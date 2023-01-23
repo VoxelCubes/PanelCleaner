@@ -2,7 +2,7 @@
 
 This tool uses machine learning to find text and then generates masks to cover it up with the highest accuracy possible. It is designed to clean easy bubbles, no in-painting or out-of-bubble text removal is done. This is intended to save a lot of monotonous work for people who have to clean a lot of panels, while making sure it doesn't paint over anything that it wasn't supposed to.
 
-![Example](https://i.imgur.com/SguwjjZ.png)
+![Example](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/spread.png)
 
 Visualized in the middle panel: 
 
@@ -49,7 +49,7 @@ The [AI](https://github.com/dmMaze/comic-text-detector) used to detect text and 
 
 | Original                             | AI Output                           | Panel Cleaner                          |
 |:------------------------------------:|:-----------------------------------:|:--------------------------------------:|
-| ![Original](https://i.imgur.com/Krv8P8i.png) | ![AI Output](https://i.imgur.com/3jCcoEr.png) | ![Panel Cleaner](https://i.imgur.com/3JQALYY.png) |
+| ![Original](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_original.png) | ![AI Output](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_ai_raw.png) | ![Panel Cleaner](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_clean.png) |
 
 As you can see, with a bit of extra cleanup applied to the AI output, some leftover text and jpeg compression artifacts are removed, and the bubble is fully cleaned.
 
@@ -78,7 +78,7 @@ pcleaner clean folder1 image1.png
 ```
 
 Demonstration with 46 images, real time, with CUDA acceleration.
-![Demonstration](https://i.imgur.com/IAAMqaq.gif)
+![Demonstration](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/pcleaner_demo_compressed.gif)
 
 There are many more options, which can be seen by running
 
@@ -116,7 +116,7 @@ If you are having trouble seeing how the settings affect the results, you can us
 
 | Default Profile                                | Custom Profile                              |
 | ---------------------------------------------- | ------------------------------------------- |
-| ![Default Profile](https://i.imgur.com/ZrGeV0t.png) | ![Custom Profile](https://i.imgur.com/PYdo6p7.png) |
+| ![Default Profile](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/profile_original.png) | ![Custom Profile](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/profile_modded.png) |
 | mask_growth_step_pixels = 2                    | mask_growth_step_pixels = 4                 |
 | mask_growth_steps = 11                         | mask_growth_steps = 4                       |
 
