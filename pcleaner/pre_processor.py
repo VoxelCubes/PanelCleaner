@@ -70,7 +70,10 @@ def prep_json_file(
         box_size = (x2 - x1) * (y2 - y1)
         if box_size > pre_processor_conf.box_min_size:
             # Sussy box. Discard if it's too small.
-            if data["language"] == "unknown" and box_size < pre_processor_conf.suspicious_box_min_size:
+            if (
+                data["language"] == "unknown"
+                and box_size < pre_processor_conf.suspicious_box_min_size
+            ):
                 continue
             boxes.append(data["xyxy"])
 
@@ -79,7 +82,7 @@ def prep_json_file(
     # Run OCR to discard small boxes that only contain symbols.
     analytics = None
     if mocr is not None:
-        analytics = ocr_check(
+        page_data, analytics = ocr_check(
             page_data,
             mocr,
             pre_processor_conf.ocr_max_size,
@@ -95,7 +98,9 @@ def prep_json_file(
     page_data.extended_boxes = page_data.boxes.copy()
 
     page_data.grow_boxes(pre_processor_conf.box_padding_extended, st.BoxType.EXTENDED_BOX)
-    page_data.right_pad_boxes(pre_processor_conf.box_right_padding_extended, st.BoxType.EXTENDED_BOX)
+    page_data.right_pad_boxes(
+        pre_processor_conf.box_right_padding_extended, st.BoxType.EXTENDED_BOX
+    )
 
     # Check for overlapping boxes among the extended boxes.
     # The resulting list is saved in the page_data.merged_extended_boxes attribute.
@@ -121,7 +126,7 @@ def prep_json_file(
 
 def ocr_check(
     page_data: st.PageData, mocr: MangaOcr, max_box_size: int, ocr_blacklist_pattern: str
-) -> tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str], ...]]:
+) -> tuple[st.PageData, tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str], ...]]]:
     """
     Run OCR on small boxes to determine whether they contain mere symbols,
     in which case these boxes do not need to be cleaned and can be removed
@@ -135,16 +140,21 @@ def ocr_check(
     - sizes of the boxes that were removed
     - the cached file name and the text of the boxes that were removed.
 
+    (Returning the page data isn't strictly necessary, since it's modified in place,
+    but this makes that fact more explicit.)
+
     :param page_data: PageData object containing the data for the page.
     :param mocr: Manga ocr object.
-    :param max_box_size: Minimum size of a box in pixels, to consider it for ocr.
+    :param max_box_size: Maximum size of a box in pixels, to consider it for ocr.
     :param ocr_blacklist_pattern: Regex pattern to match against the ocr result.
-    :return: Analytics data.
+    :return: The modified page data and Analytics data.
     """
     base_image = Image.open(page_data.image_path)
-    candidate_small_bubbles = [box for box in page_data.boxes if page_data.box_size(box) < max_box_size]
+    candidate_small_bubbles = [
+        box for box in page_data.boxes if page_data.box_size(box) < max_box_size
+    ]
     if not candidate_small_bubbles:
-        return len(page_data.boxes), (), (), ()
+        return page_data, (len(page_data.boxes), (), (), ())
     # Check if the small bubbles only contain symbols.
     # If they do, then they are probably not text.
     # Discard them in that case.
@@ -156,15 +166,14 @@ def ocr_check(
         text = mocr(cutout)
         remove = is_not_worth_cleaning(text, ocr_blacklist_pattern)
         box_size = page_data.box_size(box)
+        box_sizes.append(box_size)
         if remove:
             discarded_box_texts.append((page_data.original_path, text))
             discarded_box_sizes.append(box_size)
             page_data.boxes.remove(box)
-        else:
-            box_sizes.append(box_size)
 
-    return (
-        len(page_data.boxes),
+    return page_data, (
+        len(page_data.boxes) + len(discarded_box_sizes),
         tuple(box_sizes),
         tuple(discarded_box_sizes),
         tuple(discarded_box_texts),

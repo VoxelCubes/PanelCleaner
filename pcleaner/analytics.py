@@ -46,11 +46,12 @@ def show_ocr_analytics(
         f"{len(removed_box_sizes) / num_small_boxes:.0%}" if num_small_boxes > 0 else "N/A"
     )
     # Partition the small box sizes into 5 rough size ranges, equally spaced.
+    part_size = 500 if max_ocr_size < 500 * 10 else max_ocr_size // 10
     partitioned_small_box_sizes = partition_list(
-        small_box_sizes, partition_size=500, max_value=max_ocr_size
+        small_box_sizes, partition_size=part_size, max_value=max_ocr_size
     )
     partitioned_removed_boxes = partition_list(
-        removed_box_sizes, partition_size=500, max_value=max_ocr_size
+        removed_box_sizes, partition_size=part_size, max_value=max_ocr_size
     )
     print("\nOCR Analytics")
     print("-------------")
@@ -61,11 +62,13 @@ def show_ocr_analytics(
     print(
         f"Number of removed boxes: {len(removed_box_sizes)} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)"
     )
-    if not small_box_sizes:
-        print("No small boxes found.\n")
-        return
-    print("\nSmall box sizes:")
-    draw_pretty_ocr_result_chart(partitioned_small_box_sizes, partitioned_removed_boxes)
+    if small_box_sizes:
+        print("\nSmall box sizes:")
+        draw_pretty_ocr_result_chart(partitioned_small_box_sizes, partitioned_removed_boxes)
+    else:
+        print("No not-removed small boxes found.\n")
+
+    # Show removed texts.
     removed_texts = list(itertools.chain.from_iterable(a[3] for a in analytics))
 
     # Find and then remove the longest common prefix from the file paths.
@@ -104,11 +107,11 @@ def draw_pretty_ocr_result_chart(
     max_value = max(lower + upper for _, lower, upper in data_array)
 
     for label, lower, upper in data_array:
-        lower_bar = "█" * int(lower / max_value * bar_width)
+        lower_bar = "█" * int((lower - upper) / max_value * bar_width)
         upper_bar = "█" * int(upper / max_value * bar_width)
         print(
             f"{label:<{max_label_width}}: "
-            f"{lower_bar}{clr.Fore.RED}{upper_bar} {upper}{clr.Style.RESET_ALL} / {lower+upper}"
+            f"{lower_bar}{clr.Fore.RED}{upper_bar} {upper}{clr.Style.RESET_ALL} / {lower}"
         )
 
     # Show legend.
