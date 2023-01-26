@@ -19,6 +19,20 @@ Visualized in the middle panel:
 - (Blue) For masks that are a tight fit, the border around the edge of the mask is denoised for final clean-up, without affecting the rest of the image.
 
 
+## Contents
+> [Features](#features) \
+> [Limitations](#limitations) \
+> [Why Use This Program?](#why-use-this-program) \
+> [Installation](#installation) \
+> [Usage](#usage) \
+> [Profiles](#profiles) \
+> [OCR](#ocr) \
+> [Examples](#examples-of-tricky-bubbles) \
+> [Acknowledgements](#acknowledgements) \
+> [License](#license) \
+> [Roadmap](#roadmap)
+
+
 ## Features
 
 - Cleans text bubbles without leaving artifacts.
@@ -70,7 +84,7 @@ When fully cleaning it isn't possible, Panel Cleaner will instead skip the bubbl
 
 The program requires **Python 3.10** or newer.
 
-Install the program with pip from PyPI:
+Install the program with pip from [PyPI](https://pypi.org/project/pcleaner/):
 ```bash
 pip install pcleaner
 ```
