@@ -42,7 +42,7 @@ Visualized in the middle panel:
 - Ignores bubbles containing only symbols or numbers, as those don't need translation.
 
 - Offers a plethora of options to customize the cleaning process and the ability to save multiple presets as profiles.
-  See the [default profile](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/default.conf) for a list of all options.
+  See the [default profile](https://github.com/VoxelCubes/PanelCleaner/blob/master/media/default.conf) for a list of all options.
 
 - Provides detailed analytics on the cleaning process, to see how your settings affect the results.
 
@@ -146,7 +146,7 @@ If you are having trouble seeing how the settings affect the results, you can us
 
 Additionally, analytics are provided for each processing step in the terminal, so you can see how your settings affect the results on a whole.
 
-See the [default profile](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/default.conf) for a list of all options.
+See the [default profile](https://github.com/VoxelCubes/PanelCleaner/blob/master/media/default.conf) for a list of all options.
 
 Note: The default profile is optimized for images roughly 1100x1600 pixels in size.
 Adjust size parameters accordingly in a profile if you are using images with a significantly
