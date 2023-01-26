@@ -94,13 +94,13 @@ Note: The program has only been tested on Linux and on Windows with WSL, but sho
 
 ## Usage
 
-The program is run from the command line, and, in the most common use, takes any number of images or directories as input. The program will create a new directory called `cleaned` in the same directory as the input files, and place the cleaned images and/or masks there.
+The program is run from the command line, and, in the most common use, takes any number of images or directories as input. The program will create a new directory called `cleaned` in the same directory as the input files, and place the cleaned images and/or masks there. Often, it's more useful to only export the mask layer, and you can do so by adding the `--save-only-mask`, or `-m` for short, option.
 
 Examples:
 ```bash
 pcleaner clean image1.png image2.png image3.png
 
-pcleaner clean folder1 image1.png
+pcleaner clean -m folder1 image1.png
 ```
 
 Demonstration with 46 images, real time, with CUDA acceleration.
