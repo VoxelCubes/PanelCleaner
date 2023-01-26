@@ -182,7 +182,8 @@ pcleaner ocr myfolder --output-path=output.txt
 
 - [Comic Text Detector](https://github.com/dmMaze/comic-text-detector) for finding text bubbles and generating the initial mask.
 
-- [Manga OCR](https://github.com/kha-white/manga-ocr) for detecting which bubbles only contain symbols or numbers.
+- [Manga OCR](https://github.com/kha-white/manga-ocr) for detecting which bubbles only contain symbols or numbers,
+  and performing the dedicated OCR command.
 
 
 ## License
