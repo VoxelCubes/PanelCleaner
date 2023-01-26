@@ -18,6 +18,7 @@ Visualized in the middle panel:
 
 - (Blue) For masks that are a tight fit, the border around the edge of the mask is denoised for final clean-up, without affecting the rest of the image.
 
+
 ## Features
 
 - Cleans text bubbles without leaving artifacts.
@@ -26,9 +27,8 @@ Visualized in the middle panel:
 
 - Ignores bubbles containing only symbols or numbers, as those don't need translation.
 
-- Works for many languages.
-
 - Offers a plethora of options to customize the cleaning process and the ability to save multiple presets as profiles.
+  See the [default profile](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/default.conf) for a list of all options.
 
 - Provides detailed analytics on the cleaning process, to see how your settings affect the results.
 
@@ -38,7 +38,12 @@ Visualized in the middle panel:
 
 - Can handle bubbles on any solid grayscale background color.
 
-## Shortcomings
+- Can also run OCR on the pages and output the text to a file.
+
+
+## Limitations
+
+- It only supports Japanese and English text.
 
 - The program relies on AI for the initial text detection, which by nature is imperfect. Sometimes it will miss little bits of text or think part of the bubble belongs to the text, which will prevent that bubble from being cleaned. From testing, this typically affects between 2–8% of bubbles, depending on your settings.
 
@@ -46,62 +51,63 @@ Visualized in the middle panel:
 
 - For masks, only grayscale is currently supported. This means it can cover up text in white, black, or gray bubbles, but not colored ones.
 
-## Why Use This Program Instead of Other Tools?
 
-This program is designed to precisely and fully clean text bubbles, without leaving any artifacts. 
+## Why Use This Program?
+
+This program is designed to precisely and fully clean text bubbles, without leaving any artifacts.
+Its aim is to save a cleaner's time, by taking care of monotonous work.
 The [AI](https://github.com/dmMaze/comic-text-detector) used to detect text and generate the initial mask was *not* created as part of this project, this project merely uses it as a starting point and improves upon the output.
 
 | Original                             | AI Output                           | Panel Cleaner                          |
 |:------------------------------------:|:-----------------------------------:|:--------------------------------------:|
 | ![Original](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_original.png) | ![AI Output](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_ai_raw.png) | ![Panel Cleaner](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_clean.png) |
 
-As you can see, with a bit of extra cleanup applied to the AI output, some leftover text and jpeg compression artifacts are removed, and the bubble is fully cleaned.
+As you can see, with a bit of extra cleanup applied to the AI output, some leftover text and jpeg compression artifacts are removed, and the bubble is fully cleaned. \
+When fully cleaning it isn't possible, Panel Cleaner will instead skip the bubble so as not to waste your time with a poorly cleaned bit of text. The exact cleaning behavior is highly configurable, see [Profiles](#profiles) for more details.
+
 
 ## Installation
 
 The program requires **Python 3.10** or newer.
 
 Install the program with pip from PyPI:
-
-```
+```bash
 pip install pcleaner
 ```
 
 Note: The program has only been tested on Linux and on Windows with WSL, but should work on Windows (natively) and Mac as well.
+
 
 ## Usage
 
 The program is run from the command line, and, in the most common use, takes any number of images or directories as input. The program will create a new directory called `cleaned` in the same directory as the input files, and place the cleaned images and/or masks there.
 
 Examples:
-
-```
+```bash
 pcleaner clean image1.png image2.png image3.png
 
 pcleaner clean folder1 image1.png
 ```
 
 Demonstration with 46 images, real time, with CUDA acceleration.
-![Demonstration](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/pcleaner_demo_compressed.gif)
+![Demonstration](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/pcleaner_demo.gif)
 
 There are many more options, which can be seen by running
-
-```
+```bash
 pcleaner --help
 ```
+
 
 ## Profiles
 
 The program exposes every setting possible in a configuration profile, which are saved as simple text files. Each configuration option is explained inside the file itself, allowing you to optimize each parameter of the cleaning process for your specific needs. \
 Just generate a new profile with
-
-```
+```bash
 pcleaner profile new my_profile_name_here
 ```
 
 and it will open your new profile for you in a text editor. \
 Here is a tiny snippet from the default profile, for example:
-
 ```ini
 # Number of pixels to grow the mask by each step. 
 # This bulks up the outline of the mask, so smaller values will be more accurate but slower.
@@ -126,9 +132,37 @@ If you are having trouble seeing how the settings affect the results, you can us
 
 Additionally, analytics are provided for each processing step in the terminal, so you can see how your settings affect the results on a whole.
 
+See the [default profile](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/default.conf) for a list of all options.
+
 Note: The default profile is optimized for images roughly 1100x1600 pixels in size.
 Adjust size parameters accordingly in a profile if you are using images with a significantly
 lower or higher resolution.
+
+
+## OCR
+
+You can also use Panel Cleaner to perform Optical Character Recognition (OCR) on the pages,
+and output the text to a file. This could be useful to assist in translation, or to extract
+text for analytical purposes. \
+You can run OCR with:
+```bash
+pcleaner ocr myfolder --output-path=output.txt
+```
+
+
+## Examples of Tricky Bubbles
+
+| Original | Cleaned |
+|:--------:|:-------:|
+| ![Square bubble raw](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/square_bubble_raw.png) | ![Square bubble clean](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/square_bubble_clean.png) |
+| ![Handwritten bubble raw](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/handwritten_bubble_raw.png) | ![Handwritten bubble clean](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/handwritten_bubble_clean.png) |
+| ![Black bubble raw](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/black_bubble_raw.png) | ![Black bubble clean](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/black_bubble_clean.png) |
+| ![Ray bubble raw](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/ray_bubble_raw.png) | ![Ray bubble clean](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/ray_bubble_clean.png) |
+| ![Nightmare bubble raw](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/nightmare_bubble_raw.png) | ![Nightmare bubble clean](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/nightmare_bubble_clean.png) |
+| ![Spikey bubble raw](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/spikey_bubble_raw.png) | ![Spikey bubble clean](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/spikey_bubble_clean.png) |
+| ![Darkrays bubble raw](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/darkrays_bubble_raw.png) | ![Darkrays bubble clean](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/demo_bubbles/darkrays_bubble_clean.png) |
+
+
 
 ## Acknowledgements
 
@@ -136,9 +170,12 @@ lower or higher resolution.
 
 - [Manga OCR](https://github.com/kha-white/manga-ocr) for detecting which bubbles only contain symbols or numbers.
 
+
 ## License
 
-This project is licensed under the GNU General Public License v3.0 – see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU General Public License v3.0 – see
+the [LICENSE](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/LICENSE) file for details.
+
 
 ## Roadmap
 
