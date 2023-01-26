@@ -7,6 +7,7 @@ Usage:
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
+    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
     pcleaner load model [--cuda | --cpu | --both] [--force]
@@ -27,6 +28,8 @@ Subcommands:
         repair       Repair a profile. This will remove any invalid entries and save the profile.
                      Warning: Changes to the comments won't be preserved, only settings.
         purge-missing  Remove all profiles that link to a file that doesn't exist.
+    ocr              Run only the OCR on the given image(s). Any number of images and directories can be given.
+                     The output will be saved in a single text file for the whole batch.
     config           View or edit the config file. This stores setting independent of profiles.
         show         Show the current configuration. This doesn't show the current profile.
         open         Open the config file in the default editor (unless specified in the config).
@@ -61,6 +64,7 @@ Options:
                                     cleaning accuracy.
     <profile_path>                  The path to the profile file to add.
     <profile_name>                  The saved name of the profile to open, delete, or set as default.
+    --output-path=<output_path>     The path to save the OCR output file to.
     --cuda                          Load the torch models that support CUDA. They will only be used if supported.
     --cpu                           Load the open cv2 models that are optimized for CPU.
                                     They will only be used as a fallback, unless specified in the config.
@@ -97,11 +101,13 @@ Examples:
 import time
 from multiprocessing import Pool
 from pathlib import Path
+import itertools
 
 from manga_ocr import MangaOcr
 from docopt import magic_docopt
 from logzero import logger, loglevel, DEBUG, INFO
 from tqdm import tqdm
+from natsort import natsorted
 import torch
 
 from pcleaner import __version__
@@ -149,6 +155,10 @@ def main():
             pc.purge_missing_profiles(config)
         else:
             raise ValueError("Invalid profile subcommand.")
+
+    elif args.ocr:
+        config = cfg.load_config()
+        run_ocr(config, args.image_path, args.output_path)
 
     elif args.cache and args.clear:
         config = cfg.load_config()
@@ -247,7 +257,9 @@ def run_cleaner(
 
     # If caching masks, direct the user to the cache directory.
     if cache_masks:
-        print(f"You can find the masks being generated in real-time in the cache directory:\n\n{cache_dir}\n")
+        print(
+            f"You can find the masks being generated in real-time in the cache directory:\n\n{cache_dir}\n"
+        )
 
     if not skip_text_detection:
         # Delete the cache directory if not explicitly keeping it.
@@ -358,6 +370,92 @@ def run_cleaner(
             )
 
         print("Done!")
+
+
+def run_ocr(config: cfg.Config, image_paths: list[Path], output_path: str | None):
+    """
+    Run OCR on the given images. This is a byproduct of the pre-processing step,
+    expanded to all bubbles.
+
+    :param config: The config to use.
+    :param image_paths: The images to run OCR on.
+    :param output_path: The path to output the results to.
+    """
+    cache_dir = config.get_cleaner_cache_dir()
+    logger.debug(f"Cache directory: {cache_dir}")
+
+    # Delete the cache directory if not explicitly keeping it.
+    if len(list(cache_dir.glob("*"))) > 0:
+        cli.empty_cache_dir(cache_dir)
+    # Get the model file, downloading it if necessary.
+    cuda = torch.cuda.is_available()
+    model_path = config.get_model_path(cuda)
+
+    print("Running text detection AI model...")
+    pp.generate_mask_data(image_paths, model_path=model_path, output_dir=cache_dir)
+
+    print("\n")
+
+    # Flush it so it shows up before the progress bar.
+    print("Running box data Pre-Processor...", flush=True)
+    # Make sure it actually flushes at all costs = wait 100 ms.
+    # (It takes several seconds to load the ocr model, so this is fine.)
+    time.sleep(0.1)
+
+    # Modify the profile to OCR all boxes.
+    # Make sure OCR is enabled.
+    config.current_profile.pre_processor.ocr_enabled = True
+    # Make sure the max size is infinite, so no boxes are skipped in the OCR process.
+    config.current_profile.pre_processor.ocr_max_size = float("inf")
+    # Make sure the sus box min size is infinite, so all boxes with "unknown" language are skipped.
+    config.current_profile.pre_processor.suspicious_box_min_size = float("inf")
+    # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
+    config.current_profile.pre_processor.ocr_blacklist_pattern = ".*"
+
+    mocr = MangaOcr()
+    ocr_analytics = []
+    for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
+        ocr_analytic = pp.prep_json_file(
+            json_file_path,
+            pre_processor_conf=config.current_profile.pre_processor,
+            cache_masks=False,
+            mocr=mocr,
+        )
+        if ocr_analytic:
+            ocr_analytics.append(ocr_analytic)
+
+    # Output the OCRed text from the analytics.
+    removed_texts = list(itertools.chain.from_iterable(a[3] for a in ocr_analytics))
+
+    # Find and then remove the longest common prefix from the file paths.
+    prefix = an.longest_common_prefix([str(Path(path).parent) for path, _ in removed_texts])
+    if prefix:
+        removed_texts = [(path[len(prefix) :], text) for path, text in removed_texts]
+    # Remove a rogue / or \ from the start of the path, if they all have one.
+    if all(path.startswith("/") or path.startswith("\\") for path, _ in removed_texts):
+        removed_texts = [(path[1:], text) for path, text in removed_texts]
+
+    removed_texts = natsorted(removed_texts, key=lambda x: x[0])
+
+    print("\nDetected Text:")
+    text = "\n".join(f"{path}: {text}" for path, text in removed_texts)
+    print(text)
+
+    if output_path is None:
+        path = Path.cwd() / "detected_text.txt"
+    else:
+        path = Path(output_path)
+
+    if path.exists():
+        if not cli.get_confirmation(f"File {path} already exists. Overwrite?"):
+            print("Aborting.")
+            return
+    try:
+        path.write_text(text, encoding="utf-8")
+        print(f"Saved detected text to {path}")
+    except OSError as e:
+        print(f"Failed to write detected text to {path}")
+        logger.exception(e)
 
 
 def clear_cache(config: cfg.Config, all_cache: bool, models: bool, images: bool):

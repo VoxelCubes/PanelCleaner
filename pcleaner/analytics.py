@@ -4,7 +4,6 @@ from collections import defaultdict
 from pathlib import Path
 
 import colorama as clr
-import numpy as np
 from natsort import natsorted
 
 import pcleaner.structures as st
