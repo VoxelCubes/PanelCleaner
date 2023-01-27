@@ -8,7 +8,7 @@ This tool uses machine learning to find text and then generates masks to cover i
 
 ![Example](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/spread.png)
 
-Visualized in the middle panel: 
+Visualized in the top right page: 
 
 - Various boxes are drawn where the AI found text. 
 
@@ -18,6 +18,7 @@ Visualized in the middle panel:
 
 - (Blue) For masks that are a tight fit, the border around the edge of the mask is denoised for final clean-up, without affecting the rest of the image.
 
+The two bottom pages are what the program can output: either just the transparent mask layer and/or the mask applied to the original image, cleaning it.
 
 ## Contents
 > [Features](#features) \
