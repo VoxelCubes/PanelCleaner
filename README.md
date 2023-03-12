@@ -92,6 +92,17 @@ pip install pcleaner
 
 Note: The program has only been tested on Linux and on Windows with WSL, but should work on Windows (natively) and Mac as well.
 
+## Install with Docker
+
+Build the image
+```bash
+docker image build -t pcleaner:v1 .
+```
+
+Run the docker image specifiying a volume where you host the images to be cleaned, the next command will use the current directory via `pwd`
+```bash
+docker run -it --name pcleaner -v $(pwd):/app pcleaner:v1
+```
 
 ## Usage
 
