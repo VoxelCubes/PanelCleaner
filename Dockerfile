@@ -11,10 +11,13 @@ ENV UID ${USER_ID}
 ENV HOME /home/${USERNAME}
 ENV PATH "${HOME}/.local/bin/:${PATH}"
 
-# We need to install libgl1 dependencies to use opencv
+# We need to install libgl1 dependencies to use opencv.
+# Also, include vim and nano to be able to edit profiles.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libgl1 \
-        libglib2.0-0
+        libglib2.0-0 \
+        vim \
+        nano
 
 # Install pcleaner
 RUN pip install pcleaner
