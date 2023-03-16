@@ -1,7 +1,7 @@
 FROM python:3.10.10-buster
 
 ARG USERNAME="pcleaner"
-ARG USER_ID="1001"
+ARG USER_ID="1000"
 ARG LOGIN_SHELL="/bin/bash"
 
 RUN useradd -m -s "${LOGIN_SHELL}" -N -u "${USER_ID}" "${USERNAME}"
