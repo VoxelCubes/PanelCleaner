@@ -269,6 +269,7 @@ class CleanerData:
     - The image cache directory.
     - The save only mask flag.
     - The save only cleaned flag.
+    - The extract text flag.
     - The show masks flag. (when true, save intermediate masks to the cache directory)
     - The debug flag.
     """
@@ -279,6 +280,7 @@ class CleanerData:
     cleaner_config: cfg.CleanerConfig
     save_only_mask: bool
     save_only_cleaned: bool
+    extract_text: bool
     show_masks: bool
     debug: bool
 
@@ -290,12 +292,14 @@ class MaskData:
     denoising process.
 
     - The original image path.
+    - The target image path.
     - The cleaned image path.
     - The mask image path.
     - The box coordinates with their respective standard deviation for the masks.
     """
 
     original_path: Path
+    target_path: Path
     cleaned_path: Path
     mask_path: Path
     boxes_with_deviation: list[tuple[tuple[int, int, int, int], float]]
@@ -311,6 +315,7 @@ class MaskData:
         data = json.loads(json_str)
         return cls(
             Path(data["original_path"]),
+            Path(data["target_path"]),
             Path(data["cleaned_path"]),
             Path(data["mask_path"]),
             data["boxes_with_deviation"],
@@ -325,6 +330,7 @@ class MaskData:
         # Convert the Path objects to strings.
         data = {
             "original_path": str(self.original_path),
+            "target_path": str(self.target_path),
             "cleaned_path": str(self.cleaned_path),
             "mask_path": str(self.mask_path),
             "boxes_with_deviation": self.boxes_with_deviation,
@@ -344,6 +350,7 @@ class DenoiserData:
     - The denoiser config.
     - The save only mask flag.
     - The save only cleaned flag.
+    - The extract text flag.
     - The separate noise mask flag.
     - The show masks flag. (when true, save intermediate masks to the cache directory)
     - The debug flag.
@@ -355,6 +362,7 @@ class DenoiserData:
     denoiser_config: cfg.DenoiserConfig
     save_only_mask: bool
     save_only_cleaned: bool
+    extract_text: bool
     separate_noise_masks: bool
     show_masks: bool
     debug: bool

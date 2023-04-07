@@ -525,3 +525,20 @@ def generate_noise_mask(
     denoised_image_cutout.putalpha(mask_faded)
 
     return denoised_image_cutout, box[:2]
+
+
+def extract_text(base_image: Image, mask: Image) -> Image:
+    """
+    Extract the text from the base image using the combined mask.
+    This essentially deletes everything but the text from the image,
+    the inverse of the mask.
+
+    :param base_image: The base image.
+    :param mask: The mask of the text. Mode: "1"
+    :return: The image with only the text.
+    """
+    # Create a blank canvas.
+    text_image = Image.new("RGBA", base_image.size, (0, 0, 0, 0))
+    # Paste the base image onto the canvas using the mask.
+    text_image.paste(base_image, (0, 0), mask)
+    return text_image

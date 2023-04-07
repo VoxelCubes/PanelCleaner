@@ -97,6 +97,7 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
     cleaned_image_path = cache_out_path.with_stem(cache_out_path.stem + "_cleaned")
     base_image.save(cleaned_image_path)
     save_denoising_data(
+        Path(page_data.original_path),
         original_img_path_as_png,
         cleaned_image_path,
         combined_mask_path,
@@ -133,11 +134,22 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
             logger.debug(f"Saving final mask to {final_mask_out_path}")
             combined_mask.save(final_mask_out_path)
 
+        if c_data.extract_text:
+            # Extract the text layer from the image.
+            logger.debug(f"Extracting text from {final_cleaned_out_path}")
+            # Reload the image, since it was modified.
+            base_image = Image.open(page_data.image_path)
+            text_img = ops.extract_text(base_image, combined_mask)
+            text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
+            text_img.save(text_out_path)
+
+
     return analytics
 
 
 def save_denoising_data(
-    original_img_path: Path,
+    original_path: Path,
+    target_path: Path,
     cleaned_path: Path,
     mask_path: Path,
     cache_path: Path,
@@ -152,7 +164,8 @@ def save_denoising_data(
     - mask_path: Path
     - boxes_with_deviation: list[tuple[tuple[int, int, int, int], float]]
 
-    :param original_img_path: The path to the original image.
+    :param original_path: The path to the original image.
+    :param target_path: The path to the original image with png suffix.
     :param cleaned_path: The path to the cleaned image.
     :param mask_path: The path to the combined mask.
     :param cache_path: The path to the cache directory.
@@ -163,5 +176,5 @@ def save_denoising_data(
     boxes_with_deviation = [m.noise_mask_data for m in mask_fitments]
 
     # Save the data.
-    mask_data = st.MaskData(original_img_path, cleaned_path, mask_path, boxes_with_deviation)
+    mask_data = st.MaskData(original_path, target_path, cleaned_path, mask_path, boxes_with_deviation)
     mask_data.write_json(cache_path.with_name(cache_path.stem + "_mask_data.json"))

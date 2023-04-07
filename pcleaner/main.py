@@ -1,9 +1,10 @@
 """Panel Cleaner
 
 Usage:
-    pcleaner clean [<image_path> ...] [--output_dir=<output_dir>] [--profile=<profile>] [--keep-cache]
-        [--save-only-mask | --save-only-cleaned] [--cache-masks] [--separate-noise-mask] [--hide-analytics]
-        [--skip-text-detection] [--skip-pre-processing] [--skip-cleaning] [--skip-denoising] [--debug]
+    pcleaner clean [<image_path> ...] [--output_dir=<output_dir>] [--profile=<profile>]
+        [--save-only-mask | --save-only-cleaned] [--cache-masks] [--separate-noise-mask]
+        [--hide-analytics] [--extract-text] [--skip-text-detection] [--skip-pre-processing]
+        [--skip-cleaning] [--skip-denoising] [--keep-cache] [--debug]
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
@@ -54,6 +55,8 @@ Options:
                                     These are normally deleted in the text detection step.
     -m --save-only-mask             Save only the mask image. This is the overlay to clean the original image.
     -c --save-only-cleaned          Save only the cleaned image. This is the original image with the mask applied.
+    -e --extract-text               Extract the text bubbles from the original image. Essentially deleting everything
+                                    except the text. The cleaning or denoising step must be run for this to work.
     -n --separate-noise-mask        Save the noise mask separately from the main mask.
     -T --skip-text-detection        Do not run the text detection AI model. This is step 1/4.
     -P --skip-pre-processing        Do not run data pre-processing. This is step 2/4.
@@ -121,6 +124,7 @@ import pcleaner.profile_cli as pc
 import pcleaner.denoiser as dn
 import pcleaner.model_downloader as md
 
+# TODO mask data and beyond isn't clobber protexted.
 
 def main():
 
@@ -200,6 +204,7 @@ def main():
             skip_denoising=args.skip_denoising,
             save_only_mask=args.save_only_mask,
             save_only_cleaned=args.save_only_cleaned,
+            extract_text=args.extract_text,
             cache_masks=args.cache_masks,
             separate_noise_mask=args.separate_noise_mask,
             hide_analytics=args.hide_analytics,
@@ -221,6 +226,7 @@ def run_cleaner(
     skip_denoising: bool,
     save_only_mask: bool,
     save_only_cleaned: bool,
+    extract_text: bool,
     cache_masks: bool,
     separate_noise_mask: bool,
     hide_analytics: bool,
@@ -239,6 +245,7 @@ def run_cleaner(
     :param skip_denoising: Whether to skip the denoising step.
     :param save_only_mask: Whether to save only the mask.
     :param save_only_cleaned: Whether to save only the cleaned image.
+    :param extract_text: Whether to extract the text from the image.
     :param cache_masks: Whether to save the masks used to clean the image in the cache directory.
     :param separate_noise_mask: Whether to save the noise mask separately.
     :param hide_analytics: Whether to hide the analytics.
@@ -322,6 +329,7 @@ def run_cleaner(
                 profile.cleaner,
                 save_only_mask,
                 save_only_cleaned,
+                extract_text,
                 cache_masks,
                 debug,
             )
@@ -350,6 +358,7 @@ def run_cleaner(
                 profile.denoiser,
                 save_only_mask,
                 save_only_cleaned,
+                extract_text,
                 separate_noise_mask,
                 cache_masks,
                 debug,
