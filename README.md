@@ -53,6 +53,8 @@ The two bottom pages are what the program can output: either just the transparen
 
 - Can handle bubbles on any solid grayscale background color.
 
+- Can also cut out the text from the rest of the image, e.g. to paste it over a colored rendition.
+
 - Can also run OCR on the pages and output the text to a file.
 
 
