@@ -24,7 +24,9 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
     original_img_path_as_png = Path(page_data.original_path).with_suffix(
         ".png"
     )  # Make sure all derived file names are .png.
-    cache_out_path = c_data.cache_dir / original_img_path_as_png.name
+    # Clobber protection prefixes have the form "[A-Z]{4}-\d+_file name", ex. JMCF-0_0023.json
+    clobber_protection_prefix = c_data.json_path.stem.split("_")[0]
+    cache_out_path = c_data.cache_dir / f"{clobber_protection_prefix}_{original_img_path_as_png.name}"
     logger.debug(f"Masking {cache_out_path.name}...")
 
     def save_mask(img, name_suffix):
