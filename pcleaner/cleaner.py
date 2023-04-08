@@ -124,12 +124,12 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
         logger.debug(f"Final output path: {final_cleaned_out_path}")
 
         # The arg parser should ensure that both can't be true at once, not like that'd be an issue, just plain silly.
-        if not c_data.save_only_mask:
+        if not c_data.save_only_mask and not c_data.save_only_text:
             # Save the final image.
             logger.debug(f"Saving final image to {final_cleaned_out_path}")
             base_image.save(final_cleaned_out_path)
 
-        if not c_data.save_only_cleaned:
+        if not c_data.save_only_cleaned and not c_data.save_only_text:
             # Save the final image.
             logger.debug(f"Saving final mask to {final_mask_out_path}")
             combined_mask.save(final_mask_out_path)

@@ -269,6 +269,7 @@ class CleanerData:
     - The image cache directory.
     - The save only mask flag.
     - The save only cleaned flag.
+    - The save only text flag.
     - The extract text flag.
     - The show masks flag. (when true, save intermediate masks to the cache directory)
     - The debug flag.
@@ -280,6 +281,7 @@ class CleanerData:
     cleaner_config: cfg.CleanerConfig
     save_only_mask: bool
     save_only_cleaned: bool
+    save_only_text: bool
     extract_text: bool
     show_masks: bool
     debug: bool
