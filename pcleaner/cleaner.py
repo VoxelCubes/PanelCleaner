@@ -21,7 +21,8 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
     # Make a shorter alias.
     cleaner_conf = c_data.cleaner_config
 
-    original_img_path_as_png = Path(page_data.original_path).with_suffix(
+    original_path = Path(page_data.original_path)
+    original_img_path_as_png = original_path.with_suffix(
         ".png"
     )  # Make sure all derived file names are .png.
     # Clobber protection prefixes have the form "[A-Z]{4}-\d+_file name", ex. JMCF-0_0023.json
@@ -94,13 +95,14 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
         base_image_copy.paste(combined_mask_debug, (0, 0), combined_mask_debug)
         save_mask(base_image_copy, "_with_masks")
 
-    base_image.paste(combined_mask, (0, 0), combined_mask)
+    cleaned_image = base_image.copy()
+    cleaned_image.paste(combined_mask, (0, 0), combined_mask)
 
-    # Save the combined mask. This will be used for denoising.
+    # Save the combined mask and cleaned image. This will be used for denoising.
     combined_mask_path = cache_out_path.with_stem(cache_out_path.stem + "_combined_mask")
     combined_mask.save(combined_mask_path)
     cleaned_image_path = cache_out_path.with_stem(cache_out_path.stem + "_cleaned")
-    base_image.save(cleaned_image_path)
+    ops.save_optimized(cleaned_image, cleaned_image_path, original_path)
     save_denoising_data(
         Path(page_data.original_path),
         original_img_path_as_png,
@@ -151,18 +153,16 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
         if not c_data.save_only_mask and not c_data.save_only_text:
             # Save the final image.
             logger.debug(f"Saving final image to {final_cleaned_out_path}")
-            base_image.save(final_cleaned_out_path)
+            ops.save_optimized(cleaned_image, final_cleaned_out_path, original_path)
 
         if not c_data.save_only_cleaned and not c_data.save_only_text:
             # Save the final image.
             logger.debug(f"Saving final mask to {final_mask_out_path}")
-            combined_mask.save(final_mask_out_path)
+            ops.save_optimized(combined_mask, final_mask_out_path)
 
         if c_data.extract_text:
             # Extract the text layer from the image.
             logger.debug(f"Extracting text from {final_cleaned_out_path}")
-            # Reload the image, since it was modified.
-            base_image = Image.open(page_data.image_path)
             text_img = ops.extract_text(base_image, combined_mask)
             text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
             if cleaner_conf.preferred_mask_file_type is None:
@@ -170,7 +170,7 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
                 text_out_path = text_out_path.with_suffix(".png")
             else:
                 text_out_path = text_out_path.with_suffix(cleaner_conf.preferred_mask_file_type)
-            text_img.save(text_out_path)
+            ops.save_optimized(text_img, text_out_path, original_path)
 
     return analytics
 

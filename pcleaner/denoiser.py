@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from PIL import Image
 from logzero import logger
 
@@ -17,6 +19,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     mask_data = st.MaskData.from_json(d_data.json_path.read_text())
     cleaned_image = Image.open(mask_data.cleaned_path)
     mask_image = Image.open(mask_data.mask_path)
+    original_path: Path = mask_data.original_path
 
     # Alias.
     d_conf = d_data.denoiser_config
@@ -61,7 +64,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     # Check what the preferred output format is.
     if c_conf.preferred_file_type is None:
         # Use the original file type.
-        final_cleaned_out_path = final_cleaned_out_path.with_suffix(mask_data.original_path.suffix)
+        final_cleaned_out_path = final_cleaned_out_path.with_suffix(original_path.suffix)
     else:
         final_cleaned_out_path = final_cleaned_out_path.with_suffix(c_conf.preferred_file_type)
 
@@ -77,26 +80,26 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     if not d_data.save_only_mask:
         # Save the final image.
         logger.debug(f"Saving final image to {final_cleaned_out_path}")
-        cleaned_image.save(final_cleaned_out_path)
+        ops.save_optimized(cleaned_image, final_cleaned_out_path, original_path)
 
     if not d_data.save_only_cleaned:
         # Save the final image.
         if d_data.separate_noise_masks:
             logger.debug(f"Saving final mask to {final_mask_out_path}")
-            mask_image.save(final_mask_out_path)
+            ops.save_optimized(mask_image, final_mask_out_path)
 
             logger.debug(f"Saving final denoised mask to {final_mask_denoised_out_path}")
-            combined_noise_mask.save(final_mask_denoised_out_path)
+            ops.save_optimized(combined_noise_mask, final_mask_denoised_out_path)
         else:
             # Combine both the mask and the denoised mask into one image.
             combined_noise_mask.paste(mask_image, (0, 0), mask_image)
             logger.debug(f"Saving final mask to {final_mask_out_path}")
-            combined_noise_mask.save(final_mask_out_path)
+            ops.save_optimized(combined_noise_mask, final_mask_out_path)
 
     if d_data.extract_text:
         # Extract the text layer from the image.
-        logger.debug(f"Extracting text from {mask_data.original_path}")
-        base_image = Image.open(mask_data.original_path)
+        logger.debug(f"Extracting text from {original_path}")
+        base_image = Image.open(original_path)
         text_img = ops.extract_text(base_image, mask_image)
         text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
         if c_conf.preferred_mask_file_type is None:
@@ -104,7 +107,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
             text_out_path = text_out_path.with_suffix(".png")
         else:
             text_out_path = text_out_path.with_suffix(c_conf.preferred_mask_file_type)
-        text_img.save(text_out_path)
+        ops.save_optimized(text_img, text_out_path, original_path)
 
     # Package the analytics. We're only interested in the std deviations.
     return st.DenoiseAnalytic(tuple(deviation for _, deviation in mask_data.boxes_with_deviation))

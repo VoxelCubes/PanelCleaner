@@ -561,3 +561,56 @@ def extract_text(base_image: Image, mask: Image) -> Image:
     # Paste the base image onto the canvas using the mask.
     text_image.paste(base_image, (0, 0), mask)
     return text_image
+
+
+# IMG_EXT = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
+
+suffix_to_format: dict[str, str] = {
+    ".jpg": "JPEG",
+    ".jpeg": "JPEG",
+    ".png": "PNG",
+    ".webp": "WEBP",
+    ".tiff": "TIFF",
+    ".tif": "TIFF",
+    ".bmp": "BMP",
+    ".dib": "BMP",
+    ".jp2": "JPEG2000",
+    ".ppm": "PPM",
+}
+
+
+def save_optimized(image: Image, path: Path, original: Path | Image.Image | None = None) -> None:
+    """
+    Save the image with optimized settings.
+
+    :param image: The image to save.
+    :param path: The path to save the image to, containing a suffix.
+    :param original: The original image, used to determine the compression method, if applicable.
+    """
+    compression_method = None
+    original_image_mode = None
+
+    if original is not None:
+        if isinstance(original, Path):
+            original = Image.open(original)
+        if suffix_to_format[path.suffix.lower()] == original.format:
+            compression_method = original.info.get("compression", None)
+            original_image_mode = original.mode
+
+    logger.debug(
+        f"Found previous compression method: {compression_method} and image mode: {original_image_mode}"
+    )
+
+    if original_image_mode is not None:
+        image = image.convert(original_image_mode)
+
+    match path.suffix.lower():
+        case ".png":
+            image.save(path, optimize=True, compress_level=9)
+        case ".jpg" | ".jpeg":
+            image.save(path, optimize=True, quality=95, progressive=True)
+        case ".tif" | ".tiff":
+            logger.debug(f"Saving image with compression method: {compression_method}")
+            image.save(path, compression=compression_method if compression_method else "tiff_lzw")
+        case _:
+            image.save(path, optimize=True)
