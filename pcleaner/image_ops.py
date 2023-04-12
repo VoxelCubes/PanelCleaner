@@ -1,5 +1,6 @@
 import colorsys
 from pathlib import Path
+from typing import Generator
 
 import numpy as np
 import cv2
@@ -142,7 +143,9 @@ def visualize_mask_fitments(
     base_image.save(output_path)
 
 
-def make_mask_steps_convolution(mask: Image, growth_step: int = 2, steps: int = 11) -> list[Image]:
+def make_mask_steps_convolution(
+    mask: Image, growth_step: int = 2, steps: int = 11
+) -> Generator[list[Image], None, None]:
     """
     Use convolution to make various sizes of the original mask.
     In each step, the outline of the mask is grown by growth_step pixels.
@@ -152,7 +155,6 @@ def make_mask_steps_convolution(mask: Image, growth_step: int = 2, steps: int = 
     :param steps: The number of steps to make.
     :return:
     """
-    masks = []
     grow_size = growth_step * 2
     mask = mask.convert("L")
     mask_array = np.array(mask, dtype=np.uint8)
@@ -170,12 +172,7 @@ def make_mask_steps_convolution(mask: Image, growth_step: int = 2, steps: int = 
         # Apply convolve2d to the image.
         padded_mask = scipy.signal.convolve2d(padded_mask, kernel, mode="same")
         cropped_mask = padded_mask[grow_size:-grow_size, grow_size:-grow_size]
-        masks.append(
-            Image.fromarray(np.where(cropped_mask > 0, 255, 0).astype(np.uint8)).convert("1")
-        )
-
-    # Return them ordered from smallest to largest.
-    return masks
+        yield Image.fromarray(np.where(cropped_mask > 0, 255, 0).astype(np.uint8)).convert("1")
 
 
 def border_std_deviation(base: Image, mask: Image, off_white_threshold: int) -> tuple[float, int]:
@@ -268,6 +265,7 @@ def pick_best_mask(
     masking_box: tuple[int, int, int, int],
     reference_box: tuple[int, int, int, int],
     cleaner_conf: cfg.CleanerConfig,
+    save_masks: bool,
     analytics_page_path: Path,
 ) -> None | st.MaskFittingResults:
     """
@@ -293,6 +291,7 @@ def pick_best_mask(
     :param masking_box: The box to cut the mask out of.
     :param reference_box: The box to cut the base image out of.
     :param cleaner_conf: The cleaner config.
+    :param save_masks: Whether to save the masks.
     :param analytics_page_path: The path to the original image for the analytics.
     :return: The best mask and what color to make it and the box (along with analytics). If no best
         mask was found, return None for the mask and color.
@@ -318,31 +317,51 @@ def pick_best_mask(
 
     # Generate masks of various sizes for the precise mask, then add the box mask to the list.
     # The generated masks are in ascending size order.
-    masks = make_mask_steps_convolution(
+    mask_gen = make_mask_steps_convolution(
         precise_mask, cleaner_conf.mask_growth_step_pixels, cleaner_conf.mask_growth_steps
     )
-    masks.append(box_mask)
+    # When using the fast mask selection, make a new generator with the box mask as the first mask,
+    # followed by the generated masks.
+    def generator_with_first(generator, first):
+        yield first
+        yield from generator
+
+    def generator_with_last(generator, last):
+        yield from generator
+        yield last
+
+    if cleaner_conf.mask_selection_fast:
+        mask_stream = generator_with_first(mask_gen, box_mask)
+    else:
+        mask_stream = generator_with_last(mask_gen, box_mask)
 
     # Calculate the border uniformity of each mask.
     # Border deviations: (std deviation, median color)
     border_deviations: list[tuple[Image, int]] = []
-    for mask in masks:
+    masks = []
+    for mask in mask_stream:
         try:
-            border_deviations.append(
-                border_std_deviation(base, mask, cleaner_conf.off_white_max_threshold)
+            masks.append(mask)
+            current_deviation = border_std_deviation(
+                base, mask, cleaner_conf.off_white_max_threshold
             )
+            border_deviations.append(current_deviation)
+            # Break on the first perfect mask if using the fast mask selection.
+            if cleaner_conf.mask_selection_fast and current_deviation[0] == 0:
+                break
         except BlankMaskError:
             return None
     # Find the best mask.
     best_mask = None
     lowest_border_deviation = None
     lowest_deviation_color = None
-    for i in range(len(masks)):
-        if i == 0 or border_deviations[i][0] <= (
+    for i, border_deviation in enumerate(border_deviations):
+        mask_deviation, mask_color = border_deviation
+        if i == 0 or mask_deviation <= (
             lowest_border_deviation * (1 - cleaner_conf.mask_improvement_threshold)
         ):
-            lowest_border_deviation = border_deviations[i][0]
-            lowest_deviation_color = border_deviations[i][1]
+            lowest_border_deviation = mask_deviation
+            lowest_deviation_color = mask_color
             best_mask = masks[i]
 
     # If the std deviation is too high, return None.
@@ -525,3 +544,20 @@ def generate_noise_mask(
     denoised_image_cutout.putalpha(mask_faded)
 
     return denoised_image_cutout, box[:2]
+
+
+def extract_text(base_image: Image, mask: Image) -> Image:
+    """
+    Extract the text from the base image using the combined mask.
+    This essentially deletes everything but the text from the image,
+    the inverse of the mask.
+
+    :param base_image: The base image.
+    :param mask: The mask of the text. Mode: "1"
+    :return: The image with only the text.
+    """
+    # Create a blank canvas.
+    text_image = Image.new("RGBA", base_image.size, (0, 0, 0, 0))
+    # Paste the base image onto the canvas using the mask.
+    text_image.paste(base_image, (0, 0), mask)
+    return text_image

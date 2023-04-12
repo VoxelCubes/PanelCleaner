@@ -9,6 +9,10 @@ from natsort import natsorted
 import pcleaner.structures as st
 
 
+# I'll admit this file is a mess.
+# These bar chart creators should be abstracted into a single implementation, not 3 different ones.
+
+
 def terminal_width() -> int:
     # Use a fallback of 50 for unsupported terminals.
     width = shutil.get_terminal_size((50, 50)).columns
@@ -71,7 +75,7 @@ def show_ocr_analytics(
     removed_texts = list(itertools.chain.from_iterable(a[3] for a in analytics))
 
     # Find and then remove the longest common prefix from the file paths.
-    prefix = longest_common_prefix([str(Path(path).parent) for path, _ in removed_texts])
+    prefix = longest_common_path_prefix([str(Path(path).parent) for path, _ in removed_texts])
     if prefix:
         removed_texts = [(path[len(prefix) :], text) for path, text in removed_texts]
     # Remove a rogue / or \ from the start of the path, if they all have one.
@@ -208,7 +212,7 @@ def show_cleaner_analytics(analytics: list[tuple[Path, bool, int, float]]):
         else "N/A"
     )
     success_rate = f"{masks_succeeded / total_boxes:.0%}" if total_boxes else "N/A"
-    perfect_mask_rate = f"{perfect_masks / total_boxes:.0%}" if total_boxes else "N/A"
+    perfect_mask_rate = f"{perfect_masks / masks_succeeded:.0%}" if masks_succeeded else "N/A"
     masks_failed = total_boxes - masks_succeeded
 
     highest_mask_index = max(analytics[2] for analytics in analytics if analytics[1])
@@ -270,7 +274,7 @@ def show_cleaner_analytics(analytics: list[tuple[Path, bool, int, float]]):
     ]
 
     # Find and then remove the longest common prefix from the file paths.
-    prefix = longest_common_prefix(
+    prefix = longest_common_path_prefix(
         [str(path.parent) for path, _, _ in pages_with_success_and_fails]
     )
     if prefix:
@@ -413,9 +417,11 @@ def draw_denoise_histogram(
     print(f"\n{clr.Fore.MAGENTA}█ Denoised{clr.Fore.RESET} | █ Total")
 
 
-def longest_common_prefix(strings: list[str]) -> str:
+def longest_common_path_prefix(strings: list[str]) -> str:
     """
     Finds the longest common prefix for a list of strings.
+    This is then interpreted as a path and checked for cut-off directory names.
+    We don't want to split in the middle of one, causing an invalid path.
 
     :param strings: The list of strings to find the longest common prefix for.
     :return: The longest common prefix.
@@ -429,4 +435,7 @@ def longest_common_prefix(strings: list[str]) -> str:
             prefix = prefix[:-1]
             if not prefix:
                 return ""
+    # If the prefix doesnt exist, cut away the mangled directory name.
+    if not Path(prefix).exists():
+        prefix = str(Path(prefix).parent)
     return prefix

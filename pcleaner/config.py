@@ -15,6 +15,7 @@ RESERVED_PROFILE_NAMES = ["builtin", "none"]
 @dataclass
 class TextDetectorConfig:
     model_path: str | None = None
+    concurrent_models: int = 1
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater) -> None:
         """
@@ -33,6 +34,13 @@ class TextDetectorConfig:
         # https://github.com/zyddnys/manga-image-translator/releases/latest
         model_path = {none_to_empty(self.model_path)}
         
+        # Number of models to run in parallel. This is useful if you have enough RAM
+        # (or VRAM with CUDA) to run multiple models at the same time.
+        # This, of course, will increase the speed of the process, but can also
+        # crash your computer if you overestimate your hardware.
+        # I recommend using 1 model per 2 GB of memory available.
+        concurrent_models = {self.concurrent_models}
+        
         """
         config_updater.read_string(multi_left_strip(config_str))
 
@@ -47,6 +55,7 @@ class TextDetectorConfig:
             return
 
         try_to_load(self, config_updater, "TextDetector", str | None, "model_path")
+        try_to_load(self, config_updater, "TextDetector", int, "concurrent_models")
 
 
 @dataclass
@@ -148,10 +157,13 @@ class PreProcessorConfig:
 
 @dataclass
 class CleanerConfig:
+    preferred_file_type: str | None = None
+    preferred_mask_file_type: str | None = None
     mask_growth_step_pixels: int = 2
     mask_growth_steps: int = 11
     off_white_max_threshold: int = 240
     mask_improvement_threshold: float = 0.1
+    mask_selection_fast: bool = False
     mask_max_standard_deviation: float = 15
     debug_mask_color: tuple[int, int, int, int] = (108, 30, 240, 127)
 
@@ -165,7 +177,17 @@ class CleanerConfig:
         config_str = f"""\
         [Cleaner]
         
-        # Number of pixels to grow the mask by each step. 
+        
+        # Preferred file type to save the cleaned image as.
+        # If no file type is specified, the original file type will be used.
+        preferred_file_type = {self.preferred_file_type if self.preferred_file_type else ""}
+        
+        # Preferred file type to save the mask as.
+        # If no file type is specified, png will be used.
+        # This is because the mask image must use transparency, which is not supported by all image formats.
+        preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
+        
+        # Number of pixels to grow the mask by each step.
         # This bulks up the outline of the mask, so smaller values will be more accurate but slower.
         mask_growth_step_pixels = {self.mask_growth_step_pixels}
         
@@ -186,6 +208,12 @@ class CleanerConfig:
         # Setting a higher value here requires a higher improvement to consider a smaller mask,
         # to give a preference to larger masks.
         mask_improvement_threshold = {self.mask_improvement_threshold}
+        
+        
+        # Whether to use the fast mask selection algorithm.
+        # When true, the mask selection algorith with pick the first perfect mask, if one if found early.
+        # This is faster, but may not find the best mask, if a slightly bigger one would have been better.
+        mask_selection_fast = {self.mask_selection_fast}
         
         # The maximum standard deviation of a mask to consider.
         # A high value here means a higher tolerance for the mask intersecting text or other objects,
@@ -212,10 +240,13 @@ class CleanerConfig:
             logger.info(f"No {section} section found in the profile, using defaults.")
             return
 
+        try_to_load(self, config_updater, section, str | None, "preferred_file_type")
+        try_to_load(self, config_updater, section, str | None, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, int, "mask_growth_step_pixels")
         try_to_load(self, config_updater, section, int, "mask_growth_steps")
         try_to_load(self, config_updater, section, int, "off_white_max_threshold")
         try_to_load(self, config_updater, section, float, "mask_improvement_threshold")
+        try_to_load(self, config_updater, section, bool, "mask_selection_fast")
         try_to_load(self, config_updater, section, float, "mask_max_standard_deviation")
         try:
             color_tuple: tuple[int, ...] = tuple(

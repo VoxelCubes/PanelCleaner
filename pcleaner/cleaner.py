@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from PIL import Image
-from logzero import logger
+from logzero import logger, loglevel, DEBUG, INFO
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
@@ -24,7 +24,11 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
     original_img_path_as_png = Path(page_data.original_path).with_suffix(
         ".png"
     )  # Make sure all derived file names are .png.
-    cache_out_path = c_data.cache_dir / original_img_path_as_png.name
+    # Clobber protection prefixes have the form "[A-Z]{4}-\d+_file name", ex. JMCF-0_0023.json
+    clobber_protection_prefix = c_data.json_path.stem.split("_")[0]
+    cache_out_path = (
+        c_data.cache_dir / f"{clobber_protection_prefix}_{original_img_path_as_png.name}"
+    )
     logger.debug(f"Masking {cache_out_path.name}...")
 
     def save_mask(img, name_suffix):
@@ -58,6 +62,7 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
             masking_box=masking_box,
             reference_box=reference_box,
             cleaner_conf=cleaner_conf,
+            save_masks=c_data.show_masks,
             analytics_page_path=Path(original_img_path_as_png),
         )
         for masking_box, reference_box in zip(
@@ -97,6 +102,7 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
     cleaned_image_path = cache_out_path.with_stem(cache_out_path.stem + "_cleaned")
     base_image.save(cleaned_image_path)
     save_denoising_data(
+        Path(page_data.original_path),
         original_img_path_as_png,
         cleaned_image_path,
         combined_mask_path,
@@ -120,24 +126,58 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
         final_cleaned_out_path = final_out_path.with_name(final_out_path.stem + "_clean.png")
         final_mask_out_path = final_out_path.with_name(final_out_path.stem + "_mask.png")
 
+        # Check what the preferred output format is.
+        if cleaner_conf.preferred_file_type is None:
+            # Use the original file type.
+            final_cleaned_out_path = final_cleaned_out_path.with_suffix(
+                Path(page_data.original_path).suffix
+            )
+        else:
+            final_cleaned_out_path = final_cleaned_out_path.with_suffix(
+                cleaner_conf.preferred_file_type
+            )
+
+        if cleaner_conf.preferred_mask_file_type is None:
+            # Use png by default.
+            final_mask_out_path = final_mask_out_path.with_suffix(".png")
+        else:
+            final_mask_out_path = final_mask_out_path.with_suffix(
+                cleaner_conf.preferred_mask_file_type
+            )
+
         logger.debug(f"Final output path: {final_cleaned_out_path}")
 
         # The arg parser should ensure that both can't be true at once, not like that'd be an issue, just plain silly.
-        if not c_data.save_only_mask:
+        if not c_data.save_only_mask and not c_data.save_only_text:
             # Save the final image.
             logger.debug(f"Saving final image to {final_cleaned_out_path}")
             base_image.save(final_cleaned_out_path)
 
-        if not c_data.save_only_cleaned:
+        if not c_data.save_only_cleaned and not c_data.save_only_text:
             # Save the final image.
             logger.debug(f"Saving final mask to {final_mask_out_path}")
             combined_mask.save(final_mask_out_path)
+
+        if c_data.extract_text:
+            # Extract the text layer from the image.
+            logger.debug(f"Extracting text from {final_cleaned_out_path}")
+            # Reload the image, since it was modified.
+            base_image = Image.open(page_data.image_path)
+            text_img = ops.extract_text(base_image, combined_mask)
+            text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
+            if cleaner_conf.preferred_mask_file_type is None:
+                # Use png by default.
+                text_out_path = text_out_path.with_suffix(".png")
+            else:
+                text_out_path = text_out_path.with_suffix(cleaner_conf.preferred_mask_file_type)
+            text_img.save(text_out_path)
 
     return analytics
 
 
 def save_denoising_data(
-    original_img_path: Path,
+    original_path: Path,
+    target_path: Path,
     cleaned_path: Path,
     mask_path: Path,
     cache_path: Path,
@@ -152,7 +192,8 @@ def save_denoising_data(
     - mask_path: Path
     - boxes_with_deviation: list[tuple[tuple[int, int, int, int], float]]
 
-    :param original_img_path: The path to the original image.
+    :param original_path: The path to the original image.
+    :param target_path: The path to the original image with png suffix.
     :param cleaned_path: The path to the cleaned image.
     :param mask_path: The path to the combined mask.
     :param cache_path: The path to the cache directory.
@@ -163,5 +204,7 @@ def save_denoising_data(
     boxes_with_deviation = [m.noise_mask_data for m in mask_fitments]
 
     # Save the data.
-    mask_data = st.MaskData(original_img_path, cleaned_path, mask_path, boxes_with_deviation)
+    mask_data = st.MaskData(
+        original_path, target_path, cleaned_path, mask_path, boxes_with_deviation
+    )
     mask_data.write_json(cache_path.with_name(cache_path.stem + "_mask_data.json"))

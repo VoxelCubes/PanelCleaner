@@ -53,12 +53,16 @@ The two bottom pages are what the program can output: either just the transparen
 
 - Can handle bubbles on any solid grayscale background color.
 
+- Can also cut out the text from the rest of the image, e.g. to paste it over a colored rendition.
+
 - Can also run OCR on the pages and output the text to a file.
 
 
 ## Limitations
 
 - It only supports Japanese and English text.
+
+- Supported file types: .jpeg, .jpg, .png, .bmp, .tiff, .tif, .jp2, .dib, .webp, .ppm
 
 - The program relies on AI for the initial text detection, which by nature is imperfect. Sometimes it will miss little bits of text or think part of the bubble belongs to the text, which will prevent that bubble from being cleaned. From testing, this typically affects between 2–8% of bubbles, depending on your settings.
 
