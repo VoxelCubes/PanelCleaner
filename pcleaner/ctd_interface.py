@@ -70,53 +70,34 @@ def model2annotations(
         print("No images found.")
         return
 
-    #####
-
     device = "cuda" if model_path.suffix == ".pt" else "cpu"
     print(f"Using device for text detection model: {device}")
     # Determine the number of processes to use
     num_processes = min(config.concurrent_models, len(img_list))
     print(f"Using {num_processes} processes for text detection.")
 
-    # RuntimeError: Cannot re-initialize CUDA in forked subprocess. To use CUDA with multiprocessing,
-    # you must use the 'spawn' start method:
-    mp.freeze_support()
-    mp.set_start_method("spawn")
+    if num_processes > 1:
 
-    # Create a pool of processes to process the images.
-    # with mp.Pool(num_processes) as pool:
-    #
-    #     # Distribute the images evenly among the processes.
-    #     batches = [list() for _ in range(num_processes)]
-    #     for i, img_path in enumerate(img_list):
-    #         batches[i % num_processes].append(img_path)
-    #
-    #     args = [(batch, model_path, device, save_dir) for batch in batches]
-    #
-    #     for _ in tqdm(pool.imap_unordered(process_image_batch, args), total=len(args)):
-    #         pass  # do nothing, just iterate through the results
-    #
-    #     if device == "cuda":
-    #         # Release CUDA resources
-    #         torch.cuda.ipc_collect()
-    #         torch.cuda.empty_cache()
-    import concurrent.futures
+        mp.freeze_support()
+        mp.set_start_method("spawn")
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=num_processes) as executor:
-        # Distribute the images evenly among the threads.
-        batches = [list() for _ in range(num_processes)]
-        for i, img_path in enumerate(img_list):
-            batches[i % num_processes].append(img_path)
+        with mp.Pool(num_processes) as pool:
 
-        args = [(batch, model_path, device, save_dir) for batch in batches]
+            # Distribute the images evenly among the processes.
+            batches = [list() for _ in range(num_processes)]
+            for i, img_path in enumerate(img_list):
+                batches[i % num_processes].append(img_path)
 
-        for _ in tqdm(executor.map(process_image_batch, args), total=len(args)):
-            pass  # do nothing, just iterate through the results
+            args = [(batch, model_path, device, save_dir) for batch in batches]
 
-        # if device == "cuda":
-        #     # Release CUDA resources
-        #     torch.cuda.ipc_collect()
-        #     torch.cuda.empty_cache()
+            for _ in tqdm(pool.imap_unordered(process_image_batch, args), total=len(args)):
+                pass  # do nothing, just iterate through the results
+
+    else:
+        model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
+
+        for index, img_path in enumerate(tqdm(img_list)):
+            process_image(img_path, model, save_dir)
 
 
 def process_image_batch(args):
@@ -128,7 +109,7 @@ def process_image_batch(args):
     del model
 
     if device == "cuda":
-        # Release CUDA resources
+        # Release CUDA resources.
         torch.cuda.ipc_collect()
         torch.cuda.empty_cache()
 

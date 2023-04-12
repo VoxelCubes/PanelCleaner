@@ -38,7 +38,7 @@ class TextDetectorConfig:
         # (or VRAM with CUDA) to run multiple models at the same time.
         # This, of course, will increase the speed of the process, but can also
         # crash your computer if you overestimate your hardware.
-        # I recommend using 1 model per 1 GB of memory available.
+        # I recommend using 1 model per 2 GB of memory available.
         concurrent_models = {self.concurrent_models}
         
         """
