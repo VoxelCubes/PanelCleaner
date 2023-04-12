@@ -15,6 +15,7 @@ RESERVED_PROFILE_NAMES = ["builtin", "none"]
 @dataclass
 class TextDetectorConfig:
     model_path: str | None = None
+    concurrent_models: int = 1
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater) -> None:
         """
@@ -33,6 +34,13 @@ class TextDetectorConfig:
         # https://github.com/zyddnys/manga-image-translator/releases/latest
         model_path = {none_to_empty(self.model_path)}
         
+        # Number of models to run in parallel. This is useful if you have enough RAM
+        # (or VRAM with CUDA) to run multiple models at the same time.
+        # This, of course, will increase the speed of the process, but can also
+        # crash your computer if you overestimate your hardware.
+        # I recommend using 1 model per 2 GB of memory available.
+        concurrent_models = {self.concurrent_models}
+        
         """
         config_updater.read_string(multi_left_strip(config_str))
 
@@ -47,6 +55,7 @@ class TextDetectorConfig:
             return
 
         try_to_load(self, config_updater, "TextDetector", str | None, "model_path")
+        try_to_load(self, config_updater, "TextDetector", int, "concurrent_models")
 
 
 @dataclass

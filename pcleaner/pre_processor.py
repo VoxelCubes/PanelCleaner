@@ -11,17 +11,20 @@ import pcleaner.structures as st
 import pcleaner.config as cfg
 
 
-def generate_mask_data(image_path: list[Path], model_path: Path, output_dir: Path) -> None:
+def generate_mask_data(
+    image_path: list[Path], config: cfg.TextDetectorConfig, model_path: Path, output_dir: Path
+) -> None:
     """
     Run the ai model to generate masks and box data for the given image,
     or all images in the given directory.
 
     :param image_path: Path to the image or directory of images.
+    :param config: Text detector configuration, part of the profile.
     :param model_path: Path to the model file.
     :param output_dir: Path to the directory where the results will be saved.
     """
 
-    ctm.model2annotations(model_path, image_path, output_dir)
+    ctm.model2annotations(config, model_path, image_path, output_dir)
 
 
 def prep_json_file(
