@@ -350,6 +350,7 @@ class DenoiserData:
     - The image output directory.
     - The image cache directory.
     - The denoiser config.
+    - The cleaner config.
     - The save only mask flag.
     - The save only cleaned flag.
     - The extract text flag.
@@ -362,6 +363,7 @@ class DenoiserData:
     output_dir: Path
     cache_dir: Path
     denoiser_config: cfg.DenoiserConfig
+    cleaner_config: cfg.CleanerConfig
     save_only_mask: bool
     save_only_cleaned: bool
     extract_text: bool

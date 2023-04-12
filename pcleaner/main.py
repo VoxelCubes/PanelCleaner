@@ -129,6 +129,7 @@ import pcleaner.model_downloader as md
 
 # TODO mask data and beyond isn't clobber protexted.
 
+
 def main():
 
     args = magic_docopt(__doc__, version=f"Panel Cleaner {__version__}")
@@ -371,6 +372,7 @@ def run_cleaner(
                 output_dir,
                 cache_dir,
                 profile.denoiser,
+                profile.cleaner,
                 save_only_mask,
                 save_only_cleaned,
                 extract_text,

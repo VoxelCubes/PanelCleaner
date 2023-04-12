@@ -148,10 +148,13 @@ class PreProcessorConfig:
 
 @dataclass
 class CleanerConfig:
+    preferred_file_type: str | None = None
+    preferred_mask_file_type: str | None = None
     mask_growth_step_pixels: int = 2
     mask_growth_steps: int = 11
     off_white_max_threshold: int = 240
     mask_improvement_threshold: float = 0.1
+    mask_selection_fast: bool = False
     mask_max_standard_deviation: float = 15
     debug_mask_color: tuple[int, int, int, int] = (108, 30, 240, 127)
 
@@ -165,7 +168,17 @@ class CleanerConfig:
         config_str = f"""\
         [Cleaner]
         
-        # Number of pixels to grow the mask by each step. 
+        
+        # Preferred file type to save the cleaned image as.
+        # If no file type is specified, the original file type will be used.
+        preferred_file_type = {self.preferred_file_type if self.preferred_file_type else ""}
+        
+        # Preferred file type to save the mask as.
+        # If no file type is specified, png will be used.
+        # This is because the mask image must use transparency, which is not supported by all image formats.
+        preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
+        
+        # Number of pixels to grow the mask by each step.
         # This bulks up the outline of the mask, so smaller values will be more accurate but slower.
         mask_growth_step_pixels = {self.mask_growth_step_pixels}
         
@@ -212,6 +225,8 @@ class CleanerConfig:
             logger.info(f"No {section} section found in the profile, using defaults.")
             return
 
+        try_to_load(self, config_updater, section, str | None, "preferred_file_type")
+        try_to_load(self, config_updater, section, str | None, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, int, "mask_growth_step_pixels")
         try_to_load(self, config_updater, section, int, "mask_growth_steps")
         try_to_load(self, config_updater, section, int, "off_white_max_threshold")
