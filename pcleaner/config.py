@@ -200,6 +200,12 @@ class CleanerConfig:
         # to give a preference to larger masks.
         mask_improvement_threshold = {self.mask_improvement_threshold}
         
+        
+        # Whether to use the fast mask selection algorithm.
+        # When true, the mask selection algorith with pick the first perfect mask, if one if found early.
+        # This is faster, but may not find the best mask, if a slightly bigger one would have been better.
+        mask_selection_fast = {self.mask_selection_fast}
+        
         # The maximum standard deviation of a mask to consider.
         # A high value here means a higher tolerance for the mask intersecting text or other objects,
         # which isn't a good mask, as it will require inpainting anyway.
@@ -231,6 +237,7 @@ class CleanerConfig:
         try_to_load(self, config_updater, section, int, "mask_growth_steps")
         try_to_load(self, config_updater, section, int, "off_white_max_threshold")
         try_to_load(self, config_updater, section, float, "mask_improvement_threshold")
+        try_to_load(self, config_updater, section, bool, "mask_selection_fast")
         try_to_load(self, config_updater, section, float, "mask_max_standard_deviation")
         try:
             color_tuple: tuple[int, ...] = tuple(
