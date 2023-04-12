@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from PIL import Image
-from logzero import logger
+from logzero import logger, loglevel, DEBUG, INFO
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st

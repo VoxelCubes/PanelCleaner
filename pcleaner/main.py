@@ -127,8 +127,6 @@ import pcleaner.profile_cli as pc
 import pcleaner.denoiser as dn
 import pcleaner.model_downloader as md
 
-# TODO mask data and beyond isn't clobber protexted.
-
 
 def main():
 
@@ -292,7 +290,15 @@ def run_cleaner(
         model_path = config.get_model_path(cuda)
 
         print("Running text detection AI model...")
-        pp.generate_mask_data(image_paths, model_path=model_path, output_dir=cache_dir)
+        print(profile.text_detector)
+        pp.generate_mask_data(
+            image_paths, config=profile.text_detector, model_path=model_path, output_dir=cache_dir
+        )
+
+        if debug:
+            loglevel(DEBUG)
+        else:
+            loglevel(INFO)
 
         # Leave some extra space here if drawing analytics, so it looks better.
         if not hide_analytics:
