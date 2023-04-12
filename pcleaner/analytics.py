@@ -12,6 +12,7 @@ import pcleaner.structures as st
 # I'll admit this file is a mess.
 # These bar chart creators should be abstracted into a single implementation, not 3 different ones.
 
+
 def terminal_width() -> int:
     # Use a fallback of 50 for unsupported terminals.
     width = shutil.get_terminal_size((50, 50)).columns
@@ -211,7 +212,7 @@ def show_cleaner_analytics(analytics: list[tuple[Path, bool, int, float]]):
         else "N/A"
     )
     success_rate = f"{masks_succeeded / total_boxes:.0%}" if total_boxes else "N/A"
-    perfect_mask_rate = f"{perfect_masks / total_boxes:.0%}" if total_boxes else "N/A"
+    perfect_mask_rate = f"{perfect_masks / masks_succeeded:.0%}" if masks_succeeded else "N/A"
     masks_failed = total_boxes - masks_succeeded
 
     highest_mask_index = max(analytics[2] for analytics in analytics if analytics[1])
