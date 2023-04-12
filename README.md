@@ -62,6 +62,8 @@ The two bottom pages are what the program can output: either just the transparen
 
 - It only supports Japanese and English text.
 
+- Supported file types: .jpeg, .jpg, .png, .bmp, .tiff, .tif, .jp2, .dib, .webp, .ppm
+
 - The program relies on AI for the initial text detection, which by nature is imperfect. Sometimes it will miss little bits of text or think part of the bubble belongs to the text, which will prevent that bubble from being cleaned. From testing, this typically affects between 2–8% of bubbles, depending on your settings.
 
 - Due to the conservative approach taken in the selection of masks, if the program can't clean the bubble to a satisfying degree, it will skip that bubble outright. This does, however, also prevent false positives.
