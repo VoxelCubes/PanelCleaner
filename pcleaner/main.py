@@ -126,6 +126,10 @@ import pcleaner.structures as st
 import pcleaner.profile_cli as pc
 import pcleaner.denoiser as dn
 import pcleaner.model_downloader as md
+import pcleaner.helpers as hp
+
+# Supported image suffixes.
+IMG_EXT = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
 
 
 def main():
@@ -282,6 +286,16 @@ def run_cleaner(
         )
 
     if not skip_text_detection:
+        # Find all the images in the given image paths.
+        image_paths = discover_all_images(image_paths)
+        if not image_paths:
+            print("No images found.")
+            return
+        else:
+            print(f"Found {len(image_paths)} {hp.f_plural(len(image_paths), 'image', 'images')}.")
+            debug_path_printout = "\n".join(map(str, image_paths))
+            logger.debug(f"Image paths: \n{debug_path_printout}")
+
         # Delete the cache directory if not explicitly keeping it.
         if len(list(cache_dir.glob("*"))) > 0 and not keep_cache:
             cli.empty_cache_dir(cache_dir)
@@ -346,6 +360,7 @@ def run_cleaner(
                 json_file,
                 cleaner_output_dir,
                 cache_dir,
+                profile.general,
                 profile.cleaner,
                 save_only_mask,
                 save_only_cleaned,
@@ -459,7 +474,7 @@ def run_ocr(config: cfg.Config, image_paths: list[Path], output_path: str | None
     removed_texts = list(itertools.chain.from_iterable(a[3] for a in ocr_analytics))
 
     # Find and then remove the longest common prefix from the file paths.
-    prefix = an.longest_common_prefix([str(Path(path).parent) for path, _ in removed_texts])
+    prefix = an.longest_common_path_prefix([str(Path(path).parent) for path, _ in removed_texts])
     if prefix:
         removed_texts = [(path[len(prefix) :], text) for path, text in removed_texts]
     # Remove a rogue / or \ from the start of the path, if they all have one.
@@ -515,6 +530,52 @@ def clear_cache(config: cfg.Config, all_cache: bool, models: bool, images: bool)
         image_cache_dir = config.get_cleaner_cache_dir()
         cli.empty_cache_dir(image_cache_dir)
         print(f"Cleared image cache at {image_cache_dir}")
+
+
+def discover_all_images(img_paths: str | Path | list[str | Path]) -> list[Path]:
+    """
+    Discover all images in the given paths.
+    Perform a shallow search in directories, not recursing into subdirectories.
+
+    :param img_paths: A path to a single image, directory, or multiple of either.
+    :return: A list of all images found by path only.
+    """
+    img_list: list[Path] = []
+
+    # Wrap single paths in a list.
+    if isinstance(img_paths, str):
+        img_list = [Path(img_paths)]
+        img_paths = []
+    elif isinstance(img_paths, Path):
+        img_list = [img_paths]
+        img_paths = []
+
+    # Convert all strings to paths.
+    img_paths = [Path(path) for path in img_paths]
+
+    for img_path in img_paths:
+        if img_path.is_dir():
+            img_list.extend(find_all_images_shallow(img_path))
+        elif img_path.is_file() and img_path.suffix.lower() in IMG_EXT:
+            img_list.append(img_path)
+        else:
+            raise FileNotFoundError(f"Image path {img_path} does not exist.")
+
+    # Ensure all paths are absolute.
+    img_list = [path.resolve() for path in img_list]
+
+    return img_list
+
+
+def find_all_images_shallow(img_dir: Path) -> list[Path]:
+    image_list: list[Path] = []
+    for file_path in img_dir.glob("*"):
+        file_suffix = file_path.suffix
+        if file_suffix.lower() not in IMG_EXT:
+            continue
+        else:
+            image_list.append(file_path)
+    return image_list
 
 
 if __name__ == "__main__":

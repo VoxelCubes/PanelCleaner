@@ -30,9 +30,10 @@ from .comic_text_detector.utils.textmask import REFINEMASK_ANNOTATION
 
 
 def model2annotations(
-    config: cfg.TextDetectorConfig,
+    config_general: cfg.GeneralConfig,
+    config_detector: cfg.TextDetectorConfig,
     model_path: Path,
-    img_paths: str | Path | list[str | Path],
+    img_list: list[Path],
     save_dir: Path,
 ):
     """
@@ -46,34 +47,18 @@ def model2annotations(
     For this modified version, include the image name and mask name in the
     json file.
 
-    :param config: Text detector configuration, part of the profile.
+    :param config_general: General configuration, part of the profile.
+    :param config_detector: Text detector configuration, part of the profile.
     :param model_path: Path to the model file. This ends either in .pt or .onnx (torch or cv2 format).
-    :param img_paths: Path or a list of paths to an image or directory of images.
+    :param img_list: Path or a list of paths to an image or directory of images.
     :param save_dir: Path to the directory where the results will be saved.
     :return:
     """
-    # Scan for images, shallow search in given directories.
-    if isinstance(img_paths, str | Path):
-        img_paths = [img_paths]
-
-    img_list = []
-
-    for img_dir in img_paths:
-        if Path(img_dir).is_dir():
-            img_list.extend(find_all_imgs(img_dir, abs_path=True))
-        elif Path(img_dir).is_file():
-            img_list.append(img_dir)
-        else:
-            raise FileNotFoundError(f"Image path {img_dir} does not exist.")
-
-    if not img_list:
-        print("No images found.")
-        return
 
     device = "cuda" if model_path.suffix == ".pt" else "cpu"
     print(f"Using device for text detection model: {device}")
     # Determine the number of processes to use
-    num_processes = min(config.concurrent_models, len(img_list))
+    num_processes = min(config_detector.concurrent_models, len(img_list))
     print(f"Using {num_processes} processes for text detection.")
 
     if num_processes > 1:
@@ -114,10 +99,9 @@ def process_image_batch(args):
         torch.cuda.empty_cache()
 
 
-def process_image(img_path: str | Path, model: TextDetector, save_dir: Path):
+def process_image(img_path: Path, model: TextDetector, save_dir: Path):
 
     img = imread(img_path)
-    img_path = Path(img_path).absolute()
 
     # Prepend an index to prevent name clobbering between different files.
     prefix = f"{uuid.uuid4()}_"
