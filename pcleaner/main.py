@@ -292,13 +292,12 @@ def run_cleaner(
         print("Running text detection AI model...")
         print(profile.text_detector)
         pp.generate_mask_data(
-            image_paths, config=profile.text_detector, model_path=model_path, output_dir=cache_dir
+            image_paths,
+            config_general=profile.general,
+            config_detector=profile.text_detector,
+            model_path=model_path,
+            output_dir=cache_dir,
         )
-
-        if debug:
-            loglevel(DEBUG)
-        else:
-            loglevel(INFO)
 
         # Leave some extra space here if drawing analytics, so it looks better.
         if not hide_analytics:
@@ -377,8 +376,8 @@ def run_cleaner(
                 json_file,
                 output_dir,
                 cache_dir,
+                profile.general,
                 profile.denoiser,
-                profile.cleaner,
                 save_only_mask,
                 save_only_cleaned,
                 extract_text,

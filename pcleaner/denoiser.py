@@ -22,8 +22,8 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     original_path: Path = mask_data.original_path
 
     # Alias.
+    g_conf = d_data.general_config
     d_conf = d_data.denoiser_config
-    c_conf = d_data.cleaner_config
 
     # Filter for the min deviation to consider for denoising.
     boxes_to_denoise: list[tuple[int, int, int, int]] = [
@@ -62,17 +62,17 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     )
 
     # Check what the preferred output format is.
-    if c_conf.preferred_file_type is None:
+    if g_conf.preferred_file_type is None:
         # Use the original file type.
         final_cleaned_out_path = final_cleaned_out_path.with_suffix(original_path.suffix)
     else:
-        final_cleaned_out_path = final_cleaned_out_path.with_suffix(c_conf.preferred_file_type)
+        final_cleaned_out_path = final_cleaned_out_path.with_suffix(g_conf.preferred_file_type)
 
-    if c_conf.preferred_mask_file_type is None:
+    if g_conf.preferred_mask_file_type is None:
         # Use png by default.
         final_mask_out_path = final_mask_out_path.with_suffix(".png")
     else:
-        final_mask_out_path = final_mask_out_path.with_suffix(c_conf.preferred_mask_file_type)
+        final_mask_out_path = final_mask_out_path.with_suffix(g_conf.preferred_mask_file_type)
 
     logger.debug(f"Final output path: {final_cleaned_out_path}")
 
@@ -102,11 +102,11 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         base_image = Image.open(original_path)
         text_img = ops.extract_text(base_image, mask_image)
         text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
-        if c_conf.preferred_mask_file_type is None:
+        if g_conf.preferred_mask_file_type is None:
             # Use png by default.
             text_out_path = text_out_path.with_suffix(".png")
         else:
-            text_out_path = text_out_path.with_suffix(c_conf.preferred_mask_file_type)
+            text_out_path = text_out_path.with_suffix(g_conf.preferred_mask_file_type)
         ops.save_optimized(text_img, text_out_path, original_path)
 
     # Package the analytics. We're only interested in the std deviations.

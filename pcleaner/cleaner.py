@@ -19,7 +19,8 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
     page_data = st.PageData.from_json(c_data.json_path.read_text())
 
     # Make a shorter alias.
-    cleaner_conf = c_data.cleaner_config
+    g_conf = c_data.general_config
+    c_conf = c_data.cleaner_config
 
     original_path = Path(page_data.original_path)
     original_img_path_as_png = original_path.with_suffix(
@@ -62,7 +63,7 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
             box_mask=box_mask,
             masking_box=masking_box,
             reference_box=reference_box,
-            cleaner_conf=cleaner_conf,
+            cleaner_conf=c_conf,
             save_masks=c_data.show_masks,
             analytics_page_path=Path(original_img_path_as_png),
         )
@@ -88,9 +89,7 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
         )
 
         # Output the result with the debug filter.
-        combined_mask_debug = ops.apply_debug_filter_to_mask(
-            combined_mask, cleaner_conf.debug_mask_color
-        )
+        combined_mask_debug = ops.apply_debug_filter_to_mask(combined_mask, c_conf.debug_mask_color)
         base_image_copy = base_image.copy()
         base_image_copy.paste(combined_mask_debug, (0, 0), combined_mask_debug)
         save_mask(base_image_copy, "_with_masks")
@@ -129,23 +128,19 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
         final_mask_out_path = final_out_path.with_name(final_out_path.stem + "_mask.png")
 
         # Check what the preferred output format is.
-        if cleaner_conf.preferred_file_type is None:
+        if g_conf.preferred_file_type is None:
             # Use the original file type.
             final_cleaned_out_path = final_cleaned_out_path.with_suffix(
                 Path(page_data.original_path).suffix
             )
         else:
-            final_cleaned_out_path = final_cleaned_out_path.with_suffix(
-                cleaner_conf.preferred_file_type
-            )
+            final_cleaned_out_path = final_cleaned_out_path.with_suffix(g_conf.preferred_file_type)
 
-        if cleaner_conf.preferred_mask_file_type is None:
+        if g_conf.preferred_mask_file_type is None:
             # Use png by default.
             final_mask_out_path = final_mask_out_path.with_suffix(".png")
         else:
-            final_mask_out_path = final_mask_out_path.with_suffix(
-                cleaner_conf.preferred_mask_file_type
-            )
+            final_mask_out_path = final_mask_out_path.with_suffix(g_conf.preferred_mask_file_type)
 
         logger.debug(f"Final output path: {final_cleaned_out_path}")
 
@@ -165,11 +160,11 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
             logger.debug(f"Extracting text from {final_cleaned_out_path}")
             text_img = ops.extract_text(base_image, combined_mask)
             text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
-            if cleaner_conf.preferred_mask_file_type is None:
+            if g_conf.preferred_mask_file_type is None:
                 # Use png by default.
                 text_out_path = text_out_path.with_suffix(".png")
             else:
-                text_out_path = text_out_path.with_suffix(cleaner_conf.preferred_mask_file_type)
+                text_out_path = text_out_path.with_suffix(g_conf.preferred_mask_file_type)
             ops.save_optimized(text_img, text_out_path, original_path)
 
     return analytics

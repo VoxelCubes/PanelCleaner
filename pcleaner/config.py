@@ -13,9 +13,10 @@ RESERVED_PROFILE_NAMES = ["builtin", "none"]
 
 
 @dataclass
-class TextDetectorConfig:
-    model_path: str | None = None
-    concurrent_models: int = 1
+class GeneralConfig:
+    preferred_file_type: str | None = None
+    preferred_mask_file_type: str | None = None
+    input_size_scale: float = 1.0
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater) -> None:
         """
@@ -24,6 +25,61 @@ class TextDetectorConfig:
         No add_after_section here since it is the first section.
 
         :param config_updater: An existing config updater object.
+        """
+
+        config_str = f"""\
+        [General]
+        
+        
+        # Preferred file type to save the cleaned image as.
+        # If no file type is specified, the original file type will be used.
+        preferred_file_type = {self.preferred_file_type if self.preferred_file_type else ""}
+
+        # Preferred file type to save the mask as.
+        # If no file type is specified, png will be used.
+        # This is because the mask image must use transparency, which is not supported by all image formats.
+        preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
+        
+        # Scale the input image by this amount before processing.
+        # This is useful for significantly speeding up processing on large images.
+        # The image will be scaled down, processed, and then only the mask is scaled back up.
+        # Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality.
+        # Images larger than 3000x3000 pixels should be scaled down, so that they fall within this range.
+        # E.g. an Image with the size 7000x10000 pixels should be scaled down with a factor of 0.25,
+        # so that it has the size 1750x2500 pixels during processing.
+        # The default value is 1.0, which means no scaling.
+        input_size_scale = {self.input_size_scale}
+        
+        """
+        config_updater.read_string(multi_left_strip(config_str))
+
+    def import_from_conf(self, config_updater: cu.ConfigUpdater) -> None:
+        """
+        Read the config from the config updater object.
+
+        :param config_updater: An existing config updater object.
+        """
+        section = "General"
+        if not config_updater.has_section(section):
+            logger.info(f"No {section} section found in the profile, using defaults.")
+            return
+
+        try_to_load(self, config_updater, section, str | None, "preferred_file_type")
+        try_to_load(self, config_updater, section, str | None, "preferred_mask_file_type")
+        try_to_load(self, config_updater, section, float, "input_size_scale")
+
+
+@dataclass
+class TextDetectorConfig:
+    model_path: str | None = None
+    concurrent_models: int = 1
+
+    def export_to_conf(self, config_updater: cu.ConfigUpdater, add_after_section: str) -> None:
+        """
+        Write the config to the config updater object.
+
+        :param config_updater: An existing config updater object.
+        :param add_after_section: The section to add the config after.
         """
 
         config_str = f"""\
@@ -42,7 +98,10 @@ class TextDetectorConfig:
         concurrent_models = {self.concurrent_models}
         
         """
-        config_updater.read_string(multi_left_strip(config_str))
+        detector_conf = cu.ConfigUpdater()
+        detector_conf.read_string(multi_left_strip(config_str))
+        preproc_section = detector_conf["PreProcessor"]
+        config_updater[add_after_section].add_after.space(2).section(preproc_section.detach())
 
     def import_from_conf(self, config_updater: cu.ConfigUpdater) -> None:
         """
@@ -157,8 +216,6 @@ class PreProcessorConfig:
 
 @dataclass
 class CleanerConfig:
-    preferred_file_type: str | None = None
-    preferred_mask_file_type: str | None = None
     mask_growth_step_pixels: int = 2
     mask_growth_steps: int = 11
     off_white_max_threshold: int = 240
@@ -177,15 +234,6 @@ class CleanerConfig:
         config_str = f"""\
         [Cleaner]
         
-        
-        # Preferred file type to save the cleaned image as.
-        # If no file type is specified, the original file type will be used.
-        preferred_file_type = {self.preferred_file_type if self.preferred_file_type else ""}
-        
-        # Preferred file type to save the mask as.
-        # If no file type is specified, png will be used.
-        # This is because the mask image must use transparency, which is not supported by all image formats.
-        preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
         
         # Number of pixels to grow the mask by each step.
         # This bulks up the outline of the mask, so smaller values will be more accurate but slower.
@@ -352,6 +400,7 @@ class Profile:
     A profile is a collection of settings that can be saved and loaded from disk.
     """
 
+    general: GeneralConfig = GeneralConfig()
     text_detector: TextDetectorConfig = TextDetectorConfig()
     pre_processor: PreProcessorConfig = PreProcessorConfig()
     cleaner: CleanerConfig = CleanerConfig()
@@ -365,7 +414,8 @@ class Profile:
         :return: True if the profile was written successfully, False otherwise.
         """
         config_updater = cu.ConfigUpdater()
-        self.text_detector.export_to_conf(config_updater)
+        self.general.export_to_conf(config_updater)
+        self.text_detector.export_to_conf(config_updater, "General")
         self.pre_processor.export_to_conf(config_updater, "TextDetector")
         self.cleaner.export_to_conf(config_updater, "PreProcessor")
         self.denoiser.export_to_conf(config_updater, "Cleaner")

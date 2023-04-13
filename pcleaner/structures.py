@@ -267,6 +267,8 @@ class CleanerData:
     - The json file path.
     - The image output directory. When none, output to the cache dir for denoising to continue.
     - The image cache directory.
+    - The general config.
+    - The cleaner config.
     - The save only mask flag.
     - The save only cleaned flag.
     - The save only text flag.
@@ -278,6 +280,7 @@ class CleanerData:
     json_path: Path
     output_dir: Path | None
     cache_dir: Path
+    general_config: cfg.GeneralConfig
     cleaner_config: cfg.CleanerConfig
     save_only_mask: bool
     save_only_cleaned: bool
@@ -349,8 +352,8 @@ class DenoiserData:
     - The json file path.
     - The image output directory.
     - The image cache directory.
+    - The general config.
     - The denoiser config.
-    - The cleaner config.
     - The save only mask flag.
     - The save only cleaned flag.
     - The extract text flag.
@@ -362,8 +365,8 @@ class DenoiserData:
     json_path: Path
     output_dir: Path
     cache_dir: Path
+    general_config: cfg.GeneralConfig
     denoiser_config: cfg.DenoiserConfig
-    cleaner_config: cfg.CleanerConfig
     save_only_mask: bool
     save_only_cleaned: bool
     extract_text: bool
