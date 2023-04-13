@@ -6,7 +6,6 @@ import cv2
 import numpy as np
 import json
 
-# These need to be restored after patching to a new version of the comic text detector.
 IMG_EXT = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
 
 NP_BOOL_TYPES = (np.bool_, np.bool8)
