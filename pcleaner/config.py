@@ -30,7 +30,6 @@ class GeneralConfig:
         config_str = f"""\
         [General]
         
-        
         # Preferred file type to save the cleaned image as.
         # If no file type is specified, the original file type will be used.
         preferred_file_type = {self.preferred_file_type if self.preferred_file_type else ""}
@@ -100,8 +99,8 @@ class TextDetectorConfig:
         """
         detector_conf = cu.ConfigUpdater()
         detector_conf.read_string(multi_left_strip(config_str))
-        preproc_section = detector_conf["PreProcessor"]
-        config_updater[add_after_section].add_after.space(2).section(preproc_section.detach())
+        general_section = detector_conf["TextDetector"]
+        config_updater[add_after_section].add_after.space(2).section(general_section.detach())
 
     def import_from_conf(self, config_updater: cu.ConfigUpdater) -> None:
         """
@@ -413,6 +412,7 @@ class Profile:
         :param path: The path to write the profile to.
         :return: True if the profile was written successfully, False otherwise.
         """
+        logger.debug("Writing profile to disk...")
         config_updater = cu.ConfigUpdater()
         self.general.export_to_conf(config_updater)
         self.text_detector.export_to_conf(config_updater, "General")
@@ -432,6 +432,7 @@ class Profile:
         """
         Load a profile from a config file.
         """
+        logger.debug("Loading profile from disk...")
         config = cu.ConfigUpdater()
         try:
             config.read(path)
