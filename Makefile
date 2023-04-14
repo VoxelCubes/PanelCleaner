@@ -21,4 +21,4 @@ release:
 	twine upload $(BUILD_DIR)*
 
 
-.PHONY: clean build install
+.PHONY: clean build install fresh-install release

@@ -45,10 +45,10 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     ]
 
     if noise_masks_with_coords:
-        logger.info("coombining noise masks...")
         combined_noise_mask = ops.combine_noise_masks(cleaned_image.size, noise_masks_with_coords)
         cleaned_image.paste(combined_noise_mask, (0, 0), combined_noise_mask)
     else:
+        # noinspection PyTypeChecker
         combined_noise_mask = Image.new("LA", cleaned_image.size, (0, 0))
 
     # Debug save.
@@ -85,8 +85,6 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         final_mask_out_path = final_mask_out_path.with_suffix(".png")
     else:
         final_mask_out_path = final_mask_out_path.with_suffix(g_conf.preferred_mask_file_type)
-
-    logger.debug(f"Final output path: {final_cleaned_out_path}")
 
     # The arg parser should ensure that both can't be true at once, not like that'd be an issue, just plain silly.
     if not d_data.save_only_mask:

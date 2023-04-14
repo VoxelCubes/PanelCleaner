@@ -31,7 +31,6 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
     cache_out_path = (
         c_data.cache_dir / f"{clobber_protection_prefix}_{original_img_path_as_png.name}"
     )
-    logger.debug(f"Masking {cache_out_path.name}...")
 
     def save_mask(img, name_suffix):
         if c_data.show_masks:
@@ -148,8 +147,6 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
             final_mask_out_path = final_mask_out_path.with_suffix(".png")
         else:
             final_mask_out_path = final_mask_out_path.with_suffix(g_conf.preferred_mask_file_type)
-
-        logger.debug(f"Final output path: {final_cleaned_out_path}")
 
         # The arg parser should ensure that both can't be true at once, not like that'd be an issue, just plain silly.
         if not c_data.save_only_mask and not c_data.save_only_text:
