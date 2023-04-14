@@ -14,11 +14,19 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     :param d_data: All the data needed for the denoising process.
     :return: Analytics.
     """
-
     # Load all the cached data.
     mask_data = st.MaskData.from_json(d_data.json_path.read_text())
-    cleaned_image = Image.open(mask_data.cleaned_path)
     mask_image = Image.open(mask_data.mask_path)
+
+    # Scale the mask to the original image size, if needed.
+    scale = mask_data.scale
+    cleaned_image = Image.open(mask_data.original_path)
+    mask_image = mask_image.convert("LA")
+    cleaned_image = cleaned_image.convert("RGB")
+    if scale != 1.0:
+        mask_image = mask_image.resize(cleaned_image.size, resample=Image.NEAREST)
+
+    cleaned_image.paste(mask_image, (0, 0), mask_image)
     original_path: Path = mask_data.original_path
 
     # Alias.
@@ -27,7 +35,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
 
     # Filter for the min deviation to consider for denoising.
     boxes_to_denoise: list[tuple[int, int, int, int]] = [
-        box
+        scaled_box(box, scale)
         for box, deviation in mask_data.boxes_with_deviation
         if deviation > d_conf.noise_min_standard_deviation
     ]
@@ -36,8 +44,12 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         ops.generate_noise_mask(cleaned_image, mask_image, box, d_conf) for box in boxes_to_denoise
     ]
 
-    combined_noise_mask = ops.combine_noise_masks(cleaned_image.size, noise_masks_with_coords)
-    cleaned_image.paste(combined_noise_mask, (0, 0), combined_noise_mask)
+    if noise_masks_with_coords:
+        logger.info("coombining noise masks...")
+        combined_noise_mask = ops.combine_noise_masks(cleaned_image.size, noise_masks_with_coords)
+        cleaned_image.paste(combined_noise_mask, (0, 0), combined_noise_mask)
+    else:
+        combined_noise_mask = Image.new("LA", cleaned_image.size, (0, 0))
 
     # Debug save.
     if d_data.show_masks:
@@ -111,3 +123,11 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
 
     # Package the analytics. We're only interested in the std deviations.
     return st.DenoiseAnalytic(tuple(deviation for _, deviation in mask_data.boxes_with_deviation))
+
+
+def scaled_box(box: tuple[int, int, int, int], scale: float) -> tuple[int, int, int, int]:
+    """Scales a box by a given scale."""
+    if scale == 1.0:
+        return box
+    # noinspection PyTypeChecker
+    return tuple(int(x * scale) for x in box)

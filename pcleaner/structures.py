@@ -42,6 +42,7 @@ class PageData:
     image_path: str  # Path to the copied png.
     mask_path: str  # Path to the generated mask.png
     original_path: str  # Path to the original image. (used for relative output)
+    scale: float  # The size of the original image relative to the png.
     boxes: list[tuple[int, int, int, int]]
     extended_boxes: list[tuple[int, int, int, int]]
     merged_extended_boxes: list[tuple[int, int, int, int]]
@@ -62,6 +63,7 @@ class PageData:
             json_data["image_path"],
             json_data["mask_path"],
             json_data["original_path"],
+            json_data["scale"],
             json_data["boxes"],
             json_data["extended_boxes"],
             json_data["merged_extended_boxes"],
@@ -300,13 +302,15 @@ class MaskData:
     - The target image path.
     - The cleaned image path.
     - The mask image path.
+    - The scale of the original image to the base image.
     - The box coordinates with their respective standard deviation for the masks.
     """
 
     original_path: Path
     target_path: Path
-    cleaned_path: Path
+    base_image_path: Path
     mask_path: Path
+    scale: float
     boxes_with_deviation: list[tuple[tuple[int, int, int, int], float]]
 
     @classmethod
@@ -321,8 +325,9 @@ class MaskData:
         return cls(
             Path(data["original_path"]),
             Path(data["target_path"]),
-            Path(data["cleaned_path"]),
+            Path(data["base_image_path"]),
             Path(data["mask_path"]),
+            data["scale"],
             data["boxes_with_deviation"],
         )
 
@@ -336,8 +341,9 @@ class MaskData:
         data = {
             "original_path": str(self.original_path),
             "target_path": str(self.target_path),
-            "cleaned_path": str(self.cleaned_path),
+            "base_image_path": str(self.base_image_path),
             "mask_path": str(self.mask_path),
+            "scale": self.scale,
             "boxes_with_deviation": self.boxes_with_deviation,
         }
         with open(json_path, "w") as f:

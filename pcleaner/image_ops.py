@@ -10,6 +10,7 @@ from logzero import logger
 
 import pcleaner.structures as st
 import pcleaner.config as cfg
+import pcleaner.helpers as hp
 
 
 class BlankMaskError(Exception):
@@ -266,6 +267,7 @@ def pick_best_mask(
     masking_box: tuple[int, int, int, int],
     reference_box: tuple[int, int, int, int],
     cleaner_conf: cfg.CleanerConfig,
+    scale: float,
     save_masks: bool,
     analytics_page_path: Path,
 ) -> None | st.MaskFittingResults:
@@ -292,6 +294,7 @@ def pick_best_mask(
     :param masking_box: The box to cut the mask out of.
     :param reference_box: The box to cut the base image out of.
     :param cleaner_conf: The cleaner config.
+    :param scale: The scale of the original image to the base image.
     :param save_masks: Whether to save the masks.
     :param analytics_page_path: The path to the original image for the analytics.
     :return: The best mask and what color to make it and the box (along with analytics). If no best
@@ -319,8 +322,11 @@ def pick_best_mask(
     # Generate masks of various sizes for the precise mask, then add the box mask to the list.
     # The generated masks are in ascending size order.
     mask_gen = make_mask_steps_convolution(
-        precise_mask, cleaner_conf.mask_growth_step_pixels, cleaner_conf.mask_growth_steps
+        precise_mask,
+        hp.scale_length_rounded(cleaner_conf.mask_growth_step_pixels, scale),
+        cleaner_conf.mask_growth_steps,
     )
+
     # When using the fast mask selection, make a new generator with the box mask as the first mask,
     # followed by the generated masks.
     def generator_with_first(generator, first):

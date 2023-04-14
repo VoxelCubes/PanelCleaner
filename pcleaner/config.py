@@ -287,8 +287,6 @@ class CleanerConfig:
             logger.info(f"No {section} section found in the profile, using defaults.")
             return
 
-        try_to_load(self, config_updater, section, str | None, "preferred_file_type")
-        try_to_load(self, config_updater, section, str | None, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, int, "mask_growth_step_pixels")
         try_to_load(self, config_updater, section, int, "mask_growth_steps")
         try_to_load(self, config_updater, section, int, "off_white_max_threshold")
@@ -437,6 +435,7 @@ class Profile:
         try:
             config.read(path)
             profile = cls()
+            profile.general.import_from_conf(config)
             profile.text_detector.import_from_conf(config)
             profile.pre_processor.import_from_conf(config)
             profile.cleaner.import_from_conf(config)

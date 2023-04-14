@@ -3,7 +3,7 @@ PYTHON = python
 BUILD_DIR = dist/
 
 # default target
-all: clean build install
+fresh-install: clean build install
 
 # build target
 build:

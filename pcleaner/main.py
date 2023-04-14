@@ -108,6 +108,7 @@ import time
 from multiprocessing import Pool
 from pathlib import Path
 import itertools
+from PIL import Image
 
 from manga_ocr import MangaOcr
 from docopt import magic_docopt
@@ -130,6 +131,9 @@ import pcleaner.helpers as hp
 
 # Supported image suffixes.
 IMG_EXT = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
+
+# Allow loading of large images.
+Image.MAX_IMAGE_PIXELS = 2**32
 
 
 def main():
@@ -304,7 +308,6 @@ def run_cleaner(
         model_path = config.get_model_path(cuda)
 
         print("Running text detection AI model...")
-        print(profile.text_detector)
         pp.generate_mask_data(
             image_paths,
             config_general=profile.general,

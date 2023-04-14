@@ -64,6 +64,7 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
             masking_box=masking_box,
             reference_box=reference_box,
             cleaner_conf=c_conf,
+            scale=page_data.scale,
             save_masks=c_data.show_masks,
             analytics_page_path=Path(original_img_path_as_png),
         )
@@ -94,26 +95,32 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
         base_image_copy.paste(combined_mask_debug, (0, 0), combined_mask_debug)
         save_mask(base_image_copy, "_with_masks")
 
-    cleaned_image = base_image.copy()
-    cleaned_image.paste(combined_mask, (0, 0), combined_mask)
-
-    # Save the combined mask and cleaned image. This will be used for denoising.
+    # Save the combined mask for denoising.
     combined_mask_path = cache_out_path.with_stem(cache_out_path.stem + "_combined_mask")
     combined_mask.save(combined_mask_path)
-    cleaned_image_path = cache_out_path.with_stem(cache_out_path.stem + "_cleaned")
-    ops.save_optimized(cleaned_image, cleaned_image_path, original_path)
     save_denoising_data(
         Path(page_data.original_path),
         original_img_path_as_png,
-        cleaned_image_path,
         combined_mask_path,
+        Path(page_data.image_path),
         cache_out_path,
+        page_data.scale,
+        c_conf.mask_max_standard_deviation,
         mask_fitments,
     )
 
     # Settle on the final output path for the cleaned image.
     # Check if outputting directly.
     if c_data.output_dir is not None:
+        # If the scale isn't 1, then we need to reload the original image and scale the mask to fit.
+        if page_data.scale != 1:
+            cleaned_image = Image.open(page_data.original_path)
+            combined_mask = combined_mask.resize(cleaned_image.size, Image.NEAREST)
+        else:
+            cleaned_image = base_image.copy()
+
+        cleaned_image.paste(combined_mask, (0, 0), combined_mask)
+
         if c_data.output_dir.is_absolute():
             final_out_path = c_data.output_dir / original_img_path_as_png.name
         else:
@@ -173,33 +180,33 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
 def save_denoising_data(
     original_path: Path,
     target_path: Path,
-    cleaned_path: Path,
     mask_path: Path,
+    base_image_path: Path,
     cache_path: Path,
+    scale: float,
+    mask_max_deviation: float,
     mask_fitments: list[st.MaskFittingResults],
 ):
     """
     Save the data needed for denoising.
 
-    Gather the following to construct a MaskData struct:
-    - original_path: Path
-    - cleaned_path: Path
-    - mask_path: Path
-    - boxes_with_deviation: list[tuple[tuple[int, int, int, int], float]]
-
     :param original_path: The path to the original image.
     :param target_path: The path to the original image with png suffix.
-    :param cleaned_path: The path to the cleaned image.
     :param mask_path: The path to the combined mask.
+    :param base_image_path: The path to the cached base image.
     :param cache_path: The path to the cache directory.
+    :param scale: The scale of the original image to the cached base image.
+    :param mask_max_deviation: The maximum deviation of the mask.
     :param mask_fitments: The mask fitments.
     """
 
-    # Gather the data needed for denoising.
-    boxes_with_deviation = [m.noise_mask_data for m in mask_fitments]
+    # Gather the data needed for denoising, don't include those with a deviation greater than the max deviation.
+    boxes_with_deviation = [
+        m.noise_mask_data for m in mask_fitments if m.analytics_std_deviation <= mask_max_deviation
+    ]
 
     # Save the data.
     mask_data = st.MaskData(
-        original_path, target_path, cleaned_path, mask_path, boxes_with_deviation
+        original_path, target_path, base_image_path, mask_path, scale, boxes_with_deviation
     )
     mask_data.write_json(cache_path.with_name(cache_path.stem + "_mask_data.json"))

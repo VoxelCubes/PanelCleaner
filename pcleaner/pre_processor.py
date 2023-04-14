@@ -2,6 +2,7 @@ import json
 import re
 from dataclasses import asdict
 from pathlib import Path
+from functools import partial
 
 from PIL import Image
 from manga_ocr import MangaOcr
@@ -9,6 +10,7 @@ from manga_ocr import MangaOcr
 import pcleaner.ctd_interface as ctm
 import pcleaner.structures as st
 import pcleaner.config as cfg
+import pcleaner.helpers as hp
 
 
 def generate_mask_data(
@@ -59,6 +61,7 @@ def prep_json_file(
     :param mocr: [Optional] Manga ocr object.
     :return: Analytics data if the manga ocr object is given, None otherwise.
     """
+
     # Check if the file was already processed.
     if json_file_path.name.endswith("_clean.json"):
         return
@@ -70,22 +73,25 @@ def prep_json_file(
     image_path = json_data["image_path"]
     mask_path = json_data["mask_path"]
     original_path = json_data["original_path"]
+    scale = json_data["scale"]
     boxes = []
+
+    scale_len = partial(hp.scale_length_rounded, scale=scale)
+    scale_area = partial(hp.scale_area_rounded, scale=scale)
 
     for data in json_data["blk_list"]:
         # Check minimum size of box.
         x1, y1, x2, y2 = data["xyxy"]
         box_size = (x2 - x1) * (y2 - y1)
-        if box_size > pre_processor_conf.box_min_size:
+        if box_size > scale_area(pre_processor_conf.box_min_size):
             # Sussy box. Discard if it's too small.
-            if (
-                data["language"] == "unknown"
-                and box_size < pre_processor_conf.suspicious_box_min_size
+            if data["language"] == "unknown" and box_size < scale_area(
+                pre_processor_conf.suspicious_box_min_size
             ):
                 continue
             boxes.append(data["xyxy"])
 
-    page_data = st.PageData(image_path, mask_path, original_path, boxes, [], [], [])
+    page_data = st.PageData(image_path, mask_path, original_path, scale, boxes, [], [], [])
 
     # Run OCR to discard small boxes that only contain symbols.
     analytics = None
@@ -93,21 +99,25 @@ def prep_json_file(
         page_data, analytics = ocr_check(
             page_data,
             mocr,
-            pre_processor_conf.ocr_max_size,
+            scale_area(pre_processor_conf.ocr_max_size),
             pre_processor_conf.ocr_blacklist_pattern,
         )
 
     # Pad the boxes a bit, save a copy, and then pad them some more.
     # The copy is used as a smaller mask, and the padded copy is used as a larger mask.
-    page_data.grow_boxes(pre_processor_conf.box_padding_initial, st.BoxType.BOX)
-    page_data.right_pad_boxes(pre_processor_conf.box_right_padding_initial, st.BoxType.BOX)
+    page_data.grow_boxes(scale_len(pre_processor_conf.box_padding_initial), st.BoxType.BOX)
+    page_data.right_pad_boxes(
+        scale_len(pre_processor_conf.box_right_padding_initial), st.BoxType.BOX
+    )
 
     # A shallow copy of the box list suffices, because the tuples inside are immutable.
     page_data.extended_boxes = page_data.boxes.copy()
 
-    page_data.grow_boxes(pre_processor_conf.box_padding_extended, st.BoxType.EXTENDED_BOX)
+    page_data.grow_boxes(
+        scale_len(pre_processor_conf.box_padding_extended), st.BoxType.EXTENDED_BOX
+    )
     page_data.right_pad_boxes(
-        pre_processor_conf.box_right_padding_extended, st.BoxType.EXTENDED_BOX
+        scale_len(pre_processor_conf.box_right_padding_extended), st.BoxType.EXTENDED_BOX
     )
 
     # Check for overlapping boxes among the extended boxes.
@@ -116,7 +126,9 @@ def prep_json_file(
 
     # Copy the merged extended boxes to the reference boxes and grow them once again.
     page_data.reference_boxes = page_data.merged_extended_boxes.copy()
-    page_data.grow_boxes(pre_processor_conf.box_reference_padding, st.BoxType.REFERENCE_BOX)
+    page_data.grow_boxes(
+        scale_len(pre_processor_conf.box_reference_padding), st.BoxType.REFERENCE_BOX
+    )
 
     # Write the json file with the cleaned data.
     json_out_path = json_file_path.parent / f"{json_file_path.stem}_clean.json"

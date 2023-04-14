@@ -16,16 +16,18 @@ necessary files to run the model and the function below.
 
 import json
 import uuid
-import string
 from pathlib import Path
 import multiprocessing as mp
 
 from tqdm import tqdm
 import torch
+import numpy as np
+import cv2
+from logzero import logger
 
 import pcleaner.config as cfg
 from .comic_text_detector.inference import TextDetector
-from .comic_text_detector.utils.io_utils import imread, imwrite, find_all_imgs, NumpyEncoder
+from .comic_text_detector.utils.io_utils import imwrite, NumpyEncoder
 from .comic_text_detector.utils.textmask import REFINEMASK_ANNOTATION
 
 
@@ -73,7 +75,10 @@ def model2annotations(
             for i, img_path in enumerate(img_list):
                 batches[i % num_processes].append(img_path)
 
-            args = [(batch, model_path, device, save_dir) for batch in batches]
+            args = [
+                (batch, model_path, device, save_dir, config_general.input_size_scale)
+                for batch in batches
+            ]
 
             for _ in tqdm(pool.imap_unordered(process_image_batch, args), total=len(args)):
                 pass  # do nothing, just iterate through the results
@@ -82,14 +87,14 @@ def model2annotations(
         model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
 
         for index, img_path in enumerate(tqdm(img_list)):
-            process_image(img_path, model, save_dir)
+            process_image(img_path, model, save_dir, config_general.input_size_scale)
 
 
 def process_image_batch(args):
-    img_batch, model_path, device, save_dir = args
+    img_batch, model_path, device, save_dir, image_scale = args
     model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
     for img_path in img_batch:
-        process_image(img_path, model, save_dir)
+        process_image(img_path, model, save_dir, image_scale)
 
     del model
 
@@ -99,9 +104,19 @@ def process_image_batch(args):
         torch.cuda.empty_cache()
 
 
-def process_image(img_path: Path, model: TextDetector, save_dir: Path):
+def process_image(img_path: Path, model: TextDetector, save_dir: Path, image_scale: float):
+    """
+    Process a single image using the TextDetector model.
+    This generates a mask and a json file containing the text boxes.
+    These both belong in the cache directory.
 
-    img = imread(img_path)
+    :param img_path: The path to the image to process.
+    :param model: The TextDetector model.
+    :param save_dir: The directory where the results will be saved.
+    :param image_scale: The scale to use when resizing the image (float > 0).
+    """
+
+    img = read_image(img_path, image_scale)
 
     # Prepend an index to prevent name clobbering between different files.
     prefix = f"{uuid.uuid4()}_"
@@ -127,6 +142,7 @@ def process_image(img_path: Path, model: TextDetector, save_dir: Path):
         "image_path": img_name,
         "mask_path": maskname,
         "original_path": str(img_path),
+        "scale": image_scale,
         "blk_list": blk_dict_list,
     }
 
@@ -136,13 +152,23 @@ def process_image(img_path: Path, model: TextDetector, save_dir: Path):
     imwrite(maskname, mask_refined)
 
 
-def get_random_uppercase_string(length: int = 4) -> str:
+def read_image(path: Path | str, scale=1.0) -> np.ndarray:
     """
-    Return a random string of uppercase letters of the given length.
+    Read image from path, scaling it if necessary.
+    Then return an array of the image.
 
-    :param length: The length of the string to return.
-    :return: A random string of uppercase letters of the given length.
+    :param path: Image path
+    :param scale: Scale factor
+    :return: Image array
     """
-    letters = string.ascii_uppercase
-    random_indices = random.sample(range(len(letters)), length)
-    return "".join(map(lambda i: letters[i], random_indices))
+
+    read_type = cv2.IMREAD_COLOR
+    img = cv2.imdecode(np.fromfile(str(path), dtype=np.uint8), read_type)
+
+    if scale != 1.0:
+        height, width, channels = img.shape
+        new_width = int(width * scale)
+        new_height = int(height * scale)
+        img = cv2.resize(img, (new_width, new_height))
+
+    return img
