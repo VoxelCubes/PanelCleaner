@@ -118,6 +118,7 @@ from logzero import logger, loglevel, DEBUG, INFO
 from tqdm import tqdm
 from natsort import natsorted
 import torch
+import tifffile
 
 from pcleaner import __version__
 import pcleaner.cleaner as cl
@@ -575,6 +576,9 @@ def discover_all_images(img_paths: str | Path | list[str | Path]) -> list[Path]:
     # Ensure all paths are absolute.
     img_list = [path.resolve() for path in img_list]
 
+    # Filter out 5 channel TIFFs, as they are not supported.
+    img_list = [path for path in img_list if not is_5_channel_tiff(path)]
+
     return img_list
 
 
@@ -587,6 +591,29 @@ def find_all_images_shallow(img_dir: Path) -> list[Path]:
         else:
             image_list.append(file_path)
     return image_list
+
+
+def is_5_channel_tiff(path: Path) -> bool:
+    """
+    Returns True if the given file is a TIFF image with a 5.1 channel, False otherwise.
+    """
+    # Check suffix first.
+    if path.suffix not in [".tif", ".tiff"]:
+        return False
+    # Try opening the file as a TIFF image
+    with tifffile.TiffFile(path) as tif:
+        logger.debug("Tiff data:\n" + str(tif.pages[0].tags))
+        # Check if the TIFF image has 5 channels.
+        try:
+            if tif.pages[0].tags["SamplesPerPixel"].value == 5:
+                logger.warning(
+                    f"Found a 5 channel TIFF image: {path}. These are not supported, the image will be skipped."
+                )
+                return True
+        except KeyError:
+            pass
+
+    return False
 
 
 if __name__ == "__main__":

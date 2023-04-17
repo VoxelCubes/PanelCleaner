@@ -215,7 +215,7 @@ def show_cleaner_analytics(analytics: list[tuple[Path, bool, int, float]]):
     perfect_mask_rate = f"{perfect_masks / masks_succeeded:.0%}" if masks_succeeded else "N/A"
     masks_failed = total_boxes - masks_succeeded
 
-    highest_mask_index = max(analytics[2] for analytics in analytics if analytics[1])
+    highest_mask_index = max((analytic[2] for analytic in analytics if analytic[1]), default=0)
     # Count the number of times each mask index was used.
     mask_usages_by_index = [0] * (highest_mask_index + 1)
     # Count the number of times each mask was perfect.

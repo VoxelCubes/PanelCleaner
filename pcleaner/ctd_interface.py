@@ -162,8 +162,7 @@ def read_image(path: Path | str, scale=1.0) -> np.ndarray:
     :return: Image array
     """
 
-    read_type = cv2.IMREAD_COLOR
-    img = cv2.imdecode(np.fromfile(str(path), dtype=np.uint8), read_type)
+    img = cv2.imdecode(np.fromfile(str(path), dtype=np.uint8), cv2.IMREAD_COLOR)
 
     if scale != 1.0:
         height, width, channels = img.shape
