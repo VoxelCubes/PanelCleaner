@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1701</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Panel Cleaner</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>1</number>
+    </property>
+    <property name="rightMargin">
+     <number>1</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="handleWidth">
+       <number>10</number>
+      </property>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Profile</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QComboBox" name="comboBox_current_profile">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>Default</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_save_pofile">
+            <property name="text">
+             <string>Save</string>
+            </property>
+            <property name="icon">
+             <iconset theme="document-save">
+              <normaloff>.</normaloff>.</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_reset_profile">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Reset All</string>
+            </property>
+            <property name="icon">
+             <iconset theme="edit-reset">
+              <normaloff>.</normaloff>.</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_apply_profile">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Apply</string>
+            </property>
+            <property name="icon">
+             <iconset theme="dialog-ok-apply">
+              <normaloff>.</normaloff>.</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QToolBox" name="toolBox_profile">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="page_placeholder">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>643</width>
+             <height>447</height>
+            </rect>
+           </property>
+           <attribute name="label">
+            <string>Profile Section</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QTabWidget" name="tabWidget_files">
+       <widget class="QWidget" name="tabWidget_table_page">
+        <attribute name="title">
+         <string>Images</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="FileTable" name="file_table">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="dragDropOverwriteMode">
+            <bool>false</bool>
+           </property>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::NoDragDrop</enum>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="cornerButtonEnabled">
+            <bool>false</bool>
+           </property>
+           <column>
+            <property name="text">
+             <string>id</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>File</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Size</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Status</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Output</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QFrame" name="frame_3">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Sunken</enum>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,1">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,3">
+          <item>
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="title">
+             <string>Process</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <item>
+              <widget class="QRadioButton" name="radioButton_cleaning">
+               <property name="text">
+                <string>Cleaning</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_ocr">
+               <property name="text">
+                <string>OCR</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_warning">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Warning</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_start">
+                 <property name="text">
+                  <string>Start</string>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="media-playback-start">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_abort">
+                 <property name="text">
+                  <string>Abort</string>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="process-stop">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="title">
+             <string>Output</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QCheckBox" name="checkBox_save_clean">
+               <property name="text">
+                <string>Cleaned Image</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_save_mask">
+               <property name="text">
+                <string>Mask</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBox_save_text">
+               <property name="text">
+                <string>Extracted Text</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>1</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Output Directory:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_out_directory"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_browse_out_dir">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="document-open-folder">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit_analytics">
+          <property name="undoRedoEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="lineWrapMode">
+           <enum>QTextEdit::NoWrap</enum>
+          </property>
+          <property name="lineWrapColumnOrWidth">
+           <number>100</number>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt;Mask Fitment Analytics &lt;br /&gt;---------------------- &lt;br /&gt;Total boxes: 5 | Masks succeeded: 5 (100%) | Masks failed: &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#b21818;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; &lt;br /&gt;Perfect masks: &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;5&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; (100%) | Average border deviation: 0.00 &lt;br /&gt;&lt;br /&gt;Mask usage by mask size (smallest to largest): &lt;br /&gt;Mask 0  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 1  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 2  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 3  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 4  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 5  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 6  : &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;████████████████████████████████████████&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 1 &lt;br /&gt;Mask 7  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 8  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 9  :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 10 :  &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 0 &lt;br /&gt;Box mask: &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;████████████████████████████████████████&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; / 4 &lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-family:'monospace'; color:#18b2b2;&quot;&gt;█ Perfect&lt;/span&gt;&lt;span style=&quot; font-family:'monospace';&quot;&gt; | █ Total&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="widget_progress_drawer" native="true">
+      <layout class="QFormLayout" name="formLayout">
+       <property name="verticalSpacing">
+        <number>4</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_progress_step">
+         <property name="text">
+          <string>Current Step:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QProgressBar" name="progressBar_individual">
+         <property name="value">
+          <number>24</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Total Progress:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QProgressBar" name="progressBar_total">
+         <property name="value">
+          <number>24</number>
+         </property>
+         <property name="textVisible">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1701</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="action_Open_Files"/>
+    <addaction name="action_Clear_Files"/>
+   </widget>
+   <widget class="QMenu" name="menu_Profile">
+    <property name="title">
+     <string>Profile</string>
+    </property>
+    <widget class="QMenu" name="menuCurrent_Profile">
+     <property name="title">
+      <string>Current Profile</string>
+     </property>
+     <addaction name="action_temp"/>
+    </widget>
+    <widget class="QMenu" name="menuSet_Default">
+     <property name="title">
+      <string>Set Default</string>
+     </property>
+     <addaction name="action_temp_2"/>
+    </widget>
+    <addaction name="menuCurrent_Profile"/>
+    <addaction name="separator"/>
+    <addaction name="action_New_Profile_2"/>
+    <addaction name="action_Import_Profile"/>
+    <addaction name="separator"/>
+    <addaction name="action_Save"/>
+    <addaction name="action_Save_as"/>
+    <addaction name="separator"/>
+    <addaction name="action_Delete_Profile"/>
+    <addaction name="separator"/>
+    <addaction name="menuSet_Default"/>
+   </widget>
+   <widget class="QMenu" name="menu_Settings">
+    <property name="title">
+     <string>Settings</string>
+    </property>
+    <widget class="QMenu" name="menu_Theme">
+     <property name="title">
+      <string>Theme</string>
+     </property>
+     <addaction name="action_System_Theme"/>
+     <addaction name="separator"/>
+     <addaction name="action_Dark"/>
+     <addaction name="action_Light"/>
+    </widget>
+    <addaction name="menu_Theme"/>
+    <addaction name="action_Open_Log"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="action_Panel_Cleaner_Documentation"/>
+    <addaction name="action_Source_Code"/>
+    <addaction name="separator"/>
+    <addaction name="actionShow_Terminal_Command"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menu_Profile"/>
+   <addaction name="menu_Settings"/>
+   <addaction name="menu_Help"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_Open_Files">
+   <property name="text">
+    <string>Open Files</string>
+   </property>
+  </action>
+  <action name="action_Clear_Files">
+   <property name="text">
+    <string>Clear Files</string>
+   </property>
+  </action>
+  <action name="action_New_Profile_2">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="action_Delete_Profile">
+   <property name="text">
+    <string>Delete</string>
+   </property>
+  </action>
+  <action name="action_Import_Profile">
+   <property name="text">
+    <string>Import...</string>
+   </property>
+  </action>
+  <action name="action_Open_Log">
+   <property name="text">
+    <string>Open Log</string>
+   </property>
+  </action>
+  <action name="action_Panel_Cleaner_Documentation">
+   <property name="text">
+    <string>Online Documentation</string>
+   </property>
+  </action>
+  <action name="action_Source_Code">
+   <property name="text">
+    <string>About Panel Cleaner</string>
+   </property>
+  </action>
+  <action name="actionView_License">
+   <property name="text">
+    <string>View License</string>
+   </property>
+  </action>
+  <action name="action_Save">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="action_Save_as">
+   <property name="text">
+    <string>Save as...</string>
+   </property>
+  </action>
+  <action name="action_Apply_Denoising">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Apply Denoising</string>
+   </property>
+  </action>
+  <action name="actionShow_Terminal_Command">
+   <property name="text">
+    <string>Show Terminal Command</string>
+   </property>
+  </action>
+  <action name="action_System_Theme">
+   <property name="text">
+    <string>System</string>
+   </property>
+  </action>
+  <action name="action_Dark">
+   <property name="text">
+    <string>Dark</string>
+   </property>
+  </action>
+  <action name="action_Light">
+   <property name="text">
+    <string>Light</string>
+   </property>
+  </action>
+  <action name="action_temp">
+   <property name="text">
+    <string>&lt;temp&gt;</string>
+   </property>
+  </action>
+  <action name="action_temp_2">
+   <property name="text">
+    <string>&lt;temp&gt;</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FileTable</class>
+   <extends>QTableWidget</extends>
+   <header>pcleaner.gui.file_table</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
