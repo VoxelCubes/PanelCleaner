@@ -83,20 +83,20 @@ Options:
     -h --help                       Show this screen.
 
 Examples:
-    pcleaner myfolder               This will clean all images in the folder, saving the output to
+    pcleaner clean myfolder               This will clean all images in the folder, saving the output to
                                     a folder inside myfolder called cleaned.
 
-    pcleaner myfolder -o myoutput   This will clean all images in the folder, saving the output to
+    pcleaner clean myfolder -o myoutput   This will clean all images in the folder, saving the output to
                                     a folder called myoutput, placed inside myfolder.
 
-    pcleaner myfolder myfolder2 mypng myjpg  This will clean all images in the folders and all given files,
+    pcleaner clean myfolder myfolder2 mypng myjpg  This will clean all images in the folders and all given files,
                                     saving the outputs to folders called cleaned, placed inside of these folders
                                     or in the parent directory of the input files, respectively.
 
-    pcleaner myfolder -p myprofile  This will clean all the images, but use the settings from the profile
+    pcleaner clean myfolder -p myprofile  This will clean all the images, but use the settings from the profile
                                     called myprofile.
 
-    pcleaner myfolder -p myprofile2 -TP  This will skip the text detection and pre-processing steps,
+    pcleaner clean myfolder -p myprofile2 -TP  This will skip the text detection and pre-processing steps,
                                     but still run the cleaning process using the settings from the profile
                                     called myprofile2. This can be useful when you tweaked settings only
                                     related to the cleaning process. You can save time skipping the first one
