@@ -186,7 +186,8 @@ def main():
 
     elif args.ocr:
         config = cfg.load_config()
-        run_ocr(config, args.image_path, args.output_path)
+        image_paths = discover_all_images(args.image_path)
+        run_ocr(config, image_paths, args.output_path)
 
     elif args.cache and args.clear:
         config = cfg.load_config()
@@ -440,6 +441,7 @@ def run_ocr(config: cfg.Config, image_paths: list[Path], output_path: str | None
     :param output_path: The path to output the results to.
     """
     cache_dir = config.get_cleaner_cache_dir()
+    profile = config.current_profile
     logger.debug(f"Cache directory: {cache_dir}")
 
     # Delete the cache directory if not explicitly keeping it.
@@ -450,7 +452,13 @@ def run_ocr(config: cfg.Config, image_paths: list[Path], output_path: str | None
     model_path = config.get_model_path(cuda)
 
     print("Running text detection AI model...")
-    pp.generate_mask_data(image_paths, model_path=model_path, output_dir=cache_dir)
+    pp.generate_mask_data(
+        image_paths,
+        config_general=profile.general,
+        config_detector=profile.text_detector,
+        model_path=model_path,
+        output_dir=cache_dir,
+    )
 
     print("\n")
 
@@ -464,9 +472,9 @@ def run_ocr(config: cfg.Config, image_paths: list[Path], output_path: str | None
     # Make sure OCR is enabled.
     config.current_profile.pre_processor.ocr_enabled = True
     # Make sure the max size is infinite, so no boxes are skipped in the OCR process.
-    config.current_profile.pre_processor.ocr_max_size = float("inf")
+    config.current_profile.pre_processor.ocr_max_size = 10**10
     # Make sure the sus box min size is infinite, so all boxes with "unknown" language are skipped.
-    config.current_profile.pre_processor.suspicious_box_min_size = float("inf")
+    config.current_profile.pre_processor.suspicious_box_min_size = 10**10
     # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
     config.current_profile.pre_processor.ocr_blacklist_pattern = ".*"
 
