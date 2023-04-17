@@ -5,6 +5,7 @@ from hashlib import sha256
 import requests
 import tqdm
 import torch
+from manga_ocr import MangaOcr
 
 
 MODEL_URL = "https://github.com/zyddnys/manga-image-translator/releases/download/beta-0.3/"
@@ -129,3 +130,6 @@ def download_models(config, force: bool, cuda: bool, cpu: bool):
             )
 
     config.save()
+
+    # Also load the OCR model, but there is only one option and can't be forced.
+    MangaOcr()

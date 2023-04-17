@@ -12,7 +12,7 @@ Usage:
     pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
-    pcleaner load model [--cuda | --cpu | --both] [--force]
+    pcleaner load models [--cuda | --cpu | --both] [--force]
     pcleaner --help
     pcleaner --version
 
@@ -186,7 +186,7 @@ def main():
         config = cfg.load_config()
         clear_cache(config, args.all, args.models, args.cleaner)
 
-    elif args.load and args.model:
+    elif args.load and args.models:
         config = cfg.load_config()
         md.download_models(config, args.force, args.cuda or args.both, args.cpu or args.both)
 
@@ -198,7 +198,7 @@ def main():
             config.show()
         elif args.open:
             cli.open_file_with_editor(cli.get_config_path(), config.profile_editor)
-    else:
+    elif args.clean:
         # Do the actual work.
         config = cfg.load_config()
         config.load_profile(args["--profile"])
@@ -233,6 +233,9 @@ def main():
         # end timer.
         end = time.time()
         print(f"\nTime elapsed: {end - start:.2f} seconds")
+
+    else:
+        print("Invalid command. See 'pcleaner --help' for more information.")
 
 
 def run_cleaner(
