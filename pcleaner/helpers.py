@@ -1,4 +1,9 @@
+import platform
+import subprocess
 from math import ceil
+from pathlib import Path
+
+from logzero import logger
 
 
 def f_plural(value, singular: str, plural: str):
@@ -30,3 +35,19 @@ def scale_area_rounded(area: int, scale: float) -> int:
     :return: Scaled area.
     """
     return ceil(area * scale * scale)
+
+
+def open_file(path: Path):
+    """
+    Open any given file with the default application.
+    """
+    logger.info(f"Opening file {path}")
+    try:
+        if platform.system() == "Linux":
+            subprocess.run(["xdg-open", path])
+        elif platform.system() == "Windows":
+            subprocess.run(["start", path])
+        elif platform.system() == "Darwin":
+            subprocess.run(["open", path])
+    except Exception as e:
+        logger.exception(e)

@@ -17,3 +17,4 @@ prettytable
 colorama
 requests
 xdg
+PySide6

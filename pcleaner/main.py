@@ -9,6 +9,7 @@ Usage:
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
+    pcleaner gui [<image_path> ...] [--debug]
     pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
@@ -30,6 +31,7 @@ Subcommands:
         repair       Repair a profile. This will remove any invalid entries and save the profile.
                      Warning: Changes to the comments won't be preserved, only settings.
         purge-missing  Remove all profiles that link to a file that doesn't exist.
+    gui              Open the GUI. Any number of images and directories can be given to be loaded on startup.
     ocr              Run only the OCR on the given image(s). Any number of images and directories can be given.
                      The output will be saved in a single text file for the whole batch.
     config           View or edit the config file. This stores setting independent of profiles.
@@ -39,7 +41,7 @@ Subcommands:
         all          Clear all cache files.
         models       Clear only the models.
         cleaner      Clear only the temporary masks and debug data.
-    load models      Download the models used by the program. If neither --cuda nor --cpu is specified, the program will
+    load models       Download the models used by the program. If neither --cuda nor --cpu is specified, the program will
                      try to use CUDA if available. If it is not, it will fall back to CPU.
                      This is done automatically when needed, but can be done manually.
 
@@ -128,6 +130,7 @@ import pcleaner.profile_cli as pc
 import pcleaner.denoiser as dn
 import pcleaner.model_downloader as md
 import pcleaner.helpers as hp
+import pcleaner.gui.launcher as gui
 
 # Supported image suffixes.
 IMG_EXT = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
@@ -177,6 +180,8 @@ def main():
             pc.purge_missing_profiles(config)
         else:
             raise ValueError("Invalid profile subcommand.")
+    elif args.gui:
+        gui.launch(args.image_path)
 
     elif args.ocr:
         config = cfg.load_config()

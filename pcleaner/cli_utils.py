@@ -55,6 +55,14 @@ def get_cache_path() -> Path:
     return path
 
 
+def get_log_path() -> Path:
+    """
+    Get the path to the log file.
+    Use the cache directory for this.
+    """
+    return get_cache_path() / f"{__program__}.log"
+
+
 def open_file_with_editor(path: Path, configured_opener: str | None) -> None:
     """
     Open the given file with the given editor.
