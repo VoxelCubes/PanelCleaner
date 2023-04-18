@@ -262,15 +262,15 @@ class MaskFittingResults:
 
 
 @dataclass
-class CleanerData:
+class MaskerData:
     """
-    This is a simple struct to hold the inputs for the cleaner.
+    This is a simple struct to hold the inputs for the masker.
     The data is a tuple of:
     - The json file path.
     - The image output directory. When none, output to the cache dir for denoising to continue.
     - The image cache directory.
     - The general config.
-    - The cleaner config.
+    - The masker config.
     - The save only mask flag.
     - The save only cleaned flag.
     - The save only text flag.
@@ -283,7 +283,7 @@ class CleanerData:
     output_dir: Path | None
     cache_dir: Path
     general_config: cfg.GeneralConfig
-    cleaner_config: cfg.CleanerConfig
+    masker_config: cfg.MaskerConfig
     save_only_mask: bool
     save_only_cleaned: bool
     save_only_text: bool

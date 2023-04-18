@@ -214,7 +214,7 @@ class PreProcessorConfig:
 
 
 @dataclass
-class CleanerConfig:
+class MaskerConfig:
     mask_growth_step_pixels: int = 2
     mask_growth_steps: int = 11
     off_white_max_threshold: int = 240
@@ -231,7 +231,7 @@ class CleanerConfig:
         :param add_after_section: The section to add the new section after.
         """
         config_str = f"""\
-        [Cleaner]
+        [Masker]
         
         
         # Number of pixels to grow the mask by each step.
@@ -271,10 +271,10 @@ class CleanerConfig:
         debug_mask_color = {','.join(map(str, self.debug_mask_color))}
         
         """
-        cleaner_conf = cu.ConfigUpdater()
-        cleaner_conf.read_string(multi_left_strip(config_str))
-        cleaner_section = cleaner_conf["Cleaner"]
-        config_updater[add_after_section].add_after.space(2).section(cleaner_section.detach())
+        masker_conf = cu.ConfigUpdater()
+        masker_conf.read_string(multi_left_strip(config_str))
+        masker_section = masker_conf["Masker"]
+        config_updater[add_after_section].add_after.space(2).section(masker_section.detach())
 
     def import_from_conf(self, config_updater: cu.ConfigUpdater) -> None:
         """
@@ -282,7 +282,7 @@ class CleanerConfig:
 
         :param config_updater: An existing config updater object.
         """
-        section = "Cleaner"
+        section = "Masker"
         if not config_updater.has_section(section):
             logger.info(f"No {section} section found in the profile, using defaults.")
             return
@@ -295,7 +295,7 @@ class CleanerConfig:
         try_to_load(self, config_updater, section, float, "mask_max_standard_deviation")
         try:
             color_tuple: tuple[int, ...] = tuple(
-                int(x) for x in config_updater["Cleaner"]["debug_mask_color"].value.split(",")
+                int(x) for x in config_updater["Masker"]["debug_mask_color"].value.split(",")
             )
             if len(color_tuple) != 4:
                 raise ValueError(
@@ -309,6 +309,7 @@ class CleanerConfig:
 
 @dataclass
 class DenoiserConfig:
+    denoising_enabled: bool = True
     noise_min_standard_deviation: float = 0.25
     noise_outline_size: int = 5
     noise_fade_radius: int = 1
@@ -317,6 +318,7 @@ class DenoiserConfig:
     color_filter_strength: int = 10
     template_window_size: int = 7
     search_window_size: int = 21
+    # TODO respect denoising enabled
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, add_after_section: str) -> None:
         """
@@ -336,6 +338,11 @@ class DenoiserConfig:
         # a minimum standard deviation and denoise the area right around the mask.
         # This preserves details in the rest of the image, but removes artifacts right around where
         # the text used to be.
+        
+        # Since this is an optional step and may even be superfluous for high-resolution images that 
+        # don't suffer from jpeg-artifacts, it can be disabled here.
+        # Set to False to disable denoising.
+        denoising_enabled = {self.denoising_enabled}
         
         # The minimum standard deviation of colors around the edge of a given mask
         # to perform denoising on the region around the mask.
@@ -400,8 +407,20 @@ class Profile:
     general: GeneralConfig = GeneralConfig()
     text_detector: TextDetectorConfig = TextDetectorConfig()
     pre_processor: PreProcessorConfig = PreProcessorConfig()
-    cleaner: CleanerConfig = CleanerConfig()
+    masker: MaskerConfig = MaskerConfig()
     denoiser: DenoiserConfig = DenoiserConfig()
+
+    def bundle_config(self) -> cu.ConfigUpdater:
+        """
+        Bundle the config into a ConfigUpdater object.
+        """
+        config_updater = cu.ConfigUpdater()
+        self.general.export_to_conf(config_updater)
+        self.text_detector.export_to_conf(config_updater, "General")
+        self.pre_processor.export_to_conf(config_updater, "TextDetector")
+        self.masker.export_to_conf(config_updater, "PreProcessor")
+        self.denoiser.export_to_conf(config_updater, "Masker")
+        return config_updater
 
     def write(self, path: Path) -> bool:
         """
@@ -411,15 +430,9 @@ class Profile:
         :return: True if the profile was written successfully, False otherwise.
         """
         logger.debug("Writing profile to disk...")
-        config_updater = cu.ConfigUpdater()
-        self.general.export_to_conf(config_updater)
-        self.text_detector.export_to_conf(config_updater, "General")
-        self.pre_processor.export_to_conf(config_updater, "TextDetector")
-        self.cleaner.export_to_conf(config_updater, "PreProcessor")
-        self.denoiser.export_to_conf(config_updater, "Cleaner")
         try:
             with open(path, "w") as file:
-                config_updater.write(file)
+                self.bundle_config().write(file)
             return True
         except Exception as e:
             logger.error(f"Failed to write profile to {path}:\n{e}")
@@ -438,7 +451,7 @@ class Profile:
             profile.general.import_from_conf(config)
             profile.text_detector.import_from_conf(config)
             profile.pre_processor.import_from_conf(config)
-            profile.cleaner.import_from_conf(config)
+            profile.masker.import_from_conf(config)
             profile.denoiser.import_from_conf(config)
         except Exception as e:
             logger.error(f"Failed to load profile from {path}:\n{e}")

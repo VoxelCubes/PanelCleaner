@@ -7,33 +7,33 @@ import pcleaner.image_ops as ops
 import pcleaner.structures as st
 
 
-def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
+def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
     """
     Do all the shit and return analytics for mask fitting.
 
-    :param c_data: All the data needed for the cleaning process.
+    :param m_data: All the data needed for the cleaning process.
     :return: Analytics, consisting of the json file path, and a list of whether the mask was generated, the index of
         the best mask, and the border uniformity of the best mask for each box.
     """
 
-    page_data = st.PageData.from_json(c_data.json_path.read_text())
+    page_data = st.PageData.from_json(m_data.json_path.read_text())
 
     # Make a shorter alias.
-    g_conf = c_data.general_config
-    c_conf = c_data.cleaner_config
+    g_conf = m_data.general_config
+    m_conf = m_data.masker_config
 
     original_path = Path(page_data.original_path)
     original_img_path_as_png = original_path.with_suffix(
         ".png"
     )  # Make sure all derived file names are .png.
     # Clobber protection prefixes have the form "[A-Z]{4}-\d+_file name", ex. JMCF-0_0023.json
-    clobber_protection_prefix = c_data.json_path.stem.split("_")[0]
+    clobber_protection_prefix = m_data.json_path.stem.split("_")[0]
     cache_out_path = (
-        c_data.cache_dir / f"{clobber_protection_prefix}_{original_img_path_as_png.name}"
+        m_data.cache_dir / f"{clobber_protection_prefix}_{original_img_path_as_png.name}"
     )
 
     def save_mask(img, name_suffix):
-        if c_data.show_masks:
+        if m_data.show_masks:
             img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
 
     # Load the base image.
@@ -62,9 +62,9 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
             box_mask=box_mask,
             masking_box=masking_box,
             reference_box=reference_box,
-            cleaner_conf=c_conf,
+            masker_conf=m_conf,
             scale=page_data.scale,
-            save_masks=c_data.show_masks,
+            save_masks=m_data.show_masks,
             analytics_page_path=Path(original_img_path_as_png),
         )
         for masking_box, reference_box in zip(
@@ -82,14 +82,14 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
 
     combined_mask = ops.combine_best_masks(base_image.size, best_masks)
 
-    if c_data.show_masks:
+    if m_data.show_masks:
         # Save the masks in the debug folder.
         ops.visualize_mask_fitments(
             base_image, mask_fitments, cache_out_path.with_stem(cache_out_path.stem + "_masks")
         )
 
         # Output the result with the debug filter.
-        combined_mask_debug = ops.apply_debug_filter_to_mask(combined_mask, c_conf.debug_mask_color)
+        combined_mask_debug = ops.apply_debug_filter_to_mask(combined_mask, m_conf.debug_mask_color)
         base_image_copy = base_image.copy()
         base_image_copy.paste(combined_mask_debug, (0, 0), combined_mask_debug)
         save_mask(base_image_copy, "_with_masks")
@@ -104,13 +104,13 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
         Path(page_data.image_path),
         cache_out_path,
         page_data.scale,
-        c_conf.mask_max_standard_deviation,
+        m_conf.mask_max_standard_deviation,
         mask_fitments,
     )
 
     # Settle on the final output path for the cleaned image.
     # Check if outputting directly.
-    if c_data.output_dir is not None:
+    if m_data.output_dir is not None:
         # If the scale isn't 1, then we need to reload the original image and scale the mask to fit.
         if page_data.scale != 1:
             cleaned_image = Image.open(page_data.original_path)
@@ -120,13 +120,13 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
 
         cleaned_image.paste(combined_mask, (0, 0), combined_mask)
 
-        if c_data.output_dir.is_absolute():
-            final_out_path = c_data.output_dir / original_img_path_as_png.name
+        if m_data.output_dir.is_absolute():
+            final_out_path = m_data.output_dir / original_img_path_as_png.name
         else:
             # Take the original image path, and place the image in a subdirectory.
             # This is for when multiple directories were passed in.
             final_out_path = (
-                original_img_path_as_png.parent / c_data.output_dir / original_img_path_as_png.name
+                original_img_path_as_png.parent / m_data.output_dir / original_img_path_as_png.name
             )
 
         final_out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -149,17 +149,17 @@ def clean_page(c_data: st.CleanerData) -> list[tuple[Path, bool, int, float]]:
             final_mask_out_path = final_mask_out_path.with_suffix(g_conf.preferred_mask_file_type)
 
         # The arg parser should ensure that both can't be true at once, not like that'd be an issue, just plain silly.
-        if not c_data.save_only_mask and not c_data.save_only_text:
+        if not m_data.save_only_mask and not m_data.save_only_text:
             # Save the final image.
             logger.debug(f"Saving final image to {final_cleaned_out_path}")
             ops.save_optimized(cleaned_image, final_cleaned_out_path, original_path)
 
-        if not c_data.save_only_cleaned and not c_data.save_only_text:
+        if not m_data.save_only_cleaned and not m_data.save_only_text:
             # Save the final image.
             logger.debug(f"Saving final mask to {final_mask_out_path}")
             ops.save_optimized(combined_mask, final_mask_out_path)
 
-        if c_data.extract_text:
+        if m_data.extract_text:
             # Extract the text layer from the image.
             logger.debug(f"Extracting text from {final_cleaned_out_path}")
             text_img = ops.extract_text(base_image, combined_mask)

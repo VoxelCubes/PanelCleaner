@@ -121,9 +121,9 @@ def draw_pretty_ocr_result_chart(
     print(f"\n█ Small boxes | {clr.Fore.RED}█ Removed boxes{clr.Style.RESET_ALL}")
 
 
-def draw_cleaner_histogram(data: dict[str, tuple[int, int]]) -> None:
+def draw_masker_histogram(data: dict[str, tuple[int, int]]) -> None:
     """
-    Draw a histogram of the cleaner results.
+    Draw a histogram of the masker results.
 
     :param data: A dict of the mask name, (perfect uses, all uses).
     """
@@ -193,9 +193,9 @@ def partition_list(
     return partition
 
 
-def show_cleaner_analytics(analytics: list[tuple[Path, bool, int, float]]):
+def show_masker_analytics(analytics: list[tuple[Path, bool, int, float]]):
     """
-    Present the analytics gathered from the cleaning process.
+    Present the analytics gathered from the masking process.
 
     The analytics for each page in the list consist of the following tuple:
     list[original_image_path, mask_found, mask_index, border_deviation]
@@ -249,7 +249,7 @@ def show_cleaner_analytics(analytics: list[tuple[Path, bool, int, float]]):
     }
     mask_usages_dict["Box mask"] = perfect_mask_usages_by_index[-1], mask_usages_by_index[-1]
 
-    draw_cleaner_histogram(mask_usages_dict)
+    draw_masker_histogram(mask_usages_dict)
 
     # Find out what pages had how many failures.
     # Structure: {page_path: {"succeeded": 0, "failed": 0}}

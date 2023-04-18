@@ -4,7 +4,7 @@ Usage:
     pcleaner clean [<image_path> ...] [--output_dir=<output_dir>] [--profile=<profile>]
         [--save-only-mask | --save-only-cleaned | --save-only-text]
         [--separate-noise-mask] [--hide-analytics] [--extract-text]
-        [--skip-text-detection] [--skip-pre-processing] [--skip-cleaning] [--skip-denoising]
+        [--skip-text-detection] [--skip-pre-processing] [--skip-masking] [--skip-denoising]
         [--keep-cache] [--cache-masks] [--debug]
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
@@ -65,7 +65,7 @@ Options:
     -n --separate-noise-mask        Save the noise mask separately from the main mask.
     -T --skip-text-detection        Do not run the text detection AI model. This is step 1/4.
     -P --skip-pre-processing        Do not run data pre-processing. This is step 2/4.
-    -C --skip-cleaning              Do not run the cleaning process. This is step 3/4.
+    -M --skip-masking               Do not run the masking process. This is step 3/4.
     -D --skip-denoising             Do not run the denoising process. This an optional step 4/4.
     -s --cache-masks                Save the masks used to clean the image in the cache directory.
     -a --hide-analytics             Hide the analytics. These are the statistics about the
@@ -225,7 +225,7 @@ def main():
             config=config,
             skip_text_detection=args.skip_text_detection,
             skip_pre_processing=args.skip_pre_processing,
-            skip_cleaning=args.skip_cleaning,
+            skip_masking=args.skip_masking,
             skip_denoising=args.skip_denoising,
             save_only_mask=args.save_only_mask,
             save_only_cleaned=args.save_only_cleaned,
@@ -251,7 +251,7 @@ def run_cleaner(
     config: cfg.Config,
     skip_text_detection: bool,
     skip_pre_processing: bool,
-    skip_cleaning: bool,
+    skip_masking: bool,
     skip_denoising: bool,
     save_only_mask: bool,
     save_only_cleaned: bool,
@@ -264,14 +264,14 @@ def run_cleaner(
     debug: bool,
 ):
     """
-    Run the cleaner on the given images.
+    Run the masker on the given images.
 
     :param image_paths: The paths to the images to clean.
     :param output_dir: The directory to save the output files to.
     :param config: The config to use.
     :param skip_text_detection: Whether to skip the text detection step.
     :param skip_pre_processing: Whether to skip the pre-processing step.
-    :param skip_cleaning: Whether to skip the cleaning step.
+    :param skip_masking: Whether to skip the masking step.
     :param skip_denoising: Whether to skip the denoising step.
     :param save_only_mask: Whether to save only the mask.
     :param save_only_cleaned: Whether to save only the cleaned image.
@@ -286,7 +286,7 @@ def run_cleaner(
     profile = config.current_profile
 
     # Catch jokesters who want to skip all 4 steps.
-    if skip_text_detection and skip_pre_processing and skip_cleaning and skip_denoising:
+    if skip_text_detection and skip_pre_processing and skip_masking and skip_denoising:
         print("Well how about that, you want to skip all 4 steps? I guess I'm not needed here.")
         return
 
@@ -355,26 +355,26 @@ def run_cleaner(
         if ocr_analytics and not hide_analytics:
             an.show_ocr_analytics(ocr_analytics, profile.pre_processor.ocr_max_size)
 
-    if not skip_cleaning:
-        print("Running Cleaner...")
+    if not skip_masking:
+        print("Running Masker...")
         # Read the json files in the image directory.
         json_files = Path(cache_dir).glob("*_clean.json")
 
         # When denoising, we don't immediately output the cleaned image.
         # But when not, we do, since denoising is optional.
         if not skip_denoising:
-            cleaner_output_dir = None
+            masker_output_dir = None
         else:
-            cleaner_output_dir = output_dir
+            masker_output_dir = output_dir
 
         # Zip together the json files and the out path thing.
         data = [
-            st.CleanerData(
+            st.MaskerData(
                 json_file,
-                cleaner_output_dir,
+                masker_output_dir,
                 cache_dir,
                 profile.general,
-                profile.cleaner,
+                profile.masker,
                 save_only_mask,
                 save_only_cleaned,
                 save_only_text,
@@ -385,13 +385,13 @@ def run_cleaner(
             for json_file in json_files
         ]
 
-        cleaner_analytics_raw = []
+        masker_analytics_raw = []
         with Pool() as pool:
             for analytic in tqdm(pool.imap(cl.clean_page, data), total=len(data)):
-                cleaner_analytics_raw.extend(analytic)
+                masker_analytics_raw.extend(analytic)
 
-        if not hide_analytics and cleaner_analytics_raw:
-            an.show_cleaner_analytics(cleaner_analytics_raw)
+        if not hide_analytics and masker_analytics_raw:
+            an.show_masker_analytics(masker_analytics_raw)
 
     if not skip_denoising:
         print("Running Denoiser...")
@@ -425,7 +425,7 @@ def run_cleaner(
             an.show_denoise_analytics(
                 denoise_analytics_raw,
                 profile.denoiser.noise_min_standard_deviation,
-                profile.cleaner.mask_max_standard_deviation,
+                profile.masker.mask_max_standard_deviation,
             )
 
         print("Done!")

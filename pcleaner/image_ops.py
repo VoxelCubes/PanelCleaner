@@ -266,7 +266,7 @@ def pick_best_mask(
     box_mask: Image,
     masking_box: tuple[int, int, int, int],
     reference_box: tuple[int, int, int, int],
-    cleaner_conf: cfg.CleanerConfig,
+    masker_conf: cfg.MaskerConfig,
     scale: float,
     save_masks: bool,
     analytics_page_path: Path,
@@ -293,7 +293,7 @@ def pick_best_mask(
     :param box_mask: The box mask.
     :param masking_box: The box to cut the mask out of.
     :param reference_box: The box to cut the base image out of.
-    :param cleaner_conf: The cleaner config.
+    :param masker_conf: The masker config.
     :param scale: The scale of the original image to the base image.
     :param save_masks: Whether to save the masks.
     :param analytics_page_path: The path to the original image for the analytics.
@@ -323,8 +323,8 @@ def pick_best_mask(
     # The generated masks are in ascending size order.
     mask_gen = make_mask_steps_convolution(
         precise_mask,
-        hp.scale_length_rounded(cleaner_conf.mask_growth_step_pixels, scale),
-        cleaner_conf.mask_growth_steps,
+        hp.scale_length_rounded(masker_conf.mask_growth_step_pixels, scale),
+        masker_conf.mask_growth_steps,
     )
 
     # When using the fast mask selection, make a new generator with the box mask as the first mask,
@@ -337,7 +337,7 @@ def pick_best_mask(
         yield from generator
         yield last
 
-    if cleaner_conf.mask_selection_fast:
+    if masker_conf.mask_selection_fast:
         mask_stream = generator_with_first(mask_gen, box_mask)
     else:
         mask_stream = generator_with_last(mask_gen, box_mask)
@@ -350,11 +350,11 @@ def pick_best_mask(
         try:
             masks.append(mask)
             current_deviation = border_std_deviation(
-                base, mask, cleaner_conf.off_white_max_threshold
+                base, mask, masker_conf.off_white_max_threshold
             )
             border_deviations.append(current_deviation)
             # Break on the first perfect mask if using the fast mask selection.
-            if cleaner_conf.mask_selection_fast and current_deviation[0] == 0:
+            if masker_conf.mask_selection_fast and current_deviation[0] == 0:
                 break
         except BlankMaskError:
             return None
@@ -365,14 +365,14 @@ def pick_best_mask(
     for i, border_deviation in enumerate(border_deviations):
         mask_deviation, mask_color = border_deviation
         if i == 0 or mask_deviation <= (
-            lowest_border_deviation * (1 - cleaner_conf.mask_improvement_threshold)
+            lowest_border_deviation * (1 - masker_conf.mask_improvement_threshold)
         ):
             lowest_border_deviation = mask_deviation
             lowest_deviation_color = mask_color
             best_mask = masks[i]
 
     # If the std deviation is too high, return None.
-    if lowest_border_deviation > cleaner_conf.mask_max_standard_deviation:
+    if lowest_border_deviation > masker_conf.mask_max_standard_deviation:
         return st.MaskFittingResults(
             best_mask=None,
             median_color=lowest_deviation_color,
