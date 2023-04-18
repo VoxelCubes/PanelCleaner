@@ -121,7 +121,7 @@ import torch
 import tifffile
 
 from pcleaner import __version__
-import pcleaner.cleaner as cl
+import pcleaner.masker as cl
 import pcleaner.config as cfg
 import pcleaner.cli_utils as cli
 import pcleaner.pre_processor as pp
