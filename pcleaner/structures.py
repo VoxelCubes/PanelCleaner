@@ -3,9 +3,11 @@ import re
 from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
+from importlib import resources
+from pcleaner import data
 
 import magic
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 import pcleaner.config as cfg
 
@@ -148,8 +150,26 @@ class PageData:
         """
         image = Image.open(image_path)
         draw = ImageDraw.Draw(image)
-        for box in self.boxes:
+        font_path = str(resources.path(data, "LiberationSans-Regular.ttf"))
+        # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
+        font_size = int(image.size[0] / 50)
+
+        for index, box in enumerate(self.boxes):
             draw.rectangle(box, outline="green")
+            # Draw the box number, with a white background, respecting font size.
+            draw.rectangle(
+                (box[2] - font_size, box[1] + 2, box[2] - 2, box[1] + font_size),
+                fill="white",
+                outline="white",
+            )
+            draw.text(
+                (box[2] - font_size, box[1]),
+                str(index + 1),
+                fill="green",
+                font=ImageFont.truetype(font_path, font_size),
+                direction="rtl",
+            )
+
         for box in self.extended_boxes:
             draw.rectangle(box, outline="red")
         for box in self.merged_extended_boxes:

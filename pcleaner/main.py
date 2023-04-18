@@ -10,7 +10,7 @@ Usage:
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
     pcleaner gui [<image_path> ...] [--debug]
-    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--debug]
+    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--cache-masks] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
     pcleaner load models [--cuda | --cpu | --both] [--force]
@@ -187,7 +187,7 @@ def main():
     elif args.ocr:
         config = cfg.load_config()
         image_paths = discover_all_images(args.image_path)
-        run_ocr(config, image_paths, args.output_path)
+        run_ocr(config, image_paths, args.output_path, cache_masks=args.cache_masks)
 
     elif args.cache and args.clear:
         config = cfg.load_config()
@@ -431,7 +431,9 @@ def run_cleaner(
         print("Done!")
 
 
-def run_ocr(config: cfg.Config, image_paths: list[Path], output_path: str | None):
+def run_ocr(
+    config: cfg.Config, image_paths: list[Path], output_path: str | None, cache_masks: bool
+):
     """
     Run OCR on the given images. This is a byproduct of the pre-processing step,
     expanded to all bubbles.
@@ -439,10 +441,17 @@ def run_ocr(config: cfg.Config, image_paths: list[Path], output_path: str | None
     :param config: The config to use.
     :param image_paths: The images to run OCR on.
     :param output_path: The path to output the results to.
+    :param cache_masks: Whether to cache the masks.
     """
     cache_dir = config.get_cleaner_cache_dir()
     profile = config.current_profile
     logger.debug(f"Cache directory: {cache_dir}")
+
+    # If caching masks, direct the user to the cache directory.
+    if cache_masks:
+        print(
+            f"You can find the masks being generated in real-time in the cache directory:\n\n{cache_dir}\n"
+        )
 
     # Delete the cache directory if not explicitly keeping it.
     if len(list(cache_dir.glob("*"))) > 0:
@@ -484,8 +493,9 @@ def run_ocr(config: cfg.Config, image_paths: list[Path], output_path: str | None
         ocr_analytic = pp.prep_json_file(
             json_file_path,
             pre_processor_conf=config.current_profile.pre_processor,
-            cache_masks=False,
+            cache_masks=cache_masks,
             mocr=mocr,
+            cache_masks_ocr=True,
         )
         if ocr_analytic:
             ocr_analytics.append(ocr_analytic)

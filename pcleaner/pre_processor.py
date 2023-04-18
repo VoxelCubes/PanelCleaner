@@ -39,6 +39,7 @@ def prep_json_file(
     pre_processor_conf: cfg.PreProcessorConfig,
     cache_masks: bool,
     mocr: MangaOcr | None = None,
+    cache_masks_ocr: bool = False,
 ) -> tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str], ...]] | None:
     """
     Load the generated json file, and clean the data, leaving only the
@@ -59,6 +60,7 @@ def prep_json_file(
     :param pre_processor_conf: Pre processor configuration, part of the profile.
     :param cache_masks: Whether to cache the masks.
     :param mocr: [Optional] Manga ocr object.
+    :param cache_masks_ocr: [Optional] Whether to cache the masks early for ocr.
     :return: Analytics data if the manga ocr object is given, None otherwise.
     """
 
@@ -91,7 +93,21 @@ def prep_json_file(
                 continue
             boxes.append(data["xyxy"])
 
+    # Sort boxes by their x+y coordinates, using the top right corner as the reference.
+    boxes.sort(key=lambda box: box[1] - 0.4 * box[2])
+
     page_data = st.PageData(image_path, mask_path, original_path, scale, boxes, [], [], [])
+
+    # Pad the boxes a bit, save a copy, and then pad them some more.
+    # The copy is used as a smaller mask, and the padded copy is used as a larger mask.
+    page_data.grow_boxes(scale_len(pre_processor_conf.box_padding_initial), st.BoxType.BOX)
+    page_data.right_pad_boxes(
+        scale_len(pre_processor_conf.box_right_padding_initial), st.BoxType.BOX
+    )
+
+    # Draw the boxes on the image and save it.
+    if cache_masks and cache_masks_ocr:
+        page_data.visualize(Path(page_data.image_path))
 
     # Run OCR to discard small boxes that only contain symbols.
     analytics = None
@@ -102,13 +118,6 @@ def prep_json_file(
             scale_area(pre_processor_conf.ocr_max_size),
             pre_processor_conf.ocr_blacklist_pattern,
         )
-
-    # Pad the boxes a bit, save a copy, and then pad them some more.
-    # The copy is used as a smaller mask, and the padded copy is used as a larger mask.
-    page_data.grow_boxes(scale_len(pre_processor_conf.box_padding_initial), st.BoxType.BOX)
-    page_data.right_pad_boxes(
-        scale_len(pre_processor_conf.box_right_padding_initial), st.BoxType.BOX
-    )
 
     # A shallow copy of the box list suffices, because the tuples inside are immutable.
     page_data.extended_boxes = page_data.boxes.copy()
@@ -138,14 +147,18 @@ def prep_json_file(
     json_out_path.write_text(json.dumps(page_data_dict, indent=4))
 
     # Draw the boxes on the image and save it.
-    if cache_masks:
+    if cache_masks and not cache_masks_ocr:
         page_data.visualize(Path(page_data.image_path))
 
     return analytics
 
 
 def ocr_check(
-    page_data: st.PageData, mocr: MangaOcr, max_box_size: int, ocr_blacklist_pattern: str
+    page_data: st.PageData,
+    mocr: MangaOcr,
+    max_box_size: int,
+    ocr_blacklist_pattern: str,
+    box_padding: int = 0,
 ) -> tuple[st.PageData, tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str], ...]]]:
     """
     Run OCR on small boxes to determine whether they contain mere symbols,
@@ -167,9 +180,11 @@ def ocr_check(
     :param mocr: Manga ocr object.
     :param max_box_size: Maximum size of a box in pixels, to consider it for ocr.
     :param ocr_blacklist_pattern: Regex pattern to match against the ocr result.
+    :param box_padding: [Optional] Padding to add to the box before running ocr.
     :return: The modified page data and Analytics data.
     """
     base_image = Image.open(page_data.image_path)
+    image_width, image_height = base_image.size
     candidate_small_bubbles = [
         box for box in page_data.boxes if page_data.box_size(box) < max_box_size
     ]
