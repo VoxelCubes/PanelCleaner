@@ -1,9 +1,10 @@
 <RCC>
   <qresource prefix="/">
+    <file>Breeze/actions/16/edit-reset.svg</file>
+    <file>BreezeDark/actions/16/edit-reset.svg</file>
     <file>BreezeDark/index.theme</file>
     <file>BreezeDark/mimetypes/16/image-bmp.svg</file>
     <file>BreezeDark/mimetypes/16/image-jpeg.svg</file>
-    <file>BreezeDark/mimetypes/16/image-jpeg2000.svg</file>
     <file>BreezeDark/mimetypes/16/image-png.svg</file>
     <file>BreezeDark/mimetypes/16/image-tiff.svg</file>
     <file>BreezeDark/mimetypes/16/image-x-generic.svg</file>
@@ -28,7 +29,6 @@
     <file>Breeze/index.theme</file>
     <file>Breeze/mimetypes/16/image-bmp.svg</file>
     <file>Breeze/mimetypes/16/image-jpeg.svg</file>
-    <file>Breeze/mimetypes/16/image-jpeg2000.svg</file>
     <file>Breeze/mimetypes/16/image-png.svg</file>
     <file>Breeze/mimetypes/16/image-tiff.svg</file>
     <file>Breeze/mimetypes/16/image-x-generic.svg</file>
