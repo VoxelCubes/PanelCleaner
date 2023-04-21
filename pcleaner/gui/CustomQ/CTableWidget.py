@@ -3,6 +3,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtCore as Qc
 
 
+# noinspection PyPep8Naming
 class CTableWidget(Qw.QTableWidget):
     """
     Extends the functionality with custom helpers

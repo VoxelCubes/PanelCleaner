@@ -3,6 +3,7 @@ import PySide6.QtWidgets as Qw
 from logzero import logger
 
 
+# noinspection PyPep8Naming
 class CComboBox(Qw.QComboBox):
     """
     Extends the functionality with custom helpers
