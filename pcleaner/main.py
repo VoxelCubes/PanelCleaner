@@ -133,9 +133,6 @@ import pcleaner.model_downloader as md
 import pcleaner.helpers as hp
 import pcleaner.gui.launcher as gui
 
-# Supported image suffixes.
-IMG_EXT = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
-
 # Allow loading of large images.
 Image.MAX_IMAGE_PIXELS = 2**32
 
@@ -586,7 +583,7 @@ def discover_all_images(img_paths: str | Path | list[str | Path]) -> list[Path]:
     for img_path in img_paths:
         if img_path.is_dir():
             img_list.extend(find_all_images_shallow(img_path))
-        elif img_path.is_file() and img_path.suffix.lower() in IMG_EXT:
+        elif img_path.is_file() and img_path.suffix.lower() in cfg.SUPPORTED_IMG_TYPES:
             img_list.append(img_path)
         else:
             raise FileNotFoundError(f"Image path {img_path} does not exist.")
@@ -604,7 +601,7 @@ def find_all_images_shallow(img_dir: Path) -> list[Path]:
     image_list: list[Path] = []
     for file_path in img_dir.glob("*"):
         file_suffix = file_path.suffix
-        if file_suffix.lower() not in IMG_EXT:
+        if file_suffix.lower() not in cfg.SUPPORTED_IMG_TYPES:
             continue
         else:
             image_list.append(file_path)

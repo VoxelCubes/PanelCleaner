@@ -570,7 +570,7 @@ def extract_text(base_image: Image, mask: Image) -> Image:
     return text_image
 
 
-# IMG_EXT = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
+# SUPPORTED_IMG_TYPES = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
 
 suffix_to_format: dict[str, str] = {
     ".jpg": "JPEG",

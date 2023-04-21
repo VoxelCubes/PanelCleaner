@@ -1,6 +1,8 @@
+import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any, NewType
 
 import configupdater as cu
 from logzero import logger
@@ -8,35 +10,52 @@ from logzero import logger
 from pcleaner import cli_utils as cli
 from pcleaner import model_downloader as md
 
+RESERVED_PROFILE_NAMES = ["builtin", "none", "default"]
 
-RESERVED_PROFILE_NAMES = ["builtin", "none"]
+# Supported image suffixes.
+SUPPORTED_IMG_TYPES = [
+    ".jpeg",
+    ".jpg",
+    ".png",
+    ".bmp",
+    ".tiff",
+    ".tif",
+    ".jp2",
+    ".dib",
+    ".webp",
+    ".ppm",
+]
+SUPPORTED_MASK_TYPES = [".png", ".bmp", ".tiff", ".tif", ".dib", ".webp", ".ppm"]
+
+# Create a dummy type to signify numbers need to be greater than 0.
+GreaterZero = NewType("GreaterZero", int)
 
 
 @dataclass
 class GeneralConfig:
     preferred_file_type: str | None = None
-    preferred_mask_file_type: str | None = None
-    input_size_scale: float = 1.0
+    preferred_mask_file_type: str = ".png"
+    input_size_scale: float | GreaterZero = 1.0
 
-    def export_to_conf(self, config_updater: cu.ConfigUpdater) -> None:
+    def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
         """
         Write the config to the config updater object.
 
         No add_after_section here since it is the first section.
 
         :param config_updater: An existing config updater object.
+        :param gui_mode: Whether the config is being exported for the GUI.
         """
 
         config_str = f"""\
         [General]
         
         # Preferred file type to save the cleaned image as.
-        # If no file type is specified, the original file type will be used.
+        [CLI: # If no file type is specified, the original file type will be used.]
         preferred_file_type = {self.preferred_file_type if self.preferred_file_type else ""}
 
         # Preferred file type to save the mask as.
-        # If no file type is specified, png will be used.
-        # This is because the mask image must use transparency, which is not supported by all image formats.
+        # Only image formats that allow for transparency are supported.
         preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
         
         # Scale the input image by this amount before processing.
@@ -50,7 +69,7 @@ class GeneralConfig:
         input_size_scale = {self.input_size_scale}
         
         """
-        config_updater.read_string(multi_left_strip(config_str))
+        config_updater.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
 
     def import_from_conf(self, config_updater: cu.ConfigUpdater) -> None:
         """
@@ -64,29 +83,34 @@ class GeneralConfig:
             return
 
         try_to_load(self, config_updater, section, str | None, "preferred_file_type")
-        try_to_load(self, config_updater, section, str | None, "preferred_mask_file_type")
-        try_to_load(self, config_updater, section, float, "input_size_scale")
+        try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
+        try_to_load(self, config_updater, section, float | GreaterZero, "input_size_scale")
 
 
 @dataclass
 class TextDetectorConfig:
     model_path: str | None = None
-    concurrent_models: int = 1
+    concurrent_models: int | GreaterZero = 1
 
-    def export_to_conf(self, config_updater: cu.ConfigUpdater, add_after_section: str) -> None:
+    def export_to_conf(
+        self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
+    ) -> None:
         """
         Write the config to the config updater object.
 
         :param config_updater: An existing config updater object.
         :param add_after_section: The section to add the config after.
+        :param gui_mode: Whether the config is being exported for the GUI.
         """
 
         config_str = f"""\
         [TextDetector]
         
         # Path to the text detection model, leave empty to use the built-in model.
-        # The model can be found here:
-        # https://github.com/zyddnys/manga-image-translator/releases/latest
+        [CLI: # You can download older versions of the model here:]
+        [CLI: # https://github.com/zyddnys/manga-image-translator/releases/latest]
+        [GUI: # You can download older versions of the model ]
+        [GUI: # <a href="https://github.com/zyddnys/manga-image-translator/releases/latest">here.</a>]
         model_path = {none_to_empty(self.model_path)}
         
         # Number of models to run in parallel. This is useful if you have enough RAM
@@ -98,7 +122,7 @@ class TextDetectorConfig:
         
         """
         detector_conf = cu.ConfigUpdater()
-        detector_conf.read_string(multi_left_strip(config_str))
+        detector_conf.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
         general_section = detector_conf["TextDetector"]
         config_updater[add_after_section].add_after.space(2).section(general_section.detach())
 
@@ -113,7 +137,7 @@ class TextDetectorConfig:
             return
 
         try_to_load(self, config_updater, "TextDetector", str | None, "model_path")
-        try_to_load(self, config_updater, "TextDetector", int, "concurrent_models")
+        try_to_load(self, config_updater, "TextDetector", int | GreaterZero, "concurrent_models")
 
 
 @dataclass
@@ -129,20 +153,23 @@ class PreProcessorConfig:
     box_right_padding_extended: int = 5
     box_reference_padding: int = 20
 
-    def export_to_conf(self, config_updater: cu.ConfigUpdater, add_after_section: str) -> None:
+    def export_to_conf(
+        self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
+    ) -> None:
         """
         Write the config to the config updater object.
 
         :param config_updater: An existing config updater object.
         :param add_after_section: The section to add the config after.
+        :param gui_mode: Whether the config is being exported for the GUI.
         """
         config_str = f"""\
         [PreProcessor]
         
         # Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.
-        # To see these boxes visualized, use the --show-masks flag when cleaning and look inside the cache folder.
+        # [CLI: To see these boxes visualized, use the --show-masks flag when cleaning and look inside the cache folder.]
 
-        # Minimum size of any box to keep it. 
+        # Minimum size of any box to keep it.
         box_min_size = {self.box_min_size}
         
         # Minimum size of a box with "unknown" language to keep it. This language is typically assigned to logos and other
@@ -156,14 +183,14 @@ class PreProcessorConfig:
         # These useless boxes are usually small, and OCR is slow, so use this as a cutoff.
         ocr_max_size = {self.ocr_max_size}
         
-        # Regex pattern to match against OCR results. 
+        # Regex pattern to match against OCR results.
         # Anything matching this pattern is discarded.
         # Note that the OCR model returns full-width characters, so this pattern should match them.
         ocr_blacklist_pattern = {self.ocr_blacklist_pattern}
         
         # Padding to add to each side of a box.
         # This is added to the initial boxes created by the text detector AI.
-        # These boxes are visualized in green with the --cache-masks flag.
+        # These boxes are visualized in green[CLI:  with the --cache-masks flag].
         box_padding_initial = {self.box_padding_initial}
         
         # Padding to add to the right side of a box.
@@ -172,7 +199,7 @@ class PreProcessorConfig:
         
         # Padding to add to each side of a box.
         # This is added to an extended set of boxes, used to cut out false positives by the text detector AI's mask.
-        # These boxes are visualized in purple with the --cache-masks flag.
+        # These boxes are visualized in purple[CLI:  with the --cache-masks flag].
         box_padding_extended = {self.box_padding_extended}
         
         # Padding to add to the right side of a box.
@@ -181,12 +208,12 @@ class PreProcessorConfig:
         
         # Padding to add to each side of a box.
         # This is added to the reference boxes used to sample the original image while analyzing what mask to use.
-        # These boxes are visualized in blue with the --cache-masks flag.
+        # These boxes are visualized in blue[CLI:  with the --cache-masks flag].
         box_reference_padding = {self.box_reference_padding}
 
         """
         preproc_conf = cu.ConfigUpdater()
-        preproc_conf.read_string(multi_left_strip(config_str))
+        preproc_conf.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
         preproc_section = preproc_conf["PreProcessor"]
         config_updater[add_after_section].add_after.space(2).section(preproc_section.detach())
 
@@ -215,7 +242,7 @@ class PreProcessorConfig:
 
 @dataclass
 class MaskerConfig:
-    mask_growth_step_pixels: int = 2
+    mask_growth_step_pixels: int | GreaterZero = 2
     mask_growth_steps: int = 11
     off_white_max_threshold: int = 240
     mask_improvement_threshold: float = 0.1
@@ -223,12 +250,15 @@ class MaskerConfig:
     mask_max_standard_deviation: float = 15
     debug_mask_color: tuple[int, int, int, int] = (108, 30, 240, 127)
 
-    def export_to_conf(self, config_updater: cu.ConfigUpdater, add_after_section: str) -> None:
+    def export_to_conf(
+        self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
+    ) -> None:
         """
         Write the config to the config updater object.
 
         :param config_updater: An existing config updater object.
         :param add_after_section: The section to add the new section after.
+        :param gui_mode: Whether to format the config for the GUI.
         """
         config_str = f"""\
         [Masker]
@@ -258,7 +288,7 @@ class MaskerConfig:
         
         
         # Whether to use the fast mask selection algorithm.
-        # When true, the mask selection algorith with pick the first perfect mask, if one if found early.
+        # When true, the mask selection algorith will pick the first perfect mask, if one is found early.
         # This is faster, but may not find the best mask, if a slightly bigger one would have been better.
         mask_selection_fast = {self.mask_selection_fast}
         
@@ -267,12 +297,12 @@ class MaskerConfig:
         # which isn't a good mask, as it will require inpainting anyway.
         mask_max_standard_deviation = {self.mask_max_standard_deviation}
         
-        # Color to use for the debug mask. This is a tuple of RGBA values.
+        # Color to use for the debug mask. [CLI: This is a tuple of RGBA values.]
         debug_mask_color = {','.join(map(str, self.debug_mask_color))}
         
         """
         masker_conf = cu.ConfigUpdater()
-        masker_conf.read_string(multi_left_strip(config_str))
+        masker_conf.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
         masker_section = masker_conf["Masker"]
         config_updater[add_after_section].add_after.space(2).section(masker_section.detach())
 
@@ -287,7 +317,7 @@ class MaskerConfig:
             logger.info(f"No {section} section found in the profile, using defaults.")
             return
 
-        try_to_load(self, config_updater, section, int, "mask_growth_step_pixels")
+        try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_step_pixels")
         try_to_load(self, config_updater, section, int, "mask_growth_steps")
         try_to_load(self, config_updater, section, int, "off_white_max_threshold")
         try_to_load(self, config_updater, section, float, "mask_improvement_threshold")
@@ -320,12 +350,15 @@ class DenoiserConfig:
     search_window_size: int = 21
     # TODO respect denoising enabled
 
-    def export_to_conf(self, config_updater: cu.ConfigUpdater, add_after_section: str) -> None:
+    def export_to_conf(
+        self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
+    ) -> None:
         """
         Write the config to the config updater object.
 
         :param config_updater: An existing config updater object.
         :param add_after_section: The section to add the new section after.
+        :param gui_mode: Whether to format the config for the GUI.
         """
         config_str = f"""\
         [Denoiser]
@@ -373,7 +406,7 @@ class DenoiserConfig:
         
         """
         denoiser_conf = cu.ConfigUpdater()
-        denoiser_conf.read_string(multi_left_strip(config_str))
+        denoiser_conf.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
         denoiser_section = denoiser_conf["Denoiser"]
         config_updater[add_after_section].add_after.space(2).section(denoiser_section.detach())
 
@@ -410,16 +443,19 @@ class Profile:
     masker: MaskerConfig = MaskerConfig()
     denoiser: DenoiserConfig = DenoiserConfig()
 
-    def bundle_config(self) -> cu.ConfigUpdater:
+    def bundle_config(self, gui_mode: bool = False) -> cu.ConfigUpdater:
         """
         Bundle the config into a ConfigUpdater object.
+
+        :param gui_mode: When true, strips out the CLI-specific options and keeps the GUI-specific ones,
+            and vice versa.
         """
         config_updater = cu.ConfigUpdater()
-        self.general.export_to_conf(config_updater)
-        self.text_detector.export_to_conf(config_updater, "General")
-        self.pre_processor.export_to_conf(config_updater, "TextDetector")
-        self.masker.export_to_conf(config_updater, "PreProcessor")
-        self.denoiser.export_to_conf(config_updater, "Masker")
+        self.general.export_to_conf(config_updater, gui_mode=gui_mode)
+        self.text_detector.export_to_conf(config_updater, "General", gui_mode=gui_mode)
+        self.pre_processor.export_to_conf(config_updater, "TextDetector", gui_mode=gui_mode)
+        self.masker.export_to_conf(config_updater, "PreProcessor", gui_mode=gui_mode)
+        self.denoiser.export_to_conf(config_updater, "Masker", gui_mode=gui_mode)
         return config_updater
 
     def write(self, path: Path) -> bool:
@@ -458,6 +494,23 @@ class Profile:
             profile = cls()
             print("Failed to load profile, using default profile.")
         return profile
+
+    def get(self, section: str, option: str) -> Any:
+        """
+        Get the value of a config option.
+        """
+        return getattr(getattr(self, section), option)
+
+    def set(self, section: str, option: str, value: Any) -> None:
+        """
+        Set the value of a config option.
+        """
+        # Check that the attribute exists.
+        if not hasattr(self, section):
+            raise AttributeError(f"No such section: {section}")
+        if not hasattr(getattr(self, section), option):
+            raise AttributeError(f"No such option: {option}")
+        setattr(getattr(self, section), option, value)
 
 
 @dataclass
@@ -834,6 +887,38 @@ def try_to_load(
                 f"Failed to parse '{conf_data}': {e}"
             )
             return
+    elif attr_type == int | GreaterZero:
+        # GreaterZero is just a signifier to check for positive numbers.
+        try:
+            attr_value = int(conf_data)
+        except ValueError as e:
+            print(
+                f"Option {attr_name} in section {section} should be an integer.\n"
+                f"Failed to parse '{conf_data}': {e}"
+            )
+            return
+        if attr_value <= 0:
+            print(
+                f"Option {attr_name} in section {section} should be greater than zero. Limiting to 1."
+            )
+            attr_value = 1
+
+    elif attr_type == float | GreaterZero:
+        # GreaterZero is just a signifier to check for positive numbers.
+        try:
+            attr_value = float(conf_data)
+        except ValueError as e:
+            print(
+                f"Option {attr_name} in section {section} should be floating point number.\n"
+                f"Failed to parse '{conf_data}': {e}"
+            )
+            return
+        if attr_value <= 0:
+            print(
+                f"Option {attr_name} in section {section} should be greater than zero. Setting to 1."
+            )
+            attr_value = 0.01
+
     elif attr_type == Path:
         try:
             attr_value = Path(conf_data)
@@ -876,3 +961,29 @@ def multi_left_strip(string: str) -> str:
     """
     stripped_lines = (line.lstrip() for line in string.splitlines())
     return "\n".join(stripped_lines)
+
+
+def format_for_version(conf_string: str, gui_mode: bool) -> str:
+    """
+    Format the config string for the current version of the program.
+
+    In CLI mode, remove all GUI-only options, and vice versa.
+    The comments that need to be replaces are marked as follows:
+    [CLI: ...] and [GUI: ...]
+
+    :param conf_string: The config string to format.
+    :param gui_mode: Whether to format for GUI mode.
+    :return: The formatted config string.
+    """
+    if gui_mode:
+        conf_string = re.sub(r"^\s*\[CLI: (.*?)]\s*$", "", conf_string, flags=re.MULTILINE)
+        conf_string = re.sub(r"^\s*\[GUI: (.*?)]\s*$", r"\1", conf_string, flags=re.MULTILINE)
+        conf_string = re.sub(r"\[CLI: (.*?)]", "", conf_string)
+        conf_string = re.sub(r"\[GUI: (.*?)]", r"\1", conf_string)
+    else:
+        conf_string = re.sub(r"^\s*\[GUI: (.*?)]\s*$", "", conf_string, flags=re.MULTILINE)
+        conf_string = re.sub(r"^\s*\[CLI: (.*?)]\s*$", r"\1", conf_string, flags=re.MULTILINE)
+        conf_string = re.sub(r"\[GUI: (.*?)]", "", conf_string)
+        conf_string = re.sub(r"\[CLI: (.*?)]", r"\1", conf_string)
+
+    return conf_string
