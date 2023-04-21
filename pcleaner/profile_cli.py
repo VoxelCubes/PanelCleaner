@@ -194,6 +194,9 @@ def repair_profile(config: cfg.Config, profile_name: str):
         profile = cfg.Profile()
         not_salvageable = True
 
+    # Verify the values in the profile.
+    profile.fix()
+
     # If it wasn't salvageable, ask before overwriting.
     if not_salvageable:
         if not cli.get_confirmation(

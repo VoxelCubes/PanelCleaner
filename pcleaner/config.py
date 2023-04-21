@@ -9,6 +9,7 @@ from logzero import logger
 
 from pcleaner import cli_utils as cli
 from pcleaner import model_downloader as md
+from pcleaner import helpers as hp
 
 RESERVED_PROFILE_NAMES = ["builtin", "none", "default"]
 
@@ -86,6 +87,33 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, float | GreaterZero, "input_size_scale")
 
+    def fix(self):
+        """
+        Fix the config values.
+        """
+        if (
+            self.preferred_file_type is not None
+            and self.preferred_file_type.lower() not in SUPPORTED_IMG_TYPES
+        ):
+            closest = hp.closest_match(self.preferred_file_type.lower(), SUPPORTED_IMG_TYPES)
+            if closest is None:
+                logger.error(
+                    f"Could not recover from invalid preferred_file_type: {self.preferred_file_type}, using default."
+                )
+            self.preferred_file_type = closest
+
+        if self.preferred_mask_file_type is None:
+            self.preferred_mask_file_type = SUPPORTED_MASK_TYPES[0]
+
+        if self.preferred_mask_file_type.lower() not in SUPPORTED_MASK_TYPES:
+            closest = hp.closest_match(self.preferred_mask_file_type.lower(), SUPPORTED_MASK_TYPES)
+            if closest is None:
+                logger.error(
+                    f"Could not recover from invalid preferred_mask_file_type: {self.preferred_mask_file_type}, using default."
+                )
+                closest = SUPPORTED_MASK_TYPES[0]
+            self.preferred_mask_file_type = closest
+
 
 @dataclass
 class TextDetectorConfig:
@@ -138,6 +166,16 @@ class TextDetectorConfig:
 
         try_to_load(self, config_updater, "TextDetector", str | None, "model_path")
         try_to_load(self, config_updater, "TextDetector", int | GreaterZero, "concurrent_models")
+
+    def fix(self):
+        """
+        Fix the config values.
+        Numbers flagged as greater than zero are already fixed then loading.
+        """
+        if self.model_path is not None:
+            if not Path(self.model_path).exists():
+                logger.error(f"Could not find model file: {self.model_path}, using default.")
+                self.model_path = None
 
 
 @dataclass
@@ -239,6 +277,27 @@ class PreProcessorConfig:
         try_to_load(self, config_updater, section, int, "box_right_padding_extended")
         try_to_load(self, config_updater, section, int, "box_reference_padding")
 
+    def fix(self):
+        """
+        Ensure all numbers are greater equal 0.
+        """
+        if self.box_min_size < 0:
+            self.box_min_size = 0
+        if self.suspicious_box_min_size < 0:
+            self.suspicious_box_min_size = 0
+        if self.ocr_max_size < 0:
+            self.ocr_max_size = 0
+        if self.box_padding_initial < 0:
+            self.box_padding_initial = 0
+        if self.box_right_padding_initial < 0:
+            self.box_right_padding_initial = 0
+        if self.box_padding_extended < 0:
+            self.box_padding_extended = 0
+        if self.box_right_padding_extended < 0:
+            self.box_right_padding_extended = 0
+        if self.box_reference_padding < 0:
+            self.box_reference_padding = 0
+
 
 @dataclass
 class MaskerConfig:
@@ -336,6 +395,21 @@ class MaskerConfig:
         except (cu.NoOptionError, ValueError):
             pass
 
+    def fix(self):
+        """
+        Keep the numbers greater or equal to zero.
+        For numbers, ensure the range 0-255.
+        """
+        self.mask_growth_steps = max(0, self.mask_growth_steps)
+        self.off_white_max_threshold = max(0, min(255, self.off_white_max_threshold))
+        if self.mask_improvement_threshold < 0:
+            self.mask_improvement_threshold = 0
+        if self.mask_max_standard_deviation < 0:
+            self.mask_max_standard_deviation = 0
+        # We already ensured that it's a tuple of 4 ints.
+        # noinspection PyTypeChecker
+        self.debug_mask_color = tuple(max(0, min(255, x)) for x in self.debug_mask_color)
+
 
 @dataclass
 class DenoiserConfig:
@@ -430,6 +504,22 @@ class DenoiserConfig:
         try_to_load(self, config_updater, section, int, "template_window_size")
         try_to_load(self, config_updater, section, int, "search_window_size")
 
+    def fix(self):
+        if self.noise_min_standard_deviation < 0:
+            self.noise_min_standard_deviation = 0
+        if self.noise_outline_size < 0:
+            self.noise_outline_size = 0
+        if self.noise_fade_radius < 0:
+            self.noise_fade_radius = 0
+        if self.filter_strength < 0:
+            self.filter_strength = 0
+        if self.color_filter_strength < 0:
+            self.color_filter_strength = 0
+        if self.template_window_size < 0:
+            self.template_window_size = 0
+        if self.search_window_size < 0:
+            self.search_window_size = 0
+
 
 @dataclass
 class Profile:
@@ -489,6 +579,7 @@ class Profile:
             profile.pre_processor.import_from_conf(config)
             profile.masker.import_from_conf(config)
             profile.denoiser.import_from_conf(config)
+            profile.fix()
         except Exception as e:
             logger.error(f"Failed to load profile from {path}:\n{e}")
             profile = cls()
@@ -511,6 +602,16 @@ class Profile:
         if not hasattr(getattr(self, section), option):
             raise AttributeError(f"No such option: {option}")
         setattr(getattr(self, section), option, value)
+
+    def fix(self):
+        """
+        Correct any invalid values in the profile.
+        """
+        self.general.fix()
+        self.text_detector.fix()
+        self.pre_processor.fix()
+        self.masker.fix()
+        self.denoiser.fix()
 
 
 @dataclass

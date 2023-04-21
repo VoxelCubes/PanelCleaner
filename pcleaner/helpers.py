@@ -2,6 +2,7 @@ import platform
 import subprocess
 from math import ceil
 from pathlib import Path
+import difflib
 
 from logzero import logger
 
@@ -51,3 +52,19 @@ def open_file(path: Path):
             subprocess.run(["open", path])
     except Exception as e:
         logger.exception(e)
+
+
+def closest_match(word: str, choices: list[str]) -> str | None:
+    """
+    Return the closest match for the given word in the list of choices.
+    If no good match is found, return None.
+    """
+    if word in choices:
+        return word
+    else:
+        # Find the closest match using difflib:
+        closest = difflib.get_close_matches(word, choices, 1, 0.5)  # 0.6 is the default threshold
+        if closest:
+            return str(closest[0])
+        else:
+            return None
