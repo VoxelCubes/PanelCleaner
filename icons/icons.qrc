@@ -26,6 +26,8 @@
     <file>BreezeDark/actions/16/process-stop.svg</file>
     <file>BreezeDark/actions/16/system-help.svg</file>
     <file>BreezeDark/actions/16/view-refresh.svg</file>
+    <file>BreezeDark/actions/16/document-revert.svg</file>
+    <file>Breeze/actions/16/document-revert.svg</file>
     <file>Breeze/index.theme</file>
     <file>Breeze/mimetypes/16/image-bmp.svg</file>
     <file>Breeze/mimetypes/16/image-jpeg.svg</file>
