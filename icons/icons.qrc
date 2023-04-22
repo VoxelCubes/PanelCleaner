@@ -1,57 +1,5 @@
 <RCC>
   <qresource prefix="/">
-    <file>Breeze/actions/16/edit-reset.svg</file>
-    <file>BreezeDark/actions/16/edit-reset.svg</file>
-    <file>BreezeDark/index.theme</file>
-    <file>BreezeDark/mimetypes/16/image-bmp.svg</file>
-    <file>BreezeDark/mimetypes/16/image-jpeg.svg</file>
-    <file>BreezeDark/mimetypes/16/image-png.svg</file>
-    <file>BreezeDark/mimetypes/16/image-tiff.svg</file>
-    <file>BreezeDark/mimetypes/16/image-x-generic.svg</file>
-    <file>BreezeDark/actions/16/configure.svg</file>
-    <file>BreezeDark/actions/16/data-error.svg</file>
-    <file>BreezeDark/actions/16/data-warning.svg</file>
-    <file>BreezeDark/actions/16/dialog-cancel.svg</file>
-    <file>BreezeDark/actions/16/dialog-ok-apply.svg</file>
-    <file>BreezeDark/actions/16/document-open-folder.svg</file>
-    <file>BreezeDark/actions/16/document-open.svg</file>
-    <file>BreezeDark/actions/16/document-preview.svg</file>
-    <file>BreezeDark/actions/16/document-save.svg</file>
-    <file>BreezeDark/actions/16/edit-clear.svg</file>
-    <file>BreezeDark/actions/16/edit-delete-remove.svg</file>
-    <file>BreezeDark/actions/16/edit-delete.svg</file>
-    <file>BreezeDark/actions/16/help-about.svg</file>
-    <file>BreezeDark/actions/16/list-add.svg</file>
-    <file>BreezeDark/actions/16/media-playback-start.svg</file>
-    <file>BreezeDark/actions/16/process-stop.svg</file>
-    <file>BreezeDark/actions/16/system-help.svg</file>
-    <file>BreezeDark/actions/16/view-refresh.svg</file>
-    <file>BreezeDark/actions/16/document-revert.svg</file>
-    <file>Breeze/actions/16/document-revert.svg</file>
-    <file>Breeze/index.theme</file>
-    <file>Breeze/mimetypes/16/image-bmp.svg</file>
-    <file>Breeze/mimetypes/16/image-jpeg.svg</file>
-    <file>Breeze/mimetypes/16/image-png.svg</file>
-    <file>Breeze/mimetypes/16/image-tiff.svg</file>
-    <file>Breeze/mimetypes/16/image-x-generic.svg</file>
-    <file>Breeze/actions/16/configure.svg</file>
     <file>logo-tiny.png</file>
-    <file>Breeze/actions/16/data-error.svg</file>
-    <file>Breeze/actions/16/data-warning.svg</file>
-    <file>Breeze/actions/16/dialog-cancel.svg</file>
-    <file>Breeze/actions/16/dialog-ok-apply.svg</file>
-    <file>Breeze/actions/16/document-open-folder.svg</file>
-    <file>Breeze/actions/16/document-open.svg</file>
-    <file>Breeze/actions/16/document-preview.svg</file>
-    <file>Breeze/actions/16/document-save.svg</file>
-    <file>Breeze/actions/16/edit-clear.svg</file>
-    <file>Breeze/actions/16/edit-delete-remove.svg</file>
-    <file>Breeze/actions/16/edit-delete.svg</file>
-    <file>Breeze/actions/16/help-about.svg</file>
-    <file>Breeze/actions/16/list-add.svg</file>
-    <file>Breeze/actions/16/media-playback-start.svg</file>
-    <file>Breeze/actions/16/process-stop.svg</file>
-    <file>Breeze/actions/16/system-help.svg</file>
-    <file>Breeze/actions/16/view-refresh.svg</file>
   </qresource>
 </RCC>

@@ -1,0 +1,36 @@
+Theme directories:
+  - /usr/share/icons/breeze
+  - /usr/share/icons/breeze-dark
+
+Files:
+  actions:
+    16:
+      - configure.svg
+      - dialog-cancel.svg
+      - dialog-ok-apply.svg
+      - document-open-folder.svg
+      - document-open.svg
+      - document-preview.svg
+      - document-revert.svg
+      - document-save.svg
+      - edit-clear.svg
+      - edit-delete-remove.svg
+      - edit-delete.svg
+      - edit-reset.svg
+      - help-about.svg
+      - list-add.svg
+      - media-playback-start.svg
+      - process-stop.svg
+      - help-contents.svg
+      - view-refresh.svg
+  mimetypes:
+    16:
+      - image-bmp.svg
+      - image-jpeg.svg
+      - image-png.svg
+      - image-tiff.svg
+      - image-x-generic.svg
+  status:
+    16:
+      - data-error.svg
+      - data-warning.svg
