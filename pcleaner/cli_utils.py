@@ -74,6 +74,11 @@ def open_file_with_editor(path: Path, configured_opener: str | None) -> None:
     if platform.system() == "Linux":
         opener = "xdg-open" if configured_opener is None else configured_opener
         print(f"Opening {path} with {opener}.")
+        # Test if the configured editor exists. Even xdg-open may be missing, like in a docker container.
+        if shutil.which(opener) is None:
+            print(f"Configured editor '{opener}' not found. "
+                  f"Please open the file manually or configure another program.")
+            return
         # Run and detatch the process, so this one can exit.
         subprocess.Popen([opener, path], start_new_session=True)
 
