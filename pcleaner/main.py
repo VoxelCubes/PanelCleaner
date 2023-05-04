@@ -508,10 +508,21 @@ def run_ocr(
     if all(path.startswith("/") or path.startswith("\\") for path, _ in removed_texts):
         removed_texts = [(path[1:], text) for path, text in removed_texts]
 
-    removed_texts = natsorted(removed_texts, key=lambda x: x[0])
+    removed_texts: list[tuple[str, str]] = natsorted(removed_texts, key=lambda x: x[0])
 
     print("\nDetected Text:")
-    text = "\n".join(f"{path}: {text}" for path, text in removed_texts)
+    # text = "\n".join(f"{path}: {text}" for path, text in removed_texts)
+    # Place the file path on it's own line, and only if it's different from the previous one.
+    text = ""
+    current_path = ""
+    for path, bubble in removed_texts:
+        if path != current_path:
+            text += f"\n\n{path}: "
+            current_path = path
+        text += f"\n{bubble}"
+        if "\n" in bubble:
+            logger.warning(f"Detected newline in bubble: {path} {bubble}")
+    text = text.strip()  # Remove the leading newline.
     print(text)
 
     if output_path is None:
