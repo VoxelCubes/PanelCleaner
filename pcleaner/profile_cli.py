@@ -68,7 +68,7 @@ def new_profile(config: cfg.Config, profile_name: str, profile_path: str | None)
 
     # If no path is given, use the default path.
     if profile_path is None:
-        profile_path = cli.get_config_path().parent / "profiles" / f"{profile_name}.conf"
+        profile_path = cli.get_default_profile_path(profile_name)
     else:
         profile_path = Path(profile_path)
         # If the path is a directory, append a default filename.

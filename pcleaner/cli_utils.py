@@ -33,6 +33,12 @@ def get_config_path() -> Path:
     return path
 
 
+def get_default_profile_path(profile_name: str | None = None) -> Path:
+    if profile_name is None:
+        return get_config_path().parent / "profiles"
+    return get_config_path().parent / "profiles" / f"{profile_name}.conf"
+
+
 def get_cache_path() -> Path:
     """
     Get the default suggested path to the cache directory for both Linux and Windows.
