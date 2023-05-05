@@ -596,28 +596,34 @@ def save_optimized(image: Image, path: Path, original: Path | Image.Image | None
     """
     compression_method = None
     original_image_mode = None
+    original_dpi = None
 
     if original is not None:
         if isinstance(original, Path):
             original = Image.open(original)
         if suffix_to_format[path.suffix.lower()] == original.format:
             compression_method = original.info.get("compression", None)
-            original_image_mode = original.mode
 
-    logger.debug(
-        f"Found previous compression method: {compression_method} and image mode: {original_image_mode}"
-    )
+        original_image_mode = original.mode
+        original_dpi = original.info.get("dpi", None)
 
     if original_image_mode is not None:
         image = image.convert(original_image_mode)
 
+    # Image args may be different depending on the image type.
+    kwargs = {"optimize": True}
+
     match path.suffix.lower():
         case ".png":
-            image.save(path, optimize=True, compress_level=9)
+            kwargs["compress_level"] = 9
         case ".jpg" | ".jpeg":
-            image.save(path, optimize=True, quality=95, progressive=True)
+            kwargs["quality"] = 95
+            kwargs["progressive"] = True
         case ".tif" | ".tiff":
-            logger.debug(f"Saving image with compression method: {compression_method}")
-            image.save(path, compression=compression_method if compression_method else "tiff_lzw")
-        case _:
-            image.save(path, optimize=True)
+            # Use tiff_lzw compression by default, rather than leaving them uncompressed.
+            kwargs["compression"] = compression_method if compression_method else "tiff_lzw"
+
+    if original_dpi is not None:
+        kwargs["dpi"] = original_dpi
+    logger.debug(f"Saving image {path.name} with kwargs: {kwargs}")
+    image.save(path, **kwargs)
