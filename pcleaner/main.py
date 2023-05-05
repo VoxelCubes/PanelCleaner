@@ -282,6 +282,11 @@ def run_cleaner(
     """
     profile = config.current_profile
 
+    # Override the skip denoising flag if the config disables denoising.
+    if not profile.denoiser.denoising_enabled:
+        logger.debug("Denoising is disabled in the config, skipping denoising step.")
+        skip_denoising = True
+
     # Catch jokesters who want to skip all 4 steps.
     if skip_text_detection and skip_pre_processing and skip_masking and skip_denoising:
         print("Well how about that, you want to skip all 4 steps? I guess I'm not needed here.")

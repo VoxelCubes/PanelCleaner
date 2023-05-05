@@ -422,7 +422,6 @@ class DenoiserConfig:
     color_filter_strength: int = 10
     template_window_size: int = 7
     search_window_size: int = 21
-    # TODO respect denoising enabled
 
     def export_to_conf(
         self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
@@ -495,6 +494,7 @@ class DenoiserConfig:
             logger.info(f"No {section} section found in the profile, using defaults.")
             return
 
+        try_to_load(self, config_updater, section, bool, "denoising_enabled")
         try_to_load(self, config_updater, section, float, "noise_min_standard_deviation")
         try_to_load(self, config_updater, section, int, "noise_outline_size")
         try_to_load(self, config_updater, section, int, "noise_fade_radius")
