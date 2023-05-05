@@ -26,13 +26,13 @@ def show_info(parent, title: str, msg: str):
     Qw.QMessageBox.information(parent, title, msg, Qw.QMessageBox.Ok)
 
 
-def show_question(parent, title: str, msg: str) -> bool:
+def show_question(
+    parent, title: str, msg: str, buttons=Qw.QMessageBox.Yes | Qw.QMessageBox.Cancel
+) -> int:
     msg = msg.ljust(MIN_MSG_LENGTH)
     dlg = Qw.QMessageBox(parent)
     dlg.setWindowTitle(title)
     dlg.setText(msg)
-    dlg.setStandardButtons(Qw.QMessageBox.Yes | Qw.QMessageBox.Cancel)
+    dlg.setStandardButtons(buttons)
     dlg.setIcon(Qw.QMessageBox.Question)
-    response = dlg.exec()
-
-    return response == Qw.QMessageBox.Yes
+    return dlg.exec()

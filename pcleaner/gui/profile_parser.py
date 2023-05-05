@@ -395,6 +395,16 @@ class ProfileToolBox(qw.QToolBox):
             for widget in section.values():
                 widget.reset()
 
+    def is_modified(self) -> bool:
+        """
+        Check if any values have been modified.
+
+        :return: True if any values have been modified.
+        """
+        return not all(
+            w.value_is_default() for section in self._widgets.values() for w in section.values()
+        )
+
 
 def to_snake_case(name: str) -> str:
     """

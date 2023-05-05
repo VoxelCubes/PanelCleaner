@@ -78,7 +78,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         # Connect signals.
         self.connect_combobox_slots()
-        self.comboBox_current_profile.currentIndexChanged.connect(self.change_current_profile)
+        self.comboBox_current_profile.hookedCurrentIndexChanged.connect(self.change_current_profile)
 
         return
 
@@ -411,6 +411,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.toolBox_profile.load_profile_structure(structure)
 
         self.load_current_profile()
+        self.comboBox_current_profile.set_pre_change_hook(self.profile_change_check)
 
         # Connect signals.
         self.toolBox_profile.values_changed.connect(self.handle_profile_values_changed)
@@ -423,6 +424,42 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.debug("Loading current profile.")
         self.toolBox_profile.set_profile_values(self.config.current_profile)
+
+    def profile_change_check(self) -> bool:
+        """
+        Check if the current profile has unsaved changes.
+        """
+        logger.warning("Profile change check")
+        if self.toolBox_profile.is_modified():
+            logger.debug(
+                f"Previous profile {self.comboBox_current_profile.currentText()} has unsaved changes."
+            )
+            # Warn the user that he will lose unsaved changes.
+            message = (
+                f"The profile '{self.comboBox_current_profile.currentText()}' has unsaved changes.\n"
+                f"Switching profiles will discard changes to the current profile."
+            )
+            response = gu.show_question(
+                self,
+                "Unsaved changes",
+                message,
+                Qw.QMessageBox.Cancel | Qw.QMessageBox.Save | Qw.QMessageBox.Discard,
+            )
+            if response == Qw.QMessageBox.Cancel:
+                logger.debug("Profile change aborted.")
+                # Abort the profile change.
+                return False
+            elif response == Qw.QMessageBox.Save:
+                logger.debug("Saving previous profile.")
+                # Save the current profile.
+                self.save_profile()
+            elif response == Qw.QMessageBox.Discard:
+                # Continue as normal.
+                logger.debug("Discarding previous profile changes.")
+            else:
+                raise ValueError(f"Invalid response: {response}")
+
+        return True
 
     def change_current_profile(self):
         """
@@ -503,7 +540,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.config.load_profile(profile_name)
         self.load_current_profile()
 
-    def get_new_profile_path(self, show_protection_hint: bool = False) -> tuple[Path, str] | None:
+    def get_new_profile_path(
+        self, show_protection_hint: bool = False
+    ) -> tuple[Path, str] | tuple[None, None]:
         """
         Open a save dialog to save the current profile.
 
@@ -517,7 +556,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if response == Qw.QDialog.Accepted:
             return new_profile_dialog.get_save_path(), new_profile_dialog.get_name()
 
-        return None
+        return None, None
 
     """
     Glossary
