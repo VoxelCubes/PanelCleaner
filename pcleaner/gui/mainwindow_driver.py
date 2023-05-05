@@ -539,6 +539,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.comboBox_current_profile.setCurrentText(profile_name)
         self.config.load_profile(profile_name)
         self.load_current_profile()
+        self.handle_profile_values_changed(True)
 
     def get_new_profile_path(
         self, show_protection_hint: bool = False

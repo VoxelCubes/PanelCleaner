@@ -190,14 +190,13 @@ class ProfileOptionWidget(qw.QHBoxLayout):
         self._data_setter(value)
         self.set_reset_button_enabled(False)
 
-    def get_value(self) -> tuple[EntryTypes, Any]:
+    def get_value(self) -> Any:
         """
         Get the value of the data widget.
 
-        :return: The entry type and the value.
+        :return: The value of the data widget.
         """
-        logger.debug(f"Getting value of {self._entry_type}.{self._data_getter()}")
-        return self._entry_type, self._data_getter()
+        return self._data_getter()
 
     def _value_changed(self):
         """
