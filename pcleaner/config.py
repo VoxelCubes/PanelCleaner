@@ -527,11 +527,11 @@ class Profile:
     A profile is a collection of settings that can be saved and loaded from disk.
     """
 
-    general: GeneralConfig = GeneralConfig()
-    text_detector: TextDetectorConfig = TextDetectorConfig()
-    pre_processor: PreProcessorConfig = PreProcessorConfig()
-    masker: MaskerConfig = MaskerConfig()
-    denoiser: DenoiserConfig = DenoiserConfig()
+    general: GeneralConfig = field(default_factory=GeneralConfig)
+    text_detector: TextDetectorConfig = field(default_factory=TextDetectorConfig)
+    pre_processor: PreProcessorConfig = field(default_factory=PreProcessorConfig)
+    masker: MaskerConfig = field(default_factory=MaskerConfig)
+    denoiser: DenoiserConfig = field(default_factory=DenoiserConfig)
 
     def bundle_config(self, gui_mode: bool = False) -> cu.ConfigUpdater:
         """
@@ -547,6 +547,16 @@ class Profile:
         self.masker.export_to_conf(config_updater, "PreProcessor", gui_mode=gui_mode)
         self.denoiser.export_to_conf(config_updater, "Masker", gui_mode=gui_mode)
         return config_updater
+
+    def hash_current_values(self) -> int:
+        """
+        Hash the current values of the profile.
+        This isn't implementing __hash__ because these objects are mutable.
+        This is merely useful to tell when the profile has changed.
+
+        :return: A hash of the current values of the profile.
+        """
+        return hash(str(self.bundle_config()))
 
     def write(self, path: Path) -> bool:
         """
@@ -569,7 +579,7 @@ class Profile:
         """
         Load a profile from a config file.
         """
-        logger.debug("Loading profile from disk...")
+        logger.debug(f"Loading profile {path} from disk...")
         config = cu.ConfigUpdater()
         try:
             config.read(path)
@@ -624,7 +634,7 @@ class Config:
     profile_editor: The program to use to edit the profile files. When blank, the default editor is used.
     """
 
-    current_profile: Profile = Profile()
+    current_profile: Profile = field(default_factory=Profile)
     default_profile: str | None = None
     saved_profiles: dict[str, Path] = field(default_factory=dict)
     profile_editor: str | None = None
@@ -815,16 +825,15 @@ class Config:
 
         :param profile_name: Name or path of the profile to load.
         """
+        logger.debug(f"Loading profile {profile_name!r}...")
         # If no override is given, use the default profile.
         if profile_name is None:
             profile_name = self.default_profile
 
         # If the default profile is not set, use the builtin default profile.
-        if profile_name is None:
-            return
-
-        # Check the reserved names.
-        if profile_name.lower() in RESERVED_PROFILE_NAMES:
+        if profile_name is None or profile_name.lower() in RESERVED_PROFILE_NAMES:
+            logger.debug("Loading builtin default profile")
+            self.current_profile = Profile()
             return
 
         found_profile = cli.closest_match(profile_name, list(self.saved_profiles.keys()))

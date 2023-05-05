@@ -27,10 +27,11 @@ class ColorButton(Qw.QPushButton):
 
     def __init__(
         self,
+        parent=None,
         color: tuple[int, int, int, int] | tuple[int, int, int] = (255, 255, 255, 255),
         dialog_title: str = "Change Color",
     ):
-        super().__init__()
+        super().__init__(parent)
         self._color: Qg.QColor = Qg.QColor(*color)
         self.use_alpha = len(color) == 4
         self.dialog_title = dialog_title

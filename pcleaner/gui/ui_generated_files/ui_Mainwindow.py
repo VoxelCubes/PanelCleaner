@@ -16,14 +16,15 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox,
-    QFormLayout, QFrame, QGroupBox, QHBoxLayout,
-    QHeaderView, QLabel, QLineEdit, QMainWindow,
-    QMenu, QMenuBar, QProgressBar, QPushButton,
-    QRadioButton, QSizePolicy, QSpacerItem, QSplitter,
-    QStatusBar, QTabWidget, QTableWidgetItem, QTextEdit,
-    QToolBox, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QFormLayout,
+    QFrame, QGroupBox, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QMainWindow, QMenu,
+    QMenuBar, QProgressBar, QPushButton, QRadioButton,
+    QSizePolicy, QSpacerItem, QSplitter, QStatusBar,
+    QTabWidget, QTableWidgetItem, QTextEdit, QVBoxLayout,
+    QWidget)
 
+from pcleaner.gui.CustomQ.CComboBox import CComboBox
 from pcleaner.gui.file_table import FileTable
 
 class Ui_MainWindow(object):
@@ -73,7 +74,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(1, 1, 1, 1)
+        self.verticalLayout.setContentsMargins(1, 4, 1, 1)
         self.splitter = QSplitter(self.centralwidget)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setOrientation(Qt.Horizontal)
@@ -84,7 +85,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.comboBox_current_profile = QComboBox(self.groupBox)
+        self.comboBox_current_profile = CComboBox(self.groupBox)
         self.comboBox_current_profile.addItem("")
         self.comboBox_current_profile.setObjectName(u"comboBox_current_profile")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
@@ -92,11 +93,13 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.comboBox_current_profile.sizePolicy().hasHeightForWidth())
         self.comboBox_current_profile.setSizePolicy(sizePolicy)
+        self.comboBox_current_profile.setMinimumSize(QSize(48, 0))
 
         self.horizontalLayout_2.addWidget(self.comboBox_current_profile)
 
-        self.pushButton_save_pofile = QPushButton(self.groupBox)
-        self.pushButton_save_pofile.setObjectName(u"pushButton_save_pofile")
+        self.pushButton_save_profile = QPushButton(self.groupBox)
+        self.pushButton_save_profile.setObjectName(u"pushButton_save_profile")
+        self.pushButton_save_profile.setEnabled(False)
         icon = QIcon()
         iconThemeName = u"document-save"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -104,15 +107,15 @@ class Ui_MainWindow(object):
         else:
             icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
         
-        self.pushButton_save_pofile.setIcon(icon)
+        self.pushButton_save_profile.setIcon(icon)
 
-        self.horizontalLayout_2.addWidget(self.pushButton_save_pofile)
+        self.horizontalLayout_2.addWidget(self.pushButton_save_profile)
 
         self.pushButton_reset_profile = QPushButton(self.groupBox)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
         icon1 = QIcon()
-        iconThemeName = u"edit-reset"
+        iconThemeName = u"document-revert"
         if QIcon.hasThemeIcon(iconThemeName):
             icon1 = QIcon.fromTheme(iconThemeName)
         else:
@@ -139,14 +142,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
-        self.toolBox_profile = QToolBox(self.groupBox)
-        self.toolBox_profile.setObjectName(u"toolBox_profile")
-        self.page_placeholder = QWidget()
-        self.page_placeholder.setObjectName(u"page_placeholder")
-        self.page_placeholder.setGeometry(QRect(0, 0, 643, 447))
-        self.toolBox_profile.addItem(self.page_placeholder, u"Profile Section")
+        self.toolBox_profile_frame = QWidget(self.groupBox)
+        self.toolBox_profile_frame.setObjectName(u"toolBox_profile_frame")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.toolBox_profile_frame.sizePolicy().hasHeightForWidth())
+        self.toolBox_profile_frame.setSizePolicy(sizePolicy1)
 
-        self.verticalLayout_2.addWidget(self.toolBox_profile)
+        self.verticalLayout_2.addWidget(self.toolBox_profile_frame)
 
         self.splitter.addWidget(self.groupBox)
         self.tabWidget_files = QTabWidget(self.splitter)
@@ -189,7 +193,7 @@ class Ui_MainWindow(object):
         self.frame_3 = QFrame(self.splitter)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Sunken)
+        self.frame_3.setFrameShadow(QFrame.Raised)
         self.verticalLayout_4 = QVBoxLayout(self.frame_3)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.horizontalLayout_3 = QHBoxLayout()
@@ -217,11 +221,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.label_warning = QLabel(self.groupBox_4)
         self.label_warning.setObjectName(u"label_warning")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.label_warning.sizePolicy().hasHeightForWidth())
-        self.label_warning.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.label_warning.sizePolicy().hasHeightForWidth())
+        self.label_warning.setSizePolicy(sizePolicy2)
 
         self.verticalLayout_7.addWidget(self.label_warning)
 
@@ -284,6 +288,7 @@ class Ui_MainWindow(object):
 
         self.label_4 = QLabel(self.groupBox_3)
         self.label_4.setObjectName(u"label_4")
+        self.label_4.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
 
         self.verticalLayout_5.addWidget(self.label_4)
 
@@ -386,6 +391,9 @@ class Ui_MainWindow(object):
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
+#if QT_CONFIG(shortcut)
+        self.label_4.setBuddy(self.lineEdit_out_directory)
+#endif // QT_CONFIG(shortcut)
 
         self.menubar.addAction(self.menu_File.menuAction())
         self.menubar.addAction(self.menu_Profile.menuAction())
@@ -419,9 +427,6 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.toolBox_profile.setCurrentIndex(0)
-
-
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
@@ -448,10 +453,9 @@ class Ui_MainWindow(object):
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 
-        self.pushButton_save_pofile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+        self.pushButton_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.pushButton_reset_profile.setText(QCoreApplication.translate("MainWindow", u"Reset All", None))
         self.pushButton_apply_profile.setText(QCoreApplication.translate("MainWindow", u"Apply", None))
-        self.toolBox_profile.setItemText(self.toolBox_profile.indexOf(self.page_placeholder), QCoreApplication.translate("MainWindow", u"Profile Section", None))
         ___qtablewidgetitem = self.file_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"id", None));
         ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(1)
@@ -479,10 +483,10 @@ class Ui_MainWindow(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'monospace';\">Mask Fitment Analytics <br />---------------------- <br />Total boxes: 5 | Masks succeeded: 5 (100%) | Masks failed: </span><span style=\" font-family:'monospace'; color:#b21818;\">0</span><span style=\" font-family:'monospace';\"> <br />Perfect masks: </span><span style=\" font-family:'monospace'; color:#18b2b2;\">5</span><span style=\" font-family:'monospace';\"> (100%) | Average border deviation: 0.00 <br /><br />Mask usage by mask size (smallest to largest): <br />Mask 0  :  </span><span style=\" font-family:'monosp"
-                        "ace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 1  :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 2  :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 3  :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 4  :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 5  :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 6  : </span><span style=\" font-family:'monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
-                        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'monospace';\"> </span><span style=\" font-family:'monospace'; color:#18b2b2;\">1</span><span style=\" font-family:'monospace';\"> / 1 <br />Mask 7  :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 8  :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 9  :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Mask 10 :  </span><span style=\" font-family:'monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'monospace';\"> / 0 <br />Box mask: </span><span style=\" font-family:'monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
-                        "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'monospace';\"> </span><span style=\" font-family:'monospace'; color:#18b2b2;\">4</span><span style=\" font-family:'monospace';\"> / 4 <br /><br /></span><span style=\" font-family:'monospace'; color:#18b2b2;\">\u2588 Perfect</span><span style=\" font-family:'monospace';\"> | \u2588 Total<br /><br /></span></p></body></html>", None))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Noto Mono','Monospace';\">Mask Fitment Analytics <br />---------------------- <br />Total boxes: 5 | Masks succeeded: 5 (100%) | Masks failed: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#b21818;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> <br />Perfect masks: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">5</span><span style=\" font-family:'Noto Mono','Monospace';\"> (100%) | Average border deviation: 0.00 <br /><br />Mask usage by mask size (smallest to largest)"
+                        ": <br />Mask 0  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 1  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 2  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 3  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 4  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 5  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 6  : </span><span style=\" font-family:'Noto Mono','"
+                        "Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">1</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 1 <br />Mask 7  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 8  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 9  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 10 :  </span><span style=\" font-family:'Noto Mono','Monospa"
+                        "ce'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Box mask: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">4</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 4 <br /><br /></span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588 Perfect</span><span style=\" font-family:'Noto Mono','Monospace';\"> | \u2588 Total<br /><br /></span></p></body></html>", None))
         self.label_progress_step.setText(QCoreApplication.translate("MainWindow", u"Current Step:", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Total Progress:", None))
         self.menu_File.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
