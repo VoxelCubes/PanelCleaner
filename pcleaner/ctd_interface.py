@@ -145,8 +145,11 @@ def process_image(img_path: Path, model: TextDetector, save_dir: Path, image_sca
         "scale": image_scale,
         "blk_list": blk_dict_list,
     }
-
-    with open(Path(img_name).with_suffix(".json"), "w", encoding="utf8") as f:
+    # Remove the suffix and add _raw.json
+    json_path = Path(img_name).with_suffix(".json")
+    json_path = json_path.with_stem(json_path.stem + "#raw")
+    logger.debug(f"Saving json file to {json_path}")
+    with open(json_path, "w", encoding="utf8") as f:
         json.dump(data, f, ensure_ascii=False, cls=NumpyEncoder, indent=4)
     imwrite(img_name, img)
     imwrite(maskname, mask_refined)

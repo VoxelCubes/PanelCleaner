@@ -206,4 +206,4 @@ def save_denoising_data(
     mask_data = st.MaskData(
         original_path, target_path, base_image_path, mask_path, scale, boxes_with_deviation
     )
-    mask_data.write_json(cache_path.with_name(cache_path.stem + "_mask_data.json"))
+    mask_data.write_json(cache_path.with_name(cache_path.stem + "#mask_data.json"))

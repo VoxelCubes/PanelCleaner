@@ -6,6 +6,7 @@ from functools import partial
 
 from PIL import Image
 from manga_ocr import MangaOcr
+from logzero import logger
 
 import pcleaner.ctd_interface as ctm
 import pcleaner.structures as st
@@ -46,7 +47,7 @@ def prep_json_file(
     relevant data for the following steps.
 
     Check that this file wasn't already processed, and if it was, skip it.
-    Processed json files have the file name ending with '_clean.json'.
+    Processed json files have the file name ending with '#clean.json'.
 
     If a manga ocr object is given, run ocr on small boxes to determine whether
     they contain mere symbols, in which case these boxes do not need to be cleaned
@@ -63,11 +64,12 @@ def prep_json_file(
     :param cache_masks_ocr: [Optional] Whether to cache the masks early for ocr.
     :return: Analytics data if the manga ocr object is given, None otherwise.
     """
+    logger.debug(f"Processing json file: {json_file_path}")
 
     # Check if the file was already processed.
-    if json_file_path.name.endswith("_clean.json"):
+    if json_file_path.name.endswith("#clean.json"):
         return
-    if json_file_path.name.endswith("_mask_data.json"):
+    if json_file_path.name.endswith("#mask_data.json"):
         return
 
     json_data = json.loads(json_file_path.read_text())
@@ -140,7 +142,7 @@ def prep_json_file(
     )
 
     # Write the json file with the cleaned data.
-    json_out_path = json_file_path.parent / f"{json_file_path.stem}_clean.json"
+    json_out_path = json_file_path.parent / f"{json_file_path.stem}#clean.json"
     # Remove the _image_size attribute, because it's a cached value that may be unset.
     page_data_dict = asdict(page_data)
     del page_data_dict["_image_size"]
@@ -184,7 +186,6 @@ def ocr_check(
     :return: The modified page data and Analytics data.
     """
     base_image = Image.open(page_data.image_path)
-    image_width, image_height = base_image.size
     candidate_small_bubbles = [
         box for box in page_data.boxes if page_data.box_size(box) < max_box_size
     ]

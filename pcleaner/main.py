@@ -360,7 +360,7 @@ def run_cleaner(
     if not skip_masking:
         print("Running Masker...")
         # Read the json files in the image directory.
-        json_files = Path(cache_dir).glob("*_clean.json")
+        json_files = Path(cache_dir).glob("*#clean.json")
 
         # When denoising, we don't immediately output the cleaned image.
         # But when not, we do, since denoising is optional.
@@ -398,7 +398,7 @@ def run_cleaner(
     if not skip_denoising:
         print("Running Denoiser...")
         # Read the json files in the image directory.
-        json_files = Path(cache_dir).glob("*_mask_data.json")
+        json_files = Path(cache_dir).glob("*#mask_data.json")
 
         # Zip together the json files and the out path thing.
         data = [
