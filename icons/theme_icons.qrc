@@ -9,6 +9,9 @@
     <file>breeze/actions/16/document-preview.svg</file>
     <file>breeze/actions/16/document-revert.svg</file>
     <file>breeze/actions/16/document-save.svg</file>
+    <file>breeze/actions/16/document-save-as.svg</file>
+    <file>breeze/actions/16/document-new.svg</file>
+    <file>breeze/actions/16/document-import.svg</file>
     <file>breeze/actions/16/edit-clear.svg</file>
     <file>breeze/actions/16/edit-delete-remove.svg</file>
     <file>breeze/actions/16/edit-delete.svg</file>
@@ -19,6 +22,7 @@
     <file>breeze/actions/16/process-stop.svg</file>
     <file>breeze/actions/16/help-contents.svg</file>
     <file>breeze/actions/16/view-refresh.svg</file>
+    <file>breeze/actions/16/edit-clear-history.svg</file>
     <file>breeze/mimetypes/16/image-bmp.svg</file>
     <file>breeze/mimetypes/16/image-jpeg.svg</file>
     <file>breeze/mimetypes/16/image-png.svg</file>
@@ -35,6 +39,9 @@
     <file>breeze-dark/actions/16/document-preview.svg</file>
     <file>breeze-dark/actions/16/document-revert.svg</file>
     <file>breeze-dark/actions/16/document-save.svg</file>
+    <file>breeze-dark/actions/16/document-save-as.svg</file>
+    <file>breeze-dark/actions/16/document-new.svg</file>
+    <file>breeze-dark/actions/16/document-import.svg</file>
     <file>breeze-dark/actions/16/edit-clear.svg</file>
     <file>breeze-dark/actions/16/edit-delete-remove.svg</file>
     <file>breeze-dark/actions/16/edit-delete.svg</file>
@@ -45,6 +52,7 @@
     <file>breeze-dark/actions/16/process-stop.svg</file>
     <file>breeze-dark/actions/16/help-contents.svg</file>
     <file>breeze-dark/actions/16/view-refresh.svg</file>
+    <file>breeze-dark/actions/16/edit-clear-history.svg</file>
     <file>breeze-dark/mimetypes/16/image-bmp.svg</file>
     <file>breeze-dark/mimetypes/16/image-jpeg.svg</file>
     <file>breeze-dark/mimetypes/16/image-png.svg</file>

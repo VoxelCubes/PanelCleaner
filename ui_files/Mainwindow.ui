@@ -454,104 +454,111 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="action_Open_Files"/>
-    <addaction name="action_Clear_Files"/>
+    <addaction name="action_open_files"/>
+    <addaction name="action_clear_files"/>
    </widget>
    <widget class="QMenu" name="menu_Profile">
     <property name="title">
      <string>Profile</string>
     </property>
-    <widget class="QMenu" name="menuCurrent_Profile">
-     <property name="title">
-      <string>Current Profile</string>
-     </property>
-     <addaction name="action_temp"/>
-    </widget>
-    <widget class="QMenu" name="menuSet_Default">
+    <widget class="QMenu" name="menu_set_default_profile">
      <property name="title">
       <string>Set Default</string>
      </property>
      <addaction name="action_temp_2"/>
     </widget>
-    <addaction name="menuCurrent_Profile"/>
+    <addaction name="action_new_profile"/>
+    <addaction name="action_import_profile"/>
     <addaction name="separator"/>
-    <addaction name="action_New_Profile_2"/>
-    <addaction name="action_Import_Profile"/>
+    <addaction name="action_save_profile"/>
+    <addaction name="action_save_profile_as"/>
     <addaction name="separator"/>
-    <addaction name="action_Save"/>
-    <addaction name="action_Save_as"/>
+    <addaction name="action_delete_profile"/>
     <addaction name="separator"/>
-    <addaction name="action_Delete_Profile"/>
-    <addaction name="separator"/>
-    <addaction name="menuSet_Default"/>
+    <addaction name="menu_set_default_profile"/>
    </widget>
-   <widget class="QMenu" name="menu_Settings">
+   <widget class="QMenu" name="menu_settings">
     <property name="title">
      <string>Settings</string>
     </property>
-    <widget class="QMenu" name="menu_Theme">
+    <widget class="QMenu" name="menu_theme">
      <property name="title">
       <string>Theme</string>
      </property>
-     <addaction name="action_System_Theme"/>
+     <addaction name="action_system_theme"/>
      <addaction name="separator"/>
-     <addaction name="action_Dark"/>
-     <addaction name="action_Light"/>
+     <addaction name="action_dark"/>
+     <addaction name="action_light"/>
     </widget>
-    <addaction name="menu_Theme"/>
-    <addaction name="action_Open_Log"/>
+    <addaction name="menu_theme"/>
+    <addaction name="action_open_log"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="action_Panel_Cleaner_Documentation"/>
-    <addaction name="action_Source_Code"/>
+    <addaction name="action_panel_cleaner_documentation"/>
+    <addaction name="action_source_code"/>
     <addaction name="separator"/>
-    <addaction name="actionShow_Terminal_Command"/>
+    <addaction name="action_show_terminal_command"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Profile"/>
-   <addaction name="menu_Settings"/>
+   <addaction name="menu_settings"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_Open_Files">
+  <action name="action_open_files">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
    <property name="text">
     <string>Open Files</string>
    </property>
   </action>
-  <action name="action_Clear_Files">
+  <action name="action_clear_files">
+   <property name="icon">
+    <iconset theme="edit-clear-history"/>
+   </property>
    <property name="text">
     <string>Clear Files</string>
    </property>
   </action>
-  <action name="action_New_Profile_2">
+  <action name="action_new_profile">
+   <property name="icon">
+    <iconset theme="document-new"/>
+   </property>
    <property name="text">
     <string>New</string>
    </property>
   </action>
-  <action name="action_Delete_Profile">
+  <action name="action_delete_profile">
+   <property name="icon">
+    <iconset theme="edit-delete"/>
+   </property>
    <property name="text">
     <string>Delete</string>
    </property>
   </action>
-  <action name="action_Import_Profile">
+  <action name="action_import_profile">
+   <property name="icon">
+    <iconset theme="document-import"/>
+   </property>
    <property name="text">
     <string>Import...</string>
    </property>
   </action>
-  <action name="action_Open_Log">
+  <action name="action_open_log">
    <property name="text">
     <string>Open Log</string>
    </property>
   </action>
-  <action name="action_Panel_Cleaner_Documentation">
+  <action name="action_panel_cleaner_documentation">
    <property name="text">
     <string>Online Documentation</string>
    </property>
   </action>
-  <action name="action_Source_Code">
+  <action name="action_source_code">
    <property name="text">
     <string>About Panel Cleaner</string>
    </property>
@@ -561,12 +568,18 @@ p, li { white-space: pre-wrap; }
     <string>View License</string>
    </property>
   </action>
-  <action name="action_Save">
+  <action name="action_save_profile">
+   <property name="icon">
+    <iconset theme="document-save"/>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
   </action>
-  <action name="action_Save_as">
+  <action name="action_save_profile_as">
+   <property name="icon">
+    <iconset theme="document-save-as"/>
+   </property>
    <property name="text">
     <string>Save as...</string>
    </property>
@@ -582,22 +595,22 @@ p, li { white-space: pre-wrap; }
     <string>Apply Denoising</string>
    </property>
   </action>
-  <action name="actionShow_Terminal_Command">
+  <action name="action_show_terminal_command">
    <property name="text">
     <string>Show Terminal Command</string>
    </property>
   </action>
-  <action name="action_System_Theme">
+  <action name="action_system_theme">
    <property name="text">
     <string>System</string>
    </property>
   </action>
-  <action name="action_Dark">
+  <action name="action_dark">
    <property name="text">
     <string>Dark</string>
    </property>
   </action>
-  <action name="action_Light">
+  <action name="action_light">
    <property name="text">
     <string>Light</string>
    </property>

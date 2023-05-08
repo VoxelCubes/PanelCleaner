@@ -13,6 +13,9 @@ Files:
       - document-preview.svg
       - document-revert.svg
       - document-save.svg
+      - document-save-as.svg
+      - document-new.svg
+      - document-import.svg
       - edit-clear.svg
       - edit-delete-remove.svg
       - edit-delete.svg
@@ -23,6 +26,7 @@ Files:
       - process-stop.svg
       - help-contents.svg
       - view-refresh.svg
+      - edit-clear-history.svg
   mimetypes:
     16:
       - image-bmp.svg
