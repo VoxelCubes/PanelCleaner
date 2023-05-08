@@ -106,7 +106,8 @@ class ProfileOptionWidget(qw.QHBoxLayout):
             self._data_widget: qw.QDoubleSpinBox = qw.QDoubleSpinBox()
             self._data_widget.setStepType(qw.QAbstractSpinBox.AdaptiveDecimalStepType)
             self._data_setter = self._data_widget.setValue
-            self._data_getter = self._data_widget.value
+            # Round to 2 decimal places.
+            self._data_getter = lambda: round(self._data_widget.value(), 2)
             if entry_type == EntryTypes.FloatGreater0:
                 self._data_widget.setMinimum(0.01)
             self._data_widget.valueChanged.connect(self._value_changed)
@@ -296,7 +297,7 @@ class ProfileToolBox(qw.QToolBox):
     # A subclass that tracks the mapping of widgets to profile options.
     # This is used to save/load the values of the widgets to the profile.
 
-    values_changed = qc.Signal(bool)  # When False, all values are default.
+    values_changed = qc.Signal()  # When False, all values are default.
     values_initialized: bool = (
         False  # This prevents lookups to the default values before they are set.
     )
@@ -381,10 +382,7 @@ class ProfileToolBox(qw.QToolBox):
         if not self.values_initialized:
             return
 
-        all_values_default = all(
-            w.value_is_default() for section in self._widgets.values() for w in section.values()
-        )
-        self.values_changed.emit(all_values_default)
+        self.values_changed.emit()
 
     def reset_all(self) -> None:
         """

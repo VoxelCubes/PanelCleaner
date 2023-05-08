@@ -163,9 +163,11 @@ def main():
         if args.list:
             pc.list_profiles(config)
         elif args.new:
-            pc.new_profile(config, args.profile_name, args.profile_path)
+            _, msg = pc.new_profile(config, args.profile_name, args.profile_path, cli_mode=True)
+            print(msg)
         elif args.add:
-            pc.add_profile(config, args.profile_name, args.profile_path)
+            _, msg = pc.add_profile(config, args.profile_name, args.profile_path)
+            print(msg)
         elif args.open:
             pc.open_profile(config, args.profile_name)
         elif args.delete:

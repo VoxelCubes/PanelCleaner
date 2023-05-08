@@ -14,6 +14,7 @@ import pcleaner.helpers as hp
 import pcleaner.config as cfg
 import pcleaner.gui.profile_parser as pp
 import pcleaner.gui.gui_utils as gu
+import pcleaner.profile_cli as pc
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 from pcleaner.gui.file_table import Column
 from pcleaner import __display_name__, __version__
@@ -65,7 +66,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.hide_progress()
         self.start_button_enabled(False)
         self.show_button_start()
-        self.update_input_buttons()
+        # self.update_input_buttons()
         self.set_up_statusbar()
         self.initialize_profiles()
         self.initialize_analytics_view()
@@ -153,219 +154,219 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # self.comboBox_lang_to.currentIndexChanged.disconnect()
         pass
 
-    """
-    Config interactions
-    """
-
-    def load_config_to_ui(self):
-        """
-        Apply data from config to ui widgets.
-        """
-        logger.debug("Loading config to UI.")
-
-        self.checkBox_file_fixed_dir.setChecked(self.config.use_fixed_output_path)
-        self.lineEdit_file_out_dir.setText(self.config.fixed_output_path)
-
-        self.lineEdit_glossary_file.setText(self.config.glossary_path)
-        self.checkBox_use_glossary.setChecked(self.config.use_glossary)
-        self.checkBox_extra_quote_protection.setChecked(self.config.use_quote_protection)
-
-        self.fixed_output_dir_enabled(self.config.use_fixed_output_path)
-        self.glossary_enabled(self.config.use_glossary)
-
-        # Ignore the mock because it cannot give language options. It is only to be used for translation.
-        translator = self.open_translator(use_mock=False)
-
-        self.show_api_status(translator is not None)
-        self.update_current_usage(translator)
-
-        if translator is not None:
-            # Disconnect the slots to prevent signals from being sent during setup of new language options.
-            self.disconnect_combobox_slots()  # vvv
-            # Load language options from API.
-            self.comboBox_lang_from.clear()
-            self.comboBox_lang_to.clear()
-
-            # Add automatic option.
-            self.comboBox_lang_from.addTextItemLinkedData("Detect", "")
-
-            for lang in translator.get_source_languages():
-                self.comboBox_lang_from.addTextItemLinkedData(lang.name, lang.code)
-
-            for lang in translator.get_target_languages():
-                self.comboBox_lang_to.addTextItemLinkedData(lang.name, lang.code)
-
-            self.connect_combobox_slots()  # ^^^
-
-            # Try to select the configured languages.
-            try:
-                self.comboBox_lang_from.setCurrentIndexByLinkedData(self.config.lang_from)
-            except ValueError:
-                logger.debug(f"Configured lang_from '{self.config.lang_from}' not found")
-
-            try:
-                self.comboBox_lang_to.setCurrentIndexByLinkedData(self.config.lang_to)
-            except ValueError:
-                logger.debug(f"Configured lang_to '{self.config.lang_to}' not found")
-        else:
-            self.statusbar.showMessage("Error connecting to the API.")
-
-    def lang_from_updated(self):
-        """
-        Copy lang_from from the combobox into the config and save it.
-        """
-        self.config.lang_from = self.comboBox_lang_from.currentLinkedData()
-        logger.debug(f"Saving lang_from: {self.config.lang_from}")
-        self.config.save()
-
-    def lang_to_updated(self):
-        """
-        Copy lang_to from the combobox into the config and save it.
-        """
-        self.config.lang_to = self.comboBox_lang_to.currentLinkedData()
-        logger.debug(f"Saving lang_to: {self.config.lang_to}")
-        self.text_output_changed.emit()
-        self.config.save()
-
-    def fixed_output_dir_toggled(self):
-        """
-        Enable or disable the fixed output directory checkbox and save it to the config.
-        """
-        self.config.use_fixed_output_path = self.checkBox_file_fixed_dir.isChecked()
-        self.fixed_output_dir_enabled(self.config.use_fixed_output_path)
-        self.text_output_changed.emit()
-        self.config.save()
-
-    def browse_file_out_dir(self):
-        """
-        Browse for a directory to save files to.
-        """
-        dir_path = Qw.QFileDialog.getExistingDirectory(
-            self, "Select output directory", self.config.fixed_output_path
-        )
-        if dir_path:
-            self.lineEdit_file_out_dir.setText(dir_path)
-            self.config.fixed_output_path = dir_path
-            self.text_output_changed.emit()
-            self.config.save()
-
-    def fixed_file_out_updated(self, save: bool, *_):
-        """
-        Copy fixed_file_out from the lineedit into the config and save it.
-        Don't save until the line edit signals the end of editing.
-        Throw away the text in the line edit that the signal passes along by using *_.
-        This is because the signal for editing finished does not pass along the text,
-        making it unreliable.
-
-        :param save: Whether to save the config.
-        """
-        self.config.fixed_output_path = self.lineEdit_file_out_dir.text()
-        if save:
-            self.config.save()
-        self.text_output_changed.emit()
-
-    def use_glossary_toggled(self):
-        """
-        Enable or disable the glossary checkbox and save it to the config.
-        """
-        self.config.use_glossary = self.checkBox_use_glossary.isChecked()
-        self.glossary_enabled(self.config.use_glossary)
-        self.config.save()
-        if self.config.use_glossary:
-            self.load_glossary()
-        self.text_params_changed.emit(self.glossary)
-
-    def browse_glossary_file(self):
-        """
-        Browse for a glossary file.
-        Accepts whatever pyexcel can handle.
-        """
-        file_path = Qw.QFileDialog.getOpenFileName(
-            self, "Select glossary file", self.config.glossary_path
-        )
-        if file_path:
-            self.lineEdit_glossary_file.setText(file_path[0])
-            self.config.glossary_path = file_path[0]
-            self.config.save()
-            self.load_glossary()
-
-    def glossary_file_updated(self, save: bool, *_):
-        """
-        Copy glossary_file from the lineedit into the config and save it.
-        Don't save until the line edit signals the end of editing.
-        Throw away the text in the line edit that the signal passes along by using *_.
-        This is because the signal for editing finished does not pass along the text,
-        making it unreliable.
-
-        :param save: Whether to save the config.
-        """
-        self.config.glossary_path = self.lineEdit_glossary_file.text()
-        if save:
-            self.config.save()
-            self.load_glossary()
-
-    def extra_quote_protection_toggled(self):
-        """
-        Enable or disable the extra quote protection checkbox and save it to the config.
-        """
-        self.config.use_quote_protection = self.checkBox_extra_quote_protection.isChecked()
-        self.config.save()
-        self.text_params_changed.emit(self.glossary)
-
-    """
-    Dialogs
-    """
-
-    def configure_api(self):
-        """
-        Configure the DeepL API.
-        """
-        api_conf_dialog = ConfigureAccount(self, self.config)
-        response = api_conf_dialog.exec()
-        if response == Qw.QDialog.Accepted:
-            # Adopt changes from the dialog.
-            self.config.api_key = api_conf_dialog.lineEdit_api_key.text()
-            self.config.save()
-            self.load_config_to_ui()
-
-    """
-    Misc helpers
-    """
-
-    # def open_translator(self, use_mock: bool = True) -> deepl.Translator | None:
-    #     """
-    #     Open a translator instance.
+    # """
+    # Config interactions
+    # """
     #
-    #     :return: translator instance and whether it was successful
+    # def load_config_to_ui(self):
     #     """
+    #     Apply data from config to ui widgets.
+    #     """
+    #     logger.debug("Loading config to UI.")
     #
-    #     if self.config.api_key == "":
-    #         # Fail silently if no API key is set, since this is the default value.
-    #         logger.warning("No API key set")
-    #         return None
-    #     try:
-    #         if self.config.tl_mock and use_mock:
-    #             logger.info("Opening mock translator.")
-    #             return deepl.Translator(
-    #                 auth_key="1234567890",
-    #                 server_url="http://localhost:3000",
-    #             )
-    #         else:
-    #             logger.info("Opening translator.")
-    #             translator = deepl.Translator(auth_key=self.config.api_key)
-    #             # Test the api, since initialization doesn't mean success.
-    #             translator.get_source_languages()
-    #             return translator
-    #     except Exception as e:
-    #         show_warning(self, "API Error", f"Failed connect to DeepL API\n\n{e}")
-    #         return None
-
-    def update_file_table_params(self):
-        """
-        Update the file table with the current parameters.
-        """
-        self.text_params_changed.emit(self.glossary)
-
+    #     self.checkBox_file_fixed_dir.setChecked(self.config.use_fixed_output_path)
+    #     self.lineEdit_file_out_dir.setText(self.config.fixed_output_path)
+    #
+    #     self.lineEdit_glossary_file.setText(self.config.glossary_path)
+    #     self.checkBox_use_glossary.setChecked(self.config.use_glossary)
+    #     self.checkBox_extra_quote_protection.setChecked(self.config.use_quote_protection)
+    #
+    #     self.fixed_output_dir_enabled(self.config.use_fixed_output_path)
+    #     self.glossary_enabled(self.config.use_glossary)
+    #
+    #     # Ignore the mock because it cannot give language options. It is only to be used for translation.
+    #     translator = self.open_translator(use_mock=False)
+    #
+    #     self.show_api_status(translator is not None)
+    #     self.update_current_usage(translator)
+    #
+    #     if translator is not None:
+    #         # Disconnect the slots to prevent signals from being sent during setup of new language options.
+    #         self.disconnect_combobox_slots()  # vvv
+    #         # Load language options from API.
+    #         self.comboBox_lang_from.clear()
+    #         self.comboBox_lang_to.clear()
+    #
+    #         # Add automatic option.
+    #         self.comboBox_lang_from.addTextItemLinkedData("Detect", "")
+    #
+    #         for lang in translator.get_source_languages():
+    #             self.comboBox_lang_from.addTextItemLinkedData(lang.name, lang.code)
+    #
+    #         for lang in translator.get_target_languages():
+    #             self.comboBox_lang_to.addTextItemLinkedData(lang.name, lang.code)
+    #
+    #         self.connect_combobox_slots()  # ^^^
+    #
+    #         # Try to select the configured languages.
+    #         try:
+    #             self.comboBox_lang_from.setCurrentIndexByLinkedData(self.config.lang_from)
+    #         except ValueError:
+    #             logger.debug(f"Configured lang_from '{self.config.lang_from}' not found")
+    #
+    #         try:
+    #             self.comboBox_lang_to.setCurrentIndexByLinkedData(self.config.lang_to)
+    #         except ValueError:
+    #             logger.debug(f"Configured lang_to '{self.config.lang_to}' not found")
+    #     else:
+    #         self.statusbar.showMessage("Error connecting to the API.")
+    #
+    # def lang_from_updated(self):
+    #     """
+    #     Copy lang_from from the combobox into the config and save it.
+    #     """
+    #     self.config.lang_from = self.comboBox_lang_from.currentLinkedData()
+    #     logger.debug(f"Saving lang_from: {self.config.lang_from}")
+    #     self.config.save()
+    #
+    # def lang_to_updated(self):
+    #     """
+    #     Copy lang_to from the combobox into the config and save it.
+    #     """
+    #     self.config.lang_to = self.comboBox_lang_to.currentLinkedData()
+    #     logger.debug(f"Saving lang_to: {self.config.lang_to}")
+    #     self.text_output_changed.emit()
+    #     self.config.save()
+    #
+    # def fixed_output_dir_toggled(self):
+    #     """
+    #     Enable or disable the fixed output directory checkbox and save it to the config.
+    #     """
+    #     self.config.use_fixed_output_path = self.checkBox_file_fixed_dir.isChecked()
+    #     self.fixed_output_dir_enabled(self.config.use_fixed_output_path)
+    #     self.text_output_changed.emit()
+    #     self.config.save()
+    #
+    # def browse_file_out_dir(self):
+    #     """
+    #     Browse for a directory to save files to.
+    #     """
+    #     dir_path = Qw.QFileDialog.getExistingDirectory(
+    #         self, "Select output directory", self.config.fixed_output_path
+    #     )
+    #     if dir_path:
+    #         self.lineEdit_file_out_dir.setText(dir_path)
+    #         self.config.fixed_output_path = dir_path
+    #         self.text_output_changed.emit()
+    #         self.config.save()
+    #
+    # def fixed_file_out_updated(self, save: bool, *_):
+    #     """
+    #     Copy fixed_file_out from the lineedit into the config and save it.
+    #     Don't save until the line edit signals the end of editing.
+    #     Throw away the text in the line edit that the signal passes along by using *_.
+    #     This is because the signal for editing finished does not pass along the text,
+    #     making it unreliable.
+    #
+    #     :param save: Whether to save the config.
+    #     """
+    #     self.config.fixed_output_path = self.lineEdit_file_out_dir.text()
+    #     if save:
+    #         self.config.save()
+    #     self.text_output_changed.emit()
+    #
+    # def use_glossary_toggled(self):
+    #     """
+    #     Enable or disable the glossary checkbox and save it to the config.
+    #     """
+    #     self.config.use_glossary = self.checkBox_use_glossary.isChecked()
+    #     self.glossary_enabled(self.config.use_glossary)
+    #     self.config.save()
+    #     if self.config.use_glossary:
+    #         self.load_glossary()
+    #     self.text_params_changed.emit(self.glossary)
+    #
+    # def browse_glossary_file(self):
+    #     """
+    #     Browse for a glossary file.
+    #     Accepts whatever pyexcel can handle.
+    #     """
+    #     file_path = Qw.QFileDialog.getOpenFileName(
+    #         self, "Select glossary file", self.config.glossary_path
+    #     )
+    #     if file_path:
+    #         self.lineEdit_glossary_file.setText(file_path[0])
+    #         self.config.glossary_path = file_path[0]
+    #         self.config.save()
+    #         self.load_glossary()
+    #
+    # def glossary_file_updated(self, save: bool, *_):
+    #     """
+    #     Copy glossary_file from the lineedit into the config and save it.
+    #     Don't save until the line edit signals the end of editing.
+    #     Throw away the text in the line edit that the signal passes along by using *_.
+    #     This is because the signal for editing finished does not pass along the text,
+    #     making it unreliable.
+    #
+    #     :param save: Whether to save the config.
+    #     """
+    #     self.config.glossary_path = self.lineEdit_glossary_file.text()
+    #     if save:
+    #         self.config.save()
+    #         self.load_glossary()
+    #
+    # def extra_quote_protection_toggled(self):
+    #     """
+    #     Enable or disable the extra quote protection checkbox and save it to the config.
+    #     """
+    #     self.config.use_quote_protection = self.checkBox_extra_quote_protection.isChecked()
+    #     self.config.save()
+    #     self.text_params_changed.emit(self.glossary)
+    #
+    # """
+    # Dialogs
+    # """
+    #
+    # def configure_api(self):
+    #     """
+    #     Configure the DeepL API.
+    #     """
+    #     api_conf_dialog = ConfigureAccount(self, self.config)
+    #     response = api_conf_dialog.exec()
+    #     if response == Qw.QDialog.Accepted:
+    #         # Adopt changes from the dialog.
+    #         self.config.api_key = api_conf_dialog.lineEdit_api_key.text()
+    #         self.config.save()
+    #         self.load_config_to_ui()
+    #
+    # """
+    # Misc helpers
+    # """
+    #
+    # # def open_translator(self, use_mock: bool = True) -> deepl.Translator | None:
+    # #     """
+    # #     Open a translator instance.
+    # #
+    # #     :return: translator instance and whether it was successful
+    # #     """
+    # #
+    # #     if self.config.api_key == "":
+    # #         # Fail silently if no API key is set, since this is the default value.
+    # #         logger.warning("No API key set")
+    # #         return None
+    # #     try:
+    # #         if self.config.tl_mock and use_mock:
+    # #             logger.info("Opening mock translator.")
+    # #             return deepl.Translator(
+    # #                 auth_key="1234567890",
+    # #                 server_url="http://localhost:3000",
+    # #             )
+    # #         else:
+    # #             logger.info("Opening translator.")
+    # #             translator = deepl.Translator(auth_key=self.config.api_key)
+    # #             # Test the api, since initialization doesn't mean success.
+    # #             translator.get_source_languages()
+    # #             return translator
+    # #     except Exception as e:
+    # #         show_warning(self, "API Error", f"Failed connect to DeepL API\n\n{e}")
+    # #         return None
+    #
+    # def update_file_table_params(self):
+    #     """
+    #     Update the file table with the current parameters.
+    #     """
+    #     self.text_params_changed.emit(self.glossary)
+    #
     def initialize_analytics_view(self):
         """
         Set up the text edit for analytics.
@@ -390,13 +391,36 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Load the available profiles and display the default profile.
         """
-        all_profiles: list[tuple[str, Path | None]] = [(cfg.RESERVED_PROFILE_NAMES[0], None)]
+        all_profiles: list[tuple[str, Path | None]] = [(cfg.DEFAULT_PROFILE_NAME, None)]
         for profile_name, profile_path in self.config.saved_profiles.items():
             all_profiles.append((profile_name, profile_path))
+
+        logger.debug(f"Found profiles: {all_profiles}")
 
         self.comboBox_current_profile.clear()
         for profile_name, profile_path in all_profiles:
             self.comboBox_current_profile.addTextItemLinkedData(profile_name, profile_path)
+
+        # Set the current profile to the default profile.
+        # If this is the default profile, then staying on the 0th index is fine.
+        if self.config.default_profile:
+            self.comboBox_current_profile.setCurrentIndexByText(self.config.default_profile)
+
+        # Populate default profile list.
+        self.menu_set_default_profile.clear()
+        for profile_name, profile_path in all_profiles:
+            action = Qg.QAction(profile_name, self)
+            action.setCheckable(True)
+            action.triggered.connect(partial(self.handle_set_default_profile, profile_name))
+            self.menu_set_default_profile.addAction(action)
+            action.setChecked(
+                profile_name
+                == (
+                    self.config.default_profile
+                    if self.config.default_profile
+                    else cfg.DEFAULT_PROFILE_NAME
+                )
+            )
 
         # Load the ProfileToolBox widget.
         self.toolBox_profile = pp.ProfileToolBox(self)
@@ -404,7 +428,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         inner_layout.setContentsMargins(0, 0, 0, 0)
         inner_layout.addWidget(self.toolBox_profile)
         self.toolBox_profile_frame.setLayout(inner_layout)
-        self.config.load_profile(self.comboBox_current_profile.currentText())
+        self.config.load_profile(self.config.default_profile)
 
         # Load the structure.
         structure = pp.parse_profile_structure(self.config.current_profile)
@@ -417,6 +441,83 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.toolBox_profile.values_changed.connect(self.handle_profile_values_changed)
         self.pushButton_reset_profile.clicked.connect(self.reset_profile)
         self.pushButton_save_profile.clicked.connect(self.save_profile)
+        self.action_save_profile.triggered.connect(self.save_profile)
+        self.action_save_profile_as.triggered.connect(partial(self.save_profile, save_as=True))
+        self.action_import_profile.triggered.connect(self.import_profile)
+        self.action_new_profile.triggered.connect(partial(self.save_profile, make_new=True))
+        self.action_delete_profile.triggered.connect(self.delete_profile)
+
+    def handle_set_default_profile(self, profile_name: str):
+        """
+        Set the default profile in the config.
+        """
+        logger.debug(f"Setting default profile to {profile_name}")
+        self.config.default_profile = (
+            profile_name if profile_name != cfg.DEFAULT_PROFILE_NAME else None
+        )
+        self.config.save()
+        # Update the menu.
+        for action in self.menu_set_default_profile.actions():
+            action.setChecked(action.text() == profile_name)
+
+    def import_profile(self):
+        """
+        Open a file picker and add the profile to the profile list.
+        """
+        logger.debug("Importing profile.")
+        file_path = Qw.QFileDialog.getOpenFileName(
+            self,
+            "Import Profile",
+            "",
+            "Profile Files (*.conf)",
+        )[0]
+        if file_path:
+            logger.debug(f"Importing profile from {file_path}")
+            profile_name = Path(file_path).stem
+            success, msg = pc.add_profile(self.config, profile_name, file_path)
+            if success:
+                gu.show_info(self, "Profile Imported", msg)
+            else:
+                gu.show_warning(self, "Import Error", msg)
+                return
+
+            self.add_new_profile_to_gui(profile_name, file_path)
+
+    def delete_profile(self):
+        """
+        Ask and then delete the current profile.
+        Of course, the default profile cannot be deleted.
+        :return:
+        """
+        # if not self.profile_change_check():
+        #     return
+        logger.debug("Deleting profile.")
+        profile_name = self.comboBox_current_profile.currentText()
+
+        if self.comboBox_current_profile.currentText() == cfg.DEFAULT_PROFILE_NAME:
+            gu.show_warning(self, "Failed to Delete", "The default profile cannot be deleted.")
+            return
+        response = gu.show_question(
+            self, "Delete Profile", f"Are you sure you want to delete the profile {profile_name}?"
+        )
+        if response == Qw.QMessageBox.Yes:
+            profile_file = self.config.saved_profiles[profile_name]
+            self.config.remove_profile(profile_name)
+            self.config.save()
+            if profile_file.is_file():
+                try:
+                    profile_file.unlink()
+                except OSError as e:
+                    gu.show_warning(
+                        self, "Delete Error", "Failed to delete the profile\n" + e.what()
+                    )
+
+            self.toolBox_profile.reset_all()  # To suppress the change check.
+            self.comboBox_current_profile.removeItem(self.comboBox_current_profile.currentIndex())
+            for action in self.menu_set_default_profile.actions():
+                if action.text() == profile_name:
+                    self.menu_set_default_profile.removeAction(action)
+                    break
 
     def load_current_profile(self):
         """
@@ -428,8 +529,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def profile_change_check(self) -> bool:
         """
         Check if the current profile has unsaved changes.
+
+        :return: True if the profile is ready to be changed, False otherwise.
         """
         logger.warning("Profile change check")
+        # Check if the profile is still in the list.
+        if self.comboBox_current_profile.currentText() not in list(
+            self.config.saved_profiles.keys()
+        ) + [cfg.DEFAULT_PROFILE_NAME]:
+            logger.debug("Profile not in list.")
+            # The profile is not in the list, so it must have been deleted.
+            return True
+
         if self.toolBox_profile.is_modified():
             logger.debug(
                 f"Previous profile {self.comboBox_current_profile.currentText()} has unsaved changes."
@@ -469,38 +580,39 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.config.load_profile(profile_name)
         self.load_current_profile()
 
-    @Slot(bool)
-    def handle_profile_values_changed(self, all_default: bool):
+    @Slot()
+    def handle_profile_values_changed(self):
         """
         Handle the profile values changing.
-
-        :param all_default: Whether all values are default now.
         """
-        self.pushButton_save_profile.setEnabled(not all_default)
-        self.pushButton_reset_profile.setEnabled(not all_default)
-        self.pushButton_apply_profile.setEnabled(not all_default)
+        dirty = self.toolBox_profile.is_modified()
+        self.pushButton_save_profile.setEnabled(dirty)
+        self.pushButton_reset_profile.setEnabled(dirty)
+        self.pushButton_apply_profile.setEnabled(dirty)
+        self.action_save_profile.setEnabled(dirty)
 
     def reset_profile(self):
         """
         Reset the current profile.
         """
         self.toolBox_profile.reset_all()
-        self.handle_profile_values_changed(True)
+        self.handle_profile_values_changed()
 
-    def save_profile(self, save_as: bool = False):
+    def save_profile(self, save_as: bool = False, make_new: bool = False):
         """
         Save the current profile.
 
         :param save_as: Whether to save as a new profile.
+        :param make_new: Whether to make a new profile.
         """
         # Grab the path from the combobox's linked data. If it is none, this is the
         # default profile, so we need to save it as a new profile.
         profile_path = self.comboBox_current_profile.currentLinkedData()
         profile_name = self.comboBox_current_profile.currentText()
-        if profile_path is None:
+        if profile_path is None or make_new:
             save_as = True
 
-        if profile_path is None:
+        if profile_path is None and not make_new:
             # Trying to save over the default profile.
             profile_path, profile_name = self.get_new_profile_path(show_protection_hint=True)
         elif save_as:
@@ -511,35 +623,53 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             logger.info("User canceled profile save.")
             return
 
-        # Proceed to write the profile.
-        logger.info(f"Saving profile to {profile_path}")
-        self.toolBox_profile.get_profile_values(self.config.current_profile)
-        success = self.config.current_profile.write(profile_path)
-        if not success:
-            logger.error("Failed to save profile.")
-            self.statusbar.showMessage(f"Failed to save profile to {profile_path}")
-            gu.show_critical(self, "Save Error", "Failed to save profile.")
-            return
-
-        logger.info("Profile saved successfully.")
-        self.statusbar.showMessage(f"Profile saved to {profile_path}")
-        if save_as:
-            self.config.add_profile(profile_name, profile_path)
-            if not self.config.save():
-                logger.error("Failed to save config.")
-                self.statusbar.showMessage("Failed to save config.")
-                gu.show_critical(
-                    self,
-                    "Save Error",
-                    "Failed to save the new profile to the configuration file.",
-                )
+        if make_new:
+            success, msg = pc.new_profile(self.config, profile_name, profile_path)
+            if success:
+                gu.show_info(self, "Profile Created", msg)
+                self.add_new_profile_to_gui(profile_name, profile_path)
+            else:
+                gu.show_warning(self, "Create Error", msg)
                 return
-            # Add the new profile to the combobox.
-            self.comboBox_current_profile.addTextItemLinkedData(profile_name, profile_path)
-            self.comboBox_current_profile.setCurrentText(profile_name)
+        else:
+            # Proceed to write the profile.
+            logger.info(f"Saving profile to {profile_path}")
+            self.toolBox_profile.get_profile_values(self.config.current_profile)
+            success = self.config.current_profile.write(profile_path)
+            if not success:
+                logger.error("Failed to save profile.")
+                self.statusbar.showMessage(f"Failed to save profile to {profile_path}")
+                gu.show_critical(self, "Save Error", "Failed to save profile.")
+                return
+
+            logger.info("Profile saved successfully.")
+            self.statusbar.showMessage(f"Profile saved to {profile_path}")
+            if save_as:
+                self.config.add_profile(profile_name, profile_path)
+                if not self.config.save():
+                    logger.error("Failed to save config.")
+                    self.statusbar.showMessage("Failed to save config.")
+                    gu.show_critical(
+                        self,
+                        "Save Error",
+                        "Failed to save the new profile to the configuration file.",
+                    )
+                    return
+                # Add the new profile to the combobox.
+                self.add_new_profile_to_gui(profile_name, profile_path)
+
         self.config.load_profile(profile_name)
         self.load_current_profile()
-        self.handle_profile_values_changed(True)
+        self.handle_profile_values_changed()
+
+    def add_new_profile_to_gui(self, profile_name: str, profile_path: Path):
+        self.comboBox_current_profile.addTextItemLinkedData(profile_name, profile_path)
+        self.comboBox_current_profile.setCurrentIndexByLinkedData(profile_path)
+        self.menu_set_default_profile.addAction(profile_name)
+        self.menu_set_default_profile.actions()[-1].triggered.connect(
+            partial(self.handle_set_default_profile, profile_name)
+        )
+        self.menu_set_default_profile.actions()[-1].setCheckable(True)
 
     def get_new_profile_path(
         self, show_protection_hint: bool = False
@@ -923,16 +1053,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.label_api_status_bad.setVisible(not good)
         self.label_api_status_bad_icon.setVisible(not good)
 
-    def update_input_buttons(self):
-        logger.debug("Updating input buttons")
-
-        if self.processing:
-            self.action_Open_Files.setEnabled(False)
-            self.action_Clear_Files.setEnabled(False)
-        else:
-            self.action_Open_Files.setEnabled(True)
-            self.action_Clear_Files.setEnabled(self.file_table.rowCount() > 0)
-
+    # def update_input_buttons(self):
+    #     logger.debug("Updating input buttons")
+    #
+    #     if self.processing:
+    #         self.action_Open_Files.setEnabled(False)
+    #         self.action_Clear_Files.setEnabled(False)
+    #     else:
+    #         self.action_Open_Files.setEnabled(True)
+    #         self.action_Clear_Files.setEnabled(self.file_table.rowCount() > 0)
+    #
     # def update_current_usage(self, translator: deepl.Translator | None):
     #     if translator is None:
     #         self.label_api_usage.setText("—")

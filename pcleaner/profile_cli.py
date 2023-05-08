@@ -55,16 +55,20 @@ def list_profiles(config: cfg.Config):
     print(table)
 
 
-def new_profile(config: cfg.Config, profile_name: str, profile_path: str | None):
+def new_profile(
+    config: cfg.Config, profile_name: str, profile_path: str | None, cli_mode: bool = False
+) -> tuple[bool, str]:
     """
     Create a new profile with the given name and path.
 
     :param config: The config object.
     :param profile_name: The name of the profile.
     :param profile_path: The path to the profile.
+    :param cli_mode: Whether to ask to overwrite an existing file. Only applicable in CLI mode.
     """
-    if not is_valid_profile_name(config, profile_name):
-        return
+    valid, msg = is_valid_profile_name(config, profile_name)
+    if not valid:
+        return False, msg
 
     # If no path is given, use the default path.
     if profile_path is None:
@@ -77,24 +81,29 @@ def new_profile(config: cfg.Config, profile_name: str, profile_path: str | None)
 
     # Check if overwriting an existing file.
     if profile_path.exists():
+        if not cli_mode:
+            return False, f"Profile file {profile_path} already exists."
         if not cli.get_confirmation(f"Overwrite existing file {profile_path}?"):
-            print("Aborting.")
-            return
+            return False, "Aborted."
 
     profile_path.parent.mkdir(parents=True, exist_ok=True)
     # Create the profile file from the built-in default.
     profile = cfg.Profile()
     profile.write(profile_path)
-    print(f"Profile {profile_name} created at {profile_path}.")
 
     # Add the profile to the config.
     config.add_profile(profile_name, profile_path)
     config.save()
 
-    open_profile(config, profile_name)
+    if cli_mode:
+        print(f"Profile {profile_name} created at {profile_path}.")
+        open_profile(config, profile_name)
+        return True, ""
+
+    return True, f"Profile {profile_name} created."
 
 
-def add_profile(config: cfg.Config, profile_name: str, profile_path: str):
+def add_profile(config: cfg.Config, profile_name: str, profile_path: str) -> tuple[bool, str]:
     """
     Add a profile to the config.
 
@@ -102,20 +111,20 @@ def add_profile(config: cfg.Config, profile_name: str, profile_path: str):
     :param profile_name: The name of the profile.
     :param profile_path: The path to the profile file.
     """
-    if not is_valid_profile_name(config, profile_name):
-        return
+    valid, msg = is_valid_profile_name(config, profile_name)
+    if not valid:
+        return False, msg
 
     # Verify the profile path exists.
     profile_path = Path(profile_path)
     if not profile_path.is_file():
-        print("Profile file not found.")
-        return
+        return False, "Profile file not found."
 
     # Add the profile to the config.
     config.add_profile(profile_name, profile_path)
     config.save()
 
-    print(f"Profile {profile_name} added.")
+    return True, f"Profile {profile_name} added."
 
 
 def open_profile(config: cfg.Config, profile_name: str):
@@ -211,7 +220,7 @@ def repair_profile(config: cfg.Config, profile_name: str):
 
 def is_valid_profile_name(
     config: cfg.Config, profile_name: str, allow_reserved: bool = False
-) -> bool:
+) -> tuple[bool, str]:
     """
     Verify the profile name isn't empty or already in use.
     Normally reject reserved names, but allow them if specified.
@@ -219,18 +228,15 @@ def is_valid_profile_name(
     :param config: The config object.
     :param profile_name: The name of the profile.
     :param allow_reserved: Allow reserved names.
-    :return: True if valid, False otherwise.
+    :return: True if valid, False otherwise, and a message.
     """
     if not profile_name:
-        print("Profile name cannot be empty.")
-        return False
+        return False, "Profile name cannot be empty."
     if profile_name in config.saved_profiles.keys():
-        print("Profile name already in use.")
-        return False
+        return False, "Profile name already in use."
     if profile_name.lower() in cfg.RESERVED_PROFILE_NAMES and not allow_reserved:
-        print("Profile name is reserved.")
-        return False
-    return True
+        return False, "Profile name is reserved."
+    return True, ""
 
 
 def purge_missing_profiles(config: cfg.Config):

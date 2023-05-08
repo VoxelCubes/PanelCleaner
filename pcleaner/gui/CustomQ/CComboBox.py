@@ -84,11 +84,22 @@ class CComboBox(Qw.QComboBox):
         self.addItem(text)
         self._linked_data.append(data)
 
+    def setCurrentIndexByText(self, text: str):
+        self.setCurrentIndex(self.findText(text))
+
     def setCurrentIndexByLinkedData(self, data: any):
         self.setCurrentIndex(self._linked_data.index(data))
 
     def indexLinkedData(self, data: any):
         return self._linked_data.index(data)
+
+    @Slot(int)
+    def setCurrentIndex(self, index: int) -> None:
+        """
+        Ensure the index is valid.
+        :param index:
+        """
+        Qw.QComboBox.setCurrentIndex(self, min(max(index, 0), self.count() - 1))
 
     def currentLinkedData(self):
         try:

@@ -11,7 +11,9 @@ from pcleaner import cli_utils as cli
 from pcleaner import model_downloader as md
 from pcleaner import helpers as hp
 
-RESERVED_PROFILE_NAMES = ["builtin", "none", "default"]
+RESERVED_PROFILE_NAMES = ["default", "builtin", "none"]
+
+DEFAULT_PROFILE_NAME = RESERVED_PROFILE_NAMES[0].capitalize()
 
 # Supported image suffixes.
 SUPPORTED_IMG_TYPES = [
@@ -795,6 +797,16 @@ class Config:
         }
         try_to_load(config, conf_updater, section, Path | None, "default_torch_model_path")
         try_to_load(config, conf_updater, section, Path | None, "default_cv2_model_path")
+
+        # If the default profile isn't in the saved profiles, clear it.
+        if (
+            config.default_profile is not None
+            and config.default_profile not in config.saved_profiles
+        ):
+            logger.error(
+                f"Default profile {config.default_profile} not found in saved profiles. Clearing entry."
+            )
+            config.default_profile = None
 
         if config.default_torch_model_path is not None:
             # Verify that the model exists and has the correct hash.
