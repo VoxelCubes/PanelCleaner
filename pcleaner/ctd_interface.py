@@ -20,7 +20,6 @@ from pathlib import Path
 import multiprocessing as mp
 
 from tqdm import tqdm
-from PIL import Image
 import torch
 import numpy as np
 import cv2
@@ -166,15 +165,12 @@ def read_image(path: Path | str, scale=1.0) -> np.ndarray:
     :return: Image array
     """
 
-    img = Image.open(str(path))
-
-    if img.mode == "CMYK":
-        logger.warning(f"Image {path} is in CMYK mode. Converting to RGB.")
-        img = img.convert("RGB")
+    img = cv2.imdecode(np.fromfile(str(path), dtype=np.uint8), cv2.IMREAD_COLOR)
 
     if scale != 1.0:
-        new_width = int(img.width * scale)
-        new_height = int(img.height * scale)
-        img = img.resize((new_width, new_height), Image.ANTIALIAS)
+        height, width, channels = img.shape
+        new_width = int(width * scale)
+        new_height = int(height * scale)
+        img = cv2.resize(img, (new_width, new_height))
 
-    return np.array(img)
+    return img
