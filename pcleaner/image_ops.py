@@ -316,7 +316,8 @@ def pick_best_mask(
         # This means the box was probably just noise, so abort picking a mask.
         logger.warning(
             "Found an empty mask, the Text Detector didn't find anything but still recorded text present.\n"
-            f"Masking box: {masking_box}, x offset: {x_offset}, y offset: {y_offset}"
+            f"Image: {analytics_page_path.name} Masking box: {masking_box}, x offset: {x_offset}, y offset: {y_offset}."
+            f" Skipping."
         )
         return None
 
