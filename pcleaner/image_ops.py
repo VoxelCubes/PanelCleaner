@@ -309,12 +309,15 @@ def pick_best_mask(
 
     # Replace all given images with their corresponding cutouts.
     base = cut_out_box(base, reference_box)
-    precise_mask = cut_out_mask(precise_mask, masking_box, base.size, x_offset, y_offset)
+    precise_mask_cut = cut_out_mask(precise_mask, masking_box, base.size, x_offset, y_offset)
 
     # Check that the precise mask is not blank.
-    if precise_mask.getbbox() is None:
+    if precise_mask_cut.getbbox() is None:
         # This means the box was probably just noise, so abort picking a mask.
-        logger.warning("Found an empty mask, this is likely due to name collisions.")
+        logger.warning(
+            "Found an empty mask, the Text Detector didn't find anything but still recorded text present.\n"
+            f"Masking box: {masking_box}, x offset: {x_offset}, y offset: {y_offset}"
+        )
         return None
 
     box_mask = cut_out_mask(box_mask, masking_box, base.size, x_offset, y_offset)
@@ -322,7 +325,7 @@ def pick_best_mask(
     # Generate masks of various sizes for the precise mask, then add the box mask to the list.
     # The generated masks are in ascending size order.
     mask_gen = make_mask_steps_convolution(
-        precise_mask,
+        precise_mask_cut,
         hp.scale_length_rounded(masker_conf.mask_growth_step_pixels, scale),
         masker_conf.mask_growth_steps,
     )
