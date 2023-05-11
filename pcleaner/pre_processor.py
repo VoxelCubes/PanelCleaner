@@ -67,10 +67,8 @@ def prep_json_file(
     logger.debug(f"Processing json file: {json_file_path}")
 
     # Check if the file was already processed.
-    if json_file_path.name.endswith("#clean.json"):
-        return
-    if json_file_path.name.endswith("#mask_data.json"):
-        return
+    if not json_file_path.name.endswith("#raw.json"):
+        return None
 
     json_data = json.loads(json_file_path.read_text())
 
@@ -142,7 +140,7 @@ def prep_json_file(
     )
 
     # Write the json file with the cleaned data.
-    json_out_path = json_file_path.parent / f"{json_file_path.stem}#clean.json"
+    json_out_path = json_file_path.parent / f"{json_file_path.stem.replace('#raw', '')}#clean.json"
     # Remove the _image_size attribute, because it's a cached value that may be unset.
     page_data_dict = asdict(page_data)
     del page_data_dict["_image_size"]
