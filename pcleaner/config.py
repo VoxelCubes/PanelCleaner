@@ -356,6 +356,7 @@ class MaskerConfig:
         # The maximum standard deviation of a mask to consider.
         # A high value here means a higher tolerance for the mask intersecting text or other objects,
         # which isn't a good mask, as it will require inpainting anyway.
+        # Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.
         mask_max_standard_deviation = {self.mask_max_standard_deviation}
         
         # Color to use for the debug mask. [CLI: This is a tuple of RGBA values.]
