@@ -18,3 +18,5 @@ colorama
 requests
 xdg
 PySide6
+tifffile
+python-magic-bin

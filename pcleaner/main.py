@@ -113,7 +113,7 @@ import itertools
 from PIL import Image
 
 from manga_ocr import MangaOcr
-from docopt import magic_docopt
+from docopt import docopt
 from logzero import logger, loglevel, DEBUG, INFO
 from tqdm import tqdm
 from natsort import natsorted
@@ -139,7 +139,7 @@ Image.MAX_IMAGE_PIXELS = 2**32
 
 def main():
 
-    args = magic_docopt(__doc__, version=f"Panel Cleaner {__version__}")
+    args = docopt(__doc__, version=f"Panel Cleaner {__version__}")
     # Loglevel is info by default.
     if args.debug:
         loglevel(DEBUG)
