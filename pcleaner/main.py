@@ -118,7 +118,6 @@ from logzero import logger, loglevel, DEBUG, INFO
 from tqdm import tqdm
 from natsort import natsorted
 import torch
-import tifffile
 
 from pcleaner import __version__
 import pcleaner.masker as cl
@@ -138,7 +137,6 @@ Image.MAX_IMAGE_PIXELS = 2**32
 
 
 def main():
-
     args = docopt(__doc__, version=f"Panel Cleaner {__version__}")
     # Loglevel is info by default.
     if args.debug:
@@ -185,7 +183,8 @@ def main():
 
     elif args.ocr:
         config = cfg.load_config()
-        image_paths = discover_all_images(args.image_path)
+        # Ignore the rejected tiff list, as those are already visible in CLI mode.
+        image_paths, _ = hp.discover_all_images(args.image_path, cfg.SUPPORTED_IMG_TYPES)
         run_ocr(config, image_paths, args.output_path, cache_masks=args.cache_masks)
 
     elif args.cache and args.clear:
@@ -305,7 +304,8 @@ def run_cleaner(
 
     if not skip_text_detection:
         # Find all the images in the given image paths.
-        image_paths = discover_all_images(image_paths)
+        # Ignore the rejected tiff list, as those are already visible in CLI mode.
+        image_paths, _ = hp.discover_all_images(image_paths, cfg.SUPPORTED_IMG_TYPES)
         if not image_paths:
             print("No images found.")
             return
@@ -504,25 +504,25 @@ def run_ocr(
         if ocr_analytic:
             ocr_analytics.append(ocr_analytic)
 
-    # Output the OCRed text from the analytics.
-    removed_texts = list(itertools.chain.from_iterable(a[3] for a in ocr_analytics))
+    # Output the OCRed text from the analytics. Format: (path, removed text)
+    # The previous 3 columns are box coordinates, which are not needed here.
+    path_and_texts: list[tuple[str, str]] = list(
+        itertools.chain.from_iterable(a[3] for a in ocr_analytics)
+    )
 
-    # Find and then remove the longest common prefix from the file paths.
-    prefix = an.longest_common_path_prefix([str(Path(path).parent) for path, _ in removed_texts])
-    if prefix:
-        removed_texts = [(path[len(prefix) :], text) for path, text in removed_texts]
-    # Remove a rogue / or \ from the start of the path, if they all have one.
-    if all(path.startswith("/") or path.startswith("\\") for path, _ in removed_texts):
-        removed_texts = [(path[1:], text) for path, text in removed_texts]
-
-    removed_texts: list[tuple[str, str]] = natsorted(removed_texts, key=lambda x: x[0])
+    if path_and_texts:
+        paths, texts = zip(*path_and_texts)
+        paths = hp.trim_prefix_from_paths([Path(p) for p in paths])
+        path_and_texts = list(zip(paths, texts))
+        # Sort by path.
+        path_and_texts = natsorted(path_and_texts, key=lambda x: x[0])
 
     print("\nDetected Text:")
     # text = "\n".join(f"{path}: {text}" for path, text in removed_texts)
     # Place the file path on it's own line, and only if it's different from the previous one.
     text = ""
     current_path = ""
-    for path, bubble in removed_texts:
+    for path, bubble in path_and_texts:
         if path != current_path:
             text += f"\n\n{path}: "
             current_path = path
@@ -575,78 +575,6 @@ def clear_cache(config: cfg.Config, all_cache: bool, models: bool, images: bool)
         image_cache_dir = config.get_cleaner_cache_dir()
         cli.empty_cache_dir(image_cache_dir)
         print(f"Cleared image cache at {image_cache_dir}")
-
-
-def discover_all_images(img_paths: str | Path | list[str | Path]) -> list[Path]:
-    """
-    Discover all images in the given paths.
-    Perform a shallow search in directories, not recursing into subdirectories.
-
-    :param img_paths: A path to a single image, directory, or multiple of either.
-    :return: A list of all images found by path only.
-    """
-    img_list: list[Path] = []
-
-    # Wrap single paths in a list.
-    if isinstance(img_paths, str):
-        img_list = [Path(img_paths)]
-        img_paths = []
-    elif isinstance(img_paths, Path):
-        img_list = [img_paths]
-        img_paths = []
-
-    # Convert all strings to paths.
-    img_paths = [Path(path) for path in img_paths]
-
-    for img_path in img_paths:
-        if img_path.is_dir():
-            img_list.extend(find_all_images_shallow(img_path))
-        elif img_path.is_file() and img_path.suffix.lower() in cfg.SUPPORTED_IMG_TYPES:
-            img_list.append(img_path)
-        else:
-            raise FileNotFoundError(f"Image path {img_path} does not exist.")
-
-    # Ensure all paths are absolute.
-    img_list = [path.resolve() for path in img_list]
-
-    # Filter out 5 channel TIFFs, as they are not supported.
-    img_list = [path for path in img_list if not is_5_channel_tiff(path)]
-
-    return img_list
-
-
-def find_all_images_shallow(img_dir: Path) -> list[Path]:
-    image_list: list[Path] = []
-    for file_path in img_dir.glob("*"):
-        file_suffix = file_path.suffix
-        if file_suffix.lower() not in cfg.SUPPORTED_IMG_TYPES:
-            continue
-        else:
-            image_list.append(file_path)
-    return image_list
-
-
-def is_5_channel_tiff(path: Path) -> bool:
-    """
-    Returns True if the given file is a TIFF image with a 5.1 channel, False otherwise.
-    """
-    # Check suffix first.
-    if path.suffix not in [".tif", ".tiff"]:
-        return False
-    # Try opening the file as a TIFF image
-    with tifffile.TiffFile(path) as tif:
-        logger.debug("Tiff data:\n" + str(tif.pages[0].tags))
-        # Check if the TIFF image has 5 channels.
-        try:
-            if tif.pages[0].tags["SamplesPerPixel"].value == 5:
-                logger.warning(
-                    f"Found a 5 channel TIFF image: {path}. These are not supported, the image will be skipped."
-                )
-                return True
-        except KeyError:
-            pass
-
-    return False
 
 
 if __name__ == "__main__":

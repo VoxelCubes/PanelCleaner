@@ -7,6 +7,7 @@ import colorama as clr
 from natsort import natsorted
 
 import pcleaner.structures as st
+import pcleaner.helpers as hp
 
 
 # I'll admit this file is a mess.
@@ -72,20 +73,22 @@ def show_ocr_analytics(
         print("No not-removed small boxes found.\n")
 
     # Show removed texts.
-    removed_texts = list(itertools.chain.from_iterable(a[3] for a in analytics))
+    # Format: (path, text)
+    removed_path_texts: list[tuple[str, str]] = list(
+        itertools.chain.from_iterable(a[3] for a in analytics)
+    )
 
-    # Find and then remove the longest common prefix from the file paths.
-    prefix = longest_common_path_prefix([str(Path(path).parent) for path, _ in removed_texts])
-    if prefix:
-        removed_texts = [(path[len(prefix) :], text) for path, text in removed_texts]
-    # Remove a rogue / or \ from the start of the path, if they all have one.
-    if all(path.startswith("/") or path.startswith("\\") for path, _ in removed_texts):
-        removed_texts = [(path[1:], text) for path, text in removed_texts]
-
-    removed_texts = natsorted(removed_texts, key=lambda x: x[0])
+    if removed_path_texts:
+        # Find and then remove the longest common prefix from the file paths.
+        paths, texts = zip(*removed_path_texts)
+        paths = [Path(p) for p in paths]
+        removed_paths = hp.trim_prefix_from_paths(paths)
+        removed_path_texts = list(zip(removed_paths, texts))
+        # Sort by file path.
+        removed_path_texts = natsorted(removed_path_texts, key=lambda p: p[0])
 
     print("\nRemoved bubbles:")
-    for path, text in removed_texts:
+    for path, text in removed_path_texts:
         print(f"Page {path}: {text}")
 
     print("\n")
@@ -273,18 +276,12 @@ def show_masker_analytics(analytics: list[tuple[Path, bool, int, float]]):
         if counts["failed"]
     ]
 
-    # Find and then remove the longest common prefix from the file paths.
-    prefix = longest_common_path_prefix(
-        [str(path.parent) for path, _, _ in pages_with_success_and_fails]
-    )
-    if prefix:
-        pages_with_success_and_fails = [
-            (path.relative_to(prefix), succeeded, failed)
-            for path, succeeded, failed in pages_with_success_and_fails
-        ]
-
-    # Sort them list by file path.
-    pages_with_success_and_fails = natsorted(pages_with_success_and_fails, key=lambda x: x[0])
+    if pages_with_success_and_fails:
+        page_paths, succeeded_counts, failed_counts = zip(*pages_with_success_and_fails)
+        page_paths = hp.trim_prefix_from_paths(page_paths)
+        pages_with_success_and_fails = list(zip(page_paths, succeeded_counts, failed_counts))
+        # Sort the list of tuples by file path.
+        pages_with_success_and_fails = natsorted(pages_with_success_and_fails, key=lambda x: x[0])
 
     print("\nPages with failures / total:")
     for page_path, succeeded, failed in pages_with_success_and_fails:
@@ -417,25 +414,3 @@ def draw_denoise_histogram(
     print(f"\n{clr.Fore.MAGENTA}█ Denoised{clr.Fore.RESET} | █ Total")
 
 
-def longest_common_path_prefix(strings: list[str]) -> str:
-    """
-    Finds the longest common prefix for a list of strings.
-    This is then interpreted as a path and checked for cut-off directory names.
-    We don't want to split in the middle of one, causing an invalid path.
-
-    :param strings: The list of strings to find the longest common prefix for.
-    :return: The longest common prefix.
-    """
-    if not strings:
-        return ""
-
-    prefix = strings[0]
-    for string in strings[1:]:
-        while string.find(prefix) != 0:
-            prefix = prefix[:-1]
-            if not prefix:
-                return ""
-    # If the prefix doesnt exist, cut away the mangled directory name.
-    if not Path(prefix).exists():
-        prefix = str(Path(prefix).parent)
-    return prefix
