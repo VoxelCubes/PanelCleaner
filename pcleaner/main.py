@@ -9,7 +9,7 @@ Usage:
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
-    pcleaner gui [<image_path> ...] [--debug]
+    pcleaner gui_work_in_progress [<image_path> ...] [--debug]
     pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--cache-masks] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
@@ -178,7 +178,7 @@ def main():
             pc.purge_missing_profiles(config)
         else:
             raise ValueError("Invalid profile subcommand.")
-    elif args.gui:
+    elif args.gui_work_in_progress:
         gui.launch(args.image_path)
 
     elif args.ocr:
