@@ -123,7 +123,7 @@ from pcleaner import __version__
 import pcleaner.masker as cl
 import pcleaner.config as cfg
 import pcleaner.cli_utils as cli
-import pcleaner.pre_processor as pp
+import pcleaner.preprocessor as pp
 import pcleaner.analytics as an
 import pcleaner.structures as st
 import pcleaner.profile_cli as pc
@@ -340,7 +340,7 @@ def run_cleaner(
         # Make sure it actually flushes at all costs = wait 100 ms.
         # (It takes several seconds to load the ocr model, so this is fine.)
         time.sleep(0.1)
-        if profile.pre_processor.ocr_enabled:
+        if profile.preprocessor.ocr_enabled:
             mocr = MangaOcr()
         else:
             mocr = None
@@ -349,7 +349,7 @@ def run_cleaner(
         for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
             ocr_analytic = pp.prep_json_file(
                 json_file_path,
-                pre_processor_conf=profile.pre_processor,
+                preprocessor_conf=profile.preprocessor,
                 cache_masks=cache_masks,
                 mocr=mocr,
             )
@@ -357,7 +357,7 @@ def run_cleaner(
                 ocr_analytics.append(ocr_analytic)
 
         if ocr_analytics and not hide_analytics:
-            an.show_ocr_analytics(ocr_analytics, profile.pre_processor.ocr_max_size)
+            an.show_ocr_analytics(ocr_analytics, profile.preprocessor.ocr_max_size)
 
     if not skip_masking:
         print("Running Masker...")
@@ -483,20 +483,20 @@ def run_ocr(
 
     # Modify the profile to OCR all boxes.
     # Make sure OCR is enabled.
-    config.current_profile.pre_processor.ocr_enabled = True
+    config.current_profile.preprocessor.ocr_enabled = True
     # Make sure the max size is infinite, so no boxes are skipped in the OCR process.
-    config.current_profile.pre_processor.ocr_max_size = 10**10
+    config.current_profile.preprocessor.ocr_max_size = 10**10
     # Make sure the sus box min size is infinite, so all boxes with "unknown" language are skipped.
-    config.current_profile.pre_processor.suspicious_box_min_size = 10**10
+    config.current_profile.preprocessor.suspicious_box_min_size = 10**10
     # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
-    config.current_profile.pre_processor.ocr_blacklist_pattern = ".*"
+    config.current_profile.preprocessor.ocr_blacklist_pattern = ".*"
 
     mocr = MangaOcr()
     ocr_analytics = []
     for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
         ocr_analytic = pp.prep_json_file(
             json_file_path,
-            pre_processor_conf=config.current_profile.pre_processor,
+            preprocessor_conf=config.current_profile.preprocessor,
             cache_masks=cache_masks,
             mocr=mocr,
             cache_masks_ocr=True,

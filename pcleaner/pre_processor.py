@@ -37,7 +37,7 @@ def generate_mask_data(
 
 def prep_json_file(
     json_file_path: Path,
-    pre_processor_conf: cfg.PreProcessorConfig,
+    preprocessor_conf: cfg.PreprocessorConfig,
     cache_masks: bool,
     mocr: MangaOcr | None = None,
     cache_masks_ocr: bool = False,
@@ -58,7 +58,7 @@ def prep_json_file(
     Analytics data is returned if the manga ocr object is given.
 
     :param json_file_path: Path to the json file.
-    :param pre_processor_conf: Pre processor configuration, part of the profile.
+    :param preprocessor_conf: Preprocessor configuration, part of the profile.
     :param cache_masks: Whether to cache the masks.
     :param mocr: [Optional] Manga ocr object.
     :param cache_masks_ocr: [Optional] Whether to cache the masks early for ocr.
@@ -85,10 +85,10 @@ def prep_json_file(
         # Check minimum size of box.
         x1, y1, x2, y2 = data["xyxy"]
         box_size = (x2 - x1) * (y2 - y1)
-        if box_size > scale_area(pre_processor_conf.box_min_size):
+        if box_size > scale_area(preprocessor_conf.box_min_size):
             # Sussy box. Discard if it's too small.
             if data["language"] == "unknown" and box_size < scale_area(
-                pre_processor_conf.suspicious_box_min_size
+                preprocessor_conf.suspicious_box_min_size
             ):
                 continue
             boxes.append(data["xyxy"])
@@ -100,9 +100,9 @@ def prep_json_file(
 
     # Pad the boxes a bit, save a copy, and then pad them some more.
     # The copy is used as a smaller mask, and the padded copy is used as a larger mask.
-    page_data.grow_boxes(scale_len(pre_processor_conf.box_padding_initial), st.BoxType.BOX)
+    page_data.grow_boxes(scale_len(preprocessor_conf.box_padding_initial), st.BoxType.BOX)
     page_data.right_pad_boxes(
-        scale_len(pre_processor_conf.box_right_padding_initial), st.BoxType.BOX
+        scale_len(preprocessor_conf.box_right_padding_initial), st.BoxType.BOX
     )
 
     # Draw the boxes on the image and save it.
@@ -115,18 +115,16 @@ def prep_json_file(
         page_data, analytics = ocr_check(
             page_data,
             mocr,
-            scale_area(pre_processor_conf.ocr_max_size),
-            pre_processor_conf.ocr_blacklist_pattern,
+            scale_area(preprocessor_conf.ocr_max_size),
+            preprocessor_conf.ocr_blacklist_pattern,
         )
 
     # A shallow copy of the box list suffices, because the tuples inside are immutable.
     page_data.extended_boxes = page_data.boxes.copy()
 
-    page_data.grow_boxes(
-        scale_len(pre_processor_conf.box_padding_extended), st.BoxType.EXTENDED_BOX
-    )
+    page_data.grow_boxes(scale_len(preprocessor_conf.box_padding_extended), st.BoxType.EXTENDED_BOX)
     page_data.right_pad_boxes(
-        scale_len(pre_processor_conf.box_right_padding_extended), st.BoxType.EXTENDED_BOX
+        scale_len(preprocessor_conf.box_right_padding_extended), st.BoxType.EXTENDED_BOX
     )
 
     # Check for overlapping boxes among the extended boxes.
@@ -136,7 +134,7 @@ def prep_json_file(
     # Copy the merged extended boxes to the reference boxes and grow them once again.
     page_data.reference_boxes = page_data.merged_extended_boxes.copy()
     page_data.grow_boxes(
-        scale_len(pre_processor_conf.box_reference_padding), st.BoxType.REFERENCE_BOX
+        scale_len(preprocessor_conf.box_reference_padding), st.BoxType.REFERENCE_BOX
     )
 
     # Write the json file with the cleaned data.
