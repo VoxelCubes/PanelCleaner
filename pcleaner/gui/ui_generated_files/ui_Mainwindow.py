@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'Mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.0
+## Created by: Qt User Interface Compiler version 6.5.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -20,11 +20,12 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QForm
     QFrame, QGroupBox, QHBoxLayout, QHeaderView,
     QLabel, QLineEdit, QMainWindow, QMenu,
     QMenuBar, QProgressBar, QPushButton, QRadioButton,
-    QSizePolicy, QSpacerItem, QSplitter, QStatusBar,
-    QTabWidget, QTableWidgetItem, QTextEdit, QVBoxLayout,
-    QWidget)
+    QSizePolicy, QSpacerItem, QSplitter, QStackedWidget,
+    QStatusBar, QTabWidget, QTableWidgetItem, QTextEdit,
+    QVBoxLayout, QWidget)
 
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
+from pcleaner.gui.CustomQ.CDropFrame import CDropFrame
 from pcleaner.gui.file_table import FileTable
 
 class Ui_MainWindow(object):
@@ -32,25 +33,55 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1701, 720)
-        self.action_open_files = QAction(MainWindow)
-        self.action_open_files.setObjectName(u"action_open_files")
-        icon = QIcon(QIcon.fromTheme(u"document-open"))
-        self.action_open_files.setIcon(icon)
+        self.action_add_files = QAction(MainWindow)
+        self.action_add_files.setObjectName(u"action_add_files")
+        icon = QIcon()
+        iconThemeName = u"document-open"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.action_add_files.setIcon(icon)
         self.action_clear_files = QAction(MainWindow)
         self.action_clear_files.setObjectName(u"action_clear_files")
-        icon1 = QIcon(QIcon.fromTheme(u"edit-clear-history"))
+        icon1 = QIcon()
+        iconThemeName = u"edit-clear-history"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon1 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon1.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_clear_files.setIcon(icon1)
         self.action_new_profile = QAction(MainWindow)
         self.action_new_profile.setObjectName(u"action_new_profile")
-        icon2 = QIcon(QIcon.fromTheme(u"document-new"))
+        icon2 = QIcon()
+        iconThemeName = u"document-new"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon2 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon2.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_new_profile.setIcon(icon2)
         self.action_delete_profile = QAction(MainWindow)
         self.action_delete_profile.setObjectName(u"action_delete_profile")
-        icon3 = QIcon(QIcon.fromTheme(u"edit-delete"))
+        icon3 = QIcon()
+        iconThemeName = u"edit-delete"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon3 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon3.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_delete_profile.setIcon(icon3)
         self.action_import_profile = QAction(MainWindow)
         self.action_import_profile.setObjectName(u"action_import_profile")
-        icon4 = QIcon(QIcon.fromTheme(u"document-import"))
+        icon4 = QIcon()
+        iconThemeName = u"document-import"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon4 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon4.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_import_profile.setIcon(icon4)
         self.action_open_log = QAction(MainWindow)
         self.action_open_log.setObjectName(u"action_open_log")
@@ -62,11 +93,23 @@ class Ui_MainWindow(object):
         self.actionView_License.setObjectName(u"actionView_License")
         self.action_save_profile = QAction(MainWindow)
         self.action_save_profile.setObjectName(u"action_save_profile")
-        icon5 = QIcon(QIcon.fromTheme(u"document-save"))
+        icon5 = QIcon()
+        iconThemeName = u"document-save"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon5 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon5.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_save_profile.setIcon(icon5)
         self.action_save_profile_as = QAction(MainWindow)
         self.action_save_profile_as.setObjectName(u"action_save_profile_as")
-        icon6 = QIcon(QIcon.fromTheme(u"document-save-as"))
+        icon6 = QIcon()
+        iconThemeName = u"document-save-as"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon6 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon6.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_save_profile_as.setIcon(icon6)
         self.action_Apply_Denoising = QAction(MainWindow)
         self.action_Apply_Denoising.setObjectName(u"action_Apply_Denoising")
@@ -84,11 +127,21 @@ class Ui_MainWindow(object):
         self.action_temp.setObjectName(u"action_temp")
         self.action_temp_2 = QAction(MainWindow)
         self.action_temp_2.setObjectName(u"action_temp_2")
+        self.action_add_folders = QAction(MainWindow)
+        self.action_add_folders.setObjectName(u"action_add_folders")
+        icon7 = QIcon()
+        iconThemeName = u"document-open-folder"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon7 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon7.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.action_add_folders.setIcon(icon7)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.verticalLayout = QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(1, 4, 1, 1)
+        self.verticalLayout_6 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(1, 4, 1, 1)
         self.splitter = QSplitter(self.centralwidget)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setOrientation(Qt.Horizontal)
@@ -114,14 +167,7 @@ class Ui_MainWindow(object):
         self.pushButton_save_profile = QPushButton(self.groupBox)
         self.pushButton_save_profile.setObjectName(u"pushButton_save_profile")
         self.pushButton_save_profile.setEnabled(False)
-        icon7 = QIcon()
-        iconThemeName = u"document-save"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon7 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon7.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-        
-        self.pushButton_save_profile.setIcon(icon7)
+        self.pushButton_save_profile.setIcon(icon5)
 
         self.horizontalLayout_2.addWidget(self.pushButton_save_profile)
 
@@ -134,7 +180,7 @@ class Ui_MainWindow(object):
             icon8 = QIcon.fromTheme(iconThemeName)
         else:
             icon8.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-        
+
         self.pushButton_reset_profile.setIcon(icon8)
 
         self.horizontalLayout_2.addWidget(self.pushButton_reset_profile)
@@ -148,7 +194,7 @@ class Ui_MainWindow(object):
             icon9 = QIcon.fromTheme(iconThemeName)
         else:
             icon9.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-        
+
         self.pushButton_apply_profile.setIcon(icon9)
 
         self.horizontalLayout_2.addWidget(self.pushButton_apply_profile)
@@ -167,7 +213,36 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.toolBox_profile_frame)
 
         self.splitter.addWidget(self.groupBox)
-        self.tabWidget_files = QTabWidget(self.splitter)
+        self.stackedWidget = QStackedWidget(self.splitter)
+        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.page_greeter = QWidget()
+        self.page_greeter.setObjectName(u"page_greeter")
+        self.verticalLayout_8 = QVBoxLayout(self.page_greeter)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.frame_greeter = CDropFrame(self.page_greeter)
+        self.frame_greeter.setObjectName(u"frame_greeter")
+        self.frame_greeter.setFrameShape(QFrame.StyledPanel)
+        self.frame_greeter.setFrameShadow(QFrame.Raised)
+        self.frame_greeter.setLineWidth(4)
+        self.horizontalLayout_4 = QHBoxLayout(self.frame_greeter)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.label = QLabel(self.frame_greeter)
+        self.label.setObjectName(u"label")
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_4.addWidget(self.label)
+
+
+        self.verticalLayout_8.addWidget(self.frame_greeter)
+
+        self.stackedWidget.addWidget(self.page_greeter)
+        self.page_table = QWidget()
+        self.page_table.setObjectName(u"page_table")
+        self.verticalLayout = QVBoxLayout(self.page_table)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.tabWidget_files = QTabWidget(self.page_table)
         self.tabWidget_files.setObjectName(u"tabWidget_files")
         self.tabWidget_table_page = QWidget()
         self.tabWidget_table_page.setObjectName(u"tabWidget_table_page")
@@ -190,20 +265,23 @@ class Ui_MainWindow(object):
         self.file_table.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         self.file_table.setObjectName(u"file_table")
         self.file_table.setFrameShape(QFrame.NoFrame)
-        self.file_table.setFrameShadow(QFrame.Plain)
         self.file_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.file_table.setDragDropOverwriteMode(False)
         self.file_table.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.file_table.setAlternatingRowColors(True)
         self.file_table.setSelectionMode(QAbstractItemView.SingleSelection)
         self.file_table.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.file_table.setSortingEnabled(True)
+        self.file_table.setSortingEnabled(False)
         self.file_table.setCornerButtonEnabled(False)
 
         self.verticalLayout_3.addWidget(self.file_table)
 
         self.tabWidget_files.addTab(self.tabWidget_table_page, "")
-        self.splitter.addWidget(self.tabWidget_files)
+
+        self.verticalLayout.addWidget(self.tabWidget_files)
+
+        self.stackedWidget.addWidget(self.page_table)
+        self.splitter.addWidget(self.stackedWidget)
         self.frame_3 = QFrame(self.splitter)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
@@ -251,7 +329,7 @@ class Ui_MainWindow(object):
             icon10 = QIcon.fromTheme(iconThemeName)
         else:
             icon10.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-        
+
         self.pushButton_start.setIcon(icon10)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
@@ -264,7 +342,7 @@ class Ui_MainWindow(object):
             icon11 = QIcon.fromTheme(iconThemeName)
         else:
             icon11.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-        
+
         self.pushButton_abort.setIcon(icon11)
 
         self.verticalLayout_7.addWidget(self.pushButton_abort)
@@ -315,14 +393,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_browse_out_dir = QPushButton(self.groupBox_3)
         self.pushButton_browse_out_dir.setObjectName(u"pushButton_browse_out_dir")
-        icon12 = QIcon()
-        iconThemeName = u"document-open-folder"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon12 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon12.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-        
-        self.pushButton_browse_out_dir.setIcon(icon12)
+        self.pushButton_browse_out_dir.setIcon(icon7)
 
         self.horizontalLayout.addWidget(self.pushButton_browse_out_dir)
 
@@ -349,7 +420,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setStretch(1, 1)
         self.splitter.addWidget(self.frame_3)
 
-        self.verticalLayout.addWidget(self.splitter)
+        self.verticalLayout_6.addWidget(self.splitter)
 
         self.widget_progress_drawer = QWidget(self.centralwidget)
         self.widget_progress_drawer.setObjectName(u"widget_progress_drawer")
@@ -380,9 +451,9 @@ class Ui_MainWindow(object):
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.progressBar_total)
 
 
-        self.verticalLayout.addWidget(self.widget_progress_drawer)
+        self.verticalLayout_6.addWidget(self.widget_progress_drawer)
 
-        self.verticalLayout.setStretch(0, 1)
+        self.verticalLayout_6.setStretch(0, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -411,7 +482,8 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_Profile.menuAction())
         self.menubar.addAction(self.menu_settings.menuAction())
         self.menubar.addAction(self.menu_Help.menuAction())
-        self.menu_File.addAction(self.action_open_files)
+        self.menu_File.addAction(self.action_add_files)
+        self.menu_File.addAction(self.action_add_folders)
         self.menu_File.addAction(self.action_clear_files)
         self.menu_Profile.addAction(self.action_new_profile)
         self.menu_Profile.addAction(self.action_import_profile)
@@ -436,12 +508,15 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
+        self.stackedWidget.setCurrentIndex(0)
+
+
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Panel Cleaner", None))
-        self.action_open_files.setText(QCoreApplication.translate("MainWindow", u"Open Files", None))
+        self.action_add_files.setText(QCoreApplication.translate("MainWindow", u"Add Files...", None))
         self.action_clear_files.setText(QCoreApplication.translate("MainWindow", u"Clear Files", None))
         self.action_new_profile.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.action_delete_profile.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
@@ -459,12 +534,14 @@ class Ui_MainWindow(object):
         self.action_light.setText(QCoreApplication.translate("MainWindow", u"Light", None))
         self.action_temp.setText(QCoreApplication.translate("MainWindow", u"<temp>", None))
         self.action_temp_2.setText(QCoreApplication.translate("MainWindow", u"<temp>", None))
+        self.action_add_folders.setText(QCoreApplication.translate("MainWindow", u"Add Folder...", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 
         self.pushButton_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.pushButton_reset_profile.setText(QCoreApplication.translate("MainWindow", u"Reset All", None))
         self.pushButton_apply_profile.setText(QCoreApplication.translate("MainWindow", u"Apply", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Drag and Drop Images or Folders Here", None))
         ___qtablewidgetitem = self.file_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"id", None));
         ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(1)

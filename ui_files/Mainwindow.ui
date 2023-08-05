@@ -14,7 +14,7 @@
    <string>Panel Cleaner</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
+   <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,0">
     <property name="leftMargin">
      <number>1</number>
     </property>
@@ -119,15 +119,12 @@
         </item>
        </layout>
       </widget>
-      <widget class="QTabWidget" name="tabWidget_files">
-       <widget class="QWidget" name="tabWidget_table_page">
-        <attribute name="title">
-         <string>Images</string>
-        </attribute>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <property name="spacing">
-          <number>0</number>
-         </property>
+      <widget class="QStackedWidget" name="stackedWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="page_greeter">
+        <layout class="QVBoxLayout" name="verticalLayout_8">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -141,62 +138,126 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="FileTable" name="file_table">
+          <widget class="CDropFrame" name="frame_greeter">
            <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
+            <enum>QFrame::StyledPanel</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
+            <enum>QFrame::Raised</enum>
            </property>
-           <property name="editTriggers">
-            <set>QAbstractItemView::NoEditTriggers</set>
+           <property name="lineWidth">
+            <number>4</number>
            </property>
-           <property name="dragDropOverwriteMode">
-            <bool>false</bool>
-           </property>
-           <property name="dragDropMode">
-            <enum>QAbstractItemView::NoDragDrop</enum>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::SingleSelection</enum>
-           </property>
-           <property name="selectionBehavior">
-            <enum>QAbstractItemView::SelectRows</enum>
-           </property>
-           <property name="sortingEnabled">
-            <bool>true</bool>
-           </property>
-           <property name="cornerButtonEnabled">
-            <bool>false</bool>
-           </property>
-           <column>
-            <property name="text">
-             <string>id</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>File</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Size</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Status</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Output</string>
-            </property>
-           </column>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Drag and Drop Images or Folders Here</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_table">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QTabWidget" name="tabWidget_files">
+           <widget class="QWidget" name="tabWidget_table_page">
+            <attribute name="title">
+             <string>Images</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="FileTable" name="file_table">
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="dragDropOverwriteMode">
+                <bool>false</bool>
+               </property>
+               <property name="dragDropMode">
+                <enum>QAbstractItemView::NoDragDrop</enum>
+               </property>
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="sortingEnabled">
+                <bool>false</bool>
+               </property>
+               <property name="cornerButtonEnabled">
+                <bool>false</bool>
+               </property>
+               <column>
+                <property name="text">
+                 <string>id</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>File</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Size</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Status</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Output</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -454,7 +515,8 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="action_open_files"/>
+    <addaction name="action_add_files"/>
+    <addaction name="action_add_folders"/>
     <addaction name="action_clear_files"/>
    </widget>
    <widget class="QMenu" name="menu_Profile">
@@ -508,17 +570,19 @@ p, li { white-space: pre-wrap; }
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_open_files">
+  <action name="action_add_files">
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Open Files</string>
+    <string>Add Files...</string>
    </property>
   </action>
   <action name="action_clear_files">
    <property name="icon">
-    <iconset theme="edit-clear-history"/>
+    <iconset theme="edit-clear-history">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Clear Files</string>
@@ -526,7 +590,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_new_profile">
    <property name="icon">
-    <iconset theme="document-new"/>
+    <iconset theme="document-new">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -534,7 +599,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_delete_profile">
    <property name="icon">
-    <iconset theme="edit-delete"/>
+    <iconset theme="edit-delete">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -542,7 +608,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_import_profile">
    <property name="icon">
-    <iconset theme="document-import"/>
+    <iconset theme="document-import">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Import...</string>
@@ -570,7 +637,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_save_profile">
    <property name="icon">
-    <iconset theme="document-save"/>
+    <iconset theme="document-save">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -578,7 +646,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_save_profile_as">
    <property name="icon">
-    <iconset theme="document-save-as"/>
+    <iconset theme="document-save-as">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save as...</string>
@@ -625,6 +694,15 @@ p, li { white-space: pre-wrap; }
     <string>&lt;temp&gt;</string>
    </property>
   </action>
+  <action name="action_add_folders">
+   <property name="icon">
+    <iconset theme="document-open-folder">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Add Folder...</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -636,6 +714,12 @@ p, li { white-space: pre-wrap; }
    <class>CComboBox</class>
    <extends>QComboBox</extends>
    <header>pcleaner.gui.CustomQ.CComboBox</header>
+  </customwidget>
+  <customwidget>
+   <class>CDropFrame</class>
+   <extends>QFrame</extends>
+   <header>pcleaner.gui.CustomQ.CDropFrame</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
