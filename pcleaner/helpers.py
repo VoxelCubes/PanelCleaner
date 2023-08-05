@@ -88,20 +88,22 @@ def discover_all_images(
 
     # Wrap single paths in a list.
     if isinstance(img_paths, str):
-        img_list = [Path(img_paths)]
-        img_paths = []
+        img_paths = [Path(img_paths)]
     elif isinstance(img_paths, Path):
-        img_list = [img_paths]
-        img_paths = []
-
-    # Convert all strings to paths.
-    img_paths = [Path(path) for path in img_paths]
+        img_paths = [img_paths]
+    elif isinstance(img_paths, list):
+        # Convert all strings to paths.
+        img_paths = [Path(path) for path in img_paths]
+    else:
+        raise TypeError(f"Invalid type for img_paths: {type(img_paths)}")
 
     for img_path in img_paths:
         if img_path.is_dir():
             img_list.extend(find_all_images_shallow(img_path, supported_extensions))
         elif img_path.is_file() and img_path.suffix.lower() in supported_extensions:
             img_list.append(img_path)
+        elif img_path.is_file():
+            raise ValueError(f"Unsupported image format: {img_path.suffix} for {img_path}")
         else:
             raise FileNotFoundError(f"Image path {img_path} does not exist.")
 
