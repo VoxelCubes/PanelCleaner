@@ -24,7 +24,6 @@ import pcleaner.gui.new_profile_driver as npd
 
 # noinspection PyUnresolvedReferences
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
-
     config: cfg.Config = None
     # glossary: st.Glossary = None
     processing: bool = False
@@ -76,6 +75,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.file_table.setColumnHidden(Column.ID, True)
         self.file_table.setColumnWidth(Column.FILENAME, 200)
         self.file_table.setColumnWidth(Column.STATUS, 200)
+        self.frame_greeter.drop_signal.connect(self.file_table.dropEvent)
+        self.file_table.table_is_empty.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        self.file_table.table_not_empty.connect(lambda: self.stackedWidget.setCurrentIndex(1))
 
         # Connect signals.
         self.connect_combobox_slots()
