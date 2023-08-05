@@ -150,7 +150,8 @@ class PageData:
         """
         image = Image.open(image_path)
         draw = ImageDraw.Draw(image)
-        font_path = str(resources.path(data, "LiberationSans-Regular.ttf"))
+        with resources.files(data) as data_path:
+            font_path = str(data_path / "LiberationSans-Regular.ttf")
         # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
         font_size = int(image.size[0] / 50)
 
