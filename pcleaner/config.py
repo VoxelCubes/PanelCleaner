@@ -204,7 +204,7 @@ class PreProcessorConfig:
         :param gui_mode: Whether the config is being exported for the GUI.
         """
         config_str = f"""\
-        [PreProcessor]
+        [Preprocessor]
         
         # Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.
         # [CLI: To see these boxes visualized, use the --show-masks flag when cleaning and look inside the cache folder.]
@@ -254,7 +254,7 @@ class PreProcessorConfig:
         """
         preproc_conf = cu.ConfigUpdater()
         preproc_conf.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
-        preproc_section = preproc_conf["PreProcessor"]
+        preproc_section = preproc_conf["Preprocessor"]
         config_updater[add_after_section].add_after.space(2).section(preproc_section.detach())
 
     def import_from_conf(self, config_updater: cu.ConfigUpdater) -> None:
@@ -263,7 +263,7 @@ class PreProcessorConfig:
 
         :param config_updater: An existing config updater object.
         """
-        section = "PreProcessor"
+        section = "Preprocessor"
         if not config_updater.has_section(section):
             logger.info(f"No {section} section found in the profile, using defaults.")
             return
@@ -547,7 +547,7 @@ class Profile:
         self.general.export_to_conf(config_updater, gui_mode=gui_mode)
         self.text_detector.export_to_conf(config_updater, "General", gui_mode=gui_mode)
         self.pre_processor.export_to_conf(config_updater, "TextDetector", gui_mode=gui_mode)
-        self.masker.export_to_conf(config_updater, "PreProcessor", gui_mode=gui_mode)
+        self.masker.export_to_conf(config_updater, "Preprocessor", gui_mode=gui_mode)
         self.denoiser.export_to_conf(config_updater, "Masker", gui_mode=gui_mode)
         return config_updater
 

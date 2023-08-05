@@ -58,7 +58,7 @@ def prep_json_file(
     Analytics data is returned if the manga ocr object is given.
 
     :param json_file_path: Path to the json file.
-    :param pre_processor_conf: Pre processor configuration, part of the profile.
+    :param pre_processor_conf: Preprocessor configuration, part of the profile.
     :param cache_masks: Whether to cache the masks.
     :param mocr: [Optional] Manga ocr object.
     :param cache_masks_ocr: [Optional] Whether to cache the masks early for ocr.
