@@ -68,7 +68,7 @@ class Worker(QRunnable):
     :param kwargs: Keywords to pass to the callback function.
     """
 
-    def __init__(self, fn: Callable, *args, **kwargs):
+    def __init__(self, fn: Callable, *args, no_progress_callback: bool = False, **kwargs):
         QRunnable.__init__(self)
 
         # Store constructor arguments (re-used for processing).
@@ -78,11 +78,8 @@ class Worker(QRunnable):
         self.signals = WorkerSignals()
 
         # Add the callback to our kwargs.
-        if "no_progress_callback" not in kwargs:
+        if not no_progress_callback:
             self.kwargs["progress_callback"] = self.signals.progress
-        else:
-            # Remove the no_progress_callback from kwargs.
-            del self.kwargs["no_progress_callback"]
 
     @Slot()
     def run(self):
