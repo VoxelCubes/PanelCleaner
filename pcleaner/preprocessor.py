@@ -106,7 +106,7 @@ def prep_json_file(
     )
 
     # Draw the boxes on the image and save it.
-    if cache_masks and cache_masks_ocr:
+    if cache_masks or cache_masks_ocr:
         page_data.visualize(Path(page_data.image_path))
 
     # Run OCR to discard small boxes that only contain symbols.
@@ -146,7 +146,7 @@ def prep_json_file(
 
     # Draw the boxes on the image and save it.
     if cache_masks and not cache_masks_ocr:
-        page_data.visualize(Path(page_data.image_path))
+        page_data.visualize(Path(page_data.image_path), final_boxes=True)
 
     return analytics
 

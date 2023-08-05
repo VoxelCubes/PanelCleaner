@@ -138,7 +138,7 @@ class PageData:
         """
         return (box[2] - box[0]) * (box[3] - box[1])
 
-    def visualize(self, image_path: Path, out_dir: Path | None = None):
+    def visualize(self, image_path: Path, out_dir: Path | None = None, final_boxes: bool = False):
         """
         Visualize the boxes on an image.
         Typically, this would be used to check where on the original image the
@@ -147,6 +147,7 @@ class PageData:
         :param image_path: The path to the image to visualize the boxes on.
         :param out_dir: [Optional] The directory to save the visualization to.
             By default, the visualization is saved to the same directory as the image.
+        :param final_boxes: [Optional] Whether this visualization is after OCR.
         """
         image = Image.open(image_path)
         draw = ImageDraw.Draw(image)
@@ -178,7 +179,8 @@ class PageData:
         for box in self.reference_boxes:
             draw.rectangle(box, outline="blue")
         # Save the image.
-        out_path = image_path.with_stem(image_path.stem + "_boxes")
+        extension = "_boxes" if not final_boxes else "_boxes_final"
+        out_path = image_path.with_stem(image_path.stem + extension)
         if out_dir is not None:
             out_dir.mkdir(parents=True, exist_ok=True)
             out_path = out_dir / image_path.name
