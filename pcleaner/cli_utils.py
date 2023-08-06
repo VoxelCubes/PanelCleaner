@@ -85,7 +85,7 @@ def open_file_with_editor(path: Path, configured_opener: str | None) -> None:
             print(f"Configured editor '{opener}' not found. "
                   f"Please open the file manually or configure another program.")
             return
-        # Run and detatch the process, so this one can exit.
+        # Run and detach the process, so this one can exit.
         subprocess.Popen([opener, path], start_new_session=True)
 
         print("If nothing happens, try setting the profile_editor option in the config.")
