@@ -349,7 +349,7 @@ class MaskerConfig:
         
         
         # Whether to use the fast mask selection algorithm.
-        # When true, the mask selection algorith will pick the first perfect mask, if one is found early.
+        # When true, the mask selection algorithm will pick the first perfect mask, if one is found early.
         # This is faster, but may not find the best mask, if a slightly bigger one would have been better.
         mask_selection_fast = {self.mask_selection_fast}
         
