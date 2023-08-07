@@ -6,6 +6,8 @@ from logzero import logger
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
 
+# TODO noise mask doens't have uuid prefix
+
 
 def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     """
