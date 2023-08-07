@@ -181,7 +181,7 @@ class TextDetectorConfig:
 
 
 @dataclass
-class PreProcessorConfig:
+class PreprocessorConfig:
     box_min_size: int = 20 * 20
     suspicious_box_min_size: int = 200 * 200
     ocr_enabled: bool = True
@@ -532,7 +532,7 @@ class Profile:
 
     general: GeneralConfig = field(default_factory=GeneralConfig)
     text_detector: TextDetectorConfig = field(default_factory=TextDetectorConfig)
-    pre_processor: PreProcessorConfig = field(default_factory=PreProcessorConfig)
+    preprocessor: PreprocessorConfig = field(default_factory=PreprocessorConfig)
     masker: MaskerConfig = field(default_factory=MaskerConfig)
     denoiser: DenoiserConfig = field(default_factory=DenoiserConfig)
 
@@ -546,7 +546,7 @@ class Profile:
         config_updater = cu.ConfigUpdater()
         self.general.export_to_conf(config_updater, gui_mode=gui_mode)
         self.text_detector.export_to_conf(config_updater, "General", gui_mode=gui_mode)
-        self.pre_processor.export_to_conf(config_updater, "TextDetector", gui_mode=gui_mode)
+        self.preprocessor.export_to_conf(config_updater, "TextDetector", gui_mode=gui_mode)
         self.masker.export_to_conf(config_updater, "Preprocessor", gui_mode=gui_mode)
         self.denoiser.export_to_conf(config_updater, "Masker", gui_mode=gui_mode)
         return config_updater
@@ -589,7 +589,7 @@ class Profile:
             profile = cls()
             profile.general.import_from_conf(config)
             profile.text_detector.import_from_conf(config)
-            profile.pre_processor.import_from_conf(config)
+            profile.preprocessor.import_from_conf(config)
             profile.masker.import_from_conf(config)
             profile.denoiser.import_from_conf(config)
             profile.fix()
@@ -622,7 +622,7 @@ class Profile:
         """
         self.general.fix()
         self.text_detector.fix()
-        self.pre_processor.fix()
+        self.preprocessor.fix()
         self.masker.fix()
         self.denoiser.fix()
 
