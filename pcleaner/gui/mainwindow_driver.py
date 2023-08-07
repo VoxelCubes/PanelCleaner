@@ -70,18 +70,23 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.initialize_profiles()
         self.initialize_analytics_view()
 
-        # Allow the table to accept file drops and hide the ID column.
+        # Allow the table to accept file drops and hide the PATH column.
         self.file_table.setAcceptDrops(True)
-        self.file_table.setColumnHidden(Column.ID, True)
+        self.file_table.setColumnHidden(Column.PATH, True)
         self.file_table.setColumnWidth(Column.FILENAME, 200)
-        self.file_table.setColumnWidth(Column.STATUS, 200)
+        self.file_table.setColumnWidth(Column.SIZE, 100)
         self.frame_greeter.drop_signal.connect(self.file_table.dropEvent)
         self.file_table.table_is_empty.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         self.file_table.table_not_empty.connect(lambda: self.stackedWidget.setCurrentIndex(1))
+        # Hide the close button for the file table tab.
+        self.image_tab.tabBar().setTabButton(0, Qw.QTabBar.RightSide, None)
 
         # Connect signals.
         self.connect_combobox_slots()
         self.comboBox_current_profile.hookedCurrentIndexChanged.connect(self.change_current_profile)
+        self.action_add_files.triggered.connect(self.file_table.browse_add_files)
+        self.action_add_folders.triggered.connect(self.file_table.browse_add_folders)
+        self.file_table.requesting_image_preview.connect(self.image_tab.open_image)
 
         return
 
@@ -376,12 +381,15 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Set the font to monospace, using the included font.
         # The font is stored in the data module. Noto Mono is a free font.
         # Load it from file to be cross platform.
-        font_path = resources.path(data, "NotoMono-Regular.ttf")
+        with resources.files(data) as data_path:
+            font_path = data_path / "NotoMono-Regular.ttf"
         font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
         if font_id != -1:
             logger.info("Loaded included font")
         else:
-            logger.error(f"Failed to load included font. Using backup monospace font")
+            logger.error(
+                f"Failed to load included font from '{str(font_path)}'. Using backup monospace font"
+            )
         self.textEdit_analytics.setReadOnly(True)
         self.textEdit_analytics.setLineWrapMode(Qw.QTextEdit.NoWrap)
 
@@ -483,7 +491,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 gu.show_warning(self, "Import Error", msg)
                 return
 
-            self.add_new_profile_to_gui(profile_name, file_path)
+            self.add_new_profile_to_gui(profile_name, Path(file_path))
 
     def delete_profile(self):
         """
@@ -590,7 +598,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         dirty = self.toolBox_profile.is_modified()
         self.pushButton_save_profile.setEnabled(dirty)
         self.pushButton_reset_profile.setEnabled(dirty)
-        self.pushButton_apply_profile.setEnabled(dirty)
         self.action_save_profile.setEnabled(dirty)
 
     def reset_profile(self):

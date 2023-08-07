@@ -91,20 +91,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_apply_profile">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Apply</string>
-            </property>
-            <property name="icon">
-             <iconset theme="dialog-ok-apply">
-              <normaloff>.</normaloff>.</iconset>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item>
@@ -179,7 +165,10 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QTabWidget" name="tabWidget_files">
+          <widget class="ImageTab" name="image_tab">
+           <property name="tabsClosable">
+            <bool>true</bool>
+           </property>
            <widget class="QWidget" name="tabWidget_table_page">
             <attribute name="title">
              <string>Images</string>
@@ -719,6 +708,12 @@ p, li { white-space: pre-wrap; }
    <class>CDropFrame</class>
    <extends>QFrame</extends>
    <header>pcleaner.gui.CustomQ.CDropFrame</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ImageTab</class>
+   <extends>QTabWidget</extends>
+   <header>pcleaner.gui.image_tab</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -3,6 +3,7 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, NewType
+from collections import defaultdict
 
 import configupdater as cu
 from logzero import logger
@@ -29,6 +30,29 @@ SUPPORTED_IMG_TYPES = [
     ".ppm",
 ]
 SUPPORTED_MASK_TYPES = [".png", ".bmp", ".tiff", ".tif", ".dib", ".webp", ".ppm"]
+
+# image types:
+# - image-bmp.svg
+# - image-jpeg.svg
+# - image-png.svg
+# - image-tiff.svg
+# - image-x-generic.svg
+SUFFIX_TO_ICON = defaultdict(lambda: "image-x-generic.svg")
+SUFFIX_TO_ICON.update(
+    {
+        ".bmp": "image-bmp",
+        ".jpeg": "image-jpeg",
+        ".jpg": "image-jpeg",
+        ".png": "image-png",
+        ".tiff": "image-tiff",
+        ".tif": "image-tiff",
+        ".jp2": "image-jpeg",
+        ".dib": "image-x-generic",
+        ".webp": "image-x-generic",
+        ".ppm": "image-x-generic",
+    }
+)
+
 
 # Create a dummy type to signify numbers need to be greater than 0.
 GreaterZero = NewType("GreaterZero", int)

@@ -21,12 +21,13 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QForm
     QLabel, QLineEdit, QMainWindow, QMenu,
     QMenuBar, QProgressBar, QPushButton, QRadioButton,
     QSizePolicy, QSpacerItem, QSplitter, QStackedWidget,
-    QStatusBar, QTabWidget, QTableWidgetItem, QTextEdit,
-    QVBoxLayout, QWidget)
+    QStatusBar, QTableWidgetItem, QTextEdit, QVBoxLayout,
+    QWidget)
 
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
 from pcleaner.gui.CustomQ.CDropFrame import CDropFrame
 from pcleaner.gui.file_table import FileTable
+from pcleaner.gui.image_tab import ImageTab
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -185,20 +186,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.pushButton_reset_profile)
 
-        self.pushButton_apply_profile = QPushButton(self.groupBox)
-        self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
-        self.pushButton_apply_profile.setEnabled(False)
-        icon9 = QIcon()
-        iconThemeName = u"dialog-ok-apply"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon9 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon9.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
-        self.pushButton_apply_profile.setIcon(icon9)
-
-        self.horizontalLayout_2.addWidget(self.pushButton_apply_profile)
-
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
@@ -242,8 +229,9 @@ class Ui_MainWindow(object):
         self.verticalLayout = QVBoxLayout(self.page_table)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.tabWidget_files = QTabWidget(self.page_table)
-        self.tabWidget_files.setObjectName(u"tabWidget_files")
+        self.image_tab = ImageTab(self.page_table)
+        self.image_tab.setObjectName(u"image_tab")
+        self.image_tab.setTabsClosable(True)
         self.tabWidget_table_page = QWidget()
         self.tabWidget_table_page.setObjectName(u"tabWidget_table_page")
         self.verticalLayout_3 = QVBoxLayout(self.tabWidget_table_page)
@@ -276,9 +264,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.file_table)
 
-        self.tabWidget_files.addTab(self.tabWidget_table_page, "")
+        self.image_tab.addTab(self.tabWidget_table_page, "")
 
-        self.verticalLayout.addWidget(self.tabWidget_files)
+        self.verticalLayout.addWidget(self.image_tab)
 
         self.stackedWidget.addWidget(self.page_table)
         self.splitter.addWidget(self.stackedWidget)
@@ -323,27 +311,27 @@ class Ui_MainWindow(object):
 
         self.pushButton_start = QPushButton(self.groupBox_4)
         self.pushButton_start.setObjectName(u"pushButton_start")
-        icon10 = QIcon()
+        icon9 = QIcon()
         iconThemeName = u"media-playback-start"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon10 = QIcon.fromTheme(iconThemeName)
+            icon9 = QIcon.fromTheme(iconThemeName)
         else:
-            icon10.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon9.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_start.setIcon(icon10)
+        self.pushButton_start.setIcon(icon9)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
 
         self.pushButton_abort = QPushButton(self.groupBox_4)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon11 = QIcon()
+        icon10 = QIcon()
         iconThemeName = u"process-stop"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon11 = QIcon.fromTheme(iconThemeName)
+            icon10 = QIcon.fromTheme(iconThemeName)
         else:
-            icon11.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon10.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_abort.setIcon(icon11)
+        self.pushButton_abort.setIcon(icon10)
 
         self.verticalLayout_7.addWidget(self.pushButton_abort)
 
@@ -540,7 +528,6 @@ class Ui_MainWindow(object):
 
         self.pushButton_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.pushButton_reset_profile.setText(QCoreApplication.translate("MainWindow", u"Reset All", None))
-        self.pushButton_apply_profile.setText(QCoreApplication.translate("MainWindow", u"Apply", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Drag and Drop Images or Folders Here", None))
         ___qtablewidgetitem = self.file_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"id", None));
@@ -552,7 +539,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Status", None));
         ___qtablewidgetitem4 = self.file_table.horizontalHeaderItem(4)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Output", None));
-        self.tabWidget_files.setTabText(self.tabWidget_files.indexOf(self.tabWidget_table_page), QCoreApplication.translate("MainWindow", u"Images", None))
+        self.image_tab.setTabText(self.image_tab.indexOf(self.tabWidget_table_page), QCoreApplication.translate("MainWindow", u"Images", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))
         self.radioButton_ocr.setText(QCoreApplication.translate("MainWindow", u"OCR", None))
