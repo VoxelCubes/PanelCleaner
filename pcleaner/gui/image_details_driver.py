@@ -61,14 +61,37 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 "path_initial_boxes",
                 "The outlines of the text boxes the AI found.",
             ],
-            self.pushButton_final_boxes: ["path_final_boxes", "Temp Descriptions"],
-            self.pushButton_box_mask: ["path_box_mask", "Temp Descriptions"],
-            self.pushButton_cut_mask: ["path_cut_mask", "Temp Descriptions"],
-            self.pushButton_mask_layers: ["path_mask_layers", "Temp Descriptions"],
-            self.pushButton_final_mask: ["path_final_mask", "Temp Descriptions"],
-            self.pushButton_output_masked: ["path_masked_image", "Temp Descriptions"],
-            self.pushButton_denoise_mask: ["path_denoiser_mask", "Temp Descriptions"],
-            self.pushButton_denoised_output: ["path_denoised_image", "Temp Descriptions"],
+            self.pushButton_final_boxes: [
+                "path_final_boxes",
+                "The final boxes after expanding, merging and filtering unneeded boxes with OCR.\n"
+                "Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. "
+                "Blue: reference boxes for denoising.",
+            ],
+            self.pushButton_box_mask: ["path_box_mask", "The mask of the merged boxes."],
+            self.pushButton_cut_mask: [
+                "path_cut_mask",
+                "The rough text detection mask with everything outside the box mask cut out.",
+            ],
+            self.pushButton_mask_layers: [
+                "path_mask_layers",
+                "The different steps of growth around the cut mask displayed in different colors.",
+            ],
+            self.pushButton_final_mask: [
+                "path_final_mask",
+                "The collection of masks for each bubble that fit best.",
+            ],
+            self.pushButton_output_masked: [
+                "path_masked_image",
+                "The input image with the final mask overlaid in color.",
+            ],
+            self.pushButton_denoise_mask: [
+                "path_denoiser_mask",
+                "The final mask overlaid on a denoised portion of the original image.",
+            ],
+            self.pushButton_denoised_output: [
+                "path_denoised_image",
+                "The original image with the denoised mask applied.",
+            ],
         }
 
     def init_sidebar(self):
