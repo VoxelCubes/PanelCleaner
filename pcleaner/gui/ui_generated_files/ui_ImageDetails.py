@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'ImageDetails.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.1
+## Created by: Qt User Interface Compiler version 6.5.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -20,6 +20,7 @@ from PySide6.QtWidgets import (QApplication, QFrame, QGraphicsView, QHBoxLayout,
     QSizePolicy, QSpacerItem, QStackedWidget, QVBoxLayout,
     QWidget)
 
+from pcleaner.gui.CustomQ.CElidedLabel import CElidedLabel
 from pcleaner.gui.image_viewer import ImageViewer
 
 class Ui_ImageDetails(object):
@@ -239,14 +240,17 @@ class Ui_ImageDetails(object):
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(6, 4, 4, 4)
-        self.label_file_name = QLabel(ImageDetails)
+        self.label_file_name = CElidedLabel(ImageDetails)
         self.label_file_name.setObjectName(u"label_file_name")
+        sizePolicy2 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.label_file_name.sizePolicy().hasHeightForWidth())
+        self.label_file_name.setSizePolicy(sizePolicy2)
+        self.label_file_name.setFrameShape(QFrame.NoFrame)
+        self.label_file_name.setFrameShadow(QFrame.Raised)
 
         self.horizontalLayout.addWidget(self.label_file_name)
-
-        self.horizontalSpacer = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout.addItem(self.horizontalSpacer)
 
         self.pushButton_export = QPushButton(ImageDetails)
         self.pushButton_export.setObjectName(u"pushButton_export")
@@ -329,11 +333,11 @@ class Ui_ImageDetails(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.image_viewer = ImageViewer(self.page_viewer)
         self.image_viewer.setObjectName(u"image_viewer")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.image_viewer.sizePolicy().hasHeightForWidth())
-        self.image_viewer.setSizePolicy(sizePolicy2)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.image_viewer.sizePolicy().hasHeightForWidth())
+        self.image_viewer.setSizePolicy(sizePolicy3)
         self.image_viewer.setFrameShape(QFrame.NoFrame)
         self.image_viewer.setFrameShadow(QFrame.Plain)
         self.image_viewer.setTransformationAnchor(QGraphicsView.AnchorUnderMouse)
@@ -360,36 +364,43 @@ class Ui_ImageDetails(object):
         self.horizontalLayout_4.setContentsMargins(6, 4, 4, 4)
         self.label_step = QLabel(ImageDetails)
         self.label_step.setObjectName(u"label_step")
+        sizePolicy2.setHeightForWidth(self.label_step.sizePolicy().hasHeightForWidth())
+        self.label_step.setSizePolicy(sizePolicy2)
+        self.label_step.setWordWrap(True)
 
         self.horizontalLayout_4.addWidget(self.label_step)
 
-        self.horizontalSpacer_2 = QSpacerItem(20, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_4.addItem(self.horizontalSpacer_2)
-
-        self.label_position_label = QLabel(ImageDetails)
+        self.widget_footer_info = QWidget(ImageDetails)
+        self.widget_footer_info.setObjectName(u"widget_footer_info")
+        self.horizontalLayout_5 = QHBoxLayout(self.widget_footer_info)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label_position_label = QLabel(self.widget_footer_info)
         self.label_position_label.setObjectName(u"label_position_label")
 
-        self.horizontalLayout_4.addWidget(self.label_position_label)
+        self.horizontalLayout_5.addWidget(self.label_position_label)
 
-        self.label_position = QLabel(ImageDetails)
+        self.label_position = QLabel(self.widget_footer_info)
         self.label_position.setObjectName(u"label_position")
 
-        self.horizontalLayout_4.addWidget(self.label_position)
+        self.horizontalLayout_5.addWidget(self.label_position)
 
-        self.horizontalSpacer_3 = QSpacerItem(10, 10, QSizePolicy.Minimum, QSizePolicy.Minimum)
+        self.horizontalSpacer_footer = QSpacerItem(13, 13, QSizePolicy.Minimum, QSizePolicy.Minimum)
 
-        self.horizontalLayout_4.addItem(self.horizontalSpacer_3)
+        self.horizontalLayout_5.addItem(self.horizontalSpacer_footer)
 
-        self.label_size_label = QLabel(ImageDetails)
+        self.label_size_label = QLabel(self.widget_footer_info)
         self.label_size_label.setObjectName(u"label_size_label")
 
-        self.horizontalLayout_4.addWidget(self.label_size_label)
+        self.horizontalLayout_5.addWidget(self.label_size_label)
 
-        self.label_size = QLabel(ImageDetails)
+        self.label_size = QLabel(self.widget_footer_info)
         self.label_size.setObjectName(u"label_size")
 
-        self.horizontalLayout_4.addWidget(self.label_size)
+        self.horizontalLayout_5.addWidget(self.label_size)
+
+
+        self.horizontalLayout_4.addWidget(self.widget_footer_info)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout_4)
@@ -433,7 +444,6 @@ class Ui_ImageDetails(object):
         self.pushButton_denoise_mask.setText("")
         self.label_14.setText(QCoreApplication.translate("ImageDetails", u"Denoised Output", None))
         self.pushButton_denoised_output.setText("")
-        self.label_file_name.setText(QCoreApplication.translate("ImageDetails", u"<File name>", None))
         self.pushButton_export.setText(QCoreApplication.translate("ImageDetails", u"Export", None))
         self.pushButton_refresh.setText(QCoreApplication.translate("ImageDetails", u"Refresh", None))
 #if QT_CONFIG(tooltip)

@@ -100,6 +100,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         """
         self.label_file_name.setText(self.image_obj.path.name)
         self.label_file_name.setToolTip(str(self.image_obj.path))
+        self.label_file_name.setElideMode(Qc.Qt.ElideLeft)
 
         self.pushButton_zoom_in.clicked.connect(self.image_viewer.zoom_in)
         self.pushButton_zoom_out.clicked.connect(self.image_viewer.zoom_out)
@@ -167,10 +168,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         if image_path is None:
             # Clear whatever image is currently shown.
             self.image_viewer.set_image(None)
-            self.label_size.setText("")
             self.label_position.setText("")
-            self.label_size_label.hide()
-            self.label_position_label.hide()
+            self.widget_footer_info.hide()
             self.stackedWidget.setCurrentWidget(self.page_no_image)
         else:
             try:
@@ -179,8 +178,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                     f"{self.image_viewer.image_dimensions[0]} × {self.image_viewer.image_dimensions[1]}"
                 )
                 self.image_viewer.mouseMoved.connect(self.update_position_label)
-                self.label_size_label.show()
-                self.label_position_label.show()
+                self.widget_footer_info.show()
                 self.stackedWidget.setCurrentWidget(self.page_viewer)
             except OSError as e:
                 logger.error(f"Image at {image_path} does not exist. {e}")
