@@ -9,7 +9,6 @@ class CElidedLabel(Qw.QFrame):
 
     def __init__(self, text, parent=None):
         super(CElidedLabel, self).__init__(parent)
-        logger.debug(f"CElidedLabel.__init__({text})")
 
         self._elided = False
         self._content = text
