@@ -44,7 +44,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-147</y>
         <width>138</width>
         <height>943</height>
        </rect>
@@ -333,6 +333,26 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>Output Overlay</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_output_overlay">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="label_11">
             <property name="text">
              <string>Masked Output</string>
@@ -465,6 +485,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_export">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Export</string>
          </property>
@@ -476,6 +499,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_refresh">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Refresh</string>
          </property>

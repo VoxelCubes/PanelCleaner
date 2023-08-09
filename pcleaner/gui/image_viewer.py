@@ -5,7 +5,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtCore as Qc
 from logzero import logger
 
-import pcleaner.gui.structures as st
+import pcleaner.gui.image_file as st
 import pcleaner.gui.gui_utils as gu
 
 ZOOM_TICK_FACTOR = 1.25
@@ -36,7 +36,7 @@ class ImageViewer(Qw.QGraphicsView):
     def pixmap_valid(self):
         return self.image_item is not None and self.image_item.pixmap().isNull()
 
-    def set_image(self, image_path=None):
+    def set_image(self, image_path: Path = None):
         if image_path:
             self.image_item = Qw.QGraphicsPixmapItem()
             self.scene.addItem(self.image_item)
@@ -44,7 +44,7 @@ class ImageViewer(Qw.QGraphicsView):
             # origin (0, 0).
             self.image_item.setOffset(-0.5, -0.5)
 
-            image = Qg.QImage(image_path)
+            image = Qg.QImage(str(image_path))
             pixmap = Qg.QPixmap.fromImage(image)
             self.image_item.setPixmap(pixmap)
             self.setSceneRect(pixmap.rect())

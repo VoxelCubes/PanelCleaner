@@ -13,7 +13,7 @@ from natsort import natsorted
 
 import pcleaner.config as cfg
 from .CustomQ.CTableWidget import CTableWidget
-import pcleaner.gui.structures as st
+import pcleaner.gui.image_file as st
 import pcleaner.helpers as hp
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.worker_thread as wt

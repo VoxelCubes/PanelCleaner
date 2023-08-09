@@ -1,6 +1,6 @@
 import re
 import sys
-from dataclasses import dataclass, field
+from attrs import define, field
 from pathlib import Path
 from typing import Any, NewType
 from collections import defaultdict
@@ -58,7 +58,7 @@ SUFFIX_TO_ICON.update(
 GreaterZero = NewType("GreaterZero", int)
 
 
-@dataclass
+@define
 class GeneralConfig:
     preferred_file_type: str | None = None
     preferred_mask_file_type: str = ".png"
@@ -141,7 +141,7 @@ class GeneralConfig:
             self.preferred_mask_file_type = closest
 
 
-@dataclass
+@define
 class TextDetectorConfig:
     model_path: str | None = None
     concurrent_models: int | GreaterZero = 1
@@ -204,7 +204,7 @@ class TextDetectorConfig:
                 self.model_path = None
 
 
-@dataclass
+@define
 class PreprocessorConfig:
     box_min_size: int = 20 * 20
     suspicious_box_min_size: int = 200 * 200
@@ -325,7 +325,7 @@ class PreprocessorConfig:
             self.box_reference_padding = 0
 
 
-@dataclass
+@define
 class MaskerConfig:
     mask_growth_step_pixels: int | GreaterZero = 2
     mask_growth_steps: int = 11
@@ -438,7 +438,7 @@ class MaskerConfig:
         self.debug_mask_color = tuple(max(0, min(255, x)) for x in self.debug_mask_color)
 
 
-@dataclass
+@define
 class DenoiserConfig:
     denoising_enabled: bool = True
     noise_min_standard_deviation: float = 0.25
@@ -548,17 +548,17 @@ class DenoiserConfig:
             self.search_window_size = 0
 
 
-@dataclass
+@define
 class Profile:
     """
     A profile is a collection of settings that can be saved and loaded from disk.
     """
 
-    general: GeneralConfig = field(default_factory=GeneralConfig)
-    text_detector: TextDetectorConfig = field(default_factory=TextDetectorConfig)
-    preprocessor: PreprocessorConfig = field(default_factory=PreprocessorConfig)
-    masker: MaskerConfig = field(default_factory=MaskerConfig)
-    denoiser: DenoiserConfig = field(default_factory=DenoiserConfig)
+    general: GeneralConfig = field(factory=GeneralConfig)
+    text_detector: TextDetectorConfig = field(factory=TextDetectorConfig)
+    preprocessor: PreprocessorConfig = field(factory=PreprocessorConfig)
+    masker: MaskerConfig = field(factory=MaskerConfig)
+    denoiser: DenoiserConfig = field(factory=DenoiserConfig)
 
     def bundle_config(self, gui_mode: bool = False) -> cu.ConfigUpdater:
         """
@@ -651,7 +651,7 @@ class Profile:
         self.denoiser.fix()
 
 
-@dataclass
+@define
 class Config:
     """
     The main configuration class.
@@ -661,9 +661,9 @@ class Config:
     profile_editor: The program to use to edit the profile files. When blank, the default editor is used.
     """
 
-    current_profile: Profile = field(default_factory=Profile)
+    current_profile: Profile = field(factory=Profile)
     default_profile: str | None = None
-    saved_profiles: dict[str, Path] = field(default_factory=dict)
+    saved_profiles: dict[str, Path] = field(factory=dict)
     profile_editor: str | None = None
     cache_dir: Path | None = None
     default_torch_model_path: Path | None = None  # CUDA

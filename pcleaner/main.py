@@ -120,7 +120,7 @@ from natsort import natsorted
 import torch
 
 from pcleaner import __version__
-import pcleaner.masker as cl
+import pcleaner.masker as ma
 import pcleaner.config as cfg
 import pcleaner.cli_utils as cli
 import pcleaner.preprocessor as pp
@@ -391,7 +391,7 @@ def run_cleaner(
 
         masker_analytics_raw = []
         with Pool() as pool:
-            for analytic in tqdm(pool.imap(cl.clean_page, data), total=len(data)):
+            for analytic in tqdm(pool.imap(ma.clean_page, data), total=len(data)):
                 masker_analytics_raw.extend(analytic)
 
         if not hide_analytics and masker_analytics_raw:

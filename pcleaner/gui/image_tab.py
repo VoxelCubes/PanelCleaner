@@ -3,7 +3,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Signal, Slot
 
-import pcleaner.gui.structures as st
+import pcleaner.gui.image_file as st
 import pcleaner.gui.image_details_driver as idd
 
 from logzero import logger

@@ -42,7 +42,7 @@ class Ui_ImageDetails(object):
         self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 138, 943))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -147, 138, 943))
         self.horizontalLayout_2 = QHBoxLayout(self.scrollAreaWidgetContents)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setSizeConstraint(QLayout.SetMinimumSize)
@@ -181,6 +181,18 @@ class Ui_ImageDetails(object):
 
         self.sidebar_layout.addWidget(self.pushButton_final_mask)
 
+        self.label_16 = QLabel(self.widget)
+        self.label_16.setObjectName(u"label_16")
+
+        self.sidebar_layout.addWidget(self.label_16)
+
+        self.pushButton_output_overlay = QPushButton(self.widget)
+        self.pushButton_output_overlay.setObjectName(u"pushButton_output_overlay")
+        self.pushButton_output_overlay.setCheckable(True)
+        self.pushButton_output_overlay.setAutoExclusive(True)
+
+        self.sidebar_layout.addWidget(self.pushButton_output_overlay)
+
         self.label_11 = QLabel(self.widget)
         self.label_11.setObjectName(u"label_11")
 
@@ -254,6 +266,7 @@ class Ui_ImageDetails(object):
 
         self.pushButton_export = QPushButton(ImageDetails)
         self.pushButton_export.setObjectName(u"pushButton_export")
+        self.pushButton_export.setEnabled(False)
         icon = QIcon()
         iconThemeName = u"document-save"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -267,6 +280,7 @@ class Ui_ImageDetails(object):
 
         self.pushButton_refresh = QPushButton(ImageDetails)
         self.pushButton_refresh.setObjectName(u"pushButton_refresh")
+        self.pushButton_refresh.setEnabled(False)
         icon1 = QIcon()
         iconThemeName = u"view-refresh"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -437,6 +451,8 @@ class Ui_ImageDetails(object):
         self.pushButton_mask_layers.setText("")
         self.label_10.setText(QCoreApplication.translate("ImageDetails", u"Final Mask", None))
         self.pushButton_final_mask.setText("")
+        self.label_16.setText(QCoreApplication.translate("ImageDetails", u"Output Overlay", None))
+        self.pushButton_output_overlay.setText("")
         self.label_11.setText(QCoreApplication.translate("ImageDetails", u"Masked Output", None))
         self.pushButton_output_masked.setText("")
         self.label_12.setText(QCoreApplication.translate("ImageDetails", u"Denoiser", None))
