@@ -11,13 +11,12 @@ from pcleaner.gui.ui_generated_files.ui_ImageDetails import Ui_ImageDetails
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.gui_utils as gu
 
+# TODO slap a bunch of right aligned labels next to the step names to indicate that thez need to be refreshed.
+# when the last checksum is none, ignore, as they were never even generated.
+# Or maybe as a badge, drawing a square with the accent color underneath???
 
 THUMBNAIL_SIZE = 180, 180
 PUSHBUTTON_THUMBNAIL_MARGIN = 16
-
-# The index of the attribute name and description in the button map tuple.
-ATTR_NAME = 0
-DESCRIPTION = 1
 
 
 class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
@@ -28,7 +27,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     image_obj: imf.ImageFile  # The image object to show.
     current_image_path: Path | None  # The path of the image currently shown.
 
-    button_map: dict[Qw.QPushButton, str]  # Map buttons to the file object step name.
+    button_map: dict[Qw.QPushButton, imf.Step]
 
     def __init__(self, parent=None, image_obj: imf.ImageFile = None):
         """
@@ -52,20 +51,20 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.load_all_image_thumbnails()
         self.pushButton_input.click()
 
-    def init_button_map(self) -> dict[Qw.QPushButton, str]:
+    def init_button_map(self) -> dict[Qw.QPushButton, imf.Step]:
         return {
-            self.pushButton_input: "step_input",
-            self.pushButton_text_detection: "step_ai_mask",
-            self.pushButton_initial_boxes: "step_initial_boxes",
-            self.pushButton_final_boxes: "step_final_boxes",
-            self.pushButton_box_mask: "step_box_mask",
-            self.pushButton_cut_mask: "step_cut_mask",
-            self.pushButton_mask_layers: "step_mask_layers",
-            self.pushButton_final_mask: "step_final_mask",
-            self.pushButton_output_overlay: "step_mask_overlay",
-            self.pushButton_output_masked: "step_masked_image",
-            self.pushButton_denoise_mask: "step_denoiser_mask",
-            self.pushButton_denoised_output: "step_denoised_image",
+            self.pushButton_input: imf.Step.input,
+            self.pushButton_text_detection: imf.Step.ai_mask,
+            self.pushButton_initial_boxes: imf.Step.initial_boxes,
+            self.pushButton_final_boxes: imf.Step.final_boxes,
+            self.pushButton_box_mask: imf.Step.box_mask,
+            self.pushButton_cut_mask: imf.Step.cut_mask,
+            self.pushButton_mask_layers: imf.Step.mask_layers,
+            self.pushButton_final_mask: imf.Step.final_mask,
+            self.pushButton_output_overlay: imf.Step.mask_overlay,
+            self.pushButton_output_masked: imf.Step.masked_image,
+            self.pushButton_denoise_mask: imf.Step.denoiser_mask,
+            self.pushButton_denoised_output: imf.Step.denoised_image,
         }
 
     def init_sidebar(self):
@@ -121,8 +120,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         """
         Load all the images into the buttons.
         """
-        for button, attr_name in self.button_map.items():
-            step = self.image_obj.__getattribute__(attr_name)
+        for button, step_type in self.button_map.items():
+            step = self.image_obj.steps[step_type]
             if step.path is not None:
                 try:
                     button.setIcon(Qg.QIcon(str(step.path)))
@@ -137,7 +136,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         :param button: The button that was clicked.
         """
-        step: imf.ProcessStep = self.image_obj.__getattribute__(self.button_map[button])
+        step: imf.ProcessStep = self.image_obj.steps[self.button_map[button]]
         self.label_step.setText(step.description)
         self.current_image_path = step.path
         if not step.has_path():
