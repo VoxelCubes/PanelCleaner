@@ -1,6 +1,6 @@
-import colorsys
 from pathlib import Path
 from typing import Generator
+from itertools import cycle
 
 import numpy as np
 import cv2
@@ -116,20 +116,22 @@ def visualize_mask_fitments(
     # Don't modify the original image.
     base_image = base_image.copy()
 
-    # Generate colors for each mask.
-    hues = map(lambda i: (0.15 * i) % 1, range(len(masks)))
-
     # Convert the hues to RGB tuples and scale the values to the range [0, 255]
-    colors = (
-        (int(r * 255), int(g * 255), int(b * 255), 255)
-        for r, g, b in (colorsys.hsv_to_rgb(hue, 1.0, 1.0) for hue in hues)
+    color_tuple = (
+        (255, 0, 0, 255),  # Red
+        (0, 255, 0, 255),  # Green
+        (0, 0, 255, 255),  # Blue
+        (255, 0, 255, 255),  # Magenta
+        (255, 255, 0, 255),  # Yellow
+        (128, 0, 255, 255),  # Purple
+        (0, 255, 255, 255),  # Cyan
+        (255, 128, 0, 255),  # Orange
     )
+    colors = cycle(color_tuple)
 
     # Make each a different color, then overlay them all on top of each other.
     # Flip the order of the masks, so the largest mask comes first and the rest get pasted on top of it.
-    colored_masks = (
-        apply_debug_filter_to_mask(mask, color) for mask, color in zip(reversed(masks), colors)
-    )
+    colored_masks = (apply_debug_filter_to_mask(mask, next(colors)) for mask in reversed(masks))
 
     # Combine the masks.
     combined_mask = Image.new("RGBA", base_image.size)
