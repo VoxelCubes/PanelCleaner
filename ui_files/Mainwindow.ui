@@ -369,7 +369,7 @@
              <item>
               <widget class="QCheckBox" name="checkBox_save_text">
                <property name="text">
-                <string>Extracted Text</string>
+                <string>Isolated Text</string>
                </property>
               </widget>
              </item>
@@ -497,7 +497,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1701</width>
-     <height>34</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
