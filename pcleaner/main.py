@@ -336,7 +336,7 @@ def run_cleaner(
 
     if not skip_pre_processing:
         # Flush it so it shows up before the progress bar.
-        print("Running box data Pre-Processor...", flush=True)
+        print("Running box data Preprocessor...", flush=True)
         # Make sure it actually flushes at all costs = wait 100 ms.
         # (It takes several seconds to load the ocr model, so this is fine.)
         time.sleep(0.1)
