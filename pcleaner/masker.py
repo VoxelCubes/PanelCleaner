@@ -26,7 +26,7 @@ def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
     original_img_path_as_png = original_path.with_suffix(
         ".png"
     )  # Make sure all derived file names are .png.
-    # Clobber protection prefixes have the form "[A-Z]{4}-\d+_file name", ex. JMCF-0_0023.json
+    # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json
     clobber_protection_prefix = m_data.json_path.stem.split("_")[0]
     cache_out_path = (
         m_data.cache_dir / f"{clobber_protection_prefix}_{original_img_path_as_png.name}"
@@ -108,18 +108,26 @@ def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
         mask_fitments,
     )
 
+    # Check if we can quit early because we don't need to save the cleaned image if we'll be denoising afterwards.
+    if m_data.output_dir is None and not m_data.show_masks:
+        return analytics
+
+    # Carry on with creating the cleaned image.
+
+    # If the scale isn't 1, then we need to reload the original image and scale the mask to fit.
+    if page_data.scale != 1:
+        cleaned_image = Image.open(page_data.original_path)
+        combined_mask = combined_mask.resize(cleaned_image.size, Image.NEAREST)
+    else:
+        cleaned_image = base_image.copy()
+
+    cleaned_image.paste(combined_mask, (0, 0), combined_mask)
+
+    save_mask(cleaned_image, "_clean")
+
     # Settle on the final output path for the cleaned image.
     # Check if outputting directly.
     if m_data.output_dir is not None:
-        # If the scale isn't 1, then we need to reload the original image and scale the mask to fit.
-        if page_data.scale != 1:
-            cleaned_image = Image.open(page_data.original_path)
-            combined_mask = combined_mask.resize(cleaned_image.size, Image.NEAREST)
-        else:
-            cleaned_image = base_image.copy()
-
-        cleaned_image.paste(combined_mask, (0, 0), combined_mask)
-
         if m_data.output_dir.is_absolute():
             final_out_path = m_data.output_dir / original_img_path_as_png.name
         else:
