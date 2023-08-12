@@ -437,7 +437,11 @@ def run_cleaner(
 
 
 def run_ocr(
-    config: cfg.Config, image_paths: list[Path], output_path: str | None, cache_masks: bool, csv: bool
+    config: cfg.Config,
+    image_paths: list[Path],
+    output_path: str | None,
+    cache_masks: bool,
+    csv: bool,
 ):
     """
     Run OCR on the given images. This is a byproduct of the pre-processing step,
@@ -506,7 +510,6 @@ def run_ocr(
         if ocr_analytic:
             ocr_analytics.append(ocr_analytic)
 
-    text = ""
     print("\nDetected Text:")
     # Output the OCRed text from the analytics.
     # Format of the analytics:
@@ -522,18 +525,27 @@ def run_ocr(
         # Sort by path.
         path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
 
+    text = ""
     if csv:
         text += "filename,startx,starty,endx,endy,text\n"
 
         for path, bubble, pos in path_texts_coords:
             pos = ",".join(str(a) for a in pos)
+            path = str(path)
+            # Escape commas where necessary.
+            if "," in path:
+                path = f'"{path}"'
+
+            if "," in bubble:
+                bubble = f'"{bubble}"'
+
             if "\n" in bubble:
                 logger.warning(f"Detected newline in bubble: {path} {bubble} {pos}")
-            else:
-                text += f"{path},{pos},{bubble}\n"
+                bubble = bubble.replace("\n", "\\n")
+
+            text += f"{path},{pos},{bubble}\n"
     else:
-        
-        # Place the file path on it's own line, and only if it's different from the previous one.=
+        # Place the file path on it's own line, and only if it's different from the previous one.
         current_path = ""
         for path, bubble, _ in path_texts_coords:
             if path != current_path:
