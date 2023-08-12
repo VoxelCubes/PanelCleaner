@@ -10,7 +10,7 @@ Usage:
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
     pcleaner gui_work_in_progress [<image_path> ...] [--debug]
-    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--cache-masks] [--debug]
+    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--cache-masks] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
     pcleaner load models [--cuda | --cpu | --both] [--force]
@@ -73,6 +73,7 @@ Options:
     <profile_path>                  The path to the profile file to add.
     <profile_name>                  The saved name of the profile to open, delete, or set as default.
     --output-path=<output_path>     The path to save the OCR output file to.
+    --csv                           Save the output of the OCR as a CSV file
     --cuda                          Load the torch models that support CUDA. They will only be used if supported.
     --cpu                           Load the open cv2 models that are optimized for CPU.
                                     They will only be used as a fallback, unless specified in the config.
@@ -185,7 +186,7 @@ def main():
         config = cfg.load_config()
         # Ignore the rejected tiff list, as those are already visible in CLI mode.
         image_paths, _ = hp.discover_all_images(args.image_path, cfg.SUPPORTED_IMG_TYPES)
-        run_ocr(config, image_paths, args.output_path, cache_masks=args.cache_masks)
+        run_ocr(config, image_paths, args.output_path, args.cache_masks, args.csv)
 
     elif args.cache and args.clear:
         config = cfg.load_config()
@@ -436,7 +437,11 @@ def run_cleaner(
 
 
 def run_ocr(
-    config: cfg.Config, image_paths: list[Path], output_path: str | None, cache_masks: bool
+    config: cfg.Config,
+    image_paths: list[Path],
+    output_path: str | None,
+    cache_masks: bool,
+    csv: bool,
 ):
     """
     Run OCR on the given images. This is a byproduct of the pre-processing step,
@@ -446,6 +451,7 @@ def run_ocr(
     :param image_paths: The images to run OCR on.
     :param output_path: The path to output the results to.
     :param cache_masks: Whether to cache the masks.
+    :param csv: Whether to output CSV data
     """
     cache_dir = config.get_cleaner_cache_dir()
     profile = config.current_profile
@@ -504,36 +510,55 @@ def run_ocr(
         if ocr_analytic:
             ocr_analytics.append(ocr_analytic)
 
-    # Output the OCRed text from the analytics. Format: (path, removed text)
-    # The previous 3 columns are box coordinates, which are not needed here.
-    path_and_texts: list[tuple[str, str]] = list(
+    print("\nDetected Text:")
+    # Output the OCRed text from the analytics.
+    # Format of the analytics:
+    # number of boxes | sizes of all boxes | sizes of boxes that were OCRed | path to image, text, box coordinates
+    # We do not need to show the first three columns, so we simplify the data structure.
+    path_texts_coords: list[tuple[str, str], tuple[int, int, int, int]] = list(
         itertools.chain.from_iterable(a[3] for a in ocr_analytics)
     )
-
-    if path_and_texts:
-        paths, texts = zip(*path_and_texts)
+    if path_texts_coords:
+        paths, texts, boxes = zip(*path_texts_coords)
         paths = hp.trim_prefix_from_paths([Path(p) for p in paths])
-        path_and_texts = list(zip(paths, texts))
+        path_texts_coords = list(zip(paths, texts, boxes))
         # Sort by path.
-        path_and_texts = natsorted(path_and_texts, key=lambda x: x[0])
+        path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
 
-    print("\nDetected Text:")
-    # text = "\n".join(f"{path}: {text}" for path, text in removed_texts)
-    # Place the file path on it's own line, and only if it's different from the previous one.
     text = ""
-    current_path = ""
-    for path, bubble in path_and_texts:
-        if path != current_path:
-            text += f"\n\n{path}: "
-            current_path = path
-        text += f"\n{bubble}"
-        if "\n" in bubble:
-            logger.warning(f"Detected newline in bubble: {path} {bubble}")
-    text = text.strip()  # Remove the leading newline.
+    if csv:
+        text += "filename,startx,starty,endx,endy,text\n"
+
+        for path, bubble, pos in path_texts_coords:
+            pos = ",".join(str(a) for a in pos)
+            path = str(path)
+            # Escape commas where necessary.
+            if "," in path:
+                path = f'"{path}"'
+
+            if "," in bubble:
+                bubble = f'"{bubble}"'
+
+            if "\n" in bubble:
+                logger.warning(f"Detected newline in bubble: {path} {bubble} {pos}")
+                bubble = bubble.replace("\n", "\\n")
+
+            text += f"{path},{pos},{bubble}\n"
+    else:
+        # Place the file path on it's own line, and only if it's different from the previous one.
+        current_path = ""
+        for path, bubble, _ in path_texts_coords:
+            if path != current_path:
+                text += f"\n\n{path}: "
+                current_path = path
+            text += f"\n{bubble}"
+            if "\n" in bubble:
+                logger.warning(f"Detected newline in bubble: {path} {bubble}")
+        text = text.strip()  # Remove the leading newline.
     print(text)
 
     if output_path is None:
-        path = Path.cwd() / "detected_text.txt"
+        path = Path.cwd() / ("detected_text.txt" if not csv else "detected_text.csv")
     else:
         path = Path(output_path)
 

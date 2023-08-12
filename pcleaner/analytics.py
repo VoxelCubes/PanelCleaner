@@ -22,7 +22,7 @@ def terminal_width() -> int:
 
 
 def show_ocr_analytics(
-    analytics: list[tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str], ...]]],
+    analytics: list[tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str, tuple[int, int, int, int]], ...]]],
     max_ocr_size: int,
 ) -> None:
     """
@@ -74,13 +74,13 @@ def show_ocr_analytics(
 
     # Show removed texts.
     # Format: (path, text)
-    removed_path_texts: list[tuple[str, str]] = list(
+    removed_path_texts: list[tuple[str, str, tuple[int, int, int, int]]] = list(
         itertools.chain.from_iterable(a[3] for a in analytics)
     )
 
     if removed_path_texts:
         # Find and then remove the longest common prefix from the file paths.
-        paths, texts = zip(*removed_path_texts)
+        paths, texts, _ = zip(*removed_path_texts)
         paths = [Path(p) for p in paths]
         removed_paths = hp.trim_prefix_from_paths(paths)
         removed_path_texts = list(zip(removed_paths, texts))

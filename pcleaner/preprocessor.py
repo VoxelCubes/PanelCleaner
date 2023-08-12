@@ -157,7 +157,15 @@ def ocr_check(
     max_box_size: int,
     ocr_blacklist_pattern: str,
     box_padding: int = 0,
-) -> tuple[st.PageData, tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str], ...]]]:
+) -> tuple[
+    st.PageData,
+    tuple[
+        int,
+        tuple[int, ...],
+        tuple[int, ...],
+        tuple[tuple[str, str, tuple[int, int, int, int]], ...],
+    ],
+]:
     """
     Run OCR on small boxes to determine whether they contain mere symbols,
     in which case these boxes do not need to be cleaned and can be removed
@@ -169,7 +177,7 @@ def ocr_check(
     - number of boxes
     - sizes of all boxes that were ocred
     - sizes of the boxes that were removed
-    - the cached file name and the text of the boxes that were removed.
+    - the cached file name and the text and the coordinates of the boxes that were removed.
 
     (Returning the page data isn't strictly necessary, since it's modified in place,
     but this makes that fact more explicit.)
@@ -192,7 +200,7 @@ def ocr_check(
     # Discard them in that case.
     box_sizes = []
     discarded_box_sizes = []
-    discarded_box_texts: list[tuple[str, str]] = []
+    discarded_box_texts: list[tuple[str, str, tuple[int, int, int, int]]] = []
     for box in candidate_small_bubbles:
         cutout = base_image.crop(box)
         text = mocr(cutout)
@@ -200,7 +208,7 @@ def ocr_check(
         box_size = page_data.box_size(box)
         box_sizes.append(box_size)
         if remove:
-            discarded_box_texts.append((page_data.original_path, text))
+            discarded_box_texts.append((page_data.original_path, text, box))
             discarded_box_sizes.append(box_size)
             page_data.boxes.remove(box)
 
