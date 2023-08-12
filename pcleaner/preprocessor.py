@@ -200,7 +200,7 @@ def ocr_check(
         box_size = page_data.box_size(box)
         box_sizes.append(box_size)
         if remove:
-            discarded_box_texts.append((page_data.original_path, text))
+            discarded_box_texts.append((page_data.original_path, text, box))
             discarded_box_sizes.append(box_size)
             page_data.boxes.remove(box)
 
