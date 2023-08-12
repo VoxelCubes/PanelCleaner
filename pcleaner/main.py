@@ -448,7 +448,9 @@ def run_ocr(
     :param output_path: The path to output the results to.
     :param cache_masks: Whether to cache the masks.
     :param csv: Whether to output CSV data
-    """rofile = config.current_profile
+    """
+    cache_dir = config.get_cleaner_cache_dir()
+    profile = config.current_profile
     logger.debug(f"Cache directory: {cache_dir}")
 
     # If caching masks, direct the user to the cache directory.
