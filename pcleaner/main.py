@@ -508,22 +508,24 @@ def run_ocr(
 
     text = ""
     print("\nDetected Text:")
-    # Output the OCRed text from the analytics. Format: (path, removed text, position)
-    # The previous 3 columns the number of boxes and the sizes.
-    path_and_texts: list[tuple[str, str], tuple[int, int, int, int]] = list(
+    # Output the OCRed text from the analytics.
+    # Format of the analytics:
+    # number of boxes | sizes of all boxes | sizes of boxes that were OCRed | path to image, text, box coordinates
+    # We do not need to show the first three columns, so we simplify the data structure.
+    path_texts_coords: list[tuple[str, str], tuple[int, int, int, int]] = list(
         itertools.chain.from_iterable(a[3] for a in ocr_analytics)
     )
-    if path_and_texts:
-        paths, texts, boxes = zip(*path_and_texts)
+    if path_texts_coords:
+        paths, texts, boxes = zip(*path_texts_coords)
         paths = hp.trim_prefix_from_paths([Path(p) for p in paths])
-        path_and_texts = list(zip(paths, texts, boxes))
+        path_texts_coords = list(zip(paths, texts, boxes))
         # Sort by path.
-        path_and_texts = natsorted(path_and_texts, key=lambda x: x[0])
-    
+        path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
+
     if csv:
         text += "filename,startx,starty,endx,endy,text\n"
-        
-        for path, bubble, pos in path_and_texts:
+
+        for path, bubble, pos in path_texts_coords:
             pos = ",".join(str(a) for a in pos)
             if "\n" in bubble:
                 logger.warning(f"Detected newline in bubble: {path} {bubble} {pos}")
@@ -533,7 +535,7 @@ def run_ocr(
         
         # Place the file path on it's own line, and only if it's different from the previous one.=
         current_path = ""
-        for path, bubble, _ in path_and_texts:
+        for path, bubble, _ in path_texts_coords:
             if path != current_path:
                 text += f"\n\n{path}: "
                 current_path = path
