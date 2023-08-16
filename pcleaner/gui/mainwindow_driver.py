@@ -80,6 +80,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.file_table.table_not_empty.connect(lambda: self.stackedWidget.setCurrentIndex(1))
         # Hide the close button for the file table tab.
         self.image_tab.tabBar().setTabButton(0, Qw.QTabBar.RightSide, None)
+        # Display a theme icon on the left side of the tab.
+        self.image_tab.tabBar().setTabIcon(0, Qg.QIcon.fromTheme("view-form"))
 
         # Connect signals.
         self.connect_combobox_slots()

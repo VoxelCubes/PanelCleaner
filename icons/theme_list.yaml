@@ -26,6 +26,7 @@ Files:
       - process-stop.svg
       - help-contents.svg
       - view-refresh.svg
+      - view-form.svg
       - edit-clear-history.svg
   mimetypes:
     16:
