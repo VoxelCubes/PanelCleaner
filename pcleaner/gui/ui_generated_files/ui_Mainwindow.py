@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'Mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.1
+## Created by: Qt User Interface Compiler version 6.5.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -147,13 +147,13 @@ class Ui_MainWindow(object):
         self.splitter.setObjectName(u"splitter")
         self.splitter.setOrientation(Qt.Horizontal)
         self.splitter.setHandleWidth(10)
-        self.groupBox = QGroupBox(self.splitter)
-        self.groupBox.setObjectName(u"groupBox")
-        self.verticalLayout_2 = QVBoxLayout(self.groupBox)
+        self.groupBox_profile = QGroupBox(self.splitter)
+        self.groupBox_profile.setObjectName(u"groupBox_profile")
+        self.verticalLayout_2 = QVBoxLayout(self.groupBox_profile)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.comboBox_current_profile = CComboBox(self.groupBox)
+        self.comboBox_current_profile = CComboBox(self.groupBox_profile)
         self.comboBox_current_profile.addItem("")
         self.comboBox_current_profile.setObjectName(u"comboBox_current_profile")
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
@@ -165,14 +165,14 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.comboBox_current_profile)
 
-        self.pushButton_save_profile = QPushButton(self.groupBox)
+        self.pushButton_save_profile = QPushButton(self.groupBox_profile)
         self.pushButton_save_profile.setObjectName(u"pushButton_save_profile")
         self.pushButton_save_profile.setEnabled(False)
         self.pushButton_save_profile.setIcon(icon5)
 
         self.horizontalLayout_2.addWidget(self.pushButton_save_profile)
 
-        self.pushButton_reset_profile = QPushButton(self.groupBox)
+        self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
         icon8 = QIcon()
@@ -189,7 +189,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
-        self.toolBox_profile_frame = QWidget(self.groupBox)
+        self.toolBox_profile_frame = QWidget(self.groupBox_profile)
         self.toolBox_profile_frame.setObjectName(u"toolBox_profile_frame")
         sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
@@ -199,9 +199,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.toolBox_profile_frame)
 
-        self.splitter.addWidget(self.groupBox)
-        self.stackedWidget = QStackedWidget(self.splitter)
-        self.stackedWidget.setObjectName(u"stackedWidget")
+        self.splitter.addWidget(self.groupBox_profile)
+        self.stackedWidget_images = QStackedWidget(self.splitter)
+        self.stackedWidget_images.setObjectName(u"stackedWidget_images")
         self.page_greeter = QWidget()
         self.page_greeter.setObjectName(u"page_greeter")
         self.verticalLayout_8 = QVBoxLayout(self.page_greeter)
@@ -223,7 +223,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.frame_greeter)
 
-        self.stackedWidget.addWidget(self.page_greeter)
+        self.stackedWidget_images.addWidget(self.page_greeter)
         self.page_table = QWidget()
         self.page_table.setObjectName(u"page_table")
         self.verticalLayout = QVBoxLayout(self.page_table)
@@ -268,17 +268,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.image_tab)
 
-        self.stackedWidget.addWidget(self.page_table)
-        self.splitter.addWidget(self.stackedWidget)
-        self.frame_3 = QFrame(self.splitter)
-        self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFrameShape(QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_4 = QVBoxLayout(self.frame_3)
+        self.stackedWidget_images.addWidget(self.page_table)
+        self.splitter.addWidget(self.stackedWidget_images)
+        self.frame_output = QFrame(self.splitter)
+        self.frame_output.setObjectName(u"frame_output")
+        self.frame_output.setFrameShape(QFrame.StyledPanel)
+        self.frame_output.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_4 = QVBoxLayout(self.frame_output)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.groupBox_4 = QGroupBox(self.frame_3)
+        self.groupBox_4 = QGroupBox(self.frame_output)
         self.groupBox_4.setObjectName(u"groupBox_4")
         self.verticalLayout_9 = QVBoxLayout(self.groupBox_4)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
@@ -341,7 +341,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.groupBox_4)
 
-        self.groupBox_3 = QGroupBox(self.frame_3)
+        self.groupBox_3 = QGroupBox(self.frame_output)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.verticalLayout_5 = QVBoxLayout(self.groupBox_3)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
@@ -396,17 +396,16 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.horizontalLayout_3)
 
-        self.textEdit_analytics = QTextEdit(self.frame_3)
+        self.textEdit_analytics = QTextEdit(self.frame_output)
         self.textEdit_analytics.setObjectName(u"textEdit_analytics")
         self.textEdit_analytics.setUndoRedoEnabled(False)
         self.textEdit_analytics.setLineWrapMode(QTextEdit.NoWrap)
-        self.textEdit_analytics.setLineWrapColumnOrWidth(100)
         self.textEdit_analytics.setReadOnly(True)
 
         self.verticalLayout_4.addWidget(self.textEdit_analytics)
 
         self.verticalLayout_4.setStretch(1, 1)
-        self.splitter.addWidget(self.frame_3)
+        self.splitter.addWidget(self.frame_output)
 
         self.verticalLayout_6.addWidget(self.splitter)
 
@@ -445,7 +444,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1701, 34))
+        self.menubar.setGeometry(QRect(0, 0, 1701, 30))
         self.menu_File = QMenu(self.menubar)
         self.menu_File.setObjectName(u"menu_File")
         self.menu_Profile = QMenu(self.menubar)
@@ -496,7 +495,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget_images.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -523,7 +522,7 @@ class Ui_MainWindow(object):
         self.action_temp.setText(QCoreApplication.translate("MainWindow", u"<temp>", None))
         self.action_temp_2.setText(QCoreApplication.translate("MainWindow", u"<temp>", None))
         self.action_add_folders.setText(QCoreApplication.translate("MainWindow", u"Add Folder...", None))
-        self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
+        self.groupBox_profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 
         self.pushButton_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
@@ -549,7 +548,7 @@ class Ui_MainWindow(object):
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Output", None))
         self.checkBox_save_clean.setText(QCoreApplication.translate("MainWindow", u"Cleaned Image", None))
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))
-        self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Extracted Text", None))
+        self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
         self.pushButton_browse_out_dir.setText("")
         self.textEdit_analytics.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"

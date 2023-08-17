@@ -35,7 +35,7 @@
       <property name="handleWidth">
        <number>10</number>
       </property>
-      <widget class="QGroupBox" name="groupBox">
+      <widget class="QGroupBox" name="groupBox_profile">
        <property name="title">
         <string>Profile</string>
        </property>
@@ -105,7 +105,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QStackedWidget" name="stackedWidget">
+      <widget class="QStackedWidget" name="stackedWidget_images">
        <property name="currentIndex">
         <number>0</number>
        </property>
@@ -252,7 +252,7 @@
         </layout>
        </widget>
       </widget>
-      <widget class="QFrame" name="frame_3">
+      <widget class="QFrame" name="frame_output">
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
        </property>
@@ -429,9 +429,6 @@
           </property>
           <property name="lineWrapMode">
            <enum>QTextEdit::NoWrap</enum>
-          </property>
-          <property name="lineWrapColumnOrWidth">
-           <number>100</number>
           </property>
           <property name="readOnly">
            <bool>true</bool>
