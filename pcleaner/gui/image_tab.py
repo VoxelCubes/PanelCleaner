@@ -35,7 +35,7 @@ class ImageTab(Qw.QTabWidget):
         self,
         image_obj: imf.ImageFile,
         config: cfg.Config,
-        shared_orc_model: st.Shared[st.OCRModel],
+        shared_ocr_model: st.Shared[st.OCRModel],
         thread_queue: Qc.QThreadPool,
         progress_callback: Callable[[imf.ProgressData], None],
     ):
@@ -45,7 +45,7 @@ class ImageTab(Qw.QTabWidget):
 
         :param image_obj: Image object to open.
         :param config: The config object.
-        :param shared_orc_model: The shared OCR model.
+        :param shared_ocr_model: The shared OCR model.
         :param thread_queue: The thread queue for processing steps.
         :param progress_callback: The callback to call when a step is done.
         """
@@ -57,7 +57,7 @@ class ImageTab(Qw.QTabWidget):
         tab = idd.ImageDetailsWidget(
             image_obj=image_obj,
             config=config,
-            shared_orc_model=shared_orc_model,
+            shared_ocr_model=shared_ocr_model,
             thread_queue=thread_queue,
             progress_callback=progress_callback,
         )

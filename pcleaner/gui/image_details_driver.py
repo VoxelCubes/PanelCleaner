@@ -39,7 +39,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     button_map: dict[Qw.QPushButton, imf.Output]
 
     config: cfg.Config
-    shared_orc_model: st.Shared[st.OCRModel]  # Must be handed over by the file table.
+    shared_ocr_model: st.Shared[st.OCRModel]  # Must be handed over by the file table.
     thread_queue: Qc.QThreadPool
     progress_callback: Callable[[imf.ProgressData], None]
 
@@ -53,7 +53,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         parent=None,
         image_obj: imf.ImageFile = None,
         config: cfg.Config = None,
-        shared_orc_model: st.Shared[st.OCRModel] = None,
+        shared_ocr_model: st.Shared[st.OCRModel] = None,
         thread_queue: Qc.QThreadPool = None,
         progress_callback: Callable[[imf.ProgressData], None] = None,
     ):
@@ -68,7 +68,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         self.image_obj = image_obj
         self.config = config
-        self.shared_orc_model = shared_orc_model
+        self.shared_ocr_model = shared_ocr_model
         self.button_map = self.create_sidebar_buttons()
 
         self.first_load = True
@@ -360,7 +360,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             target_outputs=[output],
             output_dir=None,
             config=self.config,
-            ocr_model=self.shared_orc_model.get(),
+            ocr_model=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
         )
 
