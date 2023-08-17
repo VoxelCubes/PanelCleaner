@@ -1,22 +1,19 @@
 from enum import IntEnum, auto
-from functools import partial
 from pathlib import Path
-from uuid import uuid4, UUID
 
 import PySide6.QtCore as Qc
-from PySide6.QtCore import Qt
-import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Slot
 from logzero import logger
 from natsort import natsorted
 
 import pcleaner.config as cfg
-from .CustomQ.CTableWidget import CTableWidget
-import pcleaner.gui.image_file as st
-import pcleaner.helpers as hp
 import pcleaner.gui.gui_utils as gu
+import pcleaner.gui.image_file as imf
+import pcleaner.gui.structures as st
 import pcleaner.gui.worker_thread as wt
+import pcleaner.helpers as hp
+from .CustomQ.CTableWidget import CTableWidget
+
 
 # The size used for the little thumbnails on each row.
 ICON_SIZE = 44
@@ -36,19 +33,20 @@ class FileTable(CTableWidget):
     Extends the functionality with custom helpers
     """
 
+    config: cfg.Config  # Reference to the MainWindow's config.
+    shared_orc_model: st.Shared[st.OCRModel]  # Must be handed over by the mainwindow.
 
     table_is_empty = Qc.Signal()
     table_not_empty = Qc.Signal()
 
-    requesting_image_preview = Qc.Signal(st.ImageFile)
+    requesting_image_preview = Qc.Signal(imf.ImageFile)
 
     def __init__(self, parent=None):
         CTableWidget.__init__(self, parent)
 
         # Store a map of resolved file paths to file objects.
-        self.files: dict[Path, st.ImageFile] = {}
+        self.files: dict[Path, imf.ImageFile] = {}
         self.threadpool = Qc.QThreadPool.globalInstance()
-        # self.finished_drop.connect(lambda: self.request_text_param_update.emit())
 
         # Make icons larger so the thumbnails are more visible.
         self.setIconSize(Qc.QSize(ICON_SIZE, ICON_SIZE))
@@ -63,8 +61,11 @@ class FileTable(CTableWidget):
         else:
             self.table_not_empty.emit()
 
-    # def set_config(self, config: cfg.Config):
-    #     self.config = config
+    def set_config(self, config: cfg.Config):
+        self.config = config
+
+    def set_shared_orc_model(self, shared_orc_model: st.Shared[st.OCRModel]):
+        self.shared_orc_model = shared_orc_model
 
     def handleDrop(self, path: str):
         logger.debug(f"Dropped {path}")
@@ -109,7 +110,7 @@ class FileTable(CTableWidget):
             gu.show_warning(self, "Duplicate file", f'File "{path}" is already in the table.')
             return
 
-        self.files[path] = st.ImageFile(path=path)
+        self.files[path] = imf.ImageFile(path=path)
 
     def repopulate_table(self):
         """
@@ -126,7 +127,7 @@ class FileTable(CTableWidget):
 
         # Fill in the sorted rows.
         for row, (long_path, short_path) in enumerate(long_and_short_paths):
-            file_obj: st.ImageFile = self.files[long_path]
+            file_obj: imf.ImageFile = self.files[long_path]
 
             self.appendRow(str(long_path), str(short_path), "", "", "")
 
@@ -160,7 +161,7 @@ class FileTable(CTableWidget):
     # =========================== Worker Tasks ===========================
 
     @staticmethod
-    def image_loading_task(image: st.ImageFile) -> Path:
+    def image_loading_task(image: imf.ImageFile) -> Path:
         """
         Thin wrapper to ensure the image object will be returned in the event of an error.
 

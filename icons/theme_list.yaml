@@ -28,6 +28,10 @@ Files:
       - view-refresh.svg
       - view-form.svg
       - edit-clear-history.svg
+      - zoom-in
+      - zoom-out
+      - zoom-reset
+      - zoom-fit-best.svg
   mimetypes:
     16:
       - image-bmp.svg

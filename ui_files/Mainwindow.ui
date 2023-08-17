@@ -41,7 +41,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_profile_header">
           <item>
            <widget class="CComboBox" name="comboBox_current_profile">
             <property name="sizePolicy">

@@ -57,188 +57,6 @@ class Ui_ImageDetails(object):
         self.sidebar_layout = QVBoxLayout(self.widget)
         self.sidebar_layout.setObjectName(u"sidebar_layout")
         self.sidebar_layout.setContentsMargins(4, 4, 4, 4)
-        self.label_2 = QLabel(self.widget)
-        self.label_2.setObjectName(u"label_2")
-        font = QFont()
-        font.setBold(True)
-        self.label_2.setFont(font)
-
-        self.sidebar_layout.addWidget(self.label_2)
-
-        self.pushButton_input = QPushButton(self.widget)
-        self.pushButton_input.setObjectName(u"pushButton_input")
-        self.pushButton_input.setCheckable(True)
-        self.pushButton_input.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_input)
-
-        self.verticalSpacer = QSpacerItem(20, 16, QSizePolicy.Minimum, QSizePolicy.Minimum)
-
-        self.sidebar_layout.addItem(self.verticalSpacer)
-
-        self.label_3 = QLabel(self.widget)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setFont(font)
-
-        self.sidebar_layout.addWidget(self.label_3)
-
-        self.pushButton_text_detection = QPushButton(self.widget)
-        self.pushButton_text_detection.setObjectName(u"pushButton_text_detection")
-        self.pushButton_text_detection.setCheckable(True)
-        self.pushButton_text_detection.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_text_detection)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 16, QSizePolicy.Minimum, QSizePolicy.Minimum)
-
-        self.sidebar_layout.addItem(self.verticalSpacer_2)
-
-        self.label_4 = QLabel(self.widget)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setFont(font)
-
-        self.sidebar_layout.addWidget(self.label_4)
-
-        self.label_5 = QLabel(self.widget)
-        self.label_5.setObjectName(u"label_5")
-
-        self.sidebar_layout.addWidget(self.label_5)
-
-        self.pushButton_initial_boxes = QPushButton(self.widget)
-        self.pushButton_initial_boxes.setObjectName(u"pushButton_initial_boxes")
-        self.pushButton_initial_boxes.setCheckable(True)
-        self.pushButton_initial_boxes.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_initial_boxes)
-
-        self.label_6 = QLabel(self.widget)
-        self.label_6.setObjectName(u"label_6")
-
-        self.sidebar_layout.addWidget(self.label_6)
-
-        self.pushButton_final_boxes = QPushButton(self.widget)
-        self.pushButton_final_boxes.setObjectName(u"pushButton_final_boxes")
-        self.pushButton_final_boxes.setCheckable(True)
-        self.pushButton_final_boxes.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_final_boxes)
-
-        self.verticalSpacer_3 = QSpacerItem(20, 16, QSizePolicy.Minimum, QSizePolicy.Minimum)
-
-        self.sidebar_layout.addItem(self.verticalSpacer_3)
-
-        self.label_7 = QLabel(self.widget)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setFont(font)
-
-        self.sidebar_layout.addWidget(self.label_7)
-
-        self.label_8 = QLabel(self.widget)
-        self.label_8.setObjectName(u"label_8")
-
-        self.sidebar_layout.addWidget(self.label_8)
-
-        self.pushButton_box_mask = QPushButton(self.widget)
-        self.pushButton_box_mask.setObjectName(u"pushButton_box_mask")
-        self.pushButton_box_mask.setCheckable(True)
-        self.pushButton_box_mask.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_box_mask)
-
-        self.label_9 = QLabel(self.widget)
-        self.label_9.setObjectName(u"label_9")
-
-        self.sidebar_layout.addWidget(self.label_9)
-
-        self.pushButton_cut_mask = QPushButton(self.widget)
-        self.pushButton_cut_mask.setObjectName(u"pushButton_cut_mask")
-        self.pushButton_cut_mask.setCheckable(True)
-        self.pushButton_cut_mask.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_cut_mask)
-
-        self.label_13 = QLabel(self.widget)
-        self.label_13.setObjectName(u"label_13")
-
-        self.sidebar_layout.addWidget(self.label_13)
-
-        self.pushButton_mask_layers = QPushButton(self.widget)
-        self.pushButton_mask_layers.setObjectName(u"pushButton_mask_layers")
-        self.pushButton_mask_layers.setCheckable(True)
-        self.pushButton_mask_layers.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_mask_layers)
-
-        self.label_10 = QLabel(self.widget)
-        self.label_10.setObjectName(u"label_10")
-
-        self.sidebar_layout.addWidget(self.label_10)
-
-        self.pushButton_final_mask = QPushButton(self.widget)
-        self.pushButton_final_mask.setObjectName(u"pushButton_final_mask")
-        self.pushButton_final_mask.setCheckable(True)
-        self.pushButton_final_mask.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_final_mask)
-
-        self.label_16 = QLabel(self.widget)
-        self.label_16.setObjectName(u"label_16")
-
-        self.sidebar_layout.addWidget(self.label_16)
-
-        self.pushButton_output_overlay = QPushButton(self.widget)
-        self.pushButton_output_overlay.setObjectName(u"pushButton_output_overlay")
-        self.pushButton_output_overlay.setCheckable(True)
-        self.pushButton_output_overlay.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_output_overlay)
-
-        self.label_11 = QLabel(self.widget)
-        self.label_11.setObjectName(u"label_11")
-
-        self.sidebar_layout.addWidget(self.label_11)
-
-        self.pushButton_output_masked = QPushButton(self.widget)
-        self.pushButton_output_masked.setObjectName(u"pushButton_output_masked")
-        self.pushButton_output_masked.setCheckable(True)
-        self.pushButton_output_masked.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_output_masked)
-
-        self.verticalSpacer_4 = QSpacerItem(20, 16, QSizePolicy.Minimum, QSizePolicy.Minimum)
-
-        self.sidebar_layout.addItem(self.verticalSpacer_4)
-
-        self.label_12 = QLabel(self.widget)
-        self.label_12.setObjectName(u"label_12")
-        self.label_12.setFont(font)
-
-        self.sidebar_layout.addWidget(self.label_12)
-
-        self.label_15 = QLabel(self.widget)
-        self.label_15.setObjectName(u"label_15")
-
-        self.sidebar_layout.addWidget(self.label_15)
-
-        self.pushButton_denoise_mask = QPushButton(self.widget)
-        self.pushButton_denoise_mask.setObjectName(u"pushButton_denoise_mask")
-        self.pushButton_denoise_mask.setCheckable(True)
-        self.pushButton_denoise_mask.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_denoise_mask)
-
-        self.label_14 = QLabel(self.widget)
-        self.label_14.setObjectName(u"label_14")
-
-        self.sidebar_layout.addWidget(self.label_14)
-
-        self.pushButton_denoised_output = QPushButton(self.widget)
-        self.pushButton_denoised_output.setObjectName(u"pushButton_denoised_output")
-        self.pushButton_denoised_output.setCheckable(True)
-        self.pushButton_denoised_output.setAutoExclusive(True)
-
-        self.sidebar_layout.addWidget(self.pushButton_denoised_output)
-
 
         self.horizontalLayout_2.addWidget(self.widget)
 
@@ -333,6 +151,14 @@ class Ui_ImageDetails(object):
         self.pushButton_zoom_reset.setFlat(True)
 
         self.horizontalLayout.addWidget(self.pushButton_zoom_reset)
+
+        self.pushButton_zoom_fit = QPushButton(ImageDetails)
+        self.pushButton_zoom_fit.setObjectName(u"pushButton_zoom_fit")
+        icon5 = QIcon(QIcon.fromTheme(u"zoom-fit-best"))
+        self.pushButton_zoom_fit.setIcon(icon5)
+        self.pushButton_zoom_fit.setFlat(True)
+
+        self.horizontalLayout.addWidget(self.pushButton_zoom_fit)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -433,33 +259,6 @@ class Ui_ImageDetails(object):
 
     def retranslateUi(self, ImageDetails):
         ImageDetails.setWindowTitle(QCoreApplication.translate("ImageDetails", u"Form", None))
-        self.label_2.setText(QCoreApplication.translate("ImageDetails", u"Input", None))
-        self.pushButton_input.setText("")
-        self.label_3.setText(QCoreApplication.translate("ImageDetails", u"Text Detection", None))
-        self.pushButton_text_detection.setText("")
-        self.label_4.setText(QCoreApplication.translate("ImageDetails", u"Preprocessor", None))
-        self.label_5.setText(QCoreApplication.translate("ImageDetails", u"Initial Boxes", None))
-        self.pushButton_initial_boxes.setText("")
-        self.label_6.setText(QCoreApplication.translate("ImageDetails", u"Final Boxes", None))
-        self.pushButton_final_boxes.setText("")
-        self.label_7.setText(QCoreApplication.translate("ImageDetails", u"Masker", None))
-        self.label_8.setText(QCoreApplication.translate("ImageDetails", u"Box Mask", None))
-        self.pushButton_box_mask.setText("")
-        self.label_9.setText(QCoreApplication.translate("ImageDetails", u"Cut Mask", None))
-        self.pushButton_cut_mask.setText("")
-        self.label_13.setText(QCoreApplication.translate("ImageDetails", u"Mask Layers", None))
-        self.pushButton_mask_layers.setText("")
-        self.label_10.setText(QCoreApplication.translate("ImageDetails", u"Final Mask", None))
-        self.pushButton_final_mask.setText("")
-        self.label_16.setText(QCoreApplication.translate("ImageDetails", u"Output Overlay", None))
-        self.pushButton_output_overlay.setText("")
-        self.label_11.setText(QCoreApplication.translate("ImageDetails", u"Masked Output", None))
-        self.pushButton_output_masked.setText("")
-        self.label_12.setText(QCoreApplication.translate("ImageDetails", u"Denoiser", None))
-        self.label_15.setText(QCoreApplication.translate("ImageDetails", u"Denoise Mask", None))
-        self.pushButton_denoise_mask.setText("")
-        self.label_14.setText(QCoreApplication.translate("ImageDetails", u"Denoised Output", None))
-        self.pushButton_denoised_output.setText("")
         self.pushButton_export.setText(QCoreApplication.translate("ImageDetails", u"Export", None))
         self.pushButton_refresh.setText(QCoreApplication.translate("ImageDetails", u"Refresh", None))
 #if QT_CONFIG(tooltip)
@@ -474,6 +273,10 @@ class Ui_ImageDetails(object):
         self.pushButton_zoom_reset.setToolTip(QCoreApplication.translate("ImageDetails", u"Reset zoom", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_zoom_reset.setText("")
+#if QT_CONFIG(tooltip)
+        self.pushButton_zoom_fit.setToolTip(QCoreApplication.translate("ImageDetails", u"Zoom to fit", None))
+#endif // QT_CONFIG(tooltip)
+        self.pushButton_zoom_fit.setText("")
         self.label_17.setText(QCoreApplication.translate("ImageDetails", u"Generating...", None))
         self.label_step.setText(QCoreApplication.translate("ImageDetails", u"<Current Step>", None))
         self.label_position_label.setText(QCoreApplication.translate("ImageDetails", u"Position:", None))

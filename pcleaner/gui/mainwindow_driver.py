@@ -8,6 +8,9 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Signal, Slot
 from logzero import logger
+from manga_ocr import MangaOcr
+import torch
+import time
 
 import pcleaner.cli_utils as cu
 import pcleaner.helpers as hp
@@ -20,6 +23,10 @@ from pcleaner.gui.file_table import Column
 from pcleaner import __display_name__, __version__
 from pcleaner import data
 import pcleaner.gui.new_profile_driver as npd
+import pcleaner.gui.worker_thread as wt
+import pcleaner.gui.structures as st
+import pcleaner.gui.image_file as imf
+
 ANALYTICS_COLUMNS = 70
 
 
@@ -31,6 +38,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     label_stats: Qw.QLabel
 
     toolBox_profile: pp.ProfileToolBox
+    # Optional shared instance of the OCR model to save time due to its slow loading.
+    shared_ocr_model: st.Shared[st.OCRModel]
+
+    thread_queue: Qc.QThreadPool
 
     def __init__(self):
         Qw.QMainWindow.__init__(self)
@@ -40,6 +51,27 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.processing = False
 
         self.config = cfg.load_config()
+        self.shared_ocr_model = st.Shared[st.OCRModel]()
+
+        # Share core objects with the file table.
+        # Since the file table is created by the ui loader, we can't pass them to the constructor.
+        self.file_table.set_config(self.config)
+        self.file_table.set_shared_orc_model(self.shared_ocr_model)
+
+        # TODO eventually check for the existence of the text detector models on startup.
+
+        # This threadpool is used for parallelizing individual processing steps.
+        self.threadpool = Qc.QThreadPool.globalInstance()
+        logger.info(f"Multithreading with maximum {self.threadpool.maxThreadCount()} threads")
+
+        # This threadpool acts as a queue for processing runs, therefore only allowing one thread at a time.
+        # This is because they must share the same cache directory, which isn't thread safe if operating on the same image.
+        # Additionally, this allows each requested output to check if it was already fulfilled
+        # in a previous run, and if so, skip it.
+        self.thread_queue = Qc.QThreadPool()
+        self.thread_queue.setMaxThreadCount(1)
+
+        self.start_initialization_worker()
 
         self.initialize_ui()
 
@@ -55,8 +87,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.file_table.setColumnWidth(Column.FILENAME, 200)
         self.file_table.setColumnWidth(Column.SIZE, 100)
         self.frame_greeter.drop_signal.connect(self.file_table.dropEvent)
-        self.file_table.table_is_empty.connect(lambda: self.stackedWidget.setCurrentIndex(0))
-        self.file_table.table_not_empty.connect(lambda: self.stackedWidget.setCurrentIndex(1))
+        self.file_table.table_is_empty.connect(lambda: self.stackedWidget_images.setCurrentIndex(0))
+        self.file_table.table_not_empty.connect(
+            lambda: self.stackedWidget_images.setCurrentIndex(1)
+        )
         # Hide the close button for the file table tab.
         self.image_tab.tabBar().setTabButton(0, Qw.QTabBar.RightSide, None)
         # Display a theme icon on the left side of the tab.
@@ -66,14 +100,62 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.comboBox_current_profile.hookedCurrentIndexChanged.connect(self.change_current_profile)
         self.action_add_files.triggered.connect(self.file_table.browse_add_files)
         self.action_add_folders.triggered.connect(self.file_table.browse_add_folders)
-
-
-
+        self.file_table.requesting_image_preview.connect(
+            partial(
+                self.image_tab.open_image,
+                config=self.config,
+                shared_orc_model=self.shared_ocr_model,
+                thread_queue=self.thread_queue,
+                progress_callback=self.show_current_progress,
+            )
         )
+
+    # ========================================== Initialization Workers ==========================================
+
+    def start_initialization_worker(self):
+        """
+        Perform various slow startup procedures in a thread that would otherwise make the gui lag.
+
+        In particular:
+        - Clean the cache.
+        - Load the text detection model.
+        - Load the OCR model.
+        """
+        logger.debug(f"Worker Thread cleaning cache")
+        cache_worker = wt.Worker(self.clean_cache, no_progress_callback=True)
+        cache_worker.signals.error.connect(
+            partial(self.generic_worker_error, context="Failed to clean cache.")
         )
+        self.threadpool.start(cache_worker)
 
+        logger.debug(f"Worker Thread loading OCR model.")
+        ocr_worker = wt.Worker(self.load_ocr_model, no_progress_callback=True)
+        ocr_worker.signals.error.connect(
+            partial(
+                self.generic_worker_error,
+                context="Failed to load OCR model. OCR impossible, moderate cleaning impact.",
+            )
+        )
+        self.threadpool.start(ocr_worker)
 
+    def load_ocr_model(self):
+        t_start = time.time()
+        self.shared_ocr_model.set(MangaOcr())
+        logger.info(f"Loaded OCR model ({time.time()-t_start:.2f}s)")
+        self.statusbar.showMessage(f"Loaded OCR model.")
 
+    def generic_worker_error(self, error: wt.WorkerError, context: str = ""):
+        """
+        Simply show the user the error.
+
+        :param error: The worker error object.
+        :param context: A string to add to the error message.
+        """
+        logger.error(f"Worker error: {error}")
+        if not context:
+            gu.show_warning(self, "Error", f"Encountered error: {error}")
+        else:
+            gu.show_warning(self, "Error", f"{context}\n\nEncountered error: {error}")
 
     def closeEvent(self, event: Qg.QCloseEvent):
         """
@@ -90,6 +172,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # nuke_epub_cache()
         # event.accept()
 
+    def clean_cache(self):
+        cache_dir = self.config.get_cleaner_cache_dir()
+        if len(list(cache_dir.glob("*"))) > 0:
+            cu.empty_cache_dir(cache_dir)
+        self.statusbar.showMessage("Cache cleaned.")
 
     def initialize_analytics_view(self):
         """
@@ -475,6 +562,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def show_progress(self):
         self.widget_progress_drawer.show()
 
+    @Slot(imf.ProgressData)
+    def show_current_progress(self, progress_data: imf.ProgressData):
+        logger.info(f"Progress: {progress_data}")
 
     #
     # def show_glossary_help(self):

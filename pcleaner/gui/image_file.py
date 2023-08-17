@@ -1,14 +1,17 @@
 import io
-import zlib
 import json
-import attrs
-from attrs import fields
+import zlib
+from enum import Enum, IntEnum, auto
 from pathlib import Path
 from typing import Iterable
-from enum import Enum, auto
+from typing import Protocol, Any
+from uuid import uuid4
 
 import PySide6.QtGui as Qg
+import attrs
 from PIL import Image
+from attrs import fields
+from attrs import frozen
 
 import pcleaner.config as cfg
 
@@ -17,53 +20,149 @@ import pcleaner.config as cfg
 THUMBNAIL_SIZE = 44, 44
 
 
-class ProcessStep:
+class Output(IntEnum):
     """
-    This class represents a step in the image processing pipeline.
-    The profile_sensitivity attribute is a list of profile entries that affect the processing
-    that takes place in this step.
-    The format is a list of attrs attributes.
-    For example: [fields(Profile).general, fields(Profile).denoiser.filter_strength]
-    A special case: None means that all profile entries affect this step.
+    These enums represent all the output images displayed in the gui.
+    These are an IntEnum so that they can be compared by order.
+    This way, we can determine the last step in a set of outputs.
     """
 
-    path: Path | None = None
+    input = auto()
+    ai_mask = auto()
+    initial_boxes = auto()
+    final_boxes = auto()
+    box_mask = auto()
+    cut_mask = auto()
+    mask_layers = auto()
+    mask_overlay = auto()
+    final_mask = auto()
+    isolated_text = auto()
+    masked_image = auto()
+    denoiser_mask = auto()
+    isolated_denoised_text = auto()
+    denoised_image = auto()
+
+
+class Step(Enum):
+    """
+    These enums represent all the steps in the image processing pipeline.
+    """
+
+    text_detection = auto()
+    preprocessor = auto()
+    masker = auto()
+    denoiser = auto()
+
+
+class ProgressType(Enum):
+    """
+    The type of progress reported:
+    - Begin: The step started, so the progress bar should be reset.
+    - Incremental: One (or more) tasks were completed.
+    - Absolute: The progress bar should be set to a specific value.
+    - End: The step finished, so the progress bar should be set to 100%.
+    """
+
+    begin = auto()
+    incremental = auto()
+    absolute = auto()
+    end = auto()
+
+
+class ProcessOutput:
+    """
+    This class represents an output in the image processing pipeline.
+    The sensitivity filter is used to determine which entries in the profile will affect
+    this output.
+    """
+
     description: str
+    step_name: str | None
+    output_name: str | None
+    _path: Path | None = None
     _sensitivity_filter: attrs.filters
     _current_profile_checksum: int | None = None
 
     def __init__(
-        self, description: str, profile_sensitivity: Iterable[attrs.Attribute] | None = None
+        self,
+        description: str,
+        step_name: str | None,
+        output_name: str | None,
+        profile_sensitivity: Iterable[attrs.Attribute] | None = None,
     ):
+        """
+        Init the process output.
+
+        Set up the filter for the profile sensitivity.
+        Pass in a list of attrs attributes like this:
+            [fields(Profile).some_attribute, fields(Profile).some_other_attribute]
+
+        If the profile sensitivity is None, the output will include all profile entries.
+
+        :param description: A description of the output.
+        :param step_name: [Optional] The name of the step that this output belongs to. If none is given, this
+            output will be hidden.
+        :param output_name: [Optional] The name of the output. Left blank when it's the only output for the step.
+        :param profile_sensitivity: [Optional] A list of attributes that this output is sensitive to. If None, all
+            attributes will be included.
+        """
         self.description = description
+        self.step_name = step_name
+        self.output_name = output_name
         if profile_sensitivity is None:
             self._sensitivity_filter = None
         else:
             self._sensitivity_filter = attrs.filters.include(*profile_sensitivity)
+
+    def update(self, path: Path, profile: cfg.Profile) -> None:
+        """
+        Update the path of the output and the checksum of the profile entries that this output is sensitive to.
+
+        :param path: The path to the output.
+        :param profile: The profile to calculate the checksum for.
+        """
+        self._path = path
+        self.update_checksum(profile)
+
+    @property
+    def path(self) -> Path | None:
+        return self._path
 
     def has_path(self) -> bool:
         return self.path is not None
 
     def update_checksum(self, profile: cfg.Profile) -> None:
         """
-        Update the checksum of the profile entries that this step is sensitive to.
+        Update the checksum of the profile entries that this output is sensitive to.
 
         :param profile: The profile to calculate the checksum for.
         """
         self._current_profile_checksum = self._profile_checksum(profile)
 
-    def is_profile_changed(self, profile: cfg.Profile) -> bool:
+    def is_unchanged(self, profile: cfg.Profile) -> bool:
         """
-        Check if the profile entries that this step is sensitive to have changed.
+        Check if the profile entries that this output is sensitive to haven't changed.
+
+        :param profile: The profile to check.
+        :return: True if the profile hasn't changed, False otherwise.
+        """
+        return (
+            self._current_profile_checksum is not None
+            and self._current_profile_checksum == self._profile_checksum(profile)
+        )
+
+    def is_changed(self, profile: cfg.Profile) -> bool:
+        """
+        Check if the profile entries that this output is sensitive to have changed.
 
         :param profile: The profile to check.
         :return: True if the profile has changed, False otherwise.
         """
-        return self._current_profile_checksum != self._profile_checksum(profile)
+        return not self.is_unchanged(profile)
 
     def _profile_checksum(self, profile: cfg.Profile) -> int:
         """
-        Calculate a checksum of the profile entries that this step is sensitive to.
+        Calculate a checksum of the profile entries that this output is sensitive to.
 
         :param profile: The profile to calculate the checksum for.
         :return: The checksum.
@@ -74,19 +173,74 @@ class ProcessStep:
         return zlib.crc32(serialized_data)
 
 
-class Step(Enum):
-    input = auto()
-    ai_mask = auto()
-    initial_boxes = auto()
-    final_boxes = auto()
-    box_mask = auto()
-    cut_mask = auto()
-    mask_layers = auto()
-    final_mask = auto()
-    mask_overlay = auto()
-    masked_image = auto()
-    denoiser_mask = auto()
-    denoised_image = auto()
+@frozen
+class ProgressData:
+    """
+    A callback to report progress to the gui.
+
+    Consists of:
+    - The total number of images to process.
+    - The target output to reach.
+    - The current step.
+    - The progress type.
+    - A value for the case of absolute progress, or how much to increment by for incremental progress, or whatever analytics.
+    """
+
+    total_images: int
+    target_output: Output
+    current_step: Step
+    progress_type: ProgressType
+    value: int | Any = 1  # Default value for incremental progress.
+
+
+class ProgressSignal(Protocol):
+    def emit(self, data: ProgressData) -> None:
+        ...
+
+
+output_to_step: dict[Output, Step] = {
+    Output.input: Step.text_detection,
+    Output.ai_mask: Step.text_detection,
+    Output.initial_boxes: Step.preprocessor,
+    Output.final_boxes: Step.preprocessor,
+    Output.box_mask: Step.masker,
+    Output.cut_mask: Step.masker,
+    Output.mask_layers: Step.masker,
+    Output.final_mask: Step.masker,
+    Output.mask_overlay: Step.masker,
+    Output.isolated_text: Step.masker,
+    Output.masked_image: Step.masker,
+    Output.denoiser_mask: Step.denoiser,
+    Output.isolated_denoised_text: Step.denoiser,
+    Output.denoised_image: Step.denoiser,
+}
+
+# The final output representing each step.
+# If this output is intact, consider the step complete.
+step_to_output: dict[Step, tuple[Output, ...]] = {
+    Step.text_detection: (Output.input, Output.ai_mask),
+    Step.preprocessor: (Output.initial_boxes, Output.final_boxes),
+    Step.masker: (
+        Output.box_mask,
+        Output.cut_mask,
+        Output.mask_layers,
+        Output.final_mask,
+        Output.mask_overlay,
+        Output.isolated_text,
+        Output.masked_image,
+    ),
+    Step.denoiser: (Output.denoiser_mask, Output.isolated_denoised_text, Output.denoised_image),
+}
+
+
+def get_output_representing_step(step: Step) -> Output:
+    """
+    Get the output representing the step, which is the last one in the pipeline.
+
+    :param step: The step to get the output for.
+    :return: The output representing the step.
+    """
+    return step_to_output[step][-1]
 
 
 class ImageFile:
@@ -96,10 +250,11 @@ class ImageFile:
 
     path: Path  # Path to the image file.
     icon: Qg.QIcon  # Placeholder icon for the image type.
+    uuid: str  # Unique identifier for the temp files to prevent name collisions.
     # The following attributes are lazy-loaded.
     thumbnail: Qg.QPixmap | None = None  # Thumbnail of the image, used as the icon.
     size: tuple[int, int] | None = None  # Size of the image.
-    steps: dict[Step, ProcessStep]  # Map of steps to ProcessStep objects.
+    outputs: dict[Output, ProcessOutput]  # Map of steps to ProcessStep objects.
 
     error: Exception | None = None  # Error that occurred during any process.
 
@@ -111,6 +266,8 @@ class ImageFile:
         """
         self.path = path
         self.icon = Qg.QIcon.fromTheme(cfg.SUFFIX_TO_ICON[path.suffix.lower()])
+        self.uuid = str(uuid4())
+        self.outputs = {}
 
         pro = fields(cfg.Profile)
         gen = fields(cfg.GeneralConfig)
@@ -122,12 +279,14 @@ class ImageFile:
         # Init the process steps.
         # Here I need to account for all the settings that affect each step.
         settings = [gen.input_size_scale]
-        self.steps[Step.input] = ProcessStep(
-            "The original image with the scale factor applied.", settings
+        self.outputs[Output.input] = ProcessOutput(
+            "The original image with the scale factor applied.", "Input", None, settings
         )
 
         settings += [td.model_path]
-        self.steps[Step.ai_mask] = ProcessStep("The rough mask generated by the AI.", settings)
+        self.outputs[Output.ai_mask] = ProcessOutput(
+            "The rough mask generated by the AI.", "Text Detection", None, settings
+        )
 
         settings += [
             pp.box_min_size,
@@ -135,25 +294,37 @@ class ImageFile:
             pp.box_padding_initial,
             pp.box_right_padding_initial,
         ]
-        self.steps[Step.initial_boxes] = ProcessStep(
-            "The outlines of the text boxes the AI found.", settings
+        self.outputs[Output.initial_boxes] = ProcessOutput(
+            "The outlines of the text boxes the AI found.",
+            "Preprocessor",
+            "Initial Boxes",
+            settings,
         )
 
         settings += [pro.preprocessor]
-        self.steps[Step.final_boxes] = ProcessStep(
+        self.outputs[Output.final_boxes] = ProcessOutput(
             "The final boxes after expanding, merging and filtering unneeded boxes with OCR.\n"
             "Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. "
             "Blue: reference boxes for denoising.",
+            "Preprocessor",
+            "Final Boxes",
             settings,
         )
-        self.steps[Step.box_mask] = ProcessStep("The mask of the merged boxes.", settings)
-        self.steps[Step.cut_mask] = ProcessStep(
-            "The rough text detection mask with everything outside the box mask cut out.", settings
+        self.outputs[Output.box_mask] = ProcessOutput(
+            "The mask of the merged boxes.", "Masker", "Box Mask", settings
+        )
+        self.outputs[Output.cut_mask] = ProcessOutput(
+            "The rough text detection mask with everything outside the box mask cut out.",
+            "Masker",
+            "Cut Mask",
+            settings,
         )
 
         settings += [mk.mask_growth_step_pixels, mk.mask_growth_steps]
-        self.steps[Step.mask_layers] = ProcessStep(
+        self.outputs[Output.mask_layers] = ProcessOutput(
             "The different steps of growth around the cut mask displayed in different colors.",
+            "Masker",
+            "Mask Layers",
             settings,
         )
 
@@ -163,24 +334,43 @@ class ImageFile:
             mk.mask_selection_fast,
             mk.mask_max_standard_deviation,
         ]
-        self.steps[Step.final_mask] = ProcessStep(
-            "The collection of masks for each bubble that fit best.", settings
-        )
-
-        self.steps[Step.mask_overlay] = ProcessStep(
+        self.outputs[Output.mask_overlay] = ProcessOutput(
             "The input image with the final mask overlaid in color.",
+            "Masker",
+            "Mask Overlay",
             settings + [mk.debug_mask_color],
         )
-        self.steps[Step.masked_image] = ProcessStep(
-            "The input image with the final mask applied.", settings
+        self.outputs[Output.final_mask] = ProcessOutput(
+            "The collection of masks for each bubble that fit best.",
+            "Masker",
+            "Final Mask",
+            settings,
+        )
+
+        self.outputs[Output.isolated_text] = ProcessOutput(
+            "The text layer isolated from the input image.", "Masker", "Isolated Text", settings
+        )
+        self.outputs[Output.masked_image] = ProcessOutput(
+            "The input image with the final mask applied.", "Masker", "Masked Output", settings
         )
 
         settings += [pro.denoiser]
-        self.steps[Step.denoiser_mask] = ProcessStep(
-            "The final mask overlaid on a denoised portion of the input image.", settings
+        self.outputs[Output.denoiser_mask] = ProcessOutput(
+            "The final mask overlaid on a denoised portion of the input image.",
+            "Denoiser",
+            "Denoise Mask",
+            settings,
         )
-        self.steps[Step.denoised_image] = ProcessStep(
-            "The input image with the denoised mask applied.", settings
+        # The step name is None because this output is identical to the isolated text output, we don't need
+        # to show it twice.
+        self.outputs[Output.isolated_denoised_text] = ProcessOutput(
+            "The text layer isolated from the input image.", None, None, settings
+        )
+        self.outputs[Output.denoised_image] = ProcessOutput(
+            "The input image with the denoised mask applied.",
+            "Denoiser",
+            "Denoised Output",
+            settings,
         )
 
     @property

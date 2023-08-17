@@ -1,12 +1,9 @@
-from functools import partial
 from pathlib import Path
-import PySide6.QtWidgets as Qw
-import PySide6.QtGui as Qg
-import PySide6.QtCore as Qc
-from logzero import logger
 
-import pcleaner.gui.image_file as st
-import pcleaner.gui.gui_utils as gu
+import PySide6.QtCore as Qc
+import PySide6.QtGui as Qg
+import PySide6.QtWidgets as Qw
+
 
 ZOOM_TICK_FACTOR = 1.25
 
@@ -38,6 +35,7 @@ class ImageViewer(Qw.QGraphicsView):
 
     def set_image(self, image_path: Path = None):
         if image_path:
+            self.scene.clear()
             self.image_item = Qw.QGraphicsPixmapItem()
             self.scene.addItem(self.image_item)
             # Move the image item by -0.5, -0.5 to make it align with the scene's
@@ -90,6 +88,16 @@ class ImageViewer(Qw.QGraphicsView):
 
     def zoom_reset(self):
         self.zoom_factor = 1.0
+        self.zoom(1)
+
+    def zoom_fit(self):
+        if self.image_dimensions is None:
+            return
+        width, height = self.image_dimensions
+        view_width, view_height = self.viewport().width(), self.viewport().height()
+        width_factor = view_width / width
+        height_factor = view_height / height
+        self.zoom_factor = min(width_factor, height_factor)
         self.zoom(1)
 
     def image_position(self, pos):
@@ -154,7 +162,7 @@ class ImageViewer(Qw.QGraphicsView):
 
         self.zoom_factor = proposed_zoom_factor
 
-        if self.zoom_factor > 3:
+        if self.zoom_factor >= 2:
             self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, False)
             self.image_item.setTransformationMode(Qc.Qt.FastTransformation)
         else:

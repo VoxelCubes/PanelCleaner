@@ -6,8 +6,6 @@ from logzero import logger
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
 
-# TODO noise mask doens't have uuid prefix
-
 
 def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     """
@@ -19,6 +17,17 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     # Load all the cached data.
     mask_data = st.MaskData.from_json(d_data.json_path.read_text())
     mask_image = Image.open(mask_data.mask_path)
+
+    # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json
+    clobber_protection_prefix = d_data.json_path.stem.split("_")[0]
+    cache_out_path = (
+        d_data.cache_dir
+        / f"{clobber_protection_prefix}_{mask_data.original_path.with_suffix('.png').name}"
+    )
+
+    def save_mask(img, name_suffix):
+        if d_data.show_masks:
+            img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
 
     # Scale the mask to the original image size, if needed.
     scale = mask_data.scale
@@ -53,10 +62,23 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         # noinspection PyTypeChecker
         combined_noise_mask = Image.new("LA", cleaned_image.size, (0, 0))
 
-    # Debug save.
-    if d_data.show_masks:
-        cache_out_path = d_data.cache_dir / (mask_data.target_path.stem + "_noise_mask.png")
-        combined_noise_mask.save(cache_out_path)
+    save_mask(combined_noise_mask, "_noise_mask")
+    save_mask(cleaned_image, "_clean_denoised")
+
+    # Check if the output path is None. In that case we're only outputting to the cache directory.
+    if d_data.output_dir is None:
+        # Check if we still need to output the isolated text, otherwise we're done.
+        if d_data.extract_text:
+            # Extract the text layer from the image.
+            logger.debug(f"Extracting text from {original_path}")
+            base_image = Image.open(original_path)
+            text_img = ops.extract_text(base_image, mask_image)
+            save_mask(text_img, "_text")
+
+        # Package the analytics. We're only interested in the std deviations.
+        return st.DenoiseAnalytic(
+            tuple(deviation for _, deviation in mask_data.boxes_with_deviation)
+        )
 
     # Settle on the final output path for the cleaned image.
     if d_data.output_dir.is_absolute():

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'NewProfile.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.0
+## Created by: Qt User Interface Compiler version 6.5.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -64,7 +64,7 @@ class Ui_NewProfile(object):
             icon = QIcon.fromTheme(iconThemeName)
         else:
             icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-        
+
         self.pushButton_browse_location.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_browse_location)

@@ -125,6 +125,12 @@ def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
 
     save_mask(cleaned_image, "_clean")
 
+    if m_data.output_dir is None and m_data.extract_text:
+        # Extract the text layer from the image.
+        logger.debug(f"Extracting text from {original_path}")
+        text_img = ops.extract_text(base_image, combined_mask)
+        save_mask(text_img, "_text")
+
     # Settle on the final output path for the cleaned image.
     # Check if outputting directly.
     if m_data.output_dir is not None:

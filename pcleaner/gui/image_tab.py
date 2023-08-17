@@ -1,12 +1,15 @@
 from pathlib import Path
-import PySide6.QtGui as Qg
+from typing import Callable
+
+import PySide6.QtCore as Qc
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Signal, Slot
-
-import pcleaner.gui.image_file as st
-import pcleaner.gui.image_details_driver as idd
-
+from PySide6.QtCore import Slot
 from logzero import logger
+
+import pcleaner.config as cfg
+import pcleaner.gui.image_details_driver as idd
+import pcleaner.gui.image_file as imf
+import pcleaner.gui.structures as st
 
 
 # noinspection PyPep8Naming
@@ -17,7 +20,7 @@ class ImageTab(Qw.QTabWidget):
     """
 
     # Currently open dynamic tabs: path -> (image structure, tab's widget)
-    open_images: dict[Path, tuple[st.ImageFile, Qw.QWidget]]
+    open_images: dict[Path, tuple[imf.ImageFile, Qw.QWidget]]
 
     def __init__(self, parent=None):
         Qw.QTabWidget.__init__(self, parent)
@@ -27,19 +30,37 @@ class ImageTab(Qw.QTabWidget):
 
         self.tabCloseRequested.connect(self.tab_close)
 
-    def open_image(self, image_obj: st.ImageFile):
+    @Slot(imf.ImageFile)
+    def open_image(
+        self,
+        image_obj: imf.ImageFile,
+        config: cfg.Config,
+        shared_orc_model: st.Shared[st.OCRModel],
+        thread_queue: Qc.QThreadPool,
+        progress_callback: Callable[[imf.ProgressData], None],
+    ):
         """
         Check if the image is already open, in which case show it.
         Otherwise create a new tab.
 
         :param image_obj: Image object to open.
+        :param config: The config object.
+        :param shared_orc_model: The shared OCR model.
+        :param thread_queue: The thread queue for processing steps.
+        :param progress_callback: The callback to call when a step is done.
         """
         if image_obj.path in self.open_images:
             self.setCurrentWidget(self.open_images[image_obj.path][1])
             return
 
         # Create the tab.
-        tab = idd.ImageDetailsWidget(image_obj=image_obj)
+        tab = idd.ImageDetailsWidget(
+            image_obj=image_obj,
+            config=config,
+            shared_orc_model=shared_orc_model,
+            thread_queue=thread_queue,
+            progress_callback=progress_callback,
+        )
         self.addTab(tab, image_obj.path.name)
         self.open_images[image_obj.path] = (image_obj, tab)
         self.setCurrentWidget(tab)

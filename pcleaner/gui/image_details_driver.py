@@ -1,22 +1,31 @@
+import shutil
 from functools import partial
 from pathlib import Path
-import PySide6.QtWidgets as Qw
-import PySide6.QtGui as Qg
+from typing import Callable
+
 import PySide6.QtCore as Qc
-from PySide6.QtCore import Signal, Slot
+import PySide6.QtGui as Qg
+import PySide6.QtWidgets as Qw
+from PySide6.QtCore import Slot
 from logzero import logger
-import shutil
 
-from pcleaner.gui.ui_generated_files.ui_ImageDetails import Ui_ImageDetails
-import pcleaner.gui.image_file as imf
+import pcleaner.config as cfg
 import pcleaner.gui.gui_utils as gu
+import pcleaner.gui.image_file as imf
+import pcleaner.gui.processing as prc
+import pcleaner.gui.structures as st
+import pcleaner.gui.worker_thread as wt
+from pcleaner.gui.ui_generated_files.ui_ImageDetails import Ui_ImageDetails
 
-# TODO slap a bunch of right aligned labels next to the step names to indicate that thez need to be refreshed.
+
+# TODO slap a bunch of right aligned labels next to the step names to indicate that they need to be refreshed.
 # when the last checksum is none, ignore, as they were never even generated.
 # Or maybe as a badge, drawing a square with the accent color underneath???
 
 THUMBNAIL_SIZE = 180, 180
-PUSHBUTTON_THUMBNAIL_MARGIN = 16
+PUSHBUTTON_THUMBNAIL_MARGIN = 8
+PUSHBUTTON_THUMBNAIL_SEPARATION = 8
+SIDEBAR_COLUMNS = 2
 
 
 class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
@@ -27,9 +36,27 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     image_obj: imf.ImageFile  # The image object to show.
     current_image_path: Path | None  # The path of the image currently shown.
 
-    button_map: dict[Qw.QPushButton, imf.Step]
+    button_map: dict[Qw.QPushButton, imf.Output]
 
-    def __init__(self, parent=None, image_obj: imf.ImageFile = None):
+    config: cfg.Config
+    shared_orc_model: st.Shared[st.OCRModel]  # Must be handed over by the file table.
+    thread_queue: Qc.QThreadPool
+    progress_callback: Callable[[imf.ProgressData], None]
+
+    # Used so that the view will zoom to fit on the first load only.
+    # This action needs to be delayed since the image dimensions are not known until the image is loaded,
+    # since the size may change depending on the scale value.
+    first_load: bool
+
+    def __init__(
+        self,
+        parent=None,
+        image_obj: imf.ImageFile = None,
+        config: cfg.Config = None,
+        shared_orc_model: st.Shared[st.OCRModel] = None,
+        thread_queue: Qc.QThreadPool = None,
+        progress_callback: Callable[[imf.ProgressData], None] = None,
+    ):
         """
         Init the widget.
 
@@ -40,7 +67,13 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.setupUi(self)
 
         self.image_obj = image_obj
-        self.button_map = self.init_button_map()
+        self.config = config
+        self.shared_orc_model = shared_orc_model
+        self.button_map = self.create_sidebar_buttons()
+
+        self.first_load = True
+        self.thread_queue = thread_queue
+        self.progress_callback = progress_callback
 
         # Clear sample text from labels that only update on user interaction.
         self.label_size.setText("")
@@ -49,23 +82,97 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         self.init_sidebar()
         self.load_all_image_thumbnails()
-        self.pushButton_input.click()
+        # Click on the first button to show the input image.
+        input_button = list(self.button_map.keys())[0]
+        input_button.click()
 
-    def init_button_map(self) -> dict[Qw.QPushButton, imf.Step]:
-        return {
-            self.pushButton_input: imf.Step.input,
-            self.pushButton_text_detection: imf.Step.ai_mask,
-            self.pushButton_initial_boxes: imf.Step.initial_boxes,
-            self.pushButton_final_boxes: imf.Step.final_boxes,
-            self.pushButton_box_mask: imf.Step.box_mask,
-            self.pushButton_cut_mask: imf.Step.cut_mask,
-            self.pushButton_mask_layers: imf.Step.mask_layers,
-            self.pushButton_final_mask: imf.Step.final_mask,
-            self.pushButton_output_overlay: imf.Step.mask_overlay,
-            self.pushButton_output_masked: imf.Step.masked_image,
-            self.pushButton_denoise_mask: imf.Step.denoiser_mask,
-            self.pushButton_denoised_output: imf.Step.denoised_image,
-        }
+    def create_sidebar_buttons(self) -> dict[Qw.QPushButton, imf.Output]:
+        """
+        Parse the image object's outputs to create a list of buttons in the side panel.
+
+        Returns: A map of buttons to outputs.
+        """
+
+        current_button_layout: Qw.QGridLayout
+        current_button_index: int = 0
+        last_step_name: str | None = None
+
+        def add_button(title: str | None) -> Qw.QPushButton | Qw.QVBoxLayout:
+            # Insert a new button into the current step's layout.
+            button = Qw.QPushButton()
+            button.setCheckable(True)
+            button.clicked.connect(partial(self.uncheck_all_other_buttons, button))
+            # Ensure the button's style sheet dictates that when checked, it is highlighted
+            # with the accent color from the current system theme.
+            # Fetch the accent color from the current palette
+            accent_color = self.palette().color(Qg.QPalette.ColorRole.Highlight)
+
+            # Update button's stylesheet to use the accent color as background
+            button.setStyleSheet(
+                f"QPushButton:checked {{background-color: {accent_color.name()};}}"
+            )
+            button_widget = button
+
+            # Create a title as a separate label widget and stack them vertically.
+            if title is not None:
+                layout = Qw.QVBoxLayout()
+                layout.setContentsMargins(0, 0, 0, 0)
+                layout.setSpacing(4)  # The small spacing between the label and the image.
+                label = Qw.QLabel(title)
+                layout.addWidget(label)
+                layout.addWidget(button)
+                # Wrap the layout in a widget so it can be added to the grid layout.
+                button_widget = Qw.QWidget()
+                button_widget.setLayout(layout)
+
+            # Add it to the current button grid layout, wrapping to the next row if necessary.
+            nonlocal current_button_layout, current_button_index
+            current_button_layout.addWidget(
+                button_widget,
+                current_button_index // SIDEBAR_COLUMNS,
+                current_button_index % SIDEBAR_COLUMNS,
+            )
+            logger.debug(
+                f"Adding button {title} at index {current_button_index}, row {current_button_index // SIDEBAR_COLUMNS}, column {current_button_index % SIDEBAR_COLUMNS}"
+            )
+            current_button_index += 1
+            return button
+
+        def add_step_label(title: str):
+            # Add a step name label with a spacer above it if needed.
+            nonlocal last_step_name
+            if last_step_name is not None:
+                spacer = Qw.QSpacerItem(0, 16, Qw.QSizePolicy.Minimum, Qw.QSizePolicy.Minimum)
+                self.sidebar_layout.addItem(spacer)
+
+            label = Qw.QLabel(title)
+            font = label.font()
+            font.setBold(True)
+            label.setFont(font)
+            self.sidebar_layout.addWidget(label)
+            # Add a fresh grid layout for the buttons.
+            nonlocal current_button_layout, current_button_index
+            current_button_layout = Qw.QGridLayout()
+            current_button_layout.setContentsMargins(0, 0, 0, 0)
+            current_button_layout.setSpacing(PUSHBUTTON_THUMBNAIL_SEPARATION)
+            current_button_index = 0
+            self.sidebar_layout.addLayout(current_button_layout)
+
+        buttons = {}
+        for output, proc_output in self.image_obj.outputs.items():
+            # Add a step name label if it has changed and is not None.
+            # Outputs with a none step name are not shown.
+            if proc_output.step_name is None:
+                continue
+            elif proc_output.step_name != last_step_name:
+                add_step_label(proc_output.step_name)
+                last_step_name = proc_output.step_name
+
+            button_title = proc_output.output_name
+            new_button = add_button(button_title)
+            buttons[new_button] = output
+
+        return buttons
 
     def init_sidebar(self):
         """
@@ -78,6 +185,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.pushButton_zoom_in.clicked.connect(self.image_viewer.zoom_in)
         self.pushButton_zoom_out.clicked.connect(self.image_viewer.zoom_out)
         self.pushButton_zoom_reset.clicked.connect(self.image_viewer.zoom_reset)
+        self.pushButton_zoom_fit.clicked.connect(self.image_viewer.zoom_fit)
 
         self.pushButton_export.clicked.connect(self.export_image)
 
@@ -87,18 +195,19 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         image_width, image_height = self.image_obj.size
         ratio = image_width / image_height
         if image_width > image_height:
-            button_width = THUMBNAIL_SIZE[0]
-            button_height = int(button_width / ratio)
+            thumbnail_width = THUMBNAIL_SIZE[0]
+            thumbnail_height = int(thumbnail_width / ratio)
         else:
-            button_height = THUMBNAIL_SIZE[1]
-            button_width = int(button_height * ratio)
+            thumbnail_height = THUMBNAIL_SIZE[1]
+            thumbnail_width = int(thumbnail_height * ratio)
 
         # Adjust the width of the scroll area to fit the buttons.
         scrollbar_width = Qw.QApplication.style().pixelMetric(Qw.QStyle.PM_ScrollBarExtent)
         margins_left, _, margins_right, _ = self.sidebar_layout.getContentsMargins()
         self.scrollArea.setFixedWidth(
-            button_width
-            + PUSHBUTTON_THUMBNAIL_MARGIN
+            thumbnail_width * SIDEBAR_COLUMNS
+            + PUSHBUTTON_THUMBNAIL_MARGIN * SIDEBAR_COLUMNS
+            + PUSHBUTTON_THUMBNAIL_SEPARATION * (SIDEBAR_COLUMNS - 1)
             + scrollbar_width
             + margins_left
             + margins_right
@@ -110,23 +219,24 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         # self.scrollArea.setFixedWidth()
         for button in self.button_map:
             button.setFixedSize(
-                button_width + PUSHBUTTON_THUMBNAIL_MARGIN,
-                button_height + PUSHBUTTON_THUMBNAIL_MARGIN,
+                thumbnail_width + PUSHBUTTON_THUMBNAIL_MARGIN,
+                thumbnail_height + PUSHBUTTON_THUMBNAIL_MARGIN,
             )
-            button.setIconSize(Qc.QSize(button_width, button_height))
+            button.setIconSize(Qc.QSize(thumbnail_width, thumbnail_height))
             button.clicked.connect(partial(self.switch_to_image, button))
 
     def load_all_image_thumbnails(self):
         """
         Load all the images into the buttons.
         """
-        for button, step_type in self.button_map.items():
-            step = self.image_obj.steps[step_type]
-            if step.path is not None:
+        for button, output in self.button_map.items():
+            proc_output = self.image_obj.outputs[output]
+            if proc_output.path is not None:
                 try:
-                    button.setIcon(Qg.QIcon(str(step.path)))
+                    button.setIcon(Qg.QIcon(str(proc_output.path)))
+                    button.setText("")
                 except OSError as e:
-                    logger.error(f"Failed to load image {step.path}: {e}")
+                    logger.error(f"Failed to load image {proc_output.path}: {e}")
             else:
                 button.setText("Generate Me")
 
@@ -136,10 +246,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         :param button: The button that was clicked.
         """
-        step: imf.ProcessStep = self.image_obj.steps[self.button_map[button]]
-        self.label_step.setText(step.description)
-        self.current_image_path = step.path
-        if not step.has_path():
+        output = self.button_map[button]
+        proc_output: imf.ProcessOutput = self.image_obj.outputs[output]
+        self.label_step.setText(proc_output.description)
+        self.current_image_path = proc_output.path
+        if not proc_output.has_path():
             # Clear whatever image is currently shown.
             self.image_viewer.set_image(None)
             self.label_position.setText("")
@@ -147,9 +258,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.stackedWidget.setCurrentWidget(self.page_no_image)
             self.pushButton_export.setEnabled(False)
             self.pushButton_refresh.setEnabled(False)
+            self.start_output_worker(output)
         else:
             try:
-                self.image_viewer.set_image(step.path)
+                self.image_viewer.set_image(proc_output.path)
                 self.label_size.setText(
                     f"{self.image_viewer.image_dimensions[0]} × {self.image_viewer.image_dimensions[1]}"
                 )
@@ -159,9 +271,9 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 self.pushButton_export.setEnabled(True)
                 self.pushButton_refresh.setEnabled(True)
             except OSError as e:
-                logger.error(f"Image at {step.path} does not exist. {e}")
+                logger.error(f"Image at {proc_output.path} does not exist. {e}")
                 gu.show_warning(
-                    self, "Image not found.", f"Image at {step.path} does not exist: {e}"
+                    self, "Image not found.", f"Image at {proc_output.path} does not exist: {e}"
                 )
                 return
 
@@ -192,3 +304,73 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             except OSError as e:
                 logger.error(f"Failed to export image to {save_path}: {e}")
                 gu.show_warning(self, "Export failed", f"Failed to export image:\n\n{e}")
+
+    def reload_current_image(self):
+        """
+        Reload the current image.
+        The current image is the one belonging to the currently selected pushbutton.
+        """
+        # Check all the buttons to see which one is currently clicked.
+        for button in self.button_map:
+            if button.isChecked():
+                self.switch_to_image(button)
+                break
+
+    @Slot()
+    def uncheck_all_other_buttons(self, checked_button: Qw.QPushButton):
+        """
+        Uncheck all buttons except the one that was checked.
+
+        :param checked_button: The button that was checked.
+        """
+        for button in self.button_map:
+            if button is not checked_button:
+                button.setChecked(False)
+
+    # ========================================== Worker Functions ==========================================
+
+    def start_output_worker(self, output: imf.Output):
+        """
+        Start the worker thread for the given output.
+
+        :param output: The output to generate.
+        """
+        worker = wt.Worker(self.generate_output, output)
+        worker.signals.progress.connect(self.progress_callback)
+        worker.signals.result.connect(self.output_worker_result)
+        worker.signals.error.connect(self.output_worker_error)
+        self.thread_queue.start(worker)
+
+    def generate_output(self, output: imf.Output, progress_callback: imf.ProgressSignal) -> None:
+        """
+        Generate the given output, if there doesn't yet exist a valid output for it.
+
+        :param output: The output to generate.
+        :param progress_callback: The callback given by the worker thread wrapper.
+        """
+        # Check if the output is already valid.
+        proc_output: imf.ProcessOutput = self.image_obj.outputs[output]
+        if proc_output.is_unchanged(self.config.current_profile):
+            logger.debug(f"Output {output} is unchanged. Worker will not run.")
+            return
+
+        # Start the processor.
+        prc.generate_output(
+            image_objects=[self.image_obj],
+            target_outputs=[output],
+            output_dir=None,
+            config=self.config,
+            ocr_model=self.shared_orc_model.get(),
+            progress_callback=progress_callback,
+        )
+
+    def output_worker_result(self):
+        self.load_all_image_thumbnails()
+        self.reload_current_image()
+        if self.first_load:
+            self.first_load = False
+            self.image_viewer.zoom_fit()
+        logger.info("Output worker finished.")
+
+    def output_worker_error(self):
+        logger.error("Output worker encountered an error.")

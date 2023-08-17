@@ -151,8 +151,8 @@ class Ui_MainWindow(object):
         self.groupBox_profile.setObjectName(u"groupBox_profile")
         self.verticalLayout_2 = QVBoxLayout(self.groupBox_profile)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_profile_header = QHBoxLayout()
+        self.horizontalLayout_profile_header.setObjectName(u"horizontalLayout_profile_header")
         self.comboBox_current_profile = CComboBox(self.groupBox_profile)
         self.comboBox_current_profile.addItem("")
         self.comboBox_current_profile.setObjectName(u"comboBox_current_profile")
@@ -163,14 +163,14 @@ class Ui_MainWindow(object):
         self.comboBox_current_profile.setSizePolicy(sizePolicy)
         self.comboBox_current_profile.setMinimumSize(QSize(48, 0))
 
-        self.horizontalLayout_2.addWidget(self.comboBox_current_profile)
+        self.horizontalLayout_profile_header.addWidget(self.comboBox_current_profile)
 
         self.pushButton_save_profile = QPushButton(self.groupBox_profile)
         self.pushButton_save_profile.setObjectName(u"pushButton_save_profile")
         self.pushButton_save_profile.setEnabled(False)
         self.pushButton_save_profile.setIcon(icon5)
 
-        self.horizontalLayout_2.addWidget(self.pushButton_save_profile)
+        self.horizontalLayout_profile_header.addWidget(self.pushButton_save_profile)
 
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
@@ -184,10 +184,10 @@ class Ui_MainWindow(object):
 
         self.pushButton_reset_profile.setIcon(icon8)
 
-        self.horizontalLayout_2.addWidget(self.pushButton_reset_profile)
+        self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
 
 
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_profile_header)
 
         self.toolBox_profile_frame = QWidget(self.groupBox_profile)
         self.toolBox_profile_frame.setObjectName(u"toolBox_profile_frame")

@@ -15,7 +15,7 @@ necessary files to run the model and the function below.
 """
 
 import json
-import uuid
+from uuid import uuid4
 from pathlib import Path
 import multiprocessing as mp
 
@@ -64,12 +64,10 @@ def model2annotations(
     print(f"Using {num_processes} processes for text detection.")
 
     if num_processes > 1:
-
         mp.freeze_support()
         mp.set_start_method("spawn")
 
         with mp.Pool(num_processes) as pool:
-
             # Distribute the images evenly among the processes.
             batches = [list() for _ in range(num_processes)]
             for i, img_path in enumerate(img_list):
@@ -104,7 +102,14 @@ def process_image_batch(args):
         torch.cuda.empty_cache()
 
 
-def process_image(img_path: Path, model: TextDetector, save_dir: Path, image_scale: float):
+def process_image(
+    img_path: Path,
+    model: TextDetector,
+    save_dir: Path,
+    image_scale: float,
+    skip_text_detection: bool = False,
+    uuid: str = None,
+):
     """
     Process a single image using the TextDetector model.
     This generates a mask and a json file containing the text boxes.
@@ -114,12 +119,18 @@ def process_image(img_path: Path, model: TextDetector, save_dir: Path, image_sca
     :param model: The TextDetector model.
     :param save_dir: The directory where the results will be saved.
     :param image_scale: The scale to use when resizing the image (float > 0).
+    :param skip_text_detection: If True, skip the text detection step and only
+        save the scaled input image as a png.
+    :param uuid: The uuid to use for the image. If None, a new uuid will be generated.
     """
 
     img = read_image(img_path, image_scale)
 
     # Prepend an index to prevent name clobbering between different files.
-    prefix = f"{uuid.uuid4()}_"
+    if uuid is None:
+        prefix = f"{uuid4()}_"
+    else:
+        prefix = f"{uuid}_"
 
     img_name = prefix + img_path.stem
     maskname = img_name + "_mask.png"
@@ -127,6 +138,12 @@ def process_image(img_path: Path, model: TextDetector, save_dir: Path, image_sca
     # Make names absolute paths.
     img_name = str((save_dir / (img_name + ".png")).absolute())
     maskname = str((save_dir / maskname).absolute())
+
+    # Save a scaled copy of the image.
+    imwrite(img_name, img)
+    if skip_text_detection:
+        # If we're only saving the scaled image, we're done.
+        return
 
     mask, mask_refined, blk_list = model(
         img, refine_mode=REFINEMASK_ANNOTATION, keep_undetected_mask=True
@@ -151,7 +168,6 @@ def process_image(img_path: Path, model: TextDetector, save_dir: Path, image_sca
     logger.debug(f"Saving json file to {json_path}")
     with open(json_path, "w", encoding="utf8") as f:
         json.dump(data, f, ensure_ascii=False, cls=NumpyEncoder, indent=4)
-    imwrite(img_name, img)
     imwrite(maskname, mask_refined)
 
 

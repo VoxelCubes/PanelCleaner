@@ -1,15 +1,14 @@
-from pathlib import Path
-from typing import get_type_hints, Any, Callable
+import re
 from dataclasses import dataclass, field
 from enum import Enum, auto
-import re
+from typing import get_type_hints, Any, Callable
 
-import configupdater as cu
-from logzero import logger
-import PySide6.QtWidgets as qw
-import PySide6.QtGui as qg
 import PySide6.QtCore as qc
+import PySide6.QtGui as qg
+import PySide6.QtWidgets as qw
+import configupdater as cu
 from PySide6.QtCore import Slot
+from logzero import logger
 
 from pcleaner import config as cfg
 from pcleaner.config import GreaterZero
@@ -293,7 +292,6 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
 
 
 class ProfileToolBox(qw.QToolBox):
-
     # A subclass that tracks the mapping of widgets to profile options.
     # This is used to save/load the values of the widgets to the profile.
 
