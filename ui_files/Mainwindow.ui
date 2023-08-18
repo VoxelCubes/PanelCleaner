@@ -402,7 +402,11 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
-                <widget class="QLineEdit" name="lineEdit_out_directory"/>
+                <widget class="QLineEdit" name="lineEdit_out_directory">
+                 <property name="placeholderText">
+                  <string>cleaned</string>
+                 </property>
+                </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="pushButton_browse_out_dir">

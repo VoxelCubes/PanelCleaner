@@ -550,6 +550,7 @@ class Ui_MainWindow(object):
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))
         self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
+        self.lineEdit_out_directory.setPlaceholderText(QCoreApplication.translate("MainWindow", u"cleaned", None))
         self.pushButton_browse_out_dir.setText("")
         self.textEdit_analytics.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

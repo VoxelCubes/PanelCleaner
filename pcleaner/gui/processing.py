@@ -7,6 +7,7 @@ from typing import Callable
 from logzero import logger
 from manga_ocr import MangaOcr
 import torch
+from PIL import Image
 
 import pcleaner.config as cfg
 import pcleaner.denoiser as dn
@@ -15,6 +16,9 @@ import pcleaner.gui.image_file as imf
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
 import pcleaner.structures as st
+import pcleaner.image_ops as ops
+
+# TODO skip pool shenanigans for less than X images.
 
 
 def generate_output(
@@ -30,6 +34,12 @@ def generate_output(
     Process all the images in the given image objects list until the target step is reached.
     The paths inside the image objects are updated as the processing progresses.
     If the profile checksum of a step hasn't changed, the step is skipped.
+
+    In GUI mode, the masker and denoiser never write the output directly, but instead
+    place them in the cache directory. From there they may be copied to the output directory,
+    to ensure that effort isn't duplicated where possible. For example, if the output was already
+    generated for the viewer, it doesn't need to be generated again for the final output, or when
+    only changing the output path for the final output.
 
     The ocr model (or None) is passed in as arguments, so it can be reused
     across multiple runs. This is done because in gui mode the model does not need to be loaded
@@ -223,13 +233,6 @@ def generate_output(
                 for image_obj in step_masker_images
             )
 
-            # When denoising, we don't immediately output the cleaned image.
-            # But when not, we do, since denoising is optional.
-            if target_output in imf.step_to_output[imf.Step.denoiser]:
-                masker_output_dir = None
-            else:
-                masker_output_dir = output_dir
-
             # Pack all the arguments into a dataclass.
             outputs_that_need_masks = (
                 imf.Output.box_mask,
@@ -246,7 +249,7 @@ def generate_output(
             data = [
                 st.MaskerData(
                     json_file,
-                    masker_output_dir,
+                    None,
                     cache_dir,
                     profile.general,
                     profile.masker,
@@ -322,15 +325,15 @@ def generate_output(
             data = [
                 st.DenoiserData(
                     json_file,
-                    output_dir,
+                    None,
                     cache_dir,
                     profile.general,
                     profile.denoiser,
                     save_only_mask=target_outputs == [imf.Output.denoiser_mask],
                     save_only_cleaned=target_outputs == [imf.Output.denoised_image],
-                    extract_text=imf.Output.isolated_denoised_text in target_outputs,
+                    extract_text=imf.Output.isolated_text in target_outputs,
                     separate_noise_masks=False,
-                    show_masks=output_dir is None,
+                    show_masks=True,
                     debug=debug,
                 )
                 for json_file in json_files
@@ -355,7 +358,7 @@ def generate_output(
             for image_obj in step_denoiser_images:
                 update_output(image_obj, imf.Output.denoiser_mask, "_noise_mask.png")
                 update_output(image_obj, imf.Output.denoised_image, "_clean_denoised.png")
-                update_output(image_obj, imf.Output.isolated_denoised_text, "_text.png")
+                update_output(image_obj, imf.Output.isolated_text, "_text.png")
 
             progress_callback.emit(
                 imf.ProgressData(
@@ -371,4 +374,93 @@ def generate_output(
                 )
             )
 
-    logger.info("Done!")
+    logger.info(f"Finished processing {len(image_objects)} images.")
+
+    if output_dir is None:
+        return
+
+    # ============================================== Final Output ==============================================
+
+    for image_obj in image_objects:
+        copy_to_output(image_obj, target_outputs, output_dir, profile)
+
+
+def copy_to_output(
+    image_object: imf.ImageFile,
+    outputs: list[imf.Output],
+    output_directory: Path,
+    profile: cfg.Profile,
+):
+    """
+    Copy or export the outputs from the cache directory to the output directory.
+    Output paths and preferred file types are taken into account.
+
+    Supported outputs:
+    - Masked image: Output.masked_image
+    - Final mask: Output.final_mask
+    - Isolated text: Output.isolated_text
+    - Denoised image: Output.denoised_image
+    - Denoised Mask: Output.denoiser_mask
+
+    This may raise OSError in various circumstances.
+
+    :param image_object: The image object to copy the outputs for.
+    :param outputs: The outputs to copy.
+    :param output_directory: The directory to write the outputs to.
+    :param profile: The profile to use.
+    """
+
+    if output_directory.is_absolute():
+        # When absolute, the output directory is used as is.
+        final_out_path = output_directory / image_object.path.name
+    else:
+        # Otherwise, the output directory is relative to the original image's parent directory.
+        final_out_path = image_object.path.parent / output_directory / image_object.path.name
+
+    final_out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Create png paths for the outputs.
+    cleaned_out_path = final_out_path.with_name(final_out_path.stem + "_clean.png")
+    masked_out_path = final_out_path.with_name(final_out_path.stem + "_mask.png")
+    text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
+
+    # Check what the preferred output format is.
+    if profile.general.preferred_file_type is None:
+        # Use the original file type by default.
+        cleaned_out_path = cleaned_out_path.with_suffix(image_object.path.suffix)
+    else:
+        cleaned_out_path = cleaned_out_path.with_suffix(profile.general.preferred_file_type)
+
+    if profile.general.preferred_mask_file_type is None:
+        # Use png by default.
+        masked_out_path = masked_out_path.with_suffix(".png")
+        text_out_path = text_out_path.with_suffix(".png")
+    else:
+        masked_out_path = masked_out_path.with_suffix(profile.general.preferred_mask_file_type)
+        text_out_path = text_out_path.with_suffix(profile.general.preferred_mask_file_type)
+
+    # Output optimized images for all requested outputs.
+    if imf.Output.masked_image in outputs:
+        ops.save_optimized(
+            image_object.outputs[imf.Output.masked_image].path, cleaned_out_path, image_object.path
+        )
+
+    if imf.Output.final_mask in outputs:
+        ops.save_optimized(image_object.outputs[imf.Output.final_mask].path, masked_out_path)
+
+    if imf.Output.isolated_text in outputs:
+        ops.save_optimized(image_object.outputs[imf.Output.isolated_text].path, text_out_path)
+
+    if imf.Output.denoised_image in outputs:
+        ops.save_optimized(
+            image_object.outputs[imf.Output.denoised_image].path,
+            cleaned_out_path,
+            image_object.path,
+        )
+
+    if imf.Output.denoiser_mask in outputs:
+        # Special case: Here we need to take the final mask and paste this on top.
+        final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        denoised_mask = Image.open(image_object.outputs[imf.Output.denoiser_mask].path)
+        final_mask.paste(denoised_mask, (0, 0), denoised_mask)
+        ops.save_optimized(final_mask, masked_out_path)

@@ -67,14 +67,14 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
 
     # Check if the output path is None. In that case we're only outputting to the cache directory.
     if d_data.output_dir is None:
-        # Check if we still need to output the isolated text, otherwise we're done.
-        if d_data.extract_text:
-            # Extract the text layer from the image.
-            logger.debug(f"Extracting text from {original_path}")
-            base_image = Image.open(original_path)
-            text_img = ops.extract_text(base_image, mask_image)
-            save_mask(text_img, "_text")
-
+        # # Check if we still need to output the isolated text, otherwise we're done.
+        # if d_data.extract_text:
+        #     # Extract the text layer from the image.
+        #     logger.debug(f"Extracting text from {original_path}")
+        #     base_image = Image.open(original_path)
+        #     text_img = ops.extract_text(base_image, mask_image)
+        #     save_mask(text_img, "_text")
+        #
         # Package the analytics. We're only interested in the std deviations.
         return st.DenoiseAnalytic(
             tuple(deviation for _, deviation in mask_data.boxes_with_deviation)

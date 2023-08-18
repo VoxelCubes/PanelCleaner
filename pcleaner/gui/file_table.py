@@ -39,6 +39,8 @@ class FileTable(CTableWidget):
     table_is_empty = Qc.Signal()
     table_not_empty = Qc.Signal()
 
+    files: dict[Path, imf.ImageFile]
+
     requesting_image_preview = Qc.Signal(imf.ImageFile)
 
     def __init__(self, parent=None):
@@ -66,6 +68,12 @@ class FileTable(CTableWidget):
 
     def set_shared_ocr_model(self, shared_ocr_model: st.Shared[st.OCRModel]):
         self.shared_ocr_model = shared_ocr_model
+
+    def get_image_files(self) -> list[imf.ImageFile]:
+        """
+        Get a list of all the image files in the table.
+        """
+        return list(self.files.values())
 
     def handleDrop(self, path: str):
         logger.debug(f"Dropped {path}")

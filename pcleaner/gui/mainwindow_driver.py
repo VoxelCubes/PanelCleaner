@@ -2,6 +2,7 @@ import shutil
 from functools import partial
 from pathlib import Path
 from importlib import resources
+from copy import deepcopy
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -26,6 +27,7 @@ import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.worker_thread as wt
 import pcleaner.gui.structures as st
 import pcleaner.gui.image_file as imf
+import pcleaner.gui.processing as prc
 
 ANALYTICS_COLUMNS = 70
 
@@ -109,6 +111,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 progress_callback=self.show_current_progress,
             )
         )
+        self.pushButton_start.clicked.connect(self.start_processing)
 
     # ========================================== Initialization Workers ==========================================
 
@@ -136,7 +139,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 context="Failed to load OCR model. OCR impossible, moderate cleaning impact.",
             )
         )
-        self.threadpool.start(ocr_worker)
+        # Add it to the queue, to make sure it finishes before any processing starts.
+        self.thread_queue.start(ocr_worker)
 
     def load_ocr_model(self):
         t_start = time.time()
@@ -508,8 +512,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
         self.menu_set_default_profile.actions()[-1].setCheckable(True)
 
+    @staticmethod
     def get_new_profile_path(
-        self, show_protection_hint: bool = False
+        show_protection_hint: bool = False,
     ) -> tuple[Path, str] | tuple[None, None]:
         """
         Open a save dialog to save the current profile.
@@ -525,6 +530,86 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             return new_profile_dialog.get_save_path(), new_profile_dialog.get_name()
 
         return None, None
+
+    # ========================================== Processing ==========================================
+
+    def start_processing(self):
+        """
+        Start processing all files in the table.
+        """
+        # Figure out what outputs are requested, depending on the checkboxes and the profile.
+        request_cleaned = self.checkBox_save_clean.isChecked()
+        request_mask = self.checkBox_save_mask.isChecked()
+        request_text = self.checkBox_save_text.isChecked()
+
+        requested_outputs = []
+
+        if self.config.current_profile.denoiser.denoising_enabled:
+            if request_cleaned:
+                requested_outputs.append(imf.Output.denoised_image)
+            if request_mask:
+                requested_outputs.append(imf.Output.denoiser_mask)
+        else:
+            if request_cleaned:
+                requested_outputs.append(imf.Output.masked_image)
+            if request_mask:
+                requested_outputs.append(imf.Output.final_mask)
+
+        if request_text:
+            requested_outputs.append(imf.Output.isolated_text)
+
+        output_str = self.lineEdit_out_directory.text()
+        output_directory = Path(output_str if output_str else "cleaned")
+        image_files = self.file_table.get_image_files()
+        config = deepcopy(self.config)
+
+        worker = wt.Worker(
+            self.generate_output, requested_outputs, output_directory, image_files, config
+        )
+        worker.signals.progress.connect(self.show_current_progress)
+        worker.signals.result.connect(self.output_worker_result)
+        worker.signals.error.connect(self.output_worker_error)
+        self.thread_queue.start(worker)
+
+    def generate_output(
+        self,
+        outputs: list[imf.Output],
+        output_directory: Path,
+        image_files: list[imf.ImageFile],
+        config: cfg.Config,
+        progress_callback: imf.ProgressSignal,
+    ) -> None:
+        """
+        Generate the given output, if there doesn't yet exist a valid output for it.
+        Then output it to the given directory.
+
+        :param outputs: The outputs to generate.
+        :param output_directory: The directory to output to.
+        :param image_files: The image files to process.
+        :param config: The config to use.
+        :param progress_callback: The callback given by the worker thread wrapper.
+        """
+
+        # Start the processor.
+        prc.generate_output(
+            image_objects=image_files,
+            target_outputs=outputs,
+            output_dir=output_directory,
+            config=config,
+            ocr_model=self.shared_ocr_model.get(),
+            progress_callback=progress_callback,
+        )
+
+    def output_worker_result(self):
+        gu.show_info(self, "Processing Finished", "Finished processing all files.")
+        logger.info("Output worker finished.")
+
+    @Slot(wt.WorkerError)
+    def output_worker_error(self, e):
+        gu.show_warning(
+            self, "Processing Error", f"Encountered an error while processing files.\n\n{e}"
+        )
+        logger.error(f"Output worker encountered an error:\n{e}")
 
     """
     Log file

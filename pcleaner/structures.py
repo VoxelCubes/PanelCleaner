@@ -392,7 +392,7 @@ class DenoiserData:
     """
 
     json_path: Path
-    output_dir: Path
+    output_dir: Path | None
     cache_dir: Path
     general_config: cfg.GeneralConfig
     denoiser_config: cfg.DenoiserConfig

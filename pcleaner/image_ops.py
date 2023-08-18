@@ -592,7 +592,9 @@ suffix_to_format: dict[str, str] = {
 }
 
 
-def save_optimized(image: Image, path: Path, original: Path | Image.Image | None = None) -> None:
+def save_optimized(
+    image: Path | Image.Image, path: Path, original: Path | Image.Image | None = None
+) -> None:
     """
     Save the image with optimized settings.
 
@@ -600,6 +602,12 @@ def save_optimized(image: Image, path: Path, original: Path | Image.Image | None
     :param path: The path to save the image to, containing a suffix.
     :param original: The original image, used to determine the compression method, if applicable.
     """
+    assert image is not None
+
+    # Load the image if it's a path.
+    if isinstance(image, Path):
+        image = Image.open(image)
+
     compression_method = None
     original_image_mode = None
     original_dpi = None

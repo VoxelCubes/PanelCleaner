@@ -108,12 +108,7 @@ def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
         mask_fitments,
     )
 
-    # Check if we can quit early because we don't need to save the cleaned image if we'll be denoising afterwards.
-    if m_data.output_dir is None and not m_data.show_masks:
-        return analytics
-
     # Carry on with creating the cleaned image.
-
     # If the scale isn't 1, then we need to reload the original image and scale the mask to fit.
     if page_data.scale != 1:
         cleaned_image = Image.open(page_data.original_path)
@@ -129,7 +124,7 @@ def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
         # Extract the text layer from the image.
         logger.debug(f"Extracting text from {original_path}")
         text_img = ops.extract_text(base_image, combined_mask)
-        save_mask(text_img, "_text")
+        text_img.save(cache_out_path.with_stem(cache_out_path.stem + "_text"))
 
     # Settle on the final output path for the cleaned image.
     # Check if outputting directly.
