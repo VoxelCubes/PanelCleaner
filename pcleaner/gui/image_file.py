@@ -356,7 +356,7 @@ class ImageFile:
 
         settings += [pro.denoiser]
         self.outputs[Output.denoiser_mask] = ProcessOutput(
-            "The final mask overlaid on a denoised portion of the input image.",
+            "The masks that required denoising, to be overlaid on the final mask when exporting.",
             "Denoiser",
             "Denoise Mask",
             settings,
