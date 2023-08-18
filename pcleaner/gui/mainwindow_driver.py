@@ -56,7 +56,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Share core objects with the file table.
         # Since the file table is created by the ui loader, we can't pass them to the constructor.
         self.file_table.set_config(self.config)
-        self.file_table.set_shared_orc_model(self.shared_ocr_model)
+        self.file_table.set_shared_ocr_model(self.shared_ocr_model)
 
         # TODO eventually check for the existence of the text detector models on startup.
 
@@ -104,7 +104,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             partial(
                 self.image_tab.open_image,
                 config=self.config,
-                shared_orc_model=self.shared_ocr_model,
+                shared_ocr_model=self.shared_ocr_model,
                 thread_queue=self.thread_queue,
                 progress_callback=self.show_current_progress,
             )

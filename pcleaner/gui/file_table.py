@@ -34,7 +34,7 @@ class FileTable(CTableWidget):
     """
 
     config: cfg.Config  # Reference to the MainWindow's config.
-    shared_orc_model: st.Shared[st.OCRModel]  # Must be handed over by the mainwindow.
+    shared_ocr_model: st.Shared[st.OCRModel]  # Must be handed over by the mainwindow.
 
     table_is_empty = Qc.Signal()
     table_not_empty = Qc.Signal()
@@ -64,8 +64,8 @@ class FileTable(CTableWidget):
     def set_config(self, config: cfg.Config):
         self.config = config
 
-    def set_shared_orc_model(self, shared_orc_model: st.Shared[st.OCRModel]):
-        self.shared_orc_model = shared_orc_model
+    def set_shared_ocr_model(self, shared_ocr_model: st.Shared[st.OCRModel]):
+        self.shared_ocr_model = shared_ocr_model
 
     def handleDrop(self, path: str):
         logger.debug(f"Dropped {path}")
