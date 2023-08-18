@@ -270,6 +270,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 self.stackedWidget.setCurrentWidget(self.page_viewer)
                 self.pushButton_export.setEnabled(True)
                 self.pushButton_refresh.setEnabled(True)
+                if self.first_load:
+                    self.first_load = False
+                    # Call the zoom fit function after the event loop has finished.
+                    # This is necessary because the viewport dimensions are not known until the image is loaded.
+                    Qc.QTimer.singleShot(0, self.image_viewer.zoom_fit)
             except OSError as e:
                 logger.error(f"Image at {proc_output.path} does not exist. {e}")
                 gu.show_warning(
@@ -367,10 +372,9 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     def output_worker_result(self):
         self.load_all_image_thumbnails()
         self.reload_current_image()
-        if self.first_load:
-            self.first_load = False
-            self.image_viewer.zoom_fit()
         logger.info("Output worker finished.")
 
-    def output_worker_error(self):
+    @Slot(wt.WorkerError)
+    def output_worker_error(self, error: wt.WorkerError):
         logger.error("Output worker encountered an error.")
+        gu.show_warning(self, "Output failed", f"Output generation failed:\n\n{error}")

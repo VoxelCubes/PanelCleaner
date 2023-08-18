@@ -3,6 +3,7 @@ from pathlib import Path
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+from logzero import logger
 
 
 ZOOM_TICK_FACTOR = 1.25
@@ -98,6 +99,7 @@ class ImageViewer(Qw.QGraphicsView):
         width_factor = view_width / width
         height_factor = view_height / height
         self.zoom_factor = min(width_factor, height_factor)
+        logger.debug(f"Zoom to fit with factor: {self.zoom_factor:.2%}")
         self.zoom(1)
 
     def image_position(self, pos):
