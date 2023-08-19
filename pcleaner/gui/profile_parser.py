@@ -405,6 +405,9 @@ def to_snake_case(name: str) -> str:
     """
     Convert the given name to snake case.
 
+    Example:
+        "ThisIsATest" -> "this_is_a_test"
+
     :param name: The name to convert.
     :return: The converted name.
     """
@@ -417,6 +420,9 @@ def to_display_name(name: str) -> str:
     """
     Convert the given name to a display name.
     Split on underscores or CamelCase and capitalize each word.
+
+    Example:
+        "this_is_a_test" -> "This Is A Test"
 
     :param name: The name to convert.
     :return: The converted name.

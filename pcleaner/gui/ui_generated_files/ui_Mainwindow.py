@@ -16,13 +16,12 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QFormLayout,
-    QFrame, QGroupBox, QHBoxLayout, QHeaderView,
-    QLabel, QLineEdit, QMainWindow, QMenu,
-    QMenuBar, QProgressBar, QPushButton, QRadioButton,
-    QSizePolicy, QSpacerItem, QSplitter, QStackedWidget,
-    QStatusBar, QTableWidgetItem, QTextEdit, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QFrame,
+    QGroupBox, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QMenu, QMenuBar,
+    QProgressBar, QPushButton, QRadioButton, QSizePolicy,
+    QSpacerItem, QSplitter, QStackedWidget, QStatusBar,
+    QTableWidgetItem, QTextEdit, QVBoxLayout, QWidget)
 
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
 from pcleaner.gui.CustomQ.CDropFrame import CDropFrame
@@ -272,10 +271,11 @@ class Ui_MainWindow(object):
         self.splitter.addWidget(self.stackedWidget_images)
         self.frame_output = QFrame(self.splitter)
         self.frame_output.setObjectName(u"frame_output")
-        self.frame_output.setFrameShape(QFrame.StyledPanel)
+        self.frame_output.setFrameShape(QFrame.NoFrame)
         self.frame_output.setFrameShadow(QFrame.Raised)
         self.verticalLayout_4 = QVBoxLayout(self.frame_output)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.groupBox_4 = QGroupBox(self.frame_output)
@@ -411,31 +411,54 @@ class Ui_MainWindow(object):
 
         self.widget_progress_drawer = QWidget(self.centralwidget)
         self.widget_progress_drawer.setObjectName(u"widget_progress_drawer")
-        self.formLayout = QFormLayout(self.widget_progress_drawer)
-        self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setVerticalSpacing(4)
+        self.horizontalLayout_2 = QHBoxLayout(self.widget_progress_drawer)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.label_generating_what = QLabel(self.widget_progress_drawer)
+        self.label_generating_what.setObjectName(u"label_generating_what")
+
+        self.horizontalLayout_2.addWidget(self.label_generating_what)
+
+        self.label_target_outputs = QLabel(self.widget_progress_drawer)
+        self.label_target_outputs.setObjectName(u"label_target_outputs")
+
+        self.horizontalLayout_2.addWidget(self.label_target_outputs)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Maximum, QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer)
+
+        self.label_progress_total = QLabel(self.widget_progress_drawer)
+        self.label_progress_total.setObjectName(u"label_progress_total")
+
+        self.horizontalLayout_2.addWidget(self.label_progress_total)
+
+        self.progressBar_total = QProgressBar(self.widget_progress_drawer)
+        self.progressBar_total.setObjectName(u"progressBar_total")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.progressBar_total.sizePolicy().hasHeightForWidth())
+        self.progressBar_total.setSizePolicy(sizePolicy3)
+        self.progressBar_total.setMinimum(0)
+        self.progressBar_total.setValue(24)
+        self.progressBar_total.setTextVisible(True)
+
+        self.horizontalLayout_2.addWidget(self.progressBar_total)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Maximum, QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
+
         self.label_progress_step = QLabel(self.widget_progress_drawer)
         self.label_progress_step.setObjectName(u"label_progress_step")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_progress_step)
+        self.horizontalLayout_2.addWidget(self.label_progress_step)
 
         self.progressBar_individual = QProgressBar(self.widget_progress_drawer)
         self.progressBar_individual.setObjectName(u"progressBar_individual")
         self.progressBar_individual.setValue(24)
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.progressBar_individual)
-
-        self.label_2 = QLabel(self.widget_progress_drawer)
-        self.label_2.setObjectName(u"label_2")
-
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_2)
-
-        self.progressBar_total = QProgressBar(self.widget_progress_drawer)
-        self.progressBar_total.setObjectName(u"progressBar_total")
-        self.progressBar_total.setValue(24)
-        self.progressBar_total.setTextVisible(True)
-
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.progressBar_total)
+        self.horizontalLayout_2.addWidget(self.progressBar_individual)
 
 
         self.verticalLayout_6.addWidget(self.widget_progress_drawer)
@@ -560,8 +583,12 @@ class Ui_MainWindow(object):
                         ": <br />Mask 0  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 1  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 2  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 3  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 4  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 5  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 6  : </span><span style=\" font-family:'Noto Mono','"
                         "Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">1</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 1 <br />Mask 7  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 8  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 9  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 10 :  </span><span style=\" font-family:'Noto Mono','Monospa"
                         "ce'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Box mask: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">4</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 4 <br /><br /></span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588 Perfect</span><span style=\" font-family:'Noto Mono','Monospace';\"> | \u2588 Total<br /><br /></span></p></body></html>", None))
-        self.label_progress_step.setText(QCoreApplication.translate("MainWindow", u"Current Step:", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Total Progress:", None))
+        self.label_generating_what.setText(QCoreApplication.translate("MainWindow", u"Generating:", None))
+        self.label_target_outputs.setText(QCoreApplication.translate("MainWindow", u"<targeted output(s)>", None))
+        self.label_progress_total.setText(QCoreApplication.translate("MainWindow", u"Total Progress:", None))
+        self.progressBar_total.setFormat(QCoreApplication.translate("MainWindow", u"%v / %m", None))
+        self.label_progress_step.setText(QCoreApplication.translate("MainWindow", u"Images Processed:", None))
+        self.progressBar_individual.setFormat(QCoreApplication.translate("MainWindow", u"%v / %m", None))
         self.menu_File.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menu_Profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.menu_set_default_profile.setTitle(QCoreApplication.translate("MainWindow", u"Set Default", None))

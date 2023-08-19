@@ -18,7 +18,7 @@ def model2annotations_gui(
     save_dir: Path,
     no_text_detection: bool,
     partial_progress_data: partial,
-    progress_callback: imf.ProgressSignal,
+    progress_callback: imf.ProgressSignal | None,
 ):
     """
     Run the model on a directory of images and produce the following
@@ -48,10 +48,12 @@ def model2annotations_gui(
     :param progress_callback: A callback to report progress to the gui.
     """
 
-    progress_callback.emit(partial_progress_data(imf.ProgressType.begin))
+    if progress_callback is not None:
+        progress_callback.emit(partial_progress_data(imf.ProgressType.begin))
 
     def inc_progress():
-        progress_callback.emit(partial_progress_data(imf.ProgressType.incremental))
+        if progress_callback is not None:
+            progress_callback.emit(partial_progress_data(imf.ProgressType.incremental))
 
     num_processes = min(config_detector.concurrent_models, len(img_list))
 

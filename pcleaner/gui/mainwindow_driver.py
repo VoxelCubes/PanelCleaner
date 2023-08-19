@@ -1,33 +1,32 @@
-import shutil
-from functools import partial
-from pathlib import Path
-from importlib import resources
+import time
 from copy import deepcopy
+from functools import partial
+from importlib import resources
+from pathlib import Path
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Signal, Slot
+from PySide6.QtCore import Slot
 from logzero import logger
 from manga_ocr import MangaOcr
-import torch
-import time
 
 import pcleaner.cli_utils as cu
-import pcleaner.helpers as hp
 import pcleaner.config as cfg
-import pcleaner.gui.profile_parser as pp
 import pcleaner.gui.gui_utils as gu
+import pcleaner.gui.image_file as imf
+import pcleaner.gui.new_profile_driver as npd
+import pcleaner.gui.processing as prc
+import pcleaner.gui.profile_parser as pp
+import pcleaner.gui.structures as st
+import pcleaner.gui.worker_thread as wt
+import pcleaner.helpers as hp
 import pcleaner.profile_cli as pc
-from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
-from pcleaner.gui.file_table import Column
 from pcleaner import __display_name__, __version__
 from pcleaner import data
-import pcleaner.gui.new_profile_driver as npd
-import pcleaner.gui.worker_thread as wt
-import pcleaner.gui.structures as st
-import pcleaner.gui.image_file as imf
-import pcleaner.gui.processing as prc
+from pcleaner.gui.file_table import Column
+from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
+
 
 ANALYTICS_COLUMNS = 70
 
@@ -35,7 +34,6 @@ ANALYTICS_COLUMNS = 70
 # noinspection PyUnresolvedReferences
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     config: cfg.Config = None
-    processing: bool = False
 
     label_stats: Qw.QLabel
 
@@ -45,12 +43,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     thread_queue: Qc.QThreadPool
 
+    progress_current: int
+    progress_step_start: imf.Step | None  # When None, no processing is running.
+
     def __init__(self):
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__display_name__} {__version__}")
         self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
-        self.processing = False
+
+        self.progress_current = 0
+        self.progress_step_start = None
 
         self.config = cfg.load_config()
         self.shared_ocr_model = st.Shared[st.OCRModel]()
@@ -78,7 +81,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.initialize_ui()
 
     def initialize_ui(self):
-        self.hide_progress()
+        self.hide_progress_drawer()
         self.set_up_statusbar()
         self.initialize_profiles()
         self.initialize_analytics_view()
@@ -112,6 +115,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
         )
         self.pushButton_start.clicked.connect(self.start_processing)
+
+        # Set the current palette to use the inactive color for placeholder text.
+        palette = self.palette()
+        placeholder_color = palette.color(Qg.QPalette.Inactive, Qg.QPalette.Text)
+        palette.setColor(Qg.QPalette.PlaceholderText, placeholder_color)
+        self.setPalette(palette)
+        # Make the progress drawer use the alternate background color.
+        alternate_color = palette.color(Qg.QPalette.AlternateBase)
+        self.widget_progress_drawer.setStyleSheet(
+            f"background-color: {alternate_color.name()};"
+            + self.widget_progress_drawer.styleSheet()
+        )
 
     # ========================================== Initialization Workers ==========================================
 
@@ -569,6 +584,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         worker.signals.progress.connect(self.show_current_progress)
         worker.signals.result.connect(self.output_worker_result)
         worker.signals.error.connect(self.output_worker_error)
+        worker.signals.finished.connect(self.output_worker_finished)
         self.thread_queue.start(worker)
 
     def generate_output(
@@ -603,6 +619,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def output_worker_result(self):
         gu.show_info(self, "Processing Finished", "Finished processing all files.")
         logger.info("Output worker finished.")
+
+    def output_worker_finished(self):
+        self.hide_progress_drawer()
+        self.progress_step_start = None
+        self.progress_current = 0
 
     @Slot(wt.WorkerError)
     def output_worker_error(self, e):
@@ -641,15 +662,55 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     Simple UI manipulation functions
     """
 
-    def hide_progress(self):
+    def hide_progress_drawer(self):
         self.widget_progress_drawer.hide()
 
-    def show_progress(self):
+    def show_progress_drawer(self):
         self.widget_progress_drawer.show()
 
     @Slot(imf.ProgressData)
     def show_current_progress(self, progress_data: imf.ProgressData):
         logger.info(f"Progress: {progress_data}")
+
+        if progress_data.progress_type == imf.ProgressType.begin:
+            # This marks the beginning of a new processing step.
+            self.show_progress_drawer()
+            self.progress_current = 0
+
+            if self.progress_step_start is None:
+                # This is the first step.
+                self.progress_step_start = progress_data.current_step
+                # Set the target label, we don't need to update this multiple times.
+                self.label_target_outputs.setText(
+                    ", ".join(pp.to_display_name(o.name) for o in progress_data.target_outputs)
+                )
+
+        elif progress_data.progress_type == imf.ProgressType.incremental:
+            self.progress_current += progress_data.value
+        elif progress_data.progress_type == imf.ProgressType.absolute:
+            self.progress_current = progress_data.value
+        elif progress_data.progress_type == imf.ProgressType.analytics:
+            # Show analytics.
+            logger.info(f"Showing analytics... {progress_data.value}")
+        elif progress_data.progress_type == imf.ProgressType.end:
+            # This marks the end of a processing step.
+            self.output_worker_finished()
+            return
+        else:
+            # Sanity check.
+            raise ValueError(f"Invalid progress type: {progress_data.progress_type}")
+
+        # Update the progress bars.
+        self.progressBar_individual.setValue(self.progress_current)
+        self.progressBar_individual.setMaximum(progress_data.total_images)
+        self.progressBar_total.setValue(progress_data.current_step.value)
+        self.progressBar_total.setMaximum(
+            imf.output_to_step[max(progress_data.target_outputs)].value
+        )
+        # Update the label.
+        self.label_progress_total.setText(
+            f"Current step: {pp.to_display_name(progress_data.current_step.name)}"
+        )
 
     #
     # def show_glossary_help(self):

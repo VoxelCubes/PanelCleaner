@@ -79,6 +79,8 @@ def generate_output(
         Check if the given step's representative output changed relative to the current profile.
         This is to see if the step needs to be rerun for an image file that this is checked with.
 
+        Also check that all the outputs that are requested were already generated before dismissing the step.
+
         :param process_step: The step to check.
         :return: A function that takes an image object and returns True if the step needs to be rerun for it.
         """
@@ -87,7 +89,11 @@ def generate_output(
             nonlocal profile
             nonlocal process_step
 
-            return image_object.outputs[imf.get_output_representing_step(process_step)].is_changed(
+            return any(
+                not image_object.outputs[output].has_path()
+                for output in target_outputs
+                if output in imf.step_to_output[process_step]
+            ) or image_object.outputs[imf.get_output_representing_step(process_step)].is_changed(
                 profile
             )
 
@@ -129,10 +135,10 @@ def generate_output(
             partial_progress_data=partial(
                 imf.ProgressData,
                 len(step_text_detector_images),
-                target_output,
+                target_outputs,
                 imf.Step.text_detection,
             ),
-            progress_callback=progress_callback,
+            progress_callback=progress_callback if target_output != imf.Output.input else None,
         )
 
         # Update the outputs of the image objects.
@@ -141,14 +147,15 @@ def generate_output(
             update_output(image_obj, imf.Output.input, ".png")
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
 
-        progress_callback.emit(
-            imf.ProgressData(
-                len(step_text_detector_images),
-                target_output,
-                imf.Step.text_detection,
-                imf.ProgressType.end,
-            )
-        )
+        # No analytics to share here.
+        # progress_callback.emit(
+        #     imf.ProgressData(
+        #         len(step_text_detector_images),
+        #         target_outputs,
+        #         imf.Step.text_detection,
+        #         imf.ProgressType.analytics,
+        #     )
+        # )
 
     # ============================================== Preprocessing ==============================================
 
@@ -165,7 +172,7 @@ def generate_output(
             progress_callback.emit(
                 imf.ProgressData(
                     len(step_preprocessor_images),
-                    target_output,
+                    target_outputs,
                     imf.Step.preprocessor,
                     imf.ProgressType.begin,
                 )
@@ -185,7 +192,7 @@ def generate_output(
                 progress_callback.emit(
                     imf.ProgressData(
                         len(step_preprocessor_images),
-                        target_output,
+                        target_outputs,
                         imf.Step.preprocessor,
                         imf.ProgressType.incremental,
                     )
@@ -203,9 +210,9 @@ def generate_output(
             progress_callback.emit(
                 imf.ProgressData(
                     len(step_preprocessor_images),
-                    target_output,
+                    target_outputs,
                     imf.Step.preprocessor,
-                    imf.ProgressType.end,
+                    imf.ProgressType.analytics,
                     (ocr_analytics, profile.preprocessor.ocr_max_size),
                 )
             )
@@ -221,7 +228,7 @@ def generate_output(
             progress_callback.emit(
                 imf.ProgressData(
                     len(step_masker_images),
-                    target_output,
+                    target_outputs,
                     imf.Step.masker,
                     imf.ProgressType.begin,
                 )
@@ -271,7 +278,7 @@ def generate_output(
                     progress_callback.emit(
                         imf.ProgressData(
                             len(step_masker_images),
-                            target_output,
+                            target_outputs,
                             imf.Step.masker,
                             imf.ProgressType.incremental,
                         )
@@ -291,9 +298,9 @@ def generate_output(
             progress_callback.emit(
                 imf.ProgressData(
                     len(step_masker_images),
-                    target_output,
+                    target_outputs,
                     imf.Step.masker,
-                    imf.ProgressType.end,
+                    imf.ProgressType.analytics,
                     masker_analytics_raw,
                 )
             )
@@ -309,7 +316,7 @@ def generate_output(
             progress_callback.emit(
                 imf.ProgressData(
                     len(step_denoiser_images),
-                    target_output,
+                    target_outputs,
                     imf.Step.denoiser,
                     imf.ProgressType.begin,
                 )
@@ -347,7 +354,7 @@ def generate_output(
                     progress_callback.emit(
                         imf.ProgressData(
                             len(step_denoiser_images),
-                            target_output,
+                            target_outputs,
                             imf.Step.denoiser,
                             imf.ProgressType.incremental,
                         )
@@ -363,9 +370,9 @@ def generate_output(
             progress_callback.emit(
                 imf.ProgressData(
                     len(step_denoiser_images),
-                    target_output,
+                    target_outputs,
                     imf.Step.denoiser,
-                    imf.ProgressType.end,
+                    imf.ProgressType.analytics,
                     (
                         denoise_analytics_raw,
                         profile.denoiser.noise_min_standard_deviation,
@@ -376,13 +383,20 @@ def generate_output(
 
     logger.info(f"Finished processing {len(image_objects)} images.")
 
-    if output_dir is None:
-        return
-
     # ============================================== Final Output ==============================================
 
-    for image_obj in image_objects:
-        copy_to_output(image_obj, target_outputs, output_dir, profile)
+    if output_dir is not None:
+        for image_obj in image_objects:
+            copy_to_output(image_obj, target_outputs, output_dir, profile)
+
+    progress_callback.emit(
+        imf.ProgressData(
+            0,
+            [],
+            imf.Step.denoiser,
+            imf.ProgressType.end,
+        )
+    )
 
 
 def copy_to_output(

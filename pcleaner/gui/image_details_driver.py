@@ -117,7 +117,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             if title is not None:
                 layout = Qw.QVBoxLayout()
                 layout.setContentsMargins(0, 0, 0, 0)
-                layout.setSpacing(4)  # The small spacing between the label and the image.
+                layout.setSpacing(2)  # The small spacing between the label and the image.
                 label = Qw.QLabel(title)
                 layout.addWidget(label)
                 layout.addWidget(button)

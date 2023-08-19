@@ -43,12 +43,12 @@ class Output(IntEnum):
     denoised_image = auto()
 
 
-class Step(Enum):
+class Step(IntEnum):
     """
     These enums represent all the steps in the image processing pipeline.
     """
 
-    text_detection = auto()
+    text_detection = 1
     preprocessor = auto()
     masker = auto()
     denoiser = auto()
@@ -66,7 +66,78 @@ class ProgressType(Enum):
     begin = auto()
     incremental = auto()
     absolute = auto()
+    analytics = auto()
     end = auto()
+
+
+@frozen
+class ProgressData:
+    """
+    A callback to report progress to the gui.
+
+    Consists of:
+    - The total number of images to process.
+    - The target output to reach.
+    - The current step.
+    - The progress type.
+    - A value for the case of absolute progress, or how much to increment by for incremental progress, or whatever analytics.
+    """
+
+    total_images: int
+    target_outputs: list[Output]
+    current_step: Step
+    progress_type: ProgressType
+    value: int | Any = 1  # Default value for incremental progress.
+
+
+class ProgressSignal(Protocol):
+    def emit(self, data: ProgressData) -> None:
+        ...
+
+
+output_to_step: dict[Output, Step] = {
+    Output.input: Step.text_detection,
+    Output.ai_mask: Step.text_detection,
+    Output.initial_boxes: Step.preprocessor,
+    Output.final_boxes: Step.preprocessor,
+    Output.box_mask: Step.masker,
+    Output.cut_mask: Step.masker,
+    Output.mask_layers: Step.masker,
+    Output.final_mask: Step.masker,
+    Output.mask_overlay: Step.masker,
+    Output.isolated_text: Step.masker,
+    Output.masked_image: Step.masker,
+    Output.denoiser_mask: Step.denoiser,
+    Output.isolated_denoised_text: Step.denoiser,
+    Output.denoised_image: Step.denoiser,
+}
+
+# The final output representing each step.
+# If this output is intact, consider the step complete.
+step_to_output: dict[Step, tuple[Output, ...]] = {
+    Step.text_detection: (Output.input, Output.ai_mask),
+    Step.preprocessor: (Output.initial_boxes, Output.final_boxes),
+    Step.masker: (
+        Output.box_mask,
+        Output.cut_mask,
+        Output.mask_layers,
+        Output.final_mask,
+        Output.mask_overlay,
+        Output.isolated_text,
+        Output.masked_image,
+    ),
+    Step.denoiser: (Output.denoiser_mask, Output.isolated_denoised_text, Output.denoised_image),
+}
+
+
+def get_output_representing_step(step: Step) -> Output:
+    """
+    Get the output representing the step, which is the last one in the pipeline.
+
+    :param step: The step to get the output for.
+    :return: The output representing the step.
+    """
+    return step_to_output[step][-1]
 
 
 class ProcessOutput:
@@ -171,76 +242,6 @@ class ProcessOutput:
             attrs.asdict(profile, filter=self._sensitivity_filter), sort_keys=True
         ).encode()
         return zlib.crc32(serialized_data)
-
-
-@frozen
-class ProgressData:
-    """
-    A callback to report progress to the gui.
-
-    Consists of:
-    - The total number of images to process.
-    - The target output to reach.
-    - The current step.
-    - The progress type.
-    - A value for the case of absolute progress, or how much to increment by for incremental progress, or whatever analytics.
-    """
-
-    total_images: int
-    target_output: Output
-    current_step: Step
-    progress_type: ProgressType
-    value: int | Any = 1  # Default value for incremental progress.
-
-
-class ProgressSignal(Protocol):
-    def emit(self, data: ProgressData) -> None:
-        ...
-
-
-output_to_step: dict[Output, Step] = {
-    Output.input: Step.text_detection,
-    Output.ai_mask: Step.text_detection,
-    Output.initial_boxes: Step.preprocessor,
-    Output.final_boxes: Step.preprocessor,
-    Output.box_mask: Step.masker,
-    Output.cut_mask: Step.masker,
-    Output.mask_layers: Step.masker,
-    Output.final_mask: Step.masker,
-    Output.mask_overlay: Step.masker,
-    Output.isolated_text: Step.masker,
-    Output.masked_image: Step.masker,
-    Output.denoiser_mask: Step.denoiser,
-    Output.isolated_denoised_text: Step.denoiser,
-    Output.denoised_image: Step.denoiser,
-}
-
-# The final output representing each step.
-# If this output is intact, consider the step complete.
-step_to_output: dict[Step, tuple[Output, ...]] = {
-    Step.text_detection: (Output.input, Output.ai_mask),
-    Step.preprocessor: (Output.initial_boxes, Output.final_boxes),
-    Step.masker: (
-        Output.box_mask,
-        Output.cut_mask,
-        Output.mask_layers,
-        Output.final_mask,
-        Output.mask_overlay,
-        Output.isolated_text,
-        Output.masked_image,
-    ),
-    Step.denoiser: (Output.denoiser_mask, Output.isolated_denoised_text, Output.denoised_image),
-}
-
-
-def get_output_representing_step(step: Step) -> Output:
-    """
-    Get the output representing the step, which is the last one in the pipeline.
-
-    :param step: The step to get the output for.
-    :return: The output representing the step.
-    """
-    return step_to_output[step][-1]
 
 
 class ImageFile:
