@@ -271,8 +271,24 @@ def generate_output(
             ]
 
             masker_analytics_raw = []
-            with Pool() as pool:
-                for analytic in pool.imap(ma.clean_page, data):
+
+            if len(step_masker_images) > 2:
+                # Only use multiprocessing if there are more than 2 images.
+                with Pool() as pool:
+                    for analytic in pool.imap(ma.clean_page, data):
+                        masker_analytics_raw.extend(analytic)
+
+                        progress_callback.emit(
+                            imf.ProgressData(
+                                len(step_masker_images),
+                                target_outputs,
+                                imf.Step.masker,
+                                imf.ProgressType.incremental,
+                            )
+                        )
+            else:
+                for data_obj in data:
+                    analytic = ma.clean_page(data_obj)
                     masker_analytics_raw.extend(analytic)
 
                     progress_callback.emit(
@@ -347,8 +363,22 @@ def generate_output(
             ]
 
             denoise_analytics_raw = []
-            with Pool() as pool:
-                for analytic in pool.imap(dn.denoise_page, data):
+            if len(step_denoiser_images) > 2:
+                with Pool() as pool:
+                    for analytic in pool.imap(dn.denoise_page, data):
+                        denoise_analytics_raw.append(analytic)
+
+                        progress_callback.emit(
+                            imf.ProgressData(
+                                len(step_denoiser_images),
+                                target_outputs,
+                                imf.Step.denoiser,
+                                imf.ProgressType.incremental,
+                            )
+                        )
+            else:
+                for data_obj in data:
+                    analytic = dn.denoise_page(data_obj)
                     denoise_analytics_raw.append(analytic)
 
                     progress_callback.emit(

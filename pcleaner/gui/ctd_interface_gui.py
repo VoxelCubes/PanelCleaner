@@ -10,6 +10,10 @@ from pcleaner.comic_text_detector.inference import TextDetector
 from pcleaner.ctd_interface import process_image
 
 
+# It's simply slower for anything less than this many images.
+MIN_IMAGES_FOR_MULTIPROCESSING = 20
+
+
 def model2annotations_gui(
     config_general: cfg.GeneralConfig,
     config_detector: cfg.TextDetectorConfig,
@@ -57,7 +61,11 @@ def model2annotations_gui(
 
     num_processes = min(config_detector.concurrent_models, len(img_list))
 
-    if num_processes > 1 and not no_text_detection:
+    if (
+        num_processes > 1
+        and not no_text_detection
+        and len(img_list) > MIN_IMAGES_FOR_MULTIPROCESSING
+    ):
         mp.freeze_support()
         mp.set_start_method("spawn")
 
