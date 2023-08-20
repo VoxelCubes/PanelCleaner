@@ -1,6 +1,7 @@
 import multiprocessing as mp
 from functools import partial
 from pathlib import Path
+from typing import Sequence
 
 import torch
 
@@ -18,7 +19,7 @@ def model2annotations_gui(
     config_general: cfg.GeneralConfig,
     config_detector: cfg.TextDetectorConfig,
     text_detector_model_path: Path,
-    img_list: list[imf.ImageFile],
+    img_list: Sequence[imf.ImageFile],
     save_dir: Path,
     no_text_detection: bool,
     partial_progress_data: partial,

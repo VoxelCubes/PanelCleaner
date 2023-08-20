@@ -4,21 +4,19 @@ from multiprocessing import Pool
 from pathlib import Path
 from typing import Callable
 
-from logzero import logger
-from manga_ocr import MangaOcr
 import torch
 from PIL import Image
+from logzero import logger
+from manga_ocr import MangaOcr
 
 import pcleaner.config as cfg
 import pcleaner.denoiser as dn
 import pcleaner.gui.ctd_interface_gui as ctm
 import pcleaner.gui.image_file as imf
+import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
 import pcleaner.structures as st
-import pcleaner.image_ops as ops
-
-# TODO skip pool shenanigans for less than X images.
 
 
 def generate_output(
@@ -74,28 +72,38 @@ def generate_output(
     cuda = torch.cuda.is_available()
     text_detector_model_path = config.get_model_path(cuda)
 
-    def step_changed_clojure(process_step: imf.Step) -> Callable[[imf.ImageFile], bool]:
+    def step_needs_to_be_rerun_closure(current_step: imf.Step) -> Callable[[imf.ImageFile], bool]:
         """
-        Check if the given step's representative output changed relative to the current profile.
-        This is to see if the step needs to be rerun for an image file that this is checked with.
+        Check if any of the outputs for the given image object need to be rerun.
 
-        Also check that all the outputs that are requested were already generated before dismissing the step.
-
-        :param process_step: The step to check.
         :return: A function that takes an image object and returns True if the step needs to be rerun for it.
         """
 
         def step_changed(image_object: imf.ImageFile) -> bool:
             nonlocal profile
-            nonlocal process_step
+            nonlocal target_outputs
+            nonlocal target_output
+            nonlocal current_step
+            # holy shit this is cursed I need to think about it more.
+            # I think I got it sorted now...
+            # Pretty sure it works :)
 
-            return any(
-                not image_object.outputs[output].has_path()
-                for output in target_outputs
-                if output in imf.step_to_output[process_step]
-            ) or image_object.outputs[imf.get_output_representing_step(process_step)].is_changed(
-                profile
+            target_outputs_in_the_current_step: tuple[imf.Output] = tuple(
+                filter(lambda o: o in imf.step_to_output[current_step], reversed(target_outputs))
             )
+
+            if not target_outputs_in_the_current_step:
+                # In this case we just need to know if the step's representative is complete.
+                representative: imf.Output = imf.get_output_representing_step(current_step)
+                return image_object.outputs[representative].is_changed(profile)
+
+            this_is_the_final_step: bool = target_output in imf.step_to_output[current_step]
+
+            if this_is_the_final_step:
+                return any(
+                    image_object.outputs[o].is_changed(profile)
+                    for o in target_outputs_in_the_current_step
+                )
 
         return step_changed
 
@@ -117,8 +125,8 @@ def generate_output(
 
     # ============================================== Text Detection ==============================================
 
-    step_text_detector_images = list(
-        filter(step_changed_clojure(imf.Step.text_detection), image_objects)
+    step_text_detector_images = tuple(
+        filter(step_needs_to_be_rerun_closure(imf.Step.text_detection), image_objects)
     )
 
     if step_text_detector_images:
@@ -146,6 +154,7 @@ def generate_output(
         for image_obj in step_text_detector_images:
             update_output(image_obj, imf.Output.input, ".png")
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
+            update_output(image_obj, imf.Output.raw_json, "#raw.json")
 
         # No analytics to share here.
         # progress_callback.emit(
@@ -160,8 +169,8 @@ def generate_output(
     # ============================================== Preprocessing ==============================================
 
     if target_output > imf.get_output_representing_step(imf.Step.text_detection):
-        step_preprocessor_images = list(
-            filter(step_changed_clojure(imf.Step.preprocessor), image_objects)
+        step_preprocessor_images = tuple(
+            filter(step_needs_to_be_rerun_closure(imf.Step.preprocessor), image_objects)
         )
 
         if step_preprocessor_images:
@@ -206,6 +215,7 @@ def generate_output(
             for image_obj in step_preprocessor_images:
                 update_output(image_obj, imf.Output.initial_boxes, "_boxes.png")
                 update_output(image_obj, imf.Output.final_boxes, "_boxes_final.png")
+                update_output(image_obj, imf.Output.clean_json, "#clean.json")
 
             progress_callback.emit(
                 imf.ProgressData(
@@ -220,7 +230,9 @@ def generate_output(
     # ============================================== Masker ==============================================
 
     if target_output > imf.get_output_representing_step(imf.Step.preprocessor):
-        step_masker_images = list(filter(step_changed_clojure(imf.Step.masker), image_objects))
+        step_masker_images = tuple(
+            filter(step_needs_to_be_rerun_closure(imf.Step.masker), image_objects)
+        )
 
         if step_masker_images:
             logger.info(f"Running masker for {len(step_masker_images)} images...")
@@ -310,6 +322,7 @@ def generate_output(
                 update_output(image_obj, imf.Output.mask_overlay, "_with_masks.png")
                 update_output(image_obj, imf.Output.isolated_text, "_text.png")
                 update_output(image_obj, imf.Output.masked_image, "_clean.png")
+                update_output(image_obj, imf.Output.mask_data_json, "#mask_data.json")
 
             progress_callback.emit(
                 imf.ProgressData(
@@ -324,7 +337,9 @@ def generate_output(
     # ============================================== Denoiser ==============================================
 
     if target_output > imf.get_output_representing_step(imf.Step.masker):
-        step_denoiser_images = list(filter(step_changed_clojure(imf.Step.denoiser), image_objects))
+        step_denoiser_images = tuple(
+            filter(step_needs_to_be_rerun_closure(imf.Step.denoiser), image_objects)
+        )
 
         if step_denoiser_images:
             logger.info(f"Running denoiser for {len(step_denoiser_images)} images...")
