@@ -41,9 +41,9 @@ class Output(IntEnum):
     mask_overlay = auto()
     final_mask = auto()
     isolated_text = auto()
+    masked_image = auto()
     mask_data_json = auto()
 
-    masked_image = auto()
     denoiser_mask = auto()
     denoised_image = auto()
 
