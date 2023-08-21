@@ -111,6 +111,7 @@ import time
 from multiprocessing import Pool
 from pathlib import Path
 import itertools
+from typing import Sequence
 from PIL import Image
 
 from manga_ocr import MangaOcr
@@ -346,16 +347,16 @@ def run_cleaner(
         else:
             mocr = None
 
-        ocr_analytics = []
+        ocr_analytics: list[st.OCRAnalytic] = []
         for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
-            ocr_analytic = pp.prep_json_file(
+            ocr_analytics_of_a_page = pp.prep_json_file(
                 json_file_path,
                 preprocessor_conf=profile.preprocessor,
                 cache_masks=cache_masks,
                 mocr=mocr,
             )
-            if ocr_analytic:
-                ocr_analytics.append(ocr_analytic)
+            if ocr_analytics_of_a_page is not None:
+                ocr_analytics.append(ocr_analytics_of_a_page)
 
         if ocr_analytics and not hide_analytics:
             an.show_ocr_analytics(ocr_analytics, profile.preprocessor.ocr_max_size)
@@ -390,7 +391,7 @@ def run_cleaner(
             for json_file in json_files
         ]
 
-        masker_analytics_raw = []
+        masker_analytics_raw: list[st.MaskFittingAnalytic] = []
         with Pool() as pool:
             for analytic in tqdm(pool.imap(ma.clean_page, data), total=len(data)):
                 masker_analytics_raw.extend(analytic)
@@ -515,12 +516,12 @@ def run_ocr(
     # Format of the analytics:
     # number of boxes | sizes of all boxes | sizes of boxes that were OCRed | path to image, text, box coordinates
     # We do not need to show the first three columns, so we simplify the data structure.
-    path_texts_coords: list[tuple[str, str], tuple[int, int, int, int]] = list(
-        itertools.chain.from_iterable(a[3] for a in ocr_analytics)
+    path_texts_coords: list[tuple[Path, str, st.Box]] = list(
+        itertools.chain.from_iterable(a.removed_box_data for a in ocr_analytics)
     )
     if path_texts_coords:
         paths, texts, boxes = zip(*path_texts_coords)
-        paths = hp.trim_prefix_from_paths([Path(p) for p in paths])
+        paths = hp.trim_prefix_from_paths(paths)
         path_texts_coords = list(zip(paths, texts, boxes))
         # Sort by path.
         path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
@@ -529,8 +530,7 @@ def run_ocr(
     if csv:
         text += "filename,startx,starty,endx,endy,text\n"
 
-        for path, bubble, pos in path_texts_coords:
-            pos = ",".join(str(a) for a in pos)
+        for path, bubble, box in path_texts_coords:
             path = str(path)
             # Escape commas where necessary.
             if "," in path:
@@ -540,10 +540,10 @@ def run_ocr(
                 bubble = f'"{bubble}"'
 
             if "\n" in bubble:
-                logger.warning(f"Detected newline in bubble: {path} {bubble} {pos}")
+                logger.warning(f"Detected newline in bubble: {path} {bubble} {box}")
                 bubble = bubble.replace("\n", "\\n")
 
-            text += f"{path},{pos},{bubble}\n"
+            text += f"{path},{box},{bubble}\n"
     else:
         # Place the file path on it's own line, and only if it's different from the previous one.
         current_path = ""

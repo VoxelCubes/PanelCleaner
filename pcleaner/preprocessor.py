@@ -1,8 +1,9 @@
 import json
 import re
-from dataclasses import asdict
 from pathlib import Path
 from functools import partial
+from typing import Sequence, Callable
+from copy import copy
 
 from PIL import Image
 from manga_ocr import MangaOcr
@@ -41,7 +42,7 @@ def prep_json_file(
     cache_masks: bool,
     mocr: MangaOcr | None = None,
     cache_masks_ocr: bool = False,
-) -> tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str], ...]] | None:
+) -> st.OCRAnalytic | None:
     """
     Load the generated json file, and clean the data, leaving only the
     relevant data for the following steps.
@@ -54,8 +55,6 @@ def prep_json_file(
     and can be removed from the dataset.
     The model must be initialized somewhere else to lessen coupling, and to avoid the long
     initialization time for each page.
-
-    Analytics data is returned if the manga ocr object is given.
 
     :param json_file_path: Path to the json file.
     :param preprocessor_conf: Preprocessor configuration, part of the profile.
@@ -72,29 +71,28 @@ def prep_json_file(
 
     json_data = json.loads(json_file_path.read_text())
 
-    image_path = json_data["image_path"]
-    mask_path = json_data["mask_path"]
-    original_path = json_data["original_path"]
-    scale = json_data["scale"]
-    boxes = []
+    image_path: str = json_data["image_path"]
+    mask_path: str = json_data["mask_path"]
+    original_path: str = json_data["original_path"]
+    scale: float = json_data["scale"]
+    boxes: list[st.Box] = []
 
-    scale_len = partial(hp.scale_length_rounded, scale=scale)
-    scale_area = partial(hp.scale_area_rounded, scale=scale)
+    scale_len: Callable[[int], int] = partial(hp.scale_length_rounded, scale=scale)
+    scale_area: Callable[[int], int] = partial(hp.scale_area_rounded, scale=scale)
 
     for data in json_data["blk_list"]:
         # Check minimum size of box.
-        x1, y1, x2, y2 = data["xyxy"]
-        box_size = (x2 - x1) * (y2 - y1)
-        if box_size > scale_area(preprocessor_conf.box_min_size):
+        box = st.Box(*data["xyxy"])
+        if box.area > scale_area(preprocessor_conf.box_min_size):
             # Sussy box. Discard if it's too small.
-            if data["language"] == "unknown" and box_size < scale_area(
+            if data["language"] == "unknown" and box.area < scale_area(
                 preprocessor_conf.suspicious_box_min_size
             ):
                 continue
-            boxes.append(data["xyxy"])
+            boxes.append(box)
 
     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
-    boxes.sort(key=lambda box: box[1] - 0.4 * box[2])
+    boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
 
     page_data = st.PageData(image_path, mask_path, original_path, scale, boxes, [], [], [])
 
@@ -110,9 +108,9 @@ def prep_json_file(
         page_data.visualize(Path(page_data.image_path))
 
     # Run OCR to discard small boxes that only contain symbols.
-    analytics = None
+    analytic: st.OCRAnalytic | None = None
     if mocr is not None:
-        page_data, analytics = ocr_check(
+        page_data, analytic = ocr_check(
             page_data,
             mocr,
             scale_area(preprocessor_conf.ocr_max_size),
@@ -120,7 +118,7 @@ def prep_json_file(
         )
 
     # A shallow copy of the box list suffices, because the tuples inside are immutable.
-    page_data.extended_boxes = page_data.boxes.copy()
+    page_data.extended_boxes = copy(page_data.boxes)
 
     page_data.grow_boxes(scale_len(preprocessor_conf.box_padding_extended), st.BoxType.EXTENDED_BOX)
     page_data.right_pad_boxes(
@@ -132,40 +130,26 @@ def prep_json_file(
     page_data.resolve_overlaps()
 
     # Copy the merged extended boxes to the reference boxes and grow them once again.
-    page_data.reference_boxes = page_data.merged_extended_boxes.copy()
+    page_data.reference_boxes = copy(page_data.merged_extended_boxes)
     page_data.grow_boxes(
         scale_len(preprocessor_conf.box_reference_padding), st.BoxType.REFERENCE_BOX
     )
 
     # Write the json file with the cleaned data.
     json_out_path = json_file_path.parent / f"{json_file_path.stem.replace('#raw', '')}#clean.json"
-    # Remove the _image_size attribute, because it's a cached value that may be unset.
-    page_data_dict = asdict(page_data)
-    del page_data_dict["_image_size"]
-    json_out_path.write_text(json.dumps(page_data_dict, indent=4))
+
+    json_out_path.write_text(page_data.to_json())
 
     # Draw the boxes on the image and save it.
     if cache_masks and not cache_masks_ocr:
         page_data.visualize(Path(page_data.image_path), final_boxes=True)
 
-    return analytics
+    return analytic
 
 
 def ocr_check(
-    page_data: st.PageData,
-    mocr: MangaOcr,
-    max_box_size: int,
-    ocr_blacklist_pattern: str,
-    box_padding: int = 0,
-) -> tuple[
-    st.PageData,
-    tuple[
-        int,
-        tuple[int, ...],
-        tuple[int, ...],
-        tuple[tuple[str, str, tuple[int, int, int, int]], ...],
-    ],
-]:
+    page_data: st.PageData, mocr: MangaOcr, max_box_size: int, ocr_blacklist_pattern: str
+) -> tuple[st.PageData, st.OCRAnalytic]:
     """
     Run OCR on small boxes to determine whether they contain mere symbols,
     in which case these boxes do not need to be cleaned and can be removed
@@ -177,7 +161,7 @@ def ocr_check(
     - number of boxes
     - sizes of all boxes that were ocred
     - sizes of the boxes that were removed
-    - the cached file name and the text and the coordinates of the boxes that were removed.
+    - the cached file name and the text and the box that was removed.
 
     (Returning the page data isn't strictly necessary, since it's modified in place,
     but this makes that fact more explicit.)
@@ -186,37 +170,31 @@ def ocr_check(
     :param mocr: Manga ocr object.
     :param max_box_size: Maximum size of a box in pixels, to consider it for ocr.
     :param ocr_blacklist_pattern: Regex pattern to match against the ocr result.
-    :param box_padding: [Optional] Padding to add to the box before running ocr.
     :return: The modified page data and Analytics data.
     """
     base_image = Image.open(page_data.image_path)
-    candidate_small_bubbles = [
-        box for box in page_data.boxes if page_data.box_size(box) < max_box_size
-    ]
+    candidate_small_bubbles = [box for box in page_data.boxes if box.area < max_box_size]
     if not candidate_small_bubbles:
-        return page_data, (len(page_data.boxes), (), (), ())
+        return page_data, st.OCRAnalytic(len(page_data.boxes), (), (), ())
     # Check if the small bubbles only contain symbols.
     # If they do, then they are probably not text.
     # Discard them in that case.
     box_sizes = []
     discarded_box_sizes = []
-    discarded_box_texts: list[tuple[str, str, tuple[int, int, int, int]]] = []
+    discarded_box_texts: list[tuple[Path, str, st.Box]] = []
     for box in candidate_small_bubbles:
-        cutout = base_image.crop(box)
+        cutout = base_image.crop(box.as_tuple)
         text = mocr(cutout)
         remove = is_not_worth_cleaning(text, ocr_blacklist_pattern)
-        box_size = page_data.box_size(box)
-        box_sizes.append(box_size)
+        box_sizes.append(box.area)
         if remove:
-            discarded_box_texts.append((page_data.original_path, text, box))
-            discarded_box_sizes.append(box_size)
+            discarded_box_texts.append((Path(page_data.original_path), text, box))
+            discarded_box_sizes.append(box.area)
             page_data.boxes.remove(box)
 
-    return page_data, (
-        len(page_data.boxes) + len(discarded_box_sizes),
-        tuple(box_sizes),
-        tuple(discarded_box_sizes),
-        tuple(discarded_box_texts),
+    return (
+        page_data,
+        st.OCRAnalytic(len(page_data.boxes), box_sizes, discarded_box_sizes, discarded_box_texts),
     )
 
 

@@ -16,14 +16,14 @@ from PySide6.QtCore import QRunnable, Slot, Signal, QObject
 
 @dataclass(frozen=True, slots=True)
 class WorkerError:
-    exctype: type
+    exception_type: type
     value: Exception
     traceback: str
     args: tuple | None = None
     kwargs: dict | None = None
 
     def __str__(self):
-        return f"{self.exctype}: {self.traceback}\n{self.value}"
+        return f"{self.exception_type}: {self.traceback}\n{self.value}"
 
 
 class WorkerSignals(QObject):
@@ -92,9 +92,9 @@ class Worker(QRunnable):
             result = self.fn(*self.args, **self.kwargs)
         except:
             traceback.print_exc()
-            exctype, value = sys.exc_info()[:2]
+            exception_type, value = sys.exc_info()[:2]
             self.signals.error.emit(
-                WorkerError(exctype, value, traceback.format_exc(), self.args, self.kwargs)
+                WorkerError(exception_type, value, traceback.format_exc(), self.args, self.kwargs)
             )
         else:
             self.signals.result.emit(result)  # Return the result of the processing

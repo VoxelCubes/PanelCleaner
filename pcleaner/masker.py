@@ -1,19 +1,21 @@
 from pathlib import Path
+from typing import Sequence
 
 from PIL import Image
-from logzero import logger, loglevel, DEBUG, INFO
+from logzero import logger
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
 
 
-def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
+def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     """
     Do all the shit and return analytics for mask fitting.
 
     :param m_data: All the data needed for the cleaning process.
     :return: Analytics, consisting of the json file path, and a list of whether the mask was generated, the index of
-        the best mask, and the border uniformity of the best mask for each box.
+        the best mask, and the border uniformity of the best mask for each box. This is a sequence because there is
+        one for each bubble on the page.
     """
 
     page_data = st.PageData.from_json(m_data.json_path.read_text())
@@ -64,7 +66,6 @@ def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
             reference_box=reference_box,
             masker_conf=m_conf,
             scale=page_data.scale,
-            save_masks=m_data.show_masks,
             analytics_page_path=Path(original_img_path_as_png),
         )
         for masking_box, reference_box in zip(
@@ -75,7 +76,7 @@ def clean_page(m_data: st.MaskerData) -> list[tuple[Path, bool, int, float]]:
     mask_fitments = [m for m in mask_fitments if m is not None]
     # Take out the analytics.
     # The analytics consist of (mask could be found: bool, mask index: int, border deviation: float)
-    analytics: list[tuple[Path, bool, int, float]] = [m.analytics for m in mask_fitments]
+    analytics: Sequence[st.MaskFittingAnalytic] = tuple(m.analytics for m in mask_fitments)
 
     # Remove entries if they failed.
     best_masks = [m for m in mask_fitments if not m.failed]
@@ -215,4 +216,5 @@ def save_denoising_data(
     mask_data = st.MaskData(
         original_path, target_path, base_image_path, mask_path, scale, boxes_with_deviation
     )
-    mask_data.write_json(cache_path.with_name(cache_path.stem + "#mask_data.json"))
+    json_path = cache_path.with_name(cache_path.stem + "#mask_data.json")
+    json_path.write_text(mask_data.to_json())

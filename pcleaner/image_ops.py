@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Generator
+from typing import Generator, Iterable
 from itertools import cycle
 
 import numpy as np
@@ -219,7 +219,7 @@ def border_std_deviation(base: Image, mask: Image, off_white_threshold: int) -> 
     return std, median_color
 
 
-def cut_out_box(image: Image, box: tuple[int, int, int, int]) -> Image:
+def cut_out_box(image: Image, box: st.Box) -> Image:
     """
     Cut out a box from an image.
 
@@ -227,12 +227,12 @@ def cut_out_box(image: Image, box: tuple[int, int, int, int]) -> Image:
     :param box: The box to cut out.
     :return: The cut out box.
     """
-    return image.crop(box)
+    return image.crop(box.as_tuple)
 
 
 def cut_out_mask(
     mask: Image,
-    box: tuple[int, int, int, int],
+    box: st.Box,
     target_shape: tuple[int, int] = None,
     x_padding_offset: int = 0,
     y_padding_offset: int = 0,
@@ -250,7 +250,7 @@ def cut_out_mask(
     :return: The cut out mask.
     """
     # Cut out the box.
-    mask = mask.crop(box)
+    mask = mask.crop(box.as_tuple)
     # If a target shape is given, pad the mask to that shape.
     if target_shape is not None:
         # Create a black image with the target shape.
@@ -266,11 +266,10 @@ def pick_best_mask(
     base: Image,
     precise_mask: Image,
     box_mask: Image,
-    masking_box: tuple[int, int, int, int],
-    reference_box: tuple[int, int, int, int],
+    masking_box: st.Box,
+    reference_box: st.Box,
     masker_conf: cfg.MaskerConfig,
     scale: float,
-    save_masks: bool,
     analytics_page_path: Path,
 ) -> None | st.MaskFittingResults:
     """
@@ -297,7 +296,6 @@ def pick_best_mask(
     :param reference_box: The box to cut the base image out of.
     :param masker_conf: The masker config.
     :param scale: The scale of the original image to the base image.
-    :param save_masks: Whether to save the masks.
     :param analytics_page_path: The path to the original image for the analytics.
     :return: The best mask and what color to make it and the box (along with analytics). If no best
         mask was found, return None for the mask and color.
@@ -306,8 +304,8 @@ def pick_best_mask(
     # The mask box was grown by n pixels in each direction to make the reference box,
     # but it could not exceed the image dimensions.
     # These relative coords are used to paste the mask onto the base image.
-    x_offset = masking_box[0] - reference_box[0]
-    y_offset = masking_box[1] - reference_box[1]
+    x_offset = masking_box.x1 - reference_box.x1
+    y_offset = masking_box.y1 - reference_box.y1
 
     # Replace all given images with their corresponding cutouts.
     base = cut_out_box(base, reference_box)
@@ -382,7 +380,7 @@ def pick_best_mask(
         return st.MaskFittingResults(
             best_mask=None,
             median_color=lowest_deviation_color,
-            mask_coords=reference_box[:2],
+            mask_coords=(reference_box.x1, reference_box.y1),
             analytics_page_path=analytics_page_path,
             analytics_mask_index=masks.index(best_mask),
             analytics_std_deviation=lowest_border_deviation,
@@ -392,7 +390,7 @@ def pick_best_mask(
     return st.MaskFittingResults(
         best_mask=best_mask,
         median_color=lowest_deviation_color,
-        mask_coords=reference_box[:2],
+        mask_coords=(reference_box.x1, reference_box.y1),
         analytics_page_path=analytics_page_path,
         analytics_mask_index=masks.index(best_mask),
         analytics_std_deviation=lowest_border_deviation,
@@ -402,7 +400,7 @@ def pick_best_mask(
 
 
 def combine_best_masks(
-    image_size: tuple[int, int], mask_fitments: list[st.MaskFittingResults]
+    image_size: tuple[int, int], mask_fitments: Iterable[st.MaskFittingResults]
 ) -> Image:
     """
     Merge the masks together into a single mask in RGBA mode to preserve the black/white information.
@@ -523,7 +521,7 @@ def fade_mask_edges(mask: Image, fade_radius: int) -> Image:
 
 
 def generate_noise_mask(
-    image: Image, mask: Image, box: tuple[int, int, int, int], denoiser_conf: cfg.DenoiserConfig
+    image: Image, mask: Image, box: st.Box, denoiser_conf: cfg.DenoiserConfig
 ) -> tuple[Image, tuple[int, int]]:
     """
     Cut out the image and mask using the box, then denoise the image cutout.
@@ -534,12 +532,12 @@ def generate_noise_mask(
     :param mask: The mask.
     :param box: The box to cut out.
     :param denoiser_conf: The denoiser config.
-    :return: The noise mask and it's coordinates.
+    :return: The noise mask and it's coordinates (using the top left).
     """
 
     # Cut out the image and mask.
-    image_cutout = image.crop(box)
-    mask_cutout = mask.crop(box)
+    image_cutout = image.crop(box.as_tuple)
+    mask_cutout = mask.crop(box.as_tuple)
     mask_cutout = grow_mask(mask_cutout, denoiser_conf.noise_outline_size)
     mask_faded = fade_mask_edges(mask_cutout, denoiser_conf.noise_fade_radius)
 
@@ -556,7 +554,7 @@ def generate_noise_mask(
     # Add alpha channels.
     denoised_image_cutout.putalpha(mask_faded)
 
-    return denoised_image_cutout, box[:2]
+    return denoised_image_cutout, (box.x1, box.y1)
 
 
 def extract_text(base_image: Image, mask: Image) -> Image:

@@ -2,12 +2,21 @@ import itertools
 import shutil
 from collections import defaultdict
 from pathlib import Path
+from typing import Sequence
 
 import colorama as clr
 from natsort import natsorted
+from attrs import frozen
 
 import pcleaner.structures as st
 import pcleaner.helpers as hp
+
+
+@frozen
+class OCRAnalytic:
+    num_boxes: int
+    small_box_sizes: Sequence[int]
+    removed_box_sizes: Sequence[int]
 
 
 # I'll admit this file is a mess.
@@ -22,7 +31,7 @@ def terminal_width() -> int:
 
 
 def show_ocr_analytics(
-    analytics: list[tuple[int, tuple[int, ...], tuple[int, ...], tuple[tuple[str, str, tuple[int, int, int, int]], ...]]],
+    analytics: Sequence[st.OCRAnalytic],
     max_ocr_size: int,
 ) -> None:
     """
@@ -33,17 +42,17 @@ def show_ocr_analytics(
     - The number of boxes on the page.
     - The sizes of the small boxes.
     - The sizes of the boxes that were removed.
-    - The original file path and the removed text.
+    - list of: The original file path and the removed text and the box it belonged to.
 
     Various statistics are then shown.
 
     :param analytics: The analytics gathered from each pre-processed page.
     :param max_ocr_size: The maximum size of a box to be considered small.
     """
-    num_boxes = sum(a[0] for a in analytics)
-    num_small_boxes = sum(len(a[1]) for a in analytics)
-    small_box_sizes = list(itertools.chain.from_iterable(a[1] for a in analytics))
-    removed_box_sizes = list(itertools.chain.from_iterable(a[2] for a in analytics))
+    num_boxes = sum(a.num_boxes for a in analytics)
+    num_small_boxes = sum(len(a.box_sizes_ocr) for a in analytics)
+    small_box_sizes = list(itertools.chain.from_iterable(a.box_sizes_ocr for a in analytics))
+    removed_box_sizes = list(itertools.chain.from_iterable(a.box_sizes_removed for a in analytics))
     small_box_ratio = f"{num_small_boxes / num_boxes:.0%}" if num_boxes > 0 else "N/A"
     removed_box_ratio = f"{len(removed_box_sizes) / num_boxes:.0%}" if num_boxes > 0 else "N/A"
     removed_among_small_ratio = (
@@ -73,15 +82,13 @@ def show_ocr_analytics(
         print("No not-removed small boxes found.\n")
 
     # Show removed texts.
-    # Format: (path, text)
-    removed_path_texts: list[tuple[str, str, tuple[int, int, int, int]]] = list(
-        itertools.chain.from_iterable(a[3] for a in analytics)
+    removed_path_texts: list[tuple[Path, str, st.Box]] = list(
+        itertools.chain.from_iterable(a.removed_box_data for a in analytics)
     )
 
     if removed_path_texts:
         # Find and then remove the longest common prefix from the file paths.
         paths, texts, _ = zip(*removed_path_texts)
-        paths = [Path(p) for p in paths]
         removed_paths = hp.trim_prefix_from_paths(paths)
         removed_path_texts = list(zip(removed_paths, texts))
         # Sort by file path.
@@ -196,21 +203,20 @@ def partition_list(
     return partition
 
 
-def show_masker_analytics(analytics: list[tuple[Path, bool, int, float]]):
+def show_masker_analytics(analytics: list[st.MaskFittingAnalytic]):
     """
     Present the analytics gathered from the masking process.
-
-    The analytics for each page in the list consist of the following tuple:
-    list[original_image_path, mask_found, mask_index, border_deviation]
 
     :param analytics: The analytics gathered from each page.
     """
 
     total_boxes = len(analytics)
-    masks_succeeded = sum(1 for analytics in analytics if analytics[1])
-    perfect_masks = sum(1 for analytics in analytics if analytics[1] and analytics[3] == 0)
+    masks_succeeded = sum(1 for analytic in analytics if analytic.fit_was_found)
+    perfect_masks = sum(
+        1 for analytic in analytics if analytic.fit_was_found and analytic.mask_std_deviation == 0
+    )
     average_border_deviation = (
-        f"{sum(analytics[3] for analytics in analytics if analytics[1]) / masks_succeeded:.2f}"
+        f"{sum(analytic.mask_std_deviation for analytic in analytics if analytic.fit_was_found) / masks_succeeded:.2f}"
         if masks_succeeded
         else "N/A"
     )
@@ -218,16 +224,18 @@ def show_masker_analytics(analytics: list[tuple[Path, bool, int, float]]):
     perfect_mask_rate = f"{perfect_masks / masks_succeeded:.0%}" if masks_succeeded else "N/A"
     masks_failed = total_boxes - masks_succeeded
 
-    highest_mask_index = max((analytic[2] for analytic in analytics if analytic[1]), default=0)
+    highest_mask_index = max(
+        (analytic.mask_index for analytic in analytics if analytic.fit_was_found), default=0
+    )
     # Count the number of times each mask index was used.
     mask_usages_by_index = [0] * (highest_mask_index + 1)
     # Count the number of times each mask was perfect.
     perfect_mask_usages_by_index = [0] * (highest_mask_index + 1)
     for analytic in analytics:
-        if analytic[1]:
-            mask_usages_by_index[analytic[2]] += 1
-            if analytic[3] == 0:
-                perfect_mask_usages_by_index[analytic[2]] += 1
+        if analytic.fit_was_found:
+            mask_usages_by_index[analytic.mask_index] += 1
+            if analytic.mask_std_deviation == 0:
+                perfect_mask_usages_by_index[analytic.mask_index] += 1
 
     # Print the analytics.
     print("\nMask Fitment Analytics")
@@ -259,9 +267,9 @@ def show_masker_analytics(analytics: list[tuple[Path, bool, int, float]]):
     pages_with_success_and_fails_dict: defaultdict[Path, defaultdict[str, int]] = defaultdict(
         lambda: defaultdict(int)
     )
-    for analytics in analytics:
-        pages_with_success_and_fails_dict[analytics[0]][
-            "succeeded" if analytics[1] else "failed"
+    for analytic in analytics:
+        pages_with_success_and_fails_dict[analytic.image_path][
+            "succeeded" if analytic.fit_was_found else "failed"
         ] += 1
 
     if not pages_with_success_and_fails_dict:

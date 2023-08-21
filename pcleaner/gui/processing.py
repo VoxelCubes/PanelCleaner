@@ -176,8 +176,6 @@ def generate_output(
         if step_preprocessor_images:
             logger.info(f"Running preprocessing for {len(step_preprocessor_images)} images...")
 
-            ocr_analytics = []
-
             progress_callback.emit(
                 imf.ProgressData(
                     len(step_preprocessor_images),
@@ -187,6 +185,7 @@ def generate_output(
                 )
             )
 
+            ocr_analytics: list[st.OCRAnalytic] = []
             # Find all the json files associated with the images.
             for image_obj in step_preprocessor_images:
                 json_file_path = cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#raw.json"
@@ -198,6 +197,9 @@ def generate_output(
                     mocr=ocr_model if profile.preprocessor.ocr_enabled else None,
                 )
 
+                if ocr_analytic is not None:
+                    ocr_analytics.append(ocr_analytic)
+
                 progress_callback.emit(
                     imf.ProgressData(
                         len(step_preprocessor_images),
@@ -206,9 +208,6 @@ def generate_output(
                         imf.ProgressType.incremental,
                     )
                 )
-
-                if ocr_analytic:
-                    ocr_analytics.append(ocr_analytic)
 
             # Update the outputs of the image objects.
             logger.debug(f"Updating preprocessing outputs...")

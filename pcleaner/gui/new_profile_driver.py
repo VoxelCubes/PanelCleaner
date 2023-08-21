@@ -1,11 +1,11 @@
 from pathlib import Path
-import PySide6.QtWidgets as qw
-import PySide6.QtGui as qg
+import PySide6.QtWidgets as Qw
+import PySide6.QtGui as Qg
 
 from pcleaner.gui.ui_generated_files.ui_NewProfile import Ui_NewProfile
 
 
-class NewProfileDialog(qw.QDialog, Ui_NewProfile):
+class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
     """
     The dialog for creating a new profile.
     It takes care of assigning a new file path.
@@ -29,14 +29,14 @@ class NewProfileDialog(qw.QDialog, Ui_NewProfile):
             as they are used for builtin profiles.
         """
         # For some reason, it doesn't want parent.
-        qw.QDialog.__init__(self)
+        Qw.QDialog.__init__(self)
         self.setupUi(self)
 
         self.default_path = default_path
         self.label_default_path.setText(str(self.default_path))
         self.protected_names = protected_names
 
-        self.label_warning_icon.setPixmap(qg.QIcon.fromTheme("data-error").pixmap(16, 16))
+        self.label_warning_icon.setPixmap(Qg.QIcon.fromTheme("data-error").pixmap(16, 16))
         self.label_default_protection_hint.setVisible(show_protection_hint)
 
         self.validate()
@@ -80,9 +80,9 @@ class NewProfileDialog(qw.QDialog, Ui_NewProfile):
         """
         Let the user choose a custom location. Only directories are allowed.
         """
-        dialog = qw.QFileDialog(self)
-        dialog.setFileMode(qw.QFileDialog.Directory)
-        dialog.setOption(qw.QFileDialog.ShowDirsOnly, True)
+        dialog = Qw.QFileDialog(self)
+        dialog.setFileMode(Qw.QFileDialog.Directory)
+        dialog.setOption(Qw.QFileDialog.ShowDirsOnly, True)
         dialog.setDirectory(str(self.default_path))
 
         if dialog.exec():
@@ -99,24 +99,24 @@ class NewProfileDialog(qw.QDialog, Ui_NewProfile):
             self.label_warning_message.setText("Please enter a name.")
             self.label_warning_message.show()
             self.label_warning_icon.hide()
-            self.buttonBox.button(qw.QDialogButtonBox.Save).setEnabled(False)
+            self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(False)
         elif name.lower() in self.protected_names:
             self.label_warning_message.setText("This name is used by a builtin profile.")
             self.label_warning_message.show()
             self.label_warning_icon.show()
-            self.buttonBox.button(qw.QDialogButtonBox.Save).setEnabled(False)
+            self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(False)
         elif (prospective_dir / name).with_suffix(".conf").exists():
             self.label_warning_message.setText("A profile with this name already exists.")
             self.label_warning_message.show()
             self.label_warning_icon.show()
-            self.buttonBox.button(qw.QDialogButtonBox.Save).setEnabled(False)
+            self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(False)
         else:
             self.label_warning_message.hide()
             self.label_warning_icon.hide()
-            self.buttonBox.button(qw.QDialogButtonBox.Save).setEnabled(True)
+            self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(True)
 
         if not prospective_dir.is_dir():
             self.label_warning_message.setText("The selected directory does not exist.")
             self.label_warning_message.show()
             self.label_warning_icon.show()
-            self.buttonBox.button(qw.QDialogButtonBox.Save).setEnabled(False)
+            self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(False)

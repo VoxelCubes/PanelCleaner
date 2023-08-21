@@ -1,9 +1,8 @@
 from enum import Enum, auto
+from typing import Callable
 
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Slot, Signal, QEvent
-
-from typing import Callable, Any
+from PySide6.QtCore import Slot, Signal
 from logzero import logger
 
 

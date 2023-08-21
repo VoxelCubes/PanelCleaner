@@ -1,7 +1,6 @@
 import PySide6.QtWidgets as Qw
 import PySide6.QtGui as Qg
 import PySide6.QtCore as Qc
-from logzero import logger
 
 
 class CElidedLabel(Qw.QFrame):

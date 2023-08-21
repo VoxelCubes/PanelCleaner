@@ -45,8 +45,8 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     d_conf = d_data.denoiser_config
 
     # Filter for the min deviation to consider for denoising.
-    boxes_to_denoise: list[tuple[int, int, int, int]] = [
-        scaled_box(box, scale)
+    boxes_to_denoise: list[st.Box] = [
+        box.scale(scale)
         for box, deviation in mask_data.boxes_with_deviation
         if deviation > d_conf.noise_min_standard_deviation
     ]
@@ -145,11 +145,3 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
 
     # Package the analytics. We're only interested in the std deviations.
     return st.DenoiseAnalytic(tuple(deviation for _, deviation in mask_data.boxes_with_deviation))
-
-
-def scaled_box(box: tuple[int, int, int, int], scale: float) -> tuple[int, int, int, int]:
-    """Scales a box by a given scale."""
-    if scale == 1.0:
-        return box
-    # noinspection PyTypeChecker
-    return tuple(int(x * scale) for x in box)

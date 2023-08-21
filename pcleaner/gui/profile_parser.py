@@ -3,9 +3,9 @@ from dataclasses import dataclass, field
 from enum import Enum, auto
 from typing import get_type_hints, Any, Callable
 
-import PySide6.QtCore as qc
-import PySide6.QtGui as qg
-import PySide6.QtWidgets as qw
+import PySide6.QtCore as Qc
+import PySide6.QtGui as Qg
+import PySide6.QtWidgets as Qw
 import configupdater as cu
 from PySide6.QtCore import Slot
 from logzero import logger
@@ -55,20 +55,20 @@ class ProfileSection:
     items: list[ProfileComment | ProfileEntry] = field(default_factory=list)
 
 
-class ProfileOptionWidget(qw.QHBoxLayout):
+class ProfileOptionWidget(Qw.QHBoxLayout):
     """
     A layout widget that contains some data widget and a reset button.
     """
 
-    _data_widget: qw.QWidget
-    _reset_button: qw.QPushButton
+    _data_widget: Qw.QWidget
+    _reset_button: Qw.QPushButton
     _entry_type: EntryTypes
 
     _default_value: Any
     _data_setter: Callable[[Any], None]
     _data_getter: Callable[[], Any]
 
-    valueChanged = qc.Signal()
+    valueChanged = Qc.Signal()
 
     def __init__(self, entry_type: EntryTypes):
         super().__init__()
@@ -78,22 +78,22 @@ class ProfileOptionWidget(qw.QHBoxLayout):
         self.addWidget(self._reset_button)
 
     def create_reset_button(self):
-        self._reset_button = qw.QPushButton()
-        self._reset_button.setSizePolicy(qw.QSizePolicy.Fixed, qw.QSizePolicy.Fixed)
-        self._reset_button.setIcon(qg.QIcon.fromTheme("edit-reset"))
+        self._reset_button = Qw.QPushButton()
+        self._reset_button.setSizePolicy(Qw.QSizePolicy.Fixed, Qw.QSizePolicy.Fixed)
+        self._reset_button.setIcon(Qg.QIcon.fromTheme("edit-reset"))
         self._reset_button.setToolTip("Reset to default")
         self._reset_button.clicked.connect(self.reset)
         self.set_reset_button_enabled(False)
 
     def create_data_widget(self, entry_type: EntryTypes):
         if entry_type == EntryTypes.Bool:
-            self._data_widget: qw.QCheckBox = qw.QCheckBox()
+            self._data_widget: Qw.QCheckBox = Qw.QCheckBox()
             self._data_widget.stateChanged.connect(self._value_changed)
             self._data_setter = self._data_widget.setChecked
             self._data_getter = self._data_widget.isChecked
 
         elif entry_type == EntryTypes.Int or entry_type == EntryTypes.IntGreater0:
-            self._data_widget: qw.QSpinBox = qw.QSpinBox()
+            self._data_widget: Qw.QSpinBox = Qw.QSpinBox()
             self._data_widget.setMaximum(999999999)  # Can't go much higher due to int32 limits.
             self._data_setter = self._data_widget.setValue
             self._data_getter = self._data_widget.value
@@ -102,8 +102,8 @@ class ProfileOptionWidget(qw.QHBoxLayout):
             self._data_widget.valueChanged.connect(self._value_changed)
 
         elif entry_type == EntryTypes.Float or entry_type == EntryTypes.FloatGreater0:
-            self._data_widget: qw.QDoubleSpinBox = qw.QDoubleSpinBox()
-            self._data_widget.setStepType(qw.QAbstractSpinBox.AdaptiveDecimalStepType)
+            self._data_widget: Qw.QDoubleSpinBox = Qw.QDoubleSpinBox()
+            self._data_widget.setStepType(Qw.QAbstractSpinBox.AdaptiveDecimalStepType)
             self._data_setter = self._data_widget.setValue
             # Round to 2 decimal places.
             self._data_getter = lambda: round(self._data_widget.value(), 2)
@@ -112,14 +112,14 @@ class ProfileOptionWidget(qw.QHBoxLayout):
             self._data_widget.valueChanged.connect(self._value_changed)
 
         elif entry_type == EntryTypes.Str:
-            self._data_widget: qw.QLineEdit = qw.QLineEdit()
+            self._data_widget: Qw.QLineEdit = Qw.QLineEdit()
             self._data_widget.textChanged.connect(self._value_changed)
             self._data_setter = self._data_widget.setText
             self._data_getter = self._data_widget.text
 
         elif entry_type == EntryTypes.StrNone:
             # Convert empty strings to None and vice versa.
-            self._data_widget: qw.QLineEdit = qw.QLineEdit()
+            self._data_widget: Qw.QLineEdit = Qw.QLineEdit()
             self._data_widget.textChanged.connect(self._value_changed)
 
             def _set_text(text: str | None) -> None:
@@ -291,17 +291,17 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
     return sections
 
 
-class ProfileToolBox(qw.QToolBox):
+class ProfileToolBox(Qw.QToolBox):
     # A subclass that tracks the mapping of widgets to profile options.
     # This is used to save/load the values of the widgets to the profile.
 
-    values_changed = qc.Signal()  # When False, all values are default.
+    values_changed = Qc.Signal()  # When False, all values are default.
     values_initialized: bool = (
         False  # This prevents lookups to the default values before they are set.
     )
 
     def __init__(self, parent=None):
-        qw.QToolBox.__init__(self, parent)
+        Qw.QToolBox.__init__(self, parent)
         self._widgets: dict[str, dict[str, ProfileOptionWidget]] = {}
 
     def load_profile_structure(self, structure: list[ProfileSection]) -> None:
@@ -313,8 +313,8 @@ class ProfileToolBox(qw.QToolBox):
         """
 
         for section in structure:
-            section_widget = qw.QWidget()
-            layout = qw.QFormLayout()
+            section_widget = Qw.QWidget()
+            layout = Qw.QFormLayout()
             section_widget.setLayout(layout)
             self.addItem(section_widget, to_display_name(section.name))
             self._widgets[section.name] = {}
@@ -322,17 +322,17 @@ class ProfileToolBox(qw.QToolBox):
             for item in section.items:
                 if isinstance(item, ProfileComment):
                     item: ProfileComment
-                    label = qw.QLabel(parent=self, text=item.comment)
+                    label = Qw.QLabel(parent=self, text=item.comment)
                     label.setOpenExternalLinks(True)
                     label.setWordWrap(True)
                     layout.addRow(label)
 
                 elif isinstance(item, ProfileSpace):
-                    layout.addRow(qw.QLabel(parent=self, text=""))
+                    layout.addRow(Qw.QLabel(parent=self, text=""))
 
                 elif isinstance(item, ProfileEntry):
                     item: ProfileEntry
-                    label = qw.QLabel(parent=self, text=to_display_name(item.key))
+                    label = Qw.QLabel(parent=self, text=to_display_name(item.key))
                     label.setToolTip(to_display_name(item.key))
                     layout.addRow(label)
                     option_widget = ProfileOptionWidget(item.entry_type)
