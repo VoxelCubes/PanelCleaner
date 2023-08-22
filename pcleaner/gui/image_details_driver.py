@@ -82,6 +82,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         self.init_sidebar()
         self.load_all_image_thumbnails()
+        self.pushButton_refresh.clicked.connect(self.regenerate_current_output)
         # Click on the first button to show the input image.
         input_button = list(self.button_map.keys())[0]
         input_button.click()
@@ -301,8 +302,9 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         if not self.current_image_path.is_file():
             return
 
-        save_path, _ = Qw.QFileDialog.getSaveFileName(self, "Export Image")
+        save_path, _ = Qw.QFileDialog.getSaveFileName(self, "Export Image", filter="PNG (*.png)")
         if save_path:
+            save_path = Path(save_path).with_suffix(".png")
             try:
                 shutil.copy(self.current_image_path, save_path)
                 logger.info(f"Exported image to {save_path}")
@@ -310,16 +312,24 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 logger.error(f"Failed to export image to {save_path}: {e}")
                 gu.show_warning(self, "Export failed", f"Failed to export image:\n\n{e}")
 
+    def current_button(self) -> Qw.QPushButton | None:
+        """
+        Get the currently selected button.
+
+        Returns: The button that is currently selected, or None if no button is selected.
+        """
+        for button in self.button_map:
+            if button.isChecked():
+                return button
+        return None
+
     def reload_current_image(self):
         """
         Reload the current image.
         The current image is the one belonging to the currently selected pushbutton.
         """
-        # Check all the buttons to see which one is currently clicked.
-        for button in self.button_map:
-            if button.isChecked():
-                self.switch_to_image(button)
-                break
+        if button := self.current_button():
+            self.switch_to_image(button)
 
     @Slot()
     def uncheck_all_other_buttons(self, checked_button: Qw.QPushButton):
@@ -331,6 +341,14 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         for button in self.button_map:
             if button is not checked_button:
                 button.setChecked(False)
+
+    def regenerate_current_output(self):
+        """
+        Delete the current output and regenerate it.
+        """
+        if button := self.current_button():
+            self.image_obj.outputs[self.button_map[button]].reset()
+            self.switch_to_image(button)
 
     # ========================================== Worker Functions ==========================================
 

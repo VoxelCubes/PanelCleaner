@@ -212,6 +212,13 @@ class ProcessOutput:
     def has_path(self) -> bool:
         return self.path is not None
 
+    def reset(self) -> None:
+        """
+        Clear the path and checksum.
+        """
+        self._path = None
+        self._current_profile_checksum = None
+
     def update_checksum(self, profile: cfg.Profile) -> None:
         """
         Update the checksum of the profile entries that this output is sensitive to.
