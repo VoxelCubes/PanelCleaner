@@ -292,6 +292,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         :param y: The y coordinate of the mouse.
         """
         self.label_position.setText(f"{x}, {y}")
+        self.label_position.setMinimumWidth(self.label_position.width())
 
     def export_image(self):
         """
