@@ -38,6 +38,7 @@ class ImageTab(Qw.QTabWidget):
         shared_ocr_model: st.Shared[st.OCRModel],
         thread_queue: Qc.QThreadPool,
         progress_callback: Callable[[imf.ProgressData], None],
+        profile_changed_signal: Qc.Signal,
     ):
         """
         Check if the image is already open, in which case show it.
@@ -48,6 +49,7 @@ class ImageTab(Qw.QTabWidget):
         :param shared_ocr_model: The shared OCR model.
         :param thread_queue: The thread queue for processing steps.
         :param progress_callback: The callback to call when a step is done.
+        :param profile_changed_signal: The signal that is broadcast when the profile is changed.
         """
         if image_obj.path in self.open_images:
             self.setCurrentWidget(self.open_images[image_obj.path][1])
@@ -60,6 +62,7 @@ class ImageTab(Qw.QTabWidget):
             shared_ocr_model=shared_ocr_model,
             thread_queue=thread_queue,
             progress_callback=progress_callback,
+            profile_changed_signal=profile_changed_signal,
         )
         self.addTab(tab, image_obj.path.name)
         self.open_images[image_obj.path] = (image_obj, tab)

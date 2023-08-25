@@ -20,4 +20,5 @@ xdg
 PySide6
 tifffile
 attrs
+dictdiffer
 PyYAML  # Only used for building the icon cache, not used at runtime, therefore excluded from the wheel.

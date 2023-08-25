@@ -7,7 +7,7 @@ from pathlib import Path
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Slot
+from PySide6.QtCore import Slot, Signal
 from logzero import logger
 from manga_ocr import MangaOcr
 
@@ -45,6 +45,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     progress_current: int
     progress_step_start: imf.Step | None  # When None, no processing is running.
+
+    profile_values_changed = Signal()
 
     def __init__(self):
         Qw.QMainWindow.__init__(self)
@@ -112,6 +114,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 shared_ocr_model=self.shared_ocr_model,
                 thread_queue=self.thread_queue,
                 progress_callback=self.show_current_progress,
+                profile_changed_signal=self.profile_values_changed,
             )
         )
         self.pushButton_start.clicked.connect(self.start_processing)
@@ -382,6 +385,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.debug("Loading current profile.")
         self.toolBox_profile.set_profile_values(self.config.current_profile)
+        self.profile_values_changed.emit()
 
     def profile_change_check(self) -> bool:
         """

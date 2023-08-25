@@ -63,6 +63,7 @@ class FileTable(CTableWidget):
         else:
             self.table_not_empty.emit()
 
+    # Setters passed through from the mainwindow.
     def set_config(self, config: cfg.Config):
         self.config = config
 

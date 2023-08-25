@@ -2,6 +2,7 @@ import shutil
 from functools import partial
 from pathlib import Path
 from typing import Callable
+from typing import Sequence
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -15,17 +16,15 @@ import pcleaner.gui.image_file as imf
 import pcleaner.gui.processing as prc
 import pcleaner.gui.structures as st
 import pcleaner.gui.worker_thread as wt
+from pcleaner.gui.CustomQ.CBadgeButton import BadgeButton
 from pcleaner.gui.ui_generated_files.ui_ImageDetails import Ui_ImageDetails
 
-
-# TODO slap a bunch of right aligned labels next to the step names to indicate that they need to be refreshed.
-# when the last checksum is none, ignore, as they were never even generated.
-# Or maybe as a badge, drawing a square with the accent color underneath???
 
 THUMBNAIL_SIZE = 180, 180
 PUSHBUTTON_THUMBNAIL_MARGIN = 8
 PUSHBUTTON_THUMBNAIL_SEPARATION = 8
 SIDEBAR_COLUMNS = 2
+BADGE_SIZE = 24
 
 
 class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
@@ -36,7 +35,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     image_obj: imf.ImageFile  # The image object to show.
     current_image_path: Path | None  # The path of the image currently shown.
 
-    button_map: dict[Qw.QPushButton, imf.Output]
+    button_map: dict[BadgeButton, imf.Output]
 
     config: cfg.Config
     shared_ocr_model: st.Shared[st.OCRModel]  # Must be handed over by the file table.
@@ -56,6 +55,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         shared_ocr_model: st.Shared[st.OCRModel] = None,
         thread_queue: Qc.QThreadPool = None,
         progress_callback: Callable[[imf.ProgressData], None] = None,
+        profile_changed_signal: Qc.Signal = None,
     ):
         """
         Init the widget.
@@ -83,11 +83,12 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.init_sidebar()
         self.load_all_image_thumbnails()
         self.pushButton_refresh.clicked.connect(self.regenerate_current_output)
+        profile_changed_signal.connect(self.start_profile_checker)
         # Click on the first button to show the input image.
         input_button = list(self.button_map.keys())[0]
         input_button.click()
 
-    def create_sidebar_buttons(self) -> dict[Qw.QPushButton, imf.Output]:
+    def create_sidebar_buttons(self) -> dict[BadgeButton, imf.Output]:
         """
         Parse the image object's outputs to create a list of buttons in the side panel.
 
@@ -98,10 +99,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         current_button_index: int = 0
         last_step_name: str | None = None
 
-        def add_button(title: str | None) -> Qw.QPushButton | Qw.QVBoxLayout:
+        def add_button(title: str | None) -> BadgeButton | Qw.QVBoxLayout:
             # Insert a new button into the current step's layout.
-            button = Qw.QPushButton()
+            button = BadgeButton()
             button.setCheckable(True)
+            button.set_badge_size(BADGE_SIZE, PUSHBUTTON_THUMBNAIL_MARGIN)
             button.clicked.connect(partial(self.uncheck_all_other_buttons, button))
             # Ensure the button's style sheet dictates that when checked, it is highlighted
             # with the accent color from the current system theme.
@@ -240,8 +242,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                     logger.error(f"Failed to load image {proc_output.path}: {e}")
             else:
                 button.setText("Generate Me")
+        # Update the badges on the buttons.
+        self.start_profile_checker()
 
-    def switch_to_image(self, button: Qw.QPushButton):
+    def switch_to_image(self, button: BadgeButton):
         """
         Show the image in the button in the image view.
 
@@ -313,7 +317,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 logger.error(f"Failed to export image to {save_path}: {e}")
                 gu.show_warning(self, "Export failed", f"Failed to export image:\n\n{e}")
 
-    def current_button(self) -> Qw.QPushButton | None:
+    def current_button(self) -> BadgeButton | None:
         """
         Get the currently selected button.
 
@@ -333,7 +337,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.switch_to_image(button)
 
     @Slot()
-    def uncheck_all_other_buttons(self, checked_button: Qw.QPushButton):
+    def uncheck_all_other_buttons(self, checked_button: BadgeButton):
         """
         Uncheck all buttons except the one that was checked.
 
@@ -350,6 +354,22 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         if button := self.current_button():
             self.image_obj.outputs[self.button_map[button]].reset()
             self.switch_to_image(button)
+
+    def clear_change_flairs(self):
+        """
+        Clear the change flairs from all buttons.
+        """
+        for button in self.button_map:
+            button.hide_badge()
+
+    @staticmethod
+    def set_change_flair(button: BadgeButton):
+        """
+        Set the change flair on the given button.
+
+        :param button: The button to set the flair on.
+        """
+        button.show_badge()
 
     # ========================================== Worker Functions ==========================================
 
@@ -397,3 +417,146 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     def output_worker_error(self, error: wt.WorkerError):
         logger.error("Output worker encountered an error.")
         gu.show_warning(self, "Output failed", f"Output generation failed:\n\n{error}")
+
+    def start_profile_checker(self):
+        """
+        Start the profile checker thread.
+        """
+        worker = wt.Worker(self.check_profile_changes, no_progress_callback=True)
+        worker.signals.error.connect(self.profile_checker_error)
+        worker.signals.result.connect(self.profile_checker_result)
+        self.thread_queue.start(worker)
+
+    def check_profile_changes(self) -> Sequence[BadgeButton]:
+        """
+        Check if the current profile has changed for the outputs that exist.
+        The regular ordered outputs progressively get more sensitive, so we can
+        figure out when the first change happens and know that everything after
+        that has changed as well, and vise versa, if something near the end is
+        unchanged, we know that everything before it is unchanged as well.
+
+        This doesn't work for the individually sensitive outputs, so we just check
+        each of them.
+        """
+
+        logger.warning("Profile changed. Checking for changes.")
+
+        changed_buttons: list[BadgeButton] = []
+
+        # Create lists of the buttons that have an output to check.
+        independent_buttons: list[tuple[BadgeButton, imf.ProcessOutput]] = []
+        ordered_buttons: list[tuple[BadgeButton, imf.ProcessOutput]] = []
+
+        for button, output in self.button_map.items():
+            # Check if the output is individually sensitive or has no path.
+            proc_output: imf.ProcessOutput = self.image_obj.outputs[output]
+
+            if proc_output.path is None:
+                continue
+
+            if output in imf.OUTPUTS_WITH_INDEPENDENT_PROFILE_SENSITIVITY:
+                independent_buttons.append((button, proc_output))
+            else:
+                ordered_buttons.append((button, proc_output))
+
+        # Handle the independent buttons first.
+        for button, proc_output in independent_buttons:
+            if not proc_output.is_unchanged(self.config.current_profile):
+                changed_buttons.append(button)
+
+        # Sanity check, do we even have any ordered buttons?
+        if len(ordered_buttons) == 0:
+            return changed_buttons
+
+        # Perform a binary search on the ordered buttons, to find the first changed output.
+        # But first check the bounds, first and last.
+        # Cache the check results in a tri-state list. We can't use a typical cache because
+        # the profile will change between runs.
+        ordered_buttons_changed: list[bool | None] = [None] * len(ordered_buttons)
+
+        # Keep track of the number of cache misses for the check function.
+        change_check_calls = 0
+        change_check_cache_misses = 0
+
+        def check_changed(index: int) -> bool:
+            nonlocal ordered_buttons_changed, ordered_buttons, self
+            nonlocal change_check_cache_misses, change_check_calls
+            change_check_calls += 1
+            # logger.debug(
+            #     f"Checking button {index}, with output {self.button_map[ordered_buttons[index][0]].name}"
+            # )
+            if (changed := ordered_buttons_changed[index]) is not None:
+                return changed
+            changed = ordered_buttons[index][1].is_changed(self.config.current_profile)
+            change_check_cache_misses += 1
+            ordered_buttons_changed[index] = changed
+            return changed
+
+        # Check the first and last buttons.
+        if not check_changed(-1):
+            logger.debug(
+                f"Determined that none of the ordered buttons changed in {change_check_calls} calls"
+                f" ({1-change_check_cache_misses/change_check_calls:.0%} cache hits)."
+            )
+            # Nothing is changed.
+            return changed_buttons
+        elif check_changed(0):
+            # Everything is changed.
+            ordered_buttons_changed = [True] * len(ordered_buttons)
+        else:
+            # Now we do the binary search, knowing that a change
+            # happened somewhere between the first and last.
+            low, high = 0, len(ordered_buttons) - 1
+            current: int = (low + high) // 2
+
+            # The logic of the search is as follows:
+            # If the current button has changed but the previous one hasn't, then
+            # current points to the first changed button.
+            # Otherwise, if the current button has not changed, move low to current + 1.
+            # If the current button has changed, move high to current - 1.
+            while low <= high:
+                # Already handled the boundary cases, so we know that the current button's
+                # previous button exists and is the last unchanged one.
+                if check_changed(current) and not check_changed(current - 1):
+                    break
+                elif not check_changed(current):
+                    low = current + 1
+                else:
+                    high = current - 1
+                current = (low + high) // 2
+
+            # At this point, current points to the first changed button.
+            # Everything from this point onwards is also changed,
+            # and everything before it is unchanged.
+            for idx in range(len(ordered_buttons_changed)):
+                ordered_buttons_changed[idx] = idx >= current
+
+            logger.debug(
+                f"Determined that none of the ordered buttons changed in {change_check_calls} calls"
+                f" ({1-change_check_cache_misses/change_check_calls:.0%} cache hits)."
+            )
+
+        # Update the flair for the buttons that have changed.
+        for idx, (button, _) in enumerate(ordered_buttons):
+            if ordered_buttons_changed[idx]:
+                changed_buttons.append(button)
+
+        return changed_buttons
+
+    def profile_checker_result(self, changed_buttons: Sequence[BadgeButton]):
+        """
+        Update the flair on the buttons that have changed.
+
+        :param changed_buttons: The buttons that have changed.
+        """
+        self.clear_change_flairs()
+        logger.debug(
+            f"Setting change badge for "
+            f"{len(changed_buttons)} buttons: {','.join(self.button_map[output].name for output in changed_buttons)}"
+        )
+        for button in changed_buttons:
+            self.set_change_flair(button)
+
+    def profile_checker_error(self, error: wt.WorkerError):
+        logger.error("Profile checker encountered an error.")
+        gu.show_warning(self, "Profile check failed", f"Profile change check failed:\n\n{error}")
