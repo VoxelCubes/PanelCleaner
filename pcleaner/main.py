@@ -359,7 +359,11 @@ def run_cleaner(
                 ocr_analytics.append(ocr_analytics_of_a_page)
 
         if ocr_analytics and not hide_analytics:
-            an.show_ocr_analytics(ocr_analytics, profile.preprocessor.ocr_max_size)
+            print(
+                an.show_ocr_analytics(
+                    ocr_analytics, profile.preprocessor.ocr_max_size, an.terminal_width()
+                )
+            )
 
     if not skip_masking:
         print("Running Masker...")
@@ -397,7 +401,7 @@ def run_cleaner(
                 masker_analytics_raw.extend(analytic)
 
         if not hide_analytics and masker_analytics_raw:
-            an.show_masker_analytics(masker_analytics_raw)
+            print(an.show_masker_analytics(masker_analytics_raw, an.terminal_width()))
 
     if not skip_denoising:
         print("Running Denoiser...")
@@ -428,10 +432,13 @@ def run_cleaner(
                 denoise_analytics_raw.append(analytic)
 
         if not hide_analytics and denoise_analytics_raw:
-            an.show_denoise_analytics(
-                denoise_analytics_raw,
-                profile.denoiser.noise_min_standard_deviation,
-                profile.masker.mask_max_standard_deviation,
+            print(
+                an.show_denoise_analytics(
+                    denoise_analytics_raw,
+                    profile.denoiser.noise_min_standard_deviation,
+                    profile.masker.mask_max_standard_deviation,
+                    an.terminal_width(),
+                )
             )
 
         print("Done!")

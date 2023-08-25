@@ -3,6 +3,7 @@ import shutil
 from collections import defaultdict
 from pathlib import Path
 from typing import Sequence
+from io import StringIO
 
 import colorama as clr
 from natsort import natsorted
@@ -24,8 +25,8 @@ class OCRAnalytic:
 
 
 def terminal_width() -> int:
-    # Use a fallback of 50 for unsupported terminals.
-    width = shutil.get_terminal_size((50, 50)).columns
+    # Use a fallback of 100 for unsupported terminals.
+    width = shutil.get_terminal_size((100, 100)).columns
     # Make sure the width is at least 20, to avoid weirdness.
     return max(width, 20)
 
@@ -33,7 +34,8 @@ def terminal_width() -> int:
 def show_ocr_analytics(
     analytics: Sequence[st.OCRAnalytic],
     max_ocr_size: int,
-) -> None:
+    max_columns: int = 100,
+) -> str:
     """
     The analytics are gathered from the OCR pre-processing which has the goal of
     finding small boxes and to check if they contain text worth cleaning.
@@ -48,7 +50,11 @@ def show_ocr_analytics(
 
     :param analytics: The analytics gathered from each pre-processed page.
     :param max_ocr_size: The maximum size of a box to be considered small.
+    :param max_columns: The maximum number of columns to use for the chart per line.
+    :return: The analytics as a string.
     """
+    buffer = StringIO()
+
     num_boxes = sum(a.num_boxes for a in analytics)
     num_small_boxes = sum(len(a.box_sizes_ocr) for a in analytics)
     small_box_sizes = list(itertools.chain.from_iterable(a.box_sizes_ocr for a in analytics))
@@ -66,20 +72,25 @@ def show_ocr_analytics(
     partitioned_removed_boxes = partition_list(
         removed_box_sizes, partition_size=part_size, max_value=max_ocr_size
     )
-    print("\nOCR Analytics")
-    print("-------------")
-    print(
+    buffer.write("\nOCR Analytics\n")
+    buffer.write("-------------\n")
+    buffer.write(
         f"Number of boxes: {num_boxes} | "
-        f"Number of small boxes: {num_small_boxes} ({small_box_ratio})"
+        f"Number of small boxes: {num_small_boxes} ({small_box_ratio})\n"
     )
-    print(
-        f"Number of removed boxes: {len(removed_box_sizes)} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)"
+    buffer.write(
+        f"Number of removed boxes: {len(removed_box_sizes)} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)\n"
     )
     if small_box_sizes:
-        print("\nSmall box sizes:")
-        draw_pretty_ocr_result_chart(partitioned_small_box_sizes, partitioned_removed_boxes)
+        buffer.write("\nSmall box sizes:\n")
+        buffer.write(
+            draw_pretty_ocr_result_chart(
+                partitioned_small_box_sizes, partitioned_removed_boxes, max_columns
+            )
+            + "\n"
+        )
     else:
-        print("No not-removed small boxes found.\n")
+        buffer.write("No not-removed small boxes found.\n")
 
     # Show removed texts.
     removed_path_texts: list[tuple[Path, str, st.Box]] = list(
@@ -94,58 +105,74 @@ def show_ocr_analytics(
         # Sort by file path.
         removed_path_texts = natsorted(removed_path_texts, key=lambda p: p[0])
 
-    print("\nRemoved bubbles:")
+    buffer.write("\nRemoved bubbles:\n")
     for path, text in removed_path_texts:
-        print(f"Page {path}: {text}")
+        buffer.write(f"Page {path}: {text}\n")
 
-    print("\n")
+    buffer.write("\n")
+
+    return buffer.getvalue()
 
 
 def draw_pretty_ocr_result_chart(
-    small_box_data: list[tuple[str, int]], removed_box_data: list[tuple[str, int]]
-) -> None:
+    small_box_data: list[tuple[str, int]],
+    removed_box_data: list[tuple[str, int]],
+    max_columns: int = 100,
+) -> str:
     """
     Draw a pretty stacked bar chart.
 
     :param small_box_data: The data for the small boxes.
     :param removed_box_data: The data for the removed boxes.
+    :param max_columns: The maximum number of columns to use for the chart per line.
+    :return: The chart as a string.
     """
-    width = terminal_width()
+    buffer = StringIO()
+
     data_array = [
         (label, lower, upper)
         for (label, lower), (_, upper) in zip(small_box_data, removed_box_data)
     ]
     max_label_width = max(len(label) for label, _, _ in data_array)
-    bar_width = width - max_label_width - 16  # 16 for the spacing and trailing number and padding.
+    bar_width = (
+        max_columns - max_label_width - 16
+    )  # 16 for the spacing and trailing number and padding.
     max_value = max(lower + upper for _, lower, upper in data_array)
 
     for label, lower, upper in data_array:
         lower_bar = "█" * int((lower - upper) / max_value * bar_width)
         upper_bar = "█" * int(upper / max_value * bar_width)
-        print(
+        buffer.write(
             f"{label:<{max_label_width}}: "
-            f"{lower_bar}{clr.Fore.RED}{upper_bar} {upper}{clr.Style.RESET_ALL} / {lower}"
+            f"{lower_bar}{clr.Fore.RED}{upper_bar} {upper}{clr.Style.RESET_ALL} / {lower}\n"
         )
 
     # Show legend.
-    print(f"\n█ Small boxes | {clr.Fore.RED}█ Removed boxes{clr.Style.RESET_ALL}")
+    buffer.write(f"\n█ Small boxes | {clr.Fore.RED}█ Removed boxes{clr.Style.RESET_ALL}")
+
+    return buffer.getvalue()
 
 
-def draw_masker_histogram(data: dict[str, tuple[int, int]]) -> None:
+def draw_masker_histogram(data: dict[str, tuple[int, int]], max_columns: int = 100) -> str:
     """
     Draw a histogram of the masker results.
 
     :param data: A dict of the mask name, (perfect uses, all uses).
+    :param max_columns: The maximum number of columns to use for the histogram per line.
+    :return: The histogram as a string.
     """
 
-    width = terminal_width()
     # Find the maximum value in the data. (at least 1 to avoid division by zero)
     max_value = max(list(map(lambda x: x[1], data.values())))
     max_value = max(max_value, 1)
 
     # Longest key.
     max_label_width = max(len(k) for k in data.keys())
-    bar_width = width - max_label_width - 16  # 16 for the spacing and trailing number and padding.
+    bar_width = (
+        max_columns - max_label_width - 16
+    )  # 16 for the spacing and trailing number and padding.
+
+    buffer = StringIO()
 
     # Draw the histogram.
     for key, value in data.items():
@@ -158,14 +185,15 @@ def draw_masker_histogram(data: dict[str, tuple[int, int]]) -> None:
         elif not left_bar and not right_bar and value[0] > 0:
             left_bar = "▏"
 
-        print(
+        buffer.write(
             f"{key:<{max_label_width}}: "
             f"{clr.Fore.CYAN}{left_bar}{clr.Style.RESET_ALL}{right_bar} "
-            f"{clr.Fore.CYAN}{value[0]}{clr.Fore.RESET} / {value[1]}"
+            f"{clr.Fore.CYAN}{value[0]}{clr.Fore.RESET} / {value[1]}\n"
         )
 
     # Show legend.
-    print(f"\n{clr.Fore.CYAN}█ Perfect{clr.Style.RESET_ALL} | █ Total")
+    buffer.write(f"\n{clr.Fore.CYAN}█ Perfect{clr.Style.RESET_ALL} | █ Total\n")
+    return buffer.getvalue()
 
 
 def partition_list(
@@ -203,12 +231,15 @@ def partition_list(
     return partition
 
 
-def show_masker_analytics(analytics: list[st.MaskFittingAnalytic]):
+def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: int = 100) -> str:
     """
     Present the analytics gathered from the masking process.
 
     :param analytics: The analytics gathered from each page.
+    :param max_columns: The maximum number of columns to use for the chart per line.
+    :return: The analytics as a string.
     """
+    buffer = StringIO()
 
     total_boxes = len(analytics)
     masks_succeeded = sum(1 for analytic in analytics if analytic.fit_was_found)
@@ -237,20 +268,19 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic]):
             if analytic.mask_std_deviation == 0:
                 perfect_mask_usages_by_index[analytic.mask_index] += 1
 
-    # Print the analytics.
-    print("\nMask Fitment Analytics")
-    print("----------------------")
-    print(
+    # Write the analytics.
+    buffer.write("\nMask Fitment Analytics\n")
+    buffer.write("----------------------\n")
+    buffer.write(
         f"Total boxes: {total_boxes} | "
         f"Masks succeeded: {masks_succeeded} ({success_rate}) | "
-        f"Masks failed: {clr.Fore.RED}{masks_failed}{clr.Fore.RESET}"
+        f"Masks failed: {clr.Fore.RED}{masks_failed}{clr.Fore.RESET}\n"
     )
-    print(
+    buffer.write(
         f"Perfect masks: {clr.Fore.CYAN}{perfect_masks}{clr.Fore.RESET} ({perfect_mask_rate}) | "
-        f"Average border deviation: {average_border_deviation}"
+        f"Average border deviation: {average_border_deviation}\n"
     )
-    print("\nMask usage by mask size (smallest to largest):")
-    # Make a dict of {index: list contents} for the mask usages, except the last key is "Box mask".
+    buffer.write("\nMask usage by mask size (smallest to largest):\n")
     mask_usages_dict = {
         f"Mask {index}": perfect_total
         for index, perfect_total in enumerate(
@@ -260,10 +290,8 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic]):
     }
     mask_usages_dict["Box mask"] = perfect_mask_usages_by_index[-1], mask_usages_by_index[-1]
 
-    draw_masker_histogram(mask_usages_dict)
+    buffer.write(draw_masker_histogram(mask_usages_dict, max_columns) + "\n")
 
-    # Find out what pages had how many failures.
-    # Structure: {page_path: {"succeeded": 0, "failed": 0}}
     pages_with_success_and_fails_dict: defaultdict[Path, defaultdict[str, int]] = defaultdict(
         lambda: defaultdict(int)
     )
@@ -273,11 +301,9 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic]):
         ] += 1
 
     if not pages_with_success_and_fails_dict:
-        print("All bubbles were successfully masked.")
-        return
+        buffer.write("All bubbles were successfully masked.\n")
+        return buffer.getvalue()
 
-    # Flatten the dict into a list of tuples: (page_path, succeeded, failed).
-    # Only include pages with at least one failure.
     pages_with_success_and_fails: list[tuple[Path, int, int]] = [
         (page_path, counts["succeeded"], counts["failed"])
         for page_path, counts in pages_with_success_and_fails_dict.items()
@@ -288,30 +314,36 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic]):
         page_paths, succeeded_counts, failed_counts = zip(*pages_with_success_and_fails)
         page_paths = hp.trim_prefix_from_paths(page_paths)
         pages_with_success_and_fails = list(zip(page_paths, succeeded_counts, failed_counts))
-        # Sort the list of tuples by file path.
         pages_with_success_and_fails = natsorted(pages_with_success_and_fails, key=lambda x: x[0])
 
-    print("\nPages with failures / total:")
+    buffer.write("\nPages with failures / total:\n")
     for page_path, succeeded, failed in pages_with_success_and_fails:
-        print(f"{page_path}: {clr.Fore.RED}{failed}{clr.Fore.RESET} / {succeeded+failed}")
+        buffer.write(f"{page_path}: {clr.Fore.RED}{failed}{clr.Fore.RESET} / {succeeded+failed}\n")
 
-    print("\n")
+    buffer.write("\n")
+
+    return buffer.getvalue()
 
 
 def show_denoise_analytics(
     analytics: list[st.DenoiseAnalytic],
     configured_deviation_threshold: float,
     max_deviation_threshold: float,
-):
+    max_columns: int = 100,
+) -> str:
     """
     Present the analytics gathered from the denoising process.
 
     :param analytics: The analytics gathered from each page, here standard deviations.
     :param configured_deviation_threshold: The configured deviation threshold to de denoising.
     :param max_deviation_threshold: The maximum deviation threshold to discard the mask.
+    :param max_columns: The maximum number of columns to use for the chart per line.
+    :return: The analytics as a string.
     """
-    print("\nDenoising Analytics")
-    print("-------------------")
+    buffer = StringIO()
+
+    buffer.write("\nDenoising Analytics\n")
+    buffer.write("-------------------\n")
 
     # Get the standard deviations into one single list.
     std_deviations: list[float] = [
@@ -331,36 +363,45 @@ def show_denoise_analytics(
     above_threshold_count = len(above_threshold)
     above_ratio = f"{above_threshold_count / total_masks:.0%}" if total_masks else "N/A"
 
-    print(
+    buffer.write(
         f"Total masks: {total_masks} | Masks denoised: {clr.Fore.MAGENTA}{above_threshold_count}{clr.Fore.RESET} "
-        f"({above_ratio})"
+        f"({above_ratio})\n"
     )
-    print(
+    buffer.write(
         f"Minimum deviation to denoise: {configured_deviation_threshold} | "
-        f"Maximum allowed deviation: {max_deviation_threshold}"
+        f"Maximum allowed deviation: {max_deviation_threshold}\n"
     )
-    print(f"Standard deviation around masks:\n")
+    buffer.write(f"Standard deviation around masks:\n\n")
 
     # Show the lists in a graph.
-    draw_denoise_histogram(
-        below_threshold,
-        above_threshold,
-        max_deviation_threshold,
+    buffer.write(
+        draw_denoise_histogram(
+            below_threshold,
+            above_threshold,
+            max_deviation_threshold,
+            max_columns,
+        )
+        + "\n"
     )
-    print("")
+    buffer.write("\n")
+
+    return buffer.getvalue()
 
 
 def draw_denoise_histogram(
     below_threshold: list[float],
     above_threshold: list[float],
     max_value: float,
-):
+    max_columns: int = 100,
+) -> str:
     """
     Draw a histogram of the deviations.
 
     :param below_threshold: The standard deviations that were below the threshold.
     :param above_threshold: The standard deviations that were above the threshold.
     :param max_value: The maximum deviation threshold to discard the mask.
+    :param max_columns: The maximum number of columns to use for the histogram per line.
+    :return: The histogram as a string.
     """
     # Partition the values into 10 buckets.
     # Use a cubic polynomial that passes through 0 and the max value.
@@ -403,23 +444,24 @@ def draw_denoise_histogram(
     max_count = max(max_count, 1)
     # Rescale the buckets.
 
-    width = terminal_width()
     max_label_length = max(len(label) for label, _, _ in buckets_labeled)
-    bar_width = width - max_label_length - 16  # 16 is for the spaces and the brackets.
+    bar_width = max_columns - max_label_length - 16  # 16 is for the spaces and the brackets.
 
     buckets_labeled = [
         (b_range, int(below * bar_width / max_count), int(above * bar_width / max_count))
         for b_range, below, above in buckets_labeled
     ]
 
+    buffer = StringIO()
     # Draw the buckets.
     for b_range, below, above in buckets_labeled:
-        print(
-            f"{b_range} : {'█' * below}{clr.Fore.MAGENTA}{'█' * above} {above}{clr.Fore.RESET} / {below+above}"
+        buffer.write(
+            f"{b_range} : {'█' * below}{clr.Fore.MAGENTA}{'█' * above} {above}{clr.Fore.RESET} / {below+above}\n"
         )
 
     # Draw the legend.
-    print(f"\n{clr.Fore.MAGENTA}█ Denoised{clr.Fore.RESET} | █ Total")
+    buffer.write(f"\n{clr.Fore.MAGENTA}█ Denoised{clr.Fore.RESET} | █ Total\n")
+    return buffer.getvalue()
 
 
 """ Analytics HTML template
