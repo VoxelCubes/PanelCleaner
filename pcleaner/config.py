@@ -12,6 +12,7 @@ from pcleaner import cli_utils as cli
 from pcleaner import model_downloader as md
 from pcleaner import helpers as hp
 
+
 RESERVED_PROFILE_NAMES = ["default", "builtin", "none"]
 
 DEFAULT_PROFILE_NAME = RESERVED_PROFILE_NAMES[0].capitalize()

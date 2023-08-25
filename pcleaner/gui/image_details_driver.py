@@ -421,6 +421,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     def start_profile_checker(self):
         """
         Start the profile checker thread.
+        The process isn't very intensive, usually taking between 1 and 10 ms, but when run on the
+        queue it prevents race conditions with the output worker.
         """
         worker = wt.Worker(self.check_profile_changes, no_progress_callback=True)
         worker.signals.error.connect(self.profile_checker_error)

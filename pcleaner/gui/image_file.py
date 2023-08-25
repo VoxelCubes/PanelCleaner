@@ -170,6 +170,10 @@ class ProcessOutput:
     _path: Path | None = None
     _sensitivity_filter: attrs.filters
     _current_profile_dict: dict[str, Any] | None = None
+    # This used to use a current_dict_checksum, using the json representation of the filtered profile
+    # for the digest, but that proved unreliable despite the json exporter having sort keys enabled.
+    # The result were phantom differences that didn't exist, so using dictdiffer and comparing the filtered
+    # dicts directly was chosen instead, since it's more reliable than some other handcrafted json output.
 
     def __init__(
         self,

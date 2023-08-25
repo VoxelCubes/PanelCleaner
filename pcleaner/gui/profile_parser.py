@@ -2,6 +2,7 @@ import re
 from dataclasses import dataclass, field
 from enum import Enum, auto
 from typing import get_type_hints, Any, Callable
+from pathlib import Path
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -14,6 +15,7 @@ from pcleaner import config as cfg
 from pcleaner.config import GreaterZero
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
+import pcleaner.gui.gui_utils as gu
 
 
 class EntryTypes(Enum):
@@ -364,6 +366,7 @@ class ProfileToolBox(Qw.QToolBox):
 
         :param profile: The profile to save to.
         """
+        found_model_path = False
         logger.debug("Getting profile values")
         # Assign the value and connect the reset functionality for each widget.
         for section_name, section in self._widgets.items():
@@ -371,6 +374,25 @@ class ProfileToolBox(Qw.QToolBox):
                 # Get the value from the widget.
                 value = option_widget.get_value()
                 profile.set(section_name, key, value)
+                # Special case: model path
+                # Warn if it's an invalid path.
+                if key == "model_path":
+                    found_model_path = True
+                    if value is not None and not Path(value).exists():
+                        logger.error(
+                            f"Model path {value} does not exist. Please check your profile."
+                        )
+                        gu.show_warning(
+                            self,
+                            "Invalid model path",
+                            f"<html>The Text Detector model path {value} does not exist, reverting to default."
+                            f"\nYou can download the model manually from <a href="
+                            f'"https://github.com/zyddnys/manga-image-translator/releases/latest">here</a>'
+                            f" or continue using the default model.</html>",
+                        )
+        # Sanity check to guard against future breakage.
+        if not found_model_path:
+            logger.error("No model path found in profile.")
 
     @Slot()
     def _on_value_changed(self) -> None:
