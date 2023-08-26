@@ -54,7 +54,7 @@ class FileTable(CTableWidget):
         self.setIconSize(Qc.QSize(ICON_SIZE, ICON_SIZE))
         self.verticalHeader().setDefaultSectionSize(ICON_SIZE + 4)
 
-        self.itemDoubleClicked.connect(self.on_double_click)
+        self.itemClicked.connect(self.on_click)
 
     def check_empty(self):
         logger.debug(f"Checking if table is empty")
@@ -151,7 +151,7 @@ class FileTable(CTableWidget):
 
         self.check_empty()
 
-    def on_double_click(self, item):
+    def on_click(self, item):
         """
         Request to open the image in a new tab to generate previews.
 
