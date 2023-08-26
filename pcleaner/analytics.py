@@ -462,11 +462,3 @@ def draw_denoise_histogram(
     # Draw the legend.
     buffer.write(f"\n{clr.Fore.MAGENTA}█ Denoised{clr.Fore.RESET} | █ Total\n")
     return buffer.getvalue()
-
-
-""" Analytics HTML template
-<html><head><meta name="qrichtext" content="1" /><style type="text/css">
-p, li { white-space: pre-wrap; font-family: Noto Mono, Monospace; size: 12pt}
-</style></head><body>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" ">Mask Fitment Analytics <br />---------------------- <br />Total boxes: 5 | Masks succeeded: 5 (100%) | Masks failed: </span><span style="color:#b21818;">0</span><span style=" "> <br />Perfect masks: </span><span style="color:#18b2b2;">5</span><span style=" "> (100%) | Average border deviation: 0.00 <br /><br />Mask usage by mask size (smallest to largest): <br />Mask 0  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 1  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 2  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 3  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 4  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 5  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 6  : </span><span style="color:#18b2b2;">████████████████████████████████████████</span><span style=" "> </span><span style="color:#18b2b2;">1</span><span style=" "> / 1 <br />Mask 7  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 8  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 9  :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Mask 10 :  </span><span style="color:#18b2b2;">0</span><span style=" "> / 0 <br />Box mask: </span><span style="color:#18b2b2;">████████████████████████████████████████</span><span style=" "> </span><span style="color:#18b2b2;">4</span><span style=" "> / 4 <br /><br /></span><span style="color:#18b2b2;">█ Perfect</span><span style=" "> | █ Total<br /><br /></span></p></body></html>
-"""

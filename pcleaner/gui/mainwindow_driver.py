@@ -2,6 +2,7 @@ import time
 from copy import deepcopy
 from functools import partial
 from importlib import resources
+from typing import Sequence
 from pathlib import Path
 
 import PySide6.QtCore as Qc
@@ -13,12 +14,14 @@ from manga_ocr import MangaOcr
 
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
+import pcleaner.analytics as an
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.processing as prc
 import pcleaner.gui.profile_parser as pp
-import pcleaner.gui.structures as st
+import pcleaner.gui.structures as gst
+import pcleaner.structures as st
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
 import pcleaner.profile_cli as pc
@@ -28,7 +31,7 @@ from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
 
-ANALYTICS_COLUMNS = 70
+ANALYTICS_COLUMNS = 72
 
 
 # noinspection PyUnresolvedReferences
@@ -39,7 +42,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     toolBox_profile: pp.ProfileToolBox
     # Optional shared instance of the OCR model to save time due to its slow loading.
-    shared_ocr_model: st.Shared[st.OCRModel]
+    shared_ocr_model: gst.Shared[gst.OCRModel]
 
     thread_queue: Qc.QThreadPool
 
@@ -58,7 +61,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.progress_step_start = None
 
         self.config = cfg.load_config()
-        self.shared_ocr_model = st.Shared[st.OCRModel]()
+        self.shared_ocr_model = gst.Shared[gst.OCRModel]()
 
         # Share core objects with the file table.
         # Since the file table is created by the ui loader, we can't pass them to the constructor.
@@ -87,6 +90,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.set_up_statusbar()
         self.initialize_profiles()
         self.initialize_analytics_view()
+        self.disable_running_cleaner()
 
         # Allow the table to accept file drops and hide the PATH column.
         self.file_table.setAcceptDrops(True)
@@ -131,6 +135,22 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             + self.widget_progress_drawer.styleSheet()
         )
 
+    # ========================================== UI Toggles ==========================================
+
+    def hide_progress_drawer(self):
+        self.widget_progress_drawer.hide()
+
+    def show_progress_drawer(self):
+        self.widget_progress_drawer.show()
+
+    def enable_running_cleaner(self):
+        logger.info("Enabling running cleaner")
+        self.pushButton_start.setEnabled(True)
+
+    def disable_running_cleaner(self):
+        logger.info("Disabling running cleaner")
+        self.pushButton_start.setEnabled(False)
+
     # ========================================== Initialization Workers ==========================================
 
     def start_initialization_worker(self):
@@ -162,9 +182,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     def load_ocr_model(self):
         t_start = time.time()
+        self.statusbar.showMessage(f"Loading OCR model...")
         self.shared_ocr_model.set(MangaOcr())
         logger.info(f"Loaded OCR model ({time.time()-t_start:.2f}s)")
         self.statusbar.showMessage(f"Loaded OCR model.")
+        self.enable_running_cleaner()
 
     def generic_worker_error(self, error: wt.WorkerError, context: str = ""):
         """
@@ -198,7 +220,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         cache_dir = self.config.get_cleaner_cache_dir()
         if len(list(cache_dir.glob("*"))) > 0:
             cu.empty_cache_dir(cache_dir)
-        self.statusbar.showMessage("Cache cleaned.")
 
     def initialize_analytics_view(self):
         """
@@ -207,6 +228,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Set the font to monospace, using the included font.
         # The font is stored in the data module. Noto Mono is a free font.
         # Load it from file to be cross platform.
+        self.textEdit_analytics.clear()
         with resources.files(data) as data_path:
             font_path = data_path / "NotoMono-Regular.ttf"
         font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
@@ -556,6 +578,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Start processing all files in the table.
         """
+        self.disable_running_cleaner()
         # Figure out what outputs are requested, depending on the checkboxes and the profile.
         request_cleaned = self.checkBox_save_clean.isChecked()
         request_mask = self.checkBox_save_mask.isChecked()
@@ -628,6 +651,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.hide_progress_drawer()
         self.progress_step_start = None
         self.progress_current = 0
+        self.enable_running_cleaner()
 
     @Slot(wt.WorkerError)
     def output_worker_error(self, e):
@@ -666,17 +690,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     Simple UI manipulation functions
     """
 
-    def hide_progress_drawer(self):
-        self.widget_progress_drawer.hide()
-
-    def show_progress_drawer(self):
-        self.widget_progress_drawer.show()
-
     @Slot(imf.ProgressData)
     def show_current_progress(self, progress_data: imf.ProgressData):
         logger.info(f"Progress: {progress_data}")
 
-        if progress_data.progress_type == imf.ProgressType.begin:
+        if progress_data.progress_type == imf.ProgressType.start:
+            # Processing begins, initialize what needs to be.
+            # Specifically, clear the analytics panel.
+            self.textEdit_analytics.clear()
+            return
+
+        elif progress_data.progress_type == imf.ProgressType.begin_step:
             # This marks the beginning of a new processing step.
             self.show_progress_drawer()
             self.progress_current = 0
@@ -691,11 +715,36 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         elif progress_data.progress_type == imf.ProgressType.incremental:
             self.progress_current += progress_data.value
+
         elif progress_data.progress_type == imf.ProgressType.absolute:
             self.progress_current = progress_data.value
-        elif progress_data.progress_type == imf.ProgressType.analytics:
+
+        elif progress_data.progress_type == imf.ProgressType.analyticsOCR:
+            logger.info(f"Showing ocr analytics... {progress_data.value}")
+            # Append the formatted analytics to the text edit.
+            ocr_analytics, ocr_max_size = progress_data.value
+            analytics_str = an.show_ocr_analytics(ocr_analytics, ocr_max_size, ANALYTICS_COLUMNS)
+            self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
+
+        elif progress_data.progress_type == imf.ProgressType.analyticsMasker:
+            # Show analytics.
+            logger.info(f"Showing masker analytics... {progress_data.value}")
+            masker_analytics_raw = progress_data.value
+            analytics_str = an.show_masker_analytics(masker_analytics_raw, ANALYTICS_COLUMNS)
+            self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
+
+        elif progress_data.progress_type == imf.ProgressType.analyticsDenoiser:
             # Show analytics.
             logger.info(f"Showing analytics... {progress_data.value}")
+            denoise_analytics_raw, min_deviation, max_deviation = progress_data.value
+            analytics_str = an.show_denoise_analytics(
+                denoise_analytics_raw,
+                min_deviation,
+                max_deviation,
+                ANALYTICS_COLUMNS,
+            )
+            self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
+
         elif progress_data.progress_type == imf.ProgressType.end:
             # This marks the end of a processing step.
             self.output_worker_finished()

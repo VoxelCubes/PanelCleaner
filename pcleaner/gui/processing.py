@@ -57,6 +57,15 @@ def generate_output(
     :param progress_callback: A callback to report progress to the gui.
     :param debug: If True, debug messages are printed.
     """
+    progress_callback.emit(
+        imf.ProgressData(
+            0,
+            [],
+            imf.Step.text_detection,
+            imf.ProgressType.start,
+        )
+    )
+
     # Create an independant copy of the profile, since this instance is shared and mutated across threads.
     # Due to the checksum only being generated at the end, we don't want to erroneously claim this output
     # matches a profile that was changed in the meantime.
@@ -181,7 +190,7 @@ def generate_output(
                     len(step_preprocessor_images),
                     target_outputs,
                     imf.Step.preprocessor,
-                    imf.ProgressType.begin,
+                    imf.ProgressType.begin_step,
                 )
             )
 
@@ -221,7 +230,7 @@ def generate_output(
                     len(step_preprocessor_images),
                     target_outputs,
                     imf.Step.preprocessor,
-                    imf.ProgressType.analytics,
+                    imf.ProgressType.analyticsOCR,
                     (ocr_analytics, profile.preprocessor.ocr_max_size),
                 )
             )
@@ -241,7 +250,7 @@ def generate_output(
                     len(step_masker_images),
                     target_outputs,
                     imf.Step.masker,
-                    imf.ProgressType.begin,
+                    imf.ProgressType.begin_step,
                 )
             )
 
@@ -328,7 +337,7 @@ def generate_output(
                     len(step_masker_images),
                     target_outputs,
                     imf.Step.masker,
-                    imf.ProgressType.analytics,
+                    imf.ProgressType.analyticsMasker,
                     masker_analytics_raw,
                 )
             )
@@ -348,7 +357,7 @@ def generate_output(
                     len(step_denoiser_images),
                     target_outputs,
                     imf.Step.denoiser,
-                    imf.ProgressType.begin,
+                    imf.ProgressType.begin_step,
                 )
             )
 
@@ -416,7 +425,7 @@ def generate_output(
                     len(step_denoiser_images),
                     target_outputs,
                     imf.Step.denoiser,
-                    imf.ProgressType.analytics,
+                    imf.ProgressType.analyticsDenoiser,
                     (
                         denoise_analytics_raw,
                         profile.denoiser.noise_min_standard_deviation,

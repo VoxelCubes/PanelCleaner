@@ -68,10 +68,13 @@ class ProgressType(Enum):
     - End: The step finished, so the progress bar should be set to 100%.
     """
 
-    begin = auto()
+    start = auto()
+    begin_step = auto()
     incremental = auto()
     absolute = auto()
-    analytics = auto()
+    analyticsOCR = auto()
+    analyticsMasker = auto()
+    analyticsDenoiser = auto()
     end = auto()
 
 

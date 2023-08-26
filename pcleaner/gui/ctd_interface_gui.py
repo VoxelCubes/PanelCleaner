@@ -54,7 +54,7 @@ def model2annotations_gui(
     """
 
     if progress_callback is not None:
-        progress_callback.emit(partial_progress_data(imf.ProgressType.begin))
+        progress_callback.emit(partial_progress_data(imf.ProgressType.begin_step))
 
     def inc_progress():
         if progress_callback is not None:
