@@ -1,4 +1,5 @@
 import io
+import time
 from enum import Enum, IntEnum, auto
 from pathlib import Path
 from typing import Iterable
@@ -12,6 +13,7 @@ from attrs import fields
 from attrs import frozen
 from logzero import logger
 import dictdiffer
+import humanfriendly
 
 import pcleaner.config as cfg
 
@@ -283,6 +285,8 @@ class ImageFile:
     # The following attributes are lazy-loaded.
     thumbnail: Qg.QPixmap | None = None  # Thumbnail of the image, used as the icon.
     size: tuple[int, int] | None = None  # Size of the image.
+    file_size: int | None = None  # Size of the image file in bytes.
+    color_mode: str | None = None  # Color mode of the image.
     outputs: dict[Output, ProcessOutput]  # Map of steps to ProcessStep objects.
 
     error: Exception | None = None  # Error that occurred during any process.
@@ -425,12 +429,32 @@ class ImageFile:
 
     @property
     def size_str(self) -> str:
-        """
-        Returns the size of the image as a string.
-        """
         if self.size is None:
             return "Unknown"
         return f"{self.size[0]:n} × {self.size[1]:n}"
+
+    @property
+    def file_size_str(self) -> str:
+        if self.file_size is None:
+            return "Unknown"
+        return humanfriendly.format_size(self.file_size, binary=True)
+
+    @property
+    def color_mode_str(self) -> str:
+        if self.color_mode is None:
+            return "Unknown"
+        elif self.color_mode in ("RGB", "RGBA"):
+            return "RGB"
+        elif self.color_mode == "CMYK":
+            return "CMYK"
+        elif self.color_mode in ("L", "LA"):
+            return "Grayscale"
+        elif self.color_mode == "1":
+            return "1-bit"
+        elif self.color_mode == "P":
+            return "Palette"
+        else:
+            return "Unknown"
 
     def data_loaded(self) -> bool:
         """
@@ -446,6 +470,8 @@ class ImageFile:
         """
         image = Image.open(self.path)
         self.size = image.size
+        self.file_size = self.path.stat().st_size
+        self.color_mode = image.mode
         # Shrink the image down to a thumbnail size to reduce memory usage.
         thumbnail = image.copy()
         thumbnail.thumbnail(THUMBNAIL_SIZE)

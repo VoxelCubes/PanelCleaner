@@ -23,8 +23,9 @@ class Column(IntEnum):
     PATH = 0
     FILENAME = auto()
     SIZE = auto()
-    CHARS = auto()
-    OUTPUT = auto()
+    FILE_SIZE = auto()
+    COLOR_MODE = auto()
+    STEPS = auto()
 
 
 # noinspection PyUnresolvedReferences
@@ -55,6 +56,7 @@ class FileTable(CTableWidget):
         self.verticalHeader().setDefaultSectionSize(ICON_SIZE + 4)
 
         self.itemClicked.connect(self.on_click)
+        self.finished_drop.connect(self.repopulate_table)
 
     def check_empty(self):
         logger.debug(f"Checking if table is empty")
@@ -89,7 +91,6 @@ class FileTable(CTableWidget):
             )
         for image_path in image_paths:
             self.add_file(image_path)
-        self.repopulate_table()
 
         # Check for images that haven't loaded their data yet.
         # They will need to have a worker thread scheduled, so the gui doesn't freeze.
@@ -125,6 +126,7 @@ class FileTable(CTableWidget):
         """
         Repopulate the table with the current files.
         """
+        logger.debug(f"Repopulating table")
         self.clearAll()
 
         # Collect the file paths and map them to their shortened version.
@@ -138,18 +140,33 @@ class FileTable(CTableWidget):
         for row, (long_path, short_path) in enumerate(long_and_short_paths):
             file_obj: imf.ImageFile = self.files[long_path]
 
-            self.appendRow(str(long_path), str(short_path), "", "", "")
+            self.appendRow(str(long_path), str(short_path), "", "", "", "")
 
             self.item(row, Column.FILENAME).setToolTip(str(long_path))
+            # Center all columns after the filename.
+            for col in range(Column.SIZE, self.columnCount()):
+                self.item(row, col).setTextAlignment(Qc.Qt.AlignCenter)
 
             # Check if the image has loaded yet. If not, use a placeholder icon.
             if not file_obj.data_loaded():
                 self.item(row, Column.FILENAME).setIcon(file_obj.icon)
+                logger.warning(f"Image {file_obj.path} has not loaded yet.")
             else:
-                self.item(row, Column.FILENAME).setIcon(file_obj.thumbnail)
-                self.item(row, Column.SIZE).setText(file_obj.size_str)
+                self.update_row(row, file_obj)
 
         self.check_empty()
+
+    def update_row(self, row: int, file_obj: imf.ImageFile):
+        """
+        Update the table with the file object's data.
+
+        :param row: The row to update.
+        :param file_obj: The file object to use.
+        """
+        self.item(row, Column.FILENAME).setIcon(file_obj.thumbnail)
+        self.item(row, Column.SIZE).setText(file_obj.size_str)
+        self.item(row, Column.FILE_SIZE).setText(file_obj.file_size_str)
+        self.item(row, Column.COLOR_MODE).setText(file_obj.color_mode_str)
 
     def on_click(self, item):
         """
@@ -191,8 +208,7 @@ class FileTable(CTableWidget):
         for row in range(self.rowCount()):
             if self.item(row, Column.PATH).text() == str(file_path):
                 # Update the table with the thumbnail and image size.
-                self.item(row, Column.FILENAME).setIcon(self.files[file_path].thumbnail)
-                self.item(row, Column.SIZE).setText(self.files[file_path].size_str)
+                self.update_row(row, self.files[file_path])
                 break
         else:
             logger.warning(f"Worker done. Could not find {file_path} in the table. ignoring.")

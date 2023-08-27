@@ -218,6 +218,12 @@
                <property name="cornerButtonEnabled">
                 <bool>false</bool>
                </property>
+               <attribute name="horizontalHeaderHighlightSections">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="verticalHeaderHighlightSections">
+                <bool>false</bool>
+               </attribute>
                <column>
                 <property name="text">
                  <string>id</string>
@@ -235,12 +241,17 @@
                </column>
                <column>
                 <property name="text">
-                 <string>Status</string>
+                 <string>File Size</string>
                 </property>
                </column>
                <column>
                 <property name="text">
-                 <string>Output</string>
+                 <string>Color Mode</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Steps</string>
                 </property>
                </column>
               </widget>

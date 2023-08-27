@@ -238,8 +238,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.file_table = FileTable(self.tabWidget_table_page)
-        if (self.file_table.columnCount() < 5):
-            self.file_table.setColumnCount(5)
+        if (self.file_table.columnCount() < 6):
+            self.file_table.setColumnCount(6)
         __qtablewidgetitem = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -250,6 +250,8 @@ class Ui_MainWindow(object):
         self.file_table.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.file_table.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         self.file_table.setObjectName(u"file_table")
         self.file_table.setFrameShape(QFrame.NoFrame)
         self.file_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -260,6 +262,8 @@ class Ui_MainWindow(object):
         self.file_table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.file_table.setSortingEnabled(False)
         self.file_table.setCornerButtonEnabled(False)
+        self.file_table.horizontalHeader().setHighlightSections(False)
+        self.file_table.verticalHeader().setHighlightSections(False)
 
         self.verticalLayout_3.addWidget(self.file_table)
 
@@ -558,9 +562,11 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem2 = self.file_table.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Size", None));
         ___qtablewidgetitem3 = self.file_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Status", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"File Size", None));
         ___qtablewidgetitem4 = self.file_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Output", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Color Mode", None));
+        ___qtablewidgetitem5 = self.file_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Steps", None));
         self.image_tab.setTabText(self.image_tab.indexOf(self.tabWidget_table_page), QCoreApplication.translate("MainWindow", u"Images", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))
