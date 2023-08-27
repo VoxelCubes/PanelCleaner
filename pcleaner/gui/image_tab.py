@@ -86,3 +86,11 @@ class ImageTab(Qw.QTabWidget):
         path = widget_to_close.image_obj.path
         self.open_images.pop(path)
         self.removeTab(index)
+
+    def clear_files(self):
+        """
+        Clear all files from the table, removing all tabs except the primary tab.
+        """
+        self.open_images.clear()
+        for i in range(self.count() - 1, 0, -1):
+            self.removeTab(i)

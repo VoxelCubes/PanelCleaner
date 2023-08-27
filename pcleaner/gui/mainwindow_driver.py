@@ -114,6 +114,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.comboBox_current_profile.hookedCurrentIndexChanged.connect(self.change_current_profile)
         self.action_add_files.triggered.connect(self.file_table.browse_add_files)
         self.action_add_folders.triggered.connect(self.file_table.browse_add_folders)
+        self.action_clear_files.triggered.connect(self.file_table.clear_files)
+        self.action_clear_files.triggered.connect(self.image_tab.clear_files)
         self.file_table.requesting_image_preview.connect(
             partial(
                 self.image_tab.open_image,

@@ -112,6 +112,15 @@ class FileTable(CTableWidget):
 
         self.files[path] = imf.ImageFile(path=path)
 
+    def clear_files(self):
+        """
+        Delete all files from the table.
+        """
+        logger.info(f"Clearing table")
+        self.files.clear()
+        self.clearAll()
+        self.check_empty()
+
     def repopulate_table(self):
         """
         Repopulate the table with the current files.
