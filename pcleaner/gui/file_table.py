@@ -36,6 +36,7 @@ class FileTable(CTableWidget):
 
     config: cfg.Config  # Reference to the MainWindow's config.
     shared_ocr_model: st.Shared[st.OCRModel]  # Must be handed over by the mainwindow.
+    thread_queue: Qc.QThreadPool  # Must be handed over by the mainwindow.
 
     table_is_empty = Qc.Signal()
     table_not_empty = Qc.Signal()
@@ -57,6 +58,9 @@ class FileTable(CTableWidget):
 
         self.itemClicked.connect(self.on_click)
         self.finished_drop.connect(self.repopulate_table)
+
+    def set_thread_queue(self, thread_queue: Qc.QThreadPool):
+        self.thread_queue = thread_queue
 
     def check_empty(self):
         logger.debug(f"Checking if table is empty")
@@ -91,20 +95,6 @@ class FileTable(CTableWidget):
             )
         for image_path in image_paths:
             self.add_file(image_path)
-
-        # Check for images that haven't loaded their data yet.
-        # They will need to have a worker thread scheduled, so the gui doesn't freeze.
-        for image in self.files.values():
-            if not image.data_loaded():
-                # Start the text file worker.
-                worker = wt.Worker(self.image_loading_task, image=image, no_progress_callback=True)
-                logger.debug(f"Worker Thread loading image {image.path}")
-
-                worker.signals.result.connect(self.image_loading_worker_result)
-                worker.signals.error.connect(self.image_loading_worker_error)
-                # Execute.
-                logger.info(f"Executing worker thread {image.path}")
-                self.threadpool.start(worker)
 
     def add_file(self, path: Path):
         """
@@ -150,11 +140,16 @@ class FileTable(CTableWidget):
             # Check if the image has loaded yet. If not, use a placeholder icon.
             if not file_obj.data_loaded():
                 self.item(row, Column.FILENAME).setIcon(file_obj.icon)
-                logger.warning(f"Image {file_obj.path} has not loaded yet.")
+                logger.debug(f"Image {file_obj.path} has not loaded yet.")
             else:
                 self.update_row(row, file_obj)
 
         self.check_empty()
+
+        # Begin loading the images in a bit to let the gui update.
+        worker = wt.Worker(self.lazy_load_images, no_progress_callback=True)
+        worker.signals.error.connect(self.image_dispatch_worker_error)
+        self.thread_queue.start(worker)
 
     def update_row(self, row: int, file_obj: imf.ImageFile):
         """
@@ -196,6 +191,19 @@ class FileTable(CTableWidget):
         """
         return image.load_image()
 
+    def lazy_load_images(self):
+        logger.info(f"Dispatching image loading workers")
+        # Check for images that haven't loaded their data yet.
+        # They will need to have a worker thread scheduled, so the gui doesn't freeze.
+        for image in self.files.values():
+            if not (image.loading_queued or image.data_loaded()):
+                image.loading_queued = True
+                logger.debug(f"Worker Thread loading image {image.path}")
+                worker = wt.Worker(self.image_loading_task, image=image, no_progress_callback=True)
+                worker.signals.result.connect(self.image_loading_worker_result)
+                worker.signals.error.connect(self.image_loading_worker_error)
+                self.threadpool.start(worker)
+
     # ========================= Worker Callbacks =========================
 
     def image_loading_worker_result(self, file_path: Path):
@@ -229,6 +237,16 @@ class FileTable(CTableWidget):
         gu.show_warning(
             self, "Failed to load image", f"Failed to load image {file_path}:\n\n{error.value}"
         )
+
+    def image_dispatch_worker_error(self, error: wt.WorkerError):
+        """
+        Display an error message in the table.
+        """
+        gu.show_warning(
+            self, "Failed to dispatch image", f"Failed to dispatch image:\n\n{error.value}"
+        )
+
+    # =========================== File Adding ===========================
 
     def browse_add_files(self):
         """

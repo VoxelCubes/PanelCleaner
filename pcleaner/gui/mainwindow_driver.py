@@ -63,14 +63,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.config = cfg.load_config()
         self.shared_ocr_model = gst.Shared[gst.OCRModel]()
 
-        # Share core objects with the file table.
-        # Since the file table is created by the ui loader, we can't pass them to the constructor.
-        self.file_table.set_config(self.config)
-        self.file_table.set_shared_ocr_model(self.shared_ocr_model)
-
         # TODO eventually check for the existence of the text detector models on startup.
 
-        # This threadpool is used for parallelizing individual processing steps.
+        # This threadpool is used for parallelizing tasks the gui relies on, such as loading images.
+        # This isn't used for processing, since that is handled by the multiprocessing module
+        # for true parallelism.
         self.threadpool = Qc.QThreadPool.globalInstance()
         logger.info(f"Multithreading with maximum {self.threadpool.maxThreadCount()} threads")
 
@@ -80,6 +77,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # in a previous run, and if so, skip it.
         self.thread_queue = Qc.QThreadPool()
         self.thread_queue.setMaxThreadCount(1)
+
+        # Share core objects with the file table.
+        # Since the file table is created by the ui loader, we can't pass them to the constructor.
+        self.file_table.set_config(self.config)
+        self.file_table.set_shared_ocr_model(self.shared_ocr_model)
+        self.file_table.set_thread_queue(self.thread_queue)
 
         self.start_initialization_worker()
 

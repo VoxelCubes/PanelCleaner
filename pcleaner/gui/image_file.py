@@ -288,6 +288,7 @@ class ImageFile:
     file_size: int | None = None  # Size of the image file in bytes.
     color_mode: str | None = None  # Color mode of the image.
     outputs: dict[Output, ProcessOutput]  # Map of steps to ProcessStep objects.
+    loading_queued: bool = False  # Whether the image is queued to be loaded.
 
     error: Exception | None = None  # Error that occurred during any process.
 
