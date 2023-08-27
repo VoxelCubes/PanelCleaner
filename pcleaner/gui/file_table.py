@@ -15,8 +15,8 @@ import pcleaner.helpers as hp
 from .CustomQ.CTableWidget import CTableWidget
 
 
-# The size used for the little thumbnails on each row.
-ICON_SIZE = 44
+# Add some space between the icon of each row.
+GUI_PADDING = 4
 
 
 class Column(IntEnum):
@@ -53,8 +53,8 @@ class FileTable(CTableWidget):
         self.threadpool = Qc.QThreadPool.globalInstance()
 
         # Make icons larger so the thumbnails are more visible.
-        self.setIconSize(Qc.QSize(ICON_SIZE, ICON_SIZE))
-        self.verticalHeader().setDefaultSectionSize(ICON_SIZE + 4)
+        self.setIconSize(Qc.QSize(*imf.THUMBNAIL_SIZE))
+        self.verticalHeader().setDefaultSectionSize(imf.THUMBNAIL_SIZE[0] + GUI_PADDING)
 
         self.itemClicked.connect(self.on_click)
         self.finished_drop.connect(self.repopulate_table)

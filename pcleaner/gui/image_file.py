@@ -19,7 +19,7 @@ import pcleaner.config as cfg
 
 
 # The max size used for the icon and large thumbnail.
-THUMBNAIL_SIZE = 44, 44
+THUMBNAIL_SIZE = 64, 64
 
 
 class Output(IntEnum):
