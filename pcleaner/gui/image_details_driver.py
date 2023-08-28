@@ -77,7 +77,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         # Clear sample text from labels that only update on user interaction.
         self.label_size.setText("")
-        self.label_position.setText("")
+        self.label_position.setText("0, 0")
         self.label_step.setText("")
 
         self.init_sidebar()
@@ -258,7 +258,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         if not proc_output.has_path():
             # Clear whatever image is currently shown.
             self.image_viewer.set_image(None)
-            self.label_position.setText("")
+            self.label_position.setText("0, 0")
             self.widget_footer_info.hide()
             self.stackedWidget.setCurrentWidget(self.page_no_image)
             self.pushButton_export.setEnabled(False)
