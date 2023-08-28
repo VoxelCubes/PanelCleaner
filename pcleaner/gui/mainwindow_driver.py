@@ -715,7 +715,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.progress_step_start = progress_data.current_step
                 # Set the target label, we don't need to update this multiple times.
                 self.label_target_outputs.setText(
-                    ", ".join(pp.to_display_name(o.name) for o in progress_data.target_outputs)
+                    ", ".join(
+                        pp.to_display_name(o.name).replace("Ai ", "AI ")
+                        for o in progress_data.target_outputs
+                    )
                 )
 
         elif progress_data.progress_type == imf.ProgressType.incremental:
