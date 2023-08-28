@@ -57,6 +57,8 @@ import shutil
 from pathlib import Path
 import yaml
 
+SUPPORTED_EXTENSIONS = [".svg", ".png", ".xpm"]
+
 
 def parse_yaml_file(filename: Path) -> dict:
     """
@@ -67,6 +69,24 @@ def parse_yaml_file(filename: Path) -> dict:
     """
     with filename.open("r") as file:
         return yaml.safe_load(file)
+
+
+def find_xdg_icon(file, src_path, extensions):
+    og_file = file
+    # Loop through all allowed file extensions
+    for ext in extensions:
+        # Perform an XDG conformant search for the file
+        while not (src_path / f"{file}{ext}").exists() and file:
+            file = "-".join(file.split("-")[:-1])
+
+        if file:
+            return f"{file}{ext}"
+
+        # Reset file name for the next iteration
+        file = og_file
+
+    # If the loop finishes without finding a file, return None
+    return None
 
 
 def copy_files(theme_dir: Path, yaml_data: dict) -> None:
@@ -85,7 +105,12 @@ def copy_files(theme_dir: Path, yaml_data: dict) -> None:
                 dest_path.mkdir(parents=True)
 
             for file in files:
-                shutil.copy2(src_path / file, dest_path)
+                found_file = find_xdg_icon(file, src_path, SUPPORTED_EXTENSIONS)
+
+                if found_file:
+                    shutil.copy2(src_path / found_file, dest_path)
+                else:
+                    print(f"Could not find {file} in {src_path}")
 
 
 def create_sparse_copy(theme_dir: Path, yaml_data: dict) -> None:
@@ -127,10 +152,17 @@ def generate_qrc_file(yaml_data: dict) -> None:
 
             for category, subcategories in yaml_data["Files"].items():
                 for subcategory, files in subcategories.items():
+                    src_path = theme_dir / str(category) / str(subcategory)
+
                     for file in files:
-                        f.write(
-                            f"    <file>{dest_dir.relative_to(Path.cwd())}/{str(category)}/{str(subcategory)}/{file}</file>\n"
-                        )
+                        found_file = find_xdg_icon(file, src_path, SUPPORTED_EXTENSIONS)
+
+                        if found_file:
+                            f.write(
+                                f"    <file>{dest_dir.relative_to(Path.cwd())}/{str(category)}/{str(subcategory)}/{found_file}</file>\n"
+                            )
+                        else:
+                            print(f"Could not find {file} in {src_path}")
 
         f.write("  </qresource>\n")
         f.write("</RCC>\n")

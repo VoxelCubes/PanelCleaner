@@ -5,41 +5,41 @@ Theme directories:
 Files:
   actions:
     16:
-      - configure.svg
-      - dialog-cancel.svg
-      - dialog-ok-apply.svg
-      - document-open-folder.svg
-      - document-open.svg
-      - document-preview.svg
-      - document-revert.svg
-      - document-save.svg
-      - document-save-as.svg
-      - document-new.svg
-      - document-import.svg
-      - edit-clear.svg
-      - edit-delete-remove.svg
-      - edit-delete.svg
-      - edit-reset.svg
-      - help-about.svg
-      - list-add.svg
-      - media-playback-start.svg
-      - process-stop.svg
-      - help-contents.svg
-      - view-refresh.svg
-      - view-form.svg
-      - edit-clear-history.svg
+      - configure
+      - dialog-cancel
+      - dialog-ok-apply
+      - document-open-folder
+      - document-open
+      - document-preview
+      - document-revert
+      - document-save
+      - document-save-as
+      - document-new
+      - document-import
+      - edit-clear
+      - edit-delete-remove
+      - edit-delete
+      - edit-reset
+      - help-about
+      - list-add
+      - media-playback-start
+      - process-stop
+      - help-contents
+      - view-refresh
+      - view-form
+      - edit-clear-history
       - zoom-in
       - zoom-out
       - zoom-reset
-      - zoom-fit-best.svg
+      - zoom-fit-best
   mimetypes:
     16:
-      - image-bmp.svg
-      - image-jpeg.svg
-      - image-png.svg
-      - image-tiff.svg
-      - image-x-generic.svg
+      - image-bmp
+      - image-jpeg
+      - image-png
+      - image-tiff
+      - image-x-generic
   status:
     16:
-      - data-error.svg
-      - data-warning.svg
+      - data-error
+      - data-warning
