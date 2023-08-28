@@ -183,6 +183,11 @@ class FileTable(CTableWidget):
         # Get the file object.
         try:
             file_obj = self.files[Path(self.item(item.row(), Column.PATH).text())]
+            # Check if it has loaded yet.
+            if not file_obj.data_loaded():
+                logger.debug(f"Image {file_obj.path} has not loaded yet.")
+                gu.show_info(self, "Image not loaded", "Please wait until the image has loaded.")
+                return
             self.requesting_image_preview.emit(file_obj)
         except KeyError:
             logger.warning(f"Could not find file object for item at row {item.row()}")
