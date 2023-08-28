@@ -82,7 +82,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
     def create_reset_button(self):
         self._reset_button = Qw.QPushButton()
         self._reset_button.setSizePolicy(Qw.QSizePolicy.Fixed, Qw.QSizePolicy.Fixed)
-        self._reset_button.setIcon(Qg.QIcon.fromTheme("edit-reset"))
+        self._reset_button.setIcon(Qg.QIcon.fromTheme("edit-reset-symbolic"))
         self._reset_button.setToolTip("Reset to default")
         self._reset_button.clicked.connect(self.reset)
         self.set_reset_button_enabled(False)

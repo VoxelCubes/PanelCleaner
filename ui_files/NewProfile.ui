@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>556</width>
-    <height>234</height>
+    <height>236</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,8 +64,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="folder-open">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="folder-open-symbolic"/>
          </property>
         </widget>
        </item>

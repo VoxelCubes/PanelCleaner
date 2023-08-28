@@ -24,7 +24,7 @@ class Ui_NewProfile(object):
     def setupUi(self, NewProfile):
         if not NewProfile.objectName():
             NewProfile.setObjectName(u"NewProfile")
-        NewProfile.resize(556, 234)
+        NewProfile.resize(556, 236)
         self.verticalLayout = QVBoxLayout(NewProfile)
         self.verticalLayout.setSpacing(12)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -58,13 +58,7 @@ class Ui_NewProfile(object):
         self.pushButton_browse_location = QPushButton(NewProfile)
         self.pushButton_browse_location.setObjectName(u"pushButton_browse_location")
         self.pushButton_browse_location.setEnabled(False)
-        icon = QIcon()
-        iconThemeName = u"folder-open"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"folder-open-symbolic"))
         self.pushButton_browse_location.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_browse_location)

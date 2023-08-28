@@ -44,7 +44,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-147</y>
+        <y>0</y>
         <width>138</width>
         <height>943</height>
        </rect>
@@ -137,8 +137,7 @@
           <string>Export</string>
          </property>
          <property name="icon">
-          <iconset theme="document-save">
-           <normaloff>../../../.designer/backup</normaloff>../../../.designer/backup</iconset>
+          <iconset theme="document-save-symbolic"/>
          </property>
         </widget>
        </item>
@@ -151,8 +150,7 @@
           <string>Refresh</string>
          </property>
          <property name="icon">
-          <iconset theme="view-refresh">
-           <normaloff>../../../.designer/backup</normaloff>../../../.designer/backup</iconset>
+          <iconset theme="view-refresh-symbolic"/>
          </property>
         </widget>
        </item>
@@ -165,8 +163,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-in">
-           <normaloff>../../../.designer/backup</normaloff>../../../.designer/backup</iconset>
+          <iconset theme="zoom-in-symbolic"/>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -182,8 +179,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-out">
-           <normaloff>../../../.designer/backup</normaloff>../../../.designer/backup</iconset>
+          <iconset theme="zoom-out-symbolic"/>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -199,8 +195,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-original">
-           <normaloff>../../../.designer/backup</normaloff>../../../.designer/backup</iconset>
+          <iconset theme="zoom-original-symbolic"/>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -216,7 +211,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-fit-best"/>
+          <iconset theme="zoom-fit-best-symbolic"/>
          </property>
          <property name="flat">
           <bool>true</bool>
