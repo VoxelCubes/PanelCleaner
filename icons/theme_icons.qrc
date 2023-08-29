@@ -1,5 +1,5 @@
 <RCC>
-  <qresource prefix="/">
+  <qresource prefix="icon-themes">
     <file>breeze/index.theme</file>
     <file>breeze/actions/16/configure.svg</file>
     <file>breeze/actions/16/dialog-cancel.svg</file>

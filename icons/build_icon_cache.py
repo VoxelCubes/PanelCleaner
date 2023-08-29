@@ -142,7 +142,7 @@ def generate_qrc_file(yaml_data: dict) -> None:
 
     with qrc_file.open("w") as f:
         f.write("<RCC>\n")
-        f.write('  <qresource prefix="/">\n')
+        f.write('  <qresource prefix="icon-themes">\n')
 
         for theme_dir_str in yaml_data["Theme directories"]:
             theme_dir = Path(theme_dir_str)
