@@ -480,6 +480,17 @@ class ImageFile:
 
         return self.path
 
+    def has_output_for_step(self, step: Step) -> bool:
+        """
+        Check if the step has an output.
+        This only checks if the representative of the step has an output path,
+        regardless of whether the output is up to date with the profile.
+
+        :param step: The step to check.
+        :return: True if the step has an output, False otherwise.
+        """
+        return self.outputs[get_output_representing_step(step)].has_path()
+
 
 def convert_PIL_to_QPixmap(image: Image.Image) -> Qg.QPixmap:
     """

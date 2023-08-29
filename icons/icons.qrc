@@ -1,12 +1,12 @@
 <RCC>
   <qresource prefix="/">
-    <file>custom_icons/light/step-denoising-symbolic.svg</file>
-    <file>custom_icons/light/step-masking-symbolic.svg</file>
-    <file>custom_icons/light/step-preprocessing-symbolic.svg</file>
+    <file>custom_icons/light/step-denoiser-symbolic.svg</file>
+    <file>custom_icons/light/step-masker-symbolic.svg</file>
+    <file>custom_icons/light/step-preprocessor-symbolic.svg</file>
     <file>custom_icons/light/step-text-detection-symbolic.svg</file>
-    <file>custom_icons/dark/step-denoising-symbolic.svg</file>
-    <file>custom_icons/dark/step-masking-symbolic.svg</file>
-    <file>custom_icons/dark/step-preprocessing-symbolic.svg</file>
+    <file>custom_icons/dark/step-denoiser-symbolic.svg</file>
+    <file>custom_icons/dark/step-masker-symbolic.svg</file>
+    <file>custom_icons/dark/step-preprocessor-symbolic.svg</file>
     <file>custom_icons/dark/step-text-detection-symbolic.svg</file>
     <file>logo-tiny.png</file>
   </qresource>

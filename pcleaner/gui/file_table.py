@@ -2,6 +2,7 @@ from enum import IntEnum, auto
 from pathlib import Path
 
 import PySide6.QtCore as Qc
+import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from logzero import logger
 from natsort import natsorted
@@ -45,6 +46,10 @@ class FileTable(CTableWidget):
 
     requesting_image_preview = Qc.Signal(imf.ImageFile)
 
+    step_icons_dark: dict[imf.Step, tuple[Qg.QIcon, Qg.QIcon]]
+    step_icons_light: dict[imf.Step, tuple[Qg.QIcon, Qg.QIcon]]
+    dark_mode: bool
+
     def __init__(self, parent=None):
         CTableWidget.__init__(self, parent)
 
@@ -58,6 +63,58 @@ class FileTable(CTableWidget):
 
         self.itemClicked.connect(self.on_click)
         self.finished_drop.connect(self.repopulate_table)
+        Qc.QTimer.singleShot(0, self.post_init)
+
+        self.dark_mode = True
+        # Set up the step icons.
+        # Define what qt resource files to use for the icons.
+
+        for dark_or_light in ["dark", "light"]:
+            icons = {}
+            for step in [
+                imf.Step.text_detection,
+                imf.Step.preprocessor,
+                imf.Step.masker,
+                imf.Step.denoiser,
+            ]:
+                # Original QIcon
+                original_icon = Qg.QIcon(
+                    f":/custom_icons/{dark_or_light}/step-{step.name.replace('_','-')}-symbolic.svg"
+                )
+
+                # Create QPixmap from QIcon
+                pixmap = original_icon.pixmap(original_icon.actualSize(Qc.QSize(64, 64)))
+
+                # Apply QGraphicsOpacityEffect to QPixmap
+                opacity_effect = Qw.QGraphicsOpacityEffect()
+                opacity_effect.setOpacity(0.5)
+
+                scene = Qw.QGraphicsScene()
+                pixmap_item = Qw.QGraphicsPixmapItem(pixmap)
+                pixmap_item.setGraphicsEffect(opacity_effect)
+                scene.addItem(pixmap_item)
+
+                # Convert QGraphicsScene back to QPixmap
+                faded_pixmap = Qg.QPixmap(pixmap.size())
+                faded_pixmap.fill(Qc.Qt.transparent)
+                painter = Qg.QPainter(faded_pixmap)
+                scene.render(painter)
+                painter.end()
+
+                # Convert QPixmap back to QIcon
+                faded_icon = Qg.QIcon(faded_pixmap)
+
+                # Add original and faded icons to dictionary
+                icons[step] = (original_icon, faded_icon)
+
+            if dark_or_light == "dark":
+                self.step_icons_dark = icons
+            else:
+                self.step_icons_light = icons
+
+    def post_init(self):
+        # Make enough room for the 4 step icons.
+        self.setColumnWidth(Column.STEPS, 4 * (imf.THUMBNAIL_SIZE // 2) + 2 * GUI_PADDING)
 
     def set_thread_queue(self, thread_queue: Qc.QThreadPool):
         self.thread_queue = thread_queue
@@ -171,6 +228,30 @@ class FileTable(CTableWidget):
         self.item(row, Column.SIZE).setText(file_obj.size_str)
         self.item(row, Column.FILE_SIZE).setText(file_obj.file_size_str)
         self.item(row, Column.COLOR_MODE).setText(file_obj.color_mode_str)
+
+        # Create the step icons. They are arranged horizontally in a container widget.
+        container = Qw.QWidget()
+        layout = Qw.QHBoxLayout(container)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+        layout.setAlignment(Qc.Qt.AlignCenter)
+        icons = self.step_icons_dark if self.dark_mode else self.step_icons_light
+        for step, (icon_enabled, icon_disabled) in icons.items():
+            label = Qw.QLabel()
+            # Check if the image object has the step completed.
+            if file_obj.has_output_for_step(step):
+                label.setPixmap(
+                    icon_enabled.pixmap(imf.THUMBNAIL_SIZE // 2, imf.THUMBNAIL_SIZE // 2)
+                )
+            else:
+                label.setPixmap(
+                    icon_disabled.pixmap(imf.THUMBNAIL_SIZE // 2, imf.THUMBNAIL_SIZE // 2)
+                )
+
+            layout.addWidget(label)
+
+        # Set the container as the cell widget
+        self.setCellWidget(row, Column.STEPS, container)
 
     def on_click(self, item):
         """
