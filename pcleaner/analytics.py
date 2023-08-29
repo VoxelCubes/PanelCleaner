@@ -447,16 +447,16 @@ def draw_denoise_histogram(
     max_label_length = max(len(label) for label, _, _ in buckets_labeled)
     bar_width = max_columns - max_label_length - 16  # 16 is for the spaces and the brackets.
 
-    buckets_labeled = [
-        (b_range, int(below * bar_width / max_count), int(above * bar_width / max_count))
-        for b_range, below, above in buckets_labeled
+    bucket_bar_lengths: list[tuple[int, int]] = [
+        (int(below * bar_width / max_count), int(above * bar_width / max_count))
+        for _, below, above in buckets_labeled
     ]
 
     buffer = StringIO()
     # Draw the buckets.
-    for b_range, below, above in buckets_labeled:
+    for (b_range, below, above), (below_len, above_len) in zip(buckets_labeled, bucket_bar_lengths):
         buffer.write(
-            f"{b_range} : {'█' * below}{clr.Fore.MAGENTA}{'█' * above} {above}{clr.Fore.RESET} / {below+above}\n"
+            f"{b_range} : {'█' * below_len}{clr.Fore.MAGENTA}{'█' * above_len} {above}{clr.Fore.RESET} / {below+above}\n"
         )
 
     # Draw the legend.
