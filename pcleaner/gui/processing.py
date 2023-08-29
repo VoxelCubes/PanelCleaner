@@ -513,7 +513,10 @@ def copy_to_output(
         )
 
     if imf.Output.final_mask in outputs:
-        ops.save_optimized(image_object.outputs[imf.Output.final_mask].path, masked_out_path)
+        # First scale the output mask to the original image size.
+        final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        final_mask.resize(image_object.size, Image.NEAREST)
+        ops.save_optimized(final_mask, masked_out_path)
 
     if imf.Output.isolated_text in outputs:
         ops.save_optimized(image_object.outputs[imf.Output.isolated_text].path, text_out_path)

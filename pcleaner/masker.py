@@ -125,7 +125,8 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     if m_data.output_dir is None and m_data.extract_text:
         # Extract the text layer from the image.
         logger.debug(f"Extracting text from {original_path}")
-        text_img = ops.extract_text(base_image, combined_mask)
+        original_image = Image.open(original_path)
+        text_img = ops.extract_text(original_image, combined_mask)
         text_img.save(cache_out_path.with_stem(cache_out_path.stem + "_text"))
 
     # Settle on the final output path for the cleaned image.
