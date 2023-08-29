@@ -35,7 +35,13 @@ class Ui_MainWindow(object):
         MainWindow.resize(1720, 720)
         self.action_add_files = QAction(MainWindow)
         self.action_add_files.setObjectName(u"action_add_files")
-        icon = QIcon(QIcon.fromTheme(u"document-open-symbolic"))
+        icon = QIcon()
+        iconThemeName = u"document-open-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_add_files.setIcon(icon)
         self.action_clear_files = QAction(MainWindow)
         self.action_clear_files.setObjectName(u"action_clear_files")
@@ -49,7 +55,13 @@ class Ui_MainWindow(object):
         self.action_clear_files.setIcon(icon1)
         self.action_new_profile = QAction(MainWindow)
         self.action_new_profile.setObjectName(u"action_new_profile")
-        icon2 = QIcon(QIcon.fromTheme(u"document-new-symbolic"))
+        icon2 = QIcon()
+        iconThemeName = u"document-new-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon2 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon2.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_new_profile.setIcon(icon2)
         self.action_delete_profile = QAction(MainWindow)
         self.action_delete_profile.setObjectName(u"action_delete_profile")
@@ -81,11 +93,23 @@ class Ui_MainWindow(object):
         self.actionView_License.setObjectName(u"actionView_License")
         self.action_save_profile = QAction(MainWindow)
         self.action_save_profile.setObjectName(u"action_save_profile")
-        icon5 = QIcon(QIcon.fromTheme(u"document-save-symbolic"))
+        icon5 = QIcon()
+        iconThemeName = u"document-save-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon5 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon5.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_save_profile.setIcon(icon5)
         self.action_save_profile_as = QAction(MainWindow)
         self.action_save_profile_as.setObjectName(u"action_save_profile_as")
-        icon6 = QIcon(QIcon.fromTheme(u"document-save-as-symbolic"))
+        icon6 = QIcon()
+        iconThemeName = u"document-save-as-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon6 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon6.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_save_profile_as.setIcon(icon6)
         self.action_Apply_Denoising = QAction(MainWindow)
         self.action_Apply_Denoising.setObjectName(u"action_Apply_Denoising")
@@ -105,7 +129,13 @@ class Ui_MainWindow(object):
         self.action_temp_2.setObjectName(u"action_temp_2")
         self.action_add_folders = QAction(MainWindow)
         self.action_add_folders.setObjectName(u"action_add_folders")
-        icon7 = QIcon(QIcon.fromTheme(u"document-open-folder"))
+        icon7 = QIcon()
+        iconThemeName = u"document-open-folder"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon7 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon7.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_add_folders.setIcon(icon7)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -144,7 +174,13 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
-        icon8 = QIcon(QIcon.fromTheme(u"document-revert-symbolic"))
+        icon8 = QIcon()
+        iconThemeName = u"document-revert-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon8 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon8.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_reset_profile.setIcon(icon8)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
@@ -202,8 +238,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.file_table = FileTable(self.tabWidget_table_page)
-        if (self.file_table.columnCount() < 6):
-            self.file_table.setColumnCount(6)
+        if (self.file_table.columnCount() < 5):
+            self.file_table.setColumnCount(5)
         __qtablewidgetitem = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -214,8 +250,6 @@ class Ui_MainWindow(object):
         self.file_table.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(4, __qtablewidgetitem4)
-        __qtablewidgetitem5 = QTableWidgetItem()
-        self.file_table.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         self.file_table.setObjectName(u"file_table")
         self.file_table.setFrameShape(QFrame.NoFrame)
         self.file_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -279,14 +313,26 @@ class Ui_MainWindow(object):
 
         self.pushButton_start = QPushButton(self.groupBox_4)
         self.pushButton_start.setObjectName(u"pushButton_start")
-        icon9 = QIcon(QIcon.fromTheme(u"media-playback-start-symbolic"))
+        icon9 = QIcon()
+        iconThemeName = u"media-playback-start-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon9 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon9.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_start.setIcon(icon9)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
 
         self.pushButton_abort = QPushButton(self.groupBox_4)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon10 = QIcon(QIcon.fromTheme(u"process-stop"))
+        icon10 = QIcon()
+        iconThemeName = u"process-stop"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon10 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon10.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_abort.setIcon(icon10)
 
         self.verticalLayout_7.addWidget(self.pushButton_abort)
@@ -337,14 +383,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_browse_out_dir = QPushButton(self.groupBox_3)
         self.pushButton_browse_out_dir.setObjectName(u"pushButton_browse_out_dir")
-        icon11 = QIcon()
-        iconThemeName = u"document-open-folder"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon11 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon11.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
-        self.pushButton_browse_out_dir.setIcon(icon11)
+        self.pushButton_browse_out_dir.setIcon(icon7)
 
         self.horizontalLayout.addWidget(self.pushButton_browse_out_dir)
 
@@ -524,8 +563,6 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"File Size", None));
         ___qtablewidgetitem4 = self.file_table.horizontalHeaderItem(4)
         ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Color Mode", None));
-        ___qtablewidgetitem5 = self.file_table.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Steps", None));
         self.image_tab.setTabText(self.image_tab.indexOf(self.tabWidget_table_page), QCoreApplication.translate("MainWindow", u"Images", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))

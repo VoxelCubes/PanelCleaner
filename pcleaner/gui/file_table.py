@@ -25,7 +25,6 @@ class Column(IntEnum):
     SIZE = auto()
     FILE_SIZE = auto()
     COLOR_MODE = auto()
-    STEPS = auto()
 
 
 # noinspection PyUnresolvedReferences

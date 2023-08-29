@@ -72,7 +72,8 @@
              <string>Save</string>
             </property>
             <property name="icon">
-             <iconset theme="document-save-symbolic"/>
+             <iconset theme="document-save-symbolic">
+              <normaloff>.</normaloff>.</iconset>
             </property>
            </widget>
           </item>
@@ -85,7 +86,8 @@
              <string>Reset All</string>
             </property>
             <property name="icon">
-             <iconset theme="document-revert-symbolic"/>
+             <iconset theme="document-revert-symbolic">
+              <normaloff>.</normaloff>.</iconset>
             </property>
            </widget>
           </item>
@@ -247,11 +249,6 @@
                  <string>Color Mode</string>
                 </property>
                </column>
-               <column>
-                <property name="text">
-                 <string>Steps</string>
-                </property>
-               </column>
               </widget>
              </item>
             </layout>
@@ -340,7 +337,8 @@
                   <string>Start</string>
                  </property>
                  <property name="icon">
-                  <iconset theme="media-playback-start-symbolic"/>
+                  <iconset theme="media-playback-start-symbolic">
+                   <normaloff>.</normaloff>.</iconset>
                  </property>
                 </widget>
                </item>
@@ -350,7 +348,8 @@
                   <string>Abort</string>
                  </property>
                  <property name="icon">
-                  <iconset theme="process-stop"/>
+                  <iconset theme="process-stop">
+                   <normaloff>.</normaloff>.</iconset>
                  </property>
                 </widget>
                </item>
@@ -639,7 +638,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_add_files">
    <property name="icon">
-    <iconset theme="document-open-symbolic"/>
+    <iconset theme="document-open-symbolic">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Add Files...</string>
@@ -656,7 +656,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_new_profile">
    <property name="icon">
-    <iconset theme="document-new-symbolic"/>
+    <iconset theme="document-new-symbolic">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>New</string>
@@ -702,7 +703,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_save_profile">
    <property name="icon">
-    <iconset theme="document-save-symbolic"/>
+    <iconset theme="document-save-symbolic">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save</string>
@@ -710,7 +712,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_save_profile_as">
    <property name="icon">
-    <iconset theme="document-save-as-symbolic"/>
+    <iconset theme="document-save-as-symbolic">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Save as...</string>
@@ -759,7 +762,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_add_folders">
    <property name="icon">
-    <iconset theme="document-open-folder"/>
+    <iconset theme="document-open-folder">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Add Folder...</string>
