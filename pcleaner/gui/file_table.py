@@ -53,8 +53,8 @@ class FileTable(CTableWidget):
         self.threadpool = Qc.QThreadPool.globalInstance()
 
         # Make icons larger so the thumbnails are more visible.
-        self.setIconSize(Qc.QSize(*imf.THUMBNAIL_SIZE))
-        self.verticalHeader().setDefaultSectionSize(imf.THUMBNAIL_SIZE[0] + GUI_PADDING)
+        self.setIconSize(Qc.QSize(imf.THUMBNAIL_SIZE, imf.THUMBNAIL_SIZE))
+        self.verticalHeader().setDefaultSectionSize(imf.THUMBNAIL_SIZE + GUI_PADDING)
 
         self.itemClicked.connect(self.on_click)
         self.finished_drop.connect(self.repopulate_table)

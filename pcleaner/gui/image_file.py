@@ -19,7 +19,7 @@ import pcleaner.config as cfg
 
 
 # The max size used for the icon and large thumbnail.
-THUMBNAIL_SIZE = 64, 64
+THUMBNAIL_SIZE = 64
 
 
 class Output(IntEnum):
@@ -475,7 +475,7 @@ class ImageFile:
         self.color_mode = image.mode
         # Shrink the image down to a thumbnail size to reduce memory usage.
         thumbnail = image.copy()
-        thumbnail.thumbnail(THUMBNAIL_SIZE)
+        thumbnail.thumbnail((THUMBNAIL_SIZE, THUMBNAIL_SIZE))
         self.thumbnail = convert_PIL_to_QPixmap(thumbnail)
 
         return self.path
