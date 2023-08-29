@@ -96,23 +96,23 @@ def generate_output(
             # holy shit this is cursed I need to think about it more.
             # I think I got it sorted now...
             # Pretty sure it works :)
+            # It didn't.
+            # Now it is fr fr
 
             target_outputs_in_the_current_step: tuple[imf.Output] = tuple(
                 filter(lambda o: o in imf.step_to_output[current_step], reversed(target_outputs))
             )
 
-            if not target_outputs_in_the_current_step:
-                # In this case we just need to know if the step's representative is complete.
-                representative: imf.Output = imf.get_output_representing_step(current_step)
-                return image_object.outputs[representative].is_changed(profile)
-
-            this_is_the_final_step: bool = target_output in imf.step_to_output[current_step]
-
-            if this_is_the_final_step:
+            if target_outputs_in_the_current_step:
+                # We need to check each output we care about to know if we gotta rerun the step.
                 return any(
                     image_object.outputs[o].is_changed(profile)
                     for o in target_outputs_in_the_current_step
                 )
+            else:
+                # In this case we just need to know if the step's representative is complete.
+                representative: imf.Output = imf.get_output_representing_step(current_step)
+                return image_object.outputs[representative].is_changed(profile)
 
         return step_changed
 
