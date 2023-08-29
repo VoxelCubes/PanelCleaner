@@ -102,16 +102,19 @@ def visualize_mask_fitments(
     # Compose all masks of the same index into one mask.
     # Each fitment result contains a list of the sub-masks and their positions.
     masks = []
-    max_masks = max(len(mask_fitment.debug_masks) for mask_fitment in mask_fitments)
-    for index in range(max_masks):
-        mask_list = []
-        for mask_fitment in mask_fitments:
-            if index >= len(mask_fitment.debug_masks):
-                continue
-            mask_tuple = (mask_fitment.debug_masks[index], mask_fitment.mask_coords)
-            mask_list.append(mask_tuple)
-        mask = compose_masks(base_image.size, mask_list)
-        masks.append(mask)
+    if mask_fitments:
+        max_masks = max(len(mask_fitment.debug_masks) for mask_fitment in mask_fitments)
+        for index in range(max_masks):
+            mask_list = []
+            for mask_fitment in mask_fitments:
+                if index >= len(mask_fitment.debug_masks):
+                    continue
+                mask_tuple = (mask_fitment.debug_masks[index], mask_fitment.mask_coords)
+                mask_list.append(mask_tuple)
+            mask = compose_masks(base_image.size, mask_list)
+            masks.append(mask)
+    else:
+        logger.warning(f"No masks generated for {output_path.name}")
 
     # Don't modify the original image.
     base_image = base_image.copy()
