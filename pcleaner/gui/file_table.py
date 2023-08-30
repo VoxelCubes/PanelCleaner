@@ -13,6 +13,7 @@ import pcleaner.gui.structures as st
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
 from .CustomQ.CTableWidget import CTableWidget
+import pcleaner.ctd_interface as ctd
 
 
 # Add some space between the icon of each row.
@@ -23,8 +24,10 @@ class Column(IntEnum):
     PATH = 0
     FILENAME = auto()
     SIZE = auto()
+    PROCESSING_SIZE = auto()
     FILE_SIZE = auto()
     COLOR_MODE = auto()
+    ANALYTICS = auto()
 
 
 # noinspection PyUnresolvedReferences
@@ -138,7 +141,7 @@ class FileTable(CTableWidget):
         for row, (long_path, short_path) in enumerate(long_and_short_paths):
             file_obj: imf.ImageFile = self.files[long_path]
 
-            self.appendRow(str(long_path), str(short_path), "", "", "", "")
+            self.appendRow(str(long_path), str(short_path), "", "", "", "", "", "")
 
             self.item(row, Column.FILENAME).setToolTip(str(long_path))
             # Center all columns after the filename.
@@ -168,6 +171,17 @@ class FileTable(CTableWidget):
         """
         self.item(row, Column.FILENAME).setIcon(file_obj.thumbnail)
         self.item(row, Column.SIZE).setText(file_obj.size_str)
+        proc_width, proc_height, proc_scale = ctd.calculate_new_size_and_scale(
+            *file_obj.size,
+            self.config.current_profile.general.input_height_lower_target,
+            self.config.current_profile.general.input_height_upper_target,
+        )
+        if proc_scale != 1:
+            self.item(row, Column.PROCESSING_SIZE).setText(
+                f"{proc_width} × {proc_height} ({proc_scale:.0%})"
+            )
+        else:
+            self.item(row, Column.PROCESSING_SIZE).setText(f"100%")
         self.item(row, Column.FILE_SIZE).setText(file_obj.file_size_str)
         self.item(row, Column.COLOR_MODE).setText(file_obj.color_mode_str)
 

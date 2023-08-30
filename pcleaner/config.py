@@ -63,7 +63,8 @@ GreaterZero = NewType("GreaterZero", int)
 class GeneralConfig:
     preferred_file_type: str | None = None
     preferred_mask_file_type: str = ".png"
-    input_size_scale: float | GreaterZero = 1.0
+    input_height_lower_target: int = 1000
+    input_height_upper_target: int = 3000
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
         """
@@ -86,15 +87,26 @@ class GeneralConfig:
         # Only image formats that allow for transparency are supported.
         preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
         
-        # Scale the input image by this amount before processing.
+        
+        # The following are the lower and upper targets for the height of the input image.
+        # It is only ever scaled down to fit within the range, preferring whole number factors
+        # to minimize the impact on image quality. Images smaller than either target will remain unchanged.
+        # You can disable this feature by setting one or both values less than or equal to 0.
+        
         # This is useful for significantly speeding up processing on large images.
+        # Also, since other options relying on pixel dimensions depend on size, this will help
+        # normalize the results across different image sizes.
+        
         # The image will be scaled down, processed, and then only the mask is scaled back up.
         # Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality.
-        # Images larger than 3000x3000 pixels should be scaled down, so that they fall within this range.
-        # E.g. an Image with the size 7000x10000 pixels should be scaled down with a factor of 0.25,
-        # so that it has the size 1750x2500 pixels during processing.
-        # The default value is 1.0, which means no scaling.
-        input_size_scale = {self.input_size_scale}
+        # Only the height of the image is used to determine the scale factor, preserving the aspect ratio,
+        # and ignoring the individual width of an image so that the factor remains consistent if one of
+        # the pages is a double page spread.
+        
+        # E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels
+        # will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.
+        input_height_lower_target = {self.input_height_lower_target}
+        input_height_upper_target = {self.input_height_upper_target}
         
         """
         config_updater.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
@@ -112,7 +124,8 @@ class GeneralConfig:
 
         try_to_load(self, config_updater, section, str | None, "preferred_file_type")
         try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
-        try_to_load(self, config_updater, section, float | GreaterZero, "input_size_scale")
+        try_to_load(self, config_updater, section, int, "input_height_lower_target")
+        try_to_load(self, config_updater, section, int, "input_height_upper_target")
 
     def fix(self):
         """

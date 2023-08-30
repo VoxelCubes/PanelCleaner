@@ -84,7 +84,8 @@ def model2annotations_gui(
                     text_detector_model_path,
                     device,
                     save_dir,
-                    config_general.input_size_scale,
+                    config_general.input_height_lower_target,
+                    config_general.input_height_upper_target,
                     inc_progress,
                 )
                 for batch in batches
@@ -106,7 +107,8 @@ def model2annotations_gui(
                 img_obj.path,
                 model,
                 save_dir,
-                config_general.input_size_scale,
+                config_general.input_height_lower_target,
+                config_general.input_height_upper_target,
                 no_text_detection,
                 img_obj.uuid,
             )

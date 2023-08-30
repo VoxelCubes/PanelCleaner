@@ -128,6 +128,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
         self.pushButton_start.clicked.connect(self.start_processing)
 
+        # Connect profile changes to file table refreshes, due to the processing size being profile-dependent.
+        self.profile_values_changed.connect(self.file_table.repopulate_table)
+
         # Set the current palette to use the inactive color for placeholder text.
         palette = self.palette()
         placeholder_color = palette.color(Qg.QPalette.Inactive, Qg.QPalette.Text)

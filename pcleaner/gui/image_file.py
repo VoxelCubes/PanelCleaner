@@ -316,9 +316,9 @@ class ImageFile:
         # from the profile must be included, for child attributes to be included.
 
         # Text Detection:
-        settings = [pro.general, gen.input_size_scale]
+        settings = [pro.general, gen.input_height_lower_target, gen.input_height_upper_target]
         self.outputs[Output.input] = ProcessOutput(
-            "The original image with the scale factor applied.", "Input", None, settings
+            "The original image with scaling applied (if needed).", "Input", None, settings
         )
         settings += [pro.text_detector, td.model_path]
         self.outputs[Output.ai_mask] = ProcessOutput(

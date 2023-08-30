@@ -241,12 +241,22 @@
                </column>
                <column>
                 <property name="text">
+                 <string>Processing Size</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
                  <string>File Size</string>
                 </property>
                </column>
                <column>
                 <property name="text">
                  <string>Color Mode</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Analytics</string>
                 </property>
                </column>
               </widget>

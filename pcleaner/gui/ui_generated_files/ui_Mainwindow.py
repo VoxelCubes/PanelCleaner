@@ -164,6 +164,14 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_profile_header.addWidget(self.comboBox_current_profile)
 
+        self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
+        self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
+        self.pushButton_apply_profile.setEnabled(False)
+        icon8 = QIcon(QIcon.fromTheme(u"checkmark"))
+        self.pushButton_apply_profile.setIcon(icon8)
+
+        self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
+
         self.pushButton_save_profile = QPushButton(self.groupBox_profile)
         self.pushButton_save_profile.setObjectName(u"pushButton_save_profile")
         self.pushButton_save_profile.setEnabled(False)
@@ -174,14 +182,14 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
-        icon8 = QIcon()
+        icon9 = QIcon()
         iconThemeName = u"document-revert-symbolic"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon8 = QIcon.fromTheme(iconThemeName)
+            icon9 = QIcon.fromTheme(iconThemeName)
         else:
-            icon8.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon9.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_reset_profile.setIcon(icon8)
+        self.pushButton_reset_profile.setIcon(icon9)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
 
@@ -238,8 +246,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.file_table = FileTable(self.tabWidget_table_page)
-        if (self.file_table.columnCount() < 5):
-            self.file_table.setColumnCount(5)
+        if (self.file_table.columnCount() < 7):
+            self.file_table.setColumnCount(7)
         __qtablewidgetitem = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -250,6 +258,10 @@ class Ui_MainWindow(object):
         self.file_table.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.file_table.setHorizontalHeaderItem(5, __qtablewidgetitem5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        self.file_table.setHorizontalHeaderItem(6, __qtablewidgetitem6)
         self.file_table.setObjectName(u"file_table")
         self.file_table.setFrameShape(QFrame.NoFrame)
         self.file_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -313,27 +325,27 @@ class Ui_MainWindow(object):
 
         self.pushButton_start = QPushButton(self.groupBox_4)
         self.pushButton_start.setObjectName(u"pushButton_start")
-        icon9 = QIcon()
-        iconThemeName = u"media-playback-start-symbolic"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon9 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon9.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
-        self.pushButton_start.setIcon(icon9)
-
-        self.verticalLayout_7.addWidget(self.pushButton_start)
-
-        self.pushButton_abort = QPushButton(self.groupBox_4)
-        self.pushButton_abort.setObjectName(u"pushButton_abort")
         icon10 = QIcon()
-        iconThemeName = u"process-stop"
+        iconThemeName = u"media-playback-start-symbolic"
         if QIcon.hasThemeIcon(iconThemeName):
             icon10 = QIcon.fromTheme(iconThemeName)
         else:
             icon10.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_abort.setIcon(icon10)
+        self.pushButton_start.setIcon(icon10)
+
+        self.verticalLayout_7.addWidget(self.pushButton_start)
+
+        self.pushButton_abort = QPushButton(self.groupBox_4)
+        self.pushButton_abort.setObjectName(u"pushButton_abort")
+        icon11 = QIcon()
+        iconThemeName = u"process-stop"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon11 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon11.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.pushButton_abort.setIcon(icon11)
 
         self.verticalLayout_7.addWidget(self.pushButton_abort)
 
@@ -560,9 +572,13 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem2 = self.file_table.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Size", None));
         ___qtablewidgetitem3 = self.file_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"File Size", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Processing Size", None));
         ___qtablewidgetitem4 = self.file_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Color Mode", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"File Size", None));
+        ___qtablewidgetitem5 = self.file_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Color Mode", None));
+        ___qtablewidgetitem6 = self.file_table.horizontalHeaderItem(6)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Analytics", None));
         self.image_tab.setTabText(self.image_tab.indexOf(self.tabWidget_table_page), QCoreApplication.translate("MainWindow", u"Images", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))

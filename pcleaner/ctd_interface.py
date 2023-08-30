@@ -18,6 +18,7 @@ import json
 from uuid import uuid4
 from pathlib import Path
 import multiprocessing as mp
+from math import floor, ceil
 
 from tqdm import tqdm
 import torch
@@ -26,9 +27,9 @@ import cv2
 from logzero import logger
 
 import pcleaner.config as cfg
-from .comic_text_detector.inference import TextDetector
-from .comic_text_detector.utils.io_utils import imwrite, NumpyEncoder
-from .comic_text_detector.utils.textmask import REFINEMASK_ANNOTATION
+from pcleaner.comic_text_detector.inference import TextDetector
+from pcleaner.comic_text_detector.utils.io_utils import imwrite, NumpyEncoder
+from pcleaner.comic_text_detector.utils.textmask import REFINEMASK_ANNOTATION
 
 
 def model2annotations(
@@ -74,7 +75,14 @@ def model2annotations(
                 batches[i % num_processes].append(img_path)
 
             args = [
-                (batch, model_path, device, save_dir, config_general.input_size_scale)
+                (
+                    batch,
+                    model_path,
+                    device,
+                    save_dir,
+                    config_general.input_height_lower_target,
+                    config_general.input_height_upper_target,
+                )
                 for batch in batches
             ]
 
@@ -85,14 +93,20 @@ def model2annotations(
         model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
 
         for index, img_path in enumerate(tqdm(img_list)):
-            process_image(img_path, model, save_dir, config_general.input_size_scale)
+            process_image(
+                img_path,
+                model,
+                save_dir,
+                config_general.input_height_lower_target,
+                config_general.input_height_upper_target,
+            )
 
 
 def process_image_batch(args):
-    img_batch, model_path, device, save_dir, image_scale = args
+    img_batch, model_path, device, save_dir, height_target_lower, height_target_upper = args
     model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
     for img_path in img_batch:
-        process_image(img_path, model, save_dir, image_scale)
+        process_image(img_path, model, save_dir, height_target_lower, height_target_upper)
 
     del model
 
@@ -106,7 +120,8 @@ def process_image(
     img_path: Path,
     model: TextDetector,
     save_dir: Path,
-    image_scale: float,
+    height_target_lower: int,
+    height_target_upper: int,
     skip_text_detection: bool = False,
     uuid: str = None,
 ):
@@ -118,13 +133,15 @@ def process_image(
     :param img_path: The path to the image to process.
     :param model: The TextDetector model.
     :param save_dir: The directory where the results will be saved.
-    :param image_scale: The scale to use when resizing the image (float > 0).
+    :param height_target_lower: The lower target height of the input image.
+    :param height_target_upper: The upper target height of the input image.
     :param skip_text_detection: If True, skip the text detection step and only
         save the scaled input image as a png.
     :param uuid: The uuid to use for the image. If None, a new uuid will be generated.
     """
 
-    img = read_image(img_path, image_scale)
+    img = read_image(img_path)
+    img, image_scale = resize_to_target(img, height_target_lower, height_target_upper)
 
     # Prepend an index to prevent name clobbering between different files.
     if uuid is None:
@@ -171,22 +188,82 @@ def process_image(
     imwrite(maskname, mask_refined)
 
 
-def read_image(path: Path | str, scale=1.0) -> np.ndarray:
+def read_image(path: Path | str) -> np.ndarray:
     """
     Read image from path, scaling it if necessary.
     Then return an array of the image.
 
     :param path: Image path
-    :param scale: Scale factor
     :return: Image array
     """
 
-    img = cv2.imdecode(np.fromfile(str(path), dtype=np.uint8), cv2.IMREAD_COLOR)
+    return cv2.imdecode(np.fromfile(str(path), dtype=np.uint8), cv2.IMREAD_COLOR)
 
-    if scale != 1.0:
-        height, width, channels = img.shape
-        new_width = int(width * scale)
-        new_height = int(height * scale)
-        img = cv2.resize(img, (new_width, new_height))
 
-    return img
+def calculate_new_size_and_scale(
+    width: int, height: int, height_target_lower: int, height_target_upper: int
+) -> tuple[int, int, float]:
+    """
+    Calculate the new dimensions and scale factor for resizing an image.
+    Prefer the largest whole integer scale factor to scale down by.
+    Never scales up and skips scaling if one of the dimensions is <= 0.
+
+    :param width: The current width of the image.
+    :param height: The current height of the image.
+    :param height_target_lower: The lower target height of the input image.
+    :param height_target_upper: The upper target height of the input image.
+    :return: Tuple containing new width, new height, and scale factor.
+    """
+    if height_target_lower <= 0 or height_target_upper <= 0 or height <= height_target_upper:
+        return width, height, 1.0
+
+    # Check if both targets are the same, or the lower one is greater, requiring an exact size.
+    if height_target_lower >= height_target_upper:
+        scale = height_target_upper / height
+        new_width = round(width * scale)
+        new_height = height_target_lower
+    else:
+        # Otherwise, check bounds and choose the largest whole integer scale factor, if possible.
+        # Using the inverse scale factor to determine denominators like 1/2, 1/3, etc.
+        inv_scale_lower = height / height_target_lower
+        inv_scale_upper = height / height_target_upper
+        inv_scale_upper_nearest = ceil(inv_scale_upper)
+        # Check if the nearest upper bound is within the range.
+        if inv_scale_upper_nearest <= inv_scale_lower:
+            scale = 1 / inv_scale_upper_nearest
+            new_width = round(width * scale)
+            new_height = round(height * scale)
+        else:
+            # Otherwise just try to choose the largest size that results in a height that is a multiple of 4.
+            max_height = round(height / inv_scale_upper)
+            min_height = round(height / inv_scale_lower)
+            # Find the largest multiple of 4 that is within the range.
+            new_height = floor(max_height / 4) * 4
+            if new_height < min_height:
+                # If the largest multiple of 4 is still too small, just use the upper bound.
+                new_height = max_height
+            scale = new_height / height
+            new_width = round(width * scale)
+
+    return new_width, new_height, scale
+
+
+def resize_to_target(
+    image: np.ndarray, height_target_lower: int, height_target_upper: int
+) -> tuple[np.ndarray, float]:
+    """
+    Resize the image to fall within the target height range.
+    Prefer the largest whole integer scale factor to scale down by.
+    Never scales up and skips scaling if one of the dimensions is <= 0.
+
+    :param image: The image to resize as a numpy array, loaded by cv2.
+    :param height_target_lower: The lower target height of the input image.
+    :param height_target_upper: The upper target height of the input image.
+    :return: The resized image and the scale factor.
+    """
+    height, width, _ = image.shape  # As a matrix, it returns the height (columns) first.
+    new_width, new_height, scale = calculate_new_size_and_scale(
+        width, height, height_target_lower, height_target_upper
+    )
+
+    return cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA), scale
