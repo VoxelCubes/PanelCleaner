@@ -32,7 +32,6 @@ compile-ui:
 # run build_icon_cache.py
 build-icon-cache:
 	cd $(QRC_DIR) && $(PYTHON) build_icon_cache.py
-	cd $(QRC_DIR)/custom_icons && $(PYTHON) copy_from_dark_to_light.py
 
 # install target
 install:
