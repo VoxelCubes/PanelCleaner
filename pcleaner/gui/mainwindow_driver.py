@@ -331,6 +331,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.toolBox_profile.values_changed.connect(self.handle_profile_values_changed)
         self.pushButton_reset_profile.clicked.connect(self.reset_profile)
         self.pushButton_save_profile.clicked.connect(self.save_profile)
+        self.pushButton_apply_profile.clicked.connect(self.apply_profile)
         self.action_save_profile.triggered.connect(self.save_profile)
         self.action_save_profile_as.triggered.connect(partial(self.save_profile, save_as=True))
         self.action_import_profile.triggered.connect(self.import_profile)
@@ -479,6 +480,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Handle the profile values changing.
         """
         dirty = self.toolBox_profile.is_modified()
+        self.pushButton_apply_profile.setEnabled(dirty)
         self.pushButton_save_profile.setEnabled(dirty)
         self.pushButton_reset_profile.setEnabled(dirty)
         self.action_save_profile.setEnabled(dirty)
@@ -489,6 +491,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         self.toolBox_profile.reset_all()
         self.handle_profile_values_changed()
+
+    def apply_profile(self):
+        """
+        Apply the current profile.
+        Read the current settings and broadcast profile changes.
+        """
+        logger.info("Applying profile.")
+        self.toolBox_profile.get_profile_values(self.config.current_profile)
+        self.handle_profile_values_changed()
+        self.profile_values_changed.emit()
 
     def save_profile(self, save_as: bool = False, make_new: bool = False):
         """
@@ -613,6 +625,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if request_text:
             requested_outputs.append(imf.Output.isolated_text)
 
+        logger.info(f"Requested outputs: {requested_outputs}")
+
         output_str = self.lineEdit_out_directory.text()
         output_directory = Path(output_str if output_str else "cleaned")
         image_files = self.file_table.get_image_files()
@@ -705,8 +719,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     @Slot(imf.ProgressData)
     def show_current_progress(self, progress_data: imf.ProgressData):
-        logger.info(f"Progress: {progress_data}")
-
         if progress_data.progress_type == imf.ProgressType.start:
             # Processing begins, initialize what needs to be.
             # Specifically, clear the analytics panel.
@@ -714,6 +726,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             return
 
         elif progress_data.progress_type == imf.ProgressType.begin_step:
+            logger.info(f"Progress beginning step: {progress_data}")
             # This marks the beginning of a new processing step.
             self.show_progress_drawer()
             self.progress_current = 0
