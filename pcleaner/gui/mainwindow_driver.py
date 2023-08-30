@@ -399,7 +399,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                         self, "Delete Error", "Failed to delete the profile\n" + e.what()
                     )
 
-            self.toolBox_profile.reset_all()  # To suppress the change check.
+            # To suppress the change check since we don't care about discarding the current changes.
+            self.toolBox_profile.reset_all()
             self.comboBox_current_profile.removeItem(self.comboBox_current_profile.currentIndex())
             for action in self.menu_set_default_profile.actions():
                 if action.text() == profile_name:
@@ -460,6 +461,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         return True
 
+    @Slot()
     def change_current_profile(self):
         """
         Set the config option to match the current profile selector, then load it.
@@ -542,6 +544,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                         "Failed to save the new profile to the configuration file.",
                     )
                     return
+                # To suppress the change check since we don't care about discarding the current changes.
+                self.toolBox_profile.reset_all()
+
                 # Add the new profile to the combobox.
                 self.add_new_profile_to_gui(profile_name, profile_path)
 

@@ -16,7 +16,10 @@ class HookState(Enum):
 class CComboBox(Qw.QComboBox):
     """
     Extends the functionality with custom helpers
-    And includes a secondary array for data linked to each item
+    And includes a secondary array for data linked to each item.
+
+    The pre_change_hook is called before the current index is changed,
+    and can interrupt the index change.
     """
 
     _pre_change_hook: Callable[[], bool] | None = None
@@ -62,12 +65,15 @@ class CComboBox(Qw.QComboBox):
                 # Go back to the previous index temporarily, to check the hook.
                 self._next_index = new_index
                 self._hook_state = HookState.CheckHook
+                # Recursively call this function again with the previous index.
                 self.setCurrentIndex(
                     self._prev_index if self._prev_index != -1 else self.currentIndex()
                 )
             case HookState.CheckHook:
                 if self._pre_change_hook():
                     self._hook_state = HookState.End
+                    # Recursively call this function again with the next index,
+                    # but ignore the hook this time due to the end state.
                     self.setCurrentIndex(self._next_index)
                     self.emit_hooked_change(self._next_index)
                 else:
@@ -107,3 +113,23 @@ class CComboBox(Qw.QComboBox):
             logger.error("No linked data found for current index")
             logger.error("Current index:", self.currentIndex())
             logger.error("Linked data:", self._linked_data)
+
+    def removeItem(self, index: int):
+        """
+        Remove an item from the combo box, and its linked data.
+
+        :param index: The index to remove.
+        """
+        if index < 0 or index >= self.count():
+            logger.warning(f"Invalid index {index} for removal.")
+            return
+
+        # Remove the item and its linked data
+        Qw.QComboBox.removeItem(self, index)
+        self._linked_data.pop(index)
+
+        # Reset hook state and prev index.
+        self._prev_index = self.currentIndex()
+        self._hook_state = HookState.Start
+        # We need to emit the change manually since we're side-stepping the hook routine.
+        self.hookedCurrentIndexChanged.emit(self.currentIndex())
