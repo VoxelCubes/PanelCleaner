@@ -64,6 +64,19 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pushButton_apply_profile">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Apply</string>
+            </property>
+            <property name="icon">
+             <iconset theme="dialog-ok-apply-symbolic"/>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="pushButton_save_profile">
             <property name="enabled">
              <bool>false</bool>
@@ -442,8 +455,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset theme="document-open-folder">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="document-open-folder-symbolic"/>
                  </property>
                 </widget>
                </item>
@@ -657,8 +669,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_clear_files">
    <property name="icon">
-    <iconset theme="edit-clear-history">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-clear-history-symbolic"/>
    </property>
    <property name="text">
     <string>Clear Files</string>
@@ -684,8 +695,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_import_profile">
    <property name="icon">
-    <iconset theme="document-import">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-import-symbolic"/>
    </property>
    <property name="text">
     <string>Import...</string>
@@ -772,8 +782,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_add_folders">
    <property name="icon">
-    <iconset theme="document-open-folder">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-open-folder-symbolic"/>
    </property>
    <property name="text">
     <string>Add Folder...</string>

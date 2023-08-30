@@ -45,13 +45,7 @@ class Ui_MainWindow(object):
         self.action_add_files.setIcon(icon)
         self.action_clear_files = QAction(MainWindow)
         self.action_clear_files.setObjectName(u"action_clear_files")
-        icon1 = QIcon()
-        iconThemeName = u"edit-clear-history"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"edit-clear-history-symbolic"))
         self.action_clear_files.setIcon(icon1)
         self.action_new_profile = QAction(MainWindow)
         self.action_new_profile.setObjectName(u"action_new_profile")
@@ -75,13 +69,7 @@ class Ui_MainWindow(object):
         self.action_delete_profile.setIcon(icon3)
         self.action_import_profile = QAction(MainWindow)
         self.action_import_profile.setObjectName(u"action_import_profile")
-        icon4 = QIcon()
-        iconThemeName = u"document-import"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon4 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon4.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
+        icon4 = QIcon(QIcon.fromTheme(u"document-import-symbolic"))
         self.action_import_profile.setIcon(icon4)
         self.action_open_log = QAction(MainWindow)
         self.action_open_log.setObjectName(u"action_open_log")
@@ -129,13 +117,7 @@ class Ui_MainWindow(object):
         self.action_temp_2.setObjectName(u"action_temp_2")
         self.action_add_folders = QAction(MainWindow)
         self.action_add_folders.setObjectName(u"action_add_folders")
-        icon7 = QIcon()
-        iconThemeName = u"document-open-folder"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon7 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon7.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
+        icon7 = QIcon(QIcon.fromTheme(u"document-open-folder-symbolic"))
         self.action_add_folders.setIcon(icon7)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -167,7 +149,7 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon8 = QIcon(QIcon.fromTheme(u"checkmark"))
+        icon8 = QIcon(QIcon.fromTheme(u"dialog-ok-apply-symbolic"))
         self.pushButton_apply_profile.setIcon(icon8)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
@@ -562,6 +544,7 @@ class Ui_MainWindow(object):
         self.groupBox_profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 
+        self.pushButton_apply_profile.setText(QCoreApplication.translate("MainWindow", u"Apply", None))
         self.pushButton_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.pushButton_reset_profile.setText(QCoreApplication.translate("MainWindow", u"Reset All", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Drag and Drop Images or Folders Here", None))
