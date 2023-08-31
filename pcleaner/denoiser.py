@@ -30,11 +30,10 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
             img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
 
     # Scale the mask to the original image size, if needed.
-    scale = mask_data.scale
     cleaned_image = Image.open(mask_data.original_path)
     mask_image = mask_image.convert("LA")
     cleaned_image = cleaned_image.convert("RGB")
-    if scale != 1.0:
+    if cleaned_image.size != mask_image.size:
         mask_image = mask_image.resize(cleaned_image.size, resample=Image.NEAREST)
 
     cleaned_image.paste(mask_image, (0, 0), mask_image)
@@ -46,7 +45,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
 
     # Filter for the min deviation to consider for denoising.
     boxes_to_denoise: list[st.Box] = [
-        box.scale(scale)
+        box
         for box, deviation in mask_data.boxes_with_deviation
         if deviation > d_conf.noise_min_standard_deviation
     ]

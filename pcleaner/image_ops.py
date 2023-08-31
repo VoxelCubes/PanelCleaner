@@ -10,7 +10,6 @@ from logzero import logger
 
 import pcleaner.structures as st
 import pcleaner.config as cfg
-import pcleaner.helpers as hp
 
 
 class BlankMaskError(Exception):
@@ -272,7 +271,6 @@ def pick_best_mask(
     masking_box: st.Box,
     reference_box: st.Box,
     masker_conf: cfg.MaskerConfig,
-    scale: float,
     analytics_page_path: Path,
 ) -> None | st.MaskFittingResults:
     """
@@ -298,7 +296,6 @@ def pick_best_mask(
     :param masking_box: The box to cut the mask out of.
     :param reference_box: The box to cut the base image out of.
     :param masker_conf: The masker config.
-    :param scale: The scale of the original image to the base image.
     :param analytics_page_path: The path to the original image for the analytics.
     :return: The best mask and what color to make it and the box (along with analytics). If no best
         mask was found, return None for the mask and color.
@@ -330,7 +327,7 @@ def pick_best_mask(
     # The generated masks are in ascending size order.
     mask_gen = make_mask_steps_convolution(
         precise_mask_cut,
-        hp.scale_length_rounded(masker_conf.mask_growth_step_pixels, scale),
+        masker_conf.mask_growth_step_pixels,
         masker_conf.mask_growth_steps,
     )
 
@@ -556,6 +553,8 @@ def generate_noise_mask(
 
     # Add alpha channels.
     denoised_image_cutout.putalpha(mask_faded)
+
+    logger.warning(f"Saving noise mask for {box}")
 
     return denoised_image_cutout, (box.x1, box.y1)
 

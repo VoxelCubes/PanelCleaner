@@ -116,10 +116,10 @@ def model2annotations_gui(
 
 
 def process_image_batch(args):
-    img_batch, model_path, device, save_dir, image_scale, inc_progress = args
+    img_batch, model_path, device, save_dir, lower_target, upper_target, inc_progress = args
     model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
     for img_path, img_uuid in img_batch:
-        process_image(img_path, model, save_dir, image_scale, uuid=img_uuid)
+        process_image(img_path, model, save_dir, lower_target, upper_target, uuid=img_uuid)
         inc_progress()
 
     del model

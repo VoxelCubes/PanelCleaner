@@ -65,7 +65,6 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
             masking_box=masking_box,
             reference_box=reference_box,
             masker_conf=m_conf,
-            scale=page_data.scale,
             analytics_page_path=Path(original_img_path_as_png),
         )
         for masking_box, reference_box in zip(

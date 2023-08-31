@@ -1,5 +1,4 @@
 import io
-import time
 from enum import Enum, IntEnum, auto
 from pathlib import Path
 from typing import Iterable

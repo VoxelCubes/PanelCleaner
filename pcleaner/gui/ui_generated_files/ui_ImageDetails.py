@@ -17,8 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGraphicsView, QHBoxLayout,
     QLabel, QLayout, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QStackedWidget, QVBoxLayout,
-    QWidget)
+    QSizePolicy, QStackedWidget, QVBoxLayout, QWidget)
 
 from pcleaner.gui.CustomQ.CElidedLabel import CElidedLabel
 from pcleaner.gui.image_viewer import ImageViewer
@@ -85,7 +84,13 @@ class Ui_ImageDetails(object):
         self.pushButton_export = QPushButton(ImageDetails)
         self.pushButton_export.setObjectName(u"pushButton_export")
         self.pushButton_export.setEnabled(False)
-        icon = QIcon(QIcon.fromTheme(u"document-save-symbolic"))
+        icon = QIcon()
+        iconThemeName = u"document-save-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_export.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_export)
@@ -93,14 +98,26 @@ class Ui_ImageDetails(object):
         self.pushButton_refresh = QPushButton(ImageDetails)
         self.pushButton_refresh.setObjectName(u"pushButton_refresh")
         self.pushButton_refresh.setEnabled(False)
-        icon1 = QIcon(QIcon.fromTheme(u"view-refresh-symbolic"))
+        icon1 = QIcon()
+        iconThemeName = u"view-refresh-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon1 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon1.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_refresh.setIcon(icon1)
 
         self.horizontalLayout.addWidget(self.pushButton_refresh)
 
         self.pushButton_zoom_in = QPushButton(ImageDetails)
         self.pushButton_zoom_in.setObjectName(u"pushButton_zoom_in")
-        icon2 = QIcon(QIcon.fromTheme(u"zoom-in-symbolic"))
+        icon2 = QIcon()
+        iconThemeName = u"zoom-in-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon2 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon2.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_zoom_in.setIcon(icon2)
         self.pushButton_zoom_in.setFlat(True)
 
@@ -108,7 +125,13 @@ class Ui_ImageDetails(object):
 
         self.pushButton_zoom_out = QPushButton(ImageDetails)
         self.pushButton_zoom_out.setObjectName(u"pushButton_zoom_out")
-        icon3 = QIcon(QIcon.fromTheme(u"zoom-out-symbolic"))
+        icon3 = QIcon()
+        iconThemeName = u"zoom-out-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon3 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon3.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_zoom_out.setIcon(icon3)
         self.pushButton_zoom_out.setFlat(True)
 
@@ -116,7 +139,13 @@ class Ui_ImageDetails(object):
 
         self.pushButton_zoom_reset = QPushButton(ImageDetails)
         self.pushButton_zoom_reset.setObjectName(u"pushButton_zoom_reset")
-        icon4 = QIcon(QIcon.fromTheme(u"zoom-original-symbolic"))
+        icon4 = QIcon()
+        iconThemeName = u"zoom-original-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon4 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon4.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_zoom_reset.setIcon(icon4)
         self.pushButton_zoom_reset.setFlat(True)
 
@@ -124,7 +153,13 @@ class Ui_ImageDetails(object):
 
         self.pushButton_zoom_fit = QPushButton(ImageDetails)
         self.pushButton_zoom_fit.setObjectName(u"pushButton_zoom_fit")
-        icon5 = QIcon(QIcon.fromTheme(u"zoom-fit-best-symbolic"))
+        icon5 = QIcon()
+        iconThemeName = u"zoom-fit-best-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon5 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon5.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_zoom_fit.setIcon(icon5)
         self.pushButton_zoom_fit.setFlat(True)
 
@@ -169,7 +204,7 @@ class Ui_ImageDetails(object):
         self.verticalLayout.addWidget(self.stackedWidget)
 
         self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setSpacing(6)
+        self.horizontalLayout_4.setSpacing(12)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(6, 4, 4, 4)
         self.label_step = QLabel(ImageDetails)
@@ -180,35 +215,43 @@ class Ui_ImageDetails(object):
 
         self.horizontalLayout_4.addWidget(self.label_step)
 
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setSpacing(4)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.label_position_label = QLabel(ImageDetails)
+        self.label_position_label.setObjectName(u"label_position_label")
+
+        self.horizontalLayout_6.addWidget(self.label_position_label)
+
+        self.label_position = QLabel(ImageDetails)
+        self.label_position.setObjectName(u"label_position")
+
+        self.horizontalLayout_6.addWidget(self.label_position)
+
+
+        self.horizontalLayout_4.addLayout(self.horizontalLayout_6)
+
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setSpacing(4)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.label_size_label = QLabel(ImageDetails)
+        self.label_size_label.setObjectName(u"label_size_label")
+
+        self.horizontalLayout_7.addWidget(self.label_size_label)
+
+        self.label_size = QLabel(ImageDetails)
+        self.label_size.setObjectName(u"label_size")
+
+        self.horizontalLayout_7.addWidget(self.label_size)
+
+
+        self.horizontalLayout_4.addLayout(self.horizontalLayout_7)
+
         self.widget_footer_info = QWidget(ImageDetails)
         self.widget_footer_info.setObjectName(u"widget_footer_info")
         self.horizontalLayout_5 = QHBoxLayout(self.widget_footer_info)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.label_position_label = QLabel(self.widget_footer_info)
-        self.label_position_label.setObjectName(u"label_position_label")
-
-        self.horizontalLayout_5.addWidget(self.label_position_label)
-
-        self.label_position = QLabel(self.widget_footer_info)
-        self.label_position.setObjectName(u"label_position")
-
-        self.horizontalLayout_5.addWidget(self.label_position)
-
-        self.horizontalSpacer_footer = QSpacerItem(13, 13, QSizePolicy.Minimum, QSizePolicy.Minimum)
-
-        self.horizontalLayout_5.addItem(self.horizontalSpacer_footer)
-
-        self.label_size_label = QLabel(self.widget_footer_info)
-        self.label_size_label.setObjectName(u"label_size_label")
-
-        self.horizontalLayout_5.addWidget(self.label_size_label)
-
-        self.label_size = QLabel(self.widget_footer_info)
-        self.label_size.setObjectName(u"label_size")
-
-        self.horizontalLayout_5.addWidget(self.label_size)
-
 
         self.horizontalLayout_4.addWidget(self.widget_footer_info)
 
