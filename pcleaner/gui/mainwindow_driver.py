@@ -44,12 +44,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     # Optional shared instance of the OCR model to save time due to its slow loading.
     shared_ocr_model: gst.Shared[gst.OCRModel]
 
-    thread_queue: Qc.QThreadPool
+    threadpool: Qc.QThreadPool  # Used for loading images and other gui tasks.
+    thread_queue: Qc.QThreadPool  # Used for tasks that need to run sequentially, without blocking the gui.
 
     progress_current: int
     progress_step_start: imf.Step | None  # When None, no processing is running.
 
     profile_values_changed = Signal()
+
+    # Save a copy of the last applied profile to prevent multiple profile change calls
+    # by the user when the profile didn't actually change.
+    last_applied_profile: cfg.Profile | None
 
     def __init__(self):
         Qw.QMainWindow.__init__(self)
@@ -57,11 +62,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.setWindowTitle(f"{__display_name__} {__version__}")
         self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
 
-        self.progress_current = 0
-        self.progress_step_start = None
+        self.progress_current: int = 0
+        self.progress_step_start: imf.Step | None = None
 
         self.config = cfg.load_config()
         self.shared_ocr_model = gst.Shared[gst.OCRModel]()
+
+        self.last_applied_profile = None
 
         # TODO eventually check for the existence of the text detector models on startup.
 
@@ -411,12 +418,33 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     self.menu_set_default_profile.removeAction(action)
                     break
 
+    def check_profile_difference_sice_last_apply(self) -> bool:
+        """
+        Compare the current profile to the last applied profile.
+
+        :return: True if the profiles are different, False otherwise.
+        """
+        if self.last_applied_profile is None:
+            return True
+
+        # Read the current profile and then compare.
+        profile_in_gui = cfg.Profile()
+        self.toolBox_profile.get_profile_values(profile_in_gui)
+        return profile_in_gui != self.last_applied_profile
+
+    def set_last_applied_profile(self):
+        """
+        Set the last applied profile to the current profile.
+        """
+        self.last_applied_profile = deepcopy(self.config.current_profile)
+
     def load_current_profile(self):
         """
         Load the current profile.
         """
         logger.debug("Loading current profile.")
         self.toolBox_profile.set_profile_values(self.config.current_profile)
+        self.set_last_applied_profile()
         self.profile_values_changed.emit()
 
     def profile_change_check(self) -> bool:
@@ -480,7 +508,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Handle the profile values changing.
         """
         dirty = self.toolBox_profile.is_modified()
-        self.pushButton_apply_profile.setEnabled(dirty)
+        self.pushButton_apply_profile.setEnabled(self.check_profile_difference_sice_last_apply())
         self.pushButton_save_profile.setEnabled(dirty)
         self.pushButton_reset_profile.setEnabled(dirty)
         self.action_save_profile.setEnabled(dirty)
@@ -500,7 +528,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.info("Applying profile.")
         self.toolBox_profile.get_profile_values(self.config.current_profile)
         self.handle_profile_values_changed()
+        self.set_last_applied_profile()
         self.profile_values_changed.emit()
+        self.pushButton_apply_profile.setEnabled(False)
 
     def save_profile(self, save_as: bool = False, make_new: bool = False):
         """
