@@ -160,7 +160,7 @@ class FileTable(CTableWidget):
         # Begin loading the images in a bit to let the gui update.
         worker = wt.Worker(self.lazy_load_images, no_progress_callback=True)
         worker.signals.error.connect(self.image_dispatch_worker_error)
-        self.thread_queue.start(worker)
+        self.threadpool.start(worker)
 
     def update_row(self, row: int, file_obj: imf.ImageFile):
         """
