@@ -47,6 +47,8 @@ class Output(IntEnum):
     denoiser_mask = auto()
     denoised_image = auto()
 
+    write_output = auto()  # This is only used for the progress bar.
+
 
 class Step(IntEnum):
     """
@@ -57,6 +59,7 @@ class Step(IntEnum):
     preprocessor = auto()
     masker = auto()
     denoiser = auto()
+    output = auto()
 
 
 class ProgressType(Enum):
@@ -120,6 +123,7 @@ output_to_step: dict[Output, Step] = {
     Output.mask_data_json: Step.masker,
     Output.denoiser_mask: Step.denoiser,
     Output.denoised_image: Step.denoiser,
+    Output.write_output: Step.output,
 }
 
 # The final output representing each step.
@@ -138,6 +142,7 @@ step_to_output: dict[Step, tuple[Output, ...]] = {
         Output.mask_data_json,
     ),
     Step.denoiser: (Output.denoiser_mask, Output.denoised_image),
+    Step.output: (Output.write_output,),
 }
 
 # When checking which outputs are affected by a profile change, we can check

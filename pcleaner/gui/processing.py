@@ -438,15 +438,33 @@ def generate_output(
 
     # ============================================== Final Output ==============================================
 
-    if output_dir is not None:
+    if target_output == imf.Output.write_output:
+        progress_callback.emit(
+            imf.ProgressData(
+                len(image_objects),
+                target_outputs,
+                imf.Step.output,
+                imf.ProgressType.begin_step,
+            )
+        )
+
         for image_obj in image_objects:
             copy_to_output(image_obj, target_outputs, output_dir, profile)
+
+            progress_callback.emit(
+                imf.ProgressData(
+                    len(image_objects),
+                    target_outputs,
+                    imf.Step.output,
+                    imf.ProgressType.incremental,
+                )
+            )
 
     progress_callback.emit(
         imf.ProgressData(
             0,
             [],
-            imf.Step.denoiser,
+            imf.Step.output,
             imf.ProgressType.end,
         )
     )

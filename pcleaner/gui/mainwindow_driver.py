@@ -655,6 +655,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if request_text:
             requested_outputs.append(imf.Output.isolated_text)
 
+        requested_outputs.append(imf.Output.write_output)
+
         logger.info(f"Requested outputs: {requested_outputs}")
 
         output_str = self.lineEdit_out_directory.text()
