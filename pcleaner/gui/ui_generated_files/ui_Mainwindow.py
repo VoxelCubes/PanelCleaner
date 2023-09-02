@@ -46,7 +46,7 @@ class Ui_MainWindow(object):
         self.action_clear_files = QAction(MainWindow)
         self.action_clear_files.setObjectName(u"action_clear_files")
         icon1 = QIcon()
-        iconThemeName = u"edit-clear-history-symbolic"
+        iconThemeName = u"edit-clear-history"
         if QIcon.hasThemeIcon(iconThemeName):
             icon1 = QIcon.fromTheme(iconThemeName)
         else:
@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
         self.action_import_profile = QAction(MainWindow)
         self.action_import_profile.setObjectName(u"action_import_profile")
         icon4 = QIcon()
-        iconThemeName = u"document-import-symbolic"
+        iconThemeName = u"document-import"
         if QIcon.hasThemeIcon(iconThemeName):
             icon4 = QIcon.fromTheme(iconThemeName)
         else:
@@ -130,7 +130,7 @@ class Ui_MainWindow(object):
         self.action_add_folders = QAction(MainWindow)
         self.action_add_folders.setObjectName(u"action_add_folders")
         icon7 = QIcon()
-        iconThemeName = u"document-open-folder-symbolic"
+        iconThemeName = u"document-open-folder"
         if QIcon.hasThemeIcon(iconThemeName):
             icon7 = QIcon.fromTheme(iconThemeName)
         else:
@@ -167,13 +167,7 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon8 = QIcon()
-        iconThemeName = u"dialog-ok-apply-symbolic"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon8 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon8.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
+        icon8 = QIcon(QIcon.fromTheme(u"dialog-ok-apply-symbolic"))
         self.pushButton_apply_profile.setIcon(icon8)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)

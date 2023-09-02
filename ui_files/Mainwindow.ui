@@ -72,8 +72,7 @@
              <string>Apply</string>
             </property>
             <property name="icon">
-             <iconset theme="dialog-ok-apply-symbolic">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="dialog-ok-apply-symbolic"/>
             </property>
            </widget>
           </item>
@@ -456,7 +455,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset theme="document-open-folder-symbolic">
+                  <iconset theme="document-open-folder">
                    <normaloff>.</normaloff>.</iconset>
                  </property>
                 </widget>
@@ -671,7 +670,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_clear_files">
    <property name="icon">
-    <iconset theme="edit-clear-history-symbolic">
+    <iconset theme="edit-clear-history">
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
@@ -698,7 +697,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_import_profile">
    <property name="icon">
-    <iconset theme="document-import-symbolic">
+    <iconset theme="document-import">
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
@@ -786,7 +785,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_add_folders">
    <property name="icon">
-    <iconset theme="document-open-folder-symbolic">
+    <iconset theme="document-open-folder">
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">

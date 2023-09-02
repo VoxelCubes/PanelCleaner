@@ -8,7 +8,7 @@ Files:
       - configure-symbolic
       - dialog-cancel-symbolic
       - dialog-ok-apply-symbolic
-      - document-import-symbolic
+      - document-import
       - document-new-symbolic
       - document-open-folder
       - document-open-symbolic
@@ -16,7 +16,7 @@ Files:
       - document-revert-symbolic
       - document-save-as-symbolic
       - document-save-symbolic
-      - edit-clear-history-symbolic
+      - edit-clear-history
       - edit-delete
       - edit-reset-symbolic
       - help-about-symbolic
