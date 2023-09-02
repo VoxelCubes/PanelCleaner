@@ -95,6 +95,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.initialize_ui()
 
+        Qc.QTimer.singleShot(0, self.post_init)
+
     def initialize_ui(self):
         self.hide_progress_drawer()
         self.set_up_statusbar()
@@ -148,6 +150,22 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.widget_progress_drawer.setStyleSheet(
             f"background-color: {alternate_color.name()};"
             + self.widget_progress_drawer.styleSheet()
+        )
+
+    def post_init(self):
+        """
+        Handle any initialization that must be done after the window is shown.
+        """
+        # Make the profile groupbox the width of 5 save buttons as a good enough heuristic.
+        header_button_width = self.pushButton_save_profile.width()
+        profile_width, table_width, output_width = self.splitter.sizes()
+        # Add the difference to the table width.
+        self.splitter.setSizes(
+            [
+                header_button_width * 5,
+                table_width + profile_width - 5 * header_button_width,
+                output_width,
+            ]
         )
 
     # ========================================== UI Toggles ==========================================

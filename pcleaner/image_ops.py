@@ -554,8 +554,6 @@ def generate_noise_mask(
     # Add alpha channels.
     denoised_image_cutout.putalpha(mask_faded)
 
-    logger.warning(f"Saving noise mask for {box}")
-
     return denoised_image_cutout, (box.x1, box.y1)
 
 
