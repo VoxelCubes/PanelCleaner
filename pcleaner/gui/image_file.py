@@ -7,9 +7,8 @@ from uuid import uuid4
 
 import PySide6.QtGui as Qg
 import attrs
+from attrs import define, frozen, fields, Factory
 from PIL import Image
-from attrs import fields
-from attrs import frozen
 from logzero import logger
 import dictdiffer
 import humanfriendly
@@ -96,12 +95,12 @@ class ProgressData:
     target_outputs: list[Output]
     current_step: Step
     progress_type: ProgressType
-    value: int | Any = 1  # Default value for incremental progress.
+    value: Any = 1  # Default value for incremental progress. Otherwise usually an analytics struct.
 
 
 class ProgressSignal(Protocol):
     def emit(self, data: ProgressData) -> None:
-        ...
+        pass
 
 
 output_to_step: dict[Output, Step] = {
@@ -147,6 +146,55 @@ step_to_output: dict[Step, tuple[Output, ...]] = {
 # But these outputs are affected by changes that the ones after them are not,
 # so we can't use that optimization.
 OUTPUTS_WITH_INDEPENDENT_PROFILE_SENSITIVITY = (Output.mask_overlay,)
+
+
+class ImageAnalyticCategory(Enum):
+    """
+    The category of analytics.
+    """
+
+    ocr_removed = auto()
+    mask_failed = auto()
+    mask_perfect = auto()
+    denoised = auto()
+
+
+class ImageAnalytics:
+    """
+    Bundle all the necessary info to display the minimal analytics for an image.
+    These numbers are shown below their corresponding icon in the file table.
+    total means the number of boxes or masks from which the failed etc. numbers are derived.
+    This total can shrink as the image is processed, since if a box is thrown out by ocr, there
+    won't be a corresponding mask for it etc., hence the seemingly redundant multiple totals.
+
+    The analytics per category are stored as simple strings in the form "value/total".
+
+    If the analytic value is blank, it should be hidden in the gui, since it's not relevant.
+    These analytics are supposed to give a quick overview of how bad or good the image is, or where
+    problems might be.
+    """
+
+    _data: dict[ImageAnalyticCategory, str]
+
+    def __init__(self):
+        self._data = {category: "" for category in ImageAnalyticCategory}
+
+    def get_category(self, category: ImageAnalyticCategory) -> str:
+        return self._data[category]
+
+    def set_category(self, category: ImageAnalyticCategory, value: int, total: int) -> None:
+        """
+        Set the analytic value for the category as a string internally.
+        If either value is 0, the analytic is reset.
+
+        :param category: The category to set the value for.
+        :param value: The value to set.
+        :param total: The total to set.
+        """
+        if value == 0 or total == 0:
+            self._data[category] = ""
+        else:
+            self._data[category] = f"{value}/{total}"
 
 
 def get_output_representing_step(step: Step) -> Output:
@@ -288,6 +336,7 @@ class ImageFile:
     color_mode: str | None = None  # Color mode of the image.
     outputs: dict[Output, ProcessOutput]  # Map of steps to ProcessStep objects.
     loading_queued: bool = False  # Whether the image is queued to be loaded.
+    analytics_data: ImageAnalytics = None
 
     error: Exception | None = None  # Error that occurred during any process.
 
@@ -301,6 +350,7 @@ class ImageFile:
         self.icon = Qg.QIcon.fromTheme(cfg.SUFFIX_TO_ICON[path.suffix.lower()])
         self.uuid = str(uuid4())
         self.outputs = {}
+        self.analytics_data = ImageAnalytics()
 
         pro = fields(cfg.Profile)
         gen = fields(cfg.GeneralConfig)

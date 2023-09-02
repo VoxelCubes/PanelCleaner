@@ -1,7 +1,10 @@
 from enum import IntEnum, auto
 from pathlib import Path
+from typing import Sequence
+from collections import defaultdict
 
 import PySide6.QtCore as Qc
+import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from logzero import logger
 from natsort import natsorted
@@ -9,7 +12,8 @@ from natsort import natsorted
 import pcleaner.config as cfg
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
-import pcleaner.gui.structures as st
+import pcleaner.gui.structures as gst
+import pcleaner.structures as st
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
 from .CustomQ.CTableWidget import CTableWidget
@@ -37,7 +41,7 @@ class FileTable(CTableWidget):
     """
 
     config: cfg.Config  # Reference to the MainWindow's config.
-    shared_ocr_model: st.Shared[st.OCRModel]  # Must be handed over by the mainwindow.
+    shared_ocr_model: gst.Shared[gst.OCRModel]  # Must be handed over by the mainwindow.
     thread_queue: Qc.QThreadPool  # Must be handed over by the mainwindow.
 
     table_is_empty = Qc.Signal()
@@ -46,6 +50,10 @@ class FileTable(CTableWidget):
     files: dict[Path, imf.ImageFile]
 
     requesting_image_preview = Qc.Signal(imf.ImageFile)
+
+    step_icons_dark: dict[imf.ImageAnalyticCategory, Qg.QIcon]
+    step_icons_light: dict[imf.ImageAnalyticCategory, Qg.QIcon]
+    dark_mode: bool
 
     def __init__(self, parent=None):
         CTableWidget.__init__(self, parent)
@@ -61,6 +69,32 @@ class FileTable(CTableWidget):
         self.itemClicked.connect(self.on_click)
         self.finished_drop.connect(self.repopulate_table)
 
+        Qc.QTimer.singleShot(0, self.post_init)
+
+        self.dark_mode = True
+
+        # Load the icons once to share them between all image files.
+        for dark_or_light in ["dark", "light"]:
+            icons = {}
+            for icon_name, analytic_category in [
+                ("ocr_box_removed.svg", imf.ImageAnalyticCategory.ocr_removed),
+                ("mask_failed.svg", imf.ImageAnalyticCategory.mask_failed),
+                ("mask_perfect.svg", imf.ImageAnalyticCategory.mask_perfect),
+                ("mask_denoised.svg", imf.ImageAnalyticCategory.denoised),
+            ]:
+                icons[analytic_category] = Qg.QIcon(f":/custom_icons/{dark_or_light}/{icon_name}")
+
+            if dark_or_light == "dark":
+                self.step_icons_dark = icons
+            else:
+                self.step_icons_light = icons
+
+    def post_init(self):
+        # Make enough room for the 4 analytic icons.
+        self.setColumnWidth(
+            Column.ANALYTICS, round(4 * (imf.THUMBNAIL_SIZE * 0.75 + GUI_PADDING) + 2 * GUI_PADDING)
+        )
+
     def set_thread_queue(self, thread_queue: Qc.QThreadPool):
         self.thread_queue = thread_queue
 
@@ -75,7 +109,7 @@ class FileTable(CTableWidget):
     def set_config(self, config: cfg.Config):
         self.config = config
 
-    def set_shared_ocr_model(self, shared_ocr_model: st.Shared[st.OCRModel]):
+    def set_shared_ocr_model(self, shared_ocr_model: gst.Shared[gst.OCRModel]):
         self.shared_ocr_model = shared_ocr_model
 
     def get_image_files(self) -> list[imf.ImageFile]:
@@ -98,7 +132,7 @@ class FileTable(CTableWidget):
         for image_path in image_paths:
             self.add_file(image_path)
 
-    def handle_profile_changed(self):
+    def update_all_rows(self):
         """
         Called when the profile has changed.
         All we need to do is to go through all the rows and call update on them.
@@ -202,6 +236,55 @@ class FileTable(CTableWidget):
         self.item(row, Column.FILE_SIZE).setText(file_obj.file_size_str)
         self.item(row, Column.COLOR_MODE).setText(file_obj.color_mode_str)
 
+        # Create the analytic icons. They are arranged horizontally in a container widget.
+        # The icon ist stacked on top of a label with the "number / total".
+        container = Qw.QWidget()
+        grid_layout = Qw.QGridLayout(container)
+        grid_layout.setContentsMargins(0, 0, 0, 0)
+        grid_layout.setSpacing(0)
+
+        icons = self.step_icons_dark if self.dark_mode else self.step_icons_light
+        grid_col = 0
+
+        for analytic, icon in icons.items():
+            # Check if the analytic isn't blank, otherwise just insert a spacer of the same size.
+            analytic_value = file_obj.analytics_data.get_category(analytic)
+            icon_size = int(imf.THUMBNAIL_SIZE * 0.75)  # Increased size, adjust as necessary
+
+            if not analytic_value:
+                empty_label = Qw.QLabel()  # Empty QLabel as spacer
+                empty_label.setFixedSize(icon_size, icon_size)
+                grid_layout.addWidget(empty_label, 0, grid_col)
+            else:
+                icon_label = Qw.QLabel()
+                icon_label.setPixmap(icon.pixmap(icon_size, icon_size))
+                icon_label.setAlignment(Qc.Qt.AlignCenter)
+                grid_layout.addWidget(icon_label, 0, grid_col)
+
+                num_label = Qw.QLabel(analytic_value)
+                num_label.setAlignment(Qc.Qt.AlignCenter)
+                grid_layout.addWidget(num_label, 1, grid_col)
+
+                # Add a helpful tooltip to both the icon and the label.
+                if analytic == imf.ImageAnalyticCategory.ocr_removed:
+                    tooltip = "Number of boxes removed by the OCR model / total boxes"
+                elif analytic == imf.ImageAnalyticCategory.mask_failed:
+                    tooltip = "Number of boxes that failed to generate a mask / total boxes"
+                elif analytic == imf.ImageAnalyticCategory.mask_perfect:
+                    tooltip = "Number of boxes that were perfectly masked / total boxes"
+                elif analytic == imf.ImageAnalyticCategory.denoised:
+                    tooltip = "Number of boxes that were denoised / total boxes"
+                else:
+                    raise ValueError(f"Unknown analytic {analytic}")
+
+                icon_label.setToolTip(tooltip)
+                num_label.setToolTip(tooltip)
+
+            grid_col += 1  # Move to next column for next icon
+
+        # Set the container as the cell widget
+        self.setCellWidget(row, Column.ANALYTICS, container)
+
     def on_click(self, item):
         """
         Request to open the image in a new tab to generate previews.
@@ -222,6 +305,92 @@ class FileTable(CTableWidget):
         except KeyError:
             logger.warning(f"Could not find file object for item at row {item.row()}")
             return
+
+    def show_ocr_mini_analytics(self, ocr_analytics: Sequence[st.OCRAnalytic]):
+        """
+        Update the image files with the mini analytics data.
+
+        :param ocr_analytics: The analytics to show.
+        """
+        # Create a default dict to store path -> (num_boxes_removed, total_boxes)
+        analytics_dict: dict[Path, Sequence[int, int]] = defaultdict(lambda: [0, 0])
+
+        for analytic in ocr_analytics:
+            for removed_data in analytic.removed_box_data:
+                path, _, _ = removed_data
+
+                # Update the number of boxes removed for this path.
+                analytics_dict[path][0] += 1
+
+                # Update the total number of boxes for this path.
+                analytics_dict[path][1] = analytic.num_boxes
+
+        # Update the image files with the analytics data.
+        for path, (num_removed, total) in analytics_dict.items():
+            img_file = self.files[path]
+            img_file.analytics_data.set_category(
+                imf.ImageAnalyticCategory.ocr_removed, num_removed, total
+            )
+        self.update_all_rows()
+
+    def show_masker_mini_analytics(self, masker_analytics: Sequence[st.MaskFittingAnalytic]):
+        """
+        Update the image files with the mini analytics data.
+
+        :param masker_analytics: The analytics to show.
+        """
+        # Create a default dict to store image_path -> (no fit found, perfect fit, total boxes)
+        analytics_dict: dict[Path, Sequence[int, int, int]] = defaultdict(lambda: [0, 0, 0])
+
+        for analytic in masker_analytics:
+            path = analytic.image_path
+
+            # Update the number of boxes where no fit was found.
+            if not analytic.fit_was_found:
+                analytics_dict[path][0] += 1
+
+            # Update the number of boxes that were perfectly masked.
+            if analytic.mask_std_deviation == 0:
+                analytics_dict[path][1] += 1
+
+            # Update the total number of boxes for this path.
+            analytics_dict[path][2] += 1
+
+        # Update the image files with the analytics data.
+        for path, (num_failed, num_perfect, total) in analytics_dict.items():
+            img_file = self.files[path]
+            img_file.analytics_data.set_category(
+                imf.ImageAnalyticCategory.mask_failed, num_failed, total
+            )
+            img_file.analytics_data.set_category(
+                imf.ImageAnalyticCategory.mask_perfect, num_perfect, total
+            )
+
+        self.update_all_rows()
+
+    def show_denoise_mini_analytics(
+        self, denoise_analytics: Sequence[st.DenoiseAnalytic], min_deviation: float
+    ):
+        """
+        Update the image files with the mini analytics data.
+
+        :param denoise_analytics: The analytics to show.
+        :param min_deviation: The minimum deviation to consider for denoising.
+        """
+        # Check how many of the deviation values fall below the threshold for a path.
+        for analytic in denoise_analytics:
+            path = analytic.path
+
+            # Update the total number of boxes for this path.
+            total = len(analytic.std_deviations)
+            denoised = len([dev for dev in analytic.std_deviations if dev > min_deviation])
+
+            # Update the number of boxes that were denoised directly.
+            self.files[path].analytics_data.set_category(
+                imf.ImageAnalyticCategory.denoised, denoised, total
+            )
+
+        self.update_all_rows()
 
     # =========================== Worker Tasks ===========================
 

@@ -494,6 +494,8 @@ class DenoiseAnalytic:
     Analytics data to visualize the denoising performance.
     - The standard deviations of the mask selection process. They are shown here,
       due to them being relevant to the min-threshold for choosing masks to denoise.
+    - The path to the original image. This is needed to trace the analytics back to the image in the gui.
     """
 
     std_deviations: Sequence[float]
+    path: Path

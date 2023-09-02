@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1720</width>
+    <width>1800</width>
     <height>720</height>
    </rect>
   </property>
@@ -72,7 +72,8 @@
              <string>Apply</string>
             </property>
             <property name="icon">
-             <iconset theme="dialog-ok-apply-symbolic"/>
+             <iconset theme="dialog-ok-apply-symbolic">
+              <normaloff>.</normaloff>.</iconset>
             </property>
            </widget>
           </item>
@@ -455,7 +456,8 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset theme="document-open-folder-symbolic"/>
+                  <iconset theme="document-open-folder-symbolic">
+                   <normaloff>.</normaloff>.</iconset>
                  </property>
                 </widget>
                </item>
@@ -595,7 +597,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1720</width>
+     <width>1800</width>
      <height>30</height>
     </rect>
    </property>
@@ -669,7 +671,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_clear_files">
    <property name="icon">
-    <iconset theme="edit-clear-history-symbolic"/>
+    <iconset theme="edit-clear-history-symbolic">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Clear Files</string>
@@ -695,7 +698,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_import_profile">
    <property name="icon">
-    <iconset theme="document-import-symbolic"/>
+    <iconset theme="document-import-symbolic">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Import...</string>
@@ -782,7 +786,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_add_folders">
    <property name="icon">
-    <iconset theme="document-open-folder-symbolic"/>
+    <iconset theme="document-open-folder-symbolic">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Add Folder...</string>

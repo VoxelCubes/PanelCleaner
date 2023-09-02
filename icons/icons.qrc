@@ -1,5 +1,13 @@
 <RCC>
   <qresource prefix="/">
+    <file>custom_icons/dark/mask_denoised.svg</file>
+    <file>custom_icons/dark/mask_failed.svg</file>
+    <file>custom_icons/dark/mask_perfect.svg</file>
+    <file>custom_icons/dark/ocr_box_removed.svg</file>
+    <file>custom_icons/light/mask_denoised.svg</file>
+    <file>custom_icons/light/mask_failed.svg</file>
+    <file>custom_icons/light/mask_perfect.svg</file>
+    <file>custom_icons/light/ocr_box_removed.svg</file>
     <file>logo-tiny.png</file>
   </qresource>
 </RCC>

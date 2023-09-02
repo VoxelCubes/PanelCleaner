@@ -3,6 +3,7 @@ from functools import partial
 from importlib import resources
 from typing import Sequence
 from pathlib import Path
+import time
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -135,7 +136,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.pushButton_start.clicked.connect(self.start_processing)
 
         # Connect profile changes to file table refreshes, due to the processing size being profile-dependent.
-        self.profile_values_changed.connect(self.file_table.handle_profile_changed)
+        self.profile_values_changed.connect(self.file_table.update_all_rows)
 
         # Set the current palette to use the inactive color for placeholder text.
         palette = self.palette()
@@ -783,6 +784,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             ocr_analytics, ocr_max_size = progress_data.value
             analytics_str = an.show_ocr_analytics(ocr_analytics, ocr_max_size, ANALYTICS_COLUMNS)
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
+            self.file_table.show_ocr_mini_analytics(ocr_analytics)
 
         elif progress_data.progress_type == imf.ProgressType.analyticsMasker:
             # Show analytics.
@@ -790,6 +792,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             masker_analytics_raw = progress_data.value
             analytics_str = an.show_masker_analytics(masker_analytics_raw, ANALYTICS_COLUMNS)
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
+            self.file_table.show_masker_mini_analytics(masker_analytics_raw)
 
         elif progress_data.progress_type == imf.ProgressType.analyticsDenoiser:
             # Show analytics.
@@ -802,6 +805,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 ANALYTICS_COLUMNS,
             )
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
+            self.file_table.show_denoise_mini_analytics(denoise_analytics_raw, min_deviation)
 
         elif progress_data.progress_type == imf.ProgressType.end:
             # This marks the end of a processing step.

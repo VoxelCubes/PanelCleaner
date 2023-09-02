@@ -76,7 +76,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         #
         # Package the analytics. We're only interested in the std deviations.
         return st.DenoiseAnalytic(
-            tuple(deviation for _, deviation in mask_data.boxes_with_deviation)
+            tuple(deviation for _, deviation in mask_data.boxes_with_deviation), original_path
         )
 
     # Settle on the final output path for the cleaned image.
@@ -143,4 +143,6 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         ops.save_optimized(text_img, text_out_path, original_path)
 
     # Package the analytics. We're only interested in the std deviations.
-    return st.DenoiseAnalytic(tuple(deviation for _, deviation in mask_data.boxes_with_deviation))
+    return st.DenoiseAnalytic(
+        tuple(deviation for _, deviation in mask_data.boxes_with_deviation), original_path
+    )
