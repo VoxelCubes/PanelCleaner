@@ -1,4 +1,3 @@
-import time
 from copy import deepcopy
 from functools import partial
 from importlib import resources
@@ -136,7 +135,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.pushButton_start.clicked.connect(self.start_processing)
 
         # Connect profile changes to file table refreshes, due to the processing size being profile-dependent.
-        self.profile_values_changed.connect(self.file_table.repopulate_table)
+        self.profile_values_changed.connect(self.file_table.handle_profile_changed)
 
         # Set the current palette to use the inactive color for placeholder text.
         palette = self.palette()

@@ -98,6 +98,16 @@ class FileTable(CTableWidget):
         for image_path in image_paths:
             self.add_file(image_path)
 
+    def handle_profile_changed(self):
+        """
+        Called when the profile has changed.
+        All we need to do is to go through all the rows and call update on them.
+        We don't need to repopulate the table, since the files and their names
+        have not changed.
+        """
+        for row in range(self.rowCount()):
+            self.update_row(row, self.files[Path(self.item(row, Column.PATH).text())])
+
     def add_file(self, path: Path):
         """
         Attempt to add a new image to the table.
@@ -128,6 +138,10 @@ class FileTable(CTableWidget):
         Repopulate the table with the current files.
         """
         logger.debug(f"Repopulating table")
+        # Remember it to scroll back after repopulating.
+        v_scroll_pos = self.verticalScrollBar().value()
+        h_scroll_pos = self.horizontalScrollBar().value()
+
         self.clearAll()
 
         # Collect the file paths and map them to their shortened version.
@@ -161,6 +175,9 @@ class FileTable(CTableWidget):
         worker = wt.Worker(self.lazy_load_images, no_progress_callback=True)
         worker.signals.error.connect(self.image_dispatch_worker_error)
         self.threadpool.start(worker)
+
+        self.verticalScrollBar().setValue(v_scroll_pos)
+        self.horizontalScrollBar().setValue(h_scroll_pos)
 
     def update_row(self, row: int, file_obj: imf.ImageFile):
         """
