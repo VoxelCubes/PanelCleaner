@@ -25,6 +25,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QFram
 
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
 from pcleaner.gui.CustomQ.CDropFrame import CDropFrame
+from pcleaner.gui.CustomQ.CTooltipLabel import CTooltipLabel
 from pcleaner.gui.file_table import FileTable
 from pcleaner.gui.image_tab import ImageTab
 
@@ -400,11 +401,26 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addItem(self.verticalSpacer_2)
 
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.label_4 = QLabel(self.groupBox_3)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
 
-        self.verticalLayout_5.addWidget(self.label_4)
+        self.horizontalLayout_5.addWidget(self.label_4)
+
+        self.label = CTooltipLabel(self.groupBox_3)
+        self.label.setObjectName(u"label")
+        self.label.setToolTipDuration(-1)
+
+        self.horizontalLayout_5.addWidget(self.label)
+
+        self.horizontalSpacer_3 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_5.addItem(self.horizontalSpacer_3)
+
+
+        self.verticalLayout_5.addLayout(self.horizontalLayout_5)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -613,6 +629,10 @@ class Ui_MainWindow(object):
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))
         self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
+#if QT_CONFIG(tooltip)
+        self.label.setToolTip(QCoreApplication.translate("MainWindow", u"You can use a relative path to create a subfolder at the image's original location, or use an absolute path.", None))
+#endif // QT_CONFIG(tooltip)
+        self.label.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
         self.lineEdit_out_directory.setPlaceholderText(QCoreApplication.translate("MainWindow", u"cleaned", None))
         self.pushButton_browse_out_dir.setText("")
         self.textEdit_analytics.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"

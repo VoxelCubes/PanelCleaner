@@ -22,6 +22,7 @@ Files:
       - edit-reset-symbolic
       - help-about-symbolic
       - help-contents-symbolic
+      - help-hint
       - list-add-symbolic
       - media-playback-start-symbolic
       - process-stop
