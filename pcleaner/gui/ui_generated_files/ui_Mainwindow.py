@@ -221,11 +221,31 @@ class Ui_MainWindow(object):
         self.frame_greeter.setLineWidth(4)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_greeter)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.label = QLabel(self.frame_greeter)
-        self.label.setObjectName(u"label")
-        self.label.setAlignment(Qt.AlignCenter)
+        self.verticalLayout_10 = QVBoxLayout()
+        self.verticalLayout_10.setSpacing(30)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.horizontalLayout_4.addWidget(self.label)
+        self.verticalLayout_10.addItem(self.verticalSpacer_3)
+
+        self.label_drop = QLabel(self.frame_greeter)
+        self.label_drop.setObjectName(u"label_drop")
+        self.label_drop.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_10.addWidget(self.label_drop)
+
+        self.label_drop_icon = QLabel(self.frame_greeter)
+        self.label_drop_icon.setObjectName(u"label_drop_icon")
+        self.label_drop_icon.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_10.addWidget(self.label_drop_icon)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_10.addItem(self.verticalSpacer_4)
+
+
+        self.horizontalLayout_4.addLayout(self.verticalLayout_10)
 
 
         self.verticalLayout_8.addWidget(self.frame_greeter)
@@ -565,7 +585,8 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile.setText(QCoreApplication.translate("MainWindow", u"Apply", None))
         self.pushButton_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.pushButton_reset_profile.setText(QCoreApplication.translate("MainWindow", u"Reset All", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Drag and Drop Images or Folders Here", None))
+        self.label_drop.setText(QCoreApplication.translate("MainWindow", u"Drag and Drop Images or Folders Here", None))
+        self.label_drop_icon.setText(QCoreApplication.translate("MainWindow", u"<drop icon>", None))
         ___qtablewidgetitem = self.file_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"id", None));
         ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(1)

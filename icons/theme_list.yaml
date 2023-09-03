@@ -16,6 +16,7 @@ Files:
       - document-revert-symbolic
       - document-save-as-symbolic
       - document-save-symbolic
+      - download
       - edit-clear-history
       - edit-delete
       - edit-reset-symbolic

@@ -8,8 +8,10 @@ UI_OUTPUT_DIR = pcleaner/gui/ui_generated_files/
 RCC_COMPILER = venv/bin/pyside6-rcc
 UIC_COMPILER = venv/bin/pyside6-uic
 
-# default target
 fresh-install: clean build install
+
+refresh-assets: build-icon-cache compile-qrc compile-ui
+
 
 # build target
 build: compile-qrc compile-ui
@@ -45,4 +47,4 @@ clean:
 release:
 	twine upload $(BUILD_DIR)*
 
-.PHONY: clean build install fresh-install release compile-qrc compile-ui build-icon-cache
+.PHONY: clean build install fresh-install release compile-qrc compile-ui build-icon-cache refresh-assets

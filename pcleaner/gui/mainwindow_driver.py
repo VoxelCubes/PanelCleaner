@@ -119,6 +119,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Display a theme icon on the left side of the tab.
         self.image_tab.tabBar().setTabIcon(0, Qg.QIcon.fromTheme("view-form-symbolic"))
 
+        # Set up the drop panel.
+        label_font = self.label_drop.font()
+        label_font.setPointSize(round(label_font.pointSize() * 1.5))
+        self.label_drop.setFont(label_font)
+        icon_size = round(imf.THUMBNAIL_SIZE * 1.5)
+        self.label_drop_icon.setPixmap(Qg.QIcon.fromTheme("download").pixmap(icon_size, icon_size))
+
         # Connect signals.
         self.comboBox_current_profile.hookedCurrentIndexChanged.connect(self.change_current_profile)
         self.action_add_files.triggered.connect(self.file_table.browse_add_files)
