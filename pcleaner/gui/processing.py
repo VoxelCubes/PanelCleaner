@@ -344,7 +344,10 @@ def generate_output(
 
     # ============================================== Denoiser ==============================================
 
-    if target_output > imf.get_output_representing_step(imf.Step.masker):
+    if (
+        target_output > imf.get_output_representing_step(imf.Step.masker)
+        and profile.denoiser.denoising_enabled
+    ):
         step_denoiser_images = tuple(
             filter(step_needs_to_be_rerun_closure(imf.Step.denoiser), image_objects)
         )

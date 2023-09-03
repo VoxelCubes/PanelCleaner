@@ -142,7 +142,15 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 profile_changed_signal=self.profile_values_changed,
             )
         )
+        # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)
+        self.pushButton_browse_out_dir.clicked.connect(self.browse_output_dir)
+        self.radioButton_cleaning.clicked.connect(
+            partial(self.stackedWidget_output.setCurrentIndex, 0)
+        )
+        self.radioButton_ocr.clicked.connect(partial(self.stackedWidget_output.setCurrentIndex, 1))
+        self.label_warning.hide()
+        self.pushButton_abort.hide()
 
         # Connect profile changes to file table refreshes, due to the processing size being profile-dependent.
         self.profile_values_changed.connect(self.file_table.update_all_rows)
@@ -174,6 +182,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 output_width,
             ]
         )
+
+    def browse_output_dir(self):
+        """
+        Open a file picker and set the output directory.
+        """
+        logger.debug("Browsing output directory.")
+        output_dir = Qw.QFileDialog.getExistingDirectory(self, "Select Output Directory")
+        if output_dir:
+            logger.debug(f"Setting output directory to {output_dir}")
+            self.lineEdit_out_directory.setText(output_dir)
 
     # ========================================== UI Toggles ==========================================
 
@@ -253,7 +271,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         #     Qc.QCoreApplication.processEvents()
         #     self.threadpool.waitForDone()
         #
-        # nuke_epub_cache()
         # event.accept()
 
     def clean_cache(self):

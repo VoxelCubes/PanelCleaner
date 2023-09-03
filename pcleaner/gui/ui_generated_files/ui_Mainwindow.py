@@ -168,7 +168,13 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon8 = QIcon(QIcon.fromTheme(u"dialog-ok-apply-symbolic"))
+        icon8 = QIcon()
+        iconThemeName = u"dialog-ok-apply-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon8 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon8.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_apply_profile.setIcon(icon8)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
@@ -380,26 +386,58 @@ class Ui_MainWindow(object):
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.verticalLayout_5 = QVBoxLayout(self.groupBox_3)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.checkBox_save_clean = QCheckBox(self.groupBox_3)
+        self.stackedWidget_output = QStackedWidget(self.groupBox_3)
+        self.stackedWidget_output.setObjectName(u"stackedWidget_output")
+        self.page_cleaning = QWidget()
+        self.page_cleaning.setObjectName(u"page_cleaning")
+        self.verticalLayout_11 = QVBoxLayout(self.page_cleaning)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.checkBox_save_clean = QCheckBox(self.page_cleaning)
         self.checkBox_save_clean.setObjectName(u"checkBox_save_clean")
         self.checkBox_save_clean.setChecked(True)
 
-        self.verticalLayout_5.addWidget(self.checkBox_save_clean)
+        self.verticalLayout_11.addWidget(self.checkBox_save_clean)
 
-        self.checkBox_save_mask = QCheckBox(self.groupBox_3)
+        self.checkBox_save_mask = QCheckBox(self.page_cleaning)
         self.checkBox_save_mask.setObjectName(u"checkBox_save_mask")
         self.checkBox_save_mask.setChecked(True)
 
-        self.verticalLayout_5.addWidget(self.checkBox_save_mask)
+        self.verticalLayout_11.addWidget(self.checkBox_save_mask)
 
-        self.checkBox_save_text = QCheckBox(self.groupBox_3)
+        self.checkBox_save_text = QCheckBox(self.page_cleaning)
         self.checkBox_save_text.setObjectName(u"checkBox_save_text")
 
-        self.verticalLayout_5.addWidget(self.checkBox_save_text)
+        self.verticalLayout_11.addWidget(self.checkBox_save_text)
 
         self.verticalSpacer_2 = QSpacerItem(20, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.verticalLayout_5.addItem(self.verticalSpacer_2)
+        self.verticalLayout_11.addItem(self.verticalSpacer_2)
+
+        self.stackedWidget_output.addWidget(self.page_cleaning)
+        self.page_ocr = QWidget()
+        self.page_ocr.setObjectName(u"page_ocr")
+        self.verticalLayout_12 = QVBoxLayout(self.page_ocr)
+        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.radioButton_ocr_text = QRadioButton(self.page_ocr)
+        self.radioButton_ocr_text.setObjectName(u"radioButton_ocr_text")
+        self.radioButton_ocr_text.setChecked(True)
+
+        self.verticalLayout_12.addWidget(self.radioButton_ocr_text)
+
+        self.radioButton_ocr_csv = QRadioButton(self.page_ocr)
+        self.radioButton_ocr_csv.setObjectName(u"radioButton_ocr_csv")
+
+        self.verticalLayout_12.addWidget(self.radioButton_ocr_csv)
+
+        self.verticalSpacer_5 = QSpacerItem(10, 37, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_12.addItem(self.verticalSpacer_5)
+
+        self.stackedWidget_output.addWidget(self.page_ocr)
+
+        self.verticalLayout_5.addWidget(self.stackedWidget_output)
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
@@ -426,6 +464,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.lineEdit_out_directory = QLineEdit(self.groupBox_3)
         self.lineEdit_out_directory.setObjectName(u"lineEdit_out_directory")
+        self.lineEdit_out_directory.setClearButtonEnabled(True)
 
         self.horizontalLayout.addWidget(self.lineEdit_out_directory)
 
@@ -569,6 +608,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget_images.setCurrentIndex(0)
+        self.stackedWidget_output.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -628,6 +668,8 @@ class Ui_MainWindow(object):
         self.checkBox_save_clean.setText(QCoreApplication.translate("MainWindow", u"Cleaned Image", None))
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))
         self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
+        self.radioButton_ocr_text.setText(QCoreApplication.translate("MainWindow", u"Plain Text", None))
+        self.radioButton_ocr_csv.setText(QCoreApplication.translate("MainWindow", u"CSV File", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
 #if QT_CONFIG(tooltip)
         self.label.setToolTip(QCoreApplication.translate("MainWindow", u"You can use a relative path to create a subfolder at the image's original location, or use an absolute path.", None))
