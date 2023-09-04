@@ -173,15 +173,45 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         # Make the profile groupbox the width of 5 save buttons as a good enough heuristic.
         header_button_width = self.pushButton_save_profile.width()
+
+        # Make the output panel just large enough for the analytics.
+        font_metrics = Qg.QFontMetrics(self.textEdit_analytics.font())
+        char_width = font_metrics.averageCharWidth()
+        columns = ANALYTICS_COLUMNS
+        required_width = char_width * columns
+
+        logger.debug(
+            f"Char width: {char_width}, columns: {columns}, required width: {required_width}"
+        )
+
+        # Adjust for margins, scroll bar, and borders
+        text_margins = self.textEdit_analytics.contentsMargins()
+        frame_margins = self.frame_output.contentsMargins()
+        scrollbar_width = Qw.QApplication.style().pixelMetric(Qw.QStyle.PM_ScrollBarExtent)
+        total_out_width = (
+            required_width
+            + text_margins.left()
+            + text_margins.right()
+            + scrollbar_width
+            + frame_margins.left()
+            + frame_margins.right()
+        )
+
         profile_width, table_width, output_width = self.splitter.sizes()
         # Add the difference to the table width.
         self.splitter.setSizes(
             [
                 header_button_width * 5,
-                table_width + profile_width - 5 * header_button_width,
-                output_width,
+                table_width
+                + profile_width
+                - 5 * header_button_width
+                + output_width
+                - total_out_width,
+                total_out_width,
             ]
         )
+
+        logger.debug(f"Splitter sizes: {self.splitter.sizes()}")
 
     def browse_output_dir(self):
         """
@@ -297,32 +327,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
         self.textEdit_analytics.setReadOnly(True)
         self.textEdit_analytics.setLineWrapMode(Qw.QTextEdit.NoWrap)
-
-        font_metrics = Qg.QFontMetrics(self.textEdit_analytics.font())
-        char_width = font_metrics.averageCharWidth()
-        columns = ANALYTICS_COLUMNS
-        required_width = char_width * columns
-
-        logger.debug(
-            f"Char width: {char_width}, columns: {columns}, required width: {required_width}"
-        )
-
-        # Adjust for margins, scroll bar, and borders
-        text_margins = self.textEdit_analytics.contentsMargins()
-        frame_margins = self.frame_output.contentsMargins()
-        scrollbar_width = Qw.QApplication.style().pixelMetric(Qw.QStyle.PM_ScrollBarExtent)
-        total_width = (
-            required_width
-            + text_margins.left()
-            + text_margins.right()
-            + scrollbar_width
-            + frame_margins.left()
-            + frame_margins.right()
-        )
-
-        self.frame_output.setMaximumWidth(total_width)
-
-        logger.debug(f"Set text edit width to {total_width}")
 
     # ========================================== Profiles ==========================================
 
