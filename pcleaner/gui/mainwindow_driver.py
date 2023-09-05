@@ -145,12 +145,15 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)
         self.pushButton_browse_out_dir.clicked.connect(self.browse_output_dir)
+        self.pushButton_browse_out_file.clicked.connect(self.browse_out_file)
         self.radioButton_cleaning.clicked.connect(
             partial(self.stackedWidget_output.setCurrentIndex, 0)
         )
         self.radioButton_ocr.clicked.connect(partial(self.stackedWidget_output.setCurrentIndex, 1))
         self.label_warning.hide()
         self.pushButton_abort.hide()
+        self.radioButton_ocr_text.clicked.connect(partial(self.handle_ocr_mode_change, csv=False))
+        self.radioButton_ocr_csv.clicked.connect(partial(self.handle_ocr_mode_change, csv=True))
 
         # Connect profile changes to file table refreshes, due to the processing size being profile-dependent.
         self.profile_values_changed.connect(self.file_table.update_all_rows)
@@ -223,6 +226,25 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             logger.debug(f"Setting output directory to {output_dir}")
             self.lineEdit_out_directory.setText(output_dir)
 
+    def browse_out_file(self):
+        """
+        Open a file picker and set the output file.
+        Support both text and csv output.
+        Don't bother asking about overwriting, we'll be doing that later to cover the free
+        input and default path options.
+        """
+        logger.debug("Browsing output file.")
+        output_file = Qw.QFileDialog.getSaveFileName(
+            self,
+            "Select Output File",
+            "",
+            "Text Files (*.txt);;CSV Files (*.csv)",
+            options=Qw.QFileDialog.DontConfirmOverwrite,
+        )[0]
+        if output_file:
+            logger.debug(f"Setting output file to {output_file}")
+            self.lineEdit_out_file.setText(output_file)
+
     # ========================================== UI Toggles ==========================================
 
     def hide_progress_drawer(self):
@@ -238,6 +260,31 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def disable_running_cleaner(self):
         logger.info("Disabling running cleaner")
         self.pushButton_start.setEnabled(False)
+
+    def handle_ocr_mode_change(self, csv: bool):
+        """
+        Swap out the file suffix for the output file.
+
+        :param csv: Whether to use csv or text output.
+        """
+        current_placeholder_path = Path(self.lineEdit_out_file.placeholderText())
+        if csv:
+            current_placeholder_path = current_placeholder_path.with_suffix(".csv")
+        else:
+            current_placeholder_path = current_placeholder_path.with_suffix(".txt")
+        self.lineEdit_out_file.setPlaceholderText(str(current_placeholder_path))
+
+        current_text = self.lineEdit_out_file.text()
+        try:
+            current_path = Path(current_text)
+            if csv:
+                current_path = current_path.with_suffix(".csv")
+            else:
+                current_path = current_path.with_suffix(".txt")
+        except ValueError:
+            return
+
+        self.lineEdit_out_file.setText(str(current_path))
 
     # ========================================== Initialization Workers ==========================================
 
@@ -677,7 +724,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     def start_processing(self):
         """
-        Start processing all files in the table.
+        Start either cleaning or OCR, depending on the selected radio button.
+        """
+        if self.radioButton_cleaning.isChecked():
+            self.start_cleaning()
+        else:
+            self.start_ocr()
+
+    def start_cleaning(self):
+        """
+        Start cleaning all files in the table.
         """
         self.disable_running_cleaner()
         # Figure out what outputs are requested, depending on the checkboxes and the profile.
@@ -708,11 +764,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         output_str = self.lineEdit_out_directory.text()
         output_directory = Path(output_str if output_str else "cleaned")
         image_files = self.file_table.get_image_files()
-        config = deepcopy(self.config)
 
-        worker = wt.Worker(
-            self.generate_output, requested_outputs, output_directory, image_files, config
-        )
+        worker = wt.Worker(self.generate_output, requested_outputs, output_directory, image_files)
         worker.signals.progress.connect(self.show_current_progress)
         worker.signals.result.connect(self.output_worker_result)
         worker.signals.error.connect(self.output_worker_error)
@@ -724,7 +777,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         outputs: list[imf.Output],
         output_directory: Path,
         image_files: list[imf.ImageFile],
-        config: cfg.Config,
         progress_callback: imf.ProgressSignal,
     ) -> None:
         """
@@ -734,7 +786,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param outputs: The outputs to generate.
         :param output_directory: The directory to output to.
         :param image_files: The image files to process.
-        :param config: The config to use.
         :param progress_callback: The callback given by the worker thread wrapper.
         """
 
@@ -743,7 +794,85 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             image_objects=image_files,
             target_outputs=outputs,
             output_dir=output_directory,
-            config=config,
+            config=self.config,
+            ocr_model=self.shared_ocr_model.get(),
+            progress_callback=progress_callback,
+        )
+
+    def start_ocr(self):
+        """
+        Start ocr-ing all files in the table.
+        """
+        # Check if we're outputting as plain text or a csv file.
+        csv_output = self.radioButton_ocr_csv.isChecked()
+
+        try:
+            output_path = Path(self.lineEdit_out_file.text())
+            # Make sure the file extension matches the output type.
+            if csv_output:
+                output_path = output_path.with_suffix(".csv")
+            else:
+                output_path = output_path.with_suffix(".txt")
+        except ValueError:
+            output_path = Path(self.lineEdit_out_file.placeholderText())
+
+        if not output_path.is_absolute():
+            # Find the common directory of all the files.
+            common_parent = hp.common_path_parent(
+                [f.path for f in self.file_table.get_image_files()]
+            )
+            output_path = common_parent / output_path
+
+        output_path = output_path.resolve()
+
+        # If it exists, ask to overwrite it.
+        if output_path.is_file():
+            if (
+                gu.show_question(
+                    self,
+                    "File Exists",
+                    f"The file '{output_path}' already exists. Overwrite?",
+                )
+                != Qw.QMessageBox.Yes
+            ):
+                logger.debug("User canceled overwrite, quitting ocr.")
+                return
+
+        # This is the point of no return, so disable the start button.
+        self.disable_running_cleaner()
+
+        image_files = self.file_table.get_image_files()
+
+        worker = wt.Worker(self.perform_ocr, output_path, image_files, csv_output)
+        worker.signals.progress.connect(self.show_current_progress)
+        worker.signals.result.connect(self.output_worker_result)
+        worker.signals.error.connect(self.output_worker_error)
+        worker.signals.finished.connect(self.output_worker_finished)
+        self.thread_queue.start(worker)
+
+    def perform_ocr(
+        self,
+        output_directory: Path,
+        image_files: list[imf.ImageFile],
+        csv_output: bool,
+        progress_callback: imf.ProgressSignal,
+    ) -> None:
+        """
+        Generate the given output, if there doesn't yet exist a valid output for it.
+        Then output it to the given directory.
+
+        :param csv_output: Whether to output as a csv file.
+        :param output_directory: The directory to output to.
+        :param image_files: The image files to process.
+        :param progress_callback: The callback given by the worker thread wrapper.
+        """
+
+        # Start the processor.
+        prc.perform_ocr(
+            image_objects=image_files,
+            output_file=output_directory,
+            csv_output=csv_output,
+            config=self.config,
             ocr_model=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
         )
@@ -814,10 +943,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.progress_step_start = progress_data.current_step
                 # Set the target label, we don't need to update this multiple times.
                 self.label_target_outputs.setText(
-                    ", ".join(
-                        pp.to_display_name(o.name).replace("Ai ", "AI ")
-                        for o in progress_data.target_outputs
-                    )
+                    ", ".join(pp.to_display_name(o.name) for o in progress_data.target_outputs)
                 )
 
         elif progress_data.progress_type == imf.ProgressType.incremental:
@@ -855,10 +981,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
             self.file_table.show_denoise_mini_analytics(denoise_analytics_raw, min_deviation)
 
+        elif progress_data.progress_type == imf.ProgressType.outputOCR:
+            # Show ocr output.
+            logger.info(f"Showing ocr output... {progress_data.value}")
+            ocr_output = progress_data.value
+            self.textEdit_analytics.append(ocr_output)
+            return  # Don't update the progress bar.
+
         elif progress_data.progress_type == imf.ProgressType.end:
             # This marks the end of a processing step.
             self.output_worker_finished()
-            return
+            return  # Don't update the progress bar.
         else:
             # Sanity check.
             raise ValueError(f"Invalid progress type: {progress_data.progress_type}")

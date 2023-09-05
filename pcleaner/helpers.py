@@ -170,3 +170,32 @@ def trim_prefix_from_paths(paths: list[Path]) -> list[Path]:
     short_paths = [Path(*p.parts[prefix_len:]) for p in paths]
 
     return short_paths
+
+
+def common_path_parent(paths: list[Path]) -> Path:
+    """
+    For a given list of Path objects, shorten them by removing the longest common prefix.
+    This will only split along directory boundaries, so the paths will remain valid, but no
+    longer relative to the original directory.
+    It will not trim the actual file name.
+
+    :param paths: A list of paths to shorten.
+    :return: A list of shortened paths as Path objects.
+    """
+    if not paths:
+        return Path()
+
+    # Special case: if any path is root (its parent is itself), return root
+    root_path = next((p for p in paths if p.parent == p), None)
+    if root_path is not None:
+        return root_path
+
+    # Split all Path objects into their constituent parts.
+    parts = [list(p.parts[:-1]) for p in paths]
+
+    # Calculate how many of the first parts are the same for all paths.
+    prefix_len = sum(1 for _ in takewhile(all_equal, zip(*parts)))
+
+    prefix = Path(*paths[0].parts[:prefix_len])
+
+    return prefix

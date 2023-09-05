@@ -33,6 +33,7 @@ class Output(IntEnum):
 
     initial_boxes = auto()
     final_boxes = auto()
+    ocr = auto()
     clean_json = auto()
 
     box_mask = auto()
@@ -78,6 +79,7 @@ class ProgressType(Enum):
     analyticsOCR = auto()
     analyticsMasker = auto()
     analyticsDenoiser = auto()
+    outputOCR = auto()
     end = auto()
 
 
@@ -112,6 +114,7 @@ output_to_step: dict[Output, Step] = {
     Output.raw_json: Step.text_detection,
     Output.initial_boxes: Step.preprocessor,
     Output.final_boxes: Step.preprocessor,
+    Output.ocr: Step.preprocessor,
     Output.clean_json: Step.preprocessor,
     Output.box_mask: Step.masker,
     Output.cut_mask: Step.masker,
@@ -130,7 +133,7 @@ output_to_step: dict[Output, Step] = {
 # If this output is intact, consider the step complete.
 step_to_output: dict[Step, tuple[Output, ...]] = {
     Step.text_detection: (Output.input, Output.ai_mask, Output.raw_json),
-    Step.preprocessor: (Output.initial_boxes, Output.final_boxes, Output.clean_json),
+    Step.preprocessor: (Output.initial_boxes, Output.final_boxes, Output.ocr, Output.clean_json),
     Step.masker: (
         Output.box_mask,
         Output.cut_mask,

@@ -3,11 +3,14 @@ from functools import partial
 from multiprocessing import Pool
 from pathlib import Path
 from typing import Callable
+from io import StringIO
+import itertools
 
 import torch
 from PIL import Image
 from logzero import logger
 from manga_ocr import MangaOcr
+from natsort import natsorted
 
 import pcleaner.config as cfg
 import pcleaner.denoiser as dn
@@ -17,6 +20,7 @@ import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
 import pcleaner.structures as st
+import pcleaner.helpers as hp
 
 
 def generate_output(
@@ -91,7 +95,6 @@ def generate_output(
         def step_changed(image_object: imf.ImageFile) -> bool:
             nonlocal profile
             nonlocal target_outputs
-            nonlocal target_output
             nonlocal current_step
             # holy shit this is cursed I need to think about it more.
             # I think I got it sorted now...
@@ -555,3 +558,267 @@ def copy_to_output(
         denoised_mask = Image.open(image_object.outputs[imf.Output.denoiser_mask].path)
         final_mask.paste(denoised_mask, (0, 0), denoised_mask)
         ops.save_optimized(final_mask, masked_out_path)
+
+
+def perform_ocr(
+    image_objects: list[imf.ImageFile],
+    output_file: Path | None,
+    csv_output: bool,
+    config: cfg.Config,
+    ocr_model: MangaOcr | None,
+    progress_callback: imf.ProgressSignal,
+    debug: bool = False,
+):
+    """
+    Perform OCR on all the images in the given image objects list.
+    If a path is given, the output is written to that path.
+    Output is either a plain text file or csv.
+
+    The ocr model (or None) is passed in as arguments, so it can be reused
+    across multiple runs. This is done because in gui mode the model does not need to be loaded
+    repeatedly for single image runs, making iterations much faster, due to the slow
+    initializations of the model taking several seconds.
+
+    When setting the output dir to None, intermediate steps are saved to disk, offering
+    additional visualizations that aren't necessary when you aren't viewing image details.
+
+    :param image_objects: The image objects to process. These contain the image paths.
+    :param output_file: The directory to save the outputs to. If None, the output remains in the cache directory.
+    :param csv_output: If True, the output is written as a csv file.
+    :param config: The config to use.
+    :param ocr_model: The ocr model to use.
+    :param progress_callback: A callback to report progress to the gui.
+    :param debug: If True, debug messages are printed.
+    """
+
+    target_outputs = [imf.Output.ocr]
+
+    progress_callback.emit(
+        imf.ProgressData(
+            0,
+            [],
+            imf.Step.text_detection,
+            imf.ProgressType.start,
+        )
+    )
+
+    # Create an independant copy of the profile, since this instance is shared and mutated across threads.
+    # Due to the checksum only being generated at the end, we don't want to erroneously claim this output
+    # matches a profile that was changed in the meantime.
+    # Also, we will be editing this profile to get OCR working.
+    profile = deepcopy(config.current_profile)
+
+    # Make sure OCR is enabled.
+    profile.preprocessor.ocr_enabled = True
+    # Make sure the max size is infinite, so no boxes are skipped in the OCR process.
+    profile.preprocessor.ocr_max_size = 10**10
+    # Make sure the sus box min size is infinite, so all boxes with "unknown" language are skipped.
+    profile.preprocessor.suspicious_box_min_size = 10**10
+    # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
+    profile.preprocessor.ocr_blacklist_pattern = ".*"
+
+    cache_dir = config.get_cleaner_cache_dir()
+
+    # Get the text detector model path from the config.
+    cuda = torch.cuda.is_available()
+    text_detector_model_path = config.get_model_path(cuda)
+
+    def step_needs_to_be_rerun_closure(current_step: imf.Step) -> Callable[[imf.ImageFile], bool]:
+        """
+        Check if any of the outputs for the given image object need to be rerun.
+
+        :return: A function that takes an image object and returns True if the step needs to be rerun for it.
+        """
+
+        def step_changed(image_object: imf.ImageFile) -> bool:
+            nonlocal profile
+            nonlocal target_outputs
+            nonlocal current_step
+
+            target_outputs_in_the_current_step: tuple[imf.Output] = tuple(
+                filter(lambda o: o in imf.step_to_output[current_step], reversed(target_outputs))
+            )
+
+            if target_outputs_in_the_current_step:
+                # We need to check each output we care about to know if we gotta rerun the step.
+                return any(
+                    image_object.outputs[o].is_changed(profile)
+                    for o in target_outputs_in_the_current_step
+                )
+            else:
+                # In this case we just need to know if the step's representative is complete.
+                representative: imf.Output = imf.get_output_representing_step(current_step)
+                return image_object.outputs[representative].is_changed(profile)
+
+        return step_changed
+
+    def update_output(image_object: imf.ImageFile, output: imf.Output, suffix: str):
+        """
+        Update the output of the given image object.
+        Check if the file actually exists, and if it does, update the output path.
+
+        :param image_object: The image object to update.
+        :param output: The output to update.
+        :param suffix: The suffix to add to the output path.
+        """
+        nonlocal profile, cache_dir
+
+        _path = cache_dir / f"{image_object.uuid}_{image_object.path.stem}{suffix}"
+
+        if _path.is_file():
+            image_object.outputs[output].update(_path, profile)
+
+    # ============================================== Text Detection ==============================================
+
+    step_text_detector_images = tuple(
+        filter(step_needs_to_be_rerun_closure(imf.Step.text_detection), image_objects)
+    )
+
+    if step_text_detector_images:
+        logger.info(
+            f"Running text detection AI model for {len(step_text_detector_images)} images..."
+        )
+        ctm.model2annotations_gui(
+            profile.general,
+            profile.text_detector,
+            text_detector_model_path,
+            step_text_detector_images,
+            cache_dir,
+            no_text_detection=False,
+            partial_progress_data=partial(
+                imf.ProgressData,
+                len(step_text_detector_images),
+                target_outputs,
+                imf.Step.text_detection,
+            ),
+            progress_callback=progress_callback,
+        )
+
+        # Update the outputs of the image objects.
+        logger.debug(f"Updating text detection outputs...")
+        for image_obj in step_text_detector_images:
+            update_output(image_obj, imf.Output.input, ".png")
+            update_output(image_obj, imf.Output.ai_mask, "_mask.png")
+            update_output(image_obj, imf.Output.raw_json, "#raw.json")
+
+    # ============================================== Preprocessing ==============================================
+
+    logger.info(f"Running preprocessing for {len(image_objects)} images...")
+
+    progress_callback.emit(
+        imf.ProgressData(
+            len(image_objects),
+            target_outputs,
+            imf.Step.preprocessor,
+            imf.ProgressType.begin_step,
+        )
+    )
+
+    ocr_analytics: list[st.OCRAnalytic] = []
+    # Find all the json files associated with the images.
+    for image_obj in image_objects:
+        json_file_path = cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#raw.json"
+        ocr_analytic = pp.prep_json_file(
+            json_file_path,
+            preprocessor_conf=profile.preprocessor,
+            cache_masks=False,
+            mocr=ocr_model if profile.preprocessor.ocr_enabled else None,
+            cache_masks_ocr=True,
+        )
+
+        if ocr_analytic is not None:
+            ocr_analytics.append(ocr_analytic)
+
+        progress_callback.emit(
+            imf.ProgressData(
+                len(image_objects),
+                target_outputs,
+                imf.Step.preprocessor,
+                imf.ProgressType.incremental,
+            )
+        )
+
+    # Update only the raw boxes, the rest are tainted by the forced profile changes.
+    logger.debug(f"Updating preprocessing outputs...")
+    for image_obj in image_objects:
+        update_output(image_obj, imf.Output.initial_boxes, "_boxes.png")
+
+    logger.info(f"Finished processing {len(image_objects)} images.")
+
+    # ============================================== Final Output ==============================================
+
+    # Output the OCRed text from the analytics.
+    # Format of the analytics:
+    # number of boxes | sizes of all boxes | sizes of boxes that were OCRed | path to image, text, box coordinates
+    # We do not need to show the first three columns, so we simplify the data structure.
+    path_texts_coords: list[tuple[Path, str, st.Box]] = list(
+        itertools.chain.from_iterable(a.removed_box_data for a in ocr_analytics)
+    )
+    if path_texts_coords:
+        paths, texts, boxes = zip(*path_texts_coords)
+        paths = hp.trim_prefix_from_paths(paths)
+        path_texts_coords = list(zip(paths, texts, boxes))
+        # Sort by path.
+        path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
+
+    buffer = StringIO()
+    if csv_output:
+        buffer.write("filename,startx,starty,endx,endy,text\n")
+
+        for path, bubble, box in path_texts_coords:
+            path = str(path)
+            # Escape commas where necessary.
+            if "," in path:
+                path = f'"{path}"'
+
+            if "," in bubble:
+                bubble = f'"{bubble}"'
+
+            if "\n" in bubble:
+                logger.warning(f"Detected newline in bubble: {path} {bubble} {box}")
+                bubble = bubble.replace("\n", "\\n")
+
+            buffer.write(f"{path},{box},{bubble}\n")
+        text_out = buffer.getvalue()
+    else:
+        # Place the file path on it's own line, and only if it's different from the previous one.
+        current_path = ""
+        for path, bubble, _ in path_texts_coords:
+            if path != current_path:
+                buffer.write(f"\n\n{path}: ")
+                current_path = path
+            buffer.write(f"\n{bubble}")
+            if "\n" in bubble:
+                logger.warning(f"Detected newline in bubble: {path} {bubble}")
+
+        text_out = buffer.getvalue()
+
+    text_out = text_out.strip("\n \t")
+
+    if output_file is not None:
+        try:
+            output_file.parent.mkdir(parents=True, exist_ok=True)
+            output_file.write_text(text_out, encoding="utf-8")
+            buffer.write(f"\n\nSaved detected text to {output_file}")
+        except OSError as e:
+            buffer.write(f"\n\nFailed to write detected text to {output_file}")
+            logger.exception(e)
+
+    progress_callback.emit(
+        imf.ProgressData(
+            0,
+            [],
+            imf.Step.preprocessor,
+            imf.ProgressType.outputOCR,
+            buffer.getvalue(),
+        )
+    )
+
+    progress_callback.emit(
+        imf.ProgressData(
+            0,
+            [],
+            imf.Step.output,
+            imf.ProgressType.end,
+        )
+    )

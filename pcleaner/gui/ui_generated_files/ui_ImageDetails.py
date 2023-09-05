@@ -81,89 +81,89 @@ class Ui_ImageDetails(object):
 
         self.horizontalLayout.addWidget(self.label_file_name)
 
-        self.pushButton_export = QPushButton(ImageDetails)
-        self.pushButton_export.setObjectName(u"pushButton_export")
-        self.pushButton_export.setEnabled(False)
+        self.pushButton_zoom_in = QPushButton(ImageDetails)
+        self.pushButton_zoom_in.setObjectName(u"pushButton_zoom_in")
         icon = QIcon()
-        iconThemeName = u"document-save-symbolic"
+        iconThemeName = u"zoom-in-symbolic"
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
             icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_export.setIcon(icon)
-
-        self.horizontalLayout.addWidget(self.pushButton_export)
-
-        self.pushButton_refresh = QPushButton(ImageDetails)
-        self.pushButton_refresh.setObjectName(u"pushButton_refresh")
-        self.pushButton_refresh.setEnabled(False)
-        icon1 = QIcon()
-        iconThemeName = u"view-refresh-symbolic"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
-        self.pushButton_refresh.setIcon(icon1)
-
-        self.horizontalLayout.addWidget(self.pushButton_refresh)
-
-        self.pushButton_zoom_in = QPushButton(ImageDetails)
-        self.pushButton_zoom_in.setObjectName(u"pushButton_zoom_in")
-        icon2 = QIcon()
-        iconThemeName = u"zoom-in-symbolic"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon2 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon2.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
-        self.pushButton_zoom_in.setIcon(icon2)
+        self.pushButton_zoom_in.setIcon(icon)
         self.pushButton_zoom_in.setFlat(True)
 
         self.horizontalLayout.addWidget(self.pushButton_zoom_in)
 
         self.pushButton_zoom_out = QPushButton(ImageDetails)
         self.pushButton_zoom_out.setObjectName(u"pushButton_zoom_out")
-        icon3 = QIcon()
+        icon1 = QIcon()
         iconThemeName = u"zoom-out-symbolic"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon3 = QIcon.fromTheme(iconThemeName)
+            icon1 = QIcon.fromTheme(iconThemeName)
         else:
-            icon3.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon1.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_zoom_out.setIcon(icon3)
+        self.pushButton_zoom_out.setIcon(icon1)
         self.pushButton_zoom_out.setFlat(True)
 
         self.horizontalLayout.addWidget(self.pushButton_zoom_out)
 
         self.pushButton_zoom_reset = QPushButton(ImageDetails)
         self.pushButton_zoom_reset.setObjectName(u"pushButton_zoom_reset")
-        icon4 = QIcon()
+        icon2 = QIcon()
         iconThemeName = u"zoom-original-symbolic"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon4 = QIcon.fromTheme(iconThemeName)
+            icon2 = QIcon.fromTheme(iconThemeName)
         else:
-            icon4.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon2.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_zoom_reset.setIcon(icon4)
+        self.pushButton_zoom_reset.setIcon(icon2)
         self.pushButton_zoom_reset.setFlat(True)
 
         self.horizontalLayout.addWidget(self.pushButton_zoom_reset)
 
         self.pushButton_zoom_fit = QPushButton(ImageDetails)
         self.pushButton_zoom_fit.setObjectName(u"pushButton_zoom_fit")
-        icon5 = QIcon()
+        icon3 = QIcon()
         iconThemeName = u"zoom-fit-best-symbolic"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon5 = QIcon.fromTheme(iconThemeName)
+            icon3 = QIcon.fromTheme(iconThemeName)
         else:
-            icon5.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon3.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_zoom_fit.setIcon(icon5)
+        self.pushButton_zoom_fit.setIcon(icon3)
         self.pushButton_zoom_fit.setFlat(True)
 
         self.horizontalLayout.addWidget(self.pushButton_zoom_fit)
+
+        self.pushButton_refresh = QPushButton(ImageDetails)
+        self.pushButton_refresh.setObjectName(u"pushButton_refresh")
+        self.pushButton_refresh.setEnabled(False)
+        icon4 = QIcon()
+        iconThemeName = u"view-refresh-symbolic"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon4 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon4.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.pushButton_refresh.setIcon(icon4)
+
+        self.horizontalLayout.addWidget(self.pushButton_refresh)
+
+        self.pushButton_menu = QPushButton(ImageDetails)
+        self.pushButton_menu.setObjectName(u"pushButton_menu")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.pushButton_menu.sizePolicy().hasHeightForWidth())
+        self.pushButton_menu.setSizePolicy(sizePolicy3)
+        self.pushButton_menu.setMinimumSize(QSize(16, 16))
+        self.pushButton_menu.setContextMenuPolicy(Qt.ActionsContextMenu)
+        icon5 = QIcon(QIcon.fromTheme(u"overflow-menu"))
+        self.pushButton_menu.setIcon(icon5)
+
+        self.horizontalLayout.addWidget(self.pushButton_menu)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -178,11 +178,11 @@ class Ui_ImageDetails(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.image_viewer = ImageViewer(self.page_viewer)
         self.image_viewer.setObjectName(u"image_viewer")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.image_viewer.sizePolicy().hasHeightForWidth())
-        self.image_viewer.setSizePolicy(sizePolicy3)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.image_viewer.sizePolicy().hasHeightForWidth())
+        self.image_viewer.setSizePolicy(sizePolicy4)
         self.image_viewer.setFrameShape(QFrame.NoFrame)
         self.image_viewer.setFrameShadow(QFrame.Plain)
         self.image_viewer.setTransformationAnchor(QGraphicsView.AnchorUnderMouse)
@@ -272,8 +272,6 @@ class Ui_ImageDetails(object):
 
     def retranslateUi(self, ImageDetails):
         ImageDetails.setWindowTitle(QCoreApplication.translate("ImageDetails", u"Form", None))
-        self.pushButton_export.setText(QCoreApplication.translate("ImageDetails", u"Export", None))
-        self.pushButton_refresh.setText(QCoreApplication.translate("ImageDetails", u"Refresh", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_zoom_in.setToolTip(QCoreApplication.translate("ImageDetails", u"Zoom in", None))
 #endif // QT_CONFIG(tooltip)
@@ -290,6 +288,8 @@ class Ui_ImageDetails(object):
         self.pushButton_zoom_fit.setToolTip(QCoreApplication.translate("ImageDetails", u"Zoom to fit", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_zoom_fit.setText("")
+        self.pushButton_refresh.setText(QCoreApplication.translate("ImageDetails", u"Refresh", None))
+        self.pushButton_menu.setText("")
         self.label_17.setText(QCoreApplication.translate("ImageDetails", u"Generating...", None))
         self.label_step.setText(QCoreApplication.translate("ImageDetails", u"<Current Step>", None))
         self.label_position_label.setText(QCoreApplication.translate("ImageDetails", u"Position:", None))

@@ -42,6 +42,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     thread_queue: Qc.QThreadPool
     progress_callback: Callable[[imf.ProgressData], None]
 
+    menu: Qw.QMenu  # The overflow menu for the export and ocr buttons.
+    export_action: Qg.QAction
+    ocr_action: Qg.QAction
+
     # Used so that the view will zoom to fit on the first load only.
     # This action needs to be delayed since the image dimensions are not known until the image is loaded,
     # since the size may change depending on the scale value.
@@ -83,10 +87,30 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.init_sidebar()
         self.load_all_image_thumbnails()
         self.pushButton_refresh.clicked.connect(self.regenerate_current_output)
+        self.init_menu()
         profile_changed_signal.connect(self.start_profile_checker)
         # Click on the first button to show the input image.
         input_button = list(self.button_map.keys())[0]
         input_button.click()
+
+    def init_menu(self):
+        """
+        Initialize the overflow menu housing the export and ocr button for the image details widget.
+        """
+        self.menu = Qw.QMenu(self)
+        self.export_action = Qg.QAction(
+            Qg.QIcon.fromTheme("document-save-symbolic"), "Export Image", self
+        )
+        self.export_action.triggered.connect(self.export_image)
+        self.menu.addAction(self.export_action)
+
+        self.ocr_action = Qg.QAction(
+            Qg.QIcon.fromTheme("document-scan-symbolic"), "OCR Image", self
+        )
+        self.ocr_action.triggered.connect(self.start_ocr_worker)
+        self.menu.addAction(self.ocr_action)
+
+        self.pushButton_menu.setMenu(self.menu)
 
     def create_sidebar_buttons(self) -> dict[BadgeButton, imf.Output]:
         """
@@ -190,8 +214,6 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.pushButton_zoom_reset.clicked.connect(self.image_viewer.zoom_reset)
         self.pushButton_zoom_fit.clicked.connect(self.image_viewer.zoom_fit)
 
-        self.pushButton_export.clicked.connect(self.export_image)
-
         # Figure out the optimal button size.
         # It should fit within the thumbnail size while maintaining the aspect ratio.
         # The button size is the minimum of the thumbnail size and the image size.
@@ -261,7 +283,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.label_position.setText("0, 0")
             self.widget_footer_info.hide()
             self.stackedWidget.setCurrentWidget(self.page_no_image)
-            self.pushButton_export.setEnabled(False)
+            self.export_action.setEnabled(False)
             self.pushButton_refresh.setEnabled(False)
             self.start_output_worker(output)
         else:
@@ -273,7 +295,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 self.image_viewer.mouseMoved.connect(self.update_position_label)
                 self.widget_footer_info.show()
                 self.stackedWidget.setCurrentWidget(self.page_viewer)
-                self.pushButton_export.setEnabled(True)
+                self.export_action.setEnabled(True)
                 self.pushButton_refresh.setEnabled(True)
                 if self.first_load:
                     self.first_load = False
@@ -562,3 +584,33 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     def profile_checker_error(self, error: wt.WorkerError):
         logger.error("Profile checker encountered an error.")
         gu.show_warning(self, "Profile check failed", f"Profile change check failed:\n\n{error}")
+
+    def start_ocr_worker(self):
+        """
+        Start a worker to perform the OCR process on this image.
+        """
+        self.ocr_action.setEnabled(False)
+        worker = wt.Worker(self.generate_ocr)
+        worker.signals.progress.connect(self.progress_callback)
+        worker.signals.finished.connect(self.ocr_worker_finished)
+        worker.signals.error.connect(self.output_worker_error)
+        self.thread_queue.start(worker)
+
+    def generate_ocr(self, progress_callback: imf.ProgressSignal) -> None:
+        """
+        Run OCR for the image.
+
+        :param progress_callback: The callback given by the worker thread wrapper.
+        """
+        prc.perform_ocr(
+            image_objects=[self.image_obj],
+            output_file=None,
+            csv_output=False,
+            config=self.config,
+            ocr_model=self.shared_ocr_model.get(),
+            progress_callback=progress_callback,
+        )
+
+    def ocr_worker_finished(self):
+        self.ocr_action.setEnabled(True)
+        logger.info("OCR worker finished.")

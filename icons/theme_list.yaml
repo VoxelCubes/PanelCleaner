@@ -16,6 +16,7 @@ Files:
       - document-revert-symbolic
       - document-save-as-symbolic
       - document-save-symbolic
+      - document-scan-symbolic
       - download
       - edit-clear-history
       - edit-delete
@@ -25,6 +26,7 @@ Files:
       - help-hint
       - list-add-symbolic
       - media-playback-start-symbolic
+      - overflow-menu
       - process-stop
       - view-form-symbolic
       - view-refresh-symbolic

@@ -453,4 +453,8 @@ def to_display_name(name: str) -> str:
     # https://stackoverflow.com/a/1176023
     s1 = re.sub("(.)([A-Z][a-z]+)", r"\1 \2", name)
     s2 = re.sub("([a-z0-9])([A-Z])", r"\1 \2", s1)
-    return " ".join(word.capitalize() for word in s2.split(" "))
+    return (
+        " ".join(word.capitalize() for word in s2.split(" "))
+        .replace("Ai ", "AI ")
+        .replace("Ocr", "OCR")
+    )

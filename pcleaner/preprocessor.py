@@ -1,8 +1,6 @@
 import json
 import re
 from pathlib import Path
-from functools import partial
-from typing import Sequence, Callable
 from copy import copy
 
 from PIL import Image
@@ -12,7 +10,6 @@ from logzero import logger
 import pcleaner.ctd_interface as ctm
 import pcleaner.structures as st
 import pcleaner.config as cfg
-import pcleaner.helpers as hp
 
 
 def generate_mask_data(
@@ -165,6 +162,7 @@ def ocr_check(
     :return: The modified page data and Analytics data.
     """
     base_image = Image.open(page_data.image_path)
+    scale = page_data.scale
     candidate_small_bubbles = [box for box in page_data.boxes if box.area < max_box_size]
     if not candidate_small_bubbles:
         return page_data, st.OCRAnalytic(len(page_data.boxes), (), (), ())
@@ -180,7 +178,10 @@ def ocr_check(
         remove = is_not_worth_cleaning(text, ocr_blacklist_pattern)
         box_sizes.append(box.area)
         if remove:
-            discarded_box_texts.append((Path(page_data.original_path), text, box))
+            # When returning the box in the analytics, the coordinates must be scaled
+            # back to the original size so they can be used in relation to the original image.
+            # They are used for the csv OCR output.
+            discarded_box_texts.append((Path(page_data.original_path), text, box.scale(1 / scale)))
             discarded_box_sizes.append(box.area)
             page_data.boxes.remove(box)
 

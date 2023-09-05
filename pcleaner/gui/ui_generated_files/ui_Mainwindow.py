@@ -414,6 +414,44 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_11.addItem(self.verticalSpacer_2)
 
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.label_4 = QLabel(self.page_cleaning)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
+
+        self.horizontalLayout_5.addWidget(self.label_4)
+
+        self.label = CTooltipLabel(self.page_cleaning)
+        self.label.setObjectName(u"label")
+        self.label.setToolTipDuration(-1)
+
+        self.horizontalLayout_5.addWidget(self.label)
+
+        self.horizontalSpacer_3 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_5.addItem(self.horizontalSpacer_3)
+
+
+        self.verticalLayout_11.addLayout(self.horizontalLayout_5)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.lineEdit_out_directory = QLineEdit(self.page_cleaning)
+        self.lineEdit_out_directory.setObjectName(u"lineEdit_out_directory")
+        self.lineEdit_out_directory.setClearButtonEnabled(True)
+
+        self.horizontalLayout.addWidget(self.lineEdit_out_directory)
+
+        self.pushButton_browse_out_dir = QPushButton(self.page_cleaning)
+        self.pushButton_browse_out_dir.setObjectName(u"pushButton_browse_out_dir")
+        self.pushButton_browse_out_dir.setIcon(icon7)
+
+        self.horizontalLayout.addWidget(self.pushButton_browse_out_dir)
+
+
+        self.verticalLayout_11.addLayout(self.horizontalLayout)
+
         self.stackedWidget_output.addWidget(self.page_cleaning)
         self.page_ocr = QWidget()
         self.page_ocr.setObjectName(u"page_ocr")
@@ -435,47 +473,48 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_12.addItem(self.verticalSpacer_5)
 
+        self.horizontalLayout_9 = QHBoxLayout()
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.label_6 = QLabel(self.page_ocr)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
+
+        self.horizontalLayout_9.addWidget(self.label_6)
+
+        self.label_3 = CTooltipLabel(self.page_ocr)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setToolTipDuration(-1)
+
+        self.horizontalLayout_9.addWidget(self.label_3)
+
+        self.horizontalSpacer_5 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_9.addItem(self.horizontalSpacer_5)
+
+
+        self.verticalLayout_12.addLayout(self.horizontalLayout_9)
+
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.lineEdit_out_file = QLineEdit(self.page_ocr)
+        self.lineEdit_out_file.setObjectName(u"lineEdit_out_file")
+        self.lineEdit_out_file.setClearButtonEnabled(True)
+
+        self.horizontalLayout_8.addWidget(self.lineEdit_out_file)
+
+        self.pushButton_browse_out_file = QPushButton(self.page_ocr)
+        self.pushButton_browse_out_file.setObjectName(u"pushButton_browse_out_file")
+        icon12 = QIcon(QIcon.fromTheme(u"document-open-symbolic"))
+        self.pushButton_browse_out_file.setIcon(icon12)
+
+        self.horizontalLayout_8.addWidget(self.pushButton_browse_out_file)
+
+
+        self.verticalLayout_12.addLayout(self.horizontalLayout_8)
+
         self.stackedWidget_output.addWidget(self.page_ocr)
 
         self.verticalLayout_5.addWidget(self.stackedWidget_output)
-
-        self.horizontalLayout_5 = QHBoxLayout()
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.label_4 = QLabel(self.groupBox_3)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
-
-        self.horizontalLayout_5.addWidget(self.label_4)
-
-        self.label = CTooltipLabel(self.groupBox_3)
-        self.label.setObjectName(u"label")
-        self.label.setToolTipDuration(-1)
-
-        self.horizontalLayout_5.addWidget(self.label)
-
-        self.horizontalSpacer_3 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_5.addItem(self.horizontalSpacer_3)
-
-
-        self.verticalLayout_5.addLayout(self.horizontalLayout_5)
-
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.lineEdit_out_directory = QLineEdit(self.groupBox_3)
-        self.lineEdit_out_directory.setObjectName(u"lineEdit_out_directory")
-        self.lineEdit_out_directory.setClearButtonEnabled(True)
-
-        self.horizontalLayout.addWidget(self.lineEdit_out_directory)
-
-        self.pushButton_browse_out_dir = QPushButton(self.groupBox_3)
-        self.pushButton_browse_out_dir.setObjectName(u"pushButton_browse_out_dir")
-        self.pushButton_browse_out_dir.setIcon(icon7)
-
-        self.horizontalLayout.addWidget(self.pushButton_browse_out_dir)
-
-
-        self.verticalLayout_5.addLayout(self.horizontalLayout)
 
 
         self.horizontalLayout_3.addWidget(self.groupBox_3)
@@ -575,6 +614,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 #if QT_CONFIG(shortcut)
         self.label_4.setBuddy(self.lineEdit_out_directory)
+        self.label_6.setBuddy(self.lineEdit_out_directory)
 #endif // QT_CONFIG(shortcut)
 
         self.menubar.addAction(self.menu_File.menuAction())
@@ -668,8 +708,6 @@ class Ui_MainWindow(object):
         self.checkBox_save_clean.setText(QCoreApplication.translate("MainWindow", u"Cleaned Image", None))
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))
         self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
-        self.radioButton_ocr_text.setText(QCoreApplication.translate("MainWindow", u"Plain Text", None))
-        self.radioButton_ocr_csv.setText(QCoreApplication.translate("MainWindow", u"CSV File", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
 #if QT_CONFIG(tooltip)
         self.label.setToolTip(QCoreApplication.translate("MainWindow", u"You can use a relative path to create a subfolder at the image's original location, or use an absolute path.", None))
@@ -677,6 +715,15 @@ class Ui_MainWindow(object):
         self.label.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
         self.lineEdit_out_directory.setPlaceholderText(QCoreApplication.translate("MainWindow", u"cleaned", None))
         self.pushButton_browse_out_dir.setText("")
+        self.radioButton_ocr_text.setText(QCoreApplication.translate("MainWindow", u"Plain Text", None))
+        self.radioButton_ocr_csv.setText(QCoreApplication.translate("MainWindow", u"CSV File", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Output File:", None))
+#if QT_CONFIG(tooltip)
+        self.label_3.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Either enter an absolute or relative path with a file name. The output of all images is written to the same file.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
+        self.lineEdit_out_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"detected_text.txt", None))
+        self.pushButton_browse_out_file.setText("")
         self.textEdit_analytics.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
