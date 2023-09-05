@@ -399,23 +399,23 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_start">
-                 <property name="text">
-                  <string>Start</string>
-                 </property>
-                 <property name="icon">
-                  <iconset theme="media-playback-start-symbolic">
-                   <normaloff>.</normaloff>.</iconset>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QPushButton" name="pushButton_abort">
                  <property name="text">
                   <string>Abort</string>
                  </property>
                  <property name="icon">
                   <iconset theme="process-stop">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_start">
+                 <property name="text">
+                  <string>Start</string>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="media-playback-start-symbolic">
                    <normaloff>.</normaloff>.</iconset>
                  </property>
                 </widget>
@@ -665,7 +665,8 @@
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset theme="document-open-symbolic"/>
+                      <iconset theme="document-open-symbolic">
+                       <normaloff>.</normaloff>.</iconset>
                      </property>
                     </widget>
                    </item>
@@ -706,7 +707,7 @@ p, li { white-space: pre-wrap; }
     </item>
     <item>
      <widget class="QWidget" name="widget_progress_drawer" native="true">
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,1,0,0,5">
        <item>
         <widget class="QLabel" name="label_generating_what">
          <property name="text">

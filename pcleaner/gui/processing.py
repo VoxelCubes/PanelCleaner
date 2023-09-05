@@ -16,6 +16,7 @@ import pcleaner.config as cfg
 import pcleaner.denoiser as dn
 import pcleaner.gui.ctd_interface_gui as ctm
 import pcleaner.gui.image_file as imf
+import pcleaner.gui.worker_thread as wt
 import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
@@ -30,6 +31,7 @@ def generate_output(
     config: cfg.Config,
     ocr_model: MangaOcr | None,
     progress_callback: imf.ProgressSignal,
+    abort_flag: wt.SharableFlag,
     debug: bool = False,
 ):
     """
@@ -59,8 +61,30 @@ def generate_output(
     :param config: The config to use.
     :param ocr_model: The ocr model to use.
     :param progress_callback: A callback to report progress to the gui.
+    :param abort_flag: A flag that is set to True when the thread should abort.
     :param debug: If True, debug messages are printed.
     """
+
+    # We will check before each step and during each iteration of the step to see if the thread should abort.
+    # The check is NOT done right before checking the outputs to avoid throwing away perfectly fine work.
+    # This means that the abort check shouldn't interrupt the processing step on an image, leaving it in a
+    # dirty state.
+    def check_abortion():
+        """
+        Check if the thread should abort.
+        If so, signal abortion to the progress callback and raise an AbortException.
+        """
+        if abort_flag.get():
+            progress_callback.emit(
+                imf.ProgressData(
+                    0,
+                    [],
+                    imf.Step.output,
+                    imf.ProgressType.aborted,
+                )
+            )
+            raise wt.Abort()
+
     progress_callback.emit(
         imf.ProgressData(
             0,
@@ -137,6 +161,8 @@ def generate_output(
 
     # ============================================== Text Detection ==============================================
 
+    check_abortion()
+
     step_text_detector_images = tuple(
         filter(step_needs_to_be_rerun_closure(imf.Step.text_detection), image_objects)
     )
@@ -145,21 +171,27 @@ def generate_output(
         logger.info(
             f"Running text detection AI model for {len(step_text_detector_images)} images..."
         )
-        ctm.model2annotations_gui(
-            profile.general,
-            profile.text_detector,
-            text_detector_model_path,
-            step_text_detector_images,
-            cache_dir,
-            no_text_detection=target_output == imf.Output.input,
-            partial_progress_data=partial(
-                imf.ProgressData,
-                len(step_text_detector_images),
-                target_outputs,
-                imf.Step.text_detection,
-            ),
-            progress_callback=progress_callback if target_output != imf.Output.input else None,
-        )
+        try:
+            ctm.model2annotations_gui(
+                profile.general,
+                profile.text_detector,
+                text_detector_model_path,
+                step_text_detector_images,
+                cache_dir,
+                no_text_detection=target_output == imf.Output.input,
+                partial_progress_data=partial(
+                    imf.ProgressData,
+                    len(step_text_detector_images),
+                    target_outputs,
+                    imf.Step.text_detection,
+                ),
+                progress_callback=progress_callback if target_output != imf.Output.input else None,
+                abort_flag=abort_flag,
+            )
+        except wt.Abort:
+            # Send the progress callback a signal that the process was aborted,
+            # and then raise the exception again to stop the processing.
+            check_abortion()
 
         # Update the outputs of the image objects.
         logger.debug(f"Updating text detection outputs...")
@@ -168,17 +200,9 @@ def generate_output(
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
             update_output(image_obj, imf.Output.raw_json, "#raw.json")
 
-        # No analytics to share here.
-        # progress_callback.emit(
-        #     imf.ProgressData(
-        #         len(step_text_detector_images),
-        #         target_outputs,
-        #         imf.Step.text_detection,
-        #         imf.ProgressType.analytics,
-        #     )
-        # )
-
     # ============================================== Preprocessing ==============================================
+
+    check_abortion()
 
     if target_output > imf.get_output_representing_step(imf.Step.text_detection):
         step_preprocessor_images = tuple(
@@ -200,6 +224,7 @@ def generate_output(
             ocr_analytics: list[st.OCRAnalytic] = []
             # Find all the json files associated with the images.
             for image_obj in step_preprocessor_images:
+                check_abortion()
                 json_file_path = cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#raw.json"
                 ocr_analytic = pp.prep_json_file(
                     json_file_path,
@@ -239,6 +264,8 @@ def generate_output(
             )
 
     # ============================================== Masker ==============================================
+
+    check_abortion()
 
     if target_output > imf.get_output_representing_step(imf.Step.preprocessor):
         step_masker_images = tuple(
@@ -299,6 +326,7 @@ def generate_output(
                 # Only use multiprocessing if there are more than 2 images.
                 with Pool() as pool:
                     for analytic in pool.imap(ma.clean_page, data):
+                        check_abortion()
                         masker_analytics_raw.extend(analytic)
 
                         progress_callback.emit(
@@ -311,6 +339,7 @@ def generate_output(
                         )
             else:
                 for data_obj in data:
+                    check_abortion()
                     analytic = ma.clean_page(data_obj)
                     masker_analytics_raw.extend(analytic)
 
@@ -346,6 +375,8 @@ def generate_output(
             )
 
     # ============================================== Denoiser ==============================================
+
+    check_abortion()
 
     if (
         target_output > imf.get_output_representing_step(imf.Step.masker)
@@ -395,6 +426,7 @@ def generate_output(
             if len(step_denoiser_images) > 2:
                 with Pool() as pool:
                     for analytic in pool.imap(dn.denoise_page, data):
+                        check_abortion()
                         denoise_analytics_raw.append(analytic)
 
                         progress_callback.emit(
@@ -407,6 +439,7 @@ def generate_output(
                         )
             else:
                 for data_obj in data:
+                    check_abortion()
                     analytic = dn.denoise_page(data_obj)
                     denoise_analytics_raw.append(analytic)
 
@@ -444,6 +477,8 @@ def generate_output(
 
     # ============================================== Final Output ==============================================
 
+    check_abortion()
+
     if target_output == imf.Output.write_output:
         progress_callback.emit(
             imf.ProgressData(
@@ -455,6 +490,7 @@ def generate_output(
         )
 
         for image_obj in image_objects:
+            check_abortion()
             copy_to_output(image_obj, target_outputs, output_dir, profile)
 
             progress_callback.emit(
@@ -567,6 +603,7 @@ def perform_ocr(
     config: cfg.Config,
     ocr_model: MangaOcr | None,
     progress_callback: imf.ProgressSignal,
+    abort_flag: wt.SharableFlag,
     debug: bool = False,
 ):
     """
@@ -588,8 +625,25 @@ def perform_ocr(
     :param config: The config to use.
     :param ocr_model: The ocr model to use.
     :param progress_callback: A callback to report progress to the gui.
+    :param abort_flag: A flag that is set to True when the thread should abort.
     :param debug: If True, debug messages are printed.
     """
+
+    def check_abortion():
+        """
+        Check if the thread should abort.
+        If so, signal abortion to the progress callback and raise an AbortException.
+        """
+        if abort_flag.get():
+            progress_callback.emit(
+                imf.ProgressData(
+                    0,
+                    [],
+                    imf.Step.output,
+                    imf.ProgressType.aborted,
+                )
+            )
+            raise wt.Abort()
 
     target_outputs = [imf.Output.ocr]
 
@@ -670,6 +724,8 @@ def perform_ocr(
 
     # ============================================== Text Detection ==============================================
 
+    check_abortion()
+
     step_text_detector_images = tuple(
         filter(step_needs_to_be_rerun_closure(imf.Step.text_detection), image_objects)
     )
@@ -678,21 +734,27 @@ def perform_ocr(
         logger.info(
             f"Running text detection AI model for {len(step_text_detector_images)} images..."
         )
-        ctm.model2annotations_gui(
-            profile.general,
-            profile.text_detector,
-            text_detector_model_path,
-            step_text_detector_images,
-            cache_dir,
-            no_text_detection=False,
-            partial_progress_data=partial(
-                imf.ProgressData,
-                len(step_text_detector_images),
-                target_outputs,
-                imf.Step.text_detection,
-            ),
-            progress_callback=progress_callback,
-        )
+        try:
+            ctm.model2annotations_gui(
+                profile.general,
+                profile.text_detector,
+                text_detector_model_path,
+                step_text_detector_images,
+                cache_dir,
+                no_text_detection=False,
+                partial_progress_data=partial(
+                    imf.ProgressData,
+                    len(step_text_detector_images),
+                    target_outputs,
+                    imf.Step.text_detection,
+                ),
+                progress_callback=progress_callback,
+                abort_flag=abort_flag,
+            )
+        except wt.Abort:
+            # Send the progress callback a signal that the process was aborted,
+            # and then raise the exception again to stop the processing.
+            check_abortion()
 
         # Update the outputs of the image objects.
         logger.debug(f"Updating text detection outputs...")
@@ -702,6 +764,8 @@ def perform_ocr(
             update_output(image_obj, imf.Output.raw_json, "#raw.json")
 
     # ============================================== Preprocessing ==============================================
+
+    check_abortion()
 
     logger.info(f"Running preprocessing for {len(image_objects)} images...")
 
@@ -717,6 +781,7 @@ def perform_ocr(
     ocr_analytics: list[st.OCRAnalytic] = []
     # Find all the json files associated with the images.
     for image_obj in image_objects:
+        check_abortion()
         json_file_path = cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#raw.json"
         ocr_analytic = pp.prep_json_file(
             json_file_path,
@@ -746,6 +811,8 @@ def perform_ocr(
     logger.info(f"Finished processing {len(image_objects)} images.")
 
     # ============================================== Final Output ==============================================
+
+    check_abortion()
 
     # Output the OCRed text from the analytics.
     # Format of the analytics:

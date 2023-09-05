@@ -81,6 +81,7 @@ class ProgressType(Enum):
     analyticsDenoiser = auto()
     outputOCR = auto()
     end = auto()
+    aborted = auto()
 
 
 @frozen

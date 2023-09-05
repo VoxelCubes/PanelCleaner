@@ -350,31 +350,31 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.label_warning)
 
-        self.pushButton_start = QPushButton(self.groupBox_4)
-        self.pushButton_start.setObjectName(u"pushButton_start")
+        self.pushButton_abort = QPushButton(self.groupBox_4)
+        self.pushButton_abort.setObjectName(u"pushButton_abort")
         icon10 = QIcon()
-        iconThemeName = u"media-playback-start-symbolic"
+        iconThemeName = u"process-stop"
         if QIcon.hasThemeIcon(iconThemeName):
             icon10 = QIcon.fromTheme(iconThemeName)
         else:
             icon10.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_start.setIcon(icon10)
+        self.pushButton_abort.setIcon(icon10)
 
-        self.verticalLayout_7.addWidget(self.pushButton_start)
+        self.verticalLayout_7.addWidget(self.pushButton_abort)
 
-        self.pushButton_abort = QPushButton(self.groupBox_4)
-        self.pushButton_abort.setObjectName(u"pushButton_abort")
+        self.pushButton_start = QPushButton(self.groupBox_4)
+        self.pushButton_start.setObjectName(u"pushButton_start")
         icon11 = QIcon()
-        iconThemeName = u"process-stop"
+        iconThemeName = u"media-playback-start-symbolic"
         if QIcon.hasThemeIcon(iconThemeName):
             icon11 = QIcon.fromTheme(iconThemeName)
         else:
             icon11.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_abort.setIcon(icon11)
+        self.pushButton_start.setIcon(icon11)
 
-        self.verticalLayout_7.addWidget(self.pushButton_abort)
+        self.verticalLayout_7.addWidget(self.pushButton_start)
 
 
         self.verticalLayout_9.addLayout(self.verticalLayout_7)
@@ -504,8 +504,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_browse_out_file = QPushButton(self.page_ocr)
         self.pushButton_browse_out_file.setObjectName(u"pushButton_browse_out_file")
-        icon12 = QIcon(QIcon.fromTheme(u"document-open-symbolic"))
-        self.pushButton_browse_out_file.setIcon(icon12)
+        self.pushButton_browse_out_file.setIcon(icon)
 
         self.horizontalLayout_8.addWidget(self.pushButton_browse_out_file)
 
@@ -588,6 +587,8 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.progressBar_individual)
 
+        self.horizontalLayout_2.setStretch(4, 1)
+        self.horizontalLayout_2.setStretch(7, 5)
 
         self.verticalLayout_6.addWidget(self.widget_progress_drawer)
 
@@ -702,8 +703,8 @@ class Ui_MainWindow(object):
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))
         self.radioButton_ocr.setText(QCoreApplication.translate("MainWindow", u"OCR", None))
         self.label_warning.setText(QCoreApplication.translate("MainWindow", u"Warning", None))
-        self.pushButton_start.setText(QCoreApplication.translate("MainWindow", u"Start", None))
         self.pushButton_abort.setText(QCoreApplication.translate("MainWindow", u"Abort", None))
+        self.pushButton_start.setText(QCoreApplication.translate("MainWindow", u"Start", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Output", None))
         self.checkBox_save_clean.setText(QCoreApplication.translate("MainWindow", u"Cleaned Image", None))
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))

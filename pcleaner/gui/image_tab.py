@@ -39,6 +39,7 @@ class ImageTab(Qw.QTabWidget):
         thread_queue: Qc.QThreadPool,
         progress_callback: Callable[[imf.ProgressData], None],
         profile_changed_signal: Qc.Signal,
+        abort_signal: Qc.Signal,
     ):
         """
         Check if the image is already open, in which case show it.
@@ -50,6 +51,7 @@ class ImageTab(Qw.QTabWidget):
         :param thread_queue: The thread queue for processing steps.
         :param progress_callback: The callback to call when a step is done.
         :param profile_changed_signal: The signal that is broadcast when the profile is changed.
+        :param abort_signal: The signal that is broadcast when the user aborts the process.
         """
         if image_obj.path in self.open_images:
             self.setCurrentWidget(self.open_images[image_obj.path][1])
@@ -63,6 +65,7 @@ class ImageTab(Qw.QTabWidget):
             thread_queue=thread_queue,
             progress_callback=progress_callback,
             profile_changed_signal=profile_changed_signal,
+            abort_signal=abort_signal,
         )
         self.addTab(tab, image_obj.path.name)
         self.open_images[image_obj.path] = (image_obj, tab)

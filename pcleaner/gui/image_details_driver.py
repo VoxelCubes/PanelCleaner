@@ -7,7 +7,7 @@ from typing import Sequence
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Slot
+from PySide6.QtCore import Slot, Signal
 from logzero import logger
 
 import pcleaner.config as cfg
@@ -41,6 +41,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     shared_ocr_model: st.Shared[st.OCRModel]  # Must be handed over by the file table.
     thread_queue: Qc.QThreadPool
     progress_callback: Callable[[imf.ProgressData], None]
+    abort_signal: Signal
 
     menu: Qw.QMenu  # The overflow menu for the export and ocr buttons.
     export_action: Qg.QAction
@@ -59,12 +60,19 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         shared_ocr_model: st.Shared[st.OCRModel] = None,
         thread_queue: Qc.QThreadPool = None,
         progress_callback: Callable[[imf.ProgressData], None] = None,
-        profile_changed_signal: Qc.Signal = None,
+        profile_changed_signal: Signal = None,
+        abort_signal: Signal = None,
     ):
         """
         Init the widget.
 
         :param image_obj: The image object to show.
+        :param config: The config object.
+        :param shared_ocr_model: The shared OCR model.
+        :param thread_queue: The thread queue to use for the workers.
+        :param progress_callback: The callback to use for the progress signals.
+        :param profile_changed_signal: The signal that is emitted when the profile changes.
+        :param abort_signal: The signal that is emitted when the worker should abort.
         """
         logger.info(f"Opening details tab for {image_obj.path}")
         Qw.QWidget.__init__(self, parent)
@@ -78,6 +86,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.first_load = True
         self.thread_queue = thread_queue
         self.progress_callback = progress_callback
+        self.abort_signal = abort_signal
 
         # Clear sample text from labels that only update on user interaction.
         self.label_size.setText("")
@@ -401,18 +410,22 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         :param output: The output to generate.
         """
-        worker = wt.Worker(self.generate_output, output)
+        worker = wt.Worker(self.generate_output, output, abort_signal=self.abort_signal)
         worker.signals.progress.connect(self.progress_callback)
         worker.signals.result.connect(self.output_worker_result)
         worker.signals.error.connect(self.output_worker_error)
+        worker.signals.aborted.connect(self.output_worker_aborted)
         self.thread_queue.start(worker)
 
-    def generate_output(self, output: imf.Output, progress_callback: imf.ProgressSignal) -> None:
+    def generate_output(
+        self, output: imf.Output, progress_callback: imf.ProgressSignal, abort_flag: wt.SharableFlag
+    ) -> None:
         """
         Generate the given output, if there doesn't yet exist a valid output for it.
 
         :param output: The output to generate.
         :param progress_callback: The callback given by the worker thread wrapper.
+        :param abort_flag: The flag that is set when the worker should abort.
         """
         # Check if the output is already valid.
         proc_output: imf.ProcessOutput = self.image_obj.outputs[output]
@@ -428,6 +441,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             config=self.config,
             ocr_model=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
+            abort_flag=abort_flag,
         )
 
     def output_worker_result(self):
@@ -439,6 +453,13 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     def output_worker_error(self, error: wt.WorkerError):
         logger.error("Output worker encountered an error.")
         gu.show_warning(self, "Output failed", f"Output generation failed:\n\n{error}")
+
+    def output_worker_aborted(self):
+        self.load_all_image_thumbnails()
+        self.reload_current_image()
+        self.thread_queue.clear()
+        self.pushButton_refresh.setEnabled(True)
+        logger.warning("Output worker aborted.")
 
     def start_profile_checker(self):
         """

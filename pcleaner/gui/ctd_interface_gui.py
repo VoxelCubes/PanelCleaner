@@ -7,6 +7,7 @@ import torch
 
 import pcleaner.config as cfg
 import pcleaner.gui.image_file as imf
+import pcleaner.gui.worker_thread as wt
 from pcleaner.comic_text_detector.inference import TextDetector
 from pcleaner.ctd_interface import process_image
 
@@ -24,6 +25,7 @@ def model2annotations_gui(
     no_text_detection: bool,
     partial_progress_data: partial,
     progress_callback: imf.ProgressSignal | None,
+    abort_flag: wt.SharableFlag,
 ):
     """
     Run the model on a directory of images and produce the following
@@ -41,6 +43,13 @@ def model2annotations_gui(
     - The target output to reach.
     - The current step.
 
+    Note on Aborting:
+    The sharable flag is passed to this function because it is what iterates over the images.
+    It must not interrupt the process for a single image, but should prevent the next image
+    from being processed.
+    All this function needs to do is raise the Abort exception, the calling function will send
+    the appropriate progress update to the rest of the gui.
+
     :param config_general: General configuration, part of the profile.
     :param config_detector: Text detector configuration, part of the profile.
     :param text_detector_model_path: Path to the model file. This ends either in .pt or .onnx (torch or cv2 format).
@@ -51,6 +60,7 @@ def model2annotations_gui(
         You must only add the current iteration to the partial function to construct a valid
         ProgressData object.
     :param progress_callback: A callback to report progress to the gui.
+    :param abort_flag: A flag to indicate if the process should abort.
     """
 
     if progress_callback is not None:
@@ -92,7 +102,8 @@ def model2annotations_gui(
             ]
 
             for _ in pool.imap_unordered(process_image_batch, args):
-                pass  # do nothing, just iterate through the results.
+                if abort_flag.get():
+                    raise wt.Abort()
 
     else:
         # Load the model.
@@ -103,6 +114,9 @@ def model2annotations_gui(
         )
 
         for img_obj in img_list:
+            if abort_flag.get():
+                raise wt.Abort()
+
             process_image(
                 img_obj.path,
                 model,

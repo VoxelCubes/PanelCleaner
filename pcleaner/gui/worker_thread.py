@@ -44,12 +44,35 @@ class WorkerSignals(QObject):
     progress
         anything to indicate the current state.
 
+    aborted
+        The initial parameters passed to the worker when it was started, args and kwargs.
+
     """
 
     finished = Signal(tuple)
     error = Signal(WorkerError)
     result = Signal(object)
     progress = Signal(object)
+    aborted = Signal(tuple)
+
+
+class SharableFlag:
+    def __init__(self, initial_value: bool = False):
+        self._flag = initial_value
+
+    def get(self) -> bool:
+        return self._flag
+
+    def set(self, value: bool) -> None:
+        self._flag = value
+
+
+class Abort(Exception):
+    """
+    Exception to abort the worker.
+    """
+
+    pass
 
 
 class Worker(QRunnable):
@@ -64,11 +87,21 @@ class Worker(QRunnable):
     :param callback: The function callback to run on this worker thread. Supplied args and
                      kwargs will be passed through to the runner.
     :param args: Arguments to pass to the callback function.
-    :param no_progress_callback: If present (true or false), don't send progress signals.
+    :param no_progress_callback: [Optional] If True, the progress_callback will not be added to the kwargs.
+    :param abort_signal: [Optional] A signal that will be emitted when the thread should abort.
     :param kwargs: Keywords to pass to the callback function.
     """
 
-    def __init__(self, fn: Callable, *args, no_progress_callback: bool = False, **kwargs):
+    aborted: SharableFlag
+
+    def __init__(
+        self,
+        fn: Callable,
+        *args,
+        no_progress_callback: bool = False,
+        abort_signal: Signal | None = None,
+        **kwargs,
+    ):
         QRunnable.__init__(self)
 
         # Store constructor arguments (re-used for processing).
@@ -77,9 +110,18 @@ class Worker(QRunnable):
         self.kwargs = kwargs
         self.signals = WorkerSignals()
 
+        # If the abort signal is received, the abort flag is set to true.
+        # The worker process must abort itself when the flag is true.
+        self.aborted = SharableFlag(False)
+
         # Add the callback to our kwargs.
         if not no_progress_callback:
             self.kwargs["progress_callback"] = self.signals.progress
+
+        # If an abort signal is provided, provide the sharable flag to the worker.
+        if abort_signal is not None:
+            self.kwargs["abort_flag"] = self.aborted
+            abort_signal.connect(self.abort)
 
     @Slot()
     def run(self):
@@ -88,8 +130,12 @@ class Worker(QRunnable):
         """
 
         # Retrieve args/kwargs here; and fire processing using them.
+        # The function should expect the keyword arguments:
+        # progress_callback and abort_flag unless disabled in the constructor.
         try:
             result = self.fn(*self.args, **self.kwargs)
+        except Abort:
+            self.signals.aborted.emit((self.args, self.kwargs))
         except:
             traceback.print_exc()
             exception_type, value = sys.exc_info()[:2]
@@ -100,3 +146,7 @@ class Worker(QRunnable):
             self.signals.result.emit(result)  # Return the result of the processing
         finally:
             self.signals.finished.emit((self.args, self.kwargs))  # Done
+
+    @Slot()
+    def abort(self):
+        self.aborted.set(True)

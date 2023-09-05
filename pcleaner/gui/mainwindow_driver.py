@@ -140,10 +140,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 thread_queue=self.thread_queue,
                 progress_callback=self.show_current_progress,
                 profile_changed_signal=self.profile_values_changed,
+                abort_signal=self.get_abort_signal(),
             )
         )
         # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)
+        self.pushButton_abort.clicked.connect(self.abort_button_on_click)
         self.pushButton_browse_out_dir.clicked.connect(self.browse_output_dir)
         self.pushButton_browse_out_file.clicked.connect(self.browse_out_file)
         self.radioButton_cleaning.clicked.connect(
@@ -256,10 +258,19 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def enable_running_cleaner(self):
         logger.info("Enabling running cleaner")
         self.pushButton_start.setEnabled(True)
+        self.pushButton_abort.hide()
 
     def disable_running_cleaner(self):
         logger.info("Disabling running cleaner")
         self.pushButton_start.setEnabled(False)
+        self.pushButton_abort.show()
+        self.pushButton_abort.setEnabled(True)
+
+    def abort_button_on_click(self):
+        self.pushButton_abort.setEnabled(False)
+        self.thread_queue.clear()
+        logger.warning("Aborting processing")
+        self.statusbar.showMessage("Aborting...", timeout=5000)
 
     def handle_ocr_mode_change(self, csv: bool):
         """
@@ -722,6 +733,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # ========================================== Processing ==========================================
 
+    def get_abort_signal(self) -> Signal:
+        return self.pushButton_abort.clicked
+
     def start_processing(self):
         """
         Start either cleaning or OCR, depending on the selected radio button.
@@ -765,11 +779,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         output_directory = Path(output_str if output_str else "cleaned")
         image_files = self.file_table.get_image_files()
 
-        worker = wt.Worker(self.generate_output, requested_outputs, output_directory, image_files)
+        worker = wt.Worker(
+            self.generate_output,
+            requested_outputs,
+            output_directory,
+            image_files,
+            abort_signal=self.get_abort_signal(),
+        )
         worker.signals.progress.connect(self.show_current_progress)
         worker.signals.result.connect(self.output_worker_result)
         worker.signals.error.connect(self.output_worker_error)
         worker.signals.finished.connect(self.output_worker_finished)
+        worker.signals.aborted.connect(self.output_worker_aborted)
         self.thread_queue.start(worker)
 
     def generate_output(
@@ -778,6 +799,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         output_directory: Path,
         image_files: list[imf.ImageFile],
         progress_callback: imf.ProgressSignal,
+        abort_flag: wt.SharableFlag,
     ) -> None:
         """
         Generate the given output, if there doesn't yet exist a valid output for it.
@@ -787,6 +809,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param output_directory: The directory to output to.
         :param image_files: The image files to process.
         :param progress_callback: The callback given by the worker thread wrapper.
+        :param abort_flag: The flag to check for aborting.
         """
 
         # Start the processor.
@@ -797,6 +820,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             config=self.config,
             ocr_model=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
+            abort_flag=abort_flag,
         )
 
     def start_ocr(self):
@@ -843,11 +867,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         image_files = self.file_table.get_image_files()
 
-        worker = wt.Worker(self.perform_ocr, output_path, image_files, csv_output)
+        worker = wt.Worker(
+            self.perform_ocr,
+            output_path,
+            image_files,
+            csv_output,
+            abort_signal=self.get_abort_signal(),
+        )
         worker.signals.progress.connect(self.show_current_progress)
         worker.signals.result.connect(self.output_worker_result)
         worker.signals.error.connect(self.output_worker_error)
         worker.signals.finished.connect(self.output_worker_finished)
+        worker.signals.aborted.connect(self.output_worker_aborted)
         self.thread_queue.start(worker)
 
     def perform_ocr(
@@ -856,6 +887,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         image_files: list[imf.ImageFile],
         csv_output: bool,
         progress_callback: imf.ProgressSignal,
+        abort_flag: wt.SharableFlag,
     ) -> None:
         """
         Generate the given output, if there doesn't yet exist a valid output for it.
@@ -865,6 +897,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param output_directory: The directory to output to.
         :param image_files: The image files to process.
         :param progress_callback: The callback given by the worker thread wrapper.
+        :param abort_flag: The flag to check for aborting.
         """
 
         # Start the processor.
@@ -875,11 +908,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             config=self.config,
             ocr_model=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
+            abort_flag=abort_flag,
         )
 
     def output_worker_result(self):
         gu.show_info(self, "Processing Finished", "Finished processing all files.")
         logger.info("Output worker finished.")
+
+    def output_worker_aborted(self):
+        gu.show_info(self, "Processing Aborted", "Processing aborted.")
+        logger.warning("Output worker aborted.")
 
     def output_worker_finished(self):
         self.hide_progress_drawer()
@@ -930,6 +968,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             # Processing begins, initialize what needs to be.
             # Specifically, clear the analytics panel.
             self.textEdit_analytics.clear()
+            # This one is needed because the image details panel also wants to be able to offer aborting.
+            self.disable_running_cleaner()
             return
 
         elif progress_data.progress_type == imf.ProgressType.begin_step:
@@ -992,6 +1032,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             # This marks the end of a processing step.
             self.output_worker_finished()
             return  # Don't update the progress bar.
+        elif progress_data.progress_type == imf.ProgressType.aborted:
+            # Worker aborted, clean up.
+            self.output_worker_finished()
+            return
         else:
             # Sanity check.
             raise ValueError(f"Invalid progress type: {progress_data.progress_type}")
