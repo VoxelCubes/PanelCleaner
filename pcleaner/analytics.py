@@ -105,9 +105,10 @@ def show_ocr_analytics(
         # Sort by file path.
         removed_path_texts = natsorted(removed_path_texts, key=lambda p: p[0])
 
-    buffer.write("\nRemoved bubbles:\n")
-    for path, text in removed_path_texts:
-        buffer.write(f"Page {path}: {text}\n")
+    if removed_path_texts:
+        buffer.write("\nRemoved bubbles:\n")
+        for path, text in removed_path_texts:
+            buffer.write(f"Page {path}: {text}\n")
 
     buffer.write("\n")
 
