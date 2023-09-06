@@ -118,6 +118,12 @@ class FileTable(CTableWidget):
         """
         return list(self.files.values())
 
+    def has_no_files(self) -> bool:
+        """
+        Check if the table is empty.
+        """
+        return len(self.files) == 0
+
     def handleDrop(self, path: str):
         logger.debug(f"Dropped {path}")
         image_paths, rejected_tiffs = hp.discover_all_images(path, cfg.SUPPORTED_IMG_TYPES)

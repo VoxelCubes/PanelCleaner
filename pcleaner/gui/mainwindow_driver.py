@@ -740,6 +740,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Start either cleaning or OCR, depending on the selected radio button.
         """
+        if self.file_table.has_no_files():
+            gu.show_warning(
+                self,
+                "No Files",
+                "No files to process. "
+                "You can add files by dragging and dropping them in the middle of the window, "
+                "or through the menubar: Files -> Add Files or Add Folder.",
+            )
+            return
+
         if self.radioButton_cleaning.isChecked():
             self.start_cleaning()
         else:
