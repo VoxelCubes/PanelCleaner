@@ -194,7 +194,6 @@ def generate_output(
             check_abortion()
 
         # Update the outputs of the image objects.
-        logger.debug(f"Updating text detection outputs...")
         for image_obj in step_text_detector_images:
             update_output(image_obj, imf.Output.input, ".png")
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
@@ -247,7 +246,6 @@ def generate_output(
                 )
 
             # Update the outputs of the image objects.
-            logger.debug(f"Updating preprocessing outputs...")
             for image_obj in step_preprocessor_images:
                 update_output(image_obj, imf.Output.initial_boxes, "_boxes.png")
                 update_output(image_obj, imf.Output.final_boxes, "_boxes_final.png")
@@ -353,7 +351,6 @@ def generate_output(
                     )
 
             # Update the outputs of the image objects.
-            logger.debug(f"Updating masker outputs...")
             for image_obj in step_masker_images:
                 update_output(image_obj, imf.Output.box_mask, "_box_mask.png")
                 update_output(image_obj, imf.Output.cut_mask, "_cut_mask.png")
@@ -453,7 +450,6 @@ def generate_output(
                     )
 
             # Update the outputs of the image objects.
-            logger.debug(f"Updating denoising outputs...")
             for image_obj in step_denoiser_images:
                 update_output(image_obj, imf.Output.denoiser_mask, "_noise_mask.png")
                 update_output(image_obj, imf.Output.denoised_image, "_clean_denoised.png")
@@ -757,7 +753,6 @@ def perform_ocr(
             check_abortion()
 
         # Update the outputs of the image objects.
-        logger.debug(f"Updating text detection outputs...")
         for image_obj in step_text_detector_images:
             update_output(image_obj, imf.Output.input, ".png")
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
@@ -804,7 +799,6 @@ def perform_ocr(
         )
 
     # Update only the raw boxes, the rest are tainted by the forced profile changes.
-    logger.debug(f"Updating preprocessing outputs...")
     for image_obj in image_objects:
         update_output(image_obj, imf.Output.initial_boxes, "_boxes.png")
 

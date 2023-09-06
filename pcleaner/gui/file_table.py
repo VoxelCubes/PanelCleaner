@@ -92,14 +92,13 @@ class FileTable(CTableWidget):
     def post_init(self):
         # Make enough room for the 4 analytic icons.
         self.setColumnWidth(
-            Column.ANALYTICS, round(4 * (imf.THUMBNAIL_SIZE * 0.75 + GUI_PADDING) + 2 * GUI_PADDING)
+            Column.ANALYTICS, round(4 * (imf.THUMBNAIL_SIZE * 0.75) + 2 * GUI_PADDING)
         )
 
     def set_thread_queue(self, thread_queue: Qc.QThreadPool):
         self.thread_queue = thread_queue
 
     def check_empty(self):
-        logger.debug(f"Checking if table is empty")
         if self.rowCount() == 0:
             self.table_is_empty.emit()
         else:
@@ -127,7 +126,6 @@ class FileTable(CTableWidget):
     def handleDrop(self, path: str):
         logger.debug(f"Dropped {path}")
         image_paths, rejected_tiffs = hp.discover_all_images(path, cfg.SUPPORTED_IMG_TYPES)
-        logger.info(f"Discovered {len(image_paths)} images")
         if rejected_tiffs:
             rejected_tiff_str = "\n".join([str(p) for p in rejected_tiffs])
             hp.show_warning(
@@ -205,7 +203,6 @@ class FileTable(CTableWidget):
             # Check if the image has loaded yet. If not, use a placeholder icon.
             if not file_obj.data_loaded():
                 self.item(row, Column.FILENAME).setIcon(file_obj.icon)
-                logger.debug(f"Image {file_obj.path} has not loaded yet.")
             else:
                 self.update_row(row, file_obj)
 
@@ -429,8 +426,6 @@ class FileTable(CTableWidget):
         """
         Update the table with the thumbnail.
         """
-        logger.debug(f"Worker thread {file_path} finished.")
-
         # Search for the file in the table.
         for row in range(self.rowCount()):
             if self.item(row, Column.PATH).text() == str(file_path):

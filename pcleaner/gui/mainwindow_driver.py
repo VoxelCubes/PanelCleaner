@@ -256,12 +256,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.widget_progress_drawer.show()
 
     def enable_running_cleaner(self):
-        logger.info("Enabling running cleaner")
         self.pushButton_start.setEnabled(True)
         self.pushButton_abort.hide()
 
     def disable_running_cleaner(self):
-        logger.info("Disabling running cleaner")
         self.pushButton_start.setEnabled(False)
         self.pushButton_abort.show()
         self.pushButton_abort.setEnabled(True)
@@ -983,7 +981,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             return
 
         elif progress_data.progress_type == imf.ProgressType.begin_step:
-            logger.info(f"Progress beginning step: {progress_data}")
             # This marks the beginning of a new processing step.
             self.show_progress_drawer()
             self.progress_current = 0
@@ -1003,7 +1000,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.progress_current = progress_data.value
 
         elif progress_data.progress_type == imf.ProgressType.analyticsOCR:
-            logger.info(f"Showing ocr analytics... {progress_data.value}")
+            logger.info(f"Showing ocr analytics...")
             # Append the formatted analytics to the text edit.
             ocr_analytics, ocr_max_size = progress_data.value
             analytics_str = an.show_ocr_analytics(ocr_analytics, ocr_max_size, ANALYTICS_COLUMNS)
@@ -1012,7 +1009,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         elif progress_data.progress_type == imf.ProgressType.analyticsMasker:
             # Show analytics.
-            logger.info(f"Showing masker analytics... {progress_data.value}")
+            logger.info(f"Showing masker analytics...")
             masker_analytics_raw = progress_data.value
             analytics_str = an.show_masker_analytics(masker_analytics_raw, ANALYTICS_COLUMNS)
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
@@ -1020,7 +1017,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         elif progress_data.progress_type == imf.ProgressType.analyticsDenoiser:
             # Show analytics.
-            logger.info(f"Showing analytics... {progress_data.value}")
+            logger.info(f"Showing denoiser analytics...")
             denoise_analytics_raw, min_deviation, max_deviation = progress_data.value
             analytics_str = an.show_denoise_analytics(
                 denoise_analytics_raw,
@@ -1033,7 +1030,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         elif progress_data.progress_type == imf.ProgressType.outputOCR:
             # Show ocr output.
-            logger.info(f"Showing ocr output... {progress_data.value}")
+            logger.info(f"Showing ocr output...")
             ocr_output = progress_data.value
             self.textEdit_analytics.append(ocr_output)
             return  # Don't update the progress bar.

@@ -168,9 +168,6 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 current_button_index // SIDEBAR_COLUMNS,
                 current_button_index % SIDEBAR_COLUMNS,
             )
-            logger.debug(
-                f"Adding button {title} at index {current_button_index}, row {current_button_index // SIDEBAR_COLUMNS}, column {current_button_index % SIDEBAR_COLUMNS}"
-            )
             current_button_index += 1
             return button
 
@@ -484,7 +481,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         each of them.
         """
 
-        logger.warning("Profile changed. Checking for changes.")
+        logger.info("Profile changed. Checking for changes.")
 
         changed_buttons: list[BadgeButton] = []
 
@@ -539,10 +536,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         # Check the first and last buttons.
         if not check_changed(-1):
-            logger.debug(
-                f"Determined that none of the ordered buttons changed in {change_check_calls} calls"
-                f" ({1-change_check_cache_misses/change_check_calls:.0%} cache hits)."
-            )
+            # logger.debug(
+            #     f"Determined that none of the ordered buttons changed in {change_check_calls} calls"
+            #     f" ({1-change_check_cache_misses/change_check_calls:.0%} cache hits)."
+            # )
             # Nothing is changed.
             return changed_buttons
         elif check_changed(0):
@@ -576,10 +573,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             for idx in range(len(ordered_buttons_changed)):
                 ordered_buttons_changed[idx] = idx >= current
 
-            logger.debug(
-                f"Determined that none of the ordered buttons changed in {change_check_calls} calls"
-                f" ({1-change_check_cache_misses/change_check_calls:.0%} cache hits)."
-            )
+            # logger.debug(
+            #     f"Determined that none of the ordered buttons changed in {change_check_calls} calls"
+            #     f" ({1-change_check_cache_misses/change_check_calls:.0%} cache hits)."
+            # )
 
         # Update the flair for the buttons that have changed.
         for idx, (button, _) in enumerate(ordered_buttons):
@@ -595,10 +592,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         :param changed_buttons: The buttons that have changed.
         """
         self.clear_change_flairs()
-        logger.debug(
-            f"Setting change badge for "
-            f"{len(changed_buttons)} buttons: {','.join(self.button_map[output].name for output in changed_buttons)}"
-        )
+        # logger.debug(
+        #     f"Setting change badge for "
+        #     f"{len(changed_buttons)} buttons: {','.join(self.button_map[output].name for output in changed_buttons)}"
+        # )
         for button in changed_buttons:
             self.set_change_flair(button)
 
