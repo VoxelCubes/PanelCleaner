@@ -7,7 +7,7 @@ Files:
     16:
       - configure-symbolic
       - dialog-cancel-symbolic
-      - dialog-ok-apply-symbolic
+      - dialog-ok-apply
       - document-import
       - document-new-symbolic
       - document-open-folder

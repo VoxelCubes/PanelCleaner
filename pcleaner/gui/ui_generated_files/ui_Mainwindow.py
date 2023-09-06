@@ -168,13 +168,7 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon8 = QIcon()
-        iconThemeName = u"dialog-ok-apply-symbolic"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon8 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon8.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
+        icon8 = QIcon(QIcon.fromTheme(u"dialog-ok-apply"))
         self.pushButton_apply_profile.setIcon(icon8)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
