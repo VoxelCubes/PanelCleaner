@@ -1,9 +1,11 @@
 import sys
 import argparse
+import os
 import platform
+from io import StringIO
 
 import PySide6.QtWidgets as Qw
-import PySide6.QtGui as Qg
+import PySide6
 import logzero
 from logzero import logger
 
@@ -29,8 +31,23 @@ def launch(input_paths: list[str]) -> None:
     # Log up to 1MB to the log file.
     logzero.logfile(str(cu.get_log_path()), maxBytes=2**30, backupCount=1, loglevel=logzero.DEBUG)
     logger.info("\n---- Starting up ----")
-    logger.info(f"Program: {__display_name__} {__version__}")
-    logger.info(f"Log file is {cu.get_log_path()}")
+    buffer = StringIO()
+    buffer.write("\n- Program Information -\n")
+    buffer.write(f"Program: {__display_name__} {__version__}\n")
+    buffer.write(f"Log file is {cu.get_log_path()}\n")
+    buffer.write(f"Config file is {cu.get_config_path()}\n")
+    buffer.write(f"Cache directory is {cu.get_cache_path()}\n")
+    buffer.write("- System Information -\n")
+    # Dump basic system info.
+    # Platform Information
+    buffer.write(f"Operating System: {platform.system()} {platform.release()}\n")
+    buffer.write(f"Machine: {platform.machine()}\n")
+    buffer.write(f"Python Version: {sys.version}\n")
+    buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
+    buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
+    buffer.write(f"CPU Cores: {os.cpu_count()}\n")
+
+    logger.info(buffer.getvalue())
 
     # # Set up icon theme.
     # if args.icon_theme:
