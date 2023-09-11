@@ -132,20 +132,33 @@ class Worker(QRunnable):
         # Retrieve args/kwargs here; and fire processing using them.
         # The function should expect the keyword arguments:
         # progress_callback and abort_flag unless disabled in the constructor.
+
+        # After running, we need to check if the signals still exist. They may have been deleted in
+        # the instance that the program was closed while the worker was running.
+        # Otherwise the Python runtime crashes, which is ok in this state, but it just isn't very nice.
         try:
-            result = self.fn(*self.args, **self.kwargs)
-        except Abort:
-            self.signals.aborted.emit((self.args, self.kwargs))
-        except:
-            traceback.print_exc()
-            exception_type, value = sys.exc_info()[:2]
-            self.signals.error.emit(
-                WorkerError(exception_type, value, traceback.format_exc(), self.args, self.kwargs)
-            )
-        else:
-            self.signals.result.emit(result)  # Return the result of the processing
-        finally:
-            self.signals.finished.emit((self.args, self.kwargs))  # Done
+            try:
+                result = self.fn(*self.args, **self.kwargs)
+            except Abort:
+                self.signals.aborted.emit((self.args, self.kwargs))
+            except:
+                # traceback.print_exc()  # Disabled because we handle showing the error in whatever
+                # called the worker. This also prevents the runtime errors from getting printed, which
+                # are caught in an outer try block.
+                exception_type, value = sys.exc_info()[:2]
+                self.signals.error.emit(
+                    WorkerError(
+                        exception_type, value, traceback.format_exc(), self.args, self.kwargs
+                    )
+                )
+            else:
+                self.signals.result.emit(result)  # Return the result of the processing.
+            finally:
+                self.signals.finished.emit((self.args, self.kwargs))  # Done
+        except RuntimeError:
+            # The signals were deleted, so we can't emit them.
+            # This is fine, we just don't need to emit anything.
+            pass
 
     @Slot()
     def abort(self):
