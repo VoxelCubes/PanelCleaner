@@ -16,6 +16,7 @@ from pcleaner import __display_name__, __version__
 # This import is needed to load the icons.
 import pcleaner.gui.rc_generated_files.rc_icons
 import pcleaner.gui.rc_generated_files.rc_theme_icons
+import pcleaner.gui.rc_generated_files.rc_themes
 
 
 def launch() -> None:

@@ -1,7 +1,8 @@
 # define variables
 PYTHON = python
 BUILD_DIR = dist/
-QRC_DIR = icons/
+QRC_DIR_ICONS = icons/
+QRC_DIR_THEMES = themes/
 UI_DIR = ui_files/
 RC_OUTPUT_DIR = pcleaner/gui/rc_generated_files/
 UI_OUTPUT_DIR = pcleaner/gui/ui_generated_files/
@@ -19,10 +20,15 @@ build: compile-qrc compile-ui
 
 # compile .qrc files
 compile-qrc:
-	for file in $(QRC_DIR)*.qrc; do \
+	for file in $(QRC_DIR_ICONS)*.qrc; do \
 		basename=`basename $$file .qrc`; \
 		$(RCC_COMPILER) $$file -o $(RC_OUTPUT_DIR)rc_$$basename.py; \
 	done
+	for file in $(QRC_DIR_THEMES)*.qrc; do \
+		basename=`basename $$file .qrc`; \
+		$(RCC_COMPILER) $$file -o $(RC_OUTPUT_DIR)rc_$$basename.py; \
+	done
+
 
 # compile .ui files
 compile-ui:
@@ -33,8 +39,8 @@ compile-ui:
 
 # run build_icon_cache.py
 build-icon-cache:
-	cd $(QRC_DIR) && $(PYTHON) build_icon_cache.py
-	cd $(QRC_DIR)/custom_icons && $(PYTHON) copy_from_dark_to_light.py
+	cd $(QRC_DIR_ICONS) && $(PYTHON) build_icon_cache.py
+	cd $(QRC_DIR_ICONS)/custom_icons && $(PYTHON) copy_from_dark_to_light.py
 
 # install target
 install:

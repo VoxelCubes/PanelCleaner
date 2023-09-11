@@ -682,6 +682,7 @@ class Config:
     cache_dir: Path | None = None
     default_torch_model_path: Path | None = None  # CUDA
     default_cv2_model_path: Path | None = None  # CPU
+    gui_theme: str | None = None
 
     def show(self):
         """
@@ -717,6 +718,10 @@ class Config:
             self.default_cv2_model_path
             if self.default_cv2_model_path is not None
             else "Not downloaded",
+        )
+        print(
+            "GUI Theme:",
+            self.gui_theme if self.gui_theme is not None else "System default",
         )
 
         print("\n" + "-" * 20 + "\n")
@@ -800,6 +805,11 @@ class Config:
         # It is downloaded automatically if blank.
         default_cv2_model_path = {none_to_empty(self.default_cv2_model_path)}
         
+        # This is the theme to use for the GUI.
+        # If blank, the system default theme is used.
+        # Built-in themes are Breeze and Breeze Dark
+        gui_theme = {none_to_empty(self.gui_theme)}
+        
         
         [Saved Profiles]
         {saved_profiles_str}
@@ -836,6 +846,7 @@ class Config:
         }
         try_to_load(config, conf_updater, section, Path | None, "default_torch_model_path")
         try_to_load(config, conf_updater, section, Path | None, "default_cv2_model_path")
+        try_to_load(config, conf_updater, section, str | None, "gui_theme")
 
         # If the default profile isn't in the saved profiles, clear it.
         if (

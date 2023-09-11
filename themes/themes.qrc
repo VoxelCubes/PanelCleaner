@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="themes">
+    <file>breeze-dark</file>
+    <file>breeze</file>
+  </qresource>
+</RCC>
