@@ -9,7 +9,6 @@ import logzero
 from logzero import logger
 
 from pcleaner.gui.mainwindow_driver import MainWindow
-import pcleaner.config as cfg
 import pcleaner.cli_utils as cu
 from pcleaner import __display_name__, __version__
 
@@ -37,8 +36,6 @@ def launch() -> None:
     buffer.write(f"Config file is {cu.get_config_path()}\n")
     buffer.write(f"Cache directory is {cu.get_cache_path()}\n")
     buffer.write("- System Information -\n")
-    # Dump basic system info.
-    # Platform Information
     buffer.write(f"Operating System: {platform.system()} {platform.release()}\n")
     buffer.write(f"Machine: {platform.machine()}\n")
     buffer.write(f"Python Version: {sys.version}\n")
@@ -47,21 +44,6 @@ def launch() -> None:
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
 
     logger.info(buffer.getvalue())
-
-    # # Set up icon theme.
-    # if args.icon_theme:
-    #     if args.icon_theme == "Breeze":
-    #         logger.info("Using Breeze icon theme.")
-    #         Qg.QIcon.setThemeName("Breeze")
-    #     elif args.icon_theme == "BreezeDark":
-    #         logger.info("Using BreezeDark icon theme.")
-    #         Qg.QIcon.setThemeName("BreezeDark")
-    #     else:
-    #         raise ValueError(f"Unknown icon theme: {args.icon_theme}")
-    # elif platform.system() == "Windows" or platform.system() == "Darwin":
-    #     # Default to Breeze on Windows.
-    #     logger.info("Using Breeze icon theme.")
-    #     Qg.QIcon.setThemeName("Breeze")
 
     # Start the main window.
     app = Qw.QApplication(sys.argv)
