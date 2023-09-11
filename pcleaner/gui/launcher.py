@@ -1,5 +1,4 @@
 import sys
-import argparse
 import os
 import platform
 from io import StringIO
@@ -20,7 +19,7 @@ import pcleaner.gui.rc_generated_files.rc_icons
 import pcleaner.gui.rc_generated_files.rc_theme_icons
 
 
-def launch(input_paths: list[str]) -> None:
+def launch() -> None:
     """
     Launch the GUI.
 
@@ -70,7 +69,6 @@ def launch(input_paths: list[str]) -> None:
     try:
         window = MainWindow()
         window.show()
-        # TODO load the initial paths
         sys.exit(app.exec())
     except Exception as e:
         logger.exception(
