@@ -72,7 +72,8 @@
              <string>Apply</string>
             </property>
             <property name="icon">
-             <iconset theme="dialog-ok-apply"/>
+             <iconset theme="dialog-ok-apply">
+              <normaloff>.</normaloff>.</iconset>
             </property>
            </widget>
           </item>
