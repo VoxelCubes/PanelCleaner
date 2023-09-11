@@ -59,6 +59,7 @@ class ImageTab(Qw.QTabWidget):
 
         # Create the tab.
         tab = idd.ImageDetailsWidget(
+            parent=self,
             image_obj=image_obj,
             config=config,
             shared_ocr_model=shared_ocr_model,

@@ -1,6 +1,8 @@
 import re
 from io import StringIO
 import PySide6.QtWidgets as Qw
+import PySide6.QtGui as Qg
+import PySide6.QtCore as Qc
 
 
 # For all show functions, pad the dialog message, so that the dialog is not too narrow for the window title.
@@ -32,6 +34,102 @@ def show_question(
     dlg.setStandardButtons(buttons)
     dlg.setIcon(Qw.QMessageBox.Question)
     return dlg.exec()
+
+
+# Mapping between KDE color keys and QPalette roles
+section_role_mapping = {
+    "Colors:Button": {
+        "BackgroundNormal": Qg.QPalette.Button,
+        "ForegroundNormal": Qg.QPalette.ButtonText,
+        "ForegroundActive": Qg.QPalette.BrightText,
+    },
+    "Colors:View": {
+        "BackgroundNormal": Qg.QPalette.Base,
+        "BackgroundAlternate": Qg.QPalette.AlternateBase,
+        "ForegroundNormal": Qg.QPalette.Text,
+        "ForegroundLink": Qg.QPalette.Link,
+        "ForegroundVisited": Qg.QPalette.LinkVisited,
+        "ForegroundInactive": Qg.QPalette.PlaceholderText,
+    },
+    "Colors:Selection": {
+        "BackgroundNormal": Qg.QPalette.Highlight,
+        "ForegroundNormal": Qg.QPalette.HighlightedText,
+    },
+    "Colors:Tooltip": {
+        "BackgroundNormal": Qg.QPalette.ToolTipBase,
+        "ForegroundNormal": Qg.QPalette.ToolTipText,
+    },
+    "Colors:Window": {
+        "BackgroundNormal": Qg.QPalette.Window,
+        "ForegroundNormal": Qg.QPalette.WindowText,
+    },
+    # Add more mappings as needed
+}
+
+
+def load_color_palette(theme: str) -> Qg.QPalette:
+    """
+    Provide a theme name and get a QPalette object.
+    The name should match one of the files in the themes folder.
+
+    :param theme: The name of the theme.
+    :return: A QPalette object.
+    """
+    palette = Qg.QPalette()
+
+    file = Qc.QFile(f":/themes/{theme}")
+    if file.open(Qc.QFile.ReadOnly | Qc.QFile.Text):
+        stream = Qc.QTextStream(file)
+        content = stream.readAll()
+
+        section = None
+        for line in content.split("\n"):
+            line = line.strip()
+            if line.startswith("[") and line.endswith("]"):
+                section = line[1:-1]
+            elif "=" in line:
+                key, value = map(str.strip, line.split("=", 1))
+                role_mapping = section_role_mapping.get(section, {})
+                qt_color_role = role_mapping.get(key, None)
+                if qt_color_role is not None:
+                    r, g, b = map(int, value.split(","))
+                    palette.setColor(qt_color_role, Qg.QColor(r, g, b))
+    else:
+        raise ValueError(f"Could not open theme file: {theme}")
+
+    # Fallback calculations
+    if not palette.color(Qg.QPalette.Light).isValid():
+        base = palette.color(Qg.QPalette.Button)
+        palette.setColor(Qg.QPalette.Light, base.lighter(150))
+
+    if not palette.color(Qg.QPalette.Dark).isValid():
+        base = palette.color(Qg.QPalette.Window)
+        palette.setColor(Qg.QPalette.Dark, base.darker(150))
+
+    if not palette.color(Qg.QPalette.Midlight).isValid():
+        light = palette.color(Qg.QPalette.Light)
+        button = palette.color(Qg.QPalette.Button)
+        midlight = Qg.QColor(
+            (light.red() + button.red()) // 2,
+            (light.green() + button.green()) // 2,
+            (light.blue() + button.blue()) // 2,
+        )
+        palette.setColor(Qg.QPalette.Midlight, midlight)
+
+    if not palette.color(Qg.QPalette.Mid).isValid():
+        dark = palette.color(Qg.QPalette.Dark)
+        button = palette.color(Qg.QPalette.Button)
+        mid = Qg.QColor(
+            (dark.red() + button.red()) // 2,
+            (dark.green() + button.green()) // 2,
+            (dark.blue() + button.blue()) // 2,
+        )
+        palette.setColor(Qg.QPalette.Mid, mid)
+
+    if not palette.color(Qg.QPalette.Shadow).isValid():
+        palette.setColor(Qg.QPalette.Shadow, Qg.QColor(0, 0, 0))
+
+    return palette
 
 
 def ansi_to_html(input_text: str) -> str:

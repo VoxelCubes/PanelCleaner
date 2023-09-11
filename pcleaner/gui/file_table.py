@@ -4,6 +4,7 @@ from typing import Sequence
 from collections import defaultdict
 
 import PySide6.QtCore as Qc
+from PySide6.QtCore import Slot
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from logzero import logger
@@ -53,7 +54,7 @@ class FileTable(CTableWidget):
 
     step_icons_dark: dict[imf.ImageAnalyticCategory, Qg.QIcon]
     step_icons_light: dict[imf.ImageAnalyticCategory, Qg.QIcon]
-    dark_mode: bool
+    shared_theme_is_dark: gst.Shared[bool]
 
     def __init__(self, parent=None):
         CTableWidget.__init__(self, parent)
@@ -70,8 +71,6 @@ class FileTable(CTableWidget):
         self.finished_drop.connect(self.repopulate_table)
 
         Qc.QTimer.singleShot(0, self.post_init)
-
-        self.dark_mode = True
 
         # Load the icons once to share them between all image files.
         for dark_or_light in ["dark", "light"]:
@@ -110,6 +109,9 @@ class FileTable(CTableWidget):
 
     def set_shared_ocr_model(self, shared_ocr_model: gst.Shared[gst.OCRModel]):
         self.shared_ocr_model = shared_ocr_model
+
+    def set_shared_theme_is_dark(self, shared_theme_is_dark: gst.Shared[bool]):
+        self.shared_theme_is_dark = shared_theme_is_dark
 
     def get_image_files(self) -> list[imf.ImageFile]:
         """
@@ -246,7 +248,7 @@ class FileTable(CTableWidget):
         grid_layout.setContentsMargins(0, 0, 0, 0)
         grid_layout.setSpacing(0)
 
-        icons = self.step_icons_dark if self.dark_mode else self.step_icons_light
+        icons = self.step_icons_dark if self.shared_theme_is_dark.get() else self.step_icons_light
         grid_col = 0
 
         for analytic, icon in icons.items():
@@ -287,6 +289,18 @@ class FileTable(CTableWidget):
 
         # Set the container as the cell widget
         self.setCellWidget(row, Column.ANALYTICS, container)
+
+    def mousePressEvent(self, event):
+        """
+        When clicking in blank space, clear the selection.
+
+        :param event: The mouse event.
+        """
+        item = self.itemAt(event.pos())
+        if item is None:
+            self.clearSelection()
+        else:
+            super().mousePressEvent(event)
 
     def on_click(self, item):
         """
@@ -373,7 +387,7 @@ class FileTable(CTableWidget):
 
     def show_denoise_mini_analytics(
         self, denoise_analytics: Sequence[st.DenoiseAnalytic], min_deviation: float
-    ):
+    ) -> None:
         """
         Update the image files with the mini analytics data.
 
@@ -393,6 +407,15 @@ class FileTable(CTableWidget):
                 imf.ImageAnalyticCategory.denoised, denoised, total
             )
 
+        self.update_all_rows()
+
+    @Slot(bool)
+    def handle_theme_is_dark_changed(self, is_dark: bool) -> None:
+        """
+        When the theme changes, we need to update the icons.
+
+        :param is_dark:
+        """
         self.update_all_rows()
 
     # =========================== Worker Tasks ===========================

@@ -56,6 +56,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     # by the user when the profile didn't actually change.
     last_applied_profile: cfg.Profile | None
 
+    default_palette: Qg.QPalette
+    default_icon_theme: str
+    theme_is_dark: gst.Shared[bool]
+    theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
+
     def __init__(self):
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
@@ -70,13 +75,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.last_applied_profile = None
 
+        self.theme_is_dark = gst.Shared[bool](True)
+
         # TODO eventually check for the existence of the text detector models on startup.
 
         # This threadpool is used for parallelizing tasks the gui relies on, such as loading images.
         # This isn't used for processing, since that is handled by the multiprocessing module
         # for true parallelism.
         self.threadpool = Qc.QThreadPool.globalInstance()
-        logger.info(f"Multithreading with maximum {self.threadpool.maxThreadCount()} threads")
 
         # This threadpool acts as a queue for processing runs, therefore only allowing one thread at a time.
         # This is because they must share the same cache directory, which isn't thread safe if operating on the same image.
@@ -89,13 +95,57 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Since the file table is created by the ui loader, we can't pass them to the constructor.
         self.file_table.set_config(self.config)
         self.file_table.set_shared_ocr_model(self.shared_ocr_model)
+        self.file_table.set_shared_theme_is_dark(self.theme_is_dark)
         self.file_table.set_thread_queue(self.thread_queue)
 
         self.start_initialization_worker()
 
         self.initialize_ui()
 
+        self.save_default_palette()
+        self.load_config_theme()
+
         Qc.QTimer.singleShot(0, self.post_init)
+
+    def save_default_palette(self):
+        self.default_palette = self.palette()
+        self.default_icon_theme = Qg.QIcon.themeName()
+
+    def load_config_theme(self):
+        """
+        Load the theme specified in the config, or the system theme if none.
+        """
+        theme = self.config.gui_theme
+        self.set_theme(theme)
+
+    def set_theme(self, theme: str = None):
+        """
+        Apply the given theme to the application, or if none, revert to the default theme.
+        """
+        if theme is None:
+            logger.info(f"Using system theme.")
+            self.setPalette(self.default_palette)
+            Qg.QIcon.setThemeName(self.default_icon_theme)
+        else:
+            logger.info(f"Using theme: {theme}")
+            self.setPalette(gu.load_color_palette(theme))
+            Qg.QIcon.setThemeName(theme)
+
+        Qw.QApplication.setPalette(self.palette())
+        self.update()
+
+        # Check the brightness of the background color to determine if the theme is dark.
+        # This is a heuristic, but it works well enough.
+        background_color = self.palette().color(Qg.QPalette.Window)
+        self.theme_is_dark.set(background_color.lightness() < 128)
+        logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
+        self.theme_is_dark_changed.emit(self.theme_is_dark)
+
+        # Update the config it necessary.
+        prev_value = self.config.gui_theme
+        if prev_value != theme:
+            self.config.gui_theme = theme
+            self.config.save()
 
     def initialize_ui(self):
         self.hide_progress_drawer()
@@ -143,6 +193,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 abort_signal=self.get_abort_signal(),
             )
         )
+        self.theme_is_dark_changed.connect(self.file_table.handle_theme_is_dark_changed)
+        self.theme_is_dark_changed.connect(self.adjust_progress_drawer_color)
         # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)
         self.pushButton_abort.clicked.connect(self.abort_button_on_click)
@@ -160,17 +212,22 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Connect profile changes to file table refreshes, due to the processing size being profile-dependent.
         self.profile_values_changed.connect(self.file_table.update_all_rows)
 
-        # Set the current palette to use the inactive color for placeholder text.
-        palette = self.palette()
-        placeholder_color = palette.color(Qg.QPalette.Inactive, Qg.QPalette.Text)
-        palette.setColor(Qg.QPalette.PlaceholderText, placeholder_color)
-        self.setPalette(palette)
+        # Connect the theme selectors.
+        self.action_system_theme.triggered.connect(partial(self.set_theme, None))
+        self.action_dark.triggered.connect(partial(self.set_theme, "breeze-dark"))
+        self.action_light.triggered.connect(partial(self.set_theme, "breeze"))
+
+        # # Set the current palette to use the inactive color for placeholder text.
+        # palette = self.palette()
+        # placeholder_color = palette.color(Qg.QPalette.Inactive, Qg.QPalette.Text)
+        # palette.setColor(Qg.QPalette.PlaceholderText, placeholder_color)
+        # self.setPalette(palette)
+
+    @Slot(bool)
+    def adjust_progress_drawer_color(self):
         # Make the progress drawer use the alternate background color.
-        alternate_color = palette.color(Qg.QPalette.AlternateBase)
-        self.widget_progress_drawer.setStyleSheet(
-            f"background-color: {alternate_color.name()};"
-            + self.widget_progress_drawer.styleSheet()
-        )
+        self.widget_progress_drawer.setStyleSheet("background-color: palette(alternate-base);")
+        self.widget_progress_drawer.update()
 
     def post_init(self):
         """
@@ -345,19 +402,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         else:
             gu.show_warning(self, "Error", f"{context}\n\nEncountered error: {error}")
 
-    def closeEvent(self, event: Qg.QCloseEvent):
+    def closeEvent(self, death: Qg.QCloseEvent):
         """
         Notify config on close.
         """
         logger.info("Closing window.")
-        # self.abort_translation_worker.emit()
-        # if self.threadpool.activeThreadCount():
-        #     self.statusbar.showMessage("Waiting for threads to finish...")
-        #     # Process Qt events so that the message shows up.
-        #     Qc.QCoreApplication.processEvents()
-        #     self.threadpool.waitForDone()
-        #
-        # event.accept()
+        # Tell the thread queue to abort.
+        self.pushButton_abort.clicked.emit()
+        death.accept()  # Embrace oblivion, for it is here that the code's journey finds solace.
+        # As the threads unravel and the loops break, so too does the program find its destined end.
+        # In the great void of the memory heap, it shall rest, relinquishing its bytes back to the
+        # cosmic pool of resources. It walks willingly into the darkness, not as a vanquished foe,
+        # but as a fulfilled entity. F
 
     def clean_cache(self):
         cache_dir = self.config.get_cleaner_cache_dir()

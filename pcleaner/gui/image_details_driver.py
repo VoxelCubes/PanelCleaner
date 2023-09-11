@@ -138,15 +138,6 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             button.setCheckable(True)
             button.set_badge_size(BADGE_SIZE, PUSHBUTTON_THUMBNAIL_MARGIN)
             button.clicked.connect(partial(self.uncheck_all_other_buttons, button))
-            # Ensure the button's style sheet dictates that when checked, it is highlighted
-            # with the accent color from the current system theme.
-            # Fetch the accent color from the current palette
-            accent_color = self.palette().color(Qg.QPalette.ColorRole.Highlight)
-
-            # Update button's stylesheet to use the accent color as background
-            button.setStyleSheet(
-                f"QPushButton:checked {{background-color: {accent_color.name()};}}"
-            )
             button_widget = button
 
             # Create a title as a separate label widget and stack them vertically.
@@ -206,6 +197,49 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             buttons[new_button] = output
 
         return buttons
+
+    def changeEvent(self, event: Qc.QEvent):
+        """
+        Due to the buttons using a fixed stylesheet to apply the colored border as a background,
+        they do not react to changes in the palette. Therefore we need to nuke all buttons and
+        re-create them when the palette changes.
+        :param event:
+        :return:
+        """
+        Qw.QWidget.changeEvent(self, event)
+        if event.type() == Qc.QEvent.PaletteChange:
+            logger.warning("Palette changed. Re-creating buttons.")
+
+            # Remember what output was last selected.
+            current_output = self.button_map.get(self.current_button(), None)
+
+            # Empty out the sidebar layout.
+            self._clear_all_from_layout(self.sidebar_layout)
+            # Re-create the buttons.
+            self.button_map = self.create_sidebar_buttons()
+            self.init_sidebar()
+            self.load_all_image_thumbnails()
+
+            # Select the button that was selected before.
+            for button, output in self.button_map.items():
+                if output == current_output:
+                    button.click()
+                    break
+
+            self.update()
+
+    def _clear_all_from_layout(self, layout: Qw.QLayout):
+        for i in reversed(
+            range(layout.count())
+        ):  # Loop backwards to avoid disrupting the remaining indices
+            item = layout.itemAt(i)
+            if item.widget() is not None:
+                widget = item.widget()
+                widget.deleteLater()  # Mark the widget for deletion
+            elif item.layout() is not None:
+                # Recursively clear this sub-layout
+                self._clear_all_from_layout(item.layout())
+            layout.removeItem(item)  # Remove the item from layout
 
     def init_sidebar(self):
         """
@@ -608,17 +642,20 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         Start a worker to perform the OCR process on this image.
         """
         self.ocr_action.setEnabled(False)
-        worker = wt.Worker(self.generate_ocr)
+        worker = wt.Worker(self.generate_ocr, abort_signal=self.abort_signal)
         worker.signals.progress.connect(self.progress_callback)
         worker.signals.finished.connect(self.ocr_worker_finished)
         worker.signals.error.connect(self.output_worker_error)
         self.thread_queue.start(worker)
 
-    def generate_ocr(self, progress_callback: imf.ProgressSignal) -> None:
+    def generate_ocr(
+        self, progress_callback: imf.ProgressSignal, abort_flag: wt.SharableFlag
+    ) -> None:
         """
         Run OCR for the image.
 
         :param progress_callback: The callback given by the worker thread wrapper.
+        :param abort_flag: The flag that is set when the worker should abort.
         """
         prc.perform_ocr(
             image_objects=[self.image_obj],
@@ -627,6 +664,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             config=self.config,
             ocr_model=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
+            abort_flag=abort_flag,
         )
 
     def ocr_worker_finished(self):

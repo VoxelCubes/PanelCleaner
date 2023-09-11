@@ -1,28 +1,45 @@
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+from PySide6.QtCore import Slot
+
+from logzero import logger
 
 
 ICON_SCALE_FACTOR = 0.75  # Adjust as desired, where 1.0 means same as badge size
 
 
 class BadgeButton(Qw.QPushButton):
+    """
+    This is a button with a badge in the top right corner.
+    This can be shown or hidden at any time.
+    As of now, the badge is the refresh icon on top of a colored circle using the
+    highlight color of the palette.
+    Additionally, you can set the button to replace the normal background color with
+    the highlight color when the button is checked (as these are checkable buttons).
+    That's called accented focus.
+    I did this to make the checked-ness more obvious, due to most of the button being covered
+    mostly by a pixmap, leaving only the edges visible.
+    """
+
     badge_visible: bool
     badge_icon: Qg.QIcon
     accent_color: Qg.QColor
     can_uncheck: bool = False
+    accented_focus: bool = True
 
     badge_size: int = 20
     badge_margin: int = 4
 
     def __init__(self, parent=None):
-        super(BadgeButton, self).__init__(parent)
+        Qw.QPushButton.__init__(self, parent=parent)
         self.badge_visible = False
         self.badge_icon = Qg.QIcon.fromTheme("view-refresh-symbolic")
         # Get the accent color from the palette.
-        self.accent_color = self.palette().color(Qg.QPalette.ColorRole.Highlight)
+        self.update_accent_color()
 
         self.clicked.connect(self.handle_toggle)
+        # self.toggled.connect(self.updateButtonPalette)
 
     @Qc.Slot(bool)
     def handle_toggle(self, checked: bool):
@@ -70,6 +87,38 @@ class BadgeButton(Qw.QPushButton):
             # Draw the centered icon pixmap.
             # Fuck this shit I'm hard-coding a 1px offset, no bloody clue why it's off by one otherwise.
             painter.drawPixmap(pixmap_x + 1, pixmap_y + 1, pixmap)
+
+    def changeEvent(self, event: Qc.QEvent):
+        super(BadgeButton, self).changeEvent(event)
+        if event.type() == Qc.QEvent.PaletteChange:
+            self.update_accent_color()
+            self.update()
+
+    @Slot(bool)
+    def updateButtonPalette(self, checked):
+        palette = self.palette()
+        if checked:  # and self.accented_focus:
+            palette.setColor(Qg.QPalette.Button, self.accent_color)
+        else:
+            # Reset to the default button color
+            palette.setColor(
+                Qg.QPalette.Button, palette.color(Qg.QPalette.Normal, Qg.QPalette.Button)
+            )
+        self.setPalette(palette)
+
+    def update_accent_color(self):
+        """
+        Use the Highlight color, aka Accent color to draw the background of the badge.
+        """
+        self.accent_color = self.palette().color(Qg.QPalette.ColorRole.Highlight)
+        if self.accented_focus:
+            self.setStyleSheet(
+                """
+                QPushButton:checked {
+                    background-color: palette(highlight);
+                }
+                """
+            )
 
     def set_badge_visible(self, visible: bool):
         self.badge_visible = visible
