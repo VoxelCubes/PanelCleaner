@@ -109,6 +109,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     def save_default_palette(self):
         self.default_palette = self.palette()
+        # Patch palette to use the text color with 50% opacity for placeholder text.
+        placeholder_color = self.default_palette.color(Qg.QPalette.Inactive, Qg.QPalette.Text)
+        placeholder_color.setAlphaF(0.5)
+        logger.debug(f"Placeholder color: {placeholder_color.name()}")
+        self.default_palette.setColor(Qg.QPalette.PlaceholderText, placeholder_color)
         self.default_icon_theme = Qg.QIcon.themeName()
 
     def load_config_theme(self):
@@ -140,6 +145,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.theme_is_dark.set(background_color.lightness() < 128)
         logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
         self.theme_is_dark_changed.emit(self.theme_is_dark)
+
+        # Update the fallback icon theme accordingly.
+        if self.theme_is_dark.get():
+            Qg.QIcon.setFallbackThemeName("breeze-dark")
+        else:
+            Qg.QIcon.setFallbackThemeName("breeze")
+
+        # Toggle the theme menu items.
+        self.action_system_theme.setChecked(theme is None)
+        self.action_dark.setChecked(theme == "breeze-dark")
+        self.action_light.setChecked(theme == "breeze")
 
         # Update the config it necessary.
         prev_value = self.config.gui_theme
@@ -173,8 +189,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         label_font = self.label_drop.font()
         label_font.setPointSize(round(label_font.pointSize() * 1.5))
         self.label_drop.setFont(label_font)
-        icon_size = round(imf.THUMBNAIL_SIZE * 1.5)
-        self.label_drop_icon.setPixmap(Qg.QIcon.fromTheme("download").pixmap(icon_size, icon_size))
 
         # Connect signals.
         self.comboBox_current_profile.hookedCurrentIndexChanged.connect(self.change_current_profile)
@@ -195,6 +209,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
         self.theme_is_dark_changed.connect(self.file_table.handle_theme_is_dark_changed)
         self.theme_is_dark_changed.connect(self.adjust_progress_drawer_color)
+        self.theme_is_dark_changed.connect(self.init_drop_panel)
+        self.theme_is_dark_changed.connect(self.label_cleaning_outdir_help.load_icon)
+        self.theme_is_dark_changed.connect(self.label_ocr_outdir_help.load_icon)
         # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)
         self.pushButton_abort.clicked.connect(self.abort_button_on_click)
@@ -216,12 +233,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_system_theme.triggered.connect(partial(self.set_theme, None))
         self.action_dark.triggered.connect(partial(self.set_theme, "breeze-dark"))
         self.action_light.triggered.connect(partial(self.set_theme, "breeze"))
-
-        # # Set the current palette to use the inactive color for placeholder text.
-        # palette = self.palette()
-        # placeholder_color = palette.color(Qg.QPalette.Inactive, Qg.QPalette.Text)
-        # palette.setColor(Qg.QPalette.PlaceholderText, placeholder_color)
-        # self.setPalette(palette)
 
     @Slot(bool)
     def adjust_progress_drawer_color(self):
@@ -303,6 +314,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if output_file:
             logger.debug(f"Setting output file to {output_file}")
             self.lineEdit_out_file.setText(output_file)
+
+    def init_drop_panel(self):
+        """
+        Initialize the drop panel icon.
+        """
+        icon_size = round(imf.THUMBNAIL_SIZE * 1.5)
+        self.label_drop_icon.setPixmap(Qg.QIcon.fromTheme("download").pixmap(icon_size, icon_size))
 
     # ========================================== UI Toggles ==========================================
 

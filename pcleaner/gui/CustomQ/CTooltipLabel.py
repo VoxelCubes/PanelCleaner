@@ -10,17 +10,26 @@ class CTooltipLabel(Qw.QLabel):
     This is to make little helper icons more consistent.
     """
 
-    def __init__(self, parent=None, tooltip: str = ""):
+    icon_name: str
+
+    def __init__(self, parent=None, tooltip: str = "", icon_name: str = "help-hint"):
         super(CTooltipLabel, self).__init__(parent)
 
         # Display the help-hint icon and no text.
-        self.setPixmap(Qg.QIcon.fromTheme("help-hint").pixmap(16, 16))
+        self.icon_name = icon_name
+        self.load_icon()
         self.setText("")
         if tooltip:
             self.setToolTip(tooltip)
 
         # Make the label focusable to receive keyboard events
         self.setFocusPolicy(Qt.StrongFocus)
+
+    def load_icon(self):
+        """
+        Load the display icon.
+        """
+        self.setPixmap(Qg.QIcon.fromTheme(self.icon_name).pixmap(16, 16))
 
     def setText(self, text: str):
         """

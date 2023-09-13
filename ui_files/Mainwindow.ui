@@ -506,7 +506,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="CTooltipLabel" name="label">
+                    <widget class="CTooltipLabel" name="label_cleaning_outdir_help">
                      <property name="toolTip">
                       <string>You can use a relative path to create a subfolder at the image's original location, or use an absolute path.</string>
                      </property>
@@ -620,7 +620,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="CTooltipLabel" name="label_3">
+                    <widget class="CTooltipLabel" name="label_ocr_outdir_help">
                      <property name="toolTip">
                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
@@ -973,16 +973,25 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="action_system_theme">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>System</string>
    </property>
   </action>
   <action name="action_dark">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Dark</string>
    </property>
   </action>
   <action name="action_light">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Light</string>
    </property>
