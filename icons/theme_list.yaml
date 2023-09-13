@@ -5,35 +5,35 @@ Theme directories:
 Files:
   actions:
     16:
-      - configure-symbolic
-      - dialog-cancel-symbolic
+      - configure
+      - dialog-cancel
       - dialog-ok-apply
       - document-import
-      - document-new-symbolic
+      - document-new
       - document-open-folder
-      - document-open-symbolic
-      - document-preview-symbolic
-      - document-revert-symbolic
-      - document-save-as-symbolic
-      - document-save-symbolic
-      - document-scan-symbolic
+      - document-open
+      - document-preview
+      - document-revert
+      - document-save-as
+      - document-save
+      - document-scan
       - download
       - edit-clear-history
       - edit-delete
-      - edit-reset-symbolic
-      - help-about-symbolic
-      - help-contents-symbolic
+      - edit-reset
+      - help-about
+      - help-contents
       - help-hint
-      - list-add-symbolic
-      - media-playback-start-symbolic
+      - list-add
+      - media-playback-start
       - overflow-menu
       - process-stop
-      - view-form-symbolic
-      - view-refresh-symbolic
-      - zoom-fit-best-symbolic
-      - zoom-in-symbolic
-      - zoom-out-symbolic
-      - zoom-reset-symbolic
+      - view-form
+      - view-refresh
+      - zoom-fit-best
+      - zoom-in
+      - zoom-out
+      - zoom-reset
   mimetypes:
     16:
       - image-bmp

@@ -34,7 +34,7 @@ class BadgeButton(Qw.QPushButton):
     def __init__(self, parent=None):
         Qw.QPushButton.__init__(self, parent=parent)
         self.badge_visible = False
-        self.badge_icon = Qg.QIcon.fromTheme("view-refresh-symbolic")
+        self.badge_icon = Qg.QIcon.fromTheme("view-refresh")
         # Get the accent color from the palette.
         self.update_accent_color()
 

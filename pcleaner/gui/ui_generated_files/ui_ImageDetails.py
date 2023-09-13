@@ -84,7 +84,7 @@ class Ui_ImageDetails(object):
         self.pushButton_zoom_in = QPushButton(ImageDetails)
         self.pushButton_zoom_in.setObjectName(u"pushButton_zoom_in")
         icon = QIcon()
-        iconThemeName = u"zoom-in-symbolic"
+        iconThemeName = u"zoom-in"
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
@@ -98,7 +98,7 @@ class Ui_ImageDetails(object):
         self.pushButton_zoom_out = QPushButton(ImageDetails)
         self.pushButton_zoom_out.setObjectName(u"pushButton_zoom_out")
         icon1 = QIcon()
-        iconThemeName = u"zoom-out-symbolic"
+        iconThemeName = u"zoom-out"
         if QIcon.hasThemeIcon(iconThemeName):
             icon1 = QIcon.fromTheme(iconThemeName)
         else:
@@ -112,7 +112,7 @@ class Ui_ImageDetails(object):
         self.pushButton_zoom_reset = QPushButton(ImageDetails)
         self.pushButton_zoom_reset.setObjectName(u"pushButton_zoom_reset")
         icon2 = QIcon()
-        iconThemeName = u"zoom-original-symbolic"
+        iconThemeName = u"zoom-original"
         if QIcon.hasThemeIcon(iconThemeName):
             icon2 = QIcon.fromTheme(iconThemeName)
         else:
@@ -126,7 +126,7 @@ class Ui_ImageDetails(object):
         self.pushButton_zoom_fit = QPushButton(ImageDetails)
         self.pushButton_zoom_fit.setObjectName(u"pushButton_zoom_fit")
         icon3 = QIcon()
-        iconThemeName = u"zoom-fit-best-symbolic"
+        iconThemeName = u"zoom-fit-best"
         if QIcon.hasThemeIcon(iconThemeName):
             icon3 = QIcon.fromTheme(iconThemeName)
         else:
@@ -141,7 +141,7 @@ class Ui_ImageDetails(object):
         self.pushButton_refresh.setObjectName(u"pushButton_refresh")
         self.pushButton_refresh.setEnabled(False)
         icon4 = QIcon()
-        iconThemeName = u"view-refresh-symbolic"
+        iconThemeName = u"view-refresh"
         if QIcon.hasThemeIcon(iconThemeName):
             icon4 = QIcon.fromTheme(iconThemeName)
         else:

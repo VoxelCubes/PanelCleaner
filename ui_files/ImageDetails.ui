@@ -137,7 +137,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-in-symbolic">
+          <iconset theme="zoom-in">
            <normaloff>.</normaloff>.</iconset>
          </property>
          <property name="flat">
@@ -154,7 +154,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-out-symbolic">
+          <iconset theme="zoom-out">
            <normaloff>.</normaloff>.</iconset>
          </property>
          <property name="flat">
@@ -171,7 +171,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-original-symbolic">
+          <iconset theme="zoom-original">
            <normaloff>.</normaloff>.</iconset>
          </property>
          <property name="flat">
@@ -188,7 +188,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-fit-best-symbolic">
+          <iconset theme="zoom-fit-best">
            <normaloff>.</normaloff>.</iconset>
          </property>
          <property name="flat">
@@ -205,7 +205,7 @@
           <string>Refresh</string>
          </property>
          <property name="icon">
-          <iconset theme="view-refresh-symbolic">
+          <iconset theme="view-refresh">
            <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>

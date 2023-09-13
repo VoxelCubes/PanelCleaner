@@ -107,15 +107,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         Initialize the overflow menu housing the export and ocr button for the image details widget.
         """
         self.menu = Qw.QMenu(self)
-        self.export_action = Qg.QAction(
-            Qg.QIcon.fromTheme("document-save-symbolic"), "Export Image", self
-        )
+        self.export_action = Qg.QAction(Qg.QIcon.fromTheme("document-save"), "Export Image", self)
         self.export_action.triggered.connect(self.export_image)
         self.menu.addAction(self.export_action)
 
-        self.ocr_action = Qg.QAction(
-            Qg.QIcon.fromTheme("document-scan-symbolic"), "OCR Image", self
-        )
+        self.ocr_action = Qg.QAction(Qg.QIcon.fromTheme("document-scan"), "OCR Image", self)
         self.ocr_action.triggered.connect(self.start_ocr_worker)
         self.menu.addAction(self.ocr_action)
 

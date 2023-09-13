@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.action_add_files = QAction(MainWindow)
         self.action_add_files.setObjectName(u"action_add_files")
         icon = QIcon()
-        iconThemeName = u"document-open-symbolic"
+        iconThemeName = u"document-open"
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
@@ -57,7 +57,7 @@ class Ui_MainWindow(object):
         self.action_new_profile = QAction(MainWindow)
         self.action_new_profile.setObjectName(u"action_new_profile")
         icon2 = QIcon()
-        iconThemeName = u"document-new-symbolic"
+        iconThemeName = u"document-new"
         if QIcon.hasThemeIcon(iconThemeName):
             icon2 = QIcon.fromTheme(iconThemeName)
         else:
@@ -95,7 +95,7 @@ class Ui_MainWindow(object):
         self.action_save_profile = QAction(MainWindow)
         self.action_save_profile.setObjectName(u"action_save_profile")
         icon5 = QIcon()
-        iconThemeName = u"document-save-symbolic"
+        iconThemeName = u"document-save"
         if QIcon.hasThemeIcon(iconThemeName):
             icon5 = QIcon.fromTheme(iconThemeName)
         else:
@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.action_save_profile_as = QAction(MainWindow)
         self.action_save_profile_as.setObjectName(u"action_save_profile_as")
         icon6 = QIcon()
-        iconThemeName = u"document-save-as-symbolic"
+        iconThemeName = u"document-save-as"
         if QIcon.hasThemeIcon(iconThemeName):
             icon6 = QIcon.fromTheme(iconThemeName)
         else:
@@ -120,10 +120,13 @@ class Ui_MainWindow(object):
         self.action_show_terminal_command.setObjectName(u"action_show_terminal_command")
         self.action_system_theme = QAction(MainWindow)
         self.action_system_theme.setObjectName(u"action_system_theme")
+        self.action_system_theme.setCheckable(True)
         self.action_dark = QAction(MainWindow)
         self.action_dark.setObjectName(u"action_dark")
+        self.action_dark.setCheckable(True)
         self.action_light = QAction(MainWindow)
         self.action_light.setObjectName(u"action_light")
+        self.action_light.setCheckable(True)
         self.action_temp = QAction(MainWindow)
         self.action_temp.setObjectName(u"action_temp")
         self.action_temp_2 = QAction(MainWindow)
@@ -190,7 +193,7 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
         icon9 = QIcon()
-        iconThemeName = u"document-revert-symbolic"
+        iconThemeName = u"document-revert"
         if QIcon.hasThemeIcon(iconThemeName):
             icon9 = QIcon.fromTheme(iconThemeName)
         else:
@@ -366,7 +369,7 @@ class Ui_MainWindow(object):
         self.pushButton_start = QPushButton(self.groupBox_4)
         self.pushButton_start.setObjectName(u"pushButton_start")
         icon11 = QIcon()
-        iconThemeName = u"media-playback-start-symbolic"
+        iconThemeName = u"media-playback-start"
         if QIcon.hasThemeIcon(iconThemeName):
             icon11 = QIcon.fromTheme(iconThemeName)
         else:
@@ -422,11 +425,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5.addWidget(self.label_4)
 
-        self.label = CTooltipLabel(self.page_cleaning)
-        self.label.setObjectName(u"label")
-        self.label.setToolTipDuration(-1)
+        self.label_cleaning_outdir_help = CTooltipLabel(self.page_cleaning)
+        self.label_cleaning_outdir_help.setObjectName(u"label_cleaning_outdir_help")
+        self.label_cleaning_outdir_help.setToolTipDuration(-1)
 
-        self.horizontalLayout_5.addWidget(self.label)
+        self.horizontalLayout_5.addWidget(self.label_cleaning_outdir_help)
 
         self.horizontalSpacer_3 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -481,11 +484,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_9.addWidget(self.label_6)
 
-        self.label_3 = CTooltipLabel(self.page_ocr)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setToolTipDuration(-1)
+        self.label_ocr_outdir_help = CTooltipLabel(self.page_ocr)
+        self.label_ocr_outdir_help.setObjectName(u"label_ocr_outdir_help")
+        self.label_ocr_outdir_help.setToolTipDuration(-1)
 
-        self.horizontalLayout_9.addWidget(self.label_3)
+        self.horizontalLayout_9.addWidget(self.label_ocr_outdir_help)
 
         self.horizontalSpacer_5 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
@@ -711,18 +714,18 @@ class Ui_MainWindow(object):
         self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
 #if QT_CONFIG(tooltip)
-        self.label.setToolTip(QCoreApplication.translate("MainWindow", u"You can use a relative path to create a subfolder at the image's original location, or use an absolute path.", None))
+        self.label_cleaning_outdir_help.setToolTip(QCoreApplication.translate("MainWindow", u"You can use a relative path to create a subfolder at the image's original location, or use an absolute path.", None))
 #endif // QT_CONFIG(tooltip)
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
+        self.label_cleaning_outdir_help.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
         self.lineEdit_out_directory.setPlaceholderText(QCoreApplication.translate("MainWindow", u"cleaned", None))
         self.pushButton_browse_out_dir.setText("")
         self.radioButton_ocr_text.setText(QCoreApplication.translate("MainWindow", u"Plain Text", None))
         self.radioButton_ocr_csv.setText(QCoreApplication.translate("MainWindow", u"CSV File", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Output File:", None))
 #if QT_CONFIG(tooltip)
-        self.label_3.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Either enter an absolute or relative path with a file name. The output of all images is written to the same file.</p></body></html>", None))
+        self.label_ocr_outdir_help.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Either enter an absolute or relative path with a file name. The output of all images is written to the same file.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
+        self.label_ocr_outdir_help.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
         self.lineEdit_out_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"detected_text.txt", None))
         self.pushButton_browse_out_file.setText("")
         self.textEdit_analytics.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
