@@ -862,8 +862,8 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="action_panel_cleaner_documentation"/>
-    <addaction name="action_source_code"/>
+    <addaction name="action_online_documentation"/>
+    <addaction name="action_about"/>
     <addaction name="separator"/>
     <addaction name="action_delete_models"/>
    </widget>
@@ -923,7 +923,7 @@ p, li { white-space: pre-wrap; }
     <string>Open Log</string>
    </property>
   </action>
-  <action name="action_panel_cleaner_documentation">
+  <action name="action_online_documentation">
    <property name="icon">
     <iconset theme="internet-services">
      <normaloff>.</normaloff>.</iconset>
@@ -932,7 +932,7 @@ p, li { white-space: pre-wrap; }
     <string>Online Documentation</string>
    </property>
   </action>
-  <action name="action_source_code">
+  <action name="action_about">
    <property name="icon">
     <iconset theme="help-about">
      <normaloff>.</normaloff>.</iconset>

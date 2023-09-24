@@ -86,8 +86,8 @@ class Ui_MainWindow(object):
         self.action_import_profile.setIcon(icon4)
         self.action_open_log = QAction(MainWindow)
         self.action_open_log.setObjectName(u"action_open_log")
-        self.action_panel_cleaner_documentation = QAction(MainWindow)
-        self.action_panel_cleaner_documentation.setObjectName(u"action_panel_cleaner_documentation")
+        self.action_online_documentation = QAction(MainWindow)
+        self.action_online_documentation.setObjectName(u"action_online_documentation")
         icon5 = QIcon()
         iconThemeName = u"internet-services"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -95,9 +95,9 @@ class Ui_MainWindow(object):
         else:
             icon5.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.action_panel_cleaner_documentation.setIcon(icon5)
-        self.action_source_code = QAction(MainWindow)
-        self.action_source_code.setObjectName(u"action_source_code")
+        self.action_online_documentation.setIcon(icon5)
+        self.action_about = QAction(MainWindow)
+        self.action_about.setObjectName(u"action_about")
         icon6 = QIcon()
         iconThemeName = u"help-about"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         else:
             icon6.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.action_source_code.setIcon(icon6)
+        self.action_about.setIcon(icon6)
         self.actionView_License = QAction(MainWindow)
         self.actionView_License.setObjectName(u"actionView_License")
         self.action_save_profile = QAction(MainWindow)
@@ -673,8 +673,8 @@ class Ui_MainWindow(object):
         self.menu_theme.addSeparator()
         self.menu_theme.addAction(self.action_dark)
         self.menu_theme.addAction(self.action_light)
-        self.menu_Help.addAction(self.action_panel_cleaner_documentation)
-        self.menu_Help.addAction(self.action_source_code)
+        self.menu_Help.addAction(self.action_online_documentation)
+        self.menu_Help.addAction(self.action_about)
         self.menu_Help.addSeparator()
         self.menu_Help.addAction(self.action_delete_models)
 
@@ -695,8 +695,8 @@ class Ui_MainWindow(object):
         self.action_delete_profile.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.action_import_profile.setText(QCoreApplication.translate("MainWindow", u"Import...", None))
         self.action_open_log.setText(QCoreApplication.translate("MainWindow", u"Open Log", None))
-        self.action_panel_cleaner_documentation.setText(QCoreApplication.translate("MainWindow", u"Online Documentation", None))
-        self.action_source_code.setText(QCoreApplication.translate("MainWindow", u"About Panel Cleaner", None))
+        self.action_online_documentation.setText(QCoreApplication.translate("MainWindow", u"Online Documentation", None))
+        self.action_about.setText(QCoreApplication.translate("MainWindow", u"About Panel Cleaner", None))
         self.actionView_License.setText(QCoreApplication.translate("MainWindow", u"View License", None))
         self.action_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.action_save_profile_as.setText(QCoreApplication.translate("MainWindow", u"Save as...", None))

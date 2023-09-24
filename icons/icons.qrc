@@ -9,5 +9,6 @@
     <file>custom_icons/light/mask_perfect.svg</file>
     <file>custom_icons/light/ocr_box_removed.svg</file>
     <file>logo-tiny.png</file>
+    <file>logo.png</file>
   </qresource>
 </RCC>

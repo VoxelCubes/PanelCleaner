@@ -19,6 +19,7 @@ import pcleaner.analytics as an
 import pcleaner.model_downloader as md
 import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.setup_greeter_driver as sgd
+import pcleaner.gui.about_driver as ad
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.new_profile_driver as npd
@@ -34,6 +35,7 @@ from pcleaner import data
 from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
+# TODO cleanup and adding -> None to non-returning functions
 
 ANALYTICS_COLUMNS = 72
 
@@ -201,6 +203,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_clear_files.triggered.connect(self.file_table.clear_files)
         self.action_clear_files.triggered.connect(self.image_tab.clear_files)
         self.action_delete_models.triggered.connect(self.delete_models)
+        self.action_online_documentation.triggered.connect(self.open_online_documentation)
+        self.action_about.triggered.connect(self.open_about)
 
         self.file_table.requesting_image_preview.connect(
             partial(
@@ -547,6 +551,23 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.ensure_models_downloaded(skip_greeter=True)
         else:
             self.close()
+
+    @staticmethod
+    def open_online_documentation():
+        """
+        Open the online documentation in the default browser.
+        """
+        logger.debug("Opening online documentation.")
+        Qg.QDesktopServices.openUrl(Qc.QUrl("https://github.com/VoxelCubes/PanelCleaner"))
+
+    def open_about(self):
+        """
+        Open the about dialog.
+        """
+        logger.debug("Opening about dialog.")
+        # Bodge in an instance variable to prevent garbage collection from immediately closing the window.
+        self.about = ad.AboutWidget()
+        self.about.show()
 
     # ========================================== Profiles ==========================================
 
