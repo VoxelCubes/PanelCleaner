@@ -11,10 +11,14 @@ import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot, Signal
 from logzero import logger
 from manga_ocr import MangaOcr
+import torch
 
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
 import pcleaner.analytics as an
+import pcleaner.model_downloader as md
+import pcleaner.gui.model_downloader_driver as mdd
+import pcleaner.gui.setup_greeter_driver as sgd
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.new_profile_driver as npd
@@ -77,7 +81,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.theme_is_dark = gst.Shared[bool](True)
 
-        # TODO eventually check for the existence of the text detector models on startup.
+        self.ensure_models_downloaded()
 
         # This threadpool is used for parallelizing tasks the gui relies on, such as loading images.
         # This isn't used for processing, since that is handled by the multiprocessing module
@@ -196,6 +200,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_add_folders.triggered.connect(self.file_table.browse_add_folders)
         self.action_clear_files.triggered.connect(self.file_table.clear_files)
         self.action_clear_files.triggered.connect(self.image_tab.clear_files)
+        self.action_delete_models.triggered.connect(self.delete_models)
+
         self.file_table.requesting_image_preview.connect(
             partial(
                 self.image_tab.open_image,
@@ -233,6 +239,56 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_system_theme.triggered.connect(partial(self.set_theme, None))
         self.action_dark.triggered.connect(partial(self.set_theme, "breeze-dark"))
         self.action_light.triggered.connect(partial(self.set_theme, "breeze"))
+
+    def ensure_models_downloaded(self, skip_greeter: bool = False) -> None:
+        """
+        Check if the config has a path for the text detection model, and if not, download it.
+        Also try to ensure the ocr model is available.
+
+        :param skip_greeter: If True, skip the greeter dialog and download the models immediately.
+        """
+        cuda = torch.cuda.is_available()
+
+        # Add an indicator to the status bar, to show if Cuda is available.
+        if cuda:
+            self.statusbar.addPermanentWidget(Qw.QLabel("CUDA available"))
+
+        need_ocr = not md.is_ocr_downloaded()
+        need_text_detector = (not cuda and self.config.default_cv2_model_path is None) or (
+            cuda and self.config.default_torch_model_path is None
+        )
+
+        if not need_ocr and not need_text_detector:
+            # Already downloaded.
+            logger.debug("Text detector model already downloaded.")
+            return
+
+        if not skip_greeter:
+            # First open the greeter to inform about the downloading.
+            greeter = sgd.SetupGreeter(self, self.config)
+            response = greeter.exec()
+            if response == Qw.QDialog.Rejected:
+                logger.critical("User rejected downloading models. Aborting.")
+                raise SystemExit(1)
+
+        # Open the model downloader dialog.
+        model_downloader = mdd.ModelDownloader(self, self.config, need_text_detector, need_ocr)
+        response = model_downloader.exec()
+        if response == Qw.QDialog.Rejected:
+            logger.critical("Failed to download models. Aborting.")
+            raise SystemExit(1)
+
+        model_path = model_downloader.model_path
+        if model_path is None:
+            logger.warning("Failed to download model.")
+            return
+
+        if cuda:
+            self.config.default_torch_model_path = model_path
+        else:
+            self.config.default_cv2_model_path = model_path
+
+        self.config.save()
 
     @Slot(bool)
     def adjust_progress_drawer_color(self):
@@ -378,7 +434,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         In particular:
         - Clean the cache.
-        - Load the text detection model.
         - Load the OCR model.
         """
         logger.debug(f"Worker Thread cleaning cache")
@@ -457,6 +512,41 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
         self.textEdit_analytics.setReadOnly(True)
         self.textEdit_analytics.setLineWrapMode(Qw.QTextEdit.NoWrap)
+
+    # ========================================== Actions ==========================================
+
+    def delete_models(self):
+        """
+        Delete the machine learning models and then offer to download them again, or quit.
+        """
+        response = gu.show_question(
+            self,
+            "Delete Models",
+            "Are you sure you want to delete the machine learning models? "
+            "This will make cleaning and OCR impossible until they are downloaded again.",
+        )
+        if response != Qw.QMessageBox.Yes:
+            return
+
+        # Delete the models.
+        try:
+            md.delete_models(self.config.get_model_cache_dir())
+        except OSError as e:
+            logger.exception(e)
+            gu.show_error(self, "Failed to Delete Models", f"Failed to delete models: {e}")
+            return
+
+        # Offer to download them again or just quit.
+        response = gu.show_question(
+            self,
+            "Models Deleted",
+            "The models were deleted. Would you like to download them again?",
+            buttons=Qw.QMessageBox.Yes | Qw.QMessageBox.Close,
+        )
+        if response == Qw.QMessageBox.Yes:
+            self.ensure_models_downloaded(skip_greeter=True)
+        else:
+            self.close()
 
     # ========================================== Profiles ==========================================
 

@@ -865,7 +865,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="action_panel_cleaner_documentation"/>
     <addaction name="action_source_code"/>
     <addaction name="separator"/>
-    <addaction name="action_show_terminal_command"/>
+    <addaction name="action_delete_models"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Profile"/>
@@ -924,11 +924,19 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="action_panel_cleaner_documentation">
+   <property name="icon">
+    <iconset theme="internet-services">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>Online Documentation</string>
    </property>
   </action>
   <action name="action_source_code">
+   <property name="icon">
+    <iconset theme="help-about">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>About Panel Cleaner</string>
    </property>
@@ -1013,6 +1021,24 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Add Folder...</string>
+   </property>
+  </action>
+  <action name="action_delete_models">
+   <property name="icon">
+    <iconset theme="edit-delete">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Delete Machine Learning Models</string>
+   </property>
+  </action>
+  <action name="action_download_models">
+   <property name="icon">
+    <iconset theme="download">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Download Machine Learning Models</string>
    </property>
   </action>
  </widget>

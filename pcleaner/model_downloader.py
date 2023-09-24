@@ -1,11 +1,14 @@
 import os
-from pathlib import Path
+import shutil
 from hashlib import sha256
+from pathlib import Path
 
 import requests
-import tqdm
 import torch
+import tqdm
+from logzero import logger
 from manga_ocr import MangaOcr
+from transformers import file_utils
 
 
 MODEL_URL = "https://github.com/zyddnys/manga-image-translator/releases/download/beta-0.3/"
@@ -13,6 +16,7 @@ TORCH_MODEL_NAME = "comictextdetector.pt"
 TORCH_SHA256 = "1f90fa60aeeb1eb82e2ac1167a66bf139a8a61b8780acd351ead55268540cccb"
 CV2_MODEL_NAME = "comictextdetector.pt.onnx"
 CV2_SHA256 = "1a86ace74961413cbd650002e7bb4dcec4980ffa21b2f19b86933372071d718f"
+OCR_DIR_NAME = "models--kha-white--manga-ocr-base"
 
 
 def check_hash(file_path: Path, sha_hash: str) -> bool:
@@ -133,3 +137,41 @@ def download_models(config, force: bool, cuda: bool, cpu: bool):
 
     # Also load the OCR model, but there is only one option and can't be forced.
     MangaOcr()
+
+
+def get_ocr_model_directory() -> Path:
+    """
+    Get the path to the OCR model directory.
+
+    :return: The path to the OCR model directory.
+    """
+    cache_dir = Path(file_utils.default_cache_path)
+    ocr_dir = cache_dir / OCR_DIR_NAME
+    return ocr_dir
+
+
+def is_ocr_downloaded():
+    """
+    Check if the OCR model is downloaded.
+
+    :return: True if the OCR model is downloaded.
+    """
+    return get_ocr_model_directory().is_dir()
+
+
+def delete_models(text_detector_cache_dir: Path):
+    """
+    Delete the downloaded models.
+
+    :param text_detector_cache_dir: The path to the text detector cache directory.
+    """
+    ocr_dir = get_ocr_model_directory()
+    if ocr_dir.is_dir():
+        logger.info(f"Deleting OCR model directory: {ocr_dir}")
+        shutil.rmtree(ocr_dir)
+    else:
+        logger.warning(f"OCR model directory does not exist and cannot be deleted: {ocr_dir}")
+
+    if text_detector_cache_dir.is_dir():
+        logger.info(f"Deleting text detector cache directory: {text_detector_cache_dir}")
+        shutil.rmtree(text_detector_cache_dir)

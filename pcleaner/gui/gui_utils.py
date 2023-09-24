@@ -1,3 +1,5 @@
+import io
+import sys
 import re
 from io import StringIO
 import PySide6.QtWidgets as Qw
@@ -34,6 +36,43 @@ def show_question(
     dlg.setStandardButtons(buttons)
     dlg.setIcon(Qw.QMessageBox.Question)
     return dlg.exec()
+
+
+class CaptureOutput(Qc.QObject):
+    text_written = Qc.Signal(str, str)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._io_stdout = io.StringIO()
+        self._io_stderr = io.StringIO()
+
+    def __enter__(self):
+        self._original_stdout = sys.stdout
+        self._original_stderr = sys.stderr
+        sys.stdout = self
+        sys.stderr = self
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout = self._original_stdout
+        sys.stderr = self._original_stderr
+
+    def write(self, string, stream="stdout"):
+        if stream == "stdout":
+            self._io_stdout.write(string)
+        elif stream == "stderr":
+            self._io_stderr.write(string)
+        self.text_written.emit(string, stream)
+
+    def getvalue(self, stream="stdout"):
+        if stream == "stdout":
+            return self._io_stdout.getvalue()
+        elif stream == "stderr":
+            return self._io_stderr.getvalue()
+
+    def flush(self):
+        self._io_stdout.flush()
+        self._io_stderr.flush()
 
 
 # Mapping between KDE color keys and QPalette roles

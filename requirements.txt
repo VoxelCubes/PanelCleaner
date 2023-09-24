@@ -11,6 +11,7 @@ natsort
 python-magic
 docopt-ng
 ConfigUpdater
+transformers
 manga_ocr
 logzero
 prettytable
