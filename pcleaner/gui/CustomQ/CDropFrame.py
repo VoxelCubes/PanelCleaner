@@ -12,13 +12,13 @@ class CDropFrame(Qw.QFrame):
 
     drop_signal = Signal(Qg.QDropEvent)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         Qw.QFrame.__init__(self, parent)
         self.setAcceptDrops(True)
 
-    def dragEnterEvent(self, event: Qg.QDragEnterEvent):
+    def dragEnterEvent(self, event: Qg.QDragEnterEvent) -> None:
         if event.mimeData().hasUrls():
             event.acceptProposedAction()
 
-    def dropEvent(self, event: Qg.QDropEvent):
+    def dropEvent(self, event: Qg.QDropEvent) -> None:
         self.drop_signal.emit(event)

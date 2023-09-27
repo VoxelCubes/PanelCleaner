@@ -22,7 +22,7 @@ class ImageTab(Qw.QTabWidget):
     # Currently open dynamic tabs: path -> (image structure, tab's widget)
     open_images: dict[Path, tuple[imf.ImageFile, Qw.QWidget]]
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         Qw.QTabWidget.__init__(self, parent)
         self.setAcceptDrops(True)
 
@@ -73,7 +73,7 @@ class ImageTab(Qw.QTabWidget):
         self.setCurrentWidget(tab)
 
     @Slot(int)
-    def tab_close(self, index: int):
+    def tab_close(self, index: int) -> None:
         """
         Close the image details tab.
 
@@ -91,7 +91,7 @@ class ImageTab(Qw.QTabWidget):
         self.open_images.pop(path)
         self.removeTab(index)
 
-    def clear_files(self):
+    def clear_files(self) -> None:
         """
         Clear all files from the table, removing all tabs except the primary tab.
         """

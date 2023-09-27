@@ -127,7 +127,7 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, int, "input_height_lower_target")
         try_to_load(self, config_updater, section, int, "input_height_upper_target")
 
-    def fix(self):
+    def fix(self) -> None:
         """
         Fix the config values.
         """
@@ -207,7 +207,7 @@ class TextDetectorConfig:
         try_to_load(self, config_updater, "TextDetector", str | None, "model_path")
         try_to_load(self, config_updater, "TextDetector", int | GreaterZero, "concurrent_models")
 
-    def fix(self):
+    def fix(self) -> None:
         """
         Fix the config values.
         Numbers flagged as greater than zero are already fixed then loading.
@@ -317,7 +317,7 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, int, "box_right_padding_extended")
         try_to_load(self, config_updater, section, int, "box_reference_padding")
 
-    def fix(self):
+    def fix(self) -> None:
         """
         Ensure all numbers are greater equal 0.
         """
@@ -436,7 +436,7 @@ class MaskerConfig:
         except (cu.NoOptionError, ValueError):
             pass
 
-    def fix(self):
+    def fix(self) -> None:
         """
         Keep the numbers greater or equal to zero.
         For numbers, ensure the range 0-255.
@@ -545,7 +545,7 @@ class DenoiserConfig:
         try_to_load(self, config_updater, section, int, "template_window_size")
         try_to_load(self, config_updater, section, int, "search_window_size")
 
-    def fix(self):
+    def fix(self) -> None:
         if self.noise_min_standard_deviation < 0:
             self.noise_min_standard_deviation = 0
         if self.noise_outline_size < 0:
@@ -654,7 +654,7 @@ class Profile:
             raise AttributeError(f"No such option: {option}")
         setattr(getattr(self, section), option, value)
 
-    def fix(self):
+    def fix(self) -> None:
         """
         Correct any invalid values in the profile.
         """
@@ -684,7 +684,7 @@ class Config:
     default_cv2_model_path: Path | None = None  # CPU
     gui_theme: str | None = None
 
-    def show(self):
+    def show(self) -> None:
         """
         Print the current configuration to the console.
         """
@@ -825,7 +825,7 @@ class Config:
         return True
 
     @classmethod
-    def from_config_updater(cls, conf_updater: cu.ConfigUpdater):
+    def from_config_updater(cls, conf_updater: cu.ConfigUpdater) -> "Config":
         """
         Create a Config object from a ConfigUpdater object.
         """
@@ -877,7 +877,7 @@ class Config:
 
         return config
 
-    def load_profile(self, profile_name: str | None = None):
+    def load_profile(self, profile_name: str | None = None) -> None:
         """
         Load a profile from disk, if a name is given.
         First search if the profile is saved, otherwise treat it like a path.

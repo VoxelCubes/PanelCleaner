@@ -66,7 +66,7 @@ def model2annotations_gui(
     if progress_callback is not None:
         progress_callback.emit(partial_progress_data(imf.ProgressType.begin_step))
 
-    def inc_progress():
+    def inc_progress() -> None:
         if progress_callback is not None:
             progress_callback.emit(partial_progress_data(imf.ProgressType.incremental))
 
@@ -129,7 +129,7 @@ def model2annotations_gui(
             inc_progress()
 
 
-def process_image_batch(args):
+def process_image_batch(args) -> None:
     img_batch, model_path, device, save_dir, lower_target, upper_target, inc_progress = args
     model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
     for img_path, img_uuid in img_batch:

@@ -71,7 +71,7 @@ def parse_yaml_file(filename: Path) -> dict:
         return yaml.safe_load(file)
 
 
-def find_xdg_icon(file, src_path, extensions):
+def find_xdg_icon(file, src_path, extensions) -> str | None:
     og_file = file
     # Loop through all allowed file extensions
     for ext in extensions:

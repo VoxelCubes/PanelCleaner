@@ -28,16 +28,16 @@ class CComboBox(Qw.QComboBox):
     _hook_state: HookState = HookState.Start
     hookedCurrentIndexChanged: Signal = Signal(int)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         Qw.QComboBox.__init__(self, parent)
         self._linked_data = []
         # self.installEventFilter(self)
         self.currentIndexChanged.connect(self.forward_current_index_changed_hooked)
 
-    def set_pre_change_hook(self, hook: Callable[[], bool]):
+    def set_pre_change_hook(self, hook: Callable[[], bool]) -> None:
         self._pre_change_hook = hook
 
-    def emit_hooked_change(self, index: int):
+    def emit_hooked_change(self, index: int) -> None:
         """
         Emit the hooked change signal, but only if the index has changed.
         Remember the previous index.
@@ -48,7 +48,7 @@ class CComboBox(Qw.QComboBox):
         self.hookedCurrentIndexChanged.emit(index)
 
     @Slot(int)
-    def forward_current_index_changed_hooked(self, new_index: int):
+    def forward_current_index_changed_hooked(self, new_index: int) -> None:
         """
         Forward the current index changed signal, but only if the hook returns True.
 
@@ -81,21 +81,21 @@ class CComboBox(Qw.QComboBox):
             case HookState.End:
                 self._hook_state = HookState.Start
 
-    def clear(self):
+    def clear(self) -> None:
         Qw.QComboBox.clear(self)
         self._linked_data.clear()
 
-    def addTextItemLinkedData(self, text: str, data: any):
+    def addTextItemLinkedData(self, text: str, data: any) -> None:
         self.addItem(text)
         self._linked_data.append(data)
 
-    def setCurrentIndexByText(self, text: str):
+    def setCurrentIndexByText(self, text: str) -> None:
         self.setCurrentIndex(self.findText(text))
 
-    def setCurrentIndexByLinkedData(self, data: any):
+    def setCurrentIndexByLinkedData(self, data: any) -> None:
         self.setCurrentIndex(self._linked_data.index(data))
 
-    def indexLinkedData(self, data: any):
+    def indexLinkedData(self, data: any) -> int:
         return self._linked_data.index(data)
 
     @Slot(int)
@@ -106,7 +106,7 @@ class CComboBox(Qw.QComboBox):
         """
         Qw.QComboBox.setCurrentIndex(self, min(max(index, 0), self.count() - 1))
 
-    def currentLinkedData(self):
+    def currentLinkedData(self) -> None:
         try:
             return self._linked_data[self.currentIndex()]
         except IndexError:
@@ -114,7 +114,7 @@ class CComboBox(Qw.QComboBox):
             logger.error("Current index:", self.currentIndex())
             logger.error("Linked data:", self._linked_data)
 
-    def removeItem(self, index: int):
+    def removeItem(self, index: int) -> None:
         """
         Remove an item from the combo box, and its linked data.
 

@@ -3,7 +3,7 @@
 import os
 
 
-def simple_replace_color_in_svg(input_folder, output_folder, old_color, new_color):
+def simple_replace_color_in_svg(input_folder, output_folder, old_color, new_color) -> None:
     # Ensure the output folder exists
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)

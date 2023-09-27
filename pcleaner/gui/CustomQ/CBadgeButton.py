@@ -31,7 +31,7 @@ class BadgeButton(Qw.QPushButton):
     badge_size: int = 20
     badge_margin: int = 4
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         Qw.QPushButton.__init__(self, parent=parent)
         self.badge_visible = False
         self.badge_icon = Qg.QIcon.fromTheme("view-refresh")
@@ -42,7 +42,7 @@ class BadgeButton(Qw.QPushButton):
         # self.toggled.connect(self.updateButtonPalette)
 
     @Qc.Slot(bool)
-    def handle_toggle(self, checked: bool):
+    def handle_toggle(self, checked: bool) -> None:
         """
         Check if the button can be unchecked, otherwise preventing such an action.
 
@@ -51,14 +51,14 @@ class BadgeButton(Qw.QPushButton):
         if not self.can_uncheck and not checked:
             self.setChecked(True)
 
-    def set_badge_size(self, size: int, margin: int):
+    def set_badge_size(self, size: int, margin: int) -> None:
         """
         Set the size of the badge and the margin around it.
         """
         self.badge_size = size
         self.badge_margin = margin
 
-    def paintEvent(self, event):
+    def paintEvent(self, event) -> None:
         # Let QPushButton handle its default painting.
         Qw.QPushButton.paintEvent(self, event)
 
@@ -88,14 +88,14 @@ class BadgeButton(Qw.QPushButton):
             # Fuck this shit I'm hard-coding a 1px offset, no bloody clue why it's off by one otherwise.
             painter.drawPixmap(pixmap_x + 1, pixmap_y + 1, pixmap)
 
-    def changeEvent(self, event: Qc.QEvent):
+    def changeEvent(self, event: Qc.QEvent) -> None:
         super(BadgeButton, self).changeEvent(event)
         if event.type() == Qc.QEvent.PaletteChange:
             self.update_accent_color()
             self.update()
 
     @Slot(bool)
-    def updateButtonPalette(self, checked):
+    def updateButtonPalette(self, checked) -> None:
         palette = self.palette()
         if checked:  # and self.accented_focus:
             palette.setColor(Qg.QPalette.Button, self.accent_color)
@@ -106,7 +106,7 @@ class BadgeButton(Qw.QPushButton):
             )
         self.setPalette(palette)
 
-    def update_accent_color(self):
+    def update_accent_color(self) -> None:
         """
         Use the Highlight color, aka Accent color to draw the background of the badge.
         """
@@ -120,12 +120,12 @@ class BadgeButton(Qw.QPushButton):
                 """
             )
 
-    def set_badge_visible(self, visible: bool):
+    def set_badge_visible(self, visible: bool) -> None:
         self.badge_visible = visible
         self.update()
 
-    def hide_badge(self):
+    def hide_badge(self) -> None:
         self.set_badge_visible(False)
 
-    def show_badge(self):
+    def show_badge(self) -> None:
         self.set_badge_visible(True)

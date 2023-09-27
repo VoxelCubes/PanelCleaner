@@ -12,7 +12,7 @@ class CTooltipLabel(Qw.QLabel):
 
     icon_name: str
 
-    def __init__(self, parent=None, tooltip: str = "", icon_name: str = "help-hint"):
+    def __init__(self, parent=None, tooltip: str = "", icon_name: str = "help-hint") -> None:
         super(CTooltipLabel, self).__init__(parent)
 
         # Display the help-hint icon and no text.
@@ -25,19 +25,19 @@ class CTooltipLabel(Qw.QLabel):
         # Make the label focusable to receive keyboard events
         self.setFocusPolicy(Qt.StrongFocus)
 
-    def load_icon(self):
+    def load_icon(self) -> None:
         """
         Load the display icon.
         """
         self.setPixmap(Qg.QIcon.fromTheme(self.icon_name).pixmap(16, 16))
 
-    def setText(self, text: str):
+    def setText(self, text: str) -> None:
         """
         Ignore all attempts to set the text.
         """
         pass
 
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, event) -> None:
         """
         Show tooltip when the Enter or Space key is pressed.
         """
@@ -45,7 +45,7 @@ class CTooltipLabel(Qw.QLabel):
             # Showing tooltip at the center of the label when triggered by keyboard.
             self.showTooltipAtPosition(self.rect().center())
 
-    def showTooltipAtPosition(self, pos: Qc.QPoint):
+    def showTooltipAtPosition(self, pos: Qc.QPoint) -> None:
         """
         Show the tooltip at the given local position.
         """

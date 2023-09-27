@@ -101,7 +101,7 @@ def download_cv2_model(cache_dir: Path) -> Path | None:
     return download_file(MODEL_URL + CV2_MODEL_NAME, cache_dir, sha_hash=CV2_SHA256)
 
 
-def download_models(config, force: bool, cuda: bool, cpu: bool):
+def download_models(config, force: bool, cuda: bool, cpu: bool) -> None:
     """
     Download the models and save the paths to them in the config.
     If neither cuda nor cpu is set, use cuda if available.
@@ -150,7 +150,7 @@ def get_ocr_model_directory() -> Path:
     return ocr_dir
 
 
-def is_ocr_downloaded():
+def is_ocr_downloaded() -> bool:
     """
     Check if the OCR model is downloaded.
 
@@ -159,7 +159,7 @@ def is_ocr_downloaded():
     return get_ocr_model_directory().is_dir()
 
 
-def delete_models(text_detector_cache_dir: Path):
+def delete_models(text_detector_cache_dir: Path) -> None:
     """
     Delete the downloaded models.
 

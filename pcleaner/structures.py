@@ -34,7 +34,7 @@ class Box:
     def as_tuple(self) -> tuple[int, int, int, int]:
         return self.x1, self.y1, self.x2, self.y2
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String representation of the box coordinates, basically unpacking the tuple.
 
@@ -43,7 +43,7 @@ class Box:
         return f"{self.x1},{self.y1},{self.x2},{self.y2}"
 
     @property
-    def area(self):
+    def area(self) -> int:
         return (self.x2 - self.x1) * (self.y2 - self.y1)
 
     def merge(self, box: "Box") -> "Box":
@@ -171,7 +171,7 @@ class PageData:
         return json.dumps(data, indent=4)
 
     @property
-    def image_size(self):
+    def image_size(self) -> tuple[int, int]:
         if self._image_size is None:
             metadata = magic.from_file(self.image_path)
             size_str = re.search(r"(\d+) x (\d+)", metadata).groups()
@@ -191,7 +191,7 @@ class PageData:
             case _:
                 raise ValueError("Invalid box type.")
 
-    def grow_boxes(self, padding: int, box_type: BoxType):
+    def grow_boxes(self, padding: int, box_type: BoxType) -> None:
         """
         Uniformly grow all boxes by padding pixels.
         Checks that the boxes don't go out of bounds.
@@ -203,7 +203,7 @@ class PageData:
         for i, box in enumerate(boxes):
             boxes[i] = box.pad(padding, self.image_size)
 
-    def right_pad_boxes(self, padding: int, box_type: BoxType):
+    def right_pad_boxes(self, padding: int, box_type: BoxType) -> None:
         """
         Right-pad all boxes by padding pixels.
         Checks that the boxes don't go out of bounds.
@@ -215,7 +215,9 @@ class PageData:
         for i, box in enumerate(boxes):
             boxes[i] = box.right_pad(padding, self.image_size)
 
-    def visualize(self, image_path: Path, out_dir: Path | None = None, final_boxes: bool = False):
+    def visualize(
+        self, image_path: Path, out_dir: Path | None = None, final_boxes: bool = False
+    ) -> None:
         """
         Visualize the boxes on an image.
         Typically, this would be used to check where on the original image the
@@ -279,7 +281,7 @@ class PageData:
             draw.rectangle(box.as_tuple, fill=(1,))
         return box_mask
 
-    def resolve_overlaps(self):
+    def resolve_overlaps(self) -> None:
         """
         Copy the extended boxes to the merged extended boxes, and merge overlapping boxes.
         """

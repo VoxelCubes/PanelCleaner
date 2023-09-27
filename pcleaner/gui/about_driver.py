@@ -44,7 +44,7 @@ class AboutWidget(Qw.QWidget, Ui_About):
             Qg.QPixmap(":/logo.png").scaledToWidth(200, mode=Qt.SmoothTransformation)
         )
 
-    def open_license(self):
+    def open_license(self) -> None:
         """
         Open the license dialog.
         """

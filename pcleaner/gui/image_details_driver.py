@@ -102,7 +102,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         input_button = list(self.button_map.keys())[0]
         input_button.click()
 
-    def init_menu(self):
+    def init_menu(self) -> None:
         """
         Initialize the overflow menu housing the export and ocr button for the image details widget.
         """
@@ -158,7 +158,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             current_button_index += 1
             return button
 
-        def add_step_label(title: str):
+        def add_step_label(title: str) -> None:
             # Add a step name label with a spacer above it if needed.
             nonlocal last_step_name
             if last_step_name is not None:
@@ -194,7 +194,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         return buttons
 
-    def changeEvent(self, event: Qc.QEvent):
+    def changeEvent(self, event: Qc.QEvent) -> None:
         """
         Due to the buttons using a fixed stylesheet to apply the colored border as a background,
         they do not react to changes in the palette. Therefore we need to nuke all buttons and
@@ -224,7 +224,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
             self.update()
 
-    def _clear_all_from_layout(self, layout: Qw.QLayout):
+    def _clear_all_from_layout(self, layout: Qw.QLayout) -> None:
         for i in reversed(
             range(layout.count())
         ):  # Loop backwards to avoid disrupting the remaining indices
@@ -237,7 +237,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 self._clear_all_from_layout(item.layout())
             layout.removeItem(item)  # Remove the item from layout
 
-    def init_sidebar(self):
+    def init_sidebar(self) -> None:
         """
         Set up the buttons in the sidebar.
         """
@@ -286,7 +286,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             button.setIconSize(Qc.QSize(thumbnail_width, thumbnail_height))
             button.clicked.connect(partial(self.switch_to_image, button))
 
-    def load_all_image_thumbnails(self):
+    def load_all_image_thumbnails(self) -> None:
         """
         Load all the images into the buttons.
         """
@@ -303,7 +303,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         # Update the badges on the buttons.
         self.start_profile_checker()
 
-    def switch_to_image(self, button: BadgeButton):
+    def switch_to_image(self, button: BadgeButton) -> None:
         """
         Show the image in the button in the image view.
 
@@ -346,7 +346,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 return
 
     @Slot(int, int)
-    def update_position_label(self, x: int, y: int):
+    def update_position_label(self, x: int, y: int) -> None:
         """
         Update the position label with the current mouse position.
 
@@ -356,7 +356,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.label_position.setText(f"{x}, {y}")
         self.label_position.setMinimumWidth(self.label_position.width())
 
-    def export_image(self):
+    def export_image(self) -> None:
         """
         If the image exists, open a save dialog to copy it to a new location.
         """
@@ -386,7 +386,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 return button
         return None
 
-    def reload_current_image(self):
+    def reload_current_image(self) -> None:
         """
         Reload the current image.
         The current image is the one belonging to the currently selected pushbutton.
@@ -395,7 +395,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.switch_to_image(button)
 
     @Slot()
-    def uncheck_all_other_buttons(self, checked_button: BadgeButton):
+    def uncheck_all_other_buttons(self, checked_button: BadgeButton) -> None:
         """
         Uncheck all buttons except the one that was checked.
 
@@ -405,7 +405,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             if button is not checked_button:
                 button.setChecked(False)
 
-    def regenerate_current_output(self):
+    def regenerate_current_output(self) -> None:
         """
         Delete the current output and regenerate it.
         """
@@ -413,7 +413,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.image_obj.outputs[self.button_map[button]].reset()
             self.switch_to_image(button)
 
-    def clear_change_flairs(self):
+    def clear_change_flairs(self) -> None:
         """
         Clear the change flairs from all buttons.
         """
@@ -421,7 +421,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             button.hide_badge()
 
     @staticmethod
-    def set_change_flair(button: BadgeButton):
+    def set_change_flair(button: BadgeButton) -> None:
         """
         Set the change flair on the given button.
 
@@ -431,7 +431,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
     # ========================================== Worker Functions ==========================================
 
-    def start_output_worker(self, output: imf.Output):
+    def start_output_worker(self, output: imf.Output) -> None:
         """
         Start the worker thread for the given output.
 
@@ -471,24 +471,24 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             abort_flag=abort_flag,
         )
 
-    def output_worker_result(self):
+    def output_worker_result(self) -> None:
         self.load_all_image_thumbnails()
         self.reload_current_image()
         logger.info("Output worker finished.")
 
     @Slot(wt.WorkerError)
-    def output_worker_error(self, error: wt.WorkerError):
+    def output_worker_error(self, error: wt.WorkerError) -> None:
         logger.error("Output worker encountered an error.")
         gu.show_warning(self, "Output failed", f"Output generation failed:\n\n{error}")
 
-    def output_worker_aborted(self):
+    def output_worker_aborted(self) -> None:
         self.load_all_image_thumbnails()
         self.reload_current_image()
         self.thread_queue.clear()
         self.pushButton_refresh.setEnabled(True)
         logger.warning("Output worker aborted.")
 
-    def start_profile_checker(self):
+    def start_profile_checker(self) -> None:
         """
         Start the profile checker thread.
         The process isn't very intensive, usually taking between 1 and 10 ms, but when run on the
@@ -615,7 +615,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         return changed_buttons
 
-    def profile_checker_result(self, changed_buttons: Sequence[BadgeButton]):
+    def profile_checker_result(self, changed_buttons: Sequence[BadgeButton]) -> None:
         """
         Update the flair on the buttons that have changed.
 
@@ -629,11 +629,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         for button in changed_buttons:
             self.set_change_flair(button)
 
-    def profile_checker_error(self, error: wt.WorkerError):
+    def profile_checker_error(self, error: wt.WorkerError) -> None:
         logger.error("Profile checker encountered an error.")
         gu.show_warning(self, "Profile check failed", f"Profile change check failed:\n\n{error}")
 
-    def start_ocr_worker(self):
+    def start_ocr_worker(self) -> None:
         """
         Start a worker to perform the OCR process on this image.
         """
@@ -663,6 +663,6 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             abort_flag=abort_flag,
         )
 
-    def ocr_worker_finished(self):
+    def ocr_worker_finished(self) -> None:
         self.ocr_action.setEnabled(True)
         logger.info("OCR worker finished.")

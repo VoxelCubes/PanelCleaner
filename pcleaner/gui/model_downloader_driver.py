@@ -108,7 +108,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
             temp_progress_data = ProgressData(100, 0, 0, 0, -1, "Already downloaded")
             self.show_ocr_progress(temp_progress_data)
 
-    def check_finished(self):
+    def check_finished(self) -> None:
         if self.text_detector_downloaded and self.ocr_downloaded:
             if not self.encountered_error:
                 logger.info("Finished downloading all models.")
@@ -153,7 +153,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         threadpool.start(worker)
 
     @Slot(ProgressData)
-    def show_text_detection_progress(self, progress_data: ProgressData):
+    def show_text_detection_progress(self, progress_data: ProgressData) -> None:
         """
         Update the progress bar.
 
@@ -169,7 +169,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.progressBar_model.setValue(progress_data.percentage)
 
     @Slot(wt.WorkerError)
-    def text_detection_error(self, worker_error: wt.WorkerError):
+    def text_detection_error(self, worker_error: wt.WorkerError) -> None:
         """
         Show an error message.
 
@@ -182,7 +182,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         gu.show_warning(self, "Download Failed", str(worker_error.value))
 
     @Slot(Path)
-    def text_detection_result(self, model_path: Path | None):
+    def text_detection_result(self, model_path: Path | None) -> None:
         """
         Save the path to the downloaded model.
 
@@ -192,7 +192,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
             return
         self.model_path = model_path
 
-    def text_detection_finished(self):
+    def text_detection_finished(self) -> None:
         """
         Close the dialog if all models have been downloaded.
         """
@@ -220,7 +220,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         worker.signals.error.connect(self.ocr_error)
         threadpool.start(worker)
 
-    def ocr_finished(self):
+    def ocr_finished(self) -> None:
         """
         Close the dialog if all models have been downloaded.
         """
@@ -231,7 +231,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.check_finished()
 
     @Slot(wt.WorkerError)
-    def ocr_error(self, worker_error: wt.WorkerError):
+    def ocr_error(self, worker_error: wt.WorkerError) -> None:
         """
         Show an error message.
 
@@ -244,7 +244,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         gu.show_warning(self, "Download Failed", str(worker_error.value))
 
     @Slot(str, str)
-    def ocr_output_log(self, text: str, stream: str):
+    def ocr_output_log(self, text: str, stream: str) -> None:
         """
         Append the text to the output log.
 
@@ -260,7 +260,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         # Update the ui with the progress data.
         self.show_ocr_progress(progress_data)
 
-    def show_ocr_progress(self, progress_data: ProgressData):
+    def show_ocr_progress(self, progress_data: ProgressData) -> None:
         self.label_ocr_file_name.setText(progress_data.file_name)
         self.label_ocr_size.setText(
             f"{format_size(progress_data.downloaded_size)} / {format_size(progress_data.file_size)}"
@@ -271,7 +271,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.progressBar_ocr.setValue(progress_data.percentage)
 
 
-def ocr_download_worker(custom_stdout):
+def ocr_download_worker(custom_stdout) -> None:
     with custom_stdout:
         MangaOcr()
 

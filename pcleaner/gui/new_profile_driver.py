@@ -19,7 +19,7 @@ class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
         default_path: Path,
         show_protection_hint: bool,
         protected_names: list[str],
-    ):
+    ) -> None:
         """
         Initialize the dialog.
 
@@ -76,7 +76,7 @@ class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
         """
         return (self.get_directory() / self.get_name()).with_suffix(".conf")
 
-    def browse_location(self):
+    def browse_location(self) -> None:
         """
         Let the user choose a custom location. Only directories are allowed.
         """
@@ -88,7 +88,7 @@ class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
         if dialog.exec():
             self.lineEdit_location.setText(dialog.selectedFiles()[0])
 
-    def validate(self):
+    def validate(self) -> None:
         """
         Check if the current input is acceptable, and show warnings if not.
         """

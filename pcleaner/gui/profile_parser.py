@@ -72,14 +72,14 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
 
     valueChanged = Qc.Signal()
 
-    def __init__(self, entry_type: EntryTypes):
+    def __init__(self, entry_type: EntryTypes) -> None:
         super().__init__()
         self.create_data_widget(entry_type)
         self.create_reset_button()
         self.addWidget(self._data_widget)
         self.addWidget(self._reset_button)
 
-    def create_reset_button(self):
+    def create_reset_button(self) -> None:
         self._reset_button = Qw.QPushButton()
         self._reset_button.setSizePolicy(Qw.QSizePolicy.Fixed, Qw.QSizePolicy.Fixed)
         self._reset_button.setIcon(Qg.QIcon.fromTheme("edit-reset"))
@@ -87,7 +87,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
         self._reset_button.clicked.connect(self.reset)
         self.set_reset_button_enabled(False)
 
-    def create_data_widget(self, entry_type: EntryTypes):
+    def create_data_widget(self, entry_type: EntryTypes) -> None:
         if entry_type == EntryTypes.Bool:
             self._data_widget: Qw.QCheckBox = Qw.QCheckBox()
             self._data_widget.stateChanged.connect(self._value_changed)
@@ -170,7 +170,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_setter = self._data_widget.setCurrentIndexByLinkedData
             self._data_getter = self._data_widget.currentLinkedData
 
-    def reset(self):
+    def reset(self) -> None:
         """
         Reset the data widget to the default value.
         """
@@ -183,7 +183,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
         """
         return self._data_getter() == self._default_value
 
-    def set_value(self, value: Any):
+    def set_value(self, value: Any) -> None:
         """
         Set the value of the data widget, which is the new default value.
         Does not emit the valueChanged signal.
@@ -200,14 +200,14 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
         """
         return self._data_getter()
 
-    def _value_changed(self):
+    def _value_changed(self) -> None:
         """
         Called when the value of the data widget changes.
         """
         self.set_reset_button_enabled(not self.value_is_default())
         self.valueChanged.emit()
 
-    def set_reset_button_enabled(self, enabled: bool):
+    def set_reset_button_enabled(self, enabled: bool) -> None:
         self._reset_button.setEnabled(enabled)
         self._reset_button.setFlat(not enabled)
 
@@ -302,7 +302,7 @@ class ProfileToolBox(Qw.QToolBox):
         False  # This prevents lookups to the default values before they are set.
     )
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         Qw.QToolBox.__init__(self, parent)
         self._widgets: dict[str, dict[str, ProfileOptionWidget]] = {}
 

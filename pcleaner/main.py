@@ -138,7 +138,7 @@ import pcleaner.gui.launcher as gui
 Image.MAX_IMAGE_PIXELS = 2**32
 
 
-def main():
+def main() -> None:
     args = docopt(__doc__, version=f"Panel Cleaner {__version__}")
     # Loglevel is info by default.
     if args.debug:
@@ -581,7 +581,7 @@ def run_ocr(
         logger.exception(e)
 
 
-def clear_cache(config: cfg.Config, all_cache: bool, models: bool, images: bool):
+def clear_cache(config: cfg.Config, all_cache: bool, models: bool, images: bool) -> None:
     """
     Clear the cache.
 

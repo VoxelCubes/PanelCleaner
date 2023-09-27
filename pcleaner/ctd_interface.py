@@ -102,7 +102,7 @@ def model2annotations(
             )
 
 
-def process_image_batch(args):
+def process_image_batch(args) -> None:
     img_batch, model_path, device, save_dir, height_target_lower, height_target_upper = args
     model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
     for img_path in img_batch:

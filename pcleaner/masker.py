@@ -34,7 +34,7 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
         m_data.cache_dir / f"{clobber_protection_prefix}_{original_img_path_as_png.name}"
     )
 
-    def save_mask(img, name_suffix):
+    def save_mask(img, name_suffix) -> None:
         if m_data.show_masks:
             img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
 

@@ -6,7 +6,7 @@ import pcleaner.cli_utils as cli
 import pcleaner.config as cfg
 
 
-def list_profiles(config: cfg.Config):
+def list_profiles(config: cfg.Config) -> None:
     """
     Display the dict of profiles in the config in a pretty table.
 
@@ -22,13 +22,13 @@ def list_profiles(config: cfg.Config):
         )
         return
 
-    def check_path(path: Path):
+    def check_path(path: Path) -> str:
         if path.exists():
             return "OK"
         else:
             return "File not found"
 
-    def check_default(profile: str | None):
+    def check_default(profile: str | None) -> str:
         if profile == config.default_profile:
             return "Yes"
         else:
@@ -127,7 +127,7 @@ def add_profile(config: cfg.Config, profile_name: str, profile_path: str) -> tup
     return True, f"Profile {profile_name} added."
 
 
-def open_profile(config: cfg.Config, profile_name: str):
+def open_profile(config: cfg.Config, profile_name: str) -> None:
     """
     Open the profile in the default editor, unless specified in the config.
 
@@ -139,7 +139,7 @@ def open_profile(config: cfg.Config, profile_name: str):
     cli.open_file_with_editor(profile_path, config.profile_editor)
 
 
-def delete_profile(config: cfg.Config, profile_name: str):
+def delete_profile(config: cfg.Config, profile_name: str) -> None:
     """
     Remove a profile from the config.
     Also offer to delete the profile file.
@@ -165,7 +165,7 @@ def delete_profile(config: cfg.Config, profile_name: str):
         print("File deleted.")
 
 
-def set_default_profile(config: cfg.Config, profile_name: str):
+def set_default_profile(config: cfg.Config, profile_name: str) -> None:
     """
     Set the default profile.
 
@@ -181,7 +181,7 @@ def set_default_profile(config: cfg.Config, profile_name: str):
     config.save()
 
 
-def repair_profile(config: cfg.Config, profile_name: str):
+def repair_profile(config: cfg.Config, profile_name: str) -> None:
     """
     Read as much of the profile as possible and then re-export the profile to the same path.
 
@@ -239,7 +239,7 @@ def is_valid_profile_name(
     return True, ""
 
 
-def purge_missing_profiles(config: cfg.Config):
+def purge_missing_profiles(config: cfg.Config) -> None:
     """
     Remove profiles from the config that no longer exist.
 

@@ -185,7 +185,7 @@ class ImageAnalytics:
 
     _data: dict[ImageAnalyticCategory, str]
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._data = {category: "" for category in ImageAnalyticCategory}
 
     def get_category(self, category: ImageAnalyticCategory) -> str:
@@ -349,7 +349,7 @@ class ImageFile:
 
     error: Exception | None = None  # Error that occurred during any process.
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path) -> None:
         """
         Init the image file.
 

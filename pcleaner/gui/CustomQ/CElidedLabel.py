@@ -6,7 +6,7 @@ import PySide6.QtCore as Qc
 class CElidedLabel(Qw.QFrame):
     elisionChanged = Qc.Signal(bool)
 
-    def __init__(self, text, parent=None):
+    def __init__(self, text, parent=None) -> None:
         super(CElidedLabel, self).__init__(parent)
 
         self._elided = False
@@ -15,27 +15,27 @@ class CElidedLabel(Qw.QFrame):
         self.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Preferred)
         self.setFrameStyle(Qw.QFrame.NoFrame)
 
-    def text(self):
+    def text(self) -> None:
         return self._content
 
-    def setText(self, newText):
+    def setText(self, newText) -> None:
         self._content = newText
         self.update()
 
-    def isElided(self):
+    def isElided(self) -> bool:
         return self._elided
 
-    def elideMode(self):
+    def elideMode(self) -> None:
         return self._elideMode
 
-    def setElideMode(self, mode):
+    def setElideMode(self, mode) -> None:
         if mode in [Qc.Qt.ElideLeft, Qc.Qt.ElideMiddle, Qc.Qt.ElideRight, Qc.Qt.ElideNone]:
             self._elideMode = mode
             self.update()
         else:
             raise ValueError(f"Invalid elide mode {mode}")
 
-    def paintEvent(self, event):
+    def paintEvent(self, event) -> None:
         painter = Qg.QPainter(self)
         fontMetrics = painter.fontMetrics()
 

@@ -22,7 +22,7 @@ class WorkerError:
     args: tuple | None = None
     kwargs: dict | None = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.exception_type}: {self.traceback}\n{self.value}"
 
 
@@ -57,7 +57,7 @@ class WorkerSignals(QObject):
 
 
 class SharableFlag:
-    def __init__(self, initial_value: bool = False):
+    def __init__(self, initial_value: bool = False) -> None:
         self._flag = initial_value
 
     def get(self) -> bool:
@@ -124,7 +124,7 @@ class Worker(QRunnable):
             abort_signal.connect(self.abort)
 
     @Slot()
-    def run(self):
+    def run(self) -> None:
         """
         Initialise the runner function with passed args, kwargs.
         """
@@ -161,5 +161,5 @@ class Worker(QRunnable):
             pass
 
     @Slot()
-    def abort(self):
+    def abort(self) -> None:
         self.aborted.set(True)

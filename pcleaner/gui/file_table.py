@@ -56,7 +56,7 @@ class FileTable(CTableWidget):
     step_icons_light: dict[imf.ImageAnalyticCategory, Qg.QIcon]
     shared_theme_is_dark: gst.Shared[bool]
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         CTableWidget.__init__(self, parent)
 
         # Store a map of resolved file paths to file objects.
@@ -88,29 +88,29 @@ class FileTable(CTableWidget):
             else:
                 self.step_icons_light = icons
 
-    def post_init(self):
+    def post_init(self) -> None:
         # Make enough room for the 4 analytic icons.
         self.setColumnWidth(
             Column.ANALYTICS, round(4 * (imf.THUMBNAIL_SIZE * 0.75) + 2 * GUI_PADDING)
         )
 
-    def set_thread_queue(self, thread_queue: Qc.QThreadPool):
+    def set_thread_queue(self, thread_queue: Qc.QThreadPool) -> None:
         self.thread_queue = thread_queue
 
-    def check_empty(self):
+    def check_empty(self) -> None:
         if self.rowCount() == 0:
             self.table_is_empty.emit()
         else:
             self.table_not_empty.emit()
 
     # Setters passed through from the mainwindow.
-    def set_config(self, config: cfg.Config):
+    def set_config(self, config: cfg.Config) -> None:
         self.config = config
 
-    def set_shared_ocr_model(self, shared_ocr_model: gst.Shared[gst.OCRModel]):
+    def set_shared_ocr_model(self, shared_ocr_model: gst.Shared[gst.OCRModel]) -> None:
         self.shared_ocr_model = shared_ocr_model
 
-    def set_shared_theme_is_dark(self, shared_theme_is_dark: gst.Shared[bool]):
+    def set_shared_theme_is_dark(self, shared_theme_is_dark: gst.Shared[bool]) -> None:
         self.shared_theme_is_dark = shared_theme_is_dark
 
     def get_image_files(self) -> list[imf.ImageFile]:
@@ -125,7 +125,7 @@ class FileTable(CTableWidget):
         """
         return len(self.files) == 0
 
-    def handleDrop(self, path: str):
+    def handleDrop(self, path: str) -> None:
         logger.debug(f"Dropped {path}")
         image_paths, rejected_tiffs = hp.discover_all_images(path, cfg.SUPPORTED_IMG_TYPES)
         if rejected_tiffs:
@@ -138,7 +138,7 @@ class FileTable(CTableWidget):
         for image_path in image_paths:
             self.add_file(image_path)
 
-    def update_all_rows(self):
+    def update_all_rows(self) -> None:
         """
         Called when the profile has changed.
         All we need to do is to go through all the rows and call update on them.
@@ -148,7 +148,7 @@ class FileTable(CTableWidget):
         for row in range(self.rowCount()):
             self.update_row(row, self.files[Path(self.item(row, Column.PATH).text())])
 
-    def add_file(self, path: Path):
+    def add_file(self, path: Path) -> None:
         """
         Attempt to add a new image to the table.
         All paths are expected to be resolved, absolute paths that point to existing files with a valid extension.
@@ -164,7 +164,7 @@ class FileTable(CTableWidget):
 
         self.files[path] = imf.ImageFile(path=path)
 
-    def clear_files(self):
+    def clear_files(self) -> None:
         """
         Delete all files from the table.
         """
@@ -173,7 +173,7 @@ class FileTable(CTableWidget):
         self.clearAll()
         self.check_empty()
 
-    def repopulate_table(self):
+    def repopulate_table(self) -> None:
         """
         Repopulate the table with the current files.
         """
@@ -218,7 +218,7 @@ class FileTable(CTableWidget):
         self.verticalScrollBar().setValue(v_scroll_pos)
         self.horizontalScrollBar().setValue(h_scroll_pos)
 
-    def update_row(self, row: int, file_obj: imf.ImageFile):
+    def update_row(self, row: int, file_obj: imf.ImageFile) -> None:
         """
         Update the table with the file object's data.
 
@@ -290,7 +290,7 @@ class FileTable(CTableWidget):
         # Set the container as the cell widget
         self.setCellWidget(row, Column.ANALYTICS, container)
 
-    def mousePressEvent(self, event):
+    def mousePressEvent(self, event) -> None:
         """
         When clicking in blank space, clear the selection.
 
@@ -302,7 +302,7 @@ class FileTable(CTableWidget):
         else:
             super().mousePressEvent(event)
 
-    def on_click(self, item):
+    def on_click(self, item) -> None:
         """
         Request to open the image in a new tab to generate previews.
 
@@ -323,7 +323,7 @@ class FileTable(CTableWidget):
             logger.warning(f"Could not find file object for item at row {item.row()}")
             return
 
-    def show_ocr_mini_analytics(self, ocr_analytics: Sequence[st.OCRAnalytic]):
+    def show_ocr_mini_analytics(self, ocr_analytics: Sequence[st.OCRAnalytic]) -> None:
         """
         Update the image files with the mini analytics data.
 
@@ -350,7 +350,9 @@ class FileTable(CTableWidget):
             )
         self.update_all_rows()
 
-    def show_masker_mini_analytics(self, masker_analytics: Sequence[st.MaskFittingAnalytic]):
+    def show_masker_mini_analytics(
+        self, masker_analytics: Sequence[st.MaskFittingAnalytic]
+    ) -> None:
         """
         Update the image files with the mini analytics data.
 
@@ -430,7 +432,7 @@ class FileTable(CTableWidget):
         """
         return image.load_image()
 
-    def lazy_load_images(self):
+    def lazy_load_images(self) -> None:
         logger.info(f"Dispatching image loading workers")
         # Check for images that haven't loaded their data yet.
         # They will need to have a worker thread scheduled, so the gui doesn't freeze.
@@ -445,7 +447,7 @@ class FileTable(CTableWidget):
 
     # ========================= Worker Callbacks =========================
 
-    def image_loading_worker_result(self, file_path: Path):
+    def image_loading_worker_result(self, file_path: Path) -> None:
         """
         Update the table with the thumbnail.
         """
@@ -458,7 +460,7 @@ class FileTable(CTableWidget):
         else:
             logger.warning(f"Worker done. Could not find {file_path} in the table. ignoring.")
 
-    def image_loading_worker_error(self, error: wt.WorkerError):
+    def image_loading_worker_error(self, error: wt.WorkerError) -> None:
         """
         Display an error message in the table.
         """
@@ -475,7 +477,7 @@ class FileTable(CTableWidget):
             self, "Failed to load image", f"Failed to load image {file_path}:\n\n{error.value}"
         )
 
-    def image_dispatch_worker_error(self, error: wt.WorkerError):
+    def image_dispatch_worker_error(self, error: wt.WorkerError) -> None:
         """
         Display an error message in the table.
         """
@@ -485,7 +487,7 @@ class FileTable(CTableWidget):
 
     # =========================== File Adding ===========================
 
-    def browse_add_files(self):
+    def browse_add_files(self) -> None:
         """
         Browse for one or more files to add to the table.
         """
@@ -504,7 +506,7 @@ class FileTable(CTableWidget):
                 self.handleDrop(file)
             # self.request_text_param_update.emit()
 
-    def browse_add_folders(self):
+    def browse_add_folders(self) -> None:
         """
         Browse for one or more folders to add to the table.
         """

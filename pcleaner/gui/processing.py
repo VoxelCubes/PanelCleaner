@@ -69,7 +69,7 @@ def generate_output(
     # The check is NOT done right before checking the outputs to avoid throwing away perfectly fine work.
     # This means that the abort check shouldn't interrupt the processing step on an image, leaving it in a
     # dirty state.
-    def check_abortion():
+    def check_abortion() -> None:
         """
         Check if the thread should abort.
         If so, signal abortion to the progress callback and raise an AbortException.
@@ -143,7 +143,7 @@ def generate_output(
 
         return step_changed
 
-    def update_output(image_object: imf.ImageFile, output: imf.Output, suffix: str):
+    def update_output(image_object: imf.ImageFile, output: imf.Output, suffix: str) -> None:
         """
         Update the output of the given image object.
         Check if the file actually exists, and if it does, update the output path.
@@ -625,7 +625,7 @@ def perform_ocr(
     :param debug: If True, debug messages are printed.
     """
 
-    def check_abortion():
+    def check_abortion() -> None:
         """
         Check if the thread should abort.
         If so, signal abortion to the progress callback and raise an AbortException.
@@ -702,7 +702,7 @@ def perform_ocr(
 
         return step_changed
 
-    def update_output(image_object: imf.ImageFile, output: imf.Output, suffix: str):
+    def update_output(image_object: imf.ImageFile, output: imf.Output, suffix: str) -> None:
         """
         Update the output of the given image object.
         Check if the file actually exists, and if it does, update the output path.

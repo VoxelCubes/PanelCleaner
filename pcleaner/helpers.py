@@ -9,14 +9,14 @@ import tifffile
 from logzero import logger
 
 
-def f_plural(value, singular: str, plural: str):
+def f_plural(value, singular: str, plural: str) -> str:
     """
     Selects which form to use based on the value.
     """
     return singular if value == 1 else plural
 
 
-def open_file(path: Path):
+def open_file(path: Path) -> None:
     """
     Open any given file with the default application.
     """
@@ -134,7 +134,7 @@ def is_5_channel_tiff(path: Path) -> bool:
     return False
 
 
-def all_equal(iterable):
+def all_equal(iterable) -> bool:
     """
     Checks if all items in a list are the same using itertools.groupby.
     It works because groupby will produce a single group if and only if all items are the same.

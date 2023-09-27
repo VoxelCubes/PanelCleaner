@@ -35,7 +35,7 @@ from pcleaner import data
 from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
-# TODO cleanup and adding -> None to non-returning functions
+# TODO cleanup
 
 ANALYTICS_COLUMNS = 72
 
@@ -67,7 +67,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     theme_is_dark: gst.Shared[bool]
     theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
 
-    def __init__(self):
+    def __init__(self) -> None:
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__display_name__} {__version__}")
@@ -113,7 +113,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         Qc.QTimer.singleShot(0, self.post_init)
 
-    def save_default_palette(self):
+    def save_default_palette(self) -> None:
         self.default_palette = self.palette()
         # Patch palette to use the text color with 50% opacity for placeholder text.
         placeholder_color = self.default_palette.color(Qg.QPalette.Inactive, Qg.QPalette.Text)
@@ -122,14 +122,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.default_palette.setColor(Qg.QPalette.PlaceholderText, placeholder_color)
         self.default_icon_theme = Qg.QIcon.themeName()
 
-    def load_config_theme(self):
+    def load_config_theme(self) -> None:
         """
         Load the theme specified in the config, or the system theme if none.
         """
         theme = self.config.gui_theme
         self.set_theme(theme)
 
-    def set_theme(self, theme: str = None):
+    def set_theme(self, theme: str = None) -> None:
         """
         Apply the given theme to the application, or if none, revert to the default theme.
         """
@@ -169,7 +169,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.config.gui_theme = theme
             self.config.save()
 
-    def initialize_ui(self):
+    def initialize_ui(self) -> None:
         self.hide_progress_drawer()
         self.set_up_statusbar()
         self.initialize_profiles()
@@ -295,12 +295,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.config.save()
 
     @Slot(bool)
-    def adjust_progress_drawer_color(self):
+    def adjust_progress_drawer_color(self) -> None:
         # Make the progress drawer use the alternate background color.
         self.widget_progress_drawer.setStyleSheet("background-color: palette(alternate-base);")
         self.widget_progress_drawer.update()
 
-    def post_init(self):
+    def post_init(self) -> None:
         """
         Handle any initialization that must be done after the window is shown.
         """
@@ -346,7 +346,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         logger.debug(f"Splitter sizes: {self.splitter.sizes()}")
 
-    def browse_output_dir(self):
+    def browse_output_dir(self) -> None:
         """
         Open a file picker and set the output directory.
         """
@@ -356,7 +356,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             logger.debug(f"Setting output directory to {output_dir}")
             self.lineEdit_out_directory.setText(output_dir)
 
-    def browse_out_file(self):
+    def browse_out_file(self) -> None:
         """
         Open a file picker and set the output file.
         Support both text and csv output.
@@ -375,7 +375,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             logger.debug(f"Setting output file to {output_file}")
             self.lineEdit_out_file.setText(output_file)
 
-    def init_drop_panel(self):
+    def init_drop_panel(self) -> None:
         """
         Initialize the drop panel icon.
         """
@@ -384,28 +384,28 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # ========================================== UI Toggles ==========================================
 
-    def hide_progress_drawer(self):
+    def hide_progress_drawer(self) -> None:
         self.widget_progress_drawer.hide()
 
-    def show_progress_drawer(self):
+    def show_progress_drawer(self) -> None:
         self.widget_progress_drawer.show()
 
-    def enable_running_cleaner(self):
+    def enable_running_cleaner(self) -> None:
         self.pushButton_start.setEnabled(True)
         self.pushButton_abort.hide()
 
-    def disable_running_cleaner(self):
+    def disable_running_cleaner(self) -> None:
         self.pushButton_start.setEnabled(False)
         self.pushButton_abort.show()
         self.pushButton_abort.setEnabled(True)
 
-    def abort_button_on_click(self):
+    def abort_button_on_click(self) -> None:
         self.pushButton_abort.setEnabled(False)
         self.thread_queue.clear()
         logger.warning("Aborting processing")
         self.statusbar.showMessage("Aborting...", timeout=5000)
 
-    def handle_ocr_mode_change(self, csv: bool):
+    def handle_ocr_mode_change(self, csv: bool) -> None:
         """
         Swap out the file suffix for the output file.
 
@@ -432,7 +432,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # ========================================== Initialization Workers ==========================================
 
-    def start_initialization_worker(self):
+    def start_initialization_worker(self) -> None:
         """
         Perform various slow startup procedures in a thread that would otherwise make the gui lag.
 
@@ -458,7 +458,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Add it to the queue, to make sure it finishes before any processing starts.
         self.thread_queue.start(ocr_worker)
 
-    def load_ocr_model(self):
+    def load_ocr_model(self) -> None:
         t_start = time.time()
         self.statusbar.showMessage(f"Loading OCR model...")
         self.shared_ocr_model.set(MangaOcr())
@@ -466,7 +466,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.statusbar.showMessage(f"Loaded OCR model.")
         self.enable_running_cleaner()
 
-    def generic_worker_error(self, error: wt.WorkerError, context: str = ""):
+    def generic_worker_error(self, error: wt.WorkerError, context: str = "") -> None:
         """
         Simply show the user the error.
 
@@ -479,7 +479,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         else:
             gu.show_warning(self, "Error", f"{context}\n\nEncountered error: {error}")
 
-    def closeEvent(self, death: Qg.QCloseEvent):
+    def closeEvent(self, death: Qg.QCloseEvent) -> None:
         """
         Notify config on close.
         """
@@ -492,12 +492,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # cosmic pool of resources. It walks willingly into the darkness, not as a vanquished foe,
         # but as a fulfilled entity. F
 
-    def clean_cache(self):
+    def clean_cache(self) -> None:
         cache_dir = self.config.get_cleaner_cache_dir()
         if len(list(cache_dir.glob("*"))) > 0:
             cu.empty_cache_dir(cache_dir)
 
-    def initialize_analytics_view(self):
+    def initialize_analytics_view(self) -> None:
         """
         Set up the text edit for analytics.
         """
@@ -519,7 +519,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # ========================================== Actions ==========================================
 
-    def delete_models(self):
+    def delete_models(self) -> None:
         """
         Delete the machine learning models and then offer to download them again, or quit.
         """
@@ -553,14 +553,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.close()
 
     @staticmethod
-    def open_online_documentation():
+    def open_online_documentation() -> None:
         """
         Open the online documentation in the default browser.
         """
         logger.debug("Opening online documentation.")
         Qg.QDesktopServices.openUrl(Qc.QUrl("https://github.com/VoxelCubes/PanelCleaner"))
 
-    def open_about(self):
+    def open_about(self) -> None:
         """
         Open the about dialog.
         """
@@ -571,7 +571,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     # ========================================== Profiles ==========================================
 
-    def initialize_profiles(self):
+    def initialize_profiles(self) -> None:
         """
         Load the available profiles and display the default profile.
         """
@@ -632,7 +632,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_new_profile.triggered.connect(partial(self.save_profile, make_new=True))
         self.action_delete_profile.triggered.connect(self.delete_profile)
 
-    def handle_set_default_profile(self, profile_name: str):
+    def handle_set_default_profile(self, profile_name: str) -> None:
         """
         Set the default profile in the config.
         """
@@ -645,7 +645,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         for action in self.menu_set_default_profile.actions():
             action.setChecked(action.text() == profile_name)
 
-    def import_profile(self):
+    def import_profile(self) -> None:
         """
         Open a file picker and add the profile to the profile list.
         """
@@ -668,7 +668,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
             self.add_new_profile_to_gui(profile_name, Path(file_path))
 
-    def delete_profile(self):
+    def delete_profile(self) -> None:
         """
         Ask and then delete the current profile.
         Of course, the default profile cannot be deleted.
@@ -719,13 +719,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.toolBox_profile.get_profile_values(profile_in_gui)
         return profile_in_gui != self.last_applied_profile
 
-    def set_last_applied_profile(self):
+    def set_last_applied_profile(self) -> None:
         """
         Set the last applied profile to the current profile.
         """
         self.last_applied_profile = deepcopy(self.config.current_profile)
 
-    def load_current_profile(self):
+    def load_current_profile(self) -> None:
         """
         Load the current profile.
         """
@@ -781,7 +781,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         return True
 
     @Slot()
-    def change_current_profile(self):
+    def change_current_profile(self) -> None:
         """
         Set the config option to match the current profile selector, then load it.
         """
@@ -790,7 +790,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.load_current_profile()
 
     @Slot()
-    def handle_profile_values_changed(self):
+    def handle_profile_values_changed(self) -> None:
         """
         Handle the profile values changing.
         """
@@ -800,14 +800,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.pushButton_reset_profile.setEnabled(dirty)
         self.action_save_profile.setEnabled(dirty)
 
-    def reset_profile(self):
+    def reset_profile(self) -> None:
         """
         Reset the current profile.
         """
         self.toolBox_profile.reset_all()
         self.handle_profile_values_changed()
 
-    def apply_profile(self):
+    def apply_profile(self) -> None:
         """
         Apply the current profile.
         Read the current settings and broadcast profile changes.
@@ -819,7 +819,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.profile_values_changed.emit()
         self.pushButton_apply_profile.setEnabled(False)
 
-    def save_profile(self, save_as: bool = False, make_new: bool = False):
+    def save_profile(self, save_as: bool = False, make_new: bool = False) -> None:
         """
         Save the current profile.
 
@@ -886,7 +886,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.load_current_profile()
         self.handle_profile_values_changed()
 
-    def add_new_profile_to_gui(self, profile_name: str, profile_path: Path):
+    def add_new_profile_to_gui(self, profile_name: str, profile_path: Path) -> None:
         self.comboBox_current_profile.addTextItemLinkedData(profile_name, profile_path)
         self.comboBox_current_profile.setCurrentIndexByLinkedData(profile_path)
         self.menu_set_default_profile.addAction(profile_name)
@@ -919,7 +919,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def get_abort_signal(self) -> Signal:
         return self.pushButton_abort.clicked
 
-    def start_processing(self):
+    def start_processing(self) -> None:
         """
         Start either cleaning or OCR, depending on the selected radio button.
         """
@@ -938,7 +938,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         else:
             self.start_ocr()
 
-    def start_cleaning(self):
+    def start_cleaning(self) -> None:
         """
         Start cleaning all files in the table.
         """
@@ -1016,7 +1016,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             abort_flag=abort_flag,
         )
 
-    def start_ocr(self):
+    def start_ocr(self) -> None:
         """
         Start ocr-ing all files in the table.
         """
@@ -1104,22 +1104,22 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             abort_flag=abort_flag,
         )
 
-    def output_worker_result(self):
+    def output_worker_result(self) -> None:
         gu.show_info(self, "Processing Finished", "Finished processing all files.")
         logger.info("Output worker finished.")
 
-    def output_worker_aborted(self):
+    def output_worker_aborted(self) -> None:
         gu.show_info(self, "Processing Aborted", "Processing aborted.")
         logger.warning("Output worker aborted.")
 
-    def output_worker_finished(self):
+    def output_worker_finished(self) -> None:
         self.hide_progress_drawer()
         self.progress_step_start = None
         self.progress_current = 0
         self.enable_running_cleaner()
 
     @Slot(wt.WorkerError)
-    def output_worker_error(self, e):
+    def output_worker_error(self, e) -> None:
         gu.show_warning(
             self, "Processing Error", f"Encountered an error while processing files.\n\n{e}"
         )
@@ -1129,7 +1129,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     Log file
     """
 
-    def set_up_statusbar(self):
+    def set_up_statusbar(self) -> None:
         """
         Add a label to show the current char total and time estimate.
         Add a flat button to the statusbar to offer opening the config file.
@@ -1156,7 +1156,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     """
 
     @Slot(imf.ProgressData)
-    def show_current_progress(self, progress_data: imf.ProgressData):
+    def show_current_progress(self, progress_data: imf.ProgressData) -> None:
         if progress_data.progress_type == imf.ProgressType.start:
             # Processing begins, initialize what needs to be.
             # Specifically, clear the analytics panel.
@@ -1245,7 +1245,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
 
     #
-    # def show_glossary_help(self):
+    # def show_glossary_help(self) -> None:
     #     """
     #     Show the glossary documentation in a web browser.
     #     Open the github page for this.

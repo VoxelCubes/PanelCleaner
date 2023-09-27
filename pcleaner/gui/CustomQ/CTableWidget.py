@@ -11,21 +11,21 @@ class CTableWidget(Qw.QTableWidget):
 
     finished_drop = Qc.Signal()
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         Qw.QTableWidget.__init__(self, parent)
 
-    def clearAll(self):
+    def clearAll(self) -> None:
         self.clearContents()
         self.setRowCount(0)
         self.itemSelectionChanged.emit()
 
-    def currentText(self, col: int):
+    def currentText(self, col: int) -> None:
         return self.item(self.currentRow(), col).text()
 
-    def setCurrentText(self, col: int, text: str):
+    def setCurrentText(self, col: int, text: str) -> None:
         return self.item(self.currentRow(), col).setText(text)
 
-    def appendRow(self, *args: str, select_new: bool = False):
+    def appendRow(self, *args: str, select_new: bool = False) -> None:
         """
         Adds a new row to the bottom and fills each column with one of the args
         :param args: list(str)
@@ -38,7 +38,7 @@ class CTableWidget(Qw.QTableWidget):
         if select_new:
             self.setCurrentCell(rows, 0)
 
-    def moveRowUp(self, row: int):
+    def moveRowUp(self, row: int) -> None:
         """
         Inserts a new row above row, then moves all items into it.
         Then deletes old row and selects new row.
@@ -51,7 +51,7 @@ class CTableWidget(Qw.QTableWidget):
         self.removeRow(row + 1)
         self.setCurrentCell(row - 1, 0)
 
-    def moveRowDown(self, row: int):
+    def moveRowDown(self, row: int) -> None:
         """
         Inserts a new row below row, then moves all items into it.
         Then deletes old row and selects new row.
@@ -64,35 +64,35 @@ class CTableWidget(Qw.QTableWidget):
         self.removeRow(row)
         self.setCurrentCell(row + 1, 0)
 
-    def columnValues(self, col: int):
+    def columnValues(self, col: int) -> list:
         values = []
         for row in range(self.rowCount()):
             values.append(self.item(row, col).text())
         return values
 
-    def resizeHeightToContents(self):
+    def resizeHeightToContents(self) -> None:
         # Add 1 per row to compensate for grid lines. Subtract 1 at the end since only inner grid lines count.
         height = 0
         for i in range(self.rowCount()):
             height += self.rowHeight(i) + 1
         self.setMinimumHeight(height - 1)
 
-    def hasSelected(self):
+    def hasSelected(self) -> bool:
         return self.selectedIndexes() != []
 
-    def dragEnterEvent(self, event: Qg.QDragEnterEvent):
+    def dragEnterEvent(self, event: Qg.QDragEnterEvent) -> None:
         if event.mimeData().hasUrls():
             event.accept()
         else:
             event.ignore()
 
-    def dragMoveEvent(self, event: Qg.QDragMoveEvent):
+    def dragMoveEvent(self, event: Qg.QDragMoveEvent) -> None:
         if event.mimeData().hasUrls():
             event.accept()
         else:
             event.ignore()
 
-    def dropEvent(self, event: Qg.QDropEvent):
+    def dropEvent(self, event: Qg.QDropEvent) -> None:
         if event.mimeData().hasUrls():
             for url in event.mimeData().urls():
                 self.handleDrop(url.toLocalFile())
@@ -101,5 +101,5 @@ class CTableWidget(Qw.QTableWidget):
             event.ignore()
         self.finished_drop.emit()
 
-    def handleDrop(self, path: str):
+    def handleDrop(self, path: str) -> None:
         pass

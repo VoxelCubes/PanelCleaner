@@ -11,17 +11,17 @@ import PySide6.QtCore as Qc
 MIN_MSG_LENGTH = 50
 
 
-def show_critical(parent, title: str, msg: str):
+def show_critical(parent, title: str, msg: str) -> int:
     msg = msg.ljust(MIN_MSG_LENGTH)
     return Qw.QMessageBox.critical(parent, title, msg, Qw.QMessageBox.Yes, Qw.QMessageBox.Abort)
 
 
-def show_warning(parent, title: str, msg: str):
+def show_warning(parent, title: str, msg: str) -> None:
     msg = msg.ljust(MIN_MSG_LENGTH)
     Qw.QMessageBox.warning(parent, title, msg, Qw.QMessageBox.Ok)
 
 
-def show_info(parent, title: str, msg: str):
+def show_info(parent, title: str, msg: str) -> None:
     msg = msg.ljust(MIN_MSG_LENGTH)
     Qw.QMessageBox.information(parent, title, msg, Qw.QMessageBox.Ok)
 
@@ -41,36 +41,36 @@ def show_question(
 class CaptureOutput(Qc.QObject):
     text_written = Qc.Signal(str, str)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._io_stdout = io.StringIO()
         self._io_stderr = io.StringIO()
 
-    def __enter__(self):
+    def __enter__(self) -> "CaptureOutput":
         self._original_stdout = sys.stdout
         self._original_stderr = sys.stderr
         sys.stdout = self
         sys.stderr = self
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         sys.stdout = self._original_stdout
         sys.stderr = self._original_stderr
 
-    def write(self, string, stream="stdout"):
+    def write(self, string, stream="stdout") -> None:
         if stream == "stdout":
             self._io_stdout.write(string)
         elif stream == "stderr":
             self._io_stderr.write(string)
         self.text_written.emit(string, stream)
 
-    def getvalue(self, stream="stdout"):
+    def getvalue(self, stream="stdout") -> str:
         if stream == "stdout":
             return self._io_stdout.getvalue()
         elif stream == "stderr":
             return self._io_stderr.getvalue()
 
-    def flush(self):
+    def flush(self) -> None:
         self._io_stdout.flush()
         self._io_stderr.flush()
 

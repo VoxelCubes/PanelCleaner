@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Generator, Iterable
+from typing import Generator, Iterable, TypeVar
 from itertools import cycle
 
 import numpy as np
@@ -333,11 +333,13 @@ def pick_best_mask(
 
     # When using the fast mask selection, make a new generator with the box mask as the first mask,
     # followed by the generated masks.
-    def generator_with_first(generator, first):
+    T = TypeVar("T")
+
+    def generator_with_first(generator: Iterable[T], first: T) -> Generator[T, None, None]:
         yield first
         yield from generator
 
-    def generator_with_last(generator, last):
+    def generator_with_last(generator: Iterable[T], last: T) -> Generator[T, None, None]:
         yield from generator
         yield last
 

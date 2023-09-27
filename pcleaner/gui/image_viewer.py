@@ -14,7 +14,7 @@ class ImageViewer(Qw.QGraphicsView):
     image_dimensions: tuple[int, int] | None
     image_item: Qw.QGraphicsPixmapItem | None
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         super(ImageViewer, self).__init__(parent)
         self.setRenderHint(Qg.QPainter.Antialiasing)
 
@@ -31,10 +31,10 @@ class ImageViewer(Qw.QGraphicsView):
 
         self.setMouseTracking(True)
 
-    def pixmap_valid(self):
+    def pixmap_valid(self) -> bool:
         return self.image_item is not None and self.image_item.pixmap().isNull()
 
-    def set_image(self, image_path: Path = None):
+    def set_image(self, image_path: Path = None) -> None:
         if image_path:
             self.scene.clear()
             self.image_item = Qw.QGraphicsPixmapItem()
@@ -56,7 +56,7 @@ class ImageViewer(Qw.QGraphicsView):
             self.image_dimensions = None
             self.image_item = None
 
-    def wheelEvent(self, event: Qg.QWheelEvent):
+    def wheelEvent(self, event: Qg.QWheelEvent) -> None:
         if Qc.Qt.ControlModifier & event.modifiers():
             # Zoom in/out with Ctrl + mouse wheel
             if event.angleDelta().y() > 0:
@@ -75,23 +75,23 @@ class ImageViewer(Qw.QGraphicsView):
     # For the mouse wheel events, we want to zoom slower.
     # Since zooming applies a factor, we can use a root of the factor to
     # achieve half of a zoom step.
-    def zoom_in(self, wheel=False):
+    def zoom_in(self, wheel=False) -> None:
         if wheel:
             self.zoom(ZOOM_TICK_FACTOR**0.5)
         else:
             self.zoom(ZOOM_TICK_FACTOR)
 
-    def zoom_out(self, wheel=False):
+    def zoom_out(self, wheel=False) -> None:
         if wheel:
             self.zoom(1 / (ZOOM_TICK_FACTOR**0.5))
         else:
             self.zoom(1 / ZOOM_TICK_FACTOR)
 
-    def zoom_reset(self):
+    def zoom_reset(self) -> None:
         self.zoom_factor = 1.0
         self.zoom(1)
 
-    def zoom_fit(self):
+    def zoom_fit(self) -> None:
         if self.image_dimensions is None:
             return
         width, height = self.image_dimensions
@@ -104,10 +104,10 @@ class ImageViewer(Qw.QGraphicsView):
         )
         self.zoom(1)
 
-    def image_position(self, pos):
+    def image_position(self, pos) -> Qc.QPoint:
         return self.mapToScene(pos).toPoint()
 
-    def mouseMoveEvent(self, event):
+    def mouseMoveEvent(self, event) -> None:
         if self.pixmap_valid():
             return
         # Call base class implementation for standard behavior
@@ -117,7 +117,7 @@ class ImageViewer(Qw.QGraphicsView):
         self.mouseMoved.emit(image_pos.x(), image_pos.y())
         self.viewport().update()  # Request redraw for the pixel highlight
 
-    def drawForeground(self, painter, rect):
+    def drawForeground(self, painter, rect) -> None:
         if not self.pixmap_valid() and self.zoom_factor > 5:
             view_pos = self.mapFromGlobal(Qg.QCursor.pos())
             image_pos = self.mapToScene(view_pos).toPoint()
@@ -139,7 +139,7 @@ class ImageViewer(Qw.QGraphicsView):
                 )
                 painter.drawRect(scaled_rect)
 
-    def zoom(self, factor):
+    def zoom(self, factor) -> None:
         """
         Zoom the image by the given factor.
         The image may not exceed a scale of 100x or have both width and height be smaller
@@ -174,6 +174,6 @@ class ImageViewer(Qw.QGraphicsView):
             self.image_item.setTransformationMode(Qc.Qt.SmoothTransformation)
         self.setTransform(Qg.QTransform().scale(self.zoom_factor, self.zoom_factor))
 
-    def reset_zoom(self):
+    def reset_zoom(self) -> None:
         self.zoom_factor = 1
         self.setTransform(Qg.QTransform().scale(self.zoom_factor, self.zoom_factor))

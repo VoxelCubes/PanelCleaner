@@ -25,7 +25,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         / f"{clobber_protection_prefix}_{mask_data.original_path.with_suffix('.png').name}"
     )
 
-    def save_mask(img, name_suffix):
+    def save_mask(img, name_suffix) -> None:
         if d_data.show_masks:
             img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
 
