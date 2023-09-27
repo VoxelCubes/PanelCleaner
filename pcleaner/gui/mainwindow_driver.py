@@ -1,7 +1,6 @@
 from copy import deepcopy
 from functools import partial
 from importlib import resources
-from typing import Sequence
 from pathlib import Path
 import time
 
@@ -26,7 +25,6 @@ import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.processing as prc
 import pcleaner.gui.profile_parser as pp
 import pcleaner.gui.structures as gst
-import pcleaner.structures as st
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
 import pcleaner.profile_cli as pc
@@ -1243,32 +1241,3 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.label_progress_total.setText(
             f"Current step: {pp.to_display_name(progress_data.current_step.name)}"
         )
-
-    #
-    # def show_glossary_help(self) -> None:
-    #     """
-    #     Show the glossary documentation in a web browser.
-    #     Open the github page for this.
-    #     """
-    #     show_info(
-    #         self,
-    #         "Glossary info",
-    #         # language=HTML
-    #         """<html>
-    #                 <head/>
-    #                 <body>
-    #                     <p> DeepQt uses glossary files to pre-process files before sending them to the API;
-    #                         this is not the same as DeepL's glossary functions. Therefore, they can be used
-    #                         with any language and offer special features, which DeepL's glossaries cannot
-    #                         offer.
-    #                     </p>
-    #                     <p>
-    #                        The format of these glossaries is outlined in the
-    #                         <a href="https://github.com/VoxelCubes/DeepQt/blob/master/docs/glossary_help.md">
-    #                             online documentation
-    #                         </a>
-    #                         .
-    #                     </p>
-    #                 </body>
-    #             </html>""",
-    #     )
