@@ -22,8 +22,6 @@ import pcleaner.gui.rc_generated_files.rc_themes
 def launch() -> None:
     """
     Launch the GUI.
-
-    :param input_paths: List of paths to open on startup, may be empty.
     """
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)

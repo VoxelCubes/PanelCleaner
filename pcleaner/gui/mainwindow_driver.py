@@ -219,6 +219,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.theme_is_dark_changed.connect(self.adjust_progress_drawer_color)
         self.theme_is_dark_changed.connect(self.init_drop_panel)
         self.theme_is_dark_changed.connect(self.label_cleaning_outdir_help.load_icon)
+        self.theme_is_dark_changed.connect(self.label_write_output_help.load_icon)
         self.theme_is_dark_changed.connect(self.label_ocr_outdir_help.load_icon)
         # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)
@@ -945,6 +946,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         request_cleaned = self.checkBox_save_clean.isChecked()
         request_mask = self.checkBox_save_mask.isChecked()
         request_text = self.checkBox_save_text.isChecked()
+        request_output = self.checkBox_write_output.isChecked()
 
         requested_outputs = []
 
@@ -962,7 +964,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if request_text:
             requested_outputs.append(imf.Output.isolated_text)
 
-        requested_outputs.append(imf.Output.write_output)
+        # Check for goofballs that requested no outputs.
+        if not requested_outputs:
+            gu.show_warning(
+                self,
+                "No Outputs",
+                "No outputs were requested. Please select at least one output before cleaning.",
+            )
+            self.enable_running_cleaner()
+            return
+
+        if request_output:
+            requested_outputs.append(imf.Output.write_output)
 
         logger.info(f"Requested outputs: {requested_outputs}")
 

@@ -422,9 +422,13 @@ class Ui_MainWindow(object):
         self.stackedWidget_output.setObjectName(u"stackedWidget_output")
         self.page_cleaning = QWidget()
         self.page_cleaning.setObjectName(u"page_cleaning")
-        self.verticalLayout_11 = QVBoxLayout(self.page_cleaning)
+        self.verticalLayout_14 = QVBoxLayout(self.page_cleaning)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.verticalLayout_11 = QVBoxLayout()
+        self.verticalLayout_11.setSpacing(6)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
-        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
         self.checkBox_save_clean = QCheckBox(self.page_cleaning)
         self.checkBox_save_clean.setObjectName(u"checkBox_save_clean")
         self.checkBox_save_clean.setChecked(True)
@@ -442,9 +446,50 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_11.addWidget(self.checkBox_save_text)
 
+
+        self.horizontalLayout_7.addLayout(self.verticalLayout_11)
+
+        self.horizontalSpacer_6 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_7.addItem(self.horizontalSpacer_6)
+
+        self.verticalLayout_13 = QVBoxLayout()
+        self.verticalLayout_13.setSpacing(6)
+        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.checkBox_write_output = QCheckBox(self.page_cleaning)
+        self.checkBox_write_output.setObjectName(u"checkBox_write_output")
+        self.checkBox_write_output.setChecked(True)
+
+        self.horizontalLayout_6.addWidget(self.checkBox_write_output)
+
+        self.label_write_output_help = CTooltipLabel(self.page_cleaning)
+        self.label_write_output_help.setObjectName(u"label_write_output_help")
+        self.label_write_output_help.setToolTipDuration(-1)
+
+        self.horizontalLayout_6.addWidget(self.label_write_output_help)
+
+        self.horizontalSpacer_4 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_6.addItem(self.horizontalSpacer_4)
+
+
+        self.verticalLayout_13.addLayout(self.horizontalLayout_6)
+
+        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_13.addItem(self.verticalSpacer_6)
+
+
+        self.horizontalLayout_7.addLayout(self.verticalLayout_13)
+
+
+        self.verticalLayout_14.addLayout(self.horizontalLayout_7)
+
         self.verticalSpacer_2 = QSpacerItem(20, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
-        self.verticalLayout_11.addItem(self.verticalSpacer_2)
+        self.verticalLayout_14.addItem(self.verticalSpacer_2)
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
@@ -465,7 +510,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.addItem(self.horizontalSpacer_3)
 
 
-        self.verticalLayout_11.addLayout(self.horizontalLayout_5)
+        self.verticalLayout_14.addLayout(self.horizontalLayout_5)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -482,7 +527,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.pushButton_browse_out_dir)
 
 
-        self.verticalLayout_11.addLayout(self.horizontalLayout)
+        self.verticalLayout_14.addLayout(self.horizontalLayout)
 
         self.stackedWidget_output.addWidget(self.page_cleaning)
         self.page_ocr = QWidget()
@@ -743,6 +788,11 @@ class Ui_MainWindow(object):
         self.checkBox_save_clean.setText(QCoreApplication.translate("MainWindow", u"Cleaned Image", None))
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))
         self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
+        self.checkBox_write_output.setText(QCoreApplication.translate("MainWindow", u"Save Output", None))
+#if QT_CONFIG(tooltip)
+        self.label_write_output_help.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. </p><p>If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_write_output_help.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
 #if QT_CONFIG(tooltip)
         self.label_cleaning_outdir_help.setToolTip(QCoreApplication.translate("MainWindow", u"You can use a relative path to create a subfolder at the image's original location, or use an absolute path.", None))
