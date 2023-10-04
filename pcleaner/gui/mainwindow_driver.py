@@ -2,6 +2,7 @@ from copy import deepcopy
 from functools import partial
 from importlib import resources
 from pathlib import Path
+import platform
 import time
 
 import PySide6.QtCore as Qc
@@ -61,6 +62,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     last_applied_profile: cfg.Profile | None
 
     default_palette: Qg.QPalette
+    default_style: str
     default_icon_theme: str
     theme_is_dark: gst.Shared[bool]
     theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
@@ -119,6 +121,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.debug(f"Placeholder color: {placeholder_color.name()}")
         self.default_palette.setColor(Qg.QPalette.PlaceholderText, placeholder_color)
         self.default_icon_theme = Qg.QIcon.themeName()
+        self.default_style = Qw.QApplication.style().objectName()
 
     def load_config_theme(self) -> None:
         """
@@ -135,13 +138,15 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             logger.info(f"Using system theme.")
             self.setPalette(self.default_palette)
             Qg.QIcon.setThemeName(self.default_icon_theme)
+            Qw.QApplication.setStyle(self.default_style)
         else:
             logger.info(f"Using theme: {theme}")
             self.setPalette(gu.load_color_palette(theme))
             Qg.QIcon.setThemeName(theme)
+            if platform.system() == "Windows":
+                Qw.QApplication.setStyle("Fusion")
 
         Qw.QApplication.setPalette(self.palette())
-        self.update()
 
         # Check the brightness of the background color to determine if the theme is dark.
         # This is a heuristic, but it works well enough.
@@ -160,6 +165,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_system_theme.setChecked(theme is None)
         self.action_dark.setChecked(theme == "breeze-dark")
         self.action_light.setChecked(theme == "breeze")
+
+        self.update()
 
         # Update the config it necessary.
         prev_value = self.config.gui_theme

@@ -25,7 +25,7 @@ def open_file(path: Path) -> None:
         if platform.system() == "Linux":
             subprocess.run(["xdg-open", path])
         elif platform.system() == "Windows":
-            subprocess.run(["start", path])
+            subprocess.run(["notepad", path])
         elif platform.system() == "Darwin":
             subprocess.run(["open", path])
     except Exception as e:

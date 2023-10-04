@@ -4,6 +4,7 @@ import platform
 from io import StringIO
 
 import PySide6.QtWidgets as Qw
+import PySide6.QtGui as Qg
 import PySide6
 import logzero
 from logzero import logger
@@ -46,6 +47,13 @@ def launch() -> None:
 
     # Start the main window.
     app = Qw.QApplication(sys.argv)
+
+    Qg.QIcon.setFallbackSearchPaths([":/icons", ":/icon-themes"])
+    Qg.QIcon.setThemeSearchPaths([":/icons", ":/icon-themes"])
+    # We need to set an initial theme on Windows, otherwise the icons will fail to load
+    # later on, even when switching the theme again.
+    if platform.system() == "Windows":
+        Qg.QIcon.setThemeName("breeze")
 
     try:
         window = MainWindow()
