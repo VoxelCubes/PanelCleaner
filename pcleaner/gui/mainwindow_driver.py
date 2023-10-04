@@ -1153,12 +1153,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.statusbar.addPermanentWidget(self.label_stats)
 
         button_config = Qw.QPushButton("Open Config")
-        button_config.clicked.connect(partial(hp.open_file, cu.get_config_path()))
+        button_config.clicked.connect(partial(gu.open_file, cu.get_config_path()))
         button_config.setFlat(True)
         self.statusbar.addPermanentWidget(button_config)
 
         button_log = Qw.QPushButton("Open Log")
-        button_log.clicked.connect(partial(hp.open_file, cu.get_log_path()))
+        button_log.clicked.connect(partial(gu.open_file, cu.get_log_path()))
         button_log.setFlat(True)
         self.statusbar.addPermanentWidget(button_log)
 

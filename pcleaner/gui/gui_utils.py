@@ -1,7 +1,10 @@
 import io
 import sys
 import re
+from pathlib import Path
 from io import StringIO
+
+from logzero import logger
 import PySide6.QtWidgets as Qw
 import PySide6.QtGui as Qg
 import PySide6.QtCore as Qc
@@ -36,6 +39,18 @@ def show_question(
     dlg.setStandardButtons(buttons)
     dlg.setIcon(Qw.QMessageBox.Question)
     return dlg.exec()
+
+
+def open_file(path: Path) -> None:
+    """
+    Open any given file with the default application.
+    """
+    logger.info(f"Opening file {path}")
+    try:
+        # Use Qt to open the file, so that it works on all platforms.
+        Qg.QDesktopServices.openUrl(Qc.QUrl.fromLocalFile(str(path)))
+    except Exception as e:
+        logger.exception(e)
 
 
 class CaptureOutput(Qc.QObject):
