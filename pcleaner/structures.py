@@ -241,15 +241,15 @@ class PageData:
             draw.rectangle(box.as_tuple, outline="green")
             # Draw the box number, with a white background, respecting font size.
             draw.rectangle(
-                    (box.x1 + 2, box.y1 + 2, box.x1 + font_size, box.y1 + font_size),
-                    fill="white",
-                    outline="white",
+                (box.x1 + 2, box.y1 + 2, box.x1 + font_size, box.y1 + font_size),
+                fill="white",
+                outline="white",
             )
             draw.text(
-                    (box.x1 + 2, box.y1),
-                    str(index + 1),
-                    fill="green",
-                    font=ImageFont.truetype(font_path, font_size),
+                (box.x1 + 2, box.y1),
+                str(index + 1),
+                fill="green",
+                font=ImageFont.truetype(font_path, font_size),
             )
 
         for box in self.extended_boxes:

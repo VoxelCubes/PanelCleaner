@@ -22,7 +22,6 @@ pattern behind it.
 # Follow Qt's naming convention of CamelCase for functions, signals, and classes
 # noinspection PyPep8Naming
 class ColorButton(Qw.QPushButton):
-
     colorChanged = Qc.Signal(Qg.QColor)
 
     def __init__(

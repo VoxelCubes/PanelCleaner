@@ -30,7 +30,9 @@ class SelectableMessageBox(Qw.QMessageBox):
 
 def show_critical(parent, title: str, msg: str) -> int:
     msg = msg.ljust(MIN_MSG_LENGTH)
-    box = SelectableMessageBox(Qw.QMessageBox.Critical, title, msg, Qw.QMessageBox.Yes | Qw.QMessageBox.Abort, parent)
+    box = SelectableMessageBox(
+        Qw.QMessageBox.Critical, title, msg, Qw.QMessageBox.Yes | Qw.QMessageBox.Abort, parent
+    )
     return box.exec()
 
 

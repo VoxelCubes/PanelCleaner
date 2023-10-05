@@ -8,6 +8,10 @@ RC_OUTPUT_DIR = pcleaner/gui/rc_generated_files/
 UI_OUTPUT_DIR = pcleaner/gui/ui_generated_files/
 RCC_COMPILER = venv/bin/pyside6-rcc
 UIC_COMPILER = venv/bin/pyside6-uic
+BLACK_LINE_LENGTH = 100
+BLACK_TARGET_DIR = pcleaner/
+BLACK_EXCLUDE_PATTERN = "^$(RC_OUTPUT_DIR).*|^$(UI_OUTPUT_DIR).*|^pcleaner/comic_text_detector/.*"
+
 
 fresh-install: clean build install
 
@@ -49,6 +53,10 @@ install:
 # clean target
 clean:
 	rm -rf $(BUILD_DIR)
+
+# format the code
+black-format:
+	find $(BLACK_TARGET_DIR) -type f -name '*.py' | grep -Ev $(BLACK_EXCLUDE_PATTERN) | xargs black --line-length $(BLACK_LINE_LENGTH)
 
 release:
 	twine upload $(BUILD_DIR)*
