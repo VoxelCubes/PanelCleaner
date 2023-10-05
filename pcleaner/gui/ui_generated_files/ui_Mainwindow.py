@@ -713,7 +713,6 @@ class Ui_MainWindow(object):
         self.menu_Profile.addAction(self.menu_set_default_profile.menuAction())
         self.menu_set_default_profile.addAction(self.action_temp_2)
         self.menu_settings.addAction(self.menu_theme.menuAction())
-        self.menu_settings.addAction(self.action_open_log)
         self.menu_theme.addAction(self.action_system_theme)
         self.menu_theme.addSeparator()
         self.menu_theme.addAction(self.action_dark)
