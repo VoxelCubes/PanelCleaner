@@ -1,5 +1,7 @@
 from typing import Generic, TypeVar, Optional, Protocol
+
 from PIL import Image
+
 
 T = TypeVar("T")
 

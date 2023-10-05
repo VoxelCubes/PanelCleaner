@@ -1,8 +1,8 @@
 import re
 from dataclasses import dataclass, field
 from enum import Enum, auto
-from typing import get_type_hints, Any, Callable
 from pathlib import Path
+from typing import get_type_hints, Any, Callable
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -11,11 +11,11 @@ import configupdater as cu
 from PySide6.QtCore import Slot
 from logzero import logger
 
+import pcleaner.gui.gui_utils as gu
 from pcleaner import config as cfg
 from pcleaner.config import GreaterZero
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
-import pcleaner.gui.gui_utils as gu
 
 
 class EntryTypes(Enum):

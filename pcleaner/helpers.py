@@ -1,9 +1,8 @@
+import difflib
 import platform
 import subprocess
-from math import ceil
-from pathlib import Path
-import difflib
 from itertools import takewhile, groupby
+from pathlib import Path
 
 import tifffile
 from logzero import logger

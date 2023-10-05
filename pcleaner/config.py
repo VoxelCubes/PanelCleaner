@@ -1,16 +1,16 @@
 import re
 import sys
-from attrs import define, field
+from collections import defaultdict
 from pathlib import Path
 from typing import Any, NewType
-from collections import defaultdict
 
 import configupdater as cu
+from attrs import define, field
 from logzero import logger
 
 from pcleaner import cli_utils as cli
-from pcleaner import model_downloader as md
 from pcleaner import helpers as hp
+from pcleaner import model_downloader as md
 
 
 RESERVED_PROFILE_NAMES = ["default", "builtin", "none"]

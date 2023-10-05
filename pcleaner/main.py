@@ -107,34 +107,34 @@ Examples:
                                     you choose to delete them).
 
 """
+import itertools
+import multiprocessing
 import platform
 import time
 from multiprocessing import Pool
-import multiprocessing
 from pathlib import Path
-import itertools
-from typing import Sequence
-from PIL import Image
 
-from manga_ocr import MangaOcr
+import torch
+from PIL import Image
 from docopt import docopt
 from logzero import logger, loglevel, DEBUG, INFO
-from tqdm import tqdm
+from manga_ocr import MangaOcr
 from natsort import natsorted
-import torch
+from tqdm import tqdm
 
-from pcleaner import __version__
-import pcleaner.masker as ma
-import pcleaner.config as cfg
-import pcleaner.cli_utils as cli
-import pcleaner.preprocessor as pp
 import pcleaner.analytics as an
-import pcleaner.structures as st
-import pcleaner.profile_cli as pc
+import pcleaner.cli_utils as cli
+import pcleaner.config as cfg
 import pcleaner.denoiser as dn
-import pcleaner.model_downloader as md
-import pcleaner.helpers as hp
 import pcleaner.gui.launcher as gui
+import pcleaner.helpers as hp
+import pcleaner.masker as ma
+import pcleaner.model_downloader as md
+import pcleaner.preprocessor as pp
+import pcleaner.profile_cli as pc
+import pcleaner.structures as st
+from pcleaner import __version__
+
 
 # Allow loading of large images.
 Image.MAX_IMAGE_PIXELS = 2**32

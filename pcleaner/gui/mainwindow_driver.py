@@ -1,40 +1,39 @@
+import platform
+import time
 from copy import deepcopy
 from functools import partial
 from importlib import resources
 from pathlib import Path
-import platform
-import time
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+import torch
 from PySide6.QtCore import Slot, Signal
 from logzero import logger
 from manga_ocr import MangaOcr
-import torch
 
+import pcleaner.analytics as an
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
-import pcleaner.analytics as an
-import pcleaner.model_downloader as md
-import pcleaner.gui.model_downloader_driver as mdd
-import pcleaner.gui.setup_greeter_driver as sgd
 import pcleaner.gui.about_driver as ad
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
+import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.processing as prc
 import pcleaner.gui.profile_parser as pp
+import pcleaner.gui.setup_greeter_driver as sgd
 import pcleaner.gui.structures as gst
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
+import pcleaner.model_downloader as md
 import pcleaner.profile_cli as pc
 from pcleaner import __display_name__, __version__
 from pcleaner import data
 from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
-# TODO cleanup
 
 ANALYTICS_COLUMNS = 72
 
@@ -250,6 +249,28 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_system_theme.triggered.connect(partial(self.set_theme, None))
         self.action_dark.triggered.connect(partial(self.set_theme, "breeze-dark"))
         self.action_light.triggered.connect(partial(self.set_theme, "breeze"))
+
+    def set_up_statusbar(self) -> None:
+        """
+        Add a label to show the current char total and time estimate.
+        Add a flat button to the statusbar to offer opening the config file.
+        Add a flat button to the statusbar to offer opening the log file.
+        """
+        self.statusbar.setSizeGripEnabled(False)
+        self.statusbar.setContentsMargins(0, 0, 6, 0)
+
+        self.label_stats = Qw.QLabel("")
+        self.statusbar.addPermanentWidget(self.label_stats)
+
+        button_config = Qw.QPushButton("Open Config")
+        button_config.clicked.connect(partial(gu.open_file, cu.get_config_path()))
+        button_config.setFlat(True)
+        self.statusbar.addPermanentWidget(button_config)
+
+        button_log = Qw.QPushButton("Open Log")
+        button_log.clicked.connect(partial(gu.open_file, cu.get_log_path()))
+        button_log.setFlat(True)
+        self.statusbar.addPermanentWidget(button_log)
 
     def ensure_models_downloaded(self, skip_greeter: bool = False) -> None:
         """
@@ -1158,36 +1179,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self, "Processing Error", f"Encountered an error while processing files.\n\n{e}"
         )
         logger.error(f"Output worker encountered an error:\n{e}")
-
-    """
-    Log file
-    """
-
-    def set_up_statusbar(self) -> None:
-        """
-        Add a label to show the current char total and time estimate.
-        Add a flat button to the statusbar to offer opening the config file.
-        Add a flat button to the statusbar to offer opening the log file.
-        """
-        self.statusbar.setSizeGripEnabled(False)
-        self.statusbar.setContentsMargins(0, 0, 6, 0)
-
-        self.label_stats = Qw.QLabel("")
-        self.statusbar.addPermanentWidget(self.label_stats)
-
-        button_config = Qw.QPushButton("Open Config")
-        button_config.clicked.connect(partial(gu.open_file, cu.get_config_path()))
-        button_config.setFlat(True)
-        self.statusbar.addPermanentWidget(button_config)
-
-        button_log = Qw.QPushButton("Open Log")
-        button_log.clicked.connect(partial(gu.open_file, cu.get_log_path()))
-        button_log.setFlat(True)
-        self.statusbar.addPermanentWidget(button_log)
-
-    """
-    Simple UI manipulation functions
-    """
 
     @Slot(imf.ProgressData)
     def show_current_progress(self, progress_data: imf.ProgressData) -> None:

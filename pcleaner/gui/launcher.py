@@ -1,17 +1,17 @@
-import sys
 import os
 import platform
+import sys
 from io import StringIO
 
-import PySide6.QtWidgets as Qw
-import PySide6.QtGui as Qg
 import PySide6
+import PySide6.QtGui as Qg
+import PySide6.QtWidgets as Qw
 import logzero
 from logzero import logger
 
-from pcleaner.gui.mainwindow_driver import MainWindow
 import pcleaner.cli_utils as cu
 from pcleaner import __display_name__, __version__
+from pcleaner.gui.mainwindow_driver import MainWindow
 
 
 # This import is needed to load the icons.

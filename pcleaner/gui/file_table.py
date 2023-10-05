@@ -1,24 +1,24 @@
+from collections import defaultdict
 from enum import IntEnum, auto
 from pathlib import Path
 from typing import Sequence
-from collections import defaultdict
 
 import PySide6.QtCore as Qc
-from PySide6.QtCore import Slot
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+from PySide6.QtCore import Slot
 from logzero import logger
 from natsort import natsorted
 
 import pcleaner.config as cfg
+import pcleaner.ctd_interface as ctd
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.structures as gst
-import pcleaner.structures as st
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
+import pcleaner.structures as st
 from .CustomQ.CTableWidget import CTableWidget
-import pcleaner.ctd_interface as ctd
 
 
 # Add some space between the icon of each row.

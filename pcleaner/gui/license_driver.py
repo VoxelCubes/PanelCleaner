@@ -1,5 +1,5 @@
-import PySide6.QtWidgets as Qw
 import PySide6.QtGui as Qg
+import PySide6.QtWidgets as Qw
 
 from pcleaner.gui.ui_generated_files.ui_License import Ui_License
 

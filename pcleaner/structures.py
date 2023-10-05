@@ -6,9 +6,9 @@ from pathlib import Path
 from typing import Sequence
 
 import magic
-from logzero import logger
 from PIL import Image, ImageDraw, ImageFont
 from attrs import frozen, define
+from logzero import logger
 
 import pcleaner.config as cfg
 import pcleaner.data

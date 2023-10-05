@@ -1,10 +1,10 @@
+import itertools
 from copy import deepcopy
 from functools import partial
+from io import StringIO
 from multiprocessing import Pool
 from pathlib import Path
 from typing import Callable
-from io import StringIO
-import itertools
 
 import torch
 from PIL import Image
@@ -17,11 +17,11 @@ import pcleaner.denoiser as dn
 import pcleaner.gui.ctd_interface_gui as ctm
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.worker_thread as wt
+import pcleaner.helpers as hp
 import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
 import pcleaner.structures as st
-import pcleaner.helpers as hp
 
 
 def generate_output(

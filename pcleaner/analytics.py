@@ -1,16 +1,16 @@
 import itertools
 import shutil
 from collections import defaultdict
+from io import StringIO
 from pathlib import Path
 from typing import Sequence
-from io import StringIO
 
 import colorama as clr
-from natsort import natsorted
 from attrs import frozen
+from natsort import natsorted
 
-import pcleaner.structures as st
 import pcleaner.helpers as hp
+import pcleaner.structures as st
 
 
 @frozen

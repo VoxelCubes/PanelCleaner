@@ -1,12 +1,12 @@
 import datetime
 
-import PySide6.QtWidgets as Qw
-import PySide6.QtGui as Qg
-from PySide6.QtCore import Qt
 import PySide6
+import PySide6.QtGui as Qg
+import PySide6.QtWidgets as Qw
+from PySide6.QtCore import Qt
 
-from pcleaner import __version__
 import pcleaner.gui.license_driver as ld
+from pcleaner import __version__
 from pcleaner.gui.ui_generated_files.ui_About import Ui_About
 
 

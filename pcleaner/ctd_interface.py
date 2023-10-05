@@ -15,16 +15,16 @@ necessary files to run the model and the function below.
 """
 
 import json
-from uuid import uuid4
-from pathlib import Path
 import multiprocessing as mp
 from math import floor, ceil
+from pathlib import Path
+from uuid import uuid4
 
-from tqdm import tqdm
-import torch
-import numpy as np
 import cv2
+import numpy as np
+import torch
 from logzero import logger
+from tqdm import tqdm
 
 import pcleaner.config as cfg
 from pcleaner.comic_text_detector.inference import TextDetector

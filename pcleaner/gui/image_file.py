@@ -7,11 +7,10 @@ from uuid import uuid4
 
 import PySide6.QtGui as Qg
 import attrs
-from attrs import define, frozen, fields, Factory
-from PIL import Image
-from logzero import logger
 import dictdiffer
 import humanfriendly
+from PIL import Image
+from attrs import frozen, fields
 
 import pcleaner.config as cfg
 

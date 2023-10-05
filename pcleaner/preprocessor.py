@@ -1,15 +1,15 @@
 import json
 import re
-from pathlib import Path
 from copy import copy
+from pathlib import Path
 
 from PIL import Image
-from manga_ocr import MangaOcr
 from logzero import logger
+from manga_ocr import MangaOcr
 
+import pcleaner.config as cfg
 import pcleaner.ctd_interface as ctm
 import pcleaner.structures as st
-import pcleaner.config as cfg
 
 
 def generate_mask_data(

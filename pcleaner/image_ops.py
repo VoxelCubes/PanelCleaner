@@ -1,15 +1,15 @@
+from itertools import cycle
 from pathlib import Path
 from typing import Generator, Iterable, TypeVar
-from itertools import cycle
 
-import numpy as np
 import cv2
+import numpy as np
 import scipy
 from PIL import Image, ImageFilter
 from logzero import logger
 
-import pcleaner.structures as st
 import pcleaner.config as cfg
+import pcleaner.structures as st
 
 
 class BlankMaskError(Exception):
