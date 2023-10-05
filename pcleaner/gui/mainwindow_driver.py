@@ -513,6 +513,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.textEdit_analytics.clear()
         with resources.files(data) as data_path:
             font_path = data_path / "NotoMono-Regular.ttf"
+        logger.debug(f"Loading included font from {str(font_path)}")
         font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
         if font_id != -1:
             logger.info("Loaded included font")

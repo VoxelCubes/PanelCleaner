@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Sequence
 
 import magic
+from logzero import logger
 from PIL import Image, ImageDraw, ImageFont
 from attrs import frozen, define
 
@@ -232,6 +233,7 @@ class PageData:
         draw = ImageDraw.Draw(image)
         with resources.files(pcleaner.data) as data_path:
             font_path = str(data_path / "LiberationSans-Regular.ttf")
+        logger.debug(f"Loading included font from {font_path}")
         # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
         font_size = int(image.size[0] / 50)
 
