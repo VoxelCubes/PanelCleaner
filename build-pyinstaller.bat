@@ -16,4 +16,6 @@ pyinstaller pcleaner/main.py --paths 'venv/Lib/site-packages' ^
     --collect-data torch ^
     --collect-data unidic_lite ^
     --hidden-import=scipy.signal ^
-    --add-data "venv/Lib/site-packages/manga_ocr/assets/example.jpg;assets/"
+    --add-data "venv/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" ^
+    --add-data "pcleaner/data/LiberationSans-Regular.ttf;pcleaner/data/" ^
+    --add-data "pcleaner/data/NotoMono-Regular.ttf;pcleaner/data/"
