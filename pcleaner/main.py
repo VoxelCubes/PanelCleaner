@@ -107,10 +107,10 @@ Examples:
                                     you choose to delete them).
 
 """
-
-
+import platform
 import time
 from multiprocessing import Pool
+import multiprocessing
 from pathlib import Path
 import itertools
 from typing import Sequence
@@ -613,4 +613,7 @@ def clear_cache(config: cfg.Config, all_cache: bool, models: bool, images: bool)
 
 
 if __name__ == "__main__":
+    # Freeze on windows for multiprocessing compatibility.
+    if platform.system() == "Windows":
+        multiprocessing.freeze_support()
     main()
