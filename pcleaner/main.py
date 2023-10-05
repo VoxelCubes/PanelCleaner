@@ -9,15 +9,17 @@ Usage:
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
-    pcleaner gui_work_in_progress [--debug]
+    pcleaner gui [--debug]
     pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--cache-masks] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
     pcleaner load models [--cuda | --cpu | --both] [--force]
     pcleaner --help
     pcleaner --version
+    pcleaner [--debug]
 
 Subcommands:
+    (blank)          Open the GUI.
     clean            Clean the given image(s). Any number of images and directories can be given.
     profile          Manage profiles. These are files storing the settings for the program.
         list         List all saved profiles.
@@ -31,7 +33,7 @@ Subcommands:
         repair       Repair a profile. This will remove any invalid entries and save the profile.
                      Warning: Changes to the comments won't be preserved, only settings.
         purge-missing  Remove all profiles that link to a file that doesn't exist.
-    gui              Open the GUI. Any number of images and directories can be given to be loaded on startup.
+    gui              Open the GUI. This is also automatically invoked if no command is given.
     ocr              Run only the OCR on the given image(s). Any number of images and directories can be given.
                      The output will be saved in a single text file for the whole batch.
     config           View or edit the config file. This stores setting independent of profiles.
@@ -149,7 +151,7 @@ def main() -> None:
     logger.debug(args)
 
     # If save-only-text is set, set extract-text to true, as it is required.
-    # Also automatically skip the Denoising step, as it is not needed.
+    # Also, automatically skip the Denoising step, as it is not needed.
     # This also means that the save-only-text option will not be regarded in the
     # denoising step.
     if args.save_only_text:
@@ -180,8 +182,6 @@ def main() -> None:
             pc.purge_missing_profiles(config)
         else:
             raise ValueError("Invalid profile subcommand.")
-    elif args.gui_work_in_progress:
-        gui.launch()
 
     elif args.ocr:
         config = cfg.load_config()
@@ -242,7 +242,10 @@ def main() -> None:
         print(f"\nTime elapsed: {end - start:.2f} seconds")
 
     else:
-        print("Invalid command. See 'pcleaner --help' for more information.")
+        # Launch the GUI. Either the user specified it, or no command was given.
+        # This is done so that a bundled executable can be launched in gui mode without a command,
+        # without hindering access to the cli.
+        gui.launch()
 
 
 def run_cleaner(

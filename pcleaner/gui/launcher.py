@@ -65,3 +65,7 @@ def launch() -> None:
         )
     finally:
         logger.info("---- Shutting down ----\n")
+
+
+if __name__ == "__main__":
+    launch()
