@@ -44,7 +44,7 @@ build-icon-cache:
 
 # install target
 install:
-	$(PYTHON) -m pip install $(BUILD_DIR)*.whl
+	$(PYTHON) -m pip install $(BUILD_DIR)*.whl --break-system-packages
 
 # clean target
 clean:
