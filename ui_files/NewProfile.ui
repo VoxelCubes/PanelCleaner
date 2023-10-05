@@ -64,7 +64,8 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="folder-open"/>
+          <iconset theme="document-open-folder">
+           <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>
        </item>
