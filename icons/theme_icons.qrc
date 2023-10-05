@@ -20,6 +20,7 @@
     <file>breeze/actions/16/help-about.svg</file>
     <file>breeze/actions/16/help-contents.svg</file>
     <file>breeze/actions/16/help-hint.svg</file>
+    <file>breeze/actions/16/internet-services.svg</file>
     <file>breeze/actions/16/list-add.svg</file>
     <file>breeze/actions/16/media-playback-start.svg</file>
     <file>breeze/actions/16/overflow-menu.svg</file>
@@ -57,6 +58,7 @@
     <file>breeze-dark/actions/16/help-about.svg</file>
     <file>breeze-dark/actions/16/help-contents.svg</file>
     <file>breeze-dark/actions/16/help-hint.svg</file>
+    <file>breeze-dark/actions/16/internet-services.svg</file>
     <file>breeze-dark/actions/16/list-add.svg</file>
     <file>breeze-dark/actions/16/media-playback-start.svg</file>
     <file>breeze-dark/actions/16/overflow-menu.svg</file>

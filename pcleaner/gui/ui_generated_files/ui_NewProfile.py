@@ -58,7 +58,13 @@ class Ui_NewProfile(object):
         self.pushButton_browse_location = QPushButton(NewProfile)
         self.pushButton_browse_location.setObjectName(u"pushButton_browse_location")
         self.pushButton_browse_location.setEnabled(False)
-        icon = QIcon(QIcon.fromTheme(u"document-open-folder"))
+        icon = QIcon()
+        iconThemeName = u"document-open-folder"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_browse_location.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_browse_location)
