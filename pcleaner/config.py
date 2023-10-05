@@ -608,7 +608,7 @@ class Profile:
         """
         logger.debug("Writing profile to disk...")
         try:
-            with open(path, "w") as file:
+            with open(path, "w", encoding="utf-8") as file:
                 self.bundle_config().write(file)
             return True
         except Exception as e:
@@ -623,7 +623,7 @@ class Profile:
         logger.debug(f"Loading profile {path} from disk...")
         config = cu.ConfigUpdater()
         try:
-            config.read(path)
+            config.read(path, encoding="utf-8")
             profile = cls()
             profile.general.import_from_conf(config)
             profile.text_detector.import_from_conf(config)
@@ -877,7 +877,7 @@ class Config:
 
         return config
 
-    def load_profile(self, profile_name: str | None = None) -> None:
+    def load_profile(self, profile_name: str | None = None) -> tuple[bool, Exception | None]:
         """
         Load a profile from disk, if a name is given.
         First search if the profile is saved, otherwise treat it like a path.
@@ -886,6 +886,7 @@ class Config:
         Special case: Reserve the name "builtin" and "none" (case insensitive) to load the built-in default profile.
 
         :param profile_name: Name or path of the profile to load.
+        :return: True if the profile was loaded successfully.
         """
         logger.debug(f"Loading profile {profile_name!r}...")
         # If no override is given, use the default profile.
@@ -896,7 +897,7 @@ class Config:
         if profile_name is None or profile_name.lower() in RESERVED_PROFILE_NAMES:
             logger.debug("Loading builtin default profile")
             self.current_profile = Profile()
-            return
+            return True, None
 
         found_profile = cli.closest_match(profile_name, list(self.saved_profiles.keys()))
         if found_profile is not None:
@@ -912,6 +913,9 @@ class Config:
         except Exception as e:
             logger.error(f"Failed to load profile from {profile_path}:\n{e}")
             self.current_profile = Profile()
+            return False, e
+
+        return True, None
 
     def get_model_path(self, cuda: bool) -> Path:
         """
@@ -961,7 +965,7 @@ def load_config() -> Config:
     if config_path.is_file():
         conf_updater = cu.ConfigUpdater()
         try:
-            conf_updater.read(config_path)
+            conf_updater.read(config_path, encoding="utf-8")
         except OSError as e:
             logger.error(f"Failed to read configuration from {config_path}:\n{e}")
             if cli.get_confirmation("Do you want to create a new configuration file?"):

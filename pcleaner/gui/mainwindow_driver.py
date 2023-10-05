@@ -792,7 +792,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Set the config option to match the current profile selector, then load it.
         """
         profile_name = self.comboBox_current_profile.currentText()
-        self.config.load_profile(profile_name)
+        success, error = self.config.load_profile(profile_name)
+        if not success:
+            gu.show_warning(self, "Load Error", f"Failed to load profile: \n\n{error}")
+            return
         self.load_current_profile()
 
     @Slot()
@@ -866,7 +869,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             if not success:
                 logger.error("Failed to save profile.")
                 self.statusbar.showMessage(f"Failed to save profile to {profile_path}")
-                gu.show_critical(self, "Save Error", "Failed to save profile.")
+                gu.show_warning(self, "Save Error", "Failed to save profile.")
                 return
 
             logger.info("Profile saved successfully.")
@@ -879,7 +882,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     gu.show_critical(
                         self,
                         "Save Error",
-                        "Failed to save the new profile to the configuration file.",
+                        "Failed to save the new profile to the configuration file.\n"
+                        "Continue anyway?",
                     )
                     return
                 # To suppress the change check since we don't care about discarding the current changes.
@@ -888,7 +892,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 # Add the new profile to the combobox.
                 self.add_new_profile_to_gui(profile_name, profile_path)
 
-        self.config.load_profile(profile_name)
+        success, error = self.config.load_profile(profile_name)
+        if not success:
+            gu.show_warning(self, "Load Error", f"Failed to load profile: \n\n{error}")
+            return
         self.load_current_profile()
         self.handle_profile_values_changed()
 

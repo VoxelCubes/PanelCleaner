@@ -36,6 +36,9 @@ class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
         self.label_default_path.setText(str(self.default_path))
         self.protected_names = protected_names
 
+        # Ensure that the default path exists.
+        self.default_path.mkdir(parents=True, exist_ok=True)
+
         self.label_warning_icon.setPixmap(Qg.QIcon.fromTheme("data-error").pixmap(16, 16))
         self.label_default_protection_hint.setVisible(show_protection_hint)
 
