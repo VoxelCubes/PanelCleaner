@@ -210,6 +210,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_delete_models.triggered.connect(self.delete_models)
         self.action_online_documentation.triggered.connect(self.open_online_documentation)
         self.action_about.triggered.connect(self.open_about)
+        self.action_donate.triggered.connect(self.open_donation_page)
 
         self.file_table.requesting_image_preview.connect(
             partial(
@@ -575,6 +576,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Bodge in an instance variable to prevent garbage collection from immediately closing the window.
         self.about = ad.AboutWidget()
         self.about.show()
+
+    def open_donation_page(self) -> None:
+        """
+        Open the donation page in the default browser.
+        """
+        logger.debug("Opening donation page.")
+        Qg.QDesktopServices.openUrl(Qc.QUrl("https://ko-fi.com/voxelcode"))
 
     # ========================================== Profiles ==========================================
 

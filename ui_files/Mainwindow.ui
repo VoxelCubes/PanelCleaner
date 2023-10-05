@@ -935,6 +935,7 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="action_online_documentation"/>
     <addaction name="action_about"/>
+    <addaction name="action_donate"/>
     <addaction name="separator"/>
     <addaction name="action_delete_models"/>
    </widget>
@@ -1110,6 +1111,15 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Download Machine Learning Models</string>
+   </property>
+  </action>
+  <action name="action_donate">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/heart.svg</normaloff>:/heart.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Donate</string>
    </property>
   </action>
  </widget>

@@ -170,6 +170,11 @@ class Ui_MainWindow(object):
             icon10.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
         self.action_download_models.setIcon(icon10)
+        self.action_donate = QAction(MainWindow)
+        self.action_donate.setObjectName(u"action_donate")
+        icon11 = QIcon()
+        icon11.addFile(u":/heart.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.action_donate.setIcon(icon11)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_6 = QVBoxLayout(self.centralwidget)
@@ -200,14 +205,14 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon11 = QIcon()
+        icon12 = QIcon()
         iconThemeName = u"dialog-ok-apply"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon11 = QIcon.fromTheme(iconThemeName)
+            icon12 = QIcon.fromTheme(iconThemeName)
         else:
-            icon11.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon12.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_apply_profile.setIcon(icon11)
+        self.pushButton_apply_profile.setIcon(icon12)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
 
@@ -221,14 +226,14 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
-        icon12 = QIcon()
+        icon13 = QIcon()
         iconThemeName = u"document-revert"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon12 = QIcon.fromTheme(iconThemeName)
+            icon13 = QIcon.fromTheme(iconThemeName)
         else:
-            icon12.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon13.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_reset_profile.setIcon(icon12)
+        self.pushButton_reset_profile.setIcon(icon13)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
 
@@ -384,27 +389,27 @@ class Ui_MainWindow(object):
 
         self.pushButton_abort = QPushButton(self.groupBox_4)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon13 = QIcon()
-        iconThemeName = u"process-stop"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon13 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon13.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
-        self.pushButton_abort.setIcon(icon13)
-
-        self.verticalLayout_7.addWidget(self.pushButton_abort)
-
-        self.pushButton_start = QPushButton(self.groupBox_4)
-        self.pushButton_start.setObjectName(u"pushButton_start")
         icon14 = QIcon()
-        iconThemeName = u"media-playback-start"
+        iconThemeName = u"process-stop"
         if QIcon.hasThemeIcon(iconThemeName):
             icon14 = QIcon.fromTheme(iconThemeName)
         else:
             icon14.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_start.setIcon(icon14)
+        self.pushButton_abort.setIcon(icon14)
+
+        self.verticalLayout_7.addWidget(self.pushButton_abort)
+
+        self.pushButton_start = QPushButton(self.groupBox_4)
+        self.pushButton_start.setObjectName(u"pushButton_start")
+        icon15 = QIcon()
+        iconThemeName = u"media-playback-start"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon15 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon15.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.pushButton_start.setIcon(icon15)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
 
@@ -719,6 +724,7 @@ class Ui_MainWindow(object):
         self.menu_theme.addAction(self.action_light)
         self.menu_Help.addAction(self.action_online_documentation)
         self.menu_Help.addAction(self.action_about)
+        self.menu_Help.addAction(self.action_donate)
         self.menu_Help.addSeparator()
         self.menu_Help.addAction(self.action_delete_models)
 
@@ -754,6 +760,7 @@ class Ui_MainWindow(object):
         self.action_add_folders.setText(QCoreApplication.translate("MainWindow", u"Add Folder...", None))
         self.action_delete_models.setText(QCoreApplication.translate("MainWindow", u"Delete Machine Learning Models", None))
         self.action_download_models.setText(QCoreApplication.translate("MainWindow", u"Download Machine Learning Models", None))
+        self.action_donate.setText(QCoreApplication.translate("MainWindow", u"Donate", None))
         self.groupBox_profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 

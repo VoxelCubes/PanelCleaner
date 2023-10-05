@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/">
+    <file>heart.svg</file>
     <file>custom_icons/dark/mask_denoised.svg</file>
     <file>custom_icons/dark/mask_failed.svg</file>
     <file>custom_icons/dark/mask_perfect.svg</file>
