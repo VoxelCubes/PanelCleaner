@@ -36,6 +36,8 @@ class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
         self.label_default_path.setText(str(self.default_path))
         self.protected_names = protected_names
 
+        self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
+
         # Ensure that the default path exists.
         self.default_path.mkdir(parents=True, exist_ok=True)
 
