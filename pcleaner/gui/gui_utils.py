@@ -14,19 +14,36 @@ import PySide6.QtCore as Qc
 MIN_MSG_LENGTH = 50
 
 
+class SelectableMessageBox(Qw.QMessageBox):
+    """
+    Subclass the QMessageBox to make the text selectable.
+    """
+
+    def __init__(self, *args, **kwargs):
+        super(SelectableMessageBox, self).__init__(*args, **kwargs)
+        self.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+
+        labels = self.findChildren(Qw.QLabel)
+        for label in labels:
+            label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+
+
 def show_critical(parent, title: str, msg: str) -> int:
     msg = msg.ljust(MIN_MSG_LENGTH)
-    return Qw.QMessageBox.critical(parent, title, msg, Qw.QMessageBox.Yes, Qw.QMessageBox.Abort)
+    box = SelectableMessageBox(Qw.QMessageBox.Critical, title, msg, Qw.QMessageBox.Yes | Qw.QMessageBox.Abort, parent)
+    return box.exec()
 
 
 def show_warning(parent, title: str, msg: str) -> None:
     msg = msg.ljust(MIN_MSG_LENGTH)
-    Qw.QMessageBox.warning(parent, title, msg, Qw.QMessageBox.Ok)
+    box = SelectableMessageBox(Qw.QMessageBox.Warning, title, msg, Qw.QMessageBox.Ok, parent)
+    box.exec()
 
 
 def show_info(parent, title: str, msg: str) -> None:
     msg = msg.ljust(MIN_MSG_LENGTH)
-    Qw.QMessageBox.information(parent, title, msg, Qw.QMessageBox.Ok)
+    box = SelectableMessageBox(Qw.QMessageBox.Information, title, msg, Qw.QMessageBox.Ok, parent)
+    box.exec()
 
 
 def show_question(
