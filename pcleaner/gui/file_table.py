@@ -94,6 +94,14 @@ class FileTable(CTableWidget):
             Column.ANALYTICS, round(4 * (imf.THUMBNAIL_SIZE * 0.75) + 2 * GUI_PADDING)
         )
 
+        # Add tooltips to column headers.
+        self.horizontalHeaderItem(Column.SIZE).setToolTip(
+            "Original size in pixels (width × height)"
+        )
+        self.horizontalHeaderItem(Column.PROCESSING_SIZE).setToolTip(
+            "Processing size in pixels (width × height), scale factor"
+        )
+
     def set_thread_queue(self, thread_queue: Qc.QThreadPool) -> None:
         self.thread_queue = thread_queue
 
