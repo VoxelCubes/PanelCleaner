@@ -49,11 +49,11 @@ def launch() -> None:
     app = Qw.QApplication(sys.argv)
 
     Qg.QIcon.setFallbackSearchPaths([":/icons", ":/icon-themes"])
-    Qg.QIcon.setThemeSearchPaths([":/icons", ":/icon-themes"])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load
     # later on, even when switching the theme again.
     if platform.system() == "Windows":
         Qg.QIcon.setThemeName("breeze")
+        Qg.QIcon.setThemeSearchPaths([":/icons", ":/icon-themes"])
 
     try:
         window = MainWindow()
