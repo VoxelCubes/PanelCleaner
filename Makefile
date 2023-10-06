@@ -1,5 +1,5 @@
 # define variables
-PYTHON = python
+PYTHON = venv/bin/python
 BUILD_DIR = dist/
 QRC_DIR_ICONS = icons/
 QRC_DIR_THEMES = themes/
@@ -60,5 +60,29 @@ black-format:
 
 release:
 	twine upload $(BUILD_DIR)*
+
+build-elf:
+	$(PYTHON) -m PyInstaller pcleaner/main.py \
+		--paths 'venv/lib/python3.11/site-packages' \
+		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
+		--name="PanelCleaner" \
+		--copy-metadata=filelock \
+		--copy-metadata=huggingface-hub \
+		--copy-metadata=numpy \
+		--copy-metadata=packaging \
+		--copy-metadata=pyyaml \
+		--copy-metadata=regex \
+		--copy-metadata=requests \
+		--copy-metadata=safetensors \
+		--copy-metadata=tokenizers \
+		--copy-metadata=tqdm \
+		--copy-metadata=torch \
+		--collect-data=torch \
+		--collect-data=unidic_lite \
+		--hidden-import=scipy.signal \
+		--add-data "venv/lib/python3.11/site-packages/manga_ocr/assets/example.jpg:assets/" \
+		--add-data "pcleaner/data/LiberationSans-Regular.ttf:pcleaner/data/" \
+		--add-data "pcleaner/data/NotoMono-Regular.ttf:pcleaner/data/"
+
 
 .PHONY: clean build install fresh-install release compile-qrc compile-ui build-icon-cache refresh-assets

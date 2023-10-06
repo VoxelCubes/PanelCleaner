@@ -17,6 +17,7 @@ profile.json
 build/
 develop-eggs/
 dist/
+dist-dir/
 downloads/
 eggs/
 .eggs/
@@ -27,9 +28,11 @@ sdist/
 var/
 wheels/
 share/python-wheels/
+dist-elf/
 *.egg-info/
 .installed.cfg
 *.egg
+*.spec
 MANIFEST
 
 # PyInstaller
