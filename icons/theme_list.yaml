@@ -34,7 +34,7 @@ Files:
       - zoom-fit-best
       - zoom-in
       - zoom-out
-      - zoom-reset
+      - zoom-original
   mimetypes:
     16:
       - image-bmp

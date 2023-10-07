@@ -1,4 +1,5 @@
 # define variables
+CurrentDir := $(shell pwd)
 PYTHON = venv/bin/python
 BUILD_DIR = dist/
 QRC_DIR_ICONS = icons/
@@ -43,8 +44,8 @@ compile-ui:
 
 # run build_icon_cache.py
 build-icon-cache:
-	cd $(QRC_DIR_ICONS) && $(PYTHON) build_icon_cache.py
-	cd $(QRC_DIR_ICONS)/custom_icons && $(PYTHON) copy_from_dark_to_light.py
+	cd $(QRC_DIR_ICONS) && ${CurrentDir}/$(PYTHON) build_icon_cache.py
+	cd $(QRC_DIR_ICONS)/custom_icons && ${CurrentDir}/$(PYTHON) copy_from_dark_to_light.py
 
 # install target
 install:
