@@ -5,6 +5,7 @@ __pycache__/
 
 output/**
 *.zip
+*.exe
 profile.html
 profile.json
 .directory
@@ -124,7 +125,7 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
+venv-cuda/
 ENV/
 env.bak/
 venv.bak/

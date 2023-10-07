@@ -1,7 +1,7 @@
-:: Perform a Windows build.
-.\venv\Scripts\pip install pyinstaller
-.\venv\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv/Lib/site-packages' ^
-    --onefile --noconfirm --clean --workpath=build --distpath=dist_exe --windowed ^
+:: Perform a Windows build with CUDA.
+.\venv-cuda\Scripts\pip install pyinstaller
+.\venv-cuda\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv-cuda/Lib/site-packages' ^
+    --onefile --noconfirm --clean --workpath=build --distpath=dist_exe_cuda --windowed ^
     --name="PanelCleaner.exe" --icon=icons\logo.ico ^
     --copy-metadata filelock ^
     --copy-metadata huggingface-hub ^
