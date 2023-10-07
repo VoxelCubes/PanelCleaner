@@ -324,6 +324,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.start_output_worker(output)
         else:
             try:
+                # Draw a background using the accent color to provide contrast.
+                self.image_viewer.setBackgroundBrush(
+                    Qg.QBrush(self.palette().color(Qg.QPalette.Highlight))
+                )
                 self.image_viewer.set_image(proc_output.path)
                 self.label_size.setText(
                     f"{self.image_viewer.image_dimensions[0]} × {self.image_viewer.image_dimensions[1]}"
