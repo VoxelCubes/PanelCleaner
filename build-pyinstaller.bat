@@ -1,4 +1,5 @@
 :: Perform a Windows build.
+:: Be sure to switch venv first!
 .\venv\Scripts\pip install pyinstaller
 .\venv\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv/Lib/site-packages' ^
     --onefile --noconfirm --clean --workpath=build --distpath=dist_exe --windowed ^

@@ -1,4 +1,5 @@
 :: Perform a Windows build with CUDA.
+:: Be sure to switch venv first!
 .\venv-cuda\Scripts\pip install pyinstaller
 .\venv-cuda\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv-cuda/Lib/site-packages' ^
     --onefile --noconfirm --clean --workpath=build --distpath=dist_exe_cuda --windowed ^
