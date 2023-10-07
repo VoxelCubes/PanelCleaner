@@ -8,6 +8,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 import logzero
 from logzero import logger
+import torch
 
 import pcleaner.cli_utils as cu
 from pcleaner import __display_name__, __version__
@@ -42,6 +43,10 @@ def launch() -> None:
     buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
     buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
+    if torch.cuda.is_available():
+        buffer.write(f"GPU: {torch.cuda.get_device_name(0)} (CUDA enabled)\n")
+    else:
+        buffer.write("GPU: None (CUDA not available)\n")
 
     logger.info(buffer.getvalue())
 
