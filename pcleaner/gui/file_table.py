@@ -513,6 +513,7 @@ class FileTable(CTableWidget):
             for file in selected_files:
                 self.handleDrop(file)
             # self.request_text_param_update.emit()
+        self.repopulate_table()
 
     def browse_add_folders(self) -> None:
         """
@@ -521,3 +522,5 @@ class FileTable(CTableWidget):
         folder = Qw.QFileDialog.getExistingDirectory(self, "Select directory")
         if folder:
             self.handleDrop(folder)
+
+        self.repopulate_table()
