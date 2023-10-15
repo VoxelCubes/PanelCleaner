@@ -98,6 +98,8 @@ When fully cleaning it isn't possible, Panel Cleaner will instead skip the bubbl
 You have the choice between installing a pre-built binary from the [releases section](https://github.com/VoxelCubes/PanelCleaner/releases/latest) 
 or installing it to your local python interpreter using pip.
 
+Note: All versions will need to download model data on first launch (approx. 500MB). This model data will not need to be downloaded again if Panel Cleaner updates.
+
 Important: The pre-built binaries do not support CUDA acceleration. To use CUDA, you must install the program with pip and ensure you install the appropriate [pytorch](https://pytorch.org/get-started/locally/) version for your system.
 
 ### Install with Pip
