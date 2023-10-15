@@ -67,6 +67,11 @@ pip uninstall python-magic
 pip install python-magic-bin
 ```
 
+## The Windows exe takes a long time to start, what's going on?
+
+Since this exe bundles all the dependencies into a single file, it needs to unpack them first, which can take a while. Please be patient.
+Using any of the other methods won't have this problem.
+
 ## Will profiles I set up with the CLI work with the GUI?
 
 Yes, they will. The GUI is just a wrapper around the CLI, so it will use the same profiles.
