@@ -7,6 +7,9 @@
 This tool uses machine learning to find text and then generates masks to cover it up with the highest accuracy possible. It is designed to clean easy bubbles, no in-painting or out-of-bubble text removal is done. This is intended to save a lot of monotonous work for people who have to clean a lot of panels, while making sure it doesn't paint over anything that it wasn't supposed to.
 
 ![Example](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/spread.png)
+![Example](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/screenshots/cleaning_in_progress.png)
+![Example](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/screenshots/details.png)
+
 
 Visualized in the top right page: 
 
@@ -31,7 +34,8 @@ The two bottom pages are what the program can output: either just the transparen
 > [Examples](#examples-of-tricky-bubbles) \
 > [Acknowledgements](#acknowledgements) \
 > [License](#license) \
-> [Roadmap](#roadmap)
+> [Roadmap](#roadmap) \
+> [FAQ](https://github.com/VoxelCubes/PanelCleaner/blob/master/docs/faq.md)
 
 
 ## Features
@@ -42,12 +46,16 @@ The two bottom pages are what the program can output: either just the transparen
 
 - Ignores bubbles containing only symbols or numbers, as those don't need translation.
 
+- Offers a GUI for easy use, dark, light, and system themes are supported.
+
+- No internet connection required after installing the model data.
+
 - Offers a plethora of options to customize the cleaning process and the ability to save multiple presets as profiles.
   See the [default profile](https://github.com/VoxelCubes/PanelCleaner/blob/master/media/default.conf) for a list of all options.
 
 - Provides detailed analytics on the cleaning process, to see how your settings affect the results.
 
-- Supports CUDA acceleration, if your hardware supports it.
+- Supports CUDA acceleration, if installed as a python package and your hardware supports it.
 
 - Supports batch processing of images and directories.
 
@@ -87,6 +95,13 @@ When fully cleaning it isn't possible, Panel Cleaner will instead skip the bubbl
 
 ## Installation
 
+You have the choice between installing a pre-built binary from the [releases section](https://github.com/VoxelCubes/PanelCleaner/releases/latest) 
+or installing it to your local python interpreter using pip.
+
+Important: The pre-built binaries do not support CUDA acceleration. To use CUDA, you must install the program with pip and ensure you install the appropriate [pytorch](https://pytorch.org/get-started/locally/) version for your system.
+
+### Install with Pip
+
 The program requires **Python 3.10** or newer.
 
 Install the program with pip from [PyPI](https://pypi.org/project/pcleaner/):
@@ -94,14 +109,13 @@ Install the program with pip from [PyPI](https://pypi.org/project/pcleaner/):
 pip install pcleaner
 ```
 
-Note: The program has only been tested on Linux and on Windows with WSL, but should work on Windows (natively) and Mac as well.
+Note: The program has been tested to work on Linux, MacOS, and Windows, with varying levels of setup required. See the [FAQ](https://github.com/VoxelCubes/PanelCleaner/blob/master/docs/faq.md) for help.
 
 ### Install with Docker
 
 Build the image with buildx:
 ```bash
 docker buildx build -t pcleaner:v1 .
-
 ```
 Or with the legacy builder:
 ```bash
@@ -121,9 +135,9 @@ docker start pcleaner
 docker exec -it pcleaner bash
 ```
 
-## Usage
+## Command Line Usage
 
-The program is run from the command line, and, in the most common use, takes any number of images or directories as input. The program will create a new directory called `cleaned` in the same directory as the input files, and place the cleaned images and/or masks there. Often, it's more useful to only export the mask layer, and you can do so by adding the `--save-only-mask`, or `-m` for short, option.
+The program can be run from the command line, and, in the most common use, takes any number of images or directories as input. The program will create a new directory called `cleaned` in the same directory as the input files, and place the cleaned images and/or masks there. Often, it's more useful to only export the mask layer, and you can do so by adding the `--save-only-mask`, or `-m` for short, option.
 
 Examples:
 ```bash
@@ -140,10 +154,27 @@ There are many more options, which can be seen by running
 pcleaner --help
 ```
 
+### Launching the GUI using the Command Line
+
+The GUI can be launched from the command line using the `gui` command:
+```bash
+pcleaner gui
+```
+or directly with
+```bash
+pcleaner-gui
+```
+
+If pcleaner cannot be found, ensure it is in your PATH variable, or try
+```bash
+python -m pcleaner
+```
+instead.
+
 
 ## Profiles
 
-The program exposes every setting possible in a configuration profile, which are saved as simple text files. Each configuration option is explained inside the file itself, allowing you to optimize each parameter of the cleaning process for your specific needs. \
+The program exposes every setting possible in a configuration profile, which are saved as simple text files and can also be accessed using the GUI. Each configuration option is explained inside the file itself, allowing you to optimize each parameter of the cleaning process for your specific needs. \
 Just generate a new profile with
 ```bash
 pcleaner profile new my_profile_name_here
@@ -191,6 +222,7 @@ You can run OCR with:
 ```bash
 pcleaner ocr myfolder --output-path=output.txt
 ```
+This is also available in the GUI, as the OCR output option.
 
 
 ## Examples of Tricky Bubbles
@@ -223,4 +255,4 @@ the [LICENSE](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/L
 
 ## Roadmap
 
-Maybe make a GUI for it.
+- [x] Maybe make a GUI for it.
