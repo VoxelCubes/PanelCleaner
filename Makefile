@@ -1,6 +1,7 @@
 # define variables
 CurrentDir := $(shell pwd)
 PYTHON = venv/bin/python
+PYINSTALLER = venv/bin/pyinstaller
 BUILD_DIR = dist/
 QRC_DIR_ICONS = icons/
 QRC_DIR_THEMES = themes/
@@ -63,7 +64,7 @@ release:
 	twine upload $(BUILD_DIR)*
 
 build-elf:
-	$(PYTHON) -m PyInstaller pcleaner/main.py \
+	$(PYINSTALLER) pcleaner/main.py \
 		--paths 'venv/lib/python3.11/site-packages' \
 		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
 		--name="PanelCleaner" \
@@ -72,6 +73,7 @@ build-elf:
 		--copy-metadata=numpy \
 		--copy-metadata=packaging \
 		--copy-metadata=pyyaml \
+		--copy-metadata=pillow \
 		--copy-metadata=regex \
 		--copy-metadata=requests \
 		--copy-metadata=safetensors \
@@ -85,5 +87,9 @@ build-elf:
 		--add-data "pcleaner/data/LiberationSans-Regular.ttf:pcleaner/data/" \
 		--add-data "pcleaner/data/NotoMono-Regular.ttf:pcleaner/data/"
 
+pip-install-torch-no-cuda:
+	$(PYTHON) -m pip uninstall torch torchvision -y
+	$(PYTHON) -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
-.PHONY: clean build install fresh-install release compile-qrc compile-ui build-icon-cache refresh-assets
+
+.PHONY: clean build install fresh-install release compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda
