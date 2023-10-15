@@ -111,6 +111,18 @@ pip install pcleaner
 
 Note: The program has been tested to work on Linux, MacOS, and Windows, with varying levels of setup required. See the [FAQ](https://github.com/VoxelCubes/PanelCleaner/blob/master/docs/faq.md) for help.
 
+### Installation from the Arch User Repository
+
+This installs the program in a `pipx` environment, which allows pytorch to download the appropriate CUDA version for your system, making this the best method of installation.
+
+(Coming soon)
+
+### Installation with Flatpak
+
+This installs the prebuilt binary in a flatpak container, which does not support CUDA acceleration.
+
+(Coming soon)
+
 ### Install with Docker
 
 Build the image with buildx:
