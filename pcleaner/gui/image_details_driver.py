@@ -645,6 +645,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         worker = wt.Worker(self.generate_ocr, abort_signal=self.abort_signal)
         worker.signals.progress.connect(self.progress_callback)
         worker.signals.finished.connect(self.ocr_worker_finished)
+        worker.signals.result.connect(self.output_worker_result)
         worker.signals.error.connect(self.output_worker_error)
         self.thread_queue.start(worker)
 
