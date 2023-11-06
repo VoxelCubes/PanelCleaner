@@ -39,6 +39,7 @@ def prep_json_file(
     cache_masks: bool,
     mocr: MangaOcr | None = None,
     cache_masks_ocr: bool = False,
+    performing_ocr: bool = False,
 ) -> st.OCRAnalytic | None:
     """
     Load the generated json file, and clean the data, leaving only the
@@ -53,11 +54,15 @@ def prep_json_file(
     The model must be initialized somewhere else to lessen coupling, and to avoid the long
     initialization time for each page.
 
+    Performing OCR means that the output is not for cleaning, therefore we can immediately discard any
+    boxes that cannot be processed by the OCR model, which has limited language support.
+
     :param json_file_path: Path to the json file.
     :param preprocessor_conf: Preprocessor configuration, part of the profile.
     :param cache_masks: Whether to cache the masks.
     :param mocr: [Optional] Manga ocr object.
     :param cache_masks_ocr: [Optional] Whether to cache the masks early for ocr.
+    :param performing_ocr: [Optional] Whether the actual output is for ocr, not cleaning.
     :return: Analytics data if the manga ocr object is given, None otherwise.
     """
     logger.debug(f"Processing json file: {json_file_path}")
@@ -74,17 +79,30 @@ def prep_json_file(
     scale: float = json_data["scale"]
     boxes: list[st.Box] = []
 
+    # Define permitted languages based on strictness.
+    # Since the OCR model is only trained to recognize Japanese,
+    # we need to discard anything that isn't, and if strict, also
+    # those that are unknown (likely a mix).
+    language_whitelist = ["ja"]
+    if not preprocessor_conf.ocr_strict_language:
+        language_whitelist.append("unknown")
+
+    box_ocr_enabled: list[bool] = []
+
     for data in json_data["blk_list"]:
-        # Check minimum size of box.
+        # Check box language.
+        if performing_ocr and data["language"] not in language_whitelist:
+            continue
+
         box = st.Box(*data["xyxy"])
-        if box.area > preprocessor_conf.box_min_size:
-            # Sussy box. Discard if it's too small.
-            if (
-                data["language"] == "unknown"
-                and box.area < preprocessor_conf.suspicious_box_min_size
-            ):
-                continue
-            boxes.append(box)
+        # Check minimum size of box.
+        if box.area < preprocessor_conf.box_min_size:
+            continue
+        # Sussy box. Discard if it's too small.
+        if data["language"] == "unknown" and box.area < preprocessor_conf.suspicious_box_min_size:
+            continue
+
+        boxes.append(box)
 
     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
     boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)

@@ -784,6 +784,7 @@ def perform_ocr(
             cache_masks=False,
             mocr=ocr_model if profile.preprocessor.ocr_enabled else None,
             cache_masks_ocr=True,
+            performing_ocr=True,
         )
 
         if ocr_analytic is not None:

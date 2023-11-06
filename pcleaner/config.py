@@ -225,6 +225,7 @@ class PreprocessorConfig:
     ocr_enabled: bool = True
     ocr_max_size: int = 30 * 100
     ocr_blacklist_pattern: str = "[～．ー！？０-９]*"
+    ocr_strict_language: bool = False
     box_padding_initial: int = 2
     box_right_padding_initial: int = 3
     box_padding_extended: int = 5
@@ -265,6 +266,12 @@ class PreprocessorConfig:
         # Anything matching this pattern is discarded.
         # Note that the OCR model returns full-width characters, so this pattern should match them.
         ocr_blacklist_pattern = {self.ocr_blacklist_pattern}
+        
+        # The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn't
+        # confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the
+        # detected language being unknown. If strict is disabled, those will not be discarded. Anything that is
+        # confidently recognized as a different language will be discarded regardless of this setting.
+        ocr_strict_language = {self.ocr_strict_language}
         
         # Padding to add to each side of a box.
         # This is added to the initial boxes created by the text detector AI.
@@ -311,6 +318,7 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, bool, "ocr_enabled")
         try_to_load(self, config_updater, section, int, "ocr_max_size")
         try_to_load(self, config_updater, section, str, "ocr_blacklist_pattern")
+        try_to_load(self, config_updater, section, bool, "ocr_strict_language")
         try_to_load(self, config_updater, section, int, "box_padding_initial")
         try_to_load(self, config_updater, section, int, "box_right_padding_initial")
         try_to_load(self, config_updater, section, int, "box_padding_extended")

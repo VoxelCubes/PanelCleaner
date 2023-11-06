@@ -517,6 +517,7 @@ def run_ocr(
             cache_masks=cache_masks,
             mocr=mocr,
             cache_masks_ocr=True,
+            performing_ocr=True,
         )
         if ocr_analytic:
             ocr_analytics.append(ocr_analytic)
