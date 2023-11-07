@@ -70,7 +70,7 @@ The two bottom pages are what the program can output: either just the transparen
 
 ## Limitations
 
-- It only supports Japanese and English text.
+- It only supports Japanese and English text for cleaning (success may vary with other languages), Japanese only for OCR.
 
 - Supported file types: .jpeg, .jpg, .png, .bmp, .tiff, .tif, .jp2, .dib, .webp, .ppm
 
@@ -119,7 +119,14 @@ Note: The program has been tested to work on Linux, MacOS, and Windows, with var
 
 This installs the program in a `pipx` environment, which allows pytorch to download the appropriate CUDA version for your system, making this the best method of installation.
 
-(Coming soon)
+You can find the package here: [panelcleaner](https://aur.archlinux.org/packages/panelcleaner)
+
+This will provide the `pcleaner` and `pcleaner-gui` commands, along with a desktop file for the GUI.
+
+Install it with your favorite AUR helper, e.g. with `yay`:
+```bash
+yay -S panelcleaner
+```
 
 ### Installation with Flatpak
 
