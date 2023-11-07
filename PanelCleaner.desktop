@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=PanelCleaner
+Comment=An AI-powered tool to clean manga panels
+GenericName=Manga Page Cleaner
+Icon=panelcleaner
+Exec=pcleaner-gui
+Terminal=false
+Categories=Utility
