@@ -3,7 +3,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot
 
-from logzero import logger
+from loguru import logger
 
 
 ICON_SCALE_FACTOR = 0.75  # Adjust as desired, where 1.0 means same as badge size

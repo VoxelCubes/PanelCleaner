@@ -4,7 +4,7 @@ from typing import Callable
 import PySide6.QtCore as Qc
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot
-from logzero import logger
+from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.gui.image_details_driver as idd

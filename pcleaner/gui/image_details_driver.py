@@ -8,7 +8,7 @@ import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot, Signal
-from logzero import logger
+from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.gui.gui_utils as gu

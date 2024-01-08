@@ -4,7 +4,7 @@ from copy import copy
 from pathlib import Path
 
 from PIL import Image
-from logzero import logger
+from loguru import logger
 from manga_ocr import MangaOcr
 
 import pcleaner.config as cfg
@@ -71,7 +71,7 @@ def prep_json_file(
     if not json_file_path.name.endswith("#raw.json"):
         return None
 
-    json_data = json.loads(json_file_path.read_text())
+    json_data = json.loads(json_file_path.read_text(encoding="utf-8"))
 
     image_path: str = json_data["image_path"]
     mask_path: str = json_data["mask_path"]
@@ -145,7 +145,7 @@ def prep_json_file(
     # Write the json file with the cleaned data.
     json_out_path = json_file_path.parent / f"{json_file_path.stem.replace('#raw', '')}#clean.json"
 
-    json_out_path.write_text(page_data.to_json())
+    json_out_path.write_text(page_data.to_json(), encoding="utf-8")
 
     # Draw the boxes on the image and save it.
     if cache_masks and not cache_masks_ocr:

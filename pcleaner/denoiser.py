@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from PIL import Image
-from logzero import logger
+from loguru import logger
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
@@ -15,7 +15,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     :return: Analytics.
     """
     # Load all the cached data.
-    mask_data = st.MaskData.from_json(d_data.json_path.read_text())
+    mask_data = st.MaskData.from_json(d_data.json_path.read_text(encoding="utf-8"))
     mask_image = Image.open(mask_data.mask_path)
 
     # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json

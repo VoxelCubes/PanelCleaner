@@ -3,7 +3,7 @@ from pathlib import Path
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-from logzero import logger
+from loguru import logger
 
 
 ZOOM_TICK_FACTOR = 1.25

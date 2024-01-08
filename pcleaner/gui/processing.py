@@ -8,7 +8,7 @@ from typing import Callable
 
 import torch
 from PIL import Image
-from logzero import logger
+from loguru import logger
 from manga_ocr import MangaOcr
 from natsort import natsorted
 

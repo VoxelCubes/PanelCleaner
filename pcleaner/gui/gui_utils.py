@@ -7,7 +7,7 @@ from pathlib import Path
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-from logzero import logger
+from loguru import logger
 
 
 # For all show functions, pad the dialog message, so that the dialog is not too narrow for the window title.

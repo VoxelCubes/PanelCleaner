@@ -6,8 +6,7 @@ from io import StringIO
 import PySide6
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-import logzero
-from logzero import logger
+from loguru import logger
 import torch
 
 import pcleaner.cli_utils as cu
@@ -28,7 +27,16 @@ def launch() -> None:
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
     # Log up to 1MB to the log file.
-    logzero.logfile(str(cu.get_log_path()), maxBytes=2**30, backupCount=1, loglevel=logzero.DEBUG)
+    # loguru.logfile(str(cu.get_log_path()), maxBytes=2**30, backupCount=1, loglevel=loguru.DEBUG)
+
+    # Set up file logging.
+    logger.add(
+        str(cu.get_log_path()),
+        rotation="10 MB",
+        retention="1 week",
+        level="DEBUG"
+    )
+
     logger.info("\n---- Starting up ----")
     buffer = StringIO()
     buffer.write("\n- Program Information -\n")

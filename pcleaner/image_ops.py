@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import scipy
 from PIL import Image, ImageFilter
-from logzero import logger
+from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.structures as st

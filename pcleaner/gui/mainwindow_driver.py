@@ -10,7 +10,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 import torch
 from PySide6.QtCore import Slot, Signal
-from logzero import logger
+from loguru import logger
 from manga_ocr import MangaOcr
 
 import pcleaner.analytics as an

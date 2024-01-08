@@ -13,7 +13,7 @@ docopt-ng
 ConfigUpdater
 transformers
 manga_ocr
-logzero
+loguru
 prettytable
 colorama
 requests

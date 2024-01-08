@@ -9,7 +9,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 import configupdater as cu
 from PySide6.QtCore import Slot
-from logzero import logger
+from loguru import logger
 
 import pcleaner.gui.gui_utils as gu
 from pcleaner import config as cfg

@@ -6,7 +6,7 @@ from typing import Any, NewType
 
 import configupdater as cu
 from attrs import define, field
-from logzero import logger
+from loguru import logger
 
 from pcleaner import cli_utils as cli
 from pcleaner import helpers as hp

@@ -8,7 +8,7 @@ from typing import Sequence
 import magic
 from PIL import Image, ImageDraw, ImageFont
 from attrs import frozen, define
-from logzero import logger
+from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.data
@@ -174,9 +174,18 @@ class PageData:
     @property
     def image_size(self) -> tuple[int, int]:
         if self._image_size is None:
-            metadata = magic.from_file(self.image_path)
-            size_str = re.search(r"(\d+) x (\d+)", metadata).groups()
-            self._image_size = (int(size_str[0]), int(size_str[1]))
+            try:
+                metadata = magic.from_file(self.image_path)
+                size_str = re.search(r"(\d+) x (\d+)", metadata).groups()
+                self._image_size = (int(size_str[0]), int(size_str[1]))
+            except (UnicodeDecodeError, AttributeError):
+                # Unicode error: Windows is up to some bullshit again.
+                # Attribute error: magic can't deal with windows' bullshit either, returning "cannot open".
+                # Something got fucked, time for plan B.
+                logger.error(f"Encountered a Unicode Error for file '{self.image_path}', using fallback method.")
+                temp_image = Image.open(self.image_path)
+                self._image_size = temp_image.size
+
         return self._image_size
 
     def boxes_from_type(self, box_type: BoxType) -> list[Box]:

@@ -3,7 +3,7 @@ from typing import Callable
 
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot, Signal
-from logzero import logger
+from loguru import logger
 
 
 class HookState(Enum):

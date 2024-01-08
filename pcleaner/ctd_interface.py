@@ -23,7 +23,7 @@ from uuid import uuid4
 import cv2
 import numpy as np
 import torch
-from logzero import logger
+from loguru import logger
 from tqdm import tqdm
 
 import pcleaner.config as cfg

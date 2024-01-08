@@ -5,7 +5,7 @@ from itertools import takewhile, groupby
 from pathlib import Path
 
 import tifffile
-from logzero import logger
+from loguru import logger
 
 
 def f_plural(value, singular: str, plural: str) -> str:

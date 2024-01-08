@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Sequence
 
 from PIL import Image
-from logzero import logger
+from loguru import logger
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
@@ -18,7 +18,7 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
         one for each bubble on the page.
     """
 
-    page_data = st.PageData.from_json(m_data.json_path.read_text())
+    page_data = st.PageData.from_json(m_data.json_path.read_text(encoding="utf-8"))
 
     # Make a shorter alias.
     g_conf = m_data.general_config
@@ -218,4 +218,4 @@ def save_denoising_data(
         original_path, target_path, base_image_path, mask_path, scale, boxes_with_deviation
     )
     json_path = cache_path.with_name(cache_path.stem + "#mask_data.json")
-    json_path.write_text(mask_data.to_json())
+    json_path.write_text(mask_data.to_json(), encoding="utf-8")

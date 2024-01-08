@@ -7,7 +7,7 @@ import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot
-from logzero import logger
+from loguru import logger
 from natsort import natsorted
 
 import pcleaner.config as cfg

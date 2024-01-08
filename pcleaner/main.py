@@ -117,7 +117,7 @@ from pathlib import Path
 import torch
 from PIL import Image
 from docopt import docopt
-from logzero import logger, loglevel, DEBUG, INFO
+from loguru import logger, loglevel, DEBUG, INFO
 from manga_ocr import MangaOcr
 from natsort import natsorted
 from tqdm import tqdm

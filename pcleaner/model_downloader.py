@@ -6,7 +6,7 @@ from pathlib import Path
 import requests
 import torch
 import tqdm
-from logzero import logger
+from loguru import logger
 from manga_ocr import MangaOcr
 from transformers import file_utils
 

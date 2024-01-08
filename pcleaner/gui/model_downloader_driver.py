@@ -11,7 +11,7 @@ import torch
 from PySide6.QtCore import Signal, QObject, Slot
 from attr import frozen
 from humanfriendly import format_timespan, parse_size
-from logzero import logger
+from loguru import logger
 from manga_ocr import MangaOcr
 
 import pcleaner.config as cfg
