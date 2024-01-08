@@ -117,7 +117,7 @@ from pathlib import Path
 import torch
 from PIL import Image
 from docopt import docopt
-from loguru import logger, loglevel, DEBUG, INFO
+from loguru import logger
 from manga_ocr import MangaOcr
 from natsort import natsorted
 from tqdm import tqdm
@@ -144,9 +144,9 @@ def main() -> None:
     args = docopt(__doc__, version=f"Panel Cleaner {__version__}")
     # Loglevel is info by default.
     if args.debug:
-        loglevel(DEBUG)
+        logger.level("DEBUG")
     else:
-        loglevel(INFO)
+        logger.level("INFO")
 
     logger.debug(args)
 
