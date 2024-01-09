@@ -6,4 +6,5 @@ GenericName=Manga Page Cleaner
 Icon=panelcleaner
 Exec=pcleaner-gui
 Terminal=false
-Categories=Utility
+Categories=Utility;Graphics;
+Keywords=Manga;Cleaning;Text Removal;OCR;
