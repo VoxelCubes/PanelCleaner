@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'SetupGreeter.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.3
+## Created by: Qt User Interface Compiler version 6.6.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -23,7 +23,7 @@ class Ui_SetupGreeter(object):
     def setupUi(self, SetupGreeter):
         if not SetupGreeter.objectName():
             SetupGreeter.setObjectName(u"SetupGreeter")
-        SetupGreeter.resize(720, 382)
+        SetupGreeter.resize(730, 440)
         SetupGreeter.setMinimumSize(QSize(600, 0))
         SetupGreeter.setModal(True)
         self.verticalLayout = QVBoxLayout(SetupGreeter)
@@ -56,7 +56,7 @@ class Ui_SetupGreeter(object):
 
         self.label_3 = QLabel(SetupGreeter)
         self.label_3.setObjectName(u"label_3")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
@@ -79,6 +79,12 @@ class Ui_SetupGreeter(object):
 
         self.label_text_detector_path = QLabel(SetupGreeter)
         self.label_text_detector_path.setObjectName(u"label_text_detector_path")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.label_text_detector_path.sizePolicy().hasHeightForWidth())
+        self.label_text_detector_path.setSizePolicy(sizePolicy1)
+        self.label_text_detector_path.setWordWrap(True)
         self.label_text_detector_path.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_text_detector_path)
@@ -91,9 +97,6 @@ class Ui_SetupGreeter(object):
 
         self.label_5 = QLabel(SetupGreeter)
         self.label_5.setObjectName(u"label_5")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
         self.label_5.setSizePolicy(sizePolicy1)
         self.label_5.setTextFormat(Qt.MarkdownText)
@@ -114,18 +117,21 @@ class Ui_SetupGreeter(object):
 
         self.label_ocr_path = QLabel(SetupGreeter)
         self.label_ocr_path.setObjectName(u"label_ocr_path")
+        sizePolicy1.setHeightForWidth(self.label_ocr_path.sizePolicy().hasHeightForWidth())
+        self.label_ocr_path.setSizePolicy(sizePolicy1)
+        self.label_ocr_path.setWordWrap(True)
         self.label_ocr_path.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_ocr_path)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.verticalSpacer_2 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Maximum)
 
         self.formLayout.setItem(2, QFormLayout.LabelRole, self.verticalSpacer_2)
 
 
         self.verticalLayout.addLayout(self.formLayout)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 0, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 

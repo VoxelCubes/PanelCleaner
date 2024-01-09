@@ -73,7 +73,7 @@ def show_ocr_analytics(
         removed_box_sizes, partition_size=part_size, max_value=max_ocr_size
     )
     buffer.write("\nOCR Analytics\n")
-    buffer.write("-------------\n")
+    buffer.write("━━━━━━━━━━━━━\n")
     buffer.write(
         f"Number of boxes: {num_boxes} | "
         f"Number of small boxes: {num_small_boxes} ({small_box_ratio})\n"
@@ -136,7 +136,7 @@ def draw_pretty_ocr_result_chart(
     ]
     max_label_width = max(len(label) for label, _, _ in data_array)
     bar_width = (
-        max_columns - max_label_width - 16
+        max_columns - max_label_width - 25
     )  # 16 for the spacing and trailing number and padding.
     max_value = max(lower + upper for _, lower, upper in data_array)
 
@@ -170,7 +170,7 @@ def draw_masker_histogram(data: dict[str, tuple[int, int]], max_columns: int = 1
     # Longest key.
     max_label_width = max(len(k) for k in data.keys())
     bar_width = (
-        max_columns - max_label_width - 16
+        max_columns - max_label_width - 25
     )  # 16 for the spacing and trailing number and padding.
 
     buffer = StringIO()
@@ -271,7 +271,7 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: 
 
     # Write the analytics.
     buffer.write("\nMask Fitment Analytics\n")
-    buffer.write("----------------------\n")
+    buffer.write("━━━━━━━━━━━━━━━━━━━━━━\n")
     buffer.write(
         f"Total boxes: {total_boxes} | "
         f"Masks succeeded: {masks_succeeded} ({success_rate}) | "
@@ -344,7 +344,7 @@ def show_denoise_analytics(
     buffer = StringIO()
 
     buffer.write("\nDenoising Analytics\n")
-    buffer.write("-------------------\n")
+    buffer.write("━━━━━━━━━━━━━━━━━━━\n")
 
     # Get the standard deviations into one single list.
     std_deviations: list[float] = [
@@ -446,7 +446,7 @@ def draw_denoise_histogram(
     # Rescale the buckets.
 
     max_label_length = max(len(label) for label, _, _ in buckets_labeled)
-    bar_width = max_columns - max_label_length - 16  # 16 is for the spaces and the brackets.
+    bar_width = max_columns - max_label_length - 25  # 25 is for the spaces and the brackets.
 
     bucket_bar_lengths: list[tuple[int, int]] = [
         (int(below * bar_width / max_count), int(above * bar_width / max_count))

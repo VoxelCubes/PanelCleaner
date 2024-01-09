@@ -93,6 +93,8 @@ class FileTable(CTableWidget):
         self.setColumnWidth(
             Column.ANALYTICS, round(4 * (imf.THUMBNAIL_SIZE * 0.75) + 2 * GUI_PADDING)
         )
+        # make the filename column wider.
+        self.setColumnWidth(Column.FILENAME, 220)
 
         # Add tooltips to column headers.
         self.horizontalHeaderItem(Column.SIZE).setToolTip(

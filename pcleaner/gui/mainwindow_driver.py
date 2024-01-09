@@ -35,7 +35,7 @@ from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 
 
-ANALYTICS_COLUMNS = 72
+ANALYTICS_COLUMNS = 74
 
 
 # noinspection PyUnresolvedReferences
