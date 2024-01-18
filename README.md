@@ -132,7 +132,7 @@ yay -S panelcleaner
 
 This installs the prebuilt binary in a flatpak container, which does not support CUDA acceleration.
 
-(Coming soon)
+[Get it on Flathub](https://flathub.org/apps/io.github.voxelcubes.panelcleaner)
 
 ### Install with Docker
 
