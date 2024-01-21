@@ -231,7 +231,8 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="overflow-menu"/>
+          <iconset theme="overflow-menu">
+           <normaloff>.</normaloff>.</iconset>
          </property>
         </widget>
        </item>
@@ -319,7 +320,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>&lt;Current Step&gt;</string>
+          <string notr="true">&lt;Current Step&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -341,7 +342,7 @@
          <item>
           <widget class="QLabel" name="label_position">
            <property name="text">
-            <string>&lt;x,y&gt;</string>
+            <string notr="true">&lt;x,y&gt;</string>
            </property>
           </widget>
          </item>
@@ -362,7 +363,7 @@
          <item>
           <widget class="QLabel" name="label_size">
            <property name="text">
-            <string>&lt;w x h&gt;</string>
+            <string notr="true">&lt;w x h&gt;</string>
            </property>
           </widget>
          </item>

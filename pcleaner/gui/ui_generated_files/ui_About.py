@@ -22,7 +22,7 @@ class Ui_About(object):
     def setupUi(self, About):
         if not About.objectName():
             About.setObjectName(u"About")
-        About.resize(600, 240)
+        About.resize(620, 265)
         self.horizontalLayout_2 = QHBoxLayout(About)
         self.horizontalLayout_2.setSpacing(6)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -63,6 +63,7 @@ class Ui_About(object):
 
         self.label_version = QLabel(About)
         self.label_version.setObjectName(u"label_version")
+        self.label_version.setText(u"<version>")
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_version)
 
@@ -75,11 +76,13 @@ class Ui_About(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.label_copyright = QLabel(About)
         self.label_copyright.setObjectName(u"label_copyright")
+        self.label_copyright.setText(u"<copyright>")
 
         self.horizontalLayout.addWidget(self.label_copyright)
 
         self.label_13 = QLabel(About)
         self.label_13.setObjectName(u"label_13")
+        self.label_13.setText(u"Voxel")
 
         self.horizontalLayout.addWidget(self.label_13)
 
@@ -97,6 +100,7 @@ class Ui_About(object):
 
         self.label_toolkit = QLabel(About)
         self.label_toolkit.setObjectName(u"label_toolkit")
+        self.label_toolkit.setText(u"<toolkit>")
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.label_toolkit)
 
@@ -107,6 +111,7 @@ class Ui_About(object):
 
         self.label_license = QLabel(About)
         self.label_license.setObjectName(u"label_license")
+        self.label_license.setText(u"<html><head/><body><p><a href=\"open_license\"><span style=\" text-decoration: underline; color:#8419ff;\">GNU General Public License v3.0</span></a></p></body></html>")
         self.label_license.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse)
 
         self.formLayout.setWidget(3, QFormLayout.FieldRole, self.label_license)
@@ -118,6 +123,7 @@ class Ui_About(object):
 
         self.label_10 = QLabel(About)
         self.label_10.setObjectName(u"label_10")
+        self.label_10.setText(u"<html><head/><body><p><a href=\"https://github.com/VoxelCubes/PanelCleaner\"><span style=\" text-decoration: underline; color:#8419ff;\">GitHub</span></a></p></body></html>")
         self.label_10.setOpenExternalLinks(True)
         self.label_10.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse)
 
@@ -142,15 +148,9 @@ class Ui_About(object):
 "\n"
 "An AI-powered tool to clean manga panels.", None))
         self.label_3.setText(QCoreApplication.translate("About", u"Version:", None))
-        self.label_version.setText(QCoreApplication.translate("About", u"<version>", None))
         self.label_11.setText(QCoreApplication.translate("About", u"Author:", None))
-        self.label_copyright.setText(QCoreApplication.translate("About", u"<copyright>", None))
-        self.label_13.setText(QCoreApplication.translate("About", u"Voxel", None))
         self.label_5.setText(QCoreApplication.translate("About", u"Toolkit:", None))
-        self.label_toolkit.setText(QCoreApplication.translate("About", u"<toolkit>", None))
         self.label_7.setText(QCoreApplication.translate("About", u"License:", None))
-        self.label_license.setText(QCoreApplication.translate("About", u"<html><head/><body><p><a href=\"open_license\"><span style=\" text-decoration: underline; color:#8419ff;\">GNU General Public License v3.0</span></a></p></body></html>", None))
         self.label_9.setText(QCoreApplication.translate("About", u"Source code:", None))
-        self.label_10.setText(QCoreApplication.translate("About", u"<html><head/><body><p><a href=\"https://github.com/VoxelCubes/PanelCleaner\"><span style=\" text-decoration: underline; color:#8419ff;\">GitHub</span></a></p></body></html>", None))
     # retranslateUi
 

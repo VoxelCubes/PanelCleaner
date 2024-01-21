@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>556</width>
-    <height>236</height>
+    <height>258</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -84,7 +84,7 @@
      <item row="1" column="1">
       <widget class="QLabel" name="label_default_path">
        <property name="text">
-        <string>&lt;default path&gt;</string>
+        <string notr="true">&lt;default path&gt;</string>
        </property>
        <property name="textInteractionFlags">
         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
@@ -132,7 +132,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&lt;some warning&gt;</string>
+        <string notr="true">&lt;some warning&gt;</string>
        </property>
       </widget>
      </item>

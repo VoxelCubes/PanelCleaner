@@ -147,6 +147,7 @@ class Ui_MainWindow(object):
         self.action_temp.setObjectName(u"action_temp")
         self.action_temp_2 = QAction(MainWindow)
         self.action_temp_2.setObjectName(u"action_temp_2")
+        self.action_temp_2.setText(u"<temp>")
         self.action_add_folders = QAction(MainWindow)
         self.action_add_folders.setObjectName(u"action_add_folders")
         icon9 = QIcon()
@@ -280,6 +281,7 @@ class Ui_MainWindow(object):
 
         self.label_drop_icon = QLabel(self.frame_greeter)
         self.label_drop_icon.setObjectName(u"label_drop_icon")
+        self.label_drop_icon.setText(u"<drop icon>")
         self.label_drop_icon.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_10.addWidget(self.label_drop_icon)
@@ -384,6 +386,7 @@ class Ui_MainWindow(object):
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.label_warning.sizePolicy().hasHeightForWidth())
         self.label_warning.setSizePolicy(sizePolicy2)
+        self.label_warning.setText(u"<Warning>")
 
         self.verticalLayout_7.addWidget(self.label_warning)
 
@@ -472,6 +475,7 @@ class Ui_MainWindow(object):
         self.label_write_output_help = CTooltipLabel(self.page_cleaning)
         self.label_write_output_help.setObjectName(u"label_write_output_help")
         self.label_write_output_help.setToolTipDuration(-1)
+        self.label_write_output_help.setText(u"<helper>")
 
         self.horizontalLayout_6.addWidget(self.label_write_output_help)
 
@@ -507,6 +511,7 @@ class Ui_MainWindow(object):
         self.label_cleaning_outdir_help = CTooltipLabel(self.page_cleaning)
         self.label_cleaning_outdir_help.setObjectName(u"label_cleaning_outdir_help")
         self.label_cleaning_outdir_help.setToolTipDuration(-1)
+        self.label_cleaning_outdir_help.setText(u"<helper>")
 
         self.horizontalLayout_5.addWidget(self.label_cleaning_outdir_help)
 
@@ -566,6 +571,7 @@ class Ui_MainWindow(object):
         self.label_ocr_outdir_help = CTooltipLabel(self.page_ocr)
         self.label_ocr_outdir_help.setObjectName(u"label_ocr_outdir_help")
         self.label_ocr_outdir_help.setToolTipDuration(-1)
+        self.label_ocr_outdir_help.setText(u"<helper>")
 
         self.horizontalLayout_9.addWidget(self.label_ocr_outdir_help)
 
@@ -607,6 +613,7 @@ class Ui_MainWindow(object):
 
         self.textEdit_analytics = QTextEdit(self.frame_output)
         self.textEdit_analytics.setObjectName(u"textEdit_analytics")
+        self.textEdit_analytics.setDocumentTitle(u"")
         self.textEdit_analytics.setUndoRedoEnabled(False)
         self.textEdit_analytics.setLineWrapMode(QTextEdit.NoWrap)
         self.textEdit_analytics.setReadOnly(True)
@@ -629,6 +636,7 @@ class Ui_MainWindow(object):
 
         self.label_target_outputs = QLabel(self.widget_progress_drawer)
         self.label_target_outputs.setObjectName(u"label_target_outputs")
+        self.label_target_outputs.setText(u"<targeted output(s)>")
 
         self.horizontalLayout_2.addWidget(self.label_target_outputs)
 
@@ -678,7 +686,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1800, 30))
+        self.menubar.setGeometry(QRect(0, 0, 1800, 34))
         self.menu_File = QMenu(self.menubar)
         self.menu_File.setObjectName(u"menu_File")
         self.menu_Profile = QMenu(self.menubar)
@@ -756,7 +764,6 @@ class Ui_MainWindow(object):
         self.action_dark.setText(QCoreApplication.translate("MainWindow", u"Dark", None))
         self.action_light.setText(QCoreApplication.translate("MainWindow", u"Light", None))
         self.action_temp.setText(QCoreApplication.translate("MainWindow", u"<temp>", None))
-        self.action_temp_2.setText(QCoreApplication.translate("MainWindow", u"<temp>", None))
         self.action_add_folders.setText(QCoreApplication.translate("MainWindow", u"Add Folder...", None))
         self.action_delete_models.setText(QCoreApplication.translate("MainWindow", u"Delete Machine Learning Models", None))
         self.action_download_models.setText(QCoreApplication.translate("MainWindow", u"Download Machine Learning Models", None))
@@ -768,7 +775,6 @@ class Ui_MainWindow(object):
         self.pushButton_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.pushButton_reset_profile.setText(QCoreApplication.translate("MainWindow", u"Reset All", None))
         self.label_drop.setText(QCoreApplication.translate("MainWindow", u"Drag and Drop Images or Folders Here", None))
-        self.label_drop_icon.setText(QCoreApplication.translate("MainWindow", u"<drop icon>", None))
         ___qtablewidgetitem = self.file_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"id", None));
         ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(1)
@@ -787,7 +793,6 @@ class Ui_MainWindow(object):
         self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))
         self.radioButton_ocr.setText(QCoreApplication.translate("MainWindow", u"OCR", None))
-        self.label_warning.setText(QCoreApplication.translate("MainWindow", u"Warning", None))
         self.pushButton_abort.setText(QCoreApplication.translate("MainWindow", u"Abort", None))
         self.pushButton_start.setText(QCoreApplication.translate("MainWindow", u"Start", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Output", None))
@@ -798,12 +803,10 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.label_write_output_help.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. </p><p>If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_write_output_help.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
 #if QT_CONFIG(tooltip)
         self.label_cleaning_outdir_help.setToolTip(QCoreApplication.translate("MainWindow", u"You can use a relative path to create a subfolder at the image's original location, or use an absolute path.", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_cleaning_outdir_help.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
         self.lineEdit_out_directory.setPlaceholderText(QCoreApplication.translate("MainWindow", u"cleaned", None))
         self.pushButton_browse_out_dir.setText("")
         self.radioButton_ocr_text.setText(QCoreApplication.translate("MainWindow", u"Plain Text", None))
@@ -812,7 +815,6 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.label_ocr_outdir_help.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Either enter an absolute or relative path with a file name. The output of all images is written to the same file.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_ocr_outdir_help.setText(QCoreApplication.translate("MainWindow", u"<helper>", None))
         self.lineEdit_out_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"detected_text.txt", None))
         self.pushButton_browse_out_file.setText("")
         self.textEdit_analytics.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -824,7 +826,6 @@ class Ui_MainWindow(object):
                         "Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">1</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 1 <br />Mask 7  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 8  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 9  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 10 :  </span><span style=\" font-family:'Noto Mono','Monospa"
                         "ce'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Box mask: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">4</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 4 <br /><br /></span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588 Perfect</span><span style=\" font-family:'Noto Mono','Monospace';\"> | \u2588 Total<br /><br /></span></p></body></html>", None))
         self.label_generating_what.setText(QCoreApplication.translate("MainWindow", u"Generating:", None))
-        self.label_target_outputs.setText(QCoreApplication.translate("MainWindow", u"<targeted output(s)>", None))
         self.label_progress_total.setText(QCoreApplication.translate("MainWindow", u"Total Progress:", None))
         self.progressBar_total.setFormat(QCoreApplication.translate("MainWindow", u"%v / %m", None))
         self.label_progress_step.setText(QCoreApplication.translate("MainWindow", u"Images Processed:", None))

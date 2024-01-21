@@ -24,7 +24,7 @@ class Ui_NewProfile(object):
     def setupUi(self, NewProfile):
         if not NewProfile.objectName():
             NewProfile.setObjectName(u"NewProfile")
-        NewProfile.resize(556, 236)
+        NewProfile.resize(556, 258)
         self.verticalLayout = QVBoxLayout(NewProfile)
         self.verticalLayout.setSpacing(12)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -84,6 +84,7 @@ class Ui_NewProfile(object):
 
         self.label_default_path = QLabel(NewProfile)
         self.label_default_path.setObjectName(u"label_default_path")
+        self.label_default_path.setText(u"<default path>")
         self.label_default_path.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_default_path)
@@ -114,6 +115,7 @@ class Ui_NewProfile(object):
         font = QFont()
         font.setItalic(True)
         self.label_warning_message.setFont(font)
+        self.label_warning_message.setText(u"<some warning>")
 
         self.horizontalLayout_2.addWidget(self.label_warning_message)
 
@@ -152,7 +154,5 @@ class Ui_NewProfile(object):
         self.radioButton_custom_location.setText(QCoreApplication.translate("NewProfile", u"Use a different location:", None))
         self.pushButton_browse_location.setText("")
         self.label.setText(QCoreApplication.translate("NewProfile", u"Profile Name:", None))
-        self.label_default_path.setText(QCoreApplication.translate("NewProfile", u"<default path>", None))
-        self.label_warning_message.setText(QCoreApplication.translate("NewProfile", u"<some warning>", None))
     # retranslateUi
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>720</width>
-    <height>209</height>
+    <height>214</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,7 +48,7 @@
      <item>
       <widget class="QLabel" name="label_model_name">
        <property name="text">
-        <string>&lt;model name&gt;</string>
+        <string notr="true">&lt;model name&gt;</string>
        </property>
       </widget>
      </item>
@@ -68,14 +68,14 @@
      <item>
       <widget class="QLabel" name="label_model_speed">
        <property name="text">
-        <string>&lt;download speed&gt;</string>
+        <string notr="true">&lt;download speed&gt;</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_model_size">
        <property name="text">
-        <string>&lt;download size/total&gt;</string>
+        <string notr="true">&lt;download size/total&gt;</string>
        </property>
       </widget>
      </item>
@@ -119,7 +119,7 @@
      <item>
       <widget class="QLabel" name="label_ocr_file_name">
        <property name="text">
-        <string>&lt;file name&gt;</string>
+        <string notr="true">&lt;file name&gt;</string>
        </property>
       </widget>
      </item>
@@ -139,14 +139,14 @@
      <item>
       <widget class="QLabel" name="label_ocr_speed">
        <property name="text">
-        <string>&lt;download speed&gt;</string>
+        <string notr="true">&lt;download speed&gt;</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_ocr_size">
        <property name="text">
-        <string>&lt;download size/total&gt;</string>
+        <string notr="true">&lt;download size/total&gt;</string>
        </property>
       </widget>
      </item>

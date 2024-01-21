@@ -23,7 +23,7 @@ class Ui_ModelDownloader(object):
     def setupUi(self, ModelDownloader):
         if not ModelDownloader.objectName():
             ModelDownloader.setObjectName(u"ModelDownloader")
-        ModelDownloader.resize(720, 209)
+        ModelDownloader.resize(720, 214)
         ModelDownloader.setModal(True)
         self.verticalLayout = QVBoxLayout(ModelDownloader)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -41,6 +41,7 @@ class Ui_ModelDownloader(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.label_model_name = QLabel(ModelDownloader)
         self.label_model_name.setObjectName(u"label_model_name")
+        self.label_model_name.setText(u"<model name>")
 
         self.horizontalLayout.addWidget(self.label_model_name)
 
@@ -50,11 +51,13 @@ class Ui_ModelDownloader(object):
 
         self.label_model_speed = QLabel(ModelDownloader)
         self.label_model_speed.setObjectName(u"label_model_speed")
+        self.label_model_speed.setText(u"<download speed>")
 
         self.horizontalLayout.addWidget(self.label_model_speed)
 
         self.label_model_size = QLabel(ModelDownloader)
         self.label_model_size.setObjectName(u"label_model_size")
+        self.label_model_size.setText(u"<download size/total>")
 
         self.horizontalLayout.addWidget(self.label_model_size)
 
@@ -81,6 +84,7 @@ class Ui_ModelDownloader(object):
 
         self.label_ocr_file_name = QLabel(ModelDownloader)
         self.label_ocr_file_name.setObjectName(u"label_ocr_file_name")
+        self.label_ocr_file_name.setText(u"<file name>")
 
         self.horizontalLayout_2.addWidget(self.label_ocr_file_name)
 
@@ -90,11 +94,13 @@ class Ui_ModelDownloader(object):
 
         self.label_ocr_speed = QLabel(ModelDownloader)
         self.label_ocr_speed.setObjectName(u"label_ocr_speed")
+        self.label_ocr_speed.setText(u"<download speed>")
 
         self.horizontalLayout_2.addWidget(self.label_ocr_speed)
 
         self.label_ocr_size = QLabel(ModelDownloader)
         self.label_ocr_size.setObjectName(u"label_ocr_size")
+        self.label_ocr_size.setText(u"<download size/total>")
 
         self.horizontalLayout_2.addWidget(self.label_ocr_size)
 
@@ -120,12 +126,6 @@ class Ui_ModelDownloader(object):
     def retranslateUi(self, ModelDownloader):
         ModelDownloader.setWindowTitle(QCoreApplication.translate("ModelDownloader", u"Downloading Machine Learning Models", None))
         self.label.setText(QCoreApplication.translate("ModelDownloader", u"Model data required to run Panel Cleaner:", None))
-        self.label_model_name.setText(QCoreApplication.translate("ModelDownloader", u"<model name>", None))
-        self.label_model_speed.setText(QCoreApplication.translate("ModelDownloader", u"<download speed>", None))
-        self.label_model_size.setText(QCoreApplication.translate("ModelDownloader", u"<download size/total>", None))
         self.label_2.setText(QCoreApplication.translate("ModelDownloader", u"OCR model:", None))
-        self.label_ocr_file_name.setText(QCoreApplication.translate("ModelDownloader", u"<file name>", None))
-        self.label_ocr_speed.setText(QCoreApplication.translate("ModelDownloader", u"<download speed>", None))
-        self.label_ocr_size.setText(QCoreApplication.translate("ModelDownloader", u"<download size/total>", None))
     # retranslateUi
 

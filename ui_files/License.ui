@@ -20,7 +20,7 @@
       <bool>true</bool>
      </property>
      <property name="plainText">
-      <string>Copyright (C) 2023 Voxel
+      <string notr="true">Copyright (C) 2023 Voxel
 
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007

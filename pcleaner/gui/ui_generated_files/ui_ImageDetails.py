@@ -160,7 +160,13 @@ class Ui_ImageDetails(object):
         self.pushButton_menu.setSizePolicy(sizePolicy3)
         self.pushButton_menu.setMinimumSize(QSize(16, 16))
         self.pushButton_menu.setContextMenuPolicy(Qt.ActionsContextMenu)
-        icon5 = QIcon(QIcon.fromTheme(u"overflow-menu"))
+        icon5 = QIcon()
+        iconThemeName = u"overflow-menu"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon5 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon5.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.pushButton_menu.setIcon(icon5)
 
         self.horizontalLayout.addWidget(self.pushButton_menu)
@@ -211,6 +217,7 @@ class Ui_ImageDetails(object):
         self.label_step.setObjectName(u"label_step")
         sizePolicy2.setHeightForWidth(self.label_step.sizePolicy().hasHeightForWidth())
         self.label_step.setSizePolicy(sizePolicy2)
+        self.label_step.setText(u"<Current Step>")
         self.label_step.setWordWrap(True)
 
         self.horizontalLayout_4.addWidget(self.label_step)
@@ -225,6 +232,7 @@ class Ui_ImageDetails(object):
 
         self.label_position = QLabel(ImageDetails)
         self.label_position.setObjectName(u"label_position")
+        self.label_position.setText(u"<x,y>")
 
         self.horizontalLayout_6.addWidget(self.label_position)
 
@@ -241,6 +249,7 @@ class Ui_ImageDetails(object):
 
         self.label_size = QLabel(ImageDetails)
         self.label_size.setObjectName(u"label_size")
+        self.label_size.setText(u"<w x h>")
 
         self.horizontalLayout_7.addWidget(self.label_size)
 
@@ -291,10 +300,7 @@ class Ui_ImageDetails(object):
         self.pushButton_refresh.setText(QCoreApplication.translate("ImageDetails", u"Refresh", None))
         self.pushButton_menu.setText("")
         self.label_17.setText(QCoreApplication.translate("ImageDetails", u"Generating...", None))
-        self.label_step.setText(QCoreApplication.translate("ImageDetails", u"<Current Step>", None))
         self.label_position_label.setText(QCoreApplication.translate("ImageDetails", u"Position:", None))
-        self.label_position.setText(QCoreApplication.translate("ImageDetails", u"<x,y>", None))
         self.label_size_label.setText(QCoreApplication.translate("ImageDetails", u"Size:", None))
-        self.label_size.setText(QCoreApplication.translate("ImageDetails", u"<w x h>", None))
     # retranslateUi
 

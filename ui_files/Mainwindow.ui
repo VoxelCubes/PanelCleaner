@@ -180,7 +180,7 @@
               <item>
                <widget class="QLabel" name="label_drop_icon">
                 <property name="text">
-                 <string>&lt;drop icon&gt;</string>
+                 <string notr="true">&lt;drop icon&gt;</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -394,7 +394,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Warning</string>
+                  <string notr="true">&lt;Warning&gt;</string>
                  </property>
                 </widget>
                </item>
@@ -513,7 +513,7 @@
                           <number>-1</number>
                          </property>
                          <property name="text">
-                          <string>&lt;helper&gt;</string>
+                          <string notr="true">&lt;helper&gt;</string>
                          </property>
                         </widget>
                        </item>
@@ -586,7 +586,7 @@
                       <number>-1</number>
                      </property>
                      <property name="text">
-                      <string>&lt;helper&gt;</string>
+                      <string notr="true">&lt;helper&gt;</string>
                      </property>
                     </widget>
                    </item>
@@ -700,7 +700,7 @@
                       <number>-1</number>
                      </property>
                      <property name="text">
-                      <string>&lt;helper&gt;</string>
+                      <string notr="true">&lt;helper&gt;</string>
                      </property>
                     </widget>
                    </item>
@@ -755,6 +755,9 @@
         </item>
         <item>
          <widget class="QTextEdit" name="textEdit_analytics">
+          <property name="documentTitle">
+           <string notr="true"/>
+          </property>
           <property name="undoRedoEnabled">
            <bool>false</bool>
           </property>
@@ -790,7 +793,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QLabel" name="label_target_outputs">
          <property name="text">
-          <string>&lt;targeted output(s)&gt;</string>
+          <string notr="true">&lt;targeted output(s)&gt;</string>
          </property>
         </widget>
        </item>
@@ -883,7 +886,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1800</width>
-     <height>30</height>
+     <height>34</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -1083,7 +1086,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_temp_2">
    <property name="text">
-    <string>&lt;temp&gt;</string>
+    <string notr="true">&lt;temp&gt;</string>
    </property>
   </action>
   <action name="action_add_folders">

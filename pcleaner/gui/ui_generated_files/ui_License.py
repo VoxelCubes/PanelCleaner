@@ -28,27 +28,7 @@ class Ui_License(object):
         self.plainTextEdit = QPlainTextEdit(License)
         self.plainTextEdit.setObjectName(u"plainTextEdit")
         self.plainTextEdit.setReadOnly(True)
-
-        self.verticalLayout.addWidget(self.plainTextEdit)
-
-        self.buttonBox = QDialogButtonBox(License)
-        self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Close)
-
-        self.verticalLayout.addWidget(self.buttonBox)
-
-
-        self.retranslateUi(License)
-        self.buttonBox.accepted.connect(License.accept)
-        self.buttonBox.rejected.connect(License.reject)
-
-        QMetaObject.connectSlotsByName(License)
-    # setupUi
-
-    def retranslateUi(self, License):
-        License.setWindowTitle(QCoreApplication.translate("License", u"License Agreement", None))
-        self.plainTextEdit.setPlainText(QCoreApplication.translate("License", u"Copyright (C) 2023 Voxel\n"
+        self.plainTextEdit.setPlainText(u"Copyright (C) 2023 Voxel\n"
 "\n"
 "GNU GENERAL PUBLIC LICENSE\n"
 "                       Version 3, 29 June 2007\n"
@@ -761,6 +741,26 @@ class Ui_License(object):
 "Public License instead of this License.  But first, please read\n"
 "<https://www.gnu.org/licenses/why-not-lgpl.ht"
                         "ml>.\n"
-"", None))
+"")
+
+        self.verticalLayout.addWidget(self.plainTextEdit)
+
+        self.buttonBox = QDialogButtonBox(License)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Close)
+
+        self.verticalLayout.addWidget(self.buttonBox)
+
+
+        self.retranslateUi(License)
+        self.buttonBox.accepted.connect(License.accept)
+        self.buttonBox.rejected.connect(License.reject)
+
+        QMetaObject.connectSlotsByName(License)
+    # setupUi
+
+    def retranslateUi(self, License):
+        License.setWindowTitle(QCoreApplication.translate("License", u"License Agreement", None))
     # retranslateUi
 
