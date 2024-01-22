@@ -46,11 +46,6 @@ An AI-powered tool to clean manga panels.</translation>
   <context>
     <name>ImageDetails</name>
     <message>
-      <location filename="../ui_files/ImageDetails.ui" line="14"/>
-      <source>Form</source>
-      <translation type="unfinished">Form</translation>
-    </message>
-    <message>
       <location filename="../ui_files/ImageDetails.ui" line="134"/>
       <source>Zoom in</source>
       <translation type="unfinished">Zoom in</translation>
