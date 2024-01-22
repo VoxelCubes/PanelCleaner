@@ -13,7 +13,7 @@ def supported_languages() -> dict[str, tuple[str, bool]]:
     :return: Supported languages
     """
     return {
-        "en_US": ("English (US)", True),
+        "en_US": ("English (US)", True),  # Default language, locale C
         "de_DE": ("German (DE)", False),
         "es_ES": ("Spanish (ES)", False),
         "fr_FR": ("French (FR)", False),

@@ -13,7 +13,7 @@ from PySide6.QtCore import Slot, Signal
 from loguru import logger
 from manga_ocr import MangaOcr
 
-import pcleaner.data.supported_languages as sl
+import pcleaner.gui.supported_languages as sl
 import pcleaner.analytics as an
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
