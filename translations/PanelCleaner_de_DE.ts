@@ -6,7 +6,7 @@
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>Über Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="84"/>
@@ -20,7 +20,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="101"/>
       <source>Version:</source>
-      <translation type="unfinished">Version:</translation>
+      <translation>Version:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="115"/>
@@ -30,7 +30,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="153"/>
       <source>Toolkit:</source>
-      <translation type="unfinished">Toolkit:</translation>
+      <translation>Toolkit:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="167"/>
@@ -45,11 +45,6 @@ Reinige Mangas durch KI.</translation>
   </context>
   <context>
     <name>ImageDetails</name>
-    <message>
-      <location filename="../ui_files/ImageDetails.ui" line="14"/>
-      <source>Form</source>
-      <translation type="unfinished">Form</translation>
-    </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="134"/>
       <source>Zoom in</source>
