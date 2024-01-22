@@ -45,14 +45,14 @@ compile-qrc:
 
 # Refresh localization files for each language.
 refresh-i18n:
-	$(foreach lang, $(LANGUAGES), mkdir -p translations && $(I18N_LUPDATE) pcleaner/*.py pcleaner/gui/*.py pcleaner/gui/CustomQ/*.py ui_files -ts translations/$(lang).ts;)
+	$(foreach lang, $(LANGUAGES), mkdir -p translations && $(I18N_LUPDATE) pcleaner/*.py pcleaner/gui/*.py pcleaner/gui/CustomQ/*.py ui_files -ts translations/PanelCleaner_$(lang).ts;)
 
 # Compile localization files for each language, then update the QRC file and compile it.
 compile-i18n:
-	$(foreach lang, $(LANGUAGES), $(I18N_COMPILER) translations/$(lang).ts -qm translations/packed/$(lang).qm;)
+	$(foreach lang, $(LANGUAGES), $(I18N_COMPILER) translations/PanelCleaner_$(lang).ts -qm translations/packed/PanelCleaner_$(lang).qm;)
 
 	echo '<!DOCTYPE RCC><RCC version="1.0"><qresource prefix="/translations">' > translations/packed/linguist.qrc
-	$(foreach lang, $(LANGUAGES), echo '    <file>$(lang).qm</file>' >> translations/packed/linguist.qrc;)
+	$(foreach lang, $(LANGUAGES), echo '    <file>PanelCleaner_$(lang).qm</file>' >> translations/packed/linguist.qrc;)
 	echo '</qresource></RCC>' >> translations/packed/linguist.qrc
 
 	$(RCC_COMPILER) translations/packed/linguist.qrc -o $(RC_OUTPUT_DIR)rc_translations.py

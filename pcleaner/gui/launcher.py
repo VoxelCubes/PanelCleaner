@@ -79,7 +79,7 @@ def launch() -> None:
 
     translator = Qc.QTranslator(app)
     path = ":/translations"
-    if translator.load(locale, "", "", path):
+    if translator.load(locale, "PanelCleaner", "_", path):
         app.installTranslator(translator)
         logger.info(f"Loaded translations for {locale.name()}.")
 
