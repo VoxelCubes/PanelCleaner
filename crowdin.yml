@@ -1,3 +1,9 @@
 files:
-  - source: translations/*.ts
+  - source: translations/de_DE.ts
+    translation: '%original_path%'
+  - source: translations/es_ES.ts
+    translation: '%original_path%'
+  - source: translations/fr_FR.ts
+    translation: '%original_path%'
+  - source: translations/tr_TR.ts
     translation: '%original_path%'
