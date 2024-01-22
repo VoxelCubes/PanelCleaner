@@ -43,9 +43,11 @@ compile-qrc:
 	done
 
 
-# Refresh localization files for each language.
+# Refresh localization files for the source language, en_US only.
 refresh-i18n:
-	$(foreach lang, $(LANGUAGES), mkdir -p translations && $(I18N_LUPDATE) pcleaner/*.py pcleaner/gui/*.py pcleaner/gui/CustomQ/*.py ui_files -ts translations/PanelCleaner_$(lang).ts;)
+	#$(foreach lang, $(LANGUAGES), mkdir -p translations && $(I18N_LUPDATE) pcleaner/*.py pcleaner/gui/*.py pcleaner/gui/CustomQ/*.py ui_files -ts translations/PanelCleaner_$(lang).ts;)
+	mkdir -p translations
+	$(I18N_LUPDATE) pcleaner/*.py pcleaner/gui/*.py pcleaner/gui/CustomQ/*.py ui_files -ts translations/PanelCleaner_en_US.ts
 
 # Compile localization files for each language, then update the QRC file and compile it.
 compile-i18n:
