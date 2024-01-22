@@ -13,6 +13,7 @@ from PySide6.QtCore import Slot, Signal
 from loguru import logger
 from manga_ocr import MangaOcr
 
+import pcleaner.data.supported_languages as sl
 import pcleaner.analytics as an
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
@@ -66,16 +67,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     theme_is_dark: gst.Shared[bool]
     theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
 
-    def __init__(self) -> None:
+    def __init__(self, config: cfg.Config) -> None:
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__display_name__} {__version__}")
         self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
+        self.config = config
 
         self.progress_current: int = 0
         self.progress_step_start: imf.Step | None = None
 
-        self.config = cfg.load_config()
         self.shared_ocr_model = gst.Shared[gst.OCRModel]()
 
         self.last_applied_profile = None
@@ -178,6 +179,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.set_up_statusbar()
         self.initialize_profiles()
         self.initialize_analytics_view()
+        self.initialize_language_menu()
         self.disable_running_cleaner()
 
         # Allow the table to accept file drops and hide the PATH column.
@@ -604,6 +606,61 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.debug("Opening donation page.")
         Qg.QDesktopServices.openUrl(Qc.QUrl("https://ko-fi.com/voxelcode"))
+
+    # ========================================== Languages ==========================================
+
+    def set_language(self, language_code: str | None, language_name: str) -> None:
+        """
+        Set the language of the application.
+        If the language code is None, the system default is used.
+        """
+        # Check if the language even changed.
+        if language_code == self.config.locale:
+            logger.debug(f"Language already set to {language_code}")
+            return
+
+        logger.info(f"Setting language to {language_code}")
+        # Update the checked state of the menu items.
+        for index, action in enumerate(self.menu_language.actions()):
+            if index == 0:
+                # Check for None, rather than the label text.
+                action.setChecked(language_code is None)
+                continue
+            action.setChecked(action.text() == language_name)
+
+        self.config.locale = language_code
+        self.config.save()
+        # Let the user know that he has to restart the application.
+        gu.show_info(
+            self,
+            "Restart Required",
+            "The language has been changed. "
+            "Please restart the application for the changes to take effect.",
+        )
+
+    def initialize_language_menu(self) -> None:
+        """
+        Add the available languages to the language menu.
+        The supported languages are a dict of language code to language name.
+        """
+        self.menu_language.clear()
+        # Add a system default option.
+        action = Qg.QAction("System Default", self)
+        action.triggered.connect(partial(self.set_language, None, "System Default"))
+        action.setCheckable(True)
+        self.menu_language.addAction(action)
+        if self.config.locale is None:
+            action.setChecked(True)
+
+        for language_code, (language_name, enabled) in sl.supported_languages().items():
+            if not enabled:
+                continue
+            action = Qg.QAction(language_name, self)
+            action.triggered.connect(partial(self.set_language, language_code, language_name))
+            action.setCheckable(True)
+            self.menu_language.addAction(action)
+            if self.config.locale == language_code:
+                action.setChecked(True)
 
     # ========================================== Profiles ==========================================
 

@@ -32,7 +32,7 @@ class AboutWidget(Qw.QWidget, Ui_About):
         self.label_license.linkActivated.connect(self.open_license)
 
         copyright_str = f"© 2023"
-        if until := datetime.datetime.now().year != 2023:
+        if (until := datetime.datetime.now().year) > 2023:
             copyright_str += f"–{until}"
 
         self.label_copyright.setText(copyright_str)

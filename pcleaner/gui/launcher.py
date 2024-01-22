@@ -6,10 +6,12 @@ from io import StringIO
 import PySide6
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+import PySide6.QtCore as Qc
 from loguru import logger
 import torch
 
 import pcleaner.cli_utils as cu
+import pcleaner.config as cfg
 from pcleaner import __display_name__, __version__
 from pcleaner.gui.mainwindow_driver import MainWindow
 
@@ -18,6 +20,7 @@ from pcleaner.gui.mainwindow_driver import MainWindow
 import pcleaner.gui.rc_generated_files.rc_icons
 import pcleaner.gui.rc_generated_files.rc_theme_icons
 import pcleaner.gui.rc_generated_files.rc_themes
+import pcleaner.gui.rc_generated_files.rc_translations
 
 
 def launch() -> None:
@@ -30,12 +33,7 @@ def launch() -> None:
     # loguru.logfile(str(cu.get_log_path()), maxBytes=2**30, backupCount=1, loglevel=loguru.DEBUG)
 
     # Set up file logging.
-    logger.add(
-        str(cu.get_log_path()),
-        rotation="10 MB",
-        retention="1 week",
-        level="DEBUG"
-    )
+    logger.add(str(cu.get_log_path()), rotation="10 MB", retention="1 week", level="DEBUG")
 
     logger.info("\n---- Starting up ----")
     buffer = StringIO()
@@ -50,6 +48,7 @@ def launch() -> None:
     buffer.write(f"Python Version: {sys.version}\n")
     buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
     buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
+    buffer.write(f"Current locale: {Qc.QLocale.system().name()}\n")
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
     if torch.cuda.is_available():
         buffer.write(f"GPU: {torch.cuda.get_device_name(0)} (CUDA enabled)\n")
@@ -61,6 +60,29 @@ def launch() -> None:
     # Start the main window.
     app = Qw.QApplication(sys.argv)
 
+    # Load translations.
+    path = Qc.QLibraryInfo.location(Qc.QLibraryInfo.TranslationsPath)
+    translator = Qc.QTranslator(app)
+    if translator.load(Qc.QLocale.system(), "qtbase", "_", path):
+        app.installTranslator(translator)
+    else:
+        logger.warning(f"Failed to load Qt translations from {path}.")
+
+    # Load the config.
+    config = cfg.load_config()
+
+    # Apply the locale from the config.
+    if config.locale:
+        locale = Qc.QLocale(config.locale)
+    else:
+        locale = Qc.QLocale.system()
+
+    translator = Qc.QTranslator(app)
+    path = ":/translations"
+    if translator.load(locale, "", "", path):
+        app.installTranslator(translator)
+        logger.info(f"Loaded translations for {locale.name()}.")
+
     Qg.QIcon.setFallbackSearchPaths([":/icons", ":/icon-themes"])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load
     # later on, even when switching the theme again.
@@ -69,7 +91,7 @@ def launch() -> None:
         Qg.QIcon.setThemeSearchPaths([":/icons", ":/icon-themes"])
 
     try:
-        window = MainWindow()
+        window = MainWindow(config)
         window.show()
         sys.exit(app.exec())
     except Exception as e:

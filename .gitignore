@@ -9,6 +9,7 @@ output/**
 profile.html
 profile.json
 .directory
+*.qm
 
 AUR/*
 

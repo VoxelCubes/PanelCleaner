@@ -10,14 +10,21 @@ RC_OUTPUT_DIR = pcleaner/gui/rc_generated_files/
 UI_OUTPUT_DIR = pcleaner/gui/ui_generated_files/
 RCC_COMPILER = venv/bin/pyside6-rcc
 UIC_COMPILER = venv/bin/pyside6-uic
+I18N_LUPDATE = venv/bin/pyside6-lupdate
+I18N_COMPILER = venv/bin/pyside6-lrelease
 BLACK_LINE_LENGTH = 100
 BLACK_TARGET_DIR = pcleaner/
 BLACK_EXCLUDE_PATTERN = "^$(RC_OUTPUT_DIR).*|^$(UI_OUTPUT_DIR).*|^pcleaner/comic_text_detector/.*"
 
+LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.data.supported_languages import supported_languages; print(' '.join(supported_languages().keys()))")
+
+# print supported languages
+print-supported-languages:
+	@echo $(LANGUAGES)
 
 fresh-install: clean build install
 
-refresh-assets: build-icon-cache compile-qrc compile-ui
+refresh-assets: build-icon-cache compile-qrc compile-ui refresh-i18n compile-i18n
 
 
 # build target
@@ -34,6 +41,21 @@ compile-qrc:
 		basename=`basename $$file .qrc`; \
 		$(RCC_COMPILER) $$file -o $(RC_OUTPUT_DIR)rc_$$basename.py; \
 	done
+
+
+# Refresh localization files for each language.
+refresh-i18n:
+	$(foreach lang, $(LANGUAGES), mkdir -p translations && $(I18N_LUPDATE) pcleaner/*.py pcleaner/gui/*.py pcleaner/gui/CustomQ/*.py ui_files -ts translations/$(lang).ts;)
+
+# Compile localization files for each language, then update the QRC file and compile it.
+compile-i18n:
+	$(foreach lang, $(LANGUAGES), $(I18N_COMPILER) translations/$(lang).ts -qm translations/packed/$(lang).qm;)
+
+	echo '<!DOCTYPE RCC><RCC version="1.0"><qresource prefix="/translations">' > translations/packed/linguist.qrc
+	$(foreach lang, $(LANGUAGES), echo '    <file>$(lang).qm</file>' >> translations/packed/linguist.qrc;)
+	echo '</qresource></RCC>' >> translations/packed/linguist.qrc
+
+	$(RCC_COMPILER) translations/packed/linguist.qrc -o $(RC_OUTPUT_DIR)rc_translations.py
 
 
 # compile .ui files
@@ -92,4 +114,4 @@ pip-install-torch-no-cuda:
 	$(PYTHON) -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
 
-.PHONY: clean build install fresh-install release compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda
+.PHONY: clean build install fresh-install release refresh-i18n compile-i18n compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda

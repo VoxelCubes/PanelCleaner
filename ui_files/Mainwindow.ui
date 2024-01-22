@@ -930,7 +930,17 @@ p, li { white-space: pre-wrap; }
      <addaction name="action_dark"/>
      <addaction name="action_light"/>
     </widget>
+    <widget class="QMenu" name="menu_language">
+     <property name="title">
+      <string>Language</string>
+     </property>
+     <property name="icon">
+      <iconset theme="languages"/>
+     </property>
+     <addaction name="action_temp_3"/>
+    </widget>
     <addaction name="menu_theme"/>
+    <addaction name="menu_language"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -1123,6 +1133,11 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Donate</string>
+   </property>
+  </action>
+  <action name="action_temp_3">
+   <property name="text">
+    <string notr="true">&lt;temp&gt;</string>
    </property>
   </action>
  </widget>

@@ -3,9 +3,22 @@ import platform
 import subprocess
 from itertools import takewhile, groupby
 from pathlib import Path
+import PySide6.QtCore as Qc
 
 import tifffile
 from loguru import logger
+
+
+def tr(
+    context: str = "pcleaner",
+    text: str = "",
+    disambiguation: str | None = None,
+    count: int = -1,
+) -> str:
+    """
+    Translate a string to the current locale.
+    """
+    return Qc.QCoreApplication.translate(context, text, disambiguation, count)
 
 
 def f_plural(value, singular: str, plural: str) -> str:

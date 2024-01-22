@@ -26,6 +26,7 @@ Files:
       - help-hint
       - internet-services
       - list-add
+      - languages
       - media-playback-start
       - overflow-menu
       - process-stop

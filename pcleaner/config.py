@@ -683,6 +683,7 @@ class Config:
     profile_editor: The program to use to edit the profile files. When blank, the default editor is used.
     """
 
+    locale: str | None = None
     current_profile: Profile = field(factory=Profile)
     default_profile: str | None = None
     saved_profiles: dict[str, Path] = field(factory=dict)
@@ -697,6 +698,7 @@ class Config:
         Print the current configuration to the console.
         """
         print("Current Configuration:\n")
+        print("Locale:", self.locale if self.locale is not None else "System default")
         print(
             f"Default Profile: {self.default_profile if self.default_profile is not None else 'Built-in'}"
         )
@@ -794,6 +796,9 @@ class Config:
         conf_str = f"""\
         [General]
         
+        # Interface language. Leave blank to use the system default.
+        locale = {none_to_empty(self.locale)}
+        
         # The default profile to use. Leave blank to use the built-in default profile.
         default_profile = {none_to_empty(self.default_profile)}
         
@@ -846,6 +851,7 @@ class Config:
             )
             return config
 
+        try_to_load(config, conf_updater, section, str | None, "locale")
         try_to_load(config, conf_updater, section, str | None, "default_profile")
         try_to_load(config, conf_updater, section, str | None, "profile_editor")
         try_to_load(config, conf_updater, section, Path | None, "cache_dir")

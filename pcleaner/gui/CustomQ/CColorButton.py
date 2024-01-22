@@ -2,6 +2,8 @@ import PySide6.QtWidgets as Qw
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 
+import pcleaner.helpers as hp
+
 """
 Extend a PushButton to display a color, and allow the user to change it
 with a color dialog.
@@ -28,7 +30,7 @@ class ColorButton(Qw.QPushButton):
         self,
         parent=None,
         color: tuple[int, int, int, int] | tuple[int, int, int] = (255, 255, 255, 255),
-        dialog_title: str = "Change Color",
+        dialog_title: str = hp.tr("Select Color", "ColorButton"),
     ):
         super().__init__(parent)
         self._color: Qg.QColor = Qg.QColor(*color)
