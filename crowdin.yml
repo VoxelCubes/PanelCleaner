@@ -1,9 +1,3 @@
 files:
-  - source: translations/de_DE.ts
-    translation: '%original_path%'
-  - source: translations/es_ES.ts
-    translation: '%original_path%'
-  - source: translations/fr_FR.ts
-    translation: '%original_path%'
-  - source: translations/tr_TR.ts
-    translation: '%original_path%'
+  - source: translations/PanelCleaner_en_US.ts
+    translation: /translations/PanelCleaner_%locale_with_underscore%.ts
