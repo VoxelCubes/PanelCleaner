@@ -6,41 +6,41 @@
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>Panel Temizleyici Hakkında</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="84"/>
       <source># Panel Cleaner
 
 An AI-powered tool to clean manga panels.</source>
-      <translation type="unfinished"># Panel Cleaner
+      <translation># Panel Temizleyici
 
-An AI-powered tool to clean manga panels.</translation>
+Manga panellerini temizlemek için yapay zeka destekli bir araç.</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="101"/>
       <source>Version:</source>
-      <translation type="unfinished">Version:</translation>
+      <translation>Versiyon:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="115"/>
       <source>Author:</source>
-      <translation type="unfinished">Author:</translation>
+      <translation>Yazar:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="153"/>
       <source>Toolkit:</source>
-      <translation type="unfinished">Toolkit:</translation>
+      <translation>Araç Seti:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="167"/>
       <source>License:</source>
-      <translation type="unfinished">License:</translation>
+      <translation>Lisans:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="184"/>
       <source>Source code:</source>
-      <translation type="unfinished">Source code:</translation>
+      <translation>Kaynak kodu:</translation>
     </message>
   </context>
   <context>
@@ -48,42 +48,42 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="134"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Yakınlaştır</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="151"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Uzaklaştır</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="168"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Yakınlaştırmayı sıfırla</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="185"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Sığdırmak için yakınlaştır</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="205"/>
       <source>Refresh</source>
-      <translation type="unfinished">Refresh</translation>
+      <translation>Yenile</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="289"/>
       <source>Generating...</source>
-      <translation type="unfinished">Generating...</translation>
+      <translation>Üretmek...</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="338"/>
       <source>Position:</source>
-      <translation type="unfinished">Position:</translation>
+      <translation>Pozisyon:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="359"/>
       <source>Size:</source>
-      <translation type="unfinished">Size:</translation>
+      <translation>Boyut:</translation>
     </message>
   </context>
   <context>
@@ -91,7 +91,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../ui_files/License.ui" line="14"/>
       <source>License Agreement</source>
-      <translation type="unfinished">License Agreement</translation>
+      <translation>Lisans Sözleşmesi</translation>
     </message>
   </context>
   <context>
@@ -99,13 +99,13 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="14"/>
       <source>Panel Cleaner</source>
-      <translation type="unfinished">Panel Cleaner</translation>
+      <translation>Panel Temizleyici</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="40"/>
       <location filename="../ui_files/Mainwindow.ui" line="921"/>
       <source>Profile</source>
-      <translation type="unfinished">Profile</translation>
+      <translation>Profil</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="61"/>
