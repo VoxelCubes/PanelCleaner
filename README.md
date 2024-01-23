@@ -3,6 +3,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![PyPI version](https://img.shields.io/pypi/v/pcleaner)](https://pypi.org/project/pcleaner/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Crowdin](https://badges.crowdin.net/panel-cleaner/localized.svg)](https://crowdin.com/project/panel-cleaner)
 
 This tool uses machine learning to find text and then generates masks to cover it up with the highest accuracy possible. It is designed to clean easy bubbles, no in-painting or out-of-bubble text removal is done. This is intended to save a lot of monotonous work for people who have to clean a lot of panels, while making sure it doesn't paint over anything that it wasn't supposed to.
 
@@ -37,7 +38,8 @@ The two bottom pages are what the program can output: either just the transparen
 > [Acknowledgements](#acknowledgements) \
 > [License](#license) \
 > [Roadmap](#roadmap) \
-> [FAQ](https://github.com/VoxelCubes/PanelCleaner/blob/master/docs/faq.md)
+> [FAQ](https://github.com/VoxelCubes/PanelCleaner/blob/master/docs/faq.md) \
+> [Translating](https://github.com/VoxelCubes/PanelCleaner/blob/master/translations/TRANSLATING.md) 
 
 
 ## Features
@@ -66,6 +68,8 @@ The two bottom pages are what the program can output: either just the transparen
 - Can also cut out the text from the rest of the image, e.g. to paste it over a colored rendition.
 
 - Can also run OCR on the pages and output the text to a file.
+
+- Interface available in: English (See [Translating](https://github.com/VoxelCubes/PanelCleaner/blob/master/translations/TRANSLATING.md) for more languages)
 
 
 ## Limitations
