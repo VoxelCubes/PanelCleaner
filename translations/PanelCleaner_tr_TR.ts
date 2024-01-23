@@ -236,7 +236,7 @@ Manga panellerini temizlemek için yapay zeka destekli bir araç.</translation>
       <location filename="../ui_files/Mainwindow.ui" line="595"/>
       <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
       <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
-      <translation>&apos;görüntüsünün orijinal konumunda bir alt klasör oluşturmak için göreli bir yol kullanabilir veya mutlak bir yol kullanabilirsiniz.</translation>
+      <translation>Görüntüsünün orijinal konumunda bir alt klasör oluşturmak için göreli bir yol kullanabilir veya mutlak bir yol kullanabilirsiniz.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="625"/>
