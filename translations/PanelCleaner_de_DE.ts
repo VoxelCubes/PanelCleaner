@@ -103,7 +103,7 @@ Reinige Mangas durch KI.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="40"/>
-      <location filename="../ui_files/Mainwindow.ui" line="902"/>
+      <location filename="../ui_files/Mainwindow.ui" line="921"/>
       <source>Profile</source>
       <translation>Profil</translation>
     </message>
@@ -119,7 +119,7 @@ Reinige Mangas durch KI.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="86"/>
-      <location filename="../ui_files/Mainwindow.ui" line="1041"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1060"/>
       <source>Save</source>
       <translation>Speichern</translation>
     </message>
@@ -139,13 +139,8 @@ Reinige Mangas durch KI.</translation>
       <translation>Bilder</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="286"/>
-      <source>id</source>
-      <translation>id</translation>
-    </message>
-    <message>
       <location filename="../ui_files/Mainwindow.ui" line="291"/>
-      <location filename="../ui_files/Mainwindow.ui" line="894"/>
+      <location filename="../ui_files/Mainwindow.ui" line="913"/>
       <source>File</source>
       <translation>Datei</translation>
     </message>
@@ -157,7 +152,8 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="301"/>
       <source>Processing Size</source>
-      <translation>Verarbeitungsgröße</translation>
+      <comment>The size that the picture is shrunk down to for processing.</comment>
+      <translation type="unfinished">Processing Size</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="306"/>
@@ -167,12 +163,14 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="311"/>
       <source>Color Mode</source>
-      <translation>Farbmodus</translation>
+      <comment>Like RGB, grayscale etc.</comment>
+      <translation type="unfinished">Color Mode</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="316"/>
       <source>Analytics</source>
-      <translation>Statistik</translation>
+      <comment>Can also call this statistics.</comment>
+      <translation type="unfinished">Analytics</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="353"/>
@@ -205,198 +203,203 @@ Reinige Mangas durch KI.</translation>
       <translation>Ausgabe</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="451"/>
+      <location filename="../ui_files/Mainwindow.ui" line="463"/>
       <source>Cleaned Image</source>
       <translation>Gereinigtes Bild</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="461"/>
+      <location filename="../ui_files/Mainwindow.ui" line="473"/>
       <source>Mask</source>
       <translation>Maske</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="471"/>
+      <location filename="../ui_files/Mainwindow.ui" line="483"/>
       <source>Isolated Text</source>
       <translation>Isolierter Text</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="500"/>
+      <location filename="../ui_files/Mainwindow.ui" line="512"/>
       <source>Save Output</source>
       <translation>Ausgabe speichern</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="510"/>
+      <location filename="../ui_files/Mainwindow.ui" line="522"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, werden die Ausgaben auf der Festplatte gespeichert. Andernfalls können Sie sie nur in der Bild-Detailansicht ansehen. &lt;/p&gt;&lt;p&gt;Wenn das Profil nach der Reinigung unverändert bleibt, ohne dass diese Option aktiviert war, können Sie sie schnell exportieren, indem Sie den Reiniger erneut mit dieser Option aktiviert ausführen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="570"/>
+      <location filename="../ui_files/Mainwindow.ui" line="582"/>
       <source>Output Directory:</source>
       <translation>Ausgabeverzeichnis:</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="583"/>
+      <location filename="../ui_files/Mainwindow.ui" line="595"/>
       <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
+      <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
       <translation>Sie können einen relativen Pfad verwenden, um einen Unterordner am ursprünglichen Speicherort des Bildes zu erstellen, oder einen absoluten Pfad verwenden, um an beliebiger Stelle im System die Ausgabe abzulegen.</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="613"/>
+      <location filename="../ui_files/Mainwindow.ui" line="625"/>
       <source>cleaned</source>
       <translation>gereinigt</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="652"/>
+      <location filename="../ui_files/Mainwindow.ui" line="664"/>
       <source>Plain Text</source>
       <translation>Einfacher Text</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="662"/>
+      <location filename="../ui_files/Mainwindow.ui" line="674"/>
       <source>CSV File</source>
       <translation>CSV-Datei</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="684"/>
+      <location filename="../ui_files/Mainwindow.ui" line="696"/>
       <source>Output File:</source>
       <translation>Ausgabedatei:</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="697"/>
+      <location filename="../ui_files/Mainwindow.ui" line="709"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Geben Sie entweder einen absoluten oder relativen Pfad mit einem Dateinamen an. Die Ausgabe aller Bilder wird in dieselbe Datei geschrieben.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="727"/>
+      <location filename="../ui_files/Mainwindow.ui" line="739"/>
       <source>detected_text.txt</source>
+      <extracomment>The file suffix .txt is important, don&apos;t change that. The .csv extension is swapped in automatically for that alternative when selected.</extracomment>
       <translation>erkannter_text.txt</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="789"/>
+      <location filename="../ui_files/Mainwindow.ui" line="801"/>
       <source>Generating:</source>
-      <translation>Erzeugt:</translation>
+      <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
+      <translation type="unfinished">Generating:</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="819"/>
-      <source>Total Progress:</source>
-      <translation type="unfinished">Total Progress:</translation>
+      <location filename="../ui_files/Mainwindow.ui" line="831"/>
+      <source>Current Step:</source>
+      <translation type="unfinished">Current Step:</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="841"/>
-      <location filename="../ui_files/Mainwindow.ui" line="874"/>
+      <location filename="../ui_files/Mainwindow.ui" line="860"/>
+      <location filename="../ui_files/Mainwindow.ui" line="893"/>
       <source>%v / %m</source>
       <translation>%v / %m</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="864"/>
+      <location filename="../ui_files/Mainwindow.ui" line="883"/>
       <source>Images Processed:</source>
-      <translation>Bilder Verarbeitet:</translation>
+      <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
+      <translation type="unfinished">Images Processed:</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="906"/>
+      <location filename="../ui_files/Mainwindow.ui" line="925"/>
       <source>Set Default</source>
       <translation>Standard festlegen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="922"/>
+      <location filename="../ui_files/Mainwindow.ui" line="941"/>
       <source>Settings</source>
       <translation>Einstellungen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="926"/>
+      <location filename="../ui_files/Mainwindow.ui" line="945"/>
       <source>Theme</source>
-      <translation>Farbschema</translation>
+      <comment>As in color theme</comment>
+      <translation type="unfinished">Theme</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="935"/>
+      <location filename="../ui_files/Mainwindow.ui" line="954"/>
       <source>Language</source>
       <translation>Sprache</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="948"/>
+      <location filename="../ui_files/Mainwindow.ui" line="967"/>
       <source>Help</source>
       <translation>Hilfe</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="968"/>
+      <location filename="../ui_files/Mainwindow.ui" line="987"/>
       <source>Add Files...</source>
       <translation>Dateien hinzufügen...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="977"/>
+      <location filename="../ui_files/Mainwindow.ui" line="996"/>
       <source>Clear Files</source>
       <translation>Dateien entfernen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="986"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1005"/>
       <source>New</source>
       <translation>Neu</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="995"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1014"/>
       <source>Delete</source>
       <translation>Löschen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1004"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1023"/>
       <source>Import...</source>
       <translation>Importieren...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1009"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1028"/>
       <source>Open Log</source>
       <translation>Log öffnen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1018"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1037"/>
       <source>Online Documentation</source>
       <translation>Online-Dokumentation</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1027"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1046"/>
       <source>About Panel Cleaner</source>
       <translation>Über Panel Cleaner</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1032"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1051"/>
       <source>View License</source>
       <translation>Lizenz anzeigen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1050"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1069"/>
       <source>Save as...</source>
       <translation>Speichern unter...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1058"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1077"/>
       <source>System</source>
       <translation>System</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1066"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1085"/>
       <source>Dark</source>
       <translation>Dunkel</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1074"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1093"/>
       <source>Light</source>
       <translation>Hell</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1088"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1107"/>
       <source>Add Folder...</source>
       <translation>Ordner hinzufügen...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1097"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1116"/>
       <source>Delete Machine Learning Models</source>
       <translation>Modelle für maschinelles Lernen löschen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1106"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1125"/>
       <source>Download Machine Learning Models</source>
       <translation>Modelle für maschinelles Lernen herunterladen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1115"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1134"/>
       <source>Donate</source>
       <translation>Spenden</translation>
     </message>
