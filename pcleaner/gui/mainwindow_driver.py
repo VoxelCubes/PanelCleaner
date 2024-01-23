@@ -645,8 +645,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         self.menu_language.clear()
         # Add a system default option.
-        action = Qg.QAction("System Default", self)
-        action.triggered.connect(partial(self.set_language, None, "System Default"))
+        action = Qg.QAction("System Language", self)
+        action.triggered.connect(partial(self.set_language, None, "System Language"))
         action.setCheckable(True)
         self.menu_language.addAction(action)
         if self.config.locale is None:
@@ -1322,6 +1322,4 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             imf.output_to_step[max(progress_data.target_outputs)].value
         )
         # Update the label.
-        self.label_progress_total.setText(
-            f"Current step: {pp.to_display_name(progress_data.current_step.name)}"
-        )
+        self.label_current_step.setText(pp.to_display_name(progress_data.current_step.name))
