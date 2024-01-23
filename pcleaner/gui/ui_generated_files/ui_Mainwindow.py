@@ -310,6 +310,7 @@ class Ui_MainWindow(object):
         if (self.file_table.columnCount() < 7):
             self.file_table.setColumnCount(7)
         __qtablewidgetitem = QTableWidgetItem()
+        __qtablewidgetitem.setText(u"id");
         self.file_table.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(1, __qtablewidgetitem1)
@@ -427,6 +428,7 @@ class Ui_MainWindow(object):
         self.page_cleaning.setObjectName(u"page_cleaning")
         self.verticalLayout_14 = QVBoxLayout(self.page_cleaning)
         self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_7 = QHBoxLayout()
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.verticalLayout_11 = QVBoxLayout()
@@ -647,10 +649,16 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
-        self.label_progress_total = QLabel(self.widget_progress_drawer)
-        self.label_progress_total.setObjectName(u"label_progress_total")
+        self.label_current_step_label = QLabel(self.widget_progress_drawer)
+        self.label_current_step_label.setObjectName(u"label_current_step_label")
 
-        self.horizontalLayout_2.addWidget(self.label_progress_total)
+        self.horizontalLayout_2.addWidget(self.label_current_step_label)
+
+        self.label_current_step = QLabel(self.widget_progress_drawer)
+        self.label_current_step.setObjectName(u"label_current_step")
+        self.label_current_step.setText(u"<step>")
+
+        self.horizontalLayout_2.addWidget(self.label_current_step)
 
         self.progressBar_total = QProgressBar(self.widget_progress_drawer)
         self.progressBar_total.setObjectName(u"progressBar_total")
@@ -680,8 +688,8 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.progressBar_individual)
 
-        self.horizontalLayout_2.setStretch(4, 1)
-        self.horizontalLayout_2.setStretch(7, 5)
+        self.horizontalLayout_2.setStretch(5, 1)
+        self.horizontalLayout_2.setStretch(8, 5)
 
         self.verticalLayout_6.addWidget(self.widget_progress_drawer)
 
@@ -787,20 +795,18 @@ class Ui_MainWindow(object):
         self.pushButton_save_profile.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.pushButton_reset_profile.setText(QCoreApplication.translate("MainWindow", u"Reset All", None))
         self.label_drop.setText(QCoreApplication.translate("MainWindow", u"Drag and Drop Images or Folders Here", None))
-        ___qtablewidgetitem = self.file_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"id", None));
-        ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"File", None));
-        ___qtablewidgetitem2 = self.file_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Size", None));
-        ___qtablewidgetitem3 = self.file_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Processing Size", None));
-        ___qtablewidgetitem4 = self.file_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"File Size", None));
-        ___qtablewidgetitem5 = self.file_table.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Color Mode", None));
-        ___qtablewidgetitem6 = self.file_table.horizontalHeaderItem(6)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"Analytics", None));
+        ___qtablewidgetitem = self.file_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"File", None));
+        ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Size", None));
+        ___qtablewidgetitem2 = self.file_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Processing Size", u"The size that the picture is shrunk down to for processing."));
+        ___qtablewidgetitem3 = self.file_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"File Size", None));
+        ___qtablewidgetitem4 = self.file_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Color Mode", u"Like RGB, grayscale etc."));
+        ___qtablewidgetitem5 = self.file_table.horizontalHeaderItem(6)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Analytics", u"Can also call this statistics."));
         self.image_tab.setTabText(self.image_tab.indexOf(self.tabWidget_table_page), QCoreApplication.translate("MainWindow", u"Images", None))
         self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))
@@ -829,16 +835,16 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.lineEdit_out_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"detected_text.txt", None))
         self.pushButton_browse_out_file.setText("")
-        self.label_generating_what.setText(QCoreApplication.translate("MainWindow", u"Generating:", None))
-        self.label_progress_total.setText(QCoreApplication.translate("MainWindow", u"Total Progress:", None))
+        self.label_generating_what.setText(QCoreApplication.translate("MainWindow", u"Generating:", u"This is present progressive, as in \"[currently] Generating:\""))
+        self.label_current_step_label.setText(QCoreApplication.translate("MainWindow", u"Current Step:", None))
         self.progressBar_total.setFormat(QCoreApplication.translate("MainWindow", u"%v / %m", None))
-        self.label_progress_step.setText(QCoreApplication.translate("MainWindow", u"Images Processed:", None))
+        self.label_progress_step.setText(QCoreApplication.translate("MainWindow", u"Images Processed:", u"As in \"images processed: 42\" with progress bar."))
         self.progressBar_individual.setFormat(QCoreApplication.translate("MainWindow", u"%v / %m", None))
         self.menu_File.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menu_Profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.menu_set_default_profile.setTitle(QCoreApplication.translate("MainWindow", u"Set Default", None))
         self.menu_settings.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
-        self.menu_theme.setTitle(QCoreApplication.translate("MainWindow", u"Theme", None))
+        self.menu_theme.setTitle(QCoreApplication.translate("MainWindow", u"Theme", u"As in color theme"))
         self.menu_language.setTitle(QCoreApplication.translate("MainWindow", u"Language", None))
         self.menu_Help.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
     # retranslateUi

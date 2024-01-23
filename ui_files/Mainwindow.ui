@@ -283,7 +283,7 @@
                </attribute>
                <column>
                 <property name="text">
-                 <string>id</string>
+                 <string notr="true">id</string>
                 </property>
                </column>
                <column>
@@ -298,7 +298,7 @@
                </column>
                <column>
                 <property name="text">
-                 <string>Processing Size</string>
+                 <string comment="The size that the picture is shrunk down to for processing.">Processing Size</string>
                 </property>
                </column>
                <column>
@@ -308,12 +308,12 @@
                </column>
                <column>
                 <property name="text">
-                 <string>Color Mode</string>
+                 <string comment="Like RGB, grayscale etc.">Color Mode</string>
                 </property>
                </column>
                <column>
                 <property name="text">
-                 <string>Analytics</string>
+                 <string comment="Can also call this statistics.">Analytics</string>
                 </property>
                </column>
               </widget>
@@ -438,6 +438,18 @@
                </property>
                <widget class="QWidget" name="page_cleaning">
                 <layout class="QVBoxLayout" name="verticalLayout_14">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_7">
                    <item>
@@ -580,7 +592,7 @@
                    <item>
                     <widget class="CTooltipLabel" name="label_cleaning_outdir_help">
                      <property name="toolTip">
-                      <string>You can use a relative path to create a subfolder at the image's original location, or use an absolute path.</string>
+                      <string extracomment="The &amp;apos; is the possessive 's apostrophe and should be ignored if the language doesn't call for it.">You can use a relative path to create a subfolder at the image's original location, or use an absolute path.</string>
                      </property>
                      <property name="toolTipDuration">
                       <number>-1</number>
@@ -724,7 +736,7 @@
                    <item>
                     <widget class="QLineEdit" name="lineEdit_out_file">
                      <property name="placeholderText">
-                      <string>detected_text.txt</string>
+                      <string extracomment="The file suffix .txt is important, don't change that. The .csv extension is swapped in automatically for that alternative when selected.">detected_text.txt</string>
                      </property>
                      <property name="clearButtonEnabled">
                       <bool>true</bool>
@@ -782,11 +794,11 @@ p, li { white-space: pre-wrap; }
     </item>
     <item>
      <widget class="QWidget" name="widget_progress_drawer" native="true">
-      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,1,0,0,5">
+      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0,1,0,0,5">
        <item>
         <widget class="QLabel" name="label_generating_what">
          <property name="text">
-          <string>Generating:</string>
+          <string comment="This is present progressive, as in &quot;[currently] Generating:&quot;">Generating:</string>
          </property>
         </widget>
        </item>
@@ -814,9 +826,16 @@ p, li { white-space: pre-wrap; }
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_progress_total">
+        <widget class="QLabel" name="label_current_step_label">
          <property name="text">
-          <string>Total Progress:</string>
+          <string>Current Step:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_current_step">
+         <property name="text">
+          <string notr="true">&lt;step&gt;</string>
          </property>
         </widget>
        </item>
@@ -861,7 +880,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QLabel" name="label_progress_step">
          <property name="text">
-          <string>Images Processed:</string>
+          <string comment="As in &quot;images processed: 42&quot; with progress bar.">Images Processed:</string>
          </property>
         </widget>
        </item>
@@ -923,7 +942,7 @@ p, li { white-space: pre-wrap; }
     </property>
     <widget class="QMenu" name="menu_theme">
      <property name="title">
-      <string>Theme</string>
+      <string comment="As in color theme">Theme</string>
      </property>
      <addaction name="action_system_theme"/>
      <addaction name="separator"/>
