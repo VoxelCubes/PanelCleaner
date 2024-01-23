@@ -153,7 +153,7 @@ Reinige Mangas durch KI.</translation>
       <location filename="../ui_files/Mainwindow.ui" line="301"/>
       <source>Processing Size</source>
       <comment>The size that the picture is shrunk down to for processing.</comment>
-      <translation type="unfinished">Processing Size</translation>
+      <translation>Verarbeitungsgröße</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="306"/>
@@ -164,13 +164,13 @@ Reinige Mangas durch KI.</translation>
       <location filename="../ui_files/Mainwindow.ui" line="311"/>
       <source>Color Mode</source>
       <comment>Like RGB, grayscale etc.</comment>
-      <translation type="unfinished">Color Mode</translation>
+      <translation>Farbmodus</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="316"/>
       <source>Analytics</source>
       <comment>Can also call this statistics.</comment>
-      <translation type="unfinished">Analytics</translation>
+      <translation>Statistik</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="353"/>
@@ -236,7 +236,7 @@ Reinige Mangas durch KI.</translation>
       <location filename="../ui_files/Mainwindow.ui" line="595"/>
       <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
       <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
-      <translation>Sie können einen relativen Pfad verwenden, um einen Unterordner am ursprünglichen Speicherort des Bildes zu erstellen, oder einen absoluten Pfad verwenden, um an beliebiger Stelle im System die Ausgabe abzulegen.</translation>
+      <translation>Sie können einen relativen Pfad verwenden, um einen Unterordner am ursprünglichen Speicherort des Bildes zu erstellen, oder einen absoluten Pfad verwenden, um an einer beliebigen Stelle im System die Ausgabe abzulegen.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="625"/>
@@ -273,12 +273,12 @@ Reinige Mangas durch KI.</translation>
       <location filename="../ui_files/Mainwindow.ui" line="801"/>
       <source>Generating:</source>
       <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
-      <translation type="unfinished">Generating:</translation>
+      <translation>Erzeugt:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="831"/>
       <source>Current Step:</source>
-      <translation type="unfinished">Current Step:</translation>
+      <translation>Aktueller Schritt:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="860"/>
@@ -290,7 +290,7 @@ Reinige Mangas durch KI.</translation>
       <location filename="../ui_files/Mainwindow.ui" line="883"/>
       <source>Images Processed:</source>
       <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
-      <translation type="unfinished">Images Processed:</translation>
+      <translation>Bilder Verarbeitet:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="925"/>
@@ -306,7 +306,7 @@ Reinige Mangas durch KI.</translation>
       <location filename="../ui_files/Mainwindow.ui" line="945"/>
       <source>Theme</source>
       <comment>As in color theme</comment>
-      <translation type="unfinished">Theme</translation>
+      <translation>Farbschema</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="954"/>
