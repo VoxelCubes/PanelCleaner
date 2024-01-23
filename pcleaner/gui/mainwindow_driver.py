@@ -597,7 +597,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.debug("Opening about dialog.")
         # Bodge in an instance variable to prevent garbage collection from immediately closing the window.
-        self.about = ad.AboutWidget()
+        self.about = ad.AboutWidget(self)
         self.about.show()
 
     def open_donation_page(self) -> None:

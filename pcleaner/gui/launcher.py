@@ -48,7 +48,7 @@ def launch() -> None:
     buffer.write(f"Python Version: {sys.version}\n")
     buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
     buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
-    buffer.write(f"Current locale: {Qc.QLocale.system().name()}\n")
+    buffer.write(f"System locale: {Qc.QLocale.system().name()}\n")
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
     if torch.cuda.is_available():
         buffer.write(f"GPU: {torch.cuda.get_device_name(0)} (CUDA enabled)\n")
@@ -60,14 +60,6 @@ def launch() -> None:
     # Start the main window.
     app = Qw.QApplication(sys.argv)
 
-    # Load translations.
-    path = Qc.QLibraryInfo.location(Qc.QLibraryInfo.TranslationsPath)
-    translator = Qc.QTranslator(app)
-    if translator.load(Qc.QLocale.system(), "qtbase", "_", path):
-        app.installTranslator(translator)
-    else:
-        logger.warning(f"Failed to load Qt translations from {path}.")
-
     # Load the config.
     config = cfg.load_config()
 
@@ -77,11 +69,32 @@ def launch() -> None:
     else:
         locale = Qc.QLocale.system()
 
+    logger.info(f"Using locale {locale.name()}.")
+
     translator = Qc.QTranslator(app)
+
+    # Load translations.
+    path = Qc.QLibraryInfo.location(Qc.QLibraryInfo.TranslationsPath)
+    if translator.load(locale, "qt", "_", path):
+        logger.info(f"Loaded built-in Qt translations for {locale.name()}.")
+        app.installTranslator(translator)
+    else:
+        logger.warning(f"Failed to load Qt translations from {path}.")
+
+    translator = Qc.QTranslator(app)
+
+    if translator.load(locale, "qtbase", "_", path):
+        logger.info(f"Loaded built-in Qt base translations for {locale.name()}.")
+        app.installTranslator(translator)
+    else:
+        logger.warning(f"Failed to load Qt base translations from {path}.")
+
+    translator = Qc.QTranslator(app)
+
     path = ":/translations"
     if translator.load(locale, "PanelCleaner", "_", path):
         app.installTranslator(translator)
-        logger.info(f"Loaded translations for {locale.name()}.")
+        logger.info(f"Loaded App translations for {locale.name()}.")
 
     Qg.QIcon.setFallbackSearchPaths([":/icons", ":/icon-themes"])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load
