@@ -935,7 +935,8 @@ p, li { white-space: pre-wrap; }
       <string>Language</string>
      </property>
      <property name="icon">
-      <iconset theme="languages"/>
+      <iconset theme="languages">
+       <normaloff>.</normaloff>.</iconset>
      </property>
      <addaction name="action_temp_3"/>
     </widget>
@@ -1049,22 +1050,6 @@ p, li { white-space: pre-wrap; }
     <string>Save as...</string>
    </property>
   </action>
-  <action name="action_Apply_Denoising">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Apply Denoising</string>
-   </property>
-  </action>
-  <action name="action_show_terminal_command">
-   <property name="text">
-    <string>Show Terminal Command</string>
-   </property>
-  </action>
   <action name="action_system_theme">
    <property name="checkable">
     <bool>true</bool>
@@ -1087,11 +1072,6 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Light</string>
-   </property>
-  </action>
-  <action name="action_temp">
-   <property name="text">
-    <string>&lt;temp&gt;</string>
    </property>
   </action>
   <action name="action_temp_2">

@@ -27,6 +27,7 @@ class Ui_ImageDetails(object):
         if not ImageDetails.objectName():
             ImageDetails.setObjectName(u"ImageDetails")
         ImageDetails.resize(900, 800)
+        ImageDetails.setWindowTitle(u"Form")
         self.horizontalLayout_3 = QHBoxLayout(ImageDetails)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -280,7 +281,6 @@ class Ui_ImageDetails(object):
     # setupUi
 
     def retranslateUi(self, ImageDetails):
-        ImageDetails.setWindowTitle(QCoreApplication.translate("ImageDetails", u"Form", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_zoom_in.setToolTip(QCoreApplication.translate("ImageDetails", u"Zoom in", None))
 #endif // QT_CONFIG(tooltip)
@@ -302,5 +302,6 @@ class Ui_ImageDetails(object):
         self.label_17.setText(QCoreApplication.translate("ImageDetails", u"Generating...", None))
         self.label_position_label.setText(QCoreApplication.translate("ImageDetails", u"Position:", None))
         self.label_size_label.setText(QCoreApplication.translate("ImageDetails", u"Size:", None))
+        pass
     # retranslateUi
 

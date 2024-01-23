@@ -44,11 +44,6 @@ An AI-powered tool to clean manga panels.</source>
 <context>
     <name>ImageDetails</name>
     <message>
-        <location filename="../ui_files/ImageDetails.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui_files/ImageDetails.ui" line="134"/>
         <source>Zoom in</source>
         <translation type="unfinished"></translation>
@@ -122,7 +117,7 @@ An AI-powered tool to clean manga panels.</source>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="86"/>
-        <location filename="../ui_files/Mainwindow.ui" line="1040"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1041"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -314,107 +309,92 @@ An AI-powered tool to clean manga panels.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="947"/>
+        <location filename="../ui_files/Mainwindow.ui" line="948"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="967"/>
+        <location filename="../ui_files/Mainwindow.ui" line="968"/>
         <source>Add Files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="976"/>
+        <location filename="../ui_files/Mainwindow.ui" line="977"/>
         <source>Clear Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="985"/>
+        <location filename="../ui_files/Mainwindow.ui" line="986"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="994"/>
+        <location filename="../ui_files/Mainwindow.ui" line="995"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1003"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1004"/>
         <source>Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1008"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1009"/>
         <source>Open Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1017"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1018"/>
         <source>Online Documentation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1026"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1027"/>
         <source>About Panel Cleaner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1031"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1032"/>
         <source>View License</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1049"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1050"/>
         <source>Save as...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1060"/>
-        <source>Apply Denoising</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1065"/>
-        <source>Show Terminal Command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1073"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1058"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1081"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1066"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1089"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1074"/>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1094"/>
-        <source>&lt;temp&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1108"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1088"/>
         <source>Add Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1117"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1097"/>
         <source>Delete Machine Learning Models</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1126"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1106"/>
         <source>Download Machine Learning Models</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/Mainwindow.ui" line="1135"/>
+        <location filename="../ui_files/Mainwindow.ui" line="1115"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
