@@ -2,7 +2,6 @@ import PySide6.QtWidgets as Qw
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 
-from pcleaner.helpers import tr
 
 """
 Extend a PushButton to display a color, and allow the user to change it
@@ -20,6 +19,8 @@ If the color has an alpha channel, the rectangle is drawn with a checkerboard]
 pattern behind it.
 """
 
+# TODO Select Color not translating
+
 
 # Follow Qt's naming convention of CamelCase for functions, signals, and classes
 # noinspection PyPep8Naming
@@ -30,12 +31,12 @@ class ColorButton(Qw.QPushButton):
         self,
         parent=None,
         color: tuple[int, int, int, int] | tuple[int, int, int] = (255, 255, 255, 255),
-        dialog_title: str = tr("Select Color", "ColorButton title"),
+        dialog_title: str | None = None,
     ):
         super().__init__(parent)
         self._color: Qg.QColor = Qg.QColor(*color)
         self.use_alpha = len(color) == 4
-        self.dialog_title = dialog_title
+        self.dialog_title = dialog_title if dialog_title else self.tr("Select Color")
         self.setFixedHeight(32)
         self.clicked.connect(self._open_color_dialog)
 

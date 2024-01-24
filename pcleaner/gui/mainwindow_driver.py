@@ -386,7 +386,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Open a file picker and set the output directory.
         """
         logger.debug("Browsing output directory.")
-        output_dir = Qw.QFileDialog.getExistingDirectory(self, "Select Output Directory")
+        output_dir = Qw.QFileDialog.getExistingDirectory(self, self.tr("Select Output Directory"))
         if output_dir:
             logger.debug(f"Setting output directory to {output_dir}")
             self.lineEdit_out_directory.setText(output_dir)
@@ -638,9 +638,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Let the user know that he has to restart the application.
         gu.show_info(
             self,
-            "Restart Required",
-            "The language has been changed. "
-            "Please restart the application for the changes to take effect.",
+            self.tr("Restart Required"),
+            self.tr(
+                "The language has been changed. Please restart the application for the changes to take effect."
+            ),
         )
 
     def initialize_language_menu(self) -> None:
@@ -650,8 +651,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         self.menu_language.clear()
         # Add a system default option.
-        action = Qg.QAction("System Language", self)
-        action.triggered.connect(partial(self.set_language, None, "System Language"))
+        action = Qg.QAction(self.tr("System Language"), self)
+        action.triggered.connect(partial(self.set_language, None, self.tr("System Language")))
         action.setCheckable(True)
         self.menu_language.addAction(action)
         if self.config.locale is None:
@@ -750,18 +751,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.debug("Importing profile.")
         file_path = Qw.QFileDialog.getOpenFileName(
             self,
-            "Import Profile",
+            self.tr("Import Profile"),
             "",
-            "Profile Files (*.conf)",
+            self.tr("Profile Files (*.conf)"),
         )[0]
         if file_path:
             logger.debug(f"Importing profile from {file_path}")
             profile_name = Path(file_path).stem
             success, msg = pc.add_profile(self.config, profile_name, file_path)
             if success:
-                gu.show_info(self, "Profile Imported", msg)
+                gu.show_info(self, self.tr("Profile Imported"), msg)
             else:
-                gu.show_warning(self, "Import Error", msg)
+                gu.show_warning(self, self.tr("Import Error"), msg)
                 return
 
             self.add_new_profile_to_gui(profile_name, Path(file_path))
@@ -778,10 +779,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         profile_name = self.comboBox_current_profile.currentText()
 
         if self.comboBox_current_profile.currentText() == cfg.DEFAULT_PROFILE_NAME:
-            gu.show_warning(self, "Failed to Delete", "The default profile cannot be deleted.")
+            gu.show_warning(
+                self, self.tr("Failed to Delete"), self.tr("The default profile cannot be deleted.")
+            )
             return
         response = gu.show_question(
-            self, "Delete Profile", f"Are you sure you want to delete the profile {profile_name}?"
+            self,
+            self.tr("Delete Profile"),
+            self.tr("Are you sure you want to delete the profile {profile_name}?").format(
+                profile_name=profile_name
+            ),
         )
         if response == Qw.QMessageBox.Yes:
             profile_file = self.config.saved_profiles[profile_name]
@@ -792,7 +799,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     profile_file.unlink()
                 except OSError as e:
                     gu.show_warning(
-                        self, "Delete Error", "Failed to delete the profile\n" + e.what()
+                        self,
+                        self.tr("Delete Error"),
+                        self.tr("Failed to delete the profile.") + f"\n\n{e}",
                     )
 
             # To suppress the change check since we don't care about discarding the current changes.
@@ -852,13 +861,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 f"Previous profile {self.comboBox_current_profile.currentText()} has unsaved changes."
             )
             # Warn the user that he will lose unsaved changes.
-            message = (
-                f"The profile '{self.comboBox_current_profile.currentText()}' has unsaved changes.\n"
-                f"Switching profiles will discard changes to the current profile."
-            )
+            message = self.tr(
+                "The profile '{profile}' has unsaved changes.\n"
+                "Switching profiles will discard changes to the current profile."
+            ).format(profile=self.comboBox_current_profile.currentText())
             response = gu.show_question(
                 self,
-                "Unsaved changes",
+                self.tr("Unsaved changes"),
                 message,
                 Qw.QMessageBox.Cancel | Qw.QMessageBox.Save | Qw.QMessageBox.Discard,
             )
@@ -886,7 +895,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         profile_name = self.comboBox_current_profile.currentText()
         success, error = self.config.load_profile(profile_name)
         if not success:
-            gu.show_warning(self, "Load Error", f"Failed to load profile: \n\n{error}")
+            gu.show_warning(
+                self, self.tr("Load Error"), self.tr("Failed to load profile:") + f" \n\n{error}"
+            )
             return
         self.load_current_profile()
 
@@ -948,10 +959,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if make_new:
             success, msg = pc.new_profile(self.config, profile_name, profile_path)
             if success:
-                gu.show_info(self, "Profile Created", msg)
+                gu.show_info(self, self.tr("Profile Created"), msg)
                 self.add_new_profile_to_gui(profile_name, profile_path)
             else:
-                gu.show_warning(self, "Create Error", msg)
+                gu.show_warning(self, self.tr("Create Error"), msg)
                 return
         else:
             # Proceed to write the profile.
@@ -961,7 +972,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             if not success:
                 logger.error("Failed to save profile.")
                 self.statusbar.showMessage(self.tr(f"Failed to save profile to {profile_path}"))
-                gu.show_warning(self, "Save Error", "Failed to save profile.")
+                gu.show_warning(self, self.tr("Save Error"), self.tr("Failed to save profile."))
                 return
 
             logger.info("Profile saved successfully.")
@@ -973,9 +984,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     self.statusbar.showMessage(self.tr("Failed to save config."))
                     gu.show_critical(
                         self,
-                        "Save Error",
-                        "Failed to save the new profile to the configuration file.\n"
-                        "Continue anyway?",
+                        self.tr("Save Error"),
+                        self.tr(
+                            "Failed to save the new profile to the configuration file.\n"
+                            "Continue anyway?"
+                        ),
                     )
                     return
                 # To suppress the change check since we don't care about discarding the current changes.
@@ -986,7 +999,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         success, error = self.config.load_profile(profile_name)
         if not success:
-            gu.show_warning(self, "Load Error", f"Failed to load profile: \n\n{error}")
+            gu.show_warning(
+                self, self.tr("Load Error"), self.tr("Failed to load profile:") + f" \n\n{error}"
+            )
             return
         self.load_current_profile()
         self.handle_profile_values_changed()
@@ -1031,10 +1046,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if self.file_table.has_no_files():
             gu.show_warning(
                 self,
-                "No Files",
-                "No files to process. "
-                "You can add files by dragging and dropping them in the middle of the window, "
-                "or through the menubar: Files -> Add Files or Add Folder.",
+                self.tr("No Files"),
+                self.tr(
+                    "No files to process. "
+                    "You can add files by dragging and dropping them in the middle of the window, "
+                    "or through the menubar: Files -> Add Files or Add Folder."
+                ),
             )
             return
 
@@ -1074,8 +1091,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if not requested_outputs:
             gu.show_warning(
                 self,
-                "No Outputs",
-                "No outputs were requested. Please select at least one output before cleaning.",
+                self.tr("No Outputs"),
+                self.tr(
+                    "No outputs were requested. Please select at least one output before cleaning."
+                ),
             )
             self.enable_running_cleaner()
             return
@@ -1086,7 +1105,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.info(f"Requested outputs: {requested_outputs}")
 
         output_str = self.lineEdit_out_directory.text()
-        output_directory = Path(output_str if output_str else "cleaned")
+        output_directory = Path(output_str if output_str else self.tr("cleaned"))
         image_files = self.file_table.get_image_files()
 
         worker = wt.Worker(
@@ -1164,8 +1183,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             if (
                 gu.show_question(
                     self,
-                    "File Exists",
-                    f"The file '{output_path}' already exists. Overwrite?",
+                    self.tr("File Exists"),
+                    self.tr("The file '{output_path}' already exists. Overwrite?").format(
+                        output_path=output_path
+                    ),
                 )
                 != Qw.QMessageBox.Yes
             ):
@@ -1222,11 +1243,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
 
     def output_worker_result(self) -> None:
-        gu.show_info(self, "Processing Finished", "Finished processing all files.")
+        gu.show_info(
+            self, self.tr("Processing Finished"), self.tr("Finished processing all files.")
+        )
         logger.info("Output worker finished.")
 
     def output_worker_aborted(self) -> None:
-        gu.show_info(self, "Processing Aborted", "Processing aborted.")
+        gu.show_info(self, self.tr("Processing Aborted"), self.tr("Processing aborted."))
         logger.warning("Output worker aborted.")
 
     def output_worker_finished(self) -> None:
@@ -1238,7 +1261,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     @Slot(wt.WorkerError)
     def output_worker_error(self, e) -> None:
         gu.show_warning(
-            self, "Processing Error", f"Encountered an error while processing files.\n\n{e}"
+            self,
+            self.tr("Processing Error"),
+            self.tr("Encountered an error while processing files.") + f"\n\n{e}",
         )
         logger.error(f"Output worker encountered an error:\n{e}")
 

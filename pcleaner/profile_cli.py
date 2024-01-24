@@ -2,6 +2,7 @@ from pathlib import Path
 
 import prettytable as pt
 
+from pcleaner.helpers import tr
 import pcleaner.cli_utils as cli
 import pcleaner.config as cfg
 
@@ -82,7 +83,9 @@ def new_profile(
     # Check if overwriting an existing file.
     if profile_path.exists():
         if not cli_mode:
-            return False, f"Profile file {profile_path} already exists."
+            return False, tr("Profile file {profile_path} already exists.").format(
+                profile_path=profile_path
+            )
         if not cli.get_confirmation(f"Overwrite existing file {profile_path}?"):
             return False, "Aborted."
 
@@ -100,7 +103,7 @@ def new_profile(
         open_profile(config, profile_name)
         return True, ""
 
-    return True, f"Profile {profile_name} created."
+    return True, tr("Profile {profile_name} created.").format(profile_name=profile_name)
 
 
 def add_profile(config: cfg.Config, profile_name: str, profile_path: str) -> tuple[bool, str]:
@@ -231,11 +234,11 @@ def is_valid_profile_name(
     :return: True if valid, False otherwise, and a message.
     """
     if not profile_name:
-        return False, "Profile name cannot be empty."
+        return False, tr("Profile name cannot be empty.")
     if profile_name in config.saved_profiles.keys():
-        return False, "Profile name already in use."
+        return False, tr("Profile name already in use.")
     if profile_name.lower() in cfg.RESERVED_PROFILE_NAMES and not allow_reserved:
-        return False, "Profile name is reserved."
+        return False, tr("Profile name is reserved.")
     return True, ""
 
 
