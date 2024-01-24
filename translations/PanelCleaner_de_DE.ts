@@ -7,7 +7,7 @@
       <location filename="../pcleaner/config.py" line="17"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation type="unfinished">default</translation>
+      <translation>standard</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="493"/>
@@ -15,43 +15,43 @@
       <location filename="../pcleaner/gui/image_file.py" line="505"/>
       <location filename="../pcleaner/gui/image_file.py" line="518"/>
       <source>Unknown</source>
-      <translation type="unfinished">Unknown</translation>
+      <translation>Unbekannt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="507"/>
       <source>RGB</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">RGB</translation>
+      <translation>RGB</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="509"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">CMYK</translation>
+      <translation>CMYK</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="511"/>
       <source>Grayscale</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Grayscale</translation>
+      <translation>Graustufen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="513"/>
       <source>1-bit</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">1-bit</translation>
+      <translation>1-Bit</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="515"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Palette</translation>
+      <translation>Palette</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="33"/>
       <source>Select Color</source>
       <comment>ColorButton title</comment>
-      <translation type="unfinished">Select Color</translation>
+      <translation>Farbe Auswählen</translation>
     </message>
   </context>
   <context>
@@ -145,57 +145,57 @@ Reinige Mangas durch KI.</translation>
       <location filename="../pcleaner/gui/image_details_driver.py" line="112"/>
       <location filename="../pcleaner/gui/image_details_driver.py" line="386"/>
       <source>Export Image</source>
-      <translation type="unfinished">Export Image</translation>
+      <translation>Bild exportieren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="118"/>
       <source>OCR Image</source>
-      <translation type="unfinished">OCR Image</translation>
+      <translation>OCR anwenden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="311"/>
       <source>Generate Me</source>
-      <translation type="unfinished">Generate Me</translation>
+      <translation>Erzeuge mich</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="358"/>
       <source>Image not found.</source>
-      <translation type="unfinished">Image not found.</translation>
+      <translation>Bild nicht gefunden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="359"/>
       <source>Image at {path} does not exist: {error}</source>
-      <translation type="unfinished">Image at {path} does not exist: {error}</translation>
+      <translation>Das Bild bei {path} existiert nicht: {error}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="396"/>
       <source>Export failed</source>
-      <translation type="unfinished">Export failed</translation>
+      <translation>Export fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="396"/>
       <source>Failed to export image:</source>
-      <translation type="unfinished">Failed to export image:</translation>
+      <translation>Bild kann nicht exportiert werden:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="504"/>
       <source>Output Failed</source>
-      <translation type="unfinished">Output Failed</translation>
+      <translation>Ausgabe Fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="504"/>
       <source>Output generation failed:</source>
-      <translation type="unfinished">Output generation failed:</translation>
+      <translation>Die Erzeugung der Ausgabe ist fehlgeschlagen:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="659"/>
       <source>Profile check failed</source>
-      <translation type="unfinished">Profile check failed</translation>
+      <translation>Profilprüfung fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="660"/>
       <source>Profile change check failed:</source>
-      <translation type="unfinished">Profile change check failed:</translation>
+      <translation>Profiländerungsprüfung fehlgeschlagen:</translation>
     </message>
   </context>
   <context>
@@ -514,43 +514,43 @@ Reinige Mangas durch KI.</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="272"/>
       <source>Open Config</source>
       <comment>Statusbar button</comment>
-      <translation type="unfinished">Open Config</translation>
+      <translation>Konfiguration öffnen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="277"/>
       <source>Open Log</source>
       <comment>Statusbar button</comment>
-      <translation type="unfinished">Open Log</translation>
+      <translation>Log öffnen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="441"/>
       <source>Aborting...</source>
-      <translation type="unfinished">Aborting...</translation>
+      <translation>Abbrechen...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="498"/>
       <source>Loading OCR model...</source>
-      <translation type="unfinished">Loading OCR model...</translation>
+      <translation>OCR-Modell lädt...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="501"/>
       <source>Loaded OCR model.</source>
-      <translation type="unfinished">Loaded OCR model.</translation>
+      <translation>OCR-Modell geladen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="963"/>
       <source>Failed to save profile to {profile_path}</source>
-      <translation type="unfinished">Failed to save profile to {profile_path}</translation>
+      <translation>Das Profil konnte nicht in {profile_path} gespeichert werden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="968"/>
       <source>Profile saved to {profile_path}</source>
-      <translation type="unfinished">Profile saved to {profile_path}</translation>
+      <translation>Profil gespeichert in {profile_path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="973"/>
       <source>Failed to save config.</source>
-      <translation type="unfinished">Failed to save config.</translation>
+      <translation>Konfiguration konnte nicht gespeichert werden.</translation>
     </message>
   </context>
   <context>
@@ -605,25 +605,25 @@ Reinige Mangas durch KI.</translation>
       <location filename="process_strings.py" line="15"/>
       <source>The original image with scaling applied (if needed).</source>
       <comment>Step description in the image details view, step: Input, output: None</comment>
-      <translation type="unfinished">The original image with scaling applied (if needed).</translation>
+      <translation>Das Originalbild mit angewandter Skalierung (falls erforderlich).</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="17"/>
       <source>Input</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Input</translation>
+      <translation>Eingabe</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="18"/>
       <source>The rough mask generated by the AI.</source>
       <comment>Step description in the image details view, step: Text Detection, output: None</comment>
-      <translation type="unfinished">The rough mask generated by the AI.</translation>
+      <translation>Die von der KI generierte Grobmaske.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="20"/>
       <source>Text Detection</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Text Detection</translation>
+      <translation>Text-Erkennung</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="22"/>
@@ -631,135 +631,135 @@ Reinige Mangas durch KI.</translation>
       <location filename="process_strings.py" line="55"/>
       <source>Not visible</source>
       <comment>Step description in the image details view, step: None, output: None</comment>
-      <translation type="unfinished">Not visible</translation>
+      <translation>Nicht sichtbar</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="23"/>
       <source>The outlines of the text boxes the AI found.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Initial Boxes</comment>
-      <translation type="unfinished">The outlines of the text boxes the AI found.</translation>
+      <translation>Die Umrisse der Textfelder, die die KI gefunden hat.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="24"/>
       <source>Preprocessor</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Preprocessor</translation>
+      <translation>Präprozessor</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="26"/>
       <source>Initial Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Initial Boxes</translation>
+      <translation>Initiale Felder</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="27"/>
       <source>The final boxes after expanding, merging and filtering unneeded boxes with OCR.
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Final Boxes</comment>
-      <translation type="unfinished">The final boxes after expanding, merging and filtering unneeded boxes with OCR.
-Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</translation>
+      <translation>Die finalen Felder nach dem Erweitern, Zusammenfügen und Herausfiltern nicht benötigter Felder mit OCR.
+Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) Felder. Blau: Referenzfelder für die Entrauschung.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="29"/>
       <source>Final Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Final Boxes</translation>
+      <translation>Finale Felder</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="32"/>
       <source>The mask of the merged boxes.</source>
       <comment>Step description in the image details view, step: Masker, output: Box Mask</comment>
-      <translation type="unfinished">The mask of the merged boxes.</translation>
+      <translation>Die Maske der zusammengefügten Felder.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="33"/>
       <source>Masker</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Masker</translation>
+      <translation>Maskierer</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="35"/>
       <source>Box Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Box Mask</translation>
+      <translation>Felder-Maske</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="36"/>
       <source>The rough text detection mask with everything outside the box mask cut out.</source>
       <comment>Step description in the image details view, step: Masker, output: Cut Mask</comment>
-      <translation type="unfinished">The rough text detection mask with everything outside the box mask cut out.</translation>
+      <translation>Die grobe Texterkennungsmaske mit allem, was außerhalb der Felder-Maske liegt, weggeschnitten.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="38"/>
       <source>Cut Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Cut Mask</translation>
+      <translation>Schnittmaske</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="39"/>
       <source>The different steps of growth around the cut mask displayed in different colors.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Layers</comment>
-      <translation type="unfinished">The different steps of growth around the cut mask displayed in different colors.</translation>
+      <translation>Die verschiedenen Wachstumsstufen rund um die Schnittmaske in verschiedenen Farben dargestellt.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="41"/>
       <source>Mask Layers</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Layers</translation>
+      <translation>Maskenstufen</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="42"/>
       <source>The input image with the final mask overlaid in color.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
-      <translation type="unfinished">The input image with the final mask overlaid in color.</translation>
+      <translation>Das Eingabebild mit der finalen Maske in Farbe überlagert.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="44"/>
       <source>Mask Overlay</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Overlay</translation>
+      <translation>Maskenüberlagerung</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="45"/>
       <source>The collection of masks for each bubble that fit best.</source>
       <comment>Step description in the image details view, step: Masker, output: Final Mask</comment>
-      <translation type="unfinished">The collection of masks for each bubble that fit best.</translation>
+      <translation>Die Sammlung von Masken für jede Blase, die am besten passen.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="47"/>
       <source>Final Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Final Mask</translation>
+      <translation>Finale Maske</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="48"/>
       <source>The text layer isolated from the input image.</source>
       <comment>Step description in the image details view, step: Masker, output: Isolated Text</comment>
-      <translation type="unfinished">The text layer isolated from the input image.</translation>
+      <translation>Die aus dem Eingabebild isolierte Textebene.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="50"/>
       <source>Isolated Text</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Isolated Text</translation>
+      <translation>Isolierter Text</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="51"/>
       <source>The input image with the final mask applied.</source>
       <comment>Step description in the image details view, step: Masker, output: Masked Output</comment>
-      <translation type="unfinished">The input image with the final mask applied.</translation>
+      <translation>Das Eingabebild mit der finalen Maske überlagert.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="53"/>
       <source>Masked Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Masked Output</translation>
+      <translation>Maskierte Ausgabe</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="56"/>
       <source>The masks that required denoising, to be overlaid on the final mask when exporting.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoise Mask</comment>
-      <translation type="unfinished">The masks that required denoising, to be overlaid on the final mask when exporting.</translation>
+      <translation>Die Masken, die entrauscht werden müssen. Sie werden beim Exportieren über die finale Maske gelegt.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="57"/>
@@ -1051,181 +1051,181 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="profile_strings.py" line="104"/>
       <source>Off White Max Threshold</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Off White Max Threshold</translation>
+      <translation>Max. Schwellenwert für gebrochenes Weiß</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="106"/>
       <source>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</translation>
+      <translation>Minimale Verbesserung der Standardabweichung der Maske, um sie weiter zu verkleinern. Die Standardabweichung bezieht sich auf die Farbabweichung entlang des Randes einer Maske. Eine geringe Abweichung bedeutet, dass die Maske auf einem einfarbigen Hintergrund liegt, d. h. sie überschneidet keinen Text oder andere Objekte. Wenn Sie hier einen höheren Wert einstellen, muss eine kleinere Maske deutlich besser sein, um größeren Masken den Vorzug zu geben.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="108"/>
       <source>Mask Improvement Threshold</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Improvement Threshold</translation>
+      <translation>Maskenverbesserungsschwellwert</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="110"/>
       <source>Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</translation>
+      <translation>Auswahl, ob der schnelle Maskenauswahlalgorithmus verwendet werden soll. Wenn diese Option aktiviert ist, wählt der Algorithmus für die Maskenauswahl die erste perfekte Maske aus, wenn eine solche früh gefunden wird. Dies ist schneller, aber es kann sein, dass nicht die beste Maske gefunden wird, wenn eine etwas größere besser gewesen wäre.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="112"/>
       <source>Mask Selection Fast</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Selection Fast</translation>
+      <translation>Schnelle Maskenauswahl</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="114"/>
       <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</translation>
+      <translation>Die maximale Standardabweichung einer Maske, die berücksichtigt werden soll. Ein hoher Wert bedeutet eine höhere Toleranz für eine Maske, die Text oder andere Objekte überschneidet, was keine gute Maske ist, da dieses Feld ohnehin manuelle Korrekturen benötigen wird. Wenn Sie diesen Wert auf 0 setzen, werden nur perfekte Masken zugelassen, was für Bilder mit sehr hoher Auflösung empfohlen wird.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="116"/>
       <source>Mask Max Standard Deviation</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Max Standard Deviation</translation>
+      <translation>Max. Standardabweichung einer Maske</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="118"/>
       <source>Color to use for the debug mask.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Color to use for the debug mask.</translation>
+      <translation>Farbe, die für die Debug-Maske verwendet werden soll.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="120"/>
       <source>Debug Mask Color</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Debug Mask Color</translation>
+      <translation>Farbe der Debug-Maske</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="122"/>
       <source>Denoiser</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Denoiser</translation>
+      <translation>Entrauscher</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="124"/>
       <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</translation>
+      <translation>Wenn ein Stück Text schwer zu maskieren ist, musste bei der Bereinigung wahrscheinlich eine kleine Maske gewählt werden, die ggf. eine Menge JPEG-Artefakte um den Text herum zurücklässt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="126"/>
       <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</translation>
+      <translation>Das bedeutet, dass die Farbe der Pixel um den Rand einer Maske herum nicht einheitlich ist, was als Standardabweichung quantifiziert wird. Der Entrauscher kann auf Masken ab einer minimalen Standardabweichung abzielen und den Bereich unmittelbar um die Maske herum entrauschen. Dadurch bleiben die Details im restlichen Bild erhalten, aber die Artefakte im Bereich des ehemaligen Textes werden entfernt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="128"/>
       <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</translation>
+      <translation>Da es sich hierbei um einen optionalen Schritt handelt, der bei hochaufgelösten Bildern, die nicht unter JPEG-Artefakten leiden, sogar überflüssig ist, kann er hier deaktiviert werden.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="130"/>
       <source>Denoising Enabled</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Denoising Enabled</translation>
+      <translation>Entrauschen Aktiviert</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="132"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</translation>
+      <translation>Die minimale Standardabweichung der Farben um den Rand einer gegebenen Maske, um eine Entrauschung in dem Bereich um die Maske durchzuführen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="134"/>
       <source>Noise Min Standard Deviation</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Noise Min Standard Deviation</translation>
+      <translation>Rauschen Min. Standardabweichung</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="136"/>
       <source>The thickness of an outline to denoise around a mask.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">The thickness of an outline to denoise around a mask.</translation>
+      <translation>Die Dicke eines Umrisses, der um eine Maske herum entrauscht werden soll.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="138"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Noise Outline Size</translation>
+      <translation>Rauschumrissgröße</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="140"/>
       <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</translation>
+      <translation>Blenden Sie die Ränder der entrauschten Abdeckmaske um diesen Wert ab, um die entrauschten Teile sanft in den Rest des Bildes zu integrieren.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="142"/>
       <source>Noise Fade Radius</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Noise Fade Radius</translation>
+      <translation>Rauschblendenradius</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="144"/>
       <source>Set to True to support colored images.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Set to True to support colored images.</translation>
+      <translation>Bilder mit Farbe entrauschen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="146"/>
       <source>Colored Images</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Colored Images</translation>
+      <translation>Farbige Bilder</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="148"/>
       <source>How strongly to denoise the image. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">How strongly to denoise the image. Higher values mean more denoising.</translation>
+      <translation>Wie stark das Bild entrauscht werden soll. Höhere Werte bedeuten eine stärkere Rauschunterdrückung.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="150"/>
       <source>Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Filter Strength</translation>
+      <translation>Filterstärke</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="152"/>
       <source>How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</translation>
+      <translation>Wie stark die Farbkanäle entrauscht werden sollen, im Gegensatz zur Helligkeit. Höhere Werte bedeuten mehr Rauschunterdrückung.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="154"/>
       <source>Color Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Color Filter Strength</translation>
+      <translation>Farbfilterstärke</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="156"/>
       <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Size in pixels of the template patch that is used to compute weights. Should be odd.</translation>
+      <translation>Größe des Kontextfensters in Pixeln, das für die Berechnung der Gewichte verwendet wird. Sollte ungerade sein.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="158"/>
       <source>Template Window Size</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Template Window Size</translation>
+      <translation>Kontextfenstergröße</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="160"/>
       <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</translation>
+      <translation>Größe des Fensters in Pixeln, das zur Berechnung des gewichteten Durchschnitts für ein bestimmtes Pixel verwendet wird. Sollte ungerade sein.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="162"/>
       <source>Search Window Size</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Search Window Size</translation>
+      <translation>Suchfenstergröße</translation>
     </message>
   </context>
   <context>
@@ -1234,13 +1234,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="../pcleaner/gui/profile_parser.py" line="87"/>
       <source>Reset to default</source>
       <comment>Generic reset button tooltip</comment>
-      <translation type="unfinished">Reset to default</translation>
+      <translation>Auf Standardwerte zurücksetzen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="156"/>
       <source>Same as image</source>
       <comment>Profile default option for the file type</comment>
-      <translation type="unfinished">Same as image</translation>
+      <translation>Wie Originalbild</translation>
     </message>
   </context>
   <context>
@@ -1249,8 +1249,8 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="../pcleaner/gui/profile_parser.py" line="396"/>
       <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
-You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;Der Pfad für das Text-Detektor-Modell {value} existiert nicht und wird auf die Standardeinstellungen zurückgesetzt.
+Sie können das Modell manuell &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;hier&lt;/a&gt; herunterladen oder weiterhin das Standardmodell verwenden.&lt;/html&gt;</translation>
     </message>
   </context>
   <context>
