@@ -13,6 +13,7 @@ from PySide6.QtCore import Slot, Signal
 from loguru import logger
 from manga_ocr import MangaOcr
 
+from pcleaner.helpers import tr
 import pcleaner.gui.supported_languages as sl
 import pcleaner.analytics as an
 import pcleaner.cli_utils as cu
@@ -177,6 +178,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def initialize_ui(self) -> None:
         self.hide_progress_drawer()
         self.set_up_statusbar()
+        # Purge any missing profiles before loading them.
+        logger.info("Purging missing profiles.")
+        pc.purge_missing_profiles(self.config, gui=True)
+
         self.initialize_profiles()
         self.initialize_analytics_view()
         self.initialize_language_menu()
@@ -264,12 +269,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.label_stats = Qw.QLabel("")
         self.statusbar.addPermanentWidget(self.label_stats)
 
-        button_config = Qw.QPushButton("Open Config")
+        button_config = Qw.QPushButton(self.tr("Open Config", "Statusbar button"))
         button_config.clicked.connect(partial(gu.open_file, cu.get_config_path()))
         button_config.setFlat(True)
         self.statusbar.addPermanentWidget(button_config)
 
-        button_log = Qw.QPushButton("Open Log")
+        button_log = Qw.QPushButton(self.tr("Open Log", "Statusbar button"))
         button_log.clicked.connect(partial(gu.open_file, cu.get_log_path()))
         button_log.setFlat(True)
         self.statusbar.addPermanentWidget(button_log)
@@ -614,12 +619,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Set the language of the application.
         If the language code is None, the system default is used.
         """
-        # Check if the language even changed.
-        if language_code == self.config.locale:
-            logger.debug(f"Language already set to {language_code}")
-            return
-
-        logger.info(f"Setting language to {language_code}")
         # Update the checked state of the menu items.
         for index, action in enumerate(self.menu_language.actions()):
             if index == 0:
@@ -628,6 +627,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 continue
             action.setChecked(action.text() == language_name)
 
+        # Check if the language even changed.
+        if language_code == self.config.locale:
+            logger.debug(f"Language already set to {language_code}")
+            return
+
+        logger.info(f"Setting language to {language_code}")
         self.config.locale = language_code
         self.config.save()
         # Let the user know that he has to restart the application.

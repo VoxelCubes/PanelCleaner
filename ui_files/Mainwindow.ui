@@ -1023,11 +1023,6 @@ p, li { white-space: pre-wrap; }
     <string>Import...</string>
    </property>
   </action>
-  <action name="action_open_log">
-   <property name="text">
-    <string>Open Log</string>
-   </property>
-  </action>
   <action name="action_online_documentation">
    <property name="icon">
     <iconset theme="internet-services">

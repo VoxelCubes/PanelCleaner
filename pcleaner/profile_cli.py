@@ -239,11 +239,12 @@ def is_valid_profile_name(
     return True, ""
 
 
-def purge_missing_profiles(config: cfg.Config) -> None:
+def purge_missing_profiles(config: cfg.Config, gui: bool = False) -> None:
     """
     Remove profiles from the config that no longer exist.
 
     :param config: The config object.
+    :param gui: When True, don't print anything.
     """
     purged = False
     for profile_name, profile_path in list(config.saved_profiles.items()):
@@ -252,4 +253,5 @@ def purge_missing_profiles(config: cfg.Config) -> None:
             purged = True
     if purged:
         config.save()
-        print("Purged missing profiles.")
+        if not gui:
+            print("Purged missing profiles.")
