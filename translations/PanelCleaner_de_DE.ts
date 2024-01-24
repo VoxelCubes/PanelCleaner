@@ -765,25 +765,25 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="process_strings.py" line="57"/>
       <source>Denoiser</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Denoiser</translation>
+      <translation>Entrauscher</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="59"/>
       <source>Denoise Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Denoise Mask</translation>
+      <translation>Entrauschungsmaske</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="60"/>
       <source>The input image with the denoised mask applied.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoised Output</comment>
-      <translation type="unfinished">The input image with the denoised mask applied.</translation>
+      <translation>Das Eingabebild mit der entrauschten Maske überlagert.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="62"/>
       <source>Denoised Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Denoised Output</translation>
+      <translation>Entrauschte Ausgabe</translation>
     </message>
   </context>
   <context>
@@ -792,169 +792,169 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="16"/>
       <source>General</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">General</translation>
+      <translation>Allgemein</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="18"/>
       <source>Preferred file type to save the cleaned image as.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Preferred file type to save the cleaned image as.</translation>
+      <translation>Bevorzugter Dateityp, unter dem das bereinigte Bild gespeichert werden soll.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="20"/>
       <source>Preferred File Type</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Preferred File Type</translation>
+      <translation>Bevorzugter Dateityp</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="22"/>
       <source>Preferred file type to save the mask as. Only image formats that allow for transparency are supported.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Preferred file type to save the mask as. Only image formats that allow for transparency are supported.</translation>
+      <translation>Bevorzugter Dateityp, unter dem die Maske gespeichert werden soll. Es werden nur Bildformate unterstützt, die Transparenz zulassen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="24"/>
       <source>Preferred Mask File Type</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Preferred Mask File Type</translation>
+      <translation>Bevorzugter Maskendateityp</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="26"/>
       <source>The following are the lower and upper targets for the height of the input image. It is only ever scaled down to fit within the range, preferring whole number factors to minimize the impact on image quality. Images smaller than either target will remain unchanged. You can disable this feature by setting one or both values less than or equal to 0.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">The following are the lower and upper targets for the height of the input image. It is only ever scaled down to fit within the range, preferring whole number factors to minimize the impact on image quality. Images smaller than either target will remain unchanged. You can disable this feature by setting one or both values less than or equal to 0.</translation>
+      <translation>Im Folgenden sind die unteren und oberen Zielwerte für die Höhe des Eingabebildes aufgeführt. Es wird immer nur so weit verkleinert, dass es in den Bereich passt, wobei ganzzahlige Faktoren bevorzugt werden, um die Auswirkungen auf die Bildqualität zu minimieren. Bilder, die kleiner als der obere Zielwerte sind, bleiben unverändert. Sie können diese Funktion deaktivieren, indem Sie einen oder beide Werte kleiner als oder gleich 0 setzen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="28"/>
       <source>This is useful for significantly speeding up processing on large images. Also, since other options relying on pixel dimensions depend on size, this will help normalize the results across different image sizes.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">This is useful for significantly speeding up processing on large images. Also, since other options relying on pixel dimensions depend on size, this will help normalize the results across different image sizes.</translation>
+      <translation>Dies ist nützlich, um die Verarbeitung von großen Bildern erheblich zu beschleunigen. Da andere Optionen, die sich auf die Pixeldimensionen stützen, von der Größe abhängen, hilft dies außerdem, die Ergebnisse für verschiedene Bildgrößen zu normalisieren.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="30"/>
       <source>The image will be scaled down, processed, and then only the mask is scaled back up. Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality. Only the height of the image is used to determine the scale factor, preserving the aspect ratio, and ignoring the individual width of an image so that the factor remains consistent if one of the pages is a double page spread.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">The image will be scaled down, processed, and then only the mask is scaled back up. Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality. Only the height of the image is used to determine the scale factor, preserving the aspect ratio, and ignoring the individual width of an image so that the factor remains consistent if one of the pages is a double page spread.</translation>
+      <translation>Das Bild wird verkleinert, verarbeitet und dann wird nur die Maske wieder hochskaliert. Das bedeutet, dass für die bereinigte Ausgabe weiterhin das ursprüngliche, nicht skalierte Bild verwendet wird, um Qualitätsverluste zu verhindern. Zur Bestimmung des Skalierungsfaktors wird nur die Höhe des Bildes betrachtet, wobei das Seitenverhältnis erhalten bleibt und die individuelle Breite eines Bildes ignoriert wird, so dass der Faktor konsistent bleibt, wenn es sich bei einem Bild um eine Doppelseite handelt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="32"/>
       <source>E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.</translation>
+      <translation>Z.B. für ein unteres Ziel von 1000 und ein oberes Ziel von 2000 wird ein Bild mit der Größe 5000x7000 (B, H) Pixel um den Faktor 4 verkleinert, sodass es bei der Verarbeitung die Größe 1250x1750 Pixel hat.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="34"/>
       <source>Input Height Lower Target</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Input Height Lower Target</translation>
+      <translation>Eingabehöhe unteres Ziel</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="36"/>
       <source>Input Height Upper Target</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Input Height Upper Target</translation>
+      <translation>Eingabehöhe oberes Ziel</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="38"/>
       <source>Text Detector</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Text Detector</translation>
+      <translation>Text-Erkennung</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="40"/>
       <source>Path to the text detection model, leave empty to use the built-in model. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</source>
       <comment>Profile comment in Text Detector</comment>
-      <translation type="unfinished">Path to the text detection model, leave empty to use the built-in model. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</translation>
+      <translation>Pfad zum Texterkennungsmodell. Leer lassen, um das integrierte Modell zu verwenden. Sie können ältere Versionen des Modells  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;hier herunterladen.&lt;/a&gt;</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="42"/>
       <source>Model Path</source>
       <comment>Profile entry in Text Detector</comment>
-      <translation type="unfinished">Model Path</translation>
+      <translation>Modell Pfad</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="44"/>
       <source>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available.</source>
       <comment>Profile comment in Text Detector</comment>
-      <translation type="unfinished">Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available.</translation>
+      <translation>Anzahl der Modelle, die parallel ausgeführt werden sollen. Dies ist nützlich, wenn Sie über genügend RAM (oder VRAM bei CUDA) verfügen, um mehrere Modelle gleichzeitig auszuführen. Dies erhöht natürlich die Geschwindigkeit des Prozesses, kann aber auch Ihren Computer komplett überlasten und abstürtzen lassen. Es ist empfohlen, höchstens 1 Modell pro 2 GB verfügbaren Speicher zu verwenden.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="46"/>
       <source>Concurrent Models</source>
       <comment>Profile entry in Text Detector</comment>
-      <translation type="unfinished">Concurrent Models</translation>
+      <translation>Parallele Modelle</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="48"/>
       <source>Preprocessor</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Preprocessor</translation>
+      <translation>Präprozessor</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="50"/>
       <source>Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.</translation>
+      <translation>Die Größe der Felder wird in der Gesamtzahl der Pixel angegeben. Ein Feld von 200x200 Pixeln hat also eine Größe von 200 * 200 = 40000.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="52"/>
       <source>Minimum size of any box to keep it.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Minimum size of any box to keep it.</translation>
+      <translation>Mindestgröße eines Feldes, damit es nicht verworfen wird.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="54"/>
       <source>Box Min Size</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Min Size</translation>
+      <translation>Min. Feldgröße</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="56"/>
       <source>Minimum size of a box with &quot;unknown&quot; language to keep it. This language is typically assigned to logos and other badly behaved text elements.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Minimum size of a box with &quot;unknown&quot; language to keep it. This language is typically assigned to logos and other badly behaved text elements.</translation>
+      <translation>Mindestgröße eines Feldes mit &quot;unbekannter&quot; Sprache, um es nicht zu verwerfen. Diese Sprache wird in der Regel für Logos und andere Textelemente verwendet, wo die KI nicht weiß, was sie mit ihnen anfangen soll.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="58"/>
       <source>Suspicious Box Min Size</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Suspicious Box Min Size</translation>
+      <translation>Verdächtige Min. Feldgröße</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="60"/>
       <source>Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</translation>
+      <translation>Ob OCR verwendet werden soll, um Felder zu erkennen, die nicht bereinigt werden sollten, z. B. Felder, die nur Zahlen oder Symbole enthalten.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="62"/>
       <source>OCR Enabled</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Enabled</translation>
+      <translation>OCR Aktiviert</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="64"/>
       <source>Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</translation>
+      <translation>Maximale Größe eines Feldes, für das OCR durchgeführt werden soll. Die Unsinnsfelder sind in der Regel klein und die OCR ist langsam, daher sollten Sie dies als Grenzwert verwenden.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="66"/>
       <source>OCR Max Size</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Max Size</translation>
+      <translation>OCR Max. Größe</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="68"/>
       <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</translation>
+      <translation>Regex-Muster zum Abgleich mit OCR-Ergebnissen. Alles, was mit diesem Muster übereinstimmt, wird verworfen. Beachten Sie, dass das OCR-Modell Sonderzeichen in voller Breite zurückgibt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="70"/>
       <source>OCR Blacklist Pattern</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Blacklist Pattern</translation>
+      <translation>OCR-Blacklist-Muster</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="72"/>
