@@ -11,6 +11,7 @@ import configupdater as cu
 from PySide6.QtCore import Slot
 from loguru import logger
 
+from pcleaner.helpers import tr
 import pcleaner.gui.gui_utils as gu
 from pcleaner import config as cfg
 from pcleaner.config import GreaterZero
@@ -318,13 +319,13 @@ class ProfileToolBox(Qw.QToolBox):
             section_widget = Qw.QWidget()
             layout = Qw.QFormLayout()
             section_widget.setLayout(layout)
-            self.addItem(section_widget, to_display_name(section.name))
+            self.addItem(section_widget, tr(to_display_name(section.name), "Profile"))
             self._widgets[section.name] = {}
 
             for item in section.items:
                 if isinstance(item, ProfileComment):
                     item: ProfileComment
-                    label = Qw.QLabel(parent=self, text=item.comment)
+                    label = Qw.QLabel(parent=self, text=tr(item.comment, "Profile"))
                     label.setOpenExternalLinks(True)
                     label.setWordWrap(True)
                     layout.addRow(label)
@@ -334,7 +335,7 @@ class ProfileToolBox(Qw.QToolBox):
 
                 elif isinstance(item, ProfileEntry):
                     item: ProfileEntry
-                    label = Qw.QLabel(parent=self, text=to_display_name(item.key))
+                    label = Qw.QLabel(parent=self, text=tr(to_display_name(item.key), "Profile"))
                     label.setToolTip(to_display_name(item.key))
                     layout.addRow(label)
                     option_widget = ProfileOptionWidget(item.entry_type)

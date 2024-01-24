@@ -2,6 +2,7 @@
 
 **Not all text is currently translatable yet.**
 
+
 Thanks for considering to translate the project!
 
 There are 2 options for translating:
@@ -15,6 +16,17 @@ Note: The German translations are official and may provide additional context if
 ### Language not supported yet?
 
 Open an issue on Github and I will add it to Crowdin.
+
+### Notice
+
+- You may localize the name of the project in the app, though this will need to be reflected in the 
+  PanelCleaner.desktop file as well, which cannot be done through Crowdin.
+
+- If you see the character &apos; in the text, it is a single quote ('), which has no significance for formatting.
+  Remove them from your translation if they are not needed.
+
+- Any # characters in the text are for Markdown formatting. You can adjust the line wrapping as needed, 
+  beginning new lines with another #.
 
 ## Online
 

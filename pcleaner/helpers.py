@@ -10,8 +10,8 @@ from loguru import logger
 
 
 def tr(
+    text: str,
     context: str = "pcleaner",
-    text: str = "",
     disambiguation: str | None = None,
     count: int = -1,
 ) -> str:

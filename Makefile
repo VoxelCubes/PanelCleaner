@@ -46,7 +46,8 @@ compile-qrc:
 # Refresh localization files for the source language, en_US only.
 refresh-i18n:
 	mkdir -p translations
-	$(I18N_LUPDATE) pcleaner/*.py pcleaner/gui/*.py pcleaner/gui/CustomQ/*.py ui_files -ts translations/PanelCleaner_en_US.ts
+	$(PYTHON) translations/profile_extractor.py
+	$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files translations/profile_strings.py -ts translations/PanelCleaner_de_DE.ts
 
 # Compile localization files for each language, then update the QRC file and compile it.
 compile-i18n:

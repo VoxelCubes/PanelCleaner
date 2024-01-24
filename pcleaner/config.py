@@ -80,7 +80,7 @@ class GeneralConfig:
         [General]
         
         # Preferred file type to save the cleaned image as.
-        [CLI: # If no file type is specified, the original file type will be used.]
+        # [CLI: If no file type is specified, the original file type will be used.]
         preferred_file_type = {self.preferred_file_type if self.preferred_file_type else ""}
 
         # Preferred file type to save the mask as.
@@ -369,7 +369,6 @@ class MaskerConfig:
         """
         config_str = f"""\
         [Masker]
-        
         
         # Number of pixels to grow the mask by each step.
         # This bulks up the outline of the mask, so smaller values will be more accurate but slower.

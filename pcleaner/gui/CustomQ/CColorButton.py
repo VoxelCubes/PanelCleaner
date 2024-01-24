@@ -30,7 +30,7 @@ class ColorButton(Qw.QPushButton):
         self,
         parent=None,
         color: tuple[int, int, int, int] | tuple[int, int, int] = (255, 255, 255, 255),
-        dialog_title: str = hp.tr("Select Color", "ColorButton"),
+        dialog_title: str = hp.tr("Select Color", "ColorButton title"),
     ):
         super().__init__(parent)
         self._color: Qg.QColor = Qg.QColor(*color)
