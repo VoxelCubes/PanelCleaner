@@ -48,10 +48,29 @@
       <translation type="unfinished">Palette</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="33"/>
-      <source>Select Color</source>
-      <comment>ColorButton title</comment>
-      <translation type="unfinished">Select Color</translation>
+      <location filename="../pcleaner/profile_cli.py" line="86"/>
+      <source>Profile file {profile_path} already exists.</source>
+      <translation type="unfinished">Profile file {profile_path} already exists.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="106"/>
+      <source>Profile {profile_name} created.</source>
+      <translation type="unfinished">Profile {profile_name} created.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="238"/>
+      <source>Profile name cannot be empty.</source>
+      <translation type="unfinished">Profile name cannot be empty.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="240"/>
+      <source>Profile name already in use.</source>
+      <translation type="unfinished">Profile name already in use.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="242"/>
+      <source>Profile name is reserved.</source>
+      <translation type="unfinished">Profile name is reserved.</translation>
     </message>
   </context>
   <context>
@@ -94,6 +113,14 @@ An AI-powered tool to clean manga panels.</translation>
       <location filename="../ui_files/About.ui" line="184"/>
       <source>Source code:</source>
       <translation type="unfinished">Source code:</translation>
+    </message>
+  </context>
+  <context>
+    <name>ColorButton</name>
+    <message>
+      <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="40"/>
+      <source>Select Color</source>
+      <translation type="unfinished">Select Color</translation>
     </message>
   </context>
   <context>
@@ -351,6 +378,7 @@ An AI-powered tool to clean manga panels.</translation>
       <translation type="unfinished">You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</translation>
     </message>
     <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1108"/>
       <location filename="../ui_files/Mainwindow.ui" line="625"/>
       <source>cleaned</source>
       <translation type="unfinished">cleaned</translation>
@@ -523,6 +551,11 @@ An AI-powered tool to clean manga panels.</translation>
       <translation type="unfinished">Open Log</translation>
     </message>
     <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="389"/>
+      <source>Select Output Directory</source>
+      <translation type="unfinished">Select Output Directory</translation>
+    </message>
+    <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="441"/>
       <source>Aborting...</source>
       <translation type="unfinished">Aborting...</translation>
@@ -538,19 +571,197 @@ An AI-powered tool to clean manga panels.</translation>
       <translation type="unfinished">Loaded OCR model.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="963"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="641"/>
+      <source>Restart Required</source>
+      <translation type="unfinished">Restart Required</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="644"/>
+      <source>The language has been changed. Please restart the application for the changes to take effect.</source>
+      <translation type="unfinished">The language has been changed. Please restart the application for the changes to take effect.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="654"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="655"/>
+      <source>System Language</source>
+      <translation type="unfinished">System Language</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="754"/>
+      <source>Import Profile</source>
+      <translation type="unfinished">Import Profile</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="756"/>
+      <source>Profile Files (*.conf)</source>
+      <translation type="unfinished">Profile Files (*.conf)</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="763"/>
+      <source>Profile Imported</source>
+      <translation type="unfinished">Profile Imported</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="765"/>
+      <source>Import Error</source>
+      <translation type="unfinished">Import Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="783"/>
+      <source>Failed to Delete</source>
+      <translation type="unfinished">Failed to Delete</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="784"/>
+      <source>The default profile cannot be deleted.</source>
+      <translation type="unfinished">The default profile cannot be deleted.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="788"/>
+      <source>Delete Profile</source>
+      <translation type="unfinished">Delete Profile</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="789"/>
+      <source>Are you sure you want to delete the profile {profile_name}?</source>
+      <translation type="unfinished">Are you sure you want to delete the profile {profile_name}?</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="803"/>
+      <source>Delete Error</source>
+      <translation type="unfinished">Delete Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="804"/>
+      <source>Failed to delete the profile.</source>
+      <translation type="unfinished">Failed to delete the profile.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="867"/>
+      <source>The profile &apos;{profile}&apos; has unsaved changes.
+Switching profiles will discard changes to the current profile.</source>
+      <translation type="unfinished">The profile &apos;{profile}&apos; has unsaved changes.
+Switching profiles will discard changes to the current profile.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="870"/>
+      <source>Unsaved changes</source>
+      <translation type="unfinished">Unsaved changes</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1003"/>
+      <source>Load Error</source>
+      <translation type="unfinished">Load Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1003"/>
+      <source>Failed to load profile:</source>
+      <translation type="unfinished">Failed to load profile:</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="962"/>
+      <source>Profile Created</source>
+      <translation type="unfinished">Profile Created</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="965"/>
+      <source>Create Error</source>
+      <translation type="unfinished">Create Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="974"/>
       <source>Failed to save profile to {profile_path}</source>
       <translation type="unfinished">Failed to save profile to {profile_path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="968"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="975"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="987"/>
+      <source>Save Error</source>
+      <translation type="unfinished">Save Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="975"/>
+      <source>Failed to save profile.</source>
+      <translation type="unfinished">Failed to save profile.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="979"/>
       <source>Profile saved to {profile_path}</source>
       <translation type="unfinished">Profile saved to {profile_path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="973"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="984"/>
       <source>Failed to save config.</source>
       <translation type="unfinished">Failed to save config.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="991"/>
+      <source>Failed to save the new profile to the configuration file.
+Continue anyway?</source>
+      <translation type="unfinished">Failed to save the new profile to the configuration file.
+Continue anyway?</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1049"/>
+      <source>No Files</source>
+      <translation type="unfinished">No Files</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1054"/>
+      <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
+      <translation type="unfinished">No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1094"/>
+      <source>No Outputs</source>
+      <translation type="unfinished">No Outputs</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1097"/>
+      <source>No outputs were requested. Please select at least one output before cleaning.</source>
+      <translation type="unfinished">No outputs were requested. Please select at least one output before cleaning.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1186"/>
+      <source>File Exists</source>
+      <translation type="unfinished">File Exists</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1187"/>
+      <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
+      <translation type="unfinished">The file &apos;{output_path}&apos; already exists. Overwrite?</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1247"/>
+      <source>Processing Finished</source>
+      <translation type="unfinished">Processing Finished</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1248"/>
+      <source>Finished processing all files.</source>
+      <translation type="unfinished">Finished processing all files.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1252"/>
+      <source>Processing Aborted</source>
+      <translation type="unfinished">Processing Aborted</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1252"/>
+      <source>Processing aborted.</source>
+      <translation type="unfinished">Processing aborted.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1265"/>
+      <source>Processing Error</source>
+      <translation type="unfinished">Processing Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
+      <source>Encountered an error while processing files.</source>
+      <translation type="unfinished">Encountered an error while processing files.</translation>
     </message>
   </context>
   <context>
