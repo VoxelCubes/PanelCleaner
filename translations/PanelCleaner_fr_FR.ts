@@ -958,271 +958,283 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
       <location filename="profile_strings.py" line="72"/>
+      <source>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</source>
+      <comment>Profile comment in Preprocessor</comment>
+      <translation type="unfinished">The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="74"/>
+      <source>OCR Strict Language</source>
+      <comment>Profile entry in Preprocessor</comment>
+      <translation type="unfinished">OCR Strict Language</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="76"/>
       <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="74"/>
+      <location filename="profile_strings.py" line="78"/>
       <source>Box Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Padding Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="76"/>
-      <location filename="profile_strings.py" line="84"/>
+      <location filename="profile_strings.py" line="80"/>
+      <location filename="profile_strings.py" line="88"/>
       <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="78"/>
+      <location filename="profile_strings.py" line="82"/>
       <source>Box Right Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Right Padding Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="80"/>
+      <location filename="profile_strings.py" line="84"/>
       <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="82"/>
+      <location filename="profile_strings.py" line="86"/>
       <source>Box Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Padding Extended</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="86"/>
+      <location filename="profile_strings.py" line="90"/>
       <source>Box Right Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Right Padding Extended</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="88"/>
+      <location filename="profile_strings.py" line="92"/>
       <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="90"/>
+      <location filename="profile_strings.py" line="94"/>
       <source>Box Reference Padding</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Reference Padding</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="92"/>
+      <location filename="profile_strings.py" line="96"/>
       <source>Masker</source>
       <comment>Profile section title</comment>
       <translation type="unfinished">Masker</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="94"/>
+      <location filename="profile_strings.py" line="98"/>
       <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="96"/>
+      <location filename="profile_strings.py" line="100"/>
       <source>Mask Growth Step Pixels</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Growth Step Pixels</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="98"/>
+      <location filename="profile_strings.py" line="102"/>
       <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="100"/>
+      <location filename="profile_strings.py" line="104"/>
       <source>Mask Growth Steps</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Growth Steps</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="102"/>
+      <location filename="profile_strings.py" line="106"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="104"/>
+      <location filename="profile_strings.py" line="108"/>
       <source>Off White Max Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Off White Max Threshold</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="106"/>
+      <location filename="profile_strings.py" line="110"/>
       <source>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="108"/>
+      <location filename="profile_strings.py" line="112"/>
       <source>Mask Improvement Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Improvement Threshold</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="110"/>
+      <location filename="profile_strings.py" line="114"/>
       <source>Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="112"/>
+      <location filename="profile_strings.py" line="116"/>
       <source>Mask Selection Fast</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Selection Fast</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="114"/>
+      <location filename="profile_strings.py" line="118"/>
       <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="116"/>
+      <location filename="profile_strings.py" line="120"/>
       <source>Mask Max Standard Deviation</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Max Standard Deviation</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="118"/>
+      <location filename="profile_strings.py" line="122"/>
       <source>Color to use for the debug mask.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Color to use for the debug mask.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="120"/>
+      <location filename="profile_strings.py" line="124"/>
       <source>Debug Mask Color</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Debug Mask Color</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="122"/>
+      <location filename="profile_strings.py" line="126"/>
       <source>Denoiser</source>
       <comment>Profile section title</comment>
       <translation type="unfinished">Denoiser</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="124"/>
+      <location filename="profile_strings.py" line="128"/>
       <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="126"/>
+      <location filename="profile_strings.py" line="130"/>
       <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="128"/>
+      <location filename="profile_strings.py" line="132"/>
       <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="130"/>
+      <location filename="profile_strings.py" line="134"/>
       <source>Denoising Enabled</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Denoising Enabled</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="132"/>
+      <location filename="profile_strings.py" line="136"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="134"/>
+      <location filename="profile_strings.py" line="138"/>
       <source>Noise Min Standard Deviation</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Noise Min Standard Deviation</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="136"/>
+      <location filename="profile_strings.py" line="140"/>
       <source>The thickness of an outline to denoise around a mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">The thickness of an outline to denoise around a mask.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="138"/>
+      <location filename="profile_strings.py" line="142"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Noise Outline Size</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="140"/>
+      <location filename="profile_strings.py" line="144"/>
       <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="142"/>
+      <location filename="profile_strings.py" line="146"/>
       <source>Noise Fade Radius</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Noise Fade Radius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="144"/>
+      <location filename="profile_strings.py" line="148"/>
       <source>Set to True to support colored images.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Set to True to support colored images.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="146"/>
+      <location filename="profile_strings.py" line="150"/>
       <source>Colored Images</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Colored Images</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="148"/>
+      <location filename="profile_strings.py" line="152"/>
       <source>How strongly to denoise the image. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">How strongly to denoise the image. Higher values mean more denoising.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="150"/>
+      <location filename="profile_strings.py" line="154"/>
       <source>Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Filter Strength</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="152"/>
+      <location filename="profile_strings.py" line="156"/>
       <source>How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="154"/>
+      <location filename="profile_strings.py" line="158"/>
       <source>Color Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Color Filter Strength</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="156"/>
+      <location filename="profile_strings.py" line="160"/>
       <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Size in pixels of the template patch that is used to compute weights. Should be odd.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="158"/>
+      <location filename="profile_strings.py" line="162"/>
       <source>Template Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Template Window Size</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="160"/>
+      <location filename="profile_strings.py" line="164"/>
       <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="162"/>
+      <location filename="profile_strings.py" line="166"/>
       <source>Search Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Search Window Size</translation>
