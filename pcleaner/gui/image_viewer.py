@@ -99,9 +99,9 @@ class ImageViewer(Qw.QGraphicsView):
         width_factor = view_width / width
         height_factor = view_height / height
         self.zoom_factor = min(width_factor, height_factor)
-        logger.debug(
-            f"Zoom to fit with factor: {self.zoom_factor:.2%} for view size {view_width}x{view_height} and image size {width}x{height}"
-        )
+        # logger.debug(
+        #     f"Zoom to fit with factor: {self.zoom_factor:.2%} for view size {view_width}x{view_height} and image size {width}x{height}"
+        # )
         self.zoom(1)
 
     def image_position(self, pos) -> Qc.QPoint:

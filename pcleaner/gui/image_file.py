@@ -13,6 +13,7 @@ from PIL import Image
 from attrs import frozen, fields
 
 import pcleaner.config as cfg
+from pcleaner.helpers import tr
 
 
 # The max size used for the icon and large thumbnail.
@@ -488,31 +489,31 @@ class ImageFile:
     @property
     def size_str(self) -> str:
         if self.size is None:
-            return "Unknown"
+            return tr("Unknown")
         return f"{self.size[0]:n} × {self.size[1]:n}"
 
     @property
     def file_size_str(self) -> str:
         if self.file_size is None:
-            return "Unknown"
+            return tr("Unknown")
         return humanfriendly.format_size(self.file_size, binary=True)
 
     @property
     def color_mode_str(self) -> str:
         if self.color_mode is None:
-            return "Unknown"
+            return tr("Unknown")
         elif self.color_mode in ("RGB", "RGBA"):
-            return "RGB"
+            return tr("RGB", "Color mode")
         elif self.color_mode == "CMYK":
-            return "CMYK"
+            return tr("CMYK", "Color mode")
         elif self.color_mode in ("L", "LA"):
-            return "Grayscale"
+            return tr("Grayscale", "Color mode")
         elif self.color_mode == "1":
-            return "1-bit"
+            return tr("1-bit", "Color mode")
         elif self.color_mode == "P":
-            return "Palette"
+            return tr("Palette", "Color mode")
         else:
-            return "Unknown"
+            return tr("Unknown")
 
     def data_loaded(self) -> bool:
         """

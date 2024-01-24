@@ -108,11 +108,15 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         Initialize the overflow menu housing the export and ocr button for the image details widget.
         """
         self.menu = Qw.QMenu(self)
-        self.export_action = Qg.QAction(Qg.QIcon.fromTheme("document-save"), "Export Image", self)
+        self.export_action = Qg.QAction(
+            Qg.QIcon.fromTheme("document-save"), self.tr("Export Image"), self
+        )
         self.export_action.triggered.connect(self.export_image)
         self.menu.addAction(self.export_action)
 
-        self.ocr_action = Qg.QAction(Qg.QIcon.fromTheme("document-scan"), "OCR Image", self)
+        self.ocr_action = Qg.QAction(
+            Qg.QIcon.fromTheme("document-scan"), self.tr("OCR Image"), self
+        )
         self.ocr_action.triggered.connect(self.start_ocr_worker)
         self.menu.addAction(self.ocr_action)
 
@@ -304,7 +308,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 except OSError as e:
                     logger.error(f"Failed to load image {proc_output.path}: {e}")
             else:
-                button.setText("Generate Me")
+                button.setText(self.tr("Generate Me"))
         # Update the badges on the buttons.
         self.start_profile_checker()
 
@@ -350,7 +354,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             except OSError as e:
                 logger.error(f"Image at {proc_output.path} does not exist. {e}")
                 gu.show_warning(
-                    self, "Image not found.", f"Image at {proc_output.path} does not exist: {e}"
+                    self,
+                    self.tr("Image not found."),
+                    self.tr("Image at {path} does not exist: {error}").format(
+                        path=proc_output.path, error=e
+                    ),
                 )
                 return
 
@@ -374,7 +382,9 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         if not self.current_image_path.is_file():
             return
 
-        save_path, _ = Qw.QFileDialog.getSaveFileName(self, "Export Image", filter="PNG (*.png)")
+        save_path, _ = Qw.QFileDialog.getSaveFileName(
+            self, self.tr("Export Image"), filter="PNG (*.png)"
+        )
         if save_path:
             save_path = Path(save_path).with_suffix(".png")
             try:
@@ -382,7 +392,9 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 logger.info(f"Exported image to {save_path}")
             except OSError as e:
                 logger.error(f"Failed to export image to {save_path}: {e}")
-                gu.show_warning(self, "Export failed", f"Failed to export image:\n\n{e}")
+                gu.show_warning(
+                    self, self.tr("Export failed"), self.tr("Failed to export image:") + f"\n\n{e}"
+                )
 
     def current_button(self) -> BadgeButton | None:
         """
@@ -488,7 +500,9 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     @Slot(wt.WorkerError)
     def output_worker_error(self, error: wt.WorkerError) -> None:
         logger.error("Output worker encountered an error.")
-        gu.show_warning(self, "Output failed", f"Output generation failed:\n\n{error}")
+        gu.show_warning(
+            self, self.tr("Output Failed"), self.tr("Output generation failed:") + f"\n\n{error}"
+        )
 
     def output_worker_aborted(self) -> None:
         self.load_all_image_thumbnails()
@@ -640,7 +654,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
     def profile_checker_error(self, error: wt.WorkerError) -> None:
         logger.error("Profile checker encountered an error.")
-        gu.show_warning(self, "Profile check failed", f"Profile change check failed:\n\n{error}")
+        gu.show_warning(
+            self,
+            self.tr("Profile check failed"),
+            self.tr("Profile change check failed:") + f"\n\n{error}",
+        )
 
     def start_ocr_worker(self) -> None:
         """

@@ -438,7 +438,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.pushButton_abort.setEnabled(False)
         self.thread_queue.clear()
         logger.warning("Aborting processing")
-        self.statusbar.showMessage("Aborting...", timeout=5000)
+        self.statusbar.showMessage(self.tr("Aborting..."), timeout=5000)
 
     def handle_ocr_mode_change(self, csv: bool) -> None:
         """
@@ -495,10 +495,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     def load_ocr_model(self) -> None:
         t_start = time.time()
-        self.statusbar.showMessage(f"Loading OCR model...")
+        self.statusbar.showMessage(self.tr(f"Loading OCR model..."))
         self.shared_ocr_model.set(MangaOcr())
         logger.info(f"Loaded OCR model ({time.time()-t_start:.2f}s)")
-        self.statusbar.showMessage(f"Loaded OCR model.")
+        self.statusbar.showMessage(self.tr(f"Loaded OCR model."))
         self.enable_running_cleaner()
 
     def generic_worker_error(self, error: wt.WorkerError, context: str = "") -> None:
@@ -960,17 +960,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             success = self.config.current_profile.write(profile_path)
             if not success:
                 logger.error("Failed to save profile.")
-                self.statusbar.showMessage(f"Failed to save profile to {profile_path}")
+                self.statusbar.showMessage(self.tr(f"Failed to save profile to {profile_path}"))
                 gu.show_warning(self, "Save Error", "Failed to save profile.")
                 return
 
             logger.info("Profile saved successfully.")
-            self.statusbar.showMessage(f"Profile saved to {profile_path}")
+            self.statusbar.showMessage(self.tr(f"Profile saved to {profile_path}"))
             if save_as:
                 self.config.add_profile(profile_name, profile_path)
                 if not self.config.save():
                     logger.error("Failed to save config.")
-                    self.statusbar.showMessage("Failed to save config.")
+                    self.statusbar.showMessage(self.tr("Failed to save config."))
                     gu.show_critical(
                         self,
                         "Save Error",
@@ -1262,7 +1262,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.progress_step_start = progress_data.current_step
                 # Set the target label, we don't need to update this multiple times.
                 self.label_target_outputs.setText(
-                    ", ".join(pp.to_display_name(o.name) for o in progress_data.target_outputs)
+                    ", ".join(
+                        tr(pp.to_display_name(o.name), "Process Steps")
+                        for o in progress_data.target_outputs
+                    )
                 )
 
         elif progress_data.progress_type == imf.ProgressType.incremental:
@@ -1327,4 +1330,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             imf.output_to_step[max(progress_data.target_outputs)].value
         )
         # Update the label.
-        self.label_current_step.setText(pp.to_display_name(progress_data.current_step.name))
+        self.label_current_step.setText(
+            tr(pp.to_display_name(progress_data.current_step.name), "Process Steps")
+        )

@@ -84,7 +84,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
         self._reset_button = Qw.QPushButton()
         self._reset_button.setSizePolicy(Qw.QSizePolicy.Fixed, Qw.QSizePolicy.Fixed)
         self._reset_button.setIcon(Qg.QIcon.fromTheme("edit-reset"))
-        self._reset_button.setToolTip("Reset to default")
+        self._reset_button.setToolTip(self.tr("Reset to default", "Generic reset button tooltip"))
         self._reset_button.clicked.connect(self.reset)
         self.set_reset_button_enabled(False)
 
@@ -152,7 +152,9 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             # Use "Same as image" as the default value, with a linked data of None.
             # The other suffixes just store the suffix as the linked data.
             self._data_widget: CComboBox = CComboBox()
-            self._data_widget.addTextItemLinkedData("Same as image", None)
+            self._data_widget.addTextItemLinkedData(
+                self.tr("Same as image", "Profile default option for the file type"), None
+            )
             for suffix in cfg.SUPPORTED_IMG_TYPES:
                 self._data_widget.addTextItemLinkedData(suffix, suffix)
 
@@ -386,10 +388,12 @@ class ProfileToolBox(Qw.QToolBox):
                         gu.show_warning(
                             self,
                             "Invalid model path",
-                            f"<html>The Text Detector model path {value} does not exist, reverting to default."
-                            f"\nYou can download the model manually from <a href="
-                            f'"https://github.com/zyddnys/manga-image-translator/releases/latest">here</a>'
-                            f" or continue using the default model.</html>",
+                            self.tr(
+                                "<html>The Text Detector model path {value} does not exist, reverting to default."
+                                "\nYou can download the model manually from <a href="
+                                '"https://github.com/zyddnys/manga-image-translator/releases/latest">here</a>'
+                                " or continue using the default model.</html>"
+                            ).format(value=value),
                         )
         # Sanity check to guard against future breakage.
         if not found_model_path:
