@@ -12,6 +12,7 @@ There are 2 options for translating:
 - Translate offline by using git to fork the repository and submit a pull request.
 
 Note: The German translations are official and may provide additional context if the English is ambiguous.
+Improvements are nonetheless welcome.
 
 ### Language not supported yet?
 

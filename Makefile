@@ -49,8 +49,8 @@ compile-qrc:
 # out the relevant strings, then create fake code for Linguist to ingest.
 refresh-i18n:
 	mkdir -p translations
-	$(PYTHON) translations/profile_extractor.py
-	$(PYTHON) translations/process_steps_extractor.py
+	PYTHONPATH=/home/corbin/Repos/PanelCleaner $(PYTHON) translations/profile_extractor.py
+	PYTHONPATH=/home/corbin/Repos/PanelCleaner $(PYTHON) translations/process_steps_extractor.py
 	$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
 		translations/profile_strings.py translations/process_strings.py -ts translations/PanelCleaner_en_US.ts
 
