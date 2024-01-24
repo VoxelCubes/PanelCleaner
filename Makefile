@@ -52,7 +52,7 @@ refresh-i18n:
 	$(PYTHON) translations/profile_extractor.py
 	$(PYTHON) translations/process_steps_extractor.py
 	$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
-		translations/profile_strings.py translations/process_strings.py -ts translations/PanelCleaner_de_DE.ts
+		translations/profile_strings.py translations/process_strings.py -ts translations/PanelCleaner_en_US.ts
 
 # Compile localization files for each language, then update the QRC file and compile it.
 compile-i18n:
