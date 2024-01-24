@@ -960,92 +960,92 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="72"/>
       <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</translation>
+      <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu den initialen Feldern hinzugefügt, die durch die Texterkennungs-KI erstellt wurden. Diese Rahmen werden in Grün dargestellt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="74"/>
       <source>Box Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Padding Initial</translation>
+      <translation>Feldauffüllung Initial</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="76"/>
       <location filename="profile_strings.py" line="84"/>
       <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</translation>
+      <translation>Füllung für die rechte Seite eines Feldes. Diese Erweiterung hilft dabei, Rubytext zu verdecken, der rechts von vertikalem Text übersteht.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="78"/>
       <source>Box Right Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Right Padding Initial</translation>
+      <translation>Feldauffüllung Rechts Initial</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="80"/>
       <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</translation>
+      <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu einem erweiterten Satz von Feldern hinzugefügt, die verwendet werden, um Falschmeldungen durch die KI-Maske des Texterkenners auszuschließen. Diese Kästchen werden in lila dargestellt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="82"/>
       <source>Box Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Padding Extended</translation>
+      <translation>Feldauffüllung Erweitert</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="86"/>
       <source>Box Right Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Right Padding Extended</translation>
+      <translation>Feldauffüllung Rechts Erweitert</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="88"/>
       <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</translation>
+      <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu den Referenzfeldern hinzugefügt, die bei der Analyse der zu verwendenden Maske zum Abtasten des Originalbildes verwendet werden. Diese Rahmen werden in Blau dargestellt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="90"/>
       <source>Box Reference Padding</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Reference Padding</translation>
+      <translation>Feldauffüllung Referenz</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="92"/>
       <source>Masker</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Masker</translation>
+      <translation>Maskierer</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="94"/>
       <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</translation>
+      <translation>Anzahl der Pixel, um die die Maske bei jedem Schritt vergrößert wird. Dadurch wird der Umriss der Maske vergrößert. Kleinere Werte sind also genauer, aber langsamer.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="96"/>
       <source>Mask Growth Step Pixels</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Growth Step Pixels</translation>
+      <translation>Maskenwachstum pro Schritt</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="98"/>
       <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</translation>
+      <translation>Anzahl der Schritte, um die die Maske wachsen soll. Bei einer höheren Zahl werden mehr und immer größere Masken erstellt, die letztlich durch die Größe des Referenzfeldes begrenzt sind.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="100"/>
       <source>Mask Growth Steps</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Growth Steps</translation>
+      <translation>Maskenwachstumsschritte</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="102"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</translation>
+      <translation>Maximaler Schwellenwert, ab dem ein Pixel nicht als weiß gilt. Die Medianfarbe entlang des Randes einer Maske ist möglicherweise nicht reinweiß. Um leichte gebrochene Weißtöne auf einem reinweißen Hintergrund zu vermeiden, wird alles, was heller als dieser Schwellenwert ist, auf reinweiß aufgerundet.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="104"/>
