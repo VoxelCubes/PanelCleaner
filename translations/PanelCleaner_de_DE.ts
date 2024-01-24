@@ -958,271 +958,283 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="72"/>
+      <source>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</source>
+      <comment>Profile comment in Preprocessor</comment>
+      <translation type="unfinished">The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="74"/>
+      <source>OCR Strict Language</source>
+      <comment>Profile entry in Preprocessor</comment>
+      <translation type="unfinished">OCR Strict Language</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="76"/>
       <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu den initialen Feldern hinzugefügt, die durch die Texterkennungs-KI erstellt wurden. Diese Rahmen werden in Grün dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="74"/>
+      <location filename="profile_strings.py" line="78"/>
       <source>Box Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="76"/>
-      <location filename="profile_strings.py" line="84"/>
+      <location filename="profile_strings.py" line="80"/>
+      <location filename="profile_strings.py" line="88"/>
       <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung für die rechte Seite eines Feldes. Diese Erweiterung hilft dabei, Rubytext zu verdecken, der rechts von vertikalem Text übersteht.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="78"/>
+      <location filename="profile_strings.py" line="82"/>
       <source>Box Right Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Rechts Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="80"/>
+      <location filename="profile_strings.py" line="84"/>
       <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu einem erweiterten Satz von Feldern hinzugefügt, die verwendet werden, um Falschmeldungen durch die KI-Maske des Texterkenners auszuschließen. Diese Kästchen werden in lila dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="82"/>
+      <location filename="profile_strings.py" line="86"/>
       <source>Box Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Erweitert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="86"/>
+      <location filename="profile_strings.py" line="90"/>
       <source>Box Right Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Rechts Erweitert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="88"/>
+      <location filename="profile_strings.py" line="92"/>
       <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu den Referenzfeldern hinzugefügt, die bei der Analyse der zu verwendenden Maske zum Abtasten des Originalbildes verwendet werden. Diese Rahmen werden in Blau dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="90"/>
+      <location filename="profile_strings.py" line="94"/>
       <source>Box Reference Padding</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Referenz</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="92"/>
+      <location filename="profile_strings.py" line="96"/>
       <source>Masker</source>
       <comment>Profile section title</comment>
       <translation>Maskierer</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="94"/>
+      <location filename="profile_strings.py" line="98"/>
       <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Anzahl der Pixel, um die die Maske bei jedem Schritt vergrößert wird. Dadurch wird der Umriss der Maske vergrößert. Kleinere Werte sind also genauer, aber langsamer.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="96"/>
+      <location filename="profile_strings.py" line="100"/>
       <source>Mask Growth Step Pixels</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenwachstum pro Schritt</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="98"/>
+      <location filename="profile_strings.py" line="102"/>
       <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Anzahl der Schritte, um die die Maske wachsen soll. Bei einer höheren Zahl werden mehr und immer größere Masken erstellt, die letztlich durch die Größe des Referenzfeldes begrenzt sind.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="100"/>
+      <location filename="profile_strings.py" line="104"/>
       <source>Mask Growth Steps</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenwachstumsschritte</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="102"/>
+      <location filename="profile_strings.py" line="106"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Maximaler Schwellenwert, ab dem ein Pixel nicht als weiß gilt. Die Medianfarbe entlang des Randes einer Maske ist möglicherweise nicht reinweiß. Um leichte gebrochene Weißtöne auf einem reinweißen Hintergrund zu vermeiden, wird alles, was heller als dieser Schwellenwert ist, auf reinweiß aufgerundet.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="104"/>
+      <location filename="profile_strings.py" line="108"/>
       <source>Off White Max Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation>Max. Schwellenwert für gebrochenes Weiß</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="106"/>
+      <location filename="profile_strings.py" line="110"/>
       <source>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Minimale Verbesserung der Standardabweichung der Maske, um sie weiter zu verkleinern. Die Standardabweichung bezieht sich auf die Farbabweichung entlang des Randes einer Maske. Eine geringe Abweichung bedeutet, dass die Maske auf einem einfarbigen Hintergrund liegt, d. h. sie überschneidet keinen Text oder andere Objekte. Wenn Sie hier einen höheren Wert einstellen, muss eine kleinere Maske deutlich besser sein, um größeren Masken den Vorzug zu geben.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="108"/>
+      <location filename="profile_strings.py" line="112"/>
       <source>Mask Improvement Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenverbesserungsschwellwert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="110"/>
+      <location filename="profile_strings.py" line="114"/>
       <source>Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Auswahl, ob der schnelle Maskenauswahlalgorithmus verwendet werden soll. Wenn diese Option aktiviert ist, wählt der Algorithmus für die Maskenauswahl die erste perfekte Maske aus, wenn eine solche früh gefunden wird. Dies ist schneller, aber es kann sein, dass nicht die beste Maske gefunden wird, wenn eine etwas größere besser gewesen wäre.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="112"/>
+      <location filename="profile_strings.py" line="116"/>
       <source>Mask Selection Fast</source>
       <comment>Profile entry in Masker</comment>
       <translation>Schnelle Maskenauswahl</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="114"/>
+      <location filename="profile_strings.py" line="118"/>
       <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Die maximale Standardabweichung einer Maske, die berücksichtigt werden soll. Ein hoher Wert bedeutet eine höhere Toleranz für eine Maske, die Text oder andere Objekte überschneidet, was keine gute Maske ist, da dieses Feld ohnehin manuelle Korrekturen benötigen wird. Wenn Sie diesen Wert auf 0 setzen, werden nur perfekte Masken zugelassen, was für Bilder mit sehr hoher Auflösung empfohlen wird.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="116"/>
+      <location filename="profile_strings.py" line="120"/>
       <source>Mask Max Standard Deviation</source>
       <comment>Profile entry in Masker</comment>
       <translation>Max. Standardabweichung einer Maske</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="118"/>
+      <location filename="profile_strings.py" line="122"/>
       <source>Color to use for the debug mask.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Farbe, die für die Debug-Maske verwendet werden soll.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="120"/>
+      <location filename="profile_strings.py" line="124"/>
       <source>Debug Mask Color</source>
       <comment>Profile entry in Masker</comment>
       <translation>Farbe der Debug-Maske</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="122"/>
+      <location filename="profile_strings.py" line="126"/>
       <source>Denoiser</source>
       <comment>Profile section title</comment>
       <translation>Entrauscher</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="124"/>
+      <location filename="profile_strings.py" line="128"/>
       <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wenn ein Stück Text schwer zu maskieren ist, musste bei der Bereinigung wahrscheinlich eine kleine Maske gewählt werden, die ggf. eine Menge JPEG-Artefakte um den Text herum zurücklässt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="126"/>
+      <location filename="profile_strings.py" line="130"/>
       <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Das bedeutet, dass die Farbe der Pixel um den Rand einer Maske herum nicht einheitlich ist, was als Standardabweichung quantifiziert wird. Der Entrauscher kann auf Masken ab einer minimalen Standardabweichung abzielen und den Bereich unmittelbar um die Maske herum entrauschen. Dadurch bleiben die Details im restlichen Bild erhalten, aber die Artefakte im Bereich des ehemaligen Textes werden entfernt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="128"/>
+      <location filename="profile_strings.py" line="132"/>
       <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Da es sich hierbei um einen optionalen Schritt handelt, der bei hochaufgelösten Bildern, die nicht unter JPEG-Artefakten leiden, sogar überflüssig ist, kann er hier deaktiviert werden.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="130"/>
+      <location filename="profile_strings.py" line="134"/>
       <source>Denoising Enabled</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Entrauschen Aktiviert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="132"/>
+      <location filename="profile_strings.py" line="136"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Die minimale Standardabweichung der Farben um den Rand einer gegebenen Maske, um eine Entrauschung in dem Bereich um die Maske durchzuführen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="134"/>
+      <location filename="profile_strings.py" line="138"/>
       <source>Noise Min Standard Deviation</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschen Min. Standardabweichung</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="136"/>
+      <location filename="profile_strings.py" line="140"/>
       <source>The thickness of an outline to denoise around a mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Die Dicke eines Umrisses, der um eine Maske herum entrauscht werden soll.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="138"/>
+      <location filename="profile_strings.py" line="142"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschumrissgröße</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="140"/>
+      <location filename="profile_strings.py" line="144"/>
       <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Blenden Sie die Ränder der entrauschten Abdeckmaske um diesen Wert ab, um die entrauschten Teile sanft in den Rest des Bildes zu integrieren.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="142"/>
+      <location filename="profile_strings.py" line="146"/>
       <source>Noise Fade Radius</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschblendenradius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="144"/>
+      <location filename="profile_strings.py" line="148"/>
       <source>Set to True to support colored images.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Bilder mit Farbe entrauschen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="146"/>
+      <location filename="profile_strings.py" line="150"/>
       <source>Colored Images</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Farbige Bilder</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="148"/>
+      <location filename="profile_strings.py" line="152"/>
       <source>How strongly to denoise the image. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wie stark das Bild entrauscht werden soll. Höhere Werte bedeuten eine stärkere Rauschunterdrückung.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="150"/>
+      <location filename="profile_strings.py" line="154"/>
       <source>Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Filterstärke</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="152"/>
+      <location filename="profile_strings.py" line="156"/>
       <source>How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wie stark die Farbkanäle entrauscht werden sollen, im Gegensatz zur Helligkeit. Höhere Werte bedeuten mehr Rauschunterdrückung.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="154"/>
+      <location filename="profile_strings.py" line="158"/>
       <source>Color Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Farbfilterstärke</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="156"/>
+      <location filename="profile_strings.py" line="160"/>
       <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Größe des Kontextfensters in Pixeln, das für die Berechnung der Gewichte verwendet wird. Sollte ungerade sein.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="158"/>
+      <location filename="profile_strings.py" line="162"/>
       <source>Template Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Kontextfenstergröße</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="160"/>
+      <location filename="profile_strings.py" line="164"/>
       <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Größe des Fensters in Pixeln, das zur Berechnung des gewichteten Durchschnitts für ein bestimmtes Pixel verwendet wird. Sollte ungerade sein.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="162"/>
+      <location filename="profile_strings.py" line="166"/>
       <source>Search Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Suchfenstergröße</translation>
