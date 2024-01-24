@@ -11,6 +11,7 @@ profile.json
 .directory
 *.qm
 translations/profile_strings.py
+translations/process_strings.py
 
 AUR/*
 
@@ -37,7 +38,6 @@ dist-elf/
 *.egg-info/
 .installed.cfg
 *.egg
-*.spec
 MANIFEST
 
 # PyInstaller

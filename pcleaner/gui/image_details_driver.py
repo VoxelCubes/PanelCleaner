@@ -10,6 +10,7 @@ import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot, Signal
 from loguru import logger
 
+from pcleaner.helpers import tr
 import pcleaner.config as cfg
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
@@ -185,10 +186,14 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             if proc_output.step_name is None:
                 continue
             elif proc_output.step_name != last_step_name:
-                add_step_label(proc_output.step_name)
+                add_step_label(tr(proc_output.step_name, "Process Steps"))
                 last_step_name = proc_output.step_name
 
-            button_title = proc_output.output_name
+            button_title = (
+                tr(proc_output.output_name, "Process Steps")
+                if proc_output.output_name is not None
+                else None
+            )
             new_button = add_button(button_title)
             buttons[new_button] = output
 
@@ -311,7 +316,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         """
         output = self.button_map[button]
         proc_output: imf.ProcessOutput = self.image_obj.outputs[output]
-        self.label_step.setText(proc_output.description)
+        self.label_step.setText(tr(proc_output.description, "Process Steps"))
         self.current_image_path = proc_output.path
         if not proc_output.has_path():
             # Clear whatever image is currently shown.

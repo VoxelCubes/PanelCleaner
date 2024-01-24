@@ -83,7 +83,7 @@ def bogus_codegen(profile_strings: list[ProfileString]) -> str:
 # Strings gathered from the default profile in pcleaner/config.py
 # This file is not meant to be run, it's just a helper to generate the .ts files.
 #
-# Created by pcleaner/translations/profile_extractor.py on {datetime.now().strftime("%Y-%m-%d")}
+# Created by pcleaner/translations/profile_extractor.py on {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 #
 # WARNING! All changes made in this file will be lost when the .ts files are refreshed!
 #########################################################################################

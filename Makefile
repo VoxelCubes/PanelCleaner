@@ -44,10 +44,15 @@ compile-qrc:
 
 
 # Refresh localization files for the source language, en_US only.
+# For some of the i18n, getting Linguist to recognize the strings with enough context added was too
+# big of a pain in the ass, so here are python functions that extract the data structures and parse
+# out the relevant strings, then create fake code for Linguist to ingest.
 refresh-i18n:
 	mkdir -p translations
 	$(PYTHON) translations/profile_extractor.py
-	$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files translations/profile_strings.py -ts translations/PanelCleaner_de_DE.ts
+	$(PYTHON) translations/process_steps_extractor.py
+	$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
+		translations/profile_strings.py translations/process_strings.py -ts translations/PanelCleaner_de_DE.ts
 
 # Compile localization files for each language, then update the QRC file and compile it.
 compile-i18n:
