@@ -34,18 +34,21 @@ class ProcessString:
 def extract_step_strings(outputs: dict[imf.Output, imf.ProcessOutput]) -> list[ProcessString]:
     """
     Extracts all the strings from the process pipeline.
-    First gather explicit strings from the outputs, then gather the implicit output names from the enum.
     """
-    return [
-        ProcessString(
-            output.description.replace("\n", "\\n"),
-            output.step_name,
-            output.output_name
-            if output.output_name is not None
-            else pp.to_display_name(output_enum.name),
+    process_strings: list[ProcessString] = []
+    for output, process_output in outputs.items():
+        if process_output.description == "Not visible":
+            continue
+        process_strings.append(
+            ProcessString(
+                process_output.description.replace("\n", "\\n"),
+                process_output.step_name,
+                process_output.output_name
+                if process_output.output_name is not None
+                else pp.to_display_name(output.name),
+            )
         )
-        for output_enum, output in outputs.items()
-    ]
+    return process_strings
 
 
 def bogus_codegen(process_strings: list[ProcessString]) -> str:
