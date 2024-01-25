@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="17"/>
+      <location filename="../pcleaner/config.py" line="697"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>standard</translation>
@@ -21,13 +21,13 @@
       <location filename="../pcleaner/gui/image_file.py" line="507"/>
       <source>RGB</source>
       <comment>Color mode</comment>
-      <translation>RGB</translation>
+      <translation type="unfinished">RGB</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="509"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
-      <translation>CMYK</translation>
+      <translation type="unfinished">CMYK</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="511"/>
@@ -45,7 +45,7 @@
       <location filename="../pcleaner/gui/image_file.py" line="515"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation>Palette</translation>
+      <translation type="unfinished">Palette</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
@@ -92,7 +92,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="101"/>
       <source>Version:</source>
-      <translation>Version:</translation>
+      <translation type="unfinished">Version:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="115"/>
@@ -102,7 +102,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="153"/>
       <source>Toolkit:</source>
-      <translation>Toolkit:</translation>
+      <translation type="unfinished">Toolkit:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="167"/>
@@ -158,7 +158,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="338"/>
       <source>Position:</source>
-      <translation>Position:</translation>
+      <translation type="unfinished">Position:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="359"/>
@@ -238,7 +238,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="14"/>
       <source>Panel Cleaner</source>
-      <translation>Panel Cleaner</translation>
+      <translation type="unfinished">Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="40"/>
@@ -324,7 +324,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="369"/>
       <source>OCR</source>
-      <translation>OCR</translation>
+      <translation type="unfinished">OCR</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="404"/>
@@ -334,7 +334,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="415"/>
       <source>Start</source>
-      <translation>Start</translation>
+      <translation type="unfinished">Start</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="431"/>
@@ -424,7 +424,7 @@ Reinige Mangas durch KI.</translation>
       <location filename="../ui_files/Mainwindow.ui" line="860"/>
       <location filename="../ui_files/Mainwindow.ui" line="893"/>
       <source>%v / %m</source>
-      <translation>%v / %m</translation>
+      <translation type="unfinished">%v / %m</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="883"/>
@@ -506,7 +506,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1072"/>
       <source>System</source>
-      <translation>System</translation>
+      <translation type="unfinished">System</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1080"/>
@@ -813,22 +813,10 @@ Trotzdem fortfahren?</translation>
   <context>
     <name>Process Steps</name>
     <message>
-      <location filename="process_strings.py" line="15"/>
-      <source>The original image with scaling applied (if needed).</source>
-      <comment>Step description in the image details view, step: Input, output: None</comment>
-      <translation>Das Originalbild mit angewandter Skalierung (falls erforderlich).</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="17"/>
+      <location filename="process_strings.py" line="16"/>
       <source>Input</source>
       <comment>Step name in the image details view</comment>
       <translation>Eingabe</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="18"/>
-      <source>The rough mask generated by the AI.</source>
-      <comment>Step description in the image details view, step: Text Detection, output: None</comment>
-      <translation>Die von der KI generierte Grobmaske.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="20"/>
@@ -837,33 +825,61 @@ Trotzdem fortfahren?</translation>
       <translation>Text-Erkennung</translation>
     </message>
     <message>
+      <location filename="process_strings.py" line="15"/>
+      <source>The original image with scaling applied (if needed).</source>
+      <comment>Step description in the image details view, step: Input, output: Input</comment>
+      <translation type="unfinished">The original image with scaling applied (if needed).</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="18"/>
+      <source>Input</source>
+      <comment>Output name in the image details view</comment>
+      <translation type="unfinished">Input</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="19"/>
+      <source>The rough mask generated by the AI.</source>
+      <comment>Step description in the image details view, step: Text Detection, output: AI Mask</comment>
+      <translation type="unfinished">The rough mask generated by the AI.</translation>
+    </message>
+    <message>
       <location filename="process_strings.py" line="22"/>
-      <location filename="process_strings.py" line="31"/>
-      <location filename="process_strings.py" line="55"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: None</comment>
-      <translation>Nicht sichtbar</translation>
+      <source>AI Mask</source>
+      <comment>Output name in the image details view</comment>
+      <translation type="unfinished">AI Mask</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="23"/>
+      <source>Not visible</source>
+      <comment>Step description in the image details view, step: None, output: Raw Json</comment>
+      <translation type="unfinished">Not visible</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="25"/>
+      <source>Raw Json</source>
+      <comment>Output name in the image details view</comment>
+      <translation type="unfinished">Raw Json</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="26"/>
       <source>The outlines of the text boxes the AI found.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Initial Boxes</comment>
       <translation>Die Umrisse der Textfelder, die die KI gefunden hat.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="24"/>
+      <location filename="process_strings.py" line="27"/>
       <source>Preprocessor</source>
       <comment>Step name in the image details view</comment>
       <translation>Präprozessor</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="26"/>
+      <location filename="process_strings.py" line="29"/>
       <source>Initial Boxes</source>
       <comment>Output name in the image details view</comment>
       <translation>Initiale Felder</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="27"/>
+      <location filename="process_strings.py" line="30"/>
       <source>The final boxes after expanding, merging and filtering unneeded boxes with OCR.
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Final Boxes</comment>
@@ -871,127 +887,151 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
 Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) Felder. Blau: Referenzfelder für die Entrauschung.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="29"/>
+      <location filename="process_strings.py" line="32"/>
       <source>Final Boxes</source>
       <comment>Output name in the image details view</comment>
       <translation>Finale Felder</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="32"/>
+      <location filename="process_strings.py" line="33"/>
+      <source>Not visible</source>
+      <comment>Step description in the image details view, step: None, output: Clean Json</comment>
+      <translation type="unfinished">Not visible</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="35"/>
+      <source>Clean Json</source>
+      <comment>Output name in the image details view</comment>
+      <translation type="unfinished">Clean Json</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="36"/>
       <source>The mask of the merged boxes.</source>
       <comment>Step description in the image details view, step: Masker, output: Box Mask</comment>
       <translation>Die Maske der zusammengefügten Felder.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="33"/>
+      <location filename="process_strings.py" line="37"/>
       <source>Masker</source>
       <comment>Step name in the image details view</comment>
       <translation>Maskierer</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="35"/>
+      <location filename="process_strings.py" line="39"/>
       <source>Box Mask</source>
       <comment>Output name in the image details view</comment>
       <translation>Felder-Maske</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="36"/>
+      <location filename="process_strings.py" line="40"/>
       <source>The rough text detection mask with everything outside the box mask cut out.</source>
       <comment>Step description in the image details view, step: Masker, output: Cut Mask</comment>
       <translation>Die grobe Texterkennungsmaske mit allem, was außerhalb der Felder-Maske liegt, weggeschnitten.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="38"/>
+      <location filename="process_strings.py" line="42"/>
       <source>Cut Mask</source>
       <comment>Output name in the image details view</comment>
       <translation>Schnittmaske</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="39"/>
+      <location filename="process_strings.py" line="43"/>
       <source>The different steps of growth around the cut mask displayed in different colors.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Layers</comment>
       <translation>Die verschiedenen Wachstumsstufen rund um die Schnittmaske in verschiedenen Farben dargestellt.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="41"/>
+      <location filename="process_strings.py" line="45"/>
       <source>Mask Layers</source>
       <comment>Output name in the image details view</comment>
       <translation>Maskenstufen</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="42"/>
+      <location filename="process_strings.py" line="46"/>
       <source>The input image with the final mask overlaid in color.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
       <translation>Das Eingabebild mit der finalen Maske in Farbe überlagert.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="44"/>
+      <location filename="process_strings.py" line="48"/>
       <source>Mask Overlay</source>
       <comment>Output name in the image details view</comment>
       <translation>Maskenüberlagerung</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="45"/>
+      <location filename="process_strings.py" line="49"/>
       <source>The collection of masks for each bubble that fit best.</source>
       <comment>Step description in the image details view, step: Masker, output: Final Mask</comment>
       <translation>Die Sammlung von Masken für jede Blase, die am besten passen.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="47"/>
+      <location filename="process_strings.py" line="51"/>
       <source>Final Mask</source>
       <comment>Output name in the image details view</comment>
       <translation>Finale Maske</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="48"/>
+      <location filename="process_strings.py" line="52"/>
       <source>The text layer isolated from the input image.</source>
       <comment>Step description in the image details view, step: Masker, output: Isolated Text</comment>
       <translation>Die aus dem Eingabebild isolierte Textebene.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="50"/>
+      <location filename="process_strings.py" line="54"/>
       <source>Isolated Text</source>
       <comment>Output name in the image details view</comment>
       <translation>Isolierter Text</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="51"/>
+      <location filename="process_strings.py" line="55"/>
       <source>The input image with the final mask applied.</source>
       <comment>Step description in the image details view, step: Masker, output: Masked Output</comment>
       <translation>Das Eingabebild mit der finalen Maske überlagert.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="53"/>
+      <location filename="process_strings.py" line="57"/>
       <source>Masked Output</source>
       <comment>Output name in the image details view</comment>
       <translation>Maskierte Ausgabe</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="56"/>
+      <location filename="process_strings.py" line="58"/>
+      <source>Not visible</source>
+      <comment>Step description in the image details view, step: None, output: Mask Data Json</comment>
+      <translation type="unfinished">Not visible</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="60"/>
+      <source>Mask Data Json</source>
+      <comment>Output name in the image details view</comment>
+      <translation type="unfinished">Mask Data Json</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="61"/>
       <source>The masks that required denoising, to be overlaid on the final mask when exporting.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoise Mask</comment>
       <translation>Die Masken, die entrauscht werden müssen. Sie werden beim Exportieren über die finale Maske gelegt.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="57"/>
+      <location filename="process_strings.py" line="62"/>
       <source>Denoiser</source>
       <comment>Step name in the image details view</comment>
       <translation>Entrauscher</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="59"/>
+      <location filename="process_strings.py" line="64"/>
       <source>Denoise Mask</source>
       <comment>Output name in the image details view</comment>
       <translation>Entrauschungsmaske</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="60"/>
+      <location filename="process_strings.py" line="65"/>
       <source>The input image with the denoised mask applied.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoised Output</comment>
       <translation>Das Eingabebild mit der entrauschten Maske überlagert.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="62"/>
+      <location filename="process_strings.py" line="67"/>
       <source>Denoised Output</source>
       <comment>Output name in the image details view</comment>
       <translation>Entrauschte Ausgabe</translation>
@@ -1469,7 +1509,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
   <context>
     <name>ProfileToolBox</name>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="396"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="398"/>
       <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
       <translation>&lt;html&gt;Der Pfad für das Text-Detektor-Modell {value} existiert nicht und wird auf die Standardeinstellungen zurückgesetzt.
