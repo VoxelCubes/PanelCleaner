@@ -850,36 +850,24 @@ Trotzdem fortfahren?</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="23"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Raw Json</comment>
-      <translation type="unfinished">Not visible</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="25"/>
-      <source>Raw Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Raw Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="26"/>
       <source>The outlines of the text boxes the AI found.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Initial Boxes</comment>
       <translation>Die Umrisse der Textfelder, die die KI gefunden hat.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="27"/>
+      <location filename="process_strings.py" line="24"/>
       <source>Preprocessor</source>
       <comment>Step name in the image details view</comment>
       <translation>Präprozessor</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="29"/>
+      <location filename="process_strings.py" line="26"/>
       <source>Initial Boxes</source>
       <comment>Output name in the image details view</comment>
       <translation>Initiale Felder</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="30"/>
+      <location filename="process_strings.py" line="27"/>
       <source>The final boxes after expanding, merging and filtering unneeded boxes with OCR.
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Final Boxes</comment>
@@ -887,151 +875,127 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
 Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) Felder. Blau: Referenzfelder für die Entrauschung.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="32"/>
+      <location filename="process_strings.py" line="29"/>
       <source>Final Boxes</source>
       <comment>Output name in the image details view</comment>
       <translation>Finale Felder</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="33"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Clean Json</comment>
-      <translation type="unfinished">Not visible</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="35"/>
-      <source>Clean Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Clean Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="36"/>
+      <location filename="process_strings.py" line="30"/>
       <source>The mask of the merged boxes.</source>
       <comment>Step description in the image details view, step: Masker, output: Box Mask</comment>
       <translation>Die Maske der zusammengefügten Felder.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="37"/>
+      <location filename="process_strings.py" line="31"/>
       <source>Masker</source>
       <comment>Step name in the image details view</comment>
       <translation>Maskierer</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="39"/>
+      <location filename="process_strings.py" line="33"/>
       <source>Box Mask</source>
       <comment>Output name in the image details view</comment>
       <translation>Felder-Maske</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="40"/>
+      <location filename="process_strings.py" line="34"/>
       <source>The rough text detection mask with everything outside the box mask cut out.</source>
       <comment>Step description in the image details view, step: Masker, output: Cut Mask</comment>
       <translation>Die grobe Texterkennungsmaske mit allem, was außerhalb der Felder-Maske liegt, weggeschnitten.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="42"/>
+      <location filename="process_strings.py" line="36"/>
       <source>Cut Mask</source>
       <comment>Output name in the image details view</comment>
       <translation>Schnittmaske</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="43"/>
+      <location filename="process_strings.py" line="37"/>
       <source>The different steps of growth around the cut mask displayed in different colors.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Layers</comment>
       <translation>Die verschiedenen Wachstumsstufen rund um die Schnittmaske in verschiedenen Farben dargestellt.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="45"/>
+      <location filename="process_strings.py" line="39"/>
       <source>Mask Layers</source>
       <comment>Output name in the image details view</comment>
       <translation>Maskenstufen</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="46"/>
+      <location filename="process_strings.py" line="40"/>
       <source>The input image with the final mask overlaid in color.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
       <translation>Das Eingabebild mit der finalen Maske in Farbe überlagert.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="48"/>
+      <location filename="process_strings.py" line="42"/>
       <source>Mask Overlay</source>
       <comment>Output name in the image details view</comment>
       <translation>Maskenüberlagerung</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="49"/>
+      <location filename="process_strings.py" line="43"/>
       <source>The collection of masks for each bubble that fit best.</source>
       <comment>Step description in the image details view, step: Masker, output: Final Mask</comment>
       <translation>Die Sammlung von Masken für jede Blase, die am besten passen.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="51"/>
+      <location filename="process_strings.py" line="45"/>
       <source>Final Mask</source>
       <comment>Output name in the image details view</comment>
       <translation>Finale Maske</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="52"/>
+      <location filename="process_strings.py" line="46"/>
       <source>The text layer isolated from the input image.</source>
       <comment>Step description in the image details view, step: Masker, output: Isolated Text</comment>
       <translation>Die aus dem Eingabebild isolierte Textebene.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="54"/>
+      <location filename="process_strings.py" line="48"/>
       <source>Isolated Text</source>
       <comment>Output name in the image details view</comment>
       <translation>Isolierter Text</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="55"/>
+      <location filename="process_strings.py" line="49"/>
       <source>The input image with the final mask applied.</source>
       <comment>Step description in the image details view, step: Masker, output: Masked Output</comment>
       <translation>Das Eingabebild mit der finalen Maske überlagert.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="57"/>
+      <location filename="process_strings.py" line="51"/>
       <source>Masked Output</source>
       <comment>Output name in the image details view</comment>
       <translation>Maskierte Ausgabe</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="58"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Mask Data Json</comment>
-      <translation type="unfinished">Not visible</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="60"/>
-      <source>Mask Data Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Data Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="61"/>
+      <location filename="process_strings.py" line="52"/>
       <source>The masks that required denoising, to be overlaid on the final mask when exporting.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoise Mask</comment>
       <translation>Die Masken, die entrauscht werden müssen. Sie werden beim Exportieren über die finale Maske gelegt.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="62"/>
+      <location filename="process_strings.py" line="53"/>
       <source>Denoiser</source>
       <comment>Step name in the image details view</comment>
       <translation>Entrauscher</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="64"/>
+      <location filename="process_strings.py" line="55"/>
       <source>Denoise Mask</source>
       <comment>Output name in the image details view</comment>
       <translation>Entrauschungsmaske</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="65"/>
+      <location filename="process_strings.py" line="56"/>
       <source>The input image with the denoised mask applied.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoised Output</comment>
       <translation>Das Eingabebild mit der entrauschten Maske überlagert.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="67"/>
+      <location filename="process_strings.py" line="58"/>
       <source>Denoised Output</source>
       <comment>Output name in the image details view</comment>
       <translation>Entrauschte Ausgabe</translation>
