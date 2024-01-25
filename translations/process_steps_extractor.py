@@ -16,6 +16,7 @@ from pathlib import Path
 from attrs import define
 
 import pcleaner.gui.image_file as imf
+import pcleaner.gui.profile_parser as pp
 
 
 @define
@@ -33,10 +34,17 @@ class ProcessString:
 def extract_step_strings(outputs: dict[imf.Output, imf.ProcessOutput]) -> list[ProcessString]:
     """
     Extracts all the strings from the process pipeline.
+    First gather explicit strings from the outputs, then gather the implicit output names from the enum.
     """
     return [
-        ProcessString(output.description.replace("\n", "\\n"), output.step_name, output.output_name)
-        for output in outputs.values()
+        ProcessString(
+            output.description.replace("\n", "\\n"),
+            output.step_name,
+            output.output_name
+            if output.output_name is not None
+            else pp.to_display_name(output_enum.name),
+        )
+        for output_enum, output in outputs.items()
     ]
 
 
@@ -68,6 +76,8 @@ from PySide6.QtCore import QCoreApplication
 
     # deduplicate process steps.
     step_names_seen: set[str] = set()
+    # deduplicate output names.
+    output_names_seen: set[str] = set()
 
     for process_string in process_strings:
         buffer.write(
@@ -81,7 +91,11 @@ from PySide6.QtCore import QCoreApplication
                 f"QCoreApplication.translate('Process Steps', '{process_string.step_name}',"
                 f" 'Step name in the image details view')\n"
             )
-        if process_string.output_name is not None:
+        if (
+            process_string.output_name is not None
+            and process_string.output_name not in output_names_seen
+        ):
+            output_names_seen.add(process_string.output_name)
             buffer.write(
                 f"QCoreApplication.translate('Process Steps', '{process_string.output_name}',"
                 f" 'Output name in the image details view')\n"

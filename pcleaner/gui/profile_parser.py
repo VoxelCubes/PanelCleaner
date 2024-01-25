@@ -321,13 +321,13 @@ class ProfileToolBox(Qw.QToolBox):
             section_widget = Qw.QWidget()
             layout = Qw.QFormLayout()
             section_widget.setLayout(layout)
-            self.addItem(section_widget, tr(to_display_name(section.name), "Profile"))
+            self.addItem(section_widget, tr(to_display_name(section.name), context="Profile"))
             self._widgets[section.name] = {}
 
             for item in section.items:
                 if isinstance(item, ProfileComment):
                     item: ProfileComment
-                    label = Qw.QLabel(parent=self, text=tr(item.comment, "Profile"))
+                    label = Qw.QLabel(parent=self, text=tr(item.comment, context="Profile"))
                     label.setOpenExternalLinks(True)
                     label.setWordWrap(True)
                     layout.addRow(label)
@@ -337,7 +337,9 @@ class ProfileToolBox(Qw.QToolBox):
 
                 elif isinstance(item, ProfileEntry):
                     item: ProfileEntry
-                    label = Qw.QLabel(parent=self, text=tr(to_display_name(item.key), "Profile"))
+                    label = Qw.QLabel(
+                        parent=self, text=tr(to_display_name(item.key), context="Profile")
+                    )
                     label.setToolTip(to_display_name(item.key))
                     layout.addRow(label)
                     option_widget = ProfileOptionWidget(item.entry_type)

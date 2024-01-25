@@ -14,10 +14,6 @@ from pcleaner import helpers as hp
 from pcleaner import model_downloader as md
 
 
-RESERVED_PROFILE_NAMES = [tr("default", "reserved profile name"), "builtin", "none"]
-
-DEFAULT_PROFILE_NAME = RESERVED_PROFILE_NAMES[0].capitalize()
-
 # Supported image suffixes.
 SUPPORTED_IMG_TYPES = [
     ".jpeg",
@@ -693,6 +689,20 @@ class Config:
     default_cv2_model_path: Path | None = None  # CPU
     gui_theme: str | None = None
 
+    @staticmethod
+    def reserved_profile_names() -> list[str]:
+        """
+        These names may not be used for profiles.
+        """
+        return [tr("default", "reserved profile name"), "builtin", "none"]
+
+    @staticmethod
+    def default_profile_name() -> str:
+        """
+        The name of the default profile.
+        """
+        return Config.reserved_profile_names()[0].capitalize()
+
     def show(self) -> None:
         """
         Print the current configuration to the console.
@@ -908,7 +918,7 @@ class Config:
             profile_name = self.default_profile
 
         # If the default profile is not set, use the builtin default profile.
-        if profile_name is None or profile_name.lower() in RESERVED_PROFILE_NAMES:
+        if profile_name is None or profile_name.lower() in self.reserved_profile_names():
             logger.debug("Loading builtin default profile")
             self.current_profile = Profile()
             return True, None
