@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en_US">
   <context>
     <name/>
     <message>
@@ -8,44 +8,6 @@
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>standard</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/image_file.py" line="493"/>
-      <location filename="../pcleaner/gui/image_file.py" line="499"/>
-      <location filename="../pcleaner/gui/image_file.py" line="505"/>
-      <location filename="../pcleaner/gui/image_file.py" line="518"/>
-      <source>Unknown</source>
-      <translation>Unbekannt</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/image_file.py" line="507"/>
-      <source>RGB</source>
-      <comment>Color mode</comment>
-      <translation type="unfinished">RGB</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/image_file.py" line="509"/>
-      <source>CMYK</source>
-      <comment>Color mode</comment>
-      <translation type="unfinished">CMYK</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/image_file.py" line="511"/>
-      <source>Grayscale</source>
-      <comment>Color mode</comment>
-      <translation>Graustufen</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/image_file.py" line="513"/>
-      <source>1-bit</source>
-      <comment>Color mode</comment>
-      <translation>1-Bit</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/image_file.py" line="515"/>
-      <source>Palette</source>
-      <comment>Color mode</comment>
-      <translation type="unfinished">Palette</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
@@ -72,6 +34,44 @@
       <source>Profile name is reserved.</source>
       <translation>Der Profilname ist reserviert.</translation>
     </message>
+    <message>
+      <location filename="../pcleaner/gui/image_file.py" line="493"/>
+      <location filename="../pcleaner/gui/image_file.py" line="499"/>
+      <location filename="../pcleaner/gui/image_file.py" line="505"/>
+      <location filename="../pcleaner/gui/image_file.py" line="518"/>
+      <source>Unknown</source>
+      <translation>Unbekannt</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/image_file.py" line="507"/>
+      <source>RGB</source>
+      <comment>Color mode</comment>
+      <translation>RGB</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/image_file.py" line="509"/>
+      <source>CMYK</source>
+      <comment>Color mode</comment>
+      <translation>CMYK</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/image_file.py" line="511"/>
+      <source>Grayscale</source>
+      <comment>Color mode</comment>
+      <translation>Graustufen</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/image_file.py" line="513"/>
+      <source>1-bit</source>
+      <comment>Color mode</comment>
+      <translation>1-Bit</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/image_file.py" line="515"/>
+      <source>Palette</source>
+      <comment>Color mode</comment>
+      <translation>Palette</translation>
+    </message>
   </context>
   <context>
     <name>About</name>
@@ -92,7 +92,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="101"/>
       <source>Version:</source>
-      <translation type="unfinished">Version:</translation>
+      <translation>Version:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="115"/>
@@ -102,7 +102,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="153"/>
       <source>Toolkit:</source>
-      <translation type="unfinished">Toolkit:</translation>
+      <translation>Toolkit:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="167"/>
@@ -158,7 +158,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="338"/>
       <source>Position:</source>
-      <translation type="unfinished">Position:</translation>
+      <translation>Position:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="359"/>
@@ -235,309 +235,6 @@ Reinige Mangas durch KI.</translation>
   </context>
   <context>
     <name>MainWindow</name>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="14"/>
-      <source>Panel Cleaner</source>
-      <translation type="unfinished">Panel Cleaner</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="40"/>
-      <location filename="../ui_files/Mainwindow.ui" line="921"/>
-      <source>Profile</source>
-      <translation>Profil</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="61"/>
-      <source>Default</source>
-      <translation>Standard</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="72"/>
-      <source>Apply</source>
-      <translation>Anwenden</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="86"/>
-      <location filename="../ui_files/Mainwindow.ui" line="1055"/>
-      <source>Save</source>
-      <translation>Speichern</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="100"/>
-      <source>Reset All</source>
-      <translation>Alle zurücksetzen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="173"/>
-      <source>Drag and Drop Images or Folders Here</source>
-      <translation>Bilder oder Ordner hier ablegen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="231"/>
-      <source>Images</source>
-      <translation>Bilder</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="291"/>
-      <location filename="../ui_files/Mainwindow.ui" line="913"/>
-      <source>File</source>
-      <translation>Datei</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="296"/>
-      <source>Size</source>
-      <translation>Größe</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="301"/>
-      <source>Processing Size</source>
-      <comment>The size that the picture is shrunk down to for processing.</comment>
-      <translation>Verarbeitungsgröße</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="306"/>
-      <source>File Size</source>
-      <translation>Dateigröße</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="311"/>
-      <source>Color Mode</source>
-      <comment>Like RGB, grayscale etc.</comment>
-      <translation>Farbmodus</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="316"/>
-      <source>Analytics</source>
-      <comment>Can also call this statistics.</comment>
-      <translation>Statistik</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="353"/>
-      <source>Process</source>
-      <translation>Prozess</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="359"/>
-      <source>Cleaning</source>
-      <translation>Reinigung</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="369"/>
-      <source>OCR</source>
-      <translation type="unfinished">OCR</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="404"/>
-      <source>Abort</source>
-      <translation>Abbrechen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="415"/>
-      <source>Start</source>
-      <translation type="unfinished">Start</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="431"/>
-      <source>Output</source>
-      <translation>Ausgabe</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="463"/>
-      <source>Cleaned Image</source>
-      <translation>Gereinigtes Bild</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="473"/>
-      <source>Mask</source>
-      <translation>Maske</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="483"/>
-      <source>Isolated Text</source>
-      <translation>Isolierter Text</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="512"/>
-      <source>Save Output</source>
-      <translation>Ausgabe speichern</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="522"/>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, werden die Ausgaben auf der Festplatte gespeichert. Andernfalls können Sie sie nur in der Bild-Detailansicht ansehen. &lt;/p&gt;&lt;p&gt;Wenn das Profil nach der Reinigung unverändert bleibt, ohne dass diese Option aktiviert war, können Sie sie schnell exportieren, indem Sie den Reiniger erneut mit dieser Option aktiviert ausführen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="582"/>
-      <source>Output Directory:</source>
-      <translation>Ausgabeverzeichnis:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="595"/>
-      <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
-      <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
-      <translation>Sie können einen relativen Pfad verwenden, um einen Unterordner am ursprünglichen Speicherort des Bildes zu erstellen, oder einen absoluten Pfad verwenden, um an einer beliebigen Stelle im System die Ausgabe abzulegen.</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1108"/>
-      <location filename="../ui_files/Mainwindow.ui" line="625"/>
-      <source>cleaned</source>
-      <translation>gereinigt</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="664"/>
-      <source>Plain Text</source>
-      <translation>Einfacher Text</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="674"/>
-      <source>CSV File</source>
-      <translation>CSV-Datei</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="696"/>
-      <source>Output File:</source>
-      <translation>Ausgabedatei:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="709"/>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Geben Sie entweder einen absoluten oder relativen Pfad mit einem Dateinamen an. Die Ausgabe aller Bilder wird in dieselbe Datei geschrieben.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="739"/>
-      <source>detected_text.txt</source>
-      <extracomment>The file suffix .txt is important, don&apos;t change that. The .csv extension is swapped in automatically for that alternative when selected.</extracomment>
-      <translation>erkannter_text.txt</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="801"/>
-      <source>Generating:</source>
-      <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
-      <translation>Erzeugt:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="831"/>
-      <source>Current Step:</source>
-      <translation>Aktueller Schritt:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="860"/>
-      <location filename="../ui_files/Mainwindow.ui" line="893"/>
-      <source>%v / %m</source>
-      <translation type="unfinished">%v / %m</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="883"/>
-      <source>Images Processed:</source>
-      <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
-      <translation>Bilder Verarbeitet:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="925"/>
-      <source>Set Default</source>
-      <translation>Standard festlegen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="941"/>
-      <source>Settings</source>
-      <translation>Einstellungen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="945"/>
-      <source>Theme</source>
-      <comment>As in color theme</comment>
-      <translation>Farbschema</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="954"/>
-      <source>Language</source>
-      <translation>Sprache</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="967"/>
-      <source>Help</source>
-      <translation>Hilfe</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="987"/>
-      <source>Add Files...</source>
-      <translation>Dateien hinzufügen...</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="996"/>
-      <source>Clear Files</source>
-      <translation>Dateien entfernen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1005"/>
-      <source>New</source>
-      <translation>Neu</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1014"/>
-      <source>Delete</source>
-      <translation>Löschen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1023"/>
-      <source>Import...</source>
-      <translation>Importieren...</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1032"/>
-      <source>Online Documentation</source>
-      <translation>Online-Dokumentation</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1041"/>
-      <source>About Panel Cleaner</source>
-      <translation>Über Panel Cleaner</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1046"/>
-      <source>View License</source>
-      <translation>Lizenz anzeigen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1064"/>
-      <source>Save as...</source>
-      <translation>Speichern unter...</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1072"/>
-      <source>System</source>
-      <translation type="unfinished">System</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1080"/>
-      <source>Dark</source>
-      <translation>Dunkel</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1088"/>
-      <source>Light</source>
-      <translation>Hell</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1102"/>
-      <source>Add Folder...</source>
-      <translation>Ordner hinzufügen...</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1111"/>
-      <source>Delete Machine Learning Models</source>
-      <translation>Modelle für maschinelles Lernen löschen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1120"/>
-      <source>Download Machine Learning Models</source>
-      <translation>Modelle für maschinelles Lernen herunterladen</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1129"/>
-      <source>Donate</source>
-      <translation>Spenden</translation>
-    </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="272"/>
       <source>Open Config</source>
@@ -724,6 +421,12 @@ Trotzdem fortfahren?</translation>
       <translation>Es wurden keine Ausgaben angefordert. Bitte wählen Sie vor der Reinigung mindestens eine Ausgabe aus.</translation>
     </message>
     <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1108"/>
+      <location filename="../ui_files/Mainwindow.ui" line="625"/>
+      <source>cleaned</source>
+      <translation>gereinigt</translation>
+    </message>
+    <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1186"/>
       <source>File Exists</source>
       <translation>Datei Bereits Vorhanden</translation>
@@ -762,6 +465,303 @@ Trotzdem fortfahren?</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
       <source>Encountered an error while processing files.</source>
       <translation>Bei der Verarbeitung von Dateien ist ein Fehler aufgetreten.</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="14"/>
+      <source>Panel Cleaner</source>
+      <translation>Panel Cleaner</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="40"/>
+      <location filename="../ui_files/Mainwindow.ui" line="921"/>
+      <source>Profile</source>
+      <translation>Profil</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="61"/>
+      <source>Default</source>
+      <translation>Standard</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="72"/>
+      <source>Apply</source>
+      <translation>Anwenden</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="86"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1055"/>
+      <source>Save</source>
+      <translation>Speichern</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="100"/>
+      <source>Reset All</source>
+      <translation>Alle zurücksetzen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="173"/>
+      <source>Drag and Drop Images or Folders Here</source>
+      <translation>Bilder oder Ordner hier ablegen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="231"/>
+      <source>Images</source>
+      <translation>Bilder</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="291"/>
+      <location filename="../ui_files/Mainwindow.ui" line="913"/>
+      <source>File</source>
+      <translation>Datei</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="296"/>
+      <source>Size</source>
+      <translation>Größe</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="301"/>
+      <source>Processing Size</source>
+      <comment>The size that the picture is shrunk down to for processing.</comment>
+      <translation>Verarbeitungsgröße</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="306"/>
+      <source>File Size</source>
+      <translation>Dateigröße</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="311"/>
+      <source>Color Mode</source>
+      <comment>Like RGB, grayscale etc.</comment>
+      <translation>Farbmodus</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="316"/>
+      <source>Analytics</source>
+      <comment>Can also call this statistics.</comment>
+      <translation>Statistik</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="353"/>
+      <source>Process</source>
+      <translation>Prozess</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="359"/>
+      <source>Cleaning</source>
+      <translation>Reinigung</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="369"/>
+      <source>OCR</source>
+      <translation>OCR</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="404"/>
+      <source>Abort</source>
+      <translation>Abbrechen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="415"/>
+      <source>Start</source>
+      <translation>Start</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="431"/>
+      <source>Output</source>
+      <translation>Ausgabe</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="463"/>
+      <source>Cleaned Image</source>
+      <translation>Gereinigtes Bild</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="473"/>
+      <source>Mask</source>
+      <translation>Maske</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="483"/>
+      <source>Isolated Text</source>
+      <translation>Isolierter Text</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="512"/>
+      <source>Save Output</source>
+      <translation>Ausgabe speichern</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="522"/>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, werden die Ausgaben auf der Festplatte gespeichert. Andernfalls können Sie sie nur in der Bild-Detailansicht ansehen. &lt;/p&gt;&lt;p&gt;Wenn das Profil nach der Reinigung unverändert bleibt, ohne dass diese Option aktiviert war, können Sie sie schnell exportieren, indem Sie den Reiniger erneut mit dieser Option aktiviert ausführen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="582"/>
+      <source>Output Directory:</source>
+      <translation>Ausgabeverzeichnis:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="595"/>
+      <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
+      <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
+      <translation>Sie können einen relativen Pfad verwenden, um einen Unterordner am ursprünglichen Speicherort des Bildes zu erstellen, oder einen absoluten Pfad verwenden, um an einer beliebigen Stelle im System die Ausgabe abzulegen.</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="664"/>
+      <source>Plain Text</source>
+      <translation>Einfacher Text</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="674"/>
+      <source>CSV File</source>
+      <translation>CSV-Datei</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="696"/>
+      <source>Output File:</source>
+      <translation>Ausgabedatei:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="709"/>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Geben Sie entweder einen absoluten oder relativen Pfad mit einem Dateinamen an. Die Ausgabe aller Bilder wird in dieselbe Datei geschrieben.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="739"/>
+      <source>detected_text.txt</source>
+      <extracomment>The file suffix .txt is important, don&apos;t change that. The .csv extension is swapped in automatically for that alternative when selected.</extracomment>
+      <translation>erkannter_text.txt</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="801"/>
+      <source>Generating:</source>
+      <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
+      <translation>Erzeugt:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="831"/>
+      <source>Current Step:</source>
+      <translation>Aktueller Schritt:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="860"/>
+      <location filename="../ui_files/Mainwindow.ui" line="893"/>
+      <source>%v / %m</source>
+      <translation>%v / %m</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="883"/>
+      <source>Images Processed:</source>
+      <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
+      <translation>Bilder Verarbeitet:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="925"/>
+      <source>Set Default</source>
+      <translation>Standard festlegen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="941"/>
+      <source>Settings</source>
+      <translation>Einstellungen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="945"/>
+      <source>Theme</source>
+      <comment>As in color theme</comment>
+      <translation>Farbschema</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="954"/>
+      <source>Language</source>
+      <translation>Sprache</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="967"/>
+      <source>Help</source>
+      <translation>Hilfe</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="987"/>
+      <source>Add Files...</source>
+      <translation>Dateien hinzufügen...</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="996"/>
+      <source>Clear Files</source>
+      <translation>Dateien entfernen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1005"/>
+      <source>New</source>
+      <translation>Neu</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1014"/>
+      <source>Delete</source>
+      <translation>Löschen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1023"/>
+      <source>Import...</source>
+      <translation>Importieren...</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1032"/>
+      <source>Online Documentation</source>
+      <translation>Online-Dokumentation</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1041"/>
+      <source>About Panel Cleaner</source>
+      <translation>Über Panel Cleaner</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1046"/>
+      <source>View License</source>
+      <translation>Lizenz anzeigen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1064"/>
+      <source>Save as...</source>
+      <translation>Speichern unter...</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1072"/>
+      <source>System</source>
+      <translation>System</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1080"/>
+      <source>Dark</source>
+      <translation>Dunkel</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1088"/>
+      <source>Light</source>
+      <translation>Hell</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1102"/>
+      <source>Add Folder...</source>
+      <translation>Ordner hinzufügen...</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1111"/>
+      <source>Delete Machine Learning Models</source>
+      <translation>Modelle für maschinelles Lernen löschen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1120"/>
+      <source>Download Machine Learning Models</source>
+      <translation>Modelle für maschinelles Lernen herunterladen</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1129"/>
+      <source>Donate</source>
+      <translation>Spenden</translation>
     </message>
   </context>
   <context>
@@ -813,22 +813,16 @@ Trotzdem fortfahren?</translation>
   <context>
     <name>Process Steps</name>
     <message>
-      <location filename="process_strings.py" line="16"/>
-      <source>Input</source>
-      <comment>Step name in the image details view</comment>
-      <translation>Eingabe</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="20"/>
-      <source>Text Detection</source>
-      <comment>Step name in the image details view</comment>
-      <translation>Text-Erkennung</translation>
-    </message>
-    <message>
       <location filename="process_strings.py" line="15"/>
       <source>The original image with scaling applied (if needed).</source>
       <comment>Step description in the image details view, step: Input, output: Input</comment>
       <translation type="unfinished">The original image with scaling applied (if needed).</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="16"/>
+      <source>Input</source>
+      <comment>Step name in the image details view</comment>
+      <translation>Eingabe</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="18"/>
@@ -841,6 +835,12 @@ Trotzdem fortfahren?</translation>
       <source>The rough mask generated by the AI.</source>
       <comment>Step description in the image details view, step: Text Detection, output: AI Mask</comment>
       <translation type="unfinished">The rough mask generated by the AI.</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="20"/>
+      <source>Text Detection</source>
+      <comment>Step name in the image details view</comment>
+      <translation>Text-Erkennung</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="22"/>
