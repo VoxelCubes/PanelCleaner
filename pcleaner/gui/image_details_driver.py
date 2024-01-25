@@ -190,11 +190,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             if proc_output.step_name is None:
                 continue
             elif proc_output.step_name != last_step_name:
-                add_step_label(tr(proc_output.step_name, "Process Steps"))
+                add_step_label(tr(proc_output.step_name, context="Process Steps"))
                 last_step_name = proc_output.step_name
 
             button_title = (
-                tr(proc_output.output_name, "Process Steps")
+                tr(proc_output.output_name, context="Process Steps")
                 if proc_output.output_name is not None
                 else None
             )
@@ -320,7 +320,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         """
         output = self.button_map[button]
         proc_output: imf.ProcessOutput = self.image_obj.outputs[output]
-        self.label_step.setText(tr(proc_output.description, "Process Steps"))
+        self.label_step.setText(tr(proc_output.description, context="Process Steps"))
         self.current_image_path = proc_output.path
         if not proc_output.has_path():
             # Clear whatever image is currently shown.

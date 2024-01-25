@@ -674,7 +674,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Load the available profiles and display the default profile.
         """
-        all_profiles: list[tuple[str, Path | None]] = [(cfg.DEFAULT_PROFILE_NAME, None)]
+        all_profiles: list[tuple[str, Path | None]] = [(self.config.default_profile_name(), None)]
         for profile_name, profile_path in self.config.saved_profiles.items():
             all_profiles.append((profile_name, profile_path))
 
@@ -701,7 +701,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 == (
                     self.config.default_profile
                     if self.config.default_profile
-                    else cfg.DEFAULT_PROFILE_NAME
+                    else self.config.default_profile_name()
                 )
             )
 
@@ -737,7 +737,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.debug(f"Setting default profile to {profile_name}")
         self.config.default_profile = (
-            profile_name if profile_name != cfg.DEFAULT_PROFILE_NAME else None
+            profile_name if profile_name != self.config.default_profile_name() else None
         )
         self.config.save()
         # Update the menu.
@@ -778,7 +778,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.debug("Deleting profile.")
         profile_name = self.comboBox_current_profile.currentText()
 
-        if self.comboBox_current_profile.currentText() == cfg.DEFAULT_PROFILE_NAME:
+        if self.comboBox_current_profile.currentText() == self.config.default_profile_name():
             gu.show_warning(
                 self, self.tr("Failed to Delete"), self.tr("The default profile cannot be deleted.")
             )
@@ -851,7 +851,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Check if the profile is still in the list.
         if self.comboBox_current_profile.currentText() not in list(
             self.config.saved_profiles.keys()
-        ) + [cfg.DEFAULT_PROFILE_NAME]:
+        ) + [self.config.default_profile_name()]:
             logger.debug("Profile not in list.")
             # The profile is not in the list, so it must have been deleted.
             return True
@@ -1026,7 +1026,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         default_path = cu.get_default_profile_path()
         new_profile_dialog = npd.NewProfileDialog(
-            default_path, show_protection_hint, cfg.RESERVED_PROFILE_NAMES
+            default_path, show_protection_hint, cfg.Config.reserved_profile_names()
         )
         response = new_profile_dialog.exec()
         if response == Qw.QDialog.Accepted:
@@ -1288,7 +1288,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 # Set the target label, we don't need to update this multiple times.
                 self.label_target_outputs.setText(
                     ", ".join(
-                        tr(pp.to_display_name(o.name), "Process Steps")
+                        tr(pp.to_display_name(o.name), context="Process Steps")
                         for o in progress_data.target_outputs
                     )
                 )
@@ -1356,5 +1356,5 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
         # Update the label.
         self.label_current_step.setText(
-            tr(pp.to_display_name(progress_data.current_step.name), "Process Steps")
+            tr(pp.to_display_name(progress_data.current_step.name), context="Process Steps")
         )

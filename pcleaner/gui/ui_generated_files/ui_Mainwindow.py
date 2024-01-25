@@ -84,8 +84,6 @@ class Ui_MainWindow(object):
             icon4.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
         self.action_import_profile.setIcon(icon4)
-        self.action_open_log = QAction(MainWindow)
-        self.action_open_log.setObjectName(u"action_open_log")
         self.action_online_documentation = QAction(MainWindow)
         self.action_online_documentation.setObjectName(u"action_online_documentation")
         icon5 = QIcon()
@@ -775,7 +773,6 @@ class Ui_MainWindow(object):
         self.action_new_profile.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.action_delete_profile.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.action_import_profile.setText(QCoreApplication.translate("MainWindow", u"Import...", None))
-        self.action_open_log.setText(QCoreApplication.translate("MainWindow", u"Open Log", None))
         self.action_online_documentation.setText(QCoreApplication.translate("MainWindow", u"Online Documentation", None))
         self.action_about.setText(QCoreApplication.translate("MainWindow", u"About Panel Cleaner", None))
         self.actionView_License.setText(QCoreApplication.translate("MainWindow", u"View License", None))

@@ -11,8 +11,8 @@ from loguru import logger
 
 def tr(
     text: str,
-    context: str = "pcleaner",
     disambiguation: str | None = None,
+    context: str = "",
     count: int = -1,
 ) -> str:
     """

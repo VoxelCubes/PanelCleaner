@@ -43,7 +43,7 @@ def list_profiles(config: cfg.Config) -> None:
     # Insert the builtin first.
     table.add_row(
         [
-            cfg.RESERVED_PROFILE_NAMES[0],
+            config.reserved_profile_names()[0],
             "",
             "OK",
             check_default(None),
@@ -237,7 +237,7 @@ def is_valid_profile_name(
         return False, tr("Profile name cannot be empty.")
     if profile_name in config.saved_profiles.keys():
         return False, tr("Profile name already in use.")
-    if profile_name.lower() in cfg.RESERVED_PROFILE_NAMES and not allow_reserved:
+    if profile_name.lower() in config.reserved_profile_names() and not allow_reserved:
         return False, tr("Profile name is reserved.")
     return True, ""
 
