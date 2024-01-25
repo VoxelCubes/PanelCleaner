@@ -850,36 +850,24 @@ Continue anyway?</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="23"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Raw Json</comment>
-      <translation type="unfinished">Not visible</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="25"/>
-      <source>Raw Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Raw Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="26"/>
       <source>The outlines of the text boxes the AI found.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Initial Boxes</comment>
       <translation type="unfinished">The outlines of the text boxes the AI found.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="27"/>
+      <location filename="process_strings.py" line="24"/>
       <source>Preprocessor</source>
       <comment>Step name in the image details view</comment>
       <translation type="unfinished">Preprocessor</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="29"/>
+      <location filename="process_strings.py" line="26"/>
       <source>Initial Boxes</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Initial Boxes</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="30"/>
+      <location filename="process_strings.py" line="27"/>
       <source>The final boxes after expanding, merging and filtering unneeded boxes with OCR.
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Final Boxes</comment>
@@ -887,151 +875,127 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="32"/>
+      <location filename="process_strings.py" line="29"/>
       <source>Final Boxes</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Final Boxes</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="33"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Clean Json</comment>
-      <translation type="unfinished">Not visible</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="35"/>
-      <source>Clean Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Clean Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="36"/>
+      <location filename="process_strings.py" line="30"/>
       <source>The mask of the merged boxes.</source>
       <comment>Step description in the image details view, step: Masker, output: Box Mask</comment>
       <translation type="unfinished">The mask of the merged boxes.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="37"/>
+      <location filename="process_strings.py" line="31"/>
       <source>Masker</source>
       <comment>Step name in the image details view</comment>
       <translation type="unfinished">Masker</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="39"/>
+      <location filename="process_strings.py" line="33"/>
       <source>Box Mask</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Box Mask</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="40"/>
+      <location filename="process_strings.py" line="34"/>
       <source>The rough text detection mask with everything outside the box mask cut out.</source>
       <comment>Step description in the image details view, step: Masker, output: Cut Mask</comment>
       <translation type="unfinished">The rough text detection mask with everything outside the box mask cut out.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="42"/>
+      <location filename="process_strings.py" line="36"/>
       <source>Cut Mask</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Cut Mask</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="43"/>
+      <location filename="process_strings.py" line="37"/>
       <source>The different steps of growth around the cut mask displayed in different colors.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Layers</comment>
       <translation type="unfinished">The different steps of growth around the cut mask displayed in different colors.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="45"/>
+      <location filename="process_strings.py" line="39"/>
       <source>Mask Layers</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Mask Layers</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="46"/>
+      <location filename="process_strings.py" line="40"/>
       <source>The input image with the final mask overlaid in color.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
       <translation type="unfinished">The input image with the final mask overlaid in color.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="48"/>
+      <location filename="process_strings.py" line="42"/>
       <source>Mask Overlay</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Mask Overlay</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="49"/>
+      <location filename="process_strings.py" line="43"/>
       <source>The collection of masks for each bubble that fit best.</source>
       <comment>Step description in the image details view, step: Masker, output: Final Mask</comment>
       <translation type="unfinished">The collection of masks for each bubble that fit best.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="51"/>
+      <location filename="process_strings.py" line="45"/>
       <source>Final Mask</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Final Mask</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="52"/>
+      <location filename="process_strings.py" line="46"/>
       <source>The text layer isolated from the input image.</source>
       <comment>Step description in the image details view, step: Masker, output: Isolated Text</comment>
       <translation type="unfinished">The text layer isolated from the input image.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="54"/>
+      <location filename="process_strings.py" line="48"/>
       <source>Isolated Text</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Isolated Text</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="55"/>
+      <location filename="process_strings.py" line="49"/>
       <source>The input image with the final mask applied.</source>
       <comment>Step description in the image details view, step: Masker, output: Masked Output</comment>
       <translation type="unfinished">The input image with the final mask applied.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="57"/>
+      <location filename="process_strings.py" line="51"/>
       <source>Masked Output</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Masked Output</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="58"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Mask Data Json</comment>
-      <translation type="unfinished">Not visible</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="60"/>
-      <source>Mask Data Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Data Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="61"/>
+      <location filename="process_strings.py" line="52"/>
       <source>The masks that required denoising, to be overlaid on the final mask when exporting.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoise Mask</comment>
       <translation type="unfinished">The masks that required denoising, to be overlaid on the final mask when exporting.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="62"/>
+      <location filename="process_strings.py" line="53"/>
       <source>Denoiser</source>
       <comment>Step name in the image details view</comment>
       <translation type="unfinished">Denoiser</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="64"/>
+      <location filename="process_strings.py" line="55"/>
       <source>Denoise Mask</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Denoise Mask</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="65"/>
+      <location filename="process_strings.py" line="56"/>
       <source>The input image with the denoised mask applied.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoised Output</comment>
       <translation type="unfinished">The input image with the denoised mask applied.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="67"/>
+      <location filename="process_strings.py" line="58"/>
       <source>Denoised Output</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Denoised Output</translation>
