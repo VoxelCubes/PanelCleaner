@@ -50,27 +50,27 @@
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
       <source>Profile file {profile_path} already exists.</source>
-      <translation type="unfinished">Profile file {profile_path} already exists.</translation>
+      <translation>Die Profildatei {profile_path} existiert bereits.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="106"/>
       <source>Profile {profile_name} created.</source>
-      <translation type="unfinished">Profile {profile_name} created.</translation>
+      <translation>Profil {profile_name} erstellt.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="238"/>
       <source>Profile name cannot be empty.</source>
-      <translation type="unfinished">Profile name cannot be empty.</translation>
+      <translation>Der Profilname darf nicht leer sein.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="240"/>
       <source>Profile name already in use.</source>
-      <translation type="unfinished">Profile name already in use.</translation>
+      <translation>Der Profilname wird bereits verwendet.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="242"/>
       <source>Profile name is reserved.</source>
-      <translation type="unfinished">Profile name is reserved.</translation>
+      <translation>Der Profilname ist reserviert.</translation>
     </message>
   </context>
   <context>
@@ -120,7 +120,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="40"/>
       <source>Select Color</source>
-      <translation type="unfinished">Select Color</translation>
+      <translation>Farbe Auswählen</translation>
     </message>
   </context>
   <context>
@@ -553,7 +553,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="389"/>
       <source>Select Output Directory</source>
-      <translation type="unfinished">Select Output Directory</translation>
+      <translation>Ausgabeverzeichnis Auswählen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="441"/>
@@ -573,102 +573,102 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="641"/>
       <source>Restart Required</source>
-      <translation type="unfinished">Restart Required</translation>
+      <translation>Neustart Erforderlich</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="644"/>
       <source>The language has been changed. Please restart the application for the changes to take effect.</source>
-      <translation type="unfinished">The language has been changed. Please restart the application for the changes to take effect.</translation>
+      <translation>Die Sprache wurde geändert. Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="654"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="655"/>
       <source>System Language</source>
-      <translation type="unfinished">System Language</translation>
+      <translation>Systemsprache</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="754"/>
       <source>Import Profile</source>
-      <translation type="unfinished">Import Profile</translation>
+      <translation>Profil Importieren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="756"/>
       <source>Profile Files (*.conf)</source>
-      <translation type="unfinished">Profile Files (*.conf)</translation>
+      <translation>Profildateien (*.conf)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="763"/>
       <source>Profile Imported</source>
-      <translation type="unfinished">Profile Imported</translation>
+      <translation>Profil Importiert</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="765"/>
       <source>Import Error</source>
-      <translation type="unfinished">Import Error</translation>
+      <translation>Fehler beim Importieren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="783"/>
       <source>Failed to Delete</source>
-      <translation type="unfinished">Failed to Delete</translation>
+      <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="784"/>
       <source>The default profile cannot be deleted.</source>
-      <translation type="unfinished">The default profile cannot be deleted.</translation>
+      <translation>Das Standardprofil kann nicht gelöscht werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="788"/>
       <source>Delete Profile</source>
-      <translation type="unfinished">Delete Profile</translation>
+      <translation>Profil Löschen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="789"/>
       <source>Are you sure you want to delete the profile {profile_name}?</source>
-      <translation type="unfinished">Are you sure you want to delete the profile {profile_name}?</translation>
+      <translation>Sind Sie sicher, dass Sie das Profil {profile_name} löschen möchten?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="803"/>
       <source>Delete Error</source>
-      <translation type="unfinished">Delete Error</translation>
+      <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="804"/>
       <source>Failed to delete the profile.</source>
-      <translation type="unfinished">Failed to delete the profile.</translation>
+      <translation>Das Profil konnte nicht gelöscht werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="867"/>
       <source>The profile &apos;{profile}&apos; has unsaved changes.
 Switching profiles will discard changes to the current profile.</source>
-      <translation type="unfinished">The profile &apos;{profile}&apos; has unsaved changes.
-Switching profiles will discard changes to the current profile.</translation>
+      <translation>Das Profil &apos;{profile}&apos; hat ungespeicherte Änderungen.
+Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworfen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="870"/>
       <source>Unsaved changes</source>
-      <translation type="unfinished">Unsaved changes</translation>
+      <translation>Ungespeicherte Änderungen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1003"/>
       <source>Load Error</source>
-      <translation type="unfinished">Load Error</translation>
+      <translation>Fehler beim Laden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1003"/>
       <source>Failed to load profile:</source>
-      <translation type="unfinished">Failed to load profile:</translation>
+      <translation>Das Profil konnte nicht geladen werden:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="962"/>
       <source>Profile Created</source>
-      <translation type="unfinished">Profile Created</translation>
+      <translation>Profil Erstellt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="965"/>
       <source>Create Error</source>
-      <translation type="unfinished">Create Error</translation>
+      <translation>Fehler beim Erstellen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="974"/>
@@ -679,12 +679,12 @@ Switching profiles will discard changes to the current profile.</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="975"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="987"/>
       <source>Save Error</source>
-      <translation type="unfinished">Save Error</translation>
+      <translation>Fehler beim Speichern</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="975"/>
       <source>Failed to save profile.</source>
-      <translation type="unfinished">Failed to save profile.</translation>
+      <translation>Das Profil konnte nicht gespeichert werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="979"/>
@@ -700,68 +700,68 @@ Switching profiles will discard changes to the current profile.</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="991"/>
       <source>Failed to save the new profile to the configuration file.
 Continue anyway?</source>
-      <translation type="unfinished">Failed to save the new profile to the configuration file.
-Continue anyway?</translation>
+      <translation>Das neue Profil konnte nicht in der Konfigurationsdatei gespeichert werden.
+Trotzdem fortfahren?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1049"/>
       <source>No Files</source>
-      <translation type="unfinished">No Files</translation>
+      <translation>Keine Dateien</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1054"/>
       <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
-      <translation type="unfinished">No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</translation>
+      <translation>Keine Dateien zu verarbeiten. Sie können Dateien in der Mitte des Fensters ablegen oder über die Menüleiste hinzufügen: Dateien -&gt; Dateien hinzufügen oder Ordner hinzufügen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1094"/>
       <source>No Outputs</source>
-      <translation type="unfinished">No Outputs</translation>
+      <translation>Keine Ausgaben</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1097"/>
       <source>No outputs were requested. Please select at least one output before cleaning.</source>
-      <translation type="unfinished">No outputs were requested. Please select at least one output before cleaning.</translation>
+      <translation>Es wurden keine Ausgaben angefordert. Bitte wählen Sie vor der Reinigung mindestens eine Ausgabe aus.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1186"/>
       <source>File Exists</source>
-      <translation type="unfinished">File Exists</translation>
+      <translation>Datei Bereits Vorhanden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1187"/>
       <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
-      <translation type="unfinished">The file &apos;{output_path}&apos; already exists. Overwrite?</translation>
+      <translation>Die Datei &apos;{output_path}&apos; existiert bereits. Wollen Sie diese überschreiben?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1247"/>
       <source>Processing Finished</source>
-      <translation type="unfinished">Processing Finished</translation>
+      <translation>Verarbeitung Beendet</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1248"/>
       <source>Finished processing all files.</source>
-      <translation type="unfinished">Finished processing all files.</translation>
+      <translation>Die Verarbeitung aller Dateien ist abgeschlossen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1252"/>
       <source>Processing Aborted</source>
-      <translation type="unfinished">Processing Aborted</translation>
+      <translation>Abbruch</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1252"/>
       <source>Processing aborted.</source>
-      <translation type="unfinished">Processing aborted.</translation>
+      <translation>Die Verarbeitung wurde abgebrochen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1265"/>
       <source>Processing Error</source>
-      <translation type="unfinished">Processing Error</translation>
+      <translation>Verarbeitungsfehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
       <source>Encountered an error while processing files.</source>
-      <translation type="unfinished">Encountered an error while processing files.</translation>
+      <translation>Bei der Verarbeitung von Dateien ist ein Fehler aufgetreten.</translation>
     </message>
   </context>
   <context>
@@ -1171,13 +1171,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="72"/>
       <source>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</translation>
+      <translation>Das OCR-Modell kann nur japanischen Text verarbeiten. Wenn also die Option Strenge Spracherkennung aktiviert ist, werden Felder verworfen, von denen nicht sicher ist, dass sie japanisch sind. Manchmal verunsichern Zahlen oder andere Symbole die KI, was dazu führt, dass die erkannte Sprache unbekannt ist. Wenn Streng deaktiviert ist, werden diese nicht verworfen. Alles, was mit Sicherheit als eine andere Sprache erkannt wird, wird unabhängig von dieser Einstellung verworfen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="74"/>
       <source>OCR Strict Language</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Strict Language</translation>
+      <translation>OCR Strenge Spracherkennung</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="76"/>
