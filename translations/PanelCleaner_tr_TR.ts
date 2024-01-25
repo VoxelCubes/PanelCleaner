@@ -1,38 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr_TR" sourcelanguage="en_US">
+<TS version="2.1" language="tr_TR" sourcelanguage="en">
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="697"/>
+      <location filename="../pcleaner/config.py" line="17"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation type="unfinished">default</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/profile_cli.py" line="86"/>
-      <source>Profile file {profile_path} already exists.</source>
-      <translation type="unfinished">Profile file {profile_path} already exists.</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/profile_cli.py" line="106"/>
-      <source>Profile {profile_name} created.</source>
-      <translation type="unfinished">Profile {profile_name} created.</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/profile_cli.py" line="238"/>
-      <source>Profile name cannot be empty.</source>
-      <translation type="unfinished">Profile name cannot be empty.</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/profile_cli.py" line="240"/>
-      <source>Profile name already in use.</source>
-      <translation type="unfinished">Profile name already in use.</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/profile_cli.py" line="242"/>
-      <source>Profile name is reserved.</source>
-      <translation type="unfinished">Profile name is reserved.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="493"/>
@@ -71,6 +46,31 @@
       <source>Palette</source>
       <comment>Color mode</comment>
       <translation type="unfinished">Palette</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="86"/>
+      <source>Profile file {profile_path} already exists.</source>
+      <translation type="unfinished">Profile file {profile_path} already exists.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="106"/>
+      <source>Profile {profile_name} created.</source>
+      <translation type="unfinished">Profile {profile_name} created.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="238"/>
+      <source>Profile name cannot be empty.</source>
+      <translation type="unfinished">Profile name cannot be empty.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="240"/>
+      <source>Profile name already in use.</source>
+      <translation type="unfinished">Profile name already in use.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/profile_cli.py" line="242"/>
+      <source>Profile name is reserved.</source>
+      <translation type="unfinished">Profile name is reserved.</translation>
     </message>
   </context>
   <context>
@@ -235,6 +235,309 @@ Manga panellerini temizlemek için yapay zeka destekli bir araç.</translation>
   </context>
   <context>
     <name>MainWindow</name>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="14"/>
+      <source>Panel Cleaner</source>
+      <translation>Panel Temizleyici</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="40"/>
+      <location filename="../ui_files/Mainwindow.ui" line="921"/>
+      <source>Profile</source>
+      <translation>Profil</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="61"/>
+      <source>Default</source>
+      <translation>Varsayılan</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="72"/>
+      <source>Apply</source>
+      <translation>Uygula</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="86"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1055"/>
+      <source>Save</source>
+      <translation>Kaydet</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="100"/>
+      <source>Reset All</source>
+      <translation>Tümünü Sıfırla</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="173"/>
+      <source>Drag and Drop Images or Folders Here</source>
+      <translation>Görüntüleri veya Klasörleri Buraya Sürükleyip Bırakın</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="231"/>
+      <source>Images</source>
+      <translation>Görüntüler</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="291"/>
+      <location filename="../ui_files/Mainwindow.ui" line="913"/>
+      <source>File</source>
+      <translation>Dosya</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="296"/>
+      <source>Size</source>
+      <translation>Boyut</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="301"/>
+      <source>Processing Size</source>
+      <comment>The size that the picture is shrunk down to for processing.</comment>
+      <translation>İşlenme Boyutu</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="306"/>
+      <source>File Size</source>
+      <translation>Dosya Boyutu</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="311"/>
+      <source>Color Mode</source>
+      <comment>Like RGB, grayscale etc.</comment>
+      <translation>Renk Modu</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="316"/>
+      <source>Analytics</source>
+      <comment>Can also call this statistics.</comment>
+      <translation>Analitikler</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="353"/>
+      <source>Process</source>
+      <translation>İşlem</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="359"/>
+      <source>Cleaning</source>
+      <translation>Temizleme</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="369"/>
+      <source>OCR</source>
+      <translation>OCR</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="404"/>
+      <source>Abort</source>
+      <translation>İptal et</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="415"/>
+      <source>Start</source>
+      <translation>Başlat</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="431"/>
+      <source>Output</source>
+      <translation>Çıktı</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="463"/>
+      <source>Cleaned Image</source>
+      <translation>Temizlenmiş Görüntü</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="473"/>
+      <source>Mask</source>
+      <translation>Maske</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="483"/>
+      <source>Isolated Text</source>
+      <translation>İzole Metin</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="512"/>
+      <source>Save Output</source>
+      <translation>Çıktıyı Kaydet</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="522"/>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;İşaretlendiğinde, çıktıların tamamı diske kaydedilir. Aksi takdirde, bunları yalnızca görüntü ayrıntıları görünümünde önizleyebilirsiniz. &lt;/p&gt;&lt;p&gt;Bu seçenek etkinleştirilmeden temizlik yapıldıktan sonra profil değişmeden kalırsa, temizleyiciyi bu seçenek etkinleştirip tekrar çalıştırarak bunları hızlı bir şekilde dışa aktarabilirsiniz.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="582"/>
+      <source>Output Directory:</source>
+      <translation>Çıktı Dizini:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="595"/>
+      <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
+      <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
+      <translation>Görüntüsünün orijinal konumunda bir alt klasör oluşturmak için göreli bir yol kullanabilir veya mutlak bir yol kullanabilirsiniz.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1108"/>
+      <location filename="../ui_files/Mainwindow.ui" line="625"/>
+      <source>cleaned</source>
+      <translation>temizlenmiş</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="664"/>
+      <source>Plain Text</source>
+      <translation>Düz Metin</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="674"/>
+      <source>CSV File</source>
+      <translation>CSV Dosyası</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="696"/>
+      <source>Output File:</source>
+      <translation>Çıktı Dosyası:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="709"/>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bir dosya adıyla birlikte mutlak veya göreli bir yol girin. Tüm görüntülerin çıktısı aynı dosyaya yazılır.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="739"/>
+      <source>detected_text.txt</source>
+      <extracomment>The file suffix .txt is important, don&apos;t change that. The .csv extension is swapped in automatically for that alternative when selected.</extracomment>
+      <translation>detected_text.txt</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="801"/>
+      <source>Generating:</source>
+      <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
+      <translation>Üretiliyor:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="831"/>
+      <source>Current Step:</source>
+      <translation>Şu anki adım:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="860"/>
+      <location filename="../ui_files/Mainwindow.ui" line="893"/>
+      <source>%v / %m</source>
+      <translation>%v / %m</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="883"/>
+      <source>Images Processed:</source>
+      <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
+      <translation>İşlenen görüntüler:</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="925"/>
+      <source>Set Default</source>
+      <translation>Varsayılan olarak ayarla</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="941"/>
+      <source>Settings</source>
+      <translation>Ayarlar</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="945"/>
+      <source>Theme</source>
+      <comment>As in color theme</comment>
+      <translation>Tema</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="954"/>
+      <source>Language</source>
+      <translation>Dil</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="967"/>
+      <source>Help</source>
+      <translation>Yardım</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="987"/>
+      <source>Add Files...</source>
+      <translation>Dosya Ekle...</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="996"/>
+      <source>Clear Files</source>
+      <translation>Dosyaları Temizle</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1005"/>
+      <source>New</source>
+      <translation>Yeni</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1014"/>
+      <source>Delete</source>
+      <translation>Sil</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1023"/>
+      <source>Import...</source>
+      <translation>İçe aktar...</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1032"/>
+      <source>Online Documentation</source>
+      <translation>Çevrimiçi Dokümantasyon</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1041"/>
+      <source>About Panel Cleaner</source>
+      <translation>Panel Temizleyici Hakkında</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1046"/>
+      <source>View License</source>
+      <translation>Lisansı Görüntüle</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1064"/>
+      <source>Save as...</source>
+      <translation>Farklı kaydet...</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1072"/>
+      <source>System</source>
+      <translation>Sistem</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1080"/>
+      <source>Dark</source>
+      <translation>Karanlık</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1088"/>
+      <source>Light</source>
+      <translation>Açık</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1102"/>
+      <source>Add Folder...</source>
+      <translation>Klasör Ekle...</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1111"/>
+      <source>Delete Machine Learning Models</source>
+      <translation>Makine Öğrenimi Modellerini Sil</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1120"/>
+      <source>Download Machine Learning Models</source>
+      <translation>Makine Öğrenimi Modellerini İndir</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1129"/>
+      <source>Donate</source>
+      <translation>Bağış Yap</translation>
+    </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="272"/>
       <source>Open Config</source>
@@ -421,12 +724,6 @@ Continue anyway?</translation>
       <translation type="unfinished">No outputs were requested. Please select at least one output before cleaning.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1108"/>
-      <location filename="../ui_files/Mainwindow.ui" line="625"/>
-      <source>cleaned</source>
-      <translation>temizlenmiş</translation>
-    </message>
-    <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1186"/>
       <source>File Exists</source>
       <translation type="unfinished">File Exists</translation>
@@ -465,303 +762,6 @@ Continue anyway?</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
       <source>Encountered an error while processing files.</source>
       <translation type="unfinished">Encountered an error while processing files.</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="14"/>
-      <source>Panel Cleaner</source>
-      <translation>Panel Temizleyici</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="40"/>
-      <location filename="../ui_files/Mainwindow.ui" line="921"/>
-      <source>Profile</source>
-      <translation>Profil</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="61"/>
-      <source>Default</source>
-      <translation>Varsayılan</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="72"/>
-      <source>Apply</source>
-      <translation>Uygula</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="86"/>
-      <location filename="../ui_files/Mainwindow.ui" line="1055"/>
-      <source>Save</source>
-      <translation>Kaydet</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="100"/>
-      <source>Reset All</source>
-      <translation>Tümünü Sıfırla</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="173"/>
-      <source>Drag and Drop Images or Folders Here</source>
-      <translation>Görüntüleri veya Klasörleri Buraya Sürükleyip Bırakın</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="231"/>
-      <source>Images</source>
-      <translation>Görüntüler</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="291"/>
-      <location filename="../ui_files/Mainwindow.ui" line="913"/>
-      <source>File</source>
-      <translation>Dosya</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="296"/>
-      <source>Size</source>
-      <translation>Boyut</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="301"/>
-      <source>Processing Size</source>
-      <comment>The size that the picture is shrunk down to for processing.</comment>
-      <translation>İşlenme Boyutu</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="306"/>
-      <source>File Size</source>
-      <translation>Dosya Boyutu</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="311"/>
-      <source>Color Mode</source>
-      <comment>Like RGB, grayscale etc.</comment>
-      <translation>Renk Modu</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="316"/>
-      <source>Analytics</source>
-      <comment>Can also call this statistics.</comment>
-      <translation>Analitikler</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="353"/>
-      <source>Process</source>
-      <translation>İşlem</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="359"/>
-      <source>Cleaning</source>
-      <translation>Temizleme</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="369"/>
-      <source>OCR</source>
-      <translation type="unfinished">OCR</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="404"/>
-      <source>Abort</source>
-      <translation>İptal et</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="415"/>
-      <source>Start</source>
-      <translation>Başlat</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="431"/>
-      <source>Output</source>
-      <translation>Çıktı</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="463"/>
-      <source>Cleaned Image</source>
-      <translation>Temizlenmiş Görüntü</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="473"/>
-      <source>Mask</source>
-      <translation>Maske</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="483"/>
-      <source>Isolated Text</source>
-      <translation>İzole Metin</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="512"/>
-      <source>Save Output</source>
-      <translation>Çıktıyı Kaydet</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="522"/>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;İşaretlendiğinde, çıktıların tamamı diske kaydedilir. Aksi takdirde, bunları yalnızca görüntü ayrıntıları görünümünde önizleyebilirsiniz. &lt;/p&gt;&lt;p&gt;Bu seçenek etkinleştirilmeden temizlik yapıldıktan sonra profil değişmeden kalırsa, temizleyiciyi bu seçenek etkinleştirip tekrar çalıştırarak bunları hızlı bir şekilde dışa aktarabilirsiniz.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="582"/>
-      <source>Output Directory:</source>
-      <translation>Çıktı Dizini:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="595"/>
-      <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
-      <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
-      <translation>Görüntüsünün orijinal konumunda bir alt klasör oluşturmak için göreli bir yol kullanabilir veya mutlak bir yol kullanabilirsiniz.</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="664"/>
-      <source>Plain Text</source>
-      <translation>Düz Metin</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="674"/>
-      <source>CSV File</source>
-      <translation>CSV Dosyası</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="696"/>
-      <source>Output File:</source>
-      <translation>Çıktı Dosyası:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="709"/>
-      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bir dosya adıyla birlikte mutlak veya göreli bir yol girin. Tüm görüntülerin çıktısı aynı dosyaya yazılır.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="739"/>
-      <source>detected_text.txt</source>
-      <extracomment>The file suffix .txt is important, don&apos;t change that. The .csv extension is swapped in automatically for that alternative when selected.</extracomment>
-      <translation type="unfinished">detected_text.txt</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="801"/>
-      <source>Generating:</source>
-      <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
-      <translation>Üretiliyor:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="831"/>
-      <source>Current Step:</source>
-      <translation>Şu anki adım:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="860"/>
-      <location filename="../ui_files/Mainwindow.ui" line="893"/>
-      <source>%v / %m</source>
-      <translation type="unfinished">%v / %m</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="883"/>
-      <source>Images Processed:</source>
-      <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
-      <translation>İşlenen görüntüler:</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="925"/>
-      <source>Set Default</source>
-      <translation>Varsayılan olarak ayarla</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="941"/>
-      <source>Settings</source>
-      <translation>Ayarlar</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="945"/>
-      <source>Theme</source>
-      <comment>As in color theme</comment>
-      <translation>Tema</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="954"/>
-      <source>Language</source>
-      <translation>Dil</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="967"/>
-      <source>Help</source>
-      <translation>Yardım</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="987"/>
-      <source>Add Files...</source>
-      <translation>Dosya Ekle...</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="996"/>
-      <source>Clear Files</source>
-      <translation>Dosyaları Temizle</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1005"/>
-      <source>New</source>
-      <translation>Yeni</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1014"/>
-      <source>Delete</source>
-      <translation>Sil</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1023"/>
-      <source>Import...</source>
-      <translation>İçe aktar...</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1032"/>
-      <source>Online Documentation</source>
-      <translation>Çevrimiçi Dokümantasyon</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1041"/>
-      <source>About Panel Cleaner</source>
-      <translation>Panel Temizleyici Hakkında</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1046"/>
-      <source>View License</source>
-      <translation>Lisansı Görüntüle</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1064"/>
-      <source>Save as...</source>
-      <translation>Farklı kaydet...</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1072"/>
-      <source>System</source>
-      <translation>Sistem</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1080"/>
-      <source>Dark</source>
-      <translation>Karanlık</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1088"/>
-      <source>Light</source>
-      <translation>Açık</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1102"/>
-      <source>Add Folder...</source>
-      <translation>Klasör Ekle...</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1111"/>
-      <source>Delete Machine Learning Models</source>
-      <translation>Makine Öğrenimi Modellerini Sil</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1120"/>
-      <source>Download Machine Learning Models</source>
-      <translation>Makine Öğrenimi Modellerini İndir</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1129"/>
-      <source>Donate</source>
-      <translation>Bağış Yap</translation>
     </message>
   </context>
   <context>
@@ -815,25 +815,19 @@ Continue anyway?</translation>
     <message>
       <location filename="process_strings.py" line="15"/>
       <source>The original image with scaling applied (if needed).</source>
-      <comment>Step description in the image details view, step: Input, output: Input</comment>
+      <comment>Step description in the image details view, step: Input, output: None</comment>
       <translation type="unfinished">The original image with scaling applied (if needed).</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="16"/>
+      <location filename="process_strings.py" line="17"/>
       <source>Input</source>
       <comment>Step name in the image details view</comment>
       <translation type="unfinished">Input</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="18"/>
-      <source>Input</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Input</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="19"/>
       <source>The rough mask generated by the AI.</source>
-      <comment>Step description in the image details view, step: Text Detection, output: AI Mask</comment>
+      <comment>Step description in the image details view, step: Text Detection, output: None</comment>
       <translation type="unfinished">The rough mask generated by the AI.</translation>
     </message>
     <message>
@@ -844,42 +838,32 @@ Continue anyway?</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="22"/>
-      <source>AI Mask</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">AI Mask</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="23"/>
+      <location filename="process_strings.py" line="31"/>
+      <location filename="process_strings.py" line="55"/>
       <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Raw Json</comment>
+      <comment>Step description in the image details view, step: None, output: None</comment>
       <translation type="unfinished">Not visible</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="25"/>
-      <source>Raw Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Raw Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="26"/>
+      <location filename="process_strings.py" line="23"/>
       <source>The outlines of the text boxes the AI found.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Initial Boxes</comment>
       <translation type="unfinished">The outlines of the text boxes the AI found.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="27"/>
+      <location filename="process_strings.py" line="24"/>
       <source>Preprocessor</source>
       <comment>Step name in the image details view</comment>
       <translation type="unfinished">Preprocessor</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="29"/>
+      <location filename="process_strings.py" line="26"/>
       <source>Initial Boxes</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Initial Boxes</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="30"/>
+      <location filename="process_strings.py" line="27"/>
       <source>The final boxes after expanding, merging and filtering unneeded boxes with OCR.
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Final Boxes</comment>
@@ -887,151 +871,127 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="32"/>
+      <location filename="process_strings.py" line="29"/>
       <source>Final Boxes</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Final Boxes</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="33"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Clean Json</comment>
-      <translation type="unfinished">Not visible</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="35"/>
-      <source>Clean Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Clean Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="36"/>
+      <location filename="process_strings.py" line="32"/>
       <source>The mask of the merged boxes.</source>
       <comment>Step description in the image details view, step: Masker, output: Box Mask</comment>
       <translation type="unfinished">The mask of the merged boxes.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="37"/>
+      <location filename="process_strings.py" line="33"/>
       <source>Masker</source>
       <comment>Step name in the image details view</comment>
       <translation type="unfinished">Masker</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="39"/>
+      <location filename="process_strings.py" line="35"/>
       <source>Box Mask</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Box Mask</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="40"/>
+      <location filename="process_strings.py" line="36"/>
       <source>The rough text detection mask with everything outside the box mask cut out.</source>
       <comment>Step description in the image details view, step: Masker, output: Cut Mask</comment>
       <translation type="unfinished">The rough text detection mask with everything outside the box mask cut out.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="42"/>
+      <location filename="process_strings.py" line="38"/>
       <source>Cut Mask</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Cut Mask</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="43"/>
+      <location filename="process_strings.py" line="39"/>
       <source>The different steps of growth around the cut mask displayed in different colors.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Layers</comment>
       <translation type="unfinished">The different steps of growth around the cut mask displayed in different colors.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="45"/>
+      <location filename="process_strings.py" line="41"/>
       <source>Mask Layers</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Mask Layers</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="46"/>
+      <location filename="process_strings.py" line="42"/>
       <source>The input image with the final mask overlaid in color.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
       <translation type="unfinished">The input image with the final mask overlaid in color.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="48"/>
+      <location filename="process_strings.py" line="44"/>
       <source>Mask Overlay</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Mask Overlay</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="49"/>
+      <location filename="process_strings.py" line="45"/>
       <source>The collection of masks for each bubble that fit best.</source>
       <comment>Step description in the image details view, step: Masker, output: Final Mask</comment>
       <translation type="unfinished">The collection of masks for each bubble that fit best.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="51"/>
+      <location filename="process_strings.py" line="47"/>
       <source>Final Mask</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Final Mask</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="52"/>
+      <location filename="process_strings.py" line="48"/>
       <source>The text layer isolated from the input image.</source>
       <comment>Step description in the image details view, step: Masker, output: Isolated Text</comment>
       <translation type="unfinished">The text layer isolated from the input image.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="54"/>
+      <location filename="process_strings.py" line="50"/>
       <source>Isolated Text</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Isolated Text</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="55"/>
+      <location filename="process_strings.py" line="51"/>
       <source>The input image with the final mask applied.</source>
       <comment>Step description in the image details view, step: Masker, output: Masked Output</comment>
       <translation type="unfinished">The input image with the final mask applied.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="57"/>
+      <location filename="process_strings.py" line="53"/>
       <source>Masked Output</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Masked Output</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="58"/>
-      <source>Not visible</source>
-      <comment>Step description in the image details view, step: None, output: Mask Data Json</comment>
-      <translation type="unfinished">Not visible</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="60"/>
-      <source>Mask Data Json</source>
-      <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Data Json</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="61"/>
+      <location filename="process_strings.py" line="56"/>
       <source>The masks that required denoising, to be overlaid on the final mask when exporting.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoise Mask</comment>
       <translation type="unfinished">The masks that required denoising, to be overlaid on the final mask when exporting.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="62"/>
+      <location filename="process_strings.py" line="57"/>
       <source>Denoiser</source>
       <comment>Step name in the image details view</comment>
       <translation type="unfinished">Denoiser</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="64"/>
+      <location filename="process_strings.py" line="59"/>
       <source>Denoise Mask</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Denoise Mask</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="65"/>
+      <location filename="process_strings.py" line="60"/>
       <source>The input image with the denoised mask applied.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoised Output</comment>
       <translation type="unfinished">The input image with the denoised mask applied.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="67"/>
+      <location filename="process_strings.py" line="62"/>
       <source>Denoised Output</source>
       <comment>Output name in the image details view</comment>
       <translation type="unfinished">Denoised Output</translation>
@@ -1509,7 +1469,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
   <context>
     <name>ProfileToolBox</name>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="398"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="396"/>
       <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
       <translation type="unfinished">&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
