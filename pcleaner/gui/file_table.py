@@ -169,7 +169,11 @@ class FileTable(CTableWidget):
         # Make sure the file is not already in the table.
         if path in self.files:
             logger.warning(f'File "{path}" already in table.')
-            gu.show_warning(self, "Duplicate file", f'File "{path}" is already in the table.')
+            gu.show_warning(
+                self,
+                self.tr("Duplicate file"),
+                self.tr('File "{path}" is already in the table.').format(path=path),
+            )
             return
 
         self.files[path] = imf.ImageFile(path=path)
@@ -326,7 +330,11 @@ class FileTable(CTableWidget):
             # Check if it has loaded yet.
             if not file_obj.data_loaded():
                 logger.debug(f"Image {file_obj.path} has not loaded yet.")
-                gu.show_info(self, "Image not loaded", "Please wait until the image has loaded.")
+                gu.show_info(
+                    self,
+                    self.tr("Image not loaded"),
+                    self.tr("Please wait until the image has loaded."),
+                )
                 return
             self.requesting_image_preview.emit(file_obj)
         except KeyError:
@@ -484,7 +492,10 @@ class FileTable(CTableWidget):
         self.files[file_path].error = error.value
         logger.error(f"Worker thread {file_path} failed with {error.value}")
         gu.show_warning(
-            self, "Failed to load image", f"Failed to load image {file_path}:\n\n{error.value}"
+            self,
+            self.tr("Failed to load image"),
+            self.tr("Failed to load image {file_path}.").format(file_path=file_path)
+            + f"\n\n{error.value}",
         )
 
     def image_dispatch_worker_error(self, error: wt.WorkerError) -> None:
@@ -492,7 +503,9 @@ class FileTable(CTableWidget):
         Display an error message in the table.
         """
         gu.show_warning(
-            self, "Failed to dispatch image", f"Failed to dispatch image:\n\n{error.value}"
+            self,
+            self.tr("Failed to dispatch image"),
+            self.tr("Failed to dispatch image.") + f"\n\n{error.value}",
         )
 
     # =========================== File Adding ===========================
@@ -501,8 +514,8 @@ class FileTable(CTableWidget):
         """
         Browse for one or more files to add to the table.
         """
-        file_dialog = Qw.QFileDialog(self, "Select files")
-        file_dialog.setNameFilter(f"Images (*{' *'.join(cfg.SUPPORTED_IMG_TYPES)})")
+        file_dialog = Qw.QFileDialog(self, self.tr("Select files"))
+        file_dialog.setNameFilter(self.tr("Images") + f" (*{' *'.join(cfg.SUPPORTED_IMG_TYPES)})")
 
         # To select multiple files, you can use QFileDialog.getOpenFileNames().
         # To also include directories in the selection, we set the option QFileDialog.ShowDirsOnly to False.
@@ -521,7 +534,7 @@ class FileTable(CTableWidget):
         """
         Browse for one or more folders to add to the table.
         """
-        folder = Qw.QFileDialog.getExistingDirectory(self, "Select directory")
+        folder = Qw.QFileDialog.getExistingDirectory(self, self.tr("Select directory"))
         if folder:
             self.handleDrop(folder)
 

@@ -510,9 +510,15 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.error(f"Worker error: {error}")
         if not context:
-            gu.show_warning(self, "Error", f"Encountered error: {error}")
+            gu.show_warning(
+                self, self.tr("Error"), self.tr("Encountered error: {error}").format(error=error)
+            )
         else:
-            gu.show_warning(self, "Error", f"{context}\n\nEncountered error: {error}")
+            gu.show_warning(
+                self,
+                self.tr("Error"),
+                f"{context}\n\n" + self.tr("Encountered error: {error}").format(error=error),
+            )
 
     def closeEvent(self, death: Qg.QCloseEvent) -> None:
         """
@@ -561,9 +567,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         response = gu.show_question(
             self,
-            "Delete Models",
-            "Are you sure you want to delete the machine learning models? "
-            "This will make cleaning and OCR impossible until they are downloaded again.",
+            self.tr("Delete Models"),
+            self.tr(
+                "Are you sure you want to delete the machine learning models? "
+                "This will make cleaning and OCR impossible until they are downloaded again."
+            ),
         )
         if response != Qw.QMessageBox.Yes:
             return
@@ -573,14 +581,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             md.delete_models(self.config.get_model_cache_dir())
         except OSError as e:
             logger.exception(e)
-            gu.show_error(self, "Failed to Delete Models", f"Failed to delete models: {e}")
+            gu.show_error(
+                self,
+                self.tr("Failed to Delete Models"),
+                self.tr("Failed to delete models.") + f"\n\n{e}",
+            )
             return
 
         # Offer to download them again or just quit.
         response = gu.show_question(
             self,
-            "Models Deleted",
-            "The models were deleted. Would you like to download them again?",
+            self.tr("Models Deleted"),
+            self.tr("The models were deleted. Would you like to download them again?"),
             buttons=Qw.QMessageBox.Yes | Qw.QMessageBox.Close,
         )
         if response == Qw.QMessageBox.Yes:
@@ -605,7 +617,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.about = ad.AboutWidget(self)
         self.about.show()
 
-    def open_donation_page(self) -> None:
+    @staticmethod
+    def open_donation_page() -> None:
         """
         Open the donation page in the default browser.
         """

@@ -14,6 +14,7 @@ from humanfriendly import format_timespan, parse_size
 from loguru import logger
 from manga_ocr import MangaOcr
 
+from pcleaner.helpers import tr
 import pcleaner.config as cfg
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.worker_thread as wt
@@ -179,7 +180,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.label_model_size.setText("")
         self.encountered_error = True
         logger.exception(worker_error.value)
-        gu.show_warning(self, "Download Failed", str(worker_error.value))
+        gu.show_warning(self, self.tr("Download Failed"), str(worker_error.value))
 
     @Slot(Path)
     def text_detection_result(self, model_path: Path | None) -> None:
@@ -227,7 +228,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.ocr_downloaded = True
         if self.buffer:
             logger.info("\n".join(self.buffer))
-            gu.show_warning(self, "OCR download errors", "\n".join(self.buffer))
+            gu.show_warning(self, self.tr("OCR download errors"), "\n".join(self.buffer))
         self.check_finished()
 
     @Slot(wt.WorkerError)
@@ -241,7 +242,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.label_ocr_size.setText("")
         self.encountered_error = True
         logger.exception(worker_error.value)
-        gu.show_warning(self, "Download Failed", str(worker_error.value))
+        gu.show_warning(self, self.tr("Download Failed"), str(worker_error.value))
 
     @Slot(str, str)
     def ocr_output_log(self, text: str, stream: str) -> None:
@@ -266,7 +267,9 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
             f"{format_size(progress_data.downloaded_size)} / {format_size(progress_data.file_size)}"
         )
         self.label_ocr_speed.setText(
-            f"{format_size(progress_data.speed)}/s, ETA: {format_timespan(progress_data.eta, ) if progress_data.eta >= 0 else '—'}"
+            f"{format_size(progress_data.speed)}/s, "
+            + self.tr("ETA", "estimated time of completion")
+            + f": {format_timespan(progress_data.eta, ) if progress_data.eta >= 0 else '—'}"
         )
         self.progressBar_ocr.setValue(progress_data.percentage)
 
@@ -292,7 +295,9 @@ def download_file(url: str, save_dir: Path, signals: DownloadSignals, sha_hash: 
     try:
         response.raise_for_status()
     except requests.exceptions.HTTPError as e:
-        raise ConnectionError(f"Error downloading file from url: {url}\n{e}")
+        raise ConnectionError(
+            tr("Error downloading file from url: {url}").format(url=url) + "\n{e}"
+        )
 
     file_name = os.path.basename(url)
     save_path = save_dir / file_name
@@ -343,14 +348,18 @@ def download_file(url: str, save_dir: Path, signals: DownloadSignals, sha_hash: 
 
     if not save_path.exists():
         raise OSError(
-            f"Error downloading file from url: {url}\nFailed to save the file to {save_path}"
+            tr(
+                "Error downloading file from url: {url}\nFailed to save the file to {save_path}"
+            ).format(url=url, save_path=save_path)
         )
 
     if sha_hash is not None:
         if not md.check_hash(save_path, sha_hash):
             save_path.unlink()
             raise OSError(
-                f"Error downloading file from url: {url}\nThe file content is different from expected."
+                tr(
+                    "Error downloading file from url: {url}\nThe file content is different from expected."
+                ).format(url=url)
             )
 
     return save_path
