@@ -19,8 +19,6 @@ If the color has an alpha channel, the rectangle is drawn with a checkerboard]
 pattern behind it.
 """
 
-# TODO Select Color not translating
-
 
 # Follow Qt's naming convention of CamelCase for functions, signals, and classes
 # noinspection PyPep8Naming

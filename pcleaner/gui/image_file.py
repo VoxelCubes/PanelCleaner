@@ -42,11 +42,11 @@ class Output(IntEnum):
     mask_overlay = auto()
     final_mask = auto()
     isolated_text = auto()
-    masked_image = auto()
+    masked_output = auto()
     mask_data_json = auto()
 
-    denoiser_mask = auto()
-    denoised_image = auto()
+    denoise_mask = auto()
+    denoised_output = auto()
 
     write_output = auto()  # This is only used for the progress bar.
 
@@ -123,10 +123,10 @@ output_to_step: dict[Output, Step] = {
     Output.final_mask: Step.masker,
     Output.mask_overlay: Step.masker,
     Output.isolated_text: Step.masker,
-    Output.masked_image: Step.masker,
+    Output.masked_output: Step.masker,
     Output.mask_data_json: Step.masker,
-    Output.denoiser_mask: Step.denoiser,
-    Output.denoised_image: Step.denoiser,
+    Output.denoise_mask: Step.denoiser,
+    Output.denoised_output: Step.denoiser,
     Output.write_output: Step.output,
 }
 
@@ -141,11 +141,11 @@ step_to_output: dict[Step, tuple[Output, ...]] = {
         Output.mask_layers,
         Output.mask_overlay,
         Output.isolated_text,
-        Output.masked_image,
+        Output.masked_output,
         Output.final_mask,
         Output.mask_data_json,
     ),
-    Step.denoiser: (Output.denoiser_mask, Output.denoised_image),
+    Step.denoiser: (Output.denoise_mask, Output.denoised_output),
     Step.output: (Output.write_output,),
 }
 
@@ -373,6 +373,9 @@ class ImageFile:
         # The settings are passed as a list of attributes, note that the parent attribute
         # from the profile must be included, for child attributes to be included.
 
+        # IMPORTANT: The output names must match the display name variant of the enum name.
+        # "Input" <-> Output.input
+
         # Text Detection:
         settings = [pro.general, gen.input_height_lower_target, gen.input_height_upper_target]
         self.outputs[Output.input] = ProcessOutput(
@@ -455,7 +458,7 @@ class ImageFile:
         self.outputs[Output.isolated_text] = ProcessOutput(
             "The text layer isolated from the input image.", "Masker", "Isolated Text", settings
         )
-        self.outputs[Output.masked_image] = ProcessOutput(
+        self.outputs[Output.masked_output] = ProcessOutput(
             "The input image with the final mask applied.", "Masker", "Masked Output", settings
         )
         self.outputs[Output.mask_data_json] = ProcessOutput("Not visible", None, None, settings)
@@ -473,13 +476,13 @@ class ImageFile:
             dn.template_window_size,
             dn.search_window_size,
         ]
-        self.outputs[Output.denoiser_mask] = ProcessOutput(
+        self.outputs[Output.denoise_mask] = ProcessOutput(
             "The masks that required denoising, to be overlaid on the final mask when exporting.",
             "Denoiser",
             "Denoise Mask",
             settings,
         )
-        self.outputs[Output.denoised_image] = ProcessOutput(
+        self.outputs[Output.denoised_output] = ProcessOutput(
             "The input image with the denoised mask applied.",
             "Denoiser",
             "Denoised Output",

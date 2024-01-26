@@ -1075,12 +1075,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         if self.config.current_profile.denoiser.denoising_enabled:
             if request_cleaned:
-                requested_outputs.append(imf.Output.denoised_image)
+                requested_outputs.append(imf.Output.denoised_output)
             if request_mask:
-                requested_outputs.append(imf.Output.denoiser_mask)
+                requested_outputs.append(imf.Output.denoise_mask)
         else:
             if request_cleaned:
-                requested_outputs.append(imf.Output.masked_image)
+                requested_outputs.append(imf.Output.masked_output)
             if request_mask:
                 requested_outputs.append(imf.Output.final_mask)
 

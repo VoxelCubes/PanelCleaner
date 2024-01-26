@@ -309,7 +309,7 @@ def generate_output(
                     profile.general,
                     profile.masker,
                     save_only_mask=target_outputs == [imf.Output.final_mask],
-                    save_only_cleaned=target_outputs == [imf.Output.masked_image],
+                    save_only_cleaned=target_outputs == [imf.Output.masked_output],
                     save_only_text=target_outputs == [imf.Output.isolated_text],
                     extract_text=imf.Output.isolated_text in target_outputs,
                     show_masks=need_to_show_masks,
@@ -358,7 +358,7 @@ def generate_output(
                 update_output(image_obj, imf.Output.final_mask, "_combined_mask.png")
                 update_output(image_obj, imf.Output.mask_overlay, "_with_masks.png")
                 update_output(image_obj, imf.Output.isolated_text, "_text.png")
-                update_output(image_obj, imf.Output.masked_image, "_clean.png")
+                update_output(image_obj, imf.Output.masked_output, "_clean.png")
                 update_output(image_obj, imf.Output.mask_data_json, "#mask_data.json")
 
             progress_callback.emit(
@@ -409,8 +409,8 @@ def generate_output(
                     cache_dir,
                     profile.general,
                     profile.denoiser,
-                    save_only_mask=target_outputs == [imf.Output.denoiser_mask],
-                    save_only_cleaned=target_outputs == [imf.Output.denoised_image],
+                    save_only_mask=target_outputs == [imf.Output.denoise_mask],
+                    save_only_cleaned=target_outputs == [imf.Output.denoised_output],
                     extract_text=imf.Output.isolated_text in target_outputs,
                     separate_noise_masks=False,
                     show_masks=True,
@@ -451,8 +451,8 @@ def generate_output(
 
             # Update the outputs of the image objects.
             for image_obj in step_denoiser_images:
-                update_output(image_obj, imf.Output.denoiser_mask, "_noise_mask.png")
-                update_output(image_obj, imf.Output.denoised_image, "_clean_denoised.png")
+                update_output(image_obj, imf.Output.denoise_mask, "_noise_mask.png")
+                update_output(image_obj, imf.Output.denoised_output, "_clean_denoised.png")
                 update_output(image_obj, imf.Output.isolated_text, "_text.png")
 
             progress_callback.emit(
@@ -519,11 +519,11 @@ def copy_to_output(
     Output paths and preferred file types are taken into account.
 
     Supported outputs:
-    - Masked image: Output.masked_image
+    - Masked image: Output.masked_output
     - Final mask: Output.final_mask
     - Isolated text: Output.isolated_text
-    - Denoised image: Output.denoised_image
-    - Denoised Mask: Output.denoiser_mask
+    - Denoised image: Output.denoised_output
+    - Denoised Mask: Output.denoise_mask
 
     This may raise OSError in various circumstances.
 
@@ -563,9 +563,9 @@ def copy_to_output(
         text_out_path = text_out_path.with_suffix(profile.general.preferred_mask_file_type)
 
     # Output optimized images for all requested outputs.
-    if imf.Output.masked_image in outputs:
+    if imf.Output.masked_output in outputs:
         ops.save_optimized(
-            image_object.outputs[imf.Output.masked_image].path, cleaned_out_path, image_object.path
+            image_object.outputs[imf.Output.masked_output].path, cleaned_out_path, image_object.path
         )
 
     if imf.Output.final_mask in outputs:
@@ -577,17 +577,17 @@ def copy_to_output(
     if imf.Output.isolated_text in outputs:
         ops.save_optimized(image_object.outputs[imf.Output.isolated_text].path, text_out_path)
 
-    if imf.Output.denoised_image in outputs:
+    if imf.Output.denoised_output in outputs:
         ops.save_optimized(
-            image_object.outputs[imf.Output.denoised_image].path,
+            image_object.outputs[imf.Output.denoised_output].path,
             cleaned_out_path,
             image_object.path,
         )
 
-    if imf.Output.denoiser_mask in outputs:
+    if imf.Output.denoise_mask in outputs:
         # Special case: Here we need to take the final mask and paste this on top.
         final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
-        denoised_mask = Image.open(image_object.outputs[imf.Output.denoiser_mask].path)
+        denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
         final_mask.paste(denoised_mask, (0, 0), denoised_mask)
         ops.save_optimized(final_mask, masked_out_path)
 
