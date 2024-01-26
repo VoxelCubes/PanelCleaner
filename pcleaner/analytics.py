@@ -10,6 +10,7 @@ from attrs import frozen
 from natsort import natsorted
 
 import pcleaner.helpers as hp
+from pcleaner.helpers import tr
 import pcleaner.structures as st
 
 
@@ -59,10 +60,10 @@ def show_ocr_analytics(
     num_small_boxes = sum(len(a.box_sizes_ocr) for a in analytics)
     small_box_sizes = list(itertools.chain.from_iterable(a.box_sizes_ocr for a in analytics))
     removed_box_sizes = list(itertools.chain.from_iterable(a.box_sizes_removed for a in analytics))
-    small_box_ratio = f"{num_small_boxes / num_boxes:.0%}" if num_boxes > 0 else "N/A"
-    removed_box_ratio = f"{len(removed_box_sizes) / num_boxes:.0%}" if num_boxes > 0 else "N/A"
+    small_box_ratio = f"{num_small_boxes / num_boxes:.0%}" if num_boxes > 0 else tr("N/A")
+    removed_box_ratio = f"{len(removed_box_sizes) / num_boxes:.0%}" if num_boxes > 0 else tr("N/A")
     removed_among_small_ratio = (
-        f"{len(removed_box_sizes) / num_small_boxes:.0%}" if num_small_boxes > 0 else "N/A"
+        f"{len(removed_box_sizes) / num_small_boxes:.0%}" if num_small_boxes > 0 else tr("N/A")
     )
     # Partition the small box sizes into 5 rough size ranges, equally spaced.
     part_size = 500 if max_ocr_size < 500 * 10 else max_ocr_size // 10
@@ -72,17 +73,30 @@ def show_ocr_analytics(
     partitioned_removed_boxes = partition_list(
         removed_box_sizes, partition_size=part_size, max_value=max_ocr_size
     )
-    buffer.write("\nOCR Analytics\n")
-    buffer.write("━━━━━━━━━━━━━\n")
+    title = tr("OCR Analytics")
+    buffer.write(f"\n{title}\n")
+    buffer.write(f"{'━' * len(title)}\n")
     buffer.write(
-        f"Number of boxes: {num_boxes} | "
-        f"Number of small boxes: {num_small_boxes} ({small_box_ratio})\n"
+        tr(
+            "Number of boxes: {num_boxes} | "
+            "Number of small boxes: {num_small_boxes} ({small_box_ratio})\n"
+        ).format(
+            num_boxes=num_boxes,
+            num_small_boxes=num_small_boxes,
+            small_box_ratio=small_box_ratio,
+        )
     )
     buffer.write(
-        f"Number of removed boxes: {len(removed_box_sizes)} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)\n"
+        tr(
+            "Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)\n"
+        ).format(
+            num_removed=len(removed_box_sizes),
+            removed_box_ratio=removed_box_ratio,
+            removed_among_small_ratio=removed_among_small_ratio,
+        )
     )
     if small_box_sizes:
-        buffer.write("\nSmall box sizes:\n")
+        buffer.write(tr("\nSmall box sizes:\n"))
         buffer.write(
             draw_pretty_ocr_result_chart(
                 partitioned_small_box_sizes, partitioned_removed_boxes, max_columns
@@ -90,7 +104,7 @@ def show_ocr_analytics(
             + "\n"
         )
     else:
-        buffer.write("No not-removed small boxes found.\n")
+        buffer.write(tr("No not-removed small boxes found.\n"))
 
     # Show removed texts.
     removed_path_texts: list[tuple[Path, str, st.Box]] = list(
@@ -106,9 +120,9 @@ def show_ocr_analytics(
         removed_path_texts = natsorted(removed_path_texts, key=lambda p: p[0])
 
     if removed_path_texts:
-        buffer.write("\nRemoved bubbles:\n")
+        buffer.write(tr("\nRemoved bubbles:\n"))
         for path, text in removed_path_texts:
-            buffer.write(f"Page {path}: {text}\n")
+            buffer.write(tr("Page {path}: {text}\n").format(path=path, text=text))
 
     buffer.write("\n")
 
@@ -149,7 +163,13 @@ def draw_pretty_ocr_result_chart(
         )
 
     # Show legend.
-    buffer.write(f"\n█ Small boxes | {clr.Fore.RED}█ Removed boxes{clr.Style.RESET_ALL}")
+    buffer.write(
+        f"\n█ "
+        + tr("Small boxes")
+        + f" | {clr.Fore.RED}█ "
+        + tr("Removed boxes")
+        + f"{clr.Style.RESET_ALL}"
+    )
 
     return buffer.getvalue()
 
@@ -193,7 +213,9 @@ def draw_masker_histogram(data: dict[str, tuple[int, int]], max_columns: int = 1
         )
 
     # Show legend.
-    buffer.write(f"\n{clr.Fore.CYAN}█ Perfect{clr.Style.RESET_ALL} | █ Total\n")
+    buffer.write(
+        f"\n{clr.Fore.CYAN}█ " + tr("Perfect") + f"{clr.Style.RESET_ALL} | █ " + tr("Total\n")
+    )
     return buffer.getvalue()
 
 
@@ -250,10 +272,10 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: 
     average_border_deviation = (
         f"{sum(analytic.mask_std_deviation for analytic in analytics if analytic.fit_was_found) / masks_succeeded:.2f}"
         if masks_succeeded
-        else "N/A"
+        else tr("N/A")
     )
-    success_rate = f"{masks_succeeded / total_boxes:.0%}" if total_boxes else "N/A"
-    perfect_mask_rate = f"{perfect_masks / masks_succeeded:.0%}" if masks_succeeded else "N/A"
+    success_rate = f"{masks_succeeded / total_boxes:.0%}" if total_boxes else tr("N/A")
+    perfect_mask_rate = f"{perfect_masks / masks_succeeded:.0%}" if masks_succeeded else tr("N/A")
     masks_failed = total_boxes - masks_succeeded
 
     highest_mask_index = max(
@@ -270,20 +292,26 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: 
                 perfect_mask_usages_by_index[analytic.mask_index] += 1
 
     # Write the analytics.
-    buffer.write("\nMask Fitment Analytics\n")
-    buffer.write("━━━━━━━━━━━━━━━━━━━━━━\n")
+    title = tr("Mask Fitment Analytics")
+    buffer.write(f"\n{title}\n")
+    buffer.write(f"{'━' * len(title)}\n")
     buffer.write(
-        f"Total boxes: {total_boxes} | "
-        f"Masks succeeded: {masks_succeeded} ({success_rate}) | "
-        f"Masks failed: {clr.Fore.RED}{masks_failed}{clr.Fore.RESET}\n"
+        tr("Total boxes")
+        + f": {total_boxes} | "
+        + tr("Masks succeeded")
+        + f": {masks_succeeded} ({success_rate}) | "
+        + tr("Masks failed")
+        + f": {clr.Fore.RED}{masks_failed}{clr.Fore.RESET}\n"
     )
     buffer.write(
-        f"Perfect masks: {clr.Fore.CYAN}{perfect_masks}{clr.Fore.RESET} ({perfect_mask_rate}) | "
-        f"Average border deviation: {average_border_deviation}\n"
+        tr("Perfect masks")
+        + f": {clr.Fore.CYAN}{perfect_masks}{clr.Fore.RESET} ({perfect_mask_rate}) | "
+        + tr("Average border deviation")
+        + f": {average_border_deviation}\n"
     )
-    buffer.write("\nMask usage by mask size (smallest to largest):\n")
+    buffer.write(tr("\nMask usage by mask size (smallest to largest):\n"))
     mask_usages_dict = {
-        f"Mask {index}": perfect_total
+        tr("Mask") + f" {index}": perfect_total
         for index, perfect_total in enumerate(
             zip(perfect_mask_usages_by_index, mask_usages_by_index)
         )
@@ -302,7 +330,7 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: 
         ] += 1
 
     if not pages_with_success_and_fails_dict:
-        buffer.write("All bubbles were successfully masked.\n")
+        buffer.write(tr("All bubbles were successfully masked.\n"))
         return buffer.getvalue()
 
     pages_with_success_and_fails: list[tuple[Path, int, int]] = [
@@ -317,7 +345,7 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: 
         pages_with_success_and_fails = list(zip(page_paths, succeeded_counts, failed_counts))
         pages_with_success_and_fails = natsorted(pages_with_success_and_fails, key=lambda x: x[0])
 
-    buffer.write("\nPages with failures / total:\n")
+    buffer.write(tr("\nPages with failures / total:\n"))
     for page_path, succeeded, failed in pages_with_success_and_fails:
         buffer.write(f"{page_path}: {clr.Fore.RED}{failed}{clr.Fore.RESET} / {succeeded+failed}\n")
 
@@ -343,8 +371,9 @@ def show_denoise_analytics(
     """
     buffer = StringIO()
 
-    buffer.write("\nDenoising Analytics\n")
-    buffer.write("━━━━━━━━━━━━━━━━━━━\n")
+    title = tr("Denoising Analytics")
+    buffer.write(f"\n{title}\n")
+    buffer.write(f"{'━' * len(title)}\n")
 
     # Get the standard deviations into one single list.
     std_deviations: list[float] = [
@@ -362,17 +391,21 @@ def show_denoise_analytics(
 
     total_masks = len(std_deviations)
     above_threshold_count = len(above_threshold)
-    above_ratio = f"{above_threshold_count / total_masks:.0%}" if total_masks else "N/A"
+    above_ratio = f"{above_threshold_count / total_masks:.0%}" if total_masks else tr("N/A")
 
     buffer.write(
-        f"Total masks: {total_masks} | Masks denoised: {clr.Fore.MAGENTA}{above_threshold_count}{clr.Fore.RESET} "
-        f"({above_ratio})\n"
+        tr("Total masks")
+        + f": {total_masks} | "
+        + tr("Masks denoised")
+        + f": {clr.Fore.MAGENTA}{above_threshold_count}{clr.Fore.RESET} ({above_ratio})\n"
     )
     buffer.write(
-        f"Minimum deviation to denoise: {configured_deviation_threshold} | "
-        f"Maximum allowed deviation: {max_deviation_threshold}\n"
+        tr("Minimum deviation to denoise")
+        + f": {configured_deviation_threshold} | "
+        + tr("Maximum allowed deviation")
+        + f": {max_deviation_threshold}\n"
     )
-    buffer.write(f"Standard deviation around masks:\n\n")
+    buffer.write(tr("Standard deviation around masks:\n\n"))
 
     # Show the lists in a graph.
     buffer.write(
@@ -461,5 +494,7 @@ def draw_denoise_histogram(
         )
 
     # Draw the legend.
-    buffer.write(f"\n{clr.Fore.MAGENTA}█ Denoised{clr.Fore.RESET} | █ Total\n")
+    buffer.write(
+        f"\n{clr.Fore.MAGENTA}█ " + tr("Denoised") + f"{clr.Fore.RESET} | █ " + tr("Total\n")
+    )
     return buffer.getvalue()

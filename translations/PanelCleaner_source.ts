@@ -89,6 +89,174 @@ Failed to save the file to {save_path}</source>
 The file content is different from expected.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="64"/>
+        <location filename="../pcleaner/analytics.py" line="65"/>
+        <location filename="../pcleaner/analytics.py" line="67"/>
+        <location filename="../pcleaner/analytics.py" line="276"/>
+        <location filename="../pcleaner/analytics.py" line="278"/>
+        <location filename="../pcleaner/analytics.py" line="279"/>
+        <location filename="../pcleaner/analytics.py" line="396"/>
+        <source>N/A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="77"/>
+        <source>OCR Analytics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="83"/>
+        <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="92"/>
+        <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="99"/>
+        <source>
+Small box sizes:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="107"/>
+        <source>No not-removed small boxes found.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="123"/>
+        <source>
+Removed bubbles:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="125"/>
+        <source>Page {path}: {text}
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="169"/>
+        <source>Small boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="171"/>
+        <source>Removed boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="217"/>
+        <source>Perfect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="218"/>
+        <location filename="../pcleaner/analytics.py" line="499"/>
+        <source>Total
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="296"/>
+        <source>Mask Fitment Analytics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="300"/>
+        <source>Total boxes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="302"/>
+        <source>Masks succeeded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="304"/>
+        <source>Masks failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="308"/>
+        <source>Perfect masks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="310"/>
+        <source>Average border deviation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="312"/>
+        <source>
+Mask usage by mask size (smallest to largest):
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="314"/>
+        <source>Mask</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="333"/>
+        <source>All bubbles were successfully masked.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="348"/>
+        <source>
+Pages with failures / total:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="375"/>
+        <source>Denoising Analytics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="398"/>
+        <source>Total masks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="400"/>
+        <source>Masks denoised</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="404"/>
+        <source>Minimum deviation to denoise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="406"/>
+        <source>Maximum allowed deviation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="408"/>
+        <source>Standard deviation around masks:
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/analytics.py" line="498"/>
+        <source>Denoised</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>About</name>
