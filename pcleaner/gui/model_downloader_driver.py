@@ -370,6 +370,7 @@ def parse_ocr_progress(line: str) -> ProgressData | str | None:
     Parse a line of the download progress. The huggingface transformer library ostensibly uses
     tqdm to show the download progress.
     Example: '\rDownloading pytorch_model.bin:  12%|#1        | 31.5M/444M [00:04<00:59, 6.95MB/s]'
+    Example: 'pytorch_model.bin:  19%|#8        | 83.9M/444M [00:02<00:12, 29.0MB/s]'
 
     Note: The specific application I'm tracking, Huggingface's transformer library, uses decimal size prefixes for data.
 
@@ -390,38 +391,65 @@ def parse_ocr_progress(line: str) -> ProgressData | str | None:
         "pytorch_model.bin",
     ]
 
-    # Using regex to capture relevant data
-    regex_pattern = r".*?Downloading (?P<path>.*?): *(?P<percentage>\d+)%\|.*?\| (?P<downloaded>[\d.]+[kMGT]?B?)/(?P<total>[\d.]+[kMGT]?B?)(?: \[.*?<(?P<eta>.*), (?P<speed>[\d.]+[kMGT]?B/s)\])?"
+    # Fallback values.
+    percentage: int = 0
+    downloaded: int = 0
+    total: int = 0
+    speed: float = 0
+    eta: int = 0
+    filename: str = "?"
 
-    match = re.search(regex_pattern, line)
-    if not match:
-        return "Could not parse progress data: " + line
+    # Using regex to capture relevant data.
+    regex_pattern = r".*?(Downloading )?(?P<path>.*?): *(?P<percentage>\d+)%\|.*?\| (?P<downloaded>[\d.]+[kMGT]?B?)/(?P<total>[\d.]+[kMGT]?B?)(?: \[.*?<(?P<eta>.*), (?P<speed>[\d.]+[kMGT]?B/s)\])?"
 
-    # Figure out the file name. If it was not elided, use the file name from the line.
-    # Otherwise, check if there is a directory delimiter in the path and use the last part of the path as the file name.
-    # If all else fails, try and match it to a known file name.
-    filename = match.group("path")
-    if filename.startswith("(…)"):
-        filename = filename[3:]
-        if "/" in filename:
-            filename = filename.split("/")[-1]
+    if match := re.search(regex_pattern, line, flags=re.IGNORECASE):
+        # Figure out the file name. If it was not elided, use the file name from the line.
+        # Otherwise, check if there is a directory delimiter in the path and use the last part
+        # of the path as the file name.
+        # If all else fails, try and match it to a known file name.
+        filename = match.group("path")
+        if filename.startswith("(…)"):
+            filename = filename[3:]
+            if "/" in filename:
+                filename = filename.split("/")[-1]
+            else:
+                for known_filename in known_filenames:
+                    if known_filename in filename:
+                        filename = known_filename
+                        break
+
         else:
-            for known_filename in known_filenames:
-                if known_filename in filename:
-                    filename = known_filename
-                    break
+            filename = filename.split("/")[-1]
+
+        percentage = int(match.group("percentage"))
+
+        downloaded = parse_size(match.group("downloaded"))
+        total = parse_size(match.group("total"))
+
+        speed = parse_size(match.group("speed")) if match.group("speed") else 0
+
+        eta = parse_simple_time(match.group("eta")) if match.group("eta") else -1
 
     else:
-        filename = filename.split("/")[-1]
+        # If all that failed, attempt to salvage some information at the very least.
+        logger.error(f'Could not parse ocr download progress data: "{line}"')
 
-    percentage = int(match.group("percentage"))
+        regex_pattern_backup_percentage = r".*? *(?P<percentage>\d+)%"
+        regex_pattern_backup_data = r" (?P<downloaded>[\d.]+[kMGT]?B?)/(?P<total>[\d.]+[kMGT]?B?)"
 
-    downloaded = parse_size(match.group("downloaded"))
-    total = parse_size(match.group("total"))
+        match_percentage = re.search(regex_pattern_backup_percentage, line, flags=re.IGNORECASE)
+        match_data = re.search(regex_pattern_backup_data, line, flags=re.IGNORECASE)
 
-    speed = parse_size(match.group("speed")) if match.group("speed") else 0
+        if match_percentage:
+            percentage = int(match_percentage.group("percentage"))
 
-    eta = parse_simple_time(match.group("eta")) if match.group("eta") else -1
+        if match_data:
+            downloaded = parse_size(match_data.group("downloaded"))
+            total = parse_size(match_data.group("total"))
+
+        if not match_percentage or not match_data:
+            # It's FUBAR.
+            return "Could not parse ocr download progress data at all: " + line
 
     return ProgressData(percentage, downloaded, total, speed, eta, filename)
 
