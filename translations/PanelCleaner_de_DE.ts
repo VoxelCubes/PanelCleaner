@@ -46,13 +46,13 @@
       <location filename="../pcleaner/gui/image_file.py" line="510"/>
       <source>RGB</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">RGB</translation>
+      <translation>RGB</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="512"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">CMYK</translation>
+      <translation>CMYK</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="514"/>
@@ -70,26 +70,26 @@
       <location filename="../pcleaner/gui/image_file.py" line="518"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Palette</translation>
+      <translation>Palette</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="299"/>
       <source>Error downloading file from url: {url}</source>
-      <translation type="unfinished">Error downloading file from url: {url}</translation>
+      <translation>Fehler beim Herunterladen einer Datei von: {url}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="353"/>
       <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-Failed to save the file to {save_path}</translation>
+      <translation>Fehler beim Herunterladen der Datei von: {url}
+Die Datei konnte nicht in {save_path} gespeichert werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="362"/>
       <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-The file content is different from expected.</translation>
+      <translation>Fehler beim Herunterladen einer Datei von: {url}
+Der Inhalt der Datei ist anders als erwartet.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="64"/>
@@ -100,25 +100,25 @@ The file content is different from expected.</translation>
       <location filename="../pcleaner/analytics.py" line="279"/>
       <location filename="../pcleaner/analytics.py" line="396"/>
       <source>N/A</source>
-      <translation type="unfinished">N/A</translation>
+      <translation>K.A.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="77"/>
       <source>OCR Analytics</source>
-      <translation type="unfinished">OCR Analytics</translation>
+      <translation>OCR Statistik</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="83"/>
       <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
-      <translation type="unfinished">Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
+      <translation>Felderanzahl: {num_boxes} | Anzahl kleinen Felder: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="92"/>
       <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
-      <translation type="unfinished">Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
+      <translation>Anzahl entfernter Felder: {num_removed} ({removed_box_ratio} insgesamt, {removed_among_small_ratio} kleiner Felder)
 </translation>
     </message>
     <message>
@@ -126,15 +126,15 @@ The file content is different from expected.</translation>
       <source>
 Small box sizes:
 </source>
-      <translation type="unfinished">
-Small box sizes:
+      <translation>
+Größe kleiner Felder:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="107"/>
       <source>No not-removed small boxes found.
 </source>
-      <translation type="unfinished">No not-removed small boxes found.
+      <translation>Alle kleinen Felder wurden entfernt.
 </translation>
     </message>
     <message>
@@ -142,77 +142,77 @@ Small box sizes:
       <source>
 Removed bubbles:
 </source>
-      <translation type="unfinished">
-Removed bubbles:
+      <translation>
+Entfernte Blasen:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="125"/>
       <source>Page {path}: {text}
 </source>
-      <translation type="unfinished">Page {path}: {text}
+      <translation>Seite {path}: {text}
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="169"/>
       <source>Small boxes</source>
-      <translation type="unfinished">Small boxes</translation>
+      <translation>Kleine Felder</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="171"/>
       <source>Removed boxes</source>
-      <translation type="unfinished">Removed boxes</translation>
+      <translation>Entfernte Felder</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="217"/>
       <source>Perfect</source>
-      <translation type="unfinished">Perfect</translation>
+      <translation>Perfekt</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="218"/>
       <location filename="../pcleaner/analytics.py" line="499"/>
       <source>Total
 </source>
-      <translation type="unfinished">Total
+      <translation>Insgesamt
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="296"/>
       <source>Mask Fitment Analytics</source>
-      <translation type="unfinished">Mask Fitment Analytics</translation>
+      <translation>Maskenanpassungsstatistik</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="300"/>
       <source>Total boxes</source>
-      <translation type="unfinished">Total boxes</translation>
+      <translation>Felder insgesamt</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="302"/>
       <source>Masks succeeded</source>
-      <translation type="unfinished">Masks succeeded</translation>
+      <translation>Masken erfolgreich</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="304"/>
       <source>Masks failed</source>
-      <translation type="unfinished">Masks failed</translation>
+      <translation>Masken gescheitert</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="308"/>
       <source>Perfect masks</source>
-      <translation type="unfinished">Perfect masks</translation>
+      <translation>Perfekte Masken</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="310"/>
       <source>Average border deviation</source>
-      <translation type="unfinished">Average border deviation</translation>
+      <translation>Durchschn. Grenzabweichung</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="312"/>
       <source>
 Mask usage by mask size (smallest to largest):
 </source>
-      <translation type="unfinished">
-Mask usage by mask size (smallest to largest):
+      <translation>
+Maskenverwendung nach Maskengröße (kleinste bis größte):
 </translation>
     </message>
     <message>
@@ -224,7 +224,7 @@ Mask usage by mask size (smallest to largest):
       <location filename="../pcleaner/analytics.py" line="333"/>
       <source>All bubbles were successfully masked.
 </source>
-      <translation type="unfinished">All bubbles were successfully masked.
+      <translation>Alle Blasen wurden erfolgreich maskiert.
 </translation>
     </message>
     <message>
@@ -232,48 +232,48 @@ Mask usage by mask size (smallest to largest):
       <source>
 Pages with failures / total:
 </source>
-      <translation type="unfinished">
-Pages with failures / total:
+      <translation>
+Seiten mit Fehlern / insgesamt:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="375"/>
       <source>Denoising Analytics</source>
-      <translation type="unfinished">Denoising Analytics</translation>
+      <translation>Entrauschungsstatistik</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="398"/>
       <source>Total masks</source>
-      <translation type="unfinished">Total masks</translation>
+      <translation>Masken insgesamt</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="400"/>
       <source>Masks denoised</source>
-      <translation type="unfinished">Masks denoised</translation>
+      <translation>Masken entrauscht</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="404"/>
       <source>Minimum deviation to denoise</source>
-      <translation type="unfinished">Minimum deviation to denoise</translation>
+      <translation>Minimale Abweichung zum Entrauschen</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="406"/>
       <source>Maximum allowed deviation</source>
-      <translation type="unfinished">Maximum allowed deviation</translation>
+      <translation>Maximal zulässige Abweichung</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="408"/>
       <source>Standard deviation around masks:
 
 </source>
-      <translation type="unfinished">Standard deviation around masks:
+      <translation>Standardabweichung um Masken:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="498"/>
       <source>Denoised</source>
-      <translation type="unfinished">Denoised</translation>
+      <translation>Entrauscht</translation>
     </message>
   </context>
   <context>
@@ -295,7 +295,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="101"/>
       <source>Version:</source>
-      <translation type="unfinished">Version:</translation>
+      <translation>Version:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="115"/>
@@ -305,7 +305,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="153"/>
       <source>Toolkit:</source>
-      <translation type="unfinished">Toolkit:</translation>
+      <translation>Toolkit:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="167"/>
@@ -331,47 +331,47 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="174"/>
       <source>Duplicate file</source>
-      <translation type="unfinished">Duplicate file</translation>
+      <translation>Duplizierte Datei</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="175"/>
       <source>File &quot;{path}&quot; is already in the table.</source>
-      <translation type="unfinished">File &quot;{path}&quot; is already in the table.</translation>
+      <translation>Die Datei &quot;{path}&quot; ist bereits in der Tabelle enthalten.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="335"/>
       <source>Image not loaded</source>
-      <translation type="unfinished">Image not loaded</translation>
+      <translation>Bild nicht geladen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="336"/>
       <source>Please wait until the image has loaded.</source>
-      <translation type="unfinished">Please wait until the image has loaded.</translation>
+      <translation>Bitte warten Sie, bis das Bild geladen ist.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="496"/>
       <source>Failed to load image</source>
-      <translation type="unfinished">Failed to load image</translation>
+      <translation>Bild Ladefehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="497"/>
       <source>Failed to load image {file_path}.</source>
-      <translation type="unfinished">Failed to load image {file_path}.</translation>
+      <translation>Das Bild {file_path} konnte nicht geladen werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="507"/>
       <source>Failed to dispatch image</source>
-      <translation type="unfinished">Failed to dispatch image</translation>
+      <translation>Bildverarbeitungsfehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="508"/>
       <source>Failed to dispatch image.</source>
-      <translation type="unfinished">Failed to dispatch image.</translation>
+      <translation>Das Bild konnte nicht verarbeitet werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="517"/>
       <source>Select files</source>
-      <translation type="unfinished">Select files</translation>
+      <translation>Dateien Auswählen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="518"/>
@@ -381,7 +381,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="537"/>
       <source>Select directory</source>
-      <translation type="unfinished">Select directory</translation>
+      <translation>Verzeichnis Auswählen</translation>
     </message>
   </context>
   <context>
@@ -419,7 +419,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="338"/>
       <source>Position:</source>
-      <translation type="unfinished">Position:</translation>
+      <translation>Position:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="359"/>
@@ -532,43 +532,43 @@ Reinige Mangas durch KI.</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="514"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="519"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Fehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="514"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="520"/>
       <source>Encountered error: {error}</source>
-      <translation type="unfinished">Encountered error: {error}</translation>
+      <translation>Ein Fehler ist aufgetreten: {error}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="570"/>
       <source>Delete Models</source>
-      <translation type="unfinished">Delete Models</translation>
+      <translation>Modelle Löschen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="574"/>
       <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
-      <translation type="unfinished">Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</translation>
+      <translation>Sind Sie sicher, dass Sie die Modelle für maschinelles Lernen löschen wollen? Dadurch werden Reinigung und OCR unmöglich, bis sie erneut heruntergeladen werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="586"/>
       <source>Failed to Delete Models</source>
-      <translation type="unfinished">Failed to Delete Models</translation>
+      <translation>Löschfehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="587"/>
       <source>Failed to delete models.</source>
-      <translation type="unfinished">Failed to delete models.</translation>
+      <translation>Modelldaten konnten nicht gelöscht werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="594"/>
       <source>Models Deleted</source>
-      <translation type="unfinished">Models Deleted</translation>
+      <translation>Modelldaten Gelöscht</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="595"/>
       <source>The models were deleted. Would you like to download them again?</source>
-      <translation type="unfinished">The models were deleted. Would you like to download them again?</translation>
+      <translation>Die Modelldaten wurden gelöscht. Möchten Sie sie erneut herunterladen?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="654"/>
@@ -772,7 +772,7 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="14"/>
       <source>Panel Cleaner</source>
-      <translation type="unfinished">Panel Cleaner</translation>
+      <translation>Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="40"/>
@@ -858,7 +858,7 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="369"/>
       <source>OCR</source>
-      <translation type="unfinished">OCR</translation>
+      <translation>OCR</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="404"/>
@@ -952,7 +952,7 @@ Trotzdem fortfahren?</translation>
       <location filename="../ui_files/Mainwindow.ui" line="860"/>
       <location filename="../ui_files/Mainwindow.ui" line="893"/>
       <source>%v / %m</source>
-      <translation type="unfinished">%v / %m</translation>
+      <translation>%v / %m</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="883"/>
@@ -1034,7 +1034,7 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1072"/>
       <source>System</source>
-      <translation type="unfinished">System</translation>
+      <translation>System</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1080"/>
@@ -1088,18 +1088,18 @@ Trotzdem fortfahren?</translation>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="183"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="245"/>
       <source>Download Failed</source>
-      <translation type="unfinished">Download Failed</translation>
+      <translation>Download Gescheitert</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="231"/>
       <source>OCR download errors</source>
-      <translation type="unfinished">OCR download errors</translation>
+      <translation>OCR-Download-Fehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="272"/>
       <source>ETA</source>
       <comment>estimated time of completion</comment>
-      <translation type="unfinished">ETA</translation>
+      <translation>Restzeit</translation>
     </message>
   </context>
   <context>
