@@ -46,13 +46,13 @@
       <location filename="../pcleaner/gui/image_file.py" line="510"/>
       <source>RGB</source>
       <comment>Color mode</comment>
-      <translation>RGB</translation>
+      <translation type="unfinished">RGB</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="512"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
-      <translation>CMYK</translation>
+      <translation type="unfinished">CMYK</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="514"/>
@@ -70,7 +70,7 @@
       <location filename="../pcleaner/gui/image_file.py" line="518"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation>Palette</translation>
+      <translation type="unfinished">Palette</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="299"/>
@@ -295,7 +295,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="101"/>
       <source>Version:</source>
-      <translation>Version:</translation>
+      <translation type="unfinished">Version:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="115"/>
@@ -305,7 +305,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="153"/>
       <source>Toolkit:</source>
-      <translation>Toolkit:</translation>
+      <translation type="unfinished">Toolkit:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="167"/>
@@ -419,7 +419,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="338"/>
       <source>Position:</source>
-      <translation>Position:</translation>
+      <translation type="unfinished">Position:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="359"/>
@@ -772,7 +772,7 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="14"/>
       <source>Panel Cleaner</source>
-      <translation>Panel Cleaner</translation>
+      <translation type="unfinished">Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="40"/>
@@ -858,7 +858,7 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="369"/>
       <source>OCR</source>
-      <translation>OCR</translation>
+      <translation type="unfinished">OCR</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="404"/>
@@ -952,7 +952,7 @@ Trotzdem fortfahren?</translation>
       <location filename="../ui_files/Mainwindow.ui" line="860"/>
       <location filename="../ui_files/Mainwindow.ui" line="893"/>
       <source>%v / %m</source>
-      <translation>%v / %m</translation>
+      <translation type="unfinished">%v / %m</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="883"/>
@@ -1034,7 +1034,7 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1072"/>
       <source>System</source>
-      <translation>System</translation>
+      <translation type="unfinished">System</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1080"/>
