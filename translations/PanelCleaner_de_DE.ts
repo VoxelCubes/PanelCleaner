@@ -35,42 +35,245 @@
       <translation>Der Profilname ist reserviert.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="493"/>
-      <location filename="../pcleaner/gui/image_file.py" line="499"/>
-      <location filename="../pcleaner/gui/image_file.py" line="505"/>
-      <location filename="../pcleaner/gui/image_file.py" line="518"/>
+      <location filename="../pcleaner/gui/image_file.py" line="496"/>
+      <location filename="../pcleaner/gui/image_file.py" line="502"/>
+      <location filename="../pcleaner/gui/image_file.py" line="508"/>
+      <location filename="../pcleaner/gui/image_file.py" line="521"/>
       <source>Unknown</source>
       <translation>Unbekannt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="507"/>
+      <location filename="../pcleaner/gui/image_file.py" line="510"/>
       <source>RGB</source>
       <comment>Color mode</comment>
       <translation>RGB</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="509"/>
+      <location filename="../pcleaner/gui/image_file.py" line="512"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
       <translation>CMYK</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="511"/>
+      <location filename="../pcleaner/gui/image_file.py" line="514"/>
       <source>Grayscale</source>
       <comment>Color mode</comment>
       <translation>Graustufen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="513"/>
+      <location filename="../pcleaner/gui/image_file.py" line="516"/>
       <source>1-bit</source>
       <comment>Color mode</comment>
       <translation>1-Bit</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="515"/>
+      <location filename="../pcleaner/gui/image_file.py" line="518"/>
       <source>Palette</source>
       <comment>Color mode</comment>
       <translation>Palette</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="299"/>
+      <source>Error downloading file from url: {url}</source>
+      <translation type="unfinished">Error downloading file from url: {url}</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="353"/>
+      <source>Error downloading file from url: {url}
+Failed to save the file to {save_path}</source>
+      <translation type="unfinished">Error downloading file from url: {url}
+Failed to save the file to {save_path}</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="362"/>
+      <source>Error downloading file from url: {url}
+The file content is different from expected.</source>
+      <translation type="unfinished">Error downloading file from url: {url}
+The file content is different from expected.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="64"/>
+      <location filename="../pcleaner/analytics.py" line="65"/>
+      <location filename="../pcleaner/analytics.py" line="67"/>
+      <location filename="../pcleaner/analytics.py" line="276"/>
+      <location filename="../pcleaner/analytics.py" line="278"/>
+      <location filename="../pcleaner/analytics.py" line="279"/>
+      <location filename="../pcleaner/analytics.py" line="396"/>
+      <source>N/A</source>
+      <translation type="unfinished">N/A</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="77"/>
+      <source>OCR Analytics</source>
+      <translation type="unfinished">OCR Analytics</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="83"/>
+      <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
+</source>
+      <translation type="unfinished">Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="92"/>
+      <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
+</source>
+      <translation type="unfinished">Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="99"/>
+      <source>
+Small box sizes:
+</source>
+      <translation type="unfinished">
+Small box sizes:
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="107"/>
+      <source>No not-removed small boxes found.
+</source>
+      <translation type="unfinished">No not-removed small boxes found.
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="123"/>
+      <source>
+Removed bubbles:
+</source>
+      <translation type="unfinished">
+Removed bubbles:
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="125"/>
+      <source>Page {path}: {text}
+</source>
+      <translation type="unfinished">Page {path}: {text}
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="169"/>
+      <source>Small boxes</source>
+      <translation type="unfinished">Small boxes</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="171"/>
+      <source>Removed boxes</source>
+      <translation type="unfinished">Removed boxes</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="217"/>
+      <source>Perfect</source>
+      <translation type="unfinished">Perfect</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="218"/>
+      <location filename="../pcleaner/analytics.py" line="499"/>
+      <source>Total
+</source>
+      <translation type="unfinished">Total
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="296"/>
+      <source>Mask Fitment Analytics</source>
+      <translation type="unfinished">Mask Fitment Analytics</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="300"/>
+      <source>Total boxes</source>
+      <translation type="unfinished">Total boxes</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="302"/>
+      <source>Masks succeeded</source>
+      <translation type="unfinished">Masks succeeded</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="304"/>
+      <source>Masks failed</source>
+      <translation type="unfinished">Masks failed</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="308"/>
+      <source>Perfect masks</source>
+      <translation type="unfinished">Perfect masks</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="310"/>
+      <source>Average border deviation</source>
+      <translation type="unfinished">Average border deviation</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="312"/>
+      <source>
+Mask usage by mask size (smallest to largest):
+</source>
+      <translation type="unfinished">
+Mask usage by mask size (smallest to largest):
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="314"/>
+      <source>Mask</source>
+      <translation>Maske</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="333"/>
+      <source>All bubbles were successfully masked.
+</source>
+      <translation type="unfinished">All bubbles were successfully masked.
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="348"/>
+      <source>
+Pages with failures / total:
+</source>
+      <translation type="unfinished">
+Pages with failures / total:
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="375"/>
+      <source>Denoising Analytics</source>
+      <translation type="unfinished">Denoising Analytics</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="398"/>
+      <source>Total masks</source>
+      <translation type="unfinished">Total masks</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="400"/>
+      <source>Masks denoised</source>
+      <translation type="unfinished">Masks denoised</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="404"/>
+      <source>Minimum deviation to denoise</source>
+      <translation type="unfinished">Minimum deviation to denoise</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="406"/>
+      <source>Maximum allowed deviation</source>
+      <translation type="unfinished">Maximum allowed deviation</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="408"/>
+      <source>Standard deviation around masks:
+
+</source>
+      <translation type="unfinished">Standard deviation around masks:
+
+</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="498"/>
+      <source>Denoised</source>
+      <translation type="unfinished">Denoised</translation>
     </message>
   </context>
   <context>
@@ -118,9 +321,67 @@ Reinige Mangas durch KI.</translation>
   <context>
     <name>ColorButton</name>
     <message>
-      <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="40"/>
+      <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="38"/>
       <source>Select Color</source>
       <translation>Farbe Auswählen</translation>
+    </message>
+  </context>
+  <context>
+    <name>FileTable</name>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="174"/>
+      <source>Duplicate file</source>
+      <translation type="unfinished">Duplicate file</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="175"/>
+      <source>File &quot;{path}&quot; is already in the table.</source>
+      <translation type="unfinished">File &quot;{path}&quot; is already in the table.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="335"/>
+      <source>Image not loaded</source>
+      <translation type="unfinished">Image not loaded</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="336"/>
+      <source>Please wait until the image has loaded.</source>
+      <translation type="unfinished">Please wait until the image has loaded.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="496"/>
+      <source>Failed to load image</source>
+      <translation type="unfinished">Failed to load image</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="497"/>
+      <source>Failed to load image {file_path}.</source>
+      <translation type="unfinished">Failed to load image {file_path}.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="507"/>
+      <source>Failed to dispatch image</source>
+      <translation type="unfinished">Failed to dispatch image</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="508"/>
+      <source>Failed to dispatch image.</source>
+      <translation type="unfinished">Failed to dispatch image.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="517"/>
+      <source>Select files</source>
+      <translation type="unfinished">Select files</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="518"/>
+      <source>Images</source>
+      <translation>Bilder</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/file_table.py" line="537"/>
+      <source>Select directory</source>
+      <translation type="unfinished">Select directory</translation>
     </message>
   </context>
   <context>
@@ -268,201 +529,243 @@ Reinige Mangas durch KI.</translation>
       <translation>OCR-Modell geladen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="641"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="514"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="519"/>
+      <source>Error</source>
+      <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="514"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="520"/>
+      <source>Encountered error: {error}</source>
+      <translation type="unfinished">Encountered error: {error}</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="570"/>
+      <source>Delete Models</source>
+      <translation type="unfinished">Delete Models</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="574"/>
+      <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
+      <translation type="unfinished">Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="586"/>
+      <source>Failed to Delete Models</source>
+      <translation type="unfinished">Failed to Delete Models</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="587"/>
+      <source>Failed to delete models.</source>
+      <translation type="unfinished">Failed to delete models.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="594"/>
+      <source>Models Deleted</source>
+      <translation type="unfinished">Models Deleted</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="595"/>
+      <source>The models were deleted. Would you like to download them again?</source>
+      <translation type="unfinished">The models were deleted. Would you like to download them again?</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="654"/>
       <source>Restart Required</source>
       <translation>Neustart Erforderlich</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="644"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="657"/>
       <source>The language has been changed. Please restart the application for the changes to take effect.</source>
       <translation>Die Sprache wurde geändert. Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="654"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="655"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="667"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="668"/>
       <source>System Language</source>
       <translation>Systemsprache</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="754"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="767"/>
       <source>Import Profile</source>
       <translation>Profil Importieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="756"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="769"/>
       <source>Profile Files (*.conf)</source>
       <translation>Profildateien (*.conf)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="763"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="776"/>
       <source>Profile Imported</source>
       <translation>Profil Importiert</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="765"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="778"/>
       <source>Import Error</source>
       <translation>Fehler beim Importieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="783"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="796"/>
       <source>Failed to Delete</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="784"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="797"/>
       <source>The default profile cannot be deleted.</source>
       <translation>Das Standardprofil kann nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="788"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="801"/>
       <source>Delete Profile</source>
       <translation>Profil Löschen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="789"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="802"/>
       <source>Are you sure you want to delete the profile {profile_name}?</source>
       <translation>Sind Sie sicher, dass Sie das Profil {profile_name} löschen möchten?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="803"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="816"/>
       <source>Delete Error</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="804"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="817"/>
       <source>Failed to delete the profile.</source>
       <translation>Das Profil konnte nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="867"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="880"/>
       <source>The profile &apos;{profile}&apos; has unsaved changes.
 Switching profiles will discard changes to the current profile.</source>
       <translation>Das Profil &apos;{profile}&apos; hat ungespeicherte Änderungen.
 Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworfen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="870"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="883"/>
       <source>Unsaved changes</source>
       <translation>Ungespeicherte Änderungen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1003"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="912"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1016"/>
       <source>Load Error</source>
       <translation>Fehler beim Laden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1003"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="912"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1016"/>
       <source>Failed to load profile:</source>
       <translation>Das Profil konnte nicht geladen werden:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="962"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="975"/>
       <source>Profile Created</source>
       <translation>Profil Erstellt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="965"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="978"/>
       <source>Create Error</source>
       <translation>Fehler beim Erstellen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="974"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="987"/>
       <source>Failed to save profile to {profile_path}</source>
       <translation>Das Profil konnte nicht in {profile_path} gespeichert werden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="975"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="987"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="988"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1000"/>
       <source>Save Error</source>
       <translation>Fehler beim Speichern</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="975"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="988"/>
       <source>Failed to save profile.</source>
       <translation>Das Profil konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="979"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="992"/>
       <source>Profile saved to {profile_path}</source>
       <translation>Profil gespeichert in {profile_path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="984"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="997"/>
       <source>Failed to save config.</source>
       <translation>Konfiguration konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="991"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1004"/>
       <source>Failed to save the new profile to the configuration file.
 Continue anyway?</source>
       <translation>Das neue Profil konnte nicht in der Konfigurationsdatei gespeichert werden.
 Trotzdem fortfahren?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1049"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1062"/>
       <source>No Files</source>
       <translation>Keine Dateien</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1054"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1067"/>
       <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
       <translation>Keine Dateien zu verarbeiten. Sie können Dateien in der Mitte des Fensters ablegen oder über die Menüleiste hinzufügen: Dateien -&gt; Dateien hinzufügen oder Ordner hinzufügen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1094"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1107"/>
       <source>No Outputs</source>
       <translation>Keine Ausgaben</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1097"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1110"/>
       <source>No outputs were requested. Please select at least one output before cleaning.</source>
       <translation>Es wurden keine Ausgaben angefordert. Bitte wählen Sie vor der Reinigung mindestens eine Ausgabe aus.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1108"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1121"/>
       <location filename="../ui_files/Mainwindow.ui" line="625"/>
       <source>cleaned</source>
       <translation>gereinigt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1186"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1199"/>
       <source>File Exists</source>
       <translation>Datei Bereits Vorhanden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1187"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1200"/>
       <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
       <translation>Die Datei &apos;{output_path}&apos; existiert bereits. Wollen Sie diese überschreiben?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1247"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1260"/>
       <source>Processing Finished</source>
       <translation>Verarbeitung Beendet</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1248"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1261"/>
       <source>Finished processing all files.</source>
       <translation>Die Verarbeitung aller Dateien ist abgeschlossen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1252"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1265"/>
       <source>Processing Aborted</source>
       <translation>Abbruch</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1252"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1265"/>
       <source>Processing aborted.</source>
       <translation>Die Verarbeitung wurde abgebrochen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1265"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1278"/>
       <source>Processing Error</source>
       <translation>Verarbeitungsfehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1279"/>
       <source>Encountered an error while processing files.</source>
       <translation>Bei der Verarbeitung von Dateien ist ein Fehler aufgetreten.</translation>
     </message>
@@ -780,6 +1083,23 @@ Trotzdem fortfahren?</translation>
       <location filename="../ui_files/ModelDownloader.ui" line="115"/>
       <source>OCR model:</source>
       <translation>OCR-Modell:</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="183"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="245"/>
+      <source>Download Failed</source>
+      <translation type="unfinished">Download Failed</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="231"/>
+      <source>OCR download errors</source>
+      <translation type="unfinished">OCR download errors</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="272"/>
+      <source>ETA</source>
+      <comment>estimated time of completion</comment>
+      <translation type="unfinished">ETA</translation>
     </message>
   </context>
   <context>
