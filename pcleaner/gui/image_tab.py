@@ -98,3 +98,15 @@ class ImageTab(Qw.QTabWidget):
         self.open_images.clear()
         for i in range(self.count() - 1, 0, -1):
             self.removeTab(i)
+
+    def remove_file(self, path: Path) -> None:
+        """
+        Remove the file from the table, removing the tab if it exists.
+
+        :param path: The path of the file to remove.
+        """
+        if path in self.open_images:
+            logger.info(f"Removing file {path} from the table.")
+            index = self.indexOf(self.open_images[path][1])
+            self.open_images.pop(path)
+            self.removeTab(index)

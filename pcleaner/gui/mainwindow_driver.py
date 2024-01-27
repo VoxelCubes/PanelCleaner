@@ -197,6 +197,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.file_table.table_not_empty.connect(
             lambda: self.stackedWidget_images.setCurrentIndex(1)
         )
+        self.file_table.table_has_selection.connect(lambda: self.can_remove_file(True))
+        self.file_table.table_has_no_selection.connect(lambda: self.can_remove_file(False))
+        self.file_table.remove_file.connect(self.image_tab.remove_file)
+        self.file_table.remove_all_files.connect(self.action_remove_all_files.trigger)
         # Hide the close button for the file table tab.
         self.image_tab.tabBar().setTabButton(0, Qw.QTabBar.RightSide, None)
         # Display a theme icon on the left side of the tab.
@@ -211,12 +215,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.comboBox_current_profile.hookedCurrentIndexChanged.connect(self.change_current_profile)
         self.action_add_files.triggered.connect(self.file_table.browse_add_files)
         self.action_add_folders.triggered.connect(self.file_table.browse_add_folders)
-        self.action_clear_files.triggered.connect(self.file_table.clear_files)
-        self.action_clear_files.triggered.connect(self.image_tab.clear_files)
+        self.action_remove_file.triggered.connect(
+            lambda: self.file_table.remove_selected_file(None)
+        )
+        self.action_remove_all_files.triggered.connect(self.file_table.clear_files)
+        self.action_remove_all_files.triggered.connect(self.image_tab.clear_files)
         self.action_delete_models.triggered.connect(self.delete_models)
         self.action_online_documentation.triggered.connect(self.open_online_documentation)
         self.action_about.triggered.connect(self.open_about)
         self.action_donate.triggered.connect(self.open_donation_page)
+        self.action_help_translation.triggered.connect(self.open_translation_page)
 
         self.file_table.requesting_image_preview.connect(
             partial(
@@ -440,6 +448,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.warning("Aborting processing")
         self.statusbar.showMessage(self.tr("Aborting..."), timeout=5000)
 
+    def can_remove_file(self, can_remove: bool) -> None:
+        """
+        Enable or disable the remove file button.
+
+        :param can_remove: Whether the file can be removed.
+        """
+        self.action_remove_file.setEnabled(can_remove)
+
     def handle_ocr_mode_change(self, csv: bool) -> None:
         """
         Swap out the file suffix for the output file.
@@ -624,6 +640,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.debug("Opening donation page.")
         Qg.QDesktopServices.openUrl(Qc.QUrl("https://ko-fi.com/voxelcode"))
+
+    @staticmethod
+    def open_translation_page() -> None:
+        """
+        Open the translation page in the default browser.
+        """
+        logger.debug("Opening translation page.")
+        Qg.QDesktopServices.openUrl(
+            Qc.QUrl(
+                "https://crowdin.com/project/panel-cleaner/invite?h=5c2a97ea5dd60dc872c64a138e0705f61973200"
+            )
+        )
 
     # ========================================== Languages ==========================================
 

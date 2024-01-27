@@ -20,6 +20,7 @@ Files:
       - download
       - edit-clear-history
       - edit-delete
+      - edit-delete-remove
       - edit-reset
       - help-about
       - help-contents
@@ -32,6 +33,7 @@ Files:
       - process-stop
       - view-form
       - view-refresh
+      - view-list-details
       - zoom-fit-best
       - zoom-in
       - zoom-out

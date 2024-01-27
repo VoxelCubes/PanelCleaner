@@ -44,8 +44,8 @@ class Ui_MainWindow(object):
             icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
         self.action_add_files.setIcon(icon)
-        self.action_clear_files = QAction(MainWindow)
-        self.action_clear_files.setObjectName(u"action_clear_files")
+        self.action_remove_all_files = QAction(MainWindow)
+        self.action_remove_all_files.setObjectName(u"action_remove_all_files")
         icon1 = QIcon()
         iconThemeName = u"edit-clear-history"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -53,7 +53,7 @@ class Ui_MainWindow(object):
         else:
             icon1.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.action_clear_files.setIcon(icon1)
+        self.action_remove_all_files.setIcon(icon1)
         self.action_new_profile = QAction(MainWindow)
         self.action_new_profile.setObjectName(u"action_new_profile")
         icon2 = QIcon()
@@ -169,6 +169,27 @@ class Ui_MainWindow(object):
         self.action_temp_3 = QAction(MainWindow)
         self.action_temp_3.setObjectName(u"action_temp_3")
         self.action_temp_3.setText(u"<temp>")
+        self.action_remove_file = QAction(MainWindow)
+        self.action_remove_file.setObjectName(u"action_remove_file")
+        self.action_remove_file.setEnabled(False)
+        icon12 = QIcon()
+        iconThemeName = u"edit-delete-remove"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon12 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon12.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.action_remove_file.setIcon(icon12)
+        self.action_help_translation = QAction(MainWindow)
+        self.action_help_translation.setObjectName(u"action_help_translation")
+        icon13 = QIcon()
+        iconThemeName = u"languages"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon13 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon13.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.action_help_translation.setIcon(icon13)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_6 = QVBoxLayout(self.centralwidget)
@@ -199,14 +220,14 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon12 = QIcon()
+        icon14 = QIcon()
         iconThemeName = u"dialog-ok-apply"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon12 = QIcon.fromTheme(iconThemeName)
+            icon14 = QIcon.fromTheme(iconThemeName)
         else:
-            icon12.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon14.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_apply_profile.setIcon(icon12)
+        self.pushButton_apply_profile.setIcon(icon14)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
 
@@ -220,14 +241,14 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
-        icon13 = QIcon()
+        icon15 = QIcon()
         iconThemeName = u"document-revert"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon13 = QIcon.fromTheme(iconThemeName)
+            icon15 = QIcon.fromTheme(iconThemeName)
         else:
-            icon13.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon15.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_reset_profile.setIcon(icon13)
+        self.pushButton_reset_profile.setIcon(icon15)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
 
@@ -386,27 +407,27 @@ class Ui_MainWindow(object):
 
         self.pushButton_abort = QPushButton(self.groupBox_4)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon14 = QIcon()
+        icon16 = QIcon()
         iconThemeName = u"process-stop"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon14 = QIcon.fromTheme(iconThemeName)
+            icon16 = QIcon.fromTheme(iconThemeName)
         else:
-            icon14.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon16.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_abort.setIcon(icon14)
+        self.pushButton_abort.setIcon(icon16)
 
         self.verticalLayout_7.addWidget(self.pushButton_abort)
 
         self.pushButton_start = QPushButton(self.groupBox_4)
         self.pushButton_start.setObjectName(u"pushButton_start")
-        icon15 = QIcon()
+        icon17 = QIcon()
         iconThemeName = u"media-playback-start"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon15 = QIcon.fromTheme(iconThemeName)
+            icon17 = QIcon.fromTheme(iconThemeName)
         else:
-            icon15.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon17.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_start.setIcon(icon15)
+        self.pushButton_start.setIcon(icon17)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
 
@@ -708,14 +729,7 @@ class Ui_MainWindow(object):
         self.menu_theme.setObjectName(u"menu_theme")
         self.menu_language = QMenu(self.menu_settings)
         self.menu_language.setObjectName(u"menu_language")
-        icon16 = QIcon()
-        iconThemeName = u"languages"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon16 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon16.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
-        self.menu_language.setIcon(icon16)
+        self.menu_language.setIcon(icon13)
         self.menu_Help = QMenu(self.menubar)
         self.menu_Help.setObjectName(u"menu_Help")
         MainWindow.setMenuBar(self.menubar)
@@ -733,7 +747,9 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menu_Help.menuAction())
         self.menu_File.addAction(self.action_add_files)
         self.menu_File.addAction(self.action_add_folders)
-        self.menu_File.addAction(self.action_clear_files)
+        self.menu_File.addSeparator()
+        self.menu_File.addAction(self.action_remove_file)
+        self.menu_File.addAction(self.action_remove_all_files)
         self.menu_Profile.addAction(self.action_new_profile)
         self.menu_Profile.addAction(self.action_import_profile)
         self.menu_Profile.addSeparator()
@@ -754,6 +770,7 @@ class Ui_MainWindow(object):
         self.menu_Help.addAction(self.action_online_documentation)
         self.menu_Help.addAction(self.action_about)
         self.menu_Help.addAction(self.action_donate)
+        self.menu_Help.addAction(self.action_help_translation)
         self.menu_Help.addSeparator()
         self.menu_Help.addAction(self.action_delete_models)
 
@@ -769,7 +786,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Panel Cleaner", None))
         self.action_add_files.setText(QCoreApplication.translate("MainWindow", u"Add Files...", None))
-        self.action_clear_files.setText(QCoreApplication.translate("MainWindow", u"Clear Files", None))
+        self.action_remove_all_files.setText(QCoreApplication.translate("MainWindow", u"Remove All Files", None))
         self.action_new_profile.setText(QCoreApplication.translate("MainWindow", u"New", None))
         self.action_delete_profile.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.action_import_profile.setText(QCoreApplication.translate("MainWindow", u"Import...", None))
@@ -785,6 +802,8 @@ class Ui_MainWindow(object):
         self.action_delete_models.setText(QCoreApplication.translate("MainWindow", u"Delete Machine Learning Models", None))
         self.action_download_models.setText(QCoreApplication.translate("MainWindow", u"Download Machine Learning Models", None))
         self.action_donate.setText(QCoreApplication.translate("MainWindow", u"Donate", None))
+        self.action_remove_file.setText(QCoreApplication.translate("MainWindow", u"Remove File", None))
+        self.action_help_translation.setText(QCoreApplication.translate("MainWindow", u"Help Translate Panel Cleaner", None))
         self.groupBox_profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 

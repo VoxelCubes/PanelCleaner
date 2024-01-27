@@ -48,6 +48,12 @@ class FileTable(CTableWidget):
     table_is_empty = Qc.Signal()
     table_not_empty = Qc.Signal()
 
+    table_has_selection = Qc.Signal()
+    table_has_no_selection = Qc.Signal()
+
+    remove_file = Qc.Signal(Path)
+    remove_all_files = Qc.Signal()
+
     files: dict[Path, imf.ImageFile]
 
     requesting_image_preview = Qc.Signal(imf.ImageFile)
@@ -71,6 +77,12 @@ class FileTable(CTableWidget):
         self.finished_drop.connect(self.repopulate_table)
 
         Qc.QTimer.singleShot(0, self.post_init)
+
+        self.selectionModel().selectionChanged.connect(self.check_selected)
+        self.check_selected()
+
+        self.setContextMenuPolicy(Qc.Qt.CustomContextMenu)
+        self.customContextMenuRequested.connect(self.show_context_menu)
 
         # Load the icons once to share them between all image files.
         for dark_or_light in ["dark", "light"]:
@@ -112,6 +124,21 @@ class FileTable(CTableWidget):
             self.table_is_empty.emit()
         else:
             self.table_not_empty.emit()
+
+    def check_selected(self) -> None:
+        # Must have a selected row and focus.
+        if self.currentRow() != -1 and self.hasFocus():
+            self.table_has_selection.emit()
+        else:
+            self.table_has_no_selection.emit()
+
+    def focusInEvent(self, event):
+        super().focusInEvent(event)
+        self.check_selected()
+
+    def focusOutEvent(self, event):
+        super().focusOutEvent(event)
+        self.check_selected()
 
     # Setters passed through from the mainwindow.
     def set_config(self, config: cfg.Config) -> None:
@@ -186,6 +213,37 @@ class FileTable(CTableWidget):
         self.files.clear()
         self.clearAll()
         self.check_empty()
+
+    def keyPressEvent(self, event) -> None:
+        """
+        Allow deleting an item with the delete key.
+        :param event: Qt event.
+        """
+        if event.key() == Qc.Qt.Key_Delete:
+            if self.selectedItems():
+                self.remove_selected_file()
+        else:
+            super().keyPressEvent(event)
+
+    def remove_selected_file(self, selected_row: int | None = None) -> None:
+        """
+        Remove the selected file from the table.
+
+        :param selected_row: If not None, remove the file at this row instead of the selected row.
+        """
+        logger.debug(f"Removing selected file. Auto-selected row: {selected_row is None}")
+        if selected_row is None:
+            selected_row = self.currentRow()
+            if selected_row == -1:
+                logger.warning(f"No row selected")
+                return
+
+        path = Path(self.item(selected_row, Column.PATH).text())
+        self.remove_file.emit(path)
+        del self.files[path]
+        self.removeRow(selected_row)
+        self.check_empty()
+        self.check_selected()
 
     def repopulate_table(self) -> None:
         """
@@ -316,7 +374,7 @@ class FileTable(CTableWidget):
         else:
             super().mousePressEvent(event)
 
-    def on_click(self, item) -> None:
+    def on_click(self, item: Qw.QTableWidgetItem) -> None:
         """
         Request to open the image in a new tab to generate previews.
 
@@ -340,6 +398,42 @@ class FileTable(CTableWidget):
         except KeyError:
             logger.warning(f"Could not find file object for item at row {item.row()}")
             return
+
+    def show_context_menu(self, position):
+        # Get the item at the clicked position
+        item = self.itemAt(position)
+        if not item:
+            return  # No item at this position
+
+        context_menu = Qw.QMenu(self)
+
+        # Add "Open" action
+        open_action = Qg.QAction(
+            Qg.QIcon.fromTheme("view-list-details"), self.tr("Open individual cleaning"), self
+        )
+        context_menu.addAction(open_action)
+        open_action.triggered.connect(lambda: self.on_click(item))
+
+        # Add "Delete" action
+        item = self.itemAt(position)
+        if item:
+            # Figure out the row.
+            row = item.row()
+            delete_action = Qg.QAction(
+                Qg.QIcon.fromTheme("edit-delete-remove"), self.tr("Remove from list"), self
+            )
+            context_menu.addAction(delete_action)
+            delete_action.triggered.connect(lambda: self.remove_selected_file(row))
+
+        # Add "Delete All" action
+        delete_all_action = Qg.QAction(
+            Qg.QIcon.fromTheme("edit-clear-history"), self.tr("Remove all files from list"), self
+        )
+        context_menu.addAction(delete_all_action)
+        delete_all_action.triggered.connect(self.remove_all_files)
+
+        # Show the context menu at the cursor position
+        context_menu.exec(self.viewport().mapToGlobal(position))
 
     def show_ocr_mini_analytics(self, ocr_analytics: Sequence[st.OCRAnalytic]) -> None:
         """

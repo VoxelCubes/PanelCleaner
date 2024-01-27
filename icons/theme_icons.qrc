@@ -16,6 +16,7 @@
     <file>breeze/actions/16/download.svg</file>
     <file>breeze/actions/16/edit-clear-history.svg</file>
     <file>breeze/actions/16/edit-delete.svg</file>
+    <file>breeze/actions/16/edit-delete-remove.svg</file>
     <file>breeze/actions/16/edit-reset.svg</file>
     <file>breeze/actions/16/help-about.svg</file>
     <file>breeze/actions/16/help-contents.svg</file>
@@ -28,6 +29,7 @@
     <file>breeze/actions/16/process-stop.svg</file>
     <file>breeze/actions/16/view-form.svg</file>
     <file>breeze/actions/16/view-refresh.svg</file>
+    <file>breeze/actions/16/view-list-details.svg</file>
     <file>breeze/actions/16/zoom-fit-best.svg</file>
     <file>breeze/actions/16/zoom-in.svg</file>
     <file>breeze/actions/16/zoom-out.svg</file>
@@ -55,6 +57,7 @@
     <file>breeze-dark/actions/16/download.svg</file>
     <file>breeze-dark/actions/16/edit-clear-history.svg</file>
     <file>breeze-dark/actions/16/edit-delete.svg</file>
+    <file>breeze-dark/actions/16/edit-delete-remove.svg</file>
     <file>breeze-dark/actions/16/edit-reset.svg</file>
     <file>breeze-dark/actions/16/help-about.svg</file>
     <file>breeze-dark/actions/16/help-contents.svg</file>
@@ -67,6 +70,7 @@
     <file>breeze-dark/actions/16/process-stop.svg</file>
     <file>breeze-dark/actions/16/view-form.svg</file>
     <file>breeze-dark/actions/16/view-refresh.svg</file>
+    <file>breeze-dark/actions/16/view-list-details.svg</file>
     <file>breeze-dark/actions/16/zoom-fit-best.svg</file>
     <file>breeze-dark/actions/16/zoom-in.svg</file>
     <file>breeze-dark/actions/16/zoom-out.svg</file>

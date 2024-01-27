@@ -914,7 +914,9 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="action_add_files"/>
     <addaction name="action_add_folders"/>
-    <addaction name="action_clear_files"/>
+    <addaction name="separator"/>
+    <addaction name="action_remove_file"/>
+    <addaction name="action_remove_all_files"/>
    </widget>
    <widget class="QMenu" name="menu_Profile">
     <property name="title">
@@ -969,6 +971,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="action_online_documentation"/>
     <addaction name="action_about"/>
     <addaction name="action_donate"/>
+    <addaction name="action_help_translation"/>
     <addaction name="separator"/>
     <addaction name="action_delete_models"/>
    </widget>
@@ -987,13 +990,13 @@ p, li { white-space: pre-wrap; }
     <string>Add Files...</string>
    </property>
   </action>
-  <action name="action_clear_files">
+  <action name="action_remove_all_files">
    <property name="icon">
     <iconset theme="edit-clear-history">
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>Clear Files</string>
+    <string>Remove All Files</string>
    </property>
   </action>
   <action name="action_new_profile">
@@ -1132,6 +1135,27 @@ p, li { white-space: pre-wrap; }
   <action name="action_temp_3">
    <property name="text">
     <string notr="true">&lt;temp&gt;</string>
+   </property>
+  </action>
+  <action name="action_remove_file">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="edit-delete-remove">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Remove File</string>
+   </property>
+  </action>
+  <action name="action_help_translation">
+   <property name="icon">
+    <iconset theme="languages">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Help Translate Panel Cleaner</string>
    </property>
   </action>
  </widget>
