@@ -100,13 +100,13 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
             self.download_text_detector(config)
         else:
             temp_progress_data = ProgressData(100, 0, 0, 0, -1)
-            self.model_name = "Already downloaded"
+            self.model_name = self.tr("Already downloaded")
             self.show_text_detection_progress(temp_progress_data)
 
         if need_ocr:
             self.download_ocr()
         else:
-            temp_progress_data = ProgressData(100, 0, 0, 0, -1, "Already downloaded")
+            temp_progress_data = ProgressData(100, 0, 0, 0, -1, self.tr("Already downloaded"))
             self.show_ocr_progress(temp_progress_data)
 
     def check_finished(self) -> None:
@@ -125,11 +125,11 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         if torch.cuda.is_available():
             model_url = md.MODEL_URL + md.TORCH_MODEL_NAME
             sha_hash = md.TORCH_SHA256
-            self.model_name = "Text Detector model (CUDA)"
+            self.model_name = self.tr("Text Detector model (CUDA)")
         else:
             model_url = md.MODEL_URL + md.CV2_MODEL_NAME
             sha_hash = md.CV2_SHA256
-            self.model_name = "Text Detector model (CPU)"
+            self.model_name = self.tr("Text Detector model (CPU)")
 
         # Init the ui.
         temp_progress_data = ProgressData(0, 0, 0, 0, -1)
@@ -165,7 +165,8 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
             f"{format_size(progress_data.downloaded_size)} / {format_size(progress_data.file_size)}"
         )
         self.label_model_speed.setText(
-            f"{format_size(progress_data.speed)}/s, ETA: {format_timespan(progress_data.eta, ) if progress_data.eta >= 0 else '—'}"
+            f"{format_size(progress_data.speed)}/s, {self.tr('ETA', 'estimated time of completion')}: "
+            f"{format_timespan(progress_data.eta, ) if progress_data.eta >= 0 else '—'}"
         )
         self.progressBar_model.setValue(progress_data.percentage)
 
