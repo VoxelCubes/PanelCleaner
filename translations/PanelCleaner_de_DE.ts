@@ -254,12 +254,12 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/analytics.py" line="404"/>
       <source>Minimum deviation to denoise</source>
-      <translation>Minimale Abweichung zum Entrauschen</translation>
+      <translation>Min. Abweichung zum Entrauschen</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="406"/>
       <source>Maximum allowed deviation</source>
-      <translation>Maximal zulässige Abweichung</translation>
+      <translation>Max. zulässige Abweichung</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="408"/>
