@@ -524,6 +524,11 @@ An AI-powered tool to clean manga panels.</translation>
       <translation type="unfinished">Open Log</translation>
     </message>
     <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="301"/>
+      <source>CUDA Enabled</source>
+      <translation type="unfinished">CUDA Enabled</translation>
+    </message>
+    <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="397"/>
       <source>Select Output Directory</source>
       <translation type="unfinished">Select Output Directory</translation>
