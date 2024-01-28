@@ -351,17 +351,17 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="412"/>
       <source>Open individual cleaning</source>
-      <translation type="unfinished">Open individual cleaning</translation>
+      <translation>Individuelle Reinigung öffnen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="423"/>
       <source>Remove from list</source>
-      <translation type="unfinished">Remove from list</translation>
+      <translation>Aus der Liste entfernen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="430"/>
       <source>Remove all files from list</source>
-      <translation type="unfinished">Remove all files from list</translation>
+      <translation>Alle Dateien aus der Liste entfernen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="590"/>
@@ -522,6 +522,11 @@ Reinige Mangas durch KI.</translation>
       <source>Open Log</source>
       <comment>Statusbar button</comment>
       <translation>Log öffnen</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="301"/>
+      <source>CUDA Enabled</source>
+      <translation type="unfinished">CUDA Enabled</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="397"/>
@@ -1009,17 +1014,17 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="999"/>
       <source>Remove All Files</source>
-      <translation type="unfinished">Remove All Files</translation>
+      <translation>Alle Dateien entfernen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1149"/>
       <source>Remove File</source>
-      <translation type="unfinished">Remove File</translation>
+      <translation>Datei entfernen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1158"/>
       <source>Help Translate Panel Cleaner</source>
-      <translation type="unfinished">Help Translate Panel Cleaner</translation>
+      <translation>Helfe, Panel Cleaner zu übersetzen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1008"/>
@@ -1113,17 +1118,17 @@ Trotzdem fortfahren?</translation>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="104"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="109"/>
       <source>Already downloaded</source>
-      <translation type="unfinished">Already downloaded</translation>
+      <translation>Bereits heruntergeladen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="129"/>
       <source>Text Detector model (CUDA)</source>
-      <translation type="unfinished">Text Detector model (CUDA)</translation>
+      <translation>Texterkennungsmodell (CUDA)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="135"/>
       <source>Text Detector model (CPU)</source>
-      <translation type="unfinished">Text Detector model (CPU)</translation>
+      <translation>Texterkennungsmodell (CPU)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="184"/>
