@@ -298,7 +298,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         # Add an indicator to the status bar, to show if Cuda is available.
         if cuda:
-            self.statusbar.addPermanentWidget(Qw.QLabel("CUDA Enabled"))
+            self.statusbar.addPermanentWidget(Qw.QLabel(self.tr("CUDA Enabled")))
 
         need_ocr = not md.is_ocr_downloaded()
         need_text_detector = (not cuda and self.config.default_cv2_model_path is None) or (
