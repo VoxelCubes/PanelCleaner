@@ -223,7 +223,7 @@ Maskenverwendung nach Maskengröße (kleinste bis größte):
     <message>
       <location filename="../pcleaner/analytics.py" line="320"/>
       <source>Box mask</source>
-      <translation type="unfinished">Box mask</translation>
+      <translation>Felder-Maske</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="333"/>
