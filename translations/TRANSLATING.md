@@ -1,7 +1,5 @@
 # Translating
 
-**Not all text is currently translatable yet.**
-
 
 Thanks for considering to translate the project!
 

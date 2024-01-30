@@ -3,29 +3,48 @@
   <id>io.github.voxelcubes.panelcleaner</id>
   <launchable type="desktop-id">io.github.voxelcubes.panelcleaner.desktop</launchable>
   <name>Panel Cleaner</name>
-  <summary>An AI-powered tool to clean manga panels</summary>
+  <summary>Let AI clean manga panels for you</summary>
+  <summary xml:lang="de">Lass KI Manga Seiten für dich reinigen</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
+  <developer_name>VoxelCubes</developer_name>
   <url type="homepage">https://github.com/VoxelCubes/PanelCleaner</url>
+  <url type="translate">https://crowdin.com/project/panel-cleaner/invite?h=5c2a97ea5dd60dc872c64a138e0705f61973200</url>
+  <url type="bugtracker">https://github.com/VoxelCubes/PanelCleaner/issues</url>
+  <url type="vcs-browser">https://github.com/VoxelCubes/PanelCleaner</url>
   <description>
     <p>This tool uses machine learning to find text and then generates masks to cover it up with the 
     highest accuracy possible.</p>
-    <p>It is designed to clean easy bubbles, no in-painting or out-of-bubble text removal is done.</p>
+    <p>It is designed to clean easy bubbles, no in-painting or out-of-bubble text removal is (currently) done.</p>
     <p>This is intended to save a lot of monotonous work for people who have to clean a lot of panels, 
     while making sure it doesn't paint over anything that it wasn't supposed to.</p>
+    <p xml:lang="de">Dieses Werkzeug verwendet maschinelles Lernen, um Text zu finden und dann Masken zu generieren, 
+    um diesen mit höchstmöglicher Genauigkeit abzudecken.</p>
+    <p xml:lang="de">Es ist darauf ausgelegt, einfache Sprechblasen zu säubern, (zur Zeit) ohne In-Painting oder Entfernung 
+        von Text außerhalb der Blasen.</p>
+    <p xml:lang="de">Dies soll viel monotoner Arbeit für Menschen ersparen, die viele Seiten säubern müssen,
+        während sichergestellt wird, dass es nichts übermalt, was es nicht sollte.</p>
   </description>
   <screenshots>
     <!-- Replace the URL below with a screenshot of your application -->
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/screenshots/details.png</image>
-      <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/screenshots/cleaning_done.png</image>
+      <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_1.png</image>
+      <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_2.png</image>
     </screenshot>
   </screenshots>
   <releases>
+    <release version="2.2.0" date="2024-01-30">
+      <ul>
+        <li>Support translating the app</li>
+        <li>Added language: German</li>
+        <li>Fix: Cannot parse download progress from huggingface for OCR</li>
+        <li>Fix: Image details view using wrong render mode on first load</li>
+        <li>Fix: Overlapping boxes causing duplicate OCR text</li>
+      </ul>
+    </release>
     <release version="2.1.4" date="2024-01-09"/>
   </releases>
   <content_rating type="oars-1.1" />
-  <developer_name>VoxelCubes</developer_name>
   <categories>
     <category>Utility</category>
     <category>Graphics</category>
@@ -33,4 +52,18 @@
   <provides>
     <binary>pcleaner-gui</binary>
   </provides>
+  <languages>
+    <lang percentage="100">en</lang>
+    <lang percentage="100">de</lang>
+  </languages>
+  <keywords>
+<!--    <keyword translate="no"></keyword>-->
+    <keyword>Cleaning</keyword>
+    <keyword>Manga</keyword>
+    <keyword>AI</keyword>
+    <keyword>Machine Learning</keyword>
+    <keyword xml:lang="de">Reinigung</keyword>
+    <keyword xml:lang="de">KI</keyword>
+    <keyword xml:lang="de">Maschinelles Lernen</keyword>
+  </keywords>
 </component>
