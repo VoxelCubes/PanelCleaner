@@ -216,8 +216,11 @@ class Ui_ImageDetails(object):
         self.horizontalLayout_4.setContentsMargins(6, 4, 4, 4)
         self.label_step = QLabel(ImageDetails)
         self.label_step.setObjectName(u"label_step")
-        sizePolicy2.setHeightForWidth(self.label_step.sizePolicy().hasHeightForWidth())
-        self.label_step.setSizePolicy(sizePolicy2)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.label_step.sizePolicy().hasHeightForWidth())
+        self.label_step.setSizePolicy(sizePolicy5)
         self.label_step.setText(u"<Current Step>")
         self.label_step.setWordWrap(True)
 
