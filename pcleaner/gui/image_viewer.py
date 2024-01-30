@@ -49,6 +49,7 @@ class ImageViewer(Qw.QGraphicsView):
             self.setSceneRect(pixmap.rect())
             dim = self.image_item.pixmap().size()
             self.image_dimensions = (dim.width(), dim.height())
+            self.zoom(1)
 
         else:
             # Display "nothing" message when no image is set
