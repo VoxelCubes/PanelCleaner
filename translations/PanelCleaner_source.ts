@@ -208,6 +208,11 @@ Mask usage by mask size (smallest to largest):
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../pcleaner/analytics.py" line="320"/>
+        <source>Box mask</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../pcleaner/analytics.py" line="333"/>
         <source>All bubbles were successfully masked.
 </source>

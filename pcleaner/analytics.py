@@ -317,7 +317,7 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: 
         )
         if index < len(mask_usages_by_index) - 1
     }
-    mask_usages_dict["Box mask"] = perfect_mask_usages_by_index[-1], mask_usages_by_index[-1]
+    mask_usages_dict[tr("Box mask")] = perfect_mask_usages_by_index[-1], mask_usages_by_index[-1]
 
     buffer.write(draw_masker_histogram(mask_usages_dict, max_columns) + "\n")
 
