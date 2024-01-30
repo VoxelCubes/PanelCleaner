@@ -39,13 +39,27 @@ class Box:
         """
         String representation of the box coordinates, basically unpacking the tuple.
 
-        Returns: The box coordinates as a string.
+        :returns: The box coordinates as a string.
         """
         return f"{self.x1},{self.y1},{self.x2},{self.y2}"
+
+    def __contains__(self, point: tuple[int, int]) -> bool:
+        """
+        Check if a point is inside the box.
+
+        :param point: The point to check.
+        :returns: True if the point is inside the box, False otherwise.
+        """
+        x, y = point
+        return self.x1 <= x <= self.x2 and self.y1 <= y <= self.y2
 
     @property
     def area(self) -> int:
         return (self.x2 - self.x1) * (self.y2 - self.y1)
+
+    @property
+    def center(self) -> tuple[int, int]:
+        return (self.x1 + self.x2) // 2, (self.y1 + self.y2) // 2
 
     def merge(self, box: "Box") -> "Box":
         x_min = min(self.x1, box.x1)
@@ -59,6 +73,9 @@ class Box:
         x_overlap = (self.x1 <= other.x2) and (other.x1 <= self.x2)
         y_overlap = (self.y1 <= other.y2) and (other.y1 <= self.y2)
         return x_overlap and y_overlap
+
+    def overlaps_center(self, other: "Box") -> bool:
+        return self.center in other or other.center in self
 
     def pad(self, amount: int, canvas_size: tuple[int, int]) -> "Box":
         """
@@ -182,7 +199,9 @@ class PageData:
                 # Unicode error: Windows is up to some bullshit again.
                 # Attribute error: magic can't deal with windows' bullshit either, returning "cannot open".
                 # Something got fucked, time for plan B.
-                logger.error(f"Encountered a Unicode Error for file '{self.image_path}', using fallback method.")
+                logger.error(
+                    f"Encountered a Unicode Error for file '{self.image_path}', using fallback method."
+                )
                 temp_image = Image.open(self.image_path)
                 self._image_size = temp_image.size
 
@@ -290,6 +309,27 @@ class PageData:
         for box in boxes:
             draw.rectangle(box.as_tuple, fill=(1,))
         return box_mask
+
+    def resolve_total_overlaps(self) -> None:
+        """
+        Check the initial boxes for overlaps where the center of either box is within the other box.
+        This kind of overlap means that the same text is included in both boxes, they aren't merely touching
+        at the edges. This way we don't get duplicate text in OCR output.
+        """
+        # Place the extended boxes in the merged extended boxes, merging overlapping boxes.
+        merge_queue = self.boxes.copy()
+        merged_boxes = []
+        while merge_queue:
+            box = merge_queue.pop(0)
+            # Find all boxes that overlap with this box.
+            overlapping_boxes = [b for b in merge_queue if box.overlaps_center(b)]
+            # Merge all overlapping boxes.
+            for b in overlapping_boxes:
+                box = box.merge(b)
+                merge_queue.remove(b)
+            merged_boxes.append(box)
+
+        self.boxes = merged_boxes
 
     def resolve_overlaps(self) -> None:
         """

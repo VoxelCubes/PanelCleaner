@@ -87,8 +87,6 @@ def prep_json_file(
     if not preprocessor_conf.ocr_strict_language:
         language_whitelist.append("unknown")
 
-    box_ocr_enabled: list[bool] = []
-
     for data in json_data["blk_list"]:
         # Check box language.
         if performing_ocr and data["language"] not in language_whitelist:
@@ -108,6 +106,9 @@ def prep_json_file(
     boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
 
     page_data = st.PageData(image_path, mask_path, original_path, scale, boxes, [], [], [])
+
+    # Merge boxes that have mutually overlapping centers.
+    page_data.resolve_total_overlaps()
 
     # Pad the boxes a bit, save a copy, and then pad them some more.
     # The copy is used as a smaller mask, and the padded copy is used as a larger mask.
