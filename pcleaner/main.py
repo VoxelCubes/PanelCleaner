@@ -107,6 +107,7 @@ Examples:
                                     you choose to delete them).
 
 """
+import sys
 import itertools
 import multiprocessing
 import platform
@@ -142,11 +143,12 @@ Image.MAX_IMAGE_PIXELS = 2**32
 
 def main() -> None:
     args = docopt(__doc__, version=f"Panel Cleaner {__version__}")
-    # Loglevel is info by default.
+    # Loglevel is Warning by default.
+    logger.remove()
     if args.debug:
-        logger.level("DEBUG")
+        logger.add(sys.stdout, level="DEBUG")
     else:
-        logger.level("INFO")
+        logger.add(sys.stdout, level="WARNING")
 
     logger.debug(args)
 
