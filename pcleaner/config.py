@@ -13,6 +13,9 @@ from pcleaner import cli_utils as cli
 from pcleaner import helpers as hp
 from pcleaner import model_downloader as md
 
+# Logging session markers.
+STARTUP_MESSAGE = "---- Starting up ----"
+SHUTDOWN_MESSAGE = "---- Shutting down ----"
 
 # Supported image suffixes.
 SUPPORTED_IMG_TYPES = [

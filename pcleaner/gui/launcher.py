@@ -35,7 +35,7 @@ def launch() -> None:
     # Set up file logging.
     logger.add(str(cu.get_log_path()), rotation="10 MB", retention="1 week", level="DEBUG")
 
-    logger.info("\n---- Starting up ----")
+    logger.info("\n" + cfg.STARTUP_MESSAGE)
     buffer = StringIO()
     buffer.write("\n- Program Information -\n")
     buffer.write(f"Program: {__display_name__} {__version__}\n")
@@ -112,7 +112,7 @@ def launch() -> None:
             e,
         )
     finally:
-        logger.info("---- Shutting down ----\n")
+        logger.info(cfg.SHUTDOWN_MESSAGE + "\n")
 
 
 if __name__ == "__main__":
