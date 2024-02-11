@@ -175,6 +175,10 @@ class TextDetectorConfig:
         [TextDetector]
         
         # Path to the text detection model, leave empty to use the built-in model.
+        # It is only recommended to override this if the version downloaded automatically
+        # is older than the latest release.
+        # The path must point directly to the comictextdetector.pt (CUDA) or
+        # comictextdetector.pt.onnx (CPU) file.
         [CLI: # You can download older versions of the model here:]
         [CLI: # https://github.com/zyddnys/manga-image-translator/releases/latest]
         [GUI: # You can download older versions of the model ]
@@ -185,7 +189,10 @@ class TextDetectorConfig:
         # (or VRAM with CUDA) to run multiple models at the same time.
         # This, of course, will increase the speed of the process, but can also
         # crash your computer if you overestimate your hardware.
-        # I recommend using 1 model per 2 GB of memory available.
+        # I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images.
+        # Note: This is ignored if processing less than 50 files due to the overhead
+        # of starting multiple models not being worth it below that.
+        # Warning: This may cause program instability, use at your own risk.
         concurrent_models = {self.concurrent_models}
         
         """
