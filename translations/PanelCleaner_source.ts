@@ -334,16 +334,6 @@ An AI-powered tool to clean manga panels.</source>
 <context>
     <name>ErrorDialog</name>
     <message>
-        <location filename="../ui_files/ErrorDialog.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui_files/ErrorDialog.ui" line="46"/>
-        <source>&lt;error icon&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui_files/ErrorDialog.ui" line="95"/>
         <source>Copy to Clipboard</source>
         <translation type="unfinished"></translation>

@@ -26,6 +26,7 @@ class Ui_ErrorDialog(object):
         if not ErrorDialog.objectName():
             ErrorDialog.setObjectName(u"ErrorDialog")
         ErrorDialog.resize(1200, 700)
+        ErrorDialog.setWindowTitle(u"Dialog")
         self.horizontalLayout_2 = QHBoxLayout(ErrorDialog)
         self.horizontalLayout_2.setSpacing(12)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -41,6 +42,7 @@ class Ui_ErrorDialog(object):
         self.label_error_icon.setSizePolicy(sizePolicy)
         self.label_error_icon.setMinimumSize(QSize(64, 64))
         self.label_error_icon.setMaximumSize(QSize(64, 64))
+        self.label_error_icon.setText(u"<error icon>")
 
         self.verticalLayout_2.addWidget(self.label_error_icon)
 
@@ -122,10 +124,9 @@ class Ui_ErrorDialog(object):
     # setupUi
 
     def retranslateUi(self, ErrorDialog):
-        ErrorDialog.setWindowTitle(QCoreApplication.translate("ErrorDialog", u"Dialog", None))
-        self.label_error_icon.setText(QCoreApplication.translate("ErrorDialog", u"<error icon>", None))
         self.pushButton_clipboard.setText(QCoreApplication.translate("ErrorDialog", u"Copy to Clipboard", None))
         self.pushButton_open_issues.setText(QCoreApplication.translate("ErrorDialog", u"Open Issue Tracker", None))
         self.pushButton_close.setText(QCoreApplication.translate("ErrorDialog", u"Close", None))
+        pass
     # retranslateUi
 
