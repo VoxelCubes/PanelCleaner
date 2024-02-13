@@ -1813,7 +1813,7 @@ Ein geringeres σ ist besser, von perfekt (lila) bis misslungen (rot).</translat
       <source>Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</oldsource>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</translation>
+      <translation>Minimale Verbesserung der Standardabweichung der Maske, um sie weiter zu vergrößern. Wird hier ein höherer Wert eingestellt, so ist eine höhere Verbesserung erforderlich, um eine größere Maske zu berücksichtigen, um kleineren Masken den Vorzug zu geben.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="118"/>
