@@ -34,15 +34,17 @@
   </screenshots>
   <releases>
     <release version="2.2.0" date="2024-01-30">
-      <ul>
-        <li>[Flatpak] Fix: RuntimeError: Couldn't load custom C++ ops. 
-          (Thank you to zefr0x and masiv1001 for bringing this to my attention!)</li>
-        <li>Support translating the app</li>
-        <li>Added language: German</li>
-        <li>Fix: Cannot parse download progress from huggingface for OCR</li>
-        <li>Fix: Image details view using wrong render mode on first load</li>
-        <li>Fix: Overlapping boxes causing duplicate OCR text</li>
-      </ul>
+      <description>
+        <ul>
+          <li>[Flatpak] Fix: RuntimeError: Couldn't load custom C++ ops. 
+            (Thank you to zefr0x and masiv1001 for bringing this to my attention!)</li>
+          <li>Support translating the app</li>
+          <li>Added language: German</li>
+          <li>Fix: Cannot parse download progress from huggingface for OCR</li>
+          <li>Fix: Image details view using wrong render mode on first load</li>
+          <li>Fix: Overlapping boxes causing duplicate OCR text</li>
+        </ul>
+      </description>
     </release>
     <release version="2.1.4" date="2024-01-09"/>
   </releases>
