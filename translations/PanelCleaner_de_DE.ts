@@ -1444,14 +1444,14 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any.
 Lower σ is better, from perfect (purple) to failed (red).</source>
       <comment>Step description in the image details view, step: Masker, output: Match Quality</comment>
-      <translation type="unfinished">The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any.
-Lower σ is better, from perfect (purple) to failed (red).</translation>
+      <translation>Die Standardabweichung (σ) und die Umrissdicke (in Pixeln) jeder ausgewählten besten Maske, falls vorhanden.
+Ein geringeres σ ist besser, von perfekt (lila) bis misslungen (rot).</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="45"/>
       <source>Match Quality</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Match Quality</translation>
+      <translation>Zuteilungsqualität</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="46"/>
@@ -1806,13 +1806,14 @@ Lower σ is better, from perfect (purple) to failed (red).</translation>
       <source>The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</oldsource>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</translation>
+      <translation>Die Standardabweichung einer Maske stellt die Farbabweichung entlang des Randes der Maske dar. Dazu werden nur die einzelnen Pixel entlang des äußeren Randes einer Maske aus dem Originalbild abgetastet. Eine geringe Abweichung bedeutet, dass die Maske auf einem gleichmäßigen Hintergrund liegt, d. h. sie überschneidet keinen Text oder andere Objekte.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="116"/>
-      <source>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
+      <source>Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
+      <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</oldsource>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</translation>
+      <translation type="unfinished">Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="118"/>
