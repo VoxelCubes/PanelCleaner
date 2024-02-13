@@ -268,16 +268,13 @@ class PageData:
         for index, box in enumerate(self.boxes):
             draw.rectangle(box.as_tuple, outline="green")
             # Draw the box number, with a white background, respecting font size.
-            draw.rectangle(
-                (box.x1 + 2, box.y1 + 2, box.x1 + font_size, box.y1 + font_size),
-                fill="white",
-                outline="white",
-            )
             draw.text(
-                (box.x1 + 2, box.y1),
+                (box.x1 + 4, box.y1),
                 str(index + 1),
                 fill="green",
                 font=ImageFont.truetype(font_path, font_size),
+                stroke_fill="white",
+                stroke_width=3,
             )
 
         for box in self.extended_boxes:
