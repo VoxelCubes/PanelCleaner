@@ -254,11 +254,14 @@ def partition_list(
     return partition
 
 
-def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: int = 100) -> str:
+def show_masker_analytics(
+    analytics: list[st.MaskFittingAnalytic], masks_total: int, max_columns: int = 100
+) -> str:
     """
     Present the analytics gathered from the masking process.
 
     :param analytics: The analytics gathered from each page.
+    :param masks_total: The total number of masks used. Generally the number of growth steps + 1 for the box mask.
     :param max_columns: The maximum number of columns to use for the chart per line.
     :return: The analytics as a string.
     """
@@ -278,13 +281,10 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: 
     perfect_mask_rate = f"{perfect_masks / masks_succeeded:.0%}" if masks_succeeded else tr("N/A")
     masks_failed = total_boxes - masks_succeeded
 
-    highest_mask_index = max(
-        (analytic.mask_index for analytic in analytics if analytic.fit_was_found), default=0
-    )
     # Count the number of times each mask index was used.
-    mask_usages_by_index = [0] * (highest_mask_index + 1)
+    mask_usages_by_index = [0] * masks_total
     # Count the number of times each mask was perfect.
-    perfect_mask_usages_by_index = [0] * (highest_mask_index + 1)
+    perfect_mask_usages_by_index = [0] * masks_total
     for analytic in analytics:
         if analytic.fit_was_found:
             mask_usages_by_index[analytic.mask_index] += 1
@@ -311,7 +311,7 @@ def show_masker_analytics(analytics: list[st.MaskFittingAnalytic], max_columns: 
     )
     buffer.write(tr("\nMask usage by mask size (smallest to largest):\n"))
     mask_usages_dict = {
-        tr("Mask") + f" {index}": perfect_total
+        tr("Mask") + f" {index+1}": perfect_total
         for index, perfect_total in enumerate(
             zip(perfect_mask_usages_by_index, mask_usages_by_index)
         )

@@ -1365,8 +1365,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         elif progress_data.progress_type == imf.ProgressType.analyticsMasker:
             # Show analytics.
             logger.info(f"Showing masker analytics...")
-            masker_analytics_raw = progress_data.value
-            analytics_str = an.show_masker_analytics(masker_analytics_raw, ANALYTICS_COLUMNS)
+            masker_analytics_raw, total_masks = progress_data.value
+            analytics_str = an.show_masker_analytics(
+                masker_analytics_raw, total_masks, ANALYTICS_COLUMNS
+            )
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
             self.file_table.show_masker_mini_analytics(masker_analytics_raw)
 

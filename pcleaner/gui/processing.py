@@ -369,7 +369,7 @@ def generate_output(
                     target_outputs,
                     imf.Step.masker,
                     imf.ProgressType.analyticsMasker,
-                    masker_analytics_raw,
+                    (masker_analytics_raw, profile.masker.mask_growth_steps + 1),  # +1 for box mask
                 )
             )
 
