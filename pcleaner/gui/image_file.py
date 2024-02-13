@@ -40,6 +40,7 @@ class Output(IntEnum):
     cut_mask = auto()
     mask_layers = auto()
     mask_overlay = auto()
+    match_quality = auto()
     final_mask = auto()
     isolated_text = auto()
     masked_output = auto()
@@ -122,6 +123,7 @@ output_to_step: dict[Output, Step] = {
     Output.mask_layers: Step.masker,
     Output.final_mask: Step.masker,
     Output.mask_overlay: Step.masker,
+    Output.match_quality: Step.masker,
     Output.isolated_text: Step.masker,
     Output.masked_output: Step.masker,
     Output.mask_data_json: Step.masker,
@@ -140,6 +142,7 @@ step_to_output: dict[Step, tuple[Output, ...]] = {
         Output.cut_mask,
         Output.mask_layers,
         Output.mask_overlay,
+        Output.match_quality,
         Output.isolated_text,
         Output.masked_output,
         Output.final_mask,
@@ -154,6 +157,7 @@ step_to_output: dict[Step, tuple[Output, ...]] = {
 # unaffected by the profile change.
 # But these outputs are affected by changes that the ones after them are not,
 # so we can't use that optimization.
+# In the case of mask_overlay, it's affected by the debug mask color, but nothing else is.
 OUTPUTS_WITH_INDEPENDENT_PROFILE_SENSITIVITY = (Output.mask_overlay,)
 
 
@@ -448,6 +452,13 @@ class ImageFile:
             "Masker",
             "Mask Overlay",
             settings + [mk.debug_mask_color],
+        )
+        self.outputs[Output.match_quality] = ProcessOutput(
+            "The standard deviation (\u03C3) and outline thickness (in pixels) of each best mask chosen, if any.\n"
+            "Lower \u03C3 is better, from perfect (purple) to failed (red).",
+            "Masker",
+            "Match Quality",
+            settings,
         )
         self.outputs[Output.final_mask] = ProcessOutput(
             "The collection of masks for each bubble that fit best.",

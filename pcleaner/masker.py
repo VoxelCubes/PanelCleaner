@@ -94,6 +94,14 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
         base_image_copy.paste(combined_mask_debug, (0, 0), combined_mask_debug)
         save_mask(base_image_copy, "_with_masks")
 
+        # Output diagnostics per box.
+        ops.visualize_standard_deviations(
+            base_image,
+            mask_fitments,
+            m_conf,
+            cache_out_path.with_stem(cache_out_path.stem + "_std_devs"),
+        )
+
     # Save the combined mask for denoising.
     combined_mask_path = cache_out_path.with_stem(cache_out_path.stem + "_combined_mask")
     combined_mask.save(combined_mask_path)

@@ -1,19 +1,54 @@
 from itertools import cycle
 from pathlib import Path
+from importlib import resources
 from typing import Generator, Iterable, TypeVar
 
 import cv2
 import numpy as np
+import colorsys
 import scipy
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageDraw, ImageFont
 from loguru import logger
 
+import pcleaner.data
 import pcleaner.config as cfg
 import pcleaner.structures as st
 
 
 class BlankMaskError(Exception):
     pass
+
+
+def generate_spectrum_colors(n, lightness: float, alpha: int):
+    colors = []
+    for i in range(n):
+        # Sweep from red (0) to purple (270)
+        hue = i / n * 300 / 360  # Normalize to range [0, 1]
+        # Convert HSL to RGB, then to RGBA
+        r, g, b = colorsys.hls_to_rgb(hue, lightness, 1)
+        rgba = (int(r * 255), int(g * 255), int(b * 255), alpha)
+        colors.append(rgba)
+    return colors
+
+
+def generate_single_color(
+    percentage: float, lightness: float, alpha: float
+) -> tuple[int, int, int, int]:
+    """
+    Generate a color based on a percentage of the hue spectrum.
+
+    :param percentage: Hue from red (0.0) to purple (1.0).
+    :param lightness: Lightness from black (0.0) to white (1.0).
+    :param alpha: Alpha from transparent (0.0) to opaque (1.0).
+    :return: The color as an RGBA tuple.
+    """
+    # Convert the percentage to a position in the hue spectrum (0 to 270 degrees)
+    hue = percentage * 265 / 360  # Normalize to range [0, 1]
+
+    # Convert HSL to RGB, then to RGBA
+    r, g, b = colorsys.hls_to_rgb(hue, lightness, 1)
+    rgba = (int(r * 255), int(g * 255), int(b * 255), int(alpha * 255))
+    return rgba
 
 
 def convert_mask_to_rgba(mask: Image, color: int | tuple[int, int, int, int] = 255) -> Image:
@@ -144,6 +179,111 @@ def visualize_mask_fitments(
     alpha_mask = combined_mask.split()[3]
     alpha_mask = alpha_mask.point(lambda x: min(x, 153))
     base_image.paste(combined_mask, (0, 0), alpha_mask)
+
+    # Save the image.
+    base_image.save(output_path)
+
+
+def visualize_standard_deviations(
+    base_image: Image,
+    mask_fitments: list[st.MaskFittingResults],
+    masker_data: cfg.MaskerConfig,
+    output_path: Path,
+) -> None:
+    """
+    Draw the chosen mask as well as a box outline and draw the standard deviation
+    of the border of the mask.
+
+    :param base_image: The base image to stack the masks on top of.
+    :param mask_fitments: The data of the masks to apply.
+    :param masker_data: The masker config.
+    :param output_path: The path to save the image to.
+    """
+
+    # Don't modify the original image.
+    base_image = base_image.copy()
+
+    with resources.files(pcleaner.data) as data_path:
+        font_path = str(data_path / "LiberationSans-Regular.ttf")
+    logger.debug(f"Loading included font from {font_path}")
+    # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
+    font_size = int(base_image.size[0] / 50)
+    font = ImageFont.truetype(font_path, font_size)
+
+    step_thickness = masker_data.mask_growth_step_pixels
+    max_standard_deviation = masker_data.mask_max_standard_deviation
+
+    # For each fitment, draw the mask if one was chosen, coloring it according to the index.
+    # Also draw the bounding box in green, but choose red if no mask was chosen.
+    # Finally, draw the mask's standard deviation in the top left corner (or the max deviation if none was chosen),
+    # with the thickness of the outline under that, calculated as the mask index * growth per step (if applicable).
+    for fitment in mask_fitments:
+        text_x = fitment.mask_box.x1
+        text_y = fitment.mask_box.y1
+        if fitment.best_mask is not None:
+            # Draw the mask.
+            mask = fitment.best_mask
+            # color = colors[fitment.analytics_mask_index]
+            # Base the color off of the std deviation in relation to the max std deviation.
+            color_offset = (1 - fitment.analytics_std_deviation / max_standard_deviation) ** 4
+            color = generate_single_color(color_offset, 0.5, 0.7)
+            mask = apply_debug_filter_to_mask(mask, color)
+            base_image.paste(mask, fitment.mask_coords, mask)
+
+            # Draw the border standard deviation.
+            std_deviation = fitment.analytics_std_deviation
+            thickness = (fitment.analytics_mask_index + 1) * step_thickness
+            # Draw the standard deviation, use \sigma for the symbol.
+            text = f"\u03C3={std_deviation:.2f}"
+            draw = ImageDraw.Draw(base_image)
+            draw.rectangle(fitment.mask_box.as_tuple, outline=(0, 255, 0, 255), width=3)
+            draw.text(
+                (text_x, text_y),
+                text,
+                font=font,
+                fill="black",
+                stroke_width=3,
+                stroke_fill="white",
+            )
+            # Draw the thickness if it isn't the box mask.
+            if fitment.analytics_mask_index < masker_data.mask_growth_steps:
+                text = f"{thickness}px"
+                draw.text(
+                    (text_x, text_y + font_size + 2),
+                    text,
+                    font=font,
+                    fill="black",
+                    stroke_width=3,
+                    stroke_fill="white",
+                )
+        else:
+            # Draw the bounding box and a big ol cross going through it.
+            draw = ImageDraw.Draw(base_image)
+            draw.line(
+                (
+                    fitment.mask_box.x1 + 1,
+                    fitment.mask_box.y1 + 1,
+                    fitment.mask_box.x2 - 1,
+                    fitment.mask_box.y2 - 1,
+                ),
+                fill=(255, 0, 0, 255),
+                width=3,
+            )
+            draw.line(
+                (
+                    fitment.mask_box.x1 + 1,
+                    fitment.mask_box.y2 - 1,
+                    fitment.mask_box.x2 - 1,
+                    fitment.mask_box.y1 + 1,
+                ),
+                fill=(255, 0, 0, 255),
+                width=3,
+            )
+            draw.rectangle(fitment.mask_box.as_tuple, outline=(255, 0, 0, 255), width=3)
+            text = f"\u03C3>{max_standard_deviation:.2f}"
+            draw.text(
+                (text_x, text_y), text, font=font, fill="#900", stroke_width=3, stroke_fill="white"
+            )
 
     # Save the image.
     base_image.save(output_path)

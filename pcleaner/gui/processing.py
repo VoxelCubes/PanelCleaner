@@ -359,6 +359,7 @@ def generate_output(
                 update_output(image_obj, imf.Output.mask_layers, "_masks.png")
                 update_output(image_obj, imf.Output.final_mask, "_combined_mask.png")
                 update_output(image_obj, imf.Output.mask_overlay, "_with_masks.png")
+                update_output(image_obj, imf.Output.match_quality, "_std_devs.png")
                 update_output(image_obj, imf.Output.isolated_text, "_text.png")
                 update_output(image_obj, imf.Output.masked_output, "_clean.png")
                 update_output(image_obj, imf.Output.mask_data_json, "#mask_data.json")
