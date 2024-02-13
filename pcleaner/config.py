@@ -403,7 +403,7 @@ class MaskerConfig:
         # Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.
         mask_max_standard_deviation = {self.mask_max_standard_deviation}
         
-        # Minimum improvement in standard deviation of the mask to continue shrinking it.
+        # Minimum improvement in standard deviation of the mask to continue growing it.
         # Setting a higher value here requires a higher improvement to consider a larger mask,
         # to give a preference to smaller masks.
         mask_improvement_threshold = {self.mask_improvement_threshold}

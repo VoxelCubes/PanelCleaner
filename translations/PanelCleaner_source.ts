@@ -1786,7 +1786,8 @@ Lower σ is better, from perfect (purple) to failed (red).</source>
     </message>
     <message>
         <location filename="profile_strings.py" line="116"/>
-        <source>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
+        <source>Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
+        <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</oldsource>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
