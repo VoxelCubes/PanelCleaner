@@ -305,8 +305,12 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 try:
                     button.setIcon(Qg.QIcon(str(proc_output.path)))
                     button.setText("")
-                except OSError as e:
-                    logger.error(f"Failed to load image {proc_output.path}: {e}")
+                except OSError:
+                    gu.show_exception(
+                        self,
+                        self.tr("Loading Error"),
+                        self.tr("Failed to load image '{path}'").format(path=proc_output.path),
+                    )
             else:
                 button.setText(self.tr("Generate Me"))
         # Update the badges on the buttons.
@@ -351,14 +355,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                     # Call the zoom fit function after the event loop has finished.
                     # This is necessary because the viewport dimensions are not known until the image is loaded.
                     Qc.QTimer.singleShot(0, self.image_viewer.zoom_fit)
-            except OSError as e:
-                logger.error(f"Image at {proc_output.path} does not exist. {e}")
-                gu.show_warning(
+            except OSError:
+                gu.show_exception(
                     self,
                     self.tr("Image not found."),
-                    self.tr("Image at {path} does not exist: {error}").format(
-                        path=proc_output.path, error=e
-                    ),
+                    self.tr("Image at {path} does not exist:").format(path=proc_output.path),
                 )
                 return
 
@@ -390,10 +391,9 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             try:
                 shutil.copy(self.current_image_path, save_path)
                 logger.info(f"Exported image to {save_path}")
-            except OSError as e:
-                logger.error(f"Failed to export image to {save_path}: {e}")
-                gu.show_warning(
-                    self, self.tr("Export failed"), self.tr("Failed to export image:") + f"\n\n{e}"
+            except OSError:
+                gu.show_exception(
+                    self, self.tr("Export failed"), self.tr("Failed to export image:")
                 )
 
     def current_button(self) -> BadgeButton | None:
@@ -499,9 +499,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
     @Slot(wt.WorkerError)
     def output_worker_error(self, error: wt.WorkerError) -> None:
-        logger.error("Output worker encountered an error.")
-        gu.show_warning(
-            self, self.tr("Output Failed"), self.tr("Output generation failed:") + f"\n\n{error}"
+        gu.show_exception(
+            self, self.tr("Output Failed"), self.tr("Output generation failed:"), error
         )
 
     def output_worker_aborted(self) -> None:
@@ -653,11 +652,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.set_change_flair(button)
 
     def profile_checker_error(self, error: wt.WorkerError) -> None:
-        logger.error("Profile checker encountered an error.")
-        gu.show_warning(
-            self,
-            self.tr("Profile check failed"),
-            self.tr("Profile change check failed:") + f"\n\n{error}",
+        gu.show_exception(
+            self, self.tr("Profile check failed"), self.tr("Profile change check failed:"), error
         )
 
     def start_ocr_worker(self) -> None:

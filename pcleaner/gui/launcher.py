@@ -23,7 +23,7 @@ import pcleaner.gui.rc_generated_files.rc_themes
 import pcleaner.gui.rc_generated_files.rc_translations
 
 
-def launch() -> None:
+def launch(debug: bool = False) -> None:
     """
     Launch the GUI.
     """
@@ -39,6 +39,7 @@ def launch() -> None:
     buffer = StringIO()
     buffer.write("\n- Program Information -\n")
     buffer.write(f"Program: {__display_name__} {__version__}\n")
+    buffer.write(f"Executing from {__file__}\n")
     buffer.write(f"Log file is {cu.get_log_path()}\n")
     buffer.write(f"Config file is {cu.get_config_path()}\n")
     buffer.write(f"Cache directory is {cu.get_cache_path()}\n")
@@ -104,13 +105,11 @@ def launch() -> None:
         Qg.QIcon.setThemeSearchPaths([":/icons", ":/icon-themes"])
 
     try:
-        window = MainWindow(config)
+        window = MainWindow(config, debug)
         window.show()
         sys.exit(app.exec())
-    except Exception as e:
-        logger.exception(
-            e,
-        )
+    except Exception:
+        logger.exception("Failed to initialize the main window.")
     finally:
         logger.info(cfg.SHUTDOWN_MESSAGE + "\n")
 

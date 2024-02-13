@@ -247,7 +247,7 @@ def main() -> None:
         # Launch the GUI. Either the user specified it, or no command was given.
         # This is done so that a bundled executable can be launched in gui mode without a command,
         # without hindering access to the cli.
-        gui.launch()
+        gui.launch(args.debug)
 
 
 def run_cleaner(

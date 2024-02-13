@@ -10,9 +10,9 @@ def test_parse_good():
     with patch("pcleaner.gui.log_parser.get_username", return_value="testvm"):
         sessions = lp.parse_log_file(logfile)
 
-    assert len(sessions) == 38
-    assert sessions[0].criticals == 1
-    assert sessions[0].errors == 0
-    assert sessions[37].criticals == 0
-    assert sessions[37].errors == 3
-    assert sessions[37].corrupted is False
+    assert len(sessions) == lp.MAX_SESSIONS
+    assert sessions[19].criticals == 0
+    assert sessions[19].errors == 0
+    assert sessions[1].criticals == 3
+    assert sessions[1].errors == 0
+    assert sessions[1].corrupted is False

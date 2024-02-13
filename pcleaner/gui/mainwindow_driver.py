@@ -26,6 +26,7 @@ import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.processing as prc
 import pcleaner.gui.profile_parser as pp
 import pcleaner.gui.setup_greeter_driver as sgd
+import pcleaner.gui.issue_reporter_driver as ird
 import pcleaner.gui.structures as gst
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
@@ -43,6 +44,7 @@ ANALYTICS_COLUMNS = 74
 # noinspection PyUnresolvedReferences
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     config: cfg.Config = None
+    debug: bool
 
     label_stats: Qw.QLabel
 
@@ -68,12 +70,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     theme_is_dark: gst.Shared[bool]
     theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
 
-    def __init__(self, config: cfg.Config) -> None:
+    def __init__(self, config: cfg.Config, debug: bool) -> None:
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__display_name__} {__version__}")
         self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
         self.config = config
+        self.debug = debug
 
         self.progress_current: int = 0
         self.progress_step_start: imf.Step | None = None
@@ -225,6 +228,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_about.triggered.connect(self.open_about)
         self.action_donate.triggered.connect(self.open_donation_page)
         self.action_help_translation.triggered.connect(self.open_translation_page)
+        self.action_report_issue.triggered.connect(self.open_issue_reporter)
+        self.action_simulate_exception.triggered.connect(self.simulate_exception)
+
+        if not self.debug:
+            self.menu_Help.removeAction(self.action_simulate_exception)
 
         self.file_table.requesting_image_preview.connect(
             partial(
@@ -524,17 +532,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param error: The worker error object.
         :param context: A string to add to the error message.
         """
-        logger.error(f"Worker error: {error}")
-        if not context:
-            gu.show_warning(
-                self, self.tr("Error"), self.tr("Encountered error: {error}").format(error=error)
-            )
-        else:
-            gu.show_warning(
-                self,
-                self.tr("Error"),
-                f"{context}\n\n" + self.tr("Encountered error: {error}").format(error=error),
-            )
+        context_str = f"{context}\n\n" if context else ""
+        gu.show_exception(
+            self, self.tr("Error"), context_str + self.tr("Encountered error:"), error
+        )
 
     def closeEvent(self, death: Qg.QCloseEvent) -> None:
         """
@@ -595,13 +596,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Delete the models.
         try:
             md.delete_models(self.config.get_model_cache_dir())
-        except OSError as e:
-            logger.exception(e)
-            gu.show_error(
-                self,
-                self.tr("Failed to Delete Models"),
-                self.tr("Failed to delete models.") + f"\n\n{e}",
-            )
+        except OSError:
+            gu.show_exception(self, self.tr("Delete Failed"), self.tr("Failed to delete models."))
             return
 
         # Offer to download them again or just quit.
@@ -616,6 +612,15 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         else:
             self.close()
 
+    def simulate_exception(self) -> None:
+        """
+        Simulate an exception for testing purposes.
+        """
+        try:
+            raise ValueError("This is a simulated exception.")
+        except ValueError:
+            gu.show_exception(self, "Simulated Exception", "This is a simulated exception.")
+
     @staticmethod
     def open_online_documentation() -> None:
         """
@@ -629,9 +634,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Open the about dialog.
         """
         logger.debug("Opening about dialog.")
-        # Bodge in an instance variable to prevent garbage collection from immediately closing the window.
+        # Bodge in an instance variable to prevent garbage collection from immediately closing the window
+        # due to not opening it modally.
         self.about = ad.AboutWidget(self)
         self.about.show()
+
+    def open_issue_reporter(self) -> None:
+        """
+        Open the issue reporter dialog.
+        """
+        logger.debug("Opening issue reporter.")
+        issue_reporter = ird.IssueReporter(self)
+        issue_reporter.exec()
 
     @staticmethod
     def open_donation_page() -> None:
@@ -1300,13 +1314,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.enable_running_cleaner()
 
     @Slot(wt.WorkerError)
-    def output_worker_error(self, e) -> None:
-        gu.show_warning(
+    def output_worker_error(self, error: wt.WorkerError) -> None:
+        gu.show_exception(
             self,
             self.tr("Processing Error"),
-            self.tr("Encountered an error while processing files.") + f"\n\n{e}",
+            self.tr("Encountered an error while processing files."),
+            error,
         )
-        logger.error(f"Output worker encountered an error:\n{e}")
 
     @Slot(imf.ProgressData)
     def show_current_progress(self, progress_data: imf.ProgressData) -> None:

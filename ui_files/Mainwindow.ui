@@ -972,8 +972,10 @@ p, li { white-space: pre-wrap; }
     <addaction name="action_about"/>
     <addaction name="action_donate"/>
     <addaction name="action_help_translation"/>
+    <addaction name="action_report_issue"/>
     <addaction name="separator"/>
     <addaction name="action_delete_models"/>
+    <addaction name="action_simulate_exception"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Profile"/>
@@ -1156,6 +1158,20 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Help Translate Panel Cleaner</string>
+   </property>
+  </action>
+  <action name="action_report_issue">
+   <property name="icon">
+    <iconset theme="tools-report-bug">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Report an Issue...</string>
+   </property>
+  </action>
+  <action name="action_simulate_exception">
+   <property name="text">
+    <string>Simulate Exception</string>
    </property>
   </action>
  </widget>

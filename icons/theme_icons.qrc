@@ -27,9 +27,11 @@
     <file>breeze/actions/16/media-playback-start.svg</file>
     <file>breeze/actions/16/overflow-menu.svg</file>
     <file>breeze/actions/16/process-stop.svg</file>
+    <file>breeze/actions/16/tools-report-bug.svg</file>
     <file>breeze/actions/16/view-form.svg</file>
     <file>breeze/actions/16/view-refresh.svg</file>
     <file>breeze/actions/16/view-list-details.svg</file>
+    <file>breeze/actions/16/window-close.svg</file>
     <file>breeze/actions/16/zoom-fit-best.svg</file>
     <file>breeze/actions/16/zoom-in.svg</file>
     <file>breeze/actions/16/zoom-out.svg</file>
@@ -41,6 +43,7 @@
     <file>breeze/mimetypes/16/image-x-generic.svg</file>
     <file>breeze/status/16/data-error.svg</file>
     <file>breeze/status/16/data-warning.svg</file>
+    <file>breeze/status/64/dialog-error.svg</file>
     <file>breeze-dark/index.theme</file>
     <file>breeze-dark/actions/16/configure.svg</file>
     <file>breeze-dark/actions/16/dialog-cancel.svg</file>
@@ -68,9 +71,11 @@
     <file>breeze-dark/actions/16/media-playback-start.svg</file>
     <file>breeze-dark/actions/16/overflow-menu.svg</file>
     <file>breeze-dark/actions/16/process-stop.svg</file>
+    <file>breeze-dark/actions/16/tools-report-bug.svg</file>
     <file>breeze-dark/actions/16/view-form.svg</file>
     <file>breeze-dark/actions/16/view-refresh.svg</file>
     <file>breeze-dark/actions/16/view-list-details.svg</file>
+    <file>breeze-dark/actions/16/window-close.svg</file>
     <file>breeze-dark/actions/16/zoom-fit-best.svg</file>
     <file>breeze-dark/actions/16/zoom-in.svg</file>
     <file>breeze-dark/actions/16/zoom-out.svg</file>
@@ -82,5 +87,6 @@
     <file>breeze-dark/mimetypes/16/image-x-generic.svg</file>
     <file>breeze-dark/status/16/data-error.svg</file>
     <file>breeze-dark/status/16/data-warning.svg</file>
+    <file>breeze-dark/status/64/dialog-error.svg</file>
   </qresource>
 </RCC>

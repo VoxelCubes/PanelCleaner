@@ -1,6 +1,7 @@
 import io
 import re
 import sys
+from types import TracebackType
 from io import StringIO
 from pathlib import Path
 
@@ -8,6 +9,10 @@ import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from loguru import logger
+
+from pcleaner.gui.error_dialog_driver import ErrorDialog
+import pcleaner.gui.worker_thread as wt
+from pcleaner.helpers import tr
 
 
 # For all show functions, pad the dialog message, so that the dialog is not too narrow for the window title.
@@ -26,6 +31,34 @@ class SelectableMessageBox(Qw.QMessageBox):
         labels = self.findChildren(Qw.QLabel)
         for label in labels:
             label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
+
+
+def show_exception(
+    parent, title: str, msg: str, worker_error: None | wt.WorkerError = None
+) -> None:
+    """
+    Show an exception in a dialog along with logs.
+
+    :param parent: The parent widget.
+    :param title: The title of the dialog.
+    :param msg: The message to show.
+    :param worker_error: [Optional] A worker error object to read the exception from.
+    """
+    exception_type: type[BaseException]
+    exception_value: BaseException
+    exception_traceback: TracebackType
+
+    if worker_error is not None:
+        exception_type = worker_error.exception_type
+        exception_value = worker_error.value
+        exception_traceback = worker_error.traceback
+    else:
+        exception_type, exception_value, exception_traceback = sys.exc_info()
+
+    logger.opt(depth=1, exception=(exception_type, exception_value, exception_traceback)).error(msg)
+
+    box = ErrorDialog(parent, title, msg)
+    box.exec()
 
 
 def show_critical(parent, title: str, msg: str) -> int:
@@ -68,8 +101,8 @@ def open_file(path: Path) -> None:
     try:
         # Use Qt to open the file, so that it works on all platforms.
         Qg.QDesktopServices.openUrl(Qc.QUrl.fromLocalFile(str(path)))
-    except Exception as e:
-        logger.exception(e)
+    except:
+        show_exception(None, tr("File Error"), tr("Failed to open file."))
 
 
 class CaptureOutput(Qc.QObject):

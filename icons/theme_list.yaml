@@ -31,9 +31,11 @@ Files:
       - media-playback-start
       - overflow-menu
       - process-stop
+      - tools-report-bug
       - view-form
       - view-refresh
       - view-list-details
+      - window-close
       - zoom-fit-best
       - zoom-in
       - zoom-out
@@ -49,3 +51,5 @@ Files:
     16:
       - data-error
       - data-warning
+    64:
+      - dialog-error

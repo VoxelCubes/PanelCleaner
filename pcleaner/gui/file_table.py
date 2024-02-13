@@ -584,22 +584,19 @@ class FileTable(CTableWidget):
             return
         # Save the error in the file object.
         self.files[file_path].error = error.value
-        logger.error(f"Worker thread {file_path} failed with {error.value}")
-        gu.show_warning(
+        gu.show_exception(
             self,
             self.tr("Failed to load image"),
-            self.tr("Failed to load image {file_path}.").format(file_path=file_path)
-            + f"\n\n{error.value}",
+            self.tr("Failed to load image {file_path}.").format(file_path=file_path),
+            error,
         )
 
     def image_dispatch_worker_error(self, error: wt.WorkerError) -> None:
         """
         Display an error message in the table.
         """
-        gu.show_warning(
-            self,
-            self.tr("Failed to dispatch image"),
-            self.tr("Failed to dispatch image.") + f"\n\n{error.value}",
+        gu.show_exception(
+            self, self.tr("Dispatch Failed"), self.tr("Failed to dispatch image."), error
         )
 
     # =========================== File Adding ===========================

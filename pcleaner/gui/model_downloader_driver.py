@@ -180,8 +180,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.label_model_speed.setText("—")
         self.label_model_size.setText("")
         self.encountered_error = True
-        logger.exception(worker_error.value)
-        gu.show_warning(self, self.tr("Download Failed"), str(worker_error.value))
+        gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value))
 
     @Slot(Path)
     def text_detection_result(self, model_path: Path | None) -> None:
@@ -242,8 +241,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.label_ocr_speed.setText("—")
         self.label_ocr_size.setText("")
         self.encountered_error = True
-        logger.exception(worker_error.value)
-        gu.show_warning(self, self.tr("Download Failed"), str(worker_error.value))
+        gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value))
 
     @Slot(str, str)
     def ocr_output_log(self, text: str, stream: str) -> None:

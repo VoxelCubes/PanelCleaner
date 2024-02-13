@@ -7,7 +7,7 @@
 ##############################################################################################
 
 import sys
-import traceback
+from types import TracebackType
 from dataclasses import dataclass
 from typing import Callable
 
@@ -16,9 +16,9 @@ from PySide6.QtCore import QRunnable, Slot, Signal, QObject
 
 @dataclass(frozen=True, slots=True)
 class WorkerError:
-    exception_type: type
-    value: Exception
-    traceback: str
+    exception_type: type[BaseException]
+    value: BaseException
+    traceback: TracebackType
     args: tuple | None = None
     kwargs: dict | None = None
 
@@ -145,11 +145,11 @@ class Worker(QRunnable):
                 # traceback.print_exc()  # Disabled because we handle showing the error in whatever
                 # called the worker. This also prevents the runtime errors from getting printed, which
                 # are caught in an outer try block.
-                exception_type, value = sys.exc_info()[:2]
+                # Use traceback.format_exc() to get the traceback as a string.
+                # Using the raw traceback instead and letting the logger format that instead though.
+                exception_type, value, traceback = sys.exc_info()
                 self.signals.error.emit(
-                    WorkerError(
-                        exception_type, value, traceback.format_exc(), self.args, self.kwargs
-                    )
+                    WorkerError(exception_type, value, traceback, self.args, self.kwargs)
                 )
             else:
                 self.signals.result.emit(result)  # Return the result of the processing.

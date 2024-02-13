@@ -190,6 +190,18 @@ class Ui_MainWindow(object):
             icon13.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
         self.action_help_translation.setIcon(icon13)
+        self.action_report_issue = QAction(MainWindow)
+        self.action_report_issue.setObjectName(u"action_report_issue")
+        icon14 = QIcon()
+        iconThemeName = u"tools-report-bug"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon14 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon14.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.action_report_issue.setIcon(icon14)
+        self.action_simulate_exception = QAction(MainWindow)
+        self.action_simulate_exception.setObjectName(u"action_simulate_exception")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_6 = QVBoxLayout(self.centralwidget)
@@ -220,14 +232,14 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon14 = QIcon()
+        icon15 = QIcon()
         iconThemeName = u"dialog-ok-apply"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon14 = QIcon.fromTheme(iconThemeName)
+            icon15 = QIcon.fromTheme(iconThemeName)
         else:
-            icon14.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon15.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_apply_profile.setIcon(icon14)
+        self.pushButton_apply_profile.setIcon(icon15)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
 
@@ -241,14 +253,14 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
-        icon15 = QIcon()
+        icon16 = QIcon()
         iconThemeName = u"document-revert"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon15 = QIcon.fromTheme(iconThemeName)
+            icon16 = QIcon.fromTheme(iconThemeName)
         else:
-            icon15.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon16.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_reset_profile.setIcon(icon15)
+        self.pushButton_reset_profile.setIcon(icon16)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
 
@@ -407,27 +419,27 @@ class Ui_MainWindow(object):
 
         self.pushButton_abort = QPushButton(self.groupBox_4)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon16 = QIcon()
-        iconThemeName = u"process-stop"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon16 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon16.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-
-        self.pushButton_abort.setIcon(icon16)
-
-        self.verticalLayout_7.addWidget(self.pushButton_abort)
-
-        self.pushButton_start = QPushButton(self.groupBox_4)
-        self.pushButton_start.setObjectName(u"pushButton_start")
         icon17 = QIcon()
-        iconThemeName = u"media-playback-start"
+        iconThemeName = u"process-stop"
         if QIcon.hasThemeIcon(iconThemeName):
             icon17 = QIcon.fromTheme(iconThemeName)
         else:
             icon17.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton_start.setIcon(icon17)
+        self.pushButton_abort.setIcon(icon17)
+
+        self.verticalLayout_7.addWidget(self.pushButton_abort)
+
+        self.pushButton_start = QPushButton(self.groupBox_4)
+        self.pushButton_start.setObjectName(u"pushButton_start")
+        icon18 = QIcon()
+        iconThemeName = u"media-playback-start"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon18 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon18.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
+        self.pushButton_start.setIcon(icon18)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
 
@@ -771,8 +783,10 @@ class Ui_MainWindow(object):
         self.menu_Help.addAction(self.action_about)
         self.menu_Help.addAction(self.action_donate)
         self.menu_Help.addAction(self.action_help_translation)
+        self.menu_Help.addAction(self.action_report_issue)
         self.menu_Help.addSeparator()
         self.menu_Help.addAction(self.action_delete_models)
+        self.menu_Help.addAction(self.action_simulate_exception)
 
         self.retranslateUi(MainWindow)
 
@@ -804,6 +818,8 @@ class Ui_MainWindow(object):
         self.action_donate.setText(QCoreApplication.translate("MainWindow", u"Donate", None))
         self.action_remove_file.setText(QCoreApplication.translate("MainWindow", u"Remove File", None))
         self.action_help_translation.setText(QCoreApplication.translate("MainWindow", u"Help Translate Panel Cleaner", None))
+        self.action_report_issue.setText(QCoreApplication.translate("MainWindow", u"Report an Issue...", None))
+        self.action_simulate_exception.setText(QCoreApplication.translate("MainWindow", u"Simulate Exception", None))
         self.groupBox_profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 

@@ -22,6 +22,8 @@ import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
 import pcleaner.structures as st
+import pcleaner.gui.gui_utils as gu
+from pcleaner.helpers import tr
 
 
 def generate_output(
@@ -862,9 +864,9 @@ def perform_ocr(
             output_file.parent.mkdir(parents=True, exist_ok=True)
             output_file.write_text(text_out, encoding="utf-8")
             buffer.write(f"\n\nSaved detected text to {output_file}")
-        except OSError as e:
+        except OSError:
             buffer.write(f"\n\nFailed to write detected text to {output_file}")
-            logger.exception(e)
+            gu.show_exception(None, tr("Save Failed"), tr("Failed to write detected text to file."))
 
     progress_callback.emit(
         imf.ProgressData(

@@ -6,6 +6,8 @@ from typing import Sequence
 import pcleaner.config as cfg
 import pcleaner.cli_utils as cu
 
+MAX_SESSIONS = 30
+
 
 def get_username() -> str:
     """
@@ -15,6 +17,17 @@ def get_username() -> str:
     :return: The username of the current user.
     """
     return os.getlogin()
+
+
+def censor(text: str) -> str:
+    """
+    Censor the username from the log file.
+    We want to censor this in the log files for privacy.
+
+    :param text: The text to censor.
+    :return: The censored text.
+    """
+    return text.replace(get_username(), "<username>")
 
 
 class LogSession:
@@ -47,7 +60,7 @@ class LogSession:
             self.corrupted = True
 
     def censor(self) -> None:
-        self.text = self.text.replace(get_username(), "<username>")
+        self.text = censor(self.text)
 
 
 def load_log_file() -> str | None:
@@ -67,11 +80,12 @@ def load_log_file() -> str | None:
     return contents
 
 
-def parse_log_file(contents: str) -> Sequence[LogSession]:
+def parse_log_file(contents: str, max_sessions: int = MAX_SESSIONS) -> Sequence[LogSession]:
     """
     Parse the log file contents.
 
     :param contents: The log file contents.
+    :param max_sessions: The maximum number of sessions to parse.
     :return: A list of log sessions, sorted by date, newest first.
     """
 
@@ -80,22 +94,23 @@ def parse_log_file(contents: str) -> Sequence[LogSession]:
     raw_sessions = re.split(rf"({cfg.STARTUP_MESSAGE})", contents)
 
     # Pairing each startup message with its corresponding log session
-    for i in range(1, len(raw_sessions), 2):
+    for i in range(len(raw_sessions) - 2, 0, -2):
         if raw_sessions[i] == cfg.STARTUP_MESSAGE and i + 1 < len(raw_sessions):
             session_text = raw_sessions[i + 1]
-            # If there is a shutdown message, remove everything after that line, as it's the
-            # timestamp of the next startup. This shouldn't be more than 500 characters away.
+            # If there is a shutdown message, find it and truncate the session text
             shutdown_index = session_text.find(cfg.SHUTDOWN_MESSAGE, -500)
             if shutdown_index != -1:
-                # Find the end of that line.
                 shutdown_index = session_text.find("\n", shutdown_index)
                 if shutdown_index != -1:
                     session_text = session_text[:shutdown_index]
 
             session_text = session_text.strip()
 
-            # Since they are already sorted in the logfile, we simply reverse the order.
-            # This also safeguards against the case where we couldn't parse a date.
-            sessions.insert(0, LogSession(session_text))
+            # Append sessions in reverse order
+            sessions.append(LogSession(session_text))
+
+            # Stop if the maximum number of sessions is reached
+            if len(sessions) >= max_sessions:
+                break
 
     return sessions
