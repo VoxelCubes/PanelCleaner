@@ -359,9 +359,9 @@ class MaskerConfig:
     mask_growth_step_pixels: int | GreaterZero = 2
     mask_growth_steps: int = 11
     off_white_max_threshold: int = 240
+    mask_max_standard_deviation: float = 15
     mask_improvement_threshold: float = 0.1
     mask_selection_fast: bool = False
-    mask_max_standard_deviation: float = 15
     debug_mask_color: tuple[int, int, int, int] = (108, 30, 240, 127)
 
     def export_to_conf(
@@ -391,25 +391,27 @@ class MaskerConfig:
         # anything lighter than this threshold value will be rounded up to pure white.
         off_white_max_threshold = {self.off_white_max_threshold}
         
-        # Minimum improvement in standard deviation of the mask to continue shrinking it.
-        # The standard deviation refers to the variation is color along the edge of a mask.
-        # A low variation means that the mask sits in a solid color,
+        # The standard deviation of a mask represents the variation in color along the edge of the mask.
+        # For this, only the single line of pixels along the outer edge of a mask is sampled from
+        # the original image.
+        # A low deviation means that the mask sits in a solid color,
         # which means it doesn't intersect any text or other objects.
-        # Setting a higher value here requires a higher improvement to consider a smaller mask,
-        # to give a preference to larger masks.
-        mask_improvement_threshold = {self.mask_improvement_threshold}
-        
-        
-        # Whether to use the fast mask selection algorithm.
-        # When true, the mask selection algorithm will pick the first perfect mask, if one is found early.
-        # This is faster, but may not find the best mask, if a slightly bigger one would have been better.
-        mask_selection_fast = {self.mask_selection_fast}
         
         # The maximum standard deviation of a mask to consider.
         # A high value here means a higher tolerance for the mask intersecting text or other objects,
         # which isn't a good mask, as it will require inpainting anyway.
         # Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.
         mask_max_standard_deviation = {self.mask_max_standard_deviation}
+        
+        # Minimum improvement in standard deviation of the mask to continue shrinking it.
+        # Setting a higher value here requires a higher improvement to consider a larger mask,
+        # to give a preference to smaller masks.
+        mask_improvement_threshold = {self.mask_improvement_threshold}
+        
+        # Whether to use the fast mask selection algorithm.
+        # When true, the mask selection algorithm will pick the first perfect mask, if one is found early.
+        # This is faster, but may not find the best mask, if a slightly bigger one would have been better.
+        mask_selection_fast = {self.mask_selection_fast}
         
         # Color to use for the debug mask. [CLI: This is a tuple of RGBA values.]
         debug_mask_color = {','.join(map(str, self.debug_mask_color))}
