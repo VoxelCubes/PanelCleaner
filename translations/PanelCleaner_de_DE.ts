@@ -1437,29 +1437,27 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="process_strings.py" line="40"/>
+      <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</source>
+      <comment>Step description in the image details view, step: Masker, output: Fitment Quality</comment>
+      <translation>Die Standardabweichung (σ) und die Umrissdicke (in Pixeln) jeder ausgewählten besten Maske, falls vorhanden. Ein geringeres σ ist besser, von perfekt (lila) bis fehlgeschlagen (rot).</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="42"/>
+      <source>Fitment Quality</source>
+      <comment>Output name in the image details view</comment>
+      <translation>Anpassungsqualität</translation>
+    </message>
+    <message>
+      <location filename="process_strings.py" line="43"/>
       <source>The input image with the final mask overlaid in color.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
       <translation>Das Eingabebild mit der finalen Maske in Farbe überlagert.</translation>
     </message>
     <message>
-      <location filename="process_strings.py" line="42"/>
+      <location filename="process_strings.py" line="45"/>
       <source>Mask Overlay</source>
       <comment>Output name in the image details view</comment>
       <translation>Maskenüberlagerung</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="43"/>
-      <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any.
-Lower σ is better, from perfect (purple) to failed (red).</source>
-      <comment>Step description in the image details view, step: Masker, output: Match Quality</comment>
-      <translation>Die Standardabweichung (σ) und die Umrissdicke (in Pixeln) jeder ausgewählten besten Maske, falls vorhanden.
-Ein geringeres σ ist besser, von perfekt (lila) bis misslungen (rot).</translation>
-    </message>
-    <message>
-      <location filename="process_strings.py" line="45"/>
-      <source>Match Quality</source>
-      <comment>Output name in the image details view</comment>
-      <translation>Zuteilungsqualität</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="46"/>
