@@ -1037,13 +1037,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 if not self.config.save():
                     logger.error("Failed to save config.")
                     self.statusbar.showMessage(self.tr("Failed to save config."))
-                    gu.show_critical(
+                    gu.show_warning(
                         self,
                         self.tr("Save Error"),
-                        self.tr(
-                            "Failed to save the new profile to the configuration file.\n"
-                            "Continue anyway?"
-                        ),
+                        self.tr("Failed to save the new profile to the configuration file."),
                     )
                     return
                 # To suppress the change check since we don't care about discarding the current changes.
