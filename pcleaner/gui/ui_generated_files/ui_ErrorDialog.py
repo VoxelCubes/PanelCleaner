@@ -68,6 +68,12 @@ class Ui_ErrorDialog(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.label_name_hidden = QLabel(ErrorDialog)
+        self.label_name_hidden.setObjectName(u"label_name_hidden")
+        self.label_name_hidden.setText(u"<name was hidden>")
+
+        self.horizontalLayout.addWidget(self.label_name_hidden)
+
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)

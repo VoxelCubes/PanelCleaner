@@ -42,6 +42,9 @@ class IssueReporter(Qw.QDialog, Ui_IssueReporter):
         self.show_log()
 
         self.label_log_path.setText(str(cu.get_log_path()))
+        self.label_name_hidden.setText(
+            self.tr("Note: Name {name} was hidden").format(name=lp.get_username())
+        )
 
     def load_logs(self) -> None:
         """

@@ -263,12 +263,12 @@ Pages with failures / total:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="105"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="107"/>
         <source>File Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="105"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="107"/>
         <source>Failed to open file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -334,22 +334,27 @@ An AI-powered tool to clean manga panels.</source>
 <context>
     <name>ErrorDialog</name>
     <message>
-        <location filename="../ui_files/ErrorDialog.ui" line="95"/>
+        <location filename="../ui_files/ErrorDialog.ui" line="102"/>
         <source>Copy to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/ErrorDialog.ui" line="106"/>
+        <location filename="../ui_files/ErrorDialog.ui" line="113"/>
         <source>Open Issue Tracker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/ErrorDialog.ui" line="117"/>
+        <location filename="../ui_files/ErrorDialog.ui" line="124"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/error_dialog_driver.py" line="60"/>
+        <location filename="../pcleaner/gui/error_dialog_driver.py" line="41"/>
+        <source>Note: Name {name} was hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/error_dialog_driver.py" line="63"/>
         <source>Failed to load log.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -562,52 +567,57 @@ An AI-powered tool to clean manga panels.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/IssueReporter.ui" line="96"/>
+        <location filename="../ui_files/IssueReporter.ui" line="103"/>
         <source>Copy to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/IssueReporter.ui" line="107"/>
+        <location filename="../ui_files/IssueReporter.ui" line="114"/>
         <source>Open Issue Tracker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/IssueReporter.ui" line="118"/>
+        <location filename="../ui_files/IssueReporter.ui" line="125"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="61"/>
+        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="46"/>
+        <source>Note: Name {name} was hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="64"/>
         <source>Corrupted log session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="63"/>
+        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="66"/>
         <source>Current session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="66"/>
+        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="69"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="72"/>
+        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="75"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="73"/>
+        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="76"/>
         <source>Errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="76"/>
+        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="79"/>
         <source>Critical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="77"/>
+        <location filename="../pcleaner/gui/issue_reporter_driver.py" line="80"/>
         <source>Criticals</source>
         <translation type="unfinished"></translation>
     </message>
@@ -778,13 +788,13 @@ Switching profiles will discard changes to the current profile.</source>
     </message>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="954"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1058"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1055"/>
         <source>Load Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="954"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1058"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1055"/>
         <source>Failed to load profile:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -825,74 +835,73 @@ Switching profiles will discard changes to the current profile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1046"/>
-        <source>Failed to save the new profile to the configuration file.
-Continue anyway?</source>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1043"/>
+        <source>Failed to save the new profile to the configuration file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1104"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1101"/>
         <source>No Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1109"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1106"/>
         <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1149"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1146"/>
         <source>No Outputs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1152"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1149"/>
         <source>No outputs were requested. Please select at least one output before cleaning.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1163"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1160"/>
         <location filename="../ui_files/Mainwindow.ui" line="625"/>
         <source>cleaned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1241"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1238"/>
         <source>File Exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1242"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1239"/>
         <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1302"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1299"/>
         <source>Processing Finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1303"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1300"/>
         <source>Finished processing all files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1307"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1304"/>
         <source>Processing Aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1307"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1304"/>
         <source>Processing aborted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1320"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1317"/>
         <source>Processing Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1321"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1318"/>
         <source>Encountered an error while processing files.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1978,7 +1987,7 @@ Lower σ is better, from perfect (purple) to failed (red).</source>
 <context>
     <name>ProfileToolBox</name>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="398"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="404"/>
         <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>

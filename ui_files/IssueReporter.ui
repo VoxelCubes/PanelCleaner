@@ -78,6 +78,13 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
+      <widget class="QLabel" name="label_name_hidden">
+       <property name="text">
+        <string notr="true">&lt;name was hidden&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -129,14 +136,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CComboBox</class>
-   <extends>QComboBox</extends>
-   <header>pcleaner.gui.CustomQ.CComboBox</header>
-  </customwidget>
-  <customwidget>
    <class>LogViewer</class>
    <extends>QPlainTextEdit</extends>
    <header>pcleaner.gui.log_viewer</header>
+  </customwidget>
+  <customwidget>
+   <class>CComboBox</class>
+   <extends>QComboBox</extends>
+   <header>pcleaner.gui.CustomQ.CComboBox</header>
   </customwidget>
  </customwidgets>
  <resources/>
