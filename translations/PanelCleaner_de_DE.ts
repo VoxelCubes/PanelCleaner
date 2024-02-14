@@ -1171,7 +1171,7 @@ Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworf
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1174"/>
       <source>Simulate Exception</source>
-      <translation>Ausnahme simulieren</translation>
+      <translation>Error simulieren</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1010"/>
