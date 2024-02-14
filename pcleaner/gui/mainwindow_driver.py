@@ -878,7 +878,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         # Read the current profile and then compare.
         profile_in_gui = cfg.Profile()
-        self.toolBox_profile.get_profile_values(profile_in_gui)
+        self.toolBox_profile.get_profile_values(profile_in_gui, no_validation=True)
         return profile_in_gui != self.last_applied_profile
 
     def set_last_applied_profile(self) -> None:

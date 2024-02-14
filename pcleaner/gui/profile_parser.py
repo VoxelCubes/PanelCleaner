@@ -364,12 +364,16 @@ class ProfileToolBox(Qw.QToolBox):
 
         self.values_initialized = True
 
-    def get_profile_values(self, profile: cfg.Profile) -> None:
+    def get_profile_values(self, profile: cfg.Profile, no_validation: bool = False) -> None:
         """
         Save the values from the widgets to the given profile.
         Update in place.
 
+        The only value validated here is the model path. We don't want to interrupt the user while
+        typing.
+
         :param profile: The profile to save to.
+        :param no_validation: If True, skip validation of the values.
         """
         found_model_path = False
         logger.debug("Getting profile values")
@@ -384,6 +388,8 @@ class ProfileToolBox(Qw.QToolBox):
                 if key == "model_path":
                     found_model_path = True
                     if value is not None and not Path(value).exists():
+                        if no_validation:
+                            continue
                         logger.error(
                             f"Model path {value} does not exist. Please check your profile."
                         )
