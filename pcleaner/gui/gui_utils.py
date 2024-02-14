@@ -55,7 +55,9 @@ def show_exception(
     else:
         exception_type, exception_value, exception_traceback = sys.exc_info()
 
-    logger.opt(depth=1, exception=(exception_type, exception_value, exception_traceback)).error(msg)
+    logger.opt(depth=1, exception=(exception_type, exception_value, exception_traceback)).critical(
+        msg
+    )
 
     box = ErrorDialog(parent, title, msg)
     box.exec()
