@@ -39,8 +39,8 @@ class Output(IntEnum):
     box_mask = auto()
     cut_mask = auto()
     mask_layers = auto()
+    fitment_quality = auto()
     mask_overlay = auto()
-    match_quality = auto()
     final_mask = auto()
     isolated_text = auto()
     masked_output = auto()
@@ -121,9 +121,9 @@ output_to_step: dict[Output, Step] = {
     Output.box_mask: Step.masker,
     Output.cut_mask: Step.masker,
     Output.mask_layers: Step.masker,
-    Output.final_mask: Step.masker,
+    Output.fitment_quality: Step.masker,
     Output.mask_overlay: Step.masker,
-    Output.match_quality: Step.masker,
+    Output.final_mask: Step.masker,
     Output.isolated_text: Step.masker,
     Output.masked_output: Step.masker,
     Output.mask_data_json: Step.masker,
@@ -141,8 +141,8 @@ step_to_output: dict[Step, tuple[Output, ...]] = {
         Output.box_mask,
         Output.cut_mask,
         Output.mask_layers,
+        Output.fitment_quality,
         Output.mask_overlay,
-        Output.match_quality,
         Output.isolated_text,
         Output.masked_output,
         Output.final_mask,
@@ -447,18 +447,18 @@ class ImageFile:
             mk.mask_selection_fast,
             mk.mask_max_standard_deviation,
         ]
+        self.outputs[Output.fitment_quality] = ProcessOutput(
+            "The standard deviation (\u03C3) and outline thickness (in pixels) of each best mask chosen, if any. "
+            "Lower \u03C3 is better, from perfect (purple) to failed (red).",
+            "Masker",
+            "Fitment Quality",
+            settings,
+        )
         self.outputs[Output.mask_overlay] = ProcessOutput(
             "The input image with the final mask overlaid in color.",
             "Masker",
             "Mask Overlay",
             settings + [mk.debug_mask_color],
-        )
-        self.outputs[Output.match_quality] = ProcessOutput(
-            "The standard deviation (\u03C3) and outline thickness (in pixels) of each best mask chosen, if any.\n"
-            "Lower \u03C3 is better, from perfect (purple) to failed (red).",
-            "Masker",
-            "Match Quality",
-            settings,
         )
         self.outputs[Output.final_mask] = ProcessOutput(
             "The collection of masks for each bubble that fit best.",

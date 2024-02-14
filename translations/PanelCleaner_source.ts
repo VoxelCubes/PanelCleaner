@@ -1415,26 +1415,25 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
         <location filename="process_strings.py" line="40"/>
-        <source>The input image with the final mask overlaid in color.</source>
-        <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
+        <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</source>
+        <comment>Step description in the image details view, step: Masker, output: Fitment Quality</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="process_strings.py" line="42"/>
-        <source>Mask Overlay</source>
+        <source>Fitment Quality</source>
         <comment>Output name in the image details view</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="process_strings.py" line="43"/>
-        <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any.
-Lower σ is better, from perfect (purple) to failed (red).</source>
-        <comment>Step description in the image details view, step: Masker, output: Match Quality</comment>
+        <source>The input image with the final mask overlaid in color.</source>
+        <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="process_strings.py" line="45"/>
-        <source>Match Quality</source>
+        <source>Mask Overlay</source>
         <comment>Output name in the image details view</comment>
         <translation type="unfinished"></translation>
     </message>
