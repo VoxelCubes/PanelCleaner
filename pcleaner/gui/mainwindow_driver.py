@@ -663,7 +663,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.debug("Opening translation page.")
         Qg.QDesktopServices.openUrl(
             Qc.QUrl(
-                "https://crowdin.com/project/panel-cleaner/invite?h=5c2a97ea5dd60dc872c64a138e0705f61973200"
+                "https://github.com/VoxelCubes/PanelCleaner/blob/master/translations/TRANSLATING.md"
             )
         )
 
