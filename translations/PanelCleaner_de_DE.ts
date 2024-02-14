@@ -1439,13 +1439,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="process_strings.py" line="40"/>
       <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</source>
       <comment>Step description in the image details view, step: Masker, output: Fitment Quality</comment>
-      <translation type="unfinished">The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</translation>
+      <translation>Die Standardabweichung (σ) und die Umrissdicke (in Pixeln) jeder ausgewählten besten Maske, falls vorhanden. Ein geringeres σ ist besser, von perfekt (lila) bis fehlgeschlagen (rot).</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="42"/>
       <source>Fitment Quality</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Fitment Quality</translation>
+      <translation>Anpassungsqualität</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="43"/>
