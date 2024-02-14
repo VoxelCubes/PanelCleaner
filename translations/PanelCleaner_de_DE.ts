@@ -371,7 +371,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="41"/>
       <source>Note: Name {name} was hidden</source>
-      <translation type="unfinished">Note: Name {name} was hidden</translation>
+      <translation>Hinweis: Der Name {name} wurde ausgeblendet.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="63"/>
@@ -604,7 +604,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="46"/>
       <source>Note: Name {name} was hidden</source>
-      <translation type="unfinished">Note: Name {name} was hidden</translation>
+      <translation>Hinweis: Der Name {name} wurde ausgeblendet.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="64"/>
@@ -858,7 +858,7 @@ Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworf
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1043"/>
       <source>Failed to save the new profile to the configuration file.</source>
-      <translation type="unfinished">Failed to save the new profile to the configuration file.</translation>
+      <translation>Das neue Profil konnte nicht in der Konfigurationsdatei gespeichert werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1101"/>
