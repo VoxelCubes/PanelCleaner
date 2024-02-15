@@ -37,6 +37,8 @@
       <description>
         <ul>
           <li>Added a new details output: Fitment Quality. This will let you see what the standard deviation of the chosen mask is, if any.</li>
+          <li>Analytics output won't be cleared automatically anymore, instead it can be done manually.</li>
+          <li>Analytics output can now be edited by the user, so you can add your own notes while comparing effects of profile changes.</li>
           <li>Vastly improved error reporting, now enabling all users to include session logs (with username redacted for privacy).</li>
           <li>Clarified some profile settings.</li>
           <li>Fix: Analytics mislabeling the largest mask as the box mask, if there was no box mask chosen.</li>
