@@ -348,7 +348,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CTextEdit.py" line="17"/>
       <source>Clear	Ctrl+L</source>
-      <translation type="unfinished">Clear	Ctrl+L</translation>
+      <translation>Löschen Strg+L</translation>
     </message>
   </context>
   <context>
