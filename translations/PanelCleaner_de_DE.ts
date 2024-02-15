@@ -344,6 +344,14 @@ Reinige Mangas durch KI.</translation>
     </message>
   </context>
   <context>
+    <name>CTextEdit</name>
+    <message>
+      <location filename="../pcleaner/gui/CustomQ/CTextEdit.py" line="17"/>
+      <source>Clear	Ctrl+L</source>
+      <translation type="unfinished">Clear	Ctrl+L</translation>
+    </message>
+  </context>
+  <context>
     <name>ColorButton</name>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="38"/>
