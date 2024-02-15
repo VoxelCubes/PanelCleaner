@@ -573,7 +573,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             logger.error(
                 f"Failed to load included font from '{str(font_path)}'. Using backup monospace font"
             )
-        self.textEdit_analytics.setReadOnly(True)
         self.textEdit_analytics.setLineWrapMode(Qw.QTextEdit.NoWrap)
 
     # ========================================== Actions ==========================================
@@ -1323,8 +1322,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def show_current_progress(self, progress_data: imf.ProgressData) -> None:
         if progress_data.progress_type == imf.ProgressType.start:
             # Processing begins, initialize what needs to be.
-            # # Specifically, clear the analytics panel.
-            # self.textEdit_analytics.clear()
             # This one is needed because the image details panel also wants to be able to offer aborting.
             self.disable_running_cleaner()
             return
