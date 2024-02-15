@@ -200,6 +200,9 @@ def visualize_standard_deviations(
     :param output_path: The path to save the image to.
     """
 
+    text_offset_x: int = 5
+    text_offset_y: int = 1
+
     # Don't modify the original image.
     base_image = base_image.copy()
 
@@ -238,7 +241,7 @@ def visualize_standard_deviations(
             draw = ImageDraw.Draw(base_image)
             draw.rectangle(fitment.mask_box.as_tuple, outline=(0, 255, 0, 255), width=3)
             draw.text(
-                (text_x, text_y),
+                (text_x + text_offset_x, text_y + text_offset_y),
                 text,
                 font=font,
                 fill="black",
@@ -249,7 +252,7 @@ def visualize_standard_deviations(
             if fitment.analytics_mask_index < masker_data.mask_growth_steps:
                 text = f"{thickness}px"
                 draw.text(
-                    (text_x, text_y + font_size + 2),
+                    (text_x + text_offset_x, text_y + text_offset_y + font_size + 2),
                     text,
                     font=font,
                     fill="black",
@@ -282,7 +285,12 @@ def visualize_standard_deviations(
             draw.rectangle(fitment.mask_box.as_tuple, outline=(255, 0, 0, 255), width=3)
             text = f"\u03C3>{max_standard_deviation:.2f}"
             draw.text(
-                (text_x, text_y), text, font=font, fill="#900", stroke_width=3, stroke_fill="white"
+                (text_x + text_offset_x, text_y + text_offset_y),
+                text,
+                font=font,
+                fill="#900",
+                stroke_width=3,
+                stroke_fill="white",
             )
 
     # Save the image.
