@@ -25,6 +25,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QFram
 
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
 from pcleaner.gui.CustomQ.CDropFrame import CDropFrame
+from pcleaner.gui.CustomQ.CTextEdit import CTextEdit
 from pcleaner.gui.CustomQ.CTooltipLabel import CTooltipLabel
 from pcleaner.gui.file_table import FileTable
 from pcleaner.gui.image_tab import ImageTab
@@ -639,7 +640,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.horizontalLayout_3)
 
-        self.textEdit_analytics = QTextEdit(self.frame_output)
+        self.textEdit_analytics = CTextEdit(self.frame_output)
         self.textEdit_analytics.setObjectName(u"textEdit_analytics")
         self.textEdit_analytics.setDocumentTitle(u"")
         self.textEdit_analytics.setUndoRedoEnabled(False)

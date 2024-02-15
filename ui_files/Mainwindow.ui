@@ -766,7 +766,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTextEdit" name="textEdit_analytics">
+         <widget class="CTextEdit" name="textEdit_analytics">
           <property name="documentTitle">
            <string notr="true"/>
           </property>
@@ -1202,6 +1202,11 @@ p, li { white-space: pre-wrap; }
    <class>CTooltipLabel</class>
    <extends>QLabel</extends>
    <header>pcleaner.gui.CustomQ.CTooltipLabel</header>
+  </customwidget>
+  <customwidget>
+   <class>CTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>pcleaner.gui.CustomQ.CTextEdit</header>
   </customwidget>
  </customwidgets>
  <resources/>
