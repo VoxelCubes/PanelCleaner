@@ -58,9 +58,13 @@ SUFFIX_TO_ICON.update(
 # Create a dummy type to signify numbers need to be greater than 0.
 GreaterZero = NewType("GreaterZero", int)
 
+# Create a new type to signify a long description string.
+LongString = NewType("LongString", str)
+
 
 @define
 class GeneralConfig:
+    notes: LongString = ""
     preferred_file_type: str | None = None
     preferred_mask_file_type: str = ".png"
     input_height_lower_target: int = 1000
@@ -78,6 +82,9 @@ class GeneralConfig:
 
         config_str = f"""\
         [General]
+        
+        # About this profile:
+        notes = {escape_all(self.notes)}
         
         # Preferred file type to save the cleaned image as.
         # [CLI: If no file type is specified, the original file type will be used.]
@@ -122,6 +129,7 @@ class GeneralConfig:
             logger.info(f"No {section} section found in the profile, using defaults.")
             return
 
+        try_to_load(self, config_updater, section, LongString, "notes")
         try_to_load(self, config_updater, section, str | None, "preferred_file_type")
         try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, int, "input_height_lower_target")
@@ -1076,6 +1084,8 @@ def try_to_load(
             return
     elif attr_type == str:
         attr_value = conf_data
+    elif attr_type == LongString:
+        attr_value = conf_data.replace("\\n", "\n").replace("\\t", "\t").replace("\\r", "\r")
     elif attr_type == str | None:
         if conf_data == "":
             attr_value = None
@@ -1162,6 +1172,13 @@ def try_to_load(
 
 def none_to_empty(value: str | None) -> str:
     return "" if value is None else value
+
+
+def escape_all(string: str) -> str:
+    """
+    Escape all special characters in a string.
+    """
+    return string.replace("\n", "\\n").replace("\t", "\\t").replace("\r", "\\r")
 
 
 def multi_left_strip(string: str) -> str:

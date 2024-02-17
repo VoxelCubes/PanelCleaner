@@ -14,7 +14,7 @@ from loguru import logger
 from pcleaner.helpers import tr
 import pcleaner.gui.gui_utils as gu
 from pcleaner import config as cfg
-from pcleaner.config import GreaterZero
+from pcleaner.config import GreaterZero, LongString
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
 
@@ -30,6 +30,7 @@ class EntryTypes(Enum):
     IntGreater0 = auto()
     FloatGreater0 = auto()
     Str = auto()
+    LongString = auto()
     StrNone = auto()
     Color = auto()
     MimeSuffixIMG = auto()
@@ -119,6 +120,14 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_widget.textChanged.connect(self._value_changed)
             self._data_setter = self._data_widget.setText
             self._data_getter = self._data_widget.text
+
+        elif entry_type == EntryTypes.LongString:
+            self._data_widget: Qw.QPlainTextEdit = Qw.QPlainTextEdit()
+            # Limit the data widget to a height of 3 lines.
+            self._data_widget.setMaximumHeight(self._data_widget.fontMetrics().lineSpacing() * 5)
+            self._data_widget.textChanged.connect(self._value_changed)
+            self._data_setter = self._data_widget.setPlainText
+            self._data_getter = self._data_widget.toPlainText
 
         elif entry_type == EntryTypes.StrNone:
             # Convert empty strings to None and vice versa.
@@ -270,6 +279,8 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.FloatGreater0
                     elif value_type == str:
                         entry_type = EntryTypes.Str
+                    elif value_type == LongString:
+                        entry_type = EntryTypes.LongString
                     elif value_type == str | None:
                         entry_type = EntryTypes.StrNone
                     elif value_type == tuple[int, int, int, int]:
