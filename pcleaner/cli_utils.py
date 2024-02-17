@@ -14,15 +14,21 @@ def get_config_path() -> Path:
     """
     Get the path to the configuration file for both Linux and Windows.
     """
+    xdg_path = os.getenv("XDG_CONFIG_HOME") or Path.home() / ".config"
+
     if platform.system() == "Linux":
         path = Path(XDG_CONFIG_HOME, __program__, __program__ + "rc")
     elif platform.system() == "Windows":
-        path = Path(os.getenv("APPDATA"), __program__, __program__ + "config.ini")
+        path = Path(
+            xdg_path if "XDG_CONFIG_HOME" in os.environ else os.getenv("APPDATA"),
+            __program__,
+            __program__ + "config.ini",
+        )
     elif platform.system() == "Darwin":
         path = Path(
-            os.getenv("HOME"),
-            "Library",
-            "Application Support",
+            xdg_path
+            if "XDG_CONFIG_HOME" in os.environ
+            else (Path.home() / "Library" / "Application Support"),
             __program__,
             __program__ + "config.ini",
         )
@@ -43,15 +49,19 @@ def get_cache_path() -> Path:
     """
     Get the default suggested path to the cache directory for both Linux and Windows.
     """
+    xdg_path = os.getenv("XDG_CACHE_HOME") or Path.home() / ".cache"
+
     if platform.system() == "Linux":
         path = Path(XDG_CACHE_HOME, __program__)
     elif platform.system() == "Windows":
-        path = Path(os.getenv("APPDATA"), __program__, "cache")
+        path = Path(
+            xdg_path if "XDG_CACHE_HOME" in os.environ else os.getenv("APPDATA"),
+            __program__,
+            "cache",
+        )
     elif platform.system() == "Darwin":
         path = Path(
-            os.getenv("HOME"),
-            "Library",
-            "Caches",
+            xdg_path if "XDG_CACHE_HOME" in os.environ else (Path.home() / "Library" / "Caches"),
             __program__,
         )
     else:  # ???
