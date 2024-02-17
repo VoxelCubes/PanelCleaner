@@ -376,7 +376,6 @@ class ProfileToolBox(Qw.QToolBox):
         :param no_validation: If True, skip validation of the values.
         """
         found_model_path = False
-        logger.debug("Getting profile values")
         # Assign the value and connect the reset functionality for each widget.
         for section_name, section in self._widgets.items():
             for key, option_widget in section.items():
