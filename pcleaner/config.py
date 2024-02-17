@@ -1,5 +1,6 @@
 import re
 import sys
+import shutil
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, NewType
@@ -623,7 +624,31 @@ class Profile:
         """
         return hash(str(self.bundle_config()))
 
-    def write(self, path: Path) -> bool:
+    def safe_write(self, path: Path) -> bool:
+        """
+        Write to a temporary file and then move it to the destination.
+        If the write fails, the temporary file is deleted.
+
+        :param path: The path to write the profile to.
+        :return: True if the profile was written successfully, False otherwise.
+        """
+        temp_path = path.with_suffix(".tmp")
+        success = self.unsafe_write(temp_path)
+        if success:
+            try:
+                shutil.move(temp_path, path)
+            except Exception:
+                logger.exception(f"Failed to rename {temp_path} to {path}")
+                success = False
+        if not success:
+            try:
+                if temp_path.exists():
+                    temp_path.unlink()
+            except Exception:
+                logger.exception(f"Failed to delete {temp_path}")
+        return success
+
+    def unsafe_write(self, path: Path) -> bool:
         """
         Write the profile to a file.
 
@@ -635,8 +660,8 @@ class Profile:
             with open(path, "w", encoding="utf-8") as file:
                 self.bundle_config().write(file)
             return True
-        except Exception as e:
-            logger.error(f"Failed to write profile to {path}:\n{e}")
+        except Exception:
+            logger.exception(f"Failed to write profile to {path}")
             return False
 
     @classmethod
@@ -655,8 +680,8 @@ class Profile:
             profile.masker.import_from_conf(config)
             profile.denoiser.import_from_conf(config)
             profile.fix()
-        except Exception as e:
-            logger.error(f"Failed to load profile from {path}:\n{e}")
+        except Exception:
+            logger.exception(f"Failed to load profile from {path}")
             profile = cls()
             print("Failed to load profile, using default profile.")
         return profile

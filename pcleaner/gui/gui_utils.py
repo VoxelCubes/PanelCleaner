@@ -34,7 +34,11 @@ class SelectableMessageBox(Qw.QMessageBox):
 
 
 def show_exception(
-    parent, title: str, msg: str, worker_error: None | wt.WorkerError = None
+    parent,
+    title: str,
+    msg: str,
+    worker_error: None | wt.WorkerError = None,
+    collect_exception: bool = True,
 ) -> None:
     """
     Show an exception in a dialog along with logs.
@@ -43,21 +47,24 @@ def show_exception(
     :param title: The title of the dialog.
     :param msg: The message to show.
     :param worker_error: [Optional] A worker error object to read the exception from.
+    :param collect_exception: [Optional] Whether to add exception information to the log.
     """
-    exception_type: type[BaseException]
-    exception_value: BaseException
-    exception_traceback: TracebackType
 
-    if worker_error is not None:
-        exception_type = worker_error.exception_type
-        exception_value = worker_error.value
-        exception_traceback = worker_error.traceback
-    else:
-        exception_type, exception_value, exception_traceback = sys.exc_info()
+    if collect_exception:
+        exception_type: type[BaseException]
+        exception_value: BaseException
+        exception_traceback: TracebackType
 
-    logger.opt(depth=1, exception=(exception_type, exception_value, exception_traceback)).critical(
-        msg
-    )
+        if worker_error is not None:
+            exception_type = worker_error.exception_type
+            exception_value = worker_error.value
+            exception_traceback = worker_error.traceback
+        else:
+            exception_type, exception_value, exception_traceback = sys.exc_info()
+
+        logger.opt(
+            depth=1, exception=(exception_type, exception_value, exception_traceback)
+        ).critical(msg)
 
     box = ErrorDialog(parent, title, msg)
     box.exec()

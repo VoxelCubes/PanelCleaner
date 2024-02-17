@@ -1022,11 +1022,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             # Proceed to write the profile.
             logger.info(f"Saving profile to {profile_path}")
             self.toolBox_profile.get_profile_values(self.config.current_profile)
-            success = self.config.current_profile.write(profile_path)
+            success = self.config.current_profile.safe_write(profile_path)
             if not success:
                 logger.error("Failed to save profile.")
                 self.statusbar.showMessage(self.tr(f"Failed to save profile to {profile_path}"))
-                gu.show_warning(self, self.tr("Save Error"), self.tr("Failed to save profile."))
+                # Don't collect the exception, it was already logged.
+                gu.show_exception(
+                    self,
+                    self.tr("Save Error"),
+                    self.tr("Failed to save profile."),
+                    collect_exception=False,
+                )
                 return
 
             logger.info("Profile saved successfully.")

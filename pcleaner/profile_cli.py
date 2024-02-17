@@ -92,7 +92,7 @@ def new_profile(
     profile_path.parent.mkdir(parents=True, exist_ok=True)
     # Create the profile file from the built-in default.
     profile = cfg.Profile()
-    profile.write(profile_path)
+    profile.safe_write(profile_path)
 
     # Add the profile to the config.
     config.add_profile(profile_name, profile_path)
@@ -217,7 +217,7 @@ def repair_profile(config: cfg.Config, profile_name: str) -> None:
             print("Aborting.")
             return
 
-    profile.write(profile_path)
+    profile.safe_write(profile_path)
     print(f"Profile {closest_match} repaired.")
 
 
