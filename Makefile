@@ -22,7 +22,7 @@ LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.
 print-supported-languages:
 	@echo $(LANGUAGES)
 
-fresh-install: clean build install
+fresh-install: clean-build build install
 
 refresh-assets: build-icon-cache compile-qrc compile-ui refresh-i18n compile-i18n
 
@@ -30,6 +30,10 @@ refresh-assets: build-icon-cache compile-qrc compile-ui refresh-i18n compile-i18
 # build target
 build: compile-qrc compile-ui
 	$(PYTHON) -m build --outdir $(BUILD_DIR)
+
+# clean-build target
+clean-build: 
+	rm -rf $(BUILD_DIR)
 
 # compile .qrc files
 compile-qrc:
@@ -83,7 +87,16 @@ install:
 
 # clean target
 clean:
-	rm -rf $(BUILD_DIR)
+	rm -rf build
+	rm -rf dist
+	rm -rf dist-elf/PanelCleaner
+	rm -rf AppImage
+	rm -rf .pytest_cache
+	rm -rf pcleaner.egg-info
+	rm -rf AUR/panelcleaner/pkg
+	rm -rf AUR/panelcleaner/src
+	rm -rf AUR/panelcleaner/*.tar.gz
+	rm -rf AUR/panelcleaner/*.tar.zst
 
 # format the code
 black-format:
