@@ -124,7 +124,10 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
         elif entry_type == EntryTypes.LongString:
             self._data_widget: Qw.QPlainTextEdit = Qw.QPlainTextEdit()
             # Limit the data widget to a height of 3 lines.
-            self._data_widget.setMaximumHeight(self._data_widget.fontMetrics().lineSpacing() * 5)
+            self._data_widget.setMaximumHeight(self._data_widget.fontMetrics().lineSpacing() * 6)
+            size_policy = self._data_widget.sizePolicy()
+            size_policy.setVerticalPolicy(Qw.QSizePolicy.Fixed)
+            self._data_widget.setSizePolicy(size_policy)
             self._data_widget.textChanged.connect(self._value_changed)
             self._data_setter = self._data_widget.setPlainText
             self._data_getter = self._data_widget.toPlainText
@@ -330,7 +333,8 @@ class ProfileToolBox(Qw.QToolBox):
 
         for section in structure:
             section_widget = Qw.QWidget()
-            layout = Qw.QFormLayout()
+            layout = Qw.QVBoxLayout()
+            current_layout_form = Qw.QFormLayout()
             section_widget.setLayout(layout)
             self.addItem(section_widget, tr(to_display_name(section.name), context="Profile"))
             self._widgets[section.name] = {}
@@ -341,23 +345,44 @@ class ProfileToolBox(Qw.QToolBox):
                     label = Qw.QLabel(parent=self, text=tr(item.comment, context="Profile"))
                     label.setOpenExternalLinks(True)
                     label.setWordWrap(True)
-                    layout.addRow(label)
+                    current_layout_form.addRow(label)
 
                 elif isinstance(item, ProfileSpace):
-                    layout.addRow(Qw.QLabel(parent=self, text=""))
+                    current_layout_form.addRow(Qw.QLabel(parent=self, text=""))
 
                 elif isinstance(item, ProfileEntry):
                     item: ProfileEntry
+                    # Make a special exception for the notes field, which needs to take up
+                    # the entire width of the form, otherwise it is really narrow and looks
+                    # rather retarded.
+                    # The solution here is to break up the usual form layout and insert just
+                    # the options widget, not even a label. After that, resume with a new form layout.
+                    if item.key == "notes":
+                        layout.addLayout(current_layout_form)
+
+                        notes_widget = ProfileOptionWidget(item.entry_type)
+                        layout.addLayout(notes_widget)
+                        self._widgets[section.name][item.key] = notes_widget
+                        notes_widget.valueChanged.connect(self._on_value_changed)
+
+                        current_layout_form = Qw.QFormLayout()
+                        continue
+
                     label = Qw.QLabel(
                         parent=self, text=tr(to_display_name(item.key), context="Profile")
                     )
                     label.setToolTip(to_display_name(item.key))
-                    layout.addRow(label)
+                    current_layout_form.addRow(label)
                     option_widget = ProfileOptionWidget(item.entry_type)
-                    layout.addRow(label, option_widget)
+                    current_layout_form.addRow(label, option_widget)
                     option_widget.valueChanged.connect(self._on_value_changed)
 
                     self._widgets[section.name][item.key] = option_widget
+
+            # Add the form layout to the section widget.
+            layout.addLayout(current_layout_form)
+            # Tell the vbox layout to stretch the last item to fill the space.
+            layout.addStretch(1)
 
     def set_profile_values(self, profile: cfg.Profile) -> None:
         """
