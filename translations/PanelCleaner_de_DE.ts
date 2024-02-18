@@ -1546,13 +1546,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="18"/>
       <source>About this profile:</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">About this profile:</translation>
+      <translation>Über dieses Profil:</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="20"/>
       <source>Notes</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Notes</translation>
+      <translation>Notizen</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="22"/>
