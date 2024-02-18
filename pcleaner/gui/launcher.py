@@ -77,7 +77,7 @@ def launch(debug: bool = False) -> None:
     # Load translations.
     path = Qc.QLibraryInfo.location(Qc.QLibraryInfo.TranslationsPath)
     if translator.load(locale, "qt", "_", path):
-        logger.info(f"Loaded built-in Qt translations for {locale.name()}.")
+        logger.debug(f"Loaded built-in Qt translations for {locale.name()}.")
         app.installTranslator(translator)
     else:
         logger.warning(f"Failed to load Qt translations from {path}.")
@@ -85,7 +85,7 @@ def launch(debug: bool = False) -> None:
     translator = Qc.QTranslator(app)
 
     if translator.load(locale, "qtbase", "_", path):
-        logger.info(f"Loaded built-in Qt base translations for {locale.name()}.")
+        logger.debug(f"Loaded built-in Qt base translations for {locale.name()}.")
         app.installTranslator(translator)
     else:
         logger.warning(f"Failed to load Qt base translations from {path}.")
@@ -95,7 +95,7 @@ def launch(debug: bool = False) -> None:
     path = ":/translations"
     if translator.load(locale, "PanelCleaner", "_", path):
         app.installTranslator(translator)
-        logger.info(f"Loaded App translations for {locale.name()}.")
+        logger.debug(f"Loaded App translations for {locale.name()}.")
 
     Qg.QIcon.setFallbackSearchPaths([":/icons", ":/icon-themes"])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load

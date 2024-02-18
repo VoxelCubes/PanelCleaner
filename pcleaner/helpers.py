@@ -32,7 +32,7 @@ def open_file(path: Path) -> None:
     """
     Open any given file with the default application.
     """
-    logger.info(f"Opening file {path}")
+    logger.debug(f"Opening file {path}")
     try:
         if platform.system() == "Linux":
             subprocess.run(["xdg-open", path])

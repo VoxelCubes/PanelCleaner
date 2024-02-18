@@ -127,7 +127,7 @@ class GeneralConfig:
         """
         section = "General"
         if not config_updater.has_section(section):
-            logger.info(f"No {section} section found in the profile, using defaults.")
+            logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
         try_to_load(self, config_updater, section, LongString, "notes")
@@ -216,12 +216,13 @@ class TextDetectorConfig:
 
         :param config_updater: An existing config updater object.
         """
-        if not config_updater.has_section("TextDetector"):
-            logger.info("No TextDetector section found in the profile, using defaults.")
+        section = "TextDetector"
+        if not config_updater.has_section(section):
+            logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
-        try_to_load(self, config_updater, "TextDetector", str | None, "model_path")
-        try_to_load(self, config_updater, "TextDetector", int | GreaterZero, "concurrent_models")
+        try_to_load(self, config_updater, section, str | None, "model_path")
+        try_to_load(self, config_updater, section, int | GreaterZero, "concurrent_models")
 
     def fix(self) -> None:
         """
@@ -326,7 +327,7 @@ class PreprocessorConfig:
         """
         section = "Preprocessor"
         if not config_updater.has_section(section):
-            logger.info(f"No {section} section found in the profile, using defaults.")
+            logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
         try_to_load(self, config_updater, section, int, "box_min_size")
@@ -439,7 +440,7 @@ class MaskerConfig:
         """
         section = "Masker"
         if not config_updater.has_section(section):
-            logger.info(f"No {section} section found in the profile, using defaults.")
+            logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_step_pixels")
@@ -557,7 +558,7 @@ class DenoiserConfig:
         """
         section = "Denoiser"
         if not config_updater.has_section(section):
-            logger.info(f"No {section} section found in the profile, using defaults.")
+            logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
         try_to_load(self, config_updater, section, bool, "denoising_enabled")
@@ -669,7 +670,7 @@ class Profile:
         """
         Load a profile from a config file.
         """
-        logger.debug(f"Loading profile {path} from disk...")
+        logger.info(f"Loading profile {path} from disk...")
         config = cu.ConfigUpdater()
         try:
             config.read(path, encoding="utf-8")

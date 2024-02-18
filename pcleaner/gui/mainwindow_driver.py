@@ -182,7 +182,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.hide_progress_drawer()
         self.set_up_statusbar()
         # Purge any missing profiles before loading them.
-        logger.info("Purging missing profiles.")
+        logger.debug("Purging missing profiles.")
         pc.purge_missing_profiles(self.config, gui=True)
 
         self.initialize_profiles()
@@ -568,7 +568,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.debug(f"Loading included font from {str(font_path)}")
         font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
         if font_id != -1:
-            logger.info("Loaded included font")
+            logger.debug("Loaded included font")
         else:
             logger.error(
                 f"Failed to load included font from '{str(font_path)}'. Using backup monospace font"
@@ -732,7 +732,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         for profile_name, profile_path in self.config.saved_profiles.items():
             all_profiles.append((profile_name, profile_path))
 
-        logger.debug(f"Found profiles: {all_profiles}")
+        logger.info(f"Found profiles: {all_profiles}")
 
         self.comboBox_current_profile.clear()
         for profile_name, profile_path in all_profiles:
@@ -978,7 +978,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Apply the current profile.
         Read the current settings and broadcast profile changes.
         """
-        logger.info("Applying profile.")
+        logger.debug("Applying profile.")
         self.toolBox_profile.get_profile_values(self.config.current_profile)
         self.handle_profile_values_changed()
         self.set_last_applied_profile()
@@ -1007,7 +1007,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         # If the path is still none, the dialog was canceled.
         if profile_path is None:
-            logger.info("User canceled profile save.")
+            logger.debug("User canceled profile save.")
             return
 
         if make_new:
@@ -1035,7 +1035,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 )
                 return
 
-            logger.info("Profile saved successfully.")
+            logger.debug("Profile saved successfully.")
             self.statusbar.showMessage(self.tr(f"Profile saved to {profile_path}"))
             if save_as:
                 self.config.add_profile(profile_name, profile_path)

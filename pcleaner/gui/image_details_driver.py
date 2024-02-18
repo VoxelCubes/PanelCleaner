@@ -75,7 +75,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         :param profile_changed_signal: The signal that is emitted when the profile changes.
         :param abort_signal: The signal that is emitted when the worker should abort.
         """
-        logger.info(f"Opening details tab for {image_obj.path}")
+        logger.debug(f"Opening details tab for {image_obj.path}")
         Qw.QWidget.__init__(self, parent)
         self.setupUi(self)
 
@@ -533,7 +533,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         each of them.
         """
 
-        logger.info("Profile changed. Checking for changes.")
+        logger.debug("Profile changed. Checking for changes.")
 
         changed_buttons: list[BadgeButton] = []
 
@@ -689,4 +689,4 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
     def ocr_worker_finished(self) -> None:
         self.ocr_action.setEnabled(True)
-        logger.info("OCR worker finished.")
+        logger.debug("OCR worker finished.")

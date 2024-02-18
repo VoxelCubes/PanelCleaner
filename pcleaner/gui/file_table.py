@@ -192,7 +192,7 @@ class FileTable(CTableWidget):
 
         :param path: Path to the image file.
         """
-        logger.info(f'Requesting to add "{path}"')
+        logger.debug(f'Requesting to add "{path}"')
         # Make sure the file is not already in the table.
         if path in self.files:
             logger.warning(f'File "{path}" already in table.')
@@ -209,7 +209,7 @@ class FileTable(CTableWidget):
         """
         Delete all files from the table.
         """
-        logger.info(f"Clearing table")
+        logger.debug(f"Clearing table")
         self.files.clear()
         self.clearAll()
         self.check_empty()

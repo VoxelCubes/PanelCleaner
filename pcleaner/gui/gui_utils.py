@@ -106,7 +106,7 @@ def open_file(path: Path) -> None:
     """
     Open any given file with the default application.
     """
-    logger.info(f"Opening file {path}")
+    logger.debug(f"Opening file {path}")
     try:
         # Use Qt to open the file, so that it works on all platforms.
         Qg.QDesktopServices.openUrl(Qc.QUrl.fromLocalFile(str(path)))
