@@ -291,7 +291,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.statusbar.addPermanentWidget(button_config)
 
         button_log = Qw.QPushButton(self.tr("Open Log", "Statusbar button"))
-        button_log.clicked.connect(partial(gu.open_file, cu.get_log_path()))
+        button_log.clicked.connect(self.open_issue_reporter)
         button_log.setFlat(True)
         self.statusbar.addPermanentWidget(button_log)
 
