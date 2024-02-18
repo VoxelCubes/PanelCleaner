@@ -120,5 +120,38 @@ pip-install-torch-no-cuda:
 	$(PYTHON) -m pip uninstall torch torchvision -y
 	$(PYTHON) -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
+# build AppImage from ELF
+build-app-image: 
+	# appimagetool Error: Desktop file not found, aborting
+	# No idea how to fix, oh well...
+	@echo "Building AppImage..."
+	# Create AppDir structure
+	mkdir -p AppImage/PanelCleaner.AppDir/usr/bin
+	mkdir -p AppImage/PanelCleaner.AppDir/usr/lib
+	mkdir -p AppImage/PanelCleaner.AppDir/usr/share/applications
+	mkdir -p AppImage/PanelCleaner.AppDir/usr/share/icons/hicolor/256x256/apps
+	mkdir -p AppImage/PanelCleaner.AppDir/usr/share/metainfo
 
-.PHONY: clean build install fresh-install release refresh-i18n compile-i18n compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda
+	# Copy the ELF file and its dependencies
+	cp -r dist-elf/PanelCleaner/PanelCleaner AppImage/PanelCleaner.AppDir/usr/bin/
+	cp -r dist-elf/PanelCleaner/_internal/* AppImage/PanelCleaner.AppDir/usr/lib/
+	
+	# Copy desktop file and icon
+	cp PanelCleaner.desktop AppImage/PanelCleaner.AppDir/usr/share/applications/
+	cp icons/logo-big.png AppImage/PanelCleaner.AppDir/usr/share/icons/hicolor/256x256/apps/PanelCleaner.png
+
+	# Copy AppStream metadata
+	cp flatpak/io.github.voxelcubes.panelcleaner.appdata.xml AppImage/PanelCleaner.AppDir/usr/share/metainfo/
+
+
+	# Create AppRun script
+	echo -e "#!/bin/bash\nexec \$${APPDIR}/usr/bin/PanelCleaner" > AppImage/PanelCleaner.AppDir/AppRun
+	chmod +x AppImage/PanelCleaner.AppDir/AppRun
+
+	# Use appimagetool to create the AppImage
+	appimagetool -v AppImage/PanelCleaner.AppDir -n -u "gh-releases-zsync|VoxelCubes|PanelCleaner|latest" PanelCleaner-x86_64.AppImage
+
+	@echo "AppImage built successfully."
+
+
+.PHONY: clean build install fresh-install release refresh-i18n compile-i18n compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda, build-elf, build-app-image

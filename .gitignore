@@ -12,6 +12,7 @@ profile.json
 *.qm
 translations/profile_strings.py
 translations/process_strings.py
+AppImage/
 
 AUR/*
 
