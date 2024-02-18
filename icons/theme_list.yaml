@@ -19,6 +19,7 @@ Files:
       - document-scan
       - download
       - edit-clear-history
+      - edit-copy
       - edit-delete
       - edit-delete-remove
       - edit-reset

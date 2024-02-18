@@ -15,6 +15,7 @@
     <file>breeze/actions/16/document-scan.svg</file>
     <file>breeze/actions/16/download.svg</file>
     <file>breeze/actions/16/edit-clear-history.svg</file>
+    <file>breeze/actions/16/edit-copy.svg</file>
     <file>breeze/actions/16/edit-delete.svg</file>
     <file>breeze/actions/16/edit-delete-remove.svg</file>
     <file>breeze/actions/16/edit-reset.svg</file>
@@ -59,6 +60,7 @@
     <file>breeze-dark/actions/16/document-scan.svg</file>
     <file>breeze-dark/actions/16/download.svg</file>
     <file>breeze-dark/actions/16/edit-clear-history.svg</file>
+    <file>breeze-dark/actions/16/edit-copy.svg</file>
     <file>breeze-dark/actions/16/edit-delete.svg</file>
     <file>breeze-dark/actions/16/edit-delete-remove.svg</file>
     <file>breeze-dark/actions/16/edit-reset.svg</file>
