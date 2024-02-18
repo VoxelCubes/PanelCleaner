@@ -33,16 +33,18 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="2.3.0" date="2024-02-15">
+    <release version="2.3.0" date="2024-02-18">
       <description>
         <ul>
           <li>Added a new details output: Fitment Quality. This will let you see what the standard deviation of the chosen mask is, if any.</li>
           <li>Analytics output won't be cleared automatically anymore, instead it can be done manually.</li>
           <li>Analytics output can now be edited by the user, so you can add your own notes while comparing effects of profile changes.</li>
-          <li>Vastly improved error reporting, now enabling all users to include session logs (with username redacted for privacy).</li>
+          <li>Vastly improved error reporting, now enabling all users to easily see and include session logs (with username redacted for privacy).</li>
+          <li>Added a new profile field to include notes about that profile.</li>
           <li>Clarified some profile settings.</li>
+          <li>Support the XDG_CONFIG_HOME and XDG_CACHE_HOME environment variables on non-Linux platforms too. This will let you change where cache and config files are stored.</li>
           <li>Fix: Analytics mislabeling the largest mask as the box mask, if there was no box mask chosen.</li>
-          <li>Fix: Flathub changelog missing tag</li>
+          <li>Fix: Flathub changelog not showing up</li>
         </ul>
       </description>
     </release>
