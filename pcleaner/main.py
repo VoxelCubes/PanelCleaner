@@ -145,10 +145,13 @@ def main() -> None:
     args = docopt(__doc__, version=f"Panel Cleaner {__version__}")
     # Loglevel is Warning by default.
     logger.remove()
-    if args.debug:
-        logger.add(sys.stdout, level="DEBUG")
-    else:
-        logger.add(sys.stdout, level="WARNING")
+
+    # When bundling an executable, this can be None if no console is supplied.
+    if sys.stdout is not None:
+        if args.debug:
+            logger.add(sys.stdout, level="DEBUG")
+        else:
+            logger.add(sys.stdout, level="WARNING")
 
     logger.debug(args)
 
