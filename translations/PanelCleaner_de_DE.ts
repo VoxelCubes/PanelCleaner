@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="709"/>
+      <location filename="../pcleaner/config.py" line="742"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>standard</translation>
@@ -281,12 +281,12 @@ Seiten mit Fehlern / insgesamt:
       <translation>Entrauscht</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="107"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="114"/>
       <source>File Error</source>
       <translation>Datei-Fehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="107"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="114"/>
       <source>Failed to open file.</source>
       <translation>Die Datei konnte nicht geöffnet werden.</translation>
     </message>
@@ -703,12 +703,12 @@ Reinige Mangas durch KI.</translation>
       <translation>Fehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="587"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="586"/>
       <source>Delete Models</source>
       <translation>Modelle Löschen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="591"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="590"/>
       <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
       <translation>Sind Sie sicher, dass Sie die Modelle für maschinelles Lernen löschen wollen? Dadurch werden Reinigung und OCR unmöglich, bis sie erneut heruntergeladen werden.</translation>
     </message>
@@ -718,219 +718,219 @@ Reinige Mangas durch KI.</translation>
       <translation>Ein Fehler ist aufgetreten:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="600"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="599"/>
       <source>Failed to delete models.</source>
       <translation>Modelldaten konnten nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="600"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="599"/>
       <source>Delete Failed</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="606"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="605"/>
       <source>Models Deleted</source>
       <translation>Modelldaten Gelöscht</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="607"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="606"/>
       <source>The models were deleted. Would you like to download them again?</source>
       <translation>Die Modelldaten wurden gelöscht. Möchten Sie sie erneut herunterladen?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="696"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="695"/>
       <source>Restart Required</source>
       <translation>Neustart Erforderlich</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="699"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="698"/>
       <source>The language has been changed. Please restart the application for the changes to take effect.</source>
       <translation>Die Sprache wurde geändert. Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</translation>
     </message>
     <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="708"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="709"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="710"/>
       <source>System Language</source>
       <translation>Systemsprache</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="809"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="808"/>
       <source>Import Profile</source>
       <translation>Profil Importieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="811"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="810"/>
       <source>Profile Files (*.conf)</source>
       <translation>Profildateien (*.conf)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="818"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="817"/>
       <source>Profile Imported</source>
       <translation>Profil Importiert</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="820"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="819"/>
       <source>Import Error</source>
       <translation>Fehler beim Importieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="838"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="837"/>
       <source>Failed to Delete</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="839"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="838"/>
       <source>The default profile cannot be deleted.</source>
       <translation>Das Standardprofil kann nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="843"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="842"/>
       <source>Delete Profile</source>
       <translation>Profil Löschen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="844"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="843"/>
       <source>Are you sure you want to delete the profile {profile_name}?</source>
       <translation>Sind Sie sicher, dass Sie das Profil {profile_name} löschen möchten?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="858"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="857"/>
       <source>Delete Error</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="859"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="858"/>
       <source>Failed to delete the profile.</source>
       <translation>Das Profil konnte nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="922"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="921"/>
       <source>The profile &apos;{profile}&apos; has unsaved changes.
 Switching profiles will discard changes to the current profile.</source>
       <translation>Das Profil &apos;{profile}&apos; hat ungespeicherte Änderungen.
 Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworfen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="925"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="924"/>
       <source>Unsaved changes</source>
       <translation>Ungespeicherte Änderungen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="954"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1055"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="953"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1060"/>
       <source>Load Error</source>
       <translation>Fehler beim Laden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="954"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1055"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="953"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1060"/>
       <source>Failed to load profile:</source>
       <translation>Das Profil konnte nicht geladen werden:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1017"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1016"/>
       <source>Profile Created</source>
       <translation>Profil Erstellt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1020"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1019"/>
       <source>Create Error</source>
       <translation>Fehler beim Erstellen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1029"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1028"/>
       <source>Failed to save profile to {profile_path}</source>
       <translation>Das Profil konnte nicht in {profile_path} gespeichert werden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1030"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1042"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1032"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1047"/>
       <source>Save Error</source>
       <translation>Fehler beim Speichern</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1030"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1033"/>
       <source>Failed to save profile.</source>
       <translation>Das Profil konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1034"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1039"/>
       <source>Profile saved to {profile_path}</source>
       <translation>Profil gespeichert in {profile_path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1039"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1044"/>
       <source>Failed to save config.</source>
       <translation>Konfiguration konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1043"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1048"/>
       <source>Failed to save the new profile to the configuration file.</source>
       <translation>Das neue Profil konnte nicht in der Konfigurationsdatei gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1101"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1106"/>
       <source>No Files</source>
       <translation>Keine Dateien</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1106"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1111"/>
       <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
       <translation>Keine Dateien zu verarbeiten. Sie können Dateien in der Mitte des Fensters ablegen oder über die Menüleiste hinzufügen: Dateien -&gt; Dateien hinzufügen oder Ordner hinzufügen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1146"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1151"/>
       <source>No Outputs</source>
       <translation>Keine Ausgaben</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1149"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1154"/>
       <source>No outputs were requested. Please select at least one output before cleaning.</source>
       <translation>Es wurden keine Ausgaben angefordert. Bitte wählen Sie vor der Reinigung mindestens eine Ausgabe aus.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1160"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1165"/>
       <location filename="../ui_files/Mainwindow.ui" line="625"/>
       <source>cleaned</source>
       <translation>gereinigt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1238"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1243"/>
       <source>File Exists</source>
       <translation>Datei Bereits Vorhanden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1239"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1244"/>
       <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
       <translation>Die Datei &apos;{output_path}&apos; existiert bereits. Wollen Sie diese überschreiben?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1299"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1304"/>
       <source>Processing Finished</source>
       <translation>Verarbeitung Beendet</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1300"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1305"/>
       <source>Finished processing all files.</source>
       <translation>Die Verarbeitung aller Dateien ist abgeschlossen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1304"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1309"/>
       <source>Processing Aborted</source>
       <translation>Abbruch</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1304"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1309"/>
       <source>Processing aborted.</source>
       <translation>Die Verarbeitung wurde abgebrochen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1317"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1322"/>
       <source>Processing Error</source>
       <translation>Verarbeitungsfehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1318"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1323"/>
       <source>Encountered an error while processing files.</source>
       <translation>Bei der Verarbeitung von Dateien ist ein Fehler aufgetreten.</translation>
     </message>
@@ -1544,455 +1544,467 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="18"/>
+      <source>About this profile:</source>
+      <comment>Profile comment in General</comment>
+      <translation type="unfinished">About this profile:</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="20"/>
+      <source>Notes</source>
+      <comment>Profile entry in General</comment>
+      <translation type="unfinished">Notes</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="22"/>
       <source>Preferred file type to save the cleaned image as.</source>
       <comment>Profile comment in General</comment>
       <translation>Bevorzugter Dateityp, unter dem das bereinigte Bild gespeichert werden soll.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="20"/>
+      <location filename="profile_strings.py" line="24"/>
       <source>Preferred File Type</source>
       <comment>Profile entry in General</comment>
       <translation>Bevorzugter Dateityp</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="22"/>
+      <location filename="profile_strings.py" line="26"/>
       <source>Preferred file type to save the mask as. Only image formats that allow for transparency are supported.</source>
       <comment>Profile comment in General</comment>
       <translation>Bevorzugter Dateityp, unter dem die Maske gespeichert werden soll. Es werden nur Bildformate unterstützt, die Transparenz zulassen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="24"/>
+      <location filename="profile_strings.py" line="28"/>
       <source>Preferred Mask File Type</source>
       <comment>Profile entry in General</comment>
       <translation>Bevorzugter Maskendateityp</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="26"/>
+      <location filename="profile_strings.py" line="30"/>
       <source>The following are the lower and upper targets for the height of the input image. It is only ever scaled down to fit within the range, preferring whole number factors to minimize the impact on image quality. Images smaller than either target will remain unchanged. You can disable this feature by setting one or both values less than or equal to 0.</source>
       <comment>Profile comment in General</comment>
       <translation>Im Folgenden sind die unteren und oberen Zielwerte für die Höhe des Eingabebildes aufgeführt. Es wird immer nur so weit verkleinert, dass es in den Bereich passt, wobei ganzzahlige Faktoren bevorzugt werden, um die Auswirkungen auf die Bildqualität zu minimieren. Bilder, die kleiner als der obere Zielwerte sind, bleiben unverändert. Sie können diese Funktion deaktivieren, indem Sie einen oder beide Werte kleiner als oder gleich 0 setzen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="28"/>
+      <location filename="profile_strings.py" line="32"/>
       <source>This is useful for significantly speeding up processing on large images. Also, since other options relying on pixel dimensions depend on size, this will help normalize the results across different image sizes.</source>
       <comment>Profile comment in General</comment>
       <translation>Dies ist nützlich, um die Verarbeitung von großen Bildern erheblich zu beschleunigen. Da andere Optionen, die sich auf die Pixeldimensionen stützen, von der Größe abhängen, hilft dies außerdem, die Ergebnisse für verschiedene Bildgrößen zu normalisieren.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="30"/>
+      <location filename="profile_strings.py" line="34"/>
       <source>The image will be scaled down, processed, and then only the mask is scaled back up. Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality. Only the height of the image is used to determine the scale factor, preserving the aspect ratio, and ignoring the individual width of an image so that the factor remains consistent if one of the pages is a double page spread.</source>
       <comment>Profile comment in General</comment>
       <translation>Das Bild wird verkleinert, verarbeitet und dann wird nur die Maske wieder hochskaliert. Das bedeutet, dass für die bereinigte Ausgabe weiterhin das ursprüngliche, nicht skalierte Bild verwendet wird, um Qualitätsverluste zu verhindern. Zur Bestimmung des Skalierungsfaktors wird nur die Höhe des Bildes betrachtet, wobei das Seitenverhältnis erhalten bleibt und die individuelle Breite eines Bildes ignoriert wird, so dass der Faktor konsistent bleibt, wenn es sich bei einem Bild um eine Doppelseite handelt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="32"/>
+      <location filename="profile_strings.py" line="36"/>
       <source>E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.</source>
       <comment>Profile comment in General</comment>
       <translation>Z.B. für ein unteres Ziel von 1000 und ein oberes Ziel von 2000 wird ein Bild mit der Größe 5000x7000 (B, H) Pixel um den Faktor 4 verkleinert, sodass es bei der Verarbeitung die Größe 1250x1750 Pixel hat.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="34"/>
+      <location filename="profile_strings.py" line="38"/>
       <source>Input Height Lower Target</source>
       <comment>Profile entry in General</comment>
       <translation>Eingabehöhe unteres Ziel</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="36"/>
+      <location filename="profile_strings.py" line="40"/>
       <source>Input Height Upper Target</source>
       <comment>Profile entry in General</comment>
       <translation>Eingabehöhe oberes Ziel</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="38"/>
+      <location filename="profile_strings.py" line="42"/>
       <source>Text Detector</source>
       <comment>Profile section title</comment>
       <translation>Text-Erkennung</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="40"/>
+      <location filename="profile_strings.py" line="44"/>
       <source>Path to the text detection model, leave empty to use the built-in model. It is only recommended to override this if the version downloaded automatically is older than the latest release. The path must point directly to the comictextdetector.pt (CUDA) or comictextdetector.pt.onnx (CPU) file. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</source>
       <oldsource>Path to the text detection model, leave empty to use the built-in model. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</oldsource>
       <comment>Profile comment in Text Detector</comment>
       <translation>Pfad zum Texterkennungsmodell. Leer lassen, um das integrierte Modell zu verwenden. Es wird nur empfohlen, dies zu überschreiben, wenn die automatisch heruntergeladene Version älter ist als die neueste Version. Der Pfad muss direkt auf die Datei comictextdetector.pt (CUDA) oder comictextdetector.pt.onnx (CPU) verweisen. Sie können ältere Versionen des Modells  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;hier herunterladen.&lt;/a&gt;</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="42"/>
+      <location filename="profile_strings.py" line="46"/>
       <source>Model Path</source>
       <comment>Profile entry in Text Detector</comment>
       <translation>Modell Pfad</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="44"/>
+      <location filename="profile_strings.py" line="48"/>
       <source>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk.</source>
       <oldsource>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available.</oldsource>
       <comment>Profile comment in Text Detector</comment>
       <translation>Anzahl der Modelle, die parallel ausgeführt werden sollen. Dies ist nützlich, wenn Sie über genügend RAM (oder VRAM bei CUDA) verfügen, um mehrere Modelle gleichzeitig auszuführen. Dies erhöht natürlich die Geschwindigkeit des Prozesses, kann aber auch Ihren Computer zum Absturz bringen, wenn Sie Ihre Hardware überschätzen. Ich empfehle, 1 Modell pro 2 GB verfügbaren Speicher oder 1 Modell pro 50 Bilder zu verwenden. Hinweis: Dies wird ignoriert, wenn weniger als 50 Dateien verarbeitet werden, da sich der Overhead des Starts mehrerer Modelle darunter nicht lohnt. Warnung: Dies kann zur Instabilität des Programms führen, die Verwendung erfolgt auf eigene Gefahr.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="46"/>
+      <location filename="profile_strings.py" line="50"/>
       <source>Concurrent Models</source>
       <comment>Profile entry in Text Detector</comment>
       <translation>Parallele Modelle</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="48"/>
+      <location filename="profile_strings.py" line="52"/>
       <source>Preprocessor</source>
       <comment>Profile section title</comment>
       <translation>Präprozessor</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="50"/>
+      <location filename="profile_strings.py" line="54"/>
       <source>Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Die Größe der Felder wird in der Gesamtzahl der Pixel angegeben. Ein Feld von 200x200 Pixeln hat also eine Größe von 200 * 200 = 40000.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="52"/>
+      <location filename="profile_strings.py" line="56"/>
       <source>Minimum size of any box to keep it.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Mindestgröße eines Feldes, damit es nicht verworfen wird.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="54"/>
+      <location filename="profile_strings.py" line="58"/>
       <source>Box Min Size</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Min. Feldgröße</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="56"/>
+      <location filename="profile_strings.py" line="60"/>
       <source>Minimum size of a box with &quot;unknown&quot; language to keep it. This language is typically assigned to logos and other badly behaved text elements.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Mindestgröße eines Feldes mit &quot;unbekannter&quot; Sprache, um es nicht zu verwerfen. Diese Sprache wird in der Regel für Logos und andere Textelemente verwendet, wo die KI nicht weiß, was sie mit ihnen anfangen soll.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="58"/>
+      <location filename="profile_strings.py" line="62"/>
       <source>Suspicious Box Min Size</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Verdächtige Min. Feldgröße</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="60"/>
+      <location filename="profile_strings.py" line="64"/>
       <source>Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Ob OCR verwendet werden soll, um Felder zu erkennen, die nicht bereinigt werden sollten, z. B. Felder, die nur Zahlen oder Symbole enthalten.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="62"/>
+      <location filename="profile_strings.py" line="66"/>
       <source>OCR Enabled</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>OCR Aktiviert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="64"/>
+      <location filename="profile_strings.py" line="68"/>
       <source>Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Maximale Größe eines Feldes, für das OCR durchgeführt werden soll. Die Unsinnsfelder sind in der Regel klein und die OCR ist langsam, daher sollten Sie dies als Grenzwert verwenden.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="66"/>
+      <location filename="profile_strings.py" line="70"/>
       <source>OCR Max Size</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>OCR Max. Größe</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="68"/>
+      <location filename="profile_strings.py" line="72"/>
       <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Regex-Muster zum Abgleich mit OCR-Ergebnissen. Alles, was mit diesem Muster übereinstimmt, wird verworfen. Beachten Sie, dass das OCR-Modell Sonderzeichen in voller Breite zurückgibt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="70"/>
+      <location filename="profile_strings.py" line="74"/>
       <source>OCR Blacklist Pattern</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>OCR-Blacklist-Muster</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="72"/>
+      <location filename="profile_strings.py" line="76"/>
       <source>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Das OCR-Modell kann nur japanischen Text verarbeiten. Wenn also die Option Strenge Spracherkennung aktiviert ist, werden Felder verworfen, von denen nicht sicher ist, dass sie japanisch sind. Manchmal verunsichern Zahlen oder andere Symbole die KI, was dazu führt, dass die erkannte Sprache unbekannt ist. Wenn Streng deaktiviert ist, werden diese nicht verworfen. Alles, was mit Sicherheit als eine andere Sprache erkannt wird, wird unabhängig von dieser Einstellung verworfen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="74"/>
+      <location filename="profile_strings.py" line="78"/>
       <source>OCR Strict Language</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>OCR Strenge Spracherkennung</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="76"/>
+      <location filename="profile_strings.py" line="80"/>
       <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu den initialen Feldern hinzugefügt, die durch die Texterkennungs-KI erstellt wurden. Diese Rahmen werden in Grün dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="78"/>
+      <location filename="profile_strings.py" line="82"/>
       <source>Box Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="80"/>
-      <location filename="profile_strings.py" line="88"/>
+      <location filename="profile_strings.py" line="84"/>
+      <location filename="profile_strings.py" line="92"/>
       <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung für die rechte Seite eines Feldes. Diese Erweiterung hilft dabei, Rubytext zu verdecken, der rechts von vertikalem Text übersteht.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="82"/>
+      <location filename="profile_strings.py" line="86"/>
       <source>Box Right Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Rechts Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="84"/>
+      <location filename="profile_strings.py" line="88"/>
       <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu einem erweiterten Satz von Feldern hinzugefügt, die verwendet werden, um Falschmeldungen durch die KI-Maske des Texterkenners auszuschließen. Diese Kästchen werden in lila dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="86"/>
+      <location filename="profile_strings.py" line="90"/>
       <source>Box Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Erweitert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="90"/>
+      <location filename="profile_strings.py" line="94"/>
       <source>Box Right Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Rechts Erweitert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="92"/>
+      <location filename="profile_strings.py" line="96"/>
       <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu den Referenzfeldern hinzugefügt, die bei der Analyse der zu verwendenden Maske zum Abtasten des Originalbildes verwendet werden. Diese Rahmen werden in Blau dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="94"/>
+      <location filename="profile_strings.py" line="98"/>
       <source>Box Reference Padding</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Referenz</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="96"/>
+      <location filename="profile_strings.py" line="100"/>
       <source>Masker</source>
       <comment>Profile section title</comment>
       <translation>Maskierer</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="98"/>
+      <location filename="profile_strings.py" line="102"/>
       <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Anzahl der Pixel, um die die Maske bei jedem Schritt vergrößert wird. Dadurch wird der Umriss der Maske vergrößert. Kleinere Werte sind also genauer, aber langsamer.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="100"/>
+      <location filename="profile_strings.py" line="104"/>
       <source>Mask Growth Step Pixels</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenwachstum pro Schritt</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="102"/>
+      <location filename="profile_strings.py" line="106"/>
       <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Anzahl der Schritte, um die die Maske wachsen soll. Bei einer höheren Zahl werden mehr und immer größere Masken erstellt, die letztlich durch die Größe des Referenzfeldes begrenzt sind.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="104"/>
+      <location filename="profile_strings.py" line="108"/>
       <source>Mask Growth Steps</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenwachstumsschritte</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="106"/>
+      <location filename="profile_strings.py" line="110"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Maximaler Schwellenwert, ab dem ein Pixel nicht als weiß gilt. Die Medianfarbe entlang des Randes einer Maske ist möglicherweise nicht reinweiß. Um leichte gebrochene Weißtöne auf einem reinweißen Hintergrund zu vermeiden, wird alles, was heller als dieser Schwellenwert ist, auf reinweiß aufgerundet.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="108"/>
+      <location filename="profile_strings.py" line="112"/>
       <source>Off White Max Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation>Max. Schwellenwert für gebrochenes Weiß</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="110"/>
+      <location filename="profile_strings.py" line="114"/>
       <source>The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</oldsource>
       <comment>Profile comment in Masker</comment>
       <translation>Die Standardabweichung einer Maske stellt die Farbabweichung entlang des Randes der Maske dar. Dazu werden nur die einzelnen Pixel entlang des äußeren Randes einer Maske aus dem Originalbild abgetastet. Eine geringe Abweichung bedeutet, dass die Maske auf einem gleichmäßigen Hintergrund liegt, d. h. sie überschneidet keinen Text oder andere Objekte.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="116"/>
+      <location filename="profile_strings.py" line="120"/>
       <source>Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</oldsource>
       <comment>Profile comment in Masker</comment>
       <translation>Minimale Verbesserung der Standardabweichung der Maske, um sie weiter zu vergrößern. Wird hier ein höherer Wert eingestellt, so ist eine höhere Verbesserung erforderlich, um eine größere Maske zu berücksichtigen, um kleineren Masken den Vorzug zu geben.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="118"/>
+      <location filename="profile_strings.py" line="122"/>
       <source>Mask Improvement Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenverbesserungsschwellwert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="120"/>
+      <location filename="profile_strings.py" line="124"/>
       <source>Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Auswahl, ob der schnelle Maskenauswahlalgorithmus verwendet werden soll. Wenn diese Option aktiviert ist, wählt der Algorithmus für die Maskenauswahl die erste perfekte Maske aus, wenn eine solche früh gefunden wird. Dies ist schneller, aber es kann sein, dass nicht die beste Maske gefunden wird, wenn eine etwas größere besser gewesen wäre.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="122"/>
+      <location filename="profile_strings.py" line="126"/>
       <source>Mask Selection Fast</source>
       <comment>Profile entry in Masker</comment>
       <translation>Schnelle Maskenauswahl</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="112"/>
+      <location filename="profile_strings.py" line="116"/>
       <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Die maximale Standardabweichung einer Maske, die berücksichtigt werden soll. Ein hoher Wert bedeutet eine höhere Toleranz für eine Maske, die Text oder andere Objekte überschneidet, was keine gute Maske ist, da dieses Feld ohnehin manuelle Korrekturen benötigen wird. Wenn Sie diesen Wert auf 0 setzen, werden nur perfekte Masken zugelassen, was für Bilder mit sehr hoher Auflösung empfohlen wird.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="114"/>
+      <location filename="profile_strings.py" line="118"/>
       <source>Mask Max Standard Deviation</source>
       <comment>Profile entry in Masker</comment>
       <translation>Max. Standardabweichung einer Maske</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="124"/>
+      <location filename="profile_strings.py" line="128"/>
       <source>Color to use for the debug mask.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Farbe, die für die Debug-Maske verwendet werden soll.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="126"/>
+      <location filename="profile_strings.py" line="130"/>
       <source>Debug Mask Color</source>
       <comment>Profile entry in Masker</comment>
       <translation>Farbe der Debug-Maske</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="128"/>
+      <location filename="profile_strings.py" line="132"/>
       <source>Denoiser</source>
       <comment>Profile section title</comment>
       <translation>Entrauscher</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="130"/>
+      <location filename="profile_strings.py" line="134"/>
       <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wenn ein Stück Text schwer zu maskieren ist, musste bei der Bereinigung wahrscheinlich eine kleine Maske gewählt werden, die ggf. eine Menge JPEG-Artefakte um den Text herum zurücklässt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="132"/>
+      <location filename="profile_strings.py" line="136"/>
       <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Das bedeutet, dass die Farbe der Pixel um den Rand einer Maske herum nicht einheitlich ist, was als Standardabweichung quantifiziert wird. Der Entrauscher kann auf Masken ab einer minimalen Standardabweichung abzielen und den Bereich unmittelbar um die Maske herum entrauschen. Dadurch bleiben die Details im restlichen Bild erhalten, aber die Artefakte im Bereich des ehemaligen Textes werden entfernt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="134"/>
+      <location filename="profile_strings.py" line="138"/>
       <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Da es sich hierbei um einen optionalen Schritt handelt, der bei hochaufgelösten Bildern, die nicht unter JPEG-Artefakten leiden, sogar überflüssig ist, kann er hier deaktiviert werden.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="136"/>
+      <location filename="profile_strings.py" line="140"/>
       <source>Denoising Enabled</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Entrauschen Aktiviert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="138"/>
+      <location filename="profile_strings.py" line="142"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Die minimale Standardabweichung der Farben um den Rand einer gegebenen Maske, um eine Entrauschung in dem Bereich um die Maske durchzuführen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="140"/>
+      <location filename="profile_strings.py" line="144"/>
       <source>Noise Min Standard Deviation</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschen Min. Standardabweichung</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="142"/>
+      <location filename="profile_strings.py" line="146"/>
       <source>The thickness of an outline to denoise around a mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Die Dicke eines Umrisses, der um eine Maske herum entrauscht werden soll.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="144"/>
+      <location filename="profile_strings.py" line="148"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschumrissgröße</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="146"/>
+      <location filename="profile_strings.py" line="150"/>
       <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Blenden Sie die Ränder der entrauschten Abdeckmaske um diesen Wert ab, um die entrauschten Teile sanft in den Rest des Bildes zu integrieren.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="148"/>
+      <location filename="profile_strings.py" line="152"/>
       <source>Noise Fade Radius</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschblendenradius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="150"/>
+      <location filename="profile_strings.py" line="154"/>
       <source>Set to True to support colored images.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Bilder mit Farbe entrauschen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="152"/>
+      <location filename="profile_strings.py" line="156"/>
       <source>Colored Images</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Farbige Bilder</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="154"/>
+      <location filename="profile_strings.py" line="158"/>
       <source>How strongly to denoise the image. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wie stark das Bild entrauscht werden soll. Höhere Werte bedeuten eine stärkere Rauschunterdrückung.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="156"/>
+      <location filename="profile_strings.py" line="160"/>
       <source>Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Filterstärke</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="158"/>
+      <location filename="profile_strings.py" line="162"/>
       <source>How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wie stark die Farbkanäle entrauscht werden sollen, im Gegensatz zur Helligkeit. Höhere Werte bedeuten mehr Rauschunterdrückung.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="160"/>
+      <location filename="profile_strings.py" line="164"/>
       <source>Color Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Farbfilterstärke</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="162"/>
+      <location filename="profile_strings.py" line="166"/>
       <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Größe des Kontextfensters in Pixeln, das für die Berechnung der Gewichte verwendet wird. Sollte ungerade sein.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="164"/>
+      <location filename="profile_strings.py" line="168"/>
       <source>Template Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Kontextfenstergröße</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="166"/>
+      <location filename="profile_strings.py" line="170"/>
       <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Größe des Fensters in Pixeln, das zur Berechnung des gewichteten Durchschnitts für ein bestimmtes Pixel verwendet wird. Sollte ungerade sein.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="168"/>
+      <location filename="profile_strings.py" line="172"/>
       <source>Search Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Suchfenstergröße</translation>
@@ -2001,13 +2013,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
   <context>
     <name>ProfileOptionWidget</name>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="87"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="88"/>
       <source>Reset to default</source>
       <comment>Generic reset button tooltip</comment>
       <translation>Auf Standardwerte zurücksetzen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="156"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="168"/>
       <source>Same as image</source>
       <comment>Profile default option for the file type</comment>
       <translation>Wie Originalbild</translation>
@@ -2016,7 +2028,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
   <context>
     <name>ProfileToolBox</name>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="404"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="439"/>
       <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
       <translation>&lt;html&gt;Der Pfad für das Text-Detektor-Modell {value} existiert nicht und wird auf die Standardeinstellungen zurückgesetzt.
