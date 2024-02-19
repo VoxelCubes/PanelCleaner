@@ -29,12 +29,17 @@
     <!-- Replace the URL below with a screenshot of your application -->
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_1.png</image>
+      <caption>Fine-tune cleaning for your images</caption>
+    </screenshot>
+    <screenshot>
       <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_2.png</image>
+      <caption>Process many images at a time</caption>
     </screenshot>
   </screenshots>
   <releases>
     <release version="2.3.0" date="2024-02-18">
       <description>
+        <p>Changelog</p>
         <ul>
           <li>Added a new details output: Fitment Quality. This will let you see what the standard deviation of the chosen mask is, if any.</li>
           <li>Analytics output won't be cleared automatically anymore, instead it can be done manually.</li>
@@ -50,6 +55,7 @@
     </release>
     <release version="2.2.0" date="2024-01-30">
       <description>
+        <p>Changelog</p>
         <ul>
           <li>[Flatpak] Fix: RuntimeError: Couldn't load custom C++ ops. 
             (Thank you to zefr0x and masiv1001 for bringing this to my attention!)</li>
