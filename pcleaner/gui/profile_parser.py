@@ -89,6 +89,8 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
         self._reset_button.setToolTip(self.tr("Reset to default", "Generic reset button tooltip"))
         self._reset_button.clicked.connect(self.reset)
         self.set_reset_button_enabled(False)
+        # Don't shift focus to next widget after pressing the button.
+        self._reset_button.setFocusPolicy(Qc.Qt.NoFocus)
 
     def create_data_widget(self, entry_type: EntryTypes) -> None:
         if entry_type == EntryTypes.Bool:
