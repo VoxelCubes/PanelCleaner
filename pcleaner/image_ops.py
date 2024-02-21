@@ -201,7 +201,7 @@ def visualize_standard_deviations(
     """
 
     text_offset_x: int = 5
-    text_offset_y: int = 1
+    text_offset_y: int = 4
 
     # Don't modify the original image.
     base_image = base_image.copy()
@@ -210,7 +210,7 @@ def visualize_standard_deviations(
         font_path = str(data_path / "LiberationSans-Regular.ttf")
     logger.debug(f"Loading included font from {font_path}")
     # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
-    font_size = int(base_image.size[0] / 50)
+    font_size = int(base_image.size[0] / 50) + 5
     font = ImageFont.truetype(font_path, font_size)
 
     step_thickness = masker_data.mask_growth_step_pixels
@@ -221,6 +221,7 @@ def visualize_standard_deviations(
     # Finally, draw the mask's standard deviation in the top left corner (or the max deviation if none was chosen),
     # with the thickness of the outline under that, calculated as the mask index * growth per step (if applicable).
     for fitment in mask_fitments:
+        fitment: st.MaskFittingResults
         text_x = fitment.mask_box.x1
         text_y = fitment.mask_box.y1
         if fitment.best_mask is not None:
@@ -235,7 +236,7 @@ def visualize_standard_deviations(
 
             # Draw the border standard deviation.
             std_deviation = fitment.analytics_std_deviation
-            thickness = (fitment.analytics_mask_index + 1) * step_thickness
+            thickness = fitment.analytics_thickness
             # Draw the standard deviation, use \sigma for the symbol.
             text = f"\u03C3={std_deviation:.2f}"
             draw = ImageDraw.Draw(base_image)
@@ -248,8 +249,7 @@ def visualize_standard_deviations(
                 stroke_width=3,
                 stroke_fill="white",
             )
-            # Draw the thickness if it isn't the box mask.
-            if fitment.analytics_mask_index < masker_data.mask_growth_steps:
+            if thickness is not None:
                 text = f"{thickness}px"
                 draw.text(
                     (text_x + text_offset_x, text_y + text_offset_y + font_size + 2),
@@ -297,9 +297,36 @@ def visualize_standard_deviations(
     base_image.save(output_path)
 
 
+def make_growth_kernel(thickness: int) -> np.ndarray:
+    """
+    Make a growth kernel to add an outline of the given thickness.
+    Round the corners for a small mask, or create a proper ellipse for a larger mask.
+
+    :param thickness: The thickness of the outline.
+    :return: The growth kernel. Size: (thickness * 2 + 1, thickness * 2 + 1)
+    """
+
+    diameter = thickness * 2 + 1
+
+    if diameter <= 5:
+        # Round off the corners for a small mask.
+        kernel = np.ones((diameter, diameter), dtype=np.float64)
+        kernel[0, 0] = 0
+        kernel[0, -1] = 0
+        kernel[-1, 0] = 0
+        kernel[-1, -1] = 0
+    else:
+        # Create a proper ellipse for a larger mask.
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (diameter, diameter))
+        # Convert to float64 for the convolution.
+        kernel = kernel.astype(np.float64)
+
+    return kernel
+
+
 def make_mask_steps_convolution(
-    mask: Image, growth_step: int = 2, steps: int = 11
-) -> Generator[list[Image], None, None]:
+    mask: Image, growth_step: int, steps: int, min_thickness: int
+) -> Generator[tuple[Image, int | None], None, None]:
     """
     Use convolution to make various sizes of the original mask.
     In each step, the outline of the mask is grown by growth_step pixels.
@@ -307,26 +334,43 @@ def make_mask_steps_convolution(
     :param mask: The mask to make steps of.
     :param growth_step: The amount to grow the mask by each step.
     :param steps: The number of steps to make.
-    :return:
+    :param min_thickness: The minimum thickness of the mask. Used as the first step.
+    :return: A generator of the masks with their thickness.
     """
-    grow_size = growth_step * 2
+    # This padding is for the convolution kernel sweeping across the pixels.
+    # It needs half the growth size on each side for context, otherwise the edge will be wonky.
+    padding_for_kernel = max(min_thickness, growth_step) * 2
     mask = mask.convert("L")
     mask_array = np.array(mask, dtype=np.uint8)
     # Make a convolution kernel.
-    kernel = np.ones((grow_size + 1, grow_size + 1))
-    # Remove the corner pixels from the kernel, this will give 45 degree corners.
-    kernel[0, 0] = 0
-    kernel[0, -1] = 0
-    kernel[-1, 0] = 0
-    kernel[-1, -1] = 0
-    # Pad the image so that the convolution can handle the edges.
-    padded_mask = np.pad(mask_array, ((grow_size, grow_size), (grow_size, grow_size)), mode="edge")
+    kernel = make_growth_kernel(growth_step)
+    kernel_first = make_growth_kernel(min_thickness)
 
-    for _ in range(steps):
+    # Pad the image so that the convolution can handle the edges.
+    padded_mask = np.pad(
+        mask_array,
+        ((padding_for_kernel, padding_for_kernel), (padding_for_kernel, padding_for_kernel)),
+        mode="edge",
+    )
+    # Apply convolve2d to the image.
+    padded_mask = scipy.signal.convolve2d(padded_mask, kernel_first, mode="same")
+    # Remove the extended edges from the padding.
+    cropped_mask = padded_mask[
+        padding_for_kernel:-padding_for_kernel, padding_for_kernel:-padding_for_kernel
+    ]
+    yield Image.fromarray(np.where(cropped_mask > 0, 255, 0).astype(np.uint8)).convert(
+        "1"
+    ), min_thickness
+
+    for index in range(steps - 1):
         # Apply convolve2d to the image.
         padded_mask = scipy.signal.convolve2d(padded_mask, kernel, mode="same")
-        cropped_mask = padded_mask[grow_size:-grow_size, grow_size:-grow_size]
-        yield Image.fromarray(np.where(cropped_mask > 0, 255, 0).astype(np.uint8)).convert("1")
+        cropped_mask = padded_mask[
+            padding_for_kernel:-padding_for_kernel, padding_for_kernel:-padding_for_kernel
+        ]
+        yield Image.fromarray(np.where(cropped_mask > 0, 255, 0).astype(np.uint8)).convert(
+            "1"
+        ), min_thickness + (index + 1) * growth_step
 
 
 def border_std_deviation(base: Image, mask: Image, off_white_threshold: int) -> tuple[float, int]:
@@ -470,6 +514,8 @@ def pick_best_mask(
         return None
 
     box_mask = cut_out_mask(box_mask, masking_box, base.size, x_offset, y_offset)
+    # Thickness doesn't really apply to the box mask, as it isn't grown from the precise mask.
+    box_mask_with_thickness: tuple[Image, int | None] = (box_mask, None)
 
     # Generate masks of various sizes for the precise mask, then add the box mask to the list.
     # The generated masks are in ascending size order.
@@ -477,6 +523,7 @@ def pick_best_mask(
         precise_mask_cut,
         masker_conf.mask_growth_step_pixels,
         masker_conf.mask_growth_steps,
+        masker_conf.min_mask_thickness,
     )
 
     # When using the fast mask selection, make a new generator with the box mask as the first mask,
@@ -492,17 +539,19 @@ def pick_best_mask(
         yield last
 
     if masker_conf.mask_selection_fast:
-        mask_stream = generator_with_first(mask_gen, box_mask)
+        mask_stream = generator_with_first(mask_gen, box_mask_with_thickness)
     else:
-        mask_stream = generator_with_last(mask_gen, box_mask)
+        mask_stream = generator_with_last(mask_gen, box_mask_with_thickness)
 
     # Calculate the border uniformity of each mask.
     # Border deviations: (std deviation, median color)
-    border_deviations: list[tuple[Image, int]] = []
+    border_deviations: list[tuple[float, int]] = []
     masks = []
-    for mask in mask_stream:
+    thicknesses = []
+    for mask, thickness in mask_stream:
         try:
             masks.append(mask)
+            thicknesses.append(thickness)
             current_deviation = border_std_deviation(
                 base, mask, masker_conf.off_white_max_threshold
             )
@@ -516,6 +565,7 @@ def pick_best_mask(
     best_mask = None
     lowest_border_deviation = None
     lowest_deviation_color = None
+    chosen_thickness = None
     for i, border_deviation in enumerate(border_deviations):
         mask_deviation, mask_color = border_deviation
         if i == 0 or mask_deviation <= (
@@ -524,6 +574,7 @@ def pick_best_mask(
             lowest_border_deviation = mask_deviation
             lowest_deviation_color = mask_color
             best_mask = masks[i]
+            chosen_thickness = thicknesses[i]
 
     # If the std deviation is too high, return None.
     if lowest_border_deviation > masker_conf.mask_max_standard_deviation:
@@ -534,6 +585,7 @@ def pick_best_mask(
             analytics_page_path=analytics_page_path,
             analytics_mask_index=masks.index(best_mask),
             analytics_std_deviation=lowest_border_deviation,
+            analytics_thickness=chosen_thickness,
             mask_box=masking_box,
             debug_masks=masks,
         )
@@ -544,6 +596,7 @@ def pick_best_mask(
         analytics_page_path=analytics_page_path,
         analytics_mask_index=masks.index(best_mask),
         analytics_std_deviation=lowest_border_deviation,
+        analytics_thickness=chosen_thickness,
         mask_box=masking_box,
         debug_masks=masks,
     )

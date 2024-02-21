@@ -65,6 +65,14 @@ LongString = NewType("LongString", str)
 # Create a new type for percentages as floats. These are between 0 and 100.
 Percentage = NewType("Percentage", float)
 
+"""
+When adding new config options, follow these steps:
+1. Add the new variable to the dataclass.
+2. Add where it's written in the config template, document for the user.
+3. Add a try_to_load line in the import_from_conf method.
+4. If it affects certain outputs, add sensitivity for that in the image_file.py file.
+"""
+
 
 @define
 class GeneralConfig:
@@ -381,7 +389,8 @@ class PreprocessorConfig:
 @define
 class MaskerConfig:
     mask_growth_step_pixels: int | GreaterZero = 2
-    mask_growth_steps: int = 11
+    mask_growth_steps: int | GreaterZero = 11
+    min_mask_thickness: int = 4
     off_white_max_threshold: int = 240
     mask_max_standard_deviation: float = 15
     mask_improvement_threshold: float = 0.1
@@ -408,6 +417,14 @@ class MaskerConfig:
         # Number of steps to grow the mask by.
         # A higher number will make more and larger masks, ultimately limited by the reference box size.
         mask_growth_steps = {self.mask_growth_steps}
+        
+        # Minimum thickness of a mask.
+        # [CLI: This is like the first mask's growth step, the remaining will follow mask_growth_step_pixels.]
+        # [GUI: This is like the first mask's growth step, the remaining will follow Mask Growth Step Pixels.]
+        # This way, you can have a small step size for accuracy, but still prevent very thin masks
+        # that might be used to clean text only surrounded by an outline, when inpainting would've been the
+        # better choice.
+        min_mask_thickness = {self.min_mask_thickness}
         
         # Maximum threshold for a pixel to be considered off-white.
         # The median color along the edge of a mask may not be pure white,
@@ -458,7 +475,8 @@ class MaskerConfig:
             return
 
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_step_pixels")
-        try_to_load(self, config_updater, section, int, "mask_growth_steps")
+        try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_steps")
+        try_to_load(self, config_updater, section, int, "min_mask_thickness")
         try_to_load(self, config_updater, section, int, "off_white_max_threshold")
         try_to_load(self, config_updater, section, float, "mask_improvement_threshold")
         try_to_load(self, config_updater, section, bool, "mask_selection_fast")
@@ -1099,10 +1117,10 @@ def try_to_load(
     Union types with None will return none if the bare string is empty.
 
     :param obj: The object to assign it to.
+    :param conf_updater: The ConfigUpdater object to load from.
     :param attr_name: The name of the attribute to load.
     :param section: The config section name.
     :param attr_type: The type to construct.
-    :param conf_updater: The ConfigUpdater object to load from.
     """
     try:
         conf_data = conf_updater.get(section, attr_name).value
@@ -1111,7 +1129,6 @@ def try_to_load(
         logger.debug(e)
         return
 
-    # Handle bool specially.
     if attr_type == bool:
         if conf_data.lower() in ("1", "t", "true", "y", "yes", "on"):
             attr_value = True

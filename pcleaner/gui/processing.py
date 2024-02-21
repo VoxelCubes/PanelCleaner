@@ -1,5 +1,5 @@
 import itertools
-from copy import deepcopy
+from copy import deepcopy, copy
 from functools import partial
 from io import StringIO
 from multiprocessing import Pool
@@ -96,7 +96,7 @@ def generate_output(
         )
     )
 
-    # Create an independant copy of the profile, since this instance is shared and mutated across threads.
+    # Create an independent copy of the profile, since this instance is shared and mutated across threads.
     # Due to the checksum only being generated at the end, we don't want to erroneously claim this output
     # matches a profile that was changed in the meantime.
     profile = deepcopy(config.current_profile)
@@ -370,7 +370,7 @@ def generate_output(
                     target_outputs,
                     imf.Step.masker,
                     imf.ProgressType.analyticsMasker,
-                    (masker_analytics_raw, profile.masker.mask_growth_steps + 1),  # +1 for box mask
+                    (masker_analytics_raw, copy(profile.masker)),  # Make a copy to avoid a mutex.
                 )
             )
 

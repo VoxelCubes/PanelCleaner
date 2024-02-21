@@ -410,9 +410,7 @@ def run_cleaner(
 
         if not hide_analytics and masker_analytics_raw:
             print(
-                an.show_masker_analytics(
-                    masker_analytics_raw, profile.masker.mask_growth_steps + 1, an.terminal_width()
-                )
+                an.show_masker_analytics(masker_analytics_raw, profile.masker, an.terminal_width())
             )
 
     if not skip_denoising:

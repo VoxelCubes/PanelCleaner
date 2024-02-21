@@ -435,7 +435,12 @@ class ImageFile:
             "Cut Mask",
             settings,
         )
-        settings += [pro.masker, mk.mask_growth_step_pixels, mk.mask_growth_steps]
+        settings += [
+            pro.masker,
+            mk.mask_growth_step_pixels,
+            mk.mask_growth_steps,
+            mk.min_mask_thickness,
+        ]
         self.outputs[Output.mask_layers] = ProcessOutput(
             "The different steps of growth around the cut mask displayed in different colors.",
             "Masker",

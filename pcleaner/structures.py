@@ -276,7 +276,7 @@ class PageData:
             font_path = str(data_path / "LiberationSans-Regular.ttf")
         logger.debug(f"Loading included font from {font_path}")
         # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
-        font_size = int(image.size[0] / 50)
+        font_size = int(image.size[0] / 50) + 5
 
         for index, box in enumerate(self.boxes):
             draw.rectangle(box.as_tuple, outline="green")
@@ -392,12 +392,14 @@ class MaskFittingAnalytic:
     - Whether a good enough fit was found.
     - The mask index chosen by the mask fitting process.
     - The standard deviation of the mask chosen by the mask fitting process.
+    - The thickness of the mask chosen by the mask fitting process. None if the box mask.
     """
 
     image_path: Path
     fit_was_found: bool
     mask_index: int
     mask_std_deviation: float
+    mask_thickness: int | None
 
 
 @frozen
@@ -413,6 +415,7 @@ class MaskFittingResults:
     analytics_page_path: Path
     analytics_std_deviation: float
     analytics_mask_index: int
+    analytics_thickness: int | None
     mask_box: Box  # Used for the denoising process.
     debug_masks: list[Image]
 
@@ -423,6 +426,7 @@ class MaskFittingResults:
             not self.failed,
             self.analytics_mask_index,
             self.analytics_std_deviation,
+            self.analytics_thickness,
         )
 
     @property
