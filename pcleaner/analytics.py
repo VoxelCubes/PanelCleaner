@@ -257,6 +257,7 @@ def partition_list(
 def show_masker_analytics(
     analytics: list[st.MaskFittingAnalytic], masks_total: int, max_columns: int = 100
 ) -> str:
+    # TODO use mask_thickness is None to check which one is the box mask
     """
     Present the analytics gathered from the masking process.
 
