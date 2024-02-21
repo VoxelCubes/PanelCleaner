@@ -62,8 +62,20 @@ class BadgeButton(Qw.QPushButton):
         # Let QPushButton handle its default painting.
         Qw.QPushButton.paintEvent(self, event)
 
+        painter = Qg.QPainter(self)
+
+        if self.isChecked() and self.accented_focus and self.icon():
+            # Draw a slight accent color overlay over the pixmap displayed on the button.
+            transparent_accent = Qg.QColor(self.accent_color)
+            transparent_accent.setAlpha(50)
+            painter.setBrush(transparent_accent)
+            painter.setPen(Qc.Qt.NoPen)
+            # Get rect of the pixmap.
+            pixmap_rect = Qc.QRect(0, 0, self.iconSize().width(), self.iconSize().height())
+            pixmap_rect.moveCenter(self.rect().center())
+            painter.drawRect(pixmap_rect)
+
         if self.badge_visible:
-            painter = Qg.QPainter(self)
             # Draw the badge in the top right corner, with a margin.
             badge_rect = Qc.QRect(
                 self.width() - self.badge_size - self.badge_margin,
@@ -72,9 +84,17 @@ class BadgeButton(Qw.QPushButton):
                 self.badge_size,
             )
 
-            # Draw the colored circle background for the badge.
-            painter.setBrush(self.accent_color)
+            # Draw a dropshadow for the badge.
+            painter.setBrush(Qg.QColor(0, 0, 0, 80))
             painter.setPen(Qc.Qt.NoPen)
+            painter.drawEllipse(badge_rect.translated(2, 2))
+
+            # Draw the colored circle background for the badge, including a dark border.
+            darker_accent = self.accent_color.darker(150)
+            painter.setBrush(darker_accent)
+            painter.setPen(Qc.Qt.NoPen)
+            painter.drawEllipse(badge_rect + Qc.QMargins(1, 1, 1, 1))
+            painter.setBrush(self.accent_color)
             painter.drawEllipse(badge_rect)
 
             # Calculate the size of the smaller icon rectangle.
