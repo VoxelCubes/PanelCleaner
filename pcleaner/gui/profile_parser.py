@@ -14,7 +14,7 @@ from loguru import logger
 from pcleaner.helpers import tr
 import pcleaner.gui.gui_utils as gu
 from pcleaner import config as cfg
-from pcleaner.config import GreaterZero, LongString
+from pcleaner.config import GreaterZero, LongString, Percentage
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
 
@@ -29,6 +29,7 @@ class EntryTypes(Enum):
     Float = auto()
     IntGreater0 = auto()
     FloatGreater0 = auto()
+    Percentage = auto()
     Str = auto()
     LongString = auto()
     StrNone = auto()
@@ -113,6 +114,15 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_getter = lambda: round(self._data_widget.value(), 2)
             if entry_type == EntryTypes.FloatGreater0:
                 self._data_widget.setMinimum(0.01)
+            self._data_widget.valueChanged.connect(self._value_changed)
+
+        elif entry_type == EntryTypes.Percentage:
+            self._data_widget: Qw.QDoubleSpinBox = Qw.QDoubleSpinBox()
+            self._data_widget.setRange(0.0, 100.0)
+            self._data_widget.setDecimals(1)
+            self._data_widget.setSuffix("%")
+            self._data_setter = self._data_widget.setValue
+            self._data_getter = self._data_widget.value
             self._data_widget.valueChanged.connect(self._value_changed)
 
         elif entry_type == EntryTypes.Str:
@@ -280,6 +290,8 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.IntGreater0
                     elif value_type == float | GreaterZero:
                         entry_type = EntryTypes.FloatGreater0
+                    elif value_type == Percentage:
+                        entry_type = EntryTypes.Percentage
                     elif value_type == str:
                         entry_type = EntryTypes.Str
                     elif value_type == LongString:

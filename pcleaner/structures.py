@@ -69,10 +69,23 @@ class Box:
 
         return Box(x_min, y_min, x_max, y_max)
 
-    def overlaps(self, other: "Box") -> bool:
-        x_overlap = (self.x1 <= other.x2) and (other.x1 <= self.x2)
-        y_overlap = (self.y1 <= other.y2) and (other.y1 <= self.y2)
-        return x_overlap and y_overlap
+    def overlaps(self, other: "Box", threshold: float) -> bool:
+        """
+        Check if this box overlaps with another box.
+        Merge the boxes if more than this percentage (0-100) of the smaller box is covered by the larger box.
+
+        :param other: The other box to check for overlap.
+        :param threshold: The threshold for the overlap check.
+        :return: True if the boxes overlap, False otherwise.
+        """
+        # Calculate the area of the intersection.
+        x_overlap = max(0, min(self.x2, other.x2) - max(self.x1, other.x1))
+        y_overlap = max(0, min(self.y2, other.y2) - max(self.y1, other.y1))
+        intersection = x_overlap * y_overlap
+        # Get the area of the smaller box. Ensure this can never be 0.
+        smaller_area = min(self.area, other.area) or 1
+
+        return intersection / smaller_area > (threshold / 100)
 
     def overlaps_center(self, other: "Box") -> bool:
         return self.center in other or other.center in self
@@ -328,24 +341,31 @@ class PageData:
 
         self.boxes = merged_boxes
 
-    def resolve_overlaps(self) -> None:
+    def resolve_overlaps(self, from_type: BoxType, to_type: BoxType, threshold: float) -> None:
         """
         Copy the extended boxes to the merged extended boxes, and merge overlapping boxes.
+
+        :param from_type: The type of boxes to merge.
+        :param to_type: The type of boxes to overwrite with the merged boxes.
+        :param threshold: The threshold for the overlap check. Merge if more than this percentage (0-100) of the smaller
+            box is covered by the larger box.
         """
         # Place the extended boxes in the merged extended boxes, merging overlapping boxes.
-        merge_queue = set(self.extended_boxes)
+        merge_queue = set(self.boxes_from_type(from_type))
         merged_boxes = []
         while merge_queue:
             box = merge_queue.pop()
             # Find all boxes that overlap with this box.
-            overlapping_boxes = [b for b in merge_queue if box.overlaps(b)]
+            overlapping_boxes = [b for b in merge_queue if box.overlaps(b, threshold)]
             # Merge all overlapping boxes.
             for b in overlapping_boxes:
                 box = box.merge(b)
                 merge_queue.remove(b)
             merged_boxes.append(box)
 
-        self.merged_extended_boxes = merged_boxes
+        boxes_reference = self.boxes_from_type(to_type)
+        boxes_reference.clear()
+        boxes_reference.extend(merged_boxes)
 
 
 @frozen

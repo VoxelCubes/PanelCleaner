@@ -407,6 +407,7 @@ class ImageFile:
             settings,
         )
         settings += [
+            pp.box_overlap_threshold,
             pp.ocr_enabled,
             pp.ocr_max_size,
             pp.ocr_blacklist_pattern,

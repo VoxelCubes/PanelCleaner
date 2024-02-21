@@ -137,7 +137,11 @@ def prep_json_file(
 
     # Check for overlapping boxes among the extended boxes.
     # The resulting list is saved in the page_data.merged_extended_boxes attribute.
-    page_data.resolve_overlaps()
+    page_data.resolve_overlaps(
+        from_type=st.BoxType.EXTENDED_BOX,
+        to_type=st.BoxType.MERGED_EXT_BOX,
+        threshold=preprocessor_conf.box_overlap_threshold,
+    )
 
     # Copy the merged extended boxes to the reference boxes and grow them once again.
     page_data.reference_boxes = copy(page_data.merged_extended_boxes)

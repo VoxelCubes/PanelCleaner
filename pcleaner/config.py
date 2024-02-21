@@ -62,6 +62,9 @@ GreaterZero = NewType("GreaterZero", int)
 # Create a new type to signify a long description string.
 LongString = NewType("LongString", str)
 
+# Create a new type for percentages as floats. These are between 0 and 100.
+Percentage = NewType("Percentage", float)
+
 
 @define
 class GeneralConfig:
@@ -239,6 +242,7 @@ class TextDetectorConfig:
 class PreprocessorConfig:
     box_min_size: int = 20 * 20
     suspicious_box_min_size: int = 200 * 200
+    box_overlap_threshold: Percentage = 20.0
     ocr_enabled: bool = True
     ocr_max_size: int = 30 * 100
     ocr_blacklist_pattern: str = "[～．ー！？０-９]*"
@@ -271,6 +275,11 @@ class PreprocessorConfig:
         # Minimum size of a box with "unknown" language to keep it. This language is typically assigned to logos and other
         # badly behaved text elements.
         suspicious_box_min_size = {self.suspicious_box_min_size}
+        
+        # The minimum overlap between two boxes to merge them.
+        # This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged.
+        # A higher value will require a larger overlap to merge the boxes.
+        box_overlap_threshold = {self.box_overlap_threshold}
         
         # Whether to use OCR to detect boxes that aren't worth cleaning, like ones that only contain numbers or symbols.
         ocr_enabled = {self.ocr_enabled}
@@ -332,6 +341,7 @@ class PreprocessorConfig:
 
         try_to_load(self, config_updater, section, int, "box_min_size")
         try_to_load(self, config_updater, section, int, "suspicious_box_min_size")
+        try_to_load(self, config_updater, section, Percentage, "box_overlap_threshold")
         try_to_load(self, config_updater, section, bool, "ocr_enabled")
         try_to_load(self, config_updater, section, int, "ocr_max_size")
         try_to_load(self, config_updater, section, str, "ocr_blacklist_pattern")
@@ -350,6 +360,10 @@ class PreprocessorConfig:
             self.box_min_size = 0
         if self.suspicious_box_min_size < 0:
             self.suspicious_box_min_size = 0
+        if self.box_overlap_threshold < 0:
+            self.box_overlap_threshold = 0.0
+        if self.box_overlap_threshold > 100:
+            self.box_overlap_threshold = 100.0
         if self.ocr_max_size < 0:
             self.ocr_max_size = 0
         if self.box_padding_initial < 0:
@@ -1166,6 +1180,21 @@ def try_to_load(
                 f"Option {attr_name} in section {section} should be greater than zero. Setting to 1."
             )
             attr_value = 0.01
+
+    elif attr_type == Percentage:
+        try:
+            attr_value = float(conf_data)
+        except ValueError as e:
+            print(
+                f"Option {attr_name} in section {section} should be a percentage.\n"
+                f"Failed to parse '{conf_data}': {e}"
+            )
+            return
+        if not 0.0 <= attr_value <= 100.0:
+            print(
+                f"Option {attr_name} in section {section} should be a percentage between 0 and 100. Setting to 20."
+            )
+            attr_value = 20.0
 
     elif attr_type == Path:
         try:
