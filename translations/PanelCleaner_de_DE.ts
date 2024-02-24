@@ -167,7 +167,7 @@ Entfernte Blasen:
       <location filename="../pcleaner/analytics.py" line="211"/>
       <location filename="../pcleaner/analytics.py" line="344"/>
       <source>Failed</source>
-      <translation type="unfinished">Failed</translation>
+      <translation>Gescheitert</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="224"/>
@@ -217,14 +217,14 @@ Entfernte Blasen:
       <source>
 Mask usage by thickness (in pixels):
 </source>
-      <translation type="unfinished">
-Mask usage by thickness (in pixels):
+      <translation>
+Maskenverwendung nach Dicke (in Pixel):
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="334"/>
       <source>Mask ({thickness}px)</source>
-      <translation type="unfinished">Mask ({thickness}px)</translation>
+      <translation>Maske ({thickness}px)</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="338"/>
@@ -1692,13 +1692,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="64"/>
       <source>The minimum overlap between two boxes to merge them. This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged. A higher value will require a larger overlap to merge the boxes.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The minimum overlap between two boxes to merge them. This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged. A higher value will require a larger overlap to merge the boxes.</translation>
+      <translation>Die Mindestüberlappung zwischen zwei Feldern, um sie zusammenzuführen. Dieser Prozentsatz (0-100) gibt an, wie viel des kleineren Feldes innerhalb des größeren Feldes liegen muss, um zusammengeführt zu werden. Bei einem höheren Wert ist eine größere Überlappung erforderlich, um die Felder zusammenzuführen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="66"/>
       <source>Box Overlap Threshold</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Overlap Threshold</translation>
+      <translation>Min. Feldüberlappung</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="68"/>
@@ -1837,13 +1837,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="114"/>
       <source>Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</translation>
+      <translation>Mindestdicke einer Maske.  Dies entspricht dem ersten Wachstumsschritt der Maske, die übrigen folgen dem Wachstumsschritt der Maske in Pixeln. Auf diese Weise können Sie eine kleine Schrittgröße für die Genauigkeit haben, aber immer noch verhindern, dass sehr dünne Masken für Text verwendet werden, der nur einen Umriss hat, aber sonst vor einem Hintergrund ist, d.h. dort wäre Inpainting besser gewesen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="116"/>
       <source>Min Mask Thickness</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Min Mask Thickness</translation>
+      <translation>Min Maskendicke</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="118"/>
