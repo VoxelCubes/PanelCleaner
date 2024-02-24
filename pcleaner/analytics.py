@@ -12,6 +12,7 @@ from natsort import natsorted
 import pcleaner.helpers as hp
 from pcleaner.helpers import tr
 import pcleaner.structures as st
+import pcleaner.config as cfg
 
 
 @frozen
@@ -201,16 +202,22 @@ def draw_masker_histogram(data: dict[str, tuple[int, int]], max_columns: int = 1
         left_bar = "█" * int(value[0] / max_value * bar_width)
         right_bar = "█" * int((value[1] - value[0]) / max_value * bar_width)
         # If both are 0 in length, but one of them isn't 0 in value, draw the right-most one as a sliver.
-        if not left_bar and not right_bar and value[1] > value[0]:
+        if (not right_bar) and value[1] > value[0]:
             right_bar = "▏"
-        elif not left_bar and not right_bar and value[0] > 0:
+        if (not left_bar) and (not right_bar) and value[0] > 0:
             left_bar = "▏"
 
-        buffer.write(
-            f"{key:<{max_label_width}}: "
-            f"{clr.Fore.CYAN}{left_bar}{clr.Style.RESET_ALL}{right_bar} "
-            f"{clr.Fore.CYAN}{value[0]}{clr.Fore.RESET} / {value[1]}\n"
-        )
+        if not key == tr("Failed"):
+            buffer.write(
+                f"{key:<{max_label_width}}: "
+                f"{clr.Fore.CYAN}{left_bar}{clr.Style.RESET_ALL}{right_bar} "
+                f"{clr.Fore.CYAN}{value[0]}{clr.Fore.RESET} / {value[1]}\n"
+            )
+        else:
+            buffer.write(
+                f"{key:<{max_label_width}}: "
+                f"{clr.Fore.RED}{right_bar} {value[1]}{clr.Fore.RESET}\n"
+            )
 
     # Show legend.
     buffer.write(
@@ -255,14 +262,13 @@ def partition_list(
 
 
 def show_masker_analytics(
-    analytics: list[st.MaskFittingAnalytic], masks_total: int, max_columns: int = 100
+    analytics: list[st.MaskFittingAnalytic], masker_config: cfg.MaskerConfig, max_columns: int = 100
 ) -> str:
-    # TODO use mask_thickness is None to check which one is the box mask
     """
     Present the analytics gathered from the masking process.
 
     :param analytics: The analytics gathered from each page.
-    :param masks_total: The total number of masks used. Generally the number of growth steps + 1 for the box mask.
+    :param masker_config: The masker configuration used to gather the analytics.
     :param max_columns: The maximum number of columns to use for the chart per line.
     :return: The analytics as a string.
     """
@@ -282,15 +288,14 @@ def show_masker_analytics(
     perfect_mask_rate = f"{perfect_masks / masks_succeeded:.0%}" if masks_succeeded else tr("N/A")
     masks_failed = total_boxes - masks_succeeded
 
-    # Count the number of times each mask index was used.
-    mask_usages_by_index = [0] * masks_total
-    # Count the number of times each mask was perfect.
-    perfect_mask_usages_by_index = [0] * masks_total
+    # Count how many times each mask thickness was used.
+    mask_usage_by_thickness: defaultdict[int | None, int] = defaultdict(int)
+    perfect_mask_usage_by_thickness: defaultdict[int | None, int] = defaultdict(int)
     for analytic in analytics:
         if analytic.fit_was_found:
-            mask_usages_by_index[analytic.mask_index] += 1
+            mask_usage_by_thickness[analytic.mask_thickness] += 1
             if analytic.mask_std_deviation == 0:
-                perfect_mask_usages_by_index[analytic.mask_index] += 1
+                perfect_mask_usage_by_thickness[analytic.mask_thickness] += 1
 
     # Write the analytics.
     title = tr("Mask Fitment Analytics")
@@ -310,15 +315,33 @@ def show_masker_analytics(
         + tr("Average border deviation")
         + f": {average_border_deviation}\n"
     )
-    buffer.write(tr("\nMask usage by mask size (smallest to largest):\n"))
-    mask_usages_dict = {
-        tr("Mask") + f" {index+1}": perfect_total
-        for index, perfect_total in enumerate(
-            zip(perfect_mask_usages_by_index, mask_usages_by_index)
+    buffer.write(tr("\nMask usage by thickness (in pixels):\n"))
+
+    # Quit being retarded over mixed types in a list, this is Python for fuck's sake.
+    # noinspection PyTypeChecker
+    thicknesses: list[int | None] = list(
+        range(
+            masker_config.min_mask_thickness,
+            masker_config.min_mask_thickness
+            + masker_config.mask_growth_step_pixels * masker_config.mask_growth_steps,
+            masker_config.mask_growth_step_pixels,
         )
-        if index < len(mask_usages_by_index) - 1
-    }
-    mask_usages_dict[tr("Box mask")] = perfect_mask_usages_by_index[-1], mask_usages_by_index[-1]
+    ) + [None]
+    # Prepare histogram data: label, (perfect, total)
+    mask_usages_dict: dict[str, tuple[int, int]] = {}
+    for thickness in thicknesses:
+        if thickness is not None:
+            label = tr("Mask ({thickness}px)").format(thickness=thickness)
+        else:
+            label = tr("Box mask")
+
+        perfect = perfect_mask_usage_by_thickness[thickness]
+        total = mask_usage_by_thickness[thickness]
+
+        mask_usages_dict[label] = (perfect, total)
+
+    # Add failed masks to the histogram.
+    mask_usages_dict[tr("Failed")] = (0, masks_failed)
 
     buffer.write(draw_masker_histogram(mask_usages_dict, max_columns) + "\n")
 
@@ -480,7 +503,7 @@ def draw_denoise_histogram(
     # Rescale the buckets.
 
     max_label_length = max(len(label) for label, _, _ in buckets_labeled)
-    bar_width = max_columns - max_label_length - 25  # 25 is for the spaces and the brackets.
+    bar_width = max_columns - max_label_length - 28  # 28 is for the spaces and the brackets.
 
     bucket_bar_lengths: list[tuple[int, int]] = [
         (int(below * bar_width / max_count), int(above * bar_width / max_count))
@@ -490,8 +513,15 @@ def draw_denoise_histogram(
     buffer = StringIO()
     # Draw the buckets.
     for (b_range, below, above), (below_len, above_len) in zip(buckets_labeled, bucket_bar_lengths):
+        left_bar = "█" * below_len
+        right_bar = "█" * above_len
+        if (not above_len) and above:
+            right_bar = "▏"
+        if (not right_bar) and (not left_bar) and below:
+            left_bar = "▏"
+
         buffer.write(
-            f"{b_range} : {'█' * below_len}{clr.Fore.MAGENTA}{'█' * above_len} {above}{clr.Fore.RESET} / {below+above}\n"
+            f"{b_range} : {left_bar}{clr.Fore.MAGENTA}{right_bar} {above}{clr.Fore.RESET} / {below+above}\n"
         )
 
     # Draw the legend.

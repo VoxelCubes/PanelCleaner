@@ -276,7 +276,7 @@ class PageData:
             font_path = str(data_path / "LiberationSans-Regular.ttf")
         logger.debug(f"Loading included font from {font_path}")
         # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
-        font_size = int(image.size[0] / 50)
+        font_size = int(image.size[0] / 50) + 5
 
         for index, box in enumerate(self.boxes):
             draw.rectangle(box.as_tuple, outline="green")

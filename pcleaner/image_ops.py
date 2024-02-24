@@ -201,7 +201,7 @@ def visualize_standard_deviations(
     """
 
     text_offset_x: int = 5
-    text_offset_y: int = 1
+    text_offset_y: int = 4
 
     # Don't modify the original image.
     base_image = base_image.copy()
@@ -210,7 +210,7 @@ def visualize_standard_deviations(
         font_path = str(data_path / "LiberationSans-Regular.ttf")
     logger.debug(f"Loading included font from {font_path}")
     # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
-    font_size = int(base_image.size[0] / 50)
+    font_size = int(base_image.size[0] / 50) + 5
     font = ImageFont.truetype(font_path, font_size)
 
     step_thickness = masker_data.mask_growth_step_pixels
@@ -297,6 +297,33 @@ def visualize_standard_deviations(
     base_image.save(output_path)
 
 
+def make_growth_kernel(thickness: int) -> np.ndarray:
+    """
+    Make a growth kernel to add an outline of the given thickness.
+    Round the corners for a small mask, or create a proper ellipse for a larger mask.
+
+    :param thickness: The thickness of the outline.
+    :return: The growth kernel. Size: (thickness * 2 + 1, thickness * 2 + 1)
+    """
+
+    diameter = thickness * 2 + 1
+
+    if diameter <= 5:
+        # Round off the corners for a small mask.
+        kernel = np.ones((diameter, diameter), dtype=np.float64)
+        kernel[0, 0] = 0
+        kernel[0, -1] = 0
+        kernel[-1, 0] = 0
+        kernel[-1, -1] = 0
+    else:
+        # Create a proper ellipse for a larger mask.
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (diameter, diameter))
+        # Convert to float64 for the convolution.
+        kernel = kernel.astype(np.float64)
+
+    return kernel
+
+
 def make_mask_steps_convolution(
     mask: Image, growth_step: int, steps: int, min_thickness: int
 ) -> Generator[tuple[Image, int | None], None, None]:
@@ -312,20 +339,12 @@ def make_mask_steps_convolution(
     """
     # This padding is for the convolution kernel sweeping across the pixels.
     # It needs half the growth size on each side for context, otherwise the edge will be wonky.
-    grow_size_first = min_thickness * 2
-    grow_size = growth_step * 2
-    padding_for_kernel = max(grow_size_first, grow_size)
+    padding_for_kernel = max(min_thickness, growth_step) * 2
     mask = mask.convert("L")
     mask_array = np.array(mask, dtype=np.uint8)
     # Make a convolution kernel.
-    kernel_first = np.ones((grow_size_first + 1, grow_size_first + 1))
-    kernel = np.ones((grow_size + 1, grow_size + 1))
-    # Remove the corner pixels from the kernel, this will give 45 degree corners.
-    for k in (kernel_first, kernel):
-        k[0, 0] = 0
-        k[0, -1] = 0
-        k[-1, 0] = 0
-        k[-1, -1] = 0
+    kernel = make_growth_kernel(growth_step)
+    kernel_first = make_growth_kernel(min_thickness)
 
     # Pad the image so that the convolution can handle the edges.
     padded_mask = np.pad(
@@ -526,7 +545,7 @@ def pick_best_mask(
 
     # Calculate the border uniformity of each mask.
     # Border deviations: (std deviation, median color)
-    border_deviations: list[tuple[Image, int]] = []
+    border_deviations: list[tuple[float, int]] = []
     masks = []
     thicknesses = []
     for mask, thickness in mask_stream:
@@ -543,7 +562,6 @@ def pick_best_mask(
         except BlankMaskError:
             return None
     # Find the best mask.
-    # TODO investigate strangeness of min = 6 vs min = 4 + 2 grwoth
     best_mask = None
     lowest_border_deviation = None
     lowest_deviation_color = None
