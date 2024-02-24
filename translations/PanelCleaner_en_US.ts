@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="742"/>
+      <location filename="../pcleaner/config.py" line="743"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation type="unfinished">default</translation>
