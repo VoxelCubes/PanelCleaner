@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="742"/>
+      <location filename="../pcleaner/config.py" line="775"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation type="unfinished">default</translation>
@@ -35,39 +35,39 @@
       <translation type="unfinished">Profile name is reserved.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="507"/>
       <location filename="../pcleaner/gui/image_file.py" line="513"/>
       <location filename="../pcleaner/gui/image_file.py" line="519"/>
-      <location filename="../pcleaner/gui/image_file.py" line="532"/>
+      <location filename="../pcleaner/gui/image_file.py" line="525"/>
+      <location filename="../pcleaner/gui/image_file.py" line="538"/>
       <source>Unknown</source>
       <translation type="unfinished">Unknown</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="521"/>
+      <location filename="../pcleaner/gui/image_file.py" line="527"/>
       <source>RGB</source>
       <comment>Color mode</comment>
       <translation type="unfinished">RGB</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="523"/>
+      <location filename="../pcleaner/gui/image_file.py" line="529"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
       <translation type="unfinished">CMYK</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="525"/>
+      <location filename="../pcleaner/gui/image_file.py" line="531"/>
       <source>Grayscale</source>
       <comment>Color mode</comment>
       <translation type="unfinished">Grayscale</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="527"/>
+      <location filename="../pcleaner/gui/image_file.py" line="533"/>
       <source>1-bit</source>
       <comment>Color mode</comment>
       <translation type="unfinished">1-bit</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="529"/>
+      <location filename="../pcleaner/gui/image_file.py" line="535"/>
       <source>Palette</source>
       <comment>Color mode</comment>
       <translation type="unfinished">Palette</translation>
@@ -92,37 +92,37 @@ The file content is different from expected.</source>
 The file content is different from expected.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="64"/>
       <location filename="../pcleaner/analytics.py" line="65"/>
-      <location filename="../pcleaner/analytics.py" line="67"/>
-      <location filename="../pcleaner/analytics.py" line="279"/>
-      <location filename="../pcleaner/analytics.py" line="281"/>
-      <location filename="../pcleaner/analytics.py" line="282"/>
-      <location filename="../pcleaner/analytics.py" line="396"/>
+      <location filename="../pcleaner/analytics.py" line="66"/>
+      <location filename="../pcleaner/analytics.py" line="68"/>
+      <location filename="../pcleaner/analytics.py" line="286"/>
+      <location filename="../pcleaner/analytics.py" line="288"/>
+      <location filename="../pcleaner/analytics.py" line="289"/>
+      <location filename="../pcleaner/analytics.py" line="420"/>
       <source>N/A</source>
       <translation type="unfinished">N/A</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="77"/>
+      <location filename="../pcleaner/analytics.py" line="78"/>
       <source>OCR Analytics</source>
       <translation type="unfinished">OCR Analytics</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="83"/>
+      <location filename="../pcleaner/analytics.py" line="84"/>
       <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
       <translation type="unfinished">Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="92"/>
+      <location filename="../pcleaner/analytics.py" line="93"/>
       <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
       <translation type="unfinished">Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="99"/>
+      <location filename="../pcleaner/analytics.py" line="100"/>
       <source>
 Small box sizes:
 </source>
@@ -131,14 +131,14 @@ Small box sizes:
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="107"/>
+      <location filename="../pcleaner/analytics.py" line="108"/>
       <source>No not-removed small boxes found.
 </source>
       <translation type="unfinished">No not-removed small boxes found.
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="123"/>
+      <location filename="../pcleaner/analytics.py" line="124"/>
       <source>
 Removed bubbles:
 </source>
@@ -147,93 +147,99 @@ Removed bubbles:
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="125"/>
+      <location filename="../pcleaner/analytics.py" line="126"/>
       <source>Page {path}: {text}
 </source>
       <translation type="unfinished">Page {path}: {text}
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="169"/>
+      <location filename="../pcleaner/analytics.py" line="170"/>
       <source>Small boxes</source>
       <translation type="unfinished">Small boxes</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="171"/>
+      <location filename="../pcleaner/analytics.py" line="172"/>
       <source>Removed boxes</source>
       <translation type="unfinished">Removed boxes</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="217"/>
+      <location filename="../pcleaner/analytics.py" line="211"/>
+      <location filename="../pcleaner/analytics.py" line="344"/>
+      <source>Failed</source>
+      <translation type="unfinished">Failed</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/analytics.py" line="224"/>
       <source>Perfect</source>
       <translation type="unfinished">Perfect</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="218"/>
-      <location filename="../pcleaner/analytics.py" line="499"/>
+      <location filename="../pcleaner/analytics.py" line="225"/>
+      <location filename="../pcleaner/analytics.py" line="530"/>
       <source>Total
 </source>
       <translation type="unfinished">Total
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="296"/>
+      <location filename="../pcleaner/analytics.py" line="302"/>
       <source>Mask Fitment Analytics</source>
       <translation type="unfinished">Mask Fitment Analytics</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="300"/>
+      <location filename="../pcleaner/analytics.py" line="306"/>
       <source>Total boxes</source>
       <translation type="unfinished">Total boxes</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="302"/>
+      <location filename="../pcleaner/analytics.py" line="308"/>
       <source>Masks succeeded</source>
       <translation type="unfinished">Masks succeeded</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="304"/>
+      <location filename="../pcleaner/analytics.py" line="310"/>
       <source>Masks failed</source>
       <translation type="unfinished">Masks failed</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="308"/>
+      <location filename="../pcleaner/analytics.py" line="314"/>
       <source>Perfect masks</source>
       <translation type="unfinished">Perfect masks</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="310"/>
+      <location filename="../pcleaner/analytics.py" line="316"/>
       <source>Average border deviation</source>
       <translation type="unfinished">Average border deviation</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="312"/>
+      <location filename="../pcleaner/analytics.py" line="318"/>
       <source>
-Mask usage by mask size (smallest to largest):
+Mask usage by thickness (in pixels):
 </source>
       <translation type="unfinished">
-Mask usage by mask size (smallest to largest):
+Mask usage by thickness (in pixels):
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="314"/>
-      <source>Mask</source>
-      <translation type="unfinished">Mask</translation>
+      <location filename="../pcleaner/analytics.py" line="334"/>
+      <source>Mask ({thickness}px)</source>
+      <translation type="unfinished">Mask ({thickness}px)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="320"/>
+      <location filename="../pcleaner/analytics.py" line="338"/>
       <source>Box mask</source>
       <translation type="unfinished">Box mask</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="333"/>
+      <location filename="../pcleaner/analytics.py" line="357"/>
       <source>All bubbles were successfully masked.
 </source>
       <translation type="unfinished">All bubbles were successfully masked.
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="348"/>
+      <location filename="../pcleaner/analytics.py" line="372"/>
       <source>
 Pages with failures / total:
 </source>
@@ -242,32 +248,32 @@ Pages with failures / total:
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="375"/>
+      <location filename="../pcleaner/analytics.py" line="399"/>
       <source>Denoising Analytics</source>
       <translation type="unfinished">Denoising Analytics</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="398"/>
+      <location filename="../pcleaner/analytics.py" line="422"/>
       <source>Total masks</source>
       <translation type="unfinished">Total masks</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="400"/>
+      <location filename="../pcleaner/analytics.py" line="424"/>
       <source>Masks denoised</source>
       <translation type="unfinished">Masks denoised</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="404"/>
+      <location filename="../pcleaner/analytics.py" line="428"/>
       <source>Minimum deviation to denoise</source>
       <translation type="unfinished">Minimum deviation to denoise</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="406"/>
+      <location filename="../pcleaner/analytics.py" line="430"/>
       <source>Maximum allowed deviation</source>
       <translation type="unfinished">Maximum allowed deviation</translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="408"/>
+      <location filename="../pcleaner/analytics.py" line="432"/>
       <source>Standard deviation around masks:
 
 </source>
@@ -276,7 +282,7 @@ Pages with failures / total:
 </translation>
     </message>
     <message>
-      <location filename="../pcleaner/analytics.py" line="498"/>
+      <location filename="../pcleaner/analytics.py" line="529"/>
       <source>Denoised</source>
       <translation type="unfinished">Denoised</translation>
     </message>
@@ -1684,327 +1690,351 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
       <location filename="profile_strings.py" line="64"/>
+      <source>The minimum overlap between two boxes to merge them. This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged. A higher value will require a larger overlap to merge the boxes.</source>
+      <comment>Profile comment in Preprocessor</comment>
+      <translation type="unfinished">The minimum overlap between two boxes to merge them. This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged. A higher value will require a larger overlap to merge the boxes.</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="66"/>
+      <source>Box Overlap Threshold</source>
+      <comment>Profile entry in Preprocessor</comment>
+      <translation type="unfinished">Box Overlap Threshold</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="68"/>
       <source>Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="66"/>
+      <location filename="profile_strings.py" line="70"/>
       <source>OCR Enabled</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">OCR Enabled</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="68"/>
+      <location filename="profile_strings.py" line="72"/>
       <source>Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="70"/>
+      <location filename="profile_strings.py" line="74"/>
       <source>OCR Max Size</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">OCR Max Size</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="72"/>
+      <location filename="profile_strings.py" line="76"/>
       <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="74"/>
+      <location filename="profile_strings.py" line="78"/>
       <source>OCR Blacklist Pattern</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">OCR Blacklist Pattern</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="76"/>
+      <location filename="profile_strings.py" line="80"/>
       <source>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="78"/>
+      <location filename="profile_strings.py" line="82"/>
       <source>OCR Strict Language</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">OCR Strict Language</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="80"/>
+      <location filename="profile_strings.py" line="84"/>
       <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="82"/>
+      <location filename="profile_strings.py" line="86"/>
       <source>Box Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Padding Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="84"/>
-      <location filename="profile_strings.py" line="92"/>
+      <location filename="profile_strings.py" line="88"/>
+      <location filename="profile_strings.py" line="96"/>
       <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="86"/>
+      <location filename="profile_strings.py" line="90"/>
       <source>Box Right Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Right Padding Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="88"/>
+      <location filename="profile_strings.py" line="92"/>
       <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="90"/>
+      <location filename="profile_strings.py" line="94"/>
       <source>Box Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Padding Extended</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="94"/>
+      <location filename="profile_strings.py" line="98"/>
       <source>Box Right Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Right Padding Extended</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="96"/>
+      <location filename="profile_strings.py" line="100"/>
       <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation type="unfinished">Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="98"/>
+      <location filename="profile_strings.py" line="102"/>
       <source>Box Reference Padding</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation type="unfinished">Box Reference Padding</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="100"/>
+      <location filename="profile_strings.py" line="104"/>
       <source>Masker</source>
       <comment>Profile section title</comment>
       <translation type="unfinished">Masker</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="102"/>
+      <location filename="profile_strings.py" line="106"/>
       <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="104"/>
+      <location filename="profile_strings.py" line="108"/>
       <source>Mask Growth Step Pixels</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Growth Step Pixels</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="106"/>
+      <location filename="profile_strings.py" line="110"/>
       <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="108"/>
+      <location filename="profile_strings.py" line="112"/>
       <source>Mask Growth Steps</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Growth Steps</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="110"/>
+      <location filename="profile_strings.py" line="114"/>
+      <source>Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</source>
+      <comment>Profile comment in Masker</comment>
+      <translation type="unfinished">Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="116"/>
+      <source>Min Mask Thickness</source>
+      <comment>Profile entry in Masker</comment>
+      <translation type="unfinished">Min Mask Thickness</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="118"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="112"/>
+      <location filename="profile_strings.py" line="120"/>
       <source>Off White Max Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Off White Max Threshold</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="114"/>
+      <location filename="profile_strings.py" line="122"/>
       <source>The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</oldsource>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="120"/>
+      <location filename="profile_strings.py" line="128"/>
       <source>Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</oldsource>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="122"/>
+      <location filename="profile_strings.py" line="130"/>
       <source>Mask Improvement Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Improvement Threshold</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="124"/>
+      <location filename="profile_strings.py" line="132"/>
       <source>Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="126"/>
+      <location filename="profile_strings.py" line="134"/>
       <source>Mask Selection Fast</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Selection Fast</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="116"/>
+      <location filename="profile_strings.py" line="124"/>
       <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="118"/>
+      <location filename="profile_strings.py" line="126"/>
       <source>Mask Max Standard Deviation</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Mask Max Standard Deviation</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="128"/>
+      <location filename="profile_strings.py" line="136"/>
       <source>Color to use for the debug mask.</source>
       <comment>Profile comment in Masker</comment>
       <translation type="unfinished">Color to use for the debug mask.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="130"/>
+      <location filename="profile_strings.py" line="138"/>
       <source>Debug Mask Color</source>
       <comment>Profile entry in Masker</comment>
       <translation type="unfinished">Debug Mask Color</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="132"/>
+      <location filename="profile_strings.py" line="140"/>
       <source>Denoiser</source>
       <comment>Profile section title</comment>
       <translation type="unfinished">Denoiser</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="134"/>
+      <location filename="profile_strings.py" line="142"/>
       <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="136"/>
+      <location filename="profile_strings.py" line="144"/>
       <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="138"/>
+      <location filename="profile_strings.py" line="146"/>
       <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="140"/>
+      <location filename="profile_strings.py" line="148"/>
       <source>Denoising Enabled</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Denoising Enabled</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="142"/>
+      <location filename="profile_strings.py" line="150"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="144"/>
+      <location filename="profile_strings.py" line="152"/>
       <source>Noise Min Standard Deviation</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Noise Min Standard Deviation</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="146"/>
+      <location filename="profile_strings.py" line="154"/>
       <source>The thickness of an outline to denoise around a mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">The thickness of an outline to denoise around a mask.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="148"/>
+      <location filename="profile_strings.py" line="156"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Noise Outline Size</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="150"/>
+      <location filename="profile_strings.py" line="158"/>
       <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="152"/>
+      <location filename="profile_strings.py" line="160"/>
       <source>Noise Fade Radius</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Noise Fade Radius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="154"/>
+      <location filename="profile_strings.py" line="162"/>
       <source>Set to True to support colored images.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Set to True to support colored images.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="156"/>
+      <location filename="profile_strings.py" line="164"/>
       <source>Colored Images</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Colored Images</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="158"/>
+      <location filename="profile_strings.py" line="166"/>
       <source>How strongly to denoise the image. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">How strongly to denoise the image. Higher values mean more denoising.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="160"/>
+      <location filename="profile_strings.py" line="168"/>
       <source>Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Filter Strength</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="162"/>
+      <location filename="profile_strings.py" line="170"/>
       <source>How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="164"/>
+      <location filename="profile_strings.py" line="172"/>
       <source>Color Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Color Filter Strength</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="166"/>
+      <location filename="profile_strings.py" line="174"/>
       <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Size in pixels of the template patch that is used to compute weights. Should be odd.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="168"/>
+      <location filename="profile_strings.py" line="176"/>
       <source>Template Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Template Window Size</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="170"/>
+      <location filename="profile_strings.py" line="178"/>
       <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation type="unfinished">Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="172"/>
+      <location filename="profile_strings.py" line="180"/>
       <source>Search Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation type="unfinished">Search Window Size</translation>
@@ -2013,13 +2043,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
   <context>
     <name>ProfileOptionWidget</name>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="88"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="89"/>
       <source>Reset to default</source>
       <comment>Generic reset button tooltip</comment>
       <translation type="unfinished">Reset to default</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="168"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="180"/>
       <source>Same as image</source>
       <comment>Profile default option for the file type</comment>
       <translation type="unfinished">Same as image</translation>
@@ -2028,7 +2058,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
   <context>
     <name>ProfileToolBox</name>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="439"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="453"/>
       <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
       <translation type="unfinished">&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
