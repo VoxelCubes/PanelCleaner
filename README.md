@@ -1,6 +1,7 @@
 # Panel Cleaner
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/voxelcubes/PanelCleaner?logo=GitHub)](https://github.com/voxelcubes/PanelCleaner/releases)
 [![PyPI version](https://img.shields.io/pypi/v/pcleaner)](https://pypi.org/project/pcleaner/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Crowdin](https://badges.crowdin.net/panel-cleaner/localized.svg)](https://crowdin.com/project/panel-cleaner)
