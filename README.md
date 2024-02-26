@@ -38,7 +38,7 @@ The two bottom pages are what the program can output: either just the transparen
 > [Acknowledgements](#acknowledgements) \
 > [License](#license) \
 > [Roadmap](#roadmap) \
-> [FAQ](https://github.com/VoxelCubes/PanelCleaner/blob/master/docs/faq.md) \
+> [FAQ (Frequently Asked Questions)](https://github.com/VoxelCubes/PanelCleaner/blob/master/docs/faq.md) \
 > [Translating](https://github.com/VoxelCubes/PanelCleaner/blob/master/translations/TRANSLATING.md) 
 
 
