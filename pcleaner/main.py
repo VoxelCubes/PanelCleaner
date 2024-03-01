@@ -3,8 +3,8 @@
 Usage:
     pcleaner clean [<image_path> ...] [--output_dir=<output_dir>] [--profile=<profile>]
         [--save-only-mask | --save-only-cleaned | --save-only-text]
-        [--separate-noise-mask] [--hide-analytics] [--extract-text]
-        [--skip-text-detection] [--skip-pre-processing] [--skip-masking] [--skip-denoising]
+        [--separate-noise-mask] [--separate-inpaint-mask] [--hide-analytics] [--extract-text]
+        [--skip-text-detection] [--skip-pre-processing] [--skip-masking] [--skip-denoising] [--skip-inpainting]
         [--keep-cache] [--cache-masks] [--debug]
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
@@ -65,10 +65,12 @@ Options:
     -e --extract-text               Extract the text bubbles from the original image. Essentially deleting everything
                                     except the text. The cleaning or denoising step must be run for this to work.
     -n --separate-noise-mask        Save the noise mask separately from the main mask.
-    -T --skip-text-detection        Do not run the text detection AI model. This is step 1/4.
-    -P --skip-pre-processing        Do not run data pre-processing. This is step 2/4.
-    -M --skip-masking               Do not run the masking process. This is step 3/4.
-    -D --skip-denoising             Do not run the denoising process. This an optional step 4/4.
+    -i --separate-inpaint-mask      Save the inpaint mask separately from the main mask.
+    -T --skip-text-detection        Do not run the text detection AI model. This is step 1/5.
+    -P --skip-pre-processing        Do not run data pre-processing. This is step 2/5.
+    -M --skip-masking               Do not run the masking process. This is step 3/5.
+    -D --skip-denoising             Do not run the denoising process. This an optional step 4/5.
+    -I --skip-inpainting            Do not run the inpainting process. This is an optional step 5/5.
     -s --cache-masks                Save the masks used to clean the image in the cache directory.
     -a --hide-analytics             Hide the analytics. These are the statistics about the
                                     cleaning accuracy.
@@ -127,6 +129,7 @@ import pcleaner.analytics as an
 import pcleaner.cli_utils as cli
 import pcleaner.config as cfg
 import pcleaner.denoiser as dn
+import pcleaner.inpainting as ip
 import pcleaner.gui.launcher as gui
 import pcleaner.helpers as hp
 import pcleaner.masker as ma
@@ -232,12 +235,14 @@ def main() -> None:
             skip_pre_processing=args.skip_pre_processing,
             skip_masking=args.skip_masking,
             skip_denoising=args.skip_denoising,
+            skip_inpainting=args.skip_inpainting,
             save_only_mask=args.save_only_mask,
             save_only_cleaned=args.save_only_cleaned,
             save_only_text=args.save_only_text,
             extract_text=args.extract_text,
             cache_masks=args.cache_masks,
             separate_noise_mask=args.separate_noise_mask,
+            separate_inpaint_mask=args.separate_inpaint_mask,
             hide_analytics=args.hide_analytics,
             keep_cache=args.keep_cache,
             debug=args.debug,
@@ -261,12 +266,14 @@ def run_cleaner(
     skip_pre_processing: bool,
     skip_masking: bool,
     skip_denoising: bool,
+    skip_inpainting: bool,
     save_only_mask: bool,
     save_only_cleaned: bool,
     save_only_text: bool,
     extract_text: bool,
     cache_masks: bool,
     separate_noise_mask: bool,
+    separate_inpaint_mask: bool,
     hide_analytics: bool,
     keep_cache: bool,
     debug: bool,
@@ -281,12 +288,14 @@ def run_cleaner(
     :param skip_pre_processing: Whether to skip the pre-processing step.
     :param skip_masking: Whether to skip the masking step.
     :param skip_denoising: Whether to skip the denoising step.
+    :param skip_inpainting: Whether to skip the inpainting step.
     :param save_only_mask: Whether to save only the mask.
     :param save_only_cleaned: Whether to save only the cleaned image.
     :param save_only_text: Whether to save only the text.
     :param extract_text: Whether to extract the text from the image.
     :param cache_masks: Whether to save the masks used to clean the image in the cache directory.
     :param separate_noise_mask: Whether to save the noise mask separately.
+    :param separate_inpaint_mask: Whether to save the inpaint mask separately.
     :param hide_analytics: Whether to hide the analytics.
     :param keep_cache: Whether to keep the cache directory for the text detection step.
     :param debug: Whether to show debug information.
@@ -297,6 +306,11 @@ def run_cleaner(
     if not profile.denoiser.denoising_enabled:
         logger.debug("Denoising is disabled in the config, skipping denoising step.")
         skip_denoising = True
+
+    # Override the skip inpainting flag if the config disables inpainting.
+    if not profile.inpainter.inpainting_enabled:
+        logger.debug("Inpainting is disabled in the config, skipping inpainting step.")
+        skip_inpainting = False
 
     # Catch jokesters who want to skip all 4 steps.
     if skip_text_detection and skip_pre_processing and skip_masking and skip_denoising:
@@ -426,6 +440,7 @@ def run_cleaner(
                 cache_dir,
                 profile.general,
                 profile.denoiser,
+                profile.inpainter,
                 save_only_mask,
                 save_only_cleaned,
                 extract_text,
@@ -447,6 +462,65 @@ def run_cleaner(
                     denoise_analytics_raw,
                     profile.denoiser.noise_min_standard_deviation,
                     profile.masker.mask_max_standard_deviation,
+                    an.terminal_width(),
+                )
+            )
+
+    if not skip_inpainting:
+        print("Running Inpainter...")
+        # Read the json files in the image directory.
+        page_json_files = list(Path(cache_dir).glob("*#clean.json"))
+        mask_json_files = list(Path(cache_dir).glob("*#mask_data.json"))
+        # Zip together the matching json files.
+        zipped_jsons = []
+        for page_json_file in page_json_files:
+            for mask_json_file in mask_json_files:
+                if mask_json_file.name.startswith(page_json_file.name.split("#")[0]):
+                    zipped_jsons.append((page_json_file, mask_json_file))
+                    break
+
+        # Sanity check.
+        if not (len(zipped_jsons) == len(page_json_files) == len(mask_json_files)):
+            print(f"Found: {len(page_json_files)} page json files.")
+            print(f"Found: {len(mask_json_files)} mask json files.")
+            print(f"Matching: {len(zipped_jsons)} json files.")
+            raise ValueError("Mismatched number of json files.")
+
+        md.ensure_inpainting_available(config)
+        inpainter_model = ip.InpaintingModel(config)
+
+        # Zip together the json files and the out path thing.
+        data = [
+            st.InpainterData(
+                page_json_file,
+                mask_json_file,
+                output_dir,
+                cache_dir,
+                profile.general,
+                profile.masker,
+                profile.denoiser,
+                profile.inpainter,
+                save_only_mask,
+                save_only_cleaned,
+                extract_text,
+                separate_inpaint_mask,
+                cache_masks,
+                debug,
+            )
+            for page_json_file, mask_json_file in zipped_jsons
+        ]
+
+        inpaint_analytics_raw = []
+        for inpaint_data in tqdm(data):
+            analytic = ip.inpaint_page(inpaint_data, inpainter_model)
+            inpaint_analytics_raw.append(analytic)
+
+        if not hide_analytics and inpaint_analytics_raw:
+            print(
+                an.show_inpainting_analytics(
+                    inpaint_analytics_raw,
+                    profile.inpainter.min_inpainting_radius,
+                    profile.inpainter.max_inpainting_radius,
                     an.terminal_width(),
                 )
             )

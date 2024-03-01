@@ -221,8 +221,15 @@ def draw_masker_histogram(data: dict[str, tuple[int, int]], max_columns: int = 1
 
     # Show legend.
     buffer.write(
-        f"\n{clr.Fore.CYAN}█ " + tr("Perfect") + f"{clr.Style.RESET_ALL} | █ " + tr("Total\n")
+        f"\n{clr.Fore.CYAN}█ "
+        + tr("Perfect")
+        + f"{clr.Style.RESET_ALL} | █ "
+        + tr("Total")
+        + f" | {clr.Fore.RED}█ "
+        + tr("Failed")
+        + f"{clr.Style.RESET_ALL} \n"
     )
+
     return buffer.getvalue()
 
 
@@ -528,4 +535,117 @@ def draw_denoise_histogram(
     buffer.write(
         f"\n{clr.Fore.MAGENTA}█ " + tr("Denoised") + f"{clr.Fore.RESET} | █ " + tr("Total\n")
     )
+    return buffer.getvalue()
+
+
+def show_inpainting_analytics(
+    analytics: list[st.InpaintingAnalytic],
+    minimum_thickness: int,
+    maximum_thickness: int,
+    max_columns: int = 100,
+) -> str:
+    """
+    Present the analytics gathered from the inpainting process.
+
+    :param analytics: The analytics gathered from each page, here standard deviations.
+    :param minimum_thickness: The minimum thickness of the inpainted outlines.
+    :param maximum_thickness: The maximum thickness of the inpainted outlines.
+    :param max_columns: The maximum number of columns to use for the chart per line.
+    :return: The analytics as a string.
+    """
+    buffer = StringIO()
+
+    title = tr("Inpainting Analytics")
+    buffer.write(f"\n{title}\n")
+    buffer.write(f"{'━' * len(title)}\n")
+
+    # Get the thicknesses into one single list.
+    thicknesses: list[int] = [
+        *itertools.chain.from_iterable(analytic.thicknesses for analytic in analytics)
+    ]
+
+    total_inpaint = len(thicknesses)
+    average_thickness = sum(thicknesses) / total_inpaint if total_inpaint else tr("N/A")
+
+    buffer.write(
+        tr("Inpainting performed")
+        + f": {total_inpaint} | "
+        + tr("Average thickness")
+        + f": {average_thickness}\n"
+    )
+    buffer.write(
+        tr("Minimum thickness")
+        + f": {minimum_thickness} | "
+        + tr("Maximum thickness")
+        + f": {maximum_thickness}\n"
+    )
+    buffer.write(tr("Outline thickness around text inpainted:\n\n"))
+
+    # Show the lists in a graph.
+    buffer.write(
+        draw_inpaint_histogram(
+            thicknesses,
+            minimum_thickness,
+            maximum_thickness,
+            max_columns,
+        )
+        + "\n"
+    )
+    buffer.write("\n")
+
+    return buffer.getvalue()
+
+
+def draw_inpaint_histogram(
+    thicknesses: list[int],
+    minimum_thickness: int,
+    maximum_thickness: int,
+    max_columns: int = 100,
+) -> str:
+    """
+    Draw a histogram of the deviations.
+
+    :param thicknesses: The thicknesses of the inpainted outlines.
+    :param minimum_thickness: The minimum thickness of the inpainted outlines.
+    :param maximum_thickness: The maximum thickness of the inpainted outlines.
+    :param max_columns: The maximum number of columns to use for the histogram per line.
+    :return: The histogram as a string.
+    """
+    # The buckets contain: (min, count)
+    buckets: list[tuple[int, int]] = []
+    for thickness in range(minimum_thickness, maximum_thickness + 1):
+        buckets.append((thickness, thicknesses.count(thickness)))
+    # Format the ranges to look better.
+    number_width = len(str(buckets[-1][0]))
+    buckets_labeled: list[tuple[str, int]] = [
+        (
+            f"{thiccness: >{number_width}}",
+            count,
+        )
+        for thiccness, count in buckets
+    ]
+    # Get the maximum count in the buckets to rescale them.
+    max_count = max((count for _, count in buckets_labeled))
+    max_count = max(max_count, 1)
+    # Rescale the buckets.
+
+    max_label_length = max(len(label) for label, _ in buckets_labeled)
+    bar_width = max_columns - max_label_length - 24  # 24 is for the spaces and the brackets.
+
+    bucket_bar_lengths: list[int] = [
+        int(count * bar_width / max_count) for _, count in buckets_labeled
+    ]
+
+    buffer = StringIO()
+    # Draw the buckets.
+    for (b_range, count), (count_len) in zip(buckets_labeled, bucket_bar_lengths):
+        bar = "█" * count_len
+        if (not count_len) and count:
+            bar = "▏"
+
+        buffer.write(f"{b_range} : {clr.Fore.LIGHTGREEN_EX}{bar} {count}{clr.Fore.RESET}\n")
+
+    # Draw the legend.
+    buffer.write(f"\n{clr.Fore.LIGHTGREEN_EX}█ " + tr("Inpainted") + clr.Fore.RESET + "\n")
+
     return buffer.getvalue()

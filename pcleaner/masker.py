@@ -112,7 +112,6 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
         Path(page_data.image_path),
         cache_out_path,
         page_data.scale,
-        m_conf.mask_max_standard_deviation,
         mask_fitments,
     )
 
@@ -200,7 +199,6 @@ def save_denoising_data(
     base_image_path: Path,
     cache_path: Path,
     scale: float,
-    mask_max_deviation: float,
     mask_fitments: list[st.MaskFittingResults],
 ):
     """
@@ -212,13 +210,13 @@ def save_denoising_data(
     :param base_image_path: The path to the cached base image.
     :param cache_path: The path to the cache directory.
     :param scale: The scale of the original image to the cached base image.
-    :param mask_max_deviation: The maximum deviation of the mask.
     :param mask_fitments: The mask fitments.
     """
 
     # Gather the data needed for denoising, don't include those with a deviation greater than the max deviation.
     boxes_with_deviation = [
-        m.noise_mask_data for m in mask_fitments if m.analytics_std_deviation <= mask_max_deviation
+        (m.noise_mask_data[0], m.noise_mask_data[1], m.failed, m.analytics_thickness)
+        for m in mask_fitments
     ]
 
     # Save the data.

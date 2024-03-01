@@ -25,8 +25,8 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         / f"{clobber_protection_prefix}_{mask_data.original_path.with_suffix('.png').name}"
     )
 
-    def save_mask(img, name_suffix) -> None:
-        if d_data.show_masks:
+    def save_mask(img, name_suffix, force: bool = False) -> None:
+        if d_data.show_masks or force:
             img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
 
     # Scale the mask to the original image size, if needed.
@@ -42,12 +42,13 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     # Alias.
     g_conf = d_data.general_config
     d_conf = d_data.denoiser_config
+    i_conf = d_data.inpainter_config
 
     # Filter for the min deviation to consider for denoising.
     boxes_to_denoise: list[st.Box] = [
         box
-        for box, deviation in mask_data.boxes_with_deviation
-        if deviation > d_conf.noise_min_standard_deviation
+        for box, deviation, failed, _ in mask_data.boxes_with_stats
+        if not failed and deviation > d_conf.noise_min_standard_deviation
     ]
 
     noise_masks_with_coords: list[tuple[Image.Image, tuple[int, int]]] = [
@@ -61,7 +62,8 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         # noinspection PyTypeChecker
         combined_noise_mask = Image.new("LA", cleaned_image.size, (0, 0))
 
-    save_mask(combined_noise_mask, "_noise_mask")
+    # If inpainting, we need the noise mask either way.
+    save_mask(combined_noise_mask, "_noise_mask", force=i_conf.inpainting_enabled)
     save_mask(cleaned_image, "_clean_denoised")
 
     # Check if the output path is None. In that case we're only outputting to the cache directory.
@@ -76,7 +78,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         #
         # Package the analytics. We're only interested in the std deviations.
         return st.DenoiseAnalytic(
-            tuple(deviation for _, deviation in mask_data.boxes_with_deviation), original_path
+            tuple(deviation for _, deviation, _, _ in mask_data.boxes_with_stats), original_path
         )
 
     # Settle on the final output path for the cleaned image.
@@ -144,5 +146,5 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
 
     # Package the analytics. We're only interested in the std deviations.
     return st.DenoiseAnalytic(
-        tuple(deviation for _, deviation in mask_data.boxes_with_deviation), original_path
+        tuple(deviation for _, deviation, _, _ in mask_data.boxes_with_stats), original_path
     )

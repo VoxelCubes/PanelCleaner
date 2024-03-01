@@ -484,7 +484,7 @@ class MaskData:
     - The cleaned image path.
     - The mask image path.
     - The scale of the original image to the base image.
-    - The box coordinates with their respective standard deviation for the masks.
+    - The box coordinates with their respective standard deviation for the masks, whether they failed, and the mask thickness.
     """
 
     original_path: Path
@@ -492,7 +492,7 @@ class MaskData:
     base_image_path: Path
     mask_path: Path
     scale: float
-    boxes_with_deviation: Sequence[tuple[Box, float]]
+    boxes_with_stats: Sequence[tuple[Box, float, bool, int | None]]
 
     @classmethod
     def from_json(cls, json_str: str) -> "MaskData":
@@ -510,7 +510,10 @@ class MaskData:
             Path(data["base_image_path"]),
             Path(data["mask_path"]),
             data["scale"],
-            [(Box(*b), d) for b, d in data["boxes_with_deviation"]],
+            [
+                (Box(*box), deviation, failed, thickness)
+                for box, deviation, failed, thickness in data["boxes_with_stats"]
+            ],
         )
 
     def to_json(self) -> str:
@@ -525,7 +528,10 @@ class MaskData:
             "base_image_path": str(self.base_image_path),
             "mask_path": str(self.mask_path),
             "scale": self.scale,
-            "boxes_with_deviation": [(b.as_tuple, d) for b, d in self.boxes_with_deviation],
+            "boxes_with_stats": [
+                (box.as_tuple, deviation, failed, thickness)
+                for box, deviation, failed, thickness in self.boxes_with_stats
+            ],
         }
         return json.dumps(data, indent=4)
 
@@ -540,6 +546,7 @@ class DenoiserData:
     - The image cache directory.
     - The general config.
     - The denoiser config.
+    - The inpainter config.  (When inpainting, don't denoise images handled by the inpainter)
     - The save only mask flag.
     - The save only cleaned flag.
     - The extract text flag.
@@ -553,6 +560,7 @@ class DenoiserData:
     cache_dir: Path
     general_config: cfg.GeneralConfig
     denoiser_config: cfg.DenoiserConfig
+    inpainter_config: cfg.InpainterConfig
     save_only_mask: bool
     save_only_cleaned: bool
     extract_text: bool
@@ -571,4 +579,48 @@ class DenoiseAnalytic:
     """
 
     std_deviations: Sequence[float]
+    path: Path
+
+
+@frozen
+class InpainterData:
+    """
+    This is a simple struct to hold the inputs for the inpainter.
+    The data is a tuple of:
+    - The page data json path. (This is #clean.json)
+    - The mask data json path.  (This is #mask_data.json)
+    - The image output directory.
+    - The image cache directory.
+    - The general config.
+    - The masker config.  (For the min mask size)
+    - The inpainter config.
+    - The show masks flag. (when true, save intermediate masks to the cache directory)
+    - The debug flag.
+    """
+
+    page_data_json_path: Path
+    mask_data_json_path: Path
+    output_dir: Path | None
+    cache_dir: Path
+    general_config: cfg.GeneralConfig
+    masker_config: cfg.MaskerConfig
+    denoiser_config: cfg.DenoiserConfig
+    inpainter_config: cfg.InpainterConfig
+    save_only_mask: bool
+    save_only_cleaned: bool
+    extract_text: bool
+    separate_noise_masks: bool
+    show_masks: bool
+    debug: bool
+
+
+@frozen
+class InpaintingAnalytic:
+    """
+    Analytics data to visualize the inpainting performance.
+    - The thickness of the outline when inpainting.
+    - The path to the original image.
+    """
+
+    thicknesses: Sequence[int]
     path: Path

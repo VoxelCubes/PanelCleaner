@@ -412,6 +412,7 @@ def generate_output(
                     cache_dir,
                     profile.general,
                     profile.denoiser,
+                    profile.inpainter,
                     save_only_mask=target_outputs == [imf.Output.denoise_mask],
                     save_only_cleaned=target_outputs == [imf.Output.denoised_output],
                     extract_text=imf.Output.isolated_text in target_outputs,

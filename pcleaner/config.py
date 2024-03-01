@@ -553,6 +553,9 @@ class DenoiserConfig:
         # to perform denoising on the region around the mask.
         noise_min_standard_deviation = {self.noise_min_standard_deviation}
         
+        # Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this,
+        # after which this mask is handed off to the inpainter.
+        
         # The thickness of an outline to denoise around a mask.
         noise_outline_size = {self.noise_outline_size}
         
@@ -621,6 +624,109 @@ class DenoiserConfig:
 
 
 @define
+class InpainterConfig:
+    inpainting_enabled: bool = True
+    inpainting_min_std_dev: float = 20
+    inpainting_max_mask_radius: int = 6
+    min_inpainting_radius: int = 5
+    max_inpainting_radius: int = 20
+    inpainting_radius_multiplier: float = 0.1
+    inpainting_isolation_radius: int = 5
+
+    def export_to_conf(
+        self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
+    ) -> None:
+        """
+        Write the config to the config updater object.
+
+        :param config_updater: An existing config updater object.
+        :param add_after_section: The section to add the new section after.
+        :param gui_mode: Whether to format the config for the GUI.
+        """
+        config_str = f"""\
+        [Inpainter]
+
+        # Inpainting is when machine learning is used to replace the content of an image based on its surroundings.
+        # For masks that couldn't be cleaned well (or at all), inpainting can be used.
+        # To differentiate this from denoising, inpainting is meant for significantly worse masks that had
+        # a tight fit. Any masks that were denoised won't be inpainted.
+
+        # Since this step can provide poor results in some cases, it can be disabled here.
+        # Set to False to disable inpainting.
+        denoising_enabled = {self.inpainting_enabled}
+
+        # The minimum standard deviation of colors around the edge of a given mask
+        # to perform inpainting on the region around the mask.
+        inpainting_min_std_dev = {self.inpainting_min_std_dev}
+
+        # The maximum radius of a mask to perform inpainting on.
+        # Masks larger than this will be left as they are, because if the margin is that big,
+        # it is likely that the mask is already good enough.
+        inpainting_max_mask_radius = {self.inpainting_max_mask_radius}
+        
+        # The minimum radius around a mask to inpaint.
+        # This is added to the optimal mask size to ensure that the inpainting covers the entire mask.
+        min_inpainting_radius = {self.min_inpainting_radius}
+        
+        # For masks that proved far harder to clean, meaning they had a high standard deviation,
+        # increase the radius of the inpainting to cover more of the mask.
+        # This is additional margin is added to the min inpainting radius and is calculated as:
+        # inpainting radius multiplier * mask standard deviation
+        inpainting_radius_multiplier = {self.inpainting_radius_multiplier}
+        
+        # The maximum radius around a mask to inpaint.
+        # This limits the size the inpainting can grow to, to prevent it from covering too much of the image,
+        # if a large radius multiplier is used.
+        max_inpainting_radius = {self.max_inpainting_radius}
+        
+        # After inpainting, cut the result out of the original image to prevent the inpaitning
+        # from affecting the rest of the image.
+        # This ensures that the original image is preserved as much as possible.
+        # This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels
+        # outside of its dedicated region.
+        inpainting_isolation_radius = {self.inpainting_isolation_radius}
+
+        """
+        inpainter_conf = cu.ConfigUpdater()
+        inpainter_conf.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
+        inpainter_section = inpainter_conf["Inpainter"]
+        config_updater[add_after_section].add_after.space(2).section(inpainter_section.detach())
+
+    def import_from_conf(self, config_updater: cu.ConfigUpdater) -> None:
+        """
+        Read the config from the config updater object.
+
+        :param config_updater: An existing config updater object.
+        """
+        section = "Inpainter"
+        if not config_updater.has_section(section):
+            logger.warning(f"No {section} section found in the profile, using defaults.")
+            return
+
+        try_to_load(self, config_updater, section, bool, "inpainting_enabled")
+        try_to_load(self, config_updater, section, float, "inpainting_min_std_dev")
+        try_to_load(self, config_updater, section, int, "inpainting_max_mask_radius")
+        try_to_load(self, config_updater, section, int, "min_inpainting_radius")
+        try_to_load(self, config_updater, section, int, "max_inpainting_radius")
+        try_to_load(self, config_updater, section, float, "inpainting_radius_multiplier")
+        try_to_load(self, config_updater, section, int, "inpainting_isolation_radius")
+
+    def fix(self) -> None:
+        if self.inpainting_min_std_dev < 0:
+            self.inpainting_min_std_dev = 0
+        if self.inpainting_max_mask_radius < 0:
+            self.inpainting_max_mask_radius = 0
+        if self.min_inpainting_radius < 0:
+            self.min_inpainting_radius = 0
+        if self.max_inpainting_radius < 0:
+            self.max_inpainting_radius = 0
+        if self.inpainting_radius_multiplier < 0:
+            self.inpainting_radius_multiplier = 0
+        if self.inpainting_isolation_radius < 0:
+            self.inpainting_isolation_radius = 0
+
+
+@define
 class Profile:
     """
     A profile is a collection of settings that can be saved and loaded from disk.
@@ -631,6 +737,7 @@ class Profile:
     preprocessor: PreprocessorConfig = field(factory=PreprocessorConfig)
     masker: MaskerConfig = field(factory=MaskerConfig)
     denoiser: DenoiserConfig = field(factory=DenoiserConfig)
+    inpainter: InpainterConfig = field(factory=InpainterConfig)
 
     def bundle_config(self, gui_mode: bool = False) -> cu.ConfigUpdater:
         """
@@ -645,6 +752,7 @@ class Profile:
         self.preprocessor.export_to_conf(config_updater, "TextDetector", gui_mode=gui_mode)
         self.masker.export_to_conf(config_updater, "Preprocessor", gui_mode=gui_mode)
         self.denoiser.export_to_conf(config_updater, "Masker", gui_mode=gui_mode)
+        self.inpainter.export_to_conf(config_updater, "Denoiser", gui_mode=gui_mode)
         return config_updater
 
     def hash_current_values(self) -> int:
@@ -712,6 +820,7 @@ class Profile:
             profile.preprocessor.import_from_conf(config)
             profile.masker.import_from_conf(config)
             profile.denoiser.import_from_conf(config)
+            profile.inpainter.import_from_conf(config)
             profile.fix()
         except Exception:
             logger.exception(f"Failed to load profile from {path}")
@@ -745,6 +854,7 @@ class Profile:
         self.preprocessor.fix()
         self.masker.fix()
         self.denoiser.fix()
+        self.inpainter.fix()
 
 
 @define

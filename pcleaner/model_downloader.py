@@ -17,6 +17,10 @@ TORCH_SHA256 = "1f90fa60aeeb1eb82e2ac1167a66bf139a8a61b8780acd351ead55268540cccb
 CV2_MODEL_NAME = "comictextdetector.pt.onnx"
 CV2_SHA256 = "1a86ace74961413cbd650002e7bb4dcec4980ffa21b2f19b86933372071d718f"
 OCR_DIR_NAME = "models--kha-white--manga-ocr-base"
+INPAINTING_URL = (
+    "https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt"
+)
+INPAINTING_SHA256 = "7ba7aa7ac37a4d41fdbbeba3a2af7ead18058552997e3a3cd1a3b2210c9e6b4c"
 
 
 def check_hash(file_path: Path, sha_hash: str) -> bool:
@@ -101,6 +105,37 @@ def download_cv2_model(cache_dir: Path) -> Path | None:
     return download_file(MODEL_URL + CV2_MODEL_NAME, cache_dir, sha_hash=CV2_SHA256)
 
 
+def get_inpainting_model_path(config) -> Path:
+    """
+    Get the path to the inpainting model.
+
+    :return: The path to the inpainting model.
+    """
+    return config.get_model_cache_dir() / "big-lama.pt"
+
+
+def download_inpainting_model(cache_dir: Path) -> Path | None:
+    """
+    Download the inpainting model and return the path to the downloaded file.
+
+    :param cache_dir: The directory where the file will be saved.
+    :return: The path to the downloaded file. Or None if the download failed.
+    """
+    print("Downloading inpainting model...")
+    return download_file(INPAINTING_URL, cache_dir, sha_hash=INPAINTING_SHA256)
+
+
+def ensure_inpainting_available(config) -> None:
+    """
+    Check if it is downloaded, and download it if it isn't.
+
+    :param config: The config to get the cache path from.
+    """
+    cache_dir = config.get_model_cache_dir()
+    if not get_inpainting_model_path(config).is_file():
+        download_inpainting_model(cache_dir)
+
+
 def download_models(config, force: bool, cuda: bool, cpu: bool) -> None:
     """
     Download the models and save the paths to them in the config.
@@ -134,6 +169,9 @@ def download_models(config, force: bool, cuda: bool, cpu: bool) -> None:
             )
 
     config.save()
+
+    # Download the inpainting model.
+    download_inpainting_model(cache_dir)
 
     # Also load the OCR model, but there is only one option and can't be forced.
     MangaOcr()

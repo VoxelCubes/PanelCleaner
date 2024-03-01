@@ -691,16 +691,10 @@ def grow_mask(mask: Image, size: int) -> Image:
     :return: The grown mask. Mode: "1"
     """
     grow_size = size * 2
-    kernel_size = grow_size + 1
     mask = mask.convert("L")
     mask_array = np.array(mask, dtype=np.uint8)
     # Make a convolution kernel.
-    kernel = np.ones((kernel_size, kernel_size), np.uint8)
-    # Remove the corner pixels from the kernel, this will give 45 degree corners.
-    kernel[0, 0] = 0
-    kernel[0, -1] = 0
-    kernel[-1, 0] = 0
-    kernel[-1, -1] = 0
+    kernel = make_growth_kernel(size)
     # Pad the image so that the convolution can handle the edges.
     padded_mask = np.pad(mask_array, ((grow_size, grow_size), (grow_size, grow_size)), mode="edge")
 
