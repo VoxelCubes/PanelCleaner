@@ -71,6 +71,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
 
     text_detector_downloaded: bool = False
     ocr_downloaded: bool = False
+    inpainting_downloaded: bool = False
     encountered_error: bool = False
 
     def __init__(
@@ -79,6 +80,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         config: cfg.Config = None,
         need_text_detector: bool = True,
         need_ocr: bool = True,
+        need_inpainting: bool = True,
     ):
         """
         Initialize the widget.
@@ -87,12 +89,14 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         :param config: The config to use.
         :param need_text_detector: If True, download the text detector model.
         :param need_ocr: If True, download the ocr model.
+        :param need_inpainting: If True, download the inpainting model.
         """
         Qw.QDialog.__init__(self, parent)
         self.setupUi(self)
 
         self.text_detector_downloaded = not need_text_detector
         self.ocr_downloaded = not need_ocr
+        self.inpainting_downloaded = not need_inpainting
 
         self.buffer = []
 
@@ -108,6 +112,12 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         else:
             temp_progress_data = ProgressData(100, 0, 0, 0, -1, self.tr("Already downloaded"))
             self.show_ocr_progress(temp_progress_data)
+
+        if need_inpainting:
+            self.download_inpainting(config)
+        else:
+            temp_progress_data = ProgressData(100, 0, 0, 0, -1, self.tr("Already downloaded"))
+            self.show_inpainting_progress(temp_progress_data)
 
     def check_finished(self) -> None:
         if self.text_detector_downloaded and self.ocr_downloaded:
@@ -180,7 +190,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.label_model_speed.setText("—")
         self.label_model_size.setText("")
         self.encountered_error = True
-        gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value))
+        gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value), worker_error)
 
     @Slot(Path)
     def text_detection_result(self, model_path: Path | None) -> None:
@@ -241,7 +251,7 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.label_ocr_speed.setText("—")
         self.label_ocr_size.setText("")
         self.encountered_error = True
-        gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value))
+        gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value), worker_error)
 
     @Slot(str, str)
     def ocr_output_log(self, text: str, stream: str) -> None:
@@ -272,10 +282,75 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         )
         self.progressBar_ocr.setValue(progress_data.percentage)
 
+    # ============================= Text Detector =============================
+
+    def download_inpainting(self, config: cfg.Config) -> None:
+        model_url = md.INPAINTING_URL
+        sha_hash = md.INPAINTING_SHA256
+
+        # Init the ui.
+        temp_progress_data = ProgressData(0, 0, 0, 0, -1, self.tr("Inpainting model"))
+        self.show_inpainting_progress(temp_progress_data)
+
+        # Start the download in a separate thread.
+        threadpool = Qc.QThreadPool.globalInstance()
+        signals = DownloadSignals()
+        signals.progress_signal.connect(self.show_inpainting_progress)
+
+        worker = wt.Worker(
+            download_file,
+            model_url,
+            config.get_model_cache_dir(),
+            signals,
+            sha_hash,
+            no_progress_callback=True,
+        )
+        worker.signals.finished.connect(self.inpainting_finished)
+        worker.signals.error.connect(self.inpainting_error)
+        threadpool.start(worker)
+
+    @Slot(ProgressData)
+    def show_inpainting_progress(self, progress_data: ProgressData) -> None:
+        """
+        Update the progress bar.
+
+        :param progress_data: The progress data.
+        """
+        self.label_inpaint_size.setText(
+            f"{format_size(progress_data.downloaded_size)} / {format_size(progress_data.file_size)}"
+        )
+        self.label_inpaint_speed.setText(
+            f"{format_size(progress_data.speed)}/s, {self.tr('ETA', 'estimated time of completion')}: "
+            f"{format_timespan(progress_data.eta, ) if progress_data.eta >= 0 else '—'}"
+        )
+        self.progressBar_inpaint.setValue(progress_data.percentage)
+
+    @Slot(wt.WorkerError)
+    def inpainting_error(self, worker_error: wt.WorkerError) -> None:
+        """
+        Show an error message.
+
+        :param worker_error: The error message.
+        """
+        self.label_inpaint_speed.setText("—")
+        self.label_inpaint_size.setText("")
+        self.encountered_error = True
+        gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value), worker_error)
+
+    def inpainting_finished(self) -> None:
+        """
+        Close the dialog if all models have been downloaded.
+        """
+        self.inpainting_downloaded = True
+        self.check_finished()
+
 
 def ocr_download_worker(custom_stdout) -> None:
     with custom_stdout:
         MangaOcr()
+
+
+# ============================= Utilities =============================
 
 
 def download_file(url: str, save_dir: Path, signals: DownloadSignals, sha_hash: str = None) -> Path:

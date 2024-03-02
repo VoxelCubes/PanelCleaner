@@ -23,7 +23,7 @@ class Ui_ModelDownloader(object):
     def setupUi(self, ModelDownloader):
         if not ModelDownloader.objectName():
             ModelDownloader.setObjectName(u"ModelDownloader")
-        ModelDownloader.resize(720, 214)
+        ModelDownloader.resize(720, 306)
         ModelDownloader.setModal(True)
         self.verticalLayout = QVBoxLayout(ModelDownloader)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -113,6 +113,43 @@ class Ui_ModelDownloader(object):
 
         self.verticalLayout.addWidget(self.progressBar_ocr)
 
+        self.verticalSpacer_4 = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
+
+        self.verticalLayout.addItem(self.verticalSpacer_4)
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setSpacing(12)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.label_3 = QLabel(ModelDownloader)
+        self.label_3.setObjectName(u"label_3")
+
+        self.horizontalLayout_3.addWidget(self.label_3)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_3.addItem(self.horizontalSpacer_3)
+
+        self.label_inpaint_speed = QLabel(ModelDownloader)
+        self.label_inpaint_speed.setObjectName(u"label_inpaint_speed")
+        self.label_inpaint_speed.setText(u"<download speed>")
+
+        self.horizontalLayout_3.addWidget(self.label_inpaint_speed)
+
+        self.label_inpaint_size = QLabel(ModelDownloader)
+        self.label_inpaint_size.setObjectName(u"label_inpaint_size")
+        self.label_inpaint_size.setText(u"<download size/total>")
+
+        self.horizontalLayout_3.addWidget(self.label_inpaint_size)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
+
+        self.progressBar_inpaint = QProgressBar(ModelDownloader)
+        self.progressBar_inpaint.setObjectName(u"progressBar_inpaint")
+        self.progressBar_inpaint.setValue(0)
+
+        self.verticalLayout.addWidget(self.progressBar_inpaint)
+
         self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer_3)
@@ -127,5 +164,6 @@ class Ui_ModelDownloader(object):
         ModelDownloader.setWindowTitle(QCoreApplication.translate("ModelDownloader", u"Downloading Machine Learning Models", None))
         self.label.setText(QCoreApplication.translate("ModelDownloader", u"Model data required to run Panel Cleaner:", None))
         self.label_2.setText(QCoreApplication.translate("ModelDownloader", u"OCR model:", None))
+        self.label_3.setText(QCoreApplication.translate("ModelDownloader", u"Inpainting model", None))
     # retranslateUi
 

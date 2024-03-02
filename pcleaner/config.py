@@ -653,7 +653,7 @@ class InpainterConfig:
 
         # Since this step can provide poor results in some cases, it can be disabled here.
         # Set to False to disable inpainting.
-        denoising_enabled = {self.inpainting_enabled}
+        inpainting_enabled = {self.inpainting_enabled}
 
         # The minimum standard deviation of colors around the edge of a given mask
         # to perform inpainting on the region around the mask.
@@ -671,7 +671,7 @@ class InpainterConfig:
         # For masks that proved far harder to clean, meaning they had a high standard deviation,
         # increase the radius of the inpainting to cover more of the mask.
         # This is additional margin is added to the min inpainting radius and is calculated as:
-        # inpainting radius multiplier * mask standard deviation
+        # inpainting radius multiplier times mask standard deviation
         inpainting_radius_multiplier = {self.inpainting_radius_multiplier}
         
         # The maximum radius around a mask to inpaint.

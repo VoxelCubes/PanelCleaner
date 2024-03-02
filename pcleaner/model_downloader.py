@@ -125,6 +125,15 @@ def download_inpainting_model(cache_dir: Path) -> Path | None:
     return download_file(INPAINTING_URL, cache_dir, sha_hash=INPAINTING_SHA256)
 
 
+def is_inpainting_downloaded(config) -> bool:
+    """
+    Check if the inpainting model is downloaded.
+
+    :return: True if the inpainting model is downloaded.
+    """
+    return get_inpainting_model_path(config).is_file()
+
+
 def ensure_inpainting_available(config) -> None:
     """
     Check if it is downloaded, and download it if it isn't.
@@ -132,7 +141,7 @@ def ensure_inpainting_available(config) -> None:
     :param config: The config to get the cache path from.
     """
     cache_dir = config.get_model_cache_dir()
-    if not get_inpainting_model_path(config).is_file():
+    if not is_inpainting_downloaded(config):
         download_inpainting_model(cache_dir)
 
 

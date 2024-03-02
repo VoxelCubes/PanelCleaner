@@ -308,12 +308,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if cuda:
             self.statusbar.addPermanentWidget(Qw.QLabel(self.tr("CUDA Enabled")))
 
-        need_ocr = not md.is_ocr_downloaded()
-        need_text_detector = (not cuda and self.config.default_cv2_model_path is None) or (
-            cuda and self.config.default_torch_model_path is None
+        has_ocr = md.is_ocr_downloaded()
+        has_inpainting = md.is_inpainting_downloaded(self.config)
+        has_text_detector = (not cuda and self.config.default_cv2_model_path) or (
+            cuda and self.config.default_torch_model_path
         )
 
-        if not need_ocr and not need_text_detector:
+        if all((has_ocr, has_inpainting, has_text_detector)):
             # Already downloaded.
             logger.debug("Text detector model already downloaded.")
             return
@@ -327,7 +328,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 raise SystemExit(1)
 
         # Open the model downloader dialog.
-        model_downloader = mdd.ModelDownloader(self, self.config, need_text_detector, need_ocr)
+        model_downloader = mdd.ModelDownloader(
+            self, self.config, not has_text_detector, not has_ocr, not has_inpainting
+        )
         response = model_downloader.exec()
         if response == Qw.QDialog.Rejected:
             logger.critical("Failed to download models. Aborting.")

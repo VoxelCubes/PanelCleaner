@@ -27,3 +27,4 @@ class SetupGreeter(Qw.QDialog, Ui_SetupGreeter):
         # Update the placeholders.
         self.label_text_detector_path.setText(str(config.get_model_cache_dir()))
         self.label_ocr_path.setText(str(md.get_ocr_model_directory()))
+        self.label_inpainting_path.setText(str(config.get_model_cache_dir()))
