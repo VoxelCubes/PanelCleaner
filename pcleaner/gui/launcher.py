@@ -109,7 +109,7 @@ def launch(debug: bool = False) -> None:
         window.show()
         sys.exit(app.exec())
     except Exception:
-        logger.exception("Failed to initialize the main window.")
+        logger.opt(exception=True).critical("Failed to initialize the main window.")
     finally:
         logger.info(cfg.SHUTDOWN_MESSAGE + "\n")
 
