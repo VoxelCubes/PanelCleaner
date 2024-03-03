@@ -4,7 +4,7 @@
 <context>
     <name></name>
     <message>
-        <location filename="../pcleaner/config.py" line="888"/>
+        <location filename="../pcleaner/config.py" line="889"/>
         <source>default</source>
         <comment>reserved profile name</comment>
         <translation type="unfinished"></translation>
@@ -445,8 +445,8 @@ An AI-powered tool to clean manga panels.</source>
     </message>
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="179"/>
-        <source>The following 5-channel TIFF files are not supported
-: </source>
+        <source>The following 5-channel TIFF files are not supported: 
+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2030,7 +2030,8 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
         <location filename="profile_strings.py" line="186"/>
-        <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</source>
+        <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</source>
+        <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</oldsource>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -2042,7 +2043,8 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
         <location filename="profile_strings.py" line="190"/>
-        <source>Since this step can provide poor results in some cases, it can be disabled here. Set to False to disable inpainting.</source>
+        <source>Since this step can provide poor results in some cases, it can be disabled here.  Uncheck to disable inpainting.</source>
+        <oldsource>Since this step can provide poor results in some cases, it can be disabled here. Set to False to disable inpainting.</oldsource>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
