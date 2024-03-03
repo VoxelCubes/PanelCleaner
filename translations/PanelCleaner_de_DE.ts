@@ -469,7 +469,7 @@ Reinige Mangas durch KI.</translation>
       <location filename="../pcleaner/gui/file_table.py" line="179"/>
       <source>The following 5-channel TIFF files are not supported: 
 </source>
-      <translation type="unfinished">The following 5-channel TIFF files are not supported: 
+      <translation>Die folgenden 5-Kanal-TIFF-Dateien werden nicht unterstützt:
 </translation>
     </message>
     <message>
@@ -2060,7 +2060,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</source>
       <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</oldsource>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</translation>
+      <translation>EXPERIMENTELL: Wenn Sie bessere Standardeinstellungen finden, öffnen Sie bitte ein Issue auf Github, um die Verbesserungen mit allen zu teilen. Beachten Sie, dass Übermalung nicht standardmäßig aktiviert ist.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="188"/>
@@ -2073,7 +2073,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <source>Since this step can provide poor results in some cases, it can be disabled here.  Uncheck to disable inpainting.</source>
       <oldsource>Since this step can provide poor results in some cases, it can be disabled here. Set to False to disable inpainting.</oldsource>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">Since this step can provide poor results in some cases, it can be disabled here.  Uncheck to disable inpainting.</translation>
+      <translation>Da dieser Schritt in einigen Fällen zu schlechten Ergebnissen führen kann, kann er hier deaktiviert werden.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="192"/>
