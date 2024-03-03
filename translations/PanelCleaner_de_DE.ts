@@ -191,7 +191,7 @@ Entfernte Blasen:
     <message>
       <location filename="../pcleaner/analytics.py" line="228"/>
       <source>Total</source>
-      <translation type="unfinished">Total</translation>
+      <translation>Insgesamt</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="313"/>
@@ -295,41 +295,41 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/analytics.py" line="559"/>
       <source>Inpainting Analytics</source>
-      <translation type="unfinished">Inpainting Analytics</translation>
+      <translation>Übermalungsstatistik</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="572"/>
       <source>Inpainting performed</source>
-      <translation type="unfinished">Inpainting performed</translation>
+      <translation>Übermalung durchgeführt</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="574"/>
       <source>Average thickness</source>
-      <translation type="unfinished">Average thickness</translation>
+      <translation>Durchschnittliche Dicke</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="578"/>
       <source>Minimum thickness</source>
-      <translation type="unfinished">Minimum thickness</translation>
+      <translation>Minimale Dicke</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="580"/>
       <source>Maximum thickness</source>
-      <translation type="unfinished">Maximum thickness</translation>
+      <translation>Maximale Dicke</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="582"/>
       <source>Outline thickness around text inpainted:
 
 </source>
-      <translation type="unfinished">Outline thickness around text inpainted:
+      <translation>Dicke des Umrisses um den übermalenen Text:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="649"/>
       <source>Inpainted</source>
-      <translation type="unfinished">Inpainted</translation>
+      <translation>Übermalt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="114"/>
@@ -344,7 +344,7 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/gui/processing.py" line="527"/>
       <source>Inpainting model not found.</source>
-      <translation type="unfinished">Inpainting model not found.</translation>
+      <translation>Übermalungsmodell nicht gefunden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="983"/>
@@ -359,7 +359,7 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="355"/>
       <source>Inpainter (experimental)</source>
-      <translation type="unfinished">Inpainter (experimental)</translation>
+      <translation>Übermaler (experimentell)</translation>
     </message>
   </context>
   <context>
@@ -453,23 +453,23 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="119"/>
       <source>Original size in pixels (width × height)</source>
-      <translation type="unfinished">Original size in pixels (width × height)</translation>
+      <translation>Originalgröße in Pixel (Breite ⋅ Höhe)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="122"/>
       <source>Processing size in pixels (width × height), scale factor</source>
-      <translation type="unfinished">Processing size in pixels (width × height), scale factor</translation>
+      <translation>Verarbeitungsgröße in Pixel (Breite ⋅ Höhe), Skalierungsfaktor</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="177"/>
       <source>Unsupported TIFF files</source>
-      <translation type="unfinished">Unsupported TIFF files</translation>
+      <translation>Nicht unterstützte TIFF-Dateien</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="179"/>
       <source>The following 5-channel TIFF files are not supported
 : </source>
-      <translation type="unfinished">The following 5-channel TIFF files are not supported
+      <translation>Die folgenden 5-Kanal-TIFF-Dateien werden nicht unterstützt
 : </translation>
     </message>
     <message>
@@ -485,27 +485,27 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="354"/>
       <source>Number of boxes removed by the OCR model / total boxes</source>
-      <translation type="unfinished">Number of boxes removed by the OCR model / total boxes</translation>
+      <translation>Anzahl der durch das OCR-Modell entfernten Felder / Felder insgesamt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="358"/>
       <source>Number of boxes that failed to generate a mask / total boxes</source>
-      <translation type="unfinished">Number of boxes that failed to generate a mask / total boxes</translation>
+      <translation>Anzahl der Felder, für die keine Maske erzeugt werden konnte / Felder insgesamt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="360"/>
       <source>Number of boxes that were perfectly masked / total boxes</source>
-      <translation type="unfinished">Number of boxes that were perfectly masked / total boxes</translation>
+      <translation>Anzahl der perfekt maskierten Felder / Felder insgesamt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="362"/>
       <source>Number of boxes that were denoised / total boxes</source>
-      <translation type="unfinished">Number of boxes that were denoised / total boxes</translation>
+      <translation>Anzahl der entrauschten Felder / Felder insgesamt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="364"/>
       <source>Number of boxes that were inpainted</source>
-      <translation type="unfinished">Number of boxes that were inpainted</translation>
+      <translation>Anzahl der Felder, die übermalt wurden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="403"/>
@@ -643,21 +643,21 @@ Reinige Mangas durch KI.</translation>
       <location filename="../pcleaner/gui/image_details_driver.py" line="338"/>
       <location filename="../pcleaner/gui/image_details_driver.py" line="353"/>
       <source>Impossible Request</source>
-      <translation type="unfinished">Impossible Request</translation>
+      <translation>Unmöglicher Auftrag</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="342"/>
       <source>Denoising is disabled in the current profile, this output can&apos;t be generated.
 Please enable denoising in the profile settings and try again.</source>
-      <translation type="unfinished">Denoising is disabled in the current profile, this output can&apos;t be generated.
-Please enable denoising in the profile settings and try again.</translation>
+      <translation>Die Entrauschung ist im aktuellen Profil deaktiviert, diese Ausgabe kann nicht erzeugt werden.
+Bitte aktivieren Sie die Entrauschung in den Profileinstellungen und versuchen Sie es erneut.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="357"/>
       <source>Inpainting is disabled in the current profile, this output can&apos;t be generated.
 Please enable inpainting in the profile settings and try again.</source>
-      <translation type="unfinished">Inpainting is disabled in the current profile, this output can&apos;t be generated.
-Please enable inpainting in the profile settings and try again.</translation>
+      <translation>Übermalung ist im aktuellen Profil deaktiviert, diese Ausgabe kann nicht erzeugt werden.
+Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es erneut.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="407"/>
@@ -1436,7 +1436,7 @@ Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworf
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="292"/>
       <location filename="../ui_files/ModelDownloader.ui" line="186"/>
       <source>Inpainting model</source>
-      <translation type="unfinished">Inpainting model</translation>
+      <translation>Übermalungsmodell</translation>
     </message>
   </context>
   <context>
@@ -1673,31 +1673,31 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="process_strings.py" line="62"/>
       <source>The inpainted sections around the text that was poorly cleaned, if at all.</source>
       <comment>Step description in the image details view, step: Inpainter, output: Inpainted Mask</comment>
-      <translation type="unfinished">The inpainted sections around the text that was poorly cleaned, if at all.</translation>
+      <translation>Die übermalten Abschnitte um den Text herum, die, wenn überhaupt, nur schlecht gereinigt wurden.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="63"/>
       <source>Inpainter</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Inpainter</translation>
+      <translation>Übermaler</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="65"/>
       <source>Inpainted Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Inpainted Mask</translation>
+      <translation>Übermalte Maske</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="66"/>
       <source>The input image: cleaned, denoised (if enabled), and inpainted.</source>
       <comment>Step description in the image details view, step: Inpainter, output: Inpainted Output</comment>
-      <translation type="unfinished">The input image: cleaned, denoised (if enabled), and inpainted.</translation>
+      <translation>Das Eingabebild: gereinigt, entrauscht (falls aktiviert) und übermalt.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="68"/>
       <source>Inpainted Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Inpainted Output</translation>
+      <translation>Übermalte Ausgabe</translation>
     </message>
   </context>
   <context>
@@ -2053,103 +2053,103 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="184"/>
       <source>Inpainter</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Inpainter</translation>
+      <translation>Übermaler</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="186"/>
       <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</translation>
+      <translation>EXPERIMENTELL: Wenn Sie bessere Standardeinstellungen finden, öffnen Sie bitte ein Issue auf Github, um die Verbesserungen mit allen zu teilen. Beachten Sie, dass Übermalung nicht standardmäßig aktiviert ist.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="188"/>
       <source>Inpainting is when machine learning is used to replace the content of an image based on its surroundings. For masks that couldn&apos;t be cleaned well (or at all), inpainting can be used. To differentiate this from denoising, inpainting is meant for significantly worse masks that had a tight fit. Any masks that were denoised won&apos;t be inpainted.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">Inpainting is when machine learning is used to replace the content of an image based on its surroundings. For masks that couldn&apos;t be cleaned well (or at all), inpainting can be used. To differentiate this from denoising, inpainting is meant for significantly worse masks that had a tight fit. Any masks that were denoised won&apos;t be inpainted.</translation>
+      <translation>Beim Übermalen wird maschinelles Lernen eingesetzt, um den Inhalt eines Bildes auf der Grundlage seiner Umgebung zu ersetzen. Für Masken, die nicht gut (oder gar nicht) bereinigt werden konnten, kann Übermalung verwendet werden. Zur Unterscheidung von der Entrauschung ist das Übermalen für deutlich schlechtere Masken gedacht, die eine enge Passung aufweisen. Masken, die entrauscht wurden, werden nicht übermalt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="190"/>
       <source>Since this step can provide poor results in some cases, it can be disabled here. Set to False to disable inpainting.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">Since this step can provide poor results in some cases, it can be disabled here. Set to False to disable inpainting.</translation>
+      <translation>Da dieser Schritt in einigen Fällen zu schlechten Ergebnissen führen kann, kann er hier deaktiviert werden.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="192"/>
       <source>Inpainting Enabled</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Enabled</translation>
+      <translation>Übermalen Aktiviert</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="194"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask.</translation>
+      <translation>Die minimale Standardabweichung der Farben um den Rand einer gegebenen Maske, um eine Übermalung in dem Bereich um die Maske durchzuführen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="196"/>
       <source>Inpainting Min Std Dev</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Min Std Dev</translation>
+      <translation>Übermalung Min. Abweichung</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="198"/>
       <source>The maximum radius of a mask to perform inpainting on. Masks larger than this will be left as they are, because if the margin is that big, it is likely that the mask is already good enough.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The maximum radius of a mask to perform inpainting on. Masks larger than this will be left as they are, because if the margin is that big, it is likely that the mask is already good enough.</translation>
+      <translation>Der maximale Radius einer Maske für das Übermalen. Masken, die dicker sind als dieser Wert, werden unverändert belassen, denn wenn der Rand so groß ist, ist die Maske wahrscheinlich schon gut genug.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="200"/>
       <source>Inpainting Max Mask Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Max Mask Radius</translation>
+      <translation>Übermalung Max. Maskenradius</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="202"/>
       <source>The minimum radius around a mask to inpaint. This is added to the optimal mask size to ensure that the inpainting covers the entire mask.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The minimum radius around a mask to inpaint. This is added to the optimal mask size to ensure that the inpainting covers the entire mask.</translation>
+      <translation>Der Mindestradius um eine zu übermalende Maske. Dieser Wert wird zur optimalen Maskengröße addiert, um sicherzustellen, dass die Übermalung die gesamte Maske abdeckt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="204"/>
       <source>Min Inpainting Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Min Inpainting Radius</translation>
+      <translation>Min. Übermalungsradius</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="206"/>
       <source>For masks that proved far harder to clean, meaning they had a high standard deviation, increase the radius of the inpainting to cover more of the mask. This is additional margin is added to the min inpainting radius and is calculated as: inpainting radius multiplier times mask standard deviation</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">For masks that proved far harder to clean, meaning they had a high standard deviation, increase the radius of the inpainting to cover more of the mask. This is additional margin is added to the min inpainting radius and is calculated as: inpainting radius multiplier times mask standard deviation</translation>
+      <translation>Bei Masken, die sich als wesentlich schwieriger zu bereinigen erweisen, d. h. eine hohe Standardabweichung aufweisen, wird der Radius der Übermalung erhöht, um einen größeren Teil der Maske abzudecken. Dieser zusätzliche Spielraum wird zum minimalen Übermalungsradius addiert und wie folgt berechnet: Übermalungsradius-Faktor mal Standardabweichung der Maske</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="208"/>
       <source>Inpainting Radius Multiplier</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Radius Multiplier</translation>
+      <translation>Übermalungsradius-Faktor</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="210"/>
       <source>The maximum radius around a mask to inpaint. This limits the size the inpainting can grow to, to prevent it from covering too much of the image, if a large radius multiplier is used.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The maximum radius around a mask to inpaint. This limits the size the inpainting can grow to, to prevent it from covering too much of the image, if a large radius multiplier is used.</translation>
+      <translation>Der maximale Radius um eine zu übermalende Maske. Dies begrenzt die Größe, bis zu der die Übermalung wachsen kann, um zu verhindern, dass sie zu viel des Bildes bedeckt, wenn ein großer Übermalungsradius-Faktor verwendet wird.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="212"/>
       <source>Max Inpainting Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Max Inpainting Radius</translation>
+      <translation>Max. Übermalungsradius</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="214"/>
       <source>After inpainting, cut the result out of the original image to prevent the inpaitning from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">After inpainting, cut the result out of the original image to prevent the inpaitning from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</translation>
+      <translation>Nach dem Übermalen wird ein begrenzter Bereich aus dem Originalbild ausgeschnitten, um zu verhindern, dass sich das Übermalen auf den Rest des Bildes auswirkt. Dadurch wird sichergestellt, dass das Originalbild so weit wie möglich erhalten bleibt. Dieser Radius wird um den endgültigen Übermalungsradius herum hinzugefügt, da das Übermalungsmodell einige Pixel außerhalb des ihm zugewiesenen Bereichs verändert.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="216"/>
       <source>Inpainting Isolation Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Isolation Radius</translation>
+      <translation>Übermalung-Isolationsradius</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="124"/>
@@ -2221,7 +2221,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="154"/>
       <source>Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this, after which this mask is handed off to the inpainter.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this, after which this mask is handed off to the inpainter.</translation>
+      <translation>Hinweis: Wenn die Übermalung aktiviert ist, gilt die minimale Standardabweichung für die Übermalung als Höchstwert, nach dem diese Maske an den Übermaler weitergegeben wird.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="156"/>
@@ -2348,7 +2348,7 @@ Sie können das Modell manuell &lt;a href=&quot;https://github.com/zyddnys/manga
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="58"/>
       <source>Before Panel Cleaner can begin, it requires the following machine learning models. Press **Automatically Download** to allow Panel Cleaner to download these files to get started (Internet connection required, total space approx. 700 MiB)</source>
-      <translation type="unfinished">Before Panel Cleaner can begin, it requires the following machine learning models. Press **Automatically Download** to allow Panel Cleaner to download these files to get started (Internet connection required, total space approx. 700 MiB)</translation>
+      <translation>Bevor Panel Cleaner beginnen kann, benötigt es die folgenden Modelle für maschinelles Lernen. Drücken Sie **Automatisch Herunterladen**, damit Panel Cleaner diese Dateien für Sie installieren kann (Internetverbindung erforderlich, Gesamtspeicherplatz ca. 700 MiB)</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="107"/>
@@ -2370,17 +2370,17 @@ Sie können das Modell manuell &lt;a href=&quot;https://github.com/zyddnys/manga
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="295"/>
       <source>Inpainting:</source>
-      <translation type="unfinished">Inpainting:</translation>
+      <translation>Übermaler:</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="417"/>
       <source>Automatically Download</source>
-      <translation type="unfinished">Automatically Download</translation>
+      <translation>Automatisch Herunterladen</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="433"/>
       <source>Abort</source>
-      <translation type="unfinished">Abort</translation>
+      <translation>Abbrechen</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="147"/>
