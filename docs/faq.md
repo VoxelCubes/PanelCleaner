@@ -79,6 +79,56 @@ Yes, they will. The GUI is just a wrapper around the CLI, so it will use the sam
 
 ## This specific image causes an error, what do I do?
 
-Please open an issue on Github and attach the image in question as well as your log file. You can find it by clicking the "Open Log" button in the gui, or going to the folder `~/.cache/pcleaner` on Linux/MacOS or `%APPDATA%\pcleaner\cache` on Windows.
+Please open an issue on Github and attach the image in question as well as your log file. You can find it by clicking
+the "Open Log" button in the gui, or going to the folder `~/.cache/pcleaner` on Linux/MacOS or `%APPDATA%\pcleaner\cache` on Windows.
 
 Without both of those I cannot help you.
+
+
+## How can I install the OCR model manually?
+
+First off, don't do this unless you have a good reason to. It's a little more work than simply downloading a file,
+the way it works for the text detection and inpainting models.
+
+To begin, download only these model files from the [huggingface website](https://huggingface.co/kha-white/manga-ocr-base/tree/main):
+```
+config.json
+preprocessor_config.json
+pytorch_model.bin
+special_tokens_map.json
+tokenizer_config.json
+vocab.txt
+```
+
+Next, figure out where your huggingface cache is located. This is typically `~/.cache/huggingface` on Linux/MacOS and `%APPDATA%\.cache/huggingface` on Windows.
+
+You can also use the environment variable `XDG_CACHE_HOME` to change the exact location of the `.cache` directory. \
+Note: Changing this will affect where the other model data and logs, as well as intermediate files, are stored.
+
+Once you have the files, create a directory structure like this:
+```
+huggingface
+└── hub
+   ├── models--kha-white--manga-ocr-base
+   │  ├── refs
+   │  │  └── main
+   │  └── snapshots
+   │     └── aa6573bd10b0d446cbf622e29c3e084914df9741
+   │        ├── config.json
+   │        ├── preprocessor_config.json
+   │        ├── pytorch_model.bin
+   │        ├── special_tokens_map.json
+   │        ├── tokenizer_config.json
+   │        └── vocab.txt
+   └── version.txt
+```
+The `version.txt` contains this:
+```
+1
+```
+And the `main` file contains this:
+```
+aa6573bd10b0d446cbf622e29c3e084914df9741
+```
+
+Note: The `aa6573bd10b0d446cbf622e29c3e084914df9741` is the git commit hash of the model, basically, it marks the current version.
