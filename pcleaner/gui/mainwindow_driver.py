@@ -138,23 +138,29 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Apply the given theme to the application, or if none, revert to the default theme.
         """
+        palette: Qg.QPalette
+
         if theme is None:
             logger.info(f"Using system theme.")
-            self.setPalette(self.default_palette)
+            palette = self.default_palette
             Qg.QIcon.setThemeName(self.default_icon_theme)
-            Qw.QApplication.setStyle(self.default_style)
+            # Check if we need to restore the style.
+            if Qw.QApplication.style().objectName() != self.default_style:
+                Qw.QApplication.setStyle(self.default_style)
         else:
             logger.info(f"Using theme: {theme}")
-            self.setPalette(gu.load_color_palette(theme))
+            palette = gu.load_color_palette(theme)
+
             Qg.QIcon.setThemeName(theme)
             if platform.system() == "Windows":
                 Qw.QApplication.setStyle("Fusion")
 
+        self.setPalette(palette)
         Qw.QApplication.setPalette(self.palette())
 
         # Check the brightness of the background color to determine if the theme is dark.
         # This is a heuristic, but it works well enough.
-        background_color = self.palette().color(Qg.QPalette.Window)
+        background_color = palette.color(Qg.QPalette.Window)
         self.theme_is_dark.set(background_color.lightness() < 128)
         logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
         self.theme_is_dark_changed.emit(self.theme_is_dark)

@@ -62,6 +62,8 @@ class FileTable(CTableWidget):
     step_icons_light: dict[imf.ImageAnalyticCategory, Qg.QIcon]
     shared_theme_is_dark: gst.Shared[bool]
 
+    last_header_widths: list[int]
+
     def __init__(self, parent=None) -> None:
         CTableWidget.__init__(self, parent)
 
@@ -75,6 +77,9 @@ class FileTable(CTableWidget):
 
         self.itemClicked.connect(self.on_click)
         self.finished_drop.connect(self.repopulate_table)
+
+        # Upon style change events, we need to remember the last known good header widths, otherwise they are reset.
+        self.last_header_widths = [self.columnWidth(col) for col in range(self.columnCount())]
 
         Qc.QTimer.singleShot(0, self.post_init)
 
@@ -120,6 +125,17 @@ class FileTable(CTableWidget):
         self.horizontalHeaderItem(Column.PROCESSING_SIZE).setToolTip(
             self.tr("Processing size in pixels (width × height), scale factor")
         )
+
+    def changeEvent(self, arg__1: Qc.QEvent) -> None:
+        # If we encounter a style change event, we need to restore the last known good header widths.
+        if arg__1.type() == Qc.QEvent.StyleChange:
+            logger.debug(f"Restoring last known good header widths: {self.last_header_widths}")
+            for col, width in enumerate(self.last_header_widths):
+                self.setColumnWidth(col, width)
+        else:
+            self.last_header_widths = [self.columnWidth(col) for col in range(self.columnCount())]
+
+        super().changeEvent(arg__1)
 
     def set_thread_queue(self, thread_queue: Qc.QThreadPool) -> None:
         self.thread_queue = thread_queue
