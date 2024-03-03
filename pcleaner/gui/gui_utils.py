@@ -283,6 +283,7 @@ def ansi_to_html(input_text: str) -> str:
     ansi_to_html_lut = {
         "31": "color:#eb514f;",
         "32": "color:#00ff00;",
+        "92": "color:#22ff22;",
         "33": "color:#ffff00;",
         "34": "color:#0000ff;",
         "35": "color:#a771bf;",

@@ -9,11 +9,12 @@ from simple_lama_inpainting import SimpleLama
 import pcleaner.config as cfg
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
+import pcleaner.model_downloader as md
 
 
 class InpaintingModel:
     def __init__(self, config: cfg.Config) -> None:
-        self.model_path = get_model_path(config)
+        self.model_path = md.get_inpainting_model_path(config)
         # Sanity check: Make sure the model exists.
         if not self.model_path.is_file():
             raise FileNotFoundError(f"Model not found: {self.model_path}")
@@ -133,7 +134,10 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
         combined_mask = combined_mask.resize(cleaned_image.size, resample=Image.NEAREST)
 
     # Inpaint the image.
-    inpainted_image = model(cleaned_image, combined_mask)
+    if boxes_to_inpaint:
+        inpainted_image = model(cleaned_image, combined_mask)
+    else:
+        inpainted_image = cleaned_image
 
     # Lastly, grow the masks again by the isolation radius to cut out the inpainted areas.
     isolated_combined_mask = Image.new("1", cleaned_image.size, 0)
@@ -147,7 +151,8 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
 
     # Apply the mask to the inpainted image.
     inpainted_areas = Image.new("RGBA", cleaned_image.size, 0)
-    inpainted_image = inpainted_image.crop((0, 0, *cleaned_image.size))
+    width, height = cleaned_image.size
+    inpainted_image = inpainted_image.crop((0, 0, width, height))
     inpainted_areas.paste(inpainted_image, (0, 0), isolated_combined_mask)
 
     # Create a new output with these inpainted areas overlayed.
@@ -208,7 +213,7 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
 
     if not i_data.save_only_cleaned:
         # Save the final image.
-        if i_data.separate_noise_masks:
+        if i_data.separate_inpaint_masks:
             logger.debug(f"Saving final mask to {final_mask_out_path}")
             ops.save_optimized(mask_image, final_mask_out_path)
 

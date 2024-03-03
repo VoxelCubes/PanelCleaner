@@ -49,6 +49,9 @@ class Output(IntEnum):
     denoise_mask = auto()
     denoised_output = auto()
 
+    inpainted_mask = auto()
+    inpainted_output = auto()
+
     write_output = auto()  # This is only used for the progress bar.
 
 
@@ -61,6 +64,7 @@ class Step(IntEnum):
     preprocessor = auto()
     masker = auto()
     denoiser = auto()
+    inpainter = auto()
     output = auto()
 
 
@@ -80,6 +84,7 @@ class ProgressType(Enum):
     analyticsOCR = auto()
     analyticsMasker = auto()
     analyticsDenoiser = auto()
+    analyticsInpainter = auto()
     outputOCR = auto()
     end = auto()
     aborted = auto()
@@ -129,6 +134,8 @@ output_to_step: dict[Output, Step] = {
     Output.mask_data_json: Step.masker,
     Output.denoise_mask: Step.denoiser,
     Output.denoised_output: Step.denoiser,
+    Output.inpainted_mask: Step.inpainter,
+    Output.inpainted_output: Step.inpainter,
     Output.write_output: Step.output,
 }
 
@@ -149,6 +156,7 @@ step_to_output: dict[Step, tuple[Output, ...]] = {
         Output.mask_data_json,
     ),
     Step.denoiser: (Output.denoise_mask, Output.denoised_output),
+    Step.inpainter: (Output.inpainted_mask, Output.inpainted_output),
     Step.output: (Output.write_output,),
 }
 
@@ -170,6 +178,7 @@ class ImageAnalyticCategory(Enum):
     mask_failed = auto()
     mask_perfect = auto()
     denoised = auto()
+    inpainted = auto()
 
 
 class ImageAnalytics:
@@ -195,7 +204,7 @@ class ImageAnalytics:
     def get_category(self, category: ImageAnalyticCategory) -> str:
         return self._data[category]
 
-    def set_category(self, category: ImageAnalyticCategory, value: int, total: int) -> None:
+    def set_category(self, category: ImageAnalyticCategory, value: int, total: int | None) -> None:
         """
         Set the analytic value for the category as a string internally.
         If either value is 0, the analytic is reset.
@@ -206,6 +215,8 @@ class ImageAnalytics:
         """
         if value == 0 or total == 0:
             self._data[category] = ""
+        elif total is None:
+            self._data[category] = str(value)
         else:
             self._data[category] = f"{value}/{total}"
 
@@ -371,6 +382,7 @@ class ImageFile:
         pp = fields(cfg.PreprocessorConfig)
         mk = fields(cfg.MaskerConfig)
         dn = fields(cfg.DenoiserConfig)
+        ip = fields(cfg.InpainterConfig)
 
         # Init the process steps.
         # Here I need to account for all the settings that affect each step.
@@ -481,7 +493,8 @@ class ImageFile:
         self.outputs[Output.mask_data_json] = ProcessOutput("Not visible", None, None, settings)
 
         # Denoiser:
-        settings += [
+        denoise_settings = settings.copy()
+        denoise_settings += [
             pro.denoiser,
             dn.denoising_enabled,
             dn.noise_min_standard_deviation,
@@ -497,13 +510,40 @@ class ImageFile:
             "The masks that required denoising, to be overlaid on the final mask when exporting.",
             "Denoiser",
             "Denoise Mask",
-            settings,
+            denoise_settings,
         )
         self.outputs[Output.denoised_output] = ProcessOutput(
             "The input image with the denoised mask applied.",
             "Denoiser",
             "Denoised Output",
-            settings,
+            denoise_settings,
+        )
+
+        # Inpainter:
+        inpaint_settings = settings
+        inpaint_settings += [
+            dn.denoising_enabled,
+            dn.noise_min_standard_deviation,
+            pro.inpainter,
+            ip.inpainting_enabled,
+            ip.inpainting_min_std_dev,
+            ip.inpainting_max_mask_radius,
+            ip.min_inpainting_radius,
+            ip.max_inpainting_radius,
+            ip.inpainting_radius_multiplier,
+            ip.inpainting_isolation_radius,
+        ]
+        self.outputs[Output.inpainted_mask] = ProcessOutput(
+            "The inpainted sections around the text that was poorly cleaned, if at all.",
+            "Inpainter",
+            "Inpainted Mask",
+            inpaint_settings,
+        )
+        self.outputs[Output.inpainted_output] = ProcessOutput(
+            "The input image: cleaned, denoised (if enabled), and inpainted.",
+            "Inpainter",
+            "Inpainted Output",
+            inpaint_settings,
         )
 
     @property

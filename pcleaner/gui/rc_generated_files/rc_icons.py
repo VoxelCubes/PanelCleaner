@@ -2267,6 +2267,156 @@ z>\xf2\x09\x09(>k\xbe\xb5\xe6\x18!F\x22Z\
 \x88\x10\x88B\xa6}\x10\x0d(@\xc4c4\xf4\x89?\
 \x22\x1e\x81\x0c!D\xeb\xfd\xb4\xd7v\xc8l\xa0o\xcd\
 N\xf6\xdd\xd5?\xec\xb6v\x06\
+\x00\x00\x09=\
+<\
+?xml version=\x221.\
+0\x22 encoding=\x22UTF\
+-8\x22 standalone=\x22\
+no\x22?>\x0a<svg\x0a   vi\
+ewBox=\x220 0 16 16\
+\x22\x0a   version=\x221.\
+1\x22\x0a   id=\x22svg1\x22\x0a\
+   sodipodi:docn\
+ame=\x22mask_inpain\
+ting.svg\x22\x0a   ink\
+scape:version=\x221\
+.3.2 (091e20ef0f\
+, 2023-11-25, cu\
+stom)\x22\x0a   xmlns:\
+inkscape=\x22http:/\
+/www.inkscape.or\
+g/namespaces/ink\
+scape\x22\x0a   xmlns:\
+sodipodi=\x22http:/\
+/sodipodi.source\
+forge.net/DTD/so\
+dipodi-0.dtd\x22\x0a  \
+ xmlns=\x22http://w\
+ww.w3.org/2000/s\
+vg\x22\x0a   xmlns:svg\
+=\x22http://www.w3.\
+org/2000/svg\x22>\x0a \
+ <sodipodi:named\
+view\x0a     id=\x22na\
+medview1\x22\x0a     p\
+agecolor=\x22#50505\
+0\x22\x0a     borderco\
+lor=\x22#ffffff\x22\x0a  \
+   borderopacity\
+=\x221\x22\x0a     inksca\
+pe:showpageshado\
+w=\x220\x22\x0a     inksc\
+ape:pageopacity=\
+\x220\x22\x0a     inkscap\
+e:pagecheckerboa\
+rd=\x221\x22\x0a     inks\
+cape:deskcolor=\x22\
+#d1d1d1\x22\x0a     in\
+kscape:zoom=\x2250.\
+1875\x22\x0a     inksc\
+ape:cx=\x228.009962\
+6\x22\x0a     inkscape\
+:cy=\x227.9900374\x22\x0a\
+     inkscape:wi\
+ndow-width=\x222560\
+\x22\x0a     inkscape:\
+window-height=\x221\
+362\x22\x0a     inksca\
+pe:window-x=\x220\x22\x0a\
+     inkscape:wi\
+ndow-y=\x220\x22\x0a     \
+inkscape:window-\
+maximized=\x221\x22\x0a  \
+   inkscape:curr\
+ent-layer=\x22svg1\x22\
+ />\x0a  <defs\x0a    \
+ id=\x22defs3051\x22>\x0a\
+    <style\x0a     \
+  type=\x22text/css\
+\x22\x0a       id=\x22cur\
+rent-color-schem\
+e\x22>\x0a      .Color\
+Scheme-Text {\x0a  \
+      color:#232\
+629;\x0a      }\x0a   \
+   </style>\x0a  </\
+defs>\x0a  <path\x0a  \
+   style=\x22displa\
+y:inline;fill:cu\
+rrentColor;fill-\
+opacity:1;stroke\
+:none\x22\x0a     d=\x22M\
+ 2,2 V 14 H 14 V\
+ 2 Z M 3,3 H 13 \
+V 13 H 3 Z\x22\x0a    \
+ class=\x22ColorSch\
+eme-Text\x22\x0a     i\
+d=\x22path1\x22\x0a     s\
+odipodi:nodetype\
+s=\x22cccccccccc\x22 /\
+>\x0a  <rect\x0a     s\
+tyle=\x22display:no\
+ne;fill:#edefef;\
+fill-opacity:0.5\
+01961;stroke:non\
+e;stroke-width:0\
+.628003;stroke-l\
+inecap:square;st\
+roke-miterlimit:\
+3\x22\x0a     id=\x22rect\
+1\x22\x0a     width=\x221\
+0\x22\x0a     height=\x22\
+10\x22\x0a     x=\x223\x22\x0a \
+    y=\x223\x22 />\x0a  <\
+path\x0a     style=\
+\x22color:#232629;f\
+ill:currentColor\
+;fill-opacity:1;\
+stroke:none;stro\
+ke-width:0.62504\
+3\x22\x0a     d=\x22M 11.\
+392803,4.2534933\
+ A 0.93764485,4.\
+2194033 44.98945\
+3 0 0 8.0319871,\
+6.643787 0.93764\
+485,4.2194033 44\
+.989453 0 0 6.37\
+17217,8.5726259 \
+C 6.8761178,8.73\
+33236 7.2695056,\
+9.1264495 7.4301\
+409,9.631045 a 0\
+.93764485,4.2194\
+033 44.989453 0 \
+0 1.927617,-1.66\
+14867 0.93764485\
+,4.2194033 44.98\
+9453 0 0 2.31949\
+21,-3.6464802 0.\
+93764485,4.21940\
+33 44.989453 0 0\
+ -0.155038,-0.06\
+9585 0.93764485,\
+4.2194033 44.989\
+453 0 0 -0.12940\
+9,2e-7 z M 6.125\
+1227,9.247719 v \
+0.00247 c -1.875\
+073,0.502632 -0.\
+4688179,1.689275\
+ -1.8751228,2.50\
+014 1.8750736,0 \
+2.8126854,-0.938\
+033 2.8126854,-1\
+.563826 0,-0.311\
+9577 0.031843,-0\
+.886903 -0.93756\
+26,-0.9387811 z\x22\
+\x0a     class=\x22Col\
+orScheme-Text\x22\x0a \
+    id=\x22path1-75\
+\x22 />\x0a</svg>\x0a\
 \x00\x00\x07\xa1\
 <\
 ?xml version=\x221.\
@@ -2707,6 +2857,156 @@ c4B\xbe\xe7\xfb\x04\x8d\x98G\x09\xc6\x84\xe1\xb7\x87\
 \x0f\x11\x02Q\xc8\xb4\x0f\xa2\x01\x05\x88x\x8c\x86>\xf1\
 G\xc4#\x90!\x84h\xbd\x9f\xf6\xda\x0e\x99\x0d\xf4\xad\
 \xd9\xc9\xbe\xbb\xfa\x07\x05\x8fv\xc6\
+\x00\x00\x09=\
+<\
+?xml version=\x221.\
+0\x22 encoding=\x22UTF\
+-8\x22 standalone=\x22\
+no\x22?>\x0a<svg\x0a   vi\
+ewBox=\x220 0 16 16\
+\x22\x0a   version=\x221.\
+1\x22\x0a   id=\x22svg1\x22\x0a\
+   sodipodi:docn\
+ame=\x22mask_inpain\
+ting.svg\x22\x0a   ink\
+scape:version=\x221\
+.3.2 (091e20ef0f\
+, 2023-11-25, cu\
+stom)\x22\x0a   xmlns:\
+inkscape=\x22http:/\
+/www.inkscape.or\
+g/namespaces/ink\
+scape\x22\x0a   xmlns:\
+sodipodi=\x22http:/\
+/sodipodi.source\
+forge.net/DTD/so\
+dipodi-0.dtd\x22\x0a  \
+ xmlns=\x22http://w\
+ww.w3.org/2000/s\
+vg\x22\x0a   xmlns:svg\
+=\x22http://www.w3.\
+org/2000/svg\x22>\x0a \
+ <sodipodi:named\
+view\x0a     id=\x22na\
+medview1\x22\x0a     p\
+agecolor=\x22#50505\
+0\x22\x0a     borderco\
+lor=\x22#ffffff\x22\x0a  \
+   borderopacity\
+=\x221\x22\x0a     inksca\
+pe:showpageshado\
+w=\x220\x22\x0a     inksc\
+ape:pageopacity=\
+\x220\x22\x0a     inkscap\
+e:pagecheckerboa\
+rd=\x221\x22\x0a     inks\
+cape:deskcolor=\x22\
+#d1d1d1\x22\x0a     in\
+kscape:zoom=\x2250.\
+1875\x22\x0a     inksc\
+ape:cx=\x228.009962\
+6\x22\x0a     inkscape\
+:cy=\x227.9900374\x22\x0a\
+     inkscape:wi\
+ndow-width=\x222560\
+\x22\x0a     inkscape:\
+window-height=\x221\
+362\x22\x0a     inksca\
+pe:window-x=\x220\x22\x0a\
+     inkscape:wi\
+ndow-y=\x220\x22\x0a     \
+inkscape:window-\
+maximized=\x221\x22\x0a  \
+   inkscape:curr\
+ent-layer=\x22svg1\x22\
+ />\x0a  <defs\x0a    \
+ id=\x22defs3051\x22>\x0a\
+    <style\x0a     \
+  type=\x22text/css\
+\x22\x0a       id=\x22cur\
+rent-color-schem\
+e\x22>\x0a      .Color\
+Scheme-Text {\x0a  \
+      color:#eff\
+0f1;\x0a      }\x0a   \
+   </style>\x0a  </\
+defs>\x0a  <path\x0a  \
+   style=\x22displa\
+y:inline;fill:cu\
+rrentColor;fill-\
+opacity:1;stroke\
+:none\x22\x0a     d=\x22M\
+ 2,2 V 14 H 14 V\
+ 2 Z M 3,3 H 13 \
+V 13 H 3 Z\x22\x0a    \
+ class=\x22ColorSch\
+eme-Text\x22\x0a     i\
+d=\x22path1\x22\x0a     s\
+odipodi:nodetype\
+s=\x22cccccccccc\x22 /\
+>\x0a  <rect\x0a     s\
+tyle=\x22display:no\
+ne;fill:#edefef;\
+fill-opacity:0.5\
+01961;stroke:non\
+e;stroke-width:0\
+.628003;stroke-l\
+inecap:square;st\
+roke-miterlimit:\
+3\x22\x0a     id=\x22rect\
+1\x22\x0a     width=\x221\
+0\x22\x0a     height=\x22\
+10\x22\x0a     x=\x223\x22\x0a \
+    y=\x223\x22 />\x0a  <\
+path\x0a     style=\
+\x22color:#eff0f1;f\
+ill:currentColor\
+;fill-opacity:1;\
+stroke:none;stro\
+ke-width:0.62504\
+3\x22\x0a     d=\x22M 11.\
+392803,4.2534933\
+ A 0.93764485,4.\
+2194033 44.98945\
+3 0 0 8.0319871,\
+6.643787 0.93764\
+485,4.2194033 44\
+.989453 0 0 6.37\
+17217,8.5726259 \
+C 6.8761178,8.73\
+33236 7.2695056,\
+9.1264495 7.4301\
+409,9.631045 a 0\
+.93764485,4.2194\
+033 44.989453 0 \
+0 1.927617,-1.66\
+14867 0.93764485\
+,4.2194033 44.98\
+9453 0 0 2.31949\
+21,-3.6464802 0.\
+93764485,4.21940\
+33 44.989453 0 0\
+ -0.155038,-0.06\
+9585 0.93764485,\
+4.2194033 44.989\
+453 0 0 -0.12940\
+9,2e-7 z M 6.125\
+1227,9.247719 v \
+0.00247 c -1.875\
+073,0.502632 -0.\
+4688179,1.689275\
+ -1.8751228,2.50\
+014 1.8750736,0 \
+2.8126854,-0.938\
+033 2.8126854,-1\
+.563826 0,-0.311\
+9577 0.031843,-0\
+.886903 -0.93756\
+26,-0.9387811 z\x22\
+\x0a     class=\x22Col\
+orScheme-Text\x22\x0a \
+    id=\x22path1-75\
+\x22 />\x0a</svg>\x0a\
 "
 
 qt_resource_name = b"\
@@ -2752,6 +3052,11 @@ qt_resource_name = b"\
 \x00m\
 \x00a\x00s\x00k\x00_\x00d\x00e\x00n\x00o\x00i\x00s\x00e\x00d\x00.\x00s\x00v\x00g\
 \
+\x00\x13\
+\x0c\xb1\x85\x07\
+\x00m\
+\x00a\x00s\x00k\x00_\x00i\x00n\x00p\x00a\x00i\x00n\x00t\x00i\x00n\x00g\x00.\x00s\
+\x00v\x00g\
 "
 
 qt_resource_struct = b"\
@@ -2765,25 +3070,29 @@ qt_resource_struct = b"\
 \x00\x00\x01\x87\x8c\xdf\x0e\xff\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x02\x00\x00\x00\x05\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00l\x00\x02\x00\x00\x00\x04\x00\x00\x00\x0b\
+\x00\x00\x00l\x00\x02\x00\x00\x00\x05\x00\x00\x00\x0c\
 \x00\x00\x00\x00\x00\x00\x00\x00\
-\x00\x00\x00z\x00\x02\x00\x00\x00\x04\x00\x00\x00\x07\
+\x00\x00\x00z\x00\x02\x00\x00\x00\x05\x00\x00\x00\x07\
 \x00\x00\x00\x00\x00\x00\x00\x00\
 \x00\x00\x01\x00\x00\x01\x00\x00\x00\x01\x00\x00\x87\xc5\
-\x00\x00\x01\x8d\xbc\xe2\x82N\
+\x00\x00\x01\x8e\x05[\x0fk\
 \x00\x00\x00\xb6\x00\x00\x00\x00\x00\x01\x00\x00y\x06\
-\x00\x00\x01\x8d\xbc\xe2\x82N\
+\x00\x00\x01\x8e\x05[\x0fk\
 \x00\x00\x00\xda\x00\x00\x00\x00\x00\x01\x00\x00\x80$\
-\x00\x00\x01\x8d\xbc\xe2\x82N\
+\x00\x00\x01\x8e\x05[\x0fk\
+\x00\x00\x01(\x00\x00\x00\x00\x00\x01\x00\x00\x8cS\
+\x00\x00\x01\x8e\x05[\x0fg\
 \x00\x00\x00\x8a\x00\x00\x00\x00\x00\x01\x00\x00qa\
-\x00\x00\x01\x8d\xbc\xe2\x82N\
-\x00\x00\x01\x00\x00\x01\x00\x00\x00\x01\x00\x00\xa2\xb7\
+\x00\x00\x01\x8e\x05[\x0fg\
+\x00\x00\x01\x00\x00\x01\x00\x00\x00\x01\x00\x00\xab\xf8\
 \x00\x00\x01\x8b\x0an\xba\x80\
-\x00\x00\x00\xb6\x00\x00\x00\x00\x00\x01\x00\x00\x93\xf8\
+\x00\x00\x00\xb6\x00\x00\x00\x00\x00\x01\x00\x00\x9d9\
 \x00\x00\x01\x8b\x0an\xba\x80\
-\x00\x00\x00\xda\x00\x00\x00\x00\x00\x01\x00\x00\x9b\x16\
+\x00\x00\x00\xda\x00\x00\x00\x00\x00\x01\x00\x00\xa4W\
 \x00\x00\x01\x8b\x0an\xba\x80\
-\x00\x00\x00\x8a\x00\x00\x00\x00\x00\x01\x00\x00\x8cS\
+\x00\x00\x01(\x00\x00\x00\x00\x00\x01\x00\x00\xb0\x87\
+\x00\x00\x01\x8e\x01\xf2R\x8f\
+\x00\x00\x00\x8a\x00\x00\x00\x00\x00\x01\x00\x00\x95\x94\
 \x00\x00\x01\x8b\x0an\xba\x80\
 "
 

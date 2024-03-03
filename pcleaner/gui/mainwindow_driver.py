@@ -1133,7 +1133,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         requested_outputs = []
 
-        if self.config.current_profile.denoiser.denoising_enabled:
+        if self.config.current_profile.inpainter.inpainting_enabled:
+            if request_cleaned:
+                requested_outputs.append(imf.Output.inpainted_output)
+            if request_mask:
+                requested_outputs.append(imf.Output.inpainted_mask)
+        elif self.config.current_profile.denoiser.denoising_enabled:
             if request_cleaned:
                 requested_outputs.append(imf.Output.denoised_output)
             if request_mask:
@@ -1387,6 +1392,23 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
             self.file_table.show_denoise_mini_analytics(denoise_analytics_raw, min_deviation)
+
+        elif progress_data.progress_type == imf.ProgressType.analyticsInpainter:
+            # Show analytics.
+            logger.info(f"Showing inpainter analytics...")
+            (
+                inpainter_analytics_raw,
+                min_inpaint_thickness,
+                max_inpaint_thickness,
+            ) = progress_data.value
+            analytics_str = an.show_inpainting_analytics(
+                inpainter_analytics_raw,
+                min_inpaint_thickness,
+                max_inpaint_thickness,
+                ANALYTICS_COLUMNS,
+            )
+            self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
+            self.file_table.show_inpaint_mini_analytics(inpainter_analytics_raw)
 
         elif progress_data.progress_type == imf.ProgressType.outputOCR:
             # Show ocr output.

@@ -609,7 +609,7 @@ class InpainterData:
     save_only_mask: bool
     save_only_cleaned: bool
     extract_text: bool
-    separate_noise_masks: bool
+    separate_inpaint_masks: bool
     show_masks: bool
     debug: bool
 

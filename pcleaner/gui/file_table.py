@@ -92,8 +92,12 @@ class FileTable(CTableWidget):
                 ("mask_failed.svg", imf.ImageAnalyticCategory.mask_failed),
                 ("mask_perfect.svg", imf.ImageAnalyticCategory.mask_perfect),
                 ("mask_denoised.svg", imf.ImageAnalyticCategory.denoised),
+                ("mask_inpainting.svg", imf.ImageAnalyticCategory.inpainted),
             ]:
                 icons[analytic_category] = Qg.QIcon(f":/custom_icons/{dark_or_light}/{icon_name}")
+                # Check if it loaded correctly.
+                if icons[analytic_category].isNull():
+                    logger.error(f"Failed to load icon {icon_name} for {dark_or_light} theme.")
 
             if dark_or_light == "dark":
                 self.step_icons_dark = icons
@@ -101,19 +105,20 @@ class FileTable(CTableWidget):
                 self.step_icons_light = icons
 
     def post_init(self) -> None:
-        # Make enough room for the 4 analytic icons.
+        # Make enough room for the analytic icons.
+        icon_count = len(self.step_icons_dark)
         self.setColumnWidth(
-            Column.ANALYTICS, round(4 * (imf.THUMBNAIL_SIZE * 0.75) + 2 * GUI_PADDING)
+            Column.ANALYTICS, round(icon_count * (imf.THUMBNAIL_SIZE * 0.75) + 2 * GUI_PADDING)
         )
         # make the filename column wider.
         self.setColumnWidth(Column.FILENAME, 220)
 
         # Add tooltips to column headers.
         self.horizontalHeaderItem(Column.SIZE).setToolTip(
-            "Original size in pixels (width × height)"
+            self.tr("Original size in pixels (width × height)")
         )
         self.horizontalHeaderItem(Column.PROCESSING_SIZE).setToolTip(
-            "Processing size in pixels (width × height), scale factor"
+            self.tr("Processing size in pixels (width × height), scale factor")
         )
 
     def set_thread_queue(self, thread_queue: Qc.QThreadPool) -> None:
@@ -169,8 +174,9 @@ class FileTable(CTableWidget):
             rejected_tiff_str = "\n".join([str(p) for p in rejected_tiffs])
             hp.show_warning(
                 self,
-                "Unsupported TIFF files",
-                f"The following 5-channel TIFF files are not supported\n: " f"{rejected_tiff_str}",
+                self.tr("Unsupported TIFF files"),
+                self.tr("The following 5-channel TIFF files are not supported\n: ")
+                + str(rejected_tiff_str),
             )
         for image_path in image_paths:
             self.add_file(image_path)
@@ -344,13 +350,17 @@ class FileTable(CTableWidget):
 
                 # Add a helpful tooltip to both the icon and the label.
                 if analytic == imf.ImageAnalyticCategory.ocr_removed:
-                    tooltip = "Number of boxes removed by the OCR model / total boxes"
+                    tooltip = self.tr("Number of boxes removed by the OCR model / total boxes")
                 elif analytic == imf.ImageAnalyticCategory.mask_failed:
-                    tooltip = "Number of boxes that failed to generate a mask / total boxes"
+                    tooltip = self.tr(
+                        "Number of boxes that failed to generate a mask / total boxes"
+                    )
                 elif analytic == imf.ImageAnalyticCategory.mask_perfect:
-                    tooltip = "Number of boxes that were perfectly masked / total boxes"
+                    tooltip = self.tr("Number of boxes that were perfectly masked / total boxes")
                 elif analytic == imf.ImageAnalyticCategory.denoised:
-                    tooltip = "Number of boxes that were denoised / total boxes"
+                    tooltip = self.tr("Number of boxes that were denoised / total boxes")
+                elif analytic == imf.ImageAnalyticCategory.inpainted:
+                    tooltip = self.tr("Number of boxes that were inpainted")
                 else:
                     raise ValueError(f"Unknown analytic {analytic}")
 
@@ -519,6 +529,22 @@ class FileTable(CTableWidget):
             # Update the number of boxes that were denoised directly.
             self.files[path].analytics_data.set_category(
                 imf.ImageAnalyticCategory.denoised, denoised, total
+            )
+
+        self.update_all_rows()
+
+    def show_inpaint_mini_analytics(
+        self, inpaint_analytics: Sequence[st.InpaintingAnalytic]
+    ) -> None:
+        """
+        Update the image files with the mini analytics data.
+
+        :param inpaint_analytics: The analytics to show.
+        """
+        for analytic in inpaint_analytics:
+            path = analytic.path
+            self.files[path].analytics_data.set_category(
+                imf.ImageAnalyticCategory.inpainted, len(analytic.thicknesses), None
             )
 
         self.update_all_rows()

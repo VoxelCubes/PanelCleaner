@@ -630,7 +630,7 @@ def draw_inpaint_histogram(
     # Rescale the buckets.
 
     max_label_length = max(len(label) for label, _ in buckets_labeled)
-    bar_width = max_columns - max_label_length - 24  # 24 is for the spaces and the brackets.
+    bar_width = max_columns - max_label_length - 28  # 28 is for the spaces and the brackets.
 
     bucket_bar_lengths: list[int] = [
         int(count * bar_width / max_count) for _, count in buckets_labeled

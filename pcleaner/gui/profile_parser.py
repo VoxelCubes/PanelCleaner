@@ -350,7 +350,12 @@ class ProfileToolBox(Qw.QToolBox):
             layout = Qw.QVBoxLayout()
             current_layout_form = Qw.QFormLayout()
             section_widget.setLayout(layout)
-            self.addItem(section_widget, tr(to_display_name(section.name), context="Profile"))
+            # cMark the inpainting section as experimental.
+            if section.name == "inpainter":
+                self.addItem(section_widget, tr("Inpainter (experimental)", context="Profile"))
+            else:
+                self.addItem(section_widget, tr(to_display_name(section.name), context="Profile"))
+
             self._widgets[section.name] = {}
 
             for item in section.items:

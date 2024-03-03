@@ -316,6 +316,50 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         # Update the badges on the buttons.
         self.start_profile_checker()
 
+    def request_has_conflict(self, proc_output: imf.ProcessOutput) -> bool:
+        """
+        Check if the user made a silly request, like asking for an inpainted output when
+        inpainting was disabled in the profile.
+        Alternatively, pcleaner could silently override that setting this one time, but that
+        would be confusing to a user who doesn't know that this needs to be enabled first,
+        and would otherwise wonder why he isn't getting inpainted outputs when running the
+        batch cleaning.
+
+        :param proc_output: The requested output.
+        :return: True is this output can't be generated.
+        """
+        if (
+            proc_output.step_name == "Denoiser"
+            and not self.config.current_profile.denoiser.denoising_enabled
+        ):
+            logger.warning("Tried denoising when it was disabled in the profile.")
+            gu.show_warning(
+                self,
+                self.tr("Impossible Request"),
+                self.tr(
+                    "Denoising is disabled in the current profile, this output can't be generated.\n"
+                    "Please enable denoising in the profile settings and try again."
+                ),
+            )
+            return True
+
+        if (
+            proc_output.step_name == "Inpainter"
+            and not self.config.current_profile.inpainter.inpainting_enabled
+        ):
+            logger.warning("Tried inpainting when it was disabled in the profile.")
+            gu.show_warning(
+                self,
+                self.tr("Impossible Request"),
+                self.tr(
+                    "Inpainting is disabled in the current profile, this output can't be generated.\n"
+                    "Please enable inpainting in the profile settings and try again."
+                ),
+            )
+            return True
+
+        return False
+
     def switch_to_image(self, button: BadgeButton) -> None:
         """
         Show the image in the button in the image view.
@@ -334,6 +378,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.stackedWidget.setCurrentWidget(self.page_no_image)
             self.export_action.setEnabled(False)
             self.pushButton_refresh.setEnabled(False)
+            if self.request_has_conflict(proc_output):
+                return
             self.start_output_worker(output)
         else:
             try:

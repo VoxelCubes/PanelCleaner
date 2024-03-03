@@ -626,7 +626,7 @@ class DenoiserConfig:
 @define
 class InpainterConfig:
     inpainting_enabled: bool = True
-    inpainting_min_std_dev: float = 20
+    inpainting_min_std_dev: float = 15
     inpainting_max_mask_radius: int = 6
     min_inpainting_radius: int = 5
     max_inpainting_radius: int = 20
@@ -645,6 +645,9 @@ class InpainterConfig:
         """
         config_str = f"""\
         [Inpainter]
+        
+        # EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github
+        # to share the improvements with everyone. Note that inpainting isn't enabled by default.
 
         # Inpainting is when machine learning is used to replace the content of an image based on its surroundings.
         # For masks that couldn't be cleaned well (or at all), inpainting can be used.

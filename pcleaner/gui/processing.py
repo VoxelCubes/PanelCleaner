@@ -21,9 +21,11 @@ import pcleaner.helpers as hp
 import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
+import pcleaner.inpainting as ip
 import pcleaner.structures as st
 import pcleaner.gui.gui_utils as gu
 from pcleaner.helpers import tr
+from pcleaner import model_downloader as md
 
 
 def generate_output(
@@ -473,9 +475,119 @@ def generate_output(
                 )
             )
 
-    logger.info(f"Finished processing {len(image_objects)} images.")
+    # ============================================== Inpainting ==============================================
+
+    check_abortion()
+
+    if (
+        target_output > imf.get_output_representing_step(imf.Step.denoiser)
+        and profile.inpainter.inpainting_enabled
+    ):
+        step_inpainting_images = tuple(
+            filter(step_needs_to_be_rerun_closure(imf.Step.inpainter), image_objects)
+        )
+
+        if step_inpainting_images:
+            logger.info(f"Running inpainting for {len(step_inpainting_images)} images...")
+
+            progress_callback.emit(
+                imf.ProgressData(
+                    len(step_inpainting_images),
+                    target_outputs,
+                    imf.Step.inpainter,
+                    imf.ProgressType.begin_step,
+                )
+            )
+
+            # Find all the json files associated with the images.
+            mask_json_files = list(
+                cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#mask_data.json"
+                for image_obj in step_inpainting_images
+            )
+            page_json_files = list(
+                cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#clean.json"
+                for image_obj in step_inpainting_images
+            )
+            # Zip together the matching json files.
+            zipped_jsons = []
+            for page_json_file in page_json_files:
+                for mask_json_file in mask_json_files:
+                    if mask_json_file.name.startswith(page_json_file.name.split("#")[0]):
+                        zipped_jsons.append((page_json_file, mask_json_file))
+                        break
+
+            if not (len(zipped_jsons) == len(page_json_files) == len(mask_json_files)):
+                logger.debug(f"Found: {len(page_json_files)} page json files.")
+                logger.debug(f"Found: {len(mask_json_files)} mask json files.")
+                logger.debug(f"Matching: {len(zipped_jsons)} json files.")
+                logger.warning("Mismatched number of json files for inpainting.")
+
+            # Check the inpainting model is avaliable.
+            if not md.is_inpainting_downloaded(config):
+                raise FileNotFoundError(tr("Inpainting model not found."))
+
+            inpainter_model = ip.InpaintingModel(config)
+
+            # Pack all the arguments into a dataclass.
+            data = [
+                st.InpainterData(
+                    page_json_file,
+                    mask_json_file,
+                    None,
+                    cache_dir,
+                    profile.general,
+                    profile.masker,
+                    profile.denoiser,
+                    profile.inpainter,
+                    save_only_mask=target_outputs == [imf.Output.inpainted_mask],
+                    save_only_cleaned=target_outputs == [imf.Output.inpainted_output],
+                    extract_text=imf.Output.isolated_text in target_outputs,
+                    separate_inpaint_masks=False,
+                    show_masks=True,
+                    debug=debug,
+                )
+                for page_json_file, mask_json_file in zipped_jsons
+            ]
+
+            # Single threaded due to model loading overhead.
+            inpaint_analytics_raw = []
+            for data_obj in data:
+                check_abortion()
+                analytic = ip.inpaint_page(data_obj, inpainter_model)
+                inpaint_analytics_raw.append(analytic)
+
+                progress_callback.emit(
+                    imf.ProgressData(
+                        len(step_inpainting_images),
+                        target_outputs,
+                        imf.Step.inpainter,
+                        imf.ProgressType.incremental,
+                    )
+                )
+
+            # Update the outputs of the image objects.
+            for image_obj in step_inpainting_images:
+                update_output(image_obj, imf.Output.inpainted_mask, "_inpainting.png")
+                update_output(image_obj, imf.Output.inpainted_output, "_clean_inpaint.png")
+                update_output(image_obj, imf.Output.isolated_text, "_text.png")
+
+            progress_callback.emit(
+                imf.ProgressData(
+                    len(step_inpainting_images),
+                    target_outputs,
+                    imf.Step.inpainter,
+                    imf.ProgressType.analyticsInpainter,
+                    (
+                        inpaint_analytics_raw,
+                        profile.inpainter.min_inpainting_radius,
+                        profile.inpainter.max_inpainting_radius,
+                    ),
+                )
+            )
 
     # ============================================== Final Output ==============================================
+
+    logger.info(f"Finished processing {len(image_objects)} images.")
 
     check_abortion()
 
