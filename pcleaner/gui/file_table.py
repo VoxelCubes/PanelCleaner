@@ -175,7 +175,7 @@ class FileTable(CTableWidget):
             hp.show_warning(
                 self,
                 self.tr("Unsupported TIFF files"),
-                self.tr("The following 5-channel TIFF files are not supported\n: ")
+                self.tr("The following 5-channel TIFF files are not supported: \n")
                 + str(rejected_tiff_str),
             )
         for image_path in image_paths:
