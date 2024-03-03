@@ -625,7 +625,7 @@ class DenoiserConfig:
 
 @define
 class InpainterConfig:
-    inpainting_enabled: bool = True
+    inpainting_enabled: bool = False
     inpainting_min_std_dev: float = 15
     inpainting_max_mask_radius: int = 6
     min_inpainting_radius: int = 5
@@ -655,7 +655,8 @@ class InpainterConfig:
         # a tight fit. Any masks that were denoised won't be inpainted.
 
         # Since this step can provide poor results in some cases, it can be disabled here.
-        # Set to False to disable inpainting.
+        # [CLI: Set to False to disable inpainting.]
+        # [GUI: Uncheck to disable inpainting.]
         inpainting_enabled = {self.inpainting_enabled}
 
         # The minimum standard deviation of colors around the edge of a given mask
