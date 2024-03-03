@@ -2057,10 +2057,10 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="186"/>
-      <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</source>
-      <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</oldsource>
+      <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</source>
+      <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</oldsource>
       <comment>Profile comment in Inpainter</comment>
-      <translation>EXPERIMENTELL: Wenn Sie bessere Standardeinstellungen finden, öffnen Sie bitte ein Issue auf Github, um die Verbesserungen mit allen zu teilen. Beachten Sie, dass Übermalung nicht standardmäßig aktiviert ist.</translation>
+      <translation type="unfinished">EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="188"/>
