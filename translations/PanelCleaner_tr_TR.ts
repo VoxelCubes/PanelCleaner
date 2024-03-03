@@ -2057,10 +2057,10 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
       <location filename="profile_strings.py" line="186"/>
-      <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</source>
-      <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</oldsource>
+      <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</source>
+      <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</oldsource>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</translation>
+      <translation type="unfinished">EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="188"/>
