@@ -631,8 +631,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         with lock_file.open("w") as file:
             file.write(str(Qw.QApplication.applicationPid()))
 
-    @staticmethod
-    def free_lock_file() -> None:
+    def free_lock_file(self) -> None:
         """
         Remove the lock file.
         """
