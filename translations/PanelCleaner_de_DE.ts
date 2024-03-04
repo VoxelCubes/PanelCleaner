@@ -848,21 +848,21 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="613"/>
       <source>Multiple Instances</source>
-      <translation type="unfinished">Multiple Instances</translation>
+      <translation>Mehrere Instanzen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="619"/>
       <source>Another instance of Panel Cleaner appears to be running already or the previous instance was killed. Opening a new instance will make the old session unstable.
 
 Continue anyway?</source>
-      <translation type="unfinished">Another instance of Panel Cleaner appears to be running already or the previous instance was killed. Opening a new instance will make the old session unstable.
+      <translation>Eine andere Instanz von Panel Cleaner scheint bereits zu laufen oder die vorherige Instanz wurde unsauber beendet. Wenn Sie eine neue Instanz öffnen, wird die alte Sitzung instabil.
 
-Continue anyway?</translation>
+Trotzdem fortfahren?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="620"/>
       <source>Found process ID in lock file: </source>
-      <translation type="unfinished">Found process ID in lock file: </translation>
+      <translation>Prozess-ID in Sperrdatei gefunden: </translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="667"/>
