@@ -37,6 +37,22 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="2.4.0" date="2024-03-04">
+      <description>
+        <p>Changelog</p>
+        <ul>
+          <li>Experimental: support inpainting to clean boxes that couldn't be cleaned otherwise.
+              Note: inpainting is disabled by default, enable manually in the profile.</li>
+          <li>Make the threshold for merging boxes configurable</li>
+          <li>Changed masker analytics to show actual mask thicknesses, not the index</li>
+          <li>Warn users that opening two sessions at once will corrupt the cache</li>
+          <li>Make which output is selected in the details view clearer</li>
+          <li>Fix: File table headers not spaced correctly</li>
+          <li>Fix: Resetting a profile option shifts focus to the next option</li>
+          <li>[Windows] Fix: magic not found upon pip installation</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.3.0" date="2024-02-18">
       <description>
         <p>Changelog</p>

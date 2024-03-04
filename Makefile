@@ -1,20 +1,21 @@
 # define variables
 CurrentDir := $(shell pwd)
-PYTHON = venv/bin/python
-PYINSTALLER = venv/bin/pyinstaller
-BUILD_DIR = dist/
-QRC_DIR_ICONS = icons/
-QRC_DIR_THEMES = themes/
-UI_DIR = ui_files/
-RC_OUTPUT_DIR = pcleaner/gui/rc_generated_files/
-UI_OUTPUT_DIR = pcleaner/gui/ui_generated_files/
-RCC_COMPILER = venv/bin/pyside6-rcc
-UIC_COMPILER = venv/bin/pyside6-uic
-I18N_LUPDATE = venv/bin/pyside6-lupdate
-I18N_COMPILER = venv/bin/pyside6-lrelease
-BLACK_LINE_LENGTH = 100
-BLACK_TARGET_DIR = pcleaner/
-BLACK_EXCLUDE_PATTERN = "^$(RC_OUTPUT_DIR).*|^$(UI_OUTPUT_DIR).*|^pcleaner/comic_text_detector/.*"
+PYINSTALLER_VENV := venv_clean
+PYTHON := venv/bin/python
+PYINSTALLER := $(PYINSTALLER_VENV)/bin/pyinstaller
+BUILD_DIR := dist/
+QRC_DIR_ICONS := icons/
+QRC_DIR_THEMES := themes/
+UI_DIR := ui_files/
+RC_OUTPUT_DIR := pcleaner/gui/rc_generated_files/
+UI_OUTPUT_DIR := pcleaner/gui/ui_generated_files/
+RCC_COMPILER := venv/bin/pyside6-rcc
+UIC_COMPILER := venv/bin/pyside6-uic
+I18N_LUPDATE := venv/bin/pyside6-lupdate
+I18N_COMPILER := venv/bin/pyside6-lrelease
+BLACK_LINE_LENGTH := 100
+BLACK_TARGET_DIR := pcleaner/
+BLACK_EXCLUDE_PATTERN := "^$(RC_OUTPUT_DIR).*|^$(UI_OUTPUT_DIR).*|^pcleaner/comic_text_detector/.*"
 
 LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.gui.supported_languages import supported_languages; print(' '.join(supported_languages().keys()))")
 
@@ -107,7 +108,7 @@ release:
 
 build-elf:
 	$(PYINSTALLER) pcleaner/main.py \
-		--paths 'venv/lib/python3.11/site-packages' \
+		--paths "${PYINSTALLER_VENV}/lib/python3.11/site-packages" \
 		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
 		--name="PanelCleaner" \
 		--copy-metadata=filelock \
@@ -125,7 +126,7 @@ build-elf:
 		--collect-data=torch \
 		--collect-data=unidic_lite \
 		--hidden-import=scipy.signal \
-		--add-data "venv/lib/python3.11/site-packages/manga_ocr/assets/example.jpg:assets/" \
+		--add-data "${PYINSTALLER_VENV}/lib/python3.11/site-packages/manga_ocr/assets/example.jpg:assets/" \
 		--add-data "pcleaner/data/LiberationSans-Regular.ttf:pcleaner/data/" \
 		--add-data "pcleaner/data/NotoMono-Regular.ttf:pcleaner/data/"
 
