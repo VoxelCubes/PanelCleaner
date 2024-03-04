@@ -45,6 +45,8 @@ def launch(debug: bool = False) -> None:
     buffer.write(f"Cache directory: {cu.get_cache_path()}\n")
     buffer.write("- System Information -\n")
     buffer.write(f"Operating System: {platform.system()} {platform.release()}\n")
+    if platform.system() == "Linux":
+        buffer.write(f"Desktop Environment: {os.getenv('XDG_CURRENT_DESKTOP', 'unknown')}\n")
     buffer.write(f"Machine: {platform.machine()}\n")
     buffer.write(f"Python Version: {sys.version}\n")
     buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")

@@ -636,6 +636,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Remove the lock file.
         """
+        if self.debug:
+            return
+
         lock_file = cu.get_lock_file_path()
         if lock_file.exists():
             logger.debug("Removing lock file.")
