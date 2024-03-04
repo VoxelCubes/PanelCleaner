@@ -70,10 +70,15 @@ def show_exception(
     box.exec()
 
 
-def show_critical(parent, title: str, msg: str) -> int:
+def show_critical(parent, title: str, msg: str, **kwargs) -> int:
     msg = msg.ljust(MIN_MSG_LENGTH)
     box = SelectableMessageBox(
-        Qw.QMessageBox.Critical, title, msg, Qw.QMessageBox.Yes | Qw.QMessageBox.Abort, parent
+        Qw.QMessageBox.Critical,
+        title,
+        msg,
+        Qw.QMessageBox.Yes | Qw.QMessageBox.Abort,
+        parent,
+        **kwargs,
     )
     return box.exec()
 

@@ -22,6 +22,7 @@ xdg
 PySide6
 tifffile
 attrs
+psutil
 dictdiffer
 humanfriendly
 simple_lama_inpainting

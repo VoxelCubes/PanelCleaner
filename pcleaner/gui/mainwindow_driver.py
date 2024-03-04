@@ -1,5 +1,7 @@
 import platform
 import time
+from datetime import datetime
+import psutil
 from copy import deepcopy
 from functools import partial
 from importlib import resources
@@ -107,8 +109,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.file_table.set_shared_ocr_model(self.shared_ocr_model)
         self.file_table.set_shared_theme_is_dark(self.theme_is_dark)
         self.file_table.set_thread_queue(self.thread_queue)
-
-        self.start_initialization_worker()
 
         self.initialize_ui()
 
@@ -406,6 +406,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         logger.debug(f"Splitter sizes: {self.splitter.sizes()}")
 
+        # Check for a lock file and offer to override it if one is found.
+        # We do this right before clearing the cache, because clearing the cache
+        # will break any other instance of pcleaner that is using it.
+        self.test_and_set_lock_file()
+
+        self.start_initialization_worker()
+
     def browse_output_dir(self) -> None:
         """
         Open a file picker and set the output directory.
@@ -551,6 +558,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Notify config on close.
         """
         logger.info("Closing window.")
+        self.free_lock_file()
         # Tell the thread queue to abort.
         self.pushButton_abort.clicked.emit()
         death.accept()  # Embrace oblivion, for it is here that the code's journey finds solace.
@@ -583,6 +591,57 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 f"Failed to load included font from '{str(font_path)}'. Using backup monospace font"
             )
         self.textEdit_analytics.setLineWrapMode(Qw.QTextEdit.NoWrap)
+
+    # ========================================== Lock File ==========================================
+
+    def test_and_set_lock_file(self) -> None:
+        """
+        Create a lock file to warn against multiple instances of the application from running at the same time.
+        """
+        # In debug mode, don't bother with the lock file. All of the frequent crashing and force quitting
+        # will make it a nuisance.
+        if self.debug:
+            return
+
+        lock_file = cu.get_lock_file_path()
+        if lock_file.exists():
+            # Check if the lock file is newer than the current uptime.
+            if lock_file.stat().st_mtime >= psutil.boot_time():
+                logger.warning("Found active lock file.")
+                response = gu.show_critical(
+                    self,
+                    self.tr("Multiple Instances"),
+                    self.tr(
+                        "Another instance of Panel Cleaner appears to be running already "
+                        "or the previous instance was killed. "
+                        "Opening a new instance will make the old session unstable.\n\n"
+                        "Continue anyway?"
+                    ),
+                    detailedText=self.tr("Found process ID in lock file: ") + lock_file.read_text(),
+                )
+                if response == Qw.QMessageBox.Abort:
+                    logger.critical("User aborted due to lock file.")
+                    raise SystemExit(1)
+                logger.warning("User overrode lock file.")
+            else:
+                logger.warning(
+                    "Found lock file, but it is older than the current uptime. Overwriting."
+                )
+
+        with lock_file.open("w") as file:
+            file.write(str(Qw.QApplication.applicationPid()))
+
+    @staticmethod
+    def free_lock_file() -> None:
+        """
+        Remove the lock file.
+        """
+        lock_file = cu.get_lock_file_path()
+        if lock_file.exists():
+            logger.debug("Removing lock file.")
+            lock_file.unlink()
+        else:
+            logger.error("Lock file not found, a new instance was likely started.")
 
     # ========================================== Actions ==========================================
 
