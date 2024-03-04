@@ -127,13 +127,22 @@ class FileTable(CTableWidget):
         )
 
     def changeEvent(self, arg__1: Qc.QEvent) -> None:
-        # If we encounter a style change event, we need to restore the last known good header widths.
-        if arg__1.type() == Qc.QEvent.StyleChange:
+        """
+        Style change and some other events screw up the header widths, so check if they were
+        reset and then restore the last known good header widths.
+
+        :param arg__1: Qt event.
+        """
+
+        current_widths = [self.columnWidth(col) for col in range(self.columnCount())]
+        # Check if the widths are all 0 or 100.
+        if all(w in (0, 100) for w in current_widths):
+            # Restore the last known good header widths.
             logger.debug(f"Restoring last known good header widths: {self.last_header_widths}")
             for col, width in enumerate(self.last_header_widths):
                 self.setColumnWidth(col, width)
         else:
-            self.last_header_widths = [self.columnWidth(col) for col in range(self.columnCount())]
+            self.last_header_widths = current_widths
 
         super().changeEvent(arg__1)
 
