@@ -344,7 +344,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         model_path = model_downloader.model_path
         if model_path is None:
-            logger.warning("Failed to download model.")
+            # Nothing further to save, we're done.
             return
 
         if cuda:
