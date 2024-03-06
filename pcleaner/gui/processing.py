@@ -704,7 +704,7 @@ def copy_to_output(
         # Special case: Here we need to take the final mask and paste this on top.
         final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
         denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
-        final_mask.paste(denoised_mask, (0, 0), denoised_mask)
+        final_mask.alpha_composite(denoised_mask)
         ops.save_optimized(final_mask, masked_out_path)
 
 

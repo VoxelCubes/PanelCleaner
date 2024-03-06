@@ -173,8 +173,7 @@ def visualize_mask_fitments(
     # Combine the masks.
     combined_mask = Image.new("RGBA", base_image.size)
     for mask in colored_masks:
-        combined_mask.paste(mask, (0, 0), mask)
-
+        combined_mask.alpha_composite(mask)
     # Limit the alpha channel to 60% = 153.
     alpha_mask = combined_mask.split()[3]
     alpha_mask = alpha_mask.point(lambda x: min(x, 153))
@@ -619,7 +618,7 @@ def combine_best_masks(
     for mask_fitment in mask_fitments:
         mask, color, coords = mask_fitment.mask_data
         mask = convert_mask_to_rgba(mask, color)
-        combined_mask.paste(mask, coords, mask)
+        combined_mask.alpha_composite(mask, coords)
 
     return combined_mask
 
@@ -638,7 +637,7 @@ def combine_noise_masks(
     combined_noise_mask = Image.new("RGBA", image_size, (0, 0, 0, 0))
     # Then paste the mask onto the combined mask.
     for mask, coords in masks_with_coords:
-        combined_noise_mask.paste(mask, coords)
+        combined_noise_mask.alpha_composite(mask, coords)
 
     return combined_noise_mask
 
