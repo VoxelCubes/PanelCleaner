@@ -963,6 +963,7 @@ p, li { white-space: pre-wrap; }
     </widget>
     <addaction name="menu_theme"/>
     <addaction name="menu_language"/>
+    <addaction name="action_file_manager_extension"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -1172,6 +1173,14 @@ p, li { white-space: pre-wrap; }
   <action name="action_simulate_exception">
    <property name="text">
     <string>Simulate Exception</string>
+   </property>
+  </action>
+  <action name="action_file_manager_extension">
+   <property name="icon">
+    <iconset theme="application-menu"/>
+   </property>
+   <property name="text">
+    <string>Add File Browser Extension...</string>
    </property>
   </action>
  </widget>

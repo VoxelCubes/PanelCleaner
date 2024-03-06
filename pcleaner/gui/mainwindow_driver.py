@@ -1,6 +1,5 @@
 import platform
 import time
-from datetime import datetime
 import psutil
 from copy import deepcopy
 from functools import partial
@@ -33,6 +32,7 @@ import pcleaner.gui.structures as gst
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
 import pcleaner.model_downloader as md
+import pcleaner.gui.file_manager_extension_driver as fmed
 import pcleaner.profile_cli as pc
 from pcleaner import __display_name__, __version__
 from pcleaner import data
@@ -71,6 +71,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     default_icon_theme: str
     theme_is_dark: gst.Shared[bool]
     theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
+
+    about: ad.AboutWidget  # The about dialog.
+    file_manager_extension: fmed.FileManagerExtension  # The file manager extension dialog.
 
     def __init__(self, config: cfg.Config, debug: bool) -> None:
         Qw.QMainWindow.__init__(self)
@@ -278,6 +281,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_system_theme.triggered.connect(partial(self.set_theme, None))
         self.action_dark.triggered.connect(partial(self.set_theme, "breeze-dark"))
         self.action_light.triggered.connect(partial(self.set_theme, "breeze"))
+
+        # Handle the file manager extension.
+        self.action_file_manager_extension.triggered.connect(self.open_file_manager_extension)
+        if fmed.get_extension_target() == fmed.ExtensionTarget.Unsupported:
+            self.action_file_manager_extension.setEnabled(False)
 
     def set_up_statusbar(self) -> None:
         """
@@ -735,6 +743,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 "https://github.com/VoxelCubes/PanelCleaner/blob/master/translations/TRANSLATING.md"
             )
         )
+
+    def open_file_manager_extension(self) -> None:
+        """
+        Open the file manager extension page in the default browser.
+        """
+        logger.debug("Opening file manager extension page.")
+        self.file_manager_extension = fmed.FileManagerExtension(self)
+        self.file_manager_extension.show()
 
     # ========================================== Languages ==========================================
 

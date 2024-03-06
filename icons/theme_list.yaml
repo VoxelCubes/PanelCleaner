@@ -5,6 +5,7 @@ Theme directories:
 Files:
   actions:
     16:
+      - application-menu
       - configure
       - dialog-cancel
       - dialog-ok-apply

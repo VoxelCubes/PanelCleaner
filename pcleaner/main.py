@@ -215,48 +215,58 @@ def main() -> None:
         elif args.open:
             cli.open_file_with_editor(cli.get_config_path(), config.profile_editor)
     elif args.clean:
-        # Do the actual work.
-        config = cfg.load_config()
-        config.load_profile(args["--profile"])
-        logger.debug(config)
-
-        if args.output_dir is None:
-            args.output_dir = Path("cleaned")
-            args.relative_output = True
-        else:
-            args.output_dir = Path(args.output_dir)
-
-        # start timer.
-        start = time.time()
-        run_cleaner(
-            image_paths=args.image_path,
-            output_dir=args.output_dir,
-            config=config,
-            skip_text_detection=args.skip_text_detection,
-            skip_pre_processing=args.skip_pre_processing,
-            skip_masking=args.skip_masking,
-            skip_denoising=args.skip_denoising,
-            skip_inpainting=args.skip_inpainting,
-            save_only_mask=args.save_only_mask,
-            save_only_cleaned=args.save_only_cleaned,
-            save_only_text=args.save_only_text,
-            extract_text=args.extract_text,
-            cache_masks=args.cache_masks,
-            separate_noise_mask=args.separate_noise_mask,
-            separate_inpaint_mask=args.separate_inpaint_mask,
-            hide_analytics=args.hide_analytics,
-            keep_cache=args.keep_cache,
-            debug=args.debug,
-        )
-        # end timer.
-        end = time.time()
-        print(f"\nTime elapsed: {end - start:.2f} seconds")
-
+        img_paths: str = ""
         if args.notify:
             img_paths = ", ".join(map(str, args.image_path))
             # Prevent this fom getting too long.
             if len(img_paths) > 200:
                 img_paths = img_paths[:200] + "..."
+            hp.send_desktop_notification("Cleaning started.", f"Cleaning: {img_paths}")
+
+        try:
+            # Do the actual work.
+            config = cfg.load_config()
+            config.load_profile(args["--profile"])
+            logger.debug(config)
+
+            if args.output_dir is None:
+                args.output_dir = Path("cleaned")
+                args.relative_output = True
+            else:
+                args.output_dir = Path(args.output_dir)
+
+            # start timer.
+            start = time.time()
+            run_cleaner(
+                image_paths=args.image_path,
+                output_dir=args.output_dir,
+                config=config,
+                skip_text_detection=args.skip_text_detection,
+                skip_pre_processing=args.skip_pre_processing,
+                skip_masking=args.skip_masking,
+                skip_denoising=args.skip_denoising,
+                skip_inpainting=args.skip_inpainting,
+                save_only_mask=args.save_only_mask,
+                save_only_cleaned=args.save_only_cleaned,
+                save_only_text=args.save_only_text,
+                extract_text=args.extract_text,
+                cache_masks=args.cache_masks,
+                separate_noise_mask=args.separate_noise_mask,
+                separate_inpaint_mask=args.separate_inpaint_mask,
+                hide_analytics=args.hide_analytics,
+                keep_cache=args.keep_cache,
+                debug=args.debug,
+            )
+            # end timer.
+            end = time.time()
+            print(f"\nTime elapsed: {end - start:.2f} seconds")
+        except Exception as e:
+            if args.notify:
+                hp.send_desktop_notification("Cleaning failed.", str(e))
+            raise e
+
+        if args.notify:
+            # Prevent this fom getting too long.
             hp.send_desktop_notification("Cleaning complete.", f"Cleaned: {img_paths}")
 
     else:
