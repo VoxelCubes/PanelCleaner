@@ -5,7 +5,7 @@ Usage:
         [--save-only-mask | --save-only-cleaned | --save-only-text]
         [--separate-noise-mask] [--separate-inpaint-mask] [--hide-analytics] [--extract-text]
         [--skip-text-detection] [--skip-pre-processing] [--skip-masking] [--skip-denoising] [--skip-inpainting]
-        [--keep-cache] [--cache-masks] [--debug]
+        [--keep-cache] [--cache-masks] [--notify] [--debug]
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
@@ -74,6 +74,7 @@ Options:
     -s --cache-masks                Save the masks used to clean the image in the cache directory.
     -a --hide-analytics             Hide the analytics. These are the statistics about the
                                     cleaning accuracy.
+    --notify                        Show a notification when the program is done.
     <profile_path>                  The path to the profile file to add.
     <profile_name>                  The saved name of the profile to open, delete, or set as default.
     --output-path=<output_path>     The path to save the OCR output file to.
@@ -250,6 +251,13 @@ def main() -> None:
         # end timer.
         end = time.time()
         print(f"\nTime elapsed: {end - start:.2f} seconds")
+
+        if args.notify:
+            img_paths = ", ".join(map(str, args.image_path))
+            # Prevent this fom getting too long.
+            if len(img_paths) > 200:
+                img_paths = img_paths[:200] + "..."
+            hp.send_desktop_notification("Cleaning complete.", f"Cleaned: {img_paths}")
 
     else:
         # Launch the GUI. Either the user specified it, or no command was given.

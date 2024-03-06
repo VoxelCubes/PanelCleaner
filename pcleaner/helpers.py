@@ -1,5 +1,6 @@
 import difflib
 import platform
+from enum import Enum
 import subprocess
 from itertools import takewhile, groupby
 from pathlib import Path
@@ -211,3 +212,49 @@ def common_path_parent(paths: list[Path]) -> Path:
     prefix = Path(*paths[0].parts[:prefix_len])
 
     return prefix
+
+
+class Urgency(Enum):
+    LOW = 0
+    NORMAL = 1
+    CRITICAL = 2
+
+
+def send_desktop_notification(
+    title: str, message: str = "", duration_s: int = 10, urgency: Urgency = Urgency.NORMAL
+) -> None:
+    """
+    Send a desktop notification using the `notify-send` command on Linux.
+    On other platforms, do nothing.
+
+    :param title: The title of the notification.
+    :param message: [Optional] The message to display.
+    :param duration_s: [Optional] The duration of the notification in seconds.
+    :param urgency: [Optional] The urgency level of the notification.
+    """
+    if platform.system() == "Linux":
+        import dbus
+
+        item = "org.freedesktop.Notifications"
+        notfy_intf = dbus.Interface(
+            dbus.SessionBus().get_object(item, "/" + item.replace(".", "/")), item
+        )
+        notfy_intf.Notify(
+            "Panel Cleaner",
+            0,
+            "panelcleaner",
+            title,
+            message,
+            [],
+            {"urgency": urgency.value},
+            duration_s * 1000,
+        )
+
+    elif platform.system() == "Windows":
+        import win10toast
+
+        toaster = win10toast.ToastNotifier()
+        toaster.show_toast(title, message, duration=duration_s, threaded=True)
+
+    else:
+        logger.debug(f"Desktop notifications are not supported on {platform.system()}")

@@ -8,8 +8,6 @@ scipy
 pyclipper
 shapely
 natsort
-python-magic; platform_system != "Windows"
-python-magic-bin; platform_system == "Windows"
 docopt-ng
 ConfigUpdater
 transformers
@@ -26,4 +24,9 @@ psutil
 dictdiffer
 humanfriendly
 simple_lama_inpainting
+python-magic; platform_system != "Windows"
+python-magic-bin; platform_system == "Windows"
+dbus-python; platform_system == "Linux"
+pywin32; platform_system == "Windows"
+win10toast; platform_system == "Windows"
 PyYAML  # Only used for building the icon cache, not used at runtime, therefore excluded from the wheel.
