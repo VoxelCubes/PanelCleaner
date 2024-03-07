@@ -369,7 +369,7 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/helpers.py" line="101"/>
       <source>Unsupported image format: {suffix} for {path}</source>
-      <translation type="unfinished">Unsupported image format: {suffix} for {path}</translation>
+      <translation>Nicht unterstütztes Bildformat: {suffix} von {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="107"/>
