@@ -364,17 +364,17 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/helpers.py" line="92"/>
       <source>Invalid type for img_paths: {paths}</source>
-      <translation type="unfinished">Invalid type for img_paths: {paths}</translation>
+      <translation>Ungültiger Typ für img_paths: {paths}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="101"/>
-      <source>Unsupported image format: {suffix} {path}</source>
-      <translation type="unfinished">Unsupported image format: {suffix} {path}</translation>
+      <source>Unsupported image format: {suffix} for {path}</source>
+      <translation type="unfinished">Unsupported image format: {suffix} for {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="107"/>
       <source>Image path {img_path} does not exist.</source>
-      <translation type="unfinished">Image path {img_path} does not exist.</translation>
+      <translation>Bildpfad {img_path} existiert nicht.</translation>
     </message>
   </context>
   <context>
@@ -468,117 +468,117 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="73"/>
       <source>Unsupported system</source>
-      <translation type="unfinished">Unsupported system</translation>
+      <translation>Nicht unterstütztes System</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="74"/>
       <source>This system is not supported.</source>
-      <translation type="unfinished">This system is not supported.</translation>
+      <translation>Dieses System wird nicht unterstützt.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="77"/>
       <source>Install for Dolphin</source>
-      <translation type="unfinished">Install for Dolphin</translation>
+      <translation>Installation für Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="78"/>
       <source>Uninstall for Dolphin</source>
-      <translation type="unfinished">Uninstall for Dolphin</translation>
+      <translation>Deinstallation für Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="82"/>
       <source>The extension will be installed at {path}. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension will be installed at {path}. This doesn&apos;t require root permissions.</translation>
+      <translation>Die Erweiterung wird unter {path} installiert. Dies erfordert keine Root-Rechte.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="91"/>
       <source>The extension file will be deleted. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension file will be deleted. This doesn&apos;t require root permissions.</translation>
+      <translation>Die Erweiterungsdatei wird gelöscht. Dies erfordert keine Root-Rechte.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="93"/>
       <source>Install for Windows Explorer</source>
-      <translation type="unfinished">Install for Windows Explorer</translation>
+      <translation>Installation für Windows Explorer</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="94"/>
       <source>Uninstall for Windows Explorer</source>
-      <translation type="unfinished">Uninstall for Windows Explorer</translation>
+      <translation>Deinstallation für Windows Explorer</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="100"/>
       <source>The extension will be installed in the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be installed in the Windows registry.This requires admin permissions.</translation>
+      <translation>Die Erweiterung wird in der Windows-Registry installiert. Dies erfordert Admin-Rechte.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="106"/>
       <source>The extension will be uninstalled from the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be uninstalled from the Windows registry.This requires admin permissions.</translation>
+      <translation>Die Erweiterung wird aus der Windows-Registry deinstalliert. Dies erfordert Admin-Rechte.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="152"/>
       <source>Installation successful</source>
-      <translation type="unfinished">Installation successful</translation>
+      <translation>Installation erfolgreich</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="156"/>
       <source>Dolphin extension installed successfully.
 You may need to log out and log back in (or restart) for the changes to take effect.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.
-You may need to log out and log back in (or restart) for the changes to take effect.</translation>
+      <translation>Dolphin-Erweiterung erfolgreich installiert.
+Möglicherweise müssen Sie sich abmelden und wieder anmelden (oder neu starten), damit die Änderungen wirksam werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="161"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="175"/>
       <source>Installation failed</source>
-      <translation type="unfinished">Installation failed</translation>
+      <translation>Installation fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="162"/>
       <source>Failed to install Dolphin extension.</source>
-      <translation type="unfinished">Failed to install Dolphin extension.</translation>
+      <translation>Fehler bei der Installation der Dolphin-Erweiterung.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="176"/>
       <source>Failed to install Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to install Windows Explorer extension.</translation>
+      <translation>Fehler bei der Installation der Windows Explorer-Erweiterung.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="191"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="197"/>
       <source>Uninstallation successful</source>
-      <translation type="unfinished">Uninstallation successful</translation>
+      <translation>Deinstallation erfolgreich</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="192"/>
       <source>Dolphin extension uninstalled successfully.</source>
-      <translation type="unfinished">Dolphin extension uninstalled successfully.</translation>
+      <translation>Dolphin-Erweiterung erfolgreich deinstalliert.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="198"/>
       <source>Dolphin extension was not installed.</source>
-      <translation type="unfinished">Dolphin extension was not installed.</translation>
+      <translation>Dolphin-Erweiterung war nicht installiert.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="203"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="217"/>
       <source>Uninstallation failed</source>
-      <translation type="unfinished">Uninstallation failed</translation>
+      <translation>Deinstallation fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="204"/>
       <source>Failed to uninstall Dolphin extension.</source>
-      <translation type="unfinished">Failed to uninstall Dolphin extension.</translation>
+      <translation>Fehler beim Deinstallieren der Dolphin-Erweiterung.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
       <source>Failed to uninstall Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to uninstall Windows Explorer extension.</translation>
+      <translation>Fehler beim Deinstallieren der Windows Explorer-Erweiterung.</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="14"/>
       <source>File Manager Extension</source>
-      <translation type="unfinished">File Manager Extension</translation>
+      <translation>Dateimanager-Erweiterung</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="32"/>
@@ -589,13 +589,13 @@ This feature adds a menu option to your file browser&apos;s context menu (which 
 It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
 
 By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</source>
-      <translation type="unfinished">### Add or Remove Integration with your File Browser
+      <translation>### Integration in Ihren Dateibrowser hinzufügen oder entfernen
 
-This feature adds a menu option to your file browser&apos;s context menu (which appears when you right-click) for folders or image files.
+Diese Funktion fügt eine Menüoption zum Kontextmenü Ihres Dateibrowsers hinzu (das erscheint, wenn Sie mit der rechten Maustaste klicken) für Ordner oder Bilddateien.
 
-It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
+Sie ermöglicht die direkte Verwendung von Panel Cleaner aus dem Dateibrowser, sodass das separate Öffnen der Anwendung nicht nötig ist.
 
-By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</translation>
+Standardmäßig wird das eingebaute Profil verwendet. Sie können diese Standardeinstellung jedoch ändern, indem Sie **Profil** wählen und dann **Als Standard festlegen** in der Menüleiste der Anwendung.</translation>
     </message>
   </context>
   <context>
@@ -614,17 +614,17 @@ By default, this uses the built-in profile. However, you can change this default
       <location filename="../pcleaner/gui/file_table.py" line="204"/>
       <location filename="../pcleaner/gui/file_table.py" line="212"/>
       <source>Loading Failed</source>
-      <translation type="unfinished">Loading Failed</translation>
+      <translation>Laden fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="205"/>
       <source>Failed to discover images: {path}</source>
-      <translation type="unfinished">Failed to discover images: {path}</translation>
+      <translation>Fehler bei der Suche nach Bildern: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="213"/>
       <source>Failed to load images: {path}</source>
-      <translation type="unfinished">Failed to load images: {path}</translation>
+      <translation>Fehler beim Laden von Bildern: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="221"/>
@@ -1497,7 +1497,7 @@ Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworf
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1183"/>
       <source>Add File Browser Extension...</source>
-      <translation type="unfinished">Add File Browser Extension...</translation>
+      <translation>Dateibrowser-Erweiterung hinzufügen...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1011"/>
