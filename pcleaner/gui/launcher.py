@@ -9,6 +9,7 @@ import PySide6.QtWidgets as Qw
 import PySide6.QtCore as Qc
 from loguru import logger
 import torch
+from docopt import docopt
 
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
@@ -23,9 +24,12 @@ import pcleaner.gui.rc_generated_files.rc_themes
 import pcleaner.gui.rc_generated_files.rc_translations
 
 
-def launch(debug: bool = False) -> None:
+def launch(files_to_open: list[str], debug: bool = False) -> None:
     """
     Launch the GUI.
+
+    :param files_to_open: A list of files to open.
+    :param debug: Whether to enable debug mode.
     """
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
@@ -106,8 +110,12 @@ def launch(debug: bool = False) -> None:
         Qg.QIcon.setThemeName("breeze")
         Qg.QIcon.setThemeSearchPaths([":/icons", ":/icon-themes"])
 
+    if files_to_open:
+        input_paths = ", ".join(map(str, files_to_open))
+        logger.info(f"Files to open: {input_paths}")
+
     try:
-        window = MainWindow(config, debug)
+        window = MainWindow(config, files_to_open, debug)
         window.show()
         sys.exit(app.exec())
     except Exception:
@@ -117,4 +125,15 @@ def launch(debug: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    launch()
+    docopt_doc = """Panel Cleaner
+
+Usage:
+    pcleaner-gui [<image_path> ...] [--debug]
+
+Options:
+    <image_path>          One or multiple files or directories to clean.
+                          Leave blank to use the current working directory.
+    --debug               Enable debug mode.
+"""
+    args = docopt(docopt_doc, version=f"Panel Cleaner {__version__}")
+    launch(args.image_path, args.debug)

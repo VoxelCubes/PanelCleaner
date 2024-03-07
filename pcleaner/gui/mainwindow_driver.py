@@ -47,6 +47,7 @@ ANALYTICS_COLUMNS = 74
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     config: cfg.Config = None
     debug: bool
+    startup_files: list[str]
 
     label_stats: Qw.QLabel
 
@@ -75,13 +76,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     about: ad.AboutWidget  # The about dialog.
     file_manager_extension: fmed.FileManagerExtension  # The file manager extension dialog.
 
-    def __init__(self, config: cfg.Config, debug: bool) -> None:
+    def __init__(self, config: cfg.Config, files_to_open: list[str], debug: bool) -> None:
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__display_name__} {__version__}")
         self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
         self.config = config
         self.debug = debug
+        self.startup_files = files_to_open
 
         self.progress_current: int = 0
         self.progress_step_start: imf.Step | None = None
@@ -420,6 +422,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.test_and_set_lock_file()
 
         self.start_initialization_worker()
+
+        # Load the startup files into the file table, if any.
+        if self.startup_files:
+            self.file_table.handleDrop(self.startup_files)
+            self.file_table.repopulate_table()
 
     def browse_output_dir(self) -> None:
         """

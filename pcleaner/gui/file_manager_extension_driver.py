@@ -1,15 +1,12 @@
-import xdg
-from pathlib import Path
 import platform
 import subprocess
 from enum import Enum, auto
-import PySide6.QtCore as Qc
-import PySide6.QtGui as Qg
+from pathlib import Path
+
 import PySide6.QtWidgets as Qw
-from loguru import logger
+import xdg
 
 import pcleaner.gui.gui_utils as gu
-
 from pcleaner.gui.ui_generated_files.ui_FileManagerIntegration import Ui_FileManagerExtension
 
 

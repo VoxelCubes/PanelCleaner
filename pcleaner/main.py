@@ -9,7 +9,7 @@ Usage:
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
-    pcleaner gui [--debug]
+    pcleaner gui [<image_path> ...] [--debug]
     pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--cache-masks] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
@@ -273,7 +273,7 @@ def main() -> None:
         # Launch the GUI. Either the user specified it, or no command was given.
         # This is done so that a bundled executable can be launched in gui mode without a command,
         # without hindering access to the cli.
-        gui.launch(args.debug)
+        gui.launch(args.image_path, args.debug)
 
 
 def run_cleaner(

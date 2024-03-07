@@ -192,9 +192,28 @@ class FileTable(CTableWidget):
         """
         return len(self.files) == 0
 
-    def handleDrop(self, path: str) -> None:
+    def handleDrop(self, path: str | list[str]) -> None:
         logger.debug(f"Dropped {path}")
-        image_paths, rejected_tiffs = hp.discover_all_images(path, cfg.SUPPORTED_IMG_TYPES)
+        try:
+            image_paths, rejected_tiffs = hp.discover_all_images(path, cfg.SUPPORTED_IMG_TYPES)
+        except (FileNotFoundError, hp.UnsupportedImageType) as e:
+            logger.error(f"Failed to discover images: {e}")
+            path_str = path if isinstance(path, str) else ", ".join(path)
+            gu.show_warning(
+                self,
+                self.tr("Loading Failed"),
+                self.tr("Failed to discover images: {path}").format(path=path_str) + f"\n\n{e}",
+            )
+            return
+        except:
+            path_str = path if isinstance(path, str) else ", ".join(path)
+            gu.show_exception(
+                self,
+                self.tr("Loading Failed"),
+                self.tr("Failed to load images: {path}").format(path=path_str),
+            )
+            return
+
         if rejected_tiffs:
             rejected_tiff_str = "\n".join([str(p) for p in rejected_tiffs])
             hp.show_warning(

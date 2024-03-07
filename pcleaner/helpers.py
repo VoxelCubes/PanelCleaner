@@ -61,6 +61,11 @@ def closest_match(word: str, choices: list[str]) -> str | None:
             return None
 
 
+# Make custom exception for unsupported img suffixes.
+class UnsupportedImageType(Exception):
+    pass
+
+
 def discover_all_images(
     img_paths: str | Path | list[str | Path], supported_extensions: list[str]
 ) -> tuple[list[Path], list[Path]]:
@@ -84,17 +89,23 @@ def discover_all_images(
         # Convert all strings to paths.
         img_paths = [Path(path) for path in img_paths]
     else:
-        raise TypeError(f"Invalid type for img_paths: {type(img_paths)}")
+        raise TypeError(tr("Invalid type for img_paths: {paths}".format(paths=type(img_paths))))
 
     for img_path in img_paths:
         if img_path.is_dir():
             img_list.extend(find_all_images_shallow(img_path, supported_extensions))
-        elif img_path.is_file() and img_path.suffix.lower() in supported_extensions:
+        elif img_path.is_file() and (img_path.suffix.lower() in supported_extensions):
             img_list.append(img_path)
         elif img_path.is_file():
-            raise ValueError(f"Unsupported image format: {img_path.suffix} for {img_path}")
+            raise UnsupportedImageType(
+                tr("Unsupported image format: {suffix} {path}").format(
+                    suffix=img_path.suffix, path=img_path
+                )
+            )
         else:
-            raise FileNotFoundError(f"Image path {img_path} does not exist.")
+            raise FileNotFoundError(
+                tr("Image path {img_path} does not exist.").format(img_path=img_path)
+            )
 
     # Ensure all paths are absolute.
     img_list = [path.resolve() for path in img_list]
