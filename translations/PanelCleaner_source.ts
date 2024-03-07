@@ -348,7 +348,7 @@ Pages with failures / total:
     </message>
     <message>
         <location filename="../pcleaner/helpers.py" line="101"/>
-        <source>Unsupported image format: {suffix} {path}</source>
+        <source>Unsupported image format: {suffix} for {path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

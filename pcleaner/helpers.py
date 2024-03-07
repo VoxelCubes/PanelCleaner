@@ -98,7 +98,7 @@ def discover_all_images(
             img_list.append(img_path)
         elif img_path.is_file():
             raise UnsupportedImageType(
-                tr("Unsupported image format: {suffix} {path}").format(
+                tr("Unsupported image format: {suffix} for {path}").format(
                     suffix=img_path.suffix, path=img_path
                 )
             )
