@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="icon-themes">
     <file>breeze/index.theme</file>
+    <file>breeze/actions/16/application-menu.svg</file>
     <file>breeze/actions/16/configure.svg</file>
     <file>breeze/actions/16/dialog-cancel.svg</file>
     <file>breeze/actions/16/dialog-ok-apply.svg</file>
@@ -46,6 +47,7 @@
     <file>breeze/status/16/data-warning.svg</file>
     <file>breeze/status/64/dialog-error.svg</file>
     <file>breeze-dark/index.theme</file>
+    <file>breeze-dark/actions/16/application-menu.svg</file>
     <file>breeze-dark/actions/16/configure.svg</file>
     <file>breeze-dark/actions/16/dialog-cancel.svg</file>
     <file>breeze-dark/actions/16/dialog-ok-apply.svg</file>
