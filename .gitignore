@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 output/**
+dist_exe/**
 *.zip
 *.exe
 profile.html

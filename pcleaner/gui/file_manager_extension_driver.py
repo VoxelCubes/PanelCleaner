@@ -1,12 +1,16 @@
+import sys
 import platform
 import subprocess
+from importlib import resources
 from enum import Enum, auto
 from pathlib import Path
 
 import PySide6.QtWidgets as Qw
 import xdg
+from loguru import logger
 
 import pcleaner.gui.gui_utils as gu
+import pcleaner.data
 from pcleaner.gui.ui_generated_files.ui_FileManagerIntegration import Ui_FileManagerExtension
 
 
@@ -31,7 +35,13 @@ def get_extension_target() -> ExtensionTarget:
         except subprocess.CalledProcessError:
             return ExtensionTarget.Unsupported
     elif platform.system() == "Windows":
-        return ExtensionTarget.WindowsExplorer
+        # I've had it, fuck this. Someone else can try again.
+        return ExtensionTarget.Unsupported
+        # I dunno how to make this work well with the bare script version, so only exe supported.
+        if getattr(sys, 'frozen', False):
+            return ExtensionTarget.WindowsExplorer
+        else:
+            return ExtensionTarget.Unsupported
     else:
         return ExtensionTarget.Unsupported
 
@@ -142,18 +152,24 @@ class FileManagerExtension(Qw.QDialog, Ui_FileManagerExtension):
         try:
             desktop_file_contents = format_desktop_entry()
             target_path = get_plasma_service_menu_path()
+
+            msg = self.tr("Dolphin extension installed successfully.")
+            if not target_path.parent.is_dir():
+                msg = self.tr(
+                    "Dolphin extension installed successfully.\n"
+                    "You may need to log out and log back in (or restart) for the changes to take effect."
+                )
             target_path.parent.mkdir(parents=True, exist_ok=True)
+
             if target_path.exists():
                 target_path.unlink()
+
             target_path.write_text(desktop_file_contents)
             target_path.chmod(0o755)  # rwx r-x r-x Make it executable.
             gu.show_info(
                 self,
                 self.tr("Installation successful"),
-                self.tr(
-                    "Dolphin extension installed successfully.\n"
-                    "You may need to log out and log back in (or restart) for the changes to take effect."
-                ),
+                msg,
             )
         except Exception:
             gu.show_exception(
@@ -167,8 +183,16 @@ class FileManagerExtension(Qw.QDialog, Ui_FileManagerExtension):
         Install the file manager extension for Windows Explorer.
         """
         try:
-            # TODO: Add the correct path to the executable.
-            pass
+            target_path = get_pcleaner_path()
+            if target_path is None:
+                logger.error("Can't determine where to point the windows explorer integration.")
+                return
+            logger.info(f"Pointing windows explorer integration to {target_path}")
+            execution: list[Path | str] = get_executable_target()
+            execution.extend(["create", target_path])
+            logger.info(f"Executing subprocess: {execution}")
+            subprocess.check_output(execution)
+            gu.show_info(self, "Installation Success", "Successfully installed the Explorer integration.")
         except Exception:
             gu.show_exception(
                 self,
@@ -209,8 +233,11 @@ class FileManagerExtension(Qw.QDialog, Ui_FileManagerExtension):
         Uninstall the file manager extension for Windows Explorer.
         """
         try:
-            # TODO
-            pass
+            execution: list[Path | str] = get_executable_target()
+            execution.extend(["delete", ""])
+            logger.info(f"Executing subprocess: {execution}")
+            subprocess.check_output(execution)
+            gu.show_info(self, "Uninstallation Success", "Successfully uninstalled the Explorer integration.")
         except Exception:
             gu.show_exception(
                 self,
@@ -250,3 +277,34 @@ Exec=pcleaner clean --notify -c %u
 Icon=panelcleaner
 
 """
+
+def get_executable_target() -> list[Path]:
+    """
+    For a regular script, we want to return
+    "path to python executable", "path to regedit script"
+
+    But for the pyinstaller bundle, we can't use the bundled interpreter,
+    so we need to instead point to the pre-built exe that bundles those two together.
+
+    :return: execution path(s)
+    """
+    if getattr(sys, 'frozen', False):
+        # We need to fall back to the bundle.
+        with resources.files(pcleaner.data) as data_path:
+            exe = data_path / "WindowsExplorerIntegrationRegedit.exe"
+        return [exe]
+
+    else:
+        python_interpreter = Path(sys.executable)
+        with resources.files(pcleaner.data) as data_path:
+            script_path = data_path / "windows_explorer_integration_regedit.py"
+        return [python_interpreter, script_path]
+
+
+def get_pcleaner_path() -> Path | None:
+    # determine if application is a script file or frozen exe.
+    if getattr(sys, 'frozen', False):
+        return Path(sys.executable)
+    elif __file__:
+        return Path(__file__).parent.parent / "main.py"
+    return None
