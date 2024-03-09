@@ -518,7 +518,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="157"/>
       <source>Dolphin extension installed successfully.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.</translation>
+      <translation>Dolphin-Erweiterung erfolgreich installiert.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="171"/>
@@ -1058,12 +1058,12 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="758"/>
       <source>Not Supported</source>
-      <translation type="unfinished">Not Supported</translation>
+      <translation>Nicht Unterstützt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="758"/>
       <source>Unsupported system or package format</source>
-      <translation type="unfinished">Unsupported system or package format</translation>
+      <translation>Dieses System oder diese Installationsmethode sind nicht unterstützt.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="790"/>
