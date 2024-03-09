@@ -107,28 +107,45 @@ release:
 	twine upload $(BUILD_DIR)*
 
 build-elf:
-	$(PYINSTALLER) pcleaner/main.py \
-		--paths "${PYINSTALLER_VENV}/lib/python3.11/site-packages" \
-		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
-		--name="PanelCleaner" \
-		--copy-metadata=filelock \
-		--copy-metadata=huggingface-hub \
-		--copy-metadata=numpy \
-		--copy-metadata=packaging \
-		--copy-metadata=pyyaml \
-		--copy-metadata=pillow \
-		--copy-metadata=regex \
-		--copy-metadata=requests \
-		--copy-metadata=safetensors \
-		--copy-metadata=tokenizers \
-		--copy-metadata=tqdm \
-		--copy-metadata=torch \
-		--collect-data=torch \
-		--collect-data=unidic_lite \
-		--hidden-import=scipy.signal \
-		--add-data "${PYINSTALLER_VENV}/lib/python3.11/site-packages/manga_ocr/assets/example.jpg:assets/" \
-		--add-data "pcleaner/data/LiberationSans-Regular.ttf:pcleaner/data/" \
-		--add-data "pcleaner/data/NotoMono-Regular.ttf:pcleaner/data/"
+#	$(PYINSTALLER) pcleaner/main.py \
+#		--paths "${PYINSTALLER_VENV}/lib/python3.11/site-packages" \
+#		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
+#		--name="PanelCleaner" \
+#		--copy-metadata=filelock \
+#		--copy-metadata=huggingface-hub \
+#		--copy-metadata=numpy \
+#		--copy-metadata=packaging \
+#		--copy-metadata=pyyaml \
+#		--copy-metadata=pillow \
+#		--copy-metadata=regex \
+#		--copy-metadata=requests \
+#		--copy-metadata=safetensors \
+#		--copy-metadata=tokenizers \
+#		--copy-metadata=tqdm \
+#		--copy-metadata=torch \
+#		--collect-data=torch \
+#		--collect-data=unidic_lite \
+#		--hidden-import=scipy.signal \
+#		--add-data "${PYINSTALLER_VENV}/lib/python3.11/site-packages/manga_ocr/assets/example.jpg:assets/" \
+#		--add-data "pcleaner/data/LiberationSans-Regular.ttf:pcleaner/data/" \
+#		--add-data "pcleaner/data/NotoMono-Regular.ttf:pcleaner/data/"
+	
+	@echo "Purging CUDA related files from _internal directory..."
+	@find dist-elf/PanelCleaner/_internal -type f \( \
+		-name 'libtorch_cuda.so' -o \
+		-name 'libc10_cuda.so' -o \
+		-name 'libcusparse.so*' -o \
+		-name 'libcurand.so*' -o \
+		-name 'libcudnn.so*' -o \
+		-name 'libcublasLt.so*' -o \
+		-name 'libcublas.so*' -o \
+		-name 'libcupti.so*' -o \
+		-name 'libcufft.so*' -o \
+		-name 'libcudart.so*' -o \
+		-name 'libnv*' -o \
+		-name 'libnccl.so*' \
+		\) -exec rm -rf {} \;
+
 
 pip-install-torch-no-cuda:
 	$(PYTHON) -m pip uninstall torch torchvision -y
