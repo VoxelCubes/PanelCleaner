@@ -24,3 +24,5 @@ call build-integration-helper-pyinstaller.bat
     --add-data "venv/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" ^
     --add-data "pcleaner/data/LiberationSans-Regular.ttf;pcleaner/data/" ^
     --add-data "pcleaner/data/NotoMono-Regular.ttf;pcleaner/data/"
+
+Copy-Item -Path "docs/What is _internal.txt" -Destination "dist_exe/What is _internal.txt"
