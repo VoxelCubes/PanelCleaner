@@ -124,16 +124,20 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
         logger.info(cfg.SHUTDOWN_MESSAGE + "\n")
 
 
-if __name__ == "__main__":
+def main():
     docopt_doc = """Panel Cleaner
 
-Usage:
-    pcleaner-gui [<image_path> ...] [--debug]
+    Usage:
+        pcleaner-gui [<image_path> ...] [--debug]
 
-Options:
-    <image_path>          One or multiple files or directories to clean.
-                          Leave blank to use the current working directory.
-    --debug               Enable debug mode.
-"""
+    Options:
+        <image_path>          One or multiple files or directories to clean.
+                              Leave blank to use the current working directory.
+        --debug               Enable debug mode.
+    """
     args = docopt(docopt_doc, version=f"Panel Cleaner {__version__}")
     launch(args.image_path, args.debug)
+
+
+if __name__ == "__main__":
+    main()
