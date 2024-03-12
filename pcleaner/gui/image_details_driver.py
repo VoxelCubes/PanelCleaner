@@ -45,6 +45,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     abort_signal: Signal
 
     menu: Qw.QMenu  # The overflow menu for the export and ocr buttons.
+    to_clipboard_action: Qg.QAction
     export_action: Qg.QAction
     ocr_action: Qg.QAction
 
@@ -108,6 +109,13 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         Initialize the overflow menu housing the export and ocr button for the image details widget.
         """
         self.menu = Qw.QMenu(self)
+
+        self.to_clipboard_action = Qg.QAction(
+            Qg.QIcon.fromTheme("edit-copy"), self.tr("Copy Image to Clipboard"), self
+        )
+        self.to_clipboard_action.triggered.connect(self.copy_image_to_clipboard)
+        self.menu.addAction(self.to_clipboard_action)
+
         self.export_action = Qg.QAction(
             Qg.QIcon.fromTheme("document-save"), self.tr("Export Image"), self
         )
@@ -420,6 +428,20 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         """
         self.label_position.setText(f"{x}, {y}")
         self.label_position.setMinimumWidth(self.label_position.width())
+
+    def copy_image_to_clipboard(self) -> None:
+        """
+        If the image exists, open a save dialog to copy it to a new location.
+        """
+        if self.current_image_path is None:
+            return
+        if not self.current_image_path.is_file():
+            return
+
+        mime_data = Qc.QMimeData()
+        mime_data.setUrls([Qc.QUrl.fromLocalFile(str(self.current_image_path))])
+        clipboard = Qw.QApplication.clipboard()
+        clipboard.setMimeData(mime_data)
 
     def export_image(self) -> None:
         """
