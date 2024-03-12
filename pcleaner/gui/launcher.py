@@ -80,6 +80,10 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
 
     translator = Qc.QTranslator(app)
 
+    if platform.system() == "Windows":
+        # Set the icon for the app as well, the mainwindow isn't enough.
+        app.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
+
     # Load translations.
     path = Qc.QLibraryInfo.location(Qc.QLibraryInfo.TranslationsPath)
     if translator.load(locale, "qt", "_", path):
