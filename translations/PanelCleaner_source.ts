@@ -755,86 +755,91 @@ By default, this uses the built-in profile. However, you can change this default
 <context>
     <name>ImageDetailsWidget</name>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="112"/>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="433"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="114"/>
+        <source>Copy Image to Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="120"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="456"/>
         <source>Export Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="118"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="126"/>
         <source>OCR Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="311"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="319"/>
         <source>Loading Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="312"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="320"/>
         <source>Failed to load image &apos;{path}&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="315"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="323"/>
         <source>Generate Me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="338"/>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="353"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="346"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="361"/>
         <source>Impossible Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="342"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="350"/>
         <source>Denoising is disabled in the current profile, this output can&apos;t be generated.
 Please enable denoising in the profile settings and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="357"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="365"/>
         <source>Inpainting is disabled in the current profile, this output can&apos;t be generated.
 Please enable inpainting in the profile settings and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="407"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="416"/>
         <source>Image not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="408"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="417"/>
         <source>Image at {path} does not exist:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="442"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="465"/>
         <source>Export failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="443"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="466"/>
         <source>Failed to export image:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="549"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="572"/>
         <source>Output Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="549"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="572"/>
         <source>Output generation failed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="702"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="725"/>
         <source>Profile check failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="702"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="725"/>
         <source>Profile change check failed:</source>
         <translation type="unfinished"></translation>
     </message>
