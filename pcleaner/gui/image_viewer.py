@@ -31,7 +31,7 @@ class ImageViewer(Qw.QGraphicsView):
 
         self.setMouseTracking(True)
 
-    def pixmap_valid(self) -> bool:
+    def pixmap_invalid(self) -> bool:
         return self.image_item is not None and self.image_item.pixmap().isNull()
 
     def set_image(self, image_path: Path = None) -> None:
@@ -109,7 +109,7 @@ class ImageViewer(Qw.QGraphicsView):
         return self.mapToScene(pos).toPoint()
 
     def mouseMoveEvent(self, event) -> None:
-        if self.pixmap_valid():
+        if self.pixmap_invalid():
             return
         # Call base class implementation for standard behavior
         super().mouseMoveEvent(event)
@@ -119,7 +119,7 @@ class ImageViewer(Qw.QGraphicsView):
         self.viewport().update()  # Request redraw for the pixel highlight
 
     def drawForeground(self, painter, rect) -> None:
-        if not self.pixmap_valid() and self.zoom_factor > 5:
+        if not self.pixmap_invalid() and self.zoom_factor > 5:
             view_pos = self.mapFromGlobal(Qg.QCursor.pos())
             image_pos = self.mapToScene(view_pos).toPoint()
 
