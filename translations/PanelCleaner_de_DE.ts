@@ -787,7 +787,7 @@ Standardmäßig wird das eingebaute Profil verwendet. Sie können diese Standard
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="114"/>
       <source>Copy Image to Clipboard</source>
-      <translation type="unfinished">Copy Image to Clipboard</translation>
+      <translation>In die Zwischenablage kopieren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="120"/>
