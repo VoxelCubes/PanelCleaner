@@ -347,12 +347,12 @@ Seiten mit Fehlern / insgesamt:
       <translation>Übermalungsmodell nicht gefunden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/processing.py" line="983"/>
+      <location filename="../pcleaner/gui/processing.py" line="987"/>
       <source>Save Failed</source>
       <translation>Speichern Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/processing.py" line="983"/>
+      <location filename="../pcleaner/gui/processing.py" line="987"/>
       <source>Failed to write detected text to file.</source>
       <translation>Der erkannte Text konnte nicht in die Datei geschrieben werden.</translation>
     </message>
@@ -785,88 +785,93 @@ Standardmäßig wird das eingebaute Profil verwendet. Sie können diese Standard
   <context>
     <name>ImageDetailsWidget</name>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="112"/>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="433"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="114"/>
+      <source>Copy Image to Clipboard</source>
+      <translation type="unfinished">Copy Image to Clipboard</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="120"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="456"/>
       <source>Export Image</source>
       <translation>Bild exportieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="118"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="126"/>
       <source>OCR Image</source>
       <translation>OCR anwenden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="311"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="319"/>
       <source>Loading Error</source>
       <translation>Fehler beim Laden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="312"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="320"/>
       <source>Failed to load image &apos;{path}&apos;</source>
       <translation>Bild &apos;{path}&apos; konnte nicht geladen werden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="315"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="323"/>
       <source>Generate Me</source>
       <translation>Erzeuge mich</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="338"/>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="353"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="346"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="361"/>
       <source>Impossible Request</source>
       <translation>Unmöglicher Auftrag</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="342"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="350"/>
       <source>Denoising is disabled in the current profile, this output can&apos;t be generated.
 Please enable denoising in the profile settings and try again.</source>
       <translation>Die Entrauschung ist im aktuellen Profil deaktiviert, diese Ausgabe kann nicht erzeugt werden.
 Bitte aktivieren Sie die Entrauschung in den Profileinstellungen und versuchen Sie es erneut.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="357"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="365"/>
       <source>Inpainting is disabled in the current profile, this output can&apos;t be generated.
 Please enable inpainting in the profile settings and try again.</source>
       <translation>Übermalung ist im aktuellen Profil deaktiviert, diese Ausgabe kann nicht erzeugt werden.
 Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es erneut.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="407"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="416"/>
       <source>Image not found.</source>
       <translation>Bild nicht gefunden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="408"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="417"/>
       <source>Image at {path} does not exist:</source>
       <translation>Das Bild bei {path} existiert nicht:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="442"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="465"/>
       <source>Export failed</source>
       <translation>Export fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="443"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="466"/>
       <source>Failed to export image:</source>
       <translation>Bild kann nicht exportiert werden:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="549"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="572"/>
       <source>Output Failed</source>
       <translation>Ausgabe Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="549"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="572"/>
       <source>Output generation failed:</source>
       <translation>Die Erzeugung der Ausgabe ist fehlgeschlagen:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="702"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="725"/>
       <source>Profile check failed</source>
       <translation>Profilprüfung fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="702"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="725"/>
       <source>Profile change check failed:</source>
       <translation>Profiländerungsprüfung fehlgeschlagen:</translation>
     </message>
