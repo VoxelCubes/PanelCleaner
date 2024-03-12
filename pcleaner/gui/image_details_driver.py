@@ -379,6 +379,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.export_action.setEnabled(False)
             self.pushButton_refresh.setEnabled(False)
             if self.request_has_conflict(proc_output):
+                self.uncheck_all_other_buttons(None)
                 return
             self.start_output_worker(output)
         else:
@@ -462,14 +463,14 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             self.switch_to_image(button)
 
     @Slot()
-    def uncheck_all_other_buttons(self, checked_button: BadgeButton) -> None:
+    def uncheck_all_other_buttons(self, checked_button: BadgeButton | None) -> None:
         """
         Uncheck all buttons except the one that was checked.
 
         :param checked_button: The button that was checked.
         """
         for button in self.button_map:
-            if button is not checked_button:
+            if checked_button is None or button is not checked_button:
                 button.setChecked(False)
 
     def regenerate_current_output(self) -> None:
