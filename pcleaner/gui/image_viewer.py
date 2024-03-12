@@ -140,6 +140,19 @@ class ImageViewer(Qw.QGraphicsView):
                 )
                 painter.drawRect(scaled_rect)
 
+    def drawBackground(self, painter, rect) -> None:
+        super().drawBackground(painter, rect)  # Call the base class implementation
+        if not self.pixmap_invalid():
+            image_rect = self.image_item.boundingRect()
+            bg_color = self.palette().highlight().color()
+            # If the color is really dark, use a lighter color for the background and vice versa.
+            if bg_color.lightness() < 40:
+                bg_color = bg_color.lighter(110)
+            else:
+                bg_color = bg_color.darker(110)
+            painter.setBrush(bg_color)
+            painter.drawRect(image_rect)
+
     def zoom(self, factor) -> None:
         """
         Zoom the image by the given factor.
