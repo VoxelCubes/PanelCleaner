@@ -327,12 +327,12 @@ Pages with failures / total:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/processing.py" line="983"/>
+        <location filename="../pcleaner/gui/processing.py" line="987"/>
         <source>Save Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/processing.py" line="983"/>
+        <location filename="../pcleaner/gui/processing.py" line="987"/>
         <source>Failed to write detected text to file.</source>
         <translation type="unfinished"></translation>
     </message>

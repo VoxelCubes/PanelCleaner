@@ -104,7 +104,7 @@ black-format:
 	find $(BLACK_TARGET_DIR) -type f -name '*.py' | grep -Ev $(BLACK_EXCLUDE_PATTERN) | xargs black --line-length $(BLACK_LINE_LENGTH)
 
 release:
-	twine upload $(BUILD_DIR)*
+	$(PYTHON) -m twine upload $(BUILD_DIR)*
 
 build-elf:
 	$(PYINSTALLER) pcleaner/main.py \

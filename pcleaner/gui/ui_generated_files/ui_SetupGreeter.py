@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'SetupGreeter.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.6.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -35,7 +35,7 @@ class Ui_SetupGreeter(object):
 
         self.verticalLayout.addWidget(self.label_2, 0, Qt.AlignHCenter)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 14, QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.verticalSpacer_4 = QSpacerItem(20, 14, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout.addItem(self.verticalSpacer_4)
 
@@ -48,7 +48,7 @@ class Ui_SetupGreeter(object):
 
         self.verticalLayout.addWidget(self.label)
 
-        self.verticalSpacer_5 = QSpacerItem(20, 14, QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.verticalSpacer_5 = QSpacerItem(20, 14, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout.addItem(self.verticalSpacer_5)
 
@@ -67,7 +67,7 @@ class Ui_SetupGreeter(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.label_6 = QLabel(SetupGreeter)
         self.label_6.setObjectName(u"label_6")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
@@ -105,7 +105,7 @@ class Ui_SetupGreeter(object):
 
         self.label_text_detector_path = QLabel(SetupGreeter)
         self.label_text_detector_path.setObjectName(u"label_text_detector_path")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.label_text_detector_path.sizePolicy().hasHeightForWidth())
@@ -116,7 +116,7 @@ class Ui_SetupGreeter(object):
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_text_detector_path)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Maximum)
+        self.verticalSpacer_2 = QSpacerItem(20, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
 
         self.formLayout.setItem(2, QFormLayout.LabelRole, self.verticalSpacer_2)
 
@@ -194,21 +194,21 @@ class Ui_SetupGreeter(object):
 
         self.formLayout.setWidget(7, QFormLayout.FieldRole, self.label_inpainting_path)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 10, QSizePolicy.Minimum, QSizePolicy.Maximum)
+        self.verticalSpacer_3 = QSpacerItem(20, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
 
         self.formLayout.setItem(5, QFormLayout.LabelRole, self.verticalSpacer_3)
 
 
         self.verticalLayout.addLayout(self.formLayout)
 
-        self.verticalSpacer = QSpacerItem(0, 0, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(0, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 

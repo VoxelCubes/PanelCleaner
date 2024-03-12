@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'NewProfile.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.6.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -92,7 +92,7 @@ class Ui_NewProfile(object):
 
         self.verticalLayout.addLayout(self.formLayout)
 
-        self.verticalSpacer = QSpacerItem(20, 5, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 5, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
@@ -101,7 +101,7 @@ class Ui_NewProfile(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.label_warning_icon = QLabel(NewProfile)
         self.label_warning_icon.setObjectName(u"label_warning_icon")
-        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_warning_icon.sizePolicy().hasHeightForWidth())
@@ -119,7 +119,7 @@ class Ui_NewProfile(object):
 
         self.horizontalLayout_2.addWidget(self.label_warning_message)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
