@@ -709,6 +709,30 @@ def copy_to_output(
         denoised_mask = denoised_mask.convert("RGBA")
 
         final_mask.alpha_composite(denoised_mask)
+
+    if imf.Output.inpainted_output in outputs:
+        ops.save_optimized(
+            image_object.outputs[imf.Output.inpainted_output].path,
+            cleaned_out_path,
+            image_object.path,
+        )
+
+    if imf.Output.inpainted_mask in outputs:
+        # Special case: Here we need to take the final mask, scale it up, and then paste the denoising
+        # mask on top (if denoising), and then paste the inpainting mask on top of that.
+        final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        final_mask = final_mask.resize(image_object.size, Image.NEAREST)
+        final_mask = final_mask.convert("RGBA")
+
+        if profile.denoiser.denoising_enabled:
+            denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
+            denoised_mask = denoised_mask.convert("RGBA")
+            final_mask.alpha_composite(denoised_mask)
+
+        inpainted_mask = Image.open(image_object.outputs[imf.Output.inpainted_mask].path)
+        inpainted_mask = inpainted_mask.convert("RGBA")
+        final_mask.alpha_composite(inpainted_mask)
+
         ops.save_optimized(final_mask, masked_out_path)
 
 
