@@ -640,6 +640,8 @@ def copy_to_output(
     - Isolated text: Output.isolated_text
     - Denoised image: Output.denoised_output
     - Denoised Mask: Output.denoise_mask
+    - Inpainted image: Output.inpainted_output
+    - Inpainted Mask: Output.inpainted_mask
 
     This may raise OSError in various circumstances.
 
@@ -687,7 +689,7 @@ def copy_to_output(
     if imf.Output.final_mask in outputs:
         # First scale the output mask to the original image size.
         final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
-        final_mask.resize(image_object.size, Image.NEAREST)
+        final_mask = final_mask.resize(image_object.size, Image.NEAREST)
         ops.save_optimized(final_mask, masked_out_path)
 
     if imf.Output.isolated_text in outputs:
@@ -701,14 +703,16 @@ def copy_to_output(
         )
 
     if imf.Output.denoise_mask in outputs:
-        # Special case: Here we need to take the final mask and paste this on top.
+        # Special case: Here we need to take the final mask, scale it up, and then paste this on top.
         final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        final_mask = final_mask.resize(image_object.size, Image.BILINEAR)
         denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
         # Ensure both images are RGBA to safely alpha composite them.
         final_mask = final_mask.convert("RGBA")
         denoised_mask = denoised_mask.convert("RGBA")
-
         final_mask.alpha_composite(denoised_mask)
+
+        ops.save_optimized(final_mask, masked_out_path)
 
     if imf.Output.inpainted_output in outputs:
         ops.save_optimized(

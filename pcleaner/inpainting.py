@@ -31,7 +31,12 @@ class InpaintingModel:
         :param mask: Mask image.
         :return: The inpainted image.
         """
-        return self.simple_lama(image, mask)
+        # Run the model but ensure the output image is the same size as the input.
+        inpainted_image = self.simple_lama(image, mask)
+        if inpainted_image.size != image.size:
+            width, height = image.size
+            inpainted_image = inpainted_image.crop((0, 0, width, height))
+        return inpainted_image
 
 
 def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
@@ -54,10 +59,10 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     mask_data = st.MaskData.from_json(i_data.mask_data_json_path.read_text(encoding="utf-8"))
     mask_image = Image.open(mask_data.mask_path)
 
-    cleaned_image = Image.open(mask_data.original_path)
-    mask_image = mask_image.convert("1")
+    original_image = Image.open(mask_data.original_path)
+    mask_image_bit = mask_image.convert("1")
     exact_mask_image = exact_mask_image.convert("1")
-    cleaned_image = cleaned_image.convert("RGB")
+    original_image = original_image.convert("RGB")
     original_path: Path = mask_data.original_path
 
     # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json
@@ -101,7 +106,7 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
         boxes_to_inpaint.append(BoxInpaintData(box, mask, deviation))
 
     for box, deviation in poorly_fitted_boxes_deviation:
-        mask = ops.cut_out_box(mask_image, box)
+        mask = ops.cut_out_box(mask_image_bit, box)
         boxes_to_inpaint.append(BoxInpaintData(box, mask, deviation))
 
     # Now grow each mask according to the minimum inpainting radius, and the box's deviation.
@@ -114,8 +119,8 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
         # the inpainting.
         growth_with_isolation = growth + i_conf.inpainting_isolation_radius
         # Grow the box, then the mask, ensuring it stays within the image bounds.
-        box_padded = box.pad(growth_with_isolation, cleaned_image.size)
-        mask_padded = Image.new("1", cleaned_image.size, 0)
+        box_padded = box.pad(growth_with_isolation, mask_image.size)
+        mask_padded = Image.new("1", mask_image.size, 0)
         offset: tuple[int, int] = box.x1 - box_padded.x1, box.y1 - box_padded.y1
         mask_padded.paste(mask, offset)
         mask_padded = ops.grow_mask(mask_padded, growth)
@@ -123,43 +128,47 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
         analytics_thicknesses.append(growth)
 
     # Merge all the masks into one, then scale it up to the original image size.
-    combined_mask = Image.new("1", cleaned_image.size, 0)
+    combined_mask = Image.new("1", mask_image.size, 0)
     for box, mask, _ in padded_boxes_to_inpaint:
         combined_mask.paste(mask, (box.x1, box.y1), mask)
 
     save_mask(combined_mask, "_inpainting_mask")
 
     # Scale up the masks before inpainting.
-    if cleaned_image.size != mask_image.size:
-        combined_mask = combined_mask.resize(cleaned_image.size, resample=Image.NEAREST)
+    if original_image.size != mask_image.size:
+        combined_mask = combined_mask.resize(original_image.size, resample=Image.NEAREST)
 
     # Inpaint the image.
     if boxes_to_inpaint:
-        inpainted_image = model(cleaned_image, combined_mask)
+        inpainted_image = model(original_image, combined_mask)
     else:
-        inpainted_image = cleaned_image
+        inpainted_image = original_image
 
     # Lastly, grow the masks again by the isolation radius to cut out the inpainted areas.
-    isolated_combined_mask = Image.new("1", cleaned_image.size, 0)
+    isolated_combined_mask = Image.new("1", mask_image.size, 0)
     for box, mask, deviation in padded_boxes_to_inpaint:
         mask = ops.grow_mask(mask, i_conf.inpainting_isolation_radius)
         isolated_combined_mask.paste(mask, (box.x1, box.y1), mask)
-    if cleaned_image.size != mask_image.size:
+    if original_image.size != mask_image.size:
         isolated_combined_mask = isolated_combined_mask.resize(
-            cleaned_image.size, resample=Image.NEAREST
+            original_image.size, resample=Image.NEAREST
         )
 
     # Apply the mask to the inpainted image.
-    inpainted_areas = Image.new("RGBA", cleaned_image.size, 0)
-    width, height = cleaned_image.size
-    inpainted_image = inpainted_image.crop((0, 0, width, height))
+    inpainted_areas = Image.new("RGBA", original_image.size, 0)
     inpainted_areas.paste(inpainted_image, (0, 0), isolated_combined_mask)
 
     # Create a new output with these inpainted areas overlayed.
     # But first, apply the cleaning masks.
+    cleaned_image = (
+        original_image  # Don't bother copying as we won't need this anymore, so overwrite.
+    )
+    # We need to scale up the mask image to the original image size.
+    if original_image.size != mask_image.size:
+        mask_image = mask_image.resize(original_image.size, resample=Image.NEAREST)
     cleaned_image.paste(mask_image, (0, 0), mask_image)
     # Then, if denoising was enabled, apply that next.
-    expected_noise_mask_path = cache_out_path.with_stem(cache_out_path.stem + "_noise_mask.png")
+    expected_noise_mask_path = cache_out_path.with_name(cache_out_path.stem + "_noise_mask.png")
     if d_conf.denoising_enabled and expected_noise_mask_path.is_file():
         noise_mask = Image.open(expected_noise_mask_path)
         cleaned_image.paste(noise_mask, (0, 0), noise_mask)

@@ -720,19 +720,24 @@ def fade_mask_edges(mask: Image, fade_radius: int) -> Image:
 
 
 def generate_noise_mask(
-    image: Image, mask: Image, box: st.Box, denoiser_conf: cfg.DenoiserConfig
+    image: Image, mask: Image, box: st.Box, denoiser_conf: cfg.DenoiserConfig, scale_factor: float
 ) -> tuple[Image, tuple[int, int]]:
     """
     Cut out the image and mask using the box, then denoise the image cutout.
     Then grow the mask and fade it's edges.
     Create an alpha composite of the denoised image and the mask.
+    For the scale factor, a factor of 2 means that the original image is twice the size of the mask,
+    so we need to scale up box coordinates by 2.
 
     :param image: The image to cut out and denoise.
     :param mask: The mask.
     :param box: The box to cut out.
     :param denoiser_conf: The denoiser config.
+    :param scale_factor: The scale factor of the image, how much to scale the box coordinates by.
     :return: The noise mask and it's coordinates (using the top left).
     """
+    # Scale the box coordinates.
+    box = box.scale(scale_factor)
 
     # Cut out the image and mask.
     image_cutout = image.crop(box.as_tuple)

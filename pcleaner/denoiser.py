@@ -33,7 +33,9 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     cleaned_image = Image.open(mask_data.original_path)
     mask_image = mask_image.convert("LA")
     cleaned_image = cleaned_image.convert("RGB")
+    scale_up_factor = 1.0
     if cleaned_image.size != mask_image.size:
+        scale_up_factor = cleaned_image.size[0] / mask_image.size[0]
         mask_image = mask_image.resize(cleaned_image.size, resample=Image.NEAREST)
 
     cleaned_image.paste(mask_image, (0, 0), mask_image)
@@ -52,7 +54,8 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     ]
 
     noise_masks_with_coords: list[tuple[Image.Image, tuple[int, int]]] = [
-        ops.generate_noise_mask(cleaned_image, mask_image, box, d_conf) for box in boxes_to_denoise
+        ops.generate_noise_mask(cleaned_image, mask_image, box, d_conf, scale_up_factor)
+        for box in boxes_to_denoise
     ]
 
     if noise_masks_with_coords:
