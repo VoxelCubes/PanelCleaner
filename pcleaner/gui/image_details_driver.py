@@ -28,6 +28,35 @@ SIDEBAR_COLUMNS = 2
 BADGE_SIZE = 24
 
 
+class FileFreshnessTracker:
+    """
+    Keep track of the last time a file was modified to determine if it has changed
+    since the last time it was read.
+    """
+
+    _last_modified: dict[Path, float]
+
+    def __init__(self):
+        self._last_modified = {}
+
+    def has_changed(self, path: Path) -> bool:
+        """
+        Check if the file has changed since the last time it was checked.
+
+        :param path: The path to the file.
+        :return: True if the file has changed, False otherwise.
+        """
+        try:
+            last_modified = path.stat().st_mtime
+        except OSError:
+            logger.error(f"Failed to get last modified time for {path}")
+            return True
+        if last_modified != self._last_modified.get(path, None):
+            self._last_modified[path] = last_modified
+            return True
+        return False
+
+
 class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     """
     A widget that shows the details of an image object.
@@ -37,6 +66,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     current_image_path: Path | None  # The path of the image currently shown.
 
     button_map: dict[BadgeButton, imf.Output]
+
+    freshness_tracker: FileFreshnessTracker
 
     config: cfg.Config
     shared_ocr_model: st.Shared[st.OCRModel]  # Must be handed over by the file table.
@@ -84,6 +115,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.config = config
         self.shared_ocr_model = shared_ocr_model
         self.button_map = self.create_sidebar_buttons()
+
+        self.freshness_tracker = FileFreshnessTracker()
 
         self.first_load = True
         self.thread_queue = thread_queue
@@ -322,6 +355,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
             proc_output = self.image_obj.outputs[output]
             if proc_output.path is not None:
+                # Check if the file has even changed since last time.
+                if not self.freshness_tracker.has_changed(proc_output.path):
+                    continue
+
                 try:
                     button.setIcon(Qg.QIcon(str(proc_output.path)))
                     button.setText("")
