@@ -372,6 +372,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                         self.tr("Failed to load image '{path}'").format(path=proc_output.path),
                     )
             else:
+                # Clear any pixmaps that might be there.
+                button.setIcon(Qg.QIcon())
                 button.setText(self.tr("Generate Me"))
         # Update the badges on the buttons.
         self.start_profile_checker()
