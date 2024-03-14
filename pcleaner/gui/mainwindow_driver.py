@@ -1426,6 +1426,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     @Slot(imf.ProgressData)
     def show_current_progress(self, progress_data: imf.ProgressData) -> None:
+        # Try to update thumbnails in tabs.
+        # Ignore spammy progress types that don't actually create new steps.
+        if progress_data.progress_type not in (
+            imf.ProgressType.start,
+            imf.ProgressType.begin_step,
+            imf.ProgressType.incremental,
+            imf.ProgressType.absolute,
+        ):
+            self.image_tab.update_tabs(progress_data.current_step)
+
         if progress_data.progress_type == imf.ProgressType.start:
             # Processing begins, initialize what needs to be.
             # This one is needed because the image details panel also wants to be able to offer aborting.
@@ -1453,6 +1463,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         elif progress_data.progress_type == imf.ProgressType.absolute:
             self.progress_current = progress_data.value
+
+        elif progress_data.progress_type == imf.ProgressType.textDetection_done:
+            # This just exists to trigger the update for tabs.
+            # That's why this needs to be a different type that isn't being ignored
+            # by the guard in the beginning of this function.
+            pass
 
         elif progress_data.progress_type == imf.ProgressType.analyticsOCR:
             logger.info(f"Showing ocr analytics...")

@@ -96,7 +96,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.label_step.setText("")
 
         self.init_sidebar()
-        self.load_all_image_thumbnails()
+        self.load_image_thumbnails()
         self.pushButton_refresh.clicked.connect(self.regenerate_current_output)
         self.init_menu()
         profile_changed_signal.connect(self.start_profile_checker)
@@ -231,7 +231,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             # Re-create the buttons.
             self.button_map = self.create_sidebar_buttons()
             self.init_sidebar()
-            self.load_all_image_thumbnails()
+            self.load_image_thumbnails()
 
             # Select the button that was selected before.
             for button, output in self.button_map.items():
@@ -303,16 +303,31 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             button.setIconSize(Qc.QSize(thumbnail_width, thumbnail_height))
             button.clicked.connect(partial(self.switch_to_image, button))
 
-    def load_all_image_thumbnails(self) -> None:
+    def load_image_thumbnails(self, only_step: imf.Step | None = None) -> None:
         """
         Load all the images into the buttons.
+
+        :param only_step: [Optional] Only load the images for this step.
         """
+        logger.warning("Reloading images")
+
+        def check_output(current_output: imf.Output) -> bool:
+            return only_step is None or imf.output_to_step[current_output] == only_step
+
+        current_button = self.current_button()
+
         for button, output in self.button_map.items():
+            if not check_output(output):
+                continue
+
             proc_output = self.image_obj.outputs[output]
             if proc_output.path is not None:
                 try:
                     button.setIcon(Qg.QIcon(str(proc_output.path)))
                     button.setText("")
+
+                    if button is current_button:
+                        self.switch_to_image(button)
                 except OSError:
                     gu.show_exception(
                         self,
@@ -476,14 +491,6 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
                 return button
         return None
 
-    def reload_current_image(self) -> None:
-        """
-        Reload the current image.
-        The current image is the one belonging to the currently selected pushbutton.
-        """
-        if button := self.current_button():
-            self.switch_to_image(button)
-
     @Slot()
     def uncheck_all_other_buttons(self, checked_button: BadgeButton | None) -> None:
         """
@@ -562,8 +569,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         )
 
     def output_worker_result(self) -> None:
-        self.load_all_image_thumbnails()
-        self.reload_current_image()
+        self.load_image_thumbnails()
         logger.info("Output worker finished.")
 
     @Slot(wt.WorkerError)
@@ -573,8 +579,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         )
 
     def output_worker_aborted(self) -> None:
-        self.load_all_image_thumbnails()
-        self.reload_current_image()
+        self.load_image_thumbnails()
         self.thread_queue.clear()
         self.pushButton_refresh.setEnabled(True)
         logger.warning("Output worker aborted.")

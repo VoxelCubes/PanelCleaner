@@ -29,6 +29,7 @@ class ImageTab(Qw.QTabWidget):
         self.open_images = {}
 
         self.tabCloseRequested.connect(self.tab_close)
+        self.currentChanged.connect(lambda _: self.update_tabs())
 
     @Slot(imf.ImageFile)
     def open_image(
@@ -110,3 +111,15 @@ class ImageTab(Qw.QTabWidget):
             index = self.indexOf(self.open_images[path][1])
             self.open_images.pop(path)
             self.removeTab(index)
+
+    @Slot(imf.Step)
+    def update_tabs(self, step: imf.Step = None) -> None:
+        """
+        Update the thumbnails in the currently active image details tab, if any.
+
+        :param step: The step to update the thumbnails for.
+        """
+        logger.warning(f"Updating tabs with step {step}.")
+        current_tab = self.currentWidget()
+        if isinstance(current_tab, idd.ImageDetailsWidget):
+            current_tab.load_image_thumbnails(step)

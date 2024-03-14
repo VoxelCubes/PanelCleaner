@@ -81,6 +81,7 @@ class ProgressType(Enum):
     begin_step = auto()
     incremental = auto()
     absolute = auto()
+    textDetection_done = auto()
     analyticsOCR = auto()
     analyticsMasker = auto()
     analyticsDenoiser = auto()
