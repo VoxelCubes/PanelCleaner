@@ -203,6 +203,15 @@ def generate_output(
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
             update_output(image_obj, imf.Output.raw_json, "#raw.json")
 
+        progress_callback.emit(
+            imf.ProgressData(
+                len(step_text_detector_images),
+                target_outputs,
+                imf.Step.text_detection,
+                imf.ProgressType.textDetection_done,
+            )
+        )
+
     # ============================================== Preprocessing ==============================================
 
     check_abortion()
