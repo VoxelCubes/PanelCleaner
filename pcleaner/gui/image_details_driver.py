@@ -646,8 +646,6 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         each of them.
         """
 
-        logger.debug("Profile changed. Checking for changes.")
-
         changed_buttons: list[BadgeButton] = []
 
         # Create lists of the buttons that have an output to check.
