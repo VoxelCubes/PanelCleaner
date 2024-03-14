@@ -287,7 +287,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Handle the file manager extension.
         self.action_file_manager_extension.triggered.connect(self.open_file_manager_extension)
 
-
     def set_up_statusbar(self) -> None:
         """
         Add a label to show the current char total and time estimate.
@@ -755,7 +754,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Open the file manager extension page in the default browser.
         """
         if fmed.get_extension_target() == fmed.ExtensionTarget.Unsupported:
-            gu.show_warning(self, self.tr("Not Supported"), self.tr("Unsupported system or package format"))
+            gu.show_warning(
+                self, self.tr("Not Supported"), self.tr("Unsupported system or package format")
+            )
             return
         logger.debug("Opening file manager extension page.")
         self.file_manager_extension = fmed.FileManagerExtension(self)
