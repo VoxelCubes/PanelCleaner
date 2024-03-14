@@ -70,12 +70,16 @@ class IssueReporter(Qw.QDialog, Ui_IssueReporter):
                 else:
                     text = session.date_time.strftime("%Y-%m-%d %H:%M:%S")
 
-            text += " – "
-            text += f"{session.errors} " + hp.f_plural(
-                session.errors, self.tr("Error"), self.tr("Errors")
-            )
+            if session.errors or session.criticals:
+                text += " – "
+            if session.errors:
+                text += f"{session.errors} " + hp.f_plural(
+                    session.errors, self.tr("Error"), self.tr("Errors")
+                )
+                if session.criticals:
+                    text += ", "
             if session.criticals:
-                text += f", {session.criticals} " + hp.f_plural(
+                text += f"{session.criticals} " + hp.f_plural(
                     session.criticals, self.tr("Critical"), self.tr("Criticals")
                 )
 
