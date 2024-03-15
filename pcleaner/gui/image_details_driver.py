@@ -56,6 +56,17 @@ class FileFreshnessTracker:
             return True
         return False
 
+    def invalidate(self, path: Path | None = None) -> None:
+        """
+        Invalidate the last modified time for the given path.
+
+        :param path: [Optional] The path to the file.
+        """
+        if path is not None:
+            self._last_modified.pop(path, None)
+        else:
+            self._last_modified.clear()
+
 
 class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     """
@@ -111,12 +122,12 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         Qw.QWidget.__init__(self, parent)
         self.setupUi(self)
 
+        self.freshness_tracker = FileFreshnessTracker()
+
         self.image_obj = image_obj
         self.config = config
         self.shared_ocr_model = shared_ocr_model
         self.button_map = self.create_sidebar_buttons()
-
-        self.freshness_tracker = FileFreshnessTracker()
 
         self.first_load = True
         self.thread_queue = thread_queue
@@ -173,6 +184,8 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         current_button_layout: Qw.QGridLayout
         current_button_index: int = 0
         last_step_name: str | None = None
+        # Nuke the cache, if it exists.
+        self.freshness_tracker.invalidate()
 
         def add_button(title: str | None) -> BadgeButton | Qw.QVBoxLayout:
             # Insert a new button into the current step's layout.
