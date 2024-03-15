@@ -136,7 +136,7 @@ class FileTable(CTableWidget):
 
         current_widths = [self.columnWidth(col) for col in range(self.columnCount())]
         # Check if the widths are all 0 or 100.
-        if all(w in (0, 100) for w in current_widths):
+        if all(w in (0, 100) for w in current_widths) and self.last_header_widths:
             # Restore the last known good header widths.
             logger.debug(f"Restoring last known good header widths: {self.last_header_widths}")
             for col, width in enumerate(self.last_header_widths):
