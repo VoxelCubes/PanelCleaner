@@ -187,6 +187,28 @@ section_role_mapping = {
 }
 
 
+def clamp_8bit(value: int) -> int:
+    """
+    Clamp a value to the 0-255 range.
+    """
+    return max(0, min(value, 255))
+
+
+def apply_color_effect(source: Qg.QColor, effect_base: Qg.QColor, contrast_amount: float) -> Qg.QColor:
+    """
+    Apply a color effect to a source color.
+
+    :param source: The source color.
+    :param effect_base: The base color for the effect.
+    :param contrast_amount: The amount of contrast to apply.
+    :return: The modified color.
+    """
+    # Essentially alpha blend, with the effect having the contrast amount as the alpha pasted on top.
+    r = clamp_8bit(int(source.red() * (1 - contrast_amount) + effect_base.red() * contrast_amount))
+    g = clamp_8bit(int(source.green() * (1 - contrast_amount) + effect_base.green() * contrast_amount))
+    b = clamp_8bit(int(source.blue() * (1 - contrast_amount) + effect_base.blue() * contrast_amount))
+    return Qg.QColor(r, g, b)
+
 def load_color_palette(theme: str) -> Qg.QPalette:
     """
     Provide a theme name and get a QPalette object.
@@ -202,6 +224,31 @@ def load_color_palette(theme: str) -> Qg.QPalette:
         stream = Qc.QTextStream(file)
         content = stream.readAll()
 
+        # Find the disabled color parameters.
+        disabled_color = Qg.QColor.fromRgb(128, 128, 128)  # Default to gray.
+        disabled_contrast_amount = 0.0
+        in_disabled_section = False
+        for line in content.split("\n"):
+            line = line.strip()
+            if line == "[ColorEffects:Disabled]":
+                in_disabled_section = True
+                continue
+            if not in_disabled_section:
+                continue
+            if line.startswith("["):
+                in_disabled_section = False
+                break
+            if "=" not in line:
+                continue
+
+            # Ok, now we're in the disabled section.
+            key, value = map(str.strip, line.split("=", 1))
+            if key == "Color":
+                r, g, b = map(int, value.split(","))
+                disabled_color.setRgb(r, g, b)
+            elif key == "ContrastAmount":
+                disabled_contrast_amount = float(value)
+
         section = None
         for line in content.split("\n"):
             line = line.strip()
@@ -213,7 +260,11 @@ def load_color_palette(theme: str) -> Qg.QPalette:
                 qt_color_role = role_mapping.get(key, None)
                 if qt_color_role is not None:
                     r, g, b = map(int, value.split(","))
-                    palette.setColor(qt_color_role, Qg.QColor(r, g, b))
+                    palette.setColor(Qg.QPalette.Normal, qt_color_role, Qg.QColor(r, g, b))
+                    palette.setColor(Qg.QPalette.Inactive, qt_color_role, Qg.QColor(r, g, b))
+                    # Calculate the disabled color.
+                    disabled_color = apply_color_effect(Qg.QColor(r, g, b), disabled_color, disabled_contrast_amount)
+                    palette.setColor(Qg.QPalette.Disabled, qt_color_role, disabled_color)
     else:
         raise ValueError(f"Could not open theme file: {theme}")
 
