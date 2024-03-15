@@ -1,0 +1,6 @@
+To ensure the paths are correct, make sure your shell is in the PanelCleaner directory, not the
+Windows scripts directory.
+
+So run the build-pyinstaller.bat script like this:
+
+& ".\Windows scripts\build-pyinstaller.bat"

@@ -1,5 +1,4 @@
 REM This emulates the functionality of the Makefile's refresh-assets target.
-cd ..
 @echo off
 setlocal enabledelayedexpansion
 REM Define variables

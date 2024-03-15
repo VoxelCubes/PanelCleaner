@@ -2,6 +2,5 @@
 :: the manual way, using CUDA 11 for compatibility.
 :: See https://pytorch.org/get-started/locally/#windows-pip for more info.
 :: First ensure the regular torch is uninstalled.
-cd ..
 .\venv-cuda\Scripts\pip uninstall torch torchvision -y
 .\venv-cuda\Scripts\pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118

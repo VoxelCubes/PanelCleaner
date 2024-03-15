@@ -2,8 +2,6 @@
 :: Be sure to switch venv first!
 call build-integration-helper-pyinstaller.bat
 
-cd ..
-
 .\venv\Scripts\pip install pyinstaller
 .\venv\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv/Lib/site-packages' ^
     --onedir --noconfirm --clean --workpath=build --distpath=dist_exe --windowed ^
@@ -27,4 +25,4 @@ cd ..
     --add-data "pcleaner/data/LiberationSans-Regular.ttf;pcleaner/data/" ^
     --add-data "pcleaner/data/NotoMono-Regular.ttf;pcleaner/data/"
 
-Copy-Item -Path "docs/What is _internal.txt" -Destination "dist_exe/What is _internal.txt"
+Copy "docs/What is _internal.txt" "dist_exe/PanelCleaner/What is _internal.txt"
