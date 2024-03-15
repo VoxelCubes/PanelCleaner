@@ -1,11 +1,10 @@
-:: Perform a Windows build.
+:: Perform a Windows build with CUDA.
 :: Be sure to switch venv first!
-call build-integration-helper-pyinstaller.bat
-
-.\venv\Scripts\pip install pyinstaller
-.\venv\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv/Lib/site-packages' ^
-    --onedir --noconfirm --clean --workpath=build --distpath=dist_exe --windowed ^
-    --name="PanelCleaner" --icon=icons\logo.ico ^
+cd..
+.\venv-cuda\Scripts\pip install pyinstaller
+.\venv-cuda\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv-cuda/Lib/site-packages' ^
+    --onefile --noconfirm --clean --workpath=build --distpath=dist_exe_cuda --windowed ^
+    --name="PanelCleaner.exe" --icon=icons\logo.ico ^
     --copy-metadata filelock ^
     --copy-metadata huggingface-hub ^
     --copy-metadata numpy ^
@@ -20,9 +19,6 @@ call build-integration-helper-pyinstaller.bat
     --collect-data torch ^
     --collect-data unidic_lite ^
     --hidden-import=scipy.signal ^
-    --add-data "dist_exe/WindowsExplorerIntegrationRegedit.exe;pcleaner/data/" ^
     --add-data "venv/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" ^
     --add-data "pcleaner/data/LiberationSans-Regular.ttf;pcleaner/data/" ^
     --add-data "pcleaner/data/NotoMono-Regular.ttf;pcleaner/data/"
-
-Copy-Item -Path "docs/What is _internal.txt" -Destination "dist_exe/What is _internal.txt"
