@@ -37,7 +37,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="2.6.0" date="2024-03-14">
+    <release version="2.6.1" date="2024-03-15">
       <description>
         <p>Changelog</p>
         <ul>
@@ -49,6 +49,7 @@
           <li>Fix: denoising and inpainting failing to scale masks correctly when using a sub 100% processing size.</li>
           <li>Fix: thumbnails not updating in details tabs when running processing.</li>
           <li>Fix: glitchy button text when regenerating an output in the details tab.</li>
+          <li>Fix: bundled themes have poor contrast between enabled and disabled buttons.</li>
         </ul>
       </description>
     </release>
