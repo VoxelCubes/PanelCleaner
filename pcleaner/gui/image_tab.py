@@ -119,7 +119,6 @@ class ImageTab(Qw.QTabWidget):
 
         :param step: The step to update the thumbnails for.
         """
-        logger.warning(f"Updating tabs with step {step}.")
         current_tab = self.currentWidget()
         if isinstance(current_tab, idd.ImageDetailsWidget):
             current_tab.load_image_thumbnails(step)
