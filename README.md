@@ -49,6 +49,8 @@ The two bottom pages are what the program can output: either just the transparen
 
 - Avoids painting over parts of the image that aren't text.
 
+- Inpaints bubbles that can't simply be masked out.
+
 - Ignores bubbles containing only symbols or numbers, as those don't need translation.
 
 - Offers a GUI for easy use, dark, light, and system themes are supported.
@@ -273,6 +275,8 @@ This is also available in the GUI, as the OCR output option.
 
 - [Manga OCR](https://github.com/kha-white/manga-ocr) for detecting which bubbles only contain symbols or numbers,
   and performing the dedicated OCR command.
+
+- [Simple Lama Inpainting](https://github.com/enesmsahin/simple-lama-inpainting) for inpainting bubbles that can't be masked out.
 
 
 ## License
