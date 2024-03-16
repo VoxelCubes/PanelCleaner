@@ -37,7 +37,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="2.6.1" date="2024-03-15">
+    <release version="2.6.1" date="2024-03-16">
       <description>
         <p>Changelog</p>
         <ul>
@@ -45,6 +45,7 @@
           <li>Add a new option in the image previews to copy the image path to the clipboard, so that you can simply paste it into other applications without needing to export it first.</li>
           <li>Update image thumbnails in image details tabs after every step, rather than waiting until all steps are done.</li>
           <li>Only show number of errors in log viewer if there were errors.</li>
+          <li>[Flatpak] Fix: CUDA libraries causing additional 4GB install size.</li>
           <li>Fix: inpainting outputs not written to output.</li>
           <li>Fix: denoising and inpainting failing to scale masks correctly when using a sub 100% processing size.</li>
           <li>Fix: thumbnails not updating in details tabs when running processing.</li>
