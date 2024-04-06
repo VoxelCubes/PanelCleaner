@@ -16,6 +16,10 @@ import pcleaner.config as cfg
 from pcleaner import __display_name__, __version__
 from pcleaner.gui.mainwindow_driver import MainWindow
 
+# TODO Things to copy from deepqt:
+# - the testing
+# - the sys.excepthook
+# - the gather themes (potentially)
 
 # This import is needed to load the icons.
 import pcleaner.gui.rc_generated_files.rc_icons

@@ -205,7 +205,7 @@ class FileTable(CTableWidget):
                 self.tr("Failed to discover images: {path}").format(path=path_str) + f"\n\n{e}",
             )
             return
-        except:
+        except Exception:
             path_str = path if isinstance(path, str) else ", ".join(path)
             gu.show_exception(
                 self,
