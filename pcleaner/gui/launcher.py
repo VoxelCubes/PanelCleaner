@@ -2,6 +2,7 @@ import os
 import platform
 import sys
 from io import StringIO
+from PIL import Image
 
 import PySide6
 import PySide6.QtGui as Qg
@@ -36,6 +37,14 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     :param files_to_open: A list of files to open.
     :param debug: Whether to enable debug mode.
     """
+
+    # Ensure that the resources are loaded.
+    # Due to them not being utilized directly, the import statements may be
+    # removed by an errant code formatter
+    assert pcleaner.gui.rc_generated_files.rc_icons
+    assert pcleaner.gui.rc_generated_files.rc_theme_icons
+    assert pcleaner.gui.rc_generated_files.rc_themes
+    assert pcleaner.gui.rc_generated_files.rc_translations
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
     # Log up to 1MB to the log file.
@@ -153,6 +162,9 @@ def main():
     """
     args = docopt(docopt_doc, version=f"Panel Cleaner {__version__}")
     launch(args.image_path, args.debug)
+
+    # Allow loading of large images.
+    Image.MAX_IMAGE_PIXELS = 2**32
 
 
 if __name__ == "__main__":
