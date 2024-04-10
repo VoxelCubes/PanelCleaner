@@ -12,6 +12,7 @@ import torch
 from docopt import docopt
 
 import pcleaner.cli_utils as cu
+import pcleaner.gui.gui_utils as gu
 import pcleaner.config as cfg
 from pcleaner import __display_name__, __version__
 from pcleaner.gui.mainwindow_driver import MainWindow
@@ -42,6 +43,15 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
 
     # Set up file logging.
     logger.add(str(cu.get_log_path()), rotation="10 MB", retention="1 week", level="DEBUG")
+
+    # Set up a preliminary exception handler so that this still shows up in the log.
+    # Once the gui is up and running it'll be replaced with a call to the gui's error dialog.
+    def exception_handler(exctype, value, traceback) -> None:
+        logger.opt(depth=1, exception=(exctype, value, traceback)).critical(
+            "An uncaught exception was raised"
+        )
+
+    sys.excepthook = exception_handler
 
     logger.info("\n" + cfg.STARTUP_MESSAGE)
     buffer = StringIO()
@@ -125,7 +135,7 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
         window.show()
         sys.exit(app.exec())
     except Exception:
-        logger.opt(exception=True).critical("Failed to initialize the main window.")
+        gu.show_exception(None, "Failed to launch", "Failed to initialize the main window.")
     finally:
         logger.info(cfg.SHUTDOWN_MESSAGE + "\n")
 
