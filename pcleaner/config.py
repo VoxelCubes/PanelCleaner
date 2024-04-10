@@ -260,6 +260,9 @@ class PreprocessorConfig:
     box_padding_extended: int = 5
     box_right_padding_extended: int = 5
     box_reference_padding: int = 20
+    ocr_use_tesseract: bool = False
+    ocr_tesseract_lang: str = "eng"
+    reading_order: str = "manga"
 
     def export_to_conf(
         self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
@@ -359,6 +362,9 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, int, "box_padding_extended")
         try_to_load(self, config_updater, section, int, "box_right_padding_extended")
         try_to_load(self, config_updater, section, int, "box_reference_padding")
+        try_to_load(self, config_updater, section, bool, "ocr_use_tesseract")
+        try_to_load(self, config_updater, section, str, "ocr_tesseract_lang")
+        try_to_load(self, config_updater, section, str, "reading_order")
 
     def fix(self) -> None:
         """

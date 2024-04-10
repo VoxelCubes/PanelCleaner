@@ -138,6 +138,7 @@ import pcleaner.model_downloader as md
 import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
+from pcleaner.ocr_tesseract import TesseractOcr
 from pcleaner import __version__
 
 
@@ -194,6 +195,7 @@ def main() -> None:
 
     elif args.ocr:
         config = cfg.load_config()
+        config.load_profile(config.default_profile)
         # Ignore the rejected tiff list, as those are already visible in CLI mode.
         image_paths, _ = hp.discover_all_images(args.image_path, cfg.SUPPORTED_IMG_TYPES)
         run_ocr(config, image_paths, args.output_path, args.cache_masks, args.csv)
@@ -607,14 +609,19 @@ def run_ocr(
     # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
     config.current_profile.preprocessor.ocr_blacklist_pattern = ".*"
 
-    mocr = MangaOcr()
+    if config.current_profile.preprocessor.ocr_use_tesseract:
+        ocr_processor = TesseractOcr(lang=config.current_profile.preprocessor.ocr_tesseract_lang)
+    else:
+        ocr_processor = MangaOcr()
+
+    # mocr = MangaOcr()
     ocr_analytics = []
     for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
         ocr_analytic = pp.prep_json_file(
             json_file_path,
             preprocessor_conf=config.current_profile.preprocessor,
             cache_masks=cache_masks,
-            mocr=mocr,
+            mocr=ocr_processor, #mocr=mocr,
             cache_masks_ocr=True,
             performing_ocr=True,
         )

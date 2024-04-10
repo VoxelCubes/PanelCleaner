@@ -10,6 +10,7 @@ from manga_ocr import MangaOcr
 import pcleaner.config as cfg
 import pcleaner.ctd_interface as ctm
 import pcleaner.structures as st
+from pcleaner.ocr_tesseract import TesseractOcr
 
 
 def generate_mask_data(
@@ -32,12 +33,51 @@ def generate_mask_data(
 
     ctm.model2annotations(config_general, config_detector, model_path, image_path, output_dir)
 
+# adapted from https://maxhalford.github.io/blog/comic-book-panel-segmentation/
+# not perfect in any way, but good enough for now
+def are_boxes_aligned(a: st.Box, b: st.Box, axis: int, tolerance: int = 10) -> bool:
+    if axis == 0:  # Horizontal axis, consider vertical alignment with tolerance
+        return (a.y1 - tolerance) < b.y2 and (b.y1 - tolerance) < a.y2
+    else:  # Vertical axis, consider horizontal alignment with tolerance
+        return (a.x1 - tolerance) < b.x2 and (b.x1 - tolerance) < a.x2
+
+def cluster_boxes(bboxes: list[st.Box], axis: int = 0, tolerance: int = 10) -> list[list[st.Box]]:
+    clusters = []
+
+    for bbox in bboxes:
+        for cluster in clusters:
+            if any(are_boxes_aligned(b, bbox, axis=axis, tolerance=tolerance) for b in cluster):
+                cluster.append(bbox)
+                break
+        else:
+            clusters.append([bbox])
+
+    # Sort clusters based on the first box in each cluster
+    if axis == 0:  # Horizontal axis, sort by top edge (y1)
+        clusters.sort(key=lambda c: c[0].y1)
+    else:  # Vertical axis, sort by left edge (x1)
+        clusters.sort(key=lambda c: c[0].x1)
+
+    # Recursively cluster within each cluster, flipping axis and passing tolerance
+    for i, cluster in enumerate(clusters):
+        if len(cluster) > 1:
+            clusters[i] = cluster_boxes(cluster, axis=1-axis, tolerance=tolerance)
+
+    return clusters
+
+def flatten(l):
+    for el in l:
+        if isinstance(el, list):
+            yield from flatten(el)
+        else:
+            yield el
+
 
 def prep_json_file(
     json_file_path: Path,
     preprocessor_conf: cfg.PreprocessorConfig,
     cache_masks: bool,
-    mocr: MangaOcr | None = None,
+    mocr: MangaOcr | TesseractOcr | None = None,
     cache_masks_ocr: bool = False,
     performing_ocr: bool = False,
 ) -> st.OCRAnalytic | None:
@@ -83,7 +123,7 @@ def prep_json_file(
     # Since the OCR model is only trained to recognize Japanese,
     # we need to discard anything that isn't, and if strict, also
     # those that are unknown (likely a mix).
-    language_whitelist = ["ja"]
+    language_whitelist = ["ja", "eng"]
     if not preprocessor_conf.ocr_strict_language:
         language_whitelist.append("unknown")
 
@@ -102,9 +142,17 @@ def prep_json_file(
 
         boxes.append(box)
 
-    # Sort boxes by their x+y coordinates, using the top right corner as the reference.
-    boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
-
+    reading_order = preprocessor_conf.reading_order
+    if reading_order == "comic":
+        try:
+            sorted_boxes = cluster_boxes(boxes)
+            boxes = list(flatten(sorted_boxes))
+        except:  # TODO: clustering recurses sometimes, so we try to sort the boxes manually
+            boxes.sort(key=lambda b: b.y1 + 0.4 * b.x1)
+    elif reading_order == "manga":
+        # Sort boxes by their x+y coordinates, using the top right corner as the reference.
+        boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
+    
     page_data = st.PageData(image_path, mask_path, original_path, scale, boxes, [], [], [])
 
     # Merge boxes that have mutually overlapping centers.
@@ -160,7 +208,7 @@ def prep_json_file(
 
 
 def ocr_check(
-    page_data: st.PageData, mocr: MangaOcr, max_box_size: int, ocr_blacklist_pattern: str
+    page_data: st.PageData, mocr: MangaOcr | TesseractOcr, max_box_size: int, ocr_blacklist_pattern: str
 ) -> tuple[st.PageData, st.OCRAnalytic]:
     """
     Run OCR on small boxes to determine whether they contain mere symbols,
@@ -224,6 +272,6 @@ def is_not_worth_cleaning(text: str, blacklist_pattern: str) -> bool:
     :param blacklist_pattern: Regex pattern to match against the text.
     :return: True if the text is not worth cleaning, False otherwise.
     """
-    if re.fullmatch(blacklist_pattern, text):
+    if re.fullmatch(blacklist_pattern, text, re.DOTALL):
         return True
     return False
