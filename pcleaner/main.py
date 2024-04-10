@@ -195,7 +195,7 @@ def main() -> None:
 
     elif args.ocr:
         config = cfg.load_config()
-        config.load_profile(config.default_profile)
+        config.load_profile(args["--profile"])
         # Ignore the rejected tiff list, as those are already visible in CLI mode.
         image_paths, _ = hp.discover_all_images(args.image_path, cfg.SUPPORTED_IMG_TYPES)
         run_ocr(config, image_paths, args.output_path, args.cache_masks, args.csv)
@@ -621,7 +621,7 @@ def run_ocr(
             json_file_path,
             preprocessor_conf=config.current_profile.preprocessor,
             cache_masks=cache_masks,
-            mocr=ocr_processor, #mocr=mocr,
+            mocr=ocr_processor,  # mocr=mocr,
             cache_masks_ocr=True,
             performing_ocr=True,
         )

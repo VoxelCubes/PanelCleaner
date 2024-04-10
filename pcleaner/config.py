@@ -68,7 +68,7 @@ Percentage = NewType("Percentage", float)
 """
 When adding new config options, follow these steps:
 1. Add the new variable to the dataclass.
-2. Add where it's written in the config template, document for the user.
+2. Add where it's written in the config template below, document the option for the user.
 3. Add a try_to_load line in the import_from_conf method.
 4. If it affects certain outputs, add sensitivity for that in the image_file.py file.
 """
@@ -252,6 +252,9 @@ class PreprocessorConfig:
     suspicious_box_min_size: int = 200 * 200
     box_overlap_threshold: Percentage = 20.0
     ocr_enabled: bool = True
+    ocr_use_tesseract: bool = False
+    ocr_tesseract_lang: str = "eng"
+    reading_order: str = "manga"
     ocr_max_size: int = 30 * 100
     ocr_blacklist_pattern: str = "[～．ー！？０-９]*"
     ocr_strict_language: bool = False
@@ -260,9 +263,6 @@ class PreprocessorConfig:
     box_padding_extended: int = 5
     box_right_padding_extended: int = 5
     box_reference_padding: int = 20
-    ocr_use_tesseract: bool = False
-    ocr_tesseract_lang: str = "eng"
-    reading_order: str = "manga"
 
     def export_to_conf(
         self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
@@ -294,6 +294,25 @@ class PreprocessorConfig:
         
         # Whether to use OCR to detect boxes that aren't worth cleaning, like ones that only contain numbers or symbols.
         ocr_enabled = {self.ocr_enabled}
+        
+        # Whether to use Tesseract to perform OCR
+        # If [CLI: set to True][GUI: checked], Tesseract OCR is used for text detection and extraction.
+        # If [CLI: set to False][GUI: unchecked], the built-in OCR model (manga-ocr) is used, which is
+        # best suited for vertical Japanese text.
+        ocr_use_tesseract = {self.ocr_use_tesseract}
+
+        # Specifies the language for Tesseract OCR to use when processing text.
+        # This should be a string corresponding to one of Tesseract's supported language codes 
+        # (e.g., 'eng' for English, 'jpn' for Japanese).
+        # This setting is only relevant if ocr_use_tesseract is enabled.
+        ocr_tesseract_lang = {self.ocr_tesseract_lang}
+
+        # Defines the reading order for processing and sorting text boxes.
+        # 'manga' indicates a right-to-left, top-to-bottom reading order, typically used for Japanese manga.
+        # Other possible values might include 'comic' for a left-to-right, top-to-bottom reading order,
+        # suitable for English and other Western languages. This setting influences how text boxes are ordered
+        # and presented for further processing.
+        reading_order = {self.reading_order}
         
         # Maximum size of a box to perform OCR on.
         # These useless boxes are usually small, and OCR is slow, so use this as a cutoff.
@@ -1103,11 +1122,11 @@ class Config:
         """
         Load a profile from disk, if a name is given.
         First search if the profile is saved, otherwise treat it like a path.
-        For None, attempt to load the default profile.
+        For None, attempt to load the default profile, be that the builtin default or the user's default.
 
         Special case: Reserve the name "builtin" and "none" (case insensitive) to load the built-in default profile.
 
-        :param profile_name: Name or path of the profile to load.
+        :param profile_name: [Optional] Name or path of the profile to load.
         :return: True if the profile was loaded successfully.
         """
         logger.debug(f"Loading profile {profile_name!r}...")
