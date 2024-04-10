@@ -1,3 +1,4 @@
+import sys
 import platform
 import time
 import psutil
@@ -372,6 +373,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Handle any initialization that must be done after the window is shown.
         """
+
+        def exception_handler(exctype, value, traceback) -> None:
+            gu.show_exception(
+                self,
+                "Uncaught Exception",
+                "An uncaught exception was raised.",
+                exception_information=(exctype, value, traceback),
+            )
+
+        sys.excepthook = exception_handler
+
         # Make the profile groupbox the width of 5 save buttons as a good enough heuristic.
         header_button_width = self.pushButton_save_profile.width()
 
