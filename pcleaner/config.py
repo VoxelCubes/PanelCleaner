@@ -394,9 +394,9 @@ class PreprocessorConfig:
         if self.suspicious_box_min_size < 0:
             self.suspicious_box_min_size = 0
         if self.box_overlap_threshold < 0:
-            self.box_overlap_threshold = 0.0
+            self.box_overlap_threshold = Percentage(0.0)
         if self.box_overlap_threshold > 100:
-            self.box_overlap_threshold = 100.0
+            self.box_overlap_threshold = Percentage(100.0)
         if self.ocr_max_size < 0:
             self.ocr_max_size = 0
         if self.box_padding_initial < 0:
