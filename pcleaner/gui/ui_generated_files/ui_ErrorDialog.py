@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'ErrorDialog.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.2
+## Created by: Qt User Interface Compiler version 6.6.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -35,7 +35,7 @@ class Ui_ErrorDialog(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.label_error_icon = QLabel(ErrorDialog)
         self.label_error_icon.setObjectName(u"label_error_icon")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_error_icon.sizePolicy().hasHeightForWidth())
@@ -46,7 +46,7 @@ class Ui_ErrorDialog(object):
 
         self.verticalLayout_2.addWidget(self.label_error_icon)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_2.addItem(self.verticalSpacer)
 
@@ -74,7 +74,7 @@ class Ui_ErrorDialog(object):
 
         self.horizontalLayout.addWidget(self.label_name_hidden)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 

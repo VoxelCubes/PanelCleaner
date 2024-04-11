@@ -81,7 +81,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__display_name__} {__version__}")
-        self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
         self.config = config
         self.debug = debug
         self.startup_files = files_to_open
@@ -191,6 +190,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.config.save()
 
     def initialize_ui(self) -> None:
+        if platform.system() == "Windows":
+            self.setWindowIcon(Qg.QIcon(":/logo.ico"))
+        else:
+            self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
+
         self.hide_progress_drawer()
         self.set_up_statusbar()
         # Purge any missing profiles before loading them.
