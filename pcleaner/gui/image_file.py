@@ -422,8 +422,7 @@ class ImageFile:
         settings += [
             pp.box_overlap_threshold,
             pp.ocr_enabled,
-            pp.ocr_use_tesseract,
-            pp.ocr_tesseract_lang,
+            pp.ocr_engine,
             pp.reading_order,
             pp.ocr_max_size,
             pp.ocr_blacklist_pattern,

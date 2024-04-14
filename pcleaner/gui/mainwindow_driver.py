@@ -20,6 +20,8 @@ import pcleaner.gui.supported_languages as sl
 import pcleaner.analytics as an
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
+import pcleaner.structures as st
+import pcleaner.preprocessor as prp
 import pcleaner.gui.about_driver as ad
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
@@ -39,7 +41,7 @@ from pcleaner import __display_name__, __version__
 from pcleaner import data
 from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
-
+import pcleaner.ocr.ocr as ocr
 
 ANALYTICS_COLUMNS = 74
 
@@ -54,7 +56,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     toolBox_profile: pp.ProfileToolBox
     # Optional shared instance of the OCR model to save time due to its slow loading.
-    shared_ocr_model: gst.Shared[gst.OCRModel]
+    shared_ocr_model: gst.Shared[ocr.OcrProcsType]
 
     threadpool: Qc.QThreadPool  # Used for loading images and other gui tasks.
     thread_queue: Qc.QThreadPool  # Used for tasks that need to run sequentially, without blocking the gui.
@@ -88,7 +90,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.progress_current: int = 0
         self.progress_step_start: imf.Step | None = None
 
-        self.shared_ocr_model = gst.Shared[gst.OCRModel]()
+        self.shared_ocr_model = gst.Shared[ocr.OcrProcsType]()
 
         self.last_applied_profile = None
 
@@ -565,7 +567,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def load_ocr_model(self) -> None:
         t_start = time.time()
         self.statusbar.showMessage(self.tr(f"Loading OCR model..."))
-        self.shared_ocr_model.set(MangaOcr())
+        profile = self.config.current_profile
+        self.shared_ocr_model.set(ocr.get_ocr_processor(profile))
         logger.info(f"Loaded OCR model ({time.time()-t_start:.2f}s)")
         self.statusbar.showMessage(self.tr(f"Loaded OCR model."))
         self.enable_running_cleaner()
@@ -1003,8 +1006,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Load the current profile.
         """
         logger.debug("Loading current profile.")
-        self.toolBox_profile.set_profile_values(self.config.current_profile)
+        profile = self.config.current_profile
+        self.toolBox_profile.set_profile_values(profile)
         self.set_last_applied_profile()
+        self.shared_ocr_model.set(ocr.get_ocr_processor(profile))
         self.profile_values_changed.emit()
 
     def profile_change_check(self) -> bool:
@@ -1321,7 +1326,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             target_outputs=outputs,
             output_dir=output_directory,
             config=self.config,
-            ocr_model=self.shared_ocr_model.get(),
+            ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
         )
@@ -1411,7 +1416,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             output_file=output_directory,
             csv_output=csv_output,
             config=self.config,
-            ocr_model=self.shared_ocr_model.get(),
+            ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
         )

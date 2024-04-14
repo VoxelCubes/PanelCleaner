@@ -19,7 +19,7 @@ import pcleaner.gui.structures as st
 import pcleaner.gui.worker_thread as wt
 from pcleaner.gui.CustomQ.CBadgeButton import BadgeButton
 from pcleaner.gui.ui_generated_files.ui_ImageDetails import Ui_ImageDetails
-
+import pcleaner.ocr.ocr as ocr
 
 THUMBNAIL_SIZE = 180, 180
 PUSHBUTTON_THUMBNAIL_MARGIN = 8
@@ -81,7 +81,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     freshness_tracker: FileFreshnessTracker
 
     config: cfg.Config
-    shared_ocr_model: st.Shared[st.OCRModel]  # Must be handed over by the file table.
+    shared_ocr_model: st.Shared[ocr.OcrProcsType] | None  # Must be handed over by the file table.
     thread_queue: Qc.QThreadPool
     progress_callback: Callable[[imf.ProgressData], None]
     abort_signal: Signal
@@ -101,7 +101,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         parent=None,
         image_obj: imf.ImageFile = None,
         config: cfg.Config = None,
-        shared_ocr_model: st.Shared[st.OCRModel] = None,
+        shared_ocr_model: st.Shared[ocr.OcrProcsType]|None = None,
         thread_queue: Qc.QThreadPool = None,
         progress_callback: Callable[[imf.ProgressData], None] = None,
         profile_changed_signal: Signal = None,
@@ -615,7 +615,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             target_outputs=[output],
             output_dir=None,
             config=self.config,
-            ocr_model=self.shared_ocr_model.get(),
+            ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
         )
@@ -806,7 +806,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             output_file=None,
             csv_output=False,
             config=self.config,
-            ocr_model=self.shared_ocr_model.get(),
+            ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
         )
