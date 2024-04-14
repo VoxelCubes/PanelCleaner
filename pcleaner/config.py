@@ -67,15 +67,18 @@ LongString = NewType("LongString", str)
 # Create a new type for percentages as floats. These are between 0 and 100.
 Percentage = NewType("Percentage", float)
 
+
 class ReadingOrder(StrEnum):
     AUTO = "auto"
     MANGA = "manga"
     COMIC = "comic"
 
+
 class OCREngine(StrEnum):
     AUTO = "auto"
     MANGAOCR = "manga-ocr"
     TESSERACT = "tesseract"
+
 
 """
 When adding new config options, follow these steps:
@@ -307,22 +310,22 @@ class PreprocessorConfig:
         # Whether to use OCR to detect boxes that aren't worth cleaning, like ones that only contain numbers or symbols.
         ocr_enabled = {self.ocr_enabled}
         
-        # Specifies which engine to use for performing OCR.
+        # Specifies which engine to use for performing OCR.[GUI: <br>]
         # - auto: Automatically selects the OCR engine based on the detected language of each text block
-        #         within the image. Uses manga-ocr for Japanese text, Tesseract for English text and for
-        #         text of unknown language.
-        # - mangaocr: Forces PanelCleaner to use the built-in manga-ocr model for all text recognition
-        #             tasks. Best suited for Japanese text.
-        # - tesseract: Forces PanelCleaner to use Tesseract OCR for all text recognition tasks. This is a
+        #         within the image. Uses Manga Ocr for Japanese text, Tesseract for English text and for
+        #         text of unknown language.[GUI: <br>]
+        # - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition
+        #             tasks. Best suited for vertical Japanese text.[GUI: <br>]
+        # - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a
         #              versatile option that supports English and multiple other languages.
         ocr_engine = {self.ocr_engine}
 
         # Defines the reading order for processing and sorting text boxes on the entire page, not
         # individual text blocks. This global setting influences how text boxes are ordered and
-        # presented for further processing.
-        # - auto: Detects the reading order based on the detected language of each text block within the page.
-        # - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.
-        # - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.
+        # presented for further processing.[GUI: <br>]
+        # - auto: Detects the reading order based on the detected language of each text block within the page.[GUI: <br>]
+        # - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.[GUI: <br>]
+        # - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.[GUI: <br>]
         # Choose based on the predominant layout of your content.
         reading_order = {self.reading_order}
 
@@ -1444,6 +1447,8 @@ def format_for_version(conf_string: str, gui_mode: bool) -> str:
         conf_string = re.sub(r"^\s*\[GUI: (.*?)]\s*$", r"\1", conf_string, flags=re.MULTILINE)
         conf_string = re.sub(r"\[CLI: (.*?)]", "", conf_string)
         conf_string = re.sub(r"\[GUI: (.*?)]", r"\1", conf_string)
+        # Additionally, strip out repeated spaces.
+        conf_string = re.sub(r"  +", " ", conf_string)
     else:
         conf_string = re.sub(r"^\s*\[GUI: (.*?)]\s*$", "", conf_string, flags=re.MULTILINE)
         conf_string = re.sub(r"^\s*\[CLI: (.*?)]\s*$", r"\1", conf_string, flags=re.MULTILINE)

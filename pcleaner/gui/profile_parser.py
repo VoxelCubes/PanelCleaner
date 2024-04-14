@@ -200,7 +200,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_getter = self._data_widget.currentLinkedData
 
         elif entry_type in (EntryTypes.OCREngine, EntryTypes.ReadingOrder):
-            # Use a spinbox and populate it with the OCR engine names from the config.
+            # Use a combobox and populate it with the OCR engine names from the config.
             # Use auto as the default value.
             self._data_widget: CComboBox = CComboBox()
             enm = {EntryTypes.OCREngine: OCREngine, EntryTypes.ReadingOrder: ReadingOrder}[

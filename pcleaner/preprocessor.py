@@ -286,7 +286,7 @@ def ocr_check(
     discarded_box_texts: list[tuple[Path, str, st.Box]] = []
     for i, box in enumerate(candidate_small_bubbles):
         cutout = base_image.crop(box.as_tuple)
-        cutout.save(outpath / f"{img_path.stem}_cutout_{i}.png")
+        # cutout.save(outpath / f"{img_path.stem}_cutout_{i}.png")
         text = mocr(cutout)
         remove = is_not_worth_cleaning(text, ocr_blacklist_pattern)
         box_sizes.append(box.area)
