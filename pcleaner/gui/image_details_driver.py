@@ -101,7 +101,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         parent=None,
         image_obj: imf.ImageFile = None,
         config: cfg.Config = None,
-        shared_ocr_model: st.Shared[ocr.OcrProcsType]|None = None,
+        shared_ocr_model: st.Shared[ocr.OcrProcsType] | None = None,
         thread_queue: Qc.QThreadPool = None,
         progress_callback: Callable[[imf.ProgressData], None] = None,
         profile_changed_signal: Signal = None,

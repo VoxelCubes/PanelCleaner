@@ -14,6 +14,7 @@ from loguru import logger
 import pcleaner.config as cfg
 import pcleaner.data
 
+
 class DetectedLang(StrEnum):
     JA = "ja"
     ENG = "eng"

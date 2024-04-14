@@ -19,7 +19,6 @@ class Shared(Generic[T]):
     def is_none(self) -> bool:
         return self._container["data"] is None
 
-
-# class OCRModel(Protocol):
-#     def __call__(self, image: Image, **kwargs) -> str:
+        # class OCRModel(Protocol):
+        #     def __call__(self, image: Image, **kwargs) -> str:
         ...

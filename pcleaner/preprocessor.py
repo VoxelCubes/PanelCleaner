@@ -35,6 +35,7 @@ def generate_mask_data(
 
     ctm.model2annotations(config_general, config_detector, model_path, image_path, output_dir)
 
+
 # adapted from https://maxhalford.github.io/blog/comic-book-panel-segmentation/
 # Original algorithm was used to sort panels in reading order, adapted here for balloons,
 # but balloons reading order is a problem that can't really be solved until we can
@@ -45,15 +46,13 @@ def are_boxes_aligned(a: st.Box, b: st.Box, axis: int, tolerance: int = 10) -> b
     else:  # Vertical axis, consider horizontal alignment with tolerance
         return (a.x1 - tolerance) < b.x2 and (b.x1 - tolerance) < a.x2
 
+
 def cluster_boxes(
-        bboxes: list[st.Box], 
-        axis: int = 0, 
-        tolerance: int = 10, 
-        depth: int = 0
-    ) -> list[list[st.Box]]:
+    bboxes: list[st.Box], axis: int = 0, tolerance: int = 10, depth: int = 0
+) -> list[list[st.Box]]:
     if depth > 10:  # Base case to prevent infinite recursion
         return [bboxes]
-    
+
     clusters = []
     for bbox in bboxes:
         for cluster in clusters:
@@ -73,7 +72,8 @@ def cluster_boxes(
     for i, cluster in enumerate(clusters):
         if len(cluster) > 1:
             clusters[i] = cluster_boxes(
-                cluster, axis=1 if axis == 0 else 0, tolerance=tolerance, depth=depth+1)
+                cluster, axis=1 if axis == 0 else 0, tolerance=tolerance, depth=depth + 1
+            )
 
     return clusters
 
@@ -156,8 +156,9 @@ def prep_json_file(
 
         page_langs.append(data["language"])
         boxes.append(box)
-    page_lang: st.DetectedLang = (Counter(page_langs).most_common(1)[0][0] 
-                                    if boxes else st.DetectedLang.UNKNOWN)
+    page_lang: st.DetectedLang = (
+        Counter(page_langs).most_common(1)[0][0] if boxes else st.DetectedLang.UNKNOWN
+    )
     logger.debug(f"Detected lang: {page_lang}")
 
     # reading_order = preprocessor_conf.reading_order
@@ -171,10 +172,10 @@ def prep_json_file(
     # else:
     #     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
     #     boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
-    
+
     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
     boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
-    
+
     page_data = st.PageData(image_path, mask_path, original_path, scale, boxes, [], [], [])
 
     # Merge boxes that have mutually overlapping centers.
@@ -186,7 +187,10 @@ def prep_json_file(
     page_data.right_pad_boxes(preprocessor_conf.box_right_padding_initial, st.BoxType.BOX)
 
     reading_order = preprocessor_conf.reading_order
-    if page_lang == st.DetectedLang.ENG and reading_order in [cfg.ReadingOrder.COMIC, cfg.ReadingOrder.AUTO]:
+    if page_lang == st.DetectedLang.ENG and reading_order in [
+        cfg.ReadingOrder.COMIC,
+        cfg.ReadingOrder.AUTO,
+    ]:
         # try:
         #     sorted_boxes = cluster_boxes(page_data.boxes)
         #     page_data.boxes = list(flatten(sorted_boxes))
@@ -196,7 +200,6 @@ def prep_json_file(
     # else:
     #     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
     #     page_data.boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
-    
 
     # Draw the boxes on the image and save it.
     if cache_masks or cache_masks_ocr:
@@ -243,10 +246,7 @@ def prep_json_file(
 
 
 def ocr_check(
-    page_data: st.PageData, 
-    mocr: ocr.OCRModel, 
-    max_box_size: int, 
-    ocr_blacklist_pattern: str
+    page_data: st.PageData, mocr: ocr.OCRModel, max_box_size: int, ocr_blacklist_pattern: str
 ) -> tuple[st.PageData, st.OCRAnalytic]:
     """
     Run OCR on small boxes to determine whether they contain mere symbols,
@@ -284,9 +284,9 @@ def ocr_check(
     box_sizes = []
     discarded_box_sizes = []
     discarded_box_texts: list[tuple[Path, str, st.Box]] = []
-    for i,box in enumerate(candidate_small_bubbles):
+    for i, box in enumerate(candidate_small_bubbles):
         cutout = base_image.crop(box.as_tuple)
-        cutout.save(outpath/f"{img_path.stem}_cutout_{i}.png")
+        cutout.save(outpath / f"{img_path.stem}_cutout_{i}.png")
         text = mocr(cutout)
         remove = is_not_worth_cleaning(text, ocr_blacklist_pattern)
         box_sizes.append(box.area)
