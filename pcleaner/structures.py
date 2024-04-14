@@ -1,6 +1,7 @@
 import json
 import re
 from enum import Enum
+from enum import StrEnum
 from importlib import resources
 from pathlib import Path
 from typing import Sequence
@@ -12,6 +13,14 @@ from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.data
+
+class DetectedLang(StrEnum):
+    JA = "ja"
+    ENG = "eng"
+    UNKNOWN = "unknown"
+
+    def __str__(self):
+        return self.value
 
 
 class BoxType(Enum):

@@ -1,7 +1,9 @@
 import re
 import sys
 import shutil
+import types
 from collections import defaultdict
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, NewType
 
@@ -64,6 +66,16 @@ LongString = NewType("LongString", str)
 
 # Create a new type for percentages as floats. These are between 0 and 100.
 Percentage = NewType("Percentage", float)
+
+class ReadingOrder(StrEnum):
+    AUTO = "auto"
+    MANGA = "manga"
+    COMIC = "comic"
+
+class OCREngine(StrEnum):
+    AUTO = "auto"
+    MANGAOCR = "manga-ocr"
+    TESSERACT = "tesseract"
 
 """
 When adding new config options, follow these steps:
@@ -253,8 +265,8 @@ class PreprocessorConfig:
     box_overlap_threshold: Percentage = 20.0
     ocr_enabled: bool = True
     ocr_use_tesseract: bool = False
-    ocr_tesseract_lang: str = "eng"
-    reading_order: str = "manga"
+    ocr_engine: OCREngine = OCREngine.AUTO
+    reading_order: ReadingOrder = ReadingOrder.AUTO
     ocr_max_size: int = 30 * 100
     ocr_blacklist_pattern: str = "[～．ー！？０-９]*"
     ocr_strict_language: bool = False
@@ -295,25 +307,25 @@ class PreprocessorConfig:
         # Whether to use OCR to detect boxes that aren't worth cleaning, like ones that only contain numbers or symbols.
         ocr_enabled = {self.ocr_enabled}
         
-        # Whether to use Tesseract to perform OCR
-        # If [CLI: set to True][GUI: checked], Tesseract OCR is used for text detection and extraction.
-        # If [CLI: set to False][GUI: unchecked], the built-in OCR model (manga-ocr) is used, which is
-        # best suited for vertical Japanese text.
-        ocr_use_tesseract = {self.ocr_use_tesseract}
+        # Specifies which engine to use for performing OCR.
+        # - auto: Automatically selects the OCR engine based on the detected language of each text block
+        #         within the image. Uses manga-ocr for Japanese text, Tesseract for English text and for
+        #         text of unknown language.
+        # - mangaocr: Forces PanelCleaner to use the built-in manga-ocr model for all text recognition
+        #             tasks. Best suited for Japanese text.
+        # - tesseract: Forces PanelCleaner to use Tesseract OCR for all text recognition tasks. This is a
+        #              versatile option that supports English and multiple other languages.
+        ocr_engine = {self.ocr_engine}
 
-        # Specifies the language for Tesseract OCR to use when processing text.
-        # This should be a string corresponding to one of Tesseract's supported language codes 
-        # (e.g., 'eng' for English, 'jpn' for Japanese).
-        # This setting is only relevant if ocr_use_tesseract is enabled.
-        ocr_tesseract_lang = {self.ocr_tesseract_lang}
-
-        # Defines the reading order for processing and sorting text boxes.
-        # 'manga' indicates a right-to-left, top-to-bottom reading order, typically used for Japanese manga.
-        # Other possible values might include 'comic' for a left-to-right, top-to-bottom reading order,
-        # suitable for English and other Western languages. This setting influences how text boxes are ordered
-        # and presented for further processing.
+        # Defines the reading order for processing and sorting text boxes on the entire page, not
+        # individual text blocks. This global setting influences how text boxes are ordered and
+        # presented for further processing.
+        # - auto: Detects the reading order based on the detected language of each text block within the page.
+        # - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.
+        # - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.
+        # Choose based on the predominant layout of your content.
         reading_order = {self.reading_order}
-        
+
         # Maximum size of a box to perform OCR on.
         # These useless boxes are usually small, and OCR is slow, so use this as a cutoff.
         ocr_max_size = {self.ocr_max_size}
@@ -381,9 +393,8 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, int, "box_padding_extended")
         try_to_load(self, config_updater, section, int, "box_right_padding_extended")
         try_to_load(self, config_updater, section, int, "box_reference_padding")
-        try_to_load(self, config_updater, section, bool, "ocr_use_tesseract")
-        try_to_load(self, config_updater, section, str, "ocr_tesseract_lang")
-        try_to_load(self, config_updater, section, str, "reading_order")
+        try_to_load(self, config_updater, section, OCREngine, "ocr_engine")
+        try_to_load(self, config_updater, section, ReadingOrder, "reading_order")
 
     def fix(self) -> None:
         """
@@ -1278,6 +1289,19 @@ def try_to_load(
                 f"Option {attr_name} in section {section} should be True or False, not '{conf_data}'"
             )
             return
+
+    # check before: `StrEnum` is a `str`
+    elif isinstance(attr_type, type) and issubclass(attr_type, StrEnum):
+        if conf_data in attr_type.__members__.values():
+            attr_value = conf_data
+        else:
+            print(
+                f"Option {attr_name} in section {section} should be a one "
+                f"of {', '.join(repr(str(_)) for _ in attr_type.__members__.values())}.\n"
+                f"Failed to parse '{conf_data}'"
+            )
+            return
+
     elif attr_type == str:
         attr_value = conf_data
     elif attr_type == LongString:
