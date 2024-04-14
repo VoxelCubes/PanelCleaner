@@ -122,7 +122,6 @@ import torch
 from PIL import Image
 from docopt import docopt
 from loguru import logger
-from manga_ocr import MangaOcr
 from natsort import natsorted
 from tqdm import tqdm
 
@@ -138,7 +137,7 @@ import pcleaner.model_downloader as md
 import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
-from pcleaner.ocr_tesseract import TesseractOcr
+import pcleaner.ocr.ocr as ocr
 from pcleaner import __version__
 
 
@@ -385,9 +384,9 @@ def run_cleaner(
         # (It takes several seconds to load the ocr model, so this is fine.)
         time.sleep(0.1)
         if profile.preprocessor.ocr_enabled:
-            mocr = MangaOcr()
+            ocr_processor = ocr.get_ocr_processor(profile)
         else:
-            mocr = None
+            ocr_processor = None
 
         ocr_analytics: list[st.OCRAnalytic] = []
         for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
@@ -395,7 +394,7 @@ def run_cleaner(
                 json_file_path,
                 preprocessor_conf=profile.preprocessor,
                 cache_masks=cache_masks,
-                mocr=mocr,
+                mocr=ocr_processor,
             )
             if ocr_analytics_of_a_page is not None:
                 ocr_analytics.append(ocr_analytics_of_a_page)
@@ -567,6 +566,9 @@ def run_ocr(
     """
     cache_dir = config.get_cleaner_cache_dir()
     profile = config.current_profile
+
+    ocr_processor = ocr.get_ocr_processor(profile)
+
     logger.debug(f"Cache directory: {cache_dir}")
 
     # If caching masks, direct the user to the cache directory.
@@ -601,27 +603,21 @@ def run_ocr(
 
     # Modify the profile to OCR all boxes.
     # Make sure OCR is enabled.
-    config.current_profile.preprocessor.ocr_enabled = True
+    profile.preprocessor.ocr_enabled = True
     # Make sure the max size is infinite, so no boxes are skipped in the OCR process.
-    config.current_profile.preprocessor.ocr_max_size = 10**10
+    profile.preprocessor.ocr_max_size = 10**10
     # Make sure the sus box min size is infinite, so all boxes with "unknown" language are skipped.
-    config.current_profile.preprocessor.suspicious_box_min_size = 10**10
+    profile.preprocessor.suspicious_box_min_size = 10**10
     # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
-    config.current_profile.preprocessor.ocr_blacklist_pattern = ".*"
+    profile.preprocessor.ocr_blacklist_pattern = ".*"
 
-    if config.current_profile.preprocessor.ocr_use_tesseract:
-        ocr_processor = TesseractOcr(lang=config.current_profile.preprocessor.ocr_tesseract_lang)
-    else:
-        ocr_processor = MangaOcr()
-
-    # mocr = MangaOcr()
     ocr_analytics = []
     for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
         ocr_analytic = pp.prep_json_file(
             json_file_path,
-            preprocessor_conf=config.current_profile.preprocessor,
+            preprocessor_conf=profile.preprocessor,
             cache_masks=cache_masks,
-            mocr=ocr_processor,  # mocr=mocr,
+            mocr=ocr_processor,
             cache_masks_ocr=True,
             performing_ocr=True,
         )
