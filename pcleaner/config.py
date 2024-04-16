@@ -310,10 +310,15 @@ class PreprocessorConfig:
         # Whether to use OCR to detect boxes that aren't worth cleaning, like ones that only contain numbers or symbols.
         ocr_enabled = {self.ocr_enabled}
         
+        # Whether to use Tesseract to perform OCR tasks.[GUI: <br>]
+        # If [CLI: set to True][GUI: checked], Tesseract OCR can be used for text extraction, if available.[GUI: <br>]
+        # If [CLI: set to False][GUI: unchecked], the built-in OCR model (manga-ocr) is always used., which is
+        # best suited for vertical Japanese text.[GUI: <br>]
+        ocr_use_tesseract = {self.ocr_use_tesseract}
+
         # Specifies which engine to use for performing OCR.[GUI: <br>]
         # - auto: Automatically selects the OCR engine based on the detected language of each text block
-        #         within the image. Uses Manga Ocr for Japanese text, Tesseract for English text and for
-        #         text of unknown language.[GUI: <br>]
+        #         within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.[GUI: <br>]
         # - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition
         #             tasks. Best suited for vertical Japanese text.[GUI: <br>]
         # - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a
@@ -396,6 +401,7 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, int, "box_padding_extended")
         try_to_load(self, config_updater, section, int, "box_right_padding_extended")
         try_to_load(self, config_updater, section, int, "box_reference_padding")
+        try_to_load(self, config_updater, section, bool, "ocr_use_tesseract")
         try_to_load(self, config_updater, section, OCREngine, "ocr_engine")
         try_to_load(self, config_updater, section, ReadingOrder, "reading_order")
 

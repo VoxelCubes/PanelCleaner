@@ -384,7 +384,9 @@ def run_cleaner(
         # (It takes several seconds to load the ocr model, so this is fine.)
         time.sleep(0.1)
         if profile.preprocessor.ocr_enabled:
-            ocr_processor = ocr.get_ocr_processor(profile)
+            ocr_processor = ocr.get_ocr_processor(
+                profile.preprocessor.ocr_use_tesseract, profile.preprocessor.ocr_engine
+            )
         else:
             ocr_processor = None
 
@@ -567,7 +569,9 @@ def run_ocr(
     cache_dir = config.get_cleaner_cache_dir()
     profile = config.current_profile
 
-    ocr_processor = ocr.get_ocr_processor(profile)
+    ocr_processor = ocr.get_ocr_processor(
+        profile.preprocessor.ocr_use_tesseract, profile.preprocessor.ocr_engine
+    )
 
     logger.debug(f"Cache directory: {cache_dir}")
 

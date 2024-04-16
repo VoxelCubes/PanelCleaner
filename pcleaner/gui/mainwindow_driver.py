@@ -444,6 +444,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.file_table.handleDrop(self.startup_files)
             self.file_table.repopulate_table()
 
+        self._check_sync_tesseract_ui()
+
     def browse_output_dir(self) -> None:
         """
         Open a file picker and set the output directory.
@@ -568,7 +570,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         t_start = time.time()
         self.statusbar.showMessage(self.tr(f"Loading OCR model..."))
         profile = self.config.current_profile
-        self.shared_ocr_model.set(ocr.get_ocr_processor(profile))
+        # pre-load manga-ocr
+        ocr.ocr_engines(profile)[cfg.OCREngine.MANGAOCR].initialize_model()
         logger.info(f"Loaded OCR model ({time.time()-t_start:.2f}s)")
         self.statusbar.showMessage(self.tr(f"Loaded OCR model."))
         self.enable_running_cleaner()
@@ -900,6 +903,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_new_profile.triggered.connect(partial(self.save_profile, make_new=True))
         self.action_delete_profile.triggered.connect(self.delete_profile)
 
+        # Tesseract ux
+        # TODO: is this the way to access a widget?
+        tess_opt_in_widget = self.toolBox_profile._widgets["preprocessor"]["ocr_use_tesseract"]
+        tess_opt_in_widget.valueChanged.connect(self._check_sync_tesseract_ui)
+
     def handle_set_default_profile(self, profile_name: str) -> None:
         """
         Set the default profile in the config.
@@ -1009,7 +1017,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         profile = self.config.current_profile
         self.toolBox_profile.set_profile_values(profile)
         self.set_last_applied_profile()
-        self.shared_ocr_model.set(ocr.get_ocr_processor(profile))
         self.profile_values_changed.emit()
 
     def profile_change_check(self) -> bool:
@@ -1071,6 +1078,32 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
             return
         self.load_current_profile()
+
+    def _check_sync_tesseract_ui(self) -> None:
+        """
+        When the user opt-in, check if Tesseract is installed and update the GUI accordingly.
+        """
+        tess_opt_in_widget = self.toolBox_profile._widgets["preprocessor"]["ocr_use_tesseract"]
+        want_tess = tess_opt_in_widget.get_value()
+        if want_tess and not ocr.tesseract_ok(self.config.current_profile):
+            gu.show_warning(
+                self,
+                "Tesseract OCR is not installed or not found",
+                self.tr(
+                    "<html>Cant't use Tesseract to perform OCR. Reverting to manga-ocr."
+                    "\nPlease see the instructions to install Tesseract correctly <a href="
+                    '"https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr">here</a>'
+                    " or continue using the default model.</html>"
+                ),
+            )
+            # TODO: how to revert widget value cleanly?
+            tess_opt_in_widget.set_value(False)
+        ocr_engine_widget = self.toolBox_profile._widgets["preprocessor"]["ocr_engine"]
+        tess_idx = list(cfg.OCREngine.__members__.values()).index(cfg.OCREngine.TESSERACT)
+        ocr_engine_widget._data_widget.model().item(tess_idx).setEnabled(
+            tess_opt_in_widget.get_value()
+        )
+        self.shared_ocr_model.set(ocr.get_ocr_processor(want_tess, ocr_engine_widget.get_value()))
 
     @Slot()
     def handle_profile_values_changed(self) -> None:

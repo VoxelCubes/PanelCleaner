@@ -22,7 +22,7 @@ class MangaOcr:
         # Initialization logic is deferred to a separate method
         pass
 
-    def _initialize_model(self, *args, **kwargs):
+    def initialize_model(self, *args, **kwargs):
         if self._model is None:
             if args or kwargs:
                 self._model = MangaOcrModel(*args, **kwargs)
@@ -32,5 +32,5 @@ class MangaOcr:
         return self._model
 
     def __call__(self, img_or_path: Image.Image | Path | str, **kwargs) -> str:
-        model = self._initialize_model()
+        model = self.initialize_model()
         return model(img_or_path)
