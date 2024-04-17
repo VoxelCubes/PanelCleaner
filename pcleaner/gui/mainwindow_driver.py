@@ -13,15 +13,12 @@ import PySide6.QtWidgets as Qw
 import torch
 from PySide6.QtCore import Slot, Signal
 from loguru import logger
-from manga_ocr import MangaOcr
 
 from pcleaner.helpers import tr
 import pcleaner.gui.supported_languages as sl
 import pcleaner.analytics as an
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
-import pcleaner.structures as st
-import pcleaner.preprocessor as prp
 import pcleaner.gui.about_driver as ad
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
@@ -444,7 +441,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.file_table.handleDrop(self.startup_files)
             self.file_table.repopulate_table()
 
-        self._check_sync_tesseract_ui()
+        self.update_model_selection()
 
     def browse_output_dir(self) -> None:
         """
@@ -903,11 +900,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_new_profile.triggered.connect(partial(self.save_profile, make_new=True))
         self.action_delete_profile.triggered.connect(self.delete_profile)
 
-        # Tesseract ux
-        # TODO: is this the way to access a widget?
-        tess_opt_in_widget = self.toolBox_profile._widgets["preprocessor"]["ocr_use_tesseract"]
-        tess_opt_in_widget.valueChanged.connect(self._check_sync_tesseract_ui)
-
     def handle_set_default_profile(self, profile_name: str) -> None:
         """
         Set the default profile in the config.
@@ -1079,31 +1071,25 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             return
         self.load_current_profile()
 
-    def _check_sync_tesseract_ui(self) -> None:
+    def update_model_selection(self) -> None:
         """
-        When the user opt-in, check if Tesseract is installed and update the GUI accordingly.
+        Assign the correct OCR model to the shared model.
+        Warn the user if Tesseract is not available.
         """
-        tess_opt_in_widget = self.toolBox_profile._widgets["preprocessor"]["ocr_use_tesseract"]
-        want_tess = tess_opt_in_widget.get_value()
+        preprocessor_config = self.config.current_profile.preprocessor
+        want_tess = preprocessor_config.ocr_use_tesseract
         if want_tess and not ocr.tesseract_ok(self.config.current_profile):
             gu.show_warning(
                 self,
                 "Tesseract OCR is not installed or not found",
                 self.tr(
-                    "<html>Cant't use Tesseract to perform OCR. Reverting to manga-ocr."
+                    "<html>Can't use Tesseract to perform OCR. Reverting to manga-ocr."
                     "\nPlease see the instructions to install Tesseract correctly <a href="
                     '"https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr">here</a>'
                     " or continue using the default model.</html>"
                 ),
             )
-            # TODO: how to revert widget value cleanly?
-            tess_opt_in_widget.set_value(False)
-        ocr_engine_widget = self.toolBox_profile._widgets["preprocessor"]["ocr_engine"]
-        tess_idx = list(cfg.OCREngine.__members__.values()).index(cfg.OCREngine.TESSERACT)
-        ocr_engine_widget._data_widget.model().item(tess_idx).setEnabled(
-            tess_opt_in_widget.get_value()
-        )
-        self.shared_ocr_model.set(ocr.get_ocr_processor(want_tess, ocr_engine_widget.get_value()))
+        self.shared_ocr_model.set(ocr.get_ocr_processor(want_tess, preprocessor_config.ocr_engine))
 
     @Slot()
     def handle_profile_values_changed(self) -> None:
@@ -1134,6 +1120,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.set_last_applied_profile()
         self.profile_values_changed.emit()
         self.pushButton_apply_profile.setEnabled(False)
+        self.update_model_selection()
 
     def save_profile(self, save_as: bool = False, make_new: bool = False) -> None:
         """

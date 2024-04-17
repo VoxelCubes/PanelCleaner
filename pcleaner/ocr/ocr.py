@@ -38,6 +38,7 @@ def get_ocr_processor(want_tess: bool, ocr_engine: cfg.OCREngine) -> OcrProcsTyp
             "Please see the instructions to install Tesseract correctly. Falling back to manga-ocr."
         )
     mangaocr = MangaOcr()
+    # noinspection PyTypeChecker
     ocr_processor: OcrProcsType = {
         st.DetectedLang.JA: mangaocr,
         st.DetectedLang.ENG: mangaocr,
