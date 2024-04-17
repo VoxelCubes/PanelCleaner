@@ -355,7 +355,6 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         :param only_step: [Optional] Only load the images for this step.
         """
-        logger.warning("Reloading images")
 
         def check_output(current_output: imf.Output) -> bool:
             return only_step is None or imf.output_to_step[current_output] == only_step
