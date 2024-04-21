@@ -66,7 +66,21 @@ class TesseractOcr:
         if lang and lang not in self.langs():
             raise RuntimeError(f"Tesseract OCR language pack '{lang}' not found.")
         img = load_image(img_or_path)
-        raw_text = pytesseract.image_to_string(
-            img, lang=lang or self.lang, config=config or self.config
-        )
+        try:
+            raw_text = pytesseract.image_to_string(
+                img, lang=lang or self.lang, config=config or self.config
+            )
+        except Exception:
+            raw_text = ''
+        if not raw_text:  # try again with sparse text
+            try:
+                d = pytesseract.image_to_data(
+                    img,
+                    lang=lang or self.lang,
+                    config=r"--psm 11",
+                    output_type=pytesseract.Output.DICT,
+                )
+                raw_text = ' '.join(_ for _ in d.get('text', ()) if _)
+            except Exception as e:
+                logger.error(f"Failed to run Tesseract with --psm 11: {e}")
         return cleanup_text(raw_text)
