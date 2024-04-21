@@ -361,8 +361,8 @@ def run_cleaner(
         if len(list(cache_dir.glob("*"))) > 0 and not keep_cache:
             cli.empty_cache_dir(cache_dir)
         # Get the model file, downloading it if necessary.
-        cuda = torch.cuda.is_available()
-        model_path = config.get_model_path(cuda)
+        gpu = torch.cuda.is_available() or torch.backends.mps.is_available()
+        model_path = config.get_model_path(gpu)
 
         print("Running text detection AI model...")
         pp.generate_mask_data(
@@ -585,10 +585,11 @@ def run_ocr(
     if len(list(cache_dir.glob("*"))) > 0:
         cli.empty_cache_dir(cache_dir)
     # Get the model file, downloading it if necessary.
-    cuda = torch.cuda.is_available()
-    model_path = config.get_model_path(cuda)
+    gpu = torch.cuda.is_available() or torch.backends.mps.is_available()
+    model_path = config.get_model_path(gpu)
 
     print("Running text detection AI model...")
+    # start = time.perf_counter()
     pp.generate_mask_data(
         image_paths,
         config_general=profile.general,
@@ -596,7 +597,8 @@ def run_ocr(
         model_path=model_path,
         output_dir=cache_dir,
     )
-
+    # end = time.perf_counter()
+    # print(f"\nTime elapsed: {end - start:.4f} seconds")
     print("\n")
 
     # Flush it so it shows up before the progress bar.

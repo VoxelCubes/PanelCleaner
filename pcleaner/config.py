@@ -1178,14 +1178,14 @@ class Config:
 
         return True, None
 
-    def get_model_path(self, cuda: bool) -> Path:
+    def get_model_path(self, gpu: bool) -> Path:
         """
         Get the path to the default model.
         Check the current profile first. If it is None or the file does not exist,
         return the default model path from the config.
         If it is None, download the model first.
 
-        :param cuda: When true, prefer the torch model.
+        :param gpu: When true, prefer the torch model.
         """
         if self.current_profile.text_detector.model_path is not None:
             model_path = Path(self.current_profile.text_detector.model_path)
@@ -1198,7 +1198,7 @@ class Config:
 
         # Models are downloaded to the folder: cache directory/models
         cache_dir = self.get_model_cache_dir()
-        if cuda:
+        if gpu:
             if self.default_torch_model_path is None:
                 self.default_torch_model_path = md.download_torch_model(cache_dir)
                 if self.default_torch_model_path is None:

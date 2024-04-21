@@ -58,7 +58,7 @@ def model2annotations(
     :return:
     """
 
-    device = "cuda" if model_path.suffix == ".pt" else "cpu"
+    device = ("mps" if torch.backends.mps.is_available() else "cuda") if model_path.suffix == ".pt" else "cpu"
     print(f"Using device for text detection model: {device}")
     # Determine the number of processes to use
     num_processes = min(config_detector.concurrent_models, len(img_list))
