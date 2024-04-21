@@ -167,3 +167,4 @@ cython_debug/
 .idea/
 
 *.sh
+_testbed/cleaner/
