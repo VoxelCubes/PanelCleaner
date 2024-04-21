@@ -269,7 +269,7 @@ class PageData:
 
     def visualize(
         self, image_path: Path, out_dir: Path | None = None, final_boxes: bool = False
-    ) -> None:
+    ) -> Image.Image:
         """
         Visualize the boxes on an image.
         Typically, this would be used to check where on the original image the
@@ -313,6 +313,7 @@ class PageData:
             out_dir.mkdir(parents=True, exist_ok=True)
             out_path = out_dir / image_path.name
         image.save(out_path)
+        return image
 
     def make_box_mask(self, image_size: tuple[int, int], box_type: BoxType) -> Image:
         """
