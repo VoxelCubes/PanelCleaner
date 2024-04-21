@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 import colorsys
 import scipy
-from PIL import Image, ImageFilter, ImageDraw, ImageFont
+from PIL import Image, ImageFilter, ImageDraw, ImageFont, ImageOps
 from loguru import logger
 
 import pcleaner.data
@@ -51,7 +51,9 @@ def generate_single_color(
     return rgba
 
 
-def convert_mask_to_rgba(mask: Image, color: int | tuple[int, int, int, int] = 255) -> Image:
+def convert_mask_to_rgba(
+    mask: Image.Image, color: int | tuple[int, int, int, int] = 255
+) -> Image.Image:
     """
     Convert "1" mask to "RGBA" mask, where black has an alpha of 0 and white has an alpha of 255.
 
@@ -69,8 +71,8 @@ def convert_mask_to_rgba(mask: Image, color: int | tuple[int, int, int, int] = 2
 
 
 def apply_debug_filter_to_mask(
-    img: Image, color: tuple[int, int, int, int] = (108, 30, 240, 127)
-) -> Image:
+    img: Image.Image, color: tuple[int, int, int, int] = (108, 30, 240, 127)
+) -> Image.Image:
     """
     Make the mask purple and 50% transparent.
     The mask has either transparent or opaque pixels.
@@ -90,7 +92,7 @@ def apply_debug_filter_to_mask(
         raise ValueError(f"Unknown mode: {img.mode}")
 
 
-def mask_intersection(mask1: Image, mask2: Image) -> Image:
+def mask_intersection(mask1: Image.Image, mask2: Image.Image) -> Image.Image:
     """
     Cut out the parts of mask1 that are not in mask2.
 
@@ -102,8 +104,8 @@ def mask_intersection(mask1: Image, mask2: Image) -> Image:
 
 
 def compose_masks(
-    base_size: tuple[int, int], masks_with_pos: list[tuple[Image, tuple[int, int]]]
-) -> Image:
+    base_size: tuple[int, int], masks_with_pos: list[tuple[Image.Image, tuple[int, int]]]
+) -> Image.Image:
     """
     Compose a list of masks into one mask.
 
@@ -122,7 +124,7 @@ def compose_masks(
 
 
 def visualize_mask_fitments(
-    base_image: Image, mask_fitments: list[st.MaskFittingResults], output_path: Path
+    base_image: Image.Image, mask_fitments: list[st.MaskFittingResults], output_path: Path
 ) -> None:
     """
     Stack each mask on top of the base image and save the result.
@@ -185,7 +187,7 @@ def visualize_mask_fitments(
 
 
 def visualize_standard_deviations(
-    base_image: Image,
+    base_image: Image.Image,
     mask_fitments: list[st.MaskFittingResults],
     masker_data: cfg.MaskerConfig,
     output_path: Path,
@@ -325,8 +327,8 @@ def make_growth_kernel(thickness: int) -> np.ndarray:
 
 
 def make_mask_steps_convolution(
-    mask: Image, growth_step: int, steps: int, min_thickness: int
-) -> Generator[tuple[Image, int | None], None, None]:
+    mask: Image.Image, growth_step: int, steps: int, min_thickness: int
+) -> Generator[tuple[Image.Image, int | None], None, None]:
     """
     Use convolution to make various sizes of the original mask.
     In each step, the outline of the mask is grown by growth_step pixels.
@@ -373,7 +375,9 @@ def make_mask_steps_convolution(
         ), min_thickness + (index + 1) * growth_step
 
 
-def border_std_deviation(base: Image, mask: Image, off_white_threshold: int) -> tuple[float, int]:
+def border_std_deviation(
+    base: Image.Image, mask: Image.Image, off_white_threshold: int
+) -> tuple[float, int]:
     """
     Calculate the border uniformity of a mask.
     For this, find the edge pixels of the mask and then calculate the median color of the pixels around them.
@@ -413,7 +417,7 @@ def border_std_deviation(base: Image, mask: Image, off_white_threshold: int) -> 
     return std, median_color
 
 
-def cut_out_box(image: Image, box: st.Box) -> Image:
+def cut_out_box(image: Image.Image, box: st.Box) -> Image.Image:
     """
     Cut out a box from an image.
 
@@ -425,12 +429,12 @@ def cut_out_box(image: Image, box: st.Box) -> Image:
 
 
 def cut_out_mask(
-    mask: Image,
+    mask: Image.Image,
     box: st.Box,
     target_shape: tuple[int, int] = None,
     x_padding_offset: int = 0,
     y_padding_offset: int = 0,
-) -> Image:
+) -> Image.Image:
     """
     Cut out a box from a mask.
     If a target shape is given, the mask is padded to that shape with black.
@@ -457,9 +461,9 @@ def cut_out_mask(
 
 
 def pick_best_mask(
-    base: Image,
-    precise_mask: Image,
-    box_mask: Image,
+    base: Image.Image,
+    precise_mask: Image.Image,
+    box_mask: Image.Image,
     masking_box: st.Box,
     reference_box: st.Box,
     masker_conf: cfg.MaskerConfig,
@@ -515,7 +519,7 @@ def pick_best_mask(
 
     box_mask = cut_out_mask(box_mask, masking_box, base.size, x_offset, y_offset)
     # Thickness doesn't really apply to the box mask, as it isn't grown from the precise mask.
-    box_mask_with_thickness: tuple[Image, int | None] = (box_mask, None)
+    box_mask_with_thickness: tuple[Image.Image, int | None] = (box_mask, None)
 
     # Generate masks of various sizes for the precise mask, then add the box mask to the list.
     # The generated masks are in ascending size order.
@@ -604,7 +608,7 @@ def pick_best_mask(
 
 def combine_best_masks(
     image_size: tuple[int, int], mask_fitments: Iterable[st.MaskFittingResults]
-) -> Image:
+) -> Image.Image:
     """
     Merge the masks together into a single mask in RGBA mode to preserve the black/white information.
     Masks are in mode "1".
@@ -625,8 +629,8 @@ def combine_best_masks(
 
 
 def combine_noise_masks(
-    image_size: tuple[int, int], masks_with_coords: list[tuple[Image, tuple[int, int]]]
-) -> Image:
+    image_size: tuple[int, int], masks_with_coords: list[tuple[Image.Image, tuple[int, int]]]
+) -> Image.Image:
     """
     Merge the noise masks together into a single mask in RGBA mode.
     The noise mask may be blank if all masks either failed or fitted too well.
@@ -646,13 +650,13 @@ def combine_noise_masks(
 
 
 def denoise(
-    image: Image,
+    image: Image.Image,
     colored: bool = False,
     filter_strength: int = 10,
     color_filter_strength: int = 10,
     template_window_size: int = 7,
     search_window_size: int = 21,
-) -> Image:
+) -> Image.Image:
     """
     Denoise the image using cv2.
 
@@ -683,7 +687,7 @@ def denoise(
         )
 
 
-def grow_mask(mask: Image, size: int) -> Image:
+def grow_mask(mask: Image.Image, size: int) -> Image.Image:
     """
     Grow the mask by the given amount of pixels.
     Use convolutions to draw a thicker outline.
@@ -706,7 +710,7 @@ def grow_mask(mask: Image, size: int) -> Image:
     return Image.fromarray(np.where(cropped_mask > 0, 255, 0).astype(np.uint8)).convert("1")
 
 
-def fade_mask_edges(mask: Image, fade_radius: int) -> Image:
+def fade_mask_edges(mask: Image.Image, fade_radius: int) -> Image.Image:
     """
     Fade the edges of the mask by the given amount of pixels.
 
@@ -720,8 +724,12 @@ def fade_mask_edges(mask: Image, fade_radius: int) -> Image:
 
 
 def generate_noise_mask(
-    image: Image, mask: Image, box: st.Box, denoiser_conf: cfg.DenoiserConfig, scale_factor: float
-) -> tuple[Image, tuple[int, int]]:
+    image: Image.Image,
+    mask: Image.Image,
+    box: st.Box,
+    denoiser_conf: cfg.DenoiserConfig,
+    scale_factor: float,
+) -> tuple[Image.Image, tuple[int, int]]:
     """
     Cut out the image and mask using the box, then denoise the image cutout.
     Then grow the mask and fade it's edges.
@@ -761,7 +769,7 @@ def generate_noise_mask(
     return denoised_image_cutout, (box.x1, box.y1)
 
 
-def extract_text(base_image: Image, mask: Image) -> Image:
+def extract_text(base_image: Image.Image, mask: Image.Image) -> Image.Image:
     """
     Extract the text from the base image using the combined mask.
     This essentially deletes everything but the text from the image,
@@ -849,3 +857,20 @@ def save_optimized(
         kwargs["dpi"] = original_dpi
     logger.debug(f"Saving image {path.name} with kwargs: {kwargs}")
     image.save(path, **kwargs)
+
+
+def pad_image(
+    image: Image.Image,
+    padding: int | tuple[int, int, int, int],
+    fill_color: tuple[int, int, int] = (255, 255, 255),
+) -> Image.Image:
+    """
+    Pads an image with the specified padding and fill color.
+
+    :param image: the image to pad.
+    :param padding: Padding size in pixels. This can be a single integer or a tuple of four integers.
+    :param fill_color: The color to use for the padding. Default is white.
+    :return: A new PIL Image object with the padding applied.
+    """
+    padded_image = ImageOps.expand(image, border=padding, fill=fill_color)
+    return padded_image
