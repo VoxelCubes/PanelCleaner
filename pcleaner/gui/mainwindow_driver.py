@@ -326,6 +326,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if cuda:
             self.statusbar.addPermanentWidget(Qw.QLabel(self.tr("CUDA Enabled")))
 
+        # Change indicator to show if MPS is available.
+        if torch.backends.mps.is_available():
+            self.statusbar.addPermanentWidget(Qw.QLabel(self.tr("MPS Enabled")))
+
         has_ocr = md.is_ocr_downloaded()
         has_inpainting = md.is_inpainting_downloaded(self.config)
         has_text_detector = (not cuda and self.config.default_cv2_model_path) or (
