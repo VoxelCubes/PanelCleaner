@@ -35,7 +35,9 @@ def load_image(img_or_path) -> Image.Image:
 
 
 def cleanup_text(text: str) -> str:
-    "Strip newlines and multiple spaces"
+    """
+    Strip newlines and multiple spaces.
+    """
     return text.replace("\n", " ").replace("\r", " ").replace("\t", " ").replace("\f", " ").strip()
 
 
@@ -71,7 +73,7 @@ class TesseractOcr:
                 img, lang=lang or self.lang, config=config or self.config
             )
         except Exception:
-            raw_text = ''
+            raw_text = ""
         if not raw_text:  # try again with sparse text
             try:
                 d = pytesseract.image_to_data(
@@ -80,7 +82,7 @@ class TesseractOcr:
                     config=r"--psm 11",
                     output_type=pytesseract.Output.DICT,
                 )
-                raw_text = ' '.join(_ for _ in d.get('text', ()) if _)
+                raw_text = " ".join(_ for _ in d.get("text", ()) if _)
             except Exception as e:
                 logger.error(f"Failed to run Tesseract with --psm 11: {e}")
         return cleanup_text(raw_text)
