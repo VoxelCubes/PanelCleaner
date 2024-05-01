@@ -118,7 +118,7 @@ def main() -> None:
     code = bogus_codegen(process_strings)
     # Write the file right next to this one, no matter the current working directory.
     output_file = Path(__file__).parent / "process_strings.py"
-    output_file.write_text(code)
+    output_file.write_text(code, encoding="utf-8")
 
 
 if __name__ == "__main__":
