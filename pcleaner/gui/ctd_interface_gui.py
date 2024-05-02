@@ -23,6 +23,7 @@ def model2annotations_gui(
     img_list: Sequence[imf.ImageFile],
     save_dir: Path,
     no_text_detection: bool,
+    visualize_raw_boxes: bool,
     partial_progress_data: partial,
     progress_callback: imf.ProgressSignal | None,
     abort_flag: wt.SharableFlag,
@@ -56,6 +57,7 @@ def model2annotations_gui(
     :param img_list: Path or a list of paths to an image or directory of images.
     :param save_dir: Path to the directory where the results will be saved.
     :param no_text_detection: If True, the text detection step is skipped. This is to only get the "input" output.
+    :param visualize_raw_boxes: If True, the raw box data is drawn as an extra output.
     :param partial_progress_data: A partial function to create a ProgressData object.
         You must only add the current iteration to the partial function to construct a valid
         ProgressData object.
@@ -97,6 +99,7 @@ def model2annotations_gui(
                     config_general.input_height_lower_target,
                     config_general.input_height_upper_target,
                     inc_progress,
+                    visualize_raw_boxes,
                 )
                 for batch in batches
             ]
@@ -125,15 +128,33 @@ def model2annotations_gui(
                 config_general.input_height_upper_target,
                 no_text_detection,
                 img_obj.uuid,
+                visualize_raw_boxes,
             )
             inc_progress()
 
 
 def process_image_batch(args) -> None:
-    img_batch, model_path, device, save_dir, lower_target, upper_target, inc_progress = args
+    (
+        img_batch,
+        model_path,
+        device,
+        save_dir,
+        lower_target,
+        upper_target,
+        inc_progress,
+        visualize_raw_boxes,
+    ) = args
     model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
     for img_path, img_uuid in img_batch:
-        process_image(img_path, model, save_dir, lower_target, upper_target, uuid=img_uuid)
+        process_image(
+            img_path,
+            model,
+            save_dir,
+            lower_target,
+            upper_target,
+            uuid=img_uuid,
+            visualize_raw_boxes=visualize_raw_boxes,
+        )
         inc_progress()
 
     del model

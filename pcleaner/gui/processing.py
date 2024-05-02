@@ -184,6 +184,7 @@ def generate_output(
                 step_text_detector_images,
                 cache_dir,
                 no_text_detection=target_output == imf.Output.input,
+                visualize_raw_boxes=True,
                 partial_progress_data=partial(
                     imf.ProgressData,
                     len(step_text_detector_images),
@@ -202,6 +203,7 @@ def generate_output(
         for image_obj in step_text_detector_images:
             update_output(image_obj, imf.Output.input, ".png")
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
+            update_output(image_obj, imf.Output.raw_boxes, "_raw_boxes.png")
             update_output(image_obj, imf.Output.raw_json, "#raw.json")
 
         progress_callback.emit(
@@ -896,6 +898,7 @@ def perform_ocr(
                 step_text_detector_images,
                 cache_dir,
                 no_text_detection=False,
+                visualize_raw_boxes=True,
                 partial_progress_data=partial(
                     imf.ProgressData,
                     len(step_text_detector_images),
@@ -914,6 +917,7 @@ def perform_ocr(
         for image_obj in step_text_detector_images:
             update_output(image_obj, imf.Output.input, ".png")
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
+            update_output(image_obj, imf.Output.raw_boxes, "_raw_boxes.png")
             update_output(image_obj, imf.Output.raw_json, "#raw.json")
 
     # ============================================== Preprocessing ==============================================

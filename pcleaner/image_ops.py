@@ -1,7 +1,7 @@
 from itertools import cycle
 from pathlib import Path
 from importlib import resources
-from typing import Generator, Iterable, TypeVar
+from typing import Generator, Iterable, TypeVar, Any, NewType
 
 import cv2
 import numpy as np
@@ -874,3 +874,62 @@ def pad_image(
     """
     padded_image = ImageOps.expand(image, border=padding, fill=fill_color)
     return padded_image
+
+
+def visualize_raw_boxes(
+    image: np.ndarray, raw_boxes: list[dict[str, Any]], output_path: Path
+) -> None:
+    """
+    Create a debug visualization of the raw boxes detected in the image.
+
+    :param image: The image to visualize the raw boxes on.
+    :param raw_boxes: The raw boxes to visualize.
+    :param output_path: The path to save the visualization to.
+    """
+    image = Image.fromarray(image)
+    draw = ImageDraw.Draw(image)
+
+    with resources.files(pcleaner.data) as data_path:
+        font_path = str(data_path / "LiberationSans-Regular.ttf")
+    logger.debug(f"Loading included font from {font_path}")
+    # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
+    font_size = int(image.size[0] / 50) + 5
+
+    for index, box_data in enumerate(raw_boxes):
+        # Parse out the bounding box, boxes of the lines, and the language.
+        # This is a list of x1, y1, x2, y2.
+        box_xyxy: tuple[int, int, int, int] = box_data["xyxy"]
+        # The lines are stored as a list of all 4 corner points.
+        Point = NewType("Point", tuple[int, int])
+        lines: list[tuple[Point, Point, Point, Point]] = box_data["lines"]
+        # The supposed language of the text.
+        language: str = box_data["language"]
+
+        for line in lines:
+            # Draw the lines between the points.
+            for i in range(4):
+                x1, y1 = line[i]
+                x2, y2 = line[(i + 1) % 4]
+                draw.line((x1, y1, x2, y2), fill="cyan", width=2)
+
+        draw.rectangle(box_xyxy, outline="green")
+
+        # Draw the box number, with a white background, respecting font size.
+        draw.text(
+            (box_xyxy[0] + 4, box_xyxy[1]),
+            str(index + 1),
+            fill="green",
+            font=ImageFont.truetype(font_path, font_size),
+            stroke_fill="white",
+            stroke_width=3,
+        )
+        draw.text(
+            (box_xyxy[0] + 4, box_xyxy[1] + font_size + 2),
+            language,
+            fill="purple",
+            font=ImageFont.truetype(font_path, font_size),
+            stroke_fill="white",
+            stroke_width=3,
+        )
+
+    image.save(output_path)
