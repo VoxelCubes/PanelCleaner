@@ -63,7 +63,7 @@ refresh-i18n:
 compile-i18n:
 	$(foreach lang, $(LANGUAGES), $(I18N_COMPILER) translations/PanelCleaner_$(lang).ts -qm translations/packed/PanelCleaner_$(lang).qm;)
 
-	echo '<!DOCTYPE RCC><RCC version="1.0"><qresource prefix="/translations">' > translations/packed/linguist.qrc
+	echo '<RCC><qresource prefix="/translations">' > translations/packed/linguist.qrc
 	$(foreach lang, $(LANGUAGES), echo '    <file>PanelCleaner_$(lang).qm</file>' >> translations/packed/linguist.qrc;)
 	echo '</qresource></RCC>' >> translations/packed/linguist.qrc
 

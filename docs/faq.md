@@ -67,11 +67,6 @@ pip uninstall python-magic
 pip install python-magic-bin
 ```
 
-## The Windows exe takes a long time to start, what's going on?
-
-Since this exe bundles all the dependencies into a single file, it needs to unpack them first, which can take a while. Please be patient.
-Using any of the other methods won't have this problem.
-
 ## Will profiles I set up with the CLI work with the GUI?
 
 Yes, they will. The GUI is just a wrapper around the CLI, so it will use the same profiles.
@@ -84,6 +79,21 @@ the "Open Log" button in the gui, or going to the folder `~/.cache/pcleaner` on 
 
 Without both of those I cannot help you.
 
+## dbus cannot be installed in WSL2, what do I do?
+
+There is a simple workaround for this: simply downgrading the package.
+
+First ensure it isn't installed:
+```bash
+pip uninstall dbus-python
+```
+
+Then install the older version:
+```bash
+dbus-python==1.2.18
+```
+
+Now you can attempt to install `pcleaner` again.
 
 ## How can I install the OCR model manually?
 

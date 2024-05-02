@@ -24,10 +24,16 @@ from pcleaner.gui.mainwindow_driver import MainWindow
 # - the gather themes (potentially)
 
 # This import is needed to load the icons.
-import pcleaner.gui.rc_generated_files.rc_icons
-import pcleaner.gui.rc_generated_files.rc_theme_icons
-import pcleaner.gui.rc_generated_files.rc_themes
-import pcleaner.gui.rc_generated_files.rc_translations
+if platform.system() == "Windows":
+    import pcleaner.gui.rc_generated_files.rc_windows_icons
+    import pcleaner.gui.rc_generated_files.rc_windows_theme_icons
+    import pcleaner.gui.rc_generated_files.rc_windows_themes
+    import pcleaner.gui.rc_generated_files.rc_windows_translations
+else:
+    import pcleaner.gui.rc_generated_files.rc_icons
+    import pcleaner.gui.rc_generated_files.rc_theme_icons
+    import pcleaner.gui.rc_generated_files.rc_themes
+    import pcleaner.gui.rc_generated_files.rc_translations
 
 
 def launch(files_to_open: list[str], debug: bool = False) -> None:
@@ -41,10 +47,16 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     # Ensure that the resources are loaded.
     # Due to them not being utilized directly, the import statements may be
     # removed by an errant code formatter
-    assert pcleaner.gui.rc_generated_files.rc_icons
-    assert pcleaner.gui.rc_generated_files.rc_theme_icons
-    assert pcleaner.gui.rc_generated_files.rc_themes
-    assert pcleaner.gui.rc_generated_files.rc_translations
+    if platform.system() == "Windows":
+        assert pcleaner.gui.rc_generated_files.rc_windows_icons
+        assert pcleaner.gui.rc_generated_files.rc_windows_theme_icons
+        assert pcleaner.gui.rc_generated_files.rc_windows_themes
+        assert pcleaner.gui.rc_generated_files.rc_windows_translations
+    else:
+        assert pcleaner.gui.rc_generated_files.rc_icons
+        assert pcleaner.gui.rc_generated_files.rc_theme_icons
+        assert pcleaner.gui.rc_generated_files.rc_themes
+        assert pcleaner.gui.rc_generated_files.rc_translations
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
     # Log up to 1MB to the log file.
