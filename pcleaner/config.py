@@ -213,6 +213,7 @@ class TextDetectorConfig:
         # Note: This is ignored if processing less than 50 files due to the overhead
         # of starting multiple models not being worth it below that.
         # Warning: This may cause program instability, use at your own risk.
+        # DO NOT report issues about this problem, as it's very hardware-dependent!
         concurrent_models = {self.concurrent_models}
         
         """
