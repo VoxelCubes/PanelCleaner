@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'IssueReporter.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.7.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -61,7 +61,7 @@ class Ui_IssueReporter(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.label_2 = QLabel(IssueReporter)
         self.label_2.setObjectName(u"label_2")
-        sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
@@ -87,7 +87,7 @@ class Ui_IssueReporter(object):
 
         self.horizontalLayout.addWidget(self.label_name_hidden)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 

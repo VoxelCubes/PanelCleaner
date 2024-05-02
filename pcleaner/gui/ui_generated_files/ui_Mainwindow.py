@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'Mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.7.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -225,7 +225,7 @@ class Ui_MainWindow(object):
         self.comboBox_current_profile = CComboBox(self.groupBox_profile)
         self.comboBox_current_profile.addItem("")
         self.comboBox_current_profile.setObjectName(u"comboBox_current_profile")
-        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.comboBox_current_profile.sizePolicy().hasHeightForWidth())
@@ -274,7 +274,7 @@ class Ui_MainWindow(object):
 
         self.toolBox_profile_frame = QWidget(self.groupBox_profile)
         self.toolBox_profile_frame.setObjectName(u"toolBox_profile_frame")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.toolBox_profile_frame.sizePolicy().hasHeightForWidth())
@@ -300,7 +300,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_10 = QVBoxLayout()
         self.verticalLayout_10.setSpacing(30)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_10.addItem(self.verticalSpacer_3)
 
@@ -317,7 +317,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_10.addWidget(self.label_drop_icon)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_10.addItem(self.verticalSpacer_4)
 
@@ -405,7 +405,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.radioButton_ocr)
 
-        self.verticalSpacer = QSpacerItem(20, 0, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_9.addItem(self.verticalSpacer)
 
@@ -413,7 +413,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.label_warning = QLabel(self.groupBox_4)
         self.label_warning.setObjectName(u"label_warning")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.label_warning.sizePolicy().hasHeightForWidth())
@@ -490,7 +490,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_7.addLayout(self.verticalLayout_11)
 
-        self.horizontalSpacer_6 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_6 = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_7.addItem(self.horizontalSpacer_6)
 
@@ -512,14 +512,14 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_6.addWidget(self.label_write_output_help)
 
-        self.horizontalSpacer_4 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_6.addItem(self.horizontalSpacer_4)
 
 
         self.verticalLayout_13.addLayout(self.horizontalLayout_6)
 
-        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_13.addItem(self.verticalSpacer_6)
 
@@ -529,7 +529,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_14.addLayout(self.horizontalLayout_7)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 1, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_2 = QSpacerItem(20, 1, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_14.addItem(self.verticalSpacer_2)
 
@@ -548,7 +548,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5.addWidget(self.label_cleaning_outdir_help)
 
-        self.horizontalSpacer_3 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_3)
 
@@ -589,7 +589,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_12.addWidget(self.radioButton_ocr_csv)
 
-        self.verticalSpacer_5 = QSpacerItem(10, 37, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_5 = QSpacerItem(10, 37, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_12.addItem(self.verticalSpacer_5)
 
@@ -608,7 +608,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_9.addWidget(self.label_ocr_outdir_help)
 
-        self.horizontalSpacer_5 = QSpacerItem(0, 0, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_9.addItem(self.horizontalSpacer_5)
 
@@ -681,7 +681,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.label_target_outputs)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Maximum, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
 
@@ -698,7 +698,7 @@ class Ui_MainWindow(object):
 
         self.progressBar_total = QProgressBar(self.widget_progress_drawer)
         self.progressBar_total.setObjectName(u"progressBar_total")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.progressBar_total.sizePolicy().hasHeightForWidth())
@@ -709,7 +709,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.progressBar_total)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Maximum, QSizePolicy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 

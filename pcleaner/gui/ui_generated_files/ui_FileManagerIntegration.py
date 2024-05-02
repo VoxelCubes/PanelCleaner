@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'FileManagerIntegration.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.7.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -35,7 +35,7 @@ class Ui_FileManagerExtension(object):
 
         self.verticalLayout.addWidget(self.label)
 
-        self.verticalSpacer = QSpacerItem(20, 12, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(20, 12, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
@@ -46,7 +46,7 @@ class Ui_FileManagerExtension(object):
 
         self.verticalLayout.addWidget(self.commandLinkButton_install)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 12, QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.verticalSpacer_3 = QSpacerItem(20, 12, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout.addItem(self.verticalSpacer_3)
 
@@ -65,7 +65,7 @@ class Ui_FileManagerExtension(object):
 
         self.verticalLayout.addWidget(self.commandLinkButton_uninstall)
 
-        self.verticalSpacer_2 = QSpacerItem(20, 12, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer_2 = QSpacerItem(20, 12, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer_2)
 

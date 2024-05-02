@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'ImageDetails.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.7.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -34,7 +34,7 @@ class Ui_ImageDetails(object):
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.scrollArea = QScrollArea(ImageDetails)
         self.scrollArea.setObjectName(u"scrollArea")
-        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
@@ -49,7 +49,7 @@ class Ui_ImageDetails(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.widget = QWidget(self.scrollAreaWidgetContents)
         self.widget.setObjectName(u"widget")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Preferred)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.widget.sizePolicy().hasHeightForWidth())
@@ -72,7 +72,7 @@ class Ui_ImageDetails(object):
         self.horizontalLayout.setContentsMargins(6, 4, 4, 4)
         self.label_file_name = CElidedLabel(ImageDetails)
         self.label_file_name.setObjectName(u"label_file_name")
-        sizePolicy2 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.Preferred)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Preferred)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.label_file_name.sizePolicy().hasHeightForWidth())
@@ -154,7 +154,7 @@ class Ui_ImageDetails(object):
 
         self.pushButton_menu = QPushButton(ImageDetails)
         self.pushButton_menu.setObjectName(u"pushButton_menu")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
         sizePolicy3.setHeightForWidth(self.pushButton_menu.sizePolicy().hasHeightForWidth())
@@ -185,7 +185,7 @@ class Ui_ImageDetails(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.image_viewer = ImageViewer(self.page_viewer)
         self.image_viewer.setObjectName(u"image_viewer")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
         sizePolicy4.setHeightForWidth(self.image_viewer.sizePolicy().hasHeightForWidth())
@@ -216,7 +216,7 @@ class Ui_ImageDetails(object):
         self.horizontalLayout_4.setContentsMargins(6, 4, 4, 4)
         self.label_step = QLabel(ImageDetails)
         self.label_step.setObjectName(u"label_step")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
         sizePolicy5.setHorizontalStretch(0)
         sizePolicy5.setVerticalStretch(0)
         sizePolicy5.setHeightForWidth(self.label_step.sizePolicy().hasHeightForWidth())
