@@ -4,7 +4,7 @@
 <context>
     <name></name>
     <message>
-        <location filename="../pcleaner/config.py" line="934"/>
+        <location filename="../pcleaner/config.py" line="890"/>
         <source>default</source>
         <comment>reserved profile name</comment>
         <translation type="unfinished"></translation>
@@ -1986,8 +1986,8 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
         <location filename="profile_strings.py" line="48"/>
-        <source>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk.</source>
-        <oldsource>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. Do not report issues about this problem, as it&apos;s very hardware-dependent.</oldsource>
+        <source>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. DO NOT report issues about this problem, as it&apos;s very hardware-dependent!</source>
+        <oldsource>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk.</oldsource>
         <comment>Profile comment in Text Detector</comment>
         <translation type="unfinished"></translation>
     </message>
