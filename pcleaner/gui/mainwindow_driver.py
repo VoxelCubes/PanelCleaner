@@ -190,6 +190,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.config.gui_theme = theme
             self.config.save()
 
+    def changeEvent(self, event) -> None:
+        """
+        Listen for palette change events to notify all widgets.
+        """
+        if event.type() == Qc.QEvent.PaletteChange:
+            background_color = self.palette().color(Qg.QPalette.Window)
+            self.theme_is_dark.set(background_color.lightness() < 128)
+            logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
+            self.theme_is_dark_changed.emit(self.theme_is_dark)
+
     def initialize_ui(self) -> None:
         self.hide_progress_drawer()
         self.set_up_statusbar()
