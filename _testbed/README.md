@@ -24,7 +24,7 @@ Instructions to use Google Colab are included in the notebooks (TBD).
 
 ## Install Test Images
 The test images are not included in the repository but can be downloaded from the following link:
-- [Test images](https://drive.google.com/drive/folders/101_1_20240229)
+- [Test images](https://drive.google.com/drive/folders/0BzW8DiWVVMiMN2JaZkg4cHN0NFU?resourcekey=0-ddnFRuwaLHH4FH5bPVa1SA&usp=drive_link)
 
 After downloading, place the test images in the [media](media) directory. If you want to use your own, each image should have a corresponding text file with the same name, but with the extension `.txt`, which contains the ground truth data, one line per box (as calculated by PanelCleaner). Optionally, you can also include a `.json` file with the same name, specifying the language of the page:
 ```json

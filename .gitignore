@@ -169,6 +169,9 @@ cython_debug/
 *.sh
 
 .DS_Store
+
 _testbed/media/**
 _testbed/cleaner/**
 _testbed/model/**
+
+!.gitkeep
