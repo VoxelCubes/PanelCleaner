@@ -1,4 +1,5 @@
 import itertools
+import csv
 from copy import deepcopy, copy
 from functools import partial
 from io import StringIO
@@ -987,22 +988,15 @@ def perform_ocr(
 
     buffer = StringIO()
     if csv_output:
-        buffer.write("filename,startx,starty,endx,endy,text\n")
+        writer = csv.writer(buffer, quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["filename", "startx", "starty", "endx", "endy", "text"])
 
         for path, bubble, box in path_texts_coords:
-            path = str(path)
-            # Escape commas where necessary.
-            if "," in path:
-                path = f'"{path}"'
-
-            if "," in bubble:
-                bubble = f'"{bubble}"'
-
             if "\n" in bubble:
                 logger.warning(f"Detected newline in bubble: {path} {bubble} {box}")
                 bubble = bubble.replace("\n", "\\n")
+            writer.writerow([path, *box.as_tuple, bubble])
 
-            buffer.write(f"{path},{box},{bubble}\n")
         text_out = buffer.getvalue()
     else:
         # Place the file path on it's own line, and only if it's different from the previous one.

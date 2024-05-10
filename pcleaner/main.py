@@ -111,12 +111,14 @@ Examples:
 
 """
 import sys
+import csv
 import itertools
 import multiprocessing
 import platform
 import time
 from multiprocessing import Pool
 from pathlib import Path
+from io import StringIO
 
 import torch
 from PIL import Image
@@ -554,7 +556,7 @@ def run_ocr(
     image_paths: list[Path],
     output_path: str | None,
     cache_masks: bool,
-    csv: bool,
+    csv_output: bool,
 ):
     """
     Run OCR on the given images. This is a byproduct of the pre-processing step,
@@ -564,7 +566,7 @@ def run_ocr(
     :param image_paths: The images to run OCR on.
     :param output_path: The path to output the results to.
     :param cache_masks: Whether to cache the masks.
-    :param csv: Whether to output CSV data
+    :param csv_output: Whether to output CSV data
     """
     cache_dir = config.get_cleaner_cache_dir()
     profile = config.current_profile
@@ -645,39 +647,33 @@ def run_ocr(
         # Sort by path.
         path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
 
-    text = ""
-    if csv:
-        text += "filename,startx,starty,endx,endy,text\n"
+    buffer = StringIO()
+    if csv_output:
+        writer = csv.writer(buffer, quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["filename", "startx", "starty", "endx", "endy", "text"])
 
         for path, bubble, box in path_texts_coords:
-            path = str(path)
-            # Escape commas where necessary.
-            if "," in path:
-                path = f'"{path}"'
-
-            if "," in bubble:
-                bubble = f'"{bubble}"'
-
             if "\n" in bubble:
                 logger.warning(f"Detected newline in bubble: {path} {bubble} {box}")
                 bubble = bubble.replace("\n", "\\n")
+            writer.writerow([path, *box.as_tuple, bubble])
 
-            text += f"{path},{box},{bubble}\n"
+        text = buffer.getvalue()
     else:
         # Place the file path on it's own line, and only if it's different from the previous one.
         current_path = ""
         for path, bubble, _ in path_texts_coords:
             if path != current_path:
-                text += f"\n\n{path}: "
+                buffer.write(f"\n\n{path}: ")
                 current_path = path
-            text += f"\n{bubble}"
+            buffer.write(f"\n{bubble}")
             if "\n" in bubble:
                 logger.warning(f"Detected newline in bubble: {path} {bubble}")
-        text = text.strip()  # Remove the leading newline.
+        text = buffer.getvalue().strip()  # Remove the leading newline.
     print(text)
 
     if output_path is None:
-        path = Path.cwd() / ("detected_text.txt" if not csv else "detected_text.csv")
+        path = Path.cwd() / ("detected_text.txt" if not csv_output else "detected_text.csv")
     else:
         path = Path(output_path)
 
