@@ -19,6 +19,7 @@ import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
 import pcleaner.structures as st
 from .CustomQ.CTableWidget import CTableWidget
+import pcleaner.ocr.ocr as ocr
 
 
 # Add some space between the icon of each row.
@@ -42,7 +43,7 @@ class FileTable(CTableWidget):
     """
 
     config: cfg.Config  # Reference to the MainWindow's config.
-    shared_ocr_model: gst.Shared[gst.OCRModel]  # Must be handed over by the mainwindow.
+    shared_ocr_model: gst.Shared[ocr.OcrProcsType]  # Must be handed over by the mainwindow.
     thread_queue: Qc.QThreadPool  # Must be handed over by the mainwindow.
 
     table_is_empty = Qc.Signal()
@@ -174,7 +175,7 @@ class FileTable(CTableWidget):
     def set_config(self, config: cfg.Config) -> None:
         self.config = config
 
-    def set_shared_ocr_model(self, shared_ocr_model: gst.Shared[gst.OCRModel]) -> None:
+    def set_shared_ocr_model(self, shared_ocr_model: gst.Shared[ocr.OcrProcsType]) -> None:
         self.shared_ocr_model = shared_ocr_model
 
     def set_shared_theme_is_dark(self, shared_theme_is_dark: gst.Shared[bool]) -> None:

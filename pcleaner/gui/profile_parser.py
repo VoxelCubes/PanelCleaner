@@ -14,7 +14,7 @@ from loguru import logger
 from pcleaner.helpers import tr
 import pcleaner.gui.gui_utils as gu
 from pcleaner import config as cfg
-from pcleaner.config import GreaterZero, LongString, Percentage
+from pcleaner.config import GreaterZero, LongString, Percentage, OCREngine, ReadingOrder
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
 
@@ -36,6 +36,8 @@ class EntryTypes(Enum):
     Color = auto()
     MimeSuffixIMG = auto()
     MimeSuffixMASK = auto()
+    OCREngine = auto()
+    ReadingOrder = auto()
 
 
 @dataclass(frozen=True)
@@ -197,6 +199,20 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_setter = self._data_widget.setCurrentIndexByLinkedData
             self._data_getter = self._data_widget.currentLinkedData
 
+        elif entry_type in (EntryTypes.OCREngine, EntryTypes.ReadingOrder):
+            # Use a combobox and populate it with the enum members from the config.
+            # Use auto as the default value.
+            self._data_widget: CComboBox = CComboBox()
+            enm = {EntryTypes.OCREngine: OCREngine, EntryTypes.ReadingOrder: ReadingOrder}[
+                entry_type
+            ]
+            for member in enm.__members__.values():
+                self._data_widget.addTextItemLinkedData(member.value, member)
+            self._data_widget.setCurrentIndexByLinkedData(enm.AUTO)
+            self._data_widget.currentIndexChanged.connect(self._value_changed)
+            self._data_setter = self._data_widget.setCurrentIndexByLinkedData
+            self._data_getter = self._data_widget.currentLinkedData
+
     def reset(self) -> None:
         """
         Reset the data widget to the default value.
@@ -302,6 +318,10 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.StrNone
                     elif value_type == tuple[int, int, int, int]:
                         entry_type = EntryTypes.Color
+                    elif value_type == OCREngine:
+                        entry_type = EntryTypes.OCREngine
+                    elif value_type == ReadingOrder:
+                        entry_type = EntryTypes.ReadingOrder
                     else:
                         raise NotImplementedError(f"Unknown value type {value_type}")
 

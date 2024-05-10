@@ -10,6 +10,7 @@ import pcleaner.config as cfg
 import pcleaner.gui.image_details_driver as idd
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.structures as st
+import pcleaner.ocr.ocr as ocr
 
 
 # noinspection PyPep8Naming
@@ -36,7 +37,7 @@ class ImageTab(Qw.QTabWidget):
         self,
         image_obj: imf.ImageFile,
         config: cfg.Config,
-        shared_ocr_model: st.Shared[st.OCRModel],
+        shared_ocr_model: st.Shared[ocr.OcrProcsType],
         thread_queue: Qc.QThreadPool,
         progress_callback: Callable[[imf.ProgressData], None],
         profile_changed_signal: Qc.Signal,

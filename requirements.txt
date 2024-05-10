@@ -24,6 +24,7 @@ psutil
 dictdiffer
 humanfriendly
 simple_lama_inpainting
+pytesseract
 python-magic; platform_system != "Windows"
 python-magic-bin; platform_system == "Windows"
 dbus-python; platform_system == "Linux"
