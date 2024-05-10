@@ -15,7 +15,8 @@ def supported_languages() -> dict[str, tuple[str, bool]]:
     return {
         "en_US": ("English (US)", True),  # Default language, locale C
         "de_DE": ("Deutsch (DE)", True),
-        "es_ES": ("Spanish (ES)", False),
-        "fr_FR": ("French (FR)", False),
-        "tr_TR": ("Turkish (TR)", False),
+        "fr_FR": ("Français (FR)", False),
+        "es_ES": ("Español (ES)", False),
+        "tr_TR": ("Türkçe (TR)", False),
+        "bg_BG": ("български (BG)", False),
     }

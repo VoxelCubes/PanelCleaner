@@ -59,8 +59,17 @@ refresh-i18n:
 	$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
 		translations/profile_strings.py translations/process_strings.py -source-language en_US -target-language en_US -ts translations/PanelCleaner_source.ts
 
+# Generate .ts files for each language if they don't already exist
+generate-ts:
+	$(foreach lang, $(LANGUAGES), \
+		if [ ! -f translations/PanelCleaner_$(lang).ts ]; then \
+			echo "Generating TS file for: $(lang)"; \
+			$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
+			translations/profile_strings.py translations/process_strings.py -source-language en_US -target-language $(lang) -ts translations/PanelCleaner_$(lang).ts; \
+		fi;)
+
 # Compile localization files for each language, then update the QRC file and compile it.
-compile-i18n:
+compile-i18n: generate-ts
 	$(foreach lang, $(LANGUAGES), $(I18N_COMPILER) translations/PanelCleaner_$(lang).ts -qm translations/packed/PanelCleaner_$(lang).qm;)
 
 	echo '<RCC><qresource prefix="/translations">' > translations/packed/linguist.qrc
