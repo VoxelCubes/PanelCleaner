@@ -1,7 +1,6 @@
 import re
 import sys
 import shutil
-import types
 from collections import defaultdict
 from enum import StrEnum
 from pathlib import Path
@@ -729,7 +728,7 @@ class InpainterConfig:
         # if a large radius multiplier is used.
         max_inpainting_radius = {self.max_inpainting_radius}
         
-        # After inpainting, cut the result out of the original image to prevent the inpaitning
+        # After inpainting, cut the result out of the original image to prevent the inpainting
         # from affecting the rest of the image.
         # This ensures that the original image is preserved as much as possible.
         # This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels

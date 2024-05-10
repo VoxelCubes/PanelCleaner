@@ -11,7 +11,6 @@ import pcleaner.ctd_interface as ctm
 import pcleaner.structures as st
 
 from collections import Counter
-from typing import cast
 import pcleaner.ocr.ocr as ocr
 
 

@@ -10,7 +10,6 @@ from typing import Callable
 import torch
 from PIL import Image
 from loguru import logger
-from manga_ocr import MangaOcr
 from natsort import natsorted
 
 import pcleaner.config as cfg

@@ -396,7 +396,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self,
                 "Uncaught Exception",
                 "An uncaught exception was raised.",
-                exception_information=(exctype, value, traceback),
             )
 
         sys.excepthook = exception_handler

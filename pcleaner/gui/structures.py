@@ -1,6 +1,4 @@
-from typing import Generic, TypeVar, Optional, Protocol
-
-from PIL import Image
+from typing import Generic, TypeVar, Optional
 
 
 T = TypeVar("T")
@@ -21,4 +19,4 @@ class Shared(Generic[T]):
 
         # class OCRModel(Protocol):
         #     def __call__(self, image: Image, **kwargs) -> str:
-        ...
+        # ...

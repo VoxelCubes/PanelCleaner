@@ -153,7 +153,7 @@ def process_image_batch(args) -> None:
             lower_target,
             upper_target,
             uuid=img_uuid,
-            visualize_raw_boxes=visualize_raw_boxes,
+            visualize_raw_data=visualize_raw_boxes,
         )
         inc_progress()
 

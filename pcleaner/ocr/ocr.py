@@ -10,7 +10,8 @@ from pcleaner.ocr.ocr_tesseract import TesseractOcr
 
 
 class OCRModel(Protocol):
-    def __call__(self, img_or_path: Image.Image | Path | str, **kwargs) -> str: ...
+    def __call__(self, img_or_path: Image.Image | Path | str, **kwargs) -> str:
+        ...
 
 
 OcrProcsType: TypeAlias = Mapping[st.DetectedLang, OCRModel]
