@@ -31,7 +31,7 @@ REM Extract strings for translation
 set PYTHONPATH=%CurrentDir%
 call %PYTHON% translations\profile_extractor.py
 call %PYTHON% translations\process_steps_extractor.py
-call %I18N_LUPDATE% -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner\gui pcleaner\gui\CustomQ ui_files ^
+call %I18N_LUPDATE% -extensions .py,.ui -no-recursive pcleaner pcleaner\gui pcleaner\gui\CustomQ ui_files ^
     translations\profile_strings.py translations\process_strings.py -source-language en_US -target-language en_US -ts translations\PanelCleaner_source.ts
 
 REM Compile translations for each language
