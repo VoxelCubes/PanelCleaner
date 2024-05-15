@@ -1,6 +1,7 @@
 import json
 import re
 from enum import Enum
+from enum import StrEnum
 from importlib import resources
 from pathlib import Path
 from typing import Sequence
@@ -12,6 +13,15 @@ from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.data
+
+
+class DetectedLang(StrEnum):
+    JA = "ja"
+    ENG = "eng"
+    UNKNOWN = "unknown"
+
+    def __str__(self):
+        return self.value
 
 
 class BoxType(Enum):
@@ -259,7 +269,7 @@ class PageData:
 
     def visualize(
         self, image_path: Path, out_dir: Path | None = None, final_boxes: bool = False
-    ) -> None:
+    ) -> Image.Image:
         """
         Visualize the boxes on an image.
         Typically, this would be used to check where on the original image the
@@ -303,6 +313,7 @@ class PageData:
             out_dir.mkdir(parents=True, exist_ok=True)
             out_path = out_dir / image_path.name
         image.save(out_path)
+        return image
 
     def make_box_mask(self, image_size: tuple[int, int], box_type: BoxType) -> Image:
         """

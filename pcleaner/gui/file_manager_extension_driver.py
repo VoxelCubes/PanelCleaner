@@ -38,7 +38,7 @@ def get_extension_target() -> ExtensionTarget:
         # I've had it, fuck this. Someone else can try again.
         return ExtensionTarget.Unsupported
         # I dunno how to make this work well with the bare script version, so only exe supported.
-        if getattr(sys, 'frozen', False):
+        if getattr(sys, "frozen", False):
             return ExtensionTarget.WindowsExplorer
         else:
             return ExtensionTarget.Unsupported
@@ -192,7 +192,9 @@ class FileManagerExtension(Qw.QDialog, Ui_FileManagerExtension):
             execution.extend(["create", target_path])
             logger.info(f"Executing subprocess: {execution}")
             subprocess.check_output(execution)
-            gu.show_info(self, "Installation Success", "Successfully installed the Explorer integration.")
+            gu.show_info(
+                self, "Installation Success", "Successfully installed the Explorer integration."
+            )
         except Exception:
             gu.show_exception(
                 self,
@@ -237,7 +239,9 @@ class FileManagerExtension(Qw.QDialog, Ui_FileManagerExtension):
             execution.extend(["delete", ""])
             logger.info(f"Executing subprocess: {execution}")
             subprocess.check_output(execution)
-            gu.show_info(self, "Uninstallation Success", "Successfully uninstalled the Explorer integration.")
+            gu.show_info(
+                self, "Uninstallation Success", "Successfully uninstalled the Explorer integration."
+            )
         except Exception:
             gu.show_exception(
                 self,
@@ -278,6 +282,7 @@ Icon=panelcleaner
 
 """
 
+
 def get_executable_target() -> list[Path]:
     """
     For a regular script, we want to return
@@ -288,7 +293,7 @@ def get_executable_target() -> list[Path]:
 
     :return: execution path(s)
     """
-    if getattr(sys, 'frozen', False):
+    if getattr(sys, "frozen", False):
         # We need to fall back to the bundle.
         with resources.files(pcleaner.data) as data_path:
             exe = data_path / "WindowsExplorerIntegrationRegedit.exe"
@@ -303,7 +308,7 @@ def get_executable_target() -> list[Path]:
 
 def get_pcleaner_path() -> Path | None:
     # determine if application is a script file or frozen exe.
-    if getattr(sys, 'frozen', False):
+    if getattr(sys, "frozen", False):
         return Path(sys.executable)
     elif __file__:
         return Path(__file__).parent.parent / "main.py"

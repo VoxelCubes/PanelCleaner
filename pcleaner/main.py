@@ -10,7 +10,7 @@ Usage:
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
     pcleaner gui [<image_path> ...] [--debug]
-    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--cache-masks] [--debug]
+    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--profile=<profile>] [--cache-masks] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
     pcleaner load models [--cuda | --cpu | --both] [--force]
@@ -111,18 +111,19 @@ Examples:
 
 """
 import sys
+import csv
 import itertools
 import multiprocessing
 import platform
 import time
 from multiprocessing import Pool
 from pathlib import Path
+from io import StringIO
 
 import torch
 from PIL import Image
 from docopt import docopt
 from loguru import logger
-from manga_ocr import MangaOcr
 from natsort import natsorted
 from tqdm import tqdm
 
@@ -138,6 +139,7 @@ import pcleaner.model_downloader as md
 import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
+import pcleaner.ocr.ocr as ocr
 from pcleaner import __version__
 
 
@@ -194,6 +196,7 @@ def main() -> None:
 
     elif args.ocr:
         config = cfg.load_config()
+        config.load_profile(args["--profile"])
         # Ignore the rejected tiff list, as those are already visible in CLI mode.
         image_paths, _ = hp.discover_all_images(args.image_path, cfg.SUPPORTED_IMG_TYPES)
         run_ocr(config, image_paths, args.output_path, args.cache_masks, args.csv)
@@ -360,8 +363,8 @@ def run_cleaner(
         if len(list(cache_dir.glob("*"))) > 0 and not keep_cache:
             cli.empty_cache_dir(cache_dir)
         # Get the model file, downloading it if necessary.
-        cuda = torch.cuda.is_available()
-        model_path = config.get_model_path(cuda)
+        gpu = torch.cuda.is_available() or torch.backends.mps.is_available()
+        model_path = config.get_model_path(gpu)
 
         print("Running text detection AI model...")
         pp.generate_mask_data(
@@ -383,9 +386,11 @@ def run_cleaner(
         # (It takes several seconds to load the ocr model, so this is fine.)
         time.sleep(0.1)
         if profile.preprocessor.ocr_enabled:
-            mocr = MangaOcr()
+            ocr_processor = ocr.get_ocr_processor(
+                profile.preprocessor.ocr_use_tesseract, profile.preprocessor.ocr_engine
+            )
         else:
-            mocr = None
+            ocr_processor = None
 
         ocr_analytics: list[st.OCRAnalytic] = []
         for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
@@ -393,7 +398,7 @@ def run_cleaner(
                 json_file_path,
                 preprocessor_conf=profile.preprocessor,
                 cache_masks=cache_masks,
-                mocr=mocr,
+                mocr=ocr_processor,
             )
             if ocr_analytics_of_a_page is not None:
                 ocr_analytics.append(ocr_analytics_of_a_page)
@@ -551,7 +556,7 @@ def run_ocr(
     image_paths: list[Path],
     output_path: str | None,
     cache_masks: bool,
-    csv: bool,
+    csv_output: bool,
 ):
     """
     Run OCR on the given images. This is a byproduct of the pre-processing step,
@@ -561,10 +566,15 @@ def run_ocr(
     :param image_paths: The images to run OCR on.
     :param output_path: The path to output the results to.
     :param cache_masks: Whether to cache the masks.
-    :param csv: Whether to output CSV data
+    :param csv_output: Whether to output CSV data
     """
     cache_dir = config.get_cleaner_cache_dir()
     profile = config.current_profile
+
+    ocr_processor = ocr.get_ocr_processor(
+        profile.preprocessor.ocr_use_tesseract, profile.preprocessor.ocr_engine
+    )
+
     logger.debug(f"Cache directory: {cache_dir}")
 
     # If caching masks, direct the user to the cache directory.
@@ -577,10 +587,11 @@ def run_ocr(
     if len(list(cache_dir.glob("*"))) > 0:
         cli.empty_cache_dir(cache_dir)
     # Get the model file, downloading it if necessary.
-    cuda = torch.cuda.is_available()
-    model_path = config.get_model_path(cuda)
+    gpu = torch.cuda.is_available() or torch.backends.mps.is_available()
+    model_path = config.get_model_path(gpu)
 
     print("Running text detection AI model...")
+    # start = time.perf_counter()
     pp.generate_mask_data(
         image_paths,
         config_general=profile.general,
@@ -588,7 +599,8 @@ def run_ocr(
         model_path=model_path,
         output_dir=cache_dir,
     )
-
+    # end = time.perf_counter()
+    # print(f"\nTime elapsed: {end - start:.4f} seconds")
     print("\n")
 
     # Flush it so it shows up before the progress bar.
@@ -599,22 +611,21 @@ def run_ocr(
 
     # Modify the profile to OCR all boxes.
     # Make sure OCR is enabled.
-    config.current_profile.preprocessor.ocr_enabled = True
+    profile.preprocessor.ocr_enabled = True
     # Make sure the max size is infinite, so no boxes are skipped in the OCR process.
-    config.current_profile.preprocessor.ocr_max_size = 10**10
+    profile.preprocessor.ocr_max_size = 10**10
     # Make sure the sus box min size is infinite, so all boxes with "unknown" language are skipped.
-    config.current_profile.preprocessor.suspicious_box_min_size = 10**10
+    profile.preprocessor.suspicious_box_min_size = 10**10
     # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
-    config.current_profile.preprocessor.ocr_blacklist_pattern = ".*"
+    profile.preprocessor.ocr_blacklist_pattern = ".*"
 
-    mocr = MangaOcr()
     ocr_analytics = []
     for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
         ocr_analytic = pp.prep_json_file(
             json_file_path,
-            preprocessor_conf=config.current_profile.preprocessor,
+            preprocessor_conf=profile.preprocessor,
             cache_masks=cache_masks,
-            mocr=mocr,
+            mocr=ocr_processor,
             cache_masks_ocr=True,
             performing_ocr=True,
         )
@@ -636,39 +647,33 @@ def run_ocr(
         # Sort by path.
         path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
 
-    text = ""
-    if csv:
-        text += "filename,startx,starty,endx,endy,text\n"
+    buffer = StringIO()
+    if csv_output:
+        writer = csv.writer(buffer, quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["filename", "startx", "starty", "endx", "endy", "text"])
 
         for path, bubble, box in path_texts_coords:
-            path = str(path)
-            # Escape commas where necessary.
-            if "," in path:
-                path = f'"{path}"'
-
-            if "," in bubble:
-                bubble = f'"{bubble}"'
-
             if "\n" in bubble:
                 logger.warning(f"Detected newline in bubble: {path} {bubble} {box}")
                 bubble = bubble.replace("\n", "\\n")
+            writer.writerow([path, *box.as_tuple, bubble])
 
-            text += f"{path},{box},{bubble}\n"
+        text = buffer.getvalue()
     else:
         # Place the file path on it's own line, and only if it's different from the previous one.
         current_path = ""
         for path, bubble, _ in path_texts_coords:
             if path != current_path:
-                text += f"\n\n{path}: "
+                buffer.write(f"\n\n{path}: ")
                 current_path = path
-            text += f"\n{bubble}"
+            buffer.write(f"\n{bubble}")
             if "\n" in bubble:
                 logger.warning(f"Detected newline in bubble: {path} {bubble}")
-        text = text.strip()  # Remove the leading newline.
+        text = buffer.getvalue().strip()  # Remove the leading newline.
     print(text)
 
     if output_path is None:
-        path = Path.cwd() / ("detected_text.txt" if not csv else "detected_text.csv")
+        path = Path.cwd() / ("detected_text.txt" if not csv_output else "detected_text.csv")
     else:
         path = Path(output_path)
 

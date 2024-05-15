@@ -13,7 +13,6 @@ import PySide6.QtWidgets as Qw
 import torch
 from PySide6.QtCore import Slot, Signal
 from loguru import logger
-from manga_ocr import MangaOcr
 
 from pcleaner.helpers import tr
 import pcleaner.gui.supported_languages as sl
@@ -39,7 +38,7 @@ from pcleaner import __display_name__, __version__
 from pcleaner import data
 from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
-
+import pcleaner.ocr.ocr as ocr
 
 ANALYTICS_COLUMNS = 74
 
@@ -54,7 +53,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     toolBox_profile: pp.ProfileToolBox
     # Optional shared instance of the OCR model to save time due to its slow loading.
-    shared_ocr_model: gst.Shared[gst.OCRModel]
+    shared_ocr_model: gst.Shared[ocr.OcrProcsType]
 
     threadpool: Qc.QThreadPool  # Used for loading images and other gui tasks.
     thread_queue: Qc.QThreadPool  # Used for tasks that need to run sequentially, without blocking the gui.
@@ -81,7 +80,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
         self.setWindowTitle(f"{__display_name__} {__version__}")
-        self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
         self.config = config
         self.debug = debug
         self.startup_files = files_to_open
@@ -89,7 +87,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.progress_current: int = 0
         self.progress_step_start: imf.Step | None = None
 
-        self.shared_ocr_model = gst.Shared[gst.OCRModel]()
+        self.shared_ocr_model = gst.Shared[ocr.OcrProcsType]()
 
         self.last_applied_profile = None
 
@@ -190,7 +188,22 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.config.gui_theme = theme
             self.config.save()
 
+    def changeEvent(self, event) -> None:
+        """
+        Listen for palette change events to notify all widgets.
+        """
+        if event.type() == Qc.QEvent.PaletteChange:
+            background_color = self.palette().color(Qg.QPalette.Window)
+            self.theme_is_dark.set(background_color.lightness() < 128)
+            logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
+            self.theme_is_dark_changed.emit(self.theme_is_dark)
+
     def initialize_ui(self) -> None:
+        if platform.system() == "Windows":
+            self.setWindowIcon(Qg.QIcon(":/logo.ico"))
+        else:
+            self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
+
         self.hide_progress_drawer()
         self.set_up_statusbar()
         # Purge any missing profiles before loading them.
@@ -323,6 +336,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if cuda:
             self.statusbar.addPermanentWidget(Qw.QLabel(self.tr("CUDA Enabled")))
 
+        # Change indicator to show if MPS is available.
+        if torch.backends.mps.is_available():
+            self.statusbar.addPermanentWidget(Qw.QLabel(self.tr("MPS Enabled")))
+
         has_ocr = md.is_ocr_downloaded()
         has_inpainting = md.is_inpainting_downloaded(self.config)
         has_text_detector = (not cuda and self.config.default_cv2_model_path) or (
@@ -379,7 +396,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self,
                 "Uncaught Exception",
                 "An uncaught exception was raised.",
-                exception_information=(exctype, value, traceback),
             )
 
         sys.excepthook = exception_handler
@@ -437,6 +453,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if self.startup_files:
             self.file_table.handleDrop(self.startup_files)
             self.file_table.repopulate_table()
+
+        self.update_model_selection()
 
     def browse_output_dir(self) -> None:
         """
@@ -561,7 +579,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def load_ocr_model(self) -> None:
         t_start = time.time()
         self.statusbar.showMessage(self.tr(f"Loading OCR model..."))
-        self.shared_ocr_model.set(MangaOcr())
+        profile = self.config.current_profile
+        # pre-load manga-ocr
+        ocr.ocr_engines(profile)[cfg.OCREngine.MANGAOCR].initialize_model()
         logger.info(f"Loaded OCR model ({time.time()-t_start:.2f}s)")
         self.statusbar.showMessage(self.tr(f"Loaded OCR model."))
         self.enable_running_cleaner()
@@ -999,7 +1019,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Load the current profile.
         """
         logger.debug("Loading current profile.")
-        self.toolBox_profile.set_profile_values(self.config.current_profile)
+        profile = self.config.current_profile
+        self.toolBox_profile.set_profile_values(profile)
         self.set_last_applied_profile()
         self.profile_values_changed.emit()
 
@@ -1063,6 +1084,26 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             return
         self.load_current_profile()
 
+    def update_model_selection(self) -> None:
+        """
+        Assign the correct OCR model to the shared model.
+        Warn the user if Tesseract is not available.
+        """
+        preprocessor_config = self.config.current_profile.preprocessor
+        want_tess = preprocessor_config.ocr_use_tesseract
+        if want_tess and not ocr.tesseract_ok(self.config.current_profile):
+            gu.show_warning(
+                self,
+                "Tesseract OCR is not installed or not found",
+                self.tr(
+                    "<html>Can't use Tesseract to perform OCR. Reverting to manga-ocr."
+                    "\nPlease see the instructions to install Tesseract correctly <a href="
+                    '"https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr">here</a>'
+                    " or continue using the default model.</html>"
+                ),
+            )
+        self.shared_ocr_model.set(ocr.get_ocr_processor(want_tess, preprocessor_config.ocr_engine))
+
     @Slot()
     def handle_profile_values_changed(self) -> None:
         """
@@ -1092,6 +1133,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.set_last_applied_profile()
         self.profile_values_changed.emit()
         self.pushButton_apply_profile.setEnabled(False)
+        self.update_model_selection()
 
     def save_profile(self, save_as: bool = False, make_new: bool = False) -> None:
         """
@@ -1317,7 +1359,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             target_outputs=outputs,
             output_dir=output_directory,
             config=self.config,
-            ocr_model=self.shared_ocr_model.get(),
+            ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
         )
@@ -1407,7 +1449,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             output_file=output_directory,
             csv_output=csv_output,
             config=self.config,
-            ocr_model=self.shared_ocr_model.get(),
+            ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
         )

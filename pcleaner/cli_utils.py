@@ -119,7 +119,7 @@ def open_file_with_editor(path: Path, configured_opener: str | None) -> None:
     elif platform.system() == "Darwin":
         opener = "open" if configured_opener is None else configured_opener
         print(f"Opening {path} with {opener}.")
-        os.system(f"{opener} {path}")
+        os.system(f'{opener} "{path}"')
 
         print("\nIf nothing happens, try setting the 'profile_editor' option in the config.")
     else:

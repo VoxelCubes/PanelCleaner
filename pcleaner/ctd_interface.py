@@ -27,6 +27,7 @@ from loguru import logger
 from tqdm import tqdm
 
 import pcleaner.config as cfg
+import pcleaner.image_ops as ops
 from pcleaner.comic_text_detector.inference import TextDetector
 from pcleaner.comic_text_detector.utils.io_utils import imwrite, NumpyEncoder
 from pcleaner.comic_text_detector.utils.textmask import REFINEMASK_ANNOTATION
@@ -58,7 +59,11 @@ def model2annotations(
     :return:
     """
 
-    device = "cuda" if model_path.suffix == ".pt" else "cpu"
+    device = (
+        ("mps" if torch.backends.mps.is_available() else "cuda")
+        if model_path.suffix == ".pt"
+        else "cpu"
+    )
     print(f"Using device for text detection model: {device}")
     # Determine the number of processes to use
     num_processes = min(config_detector.concurrent_models, len(img_list))
@@ -124,6 +129,7 @@ def process_image(
     height_target_upper: int,
     skip_text_detection: bool = False,
     uuid: str = None,
+    visualize_raw_data: bool = False,
 ):
     """
     Process a single image using the TextDetector model.
@@ -138,9 +144,10 @@ def process_image(
     :param skip_text_detection: If True, skip the text detection step and only
         save the scaled input image as a png.
     :param uuid: The uuid to use for the image. If None, a new uuid will be generated.
+    :param visualize_raw_data: If True, visualize the raw box data.
     """
 
-    img = read_image(img_path)
+    img: np.ndarray = read_image(img_path)
     img, image_scale = resize_to_target(img, height_target_lower, height_target_upper)
 
     # Prepend an index to prevent name clobbering between different files.
@@ -155,6 +162,9 @@ def process_image(
     # Make names absolute paths.
     img_name = str((save_dir / (img_name + ".png")).absolute())
     maskname = str((save_dir / maskname).absolute())
+    raw_visualization_name = Path(
+        (save_dir / (prefix + img_path.stem + "_raw_boxes.png")).absolute()
+    )
 
     # Save a scaled copy of the image.
     imwrite(img_name, img)
@@ -186,6 +196,9 @@ def process_image(
     with open(json_path, "w", encoding="utf8") as f:
         json.dump(data, f, ensure_ascii=False, cls=NumpyEncoder, indent=4)
     imwrite(maskname, mask_refined)
+
+    if visualize_raw_data:
+        ops.visualize_raw_boxes(img, blk_dict_list, raw_visualization_name)
 
 
 def read_image(path: Path | str) -> np.ndarray:

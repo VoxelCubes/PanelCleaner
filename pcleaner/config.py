@@ -2,6 +2,7 @@ import re
 import sys
 import shutil
 from collections import defaultdict
+from enum import StrEnum
 from pathlib import Path
 from typing import Any, NewType
 
@@ -65,10 +66,23 @@ LongString = NewType("LongString", str)
 # Create a new type for percentages as floats. These are between 0 and 100.
 Percentage = NewType("Percentage", float)
 
+
+class ReadingOrder(StrEnum):
+    AUTO = "auto"
+    MANGA = "manga"
+    COMIC = "comic"
+
+
+class OCREngine(StrEnum):
+    AUTO = "auto"
+    MANGAOCR = "manga-ocr"
+    TESSERACT = "tesseract"
+
+
 """
 When adding new config options, follow these steps:
 1. Add the new variable to the dataclass.
-2. Add where it's written in the config template, document for the user.
+2. Add where it's written in the config template below, document the option for the user.
 3. Add a try_to_load line in the import_from_conf method.
 4. If it affects certain outputs, add sensitivity for that in the image_file.py file.
 """
@@ -213,7 +227,7 @@ class TextDetectorConfig:
         # Note: This is ignored if processing less than 50 files due to the overhead
         # of starting multiple models not being worth it below that.
         # Warning: This may cause program instability, use at your own risk.
-        # DO NOT report issues about this problem, as it's very hardware-dependent!
+        # [GUI: <br>]DO NOT report issues about this setting, as it's entirely hardware-dependent!
         concurrent_models = {self.concurrent_models}
         
         """
@@ -253,6 +267,9 @@ class PreprocessorConfig:
     suspicious_box_min_size: int = 200 * 200
     box_overlap_threshold: Percentage = 20.0
     ocr_enabled: bool = True
+    ocr_use_tesseract: bool = False
+    ocr_engine: OCREngine = OCREngine.AUTO
+    reading_order: ReadingOrder = ReadingOrder.AUTO
     ocr_max_size: int = 30 * 100
     ocr_blacklist_pattern: str = "[～．ー！？０-９]*"
     ocr_strict_language: bool = False
@@ -293,6 +310,30 @@ class PreprocessorConfig:
         # Whether to use OCR to detect boxes that aren't worth cleaning, like ones that only contain numbers or symbols.
         ocr_enabled = {self.ocr_enabled}
         
+        # Whether to use Tesseract to perform OCR tasks.[GUI: <br>]
+        # If [CLI: set to True][GUI: checked], Tesseract OCR can be used for text extraction, if available.[GUI: <br>]
+        # If [CLI: set to False][GUI: unchecked], the built-in OCR model (manga-ocr) is always used, which is
+        # best suited for vertical Japanese text.
+        ocr_use_tesseract = {self.ocr_use_tesseract}
+
+        # Specifies which engine to use for performing OCR.[GUI: <br>]
+        # - auto: Automatically selects the OCR engine based on the detected language of each text block
+        #         within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.[GUI: <br>]
+        # - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition
+        #             tasks. Best suited for vertical Japanese text.[GUI: <br>]
+        # - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a
+        #              versatile option that supports English and multiple other languages.
+        ocr_engine = {self.ocr_engine}
+
+        # Defines the reading order for processing and sorting text boxes on the entire page, not
+        # individual text blocks. This global setting influences how text boxes are ordered and
+        # presented for further processing.[GUI: <br>]
+        # - auto: Detects the reading order based on the detected language of each text block within the page.[GUI: <br>]
+        # - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.[GUI: <br>]
+        # - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.[GUI: <br>]
+        # Choose based on the predominant layout of your content.
+        reading_order = {self.reading_order}
+
         # Maximum size of a box to perform OCR on.
         # These useless boxes are usually small, and OCR is slow, so use this as a cutoff.
         ocr_max_size = {self.ocr_max_size}
@@ -360,6 +401,9 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, int, "box_padding_extended")
         try_to_load(self, config_updater, section, int, "box_right_padding_extended")
         try_to_load(self, config_updater, section, int, "box_reference_padding")
+        try_to_load(self, config_updater, section, bool, "ocr_use_tesseract")
+        try_to_load(self, config_updater, section, OCREngine, "ocr_engine")
+        try_to_load(self, config_updater, section, ReadingOrder, "reading_order")
 
     def fix(self) -> None:
         """
@@ -370,9 +414,9 @@ class PreprocessorConfig:
         if self.suspicious_box_min_size < 0:
             self.suspicious_box_min_size = 0
         if self.box_overlap_threshold < 0:
-            self.box_overlap_threshold = 0.0
+            self.box_overlap_threshold = Percentage(0.0)
         if self.box_overlap_threshold > 100:
-            self.box_overlap_threshold = 100.0
+            self.box_overlap_threshold = Percentage(100.0)
         if self.ocr_max_size < 0:
             self.ocr_max_size = 0
         if self.box_padding_initial < 0:
@@ -684,7 +728,7 @@ class InpainterConfig:
         # if a large radius multiplier is used.
         max_inpainting_radius = {self.max_inpainting_radius}
         
-        # After inpainting, cut the result out of the original image to prevent the inpaitning
+        # After inpainting, cut the result out of the original image to prevent the inpainting
         # from affecting the rest of the image.
         # This ensures that the original image is preserved as much as possible.
         # This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels
@@ -1098,11 +1142,11 @@ class Config:
         """
         Load a profile from disk, if a name is given.
         First search if the profile is saved, otherwise treat it like a path.
-        For None, attempt to load the default profile.
+        For None, attempt to load the default profile, be that the builtin default or the user's default.
 
         Special case: Reserve the name "builtin" and "none" (case insensitive) to load the built-in default profile.
 
-        :param profile_name: Name or path of the profile to load.
+        :param profile_name: [Optional] Name or path of the profile to load.
         :return: True if the profile was loaded successfully.
         """
         logger.debug(f"Loading profile {profile_name!r}...")
@@ -1134,14 +1178,14 @@ class Config:
 
         return True, None
 
-    def get_model_path(self, cuda: bool) -> Path:
+    def get_model_path(self, gpu: bool) -> Path:
         """
         Get the path to the default model.
         Check the current profile first. If it is None or the file does not exist,
         return the default model path from the config.
         If it is None, download the model first.
 
-        :param cuda: When true, prefer the torch model.
+        :param gpu: When true, prefer the torch model.
         """
         if self.current_profile.text_detector.model_path is not None:
             model_path = Path(self.current_profile.text_detector.model_path)
@@ -1154,7 +1198,7 @@ class Config:
 
         # Models are downloaded to the folder: cache directory/models
         cache_dir = self.get_model_cache_dir()
-        if cuda:
+        if gpu:
             if self.default_torch_model_path is None:
                 self.default_torch_model_path = md.download_torch_model(cache_dir)
                 if self.default_torch_model_path is None:
@@ -1254,6 +1298,19 @@ def try_to_load(
                 f"Option {attr_name} in section {section} should be True or False, not '{conf_data}'"
             )
             return
+
+    # check before: `StrEnum` is a `str`
+    elif isinstance(attr_type, type) and issubclass(attr_type, StrEnum):
+        if conf_data in attr_type.__members__.values():
+            attr_value = conf_data
+        else:
+            print(
+                f"Option {attr_name} in section {section} should be a one "
+                f"of {', '.join(repr(str(_)) for _ in attr_type.__members__.values())}.\n"
+                f"Failed to parse '{conf_data}'"
+            )
+            return
+
     elif attr_type == str:
         attr_value = conf_data
     elif attr_type == LongString:
@@ -1396,6 +1453,8 @@ def format_for_version(conf_string: str, gui_mode: bool) -> str:
         conf_string = re.sub(r"^\s*\[GUI: (.*?)]\s*$", r"\1", conf_string, flags=re.MULTILINE)
         conf_string = re.sub(r"\[CLI: (.*?)]", "", conf_string)
         conf_string = re.sub(r"\[GUI: (.*?)]", r"\1", conf_string)
+        # Additionally, strip out repeated spaces.
+        conf_string = re.sub(r"  +", " ", conf_string)
     else:
         conf_string = re.sub(r"^\s*\[GUI: (.*?)]\s*$", "", conf_string, flags=re.MULTILINE)
         conf_string = re.sub(r"^\s*\[CLI: (.*?)]\s*$", r"\1", conf_string, flags=re.MULTILINE)

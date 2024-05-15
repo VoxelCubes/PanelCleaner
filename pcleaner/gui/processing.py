@@ -1,4 +1,5 @@
 import itertools
+import csv
 from copy import deepcopy, copy
 from functools import partial
 from io import StringIO
@@ -9,7 +10,6 @@ from typing import Callable
 import torch
 from PIL import Image
 from loguru import logger
-from manga_ocr import MangaOcr
 from natsort import natsorted
 
 import pcleaner.config as cfg
@@ -26,6 +26,7 @@ import pcleaner.structures as st
 import pcleaner.gui.gui_utils as gu
 from pcleaner.helpers import tr
 from pcleaner import model_downloader as md
+import pcleaner.ocr.ocr as ocr
 
 
 def generate_output(
@@ -33,7 +34,7 @@ def generate_output(
     target_outputs: list[imf.Output],
     output_dir: Path | None,
     config: cfg.Config,
-    ocr_model: MangaOcr | None,
+    ocr_processor: ocr.OcrProcsType | None,
     progress_callback: imf.ProgressSignal,
     abort_flag: wt.SharableFlag,
     debug: bool = False,
@@ -63,7 +64,7 @@ def generate_output(
         the full run parameters.
     :param output_dir: The directory to save the outputs to. If None, the output remains in the cache directory.
     :param config: The config to use.
-    :param ocr_model: The ocr model to use.
+    :param ocr_processor: The ocr models to use.
     :param progress_callback: A callback to report progress to the gui.
     :param abort_flag: A flag that is set to True when the thread should abort.
     :param debug: If True, debug messages are printed.
@@ -183,6 +184,7 @@ def generate_output(
                 step_text_detector_images,
                 cache_dir,
                 no_text_detection=target_output == imf.Output.input,
+                visualize_raw_boxes=True,
                 partial_progress_data=partial(
                     imf.ProgressData,
                     len(step_text_detector_images),
@@ -201,6 +203,7 @@ def generate_output(
         for image_obj in step_text_detector_images:
             update_output(image_obj, imf.Output.input, ".png")
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
+            update_output(image_obj, imf.Output.raw_boxes, "_raw_boxes.png")
             update_output(image_obj, imf.Output.raw_json, "#raw.json")
 
         progress_callback.emit(
@@ -243,7 +246,7 @@ def generate_output(
                     preprocessor_conf=profile.preprocessor,
                     cache_masks=target_output in imf.step_to_output[imf.Step.preprocessor]
                     or output_dir is None,
-                    mocr=ocr_model if profile.preprocessor.ocr_enabled else None,
+                    mocr=ocr_processor if profile.preprocessor.ocr_enabled else None,
                 )
 
                 if ocr_analytic is not None:
@@ -754,7 +757,7 @@ def perform_ocr(
     output_file: Path | None,
     csv_output: bool,
     config: cfg.Config,
-    ocr_model: MangaOcr | None,
+    ocr_processor: ocr.OcrProcsType | None,
     progress_callback: imf.ProgressSignal,
     abort_flag: wt.SharableFlag,
     debug: bool = False,
@@ -776,7 +779,7 @@ def perform_ocr(
     :param output_file: The directory to save the outputs to. If None, the output remains in the cache directory.
     :param csv_output: If True, the output is written as a csv file.
     :param config: The config to use.
-    :param ocr_model: The ocr model to use.
+    :param ocr_processor: The ocr processors to use.
     :param progress_callback: A callback to report progress to the gui.
     :param abort_flag: A flag that is set to True when the thread should abort.
     :param debug: If True, debug messages are printed.
@@ -895,6 +898,7 @@ def perform_ocr(
                 step_text_detector_images,
                 cache_dir,
                 no_text_detection=False,
+                visualize_raw_boxes=True,
                 partial_progress_data=partial(
                     imf.ProgressData,
                     len(step_text_detector_images),
@@ -913,6 +917,7 @@ def perform_ocr(
         for image_obj in step_text_detector_images:
             update_output(image_obj, imf.Output.input, ".png")
             update_output(image_obj, imf.Output.ai_mask, "_mask.png")
+            update_output(image_obj, imf.Output.raw_boxes, "_raw_boxes.png")
             update_output(image_obj, imf.Output.raw_json, "#raw.json")
 
     # ============================================== Preprocessing ==============================================
@@ -939,7 +944,7 @@ def perform_ocr(
             json_file_path,
             preprocessor_conf=profile.preprocessor,
             cache_masks=False,
-            mocr=ocr_model if profile.preprocessor.ocr_enabled else None,
+            mocr=ocr_processor if profile.preprocessor.ocr_enabled else None,
             cache_masks_ocr=True,
             performing_ocr=True,
         )
@@ -982,22 +987,15 @@ def perform_ocr(
 
     buffer = StringIO()
     if csv_output:
-        buffer.write("filename,startx,starty,endx,endy,text\n")
+        writer = csv.writer(buffer, quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["filename", "startx", "starty", "endx", "endy", "text"])
 
         for path, bubble, box in path_texts_coords:
-            path = str(path)
-            # Escape commas where necessary.
-            if "," in path:
-                path = f'"{path}"'
-
-            if "," in bubble:
-                bubble = f'"{bubble}"'
-
             if "\n" in bubble:
                 logger.warning(f"Detected newline in bubble: {path} {bubble} {box}")
                 bubble = bubble.replace("\n", "\\n")
+            writer.writerow([path, *box.as_tuple, bubble])
 
-            buffer.write(f"{path},{box},{bubble}\n")
         text_out = buffer.getvalue()
     else:
         # Place the file path on it's own line, and only if it's different from the previous one.
