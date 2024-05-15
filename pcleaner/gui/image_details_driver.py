@@ -21,7 +21,8 @@ from pcleaner.gui.CustomQ.CBadgeButton import BadgeButton
 from pcleaner.gui.ui_generated_files.ui_ImageDetails import Ui_ImageDetails
 import pcleaner.ocr.ocr as ocr
 
-THUMBNAIL_SIZE = 180, 180
+# The maximum size, will be smaller on one side if the image is not square.
+THUMBNAIL_SIZE = (180, 180)
 PUSHBUTTON_THUMBNAIL_MARGIN = 8
 PUSHBUTTON_THUMBNAIL_SEPARATION = 8
 SIDEBAR_COLUMNS = 2
@@ -78,6 +79,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
     button_map: dict[BadgeButton, imf.Output]
 
+    # This set is just to figure out what labels might need extra horizontal space
+    # in the case of long translations. Apparently the actual parent widget is
+    # too retarded to keep track of its children, so we need to do it ourselves.
+    output_labels: set[Qw.QLabel]
+
     freshness_tracker: FileFreshnessTracker
 
     config: cfg.Config
@@ -127,7 +133,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.image_obj = image_obj
         self.config = config
         self.shared_ocr_model = shared_ocr_model
-        self.button_map = self.create_sidebar_buttons()
+        self.button_map, self.output_labels = self.create_sidebar_buttons()
 
         self.first_load = True
         self.thread_queue = thread_queue
@@ -174,11 +180,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         self.pushButton_menu.setMenu(self.menu)
 
-    def create_sidebar_buttons(self) -> dict[BadgeButton, imf.Output]:
+    def create_sidebar_buttons(self) -> tuple[dict[BadgeButton, imf.Output], set[Qw.QLabel]]:
         """
         Parse the image object's outputs to create a list of buttons in the side panel.
 
-        Returns: A map of buttons to outputs.
+        Returns: A map of buttons to outputs and the labels that were created.
         """
 
         current_button_layout: Qw.QGridLayout
@@ -197,12 +203,15 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
             # Create a title as a separate label widget and stack them vertically.
             if title is not None:
+                nonlocal labels
                 layout = Qw.QVBoxLayout()
                 layout.setContentsMargins(0, 0, 0, 0)
                 layout.setSpacing(2)  # The small spacing between the label and the image.
                 label = Qw.QLabel(title)
+                label.setObjectName("output_label")
                 layout.addWidget(label)
                 layout.addWidget(button)
+                labels.add(label)
                 # Wrap the layout in a widget so it can be added to the grid layout.
                 button_widget = Qw.QWidget()
                 button_widget.setLayout(layout)
@@ -232,12 +241,14 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             # Add a fresh grid layout for the buttons.
             nonlocal current_button_layout, current_button_index
             current_button_layout = Qw.QGridLayout()
+            current_button_layout.setObjectName(f"gridLayout_{title}")
             current_button_layout.setContentsMargins(0, 0, 0, 0)
             current_button_layout.setSpacing(PUSHBUTTON_THUMBNAIL_SEPARATION)
             current_button_index = 0
             self.sidebar_layout.addLayout(current_button_layout)
 
         buttons = {}
+        labels = set()
         for output, proc_output in self.image_obj.outputs.items():
             # Add a step name label if it has changed and is not None.
             # Outputs with a none step name are not shown.
@@ -255,7 +266,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             new_button = add_button(button_title)
             buttons[new_button] = output
 
-        return buttons
+        return buttons, labels
 
     def changeEvent(self, event: Qc.QEvent) -> None:
         """
@@ -275,7 +286,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             # Empty out the sidebar layout.
             self._clear_all_from_layout(self.sidebar_layout)
             # Re-create the buttons.
-            self.button_map = self.create_sidebar_buttons()
+            self.button_map, self.output_labels = self.create_sidebar_buttons()
             self.init_sidebar()
             self.load_image_thumbnails()
 
@@ -325,11 +336,20 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             thumbnail_height = THUMBNAIL_SIZE[1]
             thumbnail_width = int(thumbnail_height * ratio)
 
+        # To account for long translation strings, check what the widest label is.
+        # Ignoring the step name labels though, since they have double the width, they
+        # are unlikely to be cut off.
+        max_label_width = 0
+        for label in self.output_labels:
+            max_label_width = max(max_label_width, label.sizeHint().width())
+
+        column_width = max(thumbnail_width, max_label_width)
+
         # Adjust the width of the scroll area to fit the buttons.
         scrollbar_width = Qw.QApplication.style().pixelMetric(Qw.QStyle.PM_ScrollBarExtent)
         margins_left, _, margins_right, _ = self.sidebar_layout.getContentsMargins()
         self.scrollArea.setFixedWidth(
-            thumbnail_width * SIDEBAR_COLUMNS
+            column_width * SIDEBAR_COLUMNS
             + PUSHBUTTON_THUMBNAIL_MARGIN * SIDEBAR_COLUMNS
             + PUSHBUTTON_THUMBNAIL_SEPARATION * (SIDEBAR_COLUMNS - 1)
             + scrollbar_width
@@ -338,6 +358,11 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             + 2,  # Arbitrary extra margin to make it look "right".
         )
         logger.debug(f"Setting scroll area width to {self.scrollArea.width()}")
+
+        # Make each grid layout column take up the same column width.
+        for grid_laypout in self.sidebar_layout.findChildren(Qw.QGridLayout):
+            for i in range(grid_laypout.columnCount()):
+                grid_laypout.setColumnMinimumWidth(i, column_width)
 
         # Resize all the buttons.
         # self.scrollArea.setFixedWidth()
