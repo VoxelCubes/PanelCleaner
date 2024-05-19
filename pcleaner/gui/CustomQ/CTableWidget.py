@@ -19,7 +19,7 @@ class CTableWidget(Qw.QTableWidget):
         self.setRowCount(0)
         self.itemSelectionChanged.emit()
 
-    def currentText(self, col: int) -> None:
+    def currentText(self, col: int) -> str:
         return self.item(self.currentRow(), col).text()
 
     def setCurrentText(self, col: int, text: str) -> None:

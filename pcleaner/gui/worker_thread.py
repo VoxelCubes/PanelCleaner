@@ -141,7 +141,7 @@ class Worker(QRunnable):
                 result = self.fn(*self.args, **self.kwargs)
             except Abort:
                 self.signals.aborted.emit((self.args, self.kwargs))
-            except:
+            except Exception:
                 # traceback.print_exc()  # Disabled because we handle showing the error in whatever
                 # called the worker. This also prevents the runtime errors from getting printed, which
                 # are caught in an outer try block.

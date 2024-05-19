@@ -1,7 +1,8 @@
-<!DOCTYPE RCC><RCC version="1.0"><qresource prefix="/translations">
+<RCC><qresource prefix="/translations">
     <file>PanelCleaner_en_US.qm</file>
     <file>PanelCleaner_de_DE.qm</file>
-    <file>PanelCleaner_es_ES.qm</file>
     <file>PanelCleaner_fr_FR.qm</file>
+    <file>PanelCleaner_es_ES.qm</file>
     <file>PanelCleaner_tr_TR.qm</file>
+    <file>PanelCleaner_bg_BG.qm</file>
 </qresource></RCC>

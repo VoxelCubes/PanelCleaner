@@ -2,6 +2,7 @@ import os
 import platform
 import sys
 from io import StringIO
+from PIL import Image
 
 import PySide6
 import PySide6.QtGui as Qg
@@ -12,16 +13,27 @@ import torch
 from docopt import docopt
 
 import pcleaner.cli_utils as cu
+import pcleaner.gui.gui_utils as gu
 import pcleaner.config as cfg
 from pcleaner import __display_name__, __version__
 from pcleaner.gui.mainwindow_driver import MainWindow
 
+# TODO Things to copy from deepqt:
+# - the testing
+# - the sys.excepthook
+# - the gather themes (potentially)
 
 # This import is needed to load the icons.
-import pcleaner.gui.rc_generated_files.rc_icons
-import pcleaner.gui.rc_generated_files.rc_theme_icons
-import pcleaner.gui.rc_generated_files.rc_themes
-import pcleaner.gui.rc_generated_files.rc_translations
+if platform.system() == "Windows":
+    import pcleaner.gui.rc_generated_files.rc_windows_icons
+    import pcleaner.gui.rc_generated_files.rc_windows_theme_icons
+    import pcleaner.gui.rc_generated_files.rc_windows_themes
+    import pcleaner.gui.rc_generated_files.rc_windows_translations
+else:
+    import pcleaner.gui.rc_generated_files.rc_icons
+    import pcleaner.gui.rc_generated_files.rc_theme_icons
+    import pcleaner.gui.rc_generated_files.rc_themes
+    import pcleaner.gui.rc_generated_files.rc_translations
 
 
 def launch(files_to_open: list[str], debug: bool = False) -> None:
@@ -32,12 +44,35 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     :param debug: Whether to enable debug mode.
     """
 
+    # Ensure that the resources are loaded.
+    # Due to them not being utilized directly, the import statements may be
+    # removed by an errant code formatter
+    if platform.system() == "Windows":
+        assert pcleaner.gui.rc_generated_files.rc_windows_icons
+        assert pcleaner.gui.rc_generated_files.rc_windows_theme_icons
+        assert pcleaner.gui.rc_generated_files.rc_windows_themes
+        assert pcleaner.gui.rc_generated_files.rc_windows_translations
+    else:
+        assert pcleaner.gui.rc_generated_files.rc_icons
+        assert pcleaner.gui.rc_generated_files.rc_theme_icons
+        assert pcleaner.gui.rc_generated_files.rc_themes
+        assert pcleaner.gui.rc_generated_files.rc_translations
+
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
     # Log up to 1MB to the log file.
     # loguru.logfile(str(cu.get_log_path()), maxBytes=2**30, backupCount=1, loglevel=loguru.DEBUG)
 
     # Set up file logging.
     logger.add(str(cu.get_log_path()), rotation="10 MB", retention="1 week", level="DEBUG")
+
+    # Set up a preliminary exception handler so that this still shows up in the log.
+    # Once the gui is up and running it'll be replaced with a call to the gui's error dialog.
+    def exception_handler(exctype, value, traceback) -> None:
+        logger.opt(depth=1, exception=(exctype, value, traceback)).critical(
+            "An uncaught exception was raised"
+        )
+
+    sys.excepthook = exception_handler
 
     logger.info("\n" + cfg.STARTUP_MESSAGE)
     buffer = StringIO()
@@ -80,8 +115,6 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
 
     translator = Qc.QTranslator(app)
 
-    app.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
-
     # Load translations.
     path = Qc.QLibraryInfo.location(Qc.QLibraryInfo.TranslationsPath)
     if translator.load(locale, "qt", "_", path):
@@ -121,7 +154,7 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
         window.show()
         sys.exit(app.exec())
     except Exception:
-        logger.opt(exception=True).critical("Failed to initialize the main window.")
+        gu.show_exception(None, "Failed to launch", "Failed to initialize the main window.")
     finally:
         logger.info(cfg.SHUTDOWN_MESSAGE + "\n")
 
@@ -139,6 +172,9 @@ def main():
     """
     args = docopt(docopt_doc, version=f"Panel Cleaner {__version__}")
     launch(args.image_path, args.debug)
+
+    # Allow loading of large images.
+    Image.MAX_IMAGE_PIXELS = 2**32
 
 
 if __name__ == "__main__":

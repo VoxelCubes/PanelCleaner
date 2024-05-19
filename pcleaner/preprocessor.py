@@ -5,11 +5,13 @@ from pathlib import Path
 
 from PIL import Image
 from loguru import logger
-from manga_ocr import MangaOcr
 
 import pcleaner.config as cfg
 import pcleaner.ctd_interface as ctm
 import pcleaner.structures as st
+
+from collections import Counter
+import pcleaner.ocr.ocr as ocr
 
 
 def generate_mask_data(
@@ -33,11 +35,61 @@ def generate_mask_data(
     ctm.model2annotations(config_general, config_detector, model_path, image_path, output_dir)
 
 
+# adapted from https://maxhalford.github.io/blog/comic-book-panel-segmentation/
+# Original algorithm was used to sort panels in reading order, adapted here for balloons,
+# but balloons reading order is a problem that can't really be solved until we can
+# segment the page into panels.
+def are_boxes_aligned(a: st.Box, b: st.Box, axis: int, tolerance: int = 10) -> bool:
+    if axis == 0:  # Horizontal axis, consider vertical alignment with tolerance
+        return (a.y1 - tolerance) < b.y2 and (b.y1 - tolerance) < a.y2
+    else:  # Vertical axis, consider horizontal alignment with tolerance
+        return (a.x1 - tolerance) < b.x2 and (b.x1 - tolerance) < a.x2
+
+
+def cluster_boxes(
+    bboxes: list[st.Box], axis: int = 0, tolerance: int = 10, depth: int = 0
+) -> list[list[st.Box]]:
+    if depth > 10:  # Base case to prevent infinite recursion
+        return [bboxes]
+
+    clusters = []
+    for bbox in bboxes:
+        for cluster in clusters:
+            if any(are_boxes_aligned(b, bbox, axis=axis, tolerance=tolerance) for b in cluster):
+                cluster.append(bbox)
+                break
+        else:
+            clusters.append([bbox])
+
+    # Sort clusters based on the first box in each cluster
+    if axis == 0:  # Horizontal axis, sort by top edge (y1)
+        clusters.sort(key=lambda c: c[0].y1)
+    else:  # Vertical axis, sort by left edge (x1)
+        clusters.sort(key=lambda c: c[0].x1)
+
+    # Recursively cluster within each cluster, flipping axis and passing tolerance
+    for i, cluster in enumerate(clusters):
+        if len(cluster) > 1:
+            clusters[i] = cluster_boxes(
+                cluster, axis=1 if axis == 0 else 0, tolerance=tolerance, depth=depth + 1
+            )
+
+    return clusters
+
+
+def flatten(l):
+    for el in l:
+        if isinstance(el, list):
+            yield from flatten(el)
+        else:
+            yield el
+
+
 def prep_json_file(
     json_file_path: Path,
     preprocessor_conf: cfg.PreprocessorConfig,
     cache_masks: bool,
-    mocr: MangaOcr | None = None,
+    mocr: ocr.OcrProcsType | None = None,
     cache_masks_ocr: bool = False,
     performing_ocr: bool = False,
 ) -> st.OCRAnalytic | None:
@@ -60,7 +112,7 @@ def prep_json_file(
     :param json_file_path: Path to the json file.
     :param preprocessor_conf: Preprocessor configuration, part of the profile.
     :param cache_masks: Whether to cache the masks.
-    :param mocr: [Optional] Manga ocr object.
+    :param mocr: [Optional] OCR processors mapping.
     :param cache_masks_ocr: [Optional] Whether to cache the masks early for ocr.
     :param performing_ocr: [Optional] Whether the actual output is for ocr, not cleaning.
     :return: Analytics data if the manga ocr object is given, None otherwise.
@@ -78,14 +130,15 @@ def prep_json_file(
     original_path: str = json_data["original_path"]
     scale: float = json_data["scale"]
     boxes: list[st.Box] = []
+    page_langs: list[st.DetectedLang] = []
 
     # Define permitted languages based on strictness.
     # Since the OCR model is only trained to recognize Japanese,
     # we need to discard anything that isn't, and if strict, also
     # those that are unknown (likely a mix).
-    language_whitelist = ["ja"]
+    language_whitelist = [st.DetectedLang.JA, st.DetectedLang.ENG]
     if not preprocessor_conf.ocr_strict_language:
-        language_whitelist.append("unknown")
+        language_whitelist.append(st.DetectedLang.UNKNOWN)
 
     for data in json_data["blk_list"]:
         # Check box language.
@@ -100,7 +153,24 @@ def prep_json_file(
         if data["language"] == "unknown" and box.area < preprocessor_conf.suspicious_box_min_size:
             continue
 
+        page_langs.append(data["language"])
         boxes.append(box)
+    page_lang: st.DetectedLang = (
+        Counter(page_langs).most_common(1)[0][0] if boxes else st.DetectedLang.UNKNOWN
+    )
+    logger.debug(f"Detected lang: {page_lang}")
+
+    # reading_order = preprocessor_conf.reading_order
+    # if page_lang == st.DetectedLang.ENG and reading_order in [cfg.ReadingOrder.COMIC, cfg.ReadingOrder.AUTO]:
+    #     try:
+    #         sorted_boxes = cluster_boxes(boxes)
+    #         boxes = list(flatten(sorted_boxes))
+    #     except RecursionError:  # TODO: clustering recurses sometimes, so we try to sort the boxes manually
+    #         logger.debug(f"Boxes clustering failed, sorting manually")
+    #         boxes.sort(key=lambda b: b.y1 + 0.4 * b.x1)
+    # else:
+    #     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
+    #     boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
 
     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
     boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
@@ -115,6 +185,21 @@ def prep_json_file(
     page_data.grow_boxes(preprocessor_conf.box_padding_initial, st.BoxType.BOX)
     page_data.right_pad_boxes(preprocessor_conf.box_right_padding_initial, st.BoxType.BOX)
 
+    reading_order = preprocessor_conf.reading_order
+    if page_lang == st.DetectedLang.ENG and reading_order in [
+        cfg.ReadingOrder.COMIC,
+        cfg.ReadingOrder.AUTO,
+    ]:
+        # try:
+        #     sorted_boxes = cluster_boxes(page_data.boxes)
+        #     page_data.boxes = list(flatten(sorted_boxes))
+        # except RecursionError:  # TODO: clustering recurses sometimes, so we try to sort the boxes manually
+        #     logger.debug(f"Boxes clustering failed, sorting manually")
+        page_data.boxes.sort(key=lambda b: b.y1 + 0.4 * b.x1)
+    # else:
+    #     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
+    #     page_data.boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
+
     # Draw the boxes on the image and save it.
     if cache_masks or cache_masks_ocr:
         page_data.visualize(Path(page_data.image_path))
@@ -124,7 +209,7 @@ def prep_json_file(
     if mocr is not None:
         page_data, analytic = ocr_check(
             page_data,
-            mocr,
+            mocr[page_lang],
             preprocessor_conf.ocr_max_size,
             preprocessor_conf.ocr_blacklist_pattern,
         )
@@ -160,7 +245,7 @@ def prep_json_file(
 
 
 def ocr_check(
-    page_data: st.PageData, mocr: MangaOcr, max_box_size: int, ocr_blacklist_pattern: str
+    page_data: st.PageData, mocr: ocr.OCRModel, max_box_size: int, ocr_blacklist_pattern: str
 ) -> tuple[st.PageData, st.OCRAnalytic]:
     """
     Run OCR on small boxes to determine whether they contain mere symbols,
@@ -185,18 +270,22 @@ def ocr_check(
     :return: The modified page data and Analytics data.
     """
     base_image = Image.open(page_data.image_path)
+    img_path = Path(page_data.image_path)
+    outpath = img_path.parent
     scale = page_data.scale
-    candidate_small_bubbles = [box for box in page_data.boxes if box.area < max_box_size]
+    boxes = page_data.boxes
+    candidate_small_bubbles = [box for box in boxes if box.area < max_box_size]
     if not candidate_small_bubbles:
-        return page_data, st.OCRAnalytic(len(page_data.boxes), (), (), ())
+        return page_data, st.OCRAnalytic(len(boxes), (), (), ())
     # Check if the small bubbles only contain symbols.
     # If they do, then they are probably not text.
     # Discard them in that case.
     box_sizes = []
     discarded_box_sizes = []
     discarded_box_texts: list[tuple[Path, str, st.Box]] = []
-    for box in candidate_small_bubbles:
+    for i, box in enumerate(candidate_small_bubbles):
         cutout = base_image.crop(box.as_tuple)
+        # cutout.save(outpath / f"{img_path.stem}_cutout_{i}.png")
         text = mocr(cutout)
         remove = is_not_worth_cleaning(text, ocr_blacklist_pattern)
         box_sizes.append(box.area)
@@ -206,11 +295,11 @@ def ocr_check(
             # They are used for the csv OCR output.
             discarded_box_texts.append((Path(page_data.original_path), text, box.scale(1 / scale)))
             discarded_box_sizes.append(box.area)
-            page_data.boxes.remove(box)
+            boxes.remove(box)
 
     return (
         page_data,
-        st.OCRAnalytic(len(page_data.boxes), box_sizes, discarded_box_sizes, discarded_box_texts),
+        st.OCRAnalytic(len(boxes), box_sizes, discarded_box_sizes, discarded_box_texts),
     )
 
 
@@ -224,6 +313,6 @@ def is_not_worth_cleaning(text: str, blacklist_pattern: str) -> bool:
     :param blacklist_pattern: Regex pattern to match against the text.
     :return: True if the text is not worth cleaning, False otherwise.
     """
-    if re.fullmatch(blacklist_pattern, text):
+    if re.fullmatch(blacklist_pattern, text, re.DOTALL):
         return True
     return False
