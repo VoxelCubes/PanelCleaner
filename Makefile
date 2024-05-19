@@ -56,7 +56,7 @@ refresh-i18n:
 	mkdir -p translations
 	PYTHONPATH=/home/corbin/Repos/PanelCleaner $(PYTHON) translations/profile_extractor.py
 	PYTHONPATH=/home/corbin/Repos/PanelCleaner $(PYTHON) translations/process_steps_extractor.py
-	$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
+	$(I18N_LUPDATE) -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
 		translations/profile_strings.py translations/process_strings.py -source-language en_US -target-language en_US -ts translations/PanelCleaner_source.ts
 
 # Generate .ts files for each language if they don't already exist
@@ -64,7 +64,7 @@ generate-ts:
 	$(foreach lang, $(LANGUAGES), \
 		if [ ! -f translations/PanelCleaner_$(lang).ts ]; then \
 			echo "Generating TS file for: $(lang)"; \
-			$(I18N_LUPDATE) -no-obsolete -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
+			$(I18N_LUPDATE) -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
 			translations/profile_strings.py translations/process_strings.py -source-language en_US -target-language $(lang) -ts translations/PanelCleaner_$(lang).ts; \
 		fi;)
 
