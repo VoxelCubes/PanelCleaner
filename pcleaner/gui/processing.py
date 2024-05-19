@@ -988,7 +988,9 @@ def perform_ocr(
     buffer = StringIO()
     if csv_output:
         writer = csv.writer(buffer, quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(["filename", "startx", "starty", "endx", "endy", "text"])
+        writer.writerow(
+            [tr("filename"), tr("startx"), tr("starty"), tr("endx"), tr("endy"), tr("text")]
+        )
 
         for path, bubble, box in path_texts_coords:
             if "\n" in bubble:
@@ -1016,9 +1018,17 @@ def perform_ocr(
         try:
             output_file.parent.mkdir(parents=True, exist_ok=True)
             output_file.write_text(text_out, encoding="utf-8")
-            buffer.write(f"\n\nSaved detected text to {output_file}")
+            buffer.write(
+                "\n\n" + tr("Saved detected text to {output_file}").format(output_file=output_file)
+            )
         except OSError:
-            buffer.write(f"\n\nFailed to write detected text to {output_file}")
+            # buffer.write(f"\n\nFailed to write detected text to {output_file}")
+            buffer.write(
+                "\n\n"
+                + tr("Failed to write detected text to {output_file}").format(
+                    output_file=output_file
+                )
+            )
             gu.show_exception(None, tr("Save Failed"), tr("Failed to write detected text to file."))
 
     progress_callback.emit(
