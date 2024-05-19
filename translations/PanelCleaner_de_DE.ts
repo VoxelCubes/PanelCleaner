@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="935"/>
+      <location filename="../pcleaner/config.py" line="934"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>standard</translation>
@@ -347,12 +347,12 @@ Seiten mit Fehlern / insgesamt:
       <translation>Übermalungsmodell nicht gefunden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/processing.py" line="1029"/>
+      <location filename="../pcleaner/gui/processing.py" line="1022"/>
       <source>Save Failed</source>
       <translation>Speichern Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/processing.py" line="1029"/>
+      <location filename="../pcleaner/gui/processing.py" line="1022"/>
       <source>Failed to write detected text to file.</source>
       <translation>Der erkannte Text konnte nicht in die Datei geschrieben werden.</translation>
     </message>
@@ -785,93 +785,93 @@ Standardmäßig wird das eingebaute Profil verwendet. Sie können diese Standard
   <context>
     <name>ImageDetailsWidget</name>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="158"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="164"/>
       <source>Copy Image to Clipboard</source>
       <translation>In die Zwischenablage kopieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="164"/>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="522"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="170"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="547"/>
       <source>Export Image</source>
       <translation>Bild exportieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="170"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="176"/>
       <source>OCR Image</source>
       <translation>OCR anwenden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="383"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="408"/>
       <source>Loading Error</source>
       <translation>Fehler beim Laden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="384"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="409"/>
       <source>Failed to load image &apos;{path}&apos;</source>
       <translation>Bild &apos;{path}&apos; konnte nicht geladen werden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="389"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="414"/>
       <source>Generate Me</source>
       <translation>Erzeuge mich</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="412"/>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="427"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="437"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="452"/>
       <source>Impossible Request</source>
       <translation>Unmöglicher Auftrag</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="416"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="441"/>
       <source>Denoising is disabled in the current profile, this output can&apos;t be generated.
 Please enable denoising in the profile settings and try again.</source>
       <translation>Die Entrauschung ist im aktuellen Profil deaktiviert, diese Ausgabe kann nicht erzeugt werden.
 Bitte aktivieren Sie die Entrauschung in den Profileinstellungen und versuchen Sie es erneut.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="431"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="456"/>
       <source>Inpainting is disabled in the current profile, this output can&apos;t be generated.
 Please enable inpainting in the profile settings and try again.</source>
       <translation>Übermalung ist im aktuellen Profil deaktiviert, diese Ausgabe kann nicht erzeugt werden.
 Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es erneut.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="482"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="507"/>
       <source>Image not found.</source>
       <translation>Bild nicht gefunden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="483"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="508"/>
       <source>Image at {path} does not exist:</source>
       <translation>Das Bild bei {path} existiert nicht:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="531"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="556"/>
       <source>Export failed</source>
       <translation>Export fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="532"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="557"/>
       <source>Failed to export image:</source>
       <translation>Bild kann nicht exportiert werden:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="629"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="654"/>
       <source>Output Failed</source>
       <translation>Ausgabe Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="629"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="654"/>
       <source>Output generation failed:</source>
       <translation>Die Erzeugung der Ausgabe ist fehlgeschlagen:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="779"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="804"/>
       <source>Profile check failed</source>
       <translation>Profilprüfung fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="779"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="804"/>
       <source>Profile change check failed:</source>
       <translation>Profiländerungsprüfung fehlgeschlagen:</translation>
     </message>
@@ -982,57 +982,57 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
       <translation>CUDA Aktiviert</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="465"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="464"/>
       <source>Select Output Directory</source>
       <translation>Ausgabeverzeichnis Auswählen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="517"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="516"/>
       <source>Aborting...</source>
       <translation>Abbrechen...</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="582"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="581"/>
       <source>Loading OCR model...</source>
       <translation>OCR-Modell lädt...</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="587"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="586"/>
       <source>Loaded OCR model.</source>
       <translation>OCR-Modell geladen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="599"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="598"/>
       <source>Error</source>
       <translation>Fehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="702"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="701"/>
       <source>Delete Models</source>
       <translation>Modelle Löschen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="706"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="705"/>
       <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
       <translation>Sind Sie sicher, dass Sie die Modelle für maschinelles Lernen löschen wollen? Dadurch werden Reinigung und OCR unmöglich, bis sie erneut heruntergeladen werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="599"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="598"/>
       <source>Encountered error:</source>
       <translation>Ein Fehler ist aufgetreten:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="341"/>
       <source>MPS Enabled</source>
-      <translation type="unfinished">MPS Enabled</translation>
+      <translation>MPS Aktiviert</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="659"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="658"/>
       <source>Multiple Instances</source>
       <translation>Mehrere Instanzen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="665"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="664"/>
       <source>Another instance of Panel Cleaner appears to be running already or the previous instance was killed. Opening a new instance will make the old session unstable.
 
 Continue anyway?</source>
@@ -1041,241 +1041,241 @@ Continue anyway?</source>
 Trotzdem fortfahren?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="666"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="665"/>
       <source>Found process ID in lock file: </source>
       <translation>Prozess-ID in Sperrdatei gefunden: </translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="715"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="714"/>
       <source>Failed to delete models.</source>
       <translation>Modelldaten konnten nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="715"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="714"/>
       <source>Delete Failed</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="721"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="720"/>
       <source>Models Deleted</source>
       <translation>Modelldaten Gelöscht</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="722"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="721"/>
       <source>The models were deleted. Would you like to download them again?</source>
       <translation>Die Modelldaten wurden gelöscht. Möchten Sie sie erneut herunterladen?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="791"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="790"/>
       <source>Not Supported</source>
       <translation>Nicht Unterstützt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="792"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="791"/>
       <source>Unsupported system or package format</source>
       <translation>Dieses System oder diese Installationsmethode sind nicht unterstützt.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="824"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="823"/>
       <source>Restart Required</source>
       <translation>Neustart Erforderlich</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="827"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="826"/>
       <source>The language has been changed. Please restart the application for the changes to take effect.</source>
       <translation>Die Sprache wurde geändert. Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</translation>
     </message>
     <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="836"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="837"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="838"/>
       <source>System Language</source>
       <translation>Systemsprache</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="937"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="936"/>
       <source>Import Profile</source>
       <translation>Profil Importieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="939"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="938"/>
       <source>Profile Files (*.conf)</source>
       <translation>Profildateien (*.conf)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="946"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="945"/>
       <source>Profile Imported</source>
       <translation>Profil Importiert</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="948"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="947"/>
       <source>Import Error</source>
       <translation>Fehler beim Importieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="966"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="965"/>
       <source>Failed to Delete</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="967"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="966"/>
       <source>The default profile cannot be deleted.</source>
       <translation>Das Standardprofil kann nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="971"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="970"/>
       <source>Delete Profile</source>
       <translation>Profil Löschen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="972"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="971"/>
       <source>Are you sure you want to delete the profile {profile_name}?</source>
       <translation>Sind Sie sicher, dass Sie das Profil {profile_name} löschen möchten?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="986"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="985"/>
       <source>Delete Error</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="987"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="986"/>
       <source>Failed to delete the profile.</source>
       <translation>Das Profil konnte nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1051"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1050"/>
       <source>The profile &apos;{profile}&apos; has unsaved changes.
 Switching profiles will discard changes to the current profile.</source>
       <translation>Das Profil &apos;{profile}&apos; hat ungespeicherte Änderungen.
 Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworfen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1054"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1053"/>
       <source>Unsaved changes</source>
       <translation>Ungespeicherte Änderungen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1083"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1211"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1082"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1210"/>
       <source>Load Error</source>
       <translation>Fehler beim Laden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1083"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1211"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1082"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1210"/>
       <source>Failed to load profile:</source>
       <translation>Das Profil konnte nicht geladen werden:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1104"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1103"/>
       <source>&lt;html&gt;Can&apos;t use Tesseract to perform OCR. Reverting to manga-ocr.
 Please see the instructions to install Tesseract correctly &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;Can&apos;t use Tesseract to perform OCR. Reverting to manga-ocr.
-Please see the instructions to install Tesseract correctly &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</translation>
+      <translation>&lt;&apos;html&gt;Tesseract konnte nicht für OCR ausgeführt werden. Manga-ocr wird wieder verwendet.
+Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;hier&lt;/a&gt; oder verwenden Sie weiterhin das Standardmodell.&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1167"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1166"/>
       <source>Profile Created</source>
       <translation>Profil Erstellt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1170"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1169"/>
       <source>Create Error</source>
       <translation>Fehler beim Erstellen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1179"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1178"/>
       <source>Failed to save profile to {profile_path}</source>
       <translation>Das Profil konnte nicht in {profile_path} gespeichert werden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1183"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1198"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1182"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1197"/>
       <source>Save Error</source>
       <translation>Fehler beim Speichern</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1184"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1183"/>
       <source>Failed to save profile.</source>
       <translation>Das Profil konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1190"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1189"/>
       <source>Profile saved to {profile_path}</source>
       <translation>Profil gespeichert in {profile_path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1195"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1194"/>
       <source>Failed to save config.</source>
       <translation>Konfiguration konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1199"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1198"/>
       <source>Failed to save the new profile to the configuration file.</source>
       <translation>Das neue Profil konnte nicht in der Konfigurationsdatei gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1257"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1256"/>
       <source>No Files</source>
       <translation>Keine Dateien</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1262"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1261"/>
       <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
       <translation>Keine Dateien zu verarbeiten. Sie können Dateien in der Mitte des Fensters ablegen oder über die Menüleiste hinzufügen: Dateien -&gt; Dateien hinzufügen oder Ordner hinzufügen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1307"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1306"/>
       <source>No Outputs</source>
       <translation>Keine Ausgaben</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1310"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1309"/>
       <source>No outputs were requested. Please select at least one output before cleaning.</source>
       <translation>Es wurden keine Ausgaben angefordert. Bitte wählen Sie vor der Reinigung mindestens eine Ausgabe aus.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1321"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1320"/>
       <location filename="../ui_files/Mainwindow.ui" line="625"/>
       <source>cleaned</source>
       <translation>gereinigt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1399"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1398"/>
       <source>File Exists</source>
       <translation>Datei Bereits Vorhanden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1400"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1399"/>
       <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
       <translation>Die Datei &apos;{output_path}&apos; existiert bereits. Wollen Sie diese überschreiben?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1460"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1459"/>
       <source>Processing Finished</source>
       <translation>Verarbeitung Beendet</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1461"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1460"/>
       <source>Finished processing all files.</source>
       <translation>Die Verarbeitung aller Dateien ist abgeschlossen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1465"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1464"/>
       <source>Processing Aborted</source>
       <translation>Abbruch</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1465"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1464"/>
       <source>Processing aborted.</source>
       <translation>Die Verarbeitung wurde abgebrochen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1478"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1477"/>
       <source>Processing Error</source>
       <translation>Verarbeitungsfehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1479"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1478"/>
       <source>Encountered an error while processing files.</source>
       <translation>Bei der Verarbeitung von Dateien ist ein Fehler aufgetreten.</translation>
     </message>
@@ -1731,13 +1731,13 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
       <location filename="process_strings.py" line="23"/>
       <source>The unfiltered box data generated by the AI.</source>
       <comment>Step description in the image details view, step: Text Detection, output: Raw Boxes</comment>
-      <translation type="unfinished">The unfiltered box data generated by the AI.</translation>
+      <translation>Die von der KI erzeugten ungefilterten Feld-Daten.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="25"/>
       <source>Raw Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Raw Boxes</translation>
+      <translation>Rohe Felder</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="26"/>
@@ -2035,10 +2035,10 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="48"/>
-      <source>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. DO NOT report issues about this problem, as it&apos;s very hardware-dependent!</source>
-      <oldsource>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk.</oldsource>
+      <source>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. &lt;br&gt;DO NOT report issues about this setting, as it&apos;s entirely hardware-dependent!</source>
+      <oldsource>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. DO NOT report issues about this problem, as it&apos;s very hardware-dependent!</oldsource>
       <comment>Profile comment in Text Detector</comment>
-      <translation type="unfinished">Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. DO NOT report issues about this problem, as it&apos;s very hardware-dependent!</translation>
+      <translation>Anzahl der Modelle, die parallel ausgeführt werden sollen. Dies ist nützlich, wenn Sie über genügend RAM (oder VRAM bei CUDA) verfügen, um mehrere Modelle gleichzeitig auszuführen. Dies erhöht natürlich die Geschwindigkeit des Prozesses, kann aber auch Ihren Computer zum Absturz bringen, wenn Sie Ihre Hardware überschätzen. Ich empfehle, 1 Modell pro 2 GB verfügbaren Speicher oder 1 Modell pro 50 Bilder zu verwenden. Hinweis: Dies wird ignoriert, wenn weniger als 50 Dateien verarbeitet werden, da sich der Overhead des Starts mehrerer Modelle darunter nicht lohnt. Warnung: Dies kann zur Instabilität des Programms führen, die Verwendung erfolgt auf eigene Gefahr. &lt;br&gt;Berichten Sie NICHT über Probleme mit dieser Einstellung, da sie vollständig hardwareabhängig ist!</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="50"/>
@@ -2110,37 +2110,37 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="72"/>
       <source>Whether to use Tesseract to perform OCR tasks.&lt;br&gt; If checked, Tesseract OCR can be used for text extraction, if available.&lt;br&gt; If unchecked, the built-in OCR model (manga-ocr) is always used, which is best suited for vertical Japanese text.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Whether to use Tesseract to perform OCR tasks.&lt;br&gt; If checked, Tesseract OCR can be used for text extraction, if available.&lt;br&gt; If unchecked, the built-in OCR model (manga-ocr) is always used, which is best suited for vertical Japanese text.</translation>
+      <translation>Ob Tesseract zur Durchführung von OCR-Aufgaben verwendet werden soll.&lt;br&gt; Wenn hier ein Häckchen gesetzt ist, kann Tesseract OCR für die Textextraktion verwendet werden, sofern verfügbar.&lt;br&gt; Wenn dieses Häckchen nicht gesetzt ist, wird immer das integrierte OCR-Modell (manga-ocr) verwendet, das sich am besten für vertikalen japanischen Text eignet.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="74"/>
       <source>OCR Use Tesseract</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Use Tesseract</translation>
+      <translation>OCR Tesseract verwenden</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="76"/>
       <source>Specifies which engine to use for performing OCR.&lt;br&gt; - auto: Automatically selects the OCR engine based on the detected language of each text block within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.&lt;br&gt; - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition tasks. Best suited for vertical Japanese text.&lt;br&gt; - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a versatile option that supports English and multiple other languages.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Specifies which engine to use for performing OCR.&lt;br&gt; - auto: Automatically selects the OCR engine based on the detected language of each text block within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.&lt;br&gt; - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition tasks. Best suited for vertical Japanese text.&lt;br&gt; - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a versatile option that supports English and multiple other languages.</translation>
+      <translation>Gibt an, welche Engine für die OCR verwendet werden soll.&lt;br&gt; - auto: Wählt automatisch die OCR-Engine auf der Grundlage der erkannten Sprache jedes Textblocks im Bild aus. Verwendet Manga Ocr für japanischen Text, Tesseract für englischen oder unbekannten Text.&lt;br&gt; - mangaocr: Zwingt Panel Cleaner, das eingebaute Manga-Ocr-Modell für alle Texterkennungsaufgaben zu verwenden. Am besten geeignet für vertikalen japanischen Text.&lt;br&gt; - tesseract: Zwingt Panel Cleaner zur Verwendung von Tesseract OCR für alle Texterkennungsaufgaben. Dies ist eine vielseitige Option, die Englisch und mehrere andere Sprachen unterstützt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="78"/>
       <source>OCR Engine</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Engine</translation>
+      <translation>OCR-Engine</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="80"/>
       <source>Defines the reading order for processing and sorting text boxes on the entire page, not individual text blocks. This global setting influences how text boxes are ordered and presented for further processing.&lt;br&gt; - auto: Detects the reading order based on the detected language of each text block within the page.&lt;br&gt; - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.&lt;br&gt; - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.&lt;br&gt; Choose based on the predominant layout of your content.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Defines the reading order for processing and sorting text boxes on the entire page, not individual text blocks. This global setting influences how text boxes are ordered and presented for further processing.&lt;br&gt; - auto: Detects the reading order based on the detected language of each text block within the page.&lt;br&gt; - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.&lt;br&gt; - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.&lt;br&gt; Choose based on the predominant layout of your content.</translation>
+      <translation>Legt die Lesereihenfolge für die Verarbeitung und Sortierung von Textfeldern auf der gesamten Seite fest, nicht für einzelne Textblöcke. Diese globale Einstellung beeinflusst, wie Textfelder geordnet und für die weitere Verarbeitung dargestellt werden.&lt;br&gt; - auto: Erkennt die Lesereihenfolge anhand der erkannten Sprache der einzelnen Textblöcke auf der Seite.&lt;br&gt; - manga: Reihenfolge von rechts nach links, von oben nach unten. Geeignet für japanische Manga.&lt;br&gt; - comic: Von links nach rechts, von oben nach unten. Geeignet für westliche Comics und Texte.&lt;br&gt; Wählen Sie nach dem vorherrschenden Layout Ihres Inhalts.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="82"/>
       <source>Reading Order</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Reading Order</translation>
+      <translation>Reihenfolge</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="84"/>
@@ -2413,9 +2413,10 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="226"/>
-      <source>After inpainting, cut the result out of the original image to prevent the inpaitning from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</source>
+      <source>After inpainting, cut the result out of the original image to prevent the inpainting from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</source>
+      <oldsource>After inpainting, cut the result out of the original image to prevent the inpaitning from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</oldsource>
       <comment>Profile comment in Inpainter</comment>
-      <translation>Nach dem Übermalen wird ein begrenzter Bereich aus dem Originalbild ausgeschnitten, um zu verhindern, dass sich das Übermalen auf den Rest des Bildes auswirkt. Dadurch wird sichergestellt, dass das Originalbild so weit wie möglich erhalten bleibt. Dieser Radius wird um den endgültigen Übermalungsradius herum hinzugefügt, da das Übermalungsmodell einige Pixel außerhalb des ihm zugewiesenen Bereichs verändert.</translation>
+      <translation type="unfinished">After inpainting, cut the result out of the original image to prevent the inpainting from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="228"/>
