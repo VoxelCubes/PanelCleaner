@@ -88,10 +88,8 @@ Failed to save the file to {save_path}</source>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="436"/>
       <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Грешка при изтеглянето на файл от Url: {url}
+Съдържанието на файла е различно от очакваното.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="65"/>
@@ -218,10 +216,7 @@ Removed bubbles:
     <message>
       <location filename="../pcleaner/analytics.py" line="323"/>
       <source>Average border deviation</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Средно гранично отклонение</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="325"/>
@@ -276,28 +271,21 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/analytics.py" line="435"/>
       <source>Minimum deviation to denoise</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Минимално отклонение за денонозация</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="437"/>
       <source>Maximum allowed deviation</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Максимално допустимо отклонение</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="439"/>
       <source>Standard deviation around masks:
 
 </source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Стандартно отклонение около маските:
+
+</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="536"/>
@@ -346,10 +334,7 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="119"/>
       <source>File Error</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Грешка във файла</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="119"/>
@@ -369,10 +354,7 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/gui/processing.py" line="1022"/>
       <source>Failed to write detected text to file.</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Не успя да запише открития текст във файла.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="375"/>
@@ -569,10 +551,7 @@ You may need to log out and log back in (or restart) for the changes to take eff
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="217"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="223"/>
       <source>Uninstallation successful</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Успешно деинсталиране</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
@@ -588,10 +567,7 @@ You may need to log out and log back in (or restart) for the changes to take eff
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="229"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="248"/>
       <source>Uninstallation failed</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Деинсталирането е неуспешно</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="230"/>
@@ -669,10 +645,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="252"/>
       <source>Duplicate file</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Дублиращ се файл</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="253"/>
@@ -747,11 +720,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="670"/>
       <source>Dispatch Failed</source>
-      <translation>
-            
-            
-            
-        </translation>
+      <translation>Неуспешно изпращане</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="679"/>
@@ -789,10 +758,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="185"/>
       <source>Zoom to fit</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Увеличаване, за да се побере</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="205"/>
@@ -896,10 +862,7 @@ Please enable inpainting in the profile settings and try again.</source>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="654"/>
       <source>Output generation failed:</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Генерирането на изхода е неуспешно:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="804"/>
@@ -927,7 +890,7 @@ Please enable inpainting in the profile settings and try again.</source>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="32"/>
       <source>View Logs:</source>
-      <translation>#Виж Логовете:</translation>
+      <translation>Виж Логовете:</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="62"/>
@@ -942,10 +905,7 @@ Please enable inpainting in the profile settings and try again.</source>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="114"/>
       <source>Open Issue Tracker</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Към тракера за проблеми</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="125"/>
@@ -1693,10 +1653,7 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="281"/>
       <source>ETA</source>
       <comment>estimated time of completion</comment>
-      <translation>
-            
-            
-        </translation>
+      <translation>Остават</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="292"/>
@@ -1720,10 +1677,7 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
     <message>
       <location filename="../ui_files/NewProfile.ui" line="35"/>
       <source>Use the default location</source>
-      <translation>
-            
-            
-        </translation>
+      <translation>Използвайте местоположението по подразбиране</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="45"/>
@@ -2314,7 +2268,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="profile_strings.py" line="126"/>
       <source>Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</source>
       <comment>Profile comment in Masker</comment>
-      <translation>++ Минимална дебелина на маската.о Това е като стъпка на нарастване на първата маска, а останалите ще следват стъпка на нарастване на маската Пиксели. По този начин можете да имате малък размер на стъпката, за да постигнете точност, но все пак да предотвратите много тънки маски, които могат да се използват за почистване на текст, заобиколен само от контур, когато обрисуването би било по-добрият избор.</translation>
+      <translation>Минимална дебелина на маската.о Това е като стъпка на нарастване на първата маска, а останалите ще следват стъпка на нарастване на маската Пиксели. По този начин можете да имате малък размер на стъпката, за да постигнете точност, но все пак да предотвратите много тънки маски, които могат да се използват за почистване на текст, заобиколен само от контур, когато обрисуването би било по-добрият избор.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="128"/>
@@ -2408,10 +2362,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="profile_strings.py" line="208"/>
       <source>Inpainting Min Std Dev</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation>
-            
-            
-        </translation>
+      <translation>Мин. Стд Откл за Запълване</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="210"/>
@@ -2556,10 +2507,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="profile_strings.py" line="170"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation>
-            
-            
-        </translation>
+      <translation>Размер на контура на шума</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="172"/>
@@ -2571,10 +2519,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="profile_strings.py" line="174"/>
       <source>Noise Fade Radius</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation>
-            
-            
-        </translation>
+      <translation>Радиус на затихване на шума</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="176"/>
@@ -2658,7 +2603,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="../pcleaner/gui/profile_parser.py" line="478"/>
       <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
-      <translation>&lt;html&gt;Пътят на модела на детектора на текст {стойност} не съществува, връща се към настройките по подразбиране.
+      <translation>&lt;html&gt;Пътят на модела на детектора на текст {value} не съществува, връща се към настройките по подразбиране.
 Можете да изтеглите ръчно оттук &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;&lt;/a&gt; или продължете да използвате стандартния модел.&lt;/html&gt;</translation>
     </message>
   </context>
