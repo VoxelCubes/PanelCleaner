@@ -1,4 +1,4 @@
-# define variables
+# define configurable variables. May need to be adapted for your environment.
 CurrentDir := $(shell pwd)
 PYINSTALLER_VENV := venv_clean
 PYTHON := venv/bin/python
