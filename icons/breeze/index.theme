@@ -30,13 +30,16 @@ Name[ja]=Breeze
 Name[ka]=Breeze
 Name[ko]=Breeze
 Name[lt]=Breeze
+Name[lv]=Breeze
 Name[nl]=Breeze
 Name[nn]=Breeze
+Name[pa]=ਬਰੀਜ਼
 Name[pl]=Bryza
 Name[pt]=Brisa
 Name[pt_BR]=Breeze
 Name[ro]=Briză
 Name[ru]=Breeze
+Name[sa]=Breeze
 Name[sk]=Vánok
 Name[sl]=Sapica (Breeze)
 Name[sr]=Поветарац
@@ -65,7 +68,7 @@ Comment[de]=Breeze von der KDE VDG
 Comment[el]=Breeze από το KDE VDG
 Comment[en_GB]=Breeze by the KDE VDG
 Comment[eo]=Breeze de la KDE VDG
-Comment[es]=Brisa por KDE VDG
+Comment[es]=Brisa, por KDE VDG
 Comment[et]=Breeze KDE VDG-lt
 Comment[eu]=Breeze, KDE VDGk egina
 Comment[fi]=Breeze KDE VDG:ltä
@@ -83,13 +86,16 @@ Comment[ja]=KDE VDG による Breeze
 Comment[ka]=Breeze KDE VDG-სგან
 Comment[ko]=KDE 시각 디자인 그룹에서 제작한 Breeze
 Comment[lt]=Breeze pagal KDE VDG
+Comment[lv]=KDE VDG veidotā „Breeze“
 Comment[nl]=Breeze door de KDE VDG
 Comment[nn]=Breeze frå KDE VDG
+Comment[pa]=ਕੇਡੀਈ ਵੀਡੀਜੀ ਵਲੋਂ ਬਰੀਜ਼
 Comment[pl]=Bryza autorstwa KDE VDG
 Comment[pt]=Brisa da VDG do KDE
 Comment[pt_BR]=Breeze pelo KDE VDG
 Comment[ro]=Briză, de KDE VDG
 Comment[ru]=Breeze от KDE VDG
+Comment[sa]=KDE VDG द्वारा Breeze
 Comment[sk]=Vánok od KDE VDG
 Comment[sl]=Breeze od KDE VDG
 Comment[sv]=Breeze av KDE:s visuella designgrupp
@@ -127,8 +133,8 @@ KDE-Extensions=.svg
 ########## Directories
 ########## ordered by category and alphabetically
 
-Directories=actions/12,actions/16,actions/22,actions/24,actions/32,actions/48,actions/64,animations/16,animations/22,apps/16,apps/22,apps/32,apps/48,preferences/22,preferences/32,applets/16,applets/22,applets/48,applets/64,applets/128,applets/256,categories/32,devices/16,devices/22,devices/64,emblems/8,emblems/16,emblems/22,emotes/22,mimetypes/16,mimetypes/22,mimetypes/32,mimetypes/64,places/16,places/22,places/32,places/48,places/96,places/64,status/16,status/22,status/24,status/32,status/48,status/64,actions/symbolic,devices/symbolic,emblems/symbolic,places/symbolic,status/symbolic
-ScaledDirectories=actions/16@2x,actions/16@3x,actions/22@2x,actions/22@3x,actions/24@2x,actions/24@3x,actions/32@2x,actions/32@3x,animations/16@2x,animations/16@3x,apps/16@2x,apps/16@3x,apps/22@2x,apps/22@3x,devices/16@2x,devices/16@3x,devices/22@2x,devices/22@3x,emblems/16@2x,emblems/16@3x,emblems/22@2x,emblems/22@3x,emotes/22@2x,emotes/22@3x,mimetypes/16@2x,mimetypes/16@3x,mimetypes/22@2x,mimetypes/22@3x,places/16@2x,places/16@3x,places/22@2x,places/22@3x,status/16@2x,status/16@3x,status/22@2x,status/22@3x
+Directories=actions/12,actions/16,actions/22,actions/24,actions/32,actions/48,actions/64,animations/16,animations/22,apps/16,apps/22,apps/32,apps/48,preferences/22,preferences/32,applets/16,applets/22,applets/48,applets/64,applets/128,applets/256,categories/32,devices/16,devices/22,devices/32,devices/64,emblems/8,emblems/16,emblems/22,emotes/22,mimetypes/16,mimetypes/22,mimetypes/32,mimetypes/64,places/16,places/22,places/32,places/48,places/96,places/64,status/16,status/22,status/24,status/32,status/48,status/64
+ScaledDirectories=actions/16@2x,actions/16@3x,actions/22@2x,actions/22@3x,actions/24@2x,actions/24@3x,actions/32@2x,actions/32@3x,animations/16@2x,animations/16@3x,apps/16@2x,apps/16@3x,apps/22@2x,apps/22@3x,devices/16@2x,devices/16@3x,devices/22@2x,devices/22@3x,devices/32@2x,devices/32@3x,emblems/16@2x,emblems/16@3x,emblems/22@2x,emblems/22@3x,emotes/22@2x,emotes/22@3x,mimetypes/16@2x,mimetypes/16@3x,mimetypes/22@2x,mimetypes/22@3x,places/16@2x,places/16@3x,places/22@2x,places/22@3x,status/16@2x,status/16@3x,status/22@2x,status/22@3x
 
 ########## Actions
 ########## ordered by size
@@ -444,6 +450,26 @@ Scale=3
 Context=Devices
 Type=Fixed
 
+#32x32 - Fixed size - For medium device icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
+[devices/32]
+Size=32
+Context=Devices
+Type=Fixed
+
+#32x32@2x - Fixed size - For medium device icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
+[devices/32@2x]
+Size=32
+Scale=2
+Context=Devices
+Type=Fixed
+
+#32x32@3x - Fixed size - For medium device icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
+[devices/32@3x]
+Size=32
+Scale=3
+Context=Devices
+Type=Fixed
+
 #64x64 - Scalable - For device icons >!!!ONLY!!!< - Scalable to the following sizes: 64x64 (default), 32x32, 128x128, 256x256 - DO_NOT_USE_ANYWHERE_ELSE - Color
 [devices/64]
 Size=64
@@ -730,42 +756,5 @@ Context=Status
 Type=Scalable
 MinSize=22
 MaxSize=256
-
-# Gnome symbolic icons
-
-[actions/symbolic]
-Context=Actions
-Size=16
-MinSize=8
-MaxSize=512
-Type=Scalable
-
-[devices/symbolic]
-Context=Devices
-Size=16
-MinSize=8
-MaxSize=512
-Type=Scalable
-
-[emblems/symbolic]
-Context=Emblems
-Size=16
-MinSize=8
-MaxSize=512
-Type=Scalable
-
-[places/symbolic]
-Context=Places
-Size=16
-MinSize=8
-MaxSize=512
-Type=Scalable
-
-[status/symbolic]
-Context=Status
-Size=16
-MinSize=8
-MaxSize=512
-Type=Scalable
 
 ########## EOF

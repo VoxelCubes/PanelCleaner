@@ -327,12 +327,52 @@ Pages with failures / total:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/processing.py" line="1022"/>
-        <source>Save Failed</source>
+        <location filename="../pcleaner/gui/processing.py" line="992"/>
+        <source>filename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/processing.py" line="992"/>
+        <source>startx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/processing.py" line="992"/>
+        <source>starty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/processing.py" line="992"/>
+        <source>endx</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/processing.py" line="992"/>
+        <source>endy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/processing.py" line="993"/>
+        <source>text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/processing.py" line="1022"/>
+        <source>Saved detected text to {output_file}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/processing.py" line="1028"/>
+        <source>Failed to write detected text to {output_file}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/processing.py" line="1032"/>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/processing.py" line="1032"/>
         <source>Failed to write detected text to file.</source>
         <translation type="unfinished"></translation>
     </message>
