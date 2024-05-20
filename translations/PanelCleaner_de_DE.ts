@@ -347,12 +347,52 @@ Seiten mit Fehlern / insgesamt:
       <translation>Übermalungsmodell nicht gefunden.</translation>
     </message>
     <message>
+      <location filename="../pcleaner/gui/processing.py" line="992"/>
+      <source>filename</source>
+      <translation>Dateiname</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/processing.py" line="992"/>
+      <source>startx</source>
+      <translation>startx</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/processing.py" line="992"/>
+      <source>starty</source>
+      <translation>starty</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/processing.py" line="992"/>
+      <source>endx</source>
+      <translation>endx</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/processing.py" line="992"/>
+      <source>endy</source>
+      <translation>endy</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/processing.py" line="993"/>
+      <source>text</source>
+      <translation>Text</translation>
+    </message>
+    <message>
       <location filename="../pcleaner/gui/processing.py" line="1022"/>
+      <source>Saved detected text to {output_file}</source>
+      <translation>Erkannter Text wurde in {output_file} gespeichert.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/processing.py" line="1028"/>
+      <source>Failed to write detected text to {output_file}</source>
+      <translation>Der erkannte Text konnte nicht in {output_file} geschrieben werden.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/processing.py" line="1032"/>
       <source>Save Failed</source>
       <translation>Speichern Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/processing.py" line="1022"/>
+      <location filename="../pcleaner/gui/processing.py" line="1032"/>
       <source>Failed to write detected text to file.</source>
       <translation>Der erkannte Text konnte nicht in die Datei geschrieben werden.</translation>
     </message>
