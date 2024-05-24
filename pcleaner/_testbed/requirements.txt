@@ -1,0 +1,8 @@
+pandas
+matplotlib
+rich
+notebook
+jupyterlab
+ipywidgets
+fastcore
+nbdev

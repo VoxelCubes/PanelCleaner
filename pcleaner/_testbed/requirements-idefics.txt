@@ -1,0 +1,4 @@
+accelerate
+peft
+bitsandbytes
+flash-attn

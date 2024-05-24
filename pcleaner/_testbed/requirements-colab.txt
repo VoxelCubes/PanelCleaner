@@ -1,0 +1,7 @@
+matplotlib
+rich
+fastcore
+nbdev
+ipywidgets
+pyngrok
+portpicker
