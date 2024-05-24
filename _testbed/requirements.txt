@@ -1,5 +1,0 @@
-matplotlib
-rich
-fastcore
-nbdev
-ipywidgets
