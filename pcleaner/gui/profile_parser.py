@@ -206,7 +206,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             enm = {EntryTypes.OCREngine: OCREngine, EntryTypes.ReadingOrder: ReadingOrder}[
                 entry_type
             ]
-            for member in enm.__members__.values():
+            for member in enm:
                 self._data_widget.addTextItemLinkedData(member.value, member)
             self._data_widget.setCurrentIndexByLinkedData(enm.AUTO)
             self._data_widget.currentIndexChanged.connect(self._value_changed)

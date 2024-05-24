@@ -1,7 +1,7 @@
 import json
 import re
 from enum import Enum
-from enum import StrEnum
+# from enum import StrEnum
 from importlib import resources
 from pathlib import Path
 from typing import Sequence
@@ -15,7 +15,7 @@ import pcleaner.config as cfg
 import pcleaner.data
 
 
-class DetectedLang(StrEnum):
+class DetectedLang(cfg.EnumStr_):
     JA = "ja"
     ENG = "eng"
     UNKNOWN = "unknown"
