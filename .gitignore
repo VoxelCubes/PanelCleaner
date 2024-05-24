@@ -170,8 +170,7 @@ cython_debug/
 
 .DS_Store
 
-_testbed/media/**
-_testbed/cleaner/**
-_testbed/model/**
+*/_testbed/experiment/cache/**
+*/_testbed/experiment/source/**
 
 !.gitkeep
