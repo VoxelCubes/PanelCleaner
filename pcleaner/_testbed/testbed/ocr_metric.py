@@ -12,7 +12,8 @@ from rich.console import Console
 
 
 # %% auto 0
-__all__ = ['get_text_diffs_html', 'display_text_diffs']
+__all__ = ['remove_multiple_whitespaces', 'postprocess_ocr', 'accuracy_ocr_naive', 'accuracy_ocr_difflib', 'get_text_diffs_html',
+           'display_text_diffs']
 
 # %% ../nbs/ocr_metric.ipynb 10
 console = Console(width=104, tab_size=4, force_jupyter=True)
@@ -20,8 +21,42 @@ cprint = console.print
 
 
 # %% ../nbs/ocr_metric.ipynb 12
+def remove_multiple_whitespaces(text):
+    return ' '.join(text.split())
+
+    
+def postprocess_ocr(text):
+    "Basic postprocessing for English Tesseract OCR results."
+    return ' '.join(remove_multiple_whitespaces(text).splitlines()).capitalize()
+
+
+# %% ../nbs/ocr_metric.ipynb 14
+def accuracy_ocr_naive(text, ground_truth):
+    return sum(1 for a, b in zip(text, ground_truth) if a == b) / len(text)
+
+
+def accuracy_ocr_difflib(text, ground_truth):
+    """
+    Calculates the OCR accuracy based on the similarity between the OCR text and the ground truth text,
+    using difflib's SequenceMatcher to account for differences in a manner similar to git diffs.
+
+    :param text: The OCR-generated text.
+    :param ground_truth: The ground truth text.
+    :return: A float representing the similarity ratio between the OCR text and the ground truth, 
+            where 1.0 is identical.
+    """
+    # Initialize the SequenceMatcher with the OCR text and the ground truth
+    matcher = difflib.SequenceMatcher(None, text, ground_truth)
+    
+    # Get the similarity ratio
+    similarity_ratio = matcher.ratio()
+    
+    return similarity_ratio
+
+# %% ../nbs/ocr_metric.ipynb 15
 def get_text_diffs_html(str1, str2: str | None=None, ignore_align: bool = False):
-    matcher = difflib.SequenceMatcher(None, str1, str2 or '')
+    str2 = str2 or ''
+    matcher = difflib.SequenceMatcher(None, str1, str2)
     html_str1, html_str2 = "", ""
     _ch ='⎕'  # ▿
     ch = f'&#x{ord(_ch):x};'
