@@ -25,4 +25,4 @@ call build-integration-helper-pyinstaller.bat
     --add-data "pcleaner/data/LiberationSans-Regular.ttf;pcleaner/data/" ^
     --add-data "pcleaner/data/NotoMono-Regular.ttf;pcleaner/data/"
 
-Copy "docs/What is _internal.txt" "dist_exe/PanelCleaner/What is _internal.txt"
+Copy "docs\What is _internal.txt" "dist_exe/PanelCleaner\What is _internal.txt"
