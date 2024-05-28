@@ -264,7 +264,11 @@ Follow the instructions below to install Tesseract on your system.
 #### Windows
 
 1. Download the installer from the [official Tesseract GitHub repository](https://github.com/tesseract-ocr/tessdoc?tab=readme-ov-file#releases-and-changelog).
-2. Run the installer and follow the on-screen instructions.
+We recommend getting the latest version from UB Mannheim linked there (64 bit).
+2. Run the installer and follow the on-screen instructions for a system-wide installation.
+3. Add the Tesseract installation directory to your PATH environment variable.
+If you did the system-wide installation, this will mean adding the directory `C:\Program Files\Tesseract-OCR` [to your PATH](https://www.computerhope.com/issues/ch000549.htm).
+4. Restart your computer.
 
 #### macOS
 
