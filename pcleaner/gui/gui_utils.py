@@ -30,8 +30,9 @@ class SelectableMessageBox(Qw.QMessageBox):
 
         labels = self.findChildren(Qw.QLabel)
         for label in labels:
-            label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
-
+            label.setTextInteractionFlags(
+                Qc.Qt.TextSelectableByMouse | Qc.Qt.LinksAccessibleByMouse | Qc.Qt.LinksAccessibleByKeyboard
+            )
 
 def show_exception(
     parent,
