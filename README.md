@@ -49,7 +49,7 @@ The two bottom pages are what the program can output: either just the transparen
 
 - Avoids painting over parts of the image that aren't text.
 
-- Inpaints bubbles that can't simply be masked out.
+- Inpaints bubbles (with LaMa machine learning) that can't simply be masked out.
 
 - Ignores bubbles containing only symbols or numbers, as those don't need translation.
 
