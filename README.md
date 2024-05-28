@@ -263,7 +263,7 @@ Follow the instructions below to install Tesseract on your system.
 
 #### Windows
 
-1. Download the installer from the [official Tesseract GitHub repository](https://github.com/tesseract-ocr/tesseract/wiki).
+1. Download the installer from the [official Tesseract GitHub repository](https://github.com/tesseract-ocr/tessdoc?tab=readme-ov-file#releases-and-changelog).
 2. Run the installer and follow the on-screen instructions.
 
 #### macOS
