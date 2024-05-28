@@ -168,3 +168,8 @@ cython_debug/
 
 *.sh
 _testbed/cleaner/
+
+*/_testbed/experiment/cache/**
+*/_testbed/experiment/source/**
+
+!.gitkeep
