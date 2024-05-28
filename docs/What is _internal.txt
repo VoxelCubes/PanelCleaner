@@ -1,7 +1,7 @@
 The "_internal" directory is required for Panel Cleaner to run.
 
 This used to be compressed inside of the PanelCleaner.exe file,
-where upon running Panel Cleaner it would first spend several seconds
+whereupon running Panel Cleaner it would first spend several seconds
 uncompressing the directory to a temporary location, wasting a lot of time.
 
 In short, always keep it in the same directory as the PanelCleaner.exe.
