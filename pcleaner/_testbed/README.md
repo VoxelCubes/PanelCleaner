@@ -24,7 +24,7 @@ Instructions to use Google Colab are included in the notebooks.
 
 ## Install Test Images
 The test images are not included in the repository but can be downloaded from the following link:
-- [Test images PCISet](https://drive.google.com/file/d/18TSXLCYAPxAlUsdHmgAe6FZM5d8K6gcT/view?usp=drive_link). The notebooks have also instructions and code to download directly the set
+- [Test images PCISet](https://drive.google.com/file/d/18TSXLCYAPxAlUsdHmgAe6FZM5d8K6gcT/view?usp=drive_link). The notebooks also have instructions and code to download the set directly 
 
 After downloading, place the test images in the [source](source) directory. If you want to use your own, each image should have a corresponding text file with the same name, but with the extension `.txt`, which contains the ground truth data, one line per box (as calculated by PanelCleaner). Optionally, you can also include a `.json` file with the same name, specifying the language of the page:
 ```json
