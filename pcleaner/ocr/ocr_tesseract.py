@@ -42,7 +42,7 @@ def cleanup_text(text: str) -> str:
 
 
 class TesseractOcr:
-    def __init__(self, lang: str | None = None):
+    def __init__(self, lang: str | None = None, **kwargs):
         self.lang = lang
         # self.config = r'--psm 4 -c preserve_interword_spaces=1'
         # self.config = r'--psm 4'
