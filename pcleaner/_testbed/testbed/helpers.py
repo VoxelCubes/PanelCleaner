@@ -5,9 +5,11 @@ from __future__ import annotations
 
 import base64
 import json
+import platform
 import re
 import sys
 import uuid
+from collections import defaultdict
 from importlib import resources
 from io import BytesIO
 from pathlib import Path
@@ -27,33 +29,56 @@ from PIL import ImageFont
 
 
 # %% auto 0
-__all__ = ['PRINT_FORMATS', 'cleanupwidgets', 'RenderJSON', 'page_boxes', 'crop_box', 'size', 'dpi', 'get_image_html',
-           'get_columns_html', 'display_columns', 'get_image_grid_html', 'display_image_grid', 'acc_as_html',
-           'strip_uuid', 'defaultdict_to_dict', '_pops_', '_pops_values_', '_gets_']
+__all__ = ['IN_MAC', 'IN_LINUX', 'IN_WIN', 'PRINT_FORMATS', 'is_mac', 'is_linux', 'is_win', 'default_device', 'cleanupwidgets',
+           'RenderJSON', 'page_boxes', 'crop_box', 'size', 'dpi', 'get_image_html', 'get_columns_html',
+           'display_columns', 'get_image_grid_html', 'display_image_grid', 'acc_as_html', 'strip_uuid',
+           'defaultdict_to_dict', '_pops_', '_pops_values_', '_gets_']
 
-# %% ../nbs/helpers.ipynb 13
-_all_ = ['_pops_', '_pops_values_', '_gets_']
+# %% ../nbs/helpers.ipynb 12
+def is_mac(): return platform.system() == 'Darwin'
+def is_linux(): return platform.system() == 'Linux'
+def is_win(): return platform.system() == 'Windows'
+
+
+IN_MAC, IN_LINUX, IN_WIN = False, False, False
+
+if is_win():
+    IN_WIN = True   
+elif is_mac():
+    IN_MAC = True
+elif is_linux():
+    IN_LINUX = True
 
 
 # %% ../nbs/helpers.ipynb 14
+def default_device():
+    import torch
+    return "mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu"
+
+
+# %% ../nbs/helpers.ipynb 16
+_all_ = ['_pops_', '_pops_values_', '_gets_']
+
+
+# %% ../nbs/helpers.ipynb 17
 def _pops_(d: dict, ks: Iterable) -> dict: 
     "Pops `ks` keys from `d` and returns them in a dict. Note: `d` is changed in-place."
     return {k:d.pop(k) for k in ks if k in d}
 
 
-# %% ../nbs/helpers.ipynb 16
+# %% ../nbs/helpers.ipynb 19
 def _pops_values_(d: dict, ks: Iterable) -> tuple:
     "Pops `ks` keys from `d` and returns them as a tuple. Note: `d` is changed in-place."
     return tuple(d.pop(k, None) for k in ks)
 
 
-# %% ../nbs/helpers.ipynb 18
+# %% ../nbs/helpers.ipynb 21
 def _gets_(d: Mapping[str, Any], ks: Iterable):
     "Fetches values from a mapping for a given list of keys, returning `None` for missing keys."
     return (d.get(k, None) for k in ks)
 
 
-# %% ../nbs/helpers.ipynb 21
+# %% ../nbs/helpers.ipynb 24
 def _get_globals(mod: str):
     if hasattr(sys, '_getframe'):
         glb = sys._getframe(2).f_globals
@@ -62,7 +87,7 @@ def _get_globals(mod: str):
     return glb
 
 
-# %% ../nbs/helpers.ipynb 23
+# %% ../nbs/helpers.ipynb 26
 def cleanupwidgets(*ws, mod: str|None=None, clear=True):
     glb = _get_globals(mod or __name__)
     if clear: clear_output(wait=True)
@@ -73,7 +98,7 @@ def cleanupwidgets(*ws, mod: str|None=None, clear=True):
             except: pass
 
 
-# %% ../nbs/helpers.ipynb 26
+# %% ../nbs/helpers.ipynb 29
 class RenderJSON(object):
     def __init__(self, json_data, max_height=200, init_level=0):
         if isinstance(json_data, (Sequence, Mapping)):
@@ -89,15 +114,26 @@ class RenderJSON(object):
         self.max_height = max_height
         self.init_level = init_level
 
+
     def display(self):
         html_content = f"""
         <div id="wrapper-{self.uuid}" style="width: 100%; max-height: {self.max_height}px; overflow-y: auto;">
             <div id="{self.uuid}" style="width: 100%;"></div>
             <script>
-                require(["https://rawgit.com/caldwell/renderjson/master/renderjson.js"], function() {{
+                function renderMyJson() {{
                     renderjson.set_show_to_level({self.init_level});
                     document.getElementById('{self.uuid}').appendChild(renderjson({self.json_str}));
-                }});
+                }}
+                function loadScript(url, callback) {{
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.onload = function() {{
+                        callback();
+                    }};
+                    script.src = url;
+                    document.getElementsByTagName("head")[0].appendChild(script);
+                }}
+                loadScript("https://cdn.jsdelivr.net/npm/renderjson@latest/renderjson.js", renderMyJson);
             </script>
         </div>
         """
@@ -106,7 +142,7 @@ class RenderJSON(object):
     def _ipython_display_(self):
         self.display()
 
-# %% ../nbs/helpers.ipynb 29
+# %% ../nbs/helpers.ipynb 32
 def page_boxes(self: st.PageData, 
         image_path: Path, out_dir: Path | None = None) -> tuple[Image.Image, Path]:
     """
@@ -152,11 +188,11 @@ def page_boxes(self: st.PageData,
 
     return image, out_path
 
-# %% ../nbs/helpers.ipynb 31
+# %% ../nbs/helpers.ipynb 34
 def crop_box(box: st.Box, image: Image.Image) -> Image.Image:
     return image.crop(box.as_tuple)
 
-# %% ../nbs/helpers.ipynb 33
+# %% ../nbs/helpers.ipynb 36
 PRINT_FORMATS = {
     'Golden Age': (7.75, 10.5),  # (1930s-40s) 
     'Siver Age': (7, 10.375),  # (1950s-60s)
@@ -206,7 +242,7 @@ def dpi(w: int, h: int, print_format: str = 'Modern Age') -> float:
     return (dpi_w + dpi_h) / 2  # Average dpi for width and height
 
 
-# %% ../nbs/helpers.ipynb 35
+# %% ../nbs/helpers.ipynb 38
 def get_image_html(image: Image.Image | Path | str, max_width: int | None = None):
     """
     Converts a PIL image or an image file path to an HTML image tag. If the image is a PIL Image object,
@@ -365,14 +401,14 @@ def acc_as_html(acc):
     return f"<div style='font-size: 12pt;'><strong style='color: red;'>{acc:.2f}</strong><div/>"
 
 
-# %% ../nbs/helpers.ipynb 37
+# %% ../nbs/helpers.ipynb 40
 def strip_uuid(p: Path | str):
     _p: Path = p if isinstance(p, Path) else Path(p)
     new_stem = re.sub(r'(?i)[a-f0-9]{8}-([a-f0-9]{4}-){3}[a-f0-9]{12}', '', _p.stem).strip('_')
     return _p.with_stem(new_stem)
 
 
-# %% ../nbs/helpers.ipynb 40
+# %% ../nbs/helpers.ipynb 43
 # Deep copy a defaultdict of defaultdicts to a dict of dicts if it is not already a dict
 def defaultdict_to_dict(d) -> dict:
     if not isinstance(d, defaultdict):
