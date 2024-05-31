@@ -5,20 +5,17 @@ from __future__ import annotations
 
 
 # %% auto 0
-__all__ = ['IdeficsOCR', 'IdeficsExperimentContext']
+__all__ = ['IdeficsOCR']
 
 # %% ../nbs/ocr_idefics.ipynb 5
-import functools
 import subprocess
 from pathlib import Path
 from typing import Any
 from typing import Literal
 from typing import TypeAlias
 
-import pcleaner.config as cfg
-import pcleaner.ocr.ocr as ocr
 import torch
-from pcleaner.ocr.ocr_tesseract import TesseractOcr
+import transformers.image_utils as image_utils
 from PIL import Image
 from rich.console import Console
 from transformers import AutoProcessor
@@ -31,9 +28,15 @@ from .helpers import default_device
 from .ocr_metric import remove_multiple_whitespaces
 
 
-# %% ../nbs/ocr_idefics.ipynb 14
+# %% ../nbs/ocr_idefics.ipynb 12
 console = Console(width=104, tab_size=4, force_jupyter=True)
 cprint = console.print
+
+
+# %% ../nbs/ocr_idefics.ipynb 16
+if IN_MAC:
+    import mlx.core as mx
+    from mlx_vlm import load, generate
 
 
 # %% ../nbs/ocr_idefics.ipynb 17
@@ -42,21 +45,17 @@ def load_image(img_ref: str | Path | Image.Image) -> Image.Image:
 
 
 # %% ../nbs/ocr_idefics.ipynb 18
-def load_image(img_or_path) -> Image.Image:
-    if isinstance(img_or_path, (str, Path)):
-        return Image.open(img_or_path)
-    elif isinstance(img_or_path, Image.Image):
-        return img_or_path
-    else:
-        raise ValueError(f"img_or_path must be a path or PIL.Image, got: {type(img_or_path)}")
-
-
-# %% ../nbs/ocr_idefics.ipynb 19
 def get_gpu_vram(total=True):
     if total:
-        command = "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
+        if IN_MAC:
+            return mx.metal.device_info()['memory_size']//1024//1024
+        else:
+            command = "nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits"
     else:
-        command = "nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits"
+        if IN_MAC:
+            return mx.metal.get_active_memory()//1024//1024
+        else:
+            command = "nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits"
     try:
         vram = subprocess.check_output(command, shell=True).decode('utf-8').strip()
         return vram
@@ -64,47 +63,66 @@ def get_gpu_vram(total=True):
         return "Failed to get VRAM"
 
 
-# %% ../nbs/ocr_idefics.ipynb 43
-def _setup_processor():
-    return AutoProcessor.from_pretrained(
-        "HuggingFaceM4/idefics2-8b", 
-        do_image_splitting=False  #  cropped boxes are usually small
-        )
+# %% ../nbs/ocr_idefics.ipynb 61
+QuantT: TypeAlias = Literal['float16'] | Literal['8bit'] | Literal['4bit']
 
-# %% ../nbs/ocr_idefics.ipynb 45
-QuantT: TypeAlias = Literal['bfloat16'] | Literal['8bits'] | Literal['4bits']
-
-def _setup_model(quant: QuantT, flashattn: bool=True):
-    kwargs: dict = dict(
-        torch_dtype=torch.bfloat16,
-    )
-    if quant == 'bfloat16':
-        pass
+def _setup_processor(model_id: str = "HuggingFaceM4/idefics2-8b", **kwargs):
+    quant: QuantT = kwargs.pop('quant', '8bit')
+    if IN_MAC and quant != 'float16':
+        from mlx_vlm.utils import get_model_path, load_processor
+        model_id = f'mlx-community/idefics2-8b-{quant}'
+        processor_config = kwargs.pop('processor_config', None)
+        model_path = get_model_path(model_id)
+        if processor_config is None:
+            processor = load_processor(model_path)
+        else:
+            processor = load_processor(model_path, processor_config=processor_config)
     else:
-        from transformers import BitsAndBytesConfig
-        quantization_config = None
-        if quant == '8bits':
-            quantization_config = BitsAndBytesConfig(
-                load_in_8bit=True,
-            )
-        if quant == '4bits':
-            quantization_config = BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_quant_type="nf4",
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_compute_dtype=torch.float16
-            )
-        if quantization_config is not None:
-            kwargs.update(quantization_config=quantization_config)
-    if flashattn:
-        kwargs.update(_attn_implementation="flash_attention_2")
-    model = Idefics2ForConditionalGeneration.from_pretrained(
-        "HuggingFaceM4/idefics2-8b", 
-        device_map='auto', 
-        **kwargs)
+        processor = AutoProcessor.from_pretrained(
+            model_id, 
+            do_image_splitting=False  #  cropped boxes are usually small
+        )
+    return processor
+
+
+# %% ../nbs/ocr_idefics.ipynb 63
+def _setup_model(quant: QuantT, flashattn: bool=True, lazy: bool = False):
+    if IN_MAC and quant != 'float16':
+        from mlx_vlm.utils import load_model, get_model_path
+        model_id = f"mlx-community/idefics2-8b-{quant}"
+        model_path = get_model_path(model_id)
+        model = load_model(model_path, lazy=lazy)
+    else:
+        kwargs: dict = dict(
+            torch_dtype=torch.float16,
+        )
+        if quant == 'float16':
+            pass
+        else:
+            from transformers import BitsAndBytesConfig
+            quantization_config = None
+            if quant == '8bit':
+                quantization_config = BitsAndBytesConfig(
+                    load_in_8bit=True,
+                )
+            if quant == '4bit':
+                quantization_config = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_compute_dtype=torch.float16
+                )
+            if quantization_config is not None:
+                kwargs.update(quantization_config=quantization_config)
+        if flashattn and not IN_MAC:
+            kwargs.update(_attn_implementation="flash_attention_2")
+        model = Idefics2ForConditionalGeneration.from_pretrained(
+            "HuggingFaceM4/idefics2-8b", 
+            device_map='auto', 
+            **kwargs)
     return model
 
-# %% ../nbs/ocr_idefics.ipynb 46
+# %% ../nbs/ocr_idefics.ipynb 64
 prompt_text_tmpl = (
         "Please perform optical character recognition (OCR) on this image, which displays "
         "speech balloons from a comic book. The text is in {}. Extract the text and "
@@ -143,9 +161,21 @@ prompt_text_tmpl = (
 #         "in the speech balloon."
 # )
 
+prompt_text_tmpl = (
+        "Perform optical character recognition OCR on this image, which contains speech "
+        "balloons from a comic book. The text is in {}."
+)
+
+prompt_text_tmpl = (
+        "Do perform optical character recognition OCR on the image, which contains speech "
+        "balloons from a comic book. The text is in {}. Carefully extract the text exactly "
+        "as it appears, ensuring that you preserve the original capitalization, punctuation, and "
+        "formatting."
+)
+
 default_prompt_text_tmpl = prompt_text_tmpl
 
-# %% ../nbs/ocr_idefics.ipynb 48
+# %% ../nbs/ocr_idefics.ipynb 66
 class IdeficsOCR:
     prompt_text_tmpl: str = default_prompt_text_tmpl
     PROCESSOR: Any = None
@@ -153,48 +183,62 @@ class IdeficsOCR:
 
 
     @classmethod
-    def setup_processor(cls):
-        cls.PROCESSOR = _setup_processor()
+    def setup_processor(cls, model_id: str='HuggingFaceM4/idefics2-8b', quant: QuantT='float16'):
+        cls.PROCESSOR = _setup_processor(model_id, quant=quant)
         return cls.PROCESSOR
     
     @classmethod
-    def setup_model(cls, quant: QuantT='bfloat16', flashattn: bool=True):
+    def setup_model(cls, quant: QuantT='float16', flashattn: bool=True):
         cls.MODEL = _setup_model(quant, flashattn)
         return cls.MODEL
     
     @staticmethod
-    def is_idefics_available() -> bool:
-        return True
-
-    def show_info(self):
-        cprint(
-            f"{'model':>17}: {type(self.MODEL)}\n"
-            f"{'quantization':>17}: {type(self.quant)}\n"
-            f"{'device':>17}: {repr(self.MODEL.device)}\n"
-            f"{'current VRAM':>17}: {get_gpu_vram(False)}  MiB\n"
-    )
-
-
-    def __init__(self, 
-            lang: str | None = None, 
-            prompt_text_tmpl: str|None = None, 
-            quant: QuantT | None = None,
-            flashattn: bool | None = None,
-        ):
-        self.lang = lang
-        self.prompt_text_tmpl = prompt_text_tmpl or self.prompt_text_tmpl
-        self.quant = quant or 'bfloat16'#'4bits'
-        self.flashattn = flashattn or True
+    def is_idefics2_available() -> bool:
+        return IdeficsOCR.PROCESSOR is not None and IdeficsOCR.MODEL is not None
+    is_model_ready = is_idefics2_available
+    
+    def setup_idefics2(self):
         if self.PROCESSOR is None:
-            type(self).setup_processor()
+            type(self).setup_processor(quant=self.quant)
         if self.MODEL is None:
             type(self).setup_model(self.quant, self.flashattn)
-        self.device = self.MODEL.device
+    setup = setup_idefics2
+
+    def cleanup(self):
+        try: del self.PROCESSOR
+        except Exception: pass
+        try: del self.MODEL
+        except Exception: pass
+        if IN_MAC:
+            mx.metal.clear_cache()
+        else:
+            torch.cuda.empty_cache()
+        import gc
+        gc.collect()
+        self.MODEL = self.PROCESSOR = None
+
+    def _generation_args_mac(self, image: Image.Image, resulting_messages: list[dict]):
+        prompt = self.PROCESSOR.apply_chat_template(resulting_messages, add_generation_prompt=True)
+        max_new_tokens = 100
+        temperature = 0.0
+        top_p = 1.0
+        # repetition_penalty = 1.2
+        # repetition_context_size = 20
+        generation_args: dict = {
+            'model': self.MODEL,
+            'processor': self.PROCESSOR,
+            "image": image,
+            'prompt': prompt,
+            "max_tokens": max_new_tokens,
+            'temp': temperature,
+            'top_p': top_p,
+            # 'repetition_penalty': repetition_penalty,
+            # 'repetition_context_size': repetition_context_size,
+        }
+        return prompt, generation_args
 
     def _generation_args(self, image: Image.Image, resulting_messages: list[dict]):
         prompt = self.PROCESSOR.apply_chat_template(resulting_messages, add_generation_prompt=True)
-        inputs = self.PROCESSOR(text=prompt, images=[image], return_tensors="pt")
-        inputs = {k: v.to(self.device) for k, v in inputs.items()}
         
         max_new_tokens = 512
         repetition_penalty = 1.2
@@ -219,19 +263,57 @@ class IdeficsOCR:
             generation_args["do_sample"] = True
             generation_args["top_p"] = top_p
 
+        inputs = self.PROCESSOR(text=prompt, images=[image], return_tensors="pt")
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
         generation_args.update(inputs)
         return prompt, generation_args
+
+    def _generate_mac(self, image: Image.Image, resulting_messages: list[dict]):
+        prompt, generation_args = self._generation_args_mac(image, resulting_messages)
+        output = generate(
+            **generation_args, 
+            verbose=False#True
+        )
+        return prompt, [output.strip('<end_of_utterance>').strip(' ')]
+
+    def _generate(self, image: Image.Image, resulting_messages: list[dict]):
+        prompt, generation_args = self._generation_args(image, resulting_messages)
+        generated_ids = self.MODEL.generate(**generation_args)
+        generated_texts = self.PROCESSOR.batch_decode(
+            generated_ids[:, generation_args["input_ids"].size(1):], skip_special_tokens=True)
+        return prompt, generated_texts
+
+    def postprocess_ocr(self, text):
+        return ' '.join(remove_multiple_whitespaces(text).splitlines())
+    
+    def show_info(self):
+        cfg = IdeficsOCR.MODEL.config if IdeficsOCR.MODEL is not None else None
+        quant = self.quant
+        flashattn = self.flashattn
+        if cfg is not None:
+            if hasattr(cfg, 'quantization_config'):
+                qcfg = cfg.quantization_config
+                quant = '4bit' if qcfg.load_in_4bit else '8bit'
+            if hasattr(cfg, '_attn_implementation'):
+                flashattn = cfg._attn_implementation == 'flash_attention_2'
+        cprint(
+            f"{'Quantization':>17}: {quant!r}\n"
+            f"{'Flash attention 2':>17}: {flashattn if IN_LINUX else 'N/A'}\n"
+            f"{'VRAM':>17}: {get_gpu_vram(False)}/{get_gpu_vram()} MiB\n"
+        )
+
 
     def __call__(
         self,
         img_or_path: Image.Image | Path | str,
-        prompt_text: str | None = None,
         lang: str | None = None,
+        prompt_text: str | None = None,
         config: str | None = None,
         show_prompt: bool = False,
         **kwargs,
     ) -> str:
-        if not self.is_idefics_available():
+        self.setup_idefics2()
+        if not self.is_idefics2_available():
             raise RuntimeError("Idefics is not installed or not found.")
         resulting_messages = [
             {
@@ -242,73 +324,35 @@ class IdeficsOCR:
             }
         ]
         image = load_image(img_or_path)
-        prompt, generation_args = self._generation_args(image, resulting_messages)
-        generated_ids = self.MODEL.generate(**generation_args)
-        generated_texts = self.PROCESSOR.batch_decode(
-            generated_ids[:, generation_args["input_ids"].size(1):], skip_special_tokens=True)
+        gen_func = self._generate_mac if IN_MAC and self.quant != 'float16' else self._generate
+        prompt, generated_texts = gen_func(image, resulting_messages)
         if show_prompt:
-            cprint("INPUT:", prompt, "|OUTPUT:", generated_texts)
+            cprint("INPUT:", prompt, "\nOUTPUT:", generated_texts)
         return generated_texts[0]#.strip('"')
 
-    def postprocess_ocr(self, text):
-        return ' '.join(remove_multiple_whitespaces(text).splitlines())
-
-
-# %% ../nbs/ocr_idefics.ipynb 50
-class IdeficsExperimentContext(OCRExperimentContext):
-    @functools.lru_cache()
-    def mocr(self, lang: str):
-        if self.ocr_model == 'Idefics':
-            proc = IdeficsOCR(lang)
-        else:
-            engine = self.engines[self.ocr_model]
-            ocr_processor = ocr.get_ocr_processor(True, engine)
-            proc = ocr_processor[lang2pcleaner(lang)]
-            if isinstance(proc, TesseractOcr):
-                proc.lang = lang2tesseract(lang)
-        return proc
-
-    def cleanup_model(self):
-        del IdeficsOCR.MODEL
-        torch.cuda.empty_cache()
-        import gc
-        gc.collect()
-        IdeficsOCR.MODEL = None
-
-    def setup_idefics(self, quant: QuantT = 'bfloat16', flashattn: bool = True):
-        if IdeficsOCR.PROCESSOR is None:
-            IdeficsOCR.setup_processor()
-        if IdeficsOCR.MODEL is not None:
-            self.cleanup_model()
-        if IdeficsOCR.MODEL is None:
-            IdeficsOCR.setup_model(quant=quant, flashattn=flashattn)
-
-    def show(self):
-        super().show()
-        cfg = IdeficsOCR.MODEL.config
-        if hasattr(cfg, 'quantization_config'):
-            qcfg = cfg.quantization_config
-            quant = '4bits' if qcfg.load_in_4bit else '8bits'
-        else:
-            quant = 'bfloat16'
-        cprint(
-            f"{'Quantization':>17}: {quant!r}\n"
-            f"{'Flash attention 2':>17}: {cfg._attn_implementation == 'flash_attention_2'}\n"
-            f"{'VRAM':>17}: {get_gpu_vram(False)}/{get_gpu_vram()} MiB\n"
-        )
 
     def __init__(self, 
-            root_dir: Path | str | None = None, 
-            quant: QuantT = 'bfloat16', 
-            flashattn: bool = True,
-            *, 
-            config: cfg.Config | None = None, 
-            server: web_server.WebServer | None = None,
-            run_name: str = 'Idefics-crop-post', 
-            setup_idefics: bool = True,
+            lang: str | None = None, 
+            quant: Any | None = None,
+            flashattn: bool | None = None, 
+            device: str | None = None, 
+            *,
+            prompt_text_tmpl: str | None = None, 
+            lazy: bool | None = False,
+            **_
         ):
-        super().__init__('Idefics', root_dir, config=config, server=server, run_name=run_name)
-        if setup_idefics:
-            self.setup_idefics(quant, flashattn)
+        self.lang = lang
+        self.prompt_text_tmpl = prompt_text_tmpl or self.prompt_text_tmpl
+        self.quant: QuantT = quant or 'float16'#'4bits'
+        self.flashattn = flashattn or True
+        self.device = device or default_device()
+        if not lazy and not self.is_idefics2_available():
+            self.setup_idefics2()
 
+
+
+OCRExperimentContext.register_model('Idefics', IdeficsOCR, {
+            "quant": 'float16',
+            "flashattn": True,
+        })
 
