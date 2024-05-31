@@ -32,6 +32,7 @@ from typing import Any
 from typing import Callable
 from typing import cast
 from typing import Mapping
+from typing import Protocol
 from typing import TypeAlias
 
 import fastcore.all as FC
@@ -42,7 +43,6 @@ import pandas as pd
 import pcleaner.config as cfg
 import pcleaner.ctd_interface as ctm
 import pcleaner.image_ops as ops
-import pcleaner.ocr.ocr as ocr
 import pcleaner.structures as st
 import torch
 import traitlets as T
@@ -735,18 +735,67 @@ def dict_to_resultset(
     return results
 
 
-# %% ../nbs/experiments.ipynb 84
-class OCRModel(Enum):
-    TESSERACT = 0
-    IDEFICS = 1
-    @staticmethod
-    def __display_names__() -> dict[str, OCRModel]:
-        return dict(
-            zip("Tesseract, Idefics".split(', '), 
-            OCRModel))
+# %% ../nbs/experiments.ipynb 81
+class OCRModel(Protocol):
+    def show_info(self) -> None: ...
+    def is_model_ready(self) -> bool: ...
+    def setup(self) -> None: ...
+    def __call__(self, 
+        img_or_path: Image.Image | Path | str, 
+        lang: str | None = None, 
+        **kwargs
+    ) -> str: ...
+    def __init__(self, lang: str | None = None, *, lazy: bool | None = False, **kwargs: Any):
+        pass
 
 
-class OCRExperimentRun(ExperimentRun): ...
+class OCRExperimentRun(ExperimentRun): 
+    exp: OCRExperimentContext
+
+    @classmethod
+    def result_from(cls, 
+            exp: OCRExperimentContext,
+            image_idx: ImgIdT, box_idx: BoxIdT, method: CropMethod, ocr: str | None = None):
+        img_ctx = ImageContext(exp, image_idx)
+        extracted = method in _EXTRACTED_METHODS
+        result_cls = ResultOCRExtracted if extracted else ResultOCR
+        result = result_cls(img_ctx, int(box_idx), None, None, description=f"{method.value}")
+        if ocr is not None:
+            result.ocr = ocr
+        return result
+
+    def setup_images(self, result: ResultOCR):
+        image, _, _ = result.crop_images()
+        if result.image is None:
+            result.image = image
+
+    def after_result(self, result: ResultOCR, *args, **kwargs):
+        result.ocr = postprocess_ocr(result.ocr)
+
+    def __call__(self, 
+            result: ResultOCR | ResultOCRExtracted, 
+            ocr: bool=True) -> ResultOCR:
+        self.setup_images(result)
+        if ocr:
+            self.before_result(result)
+            result = self.exp.ocr_box(result, result.image_ctx.page_lang)
+            self.after_result(result)
+        return result
+
+    def results(self, img_idx: ImgIdT | None = None) -> RunResultsT | ImgResultsT:
+        if img_idx is None: 
+            return cast(RunResultsT, self.exp.results(self.name))
+        return cast(ImgResultsT, self.exp.results(self.name, img_idx))
+    def image_results(self, img_idx: ImgIdT):
+        return cast(ImgResultsT, self.results(img_idx))
+    def box_results(self, img_idx: ImgIdT, box_idx: BoxIdT):
+        return self.image_results(img_idx)[box_idx]
+    def method_results(self, img_idx: ImgIdT, method: CropMethod):
+        image_results = self.image_results(img_idx)
+        return {i: box_results.get(method) for i, box_results in image_results.items()}
+
+    def __new__(cls, exp: OCRExperimentContext, name: RunIdT, *args, **kwargs):
+        return cast(OCRExperimentRun, super().__new__(cls, exp, name, *args, **kwargs))
 
 
 class OCRExperimentContext(ExperimentContext):
@@ -757,7 +806,9 @@ class OCRExperimentContext(ExperimentContext):
 
     config: cfg.Config
     image_paths: list[Path]
-    ocr_model: str
+    ocr_model: OCRModel
+    ocr_model_name: str
+    ocr_model_config: dict
     force_PIL: bool
     use_tunnel: bool
     server: web_server.WebServer | None
@@ -767,11 +818,11 @@ class OCRExperimentContext(ExperimentContext):
 
     _running = T.Bool(False)
     
-    engines = {
-        'Tesseract': cfg.OCREngine.TESSERACT, 
-        'Idefics': None, 
-        'manga-ocr': cfg.OCREngine.MANGAOCR}
+    _OCR_MODELS: dict[str, tuple[Callable[..., OCRModel], dict]] = {}
 
+    @classmethod
+    def register_model(cls, name: str, processor: Callable[..., OCRModel], config: dict):
+        cls._OCR_MODELS[name] = (processor, config)
 
     @classmethod
     def get_config(cls) -> cfg.Config:
@@ -799,16 +850,28 @@ class OCRExperimentContext(ExperimentContext):
             config.default_cv2_model_path = md.download_cv2_model(model_dir)
 
         return config
-        
-    @functools.lru_cache()
-    def mocr(self, lang: str):
-        engine = self.engines[self.ocr_model]
-        ocr_processor = ocr.get_ocr_processor(True, engine)
-        proc = ocr_processor[lang2pcleaner(lang)]
-        if isinstance(proc, TesseractOcr):
-            proc.lang = lang2tesseract(lang)
-        return proc
 
+
+    # @functools.lru_cache()
+    # def mocr(self, lang: str):
+    #     engine = self.engines[self.ocr_model]
+    #     ocr_processor = ocr.get_ocr_processor(True, engine)
+    #     proc = ocr_processor[lang2pcleaner(lang)]
+    #     if isinstance(proc, TesseractOcr):
+    #         proc.lang = lang2tesseract(lang)
+    #     return proc
+
+
+    def setup_ocr_model(self, lazy: bool = True): 
+        if not hasattr(self, 'ocr_model') or self.ocr_model is None:
+            if self.ocr_model_name not in self._OCR_MODELS:
+                raise ValueError(f"Unknown OCR model: {self.ocr_model_name}")
+            self.ocr_model = self._OCR_MODELS[self.ocr_model_name][0](**self.ocr_model_config, lazy=lazy)
+        if not lazy and not self.ocr_model.is_model_ready():
+            self.ocr_model.setup()
+        return self.ocr_model
+
+    
     @contextlib.contextmanager
     def running(self, value: bool):
         _running = self._running
@@ -818,8 +881,10 @@ class OCRExperimentContext(ExperimentContext):
 
     def ocr_box(self, result: ResultOCR, lang: str): 
         assert result.image is not None
-        text = self.mocr(lang)(result.image)
-        result.ocr = postprocess_ocr(text)
+        # text = self.mocr(lang)(result.image)
+        ocr_model = self.setup_ocr_model(False)
+        text = ocr_model(result.image, lang=lang)
+        result.ocr = text
         self._dirty = True
         return result
 
@@ -1045,7 +1110,7 @@ class OCRExperimentContext(ExperimentContext):
         super()._reset_()
         self._reset_results_()
         self._load_page_data.cache_clear()
-        self.mocr.cache_clear()
+        # self.mocr.cache_clear()
 
     @classmethod
     def get_image_paths(cls, root_dir: Path):
@@ -1105,7 +1170,7 @@ class OCRExperimentContext(ExperimentContext):
 
     def to_dict(self):
         data: dict = {
-            "ocr_model": self.ocr_model,
+            "ocr_model": self.ocr_model_name,
             "runs": (rr := {})
         }
         for run_name, _ in self._exp_runs.items():
@@ -1129,7 +1194,8 @@ class OCRExperimentContext(ExperimentContext):
         except Exception as e:
             logger.error(f"Error loading {json_path}: {e}")
             return
-        self.ocr_model = data['ocr_model']
+        self.ocr_model_name = data['ocr_model']
+        self.setup_ocr_model(lazy=True)
         for run_name, run_results in data['runs'].items():
             self._load_run_results(run_name, run_results)
     
@@ -1179,22 +1245,32 @@ class OCRExperimentContext(ExperimentContext):
             f"{'cache_dir':>17}: {self.final(self.cache_dir)}\n"
         )
 
+        cprint(
+            "Experiment runs:\n" +
+            "\n".join([f"{run_name:>17}: {len(run.results())}" for run_name, run in self._exp_runs.items()])
+        )
+        ocr_model = getattr(self, 'ocr_model', None)
+        if ocr_model is not None and hasattr(ocr_model, 'show_info'):
+            ocr_model.show_info()  # type: ignore
+
 
     def __init__(self, 
-            ocr_model: str,
+            ocr_model_name: str,
             root_dir: Path | str | None = None, 
             *, 
             config: cfg.Config | None = None, 
-            server: web_server.WebServer | None = None,
-            run_name: str = 'Tesseract-crop-post',
-            load: bool = True):
+            server: WebServer | None = None,
+            run_name: str | None = None,
+            load: bool = False, 
+            setup_model: bool = False,
+            **kwargs):
         if root_dir is None:
             root_dir = type(self).EXP_DIR
         self.config = config or type(self).get_config()
-        self.ocr_model = ocr_model
+        self.ocr_model_name = ocr_model_name
         root_dir = Path(root_dir)
         super().__init__(
-            ocr_model, self.get_image_paths(root_dir), root=root_dir, run_name=run_name)
+            ocr_model_name, self.get_image_paths(root_dir), root=root_dir)
         self.image_paths = self._paths
         self._reset_results()
         self._images = self._subjects
@@ -1203,6 +1279,11 @@ class OCRExperimentContext(ExperimentContext):
         use_tunnel = os.environ['USE_TUNNEL'].lower() == 'true'
         self.use_tunnel = use_tunnel
         self.server = server or SERVER
+        
+        self.ocr_model_config = kwargs
+        if setup_model:
+            self.setup_ocr_model(True)
+        
         if load:
             self._from_json()
 
@@ -1219,7 +1300,30 @@ def setup(self, exp: OCRExperimentContext, image_idx: ImgSpecT, page_lang: str |
     self.setup_ground_truth()
 
 
-# %% ../nbs/experiments.ipynb 88
+# %% ../nbs/experiments.ipynb 85
+class TesseractOCR(TesseractOcr):
+    def __init__(self, lang: str | None = None, **kwargs):
+        if lang is not None: lang = lang2tesseract(lang)
+        super().__init__(lang, **kwargs)
+
+    def show_info(self): ...
+    def is_model_ready(self): return self.is_tesseract_available()
+    def setup(self): ...
+    
+    def __call__(self,
+        img_or_path: Image.Image | Path | str,
+        lang: str | None = None,
+        config: str | None = None,
+        **kwargs,
+    ) -> str:
+        if lang is not None: lang = lang2tesseract(lang)
+        return super().__call__(img_or_path, lang, config, **kwargs)
+
+
+OCRExperimentContext.register_model('Tesseract', TesseractOCR, {})
+
+
+# %% ../nbs/experiments.ipynb 87
 class SimpleResultVisor:
     ctx: ResultOCR
 
@@ -1395,13 +1499,13 @@ class OCRModelSelector(ContextVisor):
 
     def __init__(self, 
             exp_ctx: OCRExperimentContext,
-            ocr_model: OCRModel | None=OCRModel.TESSERACT,
-            ocr_models: dict[str, OCRModel] | None = None,
+            ocr_model: str | None=None,
+            ocr_models: list[str] | None = None,
             out: W.Output | None = None
         ):
-        self.models: dict[str, OCRModel] = ocr_models or OCRModel.__display_names__()
+        self.models: list[str] = ocr_models or list(exp_ctx._OCR_MODELS.keys()) or ['Tesseract']
         super().__init__(exp_ctx, 
-            {'model': ocr_model or OCRModel.TESSERACT}, 
+            {'model': ocr_model or 'Tesseract'}, 
             out=out or self.out)#, ctxs=[exp_visor])
 
 
@@ -1643,7 +1747,7 @@ class ExperimentOCR:
     run: ExperimentRun
 
     @property
-    def ocr_model(self): return cast(OCRExperimentContext, self.ctx.exp).ocr_model
+    def ocr_model_name(self): return cast(OCRExperimentContext, self.ctx.exp).ocr_model_name
     @property
     def img_ctx(self) -> ImageContext: return self.ctx
     @property
@@ -1778,8 +1882,8 @@ class ExperimentOCR:
         max_acc_index = np.argmax(accuracies)
         ax.get_yticklabels()[max_acc_index].set(color='blue', fontweight='bold')
 
-        model = self.ocr_model
-        title_text = (f"{page_data.original_path} - OCR model: {model}")
+        model_name = self.ocr_model_name
+        title_text = (f"{page_data.original_path} - OCR model: {model_name}")
         ax.set_title(title_text, fontsize=12, fontweight='bold')
 
         plt.tight_layout()
@@ -1905,8 +2009,8 @@ class ExperimentOCRMethod:
         results = {i:results[i] if i in results else None for i in box_idxs}
         pb = rebuild or not results or any(r is None for r in results.values())
         if pb and len(results) > 2:
-            model = exp_ctx.ocr_model
-            progress_bar = tqdm(list(results.keys()), desc=f"{self.method.value} - {model}")
+            model_name = exp_ctx.ocr_model_name
+            progress_bar = tqdm(list(results.keys()), desc=f"{self.method.value} - {model_name}")
         else:
             progress_bar = list(results.keys())
         results = []
@@ -1948,7 +2052,7 @@ class ExperimentOCRMethod:
             f"{padded_s('Page', 24)}: <strong>{img_ctx.page_data.original_path}</strong><br/>"
             f"{padded_s('Size', 24)}: <strong>{dim_fmt}</strong><br/>"
             f"{padded_s('Run', 24)}: <strong>{exp_ctx.run.name}</strong><br/>"
-            f"{padded_s('Model', 24)}: <strong>{exp_ctx.ocr_model}</strong><br/>"
+            f"{padded_s('Model', 24)}: <strong>{exp_ctx.ocr_model_name}</strong><br/>"
             f"{padded_s('Crop Method', 24)}: <strong>{self.method.value}</strong><br/>"
             f"{padded_s('Accuracy Mean/Trimmed', 24)}: {acc_fmt}"
             "</div>"), 
@@ -2230,20 +2334,21 @@ class ExperimentsVisor(ContextVisor):
         self.status_visor.reset_button.on_click(self.reset)
 
     def setup_experiment_context(self, 
-            ocr_model: str | None = None,
+            ocr_model_name: str | None = None,
             root_dir: Path | str | None = None, 
             config: cfg.Config | None = None, 
             run_names: list[str] | None = None,
         ):
-        ctx = OCRExperimentContext(ocr_model or 'Tesseract', root_dir, config=config)  # type: ignore
+        ocr_model_name = ocr_model_name or 'Tesseract'
+        ctx = OCRExperimentContext(ocr_model_name, root_dir, config=config, load=True)  # type: ignore
                     
-        for run_name in run_names or ['Tesseract-crop-post', 'Tesseract-crop']:
+        for run_name in run_names or [f"{ocr_model_name}-crop-post", f"{ocr_model_name}-crop"]:
             OCRExperimentRun(ctx, run_name)
         return ctx
 
     def __init__(self, 
             ctx: OCRExperimentContext | None = None, 
-            ocr_model: str | None = None,
+            ocr_model_name: str | None = None,
             root_dir: Path | str | None = None, 
             config: cfg.Config | None = None, 
             image_idx: ImgIdT | str | Path = 0,
@@ -2259,7 +2364,7 @@ class ExperimentsVisor(ContextVisor):
             out: W.Output | None = None,
         ):
         if ctx is None:
-            ctx = self.setup_experiment_context(ocr_model, root_dir, config, run_names)
+            ctx = self.setup_experiment_context(ocr_model_name, root_dir, config, run_names)
         _ = ImageContext(ctx, image_idx)  # raises if image_idx is out of range
         
         out = out or self.out
