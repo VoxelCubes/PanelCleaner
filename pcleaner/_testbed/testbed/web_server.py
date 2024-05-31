@@ -30,13 +30,11 @@ from pyngrok import conf
 from pyngrok import ngrok
 from rich.console import Console
 
-
-# %% ../nbs/web_server.ipynb 13
-from pcleaner._testbed.testbed.bottle import Bottle
-from pcleaner._testbed.testbed.bottle import HTTPError
-from pcleaner._testbed.testbed.bottle import response
-from pcleaner._testbed.testbed.bottle import run
-from pcleaner._testbed.testbed.bottle import static_file
+from .bottle import Bottle
+from .bottle import HTTPError
+from .bottle import response
+from .bottle import run
+from .bottle import static_file
 
 
 # %% ../nbs/web_server.ipynb 17

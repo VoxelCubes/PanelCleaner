@@ -24,6 +24,12 @@ from rich.console import Console
 from transformers import AutoProcessor
 from transformers import Idefics2ForConditionalGeneration
 
+from .experiments import OCRExperimentContext
+from .helpers import IN_MAC
+from .helpers import IN_LINUX
+from .helpers import default_device
+from .ocr_metric import remove_multiple_whitespaces
+
 
 # %% ../nbs/ocr_idefics.ipynb 14
 console = Console(width=104, tab_size=4, force_jupyter=True)
@@ -31,10 +37,8 @@ cprint = console.print
 
 
 # %% ../nbs/ocr_idefics.ipynb 17
-import pcleaner._testbed.testbed.experiments as exp_testbed
-from pcleaner._testbed.testbed.experiments import *
-from pcleaner._testbed.testbed.helpers import RenderJSON
-import pcleaner._testbed.testbed.web_server as web_server
+def load_image(img_ref: str | Path | Image.Image) -> Image.Image:
+    return image_utils.load_image(str(img_ref) if isinstance(img_ref, Path) else img_ref)
 
 
 # %% ../nbs/ocr_idefics.ipynb 18

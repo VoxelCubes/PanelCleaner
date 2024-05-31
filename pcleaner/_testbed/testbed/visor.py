@@ -22,8 +22,8 @@ from rich.console import Console
 
 
 # %% ../nbs/visor.ipynb 6
-from pcleaner._testbed.testbed.helpers import _pops_
-from pcleaner._testbed.testbed.helpers import cleanupwidgets
+from .helpers import _pops_
+from .helpers import cleanupwidgets
 
 
 # %% ../nbs/visor.ipynb 10
