@@ -76,45 +76,14 @@ os.environ['USE_TUNNEL'] = 'False'
 SERVER = None
 
 
-# %% ../nbs/experiments.ipynb 55
-def remove_multiple_whitespaces(text):
-    return ' '.join(text.split())
-
-    
-def postprocess_ocr(text):
-    "Basic postprocessing for English Tesseract OCR results."
-    return ' '.join(remove_multiple_whitespaces(text).splitlines()).capitalize()
-
-def accuracy_ocr_naive(text, ground_truth):
-    return sum(1 for a, b in zip(text, ground_truth) if a == b) / len(text)
-
-
-def accuracy_ocr_difflib(text, ground_truth):
-    """
-    Calculates the OCR accuracy based on the similarity between the OCR text and the ground truth text,
-    using difflib's SequenceMatcher to account for differences in a manner similar to git diffs.
-
-    :param text: The OCR-generated text.
-    :param ground_truth: The ground truth text.
-    :return: A float representing the similarity ratio between the OCR text and the ground truth, 
-            where 1.0 is identical.
-    """
-    # Initialize the SequenceMatcher with the OCR text and the ground truth
-    matcher = difflib.SequenceMatcher(None, text, ground_truth)
-    
-    # Get the similarity ratio
-    similarity_ratio = matcher.ratio()
-    
-    return similarity_ratio
-
-# %% ../nbs/experiments.ipynb 57
-def ground_truth_path(page_data: st.PageData):
+# %% ../nbs/experiments.ipynb 54
+def ground_truth_path_old(page_data: st.PageData):
     path = Path(page_data.original_path)
     return path.with_stem(path.stem + '_gt').with_suffix('.txt')
 
 
-def read_ground_truth(page_data: st.PageData, root_dir: Path):
-    gts_path = root_dir / ground_truth_path(page_data)
+def read_ground_truth_old(page_data: st.PageData, root_dir: Path):
+    gts_path = root_dir / ground_truth_path_old(page_data)
     if gts_path.exists():
         gts = gts_path.read_text(encoding="utf-8").splitlines()
     else:
@@ -122,7 +91,38 @@ def read_ground_truth(page_data: st.PageData, root_dir: Path):
     return gts
 
 
-# %% ../nbs/experiments.ipynb 59
+def ground_truth_path(page_data: st.PageData):
+    path = Path(page_data.original_path)
+    return path.with_stem(path.stem + '_gt').with_suffix('.json')
+
+
+def read_ground_truth(page_data: st.PageData, root_dir: Path) -> dict[str, list[str]]:
+    gts_path = root_dir / ground_truth_path(page_data)
+    empty = ["" for _ in range(len(page_data.boxes))]
+    if gts_path.exists():
+        try:
+            with open(gts_path, 'r') as f:
+                data = json.load(f)
+                if 'all-caps' not in data:
+                    data['all-caps'] = empty
+                if 'capitalized' not in data:
+                    data['capitalized'] = empty.copy()
+                return data
+        except Exception as e:
+            logger.error(f"Error loading {gts_path}: {e}")
+    gts = {'all-caps': empty,
+            'capitalized': empty.copy()}
+    return gts
+
+
+def save_ground_truth(gts: dict[str, list[str]], page_data: st.PageData, root_dir: Path):
+    fp = root_dir / ground_truth_path(page_data)
+    with open(fp, 'w') as f:
+        json.dump(gts, f, indent=2)
+    return fp
+
+
+# %% ../nbs/experiments.ipynb 56
 def dilate_by_fractional_pixel(image, dilation_fraction, filter_base_size=3):
     """
     Dilates an image by a specified fractional pixel amount. The function calculates 
@@ -525,7 +525,7 @@ class ImageContext(ExperimentSubject):
     json_data: dict | None
     page_data: st.PageData
     _page_lang: str
-    _gts: list[str]
+    _gts: dict[str, list[str]]
     _mask_dilated1: Image.Image | None
     _mask_dilated05: Image.Image | None
     _mask_dilated02: Image.Image | None
@@ -602,11 +602,13 @@ class ImageContext(ExperimentSubject):
     
     def setup_ground_truth(self):
         self._gts = read_ground_truth(self.page_data, self.exp.root_dir)
-    @property
-    def gts(self): 
+    
+    def gts(self, version: str = 'capitalized'): 
         if self._gts is None:
             self.setup_ground_truth()
-        return self._gts
+        if version not in self._gts:
+            self._gts[version] = ["" for _ in range(len(self.boxes))]
+        return self._gts[version]
     
     @functools.lru_cache(typed=True)
     def dilated_mask(self, fraction: float):
@@ -661,7 +663,7 @@ class ResultOCR(Result):
     @property
     def acc(self):
         if self.ocr is not None:
-            self._acc = accuracy_ocr_difflib(self.ocr, self.image_ctx.gts[self.block_idx])
+            self._acc = accuracy_ocr_difflib(self.ocr, self.image_ctx.gts()[self.block_idx])
         return self._acc
     @property
     def suffix(self): return f"{self.block_idx}_{self.description}"
@@ -1329,19 +1331,22 @@ class SimpleResultVisor:
 
     @classmethod
     def diff_tagged(cls, result: ResultOCR):
-        _, html = get_text_diffs_html(result.image_ctx.gts[result.block_idx], result.ocr, False)
+        _, html = get_text_diffs_html(result.image_ctx.gts()[result.block_idx], result.ocr, False)
         return f"<span style='font-size: 14px;'>{html}</span>"
 
     def as_html(self):
         result = self.ctx
-        DI = cast(OCRExperimentContext, result.image_ctx.exp).DI
+        img_ctx = result.image_ctx
+        DI = cast(OCRExperimentContext, img_ctx.exp).DI
         if isinstance(result, ResultOCRExtracted):
             return self.as_html_extracted()
         has_ocr = result.ocr is not None
         acc_html = ''
         if has_ocr:
             acc_html = f"<br/><strong><span style='color: red;'>{result.acc:.2f}</span></strong>"
-        html_str1, html_str2 = get_text_diffs_html(result.image_ctx.gts[result.block_idx], result.ocr)
+        html_str1, html_str2 = get_text_diffs_html(img_ctx.gts()[result.block_idx], result.ocr)
+        if result.image is None:
+            result.crop_images()
         box_image_path = result.cache_image()
         html1 = get_columns_html([[DI(box_image_path)], [(result.ocr or '') + acc_html]])
         if has_ocr:
@@ -1553,7 +1558,7 @@ class ContentSelector(ContextVisor):
             self.image_info(image_ctx)
             RenderJSON(image_ctx.json_data, 350, 2).display()
         if display_option in (DisplayOptions.ALL, DisplayOptions.GROUND_TRUTH):
-            cprint(image_ctx.gts)
+            cprint(image_ctx.gts())
         if display_option == DisplayOptions.CONFIG:
             self.ctx.show()
         if display_option == DisplayOptions.IMAGE:
