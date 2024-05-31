@@ -6,3 +6,6 @@ jupyterlab
 ipywidgets
 fastcore
 nbdev
+gdown
+portpicker
+pyngrok
