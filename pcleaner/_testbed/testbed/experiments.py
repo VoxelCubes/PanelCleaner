@@ -56,13 +56,13 @@ from PIL import ImageFilter
 from rich.console import Console
 from tqdm.notebook import tqdm
 
-
-# %% ../nbs/experiments.ipynb 12
-from pcleaner._testbed.testbed.helpers import *
-from pcleaner._testbed.testbed.ocr_metric import *
-from pcleaner._testbed.testbed.visor import ContextVisor
-from pcleaner._testbed.testbed.visor import Spinner
-import pcleaner._testbed.testbed.web_server as web_server
+from .helpers import *
+from .ocr_metric import *
+from .visor import ContextVisor
+from .visor import Spinner
+from .web_server import WebServer
+from .web_server import setup_ngrok
+from .web_server import WebServerBottle
 
 
 # %% ../nbs/experiments.ipynb 16

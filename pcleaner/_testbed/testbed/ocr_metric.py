@@ -15,11 +15,6 @@ from rich.console import Console
 __all__ = ['remove_multiple_whitespaces', 'postprocess_ocr', 'accuracy_ocr_naive', 'accuracy_ocr_difflib', 'get_text_diffs_html',
            'display_text_diffs']
 
-# %% ../nbs/ocr_metric.ipynb 10
-console = Console(width=104, tab_size=4, force_jupyter=True)
-cprint = console.print
-
-
 # %% ../nbs/ocr_metric.ipynb 12
 def remove_multiple_whitespaces(text):
     return ' '.join(text.split())
