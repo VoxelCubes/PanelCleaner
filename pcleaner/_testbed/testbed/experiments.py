@@ -5,15 +5,15 @@ from __future__ import annotations
 
 
 # %% auto 0
-__all__ = ['CM', 'SubjIdT', 'RunIdT', 'SubjSpecT', 'ImgIdT', 'ImgSpecT', 'BoxIdT', 'remove_multiple_whitespaces',
-           'postprocess_ocr', 'accuracy_ocr_naive', 'accuracy_ocr_difflib', 'ground_truth_path', 'read_ground_truth',
-           'dilate_by_fractional_pixel', 'extract_text', 'lang2pcleaner', 'lang2tesseract', 'CropMethod',
-           'crop_by_image', 'crop_by_extracted', 'ExperimentSubject', 'Result', 'ExperimentRun', 'ExperimentContext',
-           'ImageContext', 'ResultOCR', 'ResultOCRExtracted', 'ResultSet', 'ResultSetDefault', 'resultset_to_dict',
-           'dict_to_resultset', 'OCRModel', 'OCRExperimentRun', 'OCRExperimentContext', 'SimpleResultVisor',
-           'RunSelector', 'MessageVisor', 'StatusVisor', 'OCRModelSelector', 'DisplayOptions', 'ContentSelector',
-           'ImageSelector', 'OCRContextVisor', 'ImageContextVisor', 'ExperimentOCR', 'ExperimentOCRMethod',
-           'ResultVisor', 'ExperimentVisor', 'ExperimentsVisor']
+__all__ = ['CM', 'SubjIdT', 'RunIdT', 'SubjSpecT', 'SubjResultsT', 'ImgIdT', 'ImgSpecT', 'BoxIdT', 'BoxResultsT', 'ImgResultsT',
+           'RunResultsT', 'ground_truth_path_old', 'read_ground_truth_old', 'ground_truth_path', 'read_ground_truth',
+           'save_ground_truth', 'dilate_by_fractional_pixel', 'extract_text', 'lang2pcleaner', 'lang2tesseract',
+           'CropMethod', 'crop_by_image', 'crop_by_extracted', 'ExperimentSubject', 'Result', 'ExperimentRun',
+           'ExperimentContext', 'ImageContext', 'ResultOCR', 'ResultOCRExtracted', 'ResultSet', 'ResultSetDefault',
+           'resultset_to_dict', 'dict_to_resultset', 'OCRModel', 'OCRExperimentRun', 'OCRExperimentContext',
+           'TesseractOCR', 'SimpleResultVisor', 'RunSelector', 'MessageVisor', 'StatusVisor', 'OCRModelSelector',
+           'DisplayOptions', 'ContentSelector', 'ImageSelector', 'OCRContextVisor', 'ImageContextVisor',
+           'ExperimentOCR', 'ExperimentOCRMethod', 'ResultVisor', 'ExperimentVisor', 'ExperimentsVisor']
 
 # %% ../nbs/experiments.ipynb 11
 import contextlib
@@ -65,12 +65,12 @@ from .web_server import setup_ngrok
 from .web_server import WebServerBottle
 
 
-# %% ../nbs/experiments.ipynb 16
+# %% ../nbs/experiments.ipynb 15
 console = Console(width=104, tab_size=4, force_jupyter=True)
 cprint = console.print
 
 
-# %% ../nbs/experiments.ipynb 19
+# %% ../nbs/experiments.ipynb 18
 os.environ['USE_PIL'] = 'False'
 os.environ['USE_TUNNEL'] = 'False'
 SERVER = None
@@ -159,7 +159,7 @@ def dilate_by_fractional_pixel(image, dilation_fraction, filter_base_size=3):
     return image_dilated_fractional_pixel
 
 
-# %% ../nbs/experiments.ipynb 60
+# %% ../nbs/experiments.ipynb 57
 def extract_text(image, text_mask, box):
     cropped_image = crop_box(box, image)
     cropped_mask = crop_box(box, text_mask)
@@ -167,14 +167,14 @@ def extract_text(image, text_mask, box):
     return cropped_image, cropped_mask, extracted
 
 
-# %% ../nbs/experiments.ipynb 62
+# %% ../nbs/experiments.ipynb 59
 _lang2pcleaner = {'English': st.DetectedLang.ENG, 'Japanese': st.DetectedLang.JA, 'Spanish': st.DetectedLang.ENG,
                     'French':st.DetectedLang.ENG}
 # _lang2tesseract = {'English': 'eng', 'Japanese': 'jpn'}
 _lang2tesseract = {'English': 'eng', 'Japanese': 'jpn_vert', 'Spanish': 'spa', 'French': 'fra'}
 
 
-# %% ../nbs/experiments.ipynb 63
+# %% ../nbs/experiments.ipynb 60
 def lang2pcleaner(lang: str):
     return _lang2pcleaner[lang]
 
@@ -182,7 +182,7 @@ def lang2tesseract(lang: str):
     return _lang2tesseract[lang]
 
 
-# %% ../nbs/experiments.ipynb 66
+# %% ../nbs/experiments.ipynb 63
 class CropMethod(Enum):
     INITIAL_BOX = 'Initial box'
     DEFAULT = 'Default'
@@ -276,11 +276,11 @@ def crop_by_extracted(method: CM,
     return image, cropped_image, cropped_mask
 
 
-
-# %% ../nbs/experiments.ipynb 68
+# %% ../nbs/experiments.ipynb 65
 SubjIdT: TypeAlias = int
 RunIdT: TypeAlias = str
 SubjSpecT: TypeAlias = SubjIdT | str | Path
+SubjResultsT: TypeAlias = dict
 
 
 class ExperimentSubject:
@@ -293,13 +293,14 @@ class ExperimentSubject:
         return self
 
     def __new__(cls, exp: ExperimentContext, idx: Any, *args, **kwargs):
-        idx = exp.normalize_idx(idx)
-        self = exp.subject_context(idx)
-        if self is None:
-            self = super().__new__(cls)
-            self = exp.setup_subject_context(idx, self, *args, **kwargs)
+        self, idx = None, exp.normalize_idx(idx)
+        if idx is not None:
+            self = exp.subject_context(idx)
             if self is None:
-                raise ValueError(f"Can't create new subject with idx: {idx}: out of range")
+                self = super().__new__(cls)
+                self = exp.setup_subject_context(idx, self, *args, **kwargs)
+        if self is None:
+            raise ValueError(f"Can't create new subject with idx: {idx}: out of range")
         return self
 
 
@@ -339,7 +340,9 @@ class ExperimentRun:
 class ExperimentContext(T.HasTraits):
     "Class to maintain shared state across all file-based experiments within the experiment domain."
     name: str
-    _results: dict[RunIdT, dict[SubjIdT, Any]]
+    config: cfg.Config
+
+    _results: dict[RunIdT, dict[SubjIdT, SubjResultsT]]
 
     _dirty = T.Bool(default_value=False)
 
@@ -471,7 +474,7 @@ class ExperimentContext(T.HasTraits):
         if name: 
             return self._exp_runs.get(name)
         if self._exp_runs:
-            return self._exp_runs[list(self._exp_runs.keys())[-1]]
+            return self._exp_runs[list(self._exp_runs.keys())[0]]
         return None
     def setup_experiment_run(self, name: str, run: ExperimentRun, *args, **kwargs):
         "Set or replace cached experiment run."
@@ -487,18 +490,16 @@ class ExperimentContext(T.HasTraits):
     def cleanup_model(self):
         pass
 
-    def __init__(self, name: str, paths: list[Path], root: Path | None = None, run_name: str = 'run1'):
+    def __init__(self, name: str, paths: list[Path], root: Path | None = None):
         self.name = name
         self._root = root or type(self).EXP_DIR
         self._paths = paths  # relative paths wrt self._root
         self._subjects: dict[SubjIdT, ExperimentSubject] = {}
         self._exp_runs: dict[str, ExperimentRun] = {}
         self._results = {}
-        # default run
-        ExperimentRun(self, run_name)
 
 
-# %% ../nbs/experiments.ipynb 78
+# %% ../nbs/experiments.ipynb 75
 ImgIdT = SubjIdT
 ImgSpecT: TypeAlias = ImgIdT | str | Path
 
@@ -641,7 +642,7 @@ class ImageContext(ExperimentSubject):
         return super().__new__(cls, exp, idx, *args, **kwargs)  # type: ignore
 
 
-# %% ../nbs/experiments.ipynb 80
+# %% ../nbs/experiments.ipynb 77
 @dataclasses.dataclass
 class ResultOCR(Result): 
     subject_ctx: ImageContext
@@ -652,10 +653,10 @@ class ResultOCR(Result):
 
     def __post_init__(self): 
         self._acc = None
-        if self.image is None:
-            cache_path = self.image_ctx.exp.final(self.cache_path())
-            if cache_path.exists():
-                self.image = Image.open(cache_path)
+        # if self.image is None:
+        #     cache_path = self.image_ctx.exp.final(self.cache_path())
+        #     if cache_path.exists():
+        #         self.image = Image.open(cache_path)
 
     @property
     def image_ctx(self): return self.subject_ctx
@@ -672,17 +673,50 @@ class ResultOCR(Result):
         img_ctx = self.image_ctx
         suffix = self.suffix + (('_'+suffix) if suffix else '')
         img_name = img_ctx.image_path.stem
-        return img_ctx.cache_dir / '.crop' / f"{img_name}_{suffix}.png"
+        return img_ctx.cache_dir / '_crop' / f"{img_name}_{suffix}.png"
     
     def cache_image(self, image: Image.Image | None = None, suffix: str | None = None):
+        img_ctx = self.image_ctx
         image = image or (self.image if not suffix else None)
         box_image_path = self.cache_path(suffix)
-        final_path = self.image_ctx.exp.final(box_image_path)
+        final_path = img_ctx.exp.final(box_image_path)
         if image and not final_path.exists():
             final_path.parent.mkdir(parents=True, exist_ok=True)
             image.save(final_path)
         return box_image_path
 
+    def crop_images(self):
+        img_ctx = self.image_ctx
+        image, cropped_image, cropped_mask = self.image, None, None
+        # load cropped box from cache
+        if image is None:
+            cache_path = img_ctx.exp.final(self.cache_path())
+            if cache_path.exists():
+                image = Image.open(cache_path)
+        # crop box if needed
+        if image is None:
+            method = CropMethod(self.description)
+            if method in _IMAGE_METHODS:
+                box = img_ctx.boxes[self.block_idx]
+                image = crop_by_image(
+                    method, box, img_ctx.base_image, img_ctx.exp.config.current_profile.preprocessor)
+            elif method in _EXTRACTED_METHODS:
+                cropped_image_path = self.cache_image(cropped_image, "cropped")
+                cropped_mask_path = self.cache_image(cropped_mask, "mask")
+                if not cropped_image_path.exists() or not cropped_mask_path.exists():
+                    box = img_ctx.boxes[self.block_idx]
+                    mask = img_ctx.mask
+                    image, cropped_image, cropped_mask = crop_by_extracted(
+                        method, box, img_ctx.base_image, mask, 
+                        cropped_image_path, cropped_mask_path, img_ctx.dilated())
+        assert image is not None
+        self.cache_image(image)
+        if cropped_image is not None:
+            self.cache_image(cropped_image, "cropped")
+        if cropped_mask is not None:
+            self.cache_image(cropped_mask, "mask")
+        return image, cropped_image, cropped_mask
+    
     def to_dict(self):
         d = dataclasses.asdict(self)
         d['image_ctx'] = d['image'] = d['page_data'] = d['gts'] = None
@@ -707,12 +741,19 @@ class ResultOCRExtracted(ResultOCR):
     def __repr__(self): return super().__repr__()
 
 
-# %% ../nbs/experiments.ipynb 82
+
+
+
+# %% ../nbs/experiments.ipynb 79
 BoxIdT: TypeAlias = int
+BoxResultsT: TypeAlias = dict[CropMethod, ResultOCR]
+ImgResultsT: TypeAlias = dict[ImgIdT, BoxResultsT]
+RunResultsT: TypeAlias = dict[RunIdT, ImgResultsT]
 
-class ResultSet(dict[BoxIdT, dict[CropMethod, ResultOCR]]): ...
 
-class ResultSetDefault(defaultdict[BoxIdT, dict[CropMethod, ResultOCR]]): ...
+class ResultSet(dict[BoxIdT, BoxResultsT]): ...
+class ResultSetDefault(defaultdict[BoxIdT, BoxResultsT]): ...
+
 
 def resultset_to_dict(results: ResultSet) -> dict[BoxIdT, dict[str, str]]:
     d = {}
@@ -806,17 +847,17 @@ class OCRExperimentContext(ExperimentContext):
     This class encapsulates state necessary for conducting PanelCleaner OCR experiments.
     """
 
-    config: cfg.Config
     image_paths: list[Path]
     ocr_model: OCRModel
     ocr_model_name: str
     ocr_model_config: dict
     force_PIL: bool
     use_tunnel: bool
-    server: web_server.WebServer | None
+    server: WebServer | None
 
     # ExperimentRun name -> Image index -> Box index -> Crop method -> Result
     _results: dict[RunIdT, dict[ImgIdT, ResultSet]]
+    _exp_runs: dict[str, OCRExperimentRun]
 
     _running = T.Bool(False)
     
@@ -998,16 +1039,6 @@ class OCRExperimentContext(ExperimentContext):
     def _update_results(self, run_name: str, img_idx: ImgIdT, results: ResultSetDefault):
         self._results[run_name][img_idx] = cast(ResultSet, results)
     
-    def _result_from(self, 
-            image_idx: ImgIdT, box_idx: BoxIdT, method: CropMethod, ocr: str | None = None):
-        img_ctx = ImageContext(self, image_idx)
-        extracted = method in _EXTRACTED_METHODS
-        result_cls = ResultOCRExtracted if extracted else ResultOCR
-        result = result_cls(img_ctx, int(box_idx), None, None, description=f"{method.value}")
-        if ocr is not None:
-            result.ocr = ocr
-        return result
-        
     def result(self, 
             run_name: str,
             image_idx: ImgIdT, box_idx: BoxIdT, method: CropMethod, 
@@ -1016,39 +1047,9 @@ class OCRExperimentContext(ExperimentContext):
         _result = self._results[run_name][image_idx][box_idx].get(method)
         if not rebuild and _result is not None:
             return _result
-        
-        result: ResultOCR = self._result_from(image_idx, box_idx, method)
-        image, cropped_image, cropped_mask = result.image, None, None
-        img_ctx = ImageContext(self, image_idx)
-        base_image = img_ctx.base_image
-        box = img_ctx.boxes[box_idx]
-        if image is None and method in _IMAGE_METHODS:
-            image = crop_by_image(
-                    method, box, base_image, self.config.current_profile.preprocessor)
-
-        if image is None and method in _EXTRACTED_METHODS:
-            mask = img_ctx.mask
-            cropped_image_path = result.cache_image(cropped_image, "cropped")
-            cropped_mask_path = result.cache_image(cropped_mask, "mask")
-            if not cropped_image_path.exists() or not cropped_mask_path.exists():
-                image, cropped_image, cropped_mask = crop_by_extracted(
-                    method, box, base_image, mask, 
-                    cropped_image_path, cropped_mask_path, img_ctx.dilated())
-        
-        assert image is not None
-        if result.image is None:
-            result.image = image
-            result.cache_image()
-        if cropped_image is not None:
-            result.cache_image(cropped_image, "cropped")
-        if cropped_mask is not None:
-            result.cache_image(cropped_mask, "mask")
-        
         exp_run = OCRExperimentRun(self, run_name)
-        if ocr:
-            exp_run.before_result(result)
-            result = self.ocr_box(result, img_ctx.page_lang)
-            exp_run.after_result(result)
+        result: ResultOCR = exp_run.result_from(self, image_idx, box_idx, method)
+        result = exp_run(result, ocr)
         self._results[run_name][image_idx][box_idx][method] = result
         self._dirty = True
         return result
@@ -1061,11 +1062,11 @@ class OCRExperimentContext(ExperimentContext):
         return cast(dict[ImgIdT, ResultSet], self.results(run_name))
     def image_results(self, run_name: str, img_idx: ImgIdT):
         return cast(ResultSet, self.results(run_name, img_idx))
-    def box_results(self, run_name: str, img_idx: ImgIdT, box_idx: BoxIdT):
-        return cast(ResultSet, self.results(run_name, img_idx))[box_idx]
-    def method_results(self, run_name: str, img_idx: ImgIdT, method: CropMethod):
-        image_results = self.image_results(run_name, img_idx)
-        return {i: box_results.get(method) for i,box_results in image_results.items()}
+    # def box_results(self, run_name: str, img_idx: ImgIdT, box_idx: BoxIdT):
+    #     return cast(ResultSet, self.results(run_name, img_idx))[box_idx]
+    # def method_results(self, run_name: str, img_idx: ImgIdT, method: CropMethod):
+    #     image_results = self.image_results(run_name, img_idx)
+    #     return {i: box_results.get(method) for i,box_results in image_results.items()}
 
     def _reset_results(self):
         results = defaultdict(lambda: defaultdict(lambda: ResultSetDefault(dict)))
@@ -1146,7 +1147,8 @@ class OCRExperimentContext(ExperimentContext):
     #         self.run_to_json(run_name)
     
     def _load_run_results(self, run_name: str, run_data: dict[str, dict[str, dict[str, str]]]):
-        self._exp_runs[run_name] = OCRExperimentRun(self, run_name)
+        run = OCRExperimentRun(self, run_name)
+        # self._exp_runs[run_name] = run
         name2idx = {p.name: i for i, p in enumerate(self.image_paths)}
         for img_name, data in run_data.items():
             img_idx = name2idx.get(img_name, None)
@@ -1156,7 +1158,7 @@ class OCRExperimentContext(ExperimentContext):
             rset: ResultSetDefault = dict_to_resultset(
                 ImgIdT(img_idx), 
                 data, 
-                result_factory=self._result_from)
+                result_factory=functools.partial(run.result_from, self))
             self._update_results(run_name, img_idx, rset)
 
     # def load_results(self):
@@ -1289,8 +1291,11 @@ class OCRExperimentContext(ExperimentContext):
         if load:
             self._from_json()
 
+        # default run
+        OCRExperimentRun(self, run_name or f"{ocr_model_name}-crop-post")
 
-# %% ../nbs/experiments.ipynb 85
+
+# %% ../nbs/experiments.ipynb 82
 @FC.patch_to(ImageContext)
 def setup(self, exp: OCRExperimentContext, image_idx: ImgSpecT, page_lang: str | None = None):
     super(type(self), self).setup(exp, image_idx)
@@ -1357,13 +1362,16 @@ class SimpleResultVisor:
 
     def as_html_extracted(self):
         result = self.ctx
+        img_ctx = result.image_ctx
         has_ocr = result.ocr is not None
-        DI = cast(OCRExperimentContext, result.image_ctx.exp).DI
-        html_str1, html_str2 = get_text_diffs_html(result.image_ctx.gts[result.block_idx], result.ocr)
+        DI = cast(OCRExperimentContext, img_ctx.exp).DI
+        html_str1, html_str2 = get_text_diffs_html(img_ctx.gts()[result.block_idx], result.ocr)
         if has_ocr:
             diff_html = f"<pre style='font-size: 14px;'>{html_str1}<br/>{html_str2}</pre>"
         else:
             diff_html = f"<pre style='font-size: 14px;'>{html_str1}</pre>"
+        if result.image is None:
+            result.crop_images()
         cropped_image_path = result.cache_image(None, "cropped")
         cropped_mask_path = result.cache_image(None, "mask")
         result_path = result.cache_image()
@@ -1660,7 +1668,7 @@ class OCRContextVisor(ContextVisor):
                         ctxs={'image_idx': ImageSelector(ctx, image_idx, out=self.out)})
 
 
-# %% ../nbs/experiments.ipynb 152
+# %% ../nbs/experiments.ipynb 151
 class ImageContextVisor(ContextVisor):
     ctx: ImageContext
     # control_names: list[str] = ['display_option']
@@ -1722,7 +1730,7 @@ class ImageContextVisor(ContextVisor):
                 ctxs={'image_idx': image_selector, 'display_option': content_selector})
 
 
-# %% ../nbs/experiments.ipynb 165
+# %% ../nbs/experiments.ipynb 164
 def trimmed_mean(data, trim_percent):
     sorted_data = np.sort(data)
     n = len(data)
@@ -1746,10 +1754,10 @@ def iqr_outlier_removal(data):
     return data[(data >= lower_bound) & (data <= upper_bound)]
     
 
-# %% ../nbs/experiments.ipynb 166
+# %% ../nbs/experiments.ipynb 165
 class ExperimentOCR:
     ctx: ImageContext
-    run: ExperimentRun
+    run: OCRExperimentRun
 
     @property
     def ocr_model_name(self): return cast(OCRExperimentContext, self.ctx.exp).ocr_model_name
@@ -1901,6 +1909,8 @@ class ExperimentOCR:
         pb = tqdm(CropMethod.__members__.values(), leave=False, desc=f"Box #{box_idx+1}")
         for m in pb:
             r = cast(ResultOCR, self.result(box_idx, m))
+            if r.image is None:
+                r.crop_images()
             results.append((m, r))
         methods, images, ocrs, accs = zip(*map(
                 lambda t: (t[0].value, ctx.DI(t[1].cache_image()), 
@@ -1913,6 +1923,9 @@ class ExperimentOCR:
     def summary_method(self, method: CropMethod):
         ctx, _ = self.ctxs
         results = self.method_experiment(method).results()
+        for r in results:
+            if r.image is None:
+                r.crop_images()
         methods, images, ocrs, accs = zip(*map(
                 lambda r: (r.block_idx+1, ctx.DI(r.cache_image()), 
                 SimpleResultVisor.diff_tagged(r), acc_as_html(r.acc)), 
@@ -1980,7 +1993,7 @@ class ExperimentOCR:
         self.ctx = ctx
         run = ctx.exp.experiment_run(run_name)
         assert run is not None
-        self.run = run
+        self.run = cast(OCRExperimentRun, run)
 
 
 @dataclasses.dataclass
@@ -2004,13 +2017,12 @@ class ExperimentOCRMethod:
     def results(self, 
             box_idxs: BoxIdT | list[BoxIdT] | None = None, 
             ocr: bool=True, rebuild: bool=False) -> list[ResultOCR]:
-        ctx, img_ctx, exp_ctx = self.ctxs
+        _, img_ctx, exp_ctx = self.ctxs
         if box_idxs is None:
             box_idxs = list(range(len(img_ctx.boxes)))
         elif isinstance(box_idxs, int):
             box_idxs = [box_idxs]
-        run_name = exp_ctx.run.name
-        results = ctx.method_results(run_name, img_ctx.image_idx, self.method)
+        results = exp_ctx.run.method_results(img_ctx.image_idx, self.method)
         results = {i:results[i] if i in results else None for i in box_idxs}
         pb = rebuild or not results or any(r is None for r in results.values())
         if pb and len(results) > 2:
@@ -2098,7 +2110,7 @@ class ExperimentOCRMethod:
                 self.display(box_idxs)
 
 
-# %% ../nbs/experiments.ipynb 202
+# %% ../nbs/experiments.ipynb 201
 class ResultVisor(ContextVisor):
     ctx: ExperimentOCR
     control_names: list[str] = ['all_boxes', 'box_idx', 'all_methods', 'method']
