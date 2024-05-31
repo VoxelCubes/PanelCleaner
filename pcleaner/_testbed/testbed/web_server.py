@@ -37,12 +37,12 @@ from .bottle import run
 from .bottle import static_file
 
 
-# %% ../nbs/web_server.ipynb 17
+# %% ../nbs/web_server.ipynb 16
 console = Console(width=104, tab_size=4, force_jupyter=True)
 cprint = console.print
 
 
-# %% ../nbs/web_server.ipynb 18
+# %% ../nbs/web_server.ipynb 17
 def display_ngrok_warning(url):
     did = 'ngrokFrame' + str(uuid.uuid4())
     html_code = f"""
@@ -60,7 +60,7 @@ def display_ngrok_warning(url):
     display(HTML(html_code))
 
 
-# %% ../nbs/web_server.ipynb 19
+# %% ../nbs/web_server.ipynb 18
 class WebServer(Protocol):
     @property
     def public_url(self) -> str | None: ...
@@ -95,7 +95,7 @@ def setup_ngrok(server_cls: type[WebServer], images_dir: str | Path):
     return server
 
 
-# %% ../nbs/web_server.ipynb 24
+# %% ../nbs/web_server.ipynb 23
 class ImageHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
         for k,v in {
@@ -121,7 +121,7 @@ class ImageHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         super().__init__(*args, directory=self.directory, **kwargs)
 
 
-# %% ../nbs/web_server.ipynb 25
+# %% ../nbs/web_server.ipynb 24
 class WebServerStdlib:
     """
     A simple web server for serving images from a local directory using http.server and ngrok.
@@ -180,6 +180,7 @@ class WebServerStdlib:
                 self.unc_share = Path(self.public_url.replace('https:', ''))
             cprint(f"ngrok tunnel: {self.tunnel}")
             cprint(f"Public URL: {self.public_url}")
+            cprint(f"Serving images from: {self.directory}")
         else:
             cprint("Server is already running")
 
@@ -217,7 +218,7 @@ class WebServerStdlib:
         self.stop()
 
 
-# %% ../nbs/web_server.ipynb 39
+# %% ../nbs/web_server.ipynb 38
 app = Bottle()
 
 @app.route('/images/<filename:path>')  # type: ignore
@@ -233,7 +234,7 @@ def shutdown():
     current_process.send_signal(signal.SIGTERM)
 
 
-# %% ../nbs/web_server.ipynb 40
+# %% ../nbs/web_server.ipynb 39
 class WebServerBottle:
     """
     A simple web server for serving images from a local directory using ngrok.
@@ -283,6 +284,7 @@ class WebServerBottle:
             self.unc_share = Path(self.public_url.replace('https:', ''))/self.prefix
         cprint(f"ngrok tunnel: {self.tunnel}")
         cprint(f"Public URL: {self.public_url}")
+        cprint(f"Serving images from: {self.directory}")
 
     def start(self):
         if self.thread is None or not self.thread.is_alive():
@@ -294,16 +296,16 @@ class WebServerBottle:
         if self.tunnel and self.tunnel.public_url:
             ngrok.disconnect(self.tunnel.public_url)
             cprint("Ngrok tunnel disconnected")
-            ngrok.kill()
         
         if self.thread:
             self.make_request('/shutdown')
-            self.thread.join(timeout=10)
+            self.thread.join(timeout=5)
             if self.thread.is_alive():
                 print("Thread did not terminate, proceeding with forceful shutdown.")
             else:
                 print("Server thread stopped successfully.")
         self.thread = self.tunnel = self.public_url = self.unc_share = None
+        ngrok.kill()
         cprint("Server stopped")
 
     def make_request(self, path="/"):
