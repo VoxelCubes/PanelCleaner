@@ -1,7 +1,7 @@
 import json
+import sys
 import re
 from enum import Enum
-from enum import StrEnum
 from importlib import resources
 from pathlib import Path
 from typing import Sequence
@@ -13,6 +13,12 @@ from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.data
+
+# If using Python 3.10 or older, use the 3rd party StrEnum.
+if sys.version_info < (3, 11):
+    from strenum import StrEnum
+else:
+    from enum import StrEnum
 
 
 class DetectedLang(StrEnum):
@@ -170,9 +176,9 @@ class PageData:
     extended_boxes: list[Box]
     merged_extended_boxes: list[Box]
     reference_boxes: list[Box]
-    _image_size: tuple[
-        int, int
-    ] = None  # Cache the image size, so we don't have to load the image every time.
+    _image_size: tuple[int, int] = (
+        None  # Cache the image size, so we don't have to load the image every time.
+    )
 
     @classmethod
     def from_json(cls, json_str: str) -> "PageData":
