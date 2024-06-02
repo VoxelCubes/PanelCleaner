@@ -72,17 +72,13 @@ LongString = NewType("LongString", str)
 Percentage = NewType("Percentage", float)
 
 
-class EnumStr_(Enum):
-    @classmethod
-    def display_names(cls) -> dict[str, 'EnumStr_']:
-        return {e.value: e for e in cls}
-
-class ReadingOrder(EnumStr_):
+class ReadingOrder(StrEnum):
     AUTO = "auto"
     MANGA = "manga"
     COMIC = "comic"
 
-class OCREngine(EnumStr_):
+
+class OCREngine(StrEnum):
     AUTO = "auto"
     MANGAOCR = "manga-ocr"
     TESSERACT = "tesseract"
@@ -1313,14 +1309,13 @@ def try_to_load(
             return
 
     # check before: `StrEnum` is a `str`
-    elif isinstance(attr_type, type) and issubclass(attr_type, EnumStr_):
-        names = attr_type.display_names()
-        if conf_data in names:  # type: ignore
-            attr_value = names[conf_data]
+    elif isinstance(attr_type, type) and issubclass(attr_type, StrEnum):
+        if conf_data in attr_type.__members__.values():
+            attr_value = conf_data
         else:
             print(
                 f"Option {attr_name} in section {section} should be a one "
-                f"of {', '.join(_.value for _ in attr_type)}.\n"
+                f"of {', '.join(repr(str(_)) for _ in attr_type.__members__.values())}.\n"
                 f"Failed to parse '{conf_data}'"
             )
             return
