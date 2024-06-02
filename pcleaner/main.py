@@ -110,6 +110,7 @@ Examples:
                                     you choose to delete them).
 
 """
+
 import sys
 import csv
 import itertools
@@ -132,7 +133,6 @@ import pcleaner.cli_utils as cli
 import pcleaner.config as cfg
 import pcleaner.denoiser as dn
 import pcleaner.inpainting as ip
-import pcleaner.gui.launcher as gui
 import pcleaner.helpers as hp
 import pcleaner.masker as ma
 import pcleaner.model_downloader as md
@@ -276,7 +276,23 @@ def main() -> None:
         # Launch the GUI. Either the user specified it, or no command was given.
         # This is done so that a bundled executable can be launched in gui mode without a command,
         # without hindering access to the cli.
-        gui.launch(args.image_path, args.debug)
+        try:
+            import pcleaner.gui.launcher as gui
+        except ImportError:
+            if not args.gui:
+                print(
+                    "This is the CLI version of Panel Cleaner. "
+                    "Calling pcleaner-cli without any arguments will attempt to launch the GUI. "
+                    "Please install the GUI version 'pcleaner' to use the GUI."
+                )
+            else:
+                print(
+                    "The GUI version of Panel Cleaner is not installed. "
+                    "Please install the GUI version 'pcleaner' to use the GUI."
+                )
+            sys.exit(1)
+        else:
+            gui.launch(args.image_path, args.debug)
 
 
 def run_cleaner(

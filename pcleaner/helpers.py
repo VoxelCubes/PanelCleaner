@@ -4,10 +4,14 @@ from enum import Enum
 import subprocess
 from itertools import takewhile, groupby
 from pathlib import Path
-import PySide6.QtCore as Qc
 
 import tifffile
 from loguru import logger
+
+try:
+    import PySide6.QtCore as Qc
+except ImportError:
+    Qc = None
 
 
 def tr(
@@ -19,6 +23,8 @@ def tr(
     """
     Translate a string to the current locale.
     """
+    if Qc is None:
+        return text
     return Qc.QCoreApplication.translate(context, text, disambiguation, count)
 
 

@@ -27,10 +27,19 @@ fresh-install: clean-build build install
 
 refresh-assets: build-icon-cache compile-qrc compile-ui refresh-i18n compile-i18n
 
+build-both: build build-cli
 
-# build target
+# Normal build target. Use the setup-cli-gui.cfg configuration.
 build: compile-qrc compile-ui
+	cp setup-cli-gui.cfg setup.cfg
 	$(PYTHON) -m build --outdir $(BUILD_DIR)
+	rm setup.cfg
+
+# CLI-only build target. Use the setup-cli.cfg configuration.
+build-cli:
+	cp setup-cli.cfg setup.cfg
+	$(PYTHON) -m build --outdir $(BUILD_DIR)
+	rm setup.cfg
 
 # clean-build target
 clean-build: 
@@ -194,4 +203,4 @@ build-app-image:
 	@echo "AppImage built successfully."
 
 
-.PHONY: clean build install fresh-install release refresh-i18n compile-i18n compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda, build-elf, build-app-image
+.PHONY: clean build build-cli build-both install fresh-install release refresh-i18n compile-i18n compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda, build-elf, build-app-image

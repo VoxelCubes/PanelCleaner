@@ -104,7 +104,7 @@ When fully cleaning it isn't possible, Panel Cleaner will instead skip the bubbl
 
 ## Installation
 
-You have the choice between installing a pre-built binary from the [releases section](https://github.com/VoxelCubes/PanelCleaner/releases/latest) 
+You have the choice between installing a pre-built binary (exe or elf) from the [releases section](https://github.com/VoxelCubes/PanelCleaner/releases/latest) (**recommended for most users**),
 or installing it to your local python interpreter using pip.
 
 Note: All versions will need to download model data on first launch (approx. 500MB). This model data will not need to be downloaded again if Panel Cleaner updates.
@@ -113,12 +113,18 @@ Important: The pre-built binaries do not support CUDA acceleration. To use CUDA,
 
 ### Install with Pip
 
-The program requires **Python 3.10** or newer.
+The program requires **Python 3.10 or newer**.
 
-Install the program with pip from [PyPI](https://pypi.org/project/pcleaner/):
+Install the program with both the command line interface and graphical interface using pip from [PyPI](https://pypi.org/project/pcleaner/):
 ```bash
 pip install pcleaner
 ```
+
+Or if you only wish to use the command line interface:
+```bash
+pip install pcleaner-cli
+```
+Note: `pcleaner` and `pcleaner-cli` can be installed side by side, but the CLI-only package would be redundant.
 
 Note: The program has been tested to work on Linux, MacOS, and Windows, with varying levels of setup required. See the [FAQ](https://github.com/VoxelCubes/PanelCleaner/blob/master/docs/faq.md) for help.
 
