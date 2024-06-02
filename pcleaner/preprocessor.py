@@ -130,15 +130,15 @@ def prep_json_file(
     original_path: str = json_data["original_path"]
     scale: float = json_data["scale"]
     boxes: list[st.Box] = []
-    page_langs: list[str] = []
+    page_langs: list[st.DetectedLang] = []
 
     # Define permitted languages based on strictness.
     # Since the OCR model is only trained to recognize Japanese,
     # we need to discard anything that isn't, and if strict, also
     # those that are unknown (likely a mix).
-    language_whitelist = [st.DetectedLang.JA.value, st.DetectedLang.ENG.value]
+    language_whitelist = [st.DetectedLang.JA, st.DetectedLang.ENG]
     if not preprocessor_conf.ocr_strict_language:
-        language_whitelist.append(st.DetectedLang.UNKNOWN.value)
+        language_whitelist.append(st.DetectedLang.UNKNOWN)
 
     for data in json_data["blk_list"]:
         # Check box language.
@@ -155,9 +155,9 @@ def prep_json_file(
 
         page_langs.append(data["language"])
         boxes.append(box)
-    page_lang: st.DetectedLang = st.DetectedLang.display_names()[(
-        Counter(page_langs).most_common(1)[0][0] if boxes else st.DetectedLang.UNKNOWN.value
-    )]
+    page_lang: st.DetectedLang = (
+        Counter(page_langs).most_common(1)[0][0] if boxes else st.DetectedLang.UNKNOWN
+    )
     logger.debug(f"Detected lang: {page_lang}")
 
     # reading_order = preprocessor_conf.reading_order
