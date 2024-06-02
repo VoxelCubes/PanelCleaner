@@ -2,7 +2,6 @@ import re
 import sys
 import shutil
 from collections import defaultdict
-from enum import StrEnum
 from pathlib import Path
 from typing import Any, NewType
 
@@ -14,6 +13,12 @@ from pcleaner.helpers import tr
 from pcleaner import cli_utils as cli
 from pcleaner import helpers as hp
 from pcleaner import model_downloader as md
+
+# If using Python 3.10 or older, use the 3rd party StrEnum.
+if sys.version_info < (3, 11):
+    from strenum import StrEnum
+else:
+    from enum import StrEnum
 
 # Logging session markers.
 STARTUP_MESSAGE = "---- Starting up ----"
@@ -966,15 +971,19 @@ class Config:
         )
         print(
             "Default Torch Model Path:",
-            self.default_torch_model_path
-            if self.default_torch_model_path is not None
-            else "Not downloaded",
+            (
+                self.default_torch_model_path
+                if self.default_torch_model_path is not None
+                else "Not downloaded"
+            ),
         )
         print(
             "Default CV2 Model Path:",
-            self.default_cv2_model_path
-            if self.default_cv2_model_path is not None
-            else "Not downloaded",
+            (
+                self.default_cv2_model_path
+                if self.default_cv2_model_path is not None
+                else "Not downloaded"
+            ),
         )
         print(
             "GUI Theme:",
