@@ -7,7 +7,7 @@
       <location filename="../pcleaner/config.py" line="934"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation>Por defecto</translation>
+      <translation>por defecto</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
@@ -310,111 +310,111 @@ Páginas con fallos / total:
     <message>
       <location filename="../pcleaner/analytics.py" line="578"/>
       <source>Minimum thickness</source>
-      <translation type="unfinished">Minimum thickness</translation>
+      <translation>Espesor mínimo</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="580"/>
       <source>Maximum thickness</source>
-      <translation type="unfinished">Maximum thickness</translation>
+      <translation>Espesor máximo</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="582"/>
       <source>Outline thickness around text inpainted:
 
 </source>
-      <translation type="unfinished">Outline thickness around text inpainted:
+      <translation>Grosor del contorno alrededor del texto pintado:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="649"/>
       <source>Inpainted</source>
-      <translation type="unfinished">Inpainted</translation>
+      <translation>Pintado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="119"/>
       <source>File Error</source>
-      <translation type="unfinished">File Error</translation>
+      <translation>Error de archivo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="119"/>
       <source>Failed to open file.</source>
-      <translation type="unfinished">Failed to open file.</translation>
+      <translation>No se pudo abrir el archivo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="539"/>
       <source>Inpainting model not found.</source>
-      <translation type="unfinished">Inpainting model not found.</translation>
+      <translation>No se ha encontrado el modelo de pintura.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="992"/>
       <source>filename</source>
-      <translation type="unfinished">filename</translation>
+      <translation>nombre de archivo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="992"/>
       <source>startx</source>
-      <translation type="unfinished">startx</translation>
+      <translation>startx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="992"/>
       <source>starty</source>
-      <translation type="unfinished">starty</translation>
+      <translation>starty</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="992"/>
       <source>endx</source>
-      <translation type="unfinished">endx</translation>
+      <translation>finx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="992"/>
       <source>endy</source>
-      <translation type="unfinished">endy</translation>
+      <translation>endy</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="993"/>
       <source>text</source>
-      <translation type="unfinished">text</translation>
+      <translation>texto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="1022"/>
       <source>Saved detected text to {output_file}</source>
-      <translation type="unfinished">Saved detected text to {output_file}</translation>
+      <translation>Texto detectado guardado en {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="1028"/>
       <source>Failed to write detected text to {output_file}</source>
-      <translation type="unfinished">Failed to write detected text to {output_file}</translation>
+      <translation>Error al escribir el texto detectado en {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="1032"/>
       <source>Save Failed</source>
-      <translation type="unfinished">Save Failed</translation>
+      <translation>Guardar fallido</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="1032"/>
       <source>Failed to write detected text to file.</source>
-      <translation type="unfinished">Failed to write detected text to file.</translation>
+      <translation>Error al escribir el texto detectado en el archivo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="375"/>
       <source>Inpainter (experimental)</source>
-      <translation type="unfinished">Inpainter (experimental)</translation>
+      <translation>Inpainter (experimental)</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="92"/>
       <source>Invalid type for img_paths: {paths}</source>
-      <translation type="unfinished">Invalid type for img_paths: {paths}</translation>
+      <translation>Tipo no válido para img_paths: {paths}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="101"/>
       <source>Unsupported image format: {suffix} for {path}</source>
-      <translation type="unfinished">Unsupported image format: {suffix} for {path}</translation>
+      <translation>Formato de imagen no compatible: {suffix} para {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="107"/>
       <source>Image path {img_path} does not exist.</source>
-      <translation type="unfinished">Image path {img_path} does not exist.</translation>
+      <translation>La ruta de imagen {img_path} no existe.</translation>
     </message>
   </context>
   <context>
@@ -422,41 +422,41 @@ Páginas con fallos / total:
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>Acerca de Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="84"/>
       <source># Panel Cleaner
 
 An AI-powered tool to clean manga panels.</source>
-      <translation type="unfinished"># Panel Cleaner
+      <translation># Panel Cleaner
 
-An AI-powered tool to clean manga panels.</translation>
+Una herramienta de IA para limpiar paneles de manga.</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="101"/>
       <source>Version:</source>
-      <translation type="unfinished">Version:</translation>
+      <translation>Versión:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="115"/>
       <source>Author:</source>
-      <translation type="unfinished">Author:</translation>
+      <translation>Autor:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="153"/>
       <source>Toolkit:</source>
-      <translation type="unfinished">Toolkit:</translation>
+      <translation>Caja de herramientas:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="167"/>
       <source>License:</source>
-      <translation type="unfinished">License:</translation>
+      <translation>Licencia:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="184"/>
       <source>Source code:</source>
-      <translation type="unfinished">Source code:</translation>
+      <translation>Código fuente:</translation>
     </message>
   </context>
   <context>
@@ -464,7 +464,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CTextEdit.py" line="17"/>
       <source>Clear	Ctrl+L</source>
-      <translation type="unfinished">Clear	Ctrl+L</translation>
+      <translation>Borrar Ctrl+L</translation>
     </message>
   </context>
   <context>
@@ -472,7 +472,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="38"/>
       <source>Select Color</source>
-      <translation type="unfinished">Select Color</translation>
+      <translation>Seleccionar color</translation>
     </message>
   </context>
   <context>
@@ -480,27 +480,27 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="102"/>
       <source>Copy to Clipboard</source>
-      <translation type="unfinished">Copy to Clipboard</translation>
+      <translation>Copiar al portapapeles</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="113"/>
       <source>Open Issue Tracker</source>
-      <translation type="unfinished">Open Issue Tracker</translation>
+      <translation>Seguimiento de problemas abiertos</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="124"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Cerrar</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="41"/>
       <source>Note: Name {name} was hidden</source>
-      <translation type="unfinished">Note: Name {name} was hidden</translation>
+      <translation>Nota: El nombre {name} estaba oculto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="63"/>
       <source>Failed to load log.</source>
-      <translation type="unfinished">Failed to load log.</translation>
+      <translation>Error al cargar el registro.</translation>
     </message>
   </context>
   <context>
@@ -508,80 +508,80 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="83"/>
       <source>Unsupported system</source>
-      <translation type="unfinished">Unsupported system</translation>
+      <translation>Sistema no compatible</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
       <source>This system is not supported.</source>
-      <translation type="unfinished">This system is not supported.</translation>
+      <translation>Este sistema no es compatible.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="87"/>
       <source>Install for Dolphin</source>
-      <translation type="unfinished">Install for Dolphin</translation>
+      <translation>Instalación para Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="88"/>
       <source>Uninstall for Dolphin</source>
-      <translation type="unfinished">Uninstall for Dolphin</translation>
+      <translation>Desinstalación de Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="92"/>
       <source>The extension will be installed at {path}. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension will be installed at {path}. This doesn&apos;t require root permissions.</translation>
+      <translation>La extensión se instalará en {path}. Esto no&apos;requiere permisos de root.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="101"/>
       <source>The extension file will be deleted. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension file will be deleted. This doesn&apos;t require root permissions.</translation>
+      <translation>Se eliminará el archivo de extensión. Esto no&apos;requiere permisos de root.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="103"/>
       <source>Install for Windows Explorer</source>
-      <translation type="unfinished">Install for Windows Explorer</translation>
+      <translation>Instalación para el Explorador de Windows</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="104"/>
       <source>Uninstall for Windows Explorer</source>
-      <translation type="unfinished">Uninstall for Windows Explorer</translation>
+      <translation>Desinstalación del Explorador de Windows</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="110"/>
       <source>The extension will be installed in the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be installed in the Windows registry.This requires admin permissions.</translation>
+      <translation>La extensión se instalará en el registro de Windows, lo que requiere permisos de administrador.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="116"/>
       <source>The extension will be uninstalled from the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be uninstalled from the Windows registry.This requires admin permissions.</translation>
+      <translation>La extensión se desinstalará del registro de Windows, lo que requiere permisos de administrador.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="157"/>
       <source>Dolphin extension installed successfully.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.</translation>
+      <translation>La extensión Dolphin se ha instalado correctamente.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="171"/>
       <source>Installation successful</source>
-      <translation type="unfinished">Installation successful</translation>
+      <translation>Instalación correcta</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="162"/>
       <source>Dolphin extension installed successfully.
 You may need to log out and log back in (or restart) for the changes to take effect.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.
-You may need to log out and log back in (or restart) for the changes to take effect.</translation>
+      <translation>La extensión Dolphin se ha instalado correctamente.
+Es posible que tenga que cerrar la sesión y volver a iniciarla (o reiniciarla) para que los cambios surtan efecto.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="177"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="201"/>
       <source>Installation failed</source>
-      <translation type="unfinished">Installation failed</translation>
+      <translation>Error de instalación</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="178"/>
       <source>Failed to install Dolphin extension.</source>
-      <translation type="unfinished">Failed to install Dolphin extension.</translation>
+      <translation>Error al instalar la extensión Dolphin.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="202"/>
@@ -865,55 +865,55 @@ Por defecto, utiliza el perfil incorporado. No obstante, puede cambiar esta conf
       <location filename="../pcleaner/gui/image_details_driver.py" line="441"/>
       <source>Denoising is disabled in the current profile, this output can&apos;t be generated.
 Please enable denoising in the profile settings and try again.</source>
-      <translation type="unfinished">Denoising is disabled in the current profile, this output can&apos;t be generated.
-Please enable denoising in the profile settings and try again.</translation>
+      <translation>La eliminación de ruido está desactivada en el perfil actual, por lo que no se puede generar esta salida&apos;.
+Active la eliminación de ruido en la configuración del perfil y vuelva a intentarlo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="456"/>
       <source>Inpainting is disabled in the current profile, this output can&apos;t be generated.
 Please enable inpainting in the profile settings and try again.</source>
-      <translation type="unfinished">Inpainting is disabled in the current profile, this output can&apos;t be generated.
-Please enable inpainting in the profile settings and try again.</translation>
+      <translation>Inpainting está desactivado en el perfil actual, esta salida no puede ser generada&apos;.
+Por favor, active la función inpainting en la configuración del perfil e inténtelo de nuevo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="507"/>
       <source>Image not found.</source>
-      <translation type="unfinished">Image not found.</translation>
+      <translation>Imagen no encontrada.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="508"/>
       <source>Image at {path} does not exist:</source>
-      <translation type="unfinished">Image at {path} does not exist:</translation>
+      <translation>La imagen en {path} no existe:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="556"/>
       <source>Export failed</source>
-      <translation type="unfinished">Export failed</translation>
+      <translation>Error de exportación</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="557"/>
       <source>Failed to export image:</source>
-      <translation type="unfinished">Failed to export image:</translation>
+      <translation>Error al exportar la imagen:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="654"/>
       <source>Output Failed</source>
-      <translation type="unfinished">Output Failed</translation>
+      <translation>Salida fallida</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="654"/>
       <source>Output generation failed:</source>
-      <translation type="unfinished">Output generation failed:</translation>
+      <translation>Generación de salida fallida:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="804"/>
       <source>Profile check failed</source>
-      <translation type="unfinished">Profile check failed</translation>
+      <translation>Error en la comprobación del perfil</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="804"/>
       <source>Profile change check failed:</source>
-      <translation type="unfinished">Profile change check failed:</translation>
+      <translation>Error en la comprobación del cambio de perfil:</translation>
     </message>
   </context>
   <context>
@@ -921,77 +921,77 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="14"/>
       <source>Report an Issue</source>
-      <translation type="unfinished">Report an Issue</translation>
+      <translation>Informar de un problema</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="23"/>
       <source>Consider including the log for the session that had an issue, if applicable.</source>
-      <translation type="unfinished">Consider including the log for the session that had an issue, if applicable.</translation>
+      <translation>Considere la posibilidad de incluir el registro de la sesión en la que se produjo el problema, si procede.</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="32"/>
       <source>View Logs:</source>
-      <translation type="unfinished">View Logs:</translation>
+      <translation>Ver registros:</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="62"/>
       <source>Log file is at:</source>
-      <translation type="unfinished">Log file is at:</translation>
+      <translation>El archivo de registro está en:</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="103"/>
       <source>Copy to Clipboard</source>
-      <translation type="unfinished">Copy to Clipboard</translation>
+      <translation>Copiar al portapapeles</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="114"/>
       <source>Open Issue Tracker</source>
-      <translation type="unfinished">Open Issue Tracker</translation>
+      <translation>Seguimiento de problemas abiertos</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="125"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Cerrar</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="46"/>
       <source>Note: Name {name} was hidden</source>
-      <translation type="unfinished">Note: Name {name} was hidden</translation>
+      <translation>Nota: El nombre {name} estaba oculto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="64"/>
       <source>Corrupted log session</source>
-      <translation type="unfinished">Corrupted log session</translation>
+      <translation>Sesión de registro dañada</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="66"/>
       <source>Current session</source>
-      <translation type="unfinished">Current session</translation>
+      <translation>Sesión en curso</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="69"/>
       <source>Today</source>
-      <translation type="unfinished">Today</translation>
+      <translation>Hoy</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="77"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="78"/>
       <source>Errors</source>
-      <translation type="unfinished">Errors</translation>
+      <translation>Errores</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="83"/>
       <source>Critical</source>
-      <translation type="unfinished">Critical</translation>
+      <translation>Crítica</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="84"/>
       <source>Criticals</source>
-      <translation type="unfinished">Criticals</translation>
+      <translation>Críticas</translation>
     </message>
   </context>
   <context>
@@ -999,7 +999,7 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../ui_files/License.ui" line="14"/>
       <source>License Agreement</source>
-      <translation type="unfinished">License Agreement</translation>
+      <translation>Acuerdo de licencia</translation>
     </message>
   </context>
   <context>
@@ -1008,128 +1008,128 @@ Please enable inpainting in the profile settings and try again.</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="316"/>
       <source>Open Config</source>
       <comment>Statusbar button</comment>
-      <translation type="unfinished">Open Config</translation>
+      <translation>Abrir configuración</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="321"/>
       <source>Open Log</source>
       <comment>Statusbar button</comment>
-      <translation type="unfinished">Open Log</translation>
+      <translation>Registro abierto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="337"/>
       <source>CUDA Enabled</source>
-      <translation type="unfinished">CUDA Enabled</translation>
+      <translation>CUDA habilitado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="464"/>
       <source>Select Output Directory</source>
-      <translation type="unfinished">Select Output Directory</translation>
+      <translation>Seleccionar directorio de salida</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="516"/>
       <source>Aborting...</source>
-      <translation type="unfinished">Aborting...</translation>
+      <translation>Abortar...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="581"/>
       <source>Loading OCR model...</source>
-      <translation type="unfinished">Loading OCR model...</translation>
+      <translation>Cargando modelo OCR...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="586"/>
       <source>Loaded OCR model.</source>
-      <translation type="unfinished">Loaded OCR model.</translation>
+      <translation>Modelo OCR cargado.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="598"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Error</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="701"/>
       <source>Delete Models</source>
-      <translation type="unfinished">Delete Models</translation>
+      <translation>Borrar modelos</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="705"/>
       <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
-      <translation type="unfinished">Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</translation>
+      <translation>¿Está seguro de que desea eliminar los modelos de aprendizaje automático? Esto hará que la limpieza y el OCR sean imposibles hasta que se descarguen de nuevo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="598"/>
       <source>Encountered error:</source>
-      <translation type="unfinished">Encountered error:</translation>
+      <translation>Error encontrado:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="341"/>
       <source>MPS Enabled</source>
-      <translation type="unfinished">MPS Enabled</translation>
+      <translation>MPS activado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="658"/>
       <source>Multiple Instances</source>
-      <translation type="unfinished">Multiple Instances</translation>
+      <translation>Múltiples instancias</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="664"/>
       <source>Another instance of Panel Cleaner appears to be running already or the previous instance was killed. Opening a new instance will make the old session unstable.
 
 Continue anyway?</source>
-      <translation type="unfinished">Another instance of Panel Cleaner appears to be running already or the previous instance was killed. Opening a new instance will make the old session unstable.
+      <translation>Parece que ya se está ejecutando otra instancia de Panel Cleaner o que se ha eliminado la instancia anterior. Abrir una nueva instancia hará que la sesión anterior se vuelva inestable.
 
-Continue anyway?</translation>
+¿Continuar de todos modos?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="665"/>
       <source>Found process ID in lock file: </source>
-      <translation type="unfinished">Found process ID in lock file: </translation>
+      <translation>ID de proceso encontrado en el archivo de bloqueo: </translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="714"/>
       <source>Failed to delete models.</source>
-      <translation type="unfinished">Failed to delete models.</translation>
+      <translation>Error al borrar modelos.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="714"/>
       <source>Delete Failed</source>
-      <translation type="unfinished">Delete Failed</translation>
+      <translation>Borrado fallido</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="720"/>
       <source>Models Deleted</source>
-      <translation type="unfinished">Models Deleted</translation>
+      <translation>Modelos eliminados</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="721"/>
       <source>The models were deleted. Would you like to download them again?</source>
-      <translation type="unfinished">The models were deleted. Would you like to download them again?</translation>
+      <translation>Los modelos se han borrado. Quieres volver a descargarlos?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="790"/>
       <source>Not Supported</source>
-      <translation type="unfinished">Not Supported</translation>
+      <translation>No se admite</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="791"/>
       <source>Unsupported system or package format</source>
-      <translation type="unfinished">Unsupported system or package format</translation>
+      <translation>Formato de sistema o paquete no compatible</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="823"/>
       <source>Restart Required</source>
-      <translation type="unfinished">Restart Required</translation>
+      <translation>Reinicio necesario</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="826"/>
       <source>The language has been changed. Please restart the application for the changes to take effect.</source>
-      <translation type="unfinished">The language has been changed. Please restart the application for the changes to take effect.</translation>
+      <translation>Se ha cambiado el idioma. Reinicie la aplicación para que los cambios surtan efecto.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="836"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="837"/>
       <source>System Language</source>
-      <translation type="unfinished">System Language</translation>
+      <translation>Idioma del sistema</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="936"/>
@@ -1398,248 +1398,248 @@ Consulte las instrucciones para instalar Tesseract correctamente &lt;a href=&quo
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="353"/>
       <source>Process</source>
-      <translation type="unfinished">Process</translation>
+      <translation>Proceso</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="359"/>
       <source>Cleaning</source>
-      <translation type="unfinished">Cleaning</translation>
+      <translation>Limpieza</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="369"/>
       <source>OCR</source>
-      <translation type="unfinished">OCR</translation>
+      <translation>OCR</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="404"/>
       <source>Abort</source>
-      <translation type="unfinished">Abort</translation>
+      <translation>Abortar</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="415"/>
       <source>Start</source>
-      <translation type="unfinished">Start</translation>
+      <translation>Inicio</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="431"/>
       <source>Output</source>
-      <translation type="unfinished">Output</translation>
+      <translation>Salida</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="463"/>
       <source>Cleaned Image</source>
-      <translation type="unfinished">Cleaned Image</translation>
+      <translation>Imagen limpia</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="473"/>
       <source>Mask</source>
-      <translation type="unfinished">Mask</translation>
+      <translation>Máscara</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="483"/>
       <source>Isolated Text</source>
-      <translation type="unfinished">Isolated Text</translation>
+      <translation>Texto aislado</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="512"/>
       <source>Save Output</source>
-      <translation type="unfinished">Save Output</translation>
+      <translation>Guardar salida</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="522"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cuando está marcada, las salidas se guardan en el disco. De lo contrario, sólo podrá previsualizarlas en la vista de detalles de la imagen. &lt;/p&gt;&lt;p&gt;Si el perfil permanece inalterado tras la limpieza sin esta opción activada, puede exportarlos rápidamente ejecutando de nuevo el limpiador con esta opción activada.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="582"/>
       <source>Output Directory:</source>
-      <translation type="unfinished">Output Directory:</translation>
+      <translation>Directorio de salida:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="595"/>
       <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
       <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
-      <translation type="unfinished">You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</translation>
+      <translation>Puede utilizar una ruta relativa para crear una subcarpeta en la ubicación original de la imagen&apos;, o utilizar una ruta absoluta.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="664"/>
       <source>Plain Text</source>
-      <translation type="unfinished">Plain Text</translation>
+      <translation>Texto sin formato</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="674"/>
       <source>CSV File</source>
-      <translation type="unfinished">CSV File</translation>
+      <translation>Archivo CSV</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="696"/>
       <source>Output File:</source>
-      <translation type="unfinished">Output File:</translation>
+      <translation>Fichero de salida:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="709"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Introduzca una ruta absoluta o relativa con un nombre de archivo. La salida de todas las imágenes se escribe en el mismo archivo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="739"/>
       <source>detected_text.txt</source>
       <extracomment>The file suffix .txt is important, don&apos;t change that. The .csv extension is swapped in automatically for that alternative when selected.</extracomment>
-      <translation type="unfinished">detected_text.txt</translation>
+      <translation>texto_detectado.txt</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="801"/>
       <source>Generating:</source>
       <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
-      <translation type="unfinished">Generating:</translation>
+      <translation>Generando:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="831"/>
       <source>Current Step:</source>
-      <translation type="unfinished">Current Step:</translation>
+      <translation>Paso actual:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="860"/>
       <location filename="../ui_files/Mainwindow.ui" line="893"/>
       <source>%v / %m</source>
-      <translation type="unfinished">%v / %m</translation>
+      <translation>%v / %m</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="883"/>
       <source>Images Processed:</source>
       <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
-      <translation type="unfinished">Images Processed:</translation>
+      <translation>Imágenes procesadas:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="927"/>
       <source>Set Default</source>
-      <translation type="unfinished">Set Default</translation>
+      <translation>Fijar por defecto</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="943"/>
       <source>Settings</source>
-      <translation type="unfinished">Settings</translation>
+      <translation>Ajustes</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="947"/>
       <source>Theme</source>
       <comment>As in color theme</comment>
-      <translation type="unfinished">Theme</translation>
+      <translation>Tema</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="956"/>
       <source>Language</source>
-      <translation type="unfinished">Language</translation>
+      <translation>Idioma</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="970"/>
       <source>Help</source>
-      <translation type="unfinished">Help</translation>
+      <translation>Ayuda</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="993"/>
       <source>Add Files...</source>
-      <translation type="unfinished">Add Files...</translation>
+      <translation>Añadir archivos...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1002"/>
       <source>Remove All Files</source>
-      <translation type="unfinished">Remove All Files</translation>
+      <translation>Eliminar todos los archivos</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1152"/>
       <source>Remove File</source>
-      <translation type="unfinished">Remove File</translation>
+      <translation>Eliminar archivo</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1161"/>
       <source>Help Translate Panel Cleaner</source>
-      <translation type="unfinished">Help Translate Panel Cleaner</translation>
+      <translation>Ayuda Traducir Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1170"/>
       <source>Report an Issue...</source>
-      <translation type="unfinished">Report an Issue...</translation>
+      <translation>Informar de un problema...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1175"/>
       <source>Simulate Exception</source>
-      <translation type="unfinished">Simulate Exception</translation>
+      <translation>Simular excepción</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1183"/>
       <source>Add File Browser Extension...</source>
-      <translation type="unfinished">Add File Browser Extension...</translation>
+      <translation>Añadir extensión de navegador de archivos...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1011"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Nuevo</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1020"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Borrar</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1029"/>
       <source>Import...</source>
-      <translation type="unfinished">Import...</translation>
+      <translation>Importar...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1038"/>
       <source>Online Documentation</source>
-      <translation type="unfinished">Online Documentation</translation>
+      <translation>Documentación en línea</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1047"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>Acerca de Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1052"/>
       <source>View License</source>
-      <translation type="unfinished">View License</translation>
+      <translation>Ver licencia</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1070"/>
       <source>Save as...</source>
-      <translation type="unfinished">Save as...</translation>
+      <translation>Guardar como...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1078"/>
       <source>System</source>
-      <translation type="unfinished">System</translation>
+      <translation>Sistema</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1086"/>
       <source>Dark</source>
-      <translation type="unfinished">Dark</translation>
+      <translation>Oscuro</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1094"/>
       <source>Light</source>
-      <translation type="unfinished">Light</translation>
+      <translation>Luz</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1108"/>
       <source>Add Folder...</source>
-      <translation type="unfinished">Add Folder...</translation>
+      <translation>Añadir carpeta...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1117"/>
       <source>Delete Machine Learning Models</source>
-      <translation type="unfinished">Delete Machine Learning Models</translation>
+      <translation>Borrar modelos de aprendizaje automático</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1126"/>
       <source>Download Machine Learning Models</source>
-      <translation type="unfinished">Download Machine Learning Models</translation>
+      <translation>Descargar modelos de aprendizaje automático</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1135"/>
       <source>Donate</source>
-      <translation type="unfinished">Donate</translation>
+      <translation>Donar</translation>
     </message>
   </context>
   <context>
@@ -1647,12 +1647,12 @@ Consulte las instrucciones para instalar Tesseract correctamente &lt;a href=&quo
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="14"/>
       <source>Downloading Machine Learning Models</source>
-      <translation type="unfinished">Downloading Machine Learning Models</translation>
+      <translation>Descarga de modelos de aprendizaje automático</translation>
     </message>
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="23"/>
       <source>Model data required to run Panel Cleaner:</source>
-      <translation type="unfinished">Model data required to run Panel Cleaner:</translation>
+      <translation>Datos del modelo necesarios para ejecutar Panel Cleaner:</translation>
     </message>
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="115"/>
@@ -1747,231 +1747,231 @@ Consulte las instrucciones para instalar Tesseract correctamente &lt;a href=&quo
       <location filename="process_strings.py" line="18"/>
       <source>Input</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Input</translation>
+      <translation>Entrada</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="19"/>
       <source>The rough mask generated by the AI.</source>
       <comment>Step description in the image details view, step: Text Detection, output: AI Mask</comment>
-      <translation type="unfinished">The rough mask generated by the AI.</translation>
+      <translation>La máscara aproximada generada por la IA.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="20"/>
       <source>Text Detection</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Text Detection</translation>
+      <translation>Detección de texto</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="22"/>
       <source>AI Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">AI Mask</translation>
+      <translation>Máscara AI</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="23"/>
       <source>The unfiltered box data generated by the AI.</source>
       <comment>Step description in the image details view, step: Text Detection, output: Raw Boxes</comment>
-      <translation type="unfinished">The unfiltered box data generated by the AI.</translation>
+      <translation>Los datos de la caja sin filtrar generados por la IA.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="25"/>
       <source>Raw Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Raw Boxes</translation>
+      <translation>Cajas en bruto</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="26"/>
       <source>The outlines of the text boxes the AI found.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Initial Boxes</comment>
-      <translation type="unfinished">The outlines of the text boxes the AI found.</translation>
+      <translation>Los contornos de los cuadros de texto que ha encontrado la IA.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="27"/>
       <source>Preprocessor</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Preprocessor</translation>
+      <translation>Preprocesador</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="29"/>
       <source>Initial Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Initial Boxes</translation>
+      <translation>Cajas iniciales</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="30"/>
       <source>The final boxes after expanding, merging and filtering unneeded boxes with OCR.
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Final Boxes</comment>
-      <translation type="unfinished">The final boxes after expanding, merging and filtering unneeded boxes with OCR.
-Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</translation>
+      <translation>Las casillas finales después de ampliar, fusionar y filtrar las casillas innecesarias con OCR.
+Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (finales). Azul: recuadros de referencia para la eliminación de ruido.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="32"/>
       <source>Final Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Final Boxes</translation>
+      <translation>Cajas finales</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="33"/>
       <source>The mask of the merged boxes.</source>
       <comment>Step description in the image details view, step: Masker, output: Box Mask</comment>
-      <translation type="unfinished">The mask of the merged boxes.</translation>
+      <translation>La máscara de las cajas fusionadas.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="34"/>
       <source>Masker</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Masker</translation>
+      <translation>Enmascarador</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="36"/>
       <source>Box Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Box Mask</translation>
+      <translation>Caja Máscara</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="37"/>
       <source>The rough text detection mask with everything outside the box mask cut out.</source>
       <comment>Step description in the image details view, step: Masker, output: Cut Mask</comment>
-      <translation type="unfinished">The rough text detection mask with everything outside the box mask cut out.</translation>
+      <translation>La máscara de detección de texto en bruto con todo fuera de la máscara de caja recortada.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="39"/>
       <source>Cut Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Cut Mask</translation>
+      <translation>Máscara de corte</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="40"/>
       <source>The different steps of growth around the cut mask displayed in different colors.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Layers</comment>
-      <translation type="unfinished">The different steps of growth around the cut mask displayed in different colors.</translation>
+      <translation>Los diferentes pasos de crecimiento alrededor de la máscara de corte se muestran en diferentes colores.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="42"/>
       <source>Mask Layers</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Layers</translation>
+      <translation>Capas de máscara</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="43"/>
       <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</source>
       <comment>Step description in the image details view, step: Masker, output: Fitment Quality</comment>
-      <translation type="unfinished">The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</translation>
+      <translation>La desviación estándar (σ) y el grosor del contorno (en píxeles) de cada una de las mejores máscaras elegidas, si las hay. Cuanto menor sea σ, mejor, de perfecto (morado) a fallido (rojo).</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="45"/>
       <source>Fitment Quality</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Fitment Quality</translation>
+      <translation>Calidad de ajuste</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="46"/>
       <source>The input image with the final mask overlaid in color.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
-      <translation type="unfinished">The input image with the final mask overlaid in color.</translation>
+      <translation>La imagen de entrada con la máscara final superpuesta en color.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="48"/>
       <source>Mask Overlay</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Overlay</translation>
+      <translation>Máscara de superposición</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="49"/>
       <source>The collection of masks for each bubble that fit best.</source>
       <comment>Step description in the image details view, step: Masker, output: Final Mask</comment>
-      <translation type="unfinished">The collection of masks for each bubble that fit best.</translation>
+      <translation>La colección de máscaras para cada burbuja que mejor se adapte.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="51"/>
       <source>Final Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Final Mask</translation>
+      <translation>Máscara final</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="52"/>
       <source>The text layer isolated from the input image.</source>
       <comment>Step description in the image details view, step: Masker, output: Isolated Text</comment>
-      <translation type="unfinished">The text layer isolated from the input image.</translation>
+      <translation>La capa de texto aislada de la imagen de entrada.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="54"/>
       <source>Isolated Text</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Isolated Text</translation>
+      <translation>Texto aislado</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="55"/>
       <source>The input image with the final mask applied.</source>
       <comment>Step description in the image details view, step: Masker, output: Masked Output</comment>
-      <translation type="unfinished">The input image with the final mask applied.</translation>
+      <translation>La imagen de entrada con la máscara final aplicada.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="57"/>
       <source>Masked Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Masked Output</translation>
+      <translation>Salida enmascarada</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="58"/>
       <source>The masks that required denoising, to be overlaid on the final mask when exporting.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoise Mask</comment>
-      <translation type="unfinished">The masks that required denoising, to be overlaid on the final mask when exporting.</translation>
+      <translation>Las máscaras que requirieron eliminación de ruido, que se superpondrán a la máscara final al exportar.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="59"/>
       <source>Denoiser</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Denoiser</translation>
+      <translation>Denoise</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="61"/>
       <source>Denoise Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Denoise Mask</translation>
+      <translation>Máscara de ruido</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="62"/>
       <source>The input image with the denoised mask applied.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoised Output</comment>
-      <translation type="unfinished">The input image with the denoised mask applied.</translation>
+      <translation>La imagen de entrada con la máscara final aplicada.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="64"/>
       <source>Denoised Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Denoised Output</translation>
+      <translation>Salida digitalizada</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="65"/>
       <source>The inpainted sections around the text that was poorly cleaned, if at all.</source>
       <comment>Step description in the image details view, step: Inpainter, output: Inpainted Mask</comment>
-      <translation type="unfinished">The inpainted sections around the text that was poorly cleaned, if at all.</translation>
+      <translation>Las secciones despintadas alrededor del texto que se limpiaron mal, si es que se limpiaron.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="66"/>
       <source>Inpainter</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Inpainter</translation>
+      <translation>Pintor</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="68"/>
       <source>Inpainted Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Inpainted Mask</translation>
+      <translation>Máscara pintada</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="69"/>
       <source>The input image: cleaned, denoised (if enabled), and inpainted.</source>
       <comment>Step description in the image details view, step: Inpainter, output: Inpainted Output</comment>
-      <translation type="unfinished">The input image: cleaned, denoised (if enabled), and inpainted.</translation>
+      <translation>La imagen de entrada: limpiada, eliminación de ruido (si está activada) y pintada.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="71"/>
       <source>Inpainted Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Inpainted Output</translation>
+      <translation>Salida pintada</translation>
     </message>
   </context>
   <context>
@@ -1980,645 +1980,645 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="profile_strings.py" line="16"/>
       <source>General</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">General</translation>
+      <translation>General</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="18"/>
       <source>About this profile:</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">About this profile:</translation>
+      <translation>Acerca de este perfil:</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="20"/>
       <source>Notes</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Notes</translation>
+      <translation>Notas</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="22"/>
       <source>Preferred file type to save the cleaned image as.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Preferred file type to save the cleaned image as.</translation>
+      <translation>Tipo de archivo preferido para guardar la imagen limpiada.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="24"/>
       <source>Preferred File Type</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Preferred File Type</translation>
+      <translation>Tipo de archivo preferido</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="26"/>
       <source>Preferred file type to save the mask as. Only image formats that allow for transparency are supported.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Preferred file type to save the mask as. Only image formats that allow for transparency are supported.</translation>
+      <translation>Tipo de archivo preferido para guardar la máscara. Solo se admiten formatos de imagen que permitan transparencia.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="28"/>
       <source>Preferred Mask File Type</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Preferred Mask File Type</translation>
+      <translation>Tipo de archivo de máscara preferido</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="30"/>
       <source>The following are the lower and upper targets for the height of the input image. It is only ever scaled down to fit within the range, preferring whole number factors to minimize the impact on image quality. Images smaller than either target will remain unchanged. You can disable this feature by setting one or both values less than or equal to 0.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">The following are the lower and upper targets for the height of the input image. It is only ever scaled down to fit within the range, preferring whole number factors to minimize the impact on image quality. Images smaller than either target will remain unchanged. You can disable this feature by setting one or both values less than or equal to 0.</translation>
+      <translation>A continuación se indican los objetivos inferior y superior para la altura de la imagen de entrada. Sólo se reduce para ajustarse al rango, prefiriendo factores numéricos enteros para minimizar el impacto en la calidad de la imagen. Las imágenes más pequeñas que cualquiera de los objetivos permanecerán inalteradas. Puede desactivar esta función estableciendo uno o ambos valores menores o iguales a 0.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="32"/>
       <source>This is useful for significantly speeding up processing on large images. Also, since other options relying on pixel dimensions depend on size, this will help normalize the results across different image sizes.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">This is useful for significantly speeding up processing on large images. Also, since other options relying on pixel dimensions depend on size, this will help normalize the results across different image sizes.</translation>
+      <translation>Esto es útil para acelerar significativamente el procesamiento de imágenes de gran tamaño. Además, como otras opciones que dependen de las dimensiones en píxeles dependen del tamaño, esto ayudará a normalizar los resultados en imágenes de distintos tamaños.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="34"/>
       <source>The image will be scaled down, processed, and then only the mask is scaled back up. Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality. Only the height of the image is used to determine the scale factor, preserving the aspect ratio, and ignoring the individual width of an image so that the factor remains consistent if one of the pages is a double page spread.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">The image will be scaled down, processed, and then only the mask is scaled back up. Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality. Only the height of the image is used to determine the scale factor, preserving the aspect ratio, and ignoring the individual width of an image so that the factor remains consistent if one of the pages is a double page spread.</translation>
+      <translation>La imagen se reduce, se procesa y, a continuación, sólo se vuelve a ampliar la máscara. Esto significa que la salida limpiada seguirá utilizando la imagen original, sin escalar, para evitar cualquier pérdida de calidad. Sólo se utiliza la altura de la imagen para determinar el factor de escala, preservando la relación de aspecto, e ignorando la anchura individual de una imagen para que el factor siga siendo coherente si una de las páginas es una doble página.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="36"/>
       <source>E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.</translation>
+      <translation>Por ejemplo, para un objetivo inferior de 1000 y un objetivo superior de 2000, una imagen con un tamaño de 5000x7000 (an, al) píxeles se reducirá en un factor de 4, de modo que tenga un tamaño de 1250x1750 píxeles durante el procesamiento.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="38"/>
       <source>Input Height Lower Target</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Input Height Lower Target</translation>
+      <translation>Altura de entrada Objetivo inferior</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="40"/>
       <source>Input Height Upper Target</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Input Height Upper Target</translation>
+      <translation>Altura de entrada Objetivo superior</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="42"/>
       <source>Text Detector</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Text Detector</translation>
+      <translation>Detector de texto</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="44"/>
       <source>Path to the text detection model, leave empty to use the built-in model. It is only recommended to override this if the version downloaded automatically is older than the latest release. The path must point directly to the comictextdetector.pt (CUDA) or comictextdetector.pt.onnx (CPU) file. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</source>
       <oldsource>Path to the text detection model, leave empty to use the built-in model. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</oldsource>
       <comment>Profile comment in Text Detector</comment>
-      <translation type="unfinished">Path to the text detection model, leave empty to use the built-in model. It is only recommended to override this if the version downloaded automatically is older than the latest release. The path must point directly to the comictextdetector.pt (CUDA) or comictextdetector.pt.onnx (CPU) file. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</translation>
+      <translation>Ruta al modelo de detección de texto, dejar vacío para utilizar el modelo incorporado. Sólo se recomienda anular esto si la versión descargada automáticamente es anterior a la última versión. La ruta debe apuntar directamente al archivo comictextdetector.pt (CUDA) o comictextdetector.pt.onnx (CPU). Puedes descargar versiones anteriores del modelo  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;aquí.&lt;/a&gt;</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="46"/>
       <source>Model Path</source>
       <comment>Profile entry in Text Detector</comment>
-      <translation type="unfinished">Model Path</translation>
+      <translation>Modelo de ruta</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="48"/>
       <source>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. &lt;br&gt;DO NOT report issues about this setting, as it&apos;s entirely hardware-dependent!</source>
       <oldsource>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. DO NOT report issues about this problem, as it&apos;s very hardware-dependent!</oldsource>
       <comment>Profile comment in Text Detector</comment>
-      <translation type="unfinished">Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. &lt;br&gt;DO NOT report issues about this setting, as it&apos;s entirely hardware-dependent!</translation>
+      <translation>Número de modelos a ejecutar en paralelo. Esto es útil si tienes suficiente RAM (o VRAM con CUDA) para ejecutar varios modelos al mismo tiempo. Esto, por supuesto, aumentará la velocidad del proceso, pero también puede bloquear su ordenador si sobreestima su hardware. Recomiendo usar 1 modelo por cada 2 GB de memoria disponible, o 1 modelo por cada 50 imágenes. Nota: Esto se ignora si se procesan menos de 50 archivos debido a que la sobrecarga de iniciar múltiples modelos no merece la pena por debajo de esa cantidad. Advertencia: Esto puede causar inestabilidad en el programa, úselo bajo su propio riesgo. &lt;br&gt;¡NO informe sobre problemas con esta configuración, ya que&apos;depende completamente del hardware!</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="50"/>
       <source>Concurrent Models</source>
       <comment>Profile entry in Text Detector</comment>
-      <translation type="unfinished">Concurrent Models</translation>
+      <translation>Modelos concurrentes</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="52"/>
       <source>Preprocessor</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Preprocessor</translation>
+      <translation>Preprocesador</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="54"/>
       <source>Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.</translation>
+      <translation>Los tamaños de las cajas se expresan en el número total de píxeles, por lo que una caja de 200x200 píxeles tiene un tamaño de 200 * 200 = 40000.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="56"/>
       <source>Minimum size of any box to keep it.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Minimum size of any box to keep it.</translation>
+      <translation>Tamaño mínimo de cualquier caja para guardarla.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="58"/>
       <source>Box Min Size</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Min Size</translation>
+      <translation>Caja Tamaño mín.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="60"/>
       <source>Minimum size of a box with &quot;unknown&quot; language to keep it. This language is typically assigned to logos and other badly behaved text elements.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Minimum size of a box with &quot;unknown&quot; language to keep it. This language is typically assigned to logos and other badly behaved text elements.</translation>
+      <translation>Tamaño mínimo de un recuadro con &quot;lenguaje desconocido&quot; para mantenerlo. Este lenguaje se suele asignar a logotipos y otros elementos de texto que se comportan mal.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="62"/>
       <source>Suspicious Box Min Size</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Suspicious Box Min Size</translation>
+      <translation>Caja sospechosa Tamaño mín</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="64"/>
       <source>The minimum overlap between two boxes to merge them. This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged. A higher value will require a larger overlap to merge the boxes.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The minimum overlap between two boxes to merge them. This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged. A higher value will require a larger overlap to merge the boxes.</translation>
+      <translation>El solapamiento mínimo entre dos cajas para fusionarlas. Este porcentaje (0-100) indica qué parte de la caja más pequeña debe estar dentro de la caja más grande para fusionarse. Un valor más alto requerirá un solapamiento mayor para fusionar las cajas.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="66"/>
       <source>Box Overlap Threshold</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Overlap Threshold</translation>
+      <translation>Umbral de solapamiento de cajas</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="68"/>
       <source>Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</translation>
+      <translation>Si se utiliza OCR para detectar las casillas que no merece la pena limpiar&apos;, como las que sólo contienen números o símbolos.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="70"/>
       <source>OCR Enabled</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Enabled</translation>
+      <translation>OCR activado</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="72"/>
       <source>Whether to use Tesseract to perform OCR tasks.&lt;br&gt; If checked, Tesseract OCR can be used for text extraction, if available.&lt;br&gt; If unchecked, the built-in OCR model (manga-ocr) is always used, which is best suited for vertical Japanese text.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Whether to use Tesseract to perform OCR tasks.&lt;br&gt; If checked, Tesseract OCR can be used for text extraction, if available.&lt;br&gt; If unchecked, the built-in OCR model (manga-ocr) is always used, which is best suited for vertical Japanese text.</translation>
+      <translation>Si se utiliza Tesseract para realizar tareas de OCR.&lt;br&gt; Si está marcada, se puede utilizar Tesseract OCR para la extracción de texto, si está disponible.&lt;br&gt; Si no está marcada, se utiliza siempre el modelo OCR incorporado (manga-ocr), que es el más adecuado para el texto japonés vertical.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="74"/>
       <source>OCR Use Tesseract</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Use Tesseract</translation>
+      <translation>OCR Utilizar Tesseract</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="76"/>
       <source>Specifies which engine to use for performing OCR.&lt;br&gt; - auto: Automatically selects the OCR engine based on the detected language of each text block within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.&lt;br&gt; - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition tasks. Best suited for vertical Japanese text.&lt;br&gt; - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a versatile option that supports English and multiple other languages.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Specifies which engine to use for performing OCR.&lt;br&gt; - auto: Automatically selects the OCR engine based on the detected language of each text block within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.&lt;br&gt; - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition tasks. Best suited for vertical Japanese text.&lt;br&gt; - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a versatile option that supports English and multiple other languages.</translation>
+      <translation>Especifica qué motor utilizar para realizar el OCR.&lt;br&gt; - auto: Selecciona automáticamente el motor de OCR en función del idioma detectado de cada bloque de texto dentro de la imagen. Utiliza Manga Ocr para texto japonés, Tesseract para inglés o texto desconocido.&lt;br&gt; - mangaocr: Obliga a Panel Cleaner a utilizar el modelo manga-ocr incorporado para todas las tareas de reconocimiento de texto. Más adecuado para texto japonés vertical.&lt;br&gt; - tesseract: Obliga a Panel Cleaner a utilizar Tesseract OCR para todas las tareas de reconocimiento de texto. Se trata de una opción versátil que admite el inglés y muchos otros idiomas.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="78"/>
       <source>OCR Engine</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Engine</translation>
+      <translation>Motor OCR</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="80"/>
       <source>Defines the reading order for processing and sorting text boxes on the entire page, not individual text blocks. This global setting influences how text boxes are ordered and presented for further processing.&lt;br&gt; - auto: Detects the reading order based on the detected language of each text block within the page.&lt;br&gt; - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.&lt;br&gt; - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.&lt;br&gt; Choose based on the predominant layout of your content.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Defines the reading order for processing and sorting text boxes on the entire page, not individual text blocks. This global setting influences how text boxes are ordered and presented for further processing.&lt;br&gt; - auto: Detects the reading order based on the detected language of each text block within the page.&lt;br&gt; - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.&lt;br&gt; - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.&lt;br&gt; Choose based on the predominant layout of your content.</translation>
+      <translation>Define el orden de lectura para procesar y ordenar los cuadros de texto en toda la página, no en bloques de texto individuales. Esta configuración global influye en cómo se ordenan y presentan los cuadros de texto para su posterior procesamiento.&lt;br&gt; - auto: Detecta el orden de lectura basándose en el idioma detectado de cada bloque de texto dentro de la página.&lt;br&gt; - manga: Orden de derecha a izquierda, de arriba a abajo. Adecuado para manga japonés.&lt;br&gt; - cómic: De izquierda a derecha, de arriba abajo. Adecuado para cómics y textos occidentales.&lt;br&gt; Elija en función del diseño predominante de su contenido.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="82"/>
       <source>Reading Order</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Reading Order</translation>
+      <translation>Orden de lectura</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="84"/>
       <source>Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</translation>
+      <translation>Tamaño máximo de una caja sobre la que realizar el OCR. Estas cajas inútiles suelen ser pequeñas, y el OCR es lento, así que úsalo como límite.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="86"/>
       <source>OCR Max Size</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Max Size</translation>
+      <translation>OCR Tamaño máximo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="88"/>
       <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</translation>
+      <translation>Patrón Regex para comparar con los resultados del OCR. Todo lo que coincida con este patrón se descarta. Tenga en cuenta que el modelo OCR devuelve caracteres de ancho completo, por lo que este patrón debería coincidir con ellos.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="90"/>
       <source>OCR Blacklist Pattern</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Blacklist Pattern</translation>
+      <translation>Patrón de lista negra OCR</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="92"/>
       <source>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</translation>
+      <translation>El modelo OCR sólo puede manejar texto en japonés, por lo que cuando se activa la opción estricta, descartará las casillas que no&apos;confíe que son japonesas. A veces, los números u otros símbolos disminuyen su confianza, lo que hace que el idioma detectado sea desconocido. Si se desactiva la opción estricta, no se descartarán. Todo lo que se reconozca con seguridad como un idioma diferente se descartará independientemente de esta configuración.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="94"/>
       <source>OCR Strict Language</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Strict Language</translation>
+      <translation>OCR Lenguaje estricto</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="96"/>
       <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</translation>
+      <translation>Relleno para añadir a cada lado de una caja. Esto se añade a las cajas iniciales creadas por el detector de texto AI. Estas cajas se visualizan en verde.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="98"/>
       <source>Box Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Padding Initial</translation>
+      <translation>Caja Relleno Inicial</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="100"/>
       <location filename="profile_strings.py" line="108"/>
       <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</translation>
+      <translation>Relleno para añadir a la derecha de una caja. Esta extensión ayuda a cubrir el texto ruby que flota a la derecha del texto vertical.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="102"/>
       <source>Box Right Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Right Padding Initial</translation>
+      <translation>Caja derecha Relleno inicial</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="104"/>
       <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</translation>
+      <translation>Relleno para añadir a cada lado de una caja. Esto se añade a un conjunto ampliado de recuadros, utilizados para eliminar los falsos positivos por el detector de texto AI&apos;s mask. Estos recuadros se visualizan en púrpura.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="106"/>
       <source>Box Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Padding Extended</translation>
+      <translation>Acolchado de cajas ampliado</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="110"/>
       <source>Box Right Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Right Padding Extended</translation>
+      <translation>Caja derecha ampliada</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="112"/>
       <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</translation>
+      <translation>Relleno para añadir a cada lado de una caja. Esto se añade a las cajas de referencia utilizadas para muestrear la imagen original mientras se analiza qué máscara utilizar. Estas cajas se visualizan en azul.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="114"/>
       <source>Box Reference Padding</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">Box Reference Padding</translation>
+      <translation>Relleno de referencia de caja</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="116"/>
       <source>Masker</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Masker</translation>
+      <translation>Enmascarador</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="118"/>
       <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</translation>
+      <translation>Número de píxeles para hacer crecer la máscara en cada paso. Esto abulta el contorno de la máscara, por lo que valores más pequeños serán más precisos pero más lentos.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="120"/>
       <source>Mask Growth Step Pixels</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Growth Step Pixels</translation>
+      <translation>Máscara Crecimiento Paso Píxeles</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="122"/>
       <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</translation>
+      <translation>Número de pasos para hacer crecer la máscara. Un número mayor hará más máscaras y más grandes, limitadas en última instancia por el tamaño de la caja de referencia.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="124"/>
       <source>Mask Growth Steps</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Growth Steps</translation>
+      <translation>Pasos de crecimiento de la máscara</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="126"/>
       <source>Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</translation>
+      <translation>Espesor mínimo de una máscara.  Esto es como el primer paso de crecimiento de la máscara&apos;, el resto seguirá el Paso de crecimiento de la máscara Píxeles. De esta manera, usted puede tener un pequeño tamaño de paso para la precisión, pero aún así evitar máscaras muy finas que podrían ser utilizados para limpiar el texto sólo rodeado por un contorno, cuando inpainting&apos;ve sido la mejor opción.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="128"/>
       <source>Min Mask Thickness</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Min Mask Thickness</translation>
+      <translation>Espesor mínimo de la máscara</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="130"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</translation>
+      <translation>Umbral máximo para que un píxel se considere blanquecino. El color medio a lo largo del borde de una máscara puede no ser blanco puro, por lo que para evitar ligeros tonos blanquecinos sobre un fondo blanco puro, todo lo que sea más claro que este valor umbral se redondeará a blanco puro.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="132"/>
       <source>Off White Max Threshold</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Off White Max Threshold</translation>
+      <translation>Off White Umbral máximo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="134"/>
       <source>The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</oldsource>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</translation>
+      <translation>La desviación estándar de una máscara representa la variación de color a lo largo del borde de la máscara. Para ello, sólo se muestrea de la imagen original la única línea de píxeles a lo largo del borde exterior de una máscara. Una desviación baja significa que la máscara se sitúa en un color sólido, lo que significa que&apos;no se cruza con ningún texto u otros objetos.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="140"/>
       <source>Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</oldsource>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</translation>
+      <translation>Mejora mínima de la desviación estándar de la máscara para seguir haciéndola crecer. Establecer un valor más alto aquí requiere una mejora mayor para considerar una máscara más grande, para dar preferencia a las máscaras más pequeñas.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="142"/>
       <source>Mask Improvement Threshold</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Improvement Threshold</translation>
+      <translation>Umbral de mejora de la máscara</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="144"/>
       <source>Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</translation>
+      <translation>Si se utiliza el algoritmo de selección rápida de máscaras. Cuando es verdadero, el algoritmo de selección de máscara elegirá la primera máscara perfecta, si se encuentra una pronto. Esto es más rápido, pero puede no encontrar la mejor máscara, si una ligeramente mayor hubiera sido mejor.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="146"/>
       <source>Mask Selection Fast</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Selection Fast</translation>
+      <translation>Selección rápida de máscaras</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="196"/>
       <source>Inpainter</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Inpainter</translation>
+      <translation>Pintor</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="198"/>
       <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</source>
       <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</oldsource>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</translation>
+      <translation>CARACTERÍSTICA EXPERIMENTAL: Si encuentra una configuración predeterminada mejor, abra una incidencia en github para compartir las mejoras con todos. Tenga en cuenta que inpainting no está&apos;habilitado por defecto.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="200"/>
       <source>Inpainting is when machine learning is used to replace the content of an image based on its surroundings. For masks that couldn&apos;t be cleaned well (or at all), inpainting can be used. To differentiate this from denoising, inpainting is meant for significantly worse masks that had a tight fit. Any masks that were denoised won&apos;t be inpainted.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">Inpainting is when machine learning is used to replace the content of an image based on its surroundings. For masks that couldn&apos;t be cleaned well (or at all), inpainting can be used. To differentiate this from denoising, inpainting is meant for significantly worse masks that had a tight fit. Any masks that were denoised won&apos;t be inpainted.</translation>
+      <translation>Inpainting es cuando se utiliza el aprendizaje automático para sustituir el contenido de una imagen basándose en su entorno.&apos;Para las máscaras que no se han podido limpiar bien (o no se han podido limpiar en absoluto), se puede utilizar el inpainting. Para diferenciarlo del denoising, el inpainting está pensado para máscaras significativamente peores que se ajustaron bien. Las máscaras a las que se les haya aplicado la eliminación de ruido no se pintarán.&apos;</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="202"/>
       <source>Since this step can provide poor results in some cases, it can be disabled here.  Uncheck to disable inpainting.</source>
       <oldsource>Since this step can provide poor results in some cases, it can be disabled here. Set to False to disable inpainting.</oldsource>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">Since this step can provide poor results in some cases, it can be disabled here.  Uncheck to disable inpainting.</translation>
+      <translation>Como este paso puede dar malos resultados en algunos casos, puede desactivarse aquí.  Desmarque esta opción para desactivar el repintado.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="204"/>
       <source>Inpainting Enabled</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Enabled</translation>
+      <translation>Inpainting Activado</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="206"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask.</translation>
+      <translation>La desviación estándar mínima de los colores alrededor del borde de una máscara dada para realizar el inpainting en la región alrededor de la máscara.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="208"/>
       <source>Inpainting Min Std Dev</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Min Std Dev</translation>
+      <translation>Inpainting Min Std Dev</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="210"/>
       <source>The maximum radius of a mask to perform inpainting on. Masks larger than this will be left as they are, because if the margin is that big, it is likely that the mask is already good enough.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The maximum radius of a mask to perform inpainting on. Masks larger than this will be left as they are, because if the margin is that big, it is likely that the mask is already good enough.</translation>
+      <translation>El radio máximo de una máscara sobre el que realizar el inpainting. Las máscaras mayores que esto se dejarán como están, porque si el margen es tan grande, es probable que la máscara ya sea suficientemente buena.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="212"/>
       <source>Inpainting Max Mask Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Max Mask Radius</translation>
+      <translation>Inpainting Max Mask Radius</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="214"/>
       <source>The minimum radius around a mask to inpaint. This is added to the optimal mask size to ensure that the inpainting covers the entire mask.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The minimum radius around a mask to inpaint. This is added to the optimal mask size to ensure that the inpainting covers the entire mask.</translation>
+      <translation>Radio mínimo alrededor de la máscara que se va a pintar. Se añade al tamaño óptimo de la máscara para garantizar que el repintado cubra toda la máscara.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="216"/>
       <source>Min Inpainting Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Min Inpainting Radius</translation>
+      <translation>Radio mínimo de pintado</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="218"/>
       <source>For masks that proved far harder to clean, meaning they had a high standard deviation, increase the radius of the inpainting to cover more of the mask. This is additional margin is added to the min inpainting radius and is calculated as: inpainting radius multiplier times mask standard deviation</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">For masks that proved far harder to clean, meaning they had a high standard deviation, increase the radius of the inpainting to cover more of the mask. This is additional margin is added to the min inpainting radius and is calculated as: inpainting radius multiplier times mask standard deviation</translation>
+      <translation>En el caso de las máscaras que resultan mucho más difíciles de limpiar, es decir, que tienen una desviación estándar elevada, se aumenta el radio del inpainting para cubrir más superficie de la máscara. Este margen adicional se añade al radio mínimo de repintado y se calcula de la siguiente manera: multiplicador del radio de repintado por la desviación típica de la máscara.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="220"/>
       <source>Inpainting Radius Multiplier</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Radius Multiplier</translation>
+      <translation>Multiplicador del radio de pintado</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="222"/>
       <source>The maximum radius around a mask to inpaint. This limits the size the inpainting can grow to, to prevent it from covering too much of the image, if a large radius multiplier is used.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The maximum radius around a mask to inpaint. This limits the size the inpainting can grow to, to prevent it from covering too much of the image, if a large radius multiplier is used.</translation>
+      <translation>El radio máximo alrededor de la máscara a pintar. Esto limita el tamaño al que puede crecer el pintado, para evitar que cubra demasiada imagen si se utiliza un multiplicador de radio grande.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="224"/>
       <source>Max Inpainting Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Max Inpainting Radius</translation>
+      <translation>Radio máximo de pintado</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="226"/>
       <source>After inpainting, cut the result out of the original image to prevent the inpainting from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</source>
       <oldsource>After inpainting, cut the result out of the original image to prevent the inpaitning from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</oldsource>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">After inpainting, cut the result out of the original image to prevent the inpainting from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</translation>
+      <translation>Tras el repintado, recorte el resultado de la imagen original para evitar que el repintado afecte al resto de la imagen. De este modo, se preserva al máximo la imagen original. Este radio se añade alrededor del radio final de inpainting, debido a que el modelo de inpainting modifica algunos píxeles fuera de su región dedicada.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="228"/>
       <source>Inpainting Isolation Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Isolation Radius</translation>
+      <translation>Radio de aislamiento</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="136"/>
       <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</translation>
+      <translation>La desviación estándar máxima de una máscara a considerar. Un valor alto aquí significa una mayor tolerancia para la máscara de intersección de texto u otros objetos, que no es&apos;una buena máscara, ya que requerirá inpainting de todos modos. Un valor de 0 sólo permite máscaras perfectas, lo que se recomienda para imágenes de muy alta resolución.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="138"/>
       <source>Mask Max Standard Deviation</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Mask Max Standard Deviation</translation>
+      <translation>Máscara Desviación estándar máxima</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="148"/>
       <source>Color to use for the debug mask.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Color to use for the debug mask.</translation>
+      <translation>Color a utilizar para la máscara de depuración.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="150"/>
       <source>Debug Mask Color</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Debug Mask Color</translation>
+      <translation>Color de la máscara de depuración</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="152"/>
       <source>Denoiser</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Denoiser</translation>
+      <translation>Denoiser</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="154"/>
       <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</translation>
+      <translation>Cuando un poco de texto es difícil de enmascarar, el paso de limpieza probablemente tuvo que elegir una máscara pequeña, que deja un montón de artefactos jpeg detrás, si estaban alrededor del texto.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="156"/>
       <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</translation>
+      <translation>Esto significa que el color de los píxeles alrededor del borde de una máscara no es&apos;uniforme, lo que se cuantifica como desviación estándar. El denoiser puede centrarse en máscaras con una desviación estándar mínima y denoise el área justo alrededor de la máscara. De este modo, se conservan los detalles del resto de la imagen, pero se eliminan los artefactos justo alrededor del texto.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="158"/>
       <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</translation>
+      <translation>Dado que se trata de un paso opcional e incluso puede ser superfluo para imágenes de alta resolución que no&apos;sufren de jpeg-artifacts, se puede desactivar aquí. Seleccione False para desactivar la eliminación de ruido.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="160"/>
       <source>Denoising Enabled</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Denoising Enabled</translation>
+      <translation>Eliminación de ruido activada</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="162"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</translation>
+      <translation>La desviación estándar mínima de los colores alrededor del borde de una máscara dada para realizar la eliminación de ruido en la región alrededor de la máscara.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="164"/>
       <source>Noise Min Standard Deviation</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Noise Min Standard Deviation</translation>
+      <translation>Ruido Desviación estándar mín.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="166"/>
       <source>Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this, after which this mask is handed off to the inpainter.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this, after which this mask is handed off to the inpainter.</translation>
+      <translation>Nota: Si se activa el inpainting, la desviación estándar mínima del inpainting actuará como máximo para esto, después de lo cual esta máscara se entrega al inpainter.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="168"/>
       <source>The thickness of an outline to denoise around a mask.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">The thickness of an outline to denoise around a mask.</translation>
+      <translation>El grosor de un contorno para denotar alrededor de una máscara.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="170"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Noise Outline Size</translation>
+      <translation>Ruido Tamaño del contorno</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="172"/>
       <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</translation>
+      <translation>Desvanezca los bordes de la máscara de cobertura desprotegida en esta cantidad para mezclar suavemente las partes desprotegidas con el resto de la imagen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="174"/>
       <source>Noise Fade Radius</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Noise Fade Radius</translation>
+      <translation>Radio de atenuación del ruido</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="176"/>
       <source>Set to True to support colored images.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Set to True to support colored images.</translation>
+      <translation>Establézcalo a True para admitir imágenes en color.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="178"/>
       <source>Colored Images</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Colored Images</translation>
+      <translation>Imágenes en color</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="180"/>
       <source>How strongly to denoise the image. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">How strongly to denoise the image. Higher values mean more denoising.</translation>
+      <translation>La intensidad de la eliminación de ruido de la imagen. Los valores más altos significan más eliminación de ruido.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="182"/>
       <source>Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Filter Strength</translation>
+      <translation>Resistencia del filtro</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="184"/>
       <source>How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</translation>
+      <translation>La intensidad de la eliminación de ruido de los canales de color, en contraposición a la luminosidad. Los valores más altos significan más eliminación de ruido.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="186"/>
       <source>Color Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Color Filter Strength</translation>
+      <translation>Intensidad del filtro de color</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="188"/>
       <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Size in pixels of the template patch that is used to compute weights. Should be odd.</translation>
+      <translation>Tamaño en píxeles del parche de plantilla que se utiliza para calcular los pesos. Debe ser impar.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="190"/>
       <source>Template Window Size</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Template Window Size</translation>
+      <translation>Tamaño de la ventana de plantilla</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="192"/>
       <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</translation>
+      <translation>Tamaño en píxeles de la ventana que se utiliza para calcular la media ponderada de un píxel determinado. Debe ser impar.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="194"/>
       <source>Search Window Size</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Search Window Size</translation>
+      <translation>Tamaño de la ventana de búsqueda</translation>
     </message>
   </context>
   <context>
@@ -2627,13 +2627,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="../pcleaner/gui/profile_parser.py" line="91"/>
       <source>Reset to default</source>
       <comment>Generic reset button tooltip</comment>
-      <translation type="unfinished">Reset to default</translation>
+      <translation>Restablecer valores por defecto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="182"/>
       <source>Same as image</source>
       <comment>Profile default option for the file type</comment>
-      <translation type="unfinished">Same as image</translation>
+      <translation>Igual que la imagen</translation>
     </message>
   </context>
   <context>
@@ -2642,8 +2642,8 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="../pcleaner/gui/profile_parser.py" line="478"/>
       <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
-You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;La ruta del modelo del Detector de Texto {value} no existe, volviendo al modelo por defecto.
+Puede descargar el modelo manualmente desde &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;aquí&lt;/a&gt; o seguir utilizando el modelo por defecto.&lt;/html&gt;</translation>
     </message>
   </context>
   <context>
@@ -2651,54 +2651,54 @@ You can download the model manually from &lt;a href=&quot;https://github.com/zyd
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="20"/>
       <source>Downloading Machine Learning Models</source>
-      <translation type="unfinished">Downloading Machine Learning Models</translation>
+      <translation>Descarga de modelos de aprendizaje automático</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="32"/>
       <source>## Setting up Panel Cleaner</source>
-      <translation type="unfinished">## Setting up Panel Cleaner</translation>
+      <translation>## Configuración de Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="58"/>
       <source>Before Panel Cleaner can begin, it requires the following machine learning models. Press **Automatically Download** to allow Panel Cleaner to download these files to get started (Internet connection required, total space approx. 700 MiB)</source>
-      <translation type="unfinished">Before Panel Cleaner can begin, it requires the following machine learning models. Press **Automatically Download** to allow Panel Cleaner to download these files to get started (Internet connection required, total space approx. 700 MiB)</translation>
+      <translation>Antes de que Panel Cleaner pueda comenzar, necesita los siguientes modelos de aprendizaje automático. Pulse **Descargar automáticamente** para permitir que Panel Cleaner descargue estos archivos para empezar (se requiere conexión a Internet, espacio total aprox. 700 MiB).</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="107"/>
       <source>Text Detection:</source>
-      <translation type="unfinished">Text Detection:</translation>
+      <translation>Detección de texto:</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="168"/>
       <location filename="../ui_files/SetupGreeter.ui" line="257"/>
       <location filename="../ui_files/SetupGreeter.ui" line="330"/>
       <source>Saved in:</source>
-      <translation type="unfinished">Saved in:</translation>
+      <translation>Guardado en:</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="222"/>
       <source>Optical Character Recognition (OCR):</source>
-      <translation type="unfinished">Optical Character Recognition (OCR):</translation>
+      <translation>Reconocimiento óptico de caracteres (OCR):</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="295"/>
       <source>Inpainting:</source>
-      <translation type="unfinished">Inpainting:</translation>
+      <translation>Pintar:</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="417"/>
       <source>Automatically Download</source>
-      <translation type="unfinished">Automatically Download</translation>
+      <translation>Descarga automática</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="433"/>
       <source>Abort</source>
-      <translation type="unfinished">Abort</translation>
+      <translation>Abortar</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="147"/>
       <source>(only the comictextdetector file is needed)</source>
-      <translation type="unfinished">(only the comictextdetector file is needed)</translation>
+      <translation>(sólo se necesita el archivo comictextdetector)</translation>
     </message>
   </context>
 </TS>
