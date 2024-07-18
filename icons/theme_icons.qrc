@@ -2,6 +2,8 @@
   <qresource prefix="icon-themes">
     <file>breeze/index.theme</file>
     <file>breeze/actions/16/application-menu.svg</file>
+    <file>breeze/actions/16/arrow-left.svg</file>
+    <file>breeze/actions/16/arrow-right.svg</file>
     <file>breeze/actions/16/configure.svg</file>
     <file>breeze/actions/16/dialog-cancel.svg</file>
     <file>breeze/actions/16/dialog-ok-apply.svg</file>
@@ -45,9 +47,11 @@
     <file>breeze/mimetypes/16/image-x-generic.svg</file>
     <file>breeze/status/16/data-error.svg</file>
     <file>breeze/status/16/data-warning.svg</file>
-    <file>breeze/status/64/dialog-error.svg</file>
+    <file>breeze/status/22/dialog-error.svg</file>
     <file>breeze-dark/index.theme</file>
     <file>breeze-dark/actions/16/application-menu.svg</file>
+    <file>breeze-dark/actions/16/arrow-left.svg</file>
+    <file>breeze-dark/actions/16/arrow-right.svg</file>
     <file>breeze-dark/actions/16/configure.svg</file>
     <file>breeze-dark/actions/16/dialog-cancel.svg</file>
     <file>breeze-dark/actions/16/dialog-ok-apply.svg</file>
@@ -91,6 +95,6 @@
     <file>breeze-dark/mimetypes/16/image-x-generic.svg</file>
     <file>breeze-dark/status/16/data-error.svg</file>
     <file>breeze-dark/status/16/data-warning.svg</file>
-    <file>breeze-dark/status/64/dialog-error.svg</file>
+    <file>breeze-dark/status/22/dialog-error.svg</file>
   </qresource>
 </RCC>

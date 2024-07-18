@@ -6,6 +6,8 @@ Files:
   actions:
     16:
       - application-menu
+      - arrow-left
+      - arrow-right
       - configure
       - dialog-cancel
       - dialog-ok-apply
@@ -53,5 +55,5 @@ Files:
     16:
       - data-error
       - data-warning
-    64:
+    22:
       - dialog-error

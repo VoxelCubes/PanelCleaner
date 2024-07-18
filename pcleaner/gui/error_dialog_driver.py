@@ -34,6 +34,7 @@ class ErrorDialog(Qw.QDialog, Ui_ErrorDialog):
         self.label_message.setText(message)
 
         self.pushButton_close.clicked.connect(self.close)
+        self.pushButton_kill.clicked.connect(self.kill)
         self.pushButton_open_issues.clicked.connect(self.open_issues)
         self.pushButton_clipboard.clicked.connect(self.copy_to_clipboard)
 
@@ -73,3 +74,12 @@ class ErrorDialog(Qw.QDialog, Ui_ErrorDialog):
         """
         logger.debug("Copying issue report to clipboard.")
         Qg.QGuiApplication.clipboard().setText(self.session_log.text)
+
+    @staticmethod
+    def kill() -> None:
+        """
+        Kill the application.
+        This may be necessary when repeated errors occur and the application is unresponsive.
+        """
+        logger.critical("User killed the application.")
+        Qw.QApplication.instance().quit()  # Embrace death.

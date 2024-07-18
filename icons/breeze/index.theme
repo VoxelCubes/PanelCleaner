@@ -700,14 +700,14 @@ Type=Fixed
 #16x16@2x - Fixed size - For IM status icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
 [status/16@2x]
 Size=16
-Scale=3
+Scale=2
 Context=Status
 Type=Fixed
 
 #16x16@3x - Fixed size - For IM status icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
 [status/16@3x]
 Size=16
-Scale=2
+Scale=3
 Context=Status
 Type=Fixed
 

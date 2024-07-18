@@ -119,6 +119,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="pushButton_kill">
+         <property name="text">
+          <string>Terminate Panel Cleaner</string>
+         </property>
+         <property name="icon">
+          <iconset theme="process-stop"/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="pushButton_close">
          <property name="text">
           <string>Close</string>
