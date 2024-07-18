@@ -69,7 +69,7 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     # Once the gui is up and running it'll be replaced with a call to the gui's error dialog.
     def exception_handler(exctype, value, traceback) -> None:
         logger.opt(depth=1, exception=(exctype, value, traceback)).critical(
-            "An uncaught exception was raised"
+            "An uncaught exception was raised before the GUI was initialized."
         )
 
     sys.excepthook = exception_handler

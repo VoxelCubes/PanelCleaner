@@ -31,14 +31,17 @@ class SelectableMessageBox(Qw.QMessageBox):
         labels = self.findChildren(Qw.QLabel)
         for label in labels:
             label.setTextInteractionFlags(
-                Qc.Qt.TextSelectableByMouse | Qc.Qt.LinksAccessibleByMouse | Qc.Qt.LinksAccessibleByKeyboard
+                Qc.Qt.TextSelectableByMouse
+                | Qc.Qt.LinksAccessibleByMouse
+                | Qc.Qt.LinksAccessibleByKeyboard
             )
+
 
 def show_exception(
     parent,
     title: str,
     msg: str,
-    worker_error: None | wt.WorkerError = None,
+    error_bundle: None | wt.WorkerError | tuple[type, BaseException, TracebackType] = None,
     collect_exception: bool = True,
 ) -> None:
     """
@@ -47,7 +50,7 @@ def show_exception(
     :param parent: The parent widget.
     :param title: The title of the dialog.
     :param msg: The message to show.
-    :param worker_error: [Optional] A worker error object to read the exception from.
+    :param error_bundle: [Optional] A worker error or a tuple of exception information.
     :param collect_exception: [Optional] Whether to add exception information to the log.
     """
 
@@ -56,12 +59,23 @@ def show_exception(
         exception_value: BaseException
         exception_traceback: TracebackType
 
-        if worker_error is not None:
-            exception_type = worker_error.exception_type
-            exception_value = worker_error.value
-            exception_traceback = worker_error.traceback
+        if error_bundle is not None:
+            if isinstance(error_bundle, tuple):
+                exception_type, exception_value, exception_traceback = error_bundle
+            elif isinstance(error_bundle, wt.WorkerError):
+                exception_type = error_bundle.exception_type
+                exception_value = error_bundle.value
+                exception_traceback = error_bundle.traceback
+            else:
+                logger.error(f"Invalid error bundle: {error_bundle}")
+                exception_type, exception_value, exception_traceback = sys.exc_info()
         else:
             exception_type, exception_value, exception_traceback = sys.exc_info()
+
+        # Ignore the exception if it's a KeyboardInterrupt.
+        if exception_type is KeyboardInterrupt:
+            logger.warning("User interrupted the process.")
+            return
 
         logger.opt(
             depth=1, exception=(exception_type, exception_value, exception_traceback)
