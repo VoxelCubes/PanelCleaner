@@ -32,9 +32,6 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <property name="handleWidth">
-       <number>10</number>
-      </property>
       <widget class="QGroupBox" name="groupBox_profile">
        <property name="title">
         <string>Profile</string>
@@ -505,6 +502,46 @@
                       <number>6</number>
                      </property>
                      <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_10">
+                       <item>
+                        <widget class="QCheckBox" name="checkBox_review_output">
+                         <property name="text">
+                          <string>Review Output</string>
+                         </property>
+                         <property name="checked">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="CTooltipLabel" name="label_review_output_help">
+                         <property name="toolTip">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, a review window will open upon process completion. The results are also pre-viewable in each image's details view, before proceeding with saving them to disk.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                         <property name="toolTipDuration">
+                          <number>-1</number>
+                         </property>
+                         <property name="text">
+                          <string notr="true">&lt;helper&gt;</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <spacer name="horizontalSpacer_7">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
                       <layout class="QHBoxLayout" name="horizontalLayout_6">
                        <item>
                         <widget class="QCheckBox" name="checkBox_write_output">
@@ -519,7 +556,7 @@
                        <item>
                         <widget class="CTooltipLabel" name="label_write_output_help">
                          <property name="toolTip">
-                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view or the Output Review, if enabled. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                          </property>
                          <property name="toolTipDuration">
                           <number>-1</number>
@@ -552,7 +589,7 @@
                        <property name="sizeHint" stdset="0">
                         <size>
                          <width>20</width>
-                         <height>40</height>
+                         <height>0</height>
                         </size>
                        </property>
                       </spacer>
@@ -1177,7 +1214,8 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_file_manager_extension">
    <property name="icon">
-    <iconset theme="application-menu"/>
+    <iconset theme="application-menu">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Add File Browser Extension...</string>

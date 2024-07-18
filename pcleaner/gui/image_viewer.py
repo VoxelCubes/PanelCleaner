@@ -3,6 +3,7 @@ from pathlib import Path
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+from PySide6.QtCore import Signal, Slot
 from loguru import logger
 
 
@@ -14,6 +15,12 @@ class ImageViewer(Qw.QGraphicsView):
     image_dimensions: tuple[int, int] | None
     image_item: Qw.QGraphicsPixmapItem | None
 
+    # We want to emit when the zoom factor changes,
+    # but also specifically when it changes due to a wheel event.
+    zoom_factor_changed = Signal(float)
+    zoom_factor_changed_wheel = Signal(float)
+    # set_zoom_factor = Slot(float)
+
     def __init__(self, parent=None) -> None:
         super(ImageViewer, self).__init__(parent)
         self.setRenderHint(Qg.QPainter.Antialiasing)
@@ -23,6 +30,7 @@ class ImageViewer(Qw.QGraphicsView):
         self.setScene(self.scene)
 
         self.image_item = None
+        self.image_dimensions = None
         # Disable the allocation limit for high resolution images.
         Qg.QImageReader.setAllocationLimit(0)
 
@@ -31,8 +39,15 @@ class ImageViewer(Qw.QGraphicsView):
 
         self.setMouseTracking(True)
 
+    @Slot(float)
+    def set_zoom_factor(self, factor: float) -> None:
+        self.zoom_factor = factor
+        self.zoom(1, suppress_signals=True)
+
     def pixmap_invalid(self) -> bool:
-        return self.image_item is not None and self.image_item.pixmap().isNull()
+        return self.image_item is None or (
+            self.image_item is not None and self.image_item.pixmap().isNull()
+        )
 
     def set_image(self, image_path: Path = None) -> None:
         if image_path:
@@ -62,8 +77,10 @@ class ImageViewer(Qw.QGraphicsView):
             # Zoom in/out with Ctrl + mouse wheel
             if event.angleDelta().y() > 0:
                 self.zoom_in(wheel=True)
+                self.zoom_factor_changed_wheel.emit(self.zoom_factor)
             else:
                 self.zoom_out(wheel=True)
+                self.zoom_factor_changed_wheel.emit(self.zoom_factor)
         elif Qc.Qt.ShiftModifier & event.modifiers():
             # Horizontal scrolling with Shift + mouse wheel
             self.horizontalScrollBar().setValue(
@@ -153,13 +170,16 @@ class ImageViewer(Qw.QGraphicsView):
             painter.setBrush(bg_color)
             painter.drawRect(image_rect)
 
-    def zoom(self, factor) -> None:
+    def zoom(self, factor: float, *, suppress_signals: bool = False) -> None:
         """
         Zoom the image by the given factor.
         The image may not exceed a scale of 100x or have both width and height be smaller
         than half of the viewport's width and height.
 
+        In the even that this was called as a callback, we can suppress the signal.
+
         :param factor: The factor to multiply the current zoom factor by.
+        :param suppress_signals: Whether to suppress the zoom factor changed signal.
         """
         proposed_zoom_factor = self.zoom_factor * factor
         proposed_zoom_factor = min(proposed_zoom_factor, 100)
@@ -182,12 +202,26 @@ class ImageViewer(Qw.QGraphicsView):
 
         if self.zoom_factor >= 2:
             self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, False)
-            self.image_item.setTransformationMode(Qc.Qt.FastTransformation)
+            self.set_transformation_mode(Qc.Qt.FastTransformation)
         else:
             self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, True)
-            self.image_item.setTransformationMode(Qc.Qt.SmoothTransformation)
+            self.set_transformation_mode(Qc.Qt.SmoothTransformation)
         self.setTransform(Qg.QTransform().scale(self.zoom_factor, self.zoom_factor))
+
+        if not suppress_signals:
+            self.zoom_factor_changed.emit(self.zoom_factor)
 
     def reset_zoom(self) -> None:
         self.zoom_factor = 1
         self.setTransform(Qg.QTransform().scale(self.zoom_factor, self.zoom_factor))
+        self.zoom_factor_changed.emit(self.zoom_factor)
+
+    def set_transformation_mode(self, mode: Qc.Qt.TransformationMode) -> None:
+        """
+        This function is broken out to allow subclasses with 2 images to
+        apply the transformation mode to both images.
+
+        :param mode: The transformation mode to apply.
+        """
+
+        self.image_item.setTransformationMode(mode)

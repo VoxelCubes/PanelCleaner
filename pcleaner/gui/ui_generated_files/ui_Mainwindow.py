@@ -205,7 +205,13 @@ class Ui_MainWindow(object):
         self.action_simulate_exception.setObjectName(u"action_simulate_exception")
         self.action_file_manager_extension = QAction(MainWindow)
         self.action_file_manager_extension.setObjectName(u"action_file_manager_extension")
-        icon15 = QIcon(QIcon.fromTheme(u"application-menu"))
+        icon15 = QIcon()
+        iconThemeName = u"application-menu"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon15 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon15.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+
         self.action_file_manager_extension.setIcon(icon15)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -215,7 +221,6 @@ class Ui_MainWindow(object):
         self.splitter = QSplitter(self.centralwidget)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setOrientation(Qt.Horizontal)
-        self.splitter.setHandleWidth(10)
         self.groupBox_profile = QGroupBox(self.splitter)
         self.groupBox_profile.setObjectName(u"groupBox_profile")
         self.verticalLayout_2 = QVBoxLayout(self.groupBox_profile)
@@ -497,6 +502,28 @@ class Ui_MainWindow(object):
         self.verticalLayout_13 = QVBoxLayout()
         self.verticalLayout_13.setSpacing(6)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.horizontalLayout_10 = QHBoxLayout()
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.checkBox_review_output = QCheckBox(self.page_cleaning)
+        self.checkBox_review_output.setObjectName(u"checkBox_review_output")
+        self.checkBox_review_output.setChecked(True)
+
+        self.horizontalLayout_10.addWidget(self.checkBox_review_output)
+
+        self.label_review_output_help = CTooltipLabel(self.page_cleaning)
+        self.label_review_output_help.setObjectName(u"label_review_output_help")
+        self.label_review_output_help.setToolTipDuration(-1)
+        self.label_review_output_help.setText(u"<helper>")
+
+        self.horizontalLayout_10.addWidget(self.label_review_output_help)
+
+        self.horizontalSpacer_7 = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_10.addItem(self.horizontalSpacer_7)
+
+
+        self.verticalLayout_13.addLayout(self.horizontalLayout_10)
+
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.checkBox_write_output = QCheckBox(self.page_cleaning)
@@ -519,7 +546,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_13.addLayout(self.horizontalLayout_6)
 
-        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer_6 = QSpacerItem(20, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_13.addItem(self.verticalSpacer_6)
 
@@ -856,9 +883,13 @@ class Ui_MainWindow(object):
         self.checkBox_save_clean.setText(QCoreApplication.translate("MainWindow", u"Cleaned Image", None))
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))
         self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
+        self.checkBox_review_output.setText(QCoreApplication.translate("MainWindow", u"Review Output", None))
+#if QT_CONFIG(tooltip)
+        self.label_review_output_help.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>When checked, a review window will open upon process completion. The results are also pre-viewable in each image's details view, before proceeding with saving them to disk.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.checkBox_write_output.setText(QCoreApplication.translate("MainWindow", u"Save Output", None))
 #if QT_CONFIG(tooltip)
-        self.label_write_output_help.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view. </p><p>If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.</p></body></html>", None))
+        self.label_write_output_help.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view or the Output Review, if enabled. </p><p>If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Output Directory:", None))
 #if QT_CONFIG(tooltip)

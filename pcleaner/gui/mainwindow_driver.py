@@ -22,6 +22,7 @@ import pcleaner.config as cfg
 import pcleaner.gui.about_driver as ad
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
+import pcleaner.gui.output_review_driver as red
 import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.processing as prc
@@ -56,10 +57,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     shared_ocr_model: gst.Shared[ocr.OcrProcsType]
 
     threadpool: Qc.QThreadPool  # Used for loading images and other gui tasks.
-    thread_queue: Qc.QThreadPool  # Used for tasks that need to run sequentially, without blocking the gui.
+    thread_queue: (
+        Qc.QThreadPool
+    )  # Used for tasks that need to run sequentially, without blocking the gui.
 
     progress_current: int
     progress_step_start: imf.Step | None  # When None, no processing is running.
+
+    review_options: None | gst.ReviewOptions
 
     profile_values_changed = Signal()
 
@@ -86,6 +91,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.progress_current: int = 0
         self.progress_step_start: imf.Step | None = None
+        self.review_options = None
 
         self.shared_ocr_model = gst.Shared[ocr.OcrProcsType]()
 
@@ -1278,24 +1284,33 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         request_mask = self.checkBox_save_mask.isChecked()
         request_text = self.checkBox_save_text.isChecked()
         request_output = self.checkBox_write_output.isChecked()
+        request_review = self.checkBox_review_output.isChecked()
 
         requested_outputs = []
+        review_output: imf.Output
+        review_mask_output: imf.Output
 
         if self.config.current_profile.inpainter.inpainting_enabled:
             if request_cleaned:
                 requested_outputs.append(imf.Output.inpainted_output)
             if request_mask:
                 requested_outputs.append(imf.Output.inpainted_mask)
+            review_output = imf.Output.inpainted_output
+            review_mask_output = imf.Output.inpainted_mask
         elif self.config.current_profile.denoiser.denoising_enabled:
             if request_cleaned:
                 requested_outputs.append(imf.Output.denoised_output)
             if request_mask:
                 requested_outputs.append(imf.Output.denoise_mask)
+            review_output = imf.Output.denoised_output
+            review_mask_output = imf.Output.denoise_mask
         else:
             if request_cleaned:
                 requested_outputs.append(imf.Output.masked_output)
             if request_mask:
                 requested_outputs.append(imf.Output.final_mask)
+            review_output = imf.Output.masked_output
+            review_mask_output = imf.Output.final_mask
 
         if request_text:
             requested_outputs.append(imf.Output.isolated_text)
@@ -1312,7 +1327,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.enable_running_cleaner()
             return
 
-        if request_output:
+        # If the user wants to review first, we don't generate output now,
+        # instead doing that in a second processing run launched after
+        # the review was completed and approved.
+        if request_output and not request_review:
             requested_outputs.append(imf.Output.write_output)
 
         logger.info(f"Requested outputs: {requested_outputs}")
@@ -1321,11 +1339,39 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         output_directory = Path(output_str if output_str else self.tr("cleaned"))
         image_files = self.file_table.get_image_files()
 
+        # Save the review options for later, should the process succeed.
+        # Setting to none implies that no review is requested.
+        if request_review:
+
+            # Compile the list of all mask outputs that will need to be assembled.
+            # Get all up to and including the requested output.
+            possible_masks = [
+                imf.Output.final_mask,
+                imf.Output.denoise_mask,
+                imf.Output.inpainted_mask,
+            ]
+            review_mask_outputs = [mask for mask in possible_masks if mask <= review_mask_output]
+
+            self.review_options = gst.ReviewOptions(
+                review_output,
+                review_mask_outputs,
+                request_text,
+                request_output,
+                deepcopy(self.config),
+                output_directory,
+                requested_outputs,
+                image_files,
+            )
+        else:
+            self.review_options = None
+
+        # Start the cleaning process worker.
         worker = wt.Worker(
             self.generate_output,
             requested_outputs,
             output_directory,
             image_files,
+            self.config,
             abort_signal=self.get_abort_signal(),
         )
         worker.signals.progress.connect(self.show_current_progress)
@@ -1335,11 +1381,42 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         worker.signals.aborted.connect(self.output_worker_aborted)
         self.thread_queue.start(worker)
 
+    def post_review_export(self) -> None:
+        """
+        After the user has reviewed the output and still wants to export the images,
+        start a new processing run to generate the output.
+        Reuse all the old setting stored in the review options.
+        """
+        if self.review_options is None:
+            logger.warning("No review options found for post review export.")
+            return
+
+        logger.info("Starting post review export.")
+        worker = wt.Worker(
+            self.generate_output,
+            self.review_options.requested_outputs + [imf.Output.write_output],
+            self.review_options.output_directory,
+            self.review_options.image_files,
+            self.review_options.config,
+            abort_signal=self.get_abort_signal(),
+        )
+        worker.signals.progress.connect(self.show_current_progress)
+        worker.signals.result.connect(self.output_worker_result)
+        worker.signals.error.connect(self.output_worker_error)
+        worker.signals.finished.connect(self.output_worker_finished)
+        worker.signals.aborted.connect(self.output_worker_aborted)
+
+        # Clear the review options, to prevent another review.
+        self.review_options = None
+
+        self.thread_queue.start(worker)
+
     def generate_output(
         self,
         outputs: list[imf.Output],
         output_directory: Path,
         image_files: list[imf.ImageFile],
+        config: cfg.Config,
         progress_callback: imf.ProgressSignal,
         abort_flag: wt.SharableFlag,
     ) -> None:
@@ -1350,6 +1427,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param outputs: The outputs to generate.
         :param output_directory: The directory to output to.
         :param image_files: The image files to process.
+        :param config: The current or older configuration.
         :param progress_callback: The callback given by the worker thread wrapper.
         :param abort_flag: The flag to check for aborting.
         """
@@ -1359,7 +1437,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             image_objects=image_files,
             target_outputs=outputs,
             output_dir=output_directory,
-            config=self.config,
+            config=config,
             ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
@@ -1456,10 +1534,38 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         )
 
     def output_worker_result(self) -> None:
-        gu.show_info(
-            self, self.tr("Processing Finished"), self.tr("Finished processing all files.")
-        )
+        """
+        Handle the results of a successful processing run.
+        If a review was requested, open the review window.
+        """
         logger.info("Output worker finished.")
+        if self.review_options:
+            images_to_review = self.file_table.get_image_files()
+            dialog = red.OutputReviewWindow(
+                self,
+                images_to_review,
+                self.review_options.review_output,
+                self.review_options.review_mask_outputs,
+                self.review_options.show_isolated_text,
+                self.config,
+                self.review_options.export_afterwards,
+            )
+            dialog.exec()
+            # Ask if the user still wants to export the images.
+            if self.review_options.export_afterwards and (
+                gu.show_question(
+                    self,
+                    self.tr("Export Images"),
+                    self.tr("Would you like to export the cleaned images?"),
+                    buttons=Qw.QMessageBox.Yes | Qw.QMessageBox.No,
+                )
+                == Qw.QMessageBox.Yes
+            ):
+                self.post_review_export()
+        else:
+            gu.show_info(
+                self, self.tr("Processing Finished"), self.tr("Finished processing all files.")
+            )
 
     def output_worker_aborted(self) -> None:
         gu.show_info(self, self.tr("Processing Aborted"), self.tr("Processing aborted."))
