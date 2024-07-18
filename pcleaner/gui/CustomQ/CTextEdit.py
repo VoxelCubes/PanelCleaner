@@ -14,7 +14,8 @@ class CTextEdit(Qw.QTextEdit):
         Qw.QTextEdit.__init__(self, parent)
 
         # Create a custom action for clearing the text
-        self.clear_action = Qg.QAction(self.tr("Clear\tCtrl+L"), self)
+        self.clear_action = Qg.QAction(self.tr("Clear"), self)
+        self.clear_action.setShortcut(Qg.QKeySequence("Ctrl+L"))
         self.clear_action.setIcon(Qg.QIcon.fromTheme("edit-clear-history"))
         self.clear_action.triggered.connect(self.clear)
 
