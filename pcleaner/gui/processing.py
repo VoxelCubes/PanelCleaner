@@ -176,6 +176,9 @@ def generate_output(
         logger.info(
             f"Running text detection AI model for {len(step_text_detector_images)} images..."
         )
+
+        visualize_raw_boxes = imf.Output.raw_boxes in target_outputs
+
         try:
             ctm.model2annotations_gui(
                 profile.general,
@@ -184,7 +187,7 @@ def generate_output(
                 step_text_detector_images,
                 cache_dir,
                 no_text_detection=target_output == imf.Output.input,
-                visualize_raw_boxes=True,
+                visualize_raw_boxes=visualize_raw_boxes,
                 partial_progress_data=partial(
                     imf.ProgressData,
                     len(step_text_detector_images),
