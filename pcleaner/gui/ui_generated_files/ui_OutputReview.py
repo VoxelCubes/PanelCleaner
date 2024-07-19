@@ -111,6 +111,8 @@ class Ui_OutputReview(object):
         self.image_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.image_list.setProperty("showDropIndicator", False)
         self.image_list.setDragDropMode(QAbstractItemView.NoDragDrop)
+        self.image_list.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
+        self.image_list.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.image_list.setMovement(QListView.Static)
         self.image_list.setFlow(QListView.LeftToRight)
         self.image_list.setProperty("isWrapping", True)
@@ -118,7 +120,7 @@ class Ui_OutputReview(object):
         self.image_list.setLayoutMode(QListView.Batched)
         self.image_list.setViewMode(QListView.IconMode)
         self.image_list.setUniformItemSizes(False)
-        self.image_list.setBatchSize(100)
+        self.image_list.setBatchSize(50)
         self.image_list.setWordWrap(False)
         self.image_list.setSelectionRectVisible(True)
 

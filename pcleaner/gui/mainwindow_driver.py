@@ -1315,6 +1315,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if request_text:
             requested_outputs.append(imf.Output.isolated_text)
 
+        # Edge case: Only the isolated text was requested.
+        # Limit the review output and mask to the simple masked output.
+        if requested_outputs == [imf.Output.isolated_text]:
+            review_output = imf.Output.masked_output
+            review_mask_output = imf.Output.final_mask
+
         # Check for goofballs that requested no outputs.
         if not requested_outputs:
             gu.show_warning(

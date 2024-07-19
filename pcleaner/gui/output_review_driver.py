@@ -309,7 +309,7 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
 
         # Set a delayed zoom to fit.
         if viewer_to_zoom not in self.first_load:
-            Qc.QTimer.singleShot(1, viewer_to_zoom.zoom_fit)
+            Qc.QTimer.singleShot(0, viewer_to_zoom.zoom_fit)
             self.first_load.add(viewer_to_zoom)
 
     def load_side_by_side(self, original_path: Path, output_path: Path) -> None:

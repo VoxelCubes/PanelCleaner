@@ -146,6 +146,12 @@
          <property name="dragDropMode">
           <enum>QAbstractItemView::NoDragDrop</enum>
          </property>
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+         <property name="horizontalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
          <property name="movement">
           <enum>QListView::Static</enum>
          </property>
@@ -168,7 +174,7 @@
           <bool>false</bool>
          </property>
          <property name="batchSize">
-          <number>100</number>
+          <number>50</number>
          </property>
          <property name="wordWrap">
           <bool>false</bool>
