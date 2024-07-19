@@ -1,9 +1,10 @@
 from typing import Generic, TypeVar, Optional
 from pathlib import Path
 
-from attrs import frozen
+from attrs import frozen, define
 
 import pcleaner.gui.image_file as imf
+import pcleaner.structures as st
 import pcleaner.config as cfg
 
 
@@ -29,7 +30,7 @@ class Shared(Generic[T]):
 
 
 @frozen
-class ReviewOptions:
+class CleaningReviewOptions:
     """
     A compact structure to hold the options for the output review window.
     This is stored in the Mainwindow driver and revisited upon process completion.
@@ -45,3 +46,16 @@ class ReviewOptions:
     output_directory: Path
     requested_outputs: list[imf.Output]
     image_files: list[imf.ImageFile]
+
+
+@define
+class OcrReviewOptions:
+    """
+    A compact structure to hold the options for the OCR review window.
+    This one needs to be mutable for the mainwindow to drop off the
+    OCR results. The processors isn't run again after this so
+    no configuration is needed.
+    """
+
+    image_files: list[imf.ImageFile]
+    ocr_results: list[st.OCRAnalytic]

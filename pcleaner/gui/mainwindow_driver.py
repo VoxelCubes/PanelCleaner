@@ -23,6 +23,7 @@ import pcleaner.gui.about_driver as ad
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.output_review_driver as red
+import pcleaner.gui.ocr_review_driver as ocrd
 import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.processing as prc
@@ -64,7 +65,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     progress_current: int
     progress_step_start: imf.Step | None  # When None, no processing is running.
 
-    review_options: None | gst.ReviewOptions
+    cleaning_review_options: None | gst.CleaningReviewOptions
+    ocr_review_options: None | gst.OcrReviewOptions
 
     profile_values_changed = Signal()
 
@@ -91,7 +93,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.progress_current: int = 0
         self.progress_step_start: imf.Step | None = None
-        self.review_options = None
+        self.cleaning_review_options = None
+        self.ocr_review_options = None
 
         self.shared_ocr_model = gst.Shared[ocr.OcrProcsType]()
 
@@ -1358,7 +1361,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             ]
             review_mask_outputs = [mask for mask in possible_masks if mask <= review_mask_output]
 
-            self.review_options = gst.ReviewOptions(
+            self.cleaning_review_options = gst.CleaningReviewOptions(
                 review_output,
                 review_mask_outputs,
                 request_text,
@@ -1369,7 +1372,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 image_files,
             )
         else:
-            self.review_options = None
+            self.cleaning_review_options = None
 
         # Start the cleaning process worker.
         worker = wt.Worker(
@@ -1393,17 +1396,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         start a new processing run to generate the output.
         Reuse all the old setting stored in the review options.
         """
-        if self.review_options is None:
+        if self.cleaning_review_options is None:
             logger.warning("No review options found for post review export.")
             return
 
         logger.info("Starting post review export.")
         worker = wt.Worker(
             self.generate_output,
-            self.review_options.requested_outputs + [imf.Output.write_output],
-            self.review_options.output_directory,
-            self.review_options.image_files,
-            self.review_options.config,
+            self.cleaning_review_options.requested_outputs + [imf.Output.write_output],
+            self.cleaning_review_options.output_directory,
+            self.cleaning_review_options.image_files,
+            self.cleaning_review_options.config,
             abort_signal=self.get_abort_signal(),
         )
         worker.signals.progress.connect(self.show_current_progress)
@@ -1413,7 +1416,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         worker.signals.aborted.connect(self.output_worker_aborted)
 
         # Clear the review options, to prevent another review.
-        self.review_options = None
+        self.cleaning_review_options = None
 
         self.thread_queue.start(worker)
 
@@ -1455,6 +1458,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         # Check if we're outputting as plain text or a csv file.
         csv_output = self.radioButton_ocr_csv.isChecked()
+        review_ocr = self.checkBox_review_ocr.isChecked()
 
         try:
             output_path = Path(self.lineEdit_out_file.text())
@@ -1494,6 +1498,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.disable_running_cleaner()
 
         image_files = self.file_table.get_image_files()
+
+        if review_ocr:
+            # The empty list gets populated with analytic results in the progress callback.
+            self.ocr_review_options = gst.OcrReviewOptions(image_files, [])
+        else:
+            self.ocr_review_options = None
 
         worker = wt.Worker(
             self.perform_ocr,
@@ -1545,20 +1555,20 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         If a review was requested, open the review window.
         """
         logger.info("Output worker finished.")
-        if self.review_options:
+        if self.cleaning_review_options:
             images_to_review = self.file_table.get_image_files()
             dialog = red.OutputReviewWindow(
                 self,
                 images_to_review,
-                self.review_options.review_output,
-                self.review_options.review_mask_outputs,
-                self.review_options.show_isolated_text,
+                self.cleaning_review_options.review_output,
+                self.cleaning_review_options.review_mask_outputs,
+                self.cleaning_review_options.show_isolated_text,
                 self.config,
-                self.review_options.export_afterwards,
+                self.cleaning_review_options.export_afterwards,
             )
             dialog.exec()
             # Ask if the user still wants to export the images.
-            if self.review_options.export_afterwards and (
+            if self.cleaning_review_options.export_afterwards and (
                 gu.show_question(
                     self,
                     self.tr("Export Images"),
@@ -1568,6 +1578,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 == Qw.QMessageBox.Yes
             ):
                 self.post_review_export()
+        elif self.ocr_review_options:
+            dialog = ocrd.OcrReviewWindow(
+                self, self.ocr_review_options.image_files, self.ocr_review_options.ocr_results
+            )
+            dialog.exec()
         else:
             gu.show_info(
                 self, self.tr("Processing Finished"), self.tr("Finished processing all files.")
@@ -1689,8 +1704,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         elif progress_data.progress_type == imf.ProgressType.outputOCR:
             # Show ocr output.
             logger.info(f"Showing ocr output...")
-            ocr_output = progress_data.value
+            ocr_output, raw_analytics = progress_data.value
             self.textEdit_analytics.append(ocr_output)
+            if self.ocr_review_options is not None:
+                self.ocr_review_options.ocr_results = raw_analytics
             return  # Don't update the progress bar.
 
         elif progress_data.progress_type == imf.ProgressType.end:

@@ -1040,7 +1040,7 @@ def perform_ocr(
             [],
             imf.Step.preprocessor,
             imf.ProgressType.outputOCR,
-            buffer.getvalue(),
+            (buffer.getvalue(), ocr_analytics),
         )
     )
 

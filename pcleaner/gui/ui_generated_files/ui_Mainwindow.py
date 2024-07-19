@@ -605,16 +605,56 @@ class Ui_MainWindow(object):
         self.verticalLayout_12 = QVBoxLayout(self.page_ocr)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_11 = QHBoxLayout()
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.verticalLayout_15 = QVBoxLayout()
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.radioButton_ocr_text = QRadioButton(self.page_ocr)
         self.radioButton_ocr_text.setObjectName(u"radioButton_ocr_text")
         self.radioButton_ocr_text.setChecked(True)
 
-        self.verticalLayout_12.addWidget(self.radioButton_ocr_text)
+        self.verticalLayout_15.addWidget(self.radioButton_ocr_text)
 
         self.radioButton_ocr_csv = QRadioButton(self.page_ocr)
         self.radioButton_ocr_csv.setObjectName(u"radioButton_ocr_csv")
 
-        self.verticalLayout_12.addWidget(self.radioButton_ocr_csv)
+        self.verticalLayout_15.addWidget(self.radioButton_ocr_csv)
+
+
+        self.horizontalLayout_11.addLayout(self.verticalLayout_15)
+
+        self.horizontalSpacer_8 = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_11.addItem(self.horizontalSpacer_8)
+
+        self.verticalLayout_17 = QVBoxLayout()
+        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
+        self.horizontalLayout_12 = QHBoxLayout()
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.checkBox_review_ocr = QCheckBox(self.page_ocr)
+        self.checkBox_review_ocr.setObjectName(u"checkBox_review_ocr")
+        self.checkBox_review_ocr.setChecked(True)
+
+        self.horizontalLayout_12.addWidget(self.checkBox_review_ocr)
+
+        self.label = CTooltipLabel(self.page_ocr)
+        self.label.setObjectName(u"label")
+        self.label.setText(u"<helper>")
+
+        self.horizontalLayout_12.addWidget(self.label)
+
+
+        self.verticalLayout_17.addLayout(self.horizontalLayout_12)
+
+        self.verticalSpacer_7 = QSpacerItem(0, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_17.addItem(self.verticalSpacer_7)
+
+
+        self.horizontalLayout_11.addLayout(self.verticalLayout_17)
+
+
+        self.verticalLayout_12.addLayout(self.horizontalLayout_11)
 
         self.verticalSpacer_5 = QSpacerItem(10, 37, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -899,6 +939,10 @@ class Ui_MainWindow(object):
         self.pushButton_browse_out_dir.setText("")
         self.radioButton_ocr_text.setText(QCoreApplication.translate("MainWindow", u"Plain Text", None))
         self.radioButton_ocr_csv.setText(QCoreApplication.translate("MainWindow", u"CSV File", None))
+        self.checkBox_review_ocr.setText(QCoreApplication.translate("MainWindow", u"Review Output", None))
+#if QT_CONFIG(tooltip)
+        self.label.setToolTip(QCoreApplication.translate("MainWindow", u"When checked, a review window will open upon process completion.", None))
+#endif // QT_CONFIG(tooltip)
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Output File:", None))
 #if QT_CONFIG(tooltip)
         self.label_ocr_outdir_help.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Either enter an absolute or relative path with a file name. The output of all images is written to the same file.</p></body></html>", None))

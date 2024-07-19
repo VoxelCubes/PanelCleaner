@@ -696,21 +696,83 @@
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QRadioButton" name="radioButton_ocr_text">
-                   <property name="text">
-                    <string>Plain Text</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioButton_ocr_csv">
-                   <property name="text">
-                    <string>CSV File</string>
-                   </property>
-                  </widget>
+                  <layout class="QHBoxLayout" name="horizontalLayout_11">
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_15">
+                     <item>
+                      <widget class="QRadioButton" name="radioButton_ocr_text">
+                       <property name="text">
+                        <string>Plain Text</string>
+                       </property>
+                       <property name="checked">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QRadioButton" name="radioButton_ocr_csv">
+                       <property name="text">
+                        <string>CSV File</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>0</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <layout class="QVBoxLayout" name="verticalLayout_17">
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_12">
+                       <item>
+                        <widget class="QCheckBox" name="checkBox_review_ocr">
+                         <property name="text">
+                          <string>Review Output</string>
+                         </property>
+                         <property name="checked">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="CTooltipLabel" name="label">
+                         <property name="toolTip">
+                          <string>When checked, a review window will open upon process completion.</string>
+                         </property>
+                         <property name="text">
+                          <string notr="true">&lt;helper&gt;</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <spacer name="verticalSpacer_7">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>0</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
                  </item>
                  <item>
                   <spacer name="verticalSpacer_5">

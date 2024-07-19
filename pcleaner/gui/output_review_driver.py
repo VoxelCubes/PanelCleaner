@@ -49,8 +49,6 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
     min_thumbnail_size: int
     max_thumbnail_size: int
 
-    context_menu: Qw.QMenu
-
     def __init__(
         self,
         parent=None,
@@ -82,8 +80,6 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self.show_isolated_text = show_isolated_text
         self.config = config
         self.confirm_closing = confirm_closing
-
-        self.context_menu = Qw.QMenu(self)
 
         self.first_load = set()
         self.first_slot_connection = True
