@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Sequence
 
 import magic
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 from attrs import frozen, define
 from loguru import logger
 
@@ -287,12 +287,36 @@ class PageData:
         :param final_boxes: [Optional] Whether this visualization is after OCR.
         """
         image = Image.open(image_path)
-        draw = ImageDraw.Draw(image)
         with resources.files(pcleaner.data) as data_path:
             font_path = str(data_path / "LiberationSans-Regular.ttf")
         logger.debug(f"Loading included font from {font_path}")
         # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
         font_size = int(image.size[0] / 50) + 5
+
+        # First, draw all the rectangles with a transparent fill.
+        # This is done on a temporary image with full opacity to then
+        # make the whole layer semi-transparent, without needing to
+        # carefully fill the gaps between boxes.
+        FILL_ALPHA = 48
+        fill_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(fill_layer)
+        for box in self.reference_boxes:
+            draw.rectangle(box.as_tuple, fill="blue")
+        for box in self.merged_extended_boxes:
+            draw.rectangle(box.as_tuple, fill=(128, 0, 200, 255))  # Better purple
+        for box in self.extended_boxes:
+            draw.rectangle(box.as_tuple, fill="red")
+        for box in self.boxes:
+            draw.rectangle(box.as_tuple, fill="green")
+
+        # Apply transparency to the fill layer
+        alpha = fill_layer.split()[3]
+        alpha = ImageEnhance.Brightness(alpha).enhance(FILL_ALPHA / 255)
+        fill_layer.putalpha(alpha)
+
+        # Composite the fill layer onto the original image
+        image = Image.alpha_composite(image.convert("RGBA"), fill_layer)
+        draw = ImageDraw.Draw(image)
 
         for index, box in enumerate(self.boxes):
             draw.rectangle(box.as_tuple, outline="green")

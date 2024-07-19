@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 import colorsys
 import scipy
-from PIL import Image, ImageFilter, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageFilter, ImageDraw, ImageFont, ImageOps, ImageEnhance
 from loguru import logger
 
 import pcleaner.data
@@ -887,13 +887,33 @@ def visualize_raw_boxes(
     :param output_path: The path to save the visualization to.
     """
     image = Image.fromarray(image)
-    draw = ImageDraw.Draw(image)
 
     with resources.files(pcleaner.data) as data_path:
         font_path = str(data_path / "LiberationSans-Regular.ttf")
     logger.debug(f"Loading included font from {font_path}")
     # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
     font_size = int(image.size[0] / 50) + 5
+
+    # Fill layer for box background.
+    # Just giving the fill an alpha value didn't work, I tried.
+    fill_layer = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(fill_layer)
+    for index, box_data in enumerate(raw_boxes):
+        # This is a list of x1, y1, x2, y2.
+        box_xyxy: tuple[int, int, int, int] = box_data["xyxy"]
+
+        # Draw a transparent rectangle fill as the base.
+        draw.rectangle(box_xyxy, fill="green")
+
+    # Paste the fill layer onto the image.
+    FILL_ALPHA = 48
+    alpha = fill_layer.split()[3]
+    alpha = ImageEnhance.Brightness(alpha).enhance(FILL_ALPHA / 255)
+    fill_layer.putalpha(alpha)
+
+    # Composite the fill layer onto the original image
+    image = Image.alpha_composite(image.convert("RGBA"), fill_layer)
+    draw = ImageDraw.Draw(image)
 
     for index, box_data in enumerate(raw_boxes):
         # Parse out the bounding box, boxes of the lines, and the language.
