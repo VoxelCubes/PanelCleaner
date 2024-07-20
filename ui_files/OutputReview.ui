@@ -13,9 +13,6 @@
   <property name="windowTitle">
    <string notr="true">Review</string>
   </property>
-  <property name="sizeGripEnabled">
-   <bool>true</bool>
-  </property>
   <property name="modal">
    <bool>true</bool>
   </property>

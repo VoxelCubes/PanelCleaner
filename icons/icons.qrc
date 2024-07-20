@@ -6,11 +6,15 @@
     <file>custom_icons/dark/mask_perfect.svg</file>
     <file>custom_icons/dark/ocr_box_removed.svg</file>
     <file>custom_icons/dark/mask_inpainting.svg</file>
+    <file>custom_icons/dark/new_bubble.svg</file>
+    <file>custom_icons/dark/trash_restore.svg</file>
     <file>custom_icons/light/mask_denoised.svg</file>
     <file>custom_icons/light/mask_failed.svg</file>
     <file>custom_icons/light/mask_perfect.svg</file>
     <file>custom_icons/light/ocr_box_removed.svg</file>
     <file>custom_icons/light/mask_inpainting.svg</file>
+    <file>custom_icons/light/new_bubble.svg</file>
+    <file>custom_icons/light/trash_restore.svg</file>
     <file>logo-tiny.png</file>
     <file>logo.ico</file>
     <file>logo.png</file>

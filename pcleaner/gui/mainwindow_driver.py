@@ -1580,7 +1580,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.post_review_export()
         elif self.ocr_review_options:
             dialog = ocrd.OcrReviewWindow(
-                self, self.ocr_review_options.image_files, self.ocr_review_options.ocr_results
+                self,
+                self.ocr_review_options.image_files,
+                self.ocr_review_options.ocr_results,
+                self.shared_ocr_model,
+                self.theme_is_dark,
             )
             dialog.exec()
         else:

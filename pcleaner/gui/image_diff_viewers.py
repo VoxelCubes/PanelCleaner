@@ -34,6 +34,8 @@ class SwipeViewer(iv.ImageViewer):
         self.raw_image_left = None
         self.raw_image_right = None
 
+        self.setMouseTracking(False)
+
     def set_images(self, left: Path, right: Path) -> None:
         """
         Accept 2 image paths and load them into the viewer.
@@ -152,6 +154,8 @@ class OnionViewer(iv.ImageViewer):
         self.alpha = 0.5
         self.slider = None
 
+        self.setMouseTracking(False)
+
     def set_images(self, lower: Path, upper: Path) -> None:
         """
         Accept 2 image paths and load them into the viewer.
@@ -217,6 +221,8 @@ class DifferenceViewer(iv.ImageViewer):
         self.upper_image = None
         self.alpha = 0.0
         self.slider = None
+
+        self.setMouseTracking(False)
 
     def set_images(self, lower: Path, upper: Path) -> None:
         """
@@ -300,6 +306,8 @@ class OverlayViewer(iv.ImageViewer):
         self.alpha = 0.5
         self.slider = None
         self.recolor = (255, 0, 0, 0)  # Default recolor to red
+
+        self.setMouseTracking(False)
 
     def set_images(
         self, lower: Path, masks: list[Path], mask_color: tuple[int, int, int, int]

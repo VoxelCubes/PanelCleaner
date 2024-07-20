@@ -13,9 +13,6 @@
   <property name="windowTitle">
    <string notr="true">Review</string>
   </property>
-  <property name="sizeGripEnabled">
-   <bool>true</bool>
-  </property>
   <property name="modal">
    <bool>true</bool>
   </property>
@@ -25,7 +22,7 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="layoutWidget1">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1,0,3,0,0">
@@ -174,10 +171,10 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
          <property name="spacing">
           <number>6</number>
          </property>
@@ -292,6 +289,127 @@
           </widget>
          </item>
          <item>
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_row_up">
+           <property name="toolTip">
+            <string>Move box order up</string>
+           </property>
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset theme="arrow-up">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_row_down">
+           <property name="toolTip">
+            <string>Move box order down</string>
+           </property>
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset theme="arrow-down">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_new">
+           <property name="toolTip">
+            <string>Add a new box</string>
+           </property>
+           <property name="text">
+            <string notr="true">&lt;new&gt;</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_delete">
+           <property name="toolTip">
+            <string>Delete current box</string>
+           </property>
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset theme="edit-delete">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_undelete">
+           <property name="toolTip">
+            <string>Recover this deleted box</string>
+           </property>
+           <property name="text">
+            <string notr="true">&lt;undelete&gt;</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_reset">
+           <property name="toolTip">
+            <string>Reset changes to this image</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="edit-reset">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_reset_all">
+           <property name="text">
+            <string>Reset All</string>
+           </property>
+           <property name="icon">
+            <iconset theme="document-revert">
+             <normaloff>.</normaloff>.</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_ocr_engine"/>
+         </item>
+         <item>
           <widget class="QPushButton" name="pushButton_done">
            <property name="text">
             <string>Finish Review</string>
@@ -305,21 +423,57 @@
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
-         <widget class="ImageViewer" name="image_viewer"/>
-         <widget class="CTextEdit" name="textEdit_ocr">
-          <property name="readOnly">
+         <widget class="BubbleImageViewer" name="image_viewer"/>
+         <widget class="CTableWidget" name="tableWidget_ocr">
+          <property name="acceptDrops">
            <bool>true</bool>
           </property>
-          <property name="html">
-           <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <property name="tabKeyNavigation">
+           <bool>false</bool>
           </property>
-          <property name="tabStopDistance">
-           <double>40.000000000000000</double>
+          <property name="showDropIndicator" stdset="0">
+           <bool>true</bool>
           </property>
+          <property name="dragEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="dragDropOverwriteMode">
+           <bool>false</bool>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::NoDragDrop</enum>
+          </property>
+          <property name="defaultDropAction">
+           <enum>Qt::MoveAction</enum>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>80</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Box</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Text</string>
+           </property>
+          </column>
          </widget>
         </widget>
        </item>
@@ -331,21 +485,20 @@ p, li { white-space: pre-wrap; }
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ImageViewer</class>
-   <extends>QGraphicsView</extends>
-   <header>pcleaner.gui.image_viewer</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>CElidedLabel</class>
    <extends>QFrame</extends>
    <header>pcleaner.gui.CustomQ.CElidedLabel</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>CTextEdit</class>
-   <extends>QTextEdit</extends>
-   <header>pcleaner.gui.CustomQ.CTextEdit</header>
+   <class>CTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>pcleaner.gui.CustomQ.CTableWidget</header>
+  </customwidget>
+  <customwidget>
+   <class>BubbleImageViewer</class>
+   <extends>QGraphicsView</extends>
+   <header>pcleaner.gui.image_viewer</header>
   </customwidget>
  </customwidgets>
  <resources/>

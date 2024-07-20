@@ -1,7 +1,7 @@
 import json
 import sys
 import re
-from enum import Enum
+from enum import Enum, auto
 from importlib import resources
 from pathlib import Path
 from typing import Sequence
@@ -50,6 +50,11 @@ class Box:
     @property
     def as_tuple(self) -> tuple[int, int, int, int]:
         return self.x1, self.y1, self.x2, self.y2
+
+    @property
+    def as_tuple_xywh(self) -> tuple[int, int, int, int]:
+        # QRect expects (x1, y1, width, height)
+        return self.x1, self.y1, self.x2 - self.x1, self.y2 - self.y1
 
     def __str__(self) -> str:
         """
@@ -425,6 +430,78 @@ class OCRAnalytic:
     removed_box_data: Sequence[tuple[Path, str, Box]]
 
 
+class OCRStatus(Enum):
+    Normal = auto()
+    Removed = auto()
+    Edited = auto()
+    EditedRemoved = auto()
+    New = auto()
+
+
+@define
+class OCRResult:
+    """
+    A mutable variant that contains the OCR results for a single image.
+    This is used in the OCR review window to allow human editing.
+
+    The label contains the original index for process-created boxes,
+    but newly created boxes are labeled with "New X", where X is the index of newly added boxes.
+
+    bubbles: list[tuple[Path, str, Box, str, OCRStatus]]
+    """
+
+    path: Path
+    text: str
+    box: Box
+    label: str
+    status: OCRStatus
+
+
+def convert_ocr_analytics_to_results(ocr_analytics: list[OCRAnalytic]) -> list[list[OCRResult]]:
+    """
+    We pretty much just extract the removed box data from the analytics, but attach a
+    status to each box.
+
+    :param ocr_analytics: The OCR analytics to convert.
+    :return: The OCR results per image file.
+    """
+    ocr_results = []
+    for analytic in ocr_analytics:
+        bubbles = [
+            OCRResult(path, text, box, str(index), OCRStatus.Normal)
+            for index, (path, text, box) in enumerate(analytic.removed_box_data, start=1)
+        ]
+        ocr_results.append(bubbles)
+    return ocr_results
+
+
+def convert_ocr_results_to_analytics(ocr_results: list[list[OCRResult]]) -> list[OCRAnalytic]:
+    """
+    Just drop the status and leave the rest of the data blank,
+    meaning only the removed box data is preserved.
+    Boxes with the status Removed are dropped.
+
+    :param ocr_results: The OCR results to convert.
+    :return: The OCR analytics per image file.
+    """
+    ocr_analytics = []
+    for results in ocr_results:
+        removed_box_data = [
+            (result.path, result.text, result.box)
+            for result in results
+            if result.status != OCRStatus.Removed
+        ]
+        ocr_analytics.append(
+            OCRAnalytic(
+                len(removed_box_data),
+                [],
+                [],
+                removed_box_data,
+            )
+        )
+    return ocr_analytics
+
+
 @frozen
 class MaskFittingAnalytic:
     """
@@ -525,7 +602,8 @@ class MaskData:
     - The cleaned image path.
     - The mask image path.
     - The scale of the original image to the base image.
-    - The box coordinates with their respective standard deviation for the masks, whether they failed, and the mask thickness.
+    - The box coordinates with their respective standard deviation for the masks,
+      whether they failed, and the mask thickness.
     """
 
     original_path: Path

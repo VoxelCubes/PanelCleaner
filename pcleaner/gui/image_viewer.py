@@ -1,11 +1,14 @@
 from pathlib import Path
+from importlib import resources
 
 import PySide6.QtCore as Qc
+from PySide6.QtCore import Qt
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Signal, Slot
 from loguru import logger
 
+import pcleaner.data
 
 ZOOM_TICK_FACTOR = 1.25
 
@@ -35,7 +38,7 @@ class ImageViewer(Qw.QGraphicsView):
         Qg.QImageReader.setAllocationLimit(0)
 
         self.zoom_factor = 1.0
-        self.setAlignment(Qc.Qt.AlignCenter)
+        self.setAlignment(Qt.AlignCenter)
 
         self.setMouseTracking(True)
 
@@ -73,7 +76,7 @@ class ImageViewer(Qw.QGraphicsView):
             self.image_item = None
 
     def wheelEvent(self, event: Qg.QWheelEvent) -> None:
-        if Qc.Qt.ControlModifier & event.modifiers():
+        if Qt.ControlModifier & event.modifiers():
             # Zoom in/out with Ctrl + mouse wheel
             if event.angleDelta().y() > 0:
                 self.zoom_in(wheel=True)
@@ -81,7 +84,7 @@ class ImageViewer(Qw.QGraphicsView):
             else:
                 self.zoom_out(wheel=True)
                 self.zoom_factor_changed_wheel.emit(self.zoom_factor)
-        elif Qc.Qt.ShiftModifier & event.modifiers():
+        elif Qt.ShiftModifier & event.modifiers():
             # Horizontal scrolling with Shift + mouse wheel
             self.horizontalScrollBar().setValue(
                 self.horizontalScrollBar().value() - event.angleDelta().y()
@@ -145,7 +148,7 @@ class ImageViewer(Qw.QGraphicsView):
                 # Decide the color for the square
                 pixel_color = self.image_item.pixmap().toImage().pixelColor(image_pos)
                 avg = (pixel_color.red() + pixel_color.green() + pixel_color.blue()) / 3
-                square_color = Qc.Qt.white if avg < 128 else Qc.Qt.black
+                square_color = Qt.white if avg < 128 else Qt.black
 
                 painter.setPen(Qg.QPen(square_color, 1 / self.zoom_factor))
                 rect = Qc.QRectF(image_pos.x() - 0.5, image_pos.y() - 0.5, 1, 1)
@@ -202,10 +205,10 @@ class ImageViewer(Qw.QGraphicsView):
 
         if self.zoom_factor >= 2:
             self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, False)
-            self.set_transformation_mode(Qc.Qt.FastTransformation)
+            self.set_transformation_mode(Qt.FastTransformation)
         else:
             self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, True)
-            self.set_transformation_mode(Qc.Qt.SmoothTransformation)
+            self.set_transformation_mode(Qt.SmoothTransformation)
         self.setTransform(Qg.QTransform().scale(self.zoom_factor, self.zoom_factor))
 
         if not suppress_signals:
@@ -216,7 +219,7 @@ class ImageViewer(Qw.QGraphicsView):
         self.setTransform(Qg.QTransform().scale(self.zoom_factor, self.zoom_factor))
         self.zoom_factor_changed.emit(self.zoom_factor)
 
-    def set_transformation_mode(self, mode: Qc.Qt.TransformationMode) -> None:
+    def set_transformation_mode(self, mode: Qt.TransformationMode) -> None:
         """
         This function is broken out to allow subclasses with 2 images to
         apply the transformation mode to both images.
@@ -225,3 +228,183 @@ class ImageViewer(Qw.QGraphicsView):
         """
 
         self.image_item.setTransformationMode(mode)
+
+
+class BubbleImageViewer(ImageViewer):
+    """
+    An ImageViewer that can draw (rectangular) bubbles on the image.
+    """
+
+    # These lists must all have the same length.
+    bubbles: list[Qc.QRect]
+    bubble_colors: list[Qg.QColor]
+    bubble_labels: list[str]
+    bubble_stroke: list[Qt.PenStyle]  # DashLine or SolidLine etc.
+
+    allow_drawing_bubble: bool
+    new_bubble_color: Qg.QColor
+
+    _new_bubble_start: Qc.QPoint | None
+    _new_bubble_end: Qc.QPoint | None
+    new_bubble: Signal = Signal(Qc.QRect)
+    bubble_clicked: Signal = Signal(int)  # The index of the bubble clicked.
+
+    def __init__(self, parent=None) -> None:
+        super().__init__(parent)
+        self.bubbles = []
+        self.bubble_colors = []
+        self.bubble_labels = []
+        self.bubble_stroke = []
+        self.allow_drawing_bubble = False
+        # Default new bubble color to palette highlight color.
+        self.new_bubble_color = self.palette().highlight().color()
+
+        self._new_bubble_start = None
+        self._new_bubble_end = None
+
+        self.setMouseTracking(False)
+
+        # Load included font.
+        with resources.files(pcleaner.data) as data_path:
+            font_path = data_path / "LiberationSans-Regular.ttf"
+        font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
+        if font_id == -1:
+            logger.error("Failed to load font.")
+            self.font_name = None
+        else:
+            self.font_name = Qg.QFontDatabase.applicationFontFamilies(font_id)[0]
+
+    def set_allow_drawing_bubble(self, allow: bool) -> None:
+        self.allow_drawing_bubble = allow
+
+    def set_new_bubble_color(self, color: Qg.QColor) -> None:
+        self.new_bubble_color = color
+
+    def clear_bubbles(self) -> None:
+        self.bubbles.clear()
+        self.bubble_colors.clear()
+        self.bubble_labels.clear()
+        self.bubble_stroke.clear()
+        self.viewport().update()
+
+    def add_bubble(self, rect: Qc.QRect, color: Qg.QColor, label: str, stroke: Qt.PenStyle) -> None:
+        self.bubbles.append(rect)
+        self.bubble_colors.append(color)
+        self.bubble_labels.append(label)
+        self.bubble_stroke.append(stroke)
+        self.viewport().update()
+
+    def set_bubbles(
+        self,
+        rects: list[Qc.QRect],
+        colors: list[Qg.QColor],
+        labels: list[str],
+        strokes: list[Qt.PenStyle],
+    ) -> None:
+        self.bubbles = rects
+        self.bubble_colors = colors
+        self.bubble_labels = labels
+        self.bubble_stroke = strokes
+        self.viewport().update()
+
+    def point_in_image(self, point: Qc.QPoint) -> bool:
+        if self.image_item is None:
+            return False
+        return self.image_item.pixmap().rect().contains(point)
+
+    def point_in_a_bubble(self, point: Qc.QPoint) -> int:
+        """
+        Figure out if any of the bubbles contain this point.
+
+        :param point: The point to check.
+        :return: The index of the bubble that contains the point, or -1 if none do.
+        """
+        for i, bubble in enumerate(self.bubbles):
+            if bubble.contains(point):
+                return i
+        return -1
+
+    def mousePressEvent(self, event: Qg.QMouseEvent) -> None:
+        # Begin drawing a new bubble, if allowed.
+        if self.allow_drawing_bubble:
+            # Discard boxes that are started outside the image.
+            if self.point_in_image(self.image_position(event.pos())):
+                self._new_bubble_start = self.image_position(event.pos())
+                self.setCursor(Qt.CrossCursor)
+                logger.debug(f"Start drawing new bubble at {self._new_bubble_start}")
+        else:
+            # Check if a bubble was clicked.
+            bubble_index = self.point_in_a_bubble(self.image_position(event.pos()))
+            self.bubble_clicked.emit(bubble_index)
+        super().mousePressEvent(event)
+
+    def mouseMoveEvent(self, event: Qg.QMouseEvent) -> None:
+        if self.allow_drawing_bubble and self._new_bubble_start is not None:
+            self._new_bubble_end = self.image_position(event.pos())
+            self.viewport().update()
+        super().mouseMoveEvent(event)
+
+    def mouseReleaseEvent(self, event: Qg.QMouseEvent) -> None:
+        # Finish drawing the bubble and emit the new bubble signal.
+        if self.allow_drawing_bubble and self._new_bubble_start is not None:
+            self._new_bubble_end = self.image_position(event.pos())
+            if self.point_in_image(self._new_bubble_end):
+                self.new_bubble.emit(Qc.QRect(self._new_bubble_start, self._new_bubble_end))
+                logger.debug(
+                    f"New bubble drawn: {Qc.QRect(self._new_bubble_start, self._new_bubble_end)}"
+                )
+            self._new_bubble_start = None
+            self._new_bubble_end = None
+            self.viewport().update()
+            self.setCursor(Qt.ArrowCursor)
+        super().mouseReleaseEvent(event)
+
+    def drawForeground(self, painter, rect) -> None:
+        if self.image_item is None:
+            return
+        # Don't call super's function, we don't want the pixel highlight.
+
+        # Use the included font for drawing bubble labels.
+        font_size = int(self.image_dimensions[0] / 55) + 5  # Adjusted for scuffed Qt drawing.
+        if self.font_name is not None:
+            paint_font = Qg.QFont(self.font_name, font_size)
+        else:
+            paint_font = Qg.QFont("Arial", font_size)
+        painter.setFont(paint_font)
+
+        for bubble, color, label, stroke in zip(
+            self.bubbles, self.bubble_colors, self.bubble_labels, self.bubble_stroke
+        ):
+            # Draw the bubble with a solid outline and a fill at 48/255 opacity.
+            painter.setPen(Qg.QPen(color, 1, stroke, j=Qt.PenJoinStyle.MiterJoin))
+            painter.setBrush(Qg.QColor(color.red(), color.green(), color.blue(), 48))
+            painter.drawRect(bubble)
+
+            # Draw the label with a white outline.
+            path = Qg.QPainterPath()
+            path.addText(
+                bubble.topLeft() - Qc.QPoint(int(-font_size * 0.1), int(font_size * 0.2)),
+                paint_font,
+                label,
+            )
+
+            outline_pen = Qg.QPen(Qt.white, 5, j=Qt.PenJoinStyle.RoundJoin)
+            painter.setPen(outline_pen)
+            painter.drawPath(path)
+
+            text_pen = Qg.QPen(color)
+            painter.setPen(text_pen)
+            painter.fillPath(path, text_pen.color())
+
+        if self._new_bubble_start is not None:
+            # Use double the opacity for the new bubble to make it more visible.
+            painter.setPen(Qg.QPen(self.new_bubble_color, 1, Qt.DashLine))
+            painter.setBrush(
+                Qg.QColor(
+                    self.new_bubble_color.red(),
+                    self.new_bubble_color.green(),
+                    self.new_bubble_color.blue(),
+                    48 * 2,
+                )
+            )
+            painter.drawRect(Qc.QRect(self._new_bubble_start, self._new_bubble_end))

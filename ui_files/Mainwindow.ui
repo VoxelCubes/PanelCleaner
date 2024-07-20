@@ -782,7 +782,7 @@
                    <property name="sizeHint" stdset="0">
                     <size>
                      <width>10</width>
-                     <height>37</height>
+                     <height>0</height>
                     </size>
                    </property>
                   </spacer>
@@ -1286,6 +1286,11 @@ p, li { white-space: pre-wrap; }
  </widget>
  <customwidgets>
   <customwidget>
+   <class>CTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>pcleaner.gui.CustomQ.CTextEdit</header>
+  </customwidget>
+  <customwidget>
    <class>FileTable</class>
    <extends>QTableWidget</extends>
    <header>pcleaner.gui.file_table</header>
@@ -1311,11 +1316,6 @@ p, li { white-space: pre-wrap; }
    <class>CTooltipLabel</class>
    <extends>QLabel</extends>
    <header>pcleaner.gui.CustomQ.CTooltipLabel</header>
-  </customwidget>
-  <customwidget>
-   <class>CTextEdit</class>
-   <extends>QTextEdit</extends>
-   <header>pcleaner.gui.CustomQ.CTextEdit</header>
   </customwidget>
  </customwidgets>
  <resources/>

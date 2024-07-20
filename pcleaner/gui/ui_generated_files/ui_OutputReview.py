@@ -31,7 +31,6 @@ class Ui_OutputReview(object):
             OutputReview.setObjectName(u"OutputReview")
         OutputReview.resize(1400, 800)
         OutputReview.setWindowTitle(u"Review")
-        OutputReview.setSizeGripEnabled(True)
         OutputReview.setModal(True)
         self.verticalLayout_7 = QVBoxLayout(OutputReview)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")

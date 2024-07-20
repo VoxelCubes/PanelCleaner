@@ -10,9 +10,18 @@ class CTableWidget(Qw.QTableWidget):
     """
 
     finished_drop = Qc.Signal()
+    currentRowChanged = Qc.Signal(int)
+
+    # Populate a list to make select columns editable.
+    editable_columns: list[int] | None = None
 
     def __init__(self, parent=None) -> None:
         Qw.QTableWidget.__init__(self, parent)
+        self.editable_columns = None
+        self.currentCellChanged.connect(self.handleCurrentCellChanged)
+
+    def setEditableColumns(self, columns: list[int]) -> None:
+        self.editable_columns = columns
 
     def clearAll(self) -> None:
         self.clearContents()
@@ -21,6 +30,9 @@ class CTableWidget(Qw.QTableWidget):
 
     def currentText(self, col: int) -> str:
         return self.item(self.currentRow(), col).text()
+
+    def currentInt(self, col: int) -> int:
+        return int(self.currentText(col))
 
     def setCurrentText(self, col: int, text: str) -> None:
         return self.item(self.currentRow(), col).setText(text)
@@ -34,7 +46,15 @@ class CTableWidget(Qw.QTableWidget):
         rows = self.rowCount()
         self.setRowCount(rows + 1)
         for i, arg in enumerate(args):
-            self.setItem(rows, i, Qw.QTableWidgetItem(arg))
+            if self.editable_columns is None:
+                self.setItem(rows, i, Qw.QTableWidgetItem(arg))
+            else:
+                item = Qw.QTableWidgetItem(arg)
+                if i in self.editable_columns:
+                    item.setFlags(item.flags() | Qc.Qt.ItemIsEditable)
+                else:
+                    item.setFlags(item.flags() & ~Qc.Qt.ItemIsEditable)
+                self.setItem(rows, i, item)
         if select_new:
             self.setCurrentCell(rows, 0)
 
@@ -103,3 +123,7 @@ class CTableWidget(Qw.QTableWidget):
 
     def handleDrop(self, path: str) -> None:
         pass
+
+    def handleCurrentCellChanged(self, currentRow, currentColumn, previousRow, previousColumn):
+        if currentRow != previousRow:
+            self.currentRowChanged.emit(currentRow)
