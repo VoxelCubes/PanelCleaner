@@ -1,18 +1,20 @@
 import math
 from enum import IntEnum
-from functools import wraps
+from functools import wraps, partial
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot
 from loguru import logger
+from PIL import Image
 
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.structures as gst
 import pcleaner.structures as st
 import pcleaner.ocr.ocr as ocr
+import pcleaner.gui.worker_thread as wt
 from pcleaner.helpers import tr, f_plural
 from pcleaner.gui.ui_generated_files.ui_OcrReview import Ui_OcrReview
 
@@ -20,6 +22,9 @@ from pcleaner.gui.ui_generated_files.ui_OcrReview import Ui_OcrReview
 THUMBNAIL_SIZE = 180
 
 
+# The way the cellUpdate signal works, which we need to know when a cell was manually edited,
+# is that it also triggers on all other changes too... But we need to ignore those
+# due to inconsistent intermediate states causing exception.
 def suppress_cell_update_handling(method):
     @wraps(method)
     def wrapper(self, *args, **kwargs):
@@ -42,6 +47,12 @@ BUBBLE_STATUS_COLORS = {
     st.OCRStatus.EditedRemoved: Qg.QColor(128, 0, 0, 255),
     st.OCRStatus.Edited: Qg.QColor(0, 0, 128, 255),
     st.OCRStatus.New: Qg.QColor(128, 128, 0, 255),
+}
+
+OCR_LANG_CODE_TO_NAME = {
+    st.DetectedLang.JA: tr("Japanese"),
+    st.DetectedLang.ENG: tr("English"),
+    st.DetectedLang.UNKNOWN: tr("Unknown"),
 }
 
 
@@ -95,6 +106,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         self.images = images
         self.ocr_analytics = ocr_analytics
+        self.ocr_model = ocr_model
         self.theme_is_dark = theme_is_dark
 
         self.awaiting_user_input = False
@@ -152,6 +164,8 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         # Set the new button color to match what would be assigned to new buttons.
         self.image_viewer.set_new_bubble_color(BUBBLE_STATUS_COLORS[st.OCRStatus.New])
+
+        self.load_ocr_options()
 
     def load_custom_icons(self) -> None:
         # Load the custom new_bubble icon.
@@ -293,6 +307,91 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
     @Slot(int)
     def handle_bubble_clicked(self, index: int) -> None:
         self.tableWidget_ocr.setCurrentCell(index, 1)
+
+    # OCR Engine stuff =============================================================================
+
+    def load_ocr_options(self) -> None:
+        """
+        We can either disable auto OCR or choose what language we want it to detect.
+        """
+        self.comboBox_ocr_engine.addTextItemLinkedData(self.tr("No OCR"), None)
+        for lang in st.DetectedLang:
+            if lang != st.DetectedLang.UNKNOWN:
+                self.comboBox_ocr_engine.addTextItemLinkedData(
+                    OCR_LANG_CODE_TO_NAME[st.DetectedLang(lang)], lang
+                )
+        # Start at the second item, ie. the first actual language.
+        self.comboBox_ocr_engine.setCurrentIndex(1)
+
+    def get_ocr_engine(self) -> ocr.OCRModel | None:
+        """
+        Get the current OCR model to use.
+
+        :return: The OCR model to use, or None if no OCR should be done.
+        """
+        selected_index = self.comboBox_ocr_engine.currentIndex()
+        if selected_index == 0:
+            return None
+        return self.ocr_model.get()[self.comboBox_ocr_engine.currentLinkedData()]
+
+    def start_ocr(self, box: st.Box) -> None:
+        """
+        Start a worker thread to perform OCR on the given box.
+        It's typically fast enough to not be noticeable if it were blocking,
+        then again I don't know what kind of potato you're running this on.
+
+        :param box: The box to perform OCR on.
+        """
+        current_image_index = self.image_list.currentRow()
+        row = (
+            self.tableWidget_ocr.rowCount() - 1
+        )  # Assume new boxes are added to the end of the table.
+        ocr_worker = wt.Worker(
+            self.perform_ocr, box, current_image_index, row, no_progress_callback=True
+        )
+        ocr_worker.signals.error.connect(self.ocr_worker_error)
+        ocr_worker.signals.result.connect(self.ocr_worker_result)
+        ocr_worker.signals.finished.connect(self.ocr_worker_finished)
+        Qc.QThreadPool.globalInstance().start(ocr_worker)
+
+        Qw.QApplication.setOverrideCursor(Qc.Qt.WaitCursor)
+
+    def perform_ocr(self, box: st.Box, image_index: int, row: int) -> tuple[str, int, int]:
+        """
+        Grab the image file directly and crop that.
+
+        :param box: The box to crop.
+        :param image_index: The index of the image this is for.
+            Important to know if the user has switched images.
+        :param row: The row in the table to update.
+        :return: The OCR result.
+        """
+        model = self.get_ocr_engine()
+        original_image = self.image_viewer.image_item.pixmap()
+        # Crop the image to the bubble.
+        bubble_image = original_image.copy(*box.as_tuple_xywh)
+        bubble_pil_image = Image.fromqpixmap(bubble_image)
+        return model(bubble_pil_image), image_index, row
+
+    def ocr_worker_error(self, error: wt.WorkerError) -> None:
+        logger.error(f"OCR worker thread error: {error}")
+        gu.show_exception(self, self.tr("OCR Error"), self.tr("Encountered error:"), error)
+
+    @suppress_cell_update_handling
+    def ocr_worker_result(self, result: tuple[str, int, int]) -> None:
+        text, image_index, row = result
+
+        ocr_results = self.ocr_results[image_index]
+        try:
+            ocr_results[row].text = text
+        except IndexError:
+            logger.error("OCR result index out of range. User likely deleted the bubble.")
+
+        self.load_ocr_results(ocr_results)
+
+    def ocr_worker_finished(self) -> None:
+        # Reset the cursor and enable the window.
+        Qw.QApplication.restoreOverrideCursor()
 
     # Table manipulation functions =================================================================
 
@@ -487,6 +586,25 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         ocr_results.append(st.OCRResult(image_path, "", box, new_bubble_label, st.OCRStatus.New))
 
         self.load_ocr_results(ocr_results)
+
+        if self.get_ocr_engine() is not None:
+            # Quick sanity check. We might not want to OCR more than 20% of the image.
+            # This is a rough estimate, but it should be good enough.
+            image_area = (
+                self.image_viewer.image_dimensions[0] * self.image_viewer.image_dimensions[1]
+            )
+            bubble_area = box.area
+            if bubble_area > 0.2 * image_area:
+                if (
+                    gu.show_question(
+                        self,
+                        self.tr("OCR Warning"),
+                        self.tr("The bubble is very large. Are you sure you want to OCR it?"),
+                    )
+                    == Qw.QMessageBox.Cancel
+                ):
+                    return
+            self.start_ocr(box)
 
     @Slot(int, int)
     def handle_table_edited(self, row: int, col: int) -> None:

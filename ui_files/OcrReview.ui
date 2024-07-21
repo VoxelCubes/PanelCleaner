@@ -174,7 +174,7 @@
      <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
          <property name="spacing">
           <number>6</number>
          </property>
@@ -407,7 +407,21 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_ocr_engine"/>
+          <widget class="Line" name="line_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>OCR new boxes:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="CComboBox" name="comboBox_ocr_engine"/>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_done">
@@ -499,6 +513,11 @@
    <class>BubbleImageViewer</class>
    <extends>QGraphicsView</extends>
    <header>pcleaner.gui.image_viewer</header>
+  </customwidget>
+  <customwidget>
+   <class>CComboBox</class>
+   <extends>QComboBox</extends>
+   <header>pcleaner.gui.CustomQ.CComboBox</header>
   </customwidget>
  </customwidgets>
  <resources/>

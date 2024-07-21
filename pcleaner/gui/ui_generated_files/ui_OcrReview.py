@@ -21,6 +21,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QDial
     QSizePolicy, QSlider, QSpacerItem, QSplitter,
     QTableWidgetItem, QVBoxLayout, QWidget)
 
+from pcleaner.gui.CustomQ.CComboBox import CComboBox
 from pcleaner.gui.CustomQ.CElidedLabel import CElidedLabel
 from pcleaner.gui.CustomQ.CTableWidget import CTableWidget
 from pcleaner.gui.image_viewer import BubbleImageViewer
@@ -304,7 +305,19 @@ class Ui_OcrReview(object):
 
         self.horizontalLayout.addWidget(self.pushButton_reset_all)
 
-        self.comboBox_ocr_engine = QComboBox(self.layoutWidget)
+        self.line_2 = QFrame(self.layoutWidget)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.Shape.VLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout.addWidget(self.line_2)
+
+        self.label_2 = QLabel(self.layoutWidget)
+        self.label_2.setObjectName(u"label_2")
+
+        self.horizontalLayout.addWidget(self.label_2)
+
+        self.comboBox_ocr_engine = CComboBox(self.layoutWidget)
         self.comboBox_ocr_engine.setObjectName(u"comboBox_ocr_engine")
 
         self.horizontalLayout.addWidget(self.comboBox_ocr_engine)
@@ -408,6 +421,7 @@ class Ui_OcrReview(object):
 #endif // QT_CONFIG(tooltip)
         self.pushButton_reset.setText("")
         self.pushButton_reset_all.setText(QCoreApplication.translate("OcrReview", u"Reset All", None))
+        self.label_2.setText(QCoreApplication.translate("OcrReview", u"OCR new boxes:", None))
         self.pushButton_done.setText(QCoreApplication.translate("OcrReview", u"Finish Review", None))
         ___qtablewidgetitem = self.tableWidget_ocr.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("OcrReview", u"Box", None));
