@@ -113,7 +113,6 @@ class Ui_OcrReview(object):
         self.image_list.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.image_list.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.image_list.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
-        self.image_list.setMovement(QListView.Static)
         self.image_list.setFlow(QListView.LeftToRight)
         self.image_list.setProperty("isWrapping", True)
         self.image_list.setResizeMode(QListView.Adjust)
