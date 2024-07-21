@@ -1794,11 +1794,6 @@ Consulte las instrucciones para instalar Tesseract correctamente &lt;a href=&quo
   <context>
     <name>OcrReview</name>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="44"/>
-      <source>&lt;image count&gt;</source>
-      <translation type="unfinished">&lt;image count&gt;</translation>
-    </message>
-    <message>
       <location filename="../ui_files/OcrReview.ui" line="64"/>
       <source>Icon Size:</source>
       <translation type="unfinished">Icon Size:</translation>
@@ -1974,11 +1969,6 @@ Consulte las instrucciones para instalar Tesseract correctamente &lt;a href=&quo
   </context>
   <context>
     <name>OutputReview</name>
-    <message>
-      <location filename="../ui_files/OutputReview.ui" line="56"/>
-      <source>&lt;image count&gt;</source>
-      <translation type="unfinished">&lt;image count&gt;</translation>
-    </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="76"/>
       <source>Icon Size:</source>
