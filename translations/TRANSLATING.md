@@ -21,7 +21,7 @@ Open an issue on Github and I will add it to Crowdin.
 - You may localize the name of the project in the app, though this will need to be reflected in the 
   PanelCleaner.desktop file as well, which cannot be done through Crowdin.
 
-- If you see the character &apos; in the text, it is a single quote ('), which has no significance for formatting.
+- If you see the word `&apos;` in the text, it is a single quote ('), which has no significance for formatting.
   Remove them from your translation if they are not needed.
 
 - Any # characters in the text are for Markdown formatting. You can adjust the line wrapping as needed, 
