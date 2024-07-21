@@ -1801,102 +1801,102 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../ui_files/OcrReview.ui" line="64"/>
       <source>Icon Size:</source>
-      <translation type="unfinished">Icon Size:</translation>
+      <translation>Vorschaugröße:</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="84"/>
       <source>Previous image</source>
-      <translation type="unfinished">Previous image</translation>
+      <translation>Vorheriges Bild</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="101"/>
       <source>Next image</source>
-      <translation type="unfinished">Next image</translation>
+      <translation>Nächstes Bild</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="212"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Vergrößern</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="229"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Verkleinern</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="246"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Zoom zurücksetzen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="263"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Auf Fenstergröße zoomen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="281"/>
       <source>With Boxes</source>
-      <translation type="unfinished">With Boxes</translation>
+      <translation>Mit Feldern</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="286"/>
       <source>Original</source>
-      <translation type="unfinished">Original</translation>
+      <translation>Original</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="301"/>
       <source>Move box order up</source>
-      <translation type="unfinished">Move box order up</translation>
+      <translation>Feld höher einordnen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="318"/>
       <source>Move box order down</source>
-      <translation type="unfinished">Move box order down</translation>
+      <translation>Feld niedriger einordnen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="335"/>
       <source>Add a new box</source>
-      <translation type="unfinished">Add a new box</translation>
+      <translation>Ein neues Feld hinzufügen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="351"/>
       <source>Delete current box</source>
-      <translation type="unfinished">Delete current box</translation>
+      <translation>Aktuelles Feld löschen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="368"/>
       <source>Recover this deleted box</source>
-      <translation type="unfinished">Recover this deleted box</translation>
+      <translation>Dieses gelöschte Feld wiederherstellen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="381"/>
       <source>Reset changes to this image</source>
-      <translation type="unfinished">Reset changes to this image</translation>
+      <translation>Änderungen an diesem Bild zurücksetzen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="398"/>
       <source>Reset All</source>
-      <translation type="unfinished">Reset All</translation>
+      <translation>Alle zurücksetzen</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="419"/>
       <source>OCR new boxes:</source>
-      <translation type="unfinished">OCR new boxes:</translation>
+      <translation>OCR neue Felder:</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="429"/>
       <source>Finish Review</source>
-      <translation type="unfinished">Finish Review</translation>
+      <translation>Überprüfung beenden</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="486"/>
       <source>Box</source>
-      <translation type="unfinished">Box</translation>
+      <translation>Feld</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="491"/>
       <source>Text</source>
-      <translation type="unfinished">Text</translation>
+      <translation>Text</translation>
     </message>
   </context>
   <context>
@@ -1904,72 +1904,72 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="349"/>
       <source>No OCR</source>
-      <translation type="unfinished">No OCR</translation>
+      <translation>Keine OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="410"/>
       <source>OCR Error</source>
-      <translation type="unfinished">OCR Error</translation>
+      <translation>OCR-Fehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="410"/>
       <source>Encountered error:</source>
-      <translation type="unfinished">Encountered error:</translation>
+      <translation>Ein Fehler ist aufgetreten:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="545"/>
       <source>Reset Bubbles</source>
-      <translation type="unfinished">Reset Bubbles</translation>
+      <translation>Felder zurücksetzen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="546"/>
       <source>Are you sure you want to reset all boxes for this image?</source>
-      <translation type="unfinished">Are you sure you want to reset all boxes for this image?</translation>
+      <translation>Sind Sie sicher, dass Sie alle Felder für dieses Bild zurücksetzen wollen?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="617"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Neu</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="637"/>
       <source>OCR Warning</source>
-      <translation type="unfinished">OCR Warning</translation>
+      <translation>OCR-Warnung</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="638"/>
       <source>The bubble is very large. Are you sure you want to OCR it?</source>
-      <translation type="unfinished">The bubble is very large. Are you sure you want to OCR it?</translation>
+      <translation>Dies Feld ist sehr groß. Sind Sie sicher, dass Sie OCR hierauf ausführen wollen?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="681"/>
       <source>Finish Review</source>
-      <translation type="unfinished">Finish Review</translation>
+      <translation>Überprüfung beenden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="682"/>
       <source>Are you sure you want to finish the review?</source>
-      <translation type="unfinished">Are you sure you want to finish the review?</translation>
+      <translation>Sind Sie sicher, dass Sie die Überprüfung beenden wollen?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="740"/>
       <source>image</source>
-      <translation type="unfinished">image</translation>
+      <translation>Bild</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="740"/>
       <source>images</source>
-      <translation type="unfinished">images</translation>
+      <translation>Bilder</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="758"/>
       <source>Loading Error</source>
-      <translation type="unfinished">Loading Error</translation>
+      <translation>Fehler beim Laden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="759"/>
       <source>Failed to load image &apos;{path}&apos;</source>
-      <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
+      <translation>Bild &apos;{path}&apos; konnte nicht geladen werden</translation>
     </message>
   </context>
   <context>
@@ -1982,12 +1982,12 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../ui_files/OutputReview.ui" line="76"/>
       <source>Icon Size:</source>
-      <translation type="unfinished">Icon Size:</translation>
+      <translation>Vorschaugröße:</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="96"/>
       <source>Previous image</source>
-      <translation type="unfinished">Previous image</translation>
+      <translation>Vorheriges Bild</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="113"/>
