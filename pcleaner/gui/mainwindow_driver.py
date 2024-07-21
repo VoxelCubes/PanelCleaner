@@ -33,6 +33,7 @@ import pcleaner.gui.issue_reporter_driver as ird
 import pcleaner.gui.structures as gst
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
+import pcleaner.structures as st
 import pcleaner.model_downloader as md
 import pcleaner.gui.file_manager_extension_driver as fmed
 import pcleaner.profile_cli as pc
@@ -1420,6 +1421,43 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.thread_queue.start(worker)
 
+    def post_review_ocr_export(self, ocr_analytics: list[st.OCRAnalytic]) -> None:
+        """
+        This operation doesn't take long, so don't bother with a worker thread.
+
+        :param ocr_analytics: The analytics to export, gathered from the review.
+        """
+
+        # Output the OCRed text from the analytics.
+        text_out = ocr.format_output(
+            ocr_analytics,
+            self.ocr_review_options.csv_output,
+            (tr("filename"), tr("startx"), tr("starty"), tr("endx"), tr("endy"), tr("text")),
+        )
+
+        text_out = text_out.strip("\n \t")
+
+        output_file = self.ocr_review_options.output_path
+
+        if output_file is not None:
+            try:
+                output_file.parent.mkdir(parents=True, exist_ok=True)
+                output_file.write_text(text_out, encoding="utf-8")
+                text_out += "\n\n" + tr("Saved detected text to {output_file}").format(
+                    output_file=output_file
+                )
+            except OSError:
+                text_out += "\n\n" + tr("Failed to write detected text to {output_file}").format(
+                    output_file=output_file
+                )
+                gu.show_exception(
+                    None, tr("Save Failed"), tr("Failed to write detected text to file.")
+                )
+
+        self.textEdit_analytics.append(text_out)
+
+        self.ocr_review_options = None
+
     def generate_output(
         self,
         outputs: list[imf.Output],
@@ -1501,7 +1539,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         if review_ocr:
             # The empty list gets populated with analytic results in the progress callback.
-            self.ocr_review_options = gst.OcrReviewOptions(image_files, [])
+            self.ocr_review_options = gst.OcrReviewOptions(image_files, [], output_path, csv_output)
+            # In this case, we don't want the output to be written to a file.
+            output_path = None
         else:
             self.ocr_review_options = None
 
@@ -1587,6 +1627,21 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.theme_is_dark,
             )
             dialog.exec()
+            # Ask if the user still wants to export the ocr results.
+            if (
+                gu.show_question(
+                    self,
+                    self.tr("Export OCR Results"),
+                    self.tr("Would you like to export the OCR results?"),
+                    buttons=Qw.QMessageBox.Yes | Qw.QMessageBox.No,
+                )
+                == Qw.QMessageBox.No
+            ):
+                # Don't export to a file, but still show the results in the main window.
+                self.ocr_review_options.output_path = None
+
+            self.post_review_ocr_export(dialog.get_final_ocr_analytics())
+
         else:
             gu.show_info(
                 self, self.tr("Processing Finished"), self.tr("Finished processing all files.")
@@ -1709,9 +1764,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             # Show ocr output.
             logger.info(f"Showing ocr output...")
             ocr_output, raw_analytics = progress_data.value
-            self.textEdit_analytics.append(ocr_output)
             if self.ocr_review_options is not None:
                 self.ocr_review_options.ocr_results = raw_analytics
+            else:
+                self.textEdit_analytics.append(ocr_output)
             return  # Don't update the progress bar.
 
         elif progress_data.progress_type == imf.ProgressType.end:

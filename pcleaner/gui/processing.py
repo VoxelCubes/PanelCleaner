@@ -779,7 +779,7 @@ def perform_ocr(
     additional visualizations that aren't necessary when you aren't viewing image details.
 
     :param image_objects: The image objects to process. These contain the image paths.
-    :param output_file: The directory to save the outputs to. If None, the output remains in the cache directory.
+    :param output_file: The directory to save the outputs to. If None, nothing is written.
     :param csv_output: If True, the output is written as a csv file.
     :param config: The config to use.
     :param ocr_processor: The ocr processors to use.
@@ -975,45 +975,11 @@ def perform_ocr(
     check_abortion()
 
     # Output the OCRed text from the analytics.
-    # Format of the analytics:
-    # number of boxes | sizes of all boxes | sizes of boxes that were OCRed | path to image, text, box coordinates
-    # We do not need to show the first three columns, so we simplify the data structure.
-    path_texts_coords: list[tuple[Path, str, st.Box]] = list(
-        itertools.chain.from_iterable(a.removed_box_data for a in ocr_analytics)
+    text_out = ocr.format_output(
+        ocr_analytics,
+        csv_output,
+        (tr("filename"), tr("startx"), tr("starty"), tr("endx"), tr("endy"), tr("text")),
     )
-    if path_texts_coords:
-        paths, texts, boxes = zip(*path_texts_coords)
-        paths = hp.trim_prefix_from_paths(paths)
-        path_texts_coords = list(zip(paths, texts, boxes))
-        # Sort by path.
-        path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
-
-    buffer = StringIO()
-    if csv_output:
-        writer = csv.writer(buffer, quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(
-            [tr("filename"), tr("startx"), tr("starty"), tr("endx"), tr("endy"), tr("text")]
-        )
-
-        for path, bubble, box in path_texts_coords:
-            if "\n" in bubble:
-                logger.warning(f"Detected newline in bubble: {path} {bubble} {box}")
-                bubble = bubble.replace("\n", "\\n")
-            writer.writerow([path, *box.as_tuple, bubble])
-
-        text_out = buffer.getvalue()
-    else:
-        # Place the file path on it's own line, and only if it's different from the previous one.
-        current_path = ""
-        for path, bubble, _ in path_texts_coords:
-            if path != current_path:
-                buffer.write(f"\n\n{path}: ")
-                current_path = path
-            buffer.write(f"\n{bubble}")
-            if "\n" in bubble:
-                logger.warning(f"Detected newline in bubble: {path} {bubble}")
-
-        text_out = buffer.getvalue()
 
     text_out = text_out.strip("\n \t")
 
@@ -1021,16 +987,12 @@ def perform_ocr(
         try:
             output_file.parent.mkdir(parents=True, exist_ok=True)
             output_file.write_text(text_out, encoding="utf-8")
-            buffer.write(
-                "\n\n" + tr("Saved detected text to {output_file}").format(output_file=output_file)
+            text_out += "\n\n" + tr("Saved detected text to {output_file}").format(
+                output_file=output_file
             )
         except OSError:
-            # buffer.write(f"\n\nFailed to write detected text to {output_file}")
-            buffer.write(
-                "\n\n"
-                + tr("Failed to write detected text to {output_file}").format(
-                    output_file=output_file
-                )
+            text_out += "\n\n" + tr("Failed to write detected text to {output_file}").format(
+                output_file=output_file
             )
             gu.show_exception(None, tr("Save Failed"), tr("Failed to write detected text to file."))
 
@@ -1040,7 +1002,7 @@ def perform_ocr(
             [],
             imf.Step.preprocessor,
             imf.ProgressType.outputOCR,
-            (buffer.getvalue(), ocr_analytics),
+            (text_out, ocr_analytics),
         )
     )
 

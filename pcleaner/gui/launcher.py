@@ -20,7 +20,6 @@ from pcleaner.gui.mainwindow_driver import MainWindow
 
 # TODO Things to copy from deepqt:
 # - the testing
-# - the sys.excepthook
 # - the gather themes (potentially)
 
 # This import is needed to load the icons.
@@ -166,8 +165,7 @@ def main():
         pcleaner-gui [<image_path> ...] [--debug]
 
     Options:
-        <image_path>          One or multiple files or directories to clean.
-                              Leave blank to use the current working directory.
+        <image_path>          One or multiple files or directories to load on startup.
         --debug               Enable debug mode.
     """
     args = docopt(docopt_doc, version=f"Panel Cleaner {__version__}")

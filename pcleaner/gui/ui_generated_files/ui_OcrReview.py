@@ -346,6 +346,7 @@ class Ui_OcrReview(object):
         self.tableWidget_ocr.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         self.tableWidget_ocr.setObjectName(u"tableWidget_ocr")
         self.tableWidget_ocr.setAcceptDrops(True)
+        self.tableWidget_ocr.setEditTriggers(QAbstractItemView.AllEditTriggers)
         self.tableWidget_ocr.setTabKeyNavigation(False)
         self.tableWidget_ocr.setProperty("showDropIndicator", True)
         self.tableWidget_ocr.setDragEnabled(True)

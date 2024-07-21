@@ -71,7 +71,7 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         :param config: The configuration object.
         :param confirm_closing: Whether to ask for confirmation before closing.
         """
-        logger.debug(f"Opening Review Window for {len(images)} outputs.")
+        logger.info(f"Opening Review Window for {len(images)} outputs.")
         Qw.QDialog.__init__(self, parent)
         self.setupUi(self)
 

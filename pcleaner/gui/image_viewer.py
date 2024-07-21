@@ -331,7 +331,6 @@ class BubbleImageViewer(ImageViewer):
             if self.point_in_image(self.image_position(event.pos())):
                 self._new_bubble_start = self.image_position(event.pos())
                 self.setCursor(Qt.CrossCursor)
-                logger.debug(f"Start drawing new bubble at {self._new_bubble_start}")
         else:
             # Check if a bubble was clicked.
             bubble_index = self.point_in_a_bubble(self.image_position(event.pos()))
@@ -349,7 +348,15 @@ class BubbleImageViewer(ImageViewer):
         if self.allow_drawing_bubble and self._new_bubble_start is not None:
             self._new_bubble_end = self.image_position(event.pos())
             if self.point_in_image(self._new_bubble_end):
-                self.new_bubble.emit(Qc.QRect(self._new_bubble_start, self._new_bubble_end))
+                # Construct a positively sized QRect.
+                # Qc.QRect(self._new_bubble_start, self._new_bubble_end)
+                rect = Qc.QRect(
+                    min(self._new_bubble_start.x(), self._new_bubble_end.x()),
+                    min(self._new_bubble_start.y(), self._new_bubble_end.y()),
+                    abs(self._new_bubble_end.x() - self._new_bubble_start.x()),
+                    abs(self._new_bubble_end.y() - self._new_bubble_start.y()),
+                )
+                self.new_bubble.emit(rect)
                 logger.debug(
                     f"New bubble drawn: {Qc.QRect(self._new_bubble_start, self._new_bubble_end)}"
                 )

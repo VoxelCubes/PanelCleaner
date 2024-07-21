@@ -59,3 +59,5 @@ class OcrReviewOptions:
 
     image_files: list[imf.ImageFile]
     ocr_results: list[st.OCRAnalytic]
+    output_path: Path
+    csv_output: bool

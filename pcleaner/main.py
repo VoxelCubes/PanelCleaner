@@ -650,43 +650,14 @@ def run_ocr(
 
     print("\nDetected Text:")
     # Output the OCRed text from the analytics.
-    # Format of the analytics:
-    # number of boxes | sizes of all boxes | sizes of boxes that were OCRed | path to image, text, box coordinates
-    # We do not need to show the first three columns, so we simplify the data structure.
-    path_texts_coords: list[tuple[Path, str, st.Box]] = list(
-        itertools.chain.from_iterable(a.removed_box_data for a in ocr_analytics)
+    text_out = ocr.format_output(
+        ocr_analytics,
+        csv_output,
+        ("filename", "startx", "starty", "endx", "endy", "text"),
     )
-    if path_texts_coords:
-        paths, texts, boxes = zip(*path_texts_coords)
-        paths = hp.trim_prefix_from_paths(paths)
-        path_texts_coords = list(zip(paths, texts, boxes))
-        # Sort by path.
-        path_texts_coords = natsorted(path_texts_coords, key=lambda x: x[0])
+    text_out = text_out.strip()  # Remove the leading newline.
 
-    buffer = StringIO()
-    if csv_output:
-        writer = csv.writer(buffer, quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(["filename", "startx", "starty", "endx", "endy", "text"])
-
-        for path, bubble, box in path_texts_coords:
-            if "\n" in bubble:
-                logger.warning(f"Detected newline in bubble: {path} {bubble} {box}")
-                bubble = bubble.replace("\n", "\\n")
-            writer.writerow([path, *box.as_tuple, bubble])
-
-        text = buffer.getvalue()
-    else:
-        # Place the file path on it's own line, and only if it's different from the previous one.
-        current_path = ""
-        for path, bubble, _ in path_texts_coords:
-            if path != current_path:
-                buffer.write(f"\n\n{path}: ")
-                current_path = path
-            buffer.write(f"\n{bubble}")
-            if "\n" in bubble:
-                logger.warning(f"Detected newline in bubble: {path} {bubble}")
-        text = buffer.getvalue().strip()  # Remove the leading newline.
-    print(text)
+    print(text_out)
 
     if output_path is None:
         path = Path.cwd() / ("detected_text.txt" if not csv_output else "detected_text.csv")
@@ -698,7 +669,7 @@ def run_ocr(
             print("Aborting.")
             return
     try:
-        path.write_text(text, encoding="utf-8")
+        path.write_text(text_out, encoding="utf-8")
         print(f"Saved detected text to {path}")
     except OSError as e:
         print(f"Failed to write detected text to {path}")

@@ -1,6 +1,6 @@
 import math
 from enum import IntEnum
-from functools import wraps, partial
+from functools import wraps
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -46,7 +46,7 @@ BUBBLE_STATUS_COLORS = {
     st.OCRStatus.Removed: Qg.QColor(128, 0, 0, 255),
     st.OCRStatus.EditedRemoved: Qg.QColor(128, 0, 0, 255),
     st.OCRStatus.Edited: Qg.QColor(0, 0, 128, 255),
-    st.OCRStatus.New: Qg.QColor(128, 128, 0, 255),
+    st.OCRStatus.New: Qg.QColor(128, 64, 0, 255),
 }
 
 OCR_LANG_CODE_TO_NAME = {
@@ -96,7 +96,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         :param ocr_model: The OCR model to use.
         :param theme_is_dark: The shared theme state.
         """
-        logger.debug(f"Opening OCR Review Window for {len(images)} outputs.")
+        logger.info(f"Opening OCR Review Window for {len(images)} outputs.")
         Qw.QDialog.__init__(self, parent)
         self.setupUi(self)
 
@@ -165,7 +165,39 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         # Set the new button color to match what would be assigned to new buttons.
         self.image_viewer.set_new_bubble_color(BUBBLE_STATUS_COLORS[st.OCRStatus.New])
 
+        # Add ctrl + n as a shortcut for new bubble.
+        self.pushButton_new.setShortcut(Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_N))
+        self.pushButton_new.setToolTip(
+            self.pushButton_new.toolTip() + f" ({self.pushButton_new.shortcut().toString()})"
+        )
+        # Add ctrl + d as a shortcut for delete.
+        self.pushButton_delete.setShortcut(Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_D))
+        self.pushButton_delete.setToolTip(
+            self.pushButton_delete.toolTip() + f" ({self.pushButton_delete.shortcut().toString()})"
+        )
+        # Add ctrl + shift + d as a shortcut for undelete.
+        self.pushButton_undelete.setShortcut(
+            Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.SHIFT + Qc.Qt.Key_D)
+        )
+        self.pushButton_undelete.setToolTip(
+            self.pushButton_undelete.toolTip()
+            + f" ({self.pushButton_undelete.shortcut().toString()})"
+        )
+        # Add ctrl + r as a shortcut for reset.
+        self.pushButton_reset.setShortcut(Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_R))
+        self.pushButton_reset.setToolTip(
+            self.pushButton_reset.toolTip() + f" ({self.pushButton_reset.shortcut().toString()})"
+        )
+
         self.load_ocr_options()
+
+    def get_final_ocr_analytics(self) -> list[st.OCRAnalytic]:
+        """
+        Convert the mutable OCR results back to the original format.
+
+        :return: The OCR analytics.
+        """
+        return st.convert_ocr_results_to_analytics(self.ocr_results)
 
     def load_custom_icons(self) -> None:
         # Load the custom new_bubble icon.
@@ -389,6 +421,11 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         self.load_ocr_results(ocr_results)
 
+        # Focus the newly created bubble, if still on this image.
+        if image_index == self.image_list.currentRow():
+            self.tableWidget_ocr.setCurrentCell(row, 1)
+            self.tableWidget_ocr.focusWidget()
+
     def ocr_worker_finished(self) -> None:
         # Reset the cursor and enable the window.
         Qw.QApplication.restoreOverrideCursor()
@@ -412,7 +449,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
             ocr_results = self.current_image_ocr_results()
             self.pushButton_reset.setEnabled(
                 ocr_results[selected_row].status
-                in (st.OCRStatus.Edited, st.OCRStatus.EditedRemoved)
+                in (st.OCRStatus.Edited, st.OCRStatus.EditedRemoved, st.OCRStatus.Removed)
             )
         # For delete there must be a selection and it can't be deleted already.
         self.pushButton_undelete.hide()
@@ -475,6 +512,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         if ocr_results[selected_row].status not in (
             st.OCRStatus.Edited,
             st.OCRStatus.EditedRemoved,
+            st.OCRStatus.Removed,
         ):
             logger.error("Tried to reset a non-edited bubble.")
             return
@@ -564,9 +602,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         self.new_bubble()
 
         # Create regular xyxy coordinates for a box.
-        x1, y1 = rect.topLeft().x(), rect.topLeft().y()
-        x2, y2 = rect.bottomRight().x(), rect.bottomRight().y()
-        box = st.Box(x1, y1, x2, y2)
+        box = st.Box(*rect.getCoords())
 
         # Discard if the bubble is too small.
         MIN_BUBBLE_SIZE = 400
@@ -605,6 +641,10 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
                 ):
                     return
             self.start_ocr(box)
+        else:
+            # Focus the newly created bubble.
+            self.tableWidget_ocr.setCurrentCell(self.tableWidget_ocr.rowCount() - 1, 1)
+            self.tableWidget_ocr.focusWidget()
 
     @Slot(int, int)
     def handle_table_edited(self, row: int, col: int) -> None:
