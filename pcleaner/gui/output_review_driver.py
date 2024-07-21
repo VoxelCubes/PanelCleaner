@@ -7,6 +7,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot
 from loguru import logger
+from natsort import natsorted
 
 import pcleaner.config as cfg
 import pcleaner.gui.gui_utils as gu
@@ -66,6 +67,7 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         :param parent: The parent widget.
         :param images: The images to display.
         :param target_output: The main output to display.
+        :param mask_outputs: The mask outputs to display.
         :param show_isolated_text: Whether to show the isolated text instead of the output in
             certain view modes (side-by-side).
         :param config: The configuration object.
@@ -82,6 +84,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self.config = config
         self.confirm_closing = confirm_closing
 
+        self.sort_images_by_path()
+
         self.first_load = set()
         self.first_slot_connection = True
         self.first_sbs_slot_connection = True
@@ -94,6 +98,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self.comboBox_view_mode.currentIndexChanged.connect(self.handle_image_change)
         # Select the first image to start with.
         self.image_list.setCurrentRow(0)
+        # Override Qt's dynamic scroll speed with a fixed, standard value.
+        self.image_list.verticalScrollBar().setSingleStep(120)
 
         self.pushButton_done.clicked.connect(self.close)
 
@@ -110,6 +116,14 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
                 event.ignore()
                 return
         event.accept()
+
+    def sort_images_by_path(self) -> None:
+        """
+        Sort the images by their file path using natsort.
+        This is necessary because the parallel batch processing will not preserve the order when
+        many pictures are processed at once.
+        """
+        self.images = natsorted(self.images, key=lambda x: x.path)
 
     def calculate_thumbnail_size(self) -> None:
         """

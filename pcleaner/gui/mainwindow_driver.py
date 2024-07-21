@@ -1261,6 +1261,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Start either cleaning or OCR, depending on the selected radio button.
         """
+        # Clean up stale review data.
+        self.cleaning_review_options = None
+        self.ocr_review_options = None
+
         if self.file_table.has_no_files():
             gu.show_warning(
                 self,
@@ -1454,7 +1458,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     None, tr("Save Failed"), tr("Failed to write detected text to file.")
                 )
 
-        self.textEdit_analytics.append(text_out)
+        self.textEdit_analytics.append(text_out + "\n\n")
 
         self.ocr_review_options = None
 
@@ -1767,7 +1771,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             if self.ocr_review_options is not None:
                 self.ocr_review_options.ocr_results = raw_analytics
             else:
-                self.textEdit_analytics.append(ocr_output)
+                self.textEdit_analytics.append(ocr_output + "\n\n")
             return  # Don't update the progress bar.
 
         elif progress_data.progress_type == imf.ProgressType.end:

@@ -129,6 +129,8 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         self.comboBox_view_mode.currentIndexChanged.connect(self.update_image_boxes)
         self.tableWidget_ocr.currentRowChanged.connect(self.update_image_boxes)
         self.image_list.setCurrentRow(0)
+        # Override Qt's dynamic scroll speed with a fixed, standard value.
+        self.image_list.verticalScrollBar().setSingleStep(120)
 
         # Let the user select the bubble by clicking it too.
         self.image_viewer.bubble_clicked.connect(self.handle_bubble_clicked)
