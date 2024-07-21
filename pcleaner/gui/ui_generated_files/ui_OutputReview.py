@@ -48,6 +48,7 @@ class Ui_OutputReview(object):
         self.horizontalLayout_2.setContentsMargins(6, 6, 6, 6)
         self.label_image_count = QLabel(self.layoutWidget)
         self.label_image_count.setObjectName(u"label_image_count")
+        self.label_image_count.setText(u"<image count>")
 
         self.horizontalLayout_2.addWidget(self.label_image_count)
 
@@ -400,7 +401,6 @@ class Ui_OutputReview(object):
     # setupUi
 
     def retranslateUi(self, OutputReview):
-        self.label_image_count.setText(QCoreApplication.translate("OutputReview", u"<image count>", None))
         self.label.setText(QCoreApplication.translate("OutputReview", u"Icon Size:", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_prev.setToolTip(QCoreApplication.translate("OutputReview", u"Previous image", None))

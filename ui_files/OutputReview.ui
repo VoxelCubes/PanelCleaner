@@ -53,7 +53,7 @@
          <item>
           <widget class="QLabel" name="label_image_count">
            <property name="text">
-            <string>&lt;image count&gt;</string>
+            <string notr="true">&lt;image count&gt;</string>
            </property>
           </widget>
          </item>
@@ -597,15 +597,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ImageViewer</class>
-   <extends>QGraphicsView</extends>
-   <header>pcleaner.gui.image_viewer</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>CElidedLabel</class>
    <extends>QFrame</extends>
    <header>pcleaner.gui.CustomQ.CElidedLabel</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ImageViewer</class>
+   <extends>QGraphicsView</extends>
+   <header>pcleaner.gui.image_viewer</header>
    <container>1</container>
   </customwidget>
   <customwidget>

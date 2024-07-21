@@ -48,6 +48,7 @@ class Ui_OcrReview(object):
         self.horizontalLayout_2.setContentsMargins(6, 6, 6, 6)
         self.label_image_count = QLabel(self.layoutWidget1)
         self.label_image_count.setObjectName(u"label_image_count")
+        self.label_image_count.setText(u"<image count>")
 
         self.horizontalLayout_2.addWidget(self.label_image_count)
 
@@ -375,7 +376,6 @@ class Ui_OcrReview(object):
     # setupUi
 
     def retranslateUi(self, OcrReview):
-        self.label_image_count.setText(QCoreApplication.translate("OcrReview", u"<image count>", None))
         self.label.setText(QCoreApplication.translate("OcrReview", u"Icon Size:", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_prev.setToolTip(QCoreApplication.translate("OcrReview", u"Previous image", None))
