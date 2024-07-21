@@ -276,7 +276,7 @@ class PreprocessorConfig:
     ocr_engine: OCREngine = OCREngine.AUTO
     reading_order: ReadingOrder = ReadingOrder.AUTO
     ocr_max_size: int = 30 * 100
-    ocr_blacklist_pattern: str = "[～．ー！？０-９]*"
+    ocr_blacklist_pattern: str = "[～．ー！？０-９~.-!?0-9]*"
     ocr_strict_language: bool = False
     box_padding_initial: int = 2
     box_right_padding_initial: int = 3
