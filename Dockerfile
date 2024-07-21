@@ -16,6 +16,8 @@ ENV PATH "${HOME}/.local/bin/:${PATH}"
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libgl1 \
         libglib2.0-0 \
+        libdbus-1-dev \
+        dbus \
         vim \
         nano
 
