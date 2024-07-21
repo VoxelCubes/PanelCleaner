@@ -12,6 +12,7 @@ import pcleaner.config as cfg
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.image_viewer as iv
+from pcleaner.helpers import f_plural
 from pcleaner.gui.ui_generated_files.ui_OutputReview import Ui_OutputReview
 
 # The maximum size, will be smaller on one side if the image is not square.
@@ -160,7 +161,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self.horizontalSlider_icon_size.setValue(self.from_log_scale(THUMBNAIL_SIZE))
         self.horizontalSlider_icon_size.valueChanged.connect(self.update_icon_size)
 
-        self.label_image_count.setText(self.tr("%n image(s)", "", len(self.images)))
+        label_text = f_plural(len(self.images), self.tr("image"), self.tr("images"))
+        self.label_image_count.setText(f"{len(self.images)} {label_text}")
 
         for image in self.images:
 
