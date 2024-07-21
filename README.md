@@ -72,7 +72,10 @@ The two bottom pages are what the program can output: either just the transparen
 
 - Can also run OCR on the pages and output the text to a file.
 
-- Interface available in: English, German, Bulgarian (See [Translating](https://github.com/VoxelCubes/PanelCleaner/blob/master/translations/TRANSLATING.md) for more languages)
+- Review cleaning and OCR output, including editing the OCR output interactively before saving it.
+
+- Interface available in: English, German, Bulgarian, Spanish
+(See [Translating](https://github.com/VoxelCubes/PanelCleaner/blob/master/translations/TRANSLATING.md) for more languages)
 
 
 ## Limitations
