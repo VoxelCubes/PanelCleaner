@@ -430,12 +430,12 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="53"/>
       <source>Japanese</source>
-      <translation type="unfinished">Japanese</translation>
+      <translation>Japanisch</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="54"/>
       <source>English</source>
-      <translation type="unfinished">English</translation>
+      <translation>Englisch</translation>
     </message>
   </context>
   <context>
@@ -485,7 +485,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CTextEdit.py" line="17"/>
       <source>Clear</source>
-      <translation type="unfinished">Clear</translation>
+      <translation>Alles Löschen</translation>
     </message>
   </context>
   <context>
@@ -511,7 +511,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="124"/>
       <source>Terminate Panel Cleaner</source>
-      <translation type="unfinished">Terminate Panel Cleaner</translation>
+      <translation>Panel Cleaner Beenden</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="134"/>
@@ -1318,22 +1318,22 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1614"/>
       <source>Export Images</source>
-      <translation type="unfinished">Export Images</translation>
+      <translation>Bilder exportieren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1615"/>
       <source>Would you like to export the cleaned images?</source>
-      <translation type="unfinished">Would you like to export the cleaned images?</translation>
+      <translation>Möchten Sie die bereinigten Bilder exportieren?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1634"/>
       <source>Export OCR Results</source>
-      <translation type="unfinished">Export OCR Results</translation>
+      <translation>OCR-Ergebnisse Exportieren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1635"/>
       <source>Would you like to export the OCR results?</source>
-      <translation type="unfinished">Would you like to export the OCR results?</translation>
+      <translation>Möchten Sie die OCR-Ergebnisse exportieren?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1647"/>
@@ -1490,12 +1490,12 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
       <location filename="../ui_files/Mainwindow.ui" line="509"/>
       <location filename="../ui_files/Mainwindow.ui" line="741"/>
       <source>Review Output</source>
-      <translation type="unfinished">Review Output</translation>
+      <translation>Überprüfung der Ausgabe</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="519"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, a review window will open upon process completion. The results are also pre-viewable in each image&apos;s details view, before proceeding with saving them to disk.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, a review window will open upon process completion. The results are also pre-viewable in each image&apos;s details view, before proceeding with saving them to disk.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn dieses Kontrollkästchen aktiviert ist, wird nach Abschluss des Vorgangs ein Überprüfungsfenster geöffnet. Die Ergebnisse können auch in der Detailansicht jedes Bildes eingesehen werden, bevor sie auf der Festplatte gespeichert werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="549"/>
@@ -1526,7 +1526,7 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="751"/>
       <source>When checked, a review window will open upon process completion.</source>
-      <translation type="unfinished">When checked, a review window will open upon process completion.</translation>
+      <translation>Wenn diese Option aktiviert ist, wird nach Abschluss des Prozesses ein Überprüfungsfenster geöffnet.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="795"/>
@@ -1636,7 +1636,7 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="559"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view or the Output Review, if enabled. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view or the Output Review, if enabled. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, werden die Ausgaben auf der Festplatte gespeichert. Andernfalls können Sie sie nur in der Bilddetailansicht oder in der Ausgabeüberprüfung (falls aktiviert) ansehen. &lt;/p&gt;&lt;p&gt;Wenn das Profil nach der Reinigung unverändert bleibt, ohne dass diese Option aktiviert ist, können Sie sie schnell exportieren, indem Sie den Reininger erneut mit aktivierter Option ausführen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1119"/>
