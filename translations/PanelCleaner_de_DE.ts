@@ -1982,57 +1982,57 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../ui_files/OutputReview.ui" line="113"/>
       <source>Next image</source>
-      <translation type="unfinished">Next image</translation>
+      <translation>Nächstes Bild</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="224"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Vergrößern</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="241"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Verkleinern</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="258"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Zoom zurücksetzen</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="275"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Auf Fenstergröße zoomen</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="293"/>
       <source>Side-by-Side</source>
-      <translation type="unfinished">Side-by-Side</translation>
+      <translation>Nebeneinander</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="298"/>
       <source>Swipe</source>
-      <translation type="unfinished">Swipe</translation>
+      <translation>Wischen</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="303"/>
       <source>Onion</source>
-      <translation type="unfinished">Onion</translation>
+      <translation>Zwiebelsicht</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="308"/>
       <source>Difference</source>
-      <translation type="unfinished">Difference</translation>
+      <translation>Differenz</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="313"/>
       <source>Overlay</source>
-      <translation type="unfinished">Overlay</translation>
+      <translation>Überlagerung</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="321"/>
       <source>Finish Review</source>
-      <translation type="unfinished">Finish Review</translation>
+      <translation>Überprüfung beenden</translation>
     </message>
   </context>
   <context>
@@ -2040,32 +2040,32 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="105"/>
       <source>Finish Review</source>
-      <translation type="unfinished">Finish Review</translation>
+      <translation>Überprüfung beenden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="106"/>
       <source>Are you sure you want to finish the review?</source>
-      <translation type="unfinished">Are you sure you want to finish the review?</translation>
+      <translation>Sind Sie sicher, dass Sie die Überprüfung beenden wollen?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="164"/>
       <source>image</source>
-      <translation type="unfinished">image</translation>
+      <translation>Bild</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="164"/>
       <source>images</source>
-      <translation type="unfinished">images</translation>
+      <translation>Bilder</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="182"/>
       <source>Loading Error</source>
-      <translation type="unfinished">Loading Error</translation>
+      <translation>Fehler beim Laden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="183"/>
       <source>Failed to load image &apos;{path}&apos;</source>
-      <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
+      <translation>Bild &apos;{path}&apos; konnte nicht geladen werden</translation>
     </message>
   </context>
   <context>
