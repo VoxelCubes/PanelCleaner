@@ -209,7 +209,7 @@ class ImageViewer(Qw.QGraphicsView):
 
         self.zoom_factor = proposed_zoom_factor
 
-        if self.zoom_factor >= 2:
+        if self.zoom_factor >= 1:
             self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, False)
             self.set_transformation_mode(Qt.FastTransformation)
         else:
