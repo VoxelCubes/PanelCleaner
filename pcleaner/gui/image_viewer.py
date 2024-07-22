@@ -19,10 +19,9 @@ class ImageViewer(Qw.QGraphicsView):
     image_item: Qw.QGraphicsPixmapItem | None
 
     # We want to emit when the zoom factor changes,
-    # but also specifically when it changes due to a wheel event.
+    # and also receive them.
     zoom_factor_changed = Signal(float)
-    zoom_factor_changed_wheel = Signal(float)
-    # set_zoom_factor = Slot(float)
+    # Slot: set_zoom_factor = Slot(float)
 
     def __init__(self, parent=None) -> None:
         super(ImageViewer, self).__init__(parent)
@@ -86,10 +85,8 @@ class ImageViewer(Qw.QGraphicsView):
             # Zoom in/out with Ctrl + mouse wheel
             if event.angleDelta().y() > 0:
                 self.zoom_in(wheel=True)
-                self.zoom_factor_changed_wheel.emit(self.zoom_factor)
             else:
                 self.zoom_out(wheel=True)
-                self.zoom_factor_changed_wheel.emit(self.zoom_factor)
         elif Qt.ShiftModifier & event.modifiers():
             # Horizontal scrolling with Shift + mouse wheel
             self.horizontalScrollBar().setValue(
