@@ -1881,7 +1881,7 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../ui_files/OcrReview.ui" line="441"/>
       <source>Done</source>
-      <translation type="unfinished">Done</translation>
+      <translation>Fertig</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="498"/>
@@ -2032,7 +2032,7 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../ui_files/OutputReview.ui" line="321"/>
       <source>Done</source>
-      <translation type="unfinished">Done</translation>
+      <translation>Fertig</translation>
     </message>
   </context>
   <context>
