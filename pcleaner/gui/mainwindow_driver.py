@@ -284,7 +284,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
         )
         self.theme_is_dark_changed.connect(self.file_table.handle_theme_is_dark_changed)
-        self.theme_is_dark_changed.connect(self.adjust_progress_drawer_color)
+        self.theme_is_dark_changed.connect(self.adjust_stylesheet_overrides)
         self.theme_is_dark_changed.connect(self.init_drop_panel)
         self.theme_is_dark_changed.connect(self.label_cleaning_outdir_help.load_icon)
         self.theme_is_dark_changed.connect(self.label_write_output_help.load_icon)
@@ -396,10 +396,20 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.config.save()
 
     @Slot(bool)
-    def adjust_progress_drawer_color(self) -> None:
+    def adjust_stylesheet_overrides(self) -> None:
         # Make the progress drawer use the alternate background color.
         self.widget_progress_drawer.setStyleSheet("background-color: palette(alternate-base);")
         self.widget_progress_drawer.update()
+        # Fix the strange dark default color of the corner button in light themes.
+        if not self.theme_is_dark.get():
+            self.tabWidget_table_page.setStyleSheet(
+                """
+                QTableCornerButton::section {
+                    background-color: palette(base);
+                }"""
+            )
+        else:
+            self.tabWidget_table_page.setStyleSheet("")
 
     def post_init(self) -> None:
         """
