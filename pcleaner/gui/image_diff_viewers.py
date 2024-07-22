@@ -328,7 +328,10 @@ class OverlayViewer(iv.ImageViewer):
         self.lower_image.setOffset(-0.5, -0.5)
         self.upper_image.setOffset(-0.5, -0.5)
 
-        lower_image = cv2.imread(str(lower))
+        # lower_image = cv2.imread(str(lower))
+        lower_image = Qg.QImage(str(lower))
+        lower_pixmap = Qg.QPixmap.fromImage(lower_image)
+        self.lower_image.setPixmap(lower_pixmap)
 
         # Merge masks
         merged_mask = self.merge_masks(masks)
@@ -337,10 +340,7 @@ class OverlayViewer(iv.ImageViewer):
         recolored_image = self.recolor_image(merged_mask, self.recolor)
 
         # Convert OpenCV images to QPixmap
-        lower_pixmap = self.cv2_to_pixmap(lower_image)
         upper_pixmap = self.cv2_to_pixmap(recolored_image)
-
-        self.lower_image.setPixmap(lower_pixmap)
         self.upper_image.setPixmap(upper_pixmap)
 
         self.image_dimensions = (

@@ -332,19 +332,21 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         Zoom events from the buttons are sent to the master, then the slave updates
         its zoom level to match the master.
         """
-        # Disconnect prior slots.
-        if not self.first_sbs_slot_connection:
-            self.image_viewer_sbs_master.zoom_factor_changed.disconnect()
-            self.image_viewer_sbs_slave.zoom_factor_changed_wheel.disconnect()
-            self.image_viewer_sbs_master.horizontalScrollBar().valueChanged.disconnect()
-            self.image_viewer_sbs_slave.horizontalScrollBar().valueChanged.disconnect()
-            self.image_viewer_sbs_master.verticalScrollBar().valueChanged.disconnect()
-            self.image_viewer_sbs_slave.verticalScrollBar().valueChanged.disconnect()
+        # # Disconnect prior slots.
+        # if not self.first_sbs_slot_connection:
+        #     self.image_viewer_sbs_master.zoom_factor_changed.disconnect()
+        #     self.image_viewer_sbs_slave.zoom_factor_changed_wheel.disconnect()
+        #     self.image_viewer_sbs_master.horizontalScrollBar().valueChanged.disconnect()
+        #     self.image_viewer_sbs_slave.horizontalScrollBar().valueChanged.disconnect()
+        #     self.image_viewer_sbs_master.verticalScrollBar().valueChanged.disconnect()
+        #     self.image_viewer_sbs_slave.verticalScrollBar().valueChanged.disconnect()
 
         # Load the images.
         self.image_viewer_sbs_master.set_image(original_path)
         self.image_viewer_sbs_slave.set_image(output_path)
 
+        if not self.first_sbs_slot_connection:
+            return
         # The slave copies the master's zoom level.
         self.image_viewer_sbs_master.zoom_factor_changed.connect(
             self.image_viewer_sbs_slave.set_zoom_factor
