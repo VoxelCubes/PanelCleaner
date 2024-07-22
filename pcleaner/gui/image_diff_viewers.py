@@ -325,8 +325,13 @@ class OverlayViewer(iv.ImageViewer):
         lower_pixmap = Qg.QPixmap.fromImage(lower_image)
         self.lower_image.setPixmap(lower_pixmap)
 
+        self.image_dimensions = (
+            self.image_item.pixmap().size().width(),
+            self.image_item.pixmap().size().height(),
+        )
+
         # Merge masks
-        merged_mask = self.merge_masks(masks)
+        merged_mask = self.merge_masks(masks, self.image_dimensions)
 
         # Apply recolor to the merged mask while preserving the alpha channel
         recolored_image = self.recolor_image(merged_mask, self.recolor)
@@ -335,29 +340,49 @@ class OverlayViewer(iv.ImageViewer):
         upper_pixmap = self.cv2_to_pixmap(recolored_image)
         self.upper_image.setPixmap(upper_pixmap)
 
-        self.image_dimensions = (
-            self.image_item.pixmap().size().width(),
-            self.image_item.pixmap().size().height(),
-        )
-
         self.update_alpha()
 
     @staticmethod
-    def merge_masks(masks: list[Path]) -> np.ndarray:
+    def merge_masks(masks: list[Path], target_size: tuple[int, int]) -> np.ndarray:
         """
         Merge multiple mask images into one by adding them together.
+
+        :param masks: The paths to the masks to join.
+        :param target_size: The size of the original image that the masks need to be scaled to.
+        :return: The layered masks.
         """
         merged_mask = None
 
-        for mask_path in masks:
+        for i, mask_path in enumerate(masks):
             mask_image = cv2.imread(
                 str(mask_path), cv2.IMREAD_UNCHANGED
-            )  # Ensure alpha channel is loaded
+            )  # Ensure alpha channel is loaded.
+
             if merged_mask is None:
+                # Initialize the merged mask with zeros with the same size and type as the first mask.
                 merged_mask = np.zeros_like(mask_image, dtype=np.uint8)
 
-            # Add the current mask to the merged mask
+            # Resize the merged mask if the current mask is larger.
+            if mask_image.shape[:2] != merged_mask.shape[:2]:
+                if (
+                    mask_image.shape[0] > merged_mask.shape[0]
+                    or mask_image.shape[1] > merged_mask.shape[1]
+                ):
+                    merged_mask = cv2.resize(
+                        merged_mask,
+                        (mask_image.shape[1], mask_image.shape[0]),
+                        interpolation=cv2.INTER_NEAREST,
+                    )
+
+            # Add the current mask to the merged mask.
             merged_mask = cv2.add(merged_mask, mask_image)
+
+        # Resize the merged mask to the target size.
+        # The numpy array has dimensions height,width so we need
+        # to flip the order of the target_size.
+        target_size_hw = target_size[1], target_size[0]
+        if merged_mask.shape[:2] != target_size_hw:
+            merged_mask = cv2.resize(merged_mask, target_size_hw, interpolation=cv2.INTER_NEAREST)
 
         return merged_mask
 

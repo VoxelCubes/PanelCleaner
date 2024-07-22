@@ -335,6 +335,9 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self.image_viewer_sbs_master.set_image(original_path)
         self.image_viewer_sbs_slave.set_image(output_path)
 
+        # Sync master and slave.
+        self.update_slave()
+
         # Connect the slave view to mimic the master at all times.
         if not self.first_sbs_slot_connection:
             return
