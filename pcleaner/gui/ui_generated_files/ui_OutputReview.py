@@ -45,7 +45,7 @@ class Ui_OutputReview(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(6, 6, 6, 6)
+        self.horizontalLayout_2.setContentsMargins(6, 6, 6, 7)
         self.label_image_count = QLabel(self.layoutWidget)
         self.label_image_count.setObjectName(u"label_image_count")
         self.label_image_count.setText(u"<image count>")
@@ -135,7 +135,7 @@ class Ui_OutputReview(object):
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(6, 4, 4, 4)
+        self.horizontalLayout.setContentsMargins(6, 6, 6, 6)
         self.label_file_name = CElidedLabel(self.layoutWidget1)
         self.label_file_name.setObjectName(u"label_file_name")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Preferred)
@@ -227,7 +227,9 @@ class Ui_OutputReview(object):
         self.page_side_by_side = QWidget()
         self.page_side_by_side.setObjectName(u"page_side_by_side")
         self.horizontalLayout_3 = QHBoxLayout(self.page_side_by_side)
+        self.horizontalLayout_3.setSpacing(4)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.image_viewer_sbs_master = ImageViewer(self.page_side_by_side)
         self.image_viewer_sbs_master.setObjectName(u"image_viewer_sbs_master")
 
@@ -244,7 +246,9 @@ class Ui_OutputReview(object):
         self.page_swipe = QWidget()
         self.page_swipe.setObjectName(u"page_swipe")
         self.verticalLayout_4 = QVBoxLayout(self.page_swipe)
+        self.verticalLayout_4.setSpacing(0)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.image_viewer_swipe = SwipeViewer(self.page_swipe)
         self.image_viewer_swipe.setObjectName(u"image_viewer_swipe")
 
@@ -252,7 +256,7 @@ class Ui_OutputReview(object):
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(0, 4, 0, 4)
+        self.horizontalLayout_5.setContentsMargins(0, 6, 0, 6)
         self.horizontalSpacer_2 = QSpacerItem(0, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_5.addItem(self.horizontalSpacer_2)
@@ -282,7 +286,9 @@ class Ui_OutputReview(object):
         self.page_onion = QWidget()
         self.page_onion.setObjectName(u"page_onion")
         self.verticalLayout_5 = QVBoxLayout(self.page_onion)
+        self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.image_viewer_onion = OnionViewer(self.page_onion)
         self.image_viewer_onion.setObjectName(u"image_viewer_onion")
 
@@ -290,7 +296,7 @@ class Ui_OutputReview(object):
 
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(6, 4, 6, 4)
+        self.horizontalLayout_6.setContentsMargins(0, 6, 0, 6)
         self.horizontalSpacer_6 = QSpacerItem(0, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_6.addItem(self.horizontalSpacer_6)
@@ -317,15 +323,18 @@ class Ui_OutputReview(object):
         self.page_difference = QWidget()
         self.page_difference.setObjectName(u"page_difference")
         self.verticalLayout_6 = QVBoxLayout(self.page_difference)
+        self.verticalLayout_6.setSpacing(0)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.image_viewer_difference = DifferenceViewer(self.page_difference)
         self.image_viewer_difference.setObjectName(u"image_viewer_difference")
 
         self.verticalLayout_6.addWidget(self.image_viewer_difference)
 
         self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setSpacing(0)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.horizontalLayout_7.setContentsMargins(6, 4, 6, 4)
+        self.horizontalLayout_7.setContentsMargins(0, 6, 0, 6)
         self.horizontalSpacer_8 = QSpacerItem(0, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_7.addItem(self.horizontalSpacer_8)
@@ -352,15 +361,18 @@ class Ui_OutputReview(object):
         self.page_overlay = QWidget()
         self.page_overlay.setObjectName(u"page_overlay")
         self.verticalLayout_2 = QVBoxLayout(self.page_overlay)
+        self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.image_viewer_overlay = OverlayViewer(self.page_overlay)
         self.image_viewer_overlay.setObjectName(u"image_viewer_overlay")
 
         self.verticalLayout_2.addWidget(self.image_viewer_overlay)
 
         self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setSpacing(0)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(6, 4, 6, 4)
+        self.horizontalLayout_8.setContentsMargins(0, 6, 0, 6)
         self.horizontalSpacer_10 = QSpacerItem(0, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_8.addItem(self.horizontalSpacer_10)
@@ -394,7 +406,7 @@ class Ui_OutputReview(object):
 
         self.retranslateUi(OutputReview)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(OutputReview)
@@ -430,7 +442,7 @@ class Ui_OutputReview(object):
         self.comboBox_view_mode.setItemText(3, QCoreApplication.translate("OutputReview", u"Difference", None))
         self.comboBox_view_mode.setItemText(4, QCoreApplication.translate("OutputReview", u"Overlay", None))
 
-        self.pushButton_done.setText(QCoreApplication.translate("OutputReview", u"Finish Review", None))
+        self.pushButton_done.setText(QCoreApplication.translate("OutputReview", u"Done", None))
         pass
     # retranslateUi
 
