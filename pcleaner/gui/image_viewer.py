@@ -18,6 +18,8 @@ class ImageViewer(Qw.QGraphicsView):
     image_dimensions: tuple[int, int] | None
     image_item: Qw.QGraphicsPixmapItem | None
 
+    loaded_image_path: Path | None
+
     # We want to emit when the zoom factor changes,
     # and also receive them.
     zoom_factor_changed = Signal(float)
@@ -33,6 +35,7 @@ class ImageViewer(Qw.QGraphicsView):
 
         self.image_item = None
         self.image_dimensions = None
+        self.loaded_image_path = None
         # Disable the allocation limit for high resolution images.
         Qg.QImageReader.setAllocationLimit(0)
 
@@ -58,6 +61,8 @@ class ImageViewer(Qw.QGraphicsView):
         )
 
     def set_image(self, image_path: Path = None) -> None:
+        self.loaded_image_path = image_path
+
         if image_path:
             self.scene.clear()
             self.image_item = Qw.QGraphicsPixmapItem()
@@ -286,13 +291,6 @@ class BubbleImageViewer(ImageViewer):
         self.bubble_colors.clear()
         self.bubble_labels.clear()
         self.bubble_stroke.clear()
-        self.viewport().update()
-
-    def add_bubble(self, rect: Qc.QRect, color: Qg.QColor, label: str, stroke: Qt.PenStyle) -> None:
-        self.bubbles.append(rect)
-        self.bubble_colors.append(color)
-        self.bubble_labels.append(label)
-        self.bubble_stroke.append(stroke)
         self.viewport().update()
 
     def set_bubbles(

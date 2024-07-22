@@ -40,6 +40,9 @@ class SwipeViewer(iv.ImageViewer):
         """
         self.scene.clear()
 
+        # Store the left path as the loaded image path.
+        self.loaded_image_path = left
+
         self.image_left = Qw.QGraphicsPixmapItem()
         self.image_right = Qw.QGraphicsPixmapItem()
         self.scene.addItem(self.image_left)
@@ -158,6 +161,9 @@ class OnionViewer(iv.ImageViewer):
         """
         self.scene.clear()
 
+        # Set the lower image as the canonical image path.
+        self.loaded_image_path = lower
+
         self.lower_image = Qw.QGraphicsPixmapItem()
         self.upper_image = Qw.QGraphicsPixmapItem()
         self.scene.addItem(self.lower_image)
@@ -223,6 +229,9 @@ class DifferenceViewer(iv.ImageViewer):
         Accept 2 image paths and load them into the viewer, applying the difference filter.
         """
         self.scene.clear()
+
+        # Set the lower image as the canonical image path.
+        self.loaded_image_path = lower
 
         self.lower_image = Qw.QGraphicsPixmapItem()
         self.upper_image = Qw.QGraphicsPixmapItem()
@@ -308,6 +317,9 @@ class OverlayViewer(iv.ImageViewer):
         Accept 2 image paths and load them into the viewer.
         """
         self.scene.clear()
+
+        # Set the lower image as the canonical image path.
+        self.loaded_image_path = lower
 
         self.lower_image = Qw.QGraphicsPixmapItem()
         self.upper_image = Qw.QGraphicsPixmapItem()

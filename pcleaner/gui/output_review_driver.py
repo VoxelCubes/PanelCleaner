@@ -332,6 +332,10 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         Zoom events from the buttons are sent to the master, then the slave updates
         its zoom level to match the master.
         """
+        # Check if the image wasn't already loaded.
+        if self.image_viewer_sbs_master.loaded_image_path == original_path:
+            return
+
         self.image_viewer_sbs_master.set_image(original_path)
         self.image_viewer_sbs_slave.set_image(output_path)
 
@@ -379,6 +383,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         The original image is shown on the left, the output image is shown on the right.
         The user can swipe the images horizontally to compare them.
         """
+        if self.image_viewer_swipe.loaded_image_path == original_path:
+            return
         self.image_viewer_swipe.set_images(original_path, output_path)
 
     def load_onion(self, original_path: Path, output_path: Path) -> None:
@@ -388,6 +394,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         The output image is shown on top of the original image.
         The user can adjust the onion level to see more or less of the output image.
         """
+        if self.image_viewer_onion.loaded_image_path == original_path:
+            return
         self.image_viewer_onion.set_images(original_path, output_path)
 
     def load_difference(self, original_path: Path, output_path: Path) -> None:
@@ -396,6 +404,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         This mode has 1 image viewer.
         The difference between the original and output images is shown.
         """
+        if self.image_viewer_difference.loaded_image_path == original_path:
+            return
         self.image_viewer_difference.set_images(original_path, output_path)
 
     def load_overlay(
@@ -406,4 +416,6 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         This mode has 1 image viewer.
         The mask is shown on top of the original image.
         """
+        if self.image_viewer_overlay.loaded_image_path == original_path:
+            return
         self.image_viewer_overlay.set_images(original_path, mask_paths, mask_color)
