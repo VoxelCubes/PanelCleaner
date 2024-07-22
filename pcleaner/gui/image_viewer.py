@@ -40,7 +40,13 @@ class ImageViewer(Qw.QGraphicsView):
         self.zoom_factor = 1.0
         self.setAlignment(Qt.AlignCenter)
 
-        self.setMouseTracking(True)
+        # I'm confused as to what this is supposed to do.
+        # Docs say this will prevent it from receiving mouse move events when no button
+        # is pressed, but it somehow still does. Is it overridden somewhere??
+        self.setMouseTracking(False)
+
+        # Make zooming focus on mouse.
+        self.setTransformationAnchor(Qw.QGraphicsView.ViewportAnchor.AnchorUnderMouse)
 
     @Slot(float)
     def set_zoom_factor(self, factor: float) -> None:
@@ -261,8 +267,6 @@ class BubbleImageViewer(ImageViewer):
 
         self._new_bubble_start = None
         self._new_bubble_end = None
-
-        self.setMouseTracking(False)
 
         # Load included font.
         with resources.files(pcleaner.data) as data_path:
