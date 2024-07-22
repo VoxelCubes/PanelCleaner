@@ -332,43 +332,42 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         Zoom events from the buttons are sent to the master, then the slave updates
         its zoom level to match the master.
         """
-        # # Disconnect prior slots.
-        # if not self.first_sbs_slot_connection:
-        #     self.image_viewer_sbs_master.zoom_factor_changed.disconnect()
-        #     self.image_viewer_sbs_slave.zoom_factor_changed_wheel.disconnect()
-        #     self.image_viewer_sbs_master.horizontalScrollBar().valueChanged.disconnect()
-        #     self.image_viewer_sbs_slave.horizontalScrollBar().valueChanged.disconnect()
-        #     self.image_viewer_sbs_master.verticalScrollBar().valueChanged.disconnect()
-        #     self.image_viewer_sbs_slave.verticalScrollBar().valueChanged.disconnect()
-
-        # Load the images.
         self.image_viewer_sbs_master.set_image(original_path)
         self.image_viewer_sbs_slave.set_image(output_path)
 
+        # Connect the slave view to mimic the master at all times.
         if not self.first_sbs_slot_connection:
             return
-        # The slave copies the master's zoom level.
-        self.image_viewer_sbs_master.zoom_factor_changed.connect(
-            self.image_viewer_sbs_slave.set_zoom_factor
-        )
-        # Unless the slave receives direct orders from the scroll wheel.
-        self.image_viewer_sbs_slave.zoom_factor_changed_wheel.connect(
-            self.image_viewer_sbs_master.set_zoom_factor
-        )
-        # The slave copies the master's scroll position and vice versa.
+
+        # The slave copies the master's scroll position and zoom transformation.
+        self.image_viewer_sbs_master.zoom_factor_changed.connect(self.update_slave)
         self.image_viewer_sbs_master.horizontalScrollBar().valueChanged.connect(
             self.image_viewer_sbs_slave.horizontalScrollBar().setValue
-        )
-        self.image_viewer_sbs_slave.horizontalScrollBar().valueChanged.connect(
-            self.image_viewer_sbs_master.horizontalScrollBar().setValue
         )
         self.image_viewer_sbs_master.verticalScrollBar().valueChanged.connect(
             self.image_viewer_sbs_slave.verticalScrollBar().setValue
         )
-        self.image_viewer_sbs_slave.verticalScrollBar().valueChanged.connect(
-            self.image_viewer_sbs_master.verticalScrollBar().setValue
-        )
         self.first_sbs_slot_connection = False
+
+    @Slot(Qc.QRectF)
+    def update_slave(self) -> None:
+        # Make sure the slave view stays consistent with the master.
+        self.image_viewer_sbs_slave.set_transformation_mode(
+            self.image_viewer_sbs_master.image_item.transformationMode()
+        )
+        self.image_viewer_sbs_slave.setRenderHints(self.image_viewer_sbs_master.renderHints())
+        self.image_viewer_sbs_slave.setTransform(self.image_viewer_sbs_master.transform())
+
+        # This may seem redundant, but without it the slave scroll bars jump wildly when
+        # zooming in then out.
+        # Likewise, the previous connection of the master's scroll positions to the
+        # slave are necessary because zooming doesn't always trigger a scroll change.
+        self.image_viewer_sbs_slave.verticalScrollBar().setValue(
+            self.image_viewer_sbs_master.verticalScrollBar().value()
+        )
+        self.image_viewer_sbs_slave.horizontalScrollBar().setValue(
+            self.image_viewer_sbs_master.horizontalScrollBar().value()
+        )
 
     def load_swipe(self, original_path: Path, output_path: Path) -> None:
         """

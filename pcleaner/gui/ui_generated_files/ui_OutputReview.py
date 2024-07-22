@@ -237,6 +237,8 @@ class Ui_OutputReview(object):
 
         self.image_viewer_sbs_slave = ImageViewer(self.page_side_by_side)
         self.image_viewer_sbs_slave.setObjectName(u"image_viewer_sbs_slave")
+        self.image_viewer_sbs_slave.setEnabled(False)
+        self.image_viewer_sbs_slave.setInteractive(False)
 
         self.horizontalLayout_3.addWidget(self.image_viewer_sbs_slave)
 

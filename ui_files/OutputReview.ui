@@ -350,7 +350,14 @@
             <widget class="ImageViewer" name="image_viewer_sbs_master"/>
            </item>
            <item>
-            <widget class="ImageViewer" name="image_viewer_sbs_slave"/>
+            <widget class="ImageViewer" name="image_viewer_sbs_slave">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="interactive">
+              <bool>false</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

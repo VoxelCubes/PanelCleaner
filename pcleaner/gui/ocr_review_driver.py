@@ -21,8 +21,6 @@ from pcleaner.gui.ui_generated_files.ui_OcrReview import Ui_OcrReview
 # The maximum size, will be smaller on one side if the image is not square.
 THUMBNAIL_SIZE = 180
 
-# TODO swapping away from sbs view breaks scrolling.
-
 
 # The way the cellUpdate signal works, which we need to know when a cell was manually edited,
 # is that it also triggers on all other changes too... But we need to ignore those
@@ -614,16 +612,17 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
             logger.debug("Discarding bubble due to size.")
             return
 
-        # Find the highest new bubble index and increment by 1.
-        highest_new_index = max(
-            (
-                int(ocr_result.label.split()[-1])
-                for ocr_result in self.current_image_ocr_results()
-                if ocr_result.status == st.OCRStatus.New
-            ),
-            default=0,
-        )
-        new_bubble_label = self.tr("New") + f" {highest_new_index + 1}"
+        # Find the lowest free bubble index.
+        first_free_index = 1
+        used_indices = [
+            int(ocr_result.label.split()[-1])
+            for ocr_result in self.current_image_ocr_results()
+            if ocr_result.status == st.OCRStatus.New
+        ]
+        while first_free_index in used_indices:
+            first_free_index += 1
+
+        new_bubble_label = self.tr("New") + f" {first_free_index}"
 
         # Add the new bubble to the current image.
         ocr_results = self.current_image_ocr_results()
