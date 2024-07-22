@@ -32,7 +32,7 @@ def simple_replace_color_in_svg(input_folder, output_folder, old_color, new_colo
 # Define parameters
 input_folder = "./dark"
 output_folder = "./light"
-old_color = "#eff0f1"
+old_color = "#fcfcfc"
 new_color = "#232629"
 
 # Run the function

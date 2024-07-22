@@ -746,7 +746,7 @@
                         </widget>
                        </item>
                        <item>
-                        <widget class="CTooltipLabel" name="label">
+                        <widget class="CTooltipLabel" name="label_review_ocr_help">
                          <property name="toolTip">
                           <string>When checked, a review window will open upon process completion.</string>
                          </property>
@@ -1286,6 +1286,11 @@ p, li { white-space: pre-wrap; }
  </widget>
  <customwidgets>
   <customwidget>
+   <class>CComboBox</class>
+   <extends>QComboBox</extends>
+   <header>pcleaner.gui.CustomQ.CComboBox</header>
+  </customwidget>
+  <customwidget>
    <class>CTextEdit</class>
    <extends>QTextEdit</extends>
    <header>pcleaner.gui.CustomQ.CTextEdit</header>
@@ -1294,11 +1299,6 @@ p, li { white-space: pre-wrap; }
    <class>FileTable</class>
    <extends>QTableWidget</extends>
    <header>pcleaner.gui.file_table</header>
-  </customwidget>
-  <customwidget>
-   <class>CComboBox</class>
-   <extends>QComboBox</extends>
-   <header>pcleaner.gui.CustomQ.CComboBox</header>
   </customwidget>
   <customwidget>
    <class>CDropFrame</class>

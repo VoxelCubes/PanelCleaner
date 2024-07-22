@@ -45,6 +45,9 @@ import pcleaner.ocr.ocr as ocr
 
 ANALYTICS_COLUMNS = 74
 
+# TODO cache window sizes and splitter positions and table column widths
+# more of a 2.9 thing.
+
 
 # noinspection PyUnresolvedReferences
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
@@ -285,6 +288,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.theme_is_dark_changed.connect(self.init_drop_panel)
         self.theme_is_dark_changed.connect(self.label_cleaning_outdir_help.load_icon)
         self.theme_is_dark_changed.connect(self.label_write_output_help.load_icon)
+        self.theme_is_dark_changed.connect(self.label_review_output_help.load_icon)
+        self.theme_is_dark_changed.connect(self.label_review_ocr_help.load_icon)
         self.theme_is_dark_changed.connect(self.label_ocr_outdir_help.load_icon)
         # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)

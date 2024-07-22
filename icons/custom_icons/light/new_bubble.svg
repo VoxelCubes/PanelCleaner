@@ -31,20 +31,20 @@
      id="defs1">
     <style
        type="text/css"
-       id="current-color-scheme">.ColorScheme-Text { color: #fcfcfc; } </style>
+       id="current-color-scheme">.ColorScheme-Text { color: #232629; } </style>
   </defs>
   <path
      id="path1"
      class="ColorScheme-Text"
      d="M 2 2 L 2 14 L 8 14 L 8 13 L 3 13 L 3 3 L 13 3 L 13 8 L 14 8 L 14 2 L 2 2 z "
-     style="fill:#fcfcfc;fill-opacity:1" />
+     style="fill:#232629;fill-opacity:1" />
   <path
      id="path2"
      class="ColorScheme-Text"
      d="M 2.6582031 2.6503906 L 2.6582031 8.0234375 L 2.6582031 13.396484 L 8 13.396484 L 8 8 L 13.335938 8 L 13.335938 2.6503906 L 2.6582031 2.6503906 z "
-     style="fill:#fcfcfc;fill-opacity:0.50196081" />
+     style="fill:#232629;fill-opacity:0.50196081" />
   <path
-     style="color:#fcfcfc;fill:currentColor;fill-opacity:1;stroke:none"
+     style="color:#232629;fill:currentColor;fill-opacity:1;stroke:none"
      d="m 9,14 v -1 z m 2,-5 v 2 H 9 v 1 h 2 v 2 h 1 v -2 h 2 V 11 H 12 V 9 Z"
      class="ColorScheme-Text"
      id="path1-6"

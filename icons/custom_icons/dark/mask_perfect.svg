@@ -31,7 +31,7 @@
      id="defs3051">
     <style
        type="text/css"
-       id="current-color-scheme">&#10;      .ColorScheme-Text {&#10;        color:#eff0f1;&#10;      }&#10;      </style>
+       id="current-color-scheme">&#10;      .ColorScheme-Text {&#10;        color:#fcfcfc;&#10;      }&#10;      </style>
   </defs>
   <path
      style="fill:currentColor;fill-opacity:1;stroke:none"
@@ -51,6 +51,6 @@
      d="M 8.0159975,3.8 6.7662058,6.426 4,6.84 5.9876688,8.8933333 5.4997501,11.784 7.9786704,10.426 10.442927,11.8 9.9870029,8.9066667 12,6.8653333 l -2.7615396,-0.43 z"
      fill="currentColor"
      id="path1-2"
-     style="color:#eff0f1;fill:#3daee9;fill-opacity:1;stroke-width:0.666611"
+     style="color:#fcfcfc;fill:#3daee9;fill-opacity:1;stroke-width:0.666611"
      sodipodi:nodetypes="ccccccccccc" />
 </svg>

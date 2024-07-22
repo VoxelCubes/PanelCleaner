@@ -637,11 +637,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_12.addWidget(self.checkBox_review_ocr)
 
-        self.label = CTooltipLabel(self.page_ocr)
-        self.label.setObjectName(u"label")
-        self.label.setText(u"<helper>")
+        self.label_review_ocr_help = CTooltipLabel(self.page_ocr)
+        self.label_review_ocr_help.setObjectName(u"label_review_ocr_help")
+        self.label_review_ocr_help.setText(u"<helper>")
 
-        self.horizontalLayout_12.addWidget(self.label)
+        self.horizontalLayout_12.addWidget(self.label_review_ocr_help)
 
 
         self.verticalLayout_17.addLayout(self.horizontalLayout_12)
@@ -941,7 +941,7 @@ class Ui_MainWindow(object):
         self.radioButton_ocr_csv.setText(QCoreApplication.translate("MainWindow", u"CSV File", None))
         self.checkBox_review_ocr.setText(QCoreApplication.translate("MainWindow", u"Review Output", None))
 #if QT_CONFIG(tooltip)
-        self.label.setToolTip(QCoreApplication.translate("MainWindow", u"When checked, a review window will open upon process completion.", None))
+        self.label_review_ocr_help.setToolTip(QCoreApplication.translate("MainWindow", u"When checked, a review window will open upon process completion.", None))
 #endif // QT_CONFIG(tooltip)
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Output File:", None))
 #if QT_CONFIG(tooltip)
