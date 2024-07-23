@@ -368,18 +368,16 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
             return None
         return self.ocr_model.get()[self.comboBox_ocr_engine.currentLinkedData()]
 
-    def start_ocr(self, box: st.Box) -> None:
+    def start_ocr(self, box: st.Box, row: int) -> None:
         """
         Start a worker thread to perform OCR on the given box.
         It's typically fast enough to not be noticeable if it were blocking,
         then again I don't know what kind of potato you're running this on.
 
         :param box: The box to perform OCR on.
+        :param row: The row it was added on.
         """
         current_image_index = self.image_list.currentRow()
-        row = (
-            self.tableWidget_ocr.rowCount() - 1
-        )  # Assume new boxes are added to the end of the table.
         ocr_worker = wt.Worker(
             self.perform_ocr, box, current_image_index, row, no_progress_callback=True
         )
@@ -627,7 +625,19 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         # Add the new bubble to the current image.
         ocr_results = self.current_image_ocr_results()
         image_path = ocr_results[0].path
-        ocr_results.append(st.OCRResult(image_path, "", box, new_bubble_label, st.OCRStatus.New))
+        # Insert it after the currently selected box, if any, otherwise at the end.
+        selected_row = self.tableWidget_ocr.currentRow()
+        if selected_row == -1:
+            new_row = self.tableWidget_ocr.rowCount()
+            ocr_results.append(
+                st.OCRResult(image_path, "", box, new_bubble_label, st.OCRStatus.New)
+            )
+        else:
+            new_row = selected_row + 1
+            ocr_results.insert(
+                new_row,
+                st.OCRResult(image_path, "", box, new_bubble_label, st.OCRStatus.New),
+            )
 
         self.load_ocr_results(ocr_results)
 
@@ -648,10 +658,10 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
                     == Qw.QMessageBox.Cancel
                 ):
                     return
-            self.start_ocr(box)
+            self.start_ocr(box, new_row)
         else:
             # Focus the newly created bubble.
-            self.tableWidget_ocr.setCurrentCell(self.tableWidget_ocr.rowCount() - 1, 1)
+            self.tableWidget_ocr.setCurrentCell(new_row, 1)
             self.tableWidget_ocr.focusWidget()
 
     @Slot(int, int)
