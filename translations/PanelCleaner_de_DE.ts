@@ -521,7 +521,7 @@ Reinige Mangas durch KI.</translation>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="42"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Hinweis: Der Name &quot;{name}&quot; wurde ausgeblendet.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="64"/>
@@ -721,8 +721,8 @@ Standardmäßig wird das eingebaute Profil verwendet. Sie können diese Standard
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="273"/>
-      <source>Ok to All</source>
-      <translation type="unfinished">Ok to All</translation>
+      <source>Ignore All</source>
+      <translation type="unfinished">Ignore All</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="423"/>
@@ -987,7 +987,7 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="46"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Hinweis: Der Name &quot;{name}&quot; wurde ausgeblendet.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="64"/>
