@@ -39,7 +39,7 @@ class ErrorDialog(Qw.QDialog, Ui_ErrorDialog):
         self.pushButton_clipboard.clicked.connect(self.copy_to_clipboard)
 
         self.label_name_hidden.setText(
-            self.tr("Note: Name {name} was hidden").format(name=lp.get_username())
+            self.tr('Note: Name "{name}" was hidden').format(name=lp.get_username())
         )
         self.load_session_log()
 

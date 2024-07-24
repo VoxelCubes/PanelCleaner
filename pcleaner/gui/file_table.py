@@ -57,6 +57,8 @@ class FileTable(CTableWidget):
 
     files: dict[Path, imf.ImageFile]
 
+    notify_on_duplicate: bool
+
     requesting_image_preview = Qc.Signal(imf.ImageFile)
 
     step_icons_dark: dict[imf.ImageAnalyticCategory, Qg.QIcon]
@@ -71,6 +73,8 @@ class FileTable(CTableWidget):
         # Store a map of resolved file paths to file objects.
         self.files: dict[Path, imf.ImageFile] = {}
         self.threadpool = Qc.QThreadPool.globalInstance()
+
+        self.notify_on_duplicate = True
 
         # Make icons larger so the thumbnails are more visible.
         self.setIconSize(Qc.QSize(imf.THUMBNAIL_SIZE, imf.THUMBNAIL_SIZE))
@@ -193,6 +197,14 @@ class FileTable(CTableWidget):
         """
         return len(self.files) == 0
 
+    def dropEvent(self, event: Qg.QDropEvent) -> None:
+        """
+        We need to reset the notification flag, since this doesn't count as
+        a browse drop.
+        """
+        self.notify_on_duplicate = True
+        super().dropEvent(event)
+
     def handleDrop(self, path: str | list[str]) -> None:
         logger.debug(f"Dropped {path}")
         try:
@@ -223,8 +235,9 @@ class FileTable(CTableWidget):
                 self.tr("The following 5-channel TIFF files are not supported: \n")
                 + str(rejected_tiff_str),
             )
+
         for image_path in image_paths:
-            self.add_file(image_path)
+            self.notify_on_duplicate &= self.add_file(image_path, self.notify_on_duplicate)
 
     def update_all_rows(self) -> None:
         """
@@ -236,25 +249,36 @@ class FileTable(CTableWidget):
         for row in range(self.rowCount()):
             self.update_row(row, self.files[Path(self.item(row, Column.PATH).text())])
 
-    def add_file(self, path: Path) -> None:
+    def add_file(self, path: Path, notify_on_duplicate: bool) -> bool:
         """
         Attempt to add a new image to the table.
         All paths are expected to be resolved, absolute paths that point to existing files with a valid extension.
 
         :param path: Path to the image file.
+        :param notify_on_duplicate: When True, will notify the user when a duplicate shows up.
+        :return: Whether to notify the next time a duplicate shows up.
         """
         logger.debug(f'Requesting to add "{path}"')
         # Make sure the file is not already in the table.
         if path in self.files:
             logger.warning(f'File "{path}" already in table.')
-            gu.show_warning(
-                self,
-                self.tr("Duplicate file"),
-                self.tr('File "{path}" is already in the table.').format(path=path),
-            )
-            return
+            if not notify_on_duplicate:
+                return False
+
+            dialog = Qw.QMessageBox(self)
+            dialog.setWindowTitle(self.tr("Duplicate file"))
+            dialog.setText(self.tr('File "{path}" is already in the table.').format(path=path))
+            dialog.setStandardButtons(Qw.QMessageBox.Ok)
+            dialog.setIcon(Qw.QMessageBox.Warning)
+            ok_to_all_button = dialog.addButton(self.tr("Ok to All"), Qw.QMessageBox.ActionRole)
+
+            dialog.exec()
+            logger.warning(dialog.clickedButton() is ok_to_all_button)
+
+            return dialog.clickedButton() is not ok_to_all_button
 
         self.files[path] = imf.ImageFile(path=path)
+        return notify_on_duplicate
 
     def clear_files(self) -> None:
         """
@@ -684,6 +708,8 @@ class FileTable(CTableWidget):
         file_dialog.setOption(Qw.QFileDialog.ShowDirsOnly, False)
         file_dialog.setFileMode(Qw.QFileDialog.ExistingFiles)
 
+        self.notify_on_duplicate = True
+
         if file_dialog.exec() == Qw.QFileDialog.Accepted:
             selected_files = file_dialog.selectedFiles()
             print(selected_files)
@@ -697,6 +723,9 @@ class FileTable(CTableWidget):
         Browse for one or more folders to add to the table.
         """
         folder = Qw.QFileDialog.getExistingDirectory(self, self.tr("Select directory"))
+
+        self.notify_on_duplicate = True
+
         if folder:
             self.handleDrop(folder)
 
