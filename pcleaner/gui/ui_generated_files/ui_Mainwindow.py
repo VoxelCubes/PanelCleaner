@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'Mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.0
+## Created by: Qt User Interface Compiler version 6.7.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
-            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_add_files.setIcon(icon)
         self.action_remove_all_files = QAction(MainWindow)
@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon1 = QIcon.fromTheme(iconThemeName)
         else:
-            icon1.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_remove_all_files.setIcon(icon1)
         self.action_new_profile = QAction(MainWindow)
@@ -62,7 +62,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon2 = QIcon.fromTheme(iconThemeName)
         else:
-            icon2.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon2.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_new_profile.setIcon(icon2)
         self.action_delete_profile = QAction(MainWindow)
@@ -72,7 +72,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon3 = QIcon.fromTheme(iconThemeName)
         else:
-            icon3.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_delete_profile.setIcon(icon3)
         self.action_import_profile = QAction(MainWindow)
@@ -82,7 +82,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon4 = QIcon.fromTheme(iconThemeName)
         else:
-            icon4.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon4.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_import_profile.setIcon(icon4)
         self.action_online_documentation = QAction(MainWindow)
@@ -92,7 +92,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon5 = QIcon.fromTheme(iconThemeName)
         else:
-            icon5.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_online_documentation.setIcon(icon5)
         self.action_about = QAction(MainWindow)
@@ -102,7 +102,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon6 = QIcon.fromTheme(iconThemeName)
         else:
-            icon6.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon6.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_about.setIcon(icon6)
         self.actionView_License = QAction(MainWindow)
@@ -114,7 +114,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon7 = QIcon.fromTheme(iconThemeName)
         else:
-            icon7.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon7.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_save_profile.setIcon(icon7)
         self.action_save_profile_as = QAction(MainWindow)
@@ -124,7 +124,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon8 = QIcon.fromTheme(iconThemeName)
         else:
-            icon8.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon8.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_save_profile_as.setIcon(icon8)
         self.action_system_theme = QAction(MainWindow)
@@ -146,7 +146,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon9 = QIcon.fromTheme(iconThemeName)
         else:
-            icon9.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon9.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_add_folders.setIcon(icon9)
         self.action_delete_models = QAction(MainWindow)
@@ -159,13 +159,13 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon10 = QIcon.fromTheme(iconThemeName)
         else:
-            icon10.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon10.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_download_models.setIcon(icon10)
         self.action_donate = QAction(MainWindow)
         self.action_donate.setObjectName(u"action_donate")
         icon11 = QIcon()
-        icon11.addFile(u":/heart.svg", QSize(), QIcon.Normal, QIcon.Off)
+        icon11.addFile(u":/heart.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.action_donate.setIcon(icon11)
         self.action_temp_3 = QAction(MainWindow)
         self.action_temp_3.setObjectName(u"action_temp_3")
@@ -178,7 +178,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon12 = QIcon.fromTheme(iconThemeName)
         else:
-            icon12.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon12.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_remove_file.setIcon(icon12)
         self.action_help_translation = QAction(MainWindow)
@@ -188,7 +188,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon13 = QIcon.fromTheme(iconThemeName)
         else:
-            icon13.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon13.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_help_translation.setIcon(icon13)
         self.action_report_issue = QAction(MainWindow)
@@ -198,7 +198,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon14 = QIcon.fromTheme(iconThemeName)
         else:
-            icon14.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon14.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_report_issue.setIcon(icon14)
         self.action_simulate_exception = QAction(MainWindow)
@@ -210,7 +210,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon15 = QIcon.fromTheme(iconThemeName)
         else:
-            icon15.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon15.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.action_file_manager_extension.setIcon(icon15)
         self.centralwidget = QWidget(MainWindow)
@@ -247,7 +247,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon16 = QIcon.fromTheme(iconThemeName)
         else:
-            icon16.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon16.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.pushButton_apply_profile.setIcon(icon16)
 
@@ -268,7 +268,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon17 = QIcon.fromTheme(iconThemeName)
         else:
-            icon17.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon17.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.pushButton_reset_profile.setIcon(icon17)
 
@@ -434,7 +434,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon18 = QIcon.fromTheme(iconThemeName)
         else:
-            icon18.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon18.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.pushButton_abort.setIcon(icon18)
 
@@ -447,7 +447,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon19 = QIcon.fromTheme(iconThemeName)
         else:
-            icon19.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+            icon19.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         self.pushButton_start.setIcon(icon19)
 

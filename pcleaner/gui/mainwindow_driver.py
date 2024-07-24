@@ -48,6 +48,9 @@ ANALYTICS_COLUMNS = 74
 # TODO cache window sizes and splitter positions and table column widths
 # more of a 2.9 thing.
 
+# TODO make new ocr options for lang override.
+# OCR language: Detect per bubble|detect per image (average language)|eng|jp|es|br|de etc.
+
 
 # noinspection PyUnresolvedReferences
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
