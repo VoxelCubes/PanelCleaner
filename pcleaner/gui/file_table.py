@@ -270,7 +270,7 @@ class FileTable(CTableWidget):
             dialog.setText(self.tr('File "{path}" is already in the table.').format(path=path))
             dialog.setStandardButtons(Qw.QMessageBox.Ok)
             dialog.setIcon(Qw.QMessageBox.Warning)
-            ok_to_all_button = dialog.addButton(self.tr("Ok to All"), Qw.QMessageBox.ActionRole)
+            ok_to_all_button = dialog.addButton(self.tr("Ignore All"), Qw.QMessageBox.ActionRole)
 
             dialog.exec()
             logger.warning(dialog.clickedButton() is ok_to_all_button)

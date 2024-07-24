@@ -691,7 +691,7 @@ By default, this uses the built-in profile. However, you can change this default
     </message>
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="273"/>
-        <source>Ok to All</source>
+        <source>Ignore All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
