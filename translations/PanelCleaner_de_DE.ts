@@ -722,7 +722,7 @@ Standardmäßig wird das eingebaute Profil verwendet. Sie können diese Standard
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="273"/>
       <source>Ignore All</source>
-      <translation type="unfinished">Ignore All</translation>
+      <translation>Alle ignorieren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="423"/>
