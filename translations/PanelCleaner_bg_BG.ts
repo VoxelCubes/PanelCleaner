@@ -181,7 +181,7 @@ Removed bubbles:
       <location filename="../pcleaner/analytics.py" line="537"/>
       <source>Total
 </source>
-      <translation>Сума
+      <translation>Общо
 </translation>
     </message>
     <message>
@@ -520,7 +520,7 @@ An AI-powered tool to clean manga panels.</source>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="42"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Бележка: Име &quot;{name}&quot; бе скрит</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="64"/>
@@ -986,7 +986,7 @@ Please enable inpainting in the profile settings and try again.</source>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="46"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Бележка: Име &quot;{name}&quot; бе скрит</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="64"/>
@@ -1817,22 +1817,22 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
     <message>
       <location filename="../ui_files/OcrReview.ui" line="224"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Приближаване</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="241"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Отдалечаванe</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="258"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Нулиране на мащаба</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="275"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Увеличаване, за да се побере</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="293"/>
@@ -1877,7 +1877,7 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
     <message>
       <location filename="../ui_files/OcrReview.ui" line="410"/>
       <source>Reset All</source>
-      <translation type="unfinished">Reset All</translation>
+      <translation>#Нулирай в-ки</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="431"/>
