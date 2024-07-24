@@ -430,12 +430,12 @@ Páginas con fallos / total:
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="53"/>
       <source>Japanese</source>
-      <translation type="unfinished">Japanese</translation>
+      <translation>Japonés</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="54"/>
       <source>English</source>
-      <translation type="unfinished">English</translation>
+      <translation>Inglés</translation>
     </message>
   </context>
   <context>
@@ -521,7 +521,7 @@ Una herramienta de IA para limpiar paneles de manga.</translation>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="42"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Nota: El nombre &quot;{name}&quot; estaba oculto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="64"/>
@@ -987,7 +987,7 @@ Por favor, active la función inpainting en la configuración del perfil e inté
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="46"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Nota: El nombre &quot;{name}&quot; estaba oculto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="64"/>
@@ -1806,32 +1806,32 @@ Consulte las instrucciones para instalar Tesseract correctamente &lt;a href=&quo
     <message>
       <location filename="../ui_files/OcrReview.ui" line="99"/>
       <source>Previous image</source>
-      <translation type="unfinished">Previous image</translation>
+      <translation>Imagen anterior</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="116"/>
       <source>Next image</source>
-      <translation type="unfinished">Next image</translation>
+      <translation>Imagen siguiente</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="224"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Ampliar</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="241"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Alejar</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="258"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Restablecer zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="275"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Zoom para ajustar</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="293"/>
@@ -1876,7 +1876,7 @@ Consulte las instrucciones para instalar Tesseract correctamente &lt;a href=&quo
     <message>
       <location filename="../ui_files/OcrReview.ui" line="410"/>
       <source>Reset All</source>
-      <translation type="unfinished">Reset All</translation>
+      <translation>Restablecer todo</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="431"/>
@@ -1929,7 +1929,7 @@ Consulte las instrucciones para instalar Tesseract correctamente &lt;a href=&quo
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="623"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Nuevo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="655"/>
