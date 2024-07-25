@@ -1,3 +1,4 @@
+import platform
 from pathlib import Path
 
 import PySide6.QtCore as Qc
@@ -246,8 +247,8 @@ class DifferenceViewer(iv.ImageViewer):
         self.lower_image.setOffset(0, 0)
         self.upper_image.setOffset(0, 0)
 
-        lower_image = cv2.imread(str(lower))
-        upper_image = cv2.imread(str(upper))
+        lower_image = cv2_imread(str(lower))
+        upper_image = cv2_imread(str(upper))
 
         # Apply the difference filter using OpenCV
         difference_image = cv2.absdiff(lower_image, upper_image)
@@ -337,7 +338,7 @@ class OverlayViewer(iv.ImageViewer):
         self.lower_image.setOffset(0, 0)
         self.upper_image.setOffset(0, 0)
 
-        # lower_image = cv2.imread(str(lower))
+        # lower_image = cv2_imread(str(lower))
         lower_image = Qg.QImage(str(lower))
         lower_pixmap = Qg.QPixmap.fromImage(lower_image)
         self.lower_image.setPixmap(lower_pixmap)
@@ -373,7 +374,7 @@ class OverlayViewer(iv.ImageViewer):
         merged_mask = None
 
         for i, mask_path in enumerate(masks):
-            mask_image = cv2.imread(
+            mask_image = cv2_imread(
                 str(mask_path), cv2.IMREAD_UNCHANGED
             )  # Ensure alpha channel is loaded.
 
@@ -450,3 +451,16 @@ class OverlayViewer(iv.ImageViewer):
     def handle_slider_change(self, value: int) -> None:
         self.alpha = value / 100
         self.update_alpha()
+
+
+def cv2_imread(image_path: str, read_type=cv2.IMREAD_COLOR):
+    """
+    Windows is a retarded operating system that can't handle unicode correctly, breaking the
+    cv2 imread function. This is a stupid workaround for that. At least it is about the
+    same speed, only slightly slower.
+    """
+
+    if platform.system() == "Windows":
+        return cv2.imdecode(np.fromfile(image_path, dtype=np.uint8), read_type)
+    else:
+        return cv2.imread(image_path)
