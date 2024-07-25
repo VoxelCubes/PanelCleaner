@@ -532,11 +532,20 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def enable_running_cleaner(self) -> None:
         self.pushButton_start.setEnabled(True)
         self.pushButton_abort.hide()
+        # Enable processing options.
+        self.groupBox_output_options.setEnabled(True)
+        self.radioButton_cleaning.setEnabled(True)
+        self.radioButton_ocr.setEnabled(True)
 
     def disable_running_cleaner(self) -> None:
         self.pushButton_start.setEnabled(False)
         self.pushButton_abort.show()
         self.pushButton_abort.setEnabled(True)
+
+    def disable_processing_options(self) -> None:
+        self.groupBox_output_options.setEnabled(False)
+        self.radioButton_cleaning.setEnabled(False)
+        self.radioButton_ocr.setEnabled(False)
 
     def abort_button_on_click(self) -> None:
         self.pushButton_abort.setEnabled(False)
@@ -1305,6 +1314,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Start cleaning all files in the table.
         """
         self.disable_running_cleaner()
+        self.disable_processing_options()
         # Figure out what outputs are requested, depending on the checkboxes and the profile.
         request_cleaned = self.checkBox_save_clean.isChecked()
         request_mask = self.checkBox_save_mask.isChecked()
@@ -1556,6 +1566,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         # This is the point of no return, so disable the start button.
         self.disable_running_cleaner()
+        self.disable_processing_options()
 
         image_files = self.file_table.get_image_files()
 
