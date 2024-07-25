@@ -624,7 +624,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         # Add the new bubble to the current image.
         ocr_results = self.current_image_ocr_results()
-        image_path = ocr_results[0].path
+        image_path = self.image_viewer.loaded_image_path
         # Insert it after the currently selected box, if any, otherwise at the end.
         selected_row = self.tableWidget_ocr.currentRow()
         if selected_row == -1:
@@ -750,11 +750,6 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         window_width = self.width()
         self.splitter.setSizes([window_width // 3, 2 * window_width // 3])
 
-        self.image_list.setIconSize(Qc.QSize(THUMBNAIL_SIZE, THUMBNAIL_SIZE))
-        # Use a logarithmic scale to distribute the values.
-        self.horizontalSlider_icon_size.setValue(self.from_log_scale(THUMBNAIL_SIZE))
-        self.horizontalSlider_icon_size.valueChanged.connect(self.update_icon_size)
-
         label_text = f_plural(len(self.images), self.tr("image"), self.tr("images"))
         self.label_image_count.setText(f"{len(self.images)} {label_text}")
 
@@ -776,6 +771,10 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
                     self.tr("Loading Error"),
                     self.tr("Failed to load image '{path}'").format(path=output_path),
                 )
+
+        # Use a logarithmic scale to distribute the values.
+        self.horizontalSlider_icon_size.valueChanged.connect(self.update_icon_size)
+        self.horizontalSlider_icon_size.setValue(self.from_log_scale(THUMBNAIL_SIZE))
 
         # Sanity check.
         if len(self.images) != self.image_list.count():
@@ -812,6 +811,15 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         """
         size = self.to_log_scale(size)
         self.image_list.setIconSize(Qc.QSize(size, size))
+        for index, image in enumerate(self.images):
+            item = self.image_list.item(index)
+            text = image.path.name
+            self.elide_text(item, text, int(size * 0.9))
+
+    def elide_text(self, item, text, width):
+        font_metrics = Qg.QFontMetrics(self.font())
+        elided_text = font_metrics.elidedText(text, Qc.Qt.ElideLeft, width)
+        item.setText(elided_text)
 
     @Slot(Qw.QListWidgetItem, Qw.QListWidgetItem)
     @Slot(Qw.QListWidgetItem)

@@ -52,8 +52,6 @@ class SwipeViewer(iv.ImageViewer):
 
         self.image_left.setOffset(0, 0)
         self.image_right.setOffset(0, 0)
-        # self.image_left.setOffset(-0.5, -0.5)
-        # self.image_right.setOffset(-0.5, -0.5)
 
         self.raw_image_left = Qg.QImage(str(left))
         pixmap = Qg.QPixmap.fromImage(self.raw_image_left)
@@ -67,6 +65,9 @@ class SwipeViewer(iv.ImageViewer):
             self.image_item.pixmap().size().width(),
             self.image_item.pixmap().size().height(),
         )
+
+        self.reset_scene_rect()
+        self.update_smoothing()
 
         # Load the pixel dimensions into the slider.
         # The slider holds the exact number of pixels to show on the left side.
@@ -171,8 +172,8 @@ class OnionViewer(iv.ImageViewer):
         # Set the parent's image item for zoom purposes.
         self.image_item = self.lower_image
 
-        self.lower_image.setOffset(-0.5, -0.5)
-        self.upper_image.setOffset(-0.5, -0.5)
+        self.lower_image.setOffset(0, 0)
+        self.upper_image.setOffset(0, 0)
 
         lower_image = Qg.QImage(str(lower))
         pixmap = Qg.QPixmap.fromImage(lower_image)
@@ -187,6 +188,8 @@ class OnionViewer(iv.ImageViewer):
             self.image_item.pixmap().size().height(),
         )
 
+        self.reset_scene_rect()
+        self.update_smoothing()
         self.update_alpha()
 
     def update_alpha(self) -> None:
@@ -240,8 +243,8 @@ class DifferenceViewer(iv.ImageViewer):
         # Set the parent's image item for zoom purposes.
         self.image_item = self.lower_image
 
-        self.lower_image.setOffset(-0.5, -0.5)
-        self.upper_image.setOffset(-0.5, -0.5)
+        self.lower_image.setOffset(0, 0)
+        self.upper_image.setOffset(0, 0)
 
         lower_image = cv2.imread(str(lower))
         upper_image = cv2.imread(str(upper))
@@ -261,6 +264,8 @@ class DifferenceViewer(iv.ImageViewer):
             self.image_item.pixmap().size().height(),
         )
 
+        self.reset_scene_rect()
+        self.update_smoothing()
         self.update_alpha()
 
     def cv2_to_pixmap(self, cv2_img) -> Qg.QPixmap:
@@ -329,8 +334,8 @@ class OverlayViewer(iv.ImageViewer):
         # Set the parent's image item for zoom purposes.
         self.image_item = self.lower_image
 
-        self.lower_image.setOffset(-0.5, -0.5)
-        self.upper_image.setOffset(-0.5, -0.5)
+        self.lower_image.setOffset(0, 0)
+        self.upper_image.setOffset(0, 0)
 
         # lower_image = cv2.imread(str(lower))
         lower_image = Qg.QImage(str(lower))
@@ -341,6 +346,7 @@ class OverlayViewer(iv.ImageViewer):
             self.image_item.pixmap().size().width(),
             self.image_item.pixmap().size().height(),
         )
+        self.reset_scene_rect()
 
         # Merge masks
         merged_mask = self.merge_masks(masks, self.image_dimensions)
@@ -352,6 +358,7 @@ class OverlayViewer(iv.ImageViewer):
         upper_pixmap = self.cv2_to_pixmap(recolored_image)
         self.upper_image.setPixmap(upper_pixmap)
 
+        self.update_smoothing()
         self.update_alpha()
 
     @staticmethod

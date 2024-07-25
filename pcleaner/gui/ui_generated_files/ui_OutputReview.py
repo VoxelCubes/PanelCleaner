@@ -111,6 +111,7 @@ class Ui_OutputReview(object):
         self.image_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.image_list.setProperty("showDropIndicator", False)
         self.image_list.setDragDropMode(QAbstractItemView.NoDragDrop)
+        self.image_list.setTextElideMode(Qt.ElideLeft)
         self.image_list.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.image_list.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.image_list.setMovement(QListView.Static)

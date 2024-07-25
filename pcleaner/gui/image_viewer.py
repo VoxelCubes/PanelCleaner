@@ -68,22 +68,32 @@ class ImageViewer(Qw.QGraphicsView):
             self.image_item = Qw.QGraphicsPixmapItem()
             self.scene.addItem(self.image_item)
             # Move the image item by -0.5, -0.5 to make it align with the scene's
-            # origin (0, 0).
             self.image_item.setOffset(-0.5, -0.5)
 
             image = Qg.QImage(str(image_path))
             pixmap = Qg.QPixmap.fromImage(image)
             self.image_item.setPixmap(pixmap)
-            self.setSceneRect(pixmap.rect())
+            self.reset_scene_rect()
             dim = self.image_item.pixmap().size()
             self.image_dimensions = (dim.width(), dim.height())
-            self.zoom(1)
-
+            self.update_smoothing()
         else:
             # Display "nothing" message when no image is set
             self.scene.clear()
             self.image_dimensions = None
             self.image_item = None
+
+    def reset_scene_rect(self) -> None:
+        self.setSceneRect(self.image_item.pixmap().rect())
+
+    def update_smoothing(self) -> None:
+        # Do no smoothing if zooming is, so when a pixel covers more than 1 pixel.
+        if self.zoom_factor > 1:
+            self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, False)
+            self.set_transformation_mode(Qt.FastTransformation)
+        else:
+            self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, True)
+            self.set_transformation_mode(Qt.SmoothTransformation)
 
     def wheelEvent(self, event: Qg.QWheelEvent) -> None:
         if Qt.ControlModifier & event.modifiers():
@@ -211,12 +221,7 @@ class ImageViewer(Qw.QGraphicsView):
 
         self.zoom_factor = proposed_zoom_factor
 
-        if self.zoom_factor >= 1:
-            self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, False)
-            self.set_transformation_mode(Qt.FastTransformation)
-        else:
-            self.setRenderHint(Qg.QPainter.SmoothPixmapTransform, True)
-            self.set_transformation_mode(Qt.SmoothTransformation)
+        self.update_smoothing()
         self.setTransform(Qg.QTransform().scale(self.zoom_factor, self.zoom_factor))
 
         if not suppress_signals:
