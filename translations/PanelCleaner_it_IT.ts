@@ -82,15 +82,15 @@
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="427"/>
       <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
-      <translation type="unfinished">Error downloading file from url: {url}
+      <translation>Errore nello scaricare il file dall'url: {url}
 Failed to save the file to {save_path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="436"/>
       <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-The file content is different from expected.</translation>
+      <translation>Errore nello scaricare il file dall'url: {url}
+Il contenuto del file è diverso da quello previsto.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="65"/>
@@ -102,12 +102,12 @@ The file content is different from expected.</translation>
       <location filename="../pcleaner/analytics.py" line="427"/>
       <location filename="../pcleaner/analytics.py" line="570"/>
       <source>N/A</source>
-      <translation type="unfinished">N/A</translation>
+      <translation>N/A</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="78"/>
       <source>OCR Analytics</source>
-      <translation type="unfinished">OCR Analytics</translation>
+      <translation>Analisi OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="84"/>
