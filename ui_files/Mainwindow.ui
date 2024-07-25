@@ -423,7 +423,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_3">
+           <widget class="QGroupBox" name="groupBox_output_options">
             <property name="title">
              <string>Output</string>
             </property>
@@ -705,7 +705,7 @@
                         <string>Plain Text</string>
                        </property>
                        <property name="checked">
-                        <bool>true</bool>
+                        <bool>false</bool>
                        </property>
                       </widget>
                      </item>
@@ -713,6 +713,9 @@
                       <widget class="QRadioButton" name="radioButton_ocr_csv">
                        <property name="text">
                         <string>CSV File</string>
+                       </property>
+                       <property name="checked">
+                        <bool>true</bool>
                        </property>
                       </widget>
                      </item>

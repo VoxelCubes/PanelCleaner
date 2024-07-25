@@ -459,11 +459,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.groupBox_4)
 
-        self.groupBox_3 = QGroupBox(self.frame_output)
-        self.groupBox_3.setObjectName(u"groupBox_3")
-        self.verticalLayout_5 = QVBoxLayout(self.groupBox_3)
+        self.groupBox_output_options = QGroupBox(self.frame_output)
+        self.groupBox_output_options.setObjectName(u"groupBox_output_options")
+        self.verticalLayout_5 = QVBoxLayout(self.groupBox_output_options)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.stackedWidget_output = QStackedWidget(self.groupBox_3)
+        self.stackedWidget_output = QStackedWidget(self.groupBox_output_options)
         self.stackedWidget_output.setObjectName(u"stackedWidget_output")
         self.page_cleaning = QWidget()
         self.page_cleaning.setObjectName(u"page_cleaning")
@@ -611,12 +611,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setObjectName(u"verticalLayout_15")
         self.radioButton_ocr_text = QRadioButton(self.page_ocr)
         self.radioButton_ocr_text.setObjectName(u"radioButton_ocr_text")
-        self.radioButton_ocr_text.setChecked(True)
+        self.radioButton_ocr_text.setChecked(False)
 
         self.verticalLayout_15.addWidget(self.radioButton_ocr_text)
 
         self.radioButton_ocr_csv = QRadioButton(self.page_ocr)
         self.radioButton_ocr_csv.setObjectName(u"radioButton_ocr_csv")
+        self.radioButton_ocr_csv.setChecked(True)
 
         self.verticalLayout_15.addWidget(self.radioButton_ocr_csv)
 
@@ -704,7 +705,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.stackedWidget_output)
 
 
-        self.horizontalLayout_3.addWidget(self.groupBox_3)
+        self.horizontalLayout_3.addWidget(self.groupBox_output_options)
 
         self.horizontalLayout_3.setStretch(0, 1)
         self.horizontalLayout_3.setStretch(1, 3)
@@ -919,7 +920,7 @@ class Ui_MainWindow(object):
         self.radioButton_ocr.setText(QCoreApplication.translate("MainWindow", u"OCR", None))
         self.pushButton_abort.setText(QCoreApplication.translate("MainWindow", u"Abort", None))
         self.pushButton_start.setText(QCoreApplication.translate("MainWindow", u"Start", None))
-        self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Output", None))
+        self.groupBox_output_options.setTitle(QCoreApplication.translate("MainWindow", u"Output", None))
         self.checkBox_save_clean.setText(QCoreApplication.translate("MainWindow", u"Cleaned Image", None))
         self.checkBox_save_mask.setText(QCoreApplication.translate("MainWindow", u"Mask", None))
         self.checkBox_save_text.setText(QCoreApplication.translate("MainWindow", u"Isolated Text", None))
