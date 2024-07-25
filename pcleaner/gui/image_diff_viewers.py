@@ -463,4 +463,4 @@ def cv2_imread(image_path: str, read_type=cv2.IMREAD_COLOR):
     if platform.system() == "Windows":
         return cv2.imdecode(np.fromfile(image_path, dtype=np.uint8), read_type)
     else:
-        return cv2.imread(image_path)
+        return cv2.imread(image_path, read_type)
