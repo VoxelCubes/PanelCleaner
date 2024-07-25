@@ -1778,87 +1778,87 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="224"/>
+        <location filename="../ui_files/OcrReview.ui" line="227"/>
         <source>Zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="241"/>
+        <location filename="../ui_files/OcrReview.ui" line="244"/>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="258"/>
+        <location filename="../ui_files/OcrReview.ui" line="261"/>
         <source>Reset zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="275"/>
+        <location filename="../ui_files/OcrReview.ui" line="278"/>
         <source>Zoom to fit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="293"/>
+        <location filename="../ui_files/OcrReview.ui" line="296"/>
         <source>With Boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="298"/>
+        <location filename="../ui_files/OcrReview.ui" line="301"/>
         <source>Original</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="313"/>
+        <location filename="../ui_files/OcrReview.ui" line="316"/>
         <source>Move box order up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="330"/>
+        <location filename="../ui_files/OcrReview.ui" line="333"/>
         <source>Move box order down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="347"/>
+        <location filename="../ui_files/OcrReview.ui" line="350"/>
         <source>Add a new box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="363"/>
+        <location filename="../ui_files/OcrReview.ui" line="366"/>
         <source>Delete current box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="380"/>
+        <location filename="../ui_files/OcrReview.ui" line="383"/>
         <source>Recover this deleted box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="393"/>
+        <location filename="../ui_files/OcrReview.ui" line="396"/>
         <source>Reset changes to this image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="410"/>
+        <location filename="../ui_files/OcrReview.ui" line="413"/>
         <source>Reset All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="431"/>
+        <location filename="../ui_files/OcrReview.ui" line="434"/>
         <source>OCR new boxes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="441"/>
+        <location filename="../ui_files/OcrReview.ui" line="444"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="498"/>
+        <location filename="../ui_files/OcrReview.ui" line="501"/>
         <source>Box</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OcrReview.ui" line="503"/>
+        <location filename="../ui_files/OcrReview.ui" line="506"/>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1916,22 +1916,22 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/ocr_review_driver.py" line="758"/>
+        <location filename="../pcleaner/gui/ocr_review_driver.py" line="753"/>
         <source>image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/ocr_review_driver.py" line="758"/>
+        <location filename="../pcleaner/gui/ocr_review_driver.py" line="753"/>
         <source>images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/ocr_review_driver.py" line="776"/>
+        <location filename="../pcleaner/gui/ocr_review_driver.py" line="771"/>
         <source>Loading Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/ocr_review_driver.py" line="777"/>
+        <location filename="../pcleaner/gui/ocr_review_driver.py" line="772"/>
         <source>Failed to load image &apos;{path}&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1954,52 +1954,52 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="224"/>
+        <location filename="../ui_files/OutputReview.ui" line="227"/>
         <source>Zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="241"/>
+        <location filename="../ui_files/OutputReview.ui" line="244"/>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="258"/>
+        <location filename="../ui_files/OutputReview.ui" line="261"/>
         <source>Reset zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="275"/>
+        <location filename="../ui_files/OutputReview.ui" line="278"/>
         <source>Zoom to fit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="293"/>
+        <location filename="../ui_files/OutputReview.ui" line="296"/>
         <source>Side-by-Side</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="298"/>
+        <location filename="../ui_files/OutputReview.ui" line="301"/>
         <source>Swipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="303"/>
+        <location filename="../ui_files/OutputReview.ui" line="306"/>
         <source>Onion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="308"/>
+        <location filename="../ui_files/OutputReview.ui" line="311"/>
         <source>Difference</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="313"/>
+        <location filename="../ui_files/OutputReview.ui" line="316"/>
         <source>Overlay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/OutputReview.ui" line="321"/>
+        <location filename="../ui_files/OutputReview.ui" line="324"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2017,22 +2017,22 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/output_review_driver.py" line="178"/>
+        <location filename="../pcleaner/gui/output_review_driver.py" line="173"/>
         <source>image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/output_review_driver.py" line="178"/>
+        <location filename="../pcleaner/gui/output_review_driver.py" line="173"/>
         <source>images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/output_review_driver.py" line="196"/>
+        <location filename="../pcleaner/gui/output_review_driver.py" line="191"/>
         <source>Loading Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/output_review_driver.py" line="197"/>
+        <location filename="../pcleaner/gui/output_review_driver.py" line="192"/>
         <source>Failed to load image &apos;{path}&apos;</source>
         <translation type="unfinished"></translation>
     </message>

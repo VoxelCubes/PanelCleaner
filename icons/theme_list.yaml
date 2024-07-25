@@ -8,6 +8,8 @@ Files:
       - application-menu
       - arrow-left
       - arrow-right
+      - arrow-up
+      - arrow-down
       - configure
       - dialog-cancel
       - dialog-ok-apply
