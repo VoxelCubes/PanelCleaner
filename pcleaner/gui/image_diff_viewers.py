@@ -54,11 +54,11 @@ class SwipeViewer(iv.ImageViewer):
         self.image_left.setOffset(0, 0)
         self.image_right.setOffset(0, 0)
 
-        self.raw_image_left = Qg.QImage(str(left))
+        self.raw_image_left = iv.load_image_with_orientation(left)
         pixmap = Qg.QPixmap.fromImage(self.raw_image_left)
         self.image_left.setPixmap(pixmap)
 
-        self.raw_image_right = Qg.QImage(str(right))
+        self.raw_image_right = iv.load_image_with_orientation(right)
         pixmap = Qg.QPixmap.fromImage(self.raw_image_right)
         self.image_right.setPixmap(pixmap)
 
@@ -176,11 +176,11 @@ class OnionViewer(iv.ImageViewer):
         self.lower_image.setOffset(0, 0)
         self.upper_image.setOffset(0, 0)
 
-        lower_image = Qg.QImage(str(lower))
+        lower_image = iv.load_image_with_orientation(lower)
         pixmap = Qg.QPixmap.fromImage(lower_image)
         self.lower_image.setPixmap(pixmap)
 
-        upper_image = Qg.QImage(str(upper))
+        upper_image = iv.load_image_with_orientation(upper)
         pixmap = Qg.QPixmap.fromImage(upper_image)
         self.upper_image.setPixmap(pixmap)
 
@@ -339,7 +339,7 @@ class OverlayViewer(iv.ImageViewer):
         self.upper_image.setOffset(0, 0)
 
         # lower_image = cv2_imread(str(lower))
-        lower_image = Qg.QImage(str(lower))
+        lower_image = iv.load_image_with_orientation(lower)
         lower_pixmap = Qg.QPixmap.fromImage(lower_image)
         self.lower_image.setPixmap(lower_pixmap)
 

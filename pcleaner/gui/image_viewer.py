@@ -70,7 +70,7 @@ class ImageViewer(Qw.QGraphicsView):
             # Move the image item by -0.5, -0.5 to make it align with the scene's
             self.image_item.setOffset(-0.5, -0.5)
 
-            image = Qg.QImage(str(image_path))
+            image = load_image_with_orientation(image_path)
             pixmap = Qg.QPixmap.fromImage(image)
             self.image_item.setPixmap(pixmap)
             self.reset_scene_rect()
@@ -419,3 +419,36 @@ class BubbleImageViewer(ImageViewer):
                 )
             )
             painter.drawRect(Qc.QRect(self._new_bubble_start, self._new_bubble_end))
+
+
+def load_image_with_orientation(image_path: Path | str) -> Qg.QImage:
+    """
+    This exists to accommodate images with embedded rotation tags.
+
+    :param image_path: The image path.
+    :return: A QImage object.
+    """
+    reader = Qg.QImageReader(str(image_path))
+    image = reader.read()
+
+    if not image.isNull():
+        transformation = reader.transformation()
+        # Create the appropriate QTransform
+        if transformation == Qg.QImageIOHandler.TransformationMirror:
+            transform = Qg.QTransform().scale(-1, 1)
+        elif transformation == Qg.QImageIOHandler.TransformationFlip:
+            transform = Qg.QTransform().scale(1, -1)
+        elif transformation == Qg.QImageIOHandler.TransformationRotate180:
+            transform = Qg.QTransform().rotate(180)
+        elif transformation == Qg.QImageIOHandler.TransformationRotate90:
+            transform = Qg.QTransform().rotate(90)
+        elif transformation == Qg.QImageIOHandler.TransformationRotate270:
+            transform = Qg.QTransform().rotate(270)
+        else:
+            transform = Qg.QTransform()
+
+        # Apply the transformation if needed
+        if not transform.isIdentity():
+            image = image.transformed(transform, Qt.SmoothTransformation)
+
+    return image

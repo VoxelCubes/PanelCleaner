@@ -457,6 +457,12 @@
          </property>
          <widget class="BubbleImageViewer" name="image_viewer"/>
          <widget class="CTableWidget" name="tableWidget_ocr">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="acceptDrops">
            <bool>true</bool>
           </property>
