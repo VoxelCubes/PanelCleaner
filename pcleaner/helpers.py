@@ -250,7 +250,13 @@ def send_desktop_notification(
     :param urgency: [Optional] The urgency level of the notification.
     """
     if platform.system() == "Linux":
-        import dbus
+        try:
+            import dbus
+        except ImportError:
+            logger.error(
+                "dbus-python not installed. Please install it to have desktop notifications."
+            )
+            return
 
         item = "org.freedesktop.Notifications"
         notfy_intf = dbus.Interface(
