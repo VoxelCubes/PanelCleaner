@@ -8,6 +8,7 @@ import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Slot
 from loguru import logger
 from PIL import Image
+from natsort import natsorted
 
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
@@ -108,6 +109,8 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         self.ocr_analytics = ocr_analytics
         self.ocr_model = ocr_model
         self.theme_is_dark = theme_is_dark
+
+        self.sort_images_by_path()
 
         self.awaiting_user_input = False
 
@@ -690,6 +693,14 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         self.load_ocr_results(ocr_results)
 
     # Copied shit from OutputReview ================================================================
+
+    def sort_images_by_path(self) -> None:
+        """
+        Sort the images by their file path using natsort.
+        This is necessary because the parallel batch processing will not preserve the order when
+        many pictures are processed at once.
+        """
+        self.images = natsorted(self.images, key=lambda x: x.path)
 
     def closeEvent(self, event: Qg.QCloseEvent) -> None:
         if self.confirm_closing:
