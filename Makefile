@@ -121,7 +121,7 @@ clean:
 black-format:
 	find $(BLACK_TARGET_DIR) -type f -name '*.py' | grep -Ev $(BLACK_EXCLUDE_PATTERN) | xargs black --line-length $(BLACK_LINE_LENGTH)
 
-release:
+release: confirm
 	$(PYTHON) -m twine upload $(BUILD_DIR)*
 
 build-elf:
@@ -202,5 +202,14 @@ build-app-image:
 
 	@echo "AppImage built successfully."
 
+confirm:
+	@read -p "Are you sure you want to proceed? (yes/no): " CONFIRM; \
+	if [ "$$CONFIRM" = "yes" ]; then \
+		echo "Proceeding..."; \
+	else \
+		echo "Aborted by user."; \
+		exit 1; \
+	fi
 
-.PHONY: clean build build-cli build-both install fresh-install release refresh-i18n compile-i18n compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda, build-elf, build-app-image
+
+.PHONY: confirm clean build build-cli build-both install fresh-install release refresh-i18n compile-i18n compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda, build-elf, build-app-image
