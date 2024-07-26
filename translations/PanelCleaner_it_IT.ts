@@ -113,14 +113,14 @@ Il contenuto del file è diverso da quello previsto.</translation>
       <location filename="../pcleaner/analytics.py" line="84"/>
       <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
-      <translation type="unfinished">Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
+      <translation>Numero di riquadri: {num_boxes} | Numero di riquadri piccoli: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="93"/>
       <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
-      <translation type="unfinished">Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
+      <translation>Numero di riquadri rimossi: {num_removed} ({removed_box_ratio} totale, {removed_among_small_ratio} di riquadri piccoli)
 </translation>
     </message>
     <message>
@@ -128,15 +128,15 @@ Il contenuto del file è diverso da quello previsto.</translation>
       <source>
 Small box sizes:
 </source>
-      <translation type="unfinished">
-Small box sizes:
+      <translation>
+Riquadri piccoli:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="108"/>
       <source>No not-removed small boxes found.
 </source>
-      <translation type="unfinished">No not-removed small boxes found.
+      <translation>Non si è trovato nessun riquadro piccolo non rimosso.
 </translation>
     </message>
     <message>
@@ -144,33 +144,33 @@ Small box sizes:
       <source>
 Removed bubbles:
 </source>
-      <translation type="unfinished">
-Removed bubbles:
+      <translation>
+Fumetti puliti:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="126"/>
       <source>Page {path}: {text}
 </source>
-      <translation type="unfinished">Page {path}: {text}
+      <translation>Pagina {path}: {text}
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="170"/>
       <source>Small boxes</source>
-      <translation type="unfinished">Small boxes</translation>
+      <translation>Riquadri piccoli</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="172"/>
       <source>Removed boxes</source>
-      <translation type="unfinished">Removed boxes</translation>
+      <translation>Fumetti puliti</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="211"/>
       <location filename="../pcleaner/analytics.py" line="230"/>
       <location filename="../pcleaner/analytics.py" line="351"/>
       <source>Failed</source>
-      <translation type="unfinished">Failed</translation>
+      <translation>Operazione non riusciuta</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="226"/>
@@ -1814,87 +1814,87 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
       <translation type="unfinished">Next image</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="224"/>
+      <location filename="../ui_files/OcrReview.ui" line="227"/>
       <source>Zoom in</source>
       <translation type="unfinished">Zoom in</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="241"/>
+      <location filename="../ui_files/OcrReview.ui" line="244"/>
       <source>Zoom out</source>
       <translation type="unfinished">Zoom out</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="258"/>
+      <location filename="../ui_files/OcrReview.ui" line="261"/>
       <source>Reset zoom</source>
       <translation type="unfinished">Reset zoom</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="275"/>
+      <location filename="../ui_files/OcrReview.ui" line="278"/>
       <source>Zoom to fit</source>
       <translation type="unfinished">Zoom to fit</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="293"/>
+      <location filename="../ui_files/OcrReview.ui" line="296"/>
       <source>With Boxes</source>
       <translation type="unfinished">With Boxes</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="298"/>
+      <location filename="../ui_files/OcrReview.ui" line="301"/>
       <source>Original</source>
       <translation type="unfinished">Original</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="313"/>
+      <location filename="../ui_files/OcrReview.ui" line="316"/>
       <source>Move box order up</source>
       <translation type="unfinished">Move box order up</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="330"/>
+      <location filename="../ui_files/OcrReview.ui" line="333"/>
       <source>Move box order down</source>
       <translation type="unfinished">Move box order down</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="347"/>
+      <location filename="../ui_files/OcrReview.ui" line="350"/>
       <source>Add a new box</source>
       <translation type="unfinished">Add a new box</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="363"/>
+      <location filename="../ui_files/OcrReview.ui" line="366"/>
       <source>Delete current box</source>
       <translation type="unfinished">Delete current box</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="380"/>
+      <location filename="../ui_files/OcrReview.ui" line="383"/>
       <source>Recover this deleted box</source>
       <translation type="unfinished">Recover this deleted box</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="393"/>
+      <location filename="../ui_files/OcrReview.ui" line="396"/>
       <source>Reset changes to this image</source>
       <translation type="unfinished">Reset changes to this image</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="410"/>
+      <location filename="../ui_files/OcrReview.ui" line="413"/>
       <source>Reset All</source>
       <translation type="unfinished">Reset All</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="431"/>
+      <location filename="../ui_files/OcrReview.ui" line="434"/>
       <source>OCR new boxes:</source>
       <translation type="unfinished">OCR new boxes:</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="441"/>
+      <location filename="../ui_files/OcrReview.ui" line="444"/>
       <source>Done</source>
       <translation type="unfinished">Done</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="498"/>
+      <location filename="../ui_files/OcrReview.ui" line="501"/>
       <source>Box</source>
       <translation type="unfinished">Box</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="503"/>
+      <location filename="../ui_files/OcrReview.ui" line="506"/>
       <source>Text</source>
       <translation type="unfinished">Text</translation>
     </message>
@@ -1952,22 +1952,22 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
       <translation type="unfinished">Are you sure you want to finish the review?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="758"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="753"/>
       <source>image</source>
       <translation type="unfinished">image</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="758"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="753"/>
       <source>images</source>
       <translation type="unfinished">images</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="776"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="771"/>
       <source>Loading Error</source>
       <translation type="unfinished">Loading Error</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="777"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="772"/>
       <source>Failed to load image &apos;{path}&apos;</source>
       <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
     </message>
@@ -1990,52 +1990,52 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
       <translation type="unfinished">Next image</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="224"/>
+      <location filename="../ui_files/OutputReview.ui" line="227"/>
       <source>Zoom in</source>
       <translation type="unfinished">Zoom in</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="241"/>
+      <location filename="../ui_files/OutputReview.ui" line="244"/>
       <source>Zoom out</source>
       <translation type="unfinished">Zoom out</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="258"/>
+      <location filename="../ui_files/OutputReview.ui" line="261"/>
       <source>Reset zoom</source>
       <translation type="unfinished">Reset zoom</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="275"/>
+      <location filename="../ui_files/OutputReview.ui" line="278"/>
       <source>Zoom to fit</source>
       <translation type="unfinished">Zoom to fit</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="293"/>
+      <location filename="../ui_files/OutputReview.ui" line="296"/>
       <source>Side-by-Side</source>
       <translation type="unfinished">Side-by-Side</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="298"/>
+      <location filename="../ui_files/OutputReview.ui" line="301"/>
       <source>Swipe</source>
       <translation type="unfinished">Swipe</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="303"/>
+      <location filename="../ui_files/OutputReview.ui" line="306"/>
       <source>Onion</source>
       <translation type="unfinished">Onion</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="308"/>
+      <location filename="../ui_files/OutputReview.ui" line="311"/>
       <source>Difference</source>
       <translation type="unfinished">Difference</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="313"/>
+      <location filename="../ui_files/OutputReview.ui" line="316"/>
       <source>Overlay</source>
       <translation type="unfinished">Overlay</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="321"/>
+      <location filename="../ui_files/OutputReview.ui" line="324"/>
       <source>Done</source>
       <translation type="unfinished">Done</translation>
     </message>
@@ -2053,22 +2053,22 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
       <translation type="unfinished">Are you sure you want to finish the review?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/output_review_driver.py" line="178"/>
+      <location filename="../pcleaner/gui/output_review_driver.py" line="173"/>
       <source>image</source>
       <translation type="unfinished">image</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/output_review_driver.py" line="178"/>
+      <location filename="../pcleaner/gui/output_review_driver.py" line="173"/>
       <source>images</source>
       <translation type="unfinished">images</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/output_review_driver.py" line="196"/>
+      <location filename="../pcleaner/gui/output_review_driver.py" line="191"/>
       <source>Loading Error</source>
       <translation type="unfinished">Loading Error</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/output_review_driver.py" line="197"/>
+      <location filename="../pcleaner/gui/output_review_driver.py" line="192"/>
       <source>Failed to load image &apos;{path}&apos;</source>
       <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
     </message>
