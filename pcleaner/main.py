@@ -112,20 +112,16 @@ Examples:
 """
 
 import sys
-import csv
-import itertools
 import multiprocessing
 import platform
 import time
 from multiprocessing import Pool
 from pathlib import Path
-from io import StringIO
 
 import torch
 from PIL import Image
 from docopt import docopt
 from loguru import logger
-from natsort import natsorted
 from tqdm import tqdm
 
 import pcleaner.analytics as an

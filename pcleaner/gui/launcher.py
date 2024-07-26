@@ -3,6 +3,7 @@ import platform
 import sys
 from io import StringIO
 from PIL import Image
+from importlib import resources
 
 import PySide6
 import PySide6.QtGui as Qg
@@ -16,6 +17,7 @@ import pcleaner.cli_utils as cu
 import pcleaner.gui.gui_utils as gu
 import pcleaner.config as cfg
 from pcleaner import __display_name__, __version__
+import pcleaner.data.translation_generated_files as translation_data
 from pcleaner.gui.mainwindow_driver import MainWindow
 
 # TODO Things to copy from deepqt:
@@ -27,12 +29,10 @@ if platform.system() == "Windows":
     import pcleaner.gui.rc_generated_files.rc_windows_icons
     import pcleaner.gui.rc_generated_files.rc_windows_theme_icons
     import pcleaner.gui.rc_generated_files.rc_windows_themes
-    import pcleaner.gui.rc_generated_files.rc_windows_translations
 else:
     import pcleaner.gui.rc_generated_files.rc_icons
     import pcleaner.gui.rc_generated_files.rc_theme_icons
     import pcleaner.gui.rc_generated_files.rc_themes
-    import pcleaner.gui.rc_generated_files.rc_translations
 
 
 def launch(files_to_open: list[str], debug: bool = False) -> None:
@@ -50,12 +50,10 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
         assert pcleaner.gui.rc_generated_files.rc_windows_icons
         assert pcleaner.gui.rc_generated_files.rc_windows_theme_icons
         assert pcleaner.gui.rc_generated_files.rc_windows_themes
-        assert pcleaner.gui.rc_generated_files.rc_windows_translations
     else:
         assert pcleaner.gui.rc_generated_files.rc_icons
         assert pcleaner.gui.rc_generated_files.rc_theme_icons
         assert pcleaner.gui.rc_generated_files.rc_themes
-        assert pcleaner.gui.rc_generated_files.rc_translations
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
     # Log up to 1MB to the log file.
@@ -132,7 +130,9 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
 
     translator = Qc.QTranslator(app)
 
-    path = ":/translations"
+    with resources.files(translation_data) as data_path:
+        path = str(data_path)
+
     if translator.load(locale, "PanelCleaner", "_", path):
         app.installTranslator(translator)
         logger.debug(f"Loaded App translations for {locale.name()}.")

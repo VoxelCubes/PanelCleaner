@@ -7,6 +7,7 @@ BUILD_DIR := dist/
 QRC_DIR_ICONS := icons/
 QRC_DIR_THEMES := themes/
 UI_DIR := ui_files/
+PACKED_TRANSLATION_DATA := pcleaner/data/generated_files/translations/
 RC_OUTPUT_DIR := pcleaner/gui/rc_generated_files/
 UI_OUTPUT_DIR := pcleaner/gui/ui_generated_files/
 RCC_COMPILER := venv/bin/pyside6-rcc
@@ -17,10 +18,10 @@ BLACK_LINE_LENGTH := 100
 BLACK_TARGET_DIR := pcleaner/
 BLACK_EXCLUDE_PATTERN := "^$(RC_OUTPUT_DIR).*|^$(UI_OUTPUT_DIR).*|^pcleaner/comic_text_detector/.*"
 
-LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.gui.supported_languages import supported_languages; print(' '.join(supported_languages().keys()))")
+LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.gui.supported_languages import supported_languages; lang_codes = list(supported_languages().keys()); lang_codes.remove('en_US'); print(' '.join(lang_codes))")
 
 # print supported languages
-print-supported-languages:
+print-translated-languages:
 	@echo $(LANGUAGES)
 
 fresh-install: clean-build build install
@@ -79,14 +80,7 @@ generate-ts:
 
 # Compile localization files for each language, then update the QRC file and compile it.
 compile-i18n: generate-ts
-	$(foreach lang, $(LANGUAGES), $(I18N_COMPILER) translations/PanelCleaner_$(lang).ts -qm translations/packed/PanelCleaner_$(lang).qm;)
-
-	echo '<RCC><qresource prefix="/translations">' > translations/packed/linguist.qrc
-	$(foreach lang, $(LANGUAGES), echo '    <file>PanelCleaner_$(lang).qm</file>' >> translations/packed/linguist.qrc;)
-	echo '</qresource></RCC>' >> translations/packed/linguist.qrc
-
-	$(RCC_COMPILER) translations/packed/linguist.qrc -o $(RC_OUTPUT_DIR)rc_translations.py
-
+	$(foreach lang, $(LANGUAGES), $(I18N_COMPILER) translations/PanelCleaner_$(lang).ts -qm $(PACKED_TRANSLATION_DATA)/PanelCleaner_$(lang).qm;)
 
 # compile .ui files
 compile-ui:
