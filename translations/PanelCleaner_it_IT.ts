@@ -170,18 +170,18 @@ Fumetti puliti:
       <location filename="../pcleaner/analytics.py" line="230"/>
       <location filename="../pcleaner/analytics.py" line="351"/>
       <source>Failed</source>
-      <translation>Operazione non riusciuta</translation>
+      <translation>Operazione non riuscita</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="226"/>
       <source>Perfect</source>
-      <translation type="unfinished">Perfect</translation>
+      <translation>Perfetto</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="537"/>
       <source>Total
 </source>
-      <translation type="unfinished">Total
+      <translation>Totale
 </translation>
     </message>
     <message>
