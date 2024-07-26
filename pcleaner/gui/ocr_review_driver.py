@@ -123,6 +123,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         # Set the table to only allow editing in the text column.
         self.tableWidget_ocr.setEditableColumns([1])
+        self.tableWidget_ocr.setItemDelegate(WrapTextDelegate())
 
         self.calculate_thumbnail_size()
         self.init_arrow_buttons()
@@ -195,6 +196,9 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         )
 
         self.load_ocr_options()
+
+        # We need to wait for the widget constructor to complete.
+        Qc.QTimer.singleShot(0, self.adjust_row_heights)
 
     def get_final_ocr_analytics(self) -> list[st.OCRAnalytic]:
         """
@@ -285,6 +289,11 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
             self.tableWidget_ocr.item(index, 1).setFont(cell_font)
 
         self.update_image_boxes()
+        self.adjust_row_heights()
+
+    def adjust_row_heights(self):
+        for row in range(self.tableWidget_ocr.rowCount()):
+            self.tableWidget_ocr.resizeRowToContents(row)
 
     def update_image_boxes(self) -> None:
         """
@@ -844,3 +853,45 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         index = self.image_list.currentRow()
         image = self.images[index]
         self.switch_to_image(image)
+
+
+class WrapTextDelegate(Qw.QStyledItemDelegate):
+    """
+    Let table widget rows expand vertically to prevent line wrapping.
+    # TODO fix jankyness for when not visible.
+    """
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self._table_widget = parent
+
+    def paint(self, painter, option, index):
+        # Set text wrapping for the cell
+        option.textElideMode = Qc.Qt.ElideNone
+        option.displayAlignment = Qc.Qt.AlignLeft | Qc.Qt.AlignVCenter
+        option.widget.setWordWrap(True)
+        super().paint(painter, option, index)
+
+    def sizeHint(self, option, index):
+        # Get the text from the index
+        text = index.data(Qc.Qt.DisplayRole)
+        if not text:
+            return super().sizeHint(option, index)
+
+        # Create a Qg.QFontMetrics object to calculate the size of the text
+        font_metrics = Qg.QFontMetrics(option.font)
+
+        # Calculate the width available for the text
+        text_width = option.rect.width()
+
+        # Calculate the height needed for the text to wrap within the given width
+        text_height = font_metrics.boundingRect(
+            0, 0, text_width, 0, Qc.Qt.TextWordWrap, text
+        ).height()
+
+        # Add an extra half line height.
+        text_height += font_metrics.height()
+
+        # Calculate the default size and add text height if necessary
+        size = super().sizeHint(option, index)
+        return Qc.QSize(size.width(), max(size.height(), text_height))
