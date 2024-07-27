@@ -1651,6 +1651,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 == Qw.QMessageBox.Yes
             ):
                 self.post_review_export()
+            dialog.deleteLater()
         elif self.ocr_review_options:
             dialog = ocrd.OcrReviewWindow(
                 self,
@@ -1674,6 +1675,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.ocr_review_options.output_path = None
 
             self.post_review_ocr_export(dialog.get_final_ocr_analytics())
+            dialog.deleteLater()
 
         else:
             gu.show_info(

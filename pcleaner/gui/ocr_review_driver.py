@@ -1,6 +1,6 @@
 import math
 from enum import IntEnum
-from functools import wraps
+from functools import wraps, partial
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -124,6 +124,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         # Set the table to only allow editing in the text column.
         self.tableWidget_ocr.setEditableColumns([1])
         self.tableWidget_ocr.setItemDelegate(WrapTextDelegate())
+        self.tableWidget_ocr.resized.connect(self.adjust_row_heights)
 
         self.calculate_thumbnail_size()
         self.init_arrow_buttons()
@@ -132,7 +133,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         # Select the first image to start with.
         self.comboBox_view_mode.currentIndexChanged.connect(self.update_image_boxes)
         self.tableWidget_ocr.currentRowChanged.connect(self.update_image_boxes)
-        self.image_list.setCurrentRow(0)
+        Qc.QTimer.singleShot(0, partial(self.image_list.setCurrentRow, 0))
         # Override Qt's dynamic scroll speed with a fixed, standard value.
         self.image_list.verticalScrollBar().setSingleStep(120)
 
@@ -171,34 +172,25 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         # Set the new button color to match what would be assigned to new buttons.
         self.image_viewer.set_new_bubble_color(BUBBLE_STATUS_COLORS[st.OCRStatus.New])
 
-        # Add ctrl + n as a shortcut for new bubble.
-        self.pushButton_new.setShortcut(Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_N))
-        self.pushButton_new.setToolTip(
-            self.pushButton_new.toolTip() + f" ({self.pushButton_new.shortcut().toString()})"
-        )
-        # Add ctrl + d as a shortcut for delete.
-        self.pushButton_delete.setShortcut(Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_D))
-        self.pushButton_delete.setToolTip(
-            self.pushButton_delete.toolTip() + f" ({self.pushButton_delete.shortcut().toString()})"
-        )
-        # Add ctrl + shift + d as a shortcut for undelete.
-        self.pushButton_undelete.setShortcut(
-            Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.SHIFT + Qc.Qt.Key_D)
-        )
-        self.pushButton_undelete.setToolTip(
-            self.pushButton_undelete.toolTip()
-            + f" ({self.pushButton_undelete.shortcut().toString()})"
-        )
-        # Add ctrl + r as a shortcut for reset.
-        self.pushButton_reset.setShortcut(Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_R))
-        self.pushButton_reset.setToolTip(
-            self.pushButton_reset.toolTip() + f" ({self.pushButton_reset.shortcut().toString()})"
-        )
+        self.init_shortcuts()
 
         self.load_ocr_options()
 
-        # We need to wait for the widget constructor to complete.
-        Qc.QTimer.singleShot(0, self.adjust_row_heights)
+    def init_shortcuts(self) -> None:
+        def set_button_shortcut(button: Qw.QPushButton, key_sequence: Qg.QKeySequence) -> None:
+            button.setShortcut(key_sequence)
+            button.setToolTip(button.toolTip() + f" ({button.shortcut().toString()})")
+
+        set_button_shortcut(self.pushButton_new, Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_N))
+        set_button_shortcut(self.pushButton_delete, Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_D))
+        set_button_shortcut(
+            self.pushButton_undelete, Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.SHIFT + Qc.Qt.Key_D)
+        )
+        set_button_shortcut(self.pushButton_reset, Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_R))
+        set_button_shortcut(self.pushButton_prev, Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_Left))
+        set_button_shortcut(self.pushButton_next, Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_Right))
+        set_button_shortcut(self.pushButton_row_up, Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_Up))
+        set_button_shortcut(self.pushButton_row_down, Qg.QKeySequence(Qc.Qt.CTRL + Qc.Qt.Key_Down))
 
     def get_final_ocr_analytics(self) -> list[st.OCRAnalytic]:
         """
@@ -246,6 +238,11 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         self.load_ocr_results(self.ocr_results[self.images.index(image)])
 
+        # Select the first row (if any) to allow for easy keyboard navigation.
+        if self.tableWidget_ocr.rowCount() > 0:
+            self.tableWidget_ocr.setCurrentCell(0, 1)
+            self.tableWidget_ocr.focusWidget()
+
         # Set a delayed zoom to fit.
         if self.first_load:
             Qc.QTimer.singleShot(0, self.image_viewer.zoom_fit)
@@ -258,16 +255,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         :param ocr_results: The OCR results to load for this image.
         """
-        # Format OCR results.
         self.tableWidget_ocr.clearAll()
-        # text = ""
-        # for index, (_, ocr_text, _) in enumerate(ocr_result.removed_box_data):
-        #     text += f"{index + 1}\t {ocr_text}\n\n"
-        #
-        # if not text:
-        #     text = f'<i>{self.tr("No text found in the image.")}</i>'
-        #
-        # self.textEdit_ocr.setPlainText(text)
 
         # This index is for the table to keep track of the index into the specific OCR result list.
         # It isn't the original index of the box as shown in the image.
@@ -699,7 +687,9 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         if ocr_results[row].status == st.OCRStatus.Removed:
             ocr_results[row].status = st.OCRStatus.EditedRemoved
 
+        current_row = self.tableWidget_ocr.currentRow()
         self.load_ocr_results(ocr_results)
+        self.tableWidget_ocr.selectRow(current_row)
 
     # Copied shit from OutputReview ================================================================
 
@@ -858,7 +848,6 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 class WrapTextDelegate(Qw.QStyledItemDelegate):
     """
     Let table widget rows expand vertically to prevent line wrapping.
-    # TODO fix jankyness for when not visible.
     """
 
     def __init__(self, parent=None):

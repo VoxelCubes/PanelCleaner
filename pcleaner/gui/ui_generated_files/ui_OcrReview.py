@@ -349,7 +349,6 @@ class Ui_OcrReview(object):
         __qtablewidgetitem1 = QTableWidgetItem()
         self.tableWidget_ocr.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         self.tableWidget_ocr.setObjectName(u"tableWidget_ocr")
-        self.tableWidget_ocr.setMinimumSize(QSize(200, 0))
         self.tableWidget_ocr.setAcceptDrops(True)
         self.tableWidget_ocr.setEditTriggers(QAbstractItemView.AllEditTriggers)
         self.tableWidget_ocr.setTabKeyNavigation(False)

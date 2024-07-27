@@ -11,6 +11,7 @@ class CTableWidget(Qw.QTableWidget):
 
     finished_drop = Qc.Signal()
     currentRowChanged = Qc.Signal(int)
+    resized = Qc.Signal()
 
     # Populate a list to make select columns editable.
     editable_columns: list[int] | None = None
@@ -89,6 +90,11 @@ class CTableWidget(Qw.QTableWidget):
         for row in range(self.rowCount()):
             values.append(self.item(row, col).text())
         return values
+
+    def resizeEvent(self, event):
+        # Simple hook to catch resize events.
+        super().resizeEvent(event)
+        self.resized.emit()
 
     def resizeHeightToContents(self) -> None:
         # Add 1 per row to compensate for grid lines. Subtract 1 at the end since only inner grid lines count.
