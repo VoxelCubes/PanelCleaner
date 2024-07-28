@@ -117,7 +117,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         if len(self.images) != len(self.ocr_analytics):
             logger.error("The number of images and OCR results don't match.")
 
-        self.ocr_results = st.convert_ocr_analytics_to_results(ocr_analytics)
+        self.ocr_results = st.convert_ocr_analytics_to_results(self.ocr_analytics)
 
         self.first_load = True
 
@@ -699,7 +699,12 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         This is necessary because the parallel batch processing will not preserve the order when
         many pictures are processed at once.
         """
-        self.images = natsorted(self.images, key=lambda x: x.path)
+        # self.images = natsorted(self.images, key=lambda x: x.path)
+        combined = list(zip(self.images, self.ocr_analytics))
+        sorted_combined = natsorted(combined, key=lambda x: x[0].path)
+        images, ocr_analytics = zip(*sorted_combined)
+        self.images = list(images)
+        self.ocr_analytics = list(ocr_analytics)
 
     def closeEvent(self, event: Qg.QCloseEvent) -> None:
         if self.confirm_closing:
