@@ -164,55 +164,52 @@ class Ui_MainWindow(object):
         self.action_download_models.setIcon(icon10)
         self.action_donate = QAction(MainWindow)
         self.action_donate.setObjectName(u"action_donate")
-        icon11 = QIcon()
-        icon11.addFile(u":/heart.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.action_donate.setIcon(icon11)
         self.action_temp_3 = QAction(MainWindow)
         self.action_temp_3.setObjectName(u"action_temp_3")
         self.action_temp_3.setText(u"<temp>")
         self.action_remove_file = QAction(MainWindow)
         self.action_remove_file.setObjectName(u"action_remove_file")
         self.action_remove_file.setEnabled(False)
-        icon12 = QIcon()
+        icon11 = QIcon()
         iconThemeName = u"edit-delete-remove"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon11 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon11.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
+        self.action_remove_file.setIcon(icon11)
+        self.action_help_translation = QAction(MainWindow)
+        self.action_help_translation.setObjectName(u"action_help_translation")
+        icon12 = QIcon()
+        iconThemeName = u"languages"
         if QIcon.hasThemeIcon(iconThemeName):
             icon12 = QIcon.fromTheme(iconThemeName)
         else:
             icon12.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.action_remove_file.setIcon(icon12)
-        self.action_help_translation = QAction(MainWindow)
-        self.action_help_translation.setObjectName(u"action_help_translation")
+        self.action_help_translation.setIcon(icon12)
+        self.action_report_issue = QAction(MainWindow)
+        self.action_report_issue.setObjectName(u"action_report_issue")
         icon13 = QIcon()
-        iconThemeName = u"languages"
+        iconThemeName = u"tools-report-bug"
         if QIcon.hasThemeIcon(iconThemeName):
             icon13 = QIcon.fromTheme(iconThemeName)
         else:
             icon13.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.action_help_translation.setIcon(icon13)
-        self.action_report_issue = QAction(MainWindow)
-        self.action_report_issue.setObjectName(u"action_report_issue")
+        self.action_report_issue.setIcon(icon13)
+        self.action_simulate_exception = QAction(MainWindow)
+        self.action_simulate_exception.setObjectName(u"action_simulate_exception")
+        self.action_file_manager_extension = QAction(MainWindow)
+        self.action_file_manager_extension.setObjectName(u"action_file_manager_extension")
         icon14 = QIcon()
-        iconThemeName = u"tools-report-bug"
+        iconThemeName = u"application-menu"
         if QIcon.hasThemeIcon(iconThemeName):
             icon14 = QIcon.fromTheme(iconThemeName)
         else:
             icon14.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.action_report_issue.setIcon(icon14)
-        self.action_simulate_exception = QAction(MainWindow)
-        self.action_simulate_exception.setObjectName(u"action_simulate_exception")
-        self.action_file_manager_extension = QAction(MainWindow)
-        self.action_file_manager_extension.setObjectName(u"action_file_manager_extension")
-        icon15 = QIcon()
-        iconThemeName = u"application-menu"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon15 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon15.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
-        self.action_file_manager_extension.setIcon(icon15)
+        self.action_file_manager_extension.setIcon(icon14)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_6 = QVBoxLayout(self.centralwidget)
@@ -242,14 +239,14 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon16 = QIcon()
+        icon15 = QIcon()
         iconThemeName = u"dialog-ok-apply"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon16 = QIcon.fromTheme(iconThemeName)
+            icon15 = QIcon.fromTheme(iconThemeName)
         else:
-            icon16.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon15.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_apply_profile.setIcon(icon16)
+        self.pushButton_apply_profile.setIcon(icon15)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
 
@@ -263,14 +260,14 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
-        icon17 = QIcon()
+        icon16 = QIcon()
         iconThemeName = u"document-revert"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon17 = QIcon.fromTheme(iconThemeName)
+            icon16 = QIcon.fromTheme(iconThemeName)
         else:
-            icon17.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon16.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_reset_profile.setIcon(icon17)
+        self.pushButton_reset_profile.setIcon(icon16)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
 
@@ -429,27 +426,27 @@ class Ui_MainWindow(object):
 
         self.pushButton_abort = QPushButton(self.groupBox_4)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon18 = QIcon()
+        icon17 = QIcon()
         iconThemeName = u"process-stop"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon18 = QIcon.fromTheme(iconThemeName)
+            icon17 = QIcon.fromTheme(iconThemeName)
         else:
-            icon18.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon17.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_abort.setIcon(icon18)
+        self.pushButton_abort.setIcon(icon17)
 
         self.verticalLayout_7.addWidget(self.pushButton_abort)
 
         self.pushButton_start = QPushButton(self.groupBox_4)
         self.pushButton_start.setObjectName(u"pushButton_start")
-        icon19 = QIcon()
+        icon18 = QIcon()
         iconThemeName = u"media-playback-start"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon19 = QIcon.fromTheme(iconThemeName)
+            icon18 = QIcon.fromTheme(iconThemeName)
         else:
-            icon19.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon18.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_start.setIcon(icon19)
+        self.pushButton_start.setIcon(icon18)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
 
@@ -801,7 +798,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1850, 34))
+        self.menubar.setGeometry(QRect(0, 0, 1850, 30))
         self.menu_File = QMenu(self.menubar)
         self.menu_File.setObjectName(u"menu_File")
         self.menu_Profile = QMenu(self.menubar)
@@ -814,7 +811,7 @@ class Ui_MainWindow(object):
         self.menu_theme.setObjectName(u"menu_theme")
         self.menu_language = QMenu(self.menu_settings)
         self.menu_language.setObjectName(u"menu_language")
-        self.menu_language.setIcon(icon13)
+        self.menu_language.setIcon(icon12)
         self.menu_Help = QMenu(self.menubar)
         self.menu_Help.setObjectName(u"menu_Help")
         MainWindow.setMenuBar(self.menubar)

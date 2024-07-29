@@ -1007,7 +1007,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1850</width>
-     <height>34</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -1229,10 +1229,6 @@ p, li { white-space: pre-wrap; }
    </property>
   </action>
   <action name="action_donate">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/heart.svg</normaloff>:/heart.svg</iconset>
-   </property>
    <property name="text">
     <string>Donate</string>
    </property>

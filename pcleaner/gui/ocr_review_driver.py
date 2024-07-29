@@ -202,12 +202,10 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
     def load_custom_icons(self) -> None:
         # Load the custom new_bubble icon.
-        if self.theme_is_dark.get():
-            icon_new = Qg.QIcon(":/custom_icons/dark/new_bubble.svg")
-            icon_undelete = Qg.QIcon(":/custom_icons/dark/trash_restore.svg")
-        else:
-            icon_new = Qg.QIcon(":/custom_icons/light/new_bubble.svg")
-            icon_undelete = Qg.QIcon(":/custom_icons/light/trash_restore.svg")
+        theme = "dark" if self.theme_is_dark.get() else "light"
+
+        icon_new = gu.load_custom_icon("new_bubble", theme)
+        icon_undelete = gu.load_custom_icon("trash_restore", theme)
 
         # Check if it loaded correctly.
         if icon_new.isNull():

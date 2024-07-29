@@ -2,8 +2,10 @@ import io
 import re
 import sys
 from types import TracebackType
+from typing import Literal
 from io import StringIO
 from pathlib import Path
+from importlib import resources
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -13,6 +15,8 @@ from loguru import logger
 from pcleaner.gui.error_dialog_driver import ErrorDialog
 import pcleaner.gui.worker_thread as wt
 from pcleaner.helpers import tr
+from pcleaner.data import custom_icons
+from pcleaner.data import color_themes
 
 
 # For all show functions, pad the dialog message, so that the dialog is not too narrow for the window title.
@@ -134,6 +138,49 @@ def open_file(path: Path) -> None:
         show_exception(None, tr("File Error"), tr("Failed to open file."))
 
 
+def custom_icon_path(icon_name: str, theme: Literal["dark", "light"] | str = "") -> Path:
+    """
+    Loads the given icon from the dark, light, or color-agnostic set of custom icons.
+    File names may omit the extension, in which case .svg and .png are checked.
+
+    :param icon_name: The icon's filename, with or without extension.
+    :param theme: Indicate if the icon should be pulled from the light or dark theme,
+        if applicable, otherwise leave blank.
+    :return: A full path to the file.
+    """
+    with resources.files(custom_icons) as data_path:
+        custom_icon_dir: Path = data_path
+
+    if theme:
+        custom_icon_dir = custom_icon_dir / theme
+
+    for extension in ("", ".svg", ".png"):
+        icon_path = custom_icon_dir / (icon_name + extension)
+        if icon_path.is_file():
+            return icon_path
+
+    raise FileNotFoundError(f"Failed to load '{custom_icon_dir / icon_name}'")
+
+
+def load_custom_icon(icon_name: str, theme: Literal["dark", "light"] | str = "") -> Qg.QIcon:
+    """
+    Loads the given icon from the dark, light, or color-agnostic set of custom icons.
+    File names may omit the extension, in which case .svg and .png are checked.
+    If the file could not be found, a QIcon with a null pixmap is returned.
+
+    :param icon_name: The icon's filename, with or without extension.
+    :param theme: Indicate if the icon should be pulled from the light or dark theme,
+        if applicable, otherwise leave blank.
+    :return: A QIcon that may have a null pixmap.
+    """
+    try:
+        icon_path = custom_icon_path(icon_name, theme)
+        return Qg.QIcon(str(icon_path))
+    except FileNotFoundError as e:
+        logger.error(e)
+        return Qg.QIcon()
+
+
 class CaptureOutput(Qc.QObject):
     text_written = Qc.Signal(str, str)
 
@@ -241,7 +288,10 @@ def load_color_palette(theme: str) -> Qg.QPalette:
     """
     palette = Qg.QPalette()
 
-    file = Qc.QFile(f":/themes/{theme}")
+    with resources.files(color_themes) as data_path:
+        file_path = data_path / theme
+
+    file = Qc.QFile(file_path)
     if file.open(Qc.QFile.ReadOnly | Qc.QFile.Text):
         stream = Qc.QTextStream(file)
         content = stream.readAll()

@@ -104,10 +104,7 @@ class FileTable(CTableWidget):
                 ("mask_denoised.svg", imf.ImageAnalyticCategory.denoised),
                 ("mask_inpainting.svg", imf.ImageAnalyticCategory.inpainted),
             ]:
-                icons[analytic_category] = Qg.QIcon(f":/custom_icons/{dark_or_light}/{icon_name}")
-                # Check if it loaded correctly.
-                if icons[analytic_category].isNull():
-                    logger.error(f"Failed to load icon {icon_name} for {dark_or_light} theme.")
+                icons[analytic_category] = gu.load_custom_icon(icon_name, dark_or_light)
 
             if dark_or_light == "dark":
                 self.step_icons_dark = icons

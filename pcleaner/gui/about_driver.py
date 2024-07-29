@@ -6,6 +6,7 @@ import PySide6.QtWidgets as Qw
 from PySide6.QtCore import Qt
 
 import pcleaner.gui.license_driver as ld
+import pcleaner.gui.gui_utils as gu
 from pcleaner import __version__
 from pcleaner.gui.ui_generated_files.ui_About import Ui_About
 
@@ -27,7 +28,7 @@ class AboutWidget(Qw.QWidget, Ui_About):
         Qw.QWidget.__init__(self, parent)
         self.setupUi(self)
         self.setWindowFlag(Qt.Window)
-        self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
+        self.setWindowIcon(gu.load_custom_icon("logo-tiny"))
 
         self.label_license.linkActivated.connect(self.open_license)
 
@@ -41,7 +42,7 @@ class AboutWidget(Qw.QWidget, Ui_About):
         self.label_toolkit.setText(f"PySide (Qt) {PySide6.__version__}")
 
         self.label_logo.setPixmap(
-            Qg.QPixmap(":/logo.png").scaledToWidth(200, mode=Qt.SmoothTransformation)
+            Qg.QPixmap(gu.custom_icon_path("logo")).scaledToWidth(200, mode=Qt.SmoothTransformation)
         )
 
     def open_license(self) -> None:

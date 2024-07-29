@@ -3,6 +3,7 @@ from pathlib import Path
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 
+import pcleaner.gui.gui_utils as gu
 from pcleaner.gui.ui_generated_files.ui_NewProfile import Ui_NewProfile
 
 
@@ -37,7 +38,7 @@ class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
         self.label_default_path.setText(str(self.default_path))
         self.protected_names = protected_names
 
-        self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
+        self.setWindowIcon(gu.load_custom_icon("logo-tiny"))
 
         # Ensure that the default path exists.
         self.default_path.mkdir(parents=True, exist_ok=True)

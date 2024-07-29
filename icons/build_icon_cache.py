@@ -89,17 +89,18 @@ def find_xdg_icon(file, src_path, extensions) -> str | None:
     return None
 
 
-def copy_files(theme_dir: Path, yaml_data: dict) -> None:
+def copy_files(theme_dir: Path, yaml_data: dict, dest_dir: Path) -> None:
     """
     Copy the specified files from the source theme directory to the destination directory.
 
     :param theme_dir: Path to the source theme directory.
     :param yaml_data: Dictionary containing the files to copy.
+    :param dest_dir: Directory to copy to.
     """
     for category, subcategories in yaml_data["Files"].items():
         for subcategory, files in subcategories.items():
             src_path = theme_dir / str(category) / str(subcategory)
-            dest_path = Path.cwd() / theme_dir.name / str(category) / str(subcategory)
+            dest_path = dest_dir / str(category) / str(subcategory)
 
             if not dest_path.exists():
                 dest_path.mkdir(parents=True)
@@ -113,14 +114,15 @@ def copy_files(theme_dir: Path, yaml_data: dict) -> None:
                     print(f"Could not find {file} in {src_path}")
 
 
-def create_sparse_copy(theme_dir: Path, yaml_data: dict) -> None:
+def create_sparse_copy(theme_dir: Path, yaml_data: dict, destination_dir: Path) -> None:
     """
-    Create a sparse copy of the theme directory in the current working directory.
+    Create a sparse copy of the theme directory in the destination_dir.
 
     :param theme_dir: Path to the source theme directory.
     :param yaml_data: Dictionary containing the files to copy.
+    :param destination_dir: Destination directory (relative or absolute).
     """
-    dest_dir = Path.cwd() / theme_dir.name
+    dest_dir = destination_dir / theme_dir.name
 
     if dest_dir.exists():
         shutil.rmtree(dest_dir)
@@ -129,57 +131,20 @@ def create_sparse_copy(theme_dir: Path, yaml_data: dict) -> None:
 
     shutil.copy2(theme_dir / "index.theme", dest_dir)
 
-    copy_files(theme_dir, yaml_data)
-
-
-def generate_qrc_file(yaml_data: dict) -> None:
-    """
-    Generate the theme_icons.qrc file based on the copied files.
-
-    :param yaml_data: Dictionary containing the files to include in the qrc file.
-    """
-    qrc_file = Path.cwd() / "theme_icons.qrc"
-
-    with qrc_file.open("w") as f:
-        f.write("<RCC>\n")
-        f.write('  <qresource prefix="icon-themes">\n')
-
-        for theme_dir_str in yaml_data["Theme directories"]:
-            theme_dir = Path(theme_dir_str)
-            dest_dir = Path.cwd() / theme_dir.name
-
-            f.write(f"    <file>{dest_dir.relative_to(Path.cwd())}/index.theme</file>\n")
-
-            for category, subcategories in yaml_data["Files"].items():
-                for subcategory, files in subcategories.items():
-                    src_path = theme_dir / str(category) / str(subcategory)
-
-                    for file in files:
-                        found_file = find_xdg_icon(file, src_path, SUPPORTED_EXTENSIONS)
-
-                        if found_file:
-                            f.write(
-                                f"    <file>{dest_dir.relative_to(Path.cwd())}/{str(category)}/{str(subcategory)}/{found_file}</file>\n"
-                            )
-                        else:
-                            print(f"Could not find {file} in {src_path}")
-
-        f.write("  </qresource>\n")
-        f.write("</RCC>\n")
+    copy_files(theme_dir, yaml_data, dest_dir)
 
 
 def main() -> None:
     """
     Main function to create sparse copies of theme directories based on the specified YAML file and generate theme_icons.qrc.
     """
-    yaml_filename = Path("theme_list.yaml")
+    yaml_filename = Path("icons/theme_list.yaml")
     yaml_data = parse_yaml_file(yaml_filename)
+    destination_dir = Path("pcleaner/data/theme_icons")
 
     for theme_dir_str in yaml_data["Theme directories"]:
         theme_dir = Path(theme_dir_str)
-        create_sparse_copy(theme_dir, yaml_data)
-
-    generate_qrc_file(yaml_data)
+        create_sparse_copy(theme_dir, yaml_data, destination_dir)
 
 
 if __name__ == "__main__":

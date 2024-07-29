@@ -4,8 +4,7 @@ PYINSTALLER_VENV := venv_clean
 PYTHON := venv/bin/python
 PYINSTALLER := $(PYINSTALLER_VENV)/bin/pyinstaller
 BUILD_DIR := dist/
-QRC_DIR_ICONS := icons/
-QRC_DIR_THEMES := themes/
+DIR_ICONS := icons
 UI_DIR := ui_files/
 PACKED_TRANSLATION_DATA := pcleaner/data/generated_files/translations/
 RC_OUTPUT_DIR := pcleaner/gui/rc_generated_files/
@@ -26,12 +25,12 @@ print-translated-languages:
 
 fresh-install: clean-build build install
 
-refresh-assets: build-icon-cache compile-qrc compile-ui refresh-i18n compile-i18n
+refresh-assets: build-icon-cache compile-ui refresh-i18n compile-i18n
 
 build-both: build build-cli
 
 # Normal build target. Use the setup-cli-gui.cfg configuration.
-build: compile-qrc compile-ui
+build: compile-ui
 	cp setup-cli-gui.cfg setup.cfg
 	$(PYTHON) -m build --outdir $(BUILD_DIR)
 	rm setup.cfg
@@ -45,17 +44,6 @@ build-cli:
 # clean-build target
 clean-build: 
 	rm -rf $(BUILD_DIR)
-
-# compile .qrc files
-compile-qrc:
-	for file in $(QRC_DIR_ICONS)*.qrc; do \
-		basename=`basename $$file .qrc`; \
-		$(RCC_COMPILER) $$file -o $(RC_OUTPUT_DIR)rc_$$basename.py; \
-	done
-	for file in $(QRC_DIR_THEMES)*.qrc; do \
-		basename=`basename $$file .qrc`; \
-		$(RCC_COMPILER) $$file -o $(RC_OUTPUT_DIR)rc_$$basename.py; \
-	done
 
 
 # Refresh localization files for the source language, en_US only.
@@ -91,8 +79,8 @@ compile-ui:
 
 # run build_icon_cache.py
 build-icon-cache:
-	cd $(QRC_DIR_ICONS) && ${CurrentDir}/$(PYTHON) build_icon_cache.py
-	cd $(QRC_DIR_ICONS)/custom_icons && ${CurrentDir}/$(PYTHON) copy_from_dark_to_light.py
+	$(PYTHON) $(DIR_ICONS)/build_icon_cache.py
+	$(PYTHON) $(DIR_ICONS)/copy_from_dark_to_light.py
 
 # install target
 install:
@@ -206,4 +194,4 @@ confirm:
 	fi
 
 
-.PHONY: confirm clean build build-cli build-both install fresh-install release refresh-i18n compile-i18n compile-qrc compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda, build-elf, build-app-image
+.PHONY: confirm clean build build-cli build-both install fresh-install release refresh-i18n compile-i18n compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda build-elf build-app-image

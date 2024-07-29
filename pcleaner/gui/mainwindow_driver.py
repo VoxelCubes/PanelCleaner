@@ -146,6 +146,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.default_palette.setColor(Qg.QPalette.PlaceholderText, placeholder_color)
         self.default_icon_theme = Qg.QIcon.themeName()
         self.default_style = Qw.QApplication.style().objectName()
+        logger.info(f"Default Qt Style: {self.default_style}")
+        logger.info(f"Default Icon Theme: {self.default_icon_theme}")
 
     def load_config_theme(self) -> None:
         """
@@ -191,6 +193,26 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         else:
             Qg.QIcon.setFallbackThemeName("breeze")
 
+        # Some users will have their system theme use breeze (light) icons
+        # but actually have a dark color scheme, relying on the special
+        # theme engine in their Qt install to adjust the icon colors.
+        # Well with bundled Qt from PySide that isn't gonna work,
+        # so catch that case and forcefully switch the theme color.
+        # (Only mess with user settings if using breeze themes)
+        if theme is None and self.default_icon_theme in ("breeze", "breeze-dark"):
+            default_icons_dark = self.default_icon_theme == "breeze-dark"
+            if default_icons_dark and not self.theme_is_dark.get():
+                # Erroneously using breeze dark.
+                logger.warning(
+                    f"Default icon theme doesn't match color theme, overriding with breeze."
+                )
+                Qg.QIcon.setThemeName("breeze")
+            elif not default_icons_dark and self.theme_is_dark.get():
+                logger.warning(
+                    f"Default icon theme doesn't match color theme, overriding with breeze-dark."
+                )
+                Qg.QIcon.setThemeName("breeze-dark")
+
         # Toggle the theme menu items.
         self.action_system_theme.setChecked(theme is None)
         self.action_dark.setChecked(theme == "breeze-dark")
@@ -216,9 +238,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     def initialize_ui(self) -> None:
         if platform.system() == "Windows":
-            self.setWindowIcon(Qg.QIcon(":/logo.ico"))
+            self.setWindowIcon(gu.load_custom_icon("logo.ico"))
         else:
-            self.setWindowIcon(Qg.QIcon(":/logo-tiny.png"))
+            self.setWindowIcon(gu.load_custom_icon("logo-tiny"))
+
+        self.action_donate.setIcon(gu.load_custom_icon("heart"))
 
         self.hide_progress_drawer()
         self.set_up_statusbar()

@@ -30,8 +30,8 @@ def simple_replace_color_in_svg(input_folder, output_folder, old_color, new_colo
 
 
 # Define parameters
-input_folder = "./dark"
-output_folder = "./light"
+input_folder = "pcleaner/data/custom_icons/dark"
+output_folder = "pcleaner/data/custom_icons/light"
 old_color = "#fcfcfc"
 new_color = "#232629"
 

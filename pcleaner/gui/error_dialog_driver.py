@@ -75,11 +75,12 @@ class ErrorDialog(Qw.QDialog, Ui_ErrorDialog):
         logger.debug("Copying issue report to clipboard.")
         Qg.QGuiApplication.clipboard().setText(self.session_log.text)
 
-    @staticmethod
-    def kill() -> None:
+    def kill(self) -> None:
         """
         Kill the application.
         This may be necessary when repeated errors occur and the application is unresponsive.
         """
         logger.critical("User killed the application.")
         Qw.QApplication.instance().quit()  # Embrace death.
+        self.close()
+        raise SystemExit(255)

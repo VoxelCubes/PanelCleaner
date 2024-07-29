@@ -18,21 +18,12 @@ import pcleaner.gui.gui_utils as gu
 import pcleaner.config as cfg
 from pcleaner import __display_name__, __version__
 import pcleaner.data.translation_generated_files as translation_data
+import pcleaner.data.theme_icons as theme_icons_data
 from pcleaner.gui.mainwindow_driver import MainWindow
 
 # TODO Things to copy from deepqt:
 # - the testing
 # - the gather themes (potentially)
-
-# This import is needed to load the icons.
-if platform.system() == "Windows":
-    import pcleaner.gui.rc_generated_files.rc_windows_icons
-    import pcleaner.gui.rc_generated_files.rc_windows_theme_icons
-    import pcleaner.gui.rc_generated_files.rc_windows_themes
-else:
-    import pcleaner.gui.rc_generated_files.rc_icons
-    import pcleaner.gui.rc_generated_files.rc_theme_icons
-    import pcleaner.gui.rc_generated_files.rc_themes
 
 
 def launch(files_to_open: list[str], debug: bool = False) -> None:
@@ -42,18 +33,6 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     :param files_to_open: A list of files to open.
     :param debug: Whether to enable debug mode.
     """
-
-    # Ensure that the resources are loaded.
-    # Due to them not being utilized directly, the import statements may be
-    # removed by an errant code formatter
-    if platform.system() == "Windows":
-        assert pcleaner.gui.rc_generated_files.rc_windows_icons
-        assert pcleaner.gui.rc_generated_files.rc_windows_theme_icons
-        assert pcleaner.gui.rc_generated_files.rc_windows_themes
-    else:
-        assert pcleaner.gui.rc_generated_files.rc_icons
-        assert pcleaner.gui.rc_generated_files.rc_theme_icons
-        assert pcleaner.gui.rc_generated_files.rc_themes
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
     # Log up to 1MB to the log file.
@@ -87,6 +66,10 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     buffer.write(f"Python Version: {sys.version}\n")
     buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
     buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
+    current_app_theme = Qw.QApplication.style()
+    current_app_theme_name = current_app_theme.objectName() if current_app_theme else "Unset"
+    buffer.write(f"Current Qt Theme: {current_app_theme_name}\n")
+    buffer.write(f"Current Icon Theme: {Qg.QIcon.themeName()}\n")
     buffer.write(f"System locale: {Qc.QLocale.system().name()}\n")
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
     if torch.cuda.is_available():
@@ -137,12 +120,15 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
         app.installTranslator(translator)
         logger.debug(f"Loaded App translations for {locale.name()}.")
 
-    Qg.QIcon.setFallbackSearchPaths([":/icons", ":/icon-themes"])
+    with resources.files(theme_icons_data) as data_path:
+        theme_icons = str(data_path)
+
+    Qg.QIcon.setFallbackSearchPaths([":/icons", theme_icons])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load
     # later on, even when switching the theme again.
     if platform.system() == "Windows":
         Qg.QIcon.setThemeName("breeze")
-        Qg.QIcon.setThemeSearchPaths([":/icons", ":/icon-themes"])
+        Qg.QIcon.setThemeSearchPaths([":/icons", theme_icons])
 
     if files_to_open:
         input_paths = ", ".join(map(str, files_to_open))

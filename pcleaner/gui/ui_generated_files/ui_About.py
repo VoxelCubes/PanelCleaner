@@ -36,7 +36,6 @@ class Ui_About(object):
         self.label_logo.setSizePolicy(sizePolicy)
         self.label_logo.setMinimumSize(QSize(200, 200))
         self.label_logo.setMaximumSize(QSize(200, 200))
-        self.label_logo.setPixmap(QPixmap(u":/logo.png"))
         self.label_logo.setScaledContents(True)
 
         self.horizontalLayout_2.addWidget(self.label_logo)
