@@ -127,9 +127,8 @@ build-elf:
 		--collect-data=unidic_lite \
 		--hidden-import=scipy.signal \
 		--add-data "${PYINSTALLER_VENV}/lib/python3.11/site-packages/manga_ocr/assets/example.jpg:assets/" \
-		--add-data "pcleaner/data/LiberationSans-Regular.ttf:pcleaner/data/" \
-		--add-data "pcleaner/data/NotoMono-Regular.ttf:pcleaner/data/"
-	
+		--collect-data pcleaner
+
 	@echo "Purging CUDA related files from _internal directory..."
 	@find dist-elf/PanelCleaner/_internal -type f \( \
 		-name 'libtorch_cuda.so' -o \
