@@ -184,8 +184,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # This is a heuristic, but it works well enough.
         background_color = palette.color(Qg.QPalette.Window)
         self.theme_is_dark.set(background_color.lightness() < 128)
-        logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
-        self.theme_is_dark_changed.emit(self.theme_is_dark)
 
         # Update the fallback icon theme accordingly.
         if self.theme_is_dark.get():
@@ -212,6 +210,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     f"Default icon theme doesn't match color theme, overriding with breeze-dark."
                 )
                 Qg.QIcon.setThemeName("breeze-dark")
+
+        logger.info(f"Theme is dark: {self.theme_is_dark.get()}")
+        self.theme_is_dark_changed.emit(self.theme_is_dark)
 
         # Toggle the theme menu items.
         self.action_system_theme.setChecked(theme is None)
