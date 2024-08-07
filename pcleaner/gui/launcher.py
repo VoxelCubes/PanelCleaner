@@ -25,6 +25,9 @@ from pcleaner.gui.mainwindow_driver import MainWindow
 # - the testing
 # - the gather themes (potentially)
 
+# Allow loading of large images.
+Image.MAX_IMAGE_PIXELS = 2**32
+
 
 def launch(files_to_open: list[str], debug: bool = False) -> None:
     """
@@ -156,9 +159,6 @@ def main():
     """
     args = docopt(docopt_doc, version=f"Panel Cleaner {__version__}")
     launch(args.image_path, args.debug)
-
-    # Allow loading of large images.
-    Image.MAX_IMAGE_PIXELS = 2**32
 
 
 if __name__ == "__main__":
