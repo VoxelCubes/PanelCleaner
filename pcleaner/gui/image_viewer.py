@@ -9,6 +9,7 @@ from PySide6.QtCore import Signal, Slot
 from loguru import logger
 
 import pcleaner.data
+import pcleaner.gui.structures as gst
 
 ZOOM_TICK_FACTOR = 1.25
 
@@ -17,6 +18,9 @@ class ImageViewer(Qw.QGraphicsView):
     mouseMoved = Qc.Signal(int, int)
     image_dimensions: tuple[int, int] | None
     image_item: Qw.QGraphicsPixmapItem | None
+    # Share the pixmap within the image item to optimize multiple viewers
+    # of the same image (as with the diff viewers).
+    shared_pixmap: gst.Shared[Qg.QPixmap | None] | None
 
     loaded_image_path: Path | None
 
@@ -36,6 +40,7 @@ class ImageViewer(Qw.QGraphicsView):
         self.image_item = None
         self.image_dimensions = None
         self.loaded_image_path = None
+        self.shared_pixmap = None
         # Disable the allocation limit for high resolution images.
         Qg.QImageReader.setAllocationLimit(0)
 
@@ -50,6 +55,14 @@ class ImageViewer(Qw.QGraphicsView):
         # Make zooming focus on mouse.
         self.setTransformationAnchor(Qw.QGraphicsView.ViewportAnchor.AnchorUnderMouse)
 
+    def share_pixmap_container(self, container: gst.Shared) -> None:
+        """
+        Accept a shared container to deduplicate pixmap loads in memory.
+
+        :param container: A sharable container.
+        """
+        self.shared_pixmap = container
+
     @Slot(float)
     def set_zoom_factor(self, factor: float) -> None:
         self.zoom_factor = factor
@@ -59,6 +72,21 @@ class ImageViewer(Qw.QGraphicsView):
         return self.image_item is None or (
             self.image_item is not None and self.image_item.pixmap().isNull()
         )
+
+    def load_cache_aware(self, image_path: Path) -> Qg.QPixmap:
+        # If a container is provided, use that, or fill it if it's empty.
+        if (
+            self.shared_pixmap is None
+            or self.shared_pixmap.is_none()
+            or self.shared_pixmap.get().isNull()
+        ):
+            image = load_image_with_orientation(image_path)
+            pixmap = Qg.QPixmap.fromImage(image)
+            if self.shared_pixmap is not None:
+                self.shared_pixmap.set(pixmap)
+        else:
+            pixmap = self.shared_pixmap.get()
+        return pixmap
 
     def set_image(self, image_path: Path = None) -> None:
         self.loaded_image_path = image_path
@@ -70,8 +98,7 @@ class ImageViewer(Qw.QGraphicsView):
             # Move the image item by -0.5, -0.5 to make it align with the scene's
             self.image_item.setOffset(-0.5, -0.5)
 
-            image = load_image_with_orientation(image_path)
-            pixmap = Qg.QPixmap.fromImage(image)
+            pixmap = self.load_cache_aware(image_path)
             self.image_item.setPixmap(pixmap)
             self.reset_scene_rect()
             dim = self.image_item.pixmap().size()

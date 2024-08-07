@@ -10,6 +10,7 @@ from loguru import logger
 from natsort import natsorted
 
 import pcleaner.config as cfg
+import pcleaner.gui.structures as gst
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.image_viewer as iv
@@ -42,6 +43,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
 
     first_slot_connection: bool
     first_sbs_slot_connection: bool
+
+    shared_pixmap = gst.Shared[Qg.QPixmap]
 
     # Used so that the view will zoom to fit on the first load only.
     # This action needs to be delayed since the image dimensions are not known until the image is loaded,
@@ -89,6 +92,7 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self.first_load = set()
         self.first_slot_connection = True
         self.first_sbs_slot_connection = True
+        self.shared_pixmap = gst.Shared[Qg.QPixmap | None]()
 
         self.calculate_thumbnail_size()
         self.init_arrow_buttons()
@@ -247,6 +251,11 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self.image_viewer_onion.connect_slider(self.horizontalSlider_onion)
         self.image_viewer_difference.connect_slider(self.horizontalSlider_difference)
         self.image_viewer_overlay.connect_slider(self.horizontalSlider_overlay)
+        # Create and share a common container with the viewers that support it.
+        self.image_viewer_sbs_master.share_pixmap_container(self.shared_pixmap)
+        self.image_viewer_swipe.share_pixmap_container(self.shared_pixmap)
+        self.image_viewer_onion.share_pixmap_container(self.shared_pixmap)
+        self.image_viewer_overlay.share_pixmap_container(self.shared_pixmap)
 
     @Slot(Qw.QListWidgetItem, Qw.QListWidgetItem)
     @Slot(Qw.QListWidgetItem)
@@ -287,6 +296,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self.label_file_name.setElideMode(Qc.Qt.ElideLeft)
 
         view_mode = self.current_view_mode()
+        # Invalidate the shared pixmap.
+        self.shared_pixmap.set(None)
         self.stackedWidget.setCurrentIndex(view_mode)
 
         viewer_to_zoom: iv.ImageViewer | None = None
