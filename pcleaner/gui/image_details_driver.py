@@ -14,6 +14,7 @@ from pcleaner.helpers import tr
 import pcleaner.config as cfg
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
+import pcleaner.output_structures as ost
 import pcleaner.gui.processing as prc
 import pcleaner.gui.structures as st
 import pcleaner.gui.worker_thread as wt
@@ -77,7 +78,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     image_obj: imf.ImageFile  # The image object to show.
     current_image_path: Path | None  # The path of the image currently shown.
 
-    button_map: dict[BadgeButton, imf.Output]
+    button_map: dict[BadgeButton, ost.Output]
 
     # This set is just to figure out what labels might need extra horizontal space
     # in the case of long translations. Apparently the actual parent widget is
@@ -89,7 +90,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     config: cfg.Config
     shared_ocr_model: st.Shared[ocr.OcrProcsType] | None  # Must be handed over by the file table.
     thread_queue: Qc.QThreadPool
-    progress_callback: Callable[[imf.ProgressData], None]
+    progress_callback: Callable[[ost.ProgressData], None]
     abort_signal: Signal
 
     menu: Qw.QMenu  # The overflow menu for the export and ocr buttons.
@@ -109,7 +110,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         config: cfg.Config = None,
         shared_ocr_model: st.Shared[ocr.OcrProcsType] | None = None,
         thread_queue: Qc.QThreadPool = None,
-        progress_callback: Callable[[imf.ProgressData], None] = None,
+        progress_callback: Callable[[ost.ProgressData], None] = None,
         profile_changed_signal: Signal = None,
         abort_signal: Signal = None,
     ):
@@ -180,7 +181,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
         self.pushButton_menu.setMenu(self.menu)
 
-    def create_sidebar_buttons(self) -> tuple[dict[BadgeButton, imf.Output], set[Qw.QLabel]]:
+    def create_sidebar_buttons(self) -> tuple[dict[BadgeButton, ost.Output], set[Qw.QLabel]]:
         """
         Parse the image object's outputs to create a list of buttons in the side panel.
 
@@ -374,15 +375,15 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             button.setIconSize(Qc.QSize(thumbnail_width, thumbnail_height))
             button.clicked.connect(partial(self.switch_to_image, button))
 
-    def load_image_thumbnails(self, only_step: imf.Step | None = None) -> None:
+    def load_image_thumbnails(self, only_step: ost.Step | None = None) -> None:
         """
         Load all the images into the buttons.
 
         :param only_step: [Optional] Only load the images for this step.
         """
 
-        def check_output(current_output: imf.Output) -> bool:
-            return only_step is None or imf.output_to_step[current_output] == only_step
+        def check_output(current_output: ost.Output) -> bool:
+            return only_step is None or ost.output_to_step[current_output] == only_step
 
         current_button = self.current_button()
 
@@ -604,7 +605,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
     # ========================================== Worker Functions ==========================================
 
-    def start_output_worker(self, output: imf.Output) -> None:
+    def start_output_worker(self, output: ost.Output) -> None:
         """
         Start the worker thread for the given output.
 
@@ -618,7 +619,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.thread_queue.start(worker)
 
     def generate_output(
-        self, output: imf.Output, progress_callback: imf.ProgressSignal, abort_flag: wt.SharableFlag
+        self, output: ost.Output, progress_callback: ost.ProgressSignal, abort_flag: wt.SharableFlag
     ) -> None:
         """
         Generate the given output, if there doesn't yet exist a valid output for it.
@@ -696,7 +697,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             if proc_output.path is None:
                 continue
 
-            if output in imf.OUTPUTS_WITH_INDEPENDENT_PROFILE_SENSITIVITY:
+            if output in ost.OUTPUTS_WITH_INDEPENDENT_PROFILE_SENSITIVITY:
                 independent_buttons.append((button, proc_output))
             else:
                 ordered_buttons.append((button, proc_output))
@@ -817,7 +818,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         self.thread_queue.start(worker)
 
     def generate_ocr(
-        self, progress_callback: imf.ProgressSignal, abort_flag: wt.SharableFlag
+        self, progress_callback: ost.ProgressSignal, abort_flag: wt.SharableFlag
     ) -> None:
         """
         Run OCR for the image.

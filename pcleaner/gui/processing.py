@@ -27,11 +27,11 @@ import pcleaner.ocr.ocr as ocr
 
 def generate_output(
     image_objects: list[imf.ImageFile],
-    target_outputs: list[imf.Output],
+    target_outputs: list[ost.Output],
     output_dir: Path | None,
     config: cfg.Config,
     ocr_processor: ocr.OcrProcsType | None,
-    progress_callback: imf.ProgressSignal,
+    progress_callback: ost.ProgressSignal,
     abort_flag: wt.SharableFlag,
     debug: bool = False,
 ):
@@ -77,21 +77,21 @@ def generate_output(
         """
         if abort_flag.get():
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     0,
                     [],
-                    imf.Step.output,
-                    imf.ProgressType.aborted,
+                    ost.Step.output,
+                    ost.ProgressType.aborted,
                 )
             )
             raise wt.Abort()
 
     progress_callback.emit(
-        imf.ProgressData(
+        ost.ProgressData(
             0,
             [],
-            imf.Step.text_detection,
-            imf.ProgressType.start,
+            ost.Step.text_detection,
+            ost.ProgressType.start,
         )
     )
 
@@ -110,7 +110,7 @@ def generate_output(
     cuda = torch.cuda.is_available()
     text_detector_model_path = config.get_model_path(cuda)
 
-    def step_needs_to_be_rerun_closure(current_step: imf.Step) -> Callable[[imf.ImageFile], bool]:
+    def step_needs_to_be_rerun_closure(current_step: ost.Step) -> Callable[[imf.ImageFile], bool]:
         """
         Check if any of the outputs for the given image object need to be rerun.
 
@@ -127,8 +127,8 @@ def generate_output(
             # It didn't.
             # Now it is fr fr
 
-            target_outputs_in_the_current_step: tuple[imf.Output] = tuple(
-                filter(lambda o: o in imf.step_to_output[current_step], reversed(target_outputs))
+            target_outputs_in_the_current_step: tuple[ost.Output] = tuple(
+                filter(lambda o: o in ost.step_to_output[current_step], reversed(target_outputs))
             )
 
             if target_outputs_in_the_current_step:
@@ -139,12 +139,12 @@ def generate_output(
                 )
             else:
                 # In this case we just need to know if the step's representative is complete.
-                representative: imf.Output = imf.get_output_representing_step(current_step)
+                representative: ost.Output = ost.get_output_representing_step(current_step)
                 return image_object.outputs[representative].is_changed(profile)
 
         return step_changed
 
-    def update_output(image_object: imf.ImageFile, output: imf.Output, suffix: str) -> None:
+    def update_output(image_object: imf.ImageFile, output: ost.Output, suffix: str) -> None:
         """
         Update the output of the given image object.
         Check if the file actually exists, and if it does, update the output path.
@@ -165,7 +165,7 @@ def generate_output(
     check_abortion()
 
     step_text_detector_images = tuple(
-        filter(step_needs_to_be_rerun_closure(imf.Step.text_detection), image_objects)
+        filter(step_needs_to_be_rerun_closure(ost.Step.text_detection), image_objects)
     )
 
     if step_text_detector_images:
@@ -173,7 +173,7 @@ def generate_output(
             f"Running text detection AI model for {len(step_text_detector_images)} images..."
         )
 
-        visualize_raw_boxes = imf.Output.raw_boxes in target_outputs
+        visualize_raw_boxes = ost.Output.raw_boxes in target_outputs
 
         try:
             ctm.model2annotations_gui(
@@ -182,15 +182,15 @@ def generate_output(
                 text_detector_model_path,
                 step_text_detector_images,
                 cache_dir,
-                no_text_detection=target_output == imf.Output.input,
+                no_text_detection=target_output == ost.Output.input,
                 visualize_raw_boxes=visualize_raw_boxes,
                 partial_progress_data=partial(
-                    imf.ProgressData,
+                    ost.ProgressData,
                     len(step_text_detector_images),
                     target_outputs,
-                    imf.Step.text_detection,
+                    ost.Step.text_detection,
                 ),
-                progress_callback=progress_callback if target_output != imf.Output.input else None,
+                progress_callback=progress_callback if target_output != ost.Output.input else None,
                 abort_flag=abort_flag,
             )
         except wt.Abort:
@@ -200,17 +200,17 @@ def generate_output(
 
         # Update the outputs of the image objects.
         for image_obj in step_text_detector_images:
-            update_output(image_obj, imf.Output.input, ".png")
-            update_output(image_obj, imf.Output.ai_mask, "_mask.png")
-            update_output(image_obj, imf.Output.raw_boxes, "_raw_boxes.png")
-            update_output(image_obj, imf.Output.raw_json, "#raw.json")
+            update_output(image_obj, ost.Output.input, ".png")
+            update_output(image_obj, ost.Output.ai_mask, "_mask.png")
+            update_output(image_obj, ost.Output.raw_boxes, "_raw_boxes.png")
+            update_output(image_obj, ost.Output.raw_json, "#raw.json")
 
         progress_callback.emit(
-            imf.ProgressData(
+            ost.ProgressData(
                 len(step_text_detector_images),
                 target_outputs,
-                imf.Step.text_detection,
-                imf.ProgressType.textDetection_done,
+                ost.Step.text_detection,
+                ost.ProgressType.textDetection_done,
             )
         )
 
@@ -218,20 +218,20 @@ def generate_output(
 
     check_abortion()
 
-    if target_output > imf.get_output_representing_step(imf.Step.text_detection):
+    if target_output > ost.get_output_representing_step(ost.Step.text_detection):
         step_preprocessor_images = tuple(
-            filter(step_needs_to_be_rerun_closure(imf.Step.preprocessor), image_objects)
+            filter(step_needs_to_be_rerun_closure(ost.Step.preprocessor), image_objects)
         )
 
         if step_preprocessor_images:
             logger.info(f"Running preprocessing for {len(step_preprocessor_images)} images...")
 
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     len(step_preprocessor_images),
                     target_outputs,
-                    imf.Step.preprocessor,
-                    imf.ProgressType.begin_step,
+                    ost.Step.preprocessor,
+                    ost.ProgressType.begin_step,
                 )
             )
 
@@ -243,7 +243,7 @@ def generate_output(
                 ocr_analytic = pp.prep_json_file(
                     json_file_path,
                     preprocessor_conf=profile.preprocessor,
-                    cache_masks=target_output in imf.step_to_output[imf.Step.preprocessor]
+                    cache_masks=target_output in ost.step_to_output[ost.Step.preprocessor]
                     or output_dir is None,
                     mocr=ocr_processor if profile.preprocessor.ocr_enabled else None,
                 )
@@ -252,26 +252,26 @@ def generate_output(
                     ocr_analytics.append(ocr_analytic)
 
                 progress_callback.emit(
-                    imf.ProgressData(
+                    ost.ProgressData(
                         len(step_preprocessor_images),
                         target_outputs,
-                        imf.Step.preprocessor,
-                        imf.ProgressType.incremental,
+                        ost.Step.preprocessor,
+                        ost.ProgressType.incremental,
                     )
                 )
 
             # Update the outputs of the image objects.
             for image_obj in step_preprocessor_images:
-                update_output(image_obj, imf.Output.initial_boxes, "_boxes.png")
-                update_output(image_obj, imf.Output.final_boxes, "_boxes_final.png")
-                update_output(image_obj, imf.Output.clean_json, "#clean.json")
+                update_output(image_obj, ost.Output.initial_boxes, "_boxes.png")
+                update_output(image_obj, ost.Output.final_boxes, "_boxes_final.png")
+                update_output(image_obj, ost.Output.clean_json, "#clean.json")
 
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     len(step_preprocessor_images),
                     target_outputs,
-                    imf.Step.preprocessor,
-                    imf.ProgressType.analyticsOCR,
+                    ost.Step.preprocessor,
+                    ost.ProgressType.analyticsOCR,
                     (ocr_analytics, profile.preprocessor.ocr_max_size),
                 )
             )
@@ -280,20 +280,20 @@ def generate_output(
 
     check_abortion()
 
-    if target_output > imf.get_output_representing_step(imf.Step.preprocessor):
+    if target_output > ost.get_output_representing_step(ost.Step.preprocessor):
         step_masker_images = tuple(
-            filter(step_needs_to_be_rerun_closure(imf.Step.masker), image_objects)
+            filter(step_needs_to_be_rerun_closure(ost.Step.masker), image_objects)
         )
 
         if step_masker_images:
             logger.info(f"Running masker for {len(step_masker_images)} images...")
 
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     len(step_masker_images),
                     target_outputs,
-                    imf.Step.masker,
-                    imf.ProgressType.begin_step,
+                    ost.Step.masker,
+                    ost.ProgressType.begin_step,
                 )
             )
 
@@ -305,10 +305,10 @@ def generate_output(
 
             # Pack all the arguments into a dataclass.
             outputs_that_need_masks = (
-                imf.Output.box_mask,
-                imf.Output.cut_mask,
-                imf.Output.mask_layers,
-                imf.Output.mask_overlay,
+                ost.Output.box_mask,
+                ost.Output.cut_mask,
+                ost.Output.mask_layers,
+                ost.Output.mask_overlay,
             )
             # If any of out targeted outputs need to have intermediate masks generated,
             # we need to show the masks. Or if we explicitly want to show the masks.
@@ -323,10 +323,10 @@ def generate_output(
                     cache_dir,
                     profile.general,
                     profile.masker,
-                    save_only_mask=target_outputs == [imf.Output.final_mask],
-                    save_only_cleaned=target_outputs == [imf.Output.masked_output],
-                    save_only_text=target_outputs == [imf.Output.isolated_text],
-                    extract_text=imf.Output.isolated_text in target_outputs,
+                    save_only_mask=target_outputs == [ost.Output.final_mask],
+                    save_only_cleaned=target_outputs == [ost.Output.masked_output],
+                    save_only_text=target_outputs == [ost.Output.isolated_text],
+                    extract_text=ost.Output.isolated_text in target_outputs,
                     show_masks=need_to_show_masks,
                     debug=debug,
                 )
@@ -343,11 +343,11 @@ def generate_output(
                         masker_analytics_raw.extend(analytic)
 
                         progress_callback.emit(
-                            imf.ProgressData(
+                            ost.ProgressData(
                                 len(step_masker_images),
                                 target_outputs,
-                                imf.Step.masker,
-                                imf.ProgressType.incremental,
+                                ost.Step.masker,
+                                ost.ProgressType.incremental,
                             )
                         )
             else:
@@ -357,32 +357,32 @@ def generate_output(
                     masker_analytics_raw.extend(analytic)
 
                     progress_callback.emit(
-                        imf.ProgressData(
+                        ost.ProgressData(
                             len(step_masker_images),
                             target_outputs,
-                            imf.Step.masker,
-                            imf.ProgressType.incremental,
+                            ost.Step.masker,
+                            ost.ProgressType.incremental,
                         )
                     )
 
             # Update the outputs of the image objects.
             for image_obj in step_masker_images:
-                update_output(image_obj, imf.Output.box_mask, "_box_mask.png")
-                update_output(image_obj, imf.Output.cut_mask, "_cut_mask.png")
-                update_output(image_obj, imf.Output.mask_layers, "_masks.png")
-                update_output(image_obj, imf.Output.final_mask, "_combined_mask.png")
-                update_output(image_obj, imf.Output.mask_overlay, "_with_masks.png")
-                update_output(image_obj, imf.Output.fitment_quality, "_std_devs.png")
-                update_output(image_obj, imf.Output.isolated_text, "_text.png")
-                update_output(image_obj, imf.Output.masked_output, "_clean.png")
-                update_output(image_obj, imf.Output.mask_data_json, "#mask_data.json")
+                update_output(image_obj, ost.Output.box_mask, "_box_mask.png")
+                update_output(image_obj, ost.Output.cut_mask, "_cut_mask.png")
+                update_output(image_obj, ost.Output.mask_layers, "_masks.png")
+                update_output(image_obj, ost.Output.final_mask, "_combined_mask.png")
+                update_output(image_obj, ost.Output.mask_overlay, "_with_masks.png")
+                update_output(image_obj, ost.Output.fitment_quality, "_std_devs.png")
+                update_output(image_obj, ost.Output.isolated_text, "_text.png")
+                update_output(image_obj, ost.Output.masked_output, "_clean.png")
+                update_output(image_obj, ost.Output.mask_data_json, "#mask_data.json")
 
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     len(step_masker_images),
                     target_outputs,
-                    imf.Step.masker,
-                    imf.ProgressType.analyticsMasker,
+                    ost.Step.masker,
+                    ost.ProgressType.analyticsMasker,
                     (masker_analytics_raw, copy(profile.masker)),  # Make a copy to avoid a mutex.
                 )
             )
@@ -392,22 +392,22 @@ def generate_output(
     check_abortion()
 
     if (
-        target_output > imf.get_output_representing_step(imf.Step.masker)
+        target_output > ost.get_output_representing_step(ost.Step.masker)
         and profile.denoiser.denoising_enabled
     ):
         step_denoiser_images = tuple(
-            filter(step_needs_to_be_rerun_closure(imf.Step.denoiser), image_objects)
+            filter(step_needs_to_be_rerun_closure(ost.Step.denoiser), image_objects)
         )
 
         if step_denoiser_images:
             logger.info(f"Running denoiser for {len(step_denoiser_images)} images...")
 
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     len(step_denoiser_images),
                     target_outputs,
-                    imf.Step.denoiser,
-                    imf.ProgressType.begin_step,
+                    ost.Step.denoiser,
+                    ost.ProgressType.begin_step,
                 )
             )
 
@@ -426,9 +426,9 @@ def generate_output(
                     profile.general,
                     profile.denoiser,
                     profile.inpainter,
-                    save_only_mask=target_outputs == [imf.Output.denoise_mask],
-                    save_only_cleaned=target_outputs == [imf.Output.denoised_output],
-                    extract_text=imf.Output.isolated_text in target_outputs,
+                    save_only_mask=target_outputs == [ost.Output.denoise_mask],
+                    save_only_cleaned=target_outputs == [ost.Output.denoised_output],
+                    extract_text=ost.Output.isolated_text in target_outputs,
                     separate_noise_masks=False,
                     show_masks=True,
                     debug=debug,
@@ -444,11 +444,11 @@ def generate_output(
                         denoise_analytics_raw.append(analytic)
 
                         progress_callback.emit(
-                            imf.ProgressData(
+                            ost.ProgressData(
                                 len(step_denoiser_images),
                                 target_outputs,
-                                imf.Step.denoiser,
-                                imf.ProgressType.incremental,
+                                ost.Step.denoiser,
+                                ost.ProgressType.incremental,
                             )
                         )
             else:
@@ -458,26 +458,26 @@ def generate_output(
                     denoise_analytics_raw.append(analytic)
 
                     progress_callback.emit(
-                        imf.ProgressData(
+                        ost.ProgressData(
                             len(step_denoiser_images),
                             target_outputs,
-                            imf.Step.denoiser,
-                            imf.ProgressType.incremental,
+                            ost.Step.denoiser,
+                            ost.ProgressType.incremental,
                         )
                     )
 
             # Update the outputs of the image objects.
             for image_obj in step_denoiser_images:
-                update_output(image_obj, imf.Output.denoise_mask, "_noise_mask.png")
-                update_output(image_obj, imf.Output.denoised_output, "_clean_denoised.png")
-                update_output(image_obj, imf.Output.isolated_text, "_text.png")
+                update_output(image_obj, ost.Output.denoise_mask, "_noise_mask.png")
+                update_output(image_obj, ost.Output.denoised_output, "_clean_denoised.png")
+                update_output(image_obj, ost.Output.isolated_text, "_text.png")
 
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     len(step_denoiser_images),
                     target_outputs,
-                    imf.Step.denoiser,
-                    imf.ProgressType.analyticsDenoiser,
+                    ost.Step.denoiser,
+                    ost.ProgressType.analyticsDenoiser,
                     (
                         denoise_analytics_raw,
                         profile.denoiser.noise_min_standard_deviation,
@@ -491,22 +491,22 @@ def generate_output(
     check_abortion()
 
     if (
-        target_output > imf.get_output_representing_step(imf.Step.denoiser)
+        target_output > ost.get_output_representing_step(ost.Step.denoiser)
         and profile.inpainter.inpainting_enabled
     ):
         step_inpainting_images = tuple(
-            filter(step_needs_to_be_rerun_closure(imf.Step.inpainter), image_objects)
+            filter(step_needs_to_be_rerun_closure(ost.Step.inpainter), image_objects)
         )
 
         if step_inpainting_images:
             logger.info(f"Running inpainting for {len(step_inpainting_images)} images...")
 
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     len(step_inpainting_images),
                     target_outputs,
-                    imf.Step.inpainter,
-                    imf.ProgressType.begin_step,
+                    ost.Step.inpainter,
+                    ost.ProgressType.begin_step,
                 )
             )
 
@@ -550,9 +550,9 @@ def generate_output(
                     profile.masker,
                     profile.denoiser,
                     profile.inpainter,
-                    save_only_mask=target_outputs == [imf.Output.inpainted_mask],
-                    save_only_cleaned=target_outputs == [imf.Output.inpainted_output],
-                    extract_text=imf.Output.isolated_text in target_outputs,
+                    save_only_mask=target_outputs == [ost.Output.inpainted_mask],
+                    save_only_cleaned=target_outputs == [ost.Output.inpainted_output],
+                    extract_text=ost.Output.isolated_text in target_outputs,
                     separate_inpaint_masks=False,
                     show_masks=True,
                     debug=debug,
@@ -568,26 +568,26 @@ def generate_output(
                 inpaint_analytics_raw.append(analytic)
 
                 progress_callback.emit(
-                    imf.ProgressData(
+                    ost.ProgressData(
                         len(step_inpainting_images),
                         target_outputs,
-                        imf.Step.inpainter,
-                        imf.ProgressType.incremental,
+                        ost.Step.inpainter,
+                        ost.ProgressType.incremental,
                     )
                 )
 
             # Update the outputs of the image objects.
             for image_obj in step_inpainting_images:
-                update_output(image_obj, imf.Output.inpainted_mask, "_inpainting.png")
-                update_output(image_obj, imf.Output.inpainted_output, "_clean_inpaint.png")
-                update_output(image_obj, imf.Output.isolated_text, "_text.png")
+                update_output(image_obj, ost.Output.inpainted_mask, "_inpainting.png")
+                update_output(image_obj, ost.Output.inpainted_output, "_clean_inpaint.png")
+                update_output(image_obj, ost.Output.isolated_text, "_text.png")
 
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     len(step_inpainting_images),
                     target_outputs,
-                    imf.Step.inpainter,
-                    imf.ProgressType.analyticsInpainter,
+                    ost.Step.inpainter,
+                    ost.ProgressType.analyticsInpainter,
                     (
                         inpaint_analytics_raw,
                         profile.inpainter.min_inpainting_radius,
@@ -602,13 +602,13 @@ def generate_output(
 
     check_abortion()
 
-    if target_output == imf.Output.write_output:
+    if target_output == ost.Output.write_output:
         progress_callback.emit(
-            imf.ProgressData(
+            ost.ProgressData(
                 len(image_objects),
                 target_outputs,
-                imf.Step.output,
-                imf.ProgressType.begin_step,
+                ost.Step.output,
+                ost.ProgressType.begin_step,
             )
         )
 
@@ -617,7 +617,7 @@ def generate_output(
             (
                 image_obj.path,
                 cache_dir,
-                image_obj.outputs[imf.Output.input].path,
+                image_obj.outputs[ost.Output.input].path,
                 target_outputs,
                 output_dir,
                 profile.general.preferred_file_type,
@@ -633,11 +633,11 @@ def generate_output(
                     check_abortion()
 
                     progress_callback.emit(
-                        imf.ProgressData(
+                        ost.ProgressData(
                             len(image_objects),
                             target_outputs,
-                            imf.Step.output,
-                            imf.ProgressType.incremental,
+                            ost.Step.output,
+                            ost.ProgressType.incremental,
                         )
                     )
         else:
@@ -646,7 +646,7 @@ def generate_output(
                 copy_to_output(
                     image_obj.path,
                     cache_dir,
-                    image_obj.outputs[imf.Output.input].path,
+                    image_obj.outputs[ost.Output.input].path,
                     target_outputs,
                     output_dir,
                     profile.general.preferred_file_type,
@@ -655,20 +655,20 @@ def generate_output(
                 )
 
                 progress_callback.emit(
-                    imf.ProgressData(
+                    ost.ProgressData(
                         len(image_objects),
                         target_outputs,
-                        imf.Step.output,
-                        imf.ProgressType.incremental,
+                        ost.Step.output,
+                        ost.ProgressType.incremental,
                     )
                 )
 
     progress_callback.emit(
-        imf.ProgressData(
+        ost.ProgressData(
             0,
             [],
-            imf.Step.output,
-            imf.ProgressType.end,
+            ost.Step.output,
+            ost.ProgressType.end,
         )
     )
 
@@ -681,7 +681,7 @@ def copy_to_output(
     original_image_path: Path,
     cache_dir: Path,
     cached_base_image_path: Path,
-    outputs: list[imf.Output],
+    outputs: list[ost.Output],
     output_directory: Path,
     preferred_file_type: str | None,
     preferred_mask_file_type: str,
@@ -752,40 +752,40 @@ def copy_to_output(
     original_size = original_image.size
 
     # Output optimized images for all requested outputs.
-    if imf.Output.masked_output in outputs:
+    if ost.Output.masked_output in outputs:
         ops.save_optimized(
-            # image_object.outputs[imf.Output.masked_output].path, cleaned_out_path, original_image
+            # image_object.outputs[ost.Output.masked_output].path, cleaned_out_path, original_image
             cache_path_gen.clean,
             cleaned_out_path,
             original_image,
         )
 
-    if imf.Output.final_mask in outputs:
+    if ost.Output.final_mask in outputs:
         # First scale the output mask to the original image size.
         final_mask = Image.open(cache_path_gen.combined_mask)
-        # final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        # final_mask = Image.open(image_object.outputs[ost.Output.final_mask].path)
         final_mask = final_mask.resize(original_size, Image.NEAREST)
         ops.save_optimized(final_mask, masked_out_path)
 
-    if imf.Output.isolated_text in outputs:
+    if ost.Output.isolated_text in outputs:
         ops.save_optimized(cache_path_gen.text, text_out_path)
-        # ops.save_optimized(image_object.outputs[imf.Output.isolated_text].path, text_out_path)
+        # ops.save_optimized(image_object.outputs[ost.Output.isolated_text].path, text_out_path)
 
-    if imf.Output.denoised_output in outputs:
+    if ost.Output.denoised_output in outputs:
         ops.save_optimized(
             cache_path_gen.clean_denoised,
             cleaned_out_path,
             original_image,
-            # image_object.outputs[imf.Output.denoised_output].path, cleaned_out_path, original_image
+            # image_object.outputs[ost.Output.denoised_output].path, cleaned_out_path, original_image
         )
 
-    if imf.Output.denoise_mask in outputs:
+    if ost.Output.denoise_mask in outputs:
         # Special case: Here we need to take the final mask, scale it up, and then paste this on top.
         final_mask = Image.open(cache_path_gen.combined_mask)
-        # final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        # final_mask = Image.open(image_object.outputs[ost.Output.final_mask].path)
         final_mask = final_mask.resize(original_size, Image.BILINEAR)
         denoised_mask = Image.open(cache_path_gen.noise_mask)
-        # denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
+        # denoised_mask = Image.open(image_object.outputs[ost.Output.denoise_mask].path)
         # Ensure both images are RGBA to safely alpha composite them.
         final_mask = final_mask.convert("RGBA")
         denoised_mask = denoised_mask.convert("RGBA")
@@ -793,30 +793,30 @@ def copy_to_output(
 
         ops.save_optimized(final_mask, masked_out_path)
 
-    if imf.Output.inpainted_output in outputs:
+    if ost.Output.inpainted_output in outputs:
         ops.save_optimized(
             cache_path_gen.clean_inpaint,
             cleaned_out_path,
             original_image,
-            # image_object.outputs[imf.Output.inpainted_output].path, cleaned_out_path, original_image
+            # image_object.outputs[ost.Output.inpainted_output].path, cleaned_out_path, original_image
         )
 
-    if imf.Output.inpainted_mask in outputs:
+    if ost.Output.inpainted_mask in outputs:
         # Special case: Here we need to take the final mask, scale it up, and then paste the denoising
         # mask on top (if denoising), and then paste the inpainting mask on top of that.
         final_mask = Image.open(cache_path_gen.combined_mask)
-        # final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        # final_mask = Image.open(image_object.outputs[ost.Output.final_mask].path)
         final_mask = final_mask.resize(original_size, Image.NEAREST)
         final_mask = final_mask.convert("RGBA")
 
         if denoising_enabled:
             denoised_mask = Image.open(cache_path_gen.noise_mask)
-            # denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
+            # denoised_mask = Image.open(image_object.outputs[ost.Output.denoise_mask].path)
             denoised_mask = denoised_mask.convert("RGBA")
             final_mask.alpha_composite(denoised_mask)
 
         inpainted_mask = Image.open(cache_path_gen.inpainting)
-        # inpainted_mask = Image.open(image_object.outputs[imf.Output.inpainted_mask].path)
+        # inpainted_mask = Image.open(image_object.outputs[ost.Output.inpainted_mask].path)
         inpainted_mask = inpainted_mask.convert("RGBA")
         final_mask.alpha_composite(inpainted_mask)
 
@@ -829,7 +829,7 @@ def perform_ocr(
     csv_output: bool,
     config: cfg.Config,
     ocr_processor: ocr.OcrProcsType | None,
-    progress_callback: imf.ProgressSignal,
+    progress_callback: ost.ProgressSignal,
     abort_flag: wt.SharableFlag,
     debug: bool = False,
 ):
@@ -863,23 +863,23 @@ def perform_ocr(
         """
         if abort_flag.get():
             progress_callback.emit(
-                imf.ProgressData(
+                ost.ProgressData(
                     0,
                     [],
-                    imf.Step.output,
-                    imf.ProgressType.aborted,
+                    ost.Step.output,
+                    ost.ProgressType.aborted,
                 )
             )
             raise wt.Abort()
 
-    target_outputs = [imf.Output.ocr]
+    target_outputs = [ost.Output.ocr]
 
     progress_callback.emit(
-        imf.ProgressData(
+        ost.ProgressData(
             0,
             [],
-            imf.Step.text_detection,
-            imf.ProgressType.start,
+            ost.Step.text_detection,
+            ost.ProgressType.start,
         )
     )
 
@@ -904,7 +904,7 @@ def perform_ocr(
     cuda = torch.cuda.is_available()
     text_detector_model_path = config.get_model_path(cuda)
 
-    def step_needs_to_be_rerun_closure(current_step: imf.Step) -> Callable[[imf.ImageFile], bool]:
+    def step_needs_to_be_rerun_closure(current_step: ost.Step) -> Callable[[imf.ImageFile], bool]:
         """
         Check if any of the outputs for the given image object need to be rerun.
 
@@ -916,8 +916,8 @@ def perform_ocr(
             nonlocal target_outputs
             nonlocal current_step
 
-            target_outputs_in_the_current_step: tuple[imf.Output] = tuple(
-                filter(lambda o: o in imf.step_to_output[current_step], reversed(target_outputs))
+            target_outputs_in_the_current_step: tuple[ost.Output] = tuple(
+                filter(lambda o: o in ost.step_to_output[current_step], reversed(target_outputs))
             )
 
             if target_outputs_in_the_current_step:
@@ -928,12 +928,12 @@ def perform_ocr(
                 )
             else:
                 # In this case we just need to know if the step's representative is complete.
-                representative: imf.Output = imf.get_output_representing_step(current_step)
+                representative: ost.Output = ost.get_output_representing_step(current_step)
                 return image_object.outputs[representative].is_changed(profile)
 
         return step_changed
 
-    def update_output(image_object: imf.ImageFile, output: imf.Output, suffix: str) -> None:
+    def update_output(image_object: imf.ImageFile, output: ost.Output, suffix: str) -> None:
         """
         Update the output of the given image object.
         Check if the file actually exists, and if it does, update the output path.
@@ -954,7 +954,7 @@ def perform_ocr(
     check_abortion()
 
     step_text_detector_images = tuple(
-        filter(step_needs_to_be_rerun_closure(imf.Step.text_detection), image_objects)
+        filter(step_needs_to_be_rerun_closure(ost.Step.text_detection), image_objects)
     )
 
     if step_text_detector_images:
@@ -971,10 +971,10 @@ def perform_ocr(
                 no_text_detection=False,
                 visualize_raw_boxes=True,
                 partial_progress_data=partial(
-                    imf.ProgressData,
+                    ost.ProgressData,
                     len(step_text_detector_images),
                     target_outputs,
-                    imf.Step.text_detection,
+                    ost.Step.text_detection,
                 ),
                 progress_callback=progress_callback,
                 abort_flag=abort_flag,
@@ -986,10 +986,10 @@ def perform_ocr(
 
         # Update the outputs of the image objects.
         for image_obj in step_text_detector_images:
-            update_output(image_obj, imf.Output.input, ".png")
-            update_output(image_obj, imf.Output.ai_mask, "_mask.png")
-            update_output(image_obj, imf.Output.raw_boxes, "_raw_boxes.png")
-            update_output(image_obj, imf.Output.raw_json, "#raw.json")
+            update_output(image_obj, ost.Output.input, ".png")
+            update_output(image_obj, ost.Output.ai_mask, "_mask.png")
+            update_output(image_obj, ost.Output.raw_boxes, "_raw_boxes.png")
+            update_output(image_obj, ost.Output.raw_json, "#raw.json")
 
     # ============================================== Preprocessing ==============================================
 
@@ -998,11 +998,11 @@ def perform_ocr(
     logger.info(f"Running preprocessing for {len(image_objects)} images...")
 
     progress_callback.emit(
-        imf.ProgressData(
+        ost.ProgressData(
             len(image_objects),
             target_outputs,
-            imf.Step.preprocessor,
-            imf.ProgressType.begin_step,
+            ost.Step.preprocessor,
+            ost.ProgressType.begin_step,
         )
     )
 
@@ -1024,17 +1024,17 @@ def perform_ocr(
             ocr_analytics.append(ocr_analytic)
 
         progress_callback.emit(
-            imf.ProgressData(
+            ost.ProgressData(
                 len(image_objects),
                 target_outputs,
-                imf.Step.preprocessor,
-                imf.ProgressType.incremental,
+                ost.Step.preprocessor,
+                ost.ProgressType.incremental,
             )
         )
 
     # Update only the raw boxes, the rest are tainted by the forced profile changes.
     for image_obj in image_objects:
-        update_output(image_obj, imf.Output.initial_boxes, "_boxes.png")
+        update_output(image_obj, ost.Output.initial_boxes, "_boxes.png")
 
     logger.info(f"Finished processing {len(image_objects)} images.")
 
@@ -1065,20 +1065,20 @@ def perform_ocr(
             gu.show_exception(None, tr("Save Failed"), tr("Failed to write detected text to file."))
 
     progress_callback.emit(
-        imf.ProgressData(
+        ost.ProgressData(
             0,
             [],
-            imf.Step.preprocessor,
-            imf.ProgressType.outputOCR,
+            ost.Step.preprocessor,
+            ost.ProgressType.outputOCR,
             (text_out, ocr_analytics),
         )
     )
 
     progress_callback.emit(
-        imf.ProgressData(
+        ost.ProgressData(
             0,
             [],
-            imf.Step.output,
-            imf.ProgressType.end,
+            ost.Step.output,
+            ost.ProgressType.end,
         )
     )

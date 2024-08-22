@@ -12,6 +12,7 @@ from natsort import natsorted
 
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
+import pcleaner.output_structures as ost
 import pcleaner.gui.structures as gst
 import pcleaner.structures as st
 import pcleaner.ocr.ocr as ocr
@@ -102,7 +103,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         self.setupUi(self)
 
         # Special OutputReview overrides.
-        self.target_output = imf.Output.initial_boxes
+        self.target_output = ost.Output.initial_boxes
         self.confirm_closing = True
 
         self.images = images

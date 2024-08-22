@@ -1,8 +1,7 @@
 import io
-from enum import Enum, IntEnum, auto
 from pathlib import Path
+from typing import Any
 from typing import Iterable
-from typing import Protocol, Any
 from uuid import uuid4
 
 import PySide6.QtGui as Qg
@@ -10,230 +9,14 @@ import attrs
 import dictdiffer
 import humanfriendly
 from PIL import Image
-from attrs import frozen, fields
+from attrs import fields
 
 import pcleaner.config as cfg
+import pcleaner.output_structures as ost
 from pcleaner.helpers import tr
-
 
 # The max size used for the icon and large thumbnail.
 THUMBNAIL_SIZE = 64
-
-
-class Output(IntEnum):
-    """
-    These enums represent all the output images displayed in the gui.
-    These are an IntEnum so that they can be compared by order.
-    This way, we can determine the last step in a set of outputs.
-    """
-
-    input = auto()
-    ai_mask = auto()
-    raw_boxes = auto()
-    raw_json = auto()
-
-    initial_boxes = auto()
-    final_boxes = auto()
-    ocr = auto()
-    clean_json = auto()
-
-    box_mask = auto()
-    cut_mask = auto()
-    mask_layers = auto()
-    fitment_quality = auto()
-    mask_overlay = auto()
-    final_mask = auto()
-    isolated_text = auto()
-    masked_output = auto()
-    mask_data_json = auto()
-
-    denoise_mask = auto()
-    denoised_output = auto()
-
-    inpainted_mask = auto()
-    inpainted_output = auto()
-
-    write_output = auto()  # This is only used for the progress bar.
-
-
-class Step(IntEnum):
-    """
-    These enums represent all the steps in the image processing pipeline.
-    """
-
-    text_detection = 1
-    preprocessor = auto()
-    masker = auto()
-    denoiser = auto()
-    inpainter = auto()
-    output = auto()
-
-
-class ProgressType(Enum):
-    """
-    The type of progress reported:
-    - Begin: The step started, so the progress bar should be reset.
-    - Incremental: One (or more) tasks were completed.
-    - Absolute: The progress bar should be set to a specific value.
-    - End: The step finished, so the progress bar should be set to 100%.
-    """
-
-    start = auto()
-    begin_step = auto()
-    incremental = auto()
-    absolute = auto()
-    textDetection_done = auto()
-    analyticsOCR = auto()
-    analyticsMasker = auto()
-    analyticsDenoiser = auto()
-    analyticsInpainter = auto()
-    outputOCR = auto()
-    end = auto()
-    aborted = auto()
-
-
-@frozen
-class ProgressData:
-    """
-    A callback to report progress to the gui.
-
-    Consists of:
-    - The total number of images to process.
-    - The target output to reach.
-    - The current step.
-    - The progress type.
-    - A value for the case of absolute progress, or how much to increment by for incremental progress, or whatever analytics.
-    """
-
-    total_images: int
-    target_outputs: list[Output]
-    current_step: Step
-    progress_type: ProgressType
-    value: Any = 1  # Default value for incremental progress. Otherwise usually an analytics struct.
-
-
-class ProgressSignal(Protocol):
-    def emit(self, data: ProgressData) -> None:
-        pass
-
-
-output_to_step: dict[Output, Step] = {
-    Output.input: Step.text_detection,
-    Output.ai_mask: Step.text_detection,
-    Output.raw_boxes: Step.text_detection,
-    Output.raw_json: Step.text_detection,
-    Output.initial_boxes: Step.preprocessor,
-    Output.final_boxes: Step.preprocessor,
-    Output.ocr: Step.preprocessor,
-    Output.clean_json: Step.preprocessor,
-    Output.box_mask: Step.masker,
-    Output.cut_mask: Step.masker,
-    Output.mask_layers: Step.masker,
-    Output.fitment_quality: Step.masker,
-    Output.mask_overlay: Step.masker,
-    Output.final_mask: Step.masker,
-    Output.isolated_text: Step.masker,
-    Output.masked_output: Step.masker,
-    Output.mask_data_json: Step.masker,
-    Output.denoise_mask: Step.denoiser,
-    Output.denoised_output: Step.denoiser,
-    Output.inpainted_mask: Step.inpainter,
-    Output.inpainted_output: Step.inpainter,
-    Output.write_output: Step.output,
-}
-
-# The final output representing each step.
-# If this output is intact, consider the step complete.
-step_to_output: dict[Step, tuple[Output, ...]] = {
-    Step.text_detection: (Output.input, Output.ai_mask, Output.raw_boxes, Output.raw_json),
-    Step.preprocessor: (Output.initial_boxes, Output.final_boxes, Output.ocr, Output.clean_json),
-    Step.masker: (
-        Output.box_mask,
-        Output.cut_mask,
-        Output.mask_layers,
-        Output.fitment_quality,
-        Output.mask_overlay,
-        Output.isolated_text,
-        Output.masked_output,
-        Output.final_mask,
-        Output.mask_data_json,
-    ),
-    Step.denoiser: (Output.denoise_mask, Output.denoised_output),
-    Step.inpainter: (Output.inpainted_mask, Output.inpainted_output),
-    Step.output: (Output.write_output,),
-}
-
-# When checking which outputs are affected by a profile change, we can check
-# from the last step to the first step, and stop when we find an output that is
-# unaffected by the profile change.
-# But these outputs are affected by changes that the ones after them are not,
-# so we can't use that optimization.
-# In the case of mask_overlay, it's affected by the debug mask color, but nothing else is.
-OUTPUTS_WITH_INDEPENDENT_PROFILE_SENSITIVITY = (Output.mask_overlay,)
-
-
-class ImageAnalyticCategory(Enum):
-    """
-    The category of analytics.
-    """
-
-    ocr_removed = auto()
-    mask_failed = auto()
-    mask_perfect = auto()
-    denoised = auto()
-    inpainted = auto()
-
-
-class ImageAnalytics:
-    """
-    Bundle all the necessary info to display the minimal analytics for an image.
-    These numbers are shown below their corresponding icon in the file table.
-    total means the number of boxes or masks from which the failed etc. numbers are derived.
-    This total can shrink as the image is processed, since if a box is thrown out by ocr, there
-    won't be a corresponding mask for it etc., hence the seemingly redundant multiple totals.
-
-    The analytics per category are stored as simple strings in the form "value/total".
-
-    If the analytic value is blank, it should be hidden in the gui, since it's not relevant.
-    These analytics are supposed to give a quick overview of how bad or good the image is, or where
-    problems might be.
-    """
-
-    _data: dict[ImageAnalyticCategory, str]
-
-    def __init__(self) -> None:
-        self._data = {category: "" for category in ImageAnalyticCategory}
-
-    def get_category(self, category: ImageAnalyticCategory) -> str:
-        return self._data[category]
-
-    def set_category(self, category: ImageAnalyticCategory, value: int, total: int | None) -> None:
-        """
-        Set the analytic value for the category as a string internally.
-        If either value is 0, the analytic is reset.
-
-        :param category: The category to set the value for.
-        :param value: The value to set.
-        :param total: The total to set.
-        """
-        if value == 0 or total == 0:
-            self._data[category] = ""
-        elif total is None:
-            self._data[category] = str(value)
-        else:
-            self._data[category] = f"{value}/{total}"
-
-
-def get_output_representing_step(step: Step) -> Output:
-    """
-    Get the output representing the step, which is the last one in the pipeline.
-    This is the json output for the first three steps, which forms the foundation for the
-    next step to continue from.
-
-    :param step: The step to get the output for.
-    :return: The output representing the step.
-    """
-    return step_to_output[step][-1]
 
 
 class ProcessOutput:
@@ -361,9 +144,9 @@ class ImageFile:
     size: tuple[int, int] | None = None  # Size of the image.
     file_size: int | None = None  # Size of the image file in bytes.
     color_mode: str | None = None  # Color mode of the image.
-    outputs: dict[Output, ProcessOutput]  # Map of steps to ProcessStep objects.
+    outputs: dict[ost.Output, ProcessOutput]  # Map of steps to ProcessStep objects.
     loading_queued: bool = False  # Whether the image is queued to be loaded.
-    analytics_data: ImageAnalytics = None
+    analytics_data: ost.ImageAnalytics = None
 
     error: Exception | None = None  # Error that occurred during any process.
 
@@ -377,7 +160,7 @@ class ImageFile:
         self.icon = Qg.QIcon.fromTheme(cfg.SUFFIX_TO_ICON[path.suffix.lower()])
         self.uuid = str(uuid4())
         self.outputs = {}
-        self.analytics_data = ImageAnalytics()
+        self.analytics_data = ost.ImageAnalytics()
 
         # Aggressively cast the profile attributes to fields.
         pro = fields(cfg.Profile)
@@ -394,23 +177,23 @@ class ImageFile:
         # from the profile must be included, for child attributes to be included.
 
         # IMPORTANT: The output names must match the display name variant of the enum name.
-        # "Input" <-> Output.input
+        # "Input" <-> ost.Output.input
         # When passing in None as the output name, the output will not have a name.
         # This is used for any step that only has one output, such as Input.
 
         # Text Detection:
         settings = [pro.general, gen.input_height_lower_target, gen.input_height_upper_target]
-        self.outputs[Output.input] = ProcessOutput(
+        self.outputs[ost.Output.input] = ProcessOutput(
             "The original image with scaling applied (if needed).", "Input", None, settings
         )
         settings += [pro.text_detector, td.model_path]
-        self.outputs[Output.ai_mask] = ProcessOutput(
+        self.outputs[ost.Output.ai_mask] = ProcessOutput(
             "The rough mask generated by the AI.", "Text Detection", "AI Mask", settings
         )
-        self.outputs[Output.raw_boxes] = ProcessOutput(
+        self.outputs[ost.Output.raw_boxes] = ProcessOutput(
             "The unfiltered box data generated by the AI.", "Text Detection", "Raw Boxes", settings
         )
-        self.outputs[Output.raw_json] = ProcessOutput("Not visible", None, None, settings)
+        self.outputs[ost.Output.raw_json] = ProcessOutput("Not visible", None, None, settings)
 
         # Preprocessor:
         settings += [
@@ -421,7 +204,7 @@ class ImageFile:
             pp.box_right_padding_initial,
         ]
 
-        self.outputs[Output.initial_boxes] = ProcessOutput(
+        self.outputs[ost.Output.initial_boxes] = ProcessOutput(
             "The outlines of the text boxes the AI found.",
             "Preprocessor",
             "Initial Boxes",
@@ -438,7 +221,7 @@ class ImageFile:
             pp.box_right_padding_extended,
             pp.box_reference_padding,
         ]
-        self.outputs[Output.final_boxes] = ProcessOutput(
+        self.outputs[ost.Output.final_boxes] = ProcessOutput(
             "The final boxes after expanding, merging and filtering unneeded boxes with OCR.\n"
             "Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. "
             "Blue: reference boxes for denoising.",
@@ -446,13 +229,13 @@ class ImageFile:
             "Final Boxes",
             settings,
         )
-        self.outputs[Output.clean_json] = ProcessOutput("Not visible", None, None, settings)
+        self.outputs[ost.Output.clean_json] = ProcessOutput("Not visible", None, None, settings)
 
         # Masker:
-        self.outputs[Output.box_mask] = ProcessOutput(
+        self.outputs[ost.Output.box_mask] = ProcessOutput(
             "The mask of the merged boxes.", "Masker", "Box Mask", settings
         )
-        self.outputs[Output.cut_mask] = ProcessOutput(
+        self.outputs[ost.Output.cut_mask] = ProcessOutput(
             "The rough text detection mask with everything outside the box mask cut out.",
             "Masker",
             "Cut Mask",
@@ -464,7 +247,7 @@ class ImageFile:
             mk.mask_growth_steps,
             mk.min_mask_thickness,
         ]
-        self.outputs[Output.mask_layers] = ProcessOutput(
+        self.outputs[ost.Output.mask_layers] = ProcessOutput(
             "The different steps of growth around the cut mask displayed in different colors.",
             "Masker",
             "Mask Layers",
@@ -476,32 +259,32 @@ class ImageFile:
             mk.mask_selection_fast,
             mk.mask_max_standard_deviation,
         ]
-        self.outputs[Output.fitment_quality] = ProcessOutput(
+        self.outputs[ost.Output.fitment_quality] = ProcessOutput(
             "The standard deviation (\u03C3) and outline thickness (in pixels) of each best mask chosen, if any. "
             "Lower \u03C3 is better, from perfect (purple) to failed (red).",
             "Masker",
             "Fitment Quality",
             settings,
         )
-        self.outputs[Output.mask_overlay] = ProcessOutput(
+        self.outputs[ost.Output.mask_overlay] = ProcessOutput(
             "The input image with the final mask overlaid in color.",
             "Masker",
             "Mask Overlay",
             settings + [mk.debug_mask_color],
         )
-        self.outputs[Output.final_mask] = ProcessOutput(
+        self.outputs[ost.Output.final_mask] = ProcessOutput(
             "The collection of masks for each bubble that fit best.",
             "Masker",
             "Final Mask",
             settings,
         )
-        self.outputs[Output.isolated_text] = ProcessOutput(
+        self.outputs[ost.Output.isolated_text] = ProcessOutput(
             "The text layer isolated from the input image.", "Masker", "Isolated Text", settings
         )
-        self.outputs[Output.masked_output] = ProcessOutput(
+        self.outputs[ost.Output.masked_output] = ProcessOutput(
             "The input image with the final mask applied.", "Masker", "Masked Output", settings
         )
-        self.outputs[Output.mask_data_json] = ProcessOutput("Not visible", None, None, settings)
+        self.outputs[ost.Output.mask_data_json] = ProcessOutput("Not visible", None, None, settings)
 
         # Denoiser:
         denoise_settings = settings.copy()
@@ -517,13 +300,13 @@ class ImageFile:
             dn.template_window_size,
             dn.search_window_size,
         ]
-        self.outputs[Output.denoise_mask] = ProcessOutput(
+        self.outputs[ost.Output.denoise_mask] = ProcessOutput(
             "The masks that required denoising, to be overlaid on the final mask when exporting.",
             "Denoiser",
             "Denoise Mask",
             denoise_settings,
         )
-        self.outputs[Output.denoised_output] = ProcessOutput(
+        self.outputs[ost.Output.denoised_output] = ProcessOutput(
             "The input image with the denoised mask applied.",
             "Denoiser",
             "Denoised Output",
@@ -544,13 +327,13 @@ class ImageFile:
             ip.inpainting_radius_multiplier,
             ip.inpainting_isolation_radius,
         ]
-        self.outputs[Output.inpainted_mask] = ProcessOutput(
+        self.outputs[ost.Output.inpainted_mask] = ProcessOutput(
             "The inpainted sections around the text that was poorly cleaned, if at all.",
             "Inpainter",
             "Inpainted Mask",
             inpaint_settings,
         )
-        self.outputs[Output.inpainted_output] = ProcessOutput(
+        self.outputs[ost.Output.inpainted_output] = ProcessOutput(
             "The input image: cleaned, denoised (if enabled), and inpainted.",
             "Inpainter",
             "Inpainted Output",

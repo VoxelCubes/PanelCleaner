@@ -7,6 +7,7 @@ import torch
 
 import pcleaner.config as cfg
 import pcleaner.gui.image_file as imf
+import pcleaner.output_structures as ost
 import pcleaner.gui.worker_thread as wt
 from pcleaner.comic_text_detector.inference import TextDetector
 from pcleaner.ctd_interface import process_image
@@ -25,7 +26,7 @@ def model2annotations_gui(
     no_text_detection: bool,
     visualize_raw_boxes: bool,
     partial_progress_data: partial,
-    progress_callback: imf.ProgressSignal | None,
+    progress_callback: ost.ProgressSignal | None,
     abort_flag: wt.SharableFlag,
 ):
     """
@@ -66,11 +67,11 @@ def model2annotations_gui(
     """
 
     if progress_callback is not None:
-        progress_callback.emit(partial_progress_data(imf.ProgressType.begin_step))
+        progress_callback.emit(partial_progress_data(ost.ProgressType.begin_step))
 
     def inc_progress() -> None:
         if progress_callback is not None:
-            progress_callback.emit(partial_progress_data(imf.ProgressType.incremental))
+            progress_callback.emit(partial_progress_data(ost.ProgressType.incremental))
 
     num_processes = min(config_detector.concurrent_models, len(img_list))
 

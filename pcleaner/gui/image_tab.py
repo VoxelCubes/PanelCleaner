@@ -9,6 +9,7 @@ from loguru import logger
 import pcleaner.config as cfg
 import pcleaner.gui.image_details_driver as idd
 import pcleaner.gui.image_file as imf
+import pcleaner.output_structures as ost
 import pcleaner.gui.structures as st
 import pcleaner.ocr.ocr as ocr
 
@@ -39,7 +40,7 @@ class ImageTab(Qw.QTabWidget):
         config: cfg.Config,
         shared_ocr_model: st.Shared[ocr.OcrProcsType],
         thread_queue: Qc.QThreadPool,
-        progress_callback: Callable[[imf.ProgressData], None],
+        progress_callback: Callable[[ost.ProgressData], None],
         profile_changed_signal: Qc.Signal,
         abort_signal: Qc.Signal,
     ):
@@ -113,8 +114,8 @@ class ImageTab(Qw.QTabWidget):
             self.open_images.pop(path)
             self.removeTab(index)
 
-    @Slot(imf.Step)
-    def update_tabs(self, step: imf.Step = None) -> None:
+    @Slot(ost.Step)
+    def update_tabs(self, step: ost.Step = None) -> None:
         """
         Update the thumbnails in the currently active image details tab, if any.
 

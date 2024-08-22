@@ -4,6 +4,7 @@ from pathlib import Path
 from attrs import frozen, define
 
 import pcleaner.gui.image_file as imf
+import pcleaner.output_structures as ost
 import pcleaner.structures as st
 import pcleaner.config as cfg
 
@@ -38,13 +39,13 @@ class CleaningReviewOptions:
     the review.
     """
 
-    review_output: imf.Output
-    review_mask_outputs: list[imf.Output]
+    review_output: ost.Output
+    review_mask_outputs: list[ost.Output]
     show_isolated_text: bool
     export_afterwards: bool
     config: cfg.Config
     output_directory: Path
-    requested_outputs: list[imf.Output]
+    requested_outputs: list[ost.Output]
     image_files: list[imf.ImageFile]
 
 

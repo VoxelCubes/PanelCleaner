@@ -14,6 +14,7 @@ import pcleaner.config as cfg
 import pcleaner.ctd_interface as ctd
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
+import pcleaner.output_structures as ost
 import pcleaner.gui.structures as gst
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
@@ -61,8 +62,8 @@ class FileTable(CTableWidget):
 
     requesting_image_preview = Qc.Signal(imf.ImageFile)
 
-    step_icons_dark: dict[imf.ImageAnalyticCategory, Qg.QIcon]
-    step_icons_light: dict[imf.ImageAnalyticCategory, Qg.QIcon]
+    step_icons_dark: dict[ost.ImageAnalyticCategory, Qg.QIcon]
+    step_icons_light: dict[ost.ImageAnalyticCategory, Qg.QIcon]
     shared_theme_is_dark: gst.Shared[bool]
 
     last_header_widths: list[int]
@@ -98,11 +99,11 @@ class FileTable(CTableWidget):
         for dark_or_light in ["dark", "light"]:
             icons = {}
             for icon_name, analytic_category in [
-                ("ocr_box_removed.svg", imf.ImageAnalyticCategory.ocr_removed),
-                ("mask_failed.svg", imf.ImageAnalyticCategory.mask_failed),
-                ("mask_perfect.svg", imf.ImageAnalyticCategory.mask_perfect),
-                ("mask_denoised.svg", imf.ImageAnalyticCategory.denoised),
-                ("mask_inpainting.svg", imf.ImageAnalyticCategory.inpainted),
+                ("ocr_box_removed.svg", ost.ImageAnalyticCategory.ocr_removed),
+                ("mask_failed.svg", ost.ImageAnalyticCategory.mask_failed),
+                ("mask_perfect.svg", ost.ImageAnalyticCategory.mask_perfect),
+                ("mask_denoised.svg", ost.ImageAnalyticCategory.denoised),
+                ("mask_inpainting.svg", ost.ImageAnalyticCategory.inpainted),
             ]:
                 icons[analytic_category] = gu.load_custom_icon(icon_name, dark_or_light)
 
@@ -415,17 +416,17 @@ class FileTable(CTableWidget):
                 grid_layout.addWidget(num_label, 1, grid_col)
 
                 # Add a helpful tooltip to both the icon and the label.
-                if analytic == imf.ImageAnalyticCategory.ocr_removed:
+                if analytic == ost.ImageAnalyticCategory.ocr_removed:
                     tooltip = self.tr("Number of boxes removed by the OCR model / total boxes")
-                elif analytic == imf.ImageAnalyticCategory.mask_failed:
+                elif analytic == ost.ImageAnalyticCategory.mask_failed:
                     tooltip = self.tr(
                         "Number of boxes that failed to generate a mask / total boxes"
                     )
-                elif analytic == imf.ImageAnalyticCategory.mask_perfect:
+                elif analytic == ost.ImageAnalyticCategory.mask_perfect:
                     tooltip = self.tr("Number of boxes that were perfectly masked / total boxes")
-                elif analytic == imf.ImageAnalyticCategory.denoised:
+                elif analytic == ost.ImageAnalyticCategory.denoised:
                     tooltip = self.tr("Number of boxes that were denoised / total boxes")
-                elif analytic == imf.ImageAnalyticCategory.inpainted:
+                elif analytic == ost.ImageAnalyticCategory.inpainted:
                     tooltip = self.tr("Number of boxes that were inpainted")
                 else:
                     raise ValueError(f"Unknown analytic {analytic}")
@@ -534,7 +535,7 @@ class FileTable(CTableWidget):
         for path, (num_removed, total) in analytics_dict.items():
             img_file = self.files[path]
             img_file.analytics_data.set_category(
-                imf.ImageAnalyticCategory.ocr_removed, num_removed, total
+                ost.ImageAnalyticCategory.ocr_removed, num_removed, total
             )
         self.update_all_rows()
 
@@ -567,10 +568,10 @@ class FileTable(CTableWidget):
         for path, (num_failed, num_perfect, total) in analytics_dict.items():
             img_file = self.files[path]
             img_file.analytics_data.set_category(
-                imf.ImageAnalyticCategory.mask_failed, num_failed, total
+                ost.ImageAnalyticCategory.mask_failed, num_failed, total
             )
             img_file.analytics_data.set_category(
-                imf.ImageAnalyticCategory.mask_perfect, num_perfect, total
+                ost.ImageAnalyticCategory.mask_perfect, num_perfect, total
             )
 
         self.update_all_rows()
@@ -594,7 +595,7 @@ class FileTable(CTableWidget):
 
             # Update the number of boxes that were denoised directly.
             self.files[path].analytics_data.set_category(
-                imf.ImageAnalyticCategory.denoised, denoised, total
+                ost.ImageAnalyticCategory.denoised, denoised, total
             )
 
         self.update_all_rows()
@@ -610,7 +611,7 @@ class FileTable(CTableWidget):
         for analytic in inpaint_analytics:
             path = analytic.path
             self.files[path].analytics_data.set_category(
-                imf.ImageAnalyticCategory.inpainted, len(analytic.thicknesses), None
+                ost.ImageAnalyticCategory.inpainted, len(analytic.thicknesses), None
             )
 
         self.update_all_rows()

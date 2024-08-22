@@ -1,7 +1,6 @@
-import sys
 import platform
+import sys
 import time
-import psutil
 from copy import deepcopy
 from functools import partial
 from importlib import resources
@@ -10,38 +9,40 @@ from pathlib import Path
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+import psutil
 import torch
 from PySide6.QtCore import Slot, Signal
 from loguru import logger
 
-from pcleaner.helpers import tr
-import pcleaner.gui.supported_languages as sl
 import pcleaner.analytics as an
 import pcleaner.cli_utils as cu
 import pcleaner.config as cfg
 import pcleaner.gui.about_driver as ad
+import pcleaner.gui.file_manager_extension_driver as fmed
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
-import pcleaner.gui.output_review_driver as red
-import pcleaner.gui.ocr_review_driver as ocrd
+import pcleaner.gui.issue_reporter_driver as ird
 import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.new_profile_driver as npd
+import pcleaner.gui.ocr_review_driver as ocrd
+import pcleaner.gui.output_review_driver as red
 import pcleaner.gui.processing as prc
 import pcleaner.gui.profile_parser as pp
 import pcleaner.gui.setup_greeter_driver as sgd
-import pcleaner.gui.issue_reporter_driver as ird
 import pcleaner.gui.structures as gst
+import pcleaner.gui.supported_languages as sl
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
-import pcleaner.structures as st
 import pcleaner.model_downloader as md
-import pcleaner.gui.file_manager_extension_driver as fmed
+import pcleaner.ocr.ocr as ocr
+import pcleaner.output_structures as ost
 import pcleaner.profile_cli as pc
+import pcleaner.structures as st
 from pcleaner import __display_name__, __version__
 from pcleaner import data
 from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
-import pcleaner.ocr.ocr as ocr
+from pcleaner.helpers import tr
 
 ANALYTICS_COLUMNS = 74
 
@@ -70,7 +71,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     )  # Used for tasks that need to run sequentially, without blocking the gui.
 
     progress_current: int
-    progress_step_start: imf.Step | None  # When None, no processing is running.
+    progress_step_start: ost.Step | None  # When None, no processing is running.
 
     cleaning_review_options: None | gst.CleaningReviewOptions
     ocr_review_options: None | gst.OcrReviewOptions
@@ -99,7 +100,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.startup_files = files_to_open
 
         self.progress_current: int = 0
-        self.progress_step_start: imf.Step | None = None
+        self.progress_step_start: ost.Step | None = None
         self.cleaning_review_options = None
         self.ocr_review_options = None
 
@@ -1348,39 +1349,39 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         request_review = self.checkBox_review_output.isChecked()
 
         requested_outputs = []
-        review_output: imf.Output
-        review_mask_output: imf.Output
+        review_output: ost.Output
+        review_mask_output: ost.Output
 
         if self.config.current_profile.inpainter.inpainting_enabled:
             if request_cleaned:
-                requested_outputs.append(imf.Output.inpainted_output)
+                requested_outputs.append(ost.Output.inpainted_output)
             if request_mask:
-                requested_outputs.append(imf.Output.inpainted_mask)
-            review_output = imf.Output.inpainted_output
-            review_mask_output = imf.Output.inpainted_mask
+                requested_outputs.append(ost.Output.inpainted_mask)
+            review_output = ost.Output.inpainted_output
+            review_mask_output = ost.Output.inpainted_mask
         elif self.config.current_profile.denoiser.denoising_enabled:
             if request_cleaned:
-                requested_outputs.append(imf.Output.denoised_output)
+                requested_outputs.append(ost.Output.denoised_output)
             if request_mask:
-                requested_outputs.append(imf.Output.denoise_mask)
-            review_output = imf.Output.denoised_output
-            review_mask_output = imf.Output.denoise_mask
+                requested_outputs.append(ost.Output.denoise_mask)
+            review_output = ost.Output.denoised_output
+            review_mask_output = ost.Output.denoise_mask
         else:
             if request_cleaned:
-                requested_outputs.append(imf.Output.masked_output)
+                requested_outputs.append(ost.Output.masked_output)
             if request_mask:
-                requested_outputs.append(imf.Output.final_mask)
-            review_output = imf.Output.masked_output
-            review_mask_output = imf.Output.final_mask
+                requested_outputs.append(ost.Output.final_mask)
+            review_output = ost.Output.masked_output
+            review_mask_output = ost.Output.final_mask
 
         if request_text:
-            requested_outputs.append(imf.Output.isolated_text)
+            requested_outputs.append(ost.Output.isolated_text)
 
         # Edge case: Only the isolated text was requested.
         # Limit the review output and mask to the simple masked output.
-        if requested_outputs == [imf.Output.isolated_text]:
-            review_output = imf.Output.masked_output
-            review_mask_output = imf.Output.final_mask
+        if requested_outputs == [ost.Output.isolated_text]:
+            review_output = ost.Output.masked_output
+            review_mask_output = ost.Output.final_mask
 
         # Check for goofballs that requested no outputs.
         if not requested_outputs:
@@ -1398,7 +1399,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # instead doing that in a second processing run launched after
         # the review was completed and approved.
         if request_output and not request_review:
-            requested_outputs.append(imf.Output.write_output)
+            requested_outputs.append(ost.Output.write_output)
 
         logger.info(f"Requested outputs: {requested_outputs}")
 
@@ -1413,9 +1414,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             # Compile the list of all mask outputs that will need to be assembled.
             # Get all up to and including the requested output.
             possible_masks = [
-                imf.Output.final_mask,
-                imf.Output.denoise_mask,
-                imf.Output.inpainted_mask,
+                ost.Output.final_mask,
+                ost.Output.denoise_mask,
+                ost.Output.inpainted_mask,
             ]
             review_mask_outputs = [mask for mask in possible_masks if mask <= review_mask_output]
 
@@ -1461,7 +1462,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.info("Starting post review export.")
         worker = wt.Worker(
             self.generate_output,
-            self.cleaning_review_options.requested_outputs + [imf.Output.write_output],
+            self.cleaning_review_options.requested_outputs + [ost.Output.write_output],
             self.cleaning_review_options.output_directory,
             self.cleaning_review_options.image_files,
             self.cleaning_review_options.config,
@@ -1517,11 +1518,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     def generate_output(
         self,
-        outputs: list[imf.Output],
+        outputs: list[ost.Output],
         output_directory: Path,
         image_files: list[imf.ImageFile],
         config: cfg.Config,
-        progress_callback: imf.ProgressSignal,
+        progress_callback: ost.ProgressSignal,
         abort_flag: wt.SharableFlag,
     ) -> None:
         """
@@ -1622,7 +1623,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         output_directory: Path,
         image_files: list[imf.ImageFile],
         csv_output: bool,
-        progress_callback: imf.ProgressSignal,
+        progress_callback: ost.ProgressSignal,
         abort_flag: wt.SharableFlag,
     ) -> None:
         """
@@ -1726,25 +1727,25 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             error,
         )
 
-    @Slot(imf.ProgressData)
-    def show_current_progress(self, progress_data: imf.ProgressData) -> None:
+    @Slot(ost.ProgressData)
+    def show_current_progress(self, progress_data: ost.ProgressData) -> None:
         # Try to update thumbnails in tabs.
         # Ignore spammy progress types that don't actually create new steps.
         if progress_data.progress_type not in (
-            imf.ProgressType.start,
-            imf.ProgressType.begin_step,
-            imf.ProgressType.incremental,
-            imf.ProgressType.absolute,
+            ost.ProgressType.start,
+            ost.ProgressType.begin_step,
+            ost.ProgressType.incremental,
+            ost.ProgressType.absolute,
         ):
             self.image_tab.update_tabs(progress_data.current_step)
 
-        if progress_data.progress_type == imf.ProgressType.start:
+        if progress_data.progress_type == ost.ProgressType.start:
             # Processing begins, initialize what needs to be.
             # This one is needed because the image details panel also wants to be able to offer aborting.
             self.disable_running_cleaner()
             return
 
-        elif progress_data.progress_type == imf.ProgressType.begin_step:
+        elif progress_data.progress_type == ost.ProgressType.begin_step:
             # This marks the beginning of a new processing step.
             self.show_progress_drawer()
             self.progress_current = 0
@@ -1760,19 +1761,19 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     )
                 )
 
-        elif progress_data.progress_type == imf.ProgressType.incremental:
+        elif progress_data.progress_type == ost.ProgressType.incremental:
             self.progress_current += progress_data.value
 
-        elif progress_data.progress_type == imf.ProgressType.absolute:
+        elif progress_data.progress_type == ost.ProgressType.absolute:
             self.progress_current = progress_data.value
 
-        elif progress_data.progress_type == imf.ProgressType.textDetection_done:
+        elif progress_data.progress_type == ost.ProgressType.textDetection_done:
             # This just exists to trigger the update for tabs.
             # That's why this needs to be a different type that isn't being ignored
             # by the guard in the beginning of this function.
             pass
 
-        elif progress_data.progress_type == imf.ProgressType.analyticsOCR:
+        elif progress_data.progress_type == ost.ProgressType.analyticsOCR:
             logger.info(f"Showing ocr analytics...")
             # Append the formatted analytics to the text edit.
             ocr_analytics, ocr_max_size = progress_data.value
@@ -1780,7 +1781,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
             self.file_table.show_ocr_mini_analytics(ocr_analytics)
 
-        elif progress_data.progress_type == imf.ProgressType.analyticsMasker:
+        elif progress_data.progress_type == ost.ProgressType.analyticsMasker:
             # Show analytics.
             logger.info(f"Showing masker analytics...")
             masker_analytics_raw, masker_profile = progress_data.value
@@ -1790,7 +1791,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
             self.file_table.show_masker_mini_analytics(masker_analytics_raw)
 
-        elif progress_data.progress_type == imf.ProgressType.analyticsDenoiser:
+        elif progress_data.progress_type == ost.ProgressType.analyticsDenoiser:
             # Show analytics.
             logger.info(f"Showing denoiser analytics...")
             denoise_analytics_raw, min_deviation, max_deviation = progress_data.value
@@ -1803,7 +1804,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
             self.file_table.show_denoise_mini_analytics(denoise_analytics_raw, min_deviation)
 
-        elif progress_data.progress_type == imf.ProgressType.analyticsInpainter:
+        elif progress_data.progress_type == ost.ProgressType.analyticsInpainter:
             # Show analytics.
             logger.info(f"Showing inpainter analytics...")
             (
@@ -1820,7 +1821,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.textEdit_analytics.append(gu.ansi_to_html(analytics_str))
             self.file_table.show_inpaint_mini_analytics(inpainter_analytics_raw)
 
-        elif progress_data.progress_type == imf.ProgressType.outputOCR:
+        elif progress_data.progress_type == ost.ProgressType.outputOCR:
             # Show ocr output.
             logger.info(f"Showing ocr output...")
             ocr_output, raw_analytics = progress_data.value
@@ -1830,11 +1831,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.textEdit_analytics.append(ocr_output + "\n\n")
             return  # Don't update the progress bar.
 
-        elif progress_data.progress_type == imf.ProgressType.end:
+        elif progress_data.progress_type == ost.ProgressType.end:
             # This marks the end of a processing step.
             self.output_worker_finished()
             return  # Don't update the progress bar.
-        elif progress_data.progress_type == imf.ProgressType.aborted:
+        elif progress_data.progress_type == ost.ProgressType.aborted:
             # Worker aborted, clean up.
             self.output_worker_finished()
             return
@@ -1847,7 +1848,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.progressBar_individual.setMaximum(progress_data.total_images)
         self.progressBar_total.setValue(progress_data.current_step.value)
         self.progressBar_total.setMaximum(
-            imf.output_to_step[max(progress_data.target_outputs)].value
+            ost.output_to_step[max(progress_data.target_outputs)].value
         )
         # Update the label.
         self.label_current_step.setText(

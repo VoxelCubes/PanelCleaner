@@ -9,6 +9,7 @@ tremendously, and also provide far worse context for the translators.
 
 This file needs to be run before the Makefile action that refreshes the source .ts file.
 """
+
 from io import StringIO
 from datetime import datetime
 from pathlib import Path
@@ -16,6 +17,7 @@ from pathlib import Path
 from attrs import define
 
 import pcleaner.gui.image_file as imf
+import pcleaner.output_structures as ost
 import pcleaner.gui.profile_parser as pp
 
 
@@ -31,7 +33,7 @@ class ProcessString:
     output_name: str | None
 
 
-def extract_step_strings(outputs: dict[imf.Output, imf.ProcessOutput]) -> list[ProcessString]:
+def extract_step_strings(outputs: dict[ost.Output, imf.ProcessOutput]) -> list[ProcessString]:
     """
     Extracts all the strings from the process pipeline.
     """
@@ -43,9 +45,11 @@ def extract_step_strings(outputs: dict[imf.Output, imf.ProcessOutput]) -> list[P
             ProcessString(
                 process_output.description.replace("\n", "\\n"),
                 process_output.step_name,
-                process_output.output_name
-                if process_output.output_name is not None
-                else pp.to_display_name(output.name),
+                (
+                    process_output.output_name
+                    if process_output.output_name is not None
+                    else pp.to_display_name(output.name)
+                ),
             )
         )
     return process_strings

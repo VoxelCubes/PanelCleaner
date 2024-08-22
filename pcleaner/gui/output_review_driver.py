@@ -13,6 +13,7 @@ import pcleaner.config as cfg
 import pcleaner.gui.structures as gst
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
+import pcleaner.output_structures as ost
 import pcleaner.gui.image_viewer as iv
 from pcleaner.helpers import f_plural
 from pcleaner.gui.ui_generated_files.ui_OutputReview import Ui_OutputReview
@@ -35,8 +36,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
     """
 
     images: list[imf.ImageFile]
-    target_output: imf.Output | None
-    mask_outputs: list[imf.Output] | None
+    target_output: ost.Output | None
+    mask_outputs: list[ost.Output] | None
     show_isolated_text: bool
     config: cfg.Config
     confirm_closing: bool
@@ -58,8 +59,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         self,
         parent=None,
         images: list[imf.ImageFile] = None,
-        target_output: imf.Output | None = None,
-        mask_outputs: list[imf.Output] | None = None,
+        target_output: ost.Output | None = None,
+        mask_outputs: list[ost.Output] | None = None,
         show_isolated_text: bool = False,
         config: cfg.Config = None,
         confirm_closing: bool = False,
@@ -289,7 +290,7 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         original_path = image.path
         output_path = image.outputs[self.target_output].path
         mask_paths = [image.outputs[mask].path for mask in self.mask_outputs]
-        isolated_text_path = image.outputs[imf.Output.isolated_text].path
+        isolated_text_path = image.outputs[ost.Output.isolated_text].path
 
         self.label_file_name.setText(str(original_path))
         self.label_file_name.setToolTip(str(original_path))
