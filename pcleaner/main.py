@@ -345,9 +345,15 @@ def run_cleaner(
         logger.debug("Inpainting is disabled in the config, skipping inpainting step.")
         skip_inpainting = True
 
-    # Catch jokesters who want to skip all 4 steps.
-    if skip_text_detection and skip_pre_processing and skip_masking and skip_denoising:
-        print("Well how about that, you want to skip all 4 steps? I guess I'm not needed here.")
+    # Catch jokesters who want to skip all 5 steps.
+    if (
+        skip_text_detection
+        and skip_pre_processing
+        and skip_masking
+        and skip_denoising
+        and skip_inpainting
+    ):
+        print("Well how about that, you want to skip all 5 steps? I guess I'm not needed here.")
         return
 
     cache_dir = config.get_cleaner_cache_dir()
