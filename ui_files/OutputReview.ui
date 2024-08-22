@@ -290,6 +290,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>View Mode:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QComboBox" name="comboBox_view_mode">
            <item>
             <property name="text">

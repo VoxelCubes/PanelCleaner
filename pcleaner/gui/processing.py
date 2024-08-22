@@ -1,8 +1,5 @@
-import itertools
-import csv
 from copy import deepcopy, copy
 from functools import partial
-from io import StringIO
 from multiprocessing import Pool
 from pathlib import Path
 from typing import Callable
@@ -10,14 +7,13 @@ from typing import Callable
 import torch
 from PIL import Image
 from loguru import logger
-from natsort import natsorted
 
 import pcleaner.config as cfg
 import pcleaner.denoiser as dn
 import pcleaner.gui.ctd_interface_gui as ctm
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.worker_thread as wt
-import pcleaner.helpers as hp
+import pcleaner.output_path_generator as opg
 import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
@@ -537,7 +533,7 @@ def generate_output(
                 logger.debug(f"Matching: {len(zipped_jsons)} json files.")
                 logger.warning("Mismatched number of json files for inpainting.")
 
-            # Check the inpainting model is avaliable.
+            # Check the inpainting model is available.
             if not md.is_inpainting_downloaded(config):
                 raise FileNotFoundError(tr("Inpainting model not found."))
 
@@ -616,18 +612,56 @@ def generate_output(
             )
         )
 
-        for image_obj in image_objects:
-            check_abortion()
-            copy_to_output(image_obj, target_outputs, output_dir, profile)
-
-            progress_callback.emit(
-                imf.ProgressData(
-                    len(image_objects),
-                    target_outputs,
-                    imf.Step.output,
-                    imf.ProgressType.incremental,
-                )
+        # Pack all the arguments into a dataclass.
+        data = [
+            (
+                image_obj.path,
+                cache_dir,
+                image_obj.outputs[imf.Output.input].path,
+                target_outputs,
+                output_dir,
+                profile.general.preferred_file_type,
+                profile.general.preferred_mask_file_type,
+                profile.denoiser.denoising_enabled,
             )
+            for image_obj in image_objects
+        ]
+
+        if len(image_objects) > 2:
+            with Pool() as pool:
+                for _ in pool.imap_unordered(copy_to_output_batched, data):
+                    check_abortion()
+
+                    progress_callback.emit(
+                        imf.ProgressData(
+                            len(image_objects),
+                            target_outputs,
+                            imf.Step.output,
+                            imf.ProgressType.incremental,
+                        )
+                    )
+        else:
+            for image_obj in image_objects:
+                check_abortion()
+                copy_to_output(
+                    image_obj.path,
+                    cache_dir,
+                    image_obj.outputs[imf.Output.input].path,
+                    target_outputs,
+                    output_dir,
+                    profile.general.preferred_file_type,
+                    profile.general.preferred_mask_file_type,
+                    profile.denoiser.denoising_enabled,
+                )
+
+                progress_callback.emit(
+                    imf.ProgressData(
+                        len(image_objects),
+                        target_outputs,
+                        imf.Step.output,
+                        imf.ProgressType.incremental,
+                    )
+                )
 
     progress_callback.emit(
         imf.ProgressData(
@@ -639,12 +673,20 @@ def generate_output(
     )
 
 
+def copy_to_output_batched(arg_tuple: tuple) -> None:
+    copy_to_output(*arg_tuple)
+
+
 def copy_to_output(
-    image_object: imf.ImageFile,
+    original_image_path: Path,
+    cache_dir: Path,
+    cached_base_image_path: Path,
     outputs: list[imf.Output],
     output_directory: Path,
-    profile: cfg.Profile,
-):
+    preferred_file_type: str | None,
+    preferred_mask_file_type: str,
+    denoising_enabled: bool,
+) -> None:
     """
     Copy or export the outputs from the cache directory to the output directory.
     Output paths and preferred file types are taken into account.
@@ -660,68 +702,90 @@ def copy_to_output(
 
     This may raise OSError in various circumstances.
 
-    :param image_object: The image object to copy the outputs for.
+    :param original_image_path: The path to the original file to read it's metadata.
+    :param cache_dir: Where the cached outputs are.
+    :param cached_base_image_path: One of the cached images, to obtain this image's uuid.
     :param outputs: The outputs to copy.
     :param output_directory: The directory to write the outputs to.
-    :param profile: The profile to use.
+    :param preferred_file_type: Profile setting.
+    :param preferred_mask_file_type: Profile setting.
+    :param denoising_enabled: Profile setting.
     """
 
     if output_directory.is_absolute():
         # When absolute, the output directory is used as is.
-        final_out_path = output_directory / image_object.path.name
+        final_out_path = output_directory / original_image_path.name
+        path_gen = opg.OutputPathGenerator(original_image_path, output_directory, export_mode=True)
     else:
         # Otherwise, the output directory is relative to the original image's parent directory.
-        final_out_path = image_object.path.parent / output_directory / image_object.path.name
+        final_out_path = original_image_path.parent / output_directory / original_image_path.name
+        path_gen = opg.OutputPathGenerator(
+            original_image_path, original_image_path.parent / output_directory, export_mode=True
+        )
 
     final_out_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Create png paths for the outputs.
-    cleaned_out_path = final_out_path.with_name(final_out_path.stem + "_clean.png")
-    masked_out_path = final_out_path.with_name(final_out_path.stem + "_mask.png")
-    text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
+    cleaned_out_path = path_gen.clean
+    masked_out_path = path_gen.mask
+    text_out_path = path_gen.text
+
+    cache_path_gen = opg.OutputPathGenerator(original_image_path, cache_dir, cached_base_image_path)
 
     # Check what the preferred output format is.
-    if profile.general.preferred_file_type is None:
+    if preferred_file_type is None:
         # Use the original file type by default.
-        cleaned_out_path = cleaned_out_path.with_suffix(image_object.path.suffix)
+        cleaned_out_path = cleaned_out_path.with_suffix(original_image_path.suffix)
     else:
-        cleaned_out_path = cleaned_out_path.with_suffix(profile.general.preferred_file_type)
+        cleaned_out_path = cleaned_out_path.with_suffix(preferred_file_type)
 
-    if profile.general.preferred_mask_file_type is None:
+    if preferred_mask_file_type is None:
         # Use png by default.
         masked_out_path = masked_out_path.with_suffix(".png")
         text_out_path = text_out_path.with_suffix(".png")
     else:
-        masked_out_path = masked_out_path.with_suffix(profile.general.preferred_mask_file_type)
-        text_out_path = text_out_path.with_suffix(profile.general.preferred_mask_file_type)
+        masked_out_path = masked_out_path.with_suffix(preferred_mask_file_type)
+        text_out_path = text_out_path.with_suffix(preferred_mask_file_type)
+
+    # Preload the original image.
+    original_image = Image.open(original_image_path)
+    original_size = original_image.size
 
     # Output optimized images for all requested outputs.
     if imf.Output.masked_output in outputs:
         ops.save_optimized(
-            image_object.outputs[imf.Output.masked_output].path, cleaned_out_path, image_object.path
+            # image_object.outputs[imf.Output.masked_output].path, cleaned_out_path, original_image
+            cache_path_gen.clean,
+            cleaned_out_path,
+            original_image,
         )
 
     if imf.Output.final_mask in outputs:
         # First scale the output mask to the original image size.
-        final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
-        final_mask = final_mask.resize(image_object.size, Image.NEAREST)
+        final_mask = Image.open(cache_path_gen.combined_mask)
+        # final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        final_mask = final_mask.resize(original_size, Image.NEAREST)
         ops.save_optimized(final_mask, masked_out_path)
 
     if imf.Output.isolated_text in outputs:
-        ops.save_optimized(image_object.outputs[imf.Output.isolated_text].path, text_out_path)
+        ops.save_optimized(cache_path_gen.text, text_out_path)
+        # ops.save_optimized(image_object.outputs[imf.Output.isolated_text].path, text_out_path)
 
     if imf.Output.denoised_output in outputs:
         ops.save_optimized(
-            image_object.outputs[imf.Output.denoised_output].path,
+            cache_path_gen.clean_denoised,
             cleaned_out_path,
-            image_object.path,
+            original_image,
+            # image_object.outputs[imf.Output.denoised_output].path, cleaned_out_path, original_image
         )
 
     if imf.Output.denoise_mask in outputs:
         # Special case: Here we need to take the final mask, scale it up, and then paste this on top.
-        final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
-        final_mask = final_mask.resize(image_object.size, Image.BILINEAR)
-        denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
+        final_mask = Image.open(cache_path_gen.combined_mask)
+        # final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        final_mask = final_mask.resize(original_size, Image.BILINEAR)
+        denoised_mask = Image.open(cache_path_gen.noise_mask)
+        # denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
         # Ensure both images are RGBA to safely alpha composite them.
         final_mask = final_mask.convert("RGBA")
         denoised_mask = denoised_mask.convert("RGBA")
@@ -731,24 +795,28 @@ def copy_to_output(
 
     if imf.Output.inpainted_output in outputs:
         ops.save_optimized(
-            image_object.outputs[imf.Output.inpainted_output].path,
+            cache_path_gen.clean_inpaint,
             cleaned_out_path,
-            image_object.path,
+            original_image,
+            # image_object.outputs[imf.Output.inpainted_output].path, cleaned_out_path, original_image
         )
 
     if imf.Output.inpainted_mask in outputs:
         # Special case: Here we need to take the final mask, scale it up, and then paste the denoising
         # mask on top (if denoising), and then paste the inpainting mask on top of that.
-        final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
-        final_mask = final_mask.resize(image_object.size, Image.NEAREST)
+        final_mask = Image.open(cache_path_gen.combined_mask)
+        # final_mask = Image.open(image_object.outputs[imf.Output.final_mask].path)
+        final_mask = final_mask.resize(original_size, Image.NEAREST)
         final_mask = final_mask.convert("RGBA")
 
-        if profile.denoiser.denoising_enabled:
-            denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
+        if denoising_enabled:
+            denoised_mask = Image.open(cache_path_gen.noise_mask)
+            # denoised_mask = Image.open(image_object.outputs[imf.Output.denoise_mask].path)
             denoised_mask = denoised_mask.convert("RGBA")
             final_mask.alpha_composite(denoised_mask)
 
-        inpainted_mask = Image.open(image_object.outputs[imf.Output.inpainted_mask].path)
+        inpainted_mask = Image.open(cache_path_gen.inpainting)
+        # inpainted_mask = Image.open(image_object.outputs[imf.Output.inpainted_mask].path)
         inpainted_mask = inpainted_mask.convert("RGBA")
         final_mask.alpha_composite(inpainted_mask)
 

@@ -6,6 +6,7 @@ from loguru import logger
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
+import pcleaner.output_path_generator as opg
 
 
 def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
@@ -25,18 +26,14 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     m_conf = m_data.masker_config
 
     original_path = Path(page_data.original_path)
+    path_gen = opg.OutputPathGenerator(original_path, m_data.cache_dir, m_data.json_path)
     original_img_path_as_png = original_path.with_suffix(
         ".png"
     )  # Make sure all derived file names are .png.
-    # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json
-    clobber_protection_prefix = m_data.json_path.stem.split("_")[0]
-    cache_out_path = (
-        m_data.cache_dir / f"{clobber_protection_prefix}_{original_img_path_as_png.name}"
-    )
 
-    def save_mask(img, name_suffix) -> None:
+    def save_mask(img, path: Path) -> None:
         if m_data.show_masks:
-            img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
+            img.save(path)
 
     # Load the base image.
     base_image = Image.open(page_data.image_path)
@@ -44,7 +41,7 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     # Make a box mask. These will serve as basic masks as opposed to the AI generated precise ones.
     box_mask = page_data.make_box_mask(base_image.size, st.BoxType.EXTENDED_BOX)
 
-    save_mask(box_mask, "_box_mask")
+    save_mask(box_mask, path_gen.box_mask)
 
     # Load the precise AI-generated mask.
     mask = Image.open(page_data.mask_path)
@@ -53,7 +50,7 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     # Cut the mask to the box mask, leaving only the intersection.
     cut_mask = ops.mask_intersection(mask, box_mask)
 
-    save_mask(cut_mask, "_cut_mask")
+    save_mask(cut_mask, path_gen.cut_mask)
 
     # Use the merged extended boxes to guard against overlapping boxes after having extended them.
     # Generate varying sizes of the precise mask and then rank them based on border uniformity.
@@ -84,33 +81,25 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
 
     if m_data.show_masks:
         # Save the masks in the debug folder.
-        ops.visualize_mask_fitments(
-            base_image, mask_fitments, cache_out_path.with_stem(cache_out_path.stem + "_masks")
-        )
+        ops.visualize_mask_fitments(base_image, mask_fitments, path_gen.mask_fitments)
 
         # Output the result with the debug filter.
         combined_mask_debug = ops.apply_debug_filter_to_mask(combined_mask, m_conf.debug_mask_color)
         base_image_copy = base_image.copy()
         base_image_copy.paste(combined_mask_debug, (0, 0), combined_mask_debug)
-        save_mask(base_image_copy, "_with_masks")
+        save_mask(base_image_copy, path_gen.with_masks)
 
         # Output diagnostics per box.
-        ops.visualize_standard_deviations(
-            base_image,
-            mask_fitments,
-            m_conf,
-            cache_out_path.with_stem(cache_out_path.stem + "_std_devs"),
-        )
+        ops.visualize_standard_deviations(base_image, mask_fitments, m_conf, path_gen.std_devs)
 
     # Save the combined mask for denoising.
-    combined_mask_path = cache_out_path.with_stem(cache_out_path.stem + "_combined_mask")
-    combined_mask.save(combined_mask_path)
+    combined_mask.save(path_gen.combined_mask)
     save_denoising_data(
         Path(page_data.original_path),
         original_img_path_as_png,
-        combined_mask_path,
+        path_gen.combined_mask,
         Path(page_data.image_path),
-        cache_out_path,
+        path_gen.mask_data_json,
         page_data.scale,
         mask_fitments,
     )
@@ -126,14 +115,14 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     cleaned_image.paste(combined_mask, (0, 0), combined_mask)
 
     if m_data.show_masks or m_data.output_dir is None:
-        cleaned_image.save(cache_out_path.with_stem(cache_out_path.stem + "_clean"))
+        cleaned_image.save(path_gen.clean)
 
     if m_data.output_dir is None and m_data.extract_text:
         # Extract the text layer from the image.
         logger.debug(f"Extracting text from {original_path}")
         original_image = Image.open(original_path)
         text_img = ops.extract_text(original_image, combined_mask)
-        text_img.save(cache_out_path.with_stem(cache_out_path.stem + "_text"))
+        text_img.save(path_gen.text)
 
     # Settle on the final output path for the cleaned image.
     # Check if outputting directly.
@@ -197,7 +186,7 @@ def save_denoising_data(
     target_path: Path,
     mask_path: Path,
     base_image_path: Path,
-    cache_path: Path,
+    json_output_path: Path,
     scale: float,
     mask_fitments: list[st.MaskFittingResults],
 ):
@@ -208,7 +197,7 @@ def save_denoising_data(
     :param target_path: The path to the original image with png suffix.
     :param mask_path: The path to the combined mask.
     :param base_image_path: The path to the cached base image.
-    :param cache_path: The path to the cache directory.
+    :param json_output_path: The path to save to.
     :param scale: The scale of the original image to the cached base image.
     :param mask_fitments: The mask fitments.
     """
@@ -223,5 +212,4 @@ def save_denoising_data(
     mask_data = st.MaskData(
         original_path, target_path, base_image_path, mask_path, scale, boxes_with_deviation
     )
-    json_path = cache_path.with_name(cache_path.stem + "#mask_data.json")
-    json_path.write_text(mask_data.to_json(), encoding="utf-8")
+    json_output_path.write_text(mask_data.to_json(), encoding="utf-8")

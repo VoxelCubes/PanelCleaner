@@ -5,6 +5,7 @@ from loguru import logger
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
+import pcleaner.output_path_generator as opg
 
 
 def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
@@ -18,16 +19,12 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     mask_data = st.MaskData.from_json(d_data.json_path.read_text(encoding="utf-8"))
     mask_image = Image.open(mask_data.mask_path)
 
-    # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json
-    clobber_protection_prefix = d_data.json_path.stem.split("_")[0]
-    cache_out_path = (
-        d_data.cache_dir
-        / f"{clobber_protection_prefix}_{mask_data.original_path.with_suffix('.png').name}"
-    )
+    original_path = Path(mask_data.original_path)
+    path_gen = opg.OutputPathGenerator(original_path, d_data.cache_dir, d_data.json_path)
 
-    def save_mask(img, name_suffix, force: bool = False) -> None:
+    def save_mask(img, path: Path, force: bool = False) -> None:
         if d_data.show_masks or force:
-            img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
+            img.save(path)
 
     # Scale the mask to the original image size, if needed.
     cleaned_image = Image.open(mask_data.original_path)
@@ -66,19 +63,11 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         combined_noise_mask = Image.new("LA", cleaned_image.size, (0, 0))
 
     # If inpainting, we need the noise mask either way.
-    save_mask(combined_noise_mask, "_noise_mask", force=i_conf.inpainting_enabled)
-    save_mask(cleaned_image, "_clean_denoised")
+    save_mask(combined_noise_mask, path_gen.noise_mask, force=i_conf.inpainting_enabled)
+    save_mask(cleaned_image, path_gen.clean_denoised)
 
     # Check if the output path is None. In that case we're only outputting to the cache directory.
     if d_data.output_dir is None:
-        # # Check if we still need to output the isolated text, otherwise we're done.
-        # if d_data.extract_text:
-        #     # Extract the text layer from the image.
-        #     logger.debug(f"Extracting text from {original_path}")
-        #     base_image = Image.open(original_path)
-        #     text_img = ops.extract_text(base_image, mask_image)
-        #     save_mask(text_img, "_text")
-        #
         # Package the analytics. We're only interested in the std deviations.
         return st.DenoiseAnalytic(
             tuple(deviation for _, deviation, _, _ in mask_data.boxes_with_stats), original_path

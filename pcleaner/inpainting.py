@@ -10,6 +10,7 @@ import pcleaner.config as cfg
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
 import pcleaner.model_downloader as md
+import pcleaner.output_path_generator as opg
 
 
 class InpaintingModel:
@@ -65,16 +66,22 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     original_image = original_image.convert("RGB")
     original_path: Path = mask_data.original_path
 
-    # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json
-    clobber_protection_prefix = i_data.page_data_json_path.stem.split("_")[0]
-    cache_out_path = (
-        i_data.cache_dir
-        / f"{clobber_protection_prefix}_{mask_data.original_path.with_suffix('.png').name}"
-    )
+    path_gen = opg.OutputPathGenerator(original_path, i_data.cache_dir, i_data.page_data_json_path)
 
-    def save_mask(img, name_suffix) -> None:
+    def save_mask(img, path: Path) -> None:
         if i_data.show_masks:
-            img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
+            img.save(path)
+
+    # # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json
+    # clobber_protection_prefix = i_data.page_data_json_path.stem.split("_")[0]
+    # cache_out_path = (
+    #     i_data.cache_dir
+    #     / f"{clobber_protection_prefix}_{mask_data.original_path.with_suffix('.png').name}"
+    # )
+    #
+    # def save_mask(img, name_suffix) -> None:
+    #     if i_data.show_masks:
+    #         img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
 
     # Collect the boxes to inpaint.
     BoxInpaintData = namedtuple("BoxInpaintData", ["box", "image", "deviation"])
@@ -132,7 +139,7 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     for box, mask, _ in padded_boxes_to_inpaint:
         combined_mask.paste(mask, (box.x1, box.y1), mask)
 
-    save_mask(combined_mask, "_inpainting_mask")
+    save_mask(combined_mask, path_gen.inpainting_mask)
 
     # Scale up the masks before inpainting.
     if original_image.size != mask_image.size:
@@ -168,16 +175,15 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
         mask_image = mask_image.resize(original_image.size, resample=Image.NEAREST)
     cleaned_image.paste(mask_image, (0, 0), mask_image)
     # Then, if denoising was enabled, apply that next.
-    expected_noise_mask_path = cache_out_path.with_name(cache_out_path.stem + "_noise_mask.png")
-    if d_conf.denoising_enabled and expected_noise_mask_path.is_file():
-        noise_mask = Image.open(expected_noise_mask_path)
+    if d_conf.denoising_enabled and path_gen.noise_mask.is_file():
+        noise_mask = Image.open(path_gen.noise_mask)
         cleaned_image.paste(noise_mask, (0, 0), noise_mask)
 
     cleaned_image.paste(inpainted_areas, (0, 0), isolated_combined_mask)
 
     # Save output.
-    save_mask(inpainted_areas, "_inpainting")
-    save_mask(cleaned_image, "_clean_inpaint")
+    save_mask(inpainted_areas, path_gen.inpainting)
+    save_mask(cleaned_image, path_gen.clean_inpaint)
 
     # Check if the output path is None. In that case we're only outputting to the cache directory.
     if i_data.output_dir is None:

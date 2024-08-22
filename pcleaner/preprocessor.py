@@ -9,6 +9,7 @@ from loguru import logger
 import pcleaner.config as cfg
 import pcleaner.ctd_interface as ctm
 import pcleaner.structures as st
+import pcleaner.output_path_generator as opg
 
 from collections import Counter
 import pcleaner.ocr.ocr as ocr
@@ -83,6 +84,9 @@ def flatten(l):
             yield from flatten(el)
         else:
             yield el
+
+
+# Adaption end.
 
 
 def prep_json_file(
@@ -233,7 +237,8 @@ def prep_json_file(
     page_data.grow_boxes(preprocessor_conf.box_reference_padding, st.BoxType.REFERENCE_BOX)
 
     # Write the json file with the cleaned data.
-    json_out_path = json_file_path.parent / f"{json_file_path.stem.replace('#raw', '')}#clean.json"
+    path_gen = opg.OutputPathGenerator(Path(original_path), Path(mask_path).parent, Path(mask_path))
+    json_out_path = path_gen.clean_json
 
     json_out_path.write_text(page_data.to_json(), encoding="utf-8")
 

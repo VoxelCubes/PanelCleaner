@@ -18,7 +18,6 @@ import json
 import multiprocessing as mp
 from math import floor, ceil
 from pathlib import Path
-from uuid import uuid4
 
 import cv2
 import numpy as np
@@ -28,6 +27,7 @@ from tqdm import tqdm
 
 import pcleaner.config as cfg
 import pcleaner.image_ops as ops
+import pcleaner.output_path_generator as opg
 from pcleaner.comic_text_detector.inference import TextDetector
 from pcleaner.comic_text_detector.utils.io_utils import imwrite, NumpyEncoder
 from pcleaner.comic_text_detector.utils.textmask import REFINEMASK_ANNOTATION
@@ -150,24 +150,10 @@ def process_image(
     img: np.ndarray = read_image(img_path)
     img, image_scale = resize_to_target(img, height_target_lower, height_target_upper)
 
-    # Prepend an index to prevent name clobbering between different files.
-    if uuid is None:
-        prefix = f"{uuid4()}_"
-    else:
-        prefix = f"{uuid}_"
-
-    img_name = prefix + img_path.stem
-    maskname = img_name + "_mask.png"
-
-    # Make names absolute paths.
-    img_name = str((save_dir / (img_name + ".png")).absolute())
-    maskname = str((save_dir / maskname).absolute())
-    raw_visualization_name = Path(
-        (save_dir / (prefix + img_path.stem + "_raw_boxes.png")).absolute()
-    )
+    path_gen = opg.OutputPathGenerator(img_path, save_dir, uuid)
 
     # Save a scaled copy of the image.
-    imwrite(img_name, img)
+    imwrite(str(path_gen.base_png), img)
     if skip_text_detection:
         # If we're only saving the scaled image, we're done.
         return
@@ -183,22 +169,20 @@ def process_image(
 
     # Inject the img_name.png and mask name and original path into the json.
     data = {
-        "image_path": img_name,
-        "mask_path": maskname,
+        "image_path": str(path_gen.base_png),
+        "mask_path": str(path_gen.raw_mask),
         "original_path": str(img_path),
         "scale": image_scale,
         "blk_list": blk_dict_list,
     }
-    # Remove the suffix and add _raw.json
-    json_path = Path(img_name).with_suffix(".json")
-    json_path = json_path.with_stem(json_path.stem + "#raw")
+    json_path = path_gen.raw_json
     logger.debug(f"Saving json file to {json_path}")
     with open(json_path, "w", encoding="utf8") as f:
         json.dump(data, f, ensure_ascii=False, cls=NumpyEncoder, indent=4)
-    imwrite(maskname, mask_refined)
+    imwrite(str(path_gen.raw_mask), mask_refined)
 
     if visualize_raw_data:
-        ops.visualize_raw_boxes(img, blk_dict_list, raw_visualization_name)
+        ops.visualize_raw_boxes(img, blk_dict_list, path_gen.raw_boxes)
 
 
 def read_image(path: Path | str) -> np.ndarray:

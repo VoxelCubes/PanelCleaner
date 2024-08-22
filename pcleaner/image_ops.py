@@ -794,6 +794,7 @@ def extract_text(base_image: Image.Image, mask: Image.Image) -> Image.Image:
 
 # SUPPORTED_IMG_TYPES = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
 
+# Map the file extension to the type constant used in Pillow.
 suffix_to_format: dict[str, str] = {
     ".jpg": "JPEG",
     ".jpeg": "JPEG",
