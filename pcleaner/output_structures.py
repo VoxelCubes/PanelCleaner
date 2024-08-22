@@ -293,6 +293,8 @@ class OutputPathGenerator:
                 return self.cut_mask
             case Output.mask_layers:
                 return self.mask_fitments
+            case Output.final_mask:
+                return self.combined_mask
             case Output.mask_overlay:
                 return self.mask_overlay
             case Output.fitment_quality:
@@ -311,6 +313,8 @@ class OutputPathGenerator:
                 return self.inpainting
             case Output.inpainted_output:
                 return self.clean_inpaint
+            case _:
+                raise ValueError(f"No path assigned for output {output}")
 
     def _attach(self, suffix: str) -> Path:
         return Path(self._output_base_path + suffix)

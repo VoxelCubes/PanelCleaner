@@ -144,21 +144,21 @@ def generate_output(
 
         return step_changed
 
-    def update_output(image_object: imf.ImageFile, output: ost.Output, suffix: str) -> None:
+    def update_output(image_object: imf.ImageFile, current_output: ost.Output) -> None:
         """
         Update the output of the given image object.
         Check if the file actually exists, and if it does, update the output path.
 
         :param image_object: The image object to update.
-        :param output: The output to update.
-        :param suffix: The suffix to add to the output path.
+        :param current_output: The output to update.
         """
         nonlocal profile, cache_dir
 
-        path = cache_dir / f"{image_object.uuid}_{image_object.path.stem}{suffix}"
+        path_gen = ost.OutputPathGenerator(image_object.path, cache_dir, image_object.uuid)
+        path = path_gen.for_output(current_output)
 
         if path.is_file():
-            image_object.outputs[output].update(path, profile)
+            image_object.outputs[current_output].update(path, profile)
 
     # ============================================== Text Detection ==============================================
 
@@ -198,12 +198,9 @@ def generate_output(
             # and then raise the exception again to stop the processing.
             check_abortion()
 
-        # Update the outputs of the image objects.
         for image_obj in step_text_detector_images:
-            update_output(image_obj, ost.Output.input, ".png")
-            update_output(image_obj, ost.Output.ai_mask, "_mask.png")
-            update_output(image_obj, ost.Output.raw_boxes, "_raw_boxes.png")
-            update_output(image_obj, ost.Output.raw_json, "#raw.json")
+            for output in ost.step_to_output[ost.Step.text_detection]:
+                update_output(image_obj, output)
 
         progress_callback.emit(
             ost.ProgressData(
@@ -239,9 +236,9 @@ def generate_output(
             # Find all the json files associated with the images.
             for image_obj in step_preprocessor_images:
                 check_abortion()
-                json_file_path = cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#raw.json"
+                path_gen = ost.OutputPathGenerator(image_obj.path, cache_dir, image_obj.uuid)
                 ocr_analytic = pp.prep_json_file(
-                    json_file_path,
+                    path_gen.raw_json,
                     preprocessor_conf=profile.preprocessor,
                     cache_masks=target_output in ost.step_to_output[ost.Step.preprocessor]
                     or output_dir is None,
@@ -260,11 +257,11 @@ def generate_output(
                     )
                 )
 
-            # Update the outputs of the image objects.
+            # Update the outputs of the image objects, skipping Output.ocr.
             for image_obj in step_preprocessor_images:
-                update_output(image_obj, ost.Output.initial_boxes, "_boxes.png")
-                update_output(image_obj, ost.Output.final_boxes, "_boxes_final.png")
-                update_output(image_obj, ost.Output.clean_json, "#clean.json")
+                update_output(image_obj, ost.Output.initial_boxes)
+                update_output(image_obj, ost.Output.final_boxes)
+                update_output(image_obj, ost.Output.clean_json)
 
             progress_callback.emit(
                 ost.ProgressData(
@@ -298,10 +295,10 @@ def generate_output(
             )
 
             # Find all the json files associated with the images.
-            json_files = (
-                cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#clean.json"
-                for image_obj in step_masker_images
-            )
+            json_files = []
+            for image_obj in step_masker_images:
+                path_gen = ost.OutputPathGenerator(image_obj.path, cache_dir, image_obj.uuid)
+                json_files.append(path_gen.clean_json)
 
             # Pack all the arguments into a dataclass.
             outputs_that_need_masks = (
@@ -365,17 +362,9 @@ def generate_output(
                         )
                     )
 
-            # Update the outputs of the image objects.
             for image_obj in step_masker_images:
-                update_output(image_obj, ost.Output.box_mask, "_box_mask.png")
-                update_output(image_obj, ost.Output.cut_mask, "_cut_mask.png")
-                update_output(image_obj, ost.Output.mask_layers, "_masks.png")
-                update_output(image_obj, ost.Output.final_mask, "_combined_mask.png")
-                update_output(image_obj, ost.Output.mask_overlay, "_with_masks.png")
-                update_output(image_obj, ost.Output.fitment_quality, "_std_devs.png")
-                update_output(image_obj, ost.Output.isolated_text, "_text.png")
-                update_output(image_obj, ost.Output.masked_output, "_clean.png")
-                update_output(image_obj, ost.Output.mask_data_json, "#mask_data.json")
+                for output in ost.step_to_output[ost.Step.masker]:
+                    update_output(image_obj, output)
 
             progress_callback.emit(
                 ost.ProgressData(
@@ -412,10 +401,10 @@ def generate_output(
             )
 
             # Find all the json files associated with the images.
-            json_files = (
-                cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#mask_data.json"
-                for image_obj in step_denoiser_images
-            )
+            json_files = []
+            for image_obj in step_denoiser_images:
+                path_gen = ost.OutputPathGenerator(image_obj.path, cache_dir, image_obj.uuid)
+                json_files.append(path_gen.mask_data_json)
 
             # Pack all the arguments into a dataclass.
             data = [
@@ -466,11 +455,9 @@ def generate_output(
                         )
                     )
 
-            # Update the outputs of the image objects.
             for image_obj in step_denoiser_images:
-                update_output(image_obj, ost.Output.denoise_mask, "_noise_mask.png")
-                update_output(image_obj, ost.Output.denoised_output, "_clean_denoised.png")
-                update_output(image_obj, ost.Output.isolated_text, "_text.png")
+                for output in ost.step_to_output[ost.Step.denoiser]:
+                    update_output(image_obj, output)
 
             progress_callback.emit(
                 ost.ProgressData(
@@ -511,27 +498,10 @@ def generate_output(
             )
 
             # Find all the json files associated with the images.
-            mask_json_files = list(
-                cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#mask_data.json"
-                for image_obj in step_inpainting_images
-            )
-            page_json_files = list(
-                cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#clean.json"
-                for image_obj in step_inpainting_images
-            )
-            # Zip together the matching json files.
-            zipped_jsons = []
-            for page_json_file in page_json_files:
-                for mask_json_file in mask_json_files:
-                    if mask_json_file.name.startswith(page_json_file.name.split("#")[0]):
-                        zipped_jsons.append((page_json_file, mask_json_file))
-                        break
-
-            if not (len(zipped_jsons) == len(page_json_files) == len(mask_json_files)):
-                logger.debug(f"Found: {len(page_json_files)} page json files.")
-                logger.debug(f"Found: {len(mask_json_files)} mask json files.")
-                logger.debug(f"Matching: {len(zipped_jsons)} json files.")
-                logger.warning("Mismatched number of json files for inpainting.")
+            json_files = []
+            for image_obj in step_inpainting_images:
+                path_gen = ost.OutputPathGenerator(image_obj.path, cache_dir, image_obj.uuid)
+                json_files.append((path_gen.clean_json, path_gen.mask_data_json))
 
             # Check the inpainting model is available.
             if not md.is_inpainting_downloaded(config):
@@ -557,7 +527,7 @@ def generate_output(
                     show_masks=True,
                     debug=debug,
                 )
-                for page_json_file, mask_json_file in zipped_jsons
+                for page_json_file, mask_json_file in json_files
             ]
 
             # Single threaded due to model loading overhead.
@@ -576,11 +546,9 @@ def generate_output(
                     )
                 )
 
-            # Update the outputs of the image objects.
             for image_obj in step_inpainting_images:
-                update_output(image_obj, ost.Output.inpainted_mask, "_inpainting.png")
-                update_output(image_obj, ost.Output.inpainted_output, "_clean_inpaint.png")
-                update_output(image_obj, ost.Output.isolated_text, "_text.png")
+                for output in ost.step_to_output[ost.Step.inpainter]:
+                    update_output(image_obj, output)
 
             progress_callback.emit(
                 ost.ProgressData(
@@ -883,7 +851,7 @@ def perform_ocr(
         )
     )
 
-    # Create an independant copy of the profile, since this instance is shared and mutated across threads.
+    # Create an independent copy of the profile, since this instance is shared and mutated across threads.
     # Due to the checksum only being generated at the end, we don't want to erroneously claim this output
     # matches a profile that was changed in the meantime.
     # Also, we will be editing this profile to get OCR working.
@@ -933,21 +901,21 @@ def perform_ocr(
 
         return step_changed
 
-    def update_output(image_object: imf.ImageFile, output: ost.Output, suffix: str) -> None:
+    def update_output(image_object: imf.ImageFile, current_output: ost.Output) -> None:
         """
         Update the output of the given image object.
         Check if the file actually exists, and if it does, update the output path.
 
         :param image_object: The image object to update.
-        :param output: The output to update.
-        :param suffix: The suffix to add to the output path.
+        :param current_output: The output to update.
         """
         nonlocal profile, cache_dir
 
-        _path = cache_dir / f"{image_object.uuid}_{image_object.path.stem}{suffix}"
+        path_gen = ost.OutputPathGenerator(image_object.path, cache_dir, image_object.uuid)
+        path = path_gen.for_output(current_output)
 
-        if _path.is_file():
-            image_object.outputs[output].update(_path, profile)
+        if path.is_file():
+            image_object.outputs[current_output].update(path, profile)
 
     # ============================================== Text Detection ==============================================
 
@@ -986,10 +954,8 @@ def perform_ocr(
 
         # Update the outputs of the image objects.
         for image_obj in step_text_detector_images:
-            update_output(image_obj, ost.Output.input, ".png")
-            update_output(image_obj, ost.Output.ai_mask, "_mask.png")
-            update_output(image_obj, ost.Output.raw_boxes, "_raw_boxes.png")
-            update_output(image_obj, ost.Output.raw_json, "#raw.json")
+            for output in ost.step_to_output[ost.Step.text_detection]:
+                update_output(image_obj, output)
 
     # ============================================== Preprocessing ==============================================
 
@@ -1010,9 +976,9 @@ def perform_ocr(
     # Find all the json files associated with the images.
     for image_obj in image_objects:
         check_abortion()
-        json_file_path = cache_dir / f"{image_obj.uuid}_{image_obj.path.stem}#raw.json"
+        path_gen = ost.OutputPathGenerator(image_obj.path, cache_dir, image_obj.uuid)
         ocr_analytic = pp.prep_json_file(
-            json_file_path,
+            path_gen.raw_json,
             preprocessor_conf=profile.preprocessor,
             cache_masks=False,
             mocr=ocr_processor if profile.preprocessor.ocr_enabled else None,
@@ -1034,7 +1000,7 @@ def perform_ocr(
 
     # Update only the raw boxes, the rest are tainted by the forced profile changes.
     for image_obj in image_objects:
-        update_output(image_obj, ost.Output.initial_boxes, "_boxes.png")
+        update_output(image_obj, ost.Output.initial_boxes)
 
     logger.info(f"Finished processing {len(image_objects)} images.")
 
