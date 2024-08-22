@@ -27,7 +27,7 @@ from tqdm import tqdm
 
 import pcleaner.config as cfg
 import pcleaner.image_ops as ops
-import pcleaner.output_path_generator as opg
+import pcleaner.output_structures as ost
 from pcleaner.comic_text_detector.inference import TextDetector
 from pcleaner.comic_text_detector.utils.io_utils import imwrite, NumpyEncoder
 from pcleaner.comic_text_detector.utils.textmask import REFINEMASK_ANNOTATION
@@ -150,7 +150,7 @@ def process_image(
     img: np.ndarray = read_image(img_path)
     img, image_scale = resize_to_target(img, height_target_lower, height_target_upper)
 
-    path_gen = opg.OutputPathGenerator(img_path, save_dir, uuid)
+    path_gen = ost.OutputPathGenerator(img_path, save_dir, uuid)
 
     # Save a scaled copy of the image.
     imwrite(str(path_gen.base_png), img)

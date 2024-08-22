@@ -5,7 +5,7 @@ from loguru import logger
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
-import pcleaner.output_path_generator as opg
+import pcleaner.output_structures as ost
 
 
 def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
@@ -20,7 +20,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     mask_image = Image.open(mask_data.mask_path)
 
     original_path = Path(mask_data.original_path)
-    path_gen = opg.OutputPathGenerator(original_path, d_data.cache_dir, d_data.json_path)
+    path_gen = ost.OutputPathGenerator(original_path, d_data.cache_dir, d_data.json_path)
 
     def save_mask(img, path: Path, force: bool = False) -> None:
         if d_data.show_masks or force:

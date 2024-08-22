@@ -6,7 +6,7 @@ from loguru import logger
 
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
-import pcleaner.output_path_generator as opg
+import pcleaner.output_structures as ost
 
 
 def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
@@ -26,7 +26,7 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     m_conf = m_data.masker_config
 
     original_path = Path(page_data.original_path)
-    path_gen = opg.OutputPathGenerator(original_path, m_data.cache_dir, m_data.json_path)
+    path_gen = ost.OutputPathGenerator(original_path, m_data.cache_dir, m_data.json_path)
     original_img_path_as_png = original_path.with_suffix(
         ".png"
     )  # Make sure all derived file names are .png.

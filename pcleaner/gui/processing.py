@@ -13,7 +13,7 @@ import pcleaner.denoiser as dn
 import pcleaner.gui.ctd_interface_gui as ctm
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.worker_thread as wt
-import pcleaner.output_path_generator as opg
+import pcleaner.output_structures as ost
 import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.preprocessor as pp
@@ -715,11 +715,11 @@ def copy_to_output(
     if output_directory.is_absolute():
         # When absolute, the output directory is used as is.
         final_out_path = output_directory / original_image_path.name
-        path_gen = opg.OutputPathGenerator(original_image_path, output_directory, export_mode=True)
+        path_gen = ost.OutputPathGenerator(original_image_path, output_directory, export_mode=True)
     else:
         # Otherwise, the output directory is relative to the original image's parent directory.
         final_out_path = original_image_path.parent / output_directory / original_image_path.name
-        path_gen = opg.OutputPathGenerator(
+        path_gen = ost.OutputPathGenerator(
             original_image_path, original_image_path.parent / output_directory, export_mode=True
         )
 
@@ -730,7 +730,7 @@ def copy_to_output(
     masked_out_path = path_gen.mask
     text_out_path = path_gen.text
 
-    cache_path_gen = opg.OutputPathGenerator(original_image_path, cache_dir, cached_base_image_path)
+    cache_path_gen = ost.OutputPathGenerator(original_image_path, cache_dir, cached_base_image_path)
 
     # Check what the preferred output format is.
     if preferred_file_type is None:

@@ -10,7 +10,7 @@ import pcleaner.config as cfg
 import pcleaner.image_ops as ops
 import pcleaner.structures as st
 import pcleaner.model_downloader as md
-import pcleaner.output_path_generator as opg
+import pcleaner.output_structures as ost
 
 
 class InpaintingModel:
@@ -66,7 +66,7 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     original_image = original_image.convert("RGB")
     original_path: Path = mask_data.original_path
 
-    path_gen = opg.OutputPathGenerator(original_path, i_data.cache_dir, i_data.page_data_json_path)
+    path_gen = ost.OutputPathGenerator(original_path, i_data.cache_dir, i_data.page_data_json_path)
 
     def save_mask(img, path: Path) -> None:
         if i_data.show_masks:
