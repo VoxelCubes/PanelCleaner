@@ -22,9 +22,8 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     original_path = Path(mask_data.original_path)
     path_gen = ost.OutputPathGenerator(original_path, d_data.cache_dir, d_data.json_path)
 
-    def save_mask(img, path: Path, force: bool = False) -> None:
-        if d_data.show_masks or force:
-            img.save(path)
+    def save_mask(img, path: Path) -> None:
+        img.save(path)
 
     # Scale the mask to the original image size, if needed.
     cleaned_image = Image.open(mask_data.original_path)
@@ -39,9 +38,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     original_path: Path = mask_data.original_path
 
     # Alias.
-    g_conf = d_data.general_config
     d_conf = d_data.denoiser_config
-    i_conf = d_data.inpainter_config
 
     # Filter for the min deviation to consider for denoising.
     boxes_to_denoise: list[st.Box] = [
@@ -62,8 +59,7 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         # noinspection PyTypeChecker
         combined_noise_mask = Image.new("LA", cleaned_image.size, (0, 0))
 
-    # If inpainting, we need the noise mask either way. TODO
-    save_mask(combined_noise_mask, path_gen.noise_mask, force=i_conf.inpainting_enabled)
+    save_mask(combined_noise_mask, path_gen.noise_mask)
     save_mask(cleaned_image, path_gen.clean_denoised)
 
     # Package the analytics. We're only interested in the std deviations.

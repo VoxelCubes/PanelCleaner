@@ -436,24 +436,12 @@ def run_cleaner(
         # Read the json files in the image directory.
         json_files = Path(cache_dir).glob("*#clean.json")
 
-        # When denoising, we don't immediately output the cleaned image.
-        # But when not, we do, since denoising is optional.
-        if not skip_denoising:
-            masker_output_dir = None
-        else:
-            masker_output_dir = output_dir
-
         # Zip together the json files and the out path thing.
         data = [
             st.MaskerData(
                 json_file,
-                None,
                 cache_dir,
-                profile.general,
                 profile.masker,
-                save_only_mask,
-                save_only_cleaned,
-                save_only_text,
                 extract_text,
                 cache_masks,
                 debug,
@@ -480,16 +468,8 @@ def run_cleaner(
         data = [
             st.DenoiserData(
                 json_file,
-                None,  # useless
                 cache_dir,
-                profile.general,  # useless
                 profile.denoiser,
-                profile.inpainter,
-                save_only_mask,  # useless
-                save_only_cleaned,  # useless
-                extract_text,  # useless
-                False,  # useless
-                True,  # useless
                 debug,
             )
             for json_file in json_files
@@ -538,17 +518,10 @@ def run_cleaner(
             st.InpainterData(
                 page_json_file,
                 mask_json_file,
-                None,
                 cache_dir,
-                profile.general,
                 profile.masker,
                 profile.denoiser,
                 profile.inpainter,
-                save_only_mask,
-                save_only_cleaned,
-                extract_text,
-                False,
-                True,
                 debug,
             )
             for page_json_file, mask_json_file in zipped_jsons

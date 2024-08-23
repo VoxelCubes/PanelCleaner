@@ -22,14 +22,10 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     page_data = st.PageData.from_json(m_data.json_path.read_text(encoding="utf-8"))
 
     # Make a shorter alias.
-    g_conf = m_data.general_config
     m_conf = m_data.masker_config
 
     original_path = Path(page_data.original_path)
     path_gen = ost.OutputPathGenerator(original_path, m_data.cache_dir, m_data.json_path)
-    original_img_path_as_png = original_path.with_suffix(
-        ".png"
-    )  # Make sure all derived file names are .png.
 
     def save_mask(img, path: Path) -> None:
         if m_data.show_masks:
@@ -96,7 +92,6 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     combined_mask.save(path_gen.combined_mask)
     save_denoising_data(
         Path(page_data.original_path),
-        original_img_path_as_png,
         path_gen.combined_mask,
         Path(page_data.image_path),
         path_gen.mask_data_json,
@@ -113,11 +108,9 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
         cleaned_image = base_image.copy()
 
     cleaned_image.paste(combined_mask, (0, 0), combined_mask)
+    cleaned_image.save(path_gen.clean)
 
-    if m_data.show_masks or m_data.output_dir is None:
-        cleaned_image.save(path_gen.clean)
-
-    if m_data.output_dir is None and m_data.extract_text:
+    if m_data.extract_text:
         # Extract the text layer from the image.
         logger.debug(f"Extracting text from {original_path}")
         original_image = Image.open(original_path)
@@ -129,7 +122,6 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
 
 def save_denoising_data(
     original_path: Path,
-    target_path: Path,
     mask_path: Path,
     base_image_path: Path,
     json_output_path: Path,
@@ -140,7 +132,6 @@ def save_denoising_data(
     Save the data needed for denoising.
 
     :param original_path: The path to the original image.
-    :param target_path: The path to the original image with png suffix.
     :param mask_path: The path to the combined mask.
     :param base_image_path: The path to the cached base image.
     :param json_output_path: The path to save to.
@@ -155,7 +146,5 @@ def save_denoising_data(
     ]
 
     # Save the data.
-    mask_data = st.MaskData(
-        original_path, target_path, base_image_path, mask_path, scale, boxes_with_deviation
-    )
+    mask_data = st.MaskData(original_path, base_image_path, mask_path, scale, boxes_with_deviation)
     json_output_path.write_text(mask_data.to_json(), encoding="utf-8")

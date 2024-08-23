@@ -556,26 +556,16 @@ class MaskerData:
     This is a simple struct to hold the inputs for the masker.
     The data is a tuple of:
     - The json file path.
-    - The image output directory. When none, output to the cache dir for denoising to continue.
     - The image cache directory.
-    - The general config.
     - The masker config.
-    - The save only mask flag.
-    - The save only cleaned flag.
-    - The save only text flag.
     - The extract text flag.
     - The show masks flag. (when true, save intermediate masks to the cache directory)
     - The debug flag.
     """
 
     json_path: Path
-    output_dir: Path | None
     cache_dir: Path
-    general_config: cfg.GeneralConfig
     masker_config: cfg.MaskerConfig
-    save_only_mask: bool
-    save_only_cleaned: bool
-    save_only_text: bool
     extract_text: bool
     show_masks: bool
     debug: bool
@@ -588,8 +578,7 @@ class MaskData:
     denoising process.
 
     - The original image path.
-    - The target image path.
-    - The cleaned image path.
+    - The cached image path.
     - The mask image path.
     - The scale of the original image to the base image.
     - The box coordinates with their respective standard deviation for the masks,
@@ -597,7 +586,6 @@ class MaskData:
     """
 
     original_path: Path
-    target_path: Path
     base_image_path: Path
     mask_path: Path
     scale: float
@@ -615,7 +603,6 @@ class MaskData:
         data = json.loads(json_str)
         return cls(
             Path(data["original_path"]),
-            Path(data["target_path"]),
             Path(data["base_image_path"]),
             Path(data["mask_path"]),
             data["scale"],
@@ -633,7 +620,6 @@ class MaskData:
         # Convert the Path objects to strings.
         data = {
             "original_path": str(self.original_path),
-            "target_path": str(self.target_path),
             "base_image_path": str(self.base_image_path),
             "mask_path": str(self.mask_path),
             "scale": self.scale,
@@ -651,30 +637,14 @@ class DenoiserData:
     This is a simple struct to hold the inputs for the denoiser.
     The data is a tuple of:
     - The json file path.
-    - The image output directory.
     - The image cache directory.
-    - The general config.
     - The denoiser config.
-    - The inpainter config.  (When inpainting, don't denoise images handled by the inpainter)
-    - The save only mask flag.
-    - The save only cleaned flag.
-    - The extract text flag.
-    - The separate noise mask flag.
-    - The show masks flag. (when true, save intermediate masks to the cache directory)
     - The debug flag.
     """
 
     json_path: Path
-    output_dir: Path | None
     cache_dir: Path
-    general_config: cfg.GeneralConfig
     denoiser_config: cfg.DenoiserConfig
-    inpainter_config: cfg.InpainterConfig
-    save_only_mask: bool
-    save_only_cleaned: bool
-    extract_text: bool
-    separate_noise_masks: bool
-    show_masks: bool
     debug: bool
 
 
@@ -709,17 +679,10 @@ class InpainterData:
 
     page_data_json_path: Path
     mask_data_json_path: Path
-    output_dir: Path | None
     cache_dir: Path
-    general_config: cfg.GeneralConfig
     masker_config: cfg.MaskerConfig
     denoiser_config: cfg.DenoiserConfig
     inpainter_config: cfg.InpainterConfig
-    save_only_mask: bool
-    save_only_cleaned: bool
-    extract_text: bool
-    separate_inpaint_masks: bool
-    show_masks: bool
     debug: bool
 
 

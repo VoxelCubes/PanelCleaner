@@ -1,20 +1,11 @@
-from itertools import cycle
 from pathlib import Path
-from importlib import resources
-from typing import Generator, Iterable, TypeVar, Any, NewType
 
-import cv2
+from PIL import Image
 from attrs import frozen
-import numpy as np
-import colorsys
-import scipy
-from PIL import Image, ImageFilter, ImageDraw, ImageFont, ImageOps, ImageEnhance
 from loguru import logger
 
-import pcleaner.data
-import pcleaner.config as cfg
-import pcleaner.structures as st
 import pcleaner.output_structures as ost
+import pcleaner.structures as st
 
 # SUPPORTED_IMG_TYPES = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
 

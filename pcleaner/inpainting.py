@@ -49,7 +49,6 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     :return: Analytics.
     """
     # Alias.
-    g_conf = i_data.general_config
     m_conf = i_data.masker_config
     d_conf = i_data.denoiser_config
     i_conf = i_data.inpainter_config
@@ -67,10 +66,6 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     original_path: Path = mask_data.original_path
 
     path_gen = ost.OutputPathGenerator(original_path, i_data.cache_dir, i_data.page_data_json_path)
-
-    def save_mask(img, path: Path) -> None:
-        if i_data.show_masks:
-            img.save(path)
 
     # Collect the boxes to inpaint.
     BoxInpaintData = namedtuple("BoxInpaintData", ["box", "image", "deviation"])
@@ -128,7 +123,7 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     for box, mask, _ in padded_boxes_to_inpaint:
         combined_mask.paste(mask, (box.x1, box.y1), mask)
 
-    save_mask(combined_mask, path_gen.inpainting_mask)
+    combined_mask.save(path_gen.inpainting_mask)
 
     # Scale up the masks before inpainting.
     if original_image.size != mask_image.size:
@@ -171,8 +166,8 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     cleaned_image.paste(inpainted_areas, (0, 0), isolated_combined_mask)
 
     # Save output.
-    save_mask(inpainted_areas, path_gen.inpainting)
-    save_mask(cleaned_image, path_gen.clean_inpaint)
+    inpainted_areas.save(path_gen.inpainting)
+    cleaned_image.save(path_gen.clean_inpaint)
 
     # Package the analytics. We're only interested in the thicknesses.
     return st.InpaintingAnalytic(tuple(analytics_thicknesses), original_path)

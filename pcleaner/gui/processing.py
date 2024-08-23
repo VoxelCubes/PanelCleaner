@@ -315,13 +315,8 @@ def generate_output(
             data = [
                 st.MaskerData(
                     json_file,
-                    None,
                     cache_dir,
-                    profile.general,
                     profile.masker,
-                    save_only_mask=target_outputs == [ost.Output.final_mask],
-                    save_only_cleaned=target_outputs == [ost.Output.masked_output],
-                    save_only_text=target_outputs == [ost.Output.isolated_text],
                     extract_text=ost.Output.isolated_text in target_outputs,
                     show_masks=need_to_show_masks,
                     debug=debug,
@@ -409,17 +404,9 @@ def generate_output(
             data = [
                 st.DenoiserData(
                     json_file,
-                    None,
                     cache_dir,
-                    profile.general,
                     profile.denoiser,
-                    profile.inpainter,
-                    save_only_mask=target_outputs == [ost.Output.denoise_mask],
-                    save_only_cleaned=target_outputs == [ost.Output.denoised_output],
-                    extract_text=ost.Output.isolated_text in target_outputs,
-                    separate_noise_masks=False,
-                    show_masks=True,
-                    debug=debug,
+                    debug,
                 )
                 for json_file in json_files
             ]
@@ -513,18 +500,11 @@ def generate_output(
                 st.InpainterData(
                     page_json_file,
                     mask_json_file,
-                    None,
                     cache_dir,
-                    profile.general,
                     profile.masker,
                     profile.denoiser,
                     profile.inpainter,
-                    save_only_mask=target_outputs == [ost.Output.inpainted_mask],
-                    save_only_cleaned=target_outputs == [ost.Output.inpainted_output],
-                    extract_text=ost.Output.isolated_text in target_outputs,
-                    separate_inpaint_masks=False,
-                    show_masks=True,
-                    debug=debug,
+                    debug,
                 )
                 for page_json_file, mask_json_file in json_files
             ]
