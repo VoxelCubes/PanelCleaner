@@ -62,79 +62,9 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         # noinspection PyTypeChecker
         combined_noise_mask = Image.new("LA", cleaned_image.size, (0, 0))
 
-    # If inpainting, we need the noise mask either way.
+    # If inpainting, we need the noise mask either way. TODO
     save_mask(combined_noise_mask, path_gen.noise_mask, force=i_conf.inpainting_enabled)
     save_mask(cleaned_image, path_gen.clean_denoised)
-
-    # Check if the output path is None. In that case we're only outputting to the cache directory.
-    if d_data.output_dir is None:
-        # Package the analytics. We're only interested in the std deviations.
-        return st.DenoiseAnalytic(
-            tuple(deviation for _, deviation, _, _ in mask_data.boxes_with_stats), original_path
-        )
-
-    # Settle on the final output path for the cleaned image.
-    if d_data.output_dir.is_absolute():
-        final_out_path = d_data.output_dir / mask_data.target_path.name
-    else:
-        # Take the original image path, and place the image in a subdirectory.
-        # This is for when multiple directories were passed in.
-        final_out_path = (
-            mask_data.target_path.parent / d_data.output_dir / mask_data.target_path.name
-        )
-
-    final_out_path.parent.mkdir(parents=True, exist_ok=True)
-    final_cleaned_out_path = final_out_path.with_name(final_out_path.stem + "_clean.png")
-    final_mask_out_path = final_out_path.with_name(final_out_path.stem + "_mask.png")
-    final_mask_denoised_out_path = final_out_path.with_name(
-        final_out_path.stem + "_denoised_mask.png"
-    )
-
-    # Check what the preferred output format is.
-    if g_conf.preferred_file_type is None:
-        # Use the original file type.
-        final_cleaned_out_path = final_cleaned_out_path.with_suffix(original_path.suffix)
-    else:
-        final_cleaned_out_path = final_cleaned_out_path.with_suffix(g_conf.preferred_file_type)
-
-    if g_conf.preferred_mask_file_type is None:
-        # Use png by default.
-        final_mask_out_path = final_mask_out_path.with_suffix(".png")
-    else:
-        final_mask_out_path = final_mask_out_path.with_suffix(g_conf.preferred_mask_file_type)
-
-    # The arg parser should ensure that both can't be true at once, not like that'd be an issue, just plain silly.
-    if not d_data.save_only_mask:
-        # Save the final image.
-        logger.debug(f"Saving final image to {final_cleaned_out_path}")
-        ops.save_optimized(cleaned_image, final_cleaned_out_path, original_path)
-
-    if not d_data.save_only_cleaned:
-        # Save the final image.
-        if d_data.separate_noise_masks:
-            logger.debug(f"Saving final mask to {final_mask_out_path}")
-            ops.save_optimized(mask_image, final_mask_out_path)
-
-            logger.debug(f"Saving final denoised mask to {final_mask_denoised_out_path}")
-            ops.save_optimized(combined_noise_mask, final_mask_denoised_out_path)
-        else:
-            # Combine both the mask and the denoised mask into one image.
-            combined_noise_mask.paste(mask_image, (0, 0), mask_image)
-            logger.debug(f"Saving final mask to {final_mask_out_path}")
-            ops.save_optimized(combined_noise_mask, final_mask_out_path)
-
-    if d_data.extract_text:
-        # Extract the text layer from the image.
-        logger.debug(f"Extracting text from {original_path}")
-        base_image = Image.open(original_path)
-        text_img = ops.extract_text(base_image, mask_image)
-        text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
-        if g_conf.preferred_mask_file_type is None:
-            # Use png by default.
-            text_out_path = text_out_path.with_suffix(".png")
-        else:
-            text_out_path = text_out_path.with_suffix(g_conf.preferred_mask_file_type)
-        ops.save_optimized(text_img, text_out_path, original_path)
 
     # Package the analytics. We're only interested in the std deviations.
     return st.DenoiseAnalytic(

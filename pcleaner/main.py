@@ -64,8 +64,8 @@ Options:
                                     automatically set the --extract-text option.
     -e --extract-text               Extract the text bubbles from the original image. Essentially deleting everything
                                     except the text. The cleaning or denoising step must be run for this to work.
-    -n --separate-noise-mask        Save the noise mask separately from the main mask.
-    -i --separate-inpaint-mask      Save the inpaint mask separately from the main mask.
+    -n --separate-noise-mask        DEPRECATED Save the noise mask separately from the main mask.
+    -i --separate-inpaint-mask      DEPRECATED Save the inpaint mask separately from the main mask.
     -T --skip-text-detection        Do not run the text detection AI model. This is step 1/5.
     -P --skip-pre-processing        Do not run data pre-processing. This is step 2/5.
     -M --skip-masking               Do not run the masking process. This is step 3/5.
@@ -135,6 +135,8 @@ import pcleaner.model_downloader as md
 import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
+import pcleaner.output_structures as ost
+import pcleaner.image_export as ie
 import pcleaner.ocr.ocr as ocr
 from pcleaner import __version__
 
@@ -234,6 +236,13 @@ def main() -> None:
             else:
                 args.output_dir = Path(args.output_dir)
 
+            if args.separate_noise_mask or args.separate_inpaint_mask:
+                print(
+                    "Warning: saving noise and inpainting masks separately is DEPRECATED.\n"
+                    "The --separate-noise-mask and --separate-inpaint-mask will be removed\n"
+                    "entirely in the next version, they are no longer supported."
+                )
+
             # start timer.
             start = time.time()
             run_cleaner(
@@ -250,8 +259,6 @@ def main() -> None:
                 save_only_text=args.save_only_text,
                 extract_text=args.extract_text,
                 cache_masks=args.cache_masks,
-                separate_noise_mask=args.separate_noise_mask,
-                separate_inpaint_mask=args.separate_inpaint_mask,
                 hide_analytics=args.hide_analytics,
                 keep_cache=args.keep_cache,
                 debug=args.debug,
@@ -305,8 +312,6 @@ def run_cleaner(
     save_only_text: bool,
     extract_text: bool,
     cache_masks: bool,
-    separate_noise_mask: bool,
-    separate_inpaint_mask: bool,
     hide_analytics: bool,
     keep_cache: bool,
     debug: bool,
@@ -327,8 +332,6 @@ def run_cleaner(
     :param save_only_text: Whether to save only the text.
     :param extract_text: Whether to extract the text from the image.
     :param cache_masks: Whether to save the masks used to clean the image in the cache directory.
-    :param separate_noise_mask: Whether to save the noise mask separately.
-    :param separate_inpaint_mask: Whether to save the inpaint mask separately.
     :param hide_analytics: Whether to hide the analytics.
     :param keep_cache: Whether to keep the cache directory for the text detection step.
     :param debug: Whether to show debug information.
@@ -444,7 +447,7 @@ def run_cleaner(
         data = [
             st.MaskerData(
                 json_file,
-                masker_output_dir,
+                None,
                 cache_dir,
                 profile.general,
                 profile.masker,
@@ -477,16 +480,16 @@ def run_cleaner(
         data = [
             st.DenoiserData(
                 json_file,
-                output_dir,
+                None,  # useless
                 cache_dir,
-                profile.general,
+                profile.general,  # useless
                 profile.denoiser,
                 profile.inpainter,
-                save_only_mask,
-                save_only_cleaned,
-                extract_text,
-                separate_noise_mask,
-                cache_masks,
+                save_only_mask,  # useless
+                save_only_cleaned,  # useless
+                extract_text,  # useless
+                False,  # useless
+                True,  # useless
                 debug,
             )
             for json_file in json_files
@@ -535,7 +538,7 @@ def run_cleaner(
             st.InpainterData(
                 page_json_file,
                 mask_json_file,
-                output_dir,
+                None,
                 cache_dir,
                 profile.general,
                 profile.masker,
@@ -544,8 +547,8 @@ def run_cleaner(
                 save_only_mask,
                 save_only_cleaned,
                 extract_text,
-                separate_inpaint_mask,
-                cache_masks,
+                False,
+                True,
                 debug,
             )
             for page_json_file, mask_json_file in zipped_jsons
@@ -566,7 +569,66 @@ def run_cleaner(
                 )
             )
 
-        print("Done!")
+    print("Exporting results...")
+
+    # Figure out what outputs should be exported.
+    # They must be sorted from lowest to highest priority.
+    cleaned_outputs_whitelist = [
+        ost.Output.masked_output,
+        ost.Output.denoised_output,
+        ost.Output.inpainted_output,
+    ]
+    masked_outputs_whitelist = [
+        ost.Output.final_mask,
+        ost.Output.denoise_mask,
+        ost.Output.inpainted_mask,
+    ]
+    text_outputs_whitelist = [
+        ost.Output.isolated_text,
+    ]
+
+    if save_only_text:
+        masked_outputs_whitelist = []
+        cleaned_outputs_whitelist = []
+    if save_only_cleaned:
+        masked_outputs_whitelist = []
+        text_outputs_whitelist = []
+    if save_only_mask:
+        cleaned_outputs_whitelist = []
+        text_outputs_whitelist = []
+    if skip_denoising:
+        cleaned_outputs_whitelist.remove(ost.Output.denoised_output)
+        masked_outputs_whitelist.remove(ost.Output.denoise_mask)
+    if skip_inpainting:
+        cleaned_outputs_whitelist.remove(ost.Output.inpainted_output)
+        masked_outputs_whitelist.remove(ost.Output.inpainted_mask)
+    if not extract_text:
+        text_outputs_whitelist.remove(ost.Output.isolated_text)
+
+    export_targets = ie.discover_viable_outputs(
+        cache_dir, cleaned_outputs_whitelist, masked_outputs_whitelist, text_outputs_whitelist
+    )
+
+    # Pack all the arguments in batches.
+    data = [
+        (
+            target.original_path,
+            cache_dir,
+            target.uuid,
+            target.outputs,
+            output_dir,
+            profile.general.preferred_file_type,
+            profile.general.preferred_mask_file_type,
+            profile.denoiser.denoising_enabled,
+        )
+        for target in export_targets
+    ]
+
+    with Pool() as pool:
+        for _ in tqdm(pool.imap_unordered(ie.copy_to_output_batched, data), total=len(data)):
+            pass
+
+    print("\nDone!")
 
 
 def run_ocr(

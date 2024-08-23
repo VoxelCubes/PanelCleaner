@@ -124,60 +124,6 @@ def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
         text_img = ops.extract_text(original_image, combined_mask)
         text_img.save(path_gen.text)
 
-    # Settle on the final output path for the cleaned image.
-    # Check if outputting directly.
-    if m_data.output_dir is not None:
-        if m_data.output_dir.is_absolute():
-            final_out_path = m_data.output_dir / original_img_path_as_png.name
-        else:
-            # Take the original image path, and place the image in a subdirectory.
-            # This is for when multiple directories were passed in.
-            final_out_path = (
-                original_img_path_as_png.parent / m_data.output_dir / original_img_path_as_png.name
-            )
-
-        final_out_path.parent.mkdir(parents=True, exist_ok=True)
-        final_cleaned_out_path = final_out_path.with_name(final_out_path.stem + "_clean.png")
-        final_mask_out_path = final_out_path.with_name(final_out_path.stem + "_mask.png")
-
-        # Check what the preferred output format is.
-        if g_conf.preferred_file_type is None:
-            # Use the original file type.
-            final_cleaned_out_path = final_cleaned_out_path.with_suffix(
-                Path(page_data.original_path).suffix
-            )
-        else:
-            final_cleaned_out_path = final_cleaned_out_path.with_suffix(g_conf.preferred_file_type)
-
-        if g_conf.preferred_mask_file_type is None:
-            # Use png by default.
-            final_mask_out_path = final_mask_out_path.with_suffix(".png")
-        else:
-            final_mask_out_path = final_mask_out_path.with_suffix(g_conf.preferred_mask_file_type)
-
-        # The arg parser should ensure that both can't be true at once, not like that'd be an issue, just plain silly.
-        if not m_data.save_only_mask and not m_data.save_only_text:
-            # Save the final image.
-            logger.debug(f"Saving final image to {final_cleaned_out_path}")
-            ops.save_optimized(cleaned_image, final_cleaned_out_path, original_path)
-
-        if not m_data.save_only_cleaned and not m_data.save_only_text:
-            # Save the final image.
-            logger.debug(f"Saving final mask to {final_mask_out_path}")
-            ops.save_optimized(combined_mask, final_mask_out_path)
-
-        if m_data.extract_text:
-            # Extract the text layer from the image.
-            logger.debug(f"Extracting text from {final_cleaned_out_path}")
-            text_img = ops.extract_text(base_image, combined_mask)
-            text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
-            if g_conf.preferred_mask_file_type is None:
-                # Use png by default.
-                text_out_path = text_out_path.with_suffix(".png")
-            else:
-                text_out_path = text_out_path.with_suffix(g_conf.preferred_mask_file_type)
-            ops.save_optimized(text_img, text_out_path, original_path)
-
     return analytics
 
 

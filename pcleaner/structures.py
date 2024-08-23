@@ -278,18 +278,14 @@ class PageData:
         for i, box in enumerate(boxes):
             boxes[i] = box.right_pad(padding, self.image_size)
 
-    def visualize(
-        self, image_path: Path, out_dir: Path | None = None, final_boxes: bool = False
-    ) -> Image.Image:
+    def visualize(self, image_path: Path | str, output_path: Path | str) -> None:
         """
         Visualize the boxes on an image.
         Typically, this would be used to check where on the original image the
         boxes are located.
 
         :param image_path: The path to the image to visualize the boxes on.
-        :param out_dir: [Optional] The directory to save the visualization to.
-            By default, the visualization is saved to the same directory as the image.
-        :param final_boxes: [Optional] Whether this visualization is after OCR.
+        :param output_path: A full file path to write the image to.
         """
         image = Image.open(image_path)
         with resources.files(pcleaner.data) as data_path:
@@ -341,14 +337,8 @@ class PageData:
             draw.rectangle(box.as_tuple, outline="purple")
         for box in self.reference_boxes:
             draw.rectangle(box.as_tuple, outline="blue")
-        # Save the image.
-        extension = "_boxes" if not final_boxes else "_boxes_final"
-        out_path = image_path.with_stem(image_path.stem + extension)
-        if out_dir is not None:
-            out_dir.mkdir(parents=True, exist_ok=True)
-            out_path = out_dir / image_path.name
-        image.save(out_path)
-        return image
+
+        image.save(output_path)
 
     def make_box_mask(self, image_size: tuple[int, int], box_type: BoxType) -> Image:
         """

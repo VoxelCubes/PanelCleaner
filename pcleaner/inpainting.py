@@ -72,17 +72,6 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
         if i_data.show_masks:
             img.save(path)
 
-    # # Clobber protection prefixes have the form "{UUID}_file name", ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023.json
-    # clobber_protection_prefix = i_data.page_data_json_path.stem.split("_")[0]
-    # cache_out_path = (
-    #     i_data.cache_dir
-    #     / f"{clobber_protection_prefix}_{mask_data.original_path.with_suffix('.png').name}"
-    # )
-    #
-    # def save_mask(img, name_suffix) -> None:
-    #     if i_data.show_masks:
-    #         img.save(cache_out_path.with_stem(cache_out_path.stem + name_suffix))
-
     # Collect the boxes to inpaint.
     BoxInpaintData = namedtuple("BoxInpaintData", ["box", "image", "deviation"])
     boxes_to_inpaint: list[BoxInpaintData] = []
@@ -184,74 +173,6 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     # Save output.
     save_mask(inpainted_areas, path_gen.inpainting)
     save_mask(cleaned_image, path_gen.clean_inpaint)
-
-    # Check if the output path is None. In that case we're only outputting to the cache directory.
-    if i_data.output_dir is None:
-        # Package the analytics. We're only interested in the thicknesses.
-        return st.InpaintingAnalytic(tuple(analytics_thicknesses), original_path)
-
-    # Settle on the final output path for the cleaned image.
-    if i_data.output_dir.is_absolute():
-        final_out_path = i_data.output_dir / mask_data.target_path.name
-    else:
-        # Take the original image path, and place the image in a subdirectory.
-        # This is for when multiple directories were passed in.
-        final_out_path = (
-            mask_data.target_path.parent / i_data.output_dir / mask_data.target_path.name
-        )
-
-    final_out_path.parent.mkdir(parents=True, exist_ok=True)
-    final_cleaned_out_path = final_out_path.with_name(final_out_path.stem + "_clean.png")
-    final_mask_out_path = final_out_path.with_name(final_out_path.stem + "_mask.png")
-    final_mask_inpainted_out_path = final_out_path.with_name(
-        final_out_path.stem + "_inpainted_mask.png"
-    )
-
-    # Check what the preferred output format is.
-    if g_conf.preferred_file_type is None:
-        # Use the original file type.
-        final_cleaned_out_path = final_cleaned_out_path.with_suffix(original_path.suffix)
-    else:
-        final_cleaned_out_path = final_cleaned_out_path.with_suffix(g_conf.preferred_file_type)
-
-    if g_conf.preferred_mask_file_type is None:
-        # Use png by default.
-        final_mask_out_path = final_mask_out_path.with_suffix(".png")
-    else:
-        final_mask_out_path = final_mask_out_path.with_suffix(g_conf.preferred_mask_file_type)
-
-    # The arg parser should ensure that both can't be true at once, not like that'd be an issue, just plain silly.
-    if not i_data.save_only_mask:
-        # Save the final image.
-        logger.debug(f"Saving final image to {final_cleaned_out_path}")
-        ops.save_optimized(cleaned_image, final_cleaned_out_path, original_path)
-
-    if not i_data.save_only_cleaned:
-        # Save the final image.
-        if i_data.separate_inpaint_masks:
-            logger.debug(f"Saving final mask to {final_mask_out_path}")
-            ops.save_optimized(mask_image, final_mask_out_path)
-
-            logger.debug(f"Saving final denoised mask to {final_mask_inpainted_out_path}")
-            ops.save_optimized(inpainted_areas, final_mask_inpainted_out_path)
-        else:
-            # Combine both the mask and the denoised mask into one image.
-            inpainted_areas.paste(mask_image, (0, 0), mask_image)
-            logger.debug(f"Saving final mask to {final_mask_out_path}")
-            ops.save_optimized(inpainted_areas, final_mask_out_path)
-
-    if i_data.extract_text:
-        # Extract the text layer from the image.
-        logger.debug(f"Extracting text from {original_path}")
-        base_image = Image.open(original_path)
-        text_img = ops.extract_text(base_image, mask_image)
-        text_out_path = final_out_path.with_name(final_out_path.stem + "_text.png")
-        if g_conf.preferred_mask_file_type is None:
-            # Use png by default.
-            text_out_path = text_out_path.with_suffix(".png")
-        else:
-            text_out_path = text_out_path.with_suffix(g_conf.preferred_mask_file_type)
-        ops.save_optimized(text_img, text_out_path, original_path)
 
     # Package the analytics. We're only interested in the thicknesses.
     return st.InpaintingAnalytic(tuple(analytics_thicknesses), original_path)

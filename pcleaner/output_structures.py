@@ -229,6 +229,7 @@ class OutputPathGenerator:
 
     original_path: Path
     output_dir: Path
+    uuid: str
 
     # A suffix-free str that acts as a prefix for all cached file paths.
     _output_base_path: str
@@ -253,23 +254,23 @@ class OutputPathGenerator:
         self.original_path = original_path.resolve()
         self.output_dir = output_dir.resolve()
         if uuid_source is None:
-            clobber_protection_prefix = uuid4()
+            uuid = uuid4()
         else:
             if isinstance(uuid_source, str):
-                clobber_protection_prefix = uuid_source
+                uuid = uuid_source
             elif isinstance(uuid_source, Path):
-                # Clobber protection prefixes have the form "{UUID}_file name"
-                # ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023_myimage.png
-                clobber_protection_prefix = uuid_source.stem.split("_")[0]
+                # uuids are used as clobber protection, like: "{UUID}_filename_suffix.extension"
+                # ex. d91d86d1-b8d2-400b-98b2-2d0337973631_0023_myimage_base.png
+                uuid = uuid_source.stem.split("_")[0]
             else:
                 raise TypeError("uuid_source expected to be Path, str, or None")
 
         if not export_mode:
-            self._output_base_path = str(
-                output_dir / f"{clobber_protection_prefix}_{original_path.stem}"
-            )
+            self._output_base_path = str(output_dir / f"{uuid}_{original_path.stem}")
         else:
             self._output_base_path = str(output_dir / original_path.stem)
+
+        self.uuid = uuid
 
     def for_output(self, output: Output) -> Path:
         match output:
@@ -321,11 +322,11 @@ class OutputPathGenerator:
 
     @property
     def base_png(self) -> Path:
-        return self._attach(".png")
+        return self._attach("_base.png")
 
     @property
     def raw_mask(self) -> Path:
-        return self._attach("_mask.png")
+        return self._attach("_raw_mask.png")
 
     @property
     def mask(self) -> Path:
@@ -365,7 +366,7 @@ class OutputPathGenerator:
 
     @property
     def mask_fitments(self) -> Path:
-        return self._attach("_masks.png")
+        return self._attach("_mask_fitments.png")
 
     @property
     def combined_mask(self) -> Path:

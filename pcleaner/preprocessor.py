@@ -136,6 +136,8 @@ def prep_json_file(
     boxes: list[st.Box] = []
     page_langs: list[st.DetectedLang] = []
 
+    path_gen = ost.OutputPathGenerator(Path(original_path), Path(mask_path).parent, Path(mask_path))
+
     # Define permitted languages based on strictness.
     # Since the OCR model is only trained to recognize Japanese,
     # we need to discard anything that isn't, and if strict, also
@@ -206,7 +208,7 @@ def prep_json_file(
 
     # Draw the boxes on the image and save it.
     if cache_masks or cache_masks_ocr:
-        page_data.visualize(Path(page_data.image_path))
+        page_data.visualize(page_data.image_path, path_gen.boxes)
 
     # Run OCR to discard small boxes that only contain symbols.
     analytic: st.OCRAnalytic | None = None
@@ -237,14 +239,13 @@ def prep_json_file(
     page_data.grow_boxes(preprocessor_conf.box_reference_padding, st.BoxType.REFERENCE_BOX)
 
     # Write the json file with the cleaned data.
-    path_gen = ost.OutputPathGenerator(Path(original_path), Path(mask_path).parent, Path(mask_path))
     json_out_path = path_gen.clean_json
 
     json_out_path.write_text(page_data.to_json(), encoding="utf-8")
 
     # Draw the boxes on the image and save it.
     if cache_masks and not cache_masks_ocr:
-        page_data.visualize(Path(page_data.image_path), final_boxes=True)
+        page_data.visualize(page_data.image_path, path_gen.final_boxes)
 
     return analytic
 
