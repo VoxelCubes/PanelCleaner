@@ -18,6 +18,10 @@ BLACK_EXCLUDE_PATTERN := "^$(RC_OUTPUT_DIR).*|^$(UI_OUTPUT_DIR).*|^pcleaner/comi
 
 LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.gui.supported_languages import supported_languages; lang_codes = list(supported_languages().keys()); lang_codes.remove('en_US'); print(' '.join(lang_codes))")
 
+
+run-gui:
+	$(PYTHON) -m pcleaner.gui.launcher
+
 # print supported languages
 print-translated-languages:
 	@echo $(LANGUAGES)
