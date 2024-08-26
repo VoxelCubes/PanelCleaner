@@ -13,6 +13,7 @@ Files:
       - configure
       - dialog-cancel
       - dialog-ok-apply
+      - dialog-warning
       - document-import
       - document-new
       - document-open-folder

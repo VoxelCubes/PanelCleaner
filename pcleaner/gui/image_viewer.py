@@ -413,6 +413,15 @@ class BubbleImageViewer(ImageViewer):
         for bubble, color, label, stroke in zip(
             self.bubbles, self.bubble_colors, self.bubble_labels, self.bubble_stroke
         ):
+            # Skip bubbles that have -1 for all coordinates. These are created when importing
+            # plain text OCR data, which doesn't have box data.
+            if (
+                bubble.x() == -1
+                and bubble.y() == -1
+                and bubble.width() == 0
+                and bubble.height() == 0
+            ):
+                continue
             # Draw the bubble with a solid outline and a fill at 48/255 opacity.
             painter.setPen(Qg.QPen(color, 1, stroke, j=Qt.PenJoinStyle.MiterJoin))
             painter.setBrush(Qg.QColor(color.red(), color.green(), color.blue(), 48))

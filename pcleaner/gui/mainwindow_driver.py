@@ -21,6 +21,7 @@ import pcleaner.gui.about_driver as ad
 import pcleaner.gui.file_manager_extension_driver as fmed
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
+import pcleaner.gui.image_match_driver as imd
 import pcleaner.gui.issue_reporter_driver as ird
 import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.new_profile_driver as npd
@@ -38,6 +39,7 @@ import pcleaner.ocr.ocr as ocr
 import pcleaner.output_structures as ost
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
+import pcleaner.ocr.parsers as op
 from pcleaner import __display_name__, __version__
 from pcleaner import data
 from pcleaner.gui.file_table import Column
@@ -323,14 +325,17 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)
         self.pushButton_abort.clicked.connect(self.abort_button_on_click)
+        self.pushButton_edit_ocr.clicked.connect(self.edit_old_ocr_file)
         self.pushButton_browse_out_dir.clicked.connect(self.browse_output_dir)
         self.pushButton_browse_out_file.clicked.connect(self.browse_out_file)
         self.radioButton_cleaning.clicked.connect(
             partial(self.stackedWidget_output.setCurrentIndex, 0)
         )
+        self.radioButton_cleaning.clicked.connect(self.pushButton_edit_ocr.hide)
         self.radioButton_ocr.clicked.connect(partial(self.stackedWidget_output.setCurrentIndex, 1))
-        self.label_warning.hide()
+        self.radioButton_ocr.clicked.connect(self.pushButton_edit_ocr.show)
         self.pushButton_abort.hide()
+        self.pushButton_edit_ocr.hide()
         self.radioButton_ocr_text.clicked.connect(partial(self.handle_ocr_mode_change, csv=False))
         self.radioButton_ocr_csv.clicked.connect(partial(self.handle_ocr_mode_change, csv=True))
 
@@ -1449,6 +1454,73 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         worker.signals.aborted.connect(self.output_worker_aborted)
         self.thread_queue.start(worker)
 
+    def edit_old_ocr_file(self) -> None:
+        """
+        Load up an existing OCR Output file.
+        """
+        # Open a file dialog, then attempt to parse that file.
+        # If images are already loaded, which must be the case, use the common parent directory.
+        if self.file_table.has_no_files():
+            gu.show_warning(
+                self,
+                self.tr("No Files"),
+                self.tr(
+                    "No files to process. "
+                    "To edit an old OCR output file, you must first load "
+                    "(one or more of) the images to which it corresponds."
+                ),
+            )
+            return
+        else:
+            common_path = hp.common_path_parent([f.path for f in self.file_table.get_image_files()])
+
+        file_path = Qw.QFileDialog.getOpenFileName(
+            self,
+            self.tr("Open OCR Output File"),
+            str(common_path),
+            self.tr("OCR Output Files (*.txt *.csv)"),
+        )[0]
+
+        if not file_path:
+            # User canceled.
+            return
+
+        file_path = Path(file_path)
+
+        # Parse the file. This should be fast, so don't bother with a worker thread.
+        results, errors = op.parse_ocr_data(file_path)
+
+        if errors:
+            message = Qw.QMessageBox(self)
+            message.setIcon(Qw.QMessageBox.Critical)
+            message.setWindowTitle(self.tr("Parse Error"))
+            message.setText(self.tr("Failed to parse the OCR output file."))
+            message.setDetailedText(gu.format_ocr_parse_errors(errors))
+            message.exec()
+            return
+
+        # Try to match the results to images, show the user the results before proceeding.
+        mapping, unmatched_images, unmatched_analytics = gu.match_image_files_to_ocr_analytics(
+            self.file_table.get_image_files(), results
+        )
+
+        review_dialog = imd.ImageMatchOverview(self, mapping, unmatched_images, unmatched_analytics)
+        response = review_dialog.exec()
+
+        if response != Qw.QDialog.Accepted:
+            return
+
+        final_mapping: dict[imf.ImageFile, st.OCRAnalytic] = review_dialog.export_final_mapping()
+        image_files, ocr_analytics = zip(*final_mapping.items())
+
+        # Fill in the review options, so we can reuse the existing OCR review/editor.
+        self.ocr_review_options = gst.OcrReviewOptions(
+            image_files, ocr_analytics, file_path, file_path.suffix == ".csv", editing_old_data=True
+        )
+        self.cleaning_review_options = None  # Just to be sure.
+
+        self.output_worker_result()
+
     def post_review_export(self) -> None:
         """
         After the user has reviewed the output and still wants to export the images,
@@ -1598,7 +1670,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         if review_ocr:
             # The empty list gets populated with analytic results in the progress callback.
-            self.ocr_review_options = gst.OcrReviewOptions(image_files, [], output_path, csv_output)
+            self.ocr_review_options = gst.OcrReviewOptions(
+                image_files, [], output_path, csv_output, editing_old_data=False
+            )
             # In this case, we don't want the output to be written to a file.
             output_path = None
         else:
@@ -1683,6 +1757,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self,
                 self.ocr_review_options.image_files,
                 self.ocr_review_options.ocr_results,
+                self.ocr_review_options.editing_old_data,
                 self.shared_ocr_model,
                 self.theme_is_dark,
             )

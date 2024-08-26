@@ -1,0 +1,8 @@
+page1.jpg: 
+hello everyone.
+I wish I were a bird.
+
+page2.jpg: 
+Such a thing is impossible.
+Truly a shame.
+A different wish will suffice.

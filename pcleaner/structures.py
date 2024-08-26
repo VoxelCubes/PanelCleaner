@@ -419,6 +419,19 @@ class OCRAnalytic:
     box_sizes_removed: Sequence[int]
     removed_box_data: Sequence[tuple[Path, str, Box]]
 
+    @property
+    def path(self) -> Path | None:
+        """
+        Grab the first path from the removed box data.
+        This assumes that all boxes are from the same image,
+        which they must be.
+
+        :return: The path to the image, if any.
+        """
+        if self.removed_box_data:
+            return self.removed_box_data[0][0]
+        return None
+
 
 class OCRStatus(Enum):
     Normal = auto()

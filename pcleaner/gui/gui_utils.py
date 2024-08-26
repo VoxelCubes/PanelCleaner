@@ -14,6 +14,9 @@ from loguru import logger
 
 from pcleaner.gui.error_dialog_driver import ErrorDialog
 import pcleaner.gui.worker_thread as wt
+import pcleaner.ocr.parsers as op
+import pcleaner.gui.image_file as imf
+import pcleaner.structures as st
 from pcleaner.helpers import tr
 from pcleaner.data import custom_icons
 from pcleaner.data import color_themes
@@ -455,3 +458,94 @@ def ansi_to_html(input_text: str) -> str:
     buffer.write(html_footer)
 
     return buffer.getvalue()
+
+
+# Map the OCR parse error codes to i18n-able strings.
+OCR_PARSE_ERROR_CODES = {
+    op.ParseErrorCode.OS_ERROR: tr("Failed to access the file."),
+    op.ParseErrorCode.OTHER_ERROR: tr("An error occurred."),
+    op.ParseErrorCode.NOT_6_COLUMNS: tr("The CSV file format requires exactly 6 columns."),
+    op.ParseErrorCode.NOT_AN_INT: tr("The coordinates must be integers."),
+    op.ParseErrorCode.INT_TOO_BIG: tr("The box coordinates may not exceed 2 billion."),
+    op.ParseErrorCode.INVALID_FORMAT: tr("The file format was not recognized."),
+    op.ParseErrorCode.INVALID_CSV_HEADER: tr(
+        "The CSV file must start with a header row, followed by data rows."
+    ),
+    op.ParseErrorCode.NO_FILE_PATH: tr("The file path is missing."),
+    op.ParseErrorCode.INVALID_PATH: tr("The file path is invalid."),
+}
+
+
+def format_ocr_parse_errors(errors: list[op.ParseError]) -> str:
+    """
+    Format the OCR parse errors into a human-readable, i18n-able string.
+
+    ParseErrors contain the following:
+    - line: int
+    - error_code: ParseErrorCode
+    - context: str
+
+    :param errors: The list of OCR parse errors.
+    :return: A formatted string.
+    """
+
+    buffer = StringIO()
+    buffer.write(tr("OCR Parse Errors"))
+    buffer.write("\n\n")
+
+    for error in errors:
+        buffer.write(f"- Line {error.line}: ")
+        buffer.write(OCR_PARSE_ERROR_CODES[error.error_code])
+        buffer.write("\n")
+        buffer.write(f"  {error.context}\n\n")
+
+    return buffer.getvalue()
+
+
+class AmbiguousPath(Exception):
+    pass
+
+
+def match_image_files_to_ocr_analytics(
+    images: list[imf.ImageFile], analytics: list[st.OCRAnalytic]
+) -> tuple[dict[imf.ImageFile, st.OCRAnalytic], list[imf.ImageFile], list[st.OCRAnalytic]]:
+    """
+    Attempt to match all the currently loaded images to the OCR analytics.
+    If an image couldn't find a partner, it gets added to the unmatched list of Images.
+    Likewise, unmatched analytics are added to the unmatched list of Paths.
+
+    If an analytic could be assigned to multiple images, raise an AmbiguousPath exception.
+
+    :param images: The list of ImageFiles.
+    :param analytics: The list of OCRAnalytics.
+    :return: A dictionary of matched ImageFiles and OCRAnalytics, and two lists of unmatched items.
+    """
+    matched = {}
+    unmatched_images = images.copy()
+    unmatched_analytics = analytics.copy()
+
+    # Attempt to match the file names in the analytics to the image paths
+    # by making sure the file path is a suffix of the image path.
+    for analytic in analytics:
+        # Assumption: all removed box data elements report the same path,
+        # so choose the first one.
+        file_path_fragment = analytic.path
+
+        for image in images:
+            if str(image.path).endswith(str(file_path_fragment)):
+                # Guard against double assignments.
+                if image in matched:
+                    raise AmbiguousPath(
+                        tr("Multiple analytics match the image: {path}").format(path=image.path)
+                    )
+                if analytic not in unmatched_analytics:
+                    raise AmbiguousPath(
+                        tr("Multiple images match the file path: {path}").format(
+                            path=file_path_fragment
+                        )
+                    )
+                matched[image] = analytic
+                unmatched_images.remove(image)
+                unmatched_analytics.remove(analytic)
+
+    return matched, unmatched_images, unmatched_analytics

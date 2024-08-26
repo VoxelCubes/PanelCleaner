@@ -62,3 +62,4 @@ class OcrReviewOptions:
     ocr_results: list[st.OCRAnalytic]
     output_path: Path
     csv_output: bool
+    editing_old_data: bool

@@ -205,6 +205,11 @@ class Ui_OutputReview(object):
 
         self.horizontalLayout.addWidget(self.pushButton_zoom_fit)
 
+        self.label_2 = QLabel(self.layoutWidget1)
+        self.label_2.setObjectName(u"label_2")
+
+        self.horizontalLayout.addWidget(self.label_2)
+
         self.comboBox_view_mode = QComboBox(self.layoutWidget1)
         self.comboBox_view_mode.addItem("")
         self.comboBox_view_mode.addItem("")
@@ -439,6 +444,7 @@ class Ui_OutputReview(object):
         self.pushButton_zoom_fit.setToolTip(QCoreApplication.translate("OutputReview", u"Zoom to fit", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_zoom_fit.setText("")
+        self.label_2.setText(QCoreApplication.translate("OutputReview", u"View Mode:", None))
         self.comboBox_view_mode.setItemText(0, QCoreApplication.translate("OutputReview", u"Side-by-Side", None))
         self.comboBox_view_mode.setItemText(1, QCoreApplication.translate("OutputReview", u"Swipe", None))
         self.comboBox_view_mode.setItemText(2, QCoreApplication.translate("OutputReview", u"Onion", None))

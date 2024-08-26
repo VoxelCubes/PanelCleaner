@@ -68,6 +68,9 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
     ocr_analytics: list[st.OCRAnalytic]
     # These use the mutable format.
     ocr_results: list[list[st.OCRResult]]
+    # When editing old data, we shouldn't try to use the generated box images,
+    # as they might not exist or be wrong.
+    editing_old_data: bool
 
     min_thumbnail_size: int
     max_thumbnail_size: int
@@ -85,6 +88,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         parent=None,
         images: list[imf.ImageFile] = None,
         ocr_analytics: list[st.OCRAnalytic] = None,
+        editing_old_data: bool = False,
         ocr_model: gst.Shared[ocr.OcrProcsType] = None,
         theme_is_dark: gst.Shared[bool] = None,
     ):
@@ -95,6 +99,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         :param parent: The parent widget.
         :param images: The images to display.
         :param ocr_analytics: The OCR results to display.
+        :param editing_old_data: When true, don't attempt to load generated box outputs.
         :param ocr_model: The OCR model to use.
         :param theme_is_dark: The shared theme state.
         """
@@ -108,6 +113,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         self.images = images
         self.ocr_analytics = ocr_analytics
+        self.editing_old_data = editing_old_data
         self.ocr_model = ocr_model
         self.theme_is_dark = theme_is_dark
 
@@ -770,7 +776,10 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         for image in self.images:
 
             original_path = image.path
-            output_path = image.outputs[self.target_output].path
+            if self.editing_old_data:
+                output_path = original_path
+            else:
+                output_path = image.outputs[self.target_output].path
 
             if output_path is None:
                 logger.error(f"Output path for {image.path} is None.")
