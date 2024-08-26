@@ -70,9 +70,13 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
     buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
     current_app_theme = Qw.QApplication.style()
-    current_app_theme_name = current_app_theme.objectName() if current_app_theme else "Unset"
+    current_app_theme_name = (
+        current_app_theme.objectName() if current_app_theme else "System Default"
+    )
     buffer.write(f"Current Qt Theme: {current_app_theme_name}\n")
-    buffer.write(f"Current Icon Theme: {Qg.QIcon.themeName()}\n")
+    icon_theme_name = Qg.QIcon.themeName()
+    icon_theme_name = icon_theme_name if icon_theme_name else "System Default"
+    buffer.write(f"Current Icon Theme: {icon_theme_name}\n")
     buffer.write(f"System locale: {Qc.QLocale.system().name()}\n")
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
     if torch.cuda.is_available():
