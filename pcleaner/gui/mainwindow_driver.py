@@ -942,9 +942,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         # Populate default profile list.
         self.menu_set_default_profile.clear()
+        action_group = Qg.QActionGroup(self)
+        action_group.setExclusive(True)
         for profile_name, profile_path in all_profiles:
             action = Qg.QAction(profile_name, self)
             action.setCheckable(True)
+            action_group.addAction(action)
             action.triggered.connect(partial(self.handle_set_default_profile, profile_name))
             self.menu_set_default_profile.addAction(action)
             action.setChecked(
@@ -991,9 +994,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             profile_name if profile_name != self.config.default_profile_name() else None
         )
         self.config.save()
-        # Update the menu.
-        for action in self.menu_set_default_profile.actions():
-            action.setChecked(action.text() == profile_name)
 
     def import_profile(self) -> None:
         """
