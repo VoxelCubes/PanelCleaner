@@ -143,6 +143,7 @@ import pcleaner.ocr.ocr as ocr
 import pcleaner.ocr.supported_languages as osl
 from pcleaner import __version__
 
+from pcleaner.config import PSDExport
 
 # Allow loading of large images.
 Image.MAX_IMAGE_PIXELS = 2**32
@@ -621,8 +622,7 @@ def run_cleaner(
             pass
 
     if profile.general.save_psd_output == PSDExport.BULKPSD:
-        ie.bundle_psd(output_dir, cache_dir, [image_object.original_path for image_object in target], [image_object.uuid for image_object in target])
-
+        ie.bundle_psd(output_dir, cache_dir, [image_object.original_path for image_object in export_targets], [image_object.uuid for image_object in export_targets])
 
     print("\nDone!")
 
