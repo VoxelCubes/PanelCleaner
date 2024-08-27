@@ -343,7 +343,7 @@ def run_cleaner(
     :param debug: Whether to show debug information.
     """
     profile = config.current_profile
-
+    
     # Override the skip denoising flag if the config disables denoising.
     if not profile.denoiser.denoising_enabled:
         logger.debug("Denoising is disabled in the config, skipping denoising step.")
@@ -611,6 +611,7 @@ def run_cleaner(
             profile.general.preferred_file_type,
             profile.general.preferred_mask_file_type,
             profile.denoiser.denoising_enabled,
+            profile.general.save_psd_output,
         )
         for target in export_targets
     ]
@@ -618,6 +619,10 @@ def run_cleaner(
     with Pool() as pool:
         for _ in tqdm(pool.imap_unordered(ie.copy_to_output_batched, data), total=len(data)):
             pass
+
+    if profile.general.save_psd_output == PSDExport.BULKPSD:
+        ie.bundle_psd(output_dir, cache_dir, [image_object.original_path for image_object in target], [image_object.uuid for image_object in target])
+
 
     print("\nDone!")
 

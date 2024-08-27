@@ -15,7 +15,7 @@ from pcleaner.helpers import tr
 import pcleaner.gui.gui_utils as gu
 import pcleaner.ocr.supported_languages as osl
 from pcleaner import config as cfg
-from pcleaner.config import GreaterZero, LongString, Percentage, OCREngine, ReadingOrder
+from pcleaner.config import GreaterZero, LongString, Percentage, OCREngine, ReadingOrder, PSDExport
 from pcleaner.ocr.supported_languages import LanguageCode
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
@@ -41,7 +41,7 @@ class EntryTypes(Enum):
     OCREngine = auto()
     ReadingOrder = auto()
     LanguageCode = auto()
-
+    PSDExport = auto()
 
 @dataclass(frozen=True)
 class ProfileComment:
@@ -202,7 +202,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_setter = self._data_widget.setCurrentIndexByLinkedData
             self._data_getter = self._data_widget.currentLinkedData
 
-        elif entry_type in (EntryTypes.OCREngine, EntryTypes.ReadingOrder):
+        elif entry_type in (EntryTypes.OCREngine, EntryTypes.ReadingOrder, EntryTypes.PSDExport):
             # Use a combobox and populate it with the enum members from the config.
             self._data_widget: CComboBox = CComboBox()
             name_mapper: dict[Enum, str] | None = None
@@ -211,6 +211,8 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
                     enum_class = OCREngine
                 case EntryTypes.ReadingOrder:
                     enum_class = ReadingOrder
+                case EntryTypes.PSDExport:
+                    enum_class = PSDExport
                 case _:
                     raise NotImplementedError(f"Unknown entry type {entry_type}")
 
@@ -350,6 +352,8 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.ReadingOrder
                     elif value_type == LanguageCode:
                         entry_type = EntryTypes.LanguageCode
+                    elif value_type == PSDExport:
+                        entry_type = EntryTypes.PSDExport
                     else:
                         raise NotImplementedError(f"Unknown value type {value_type}")
 

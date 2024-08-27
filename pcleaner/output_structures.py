@@ -411,3 +411,11 @@ class OutputPathGenerator:
     @property
     def clean_inpaint(self) -> Path:
         return self._attach("_clean_inpaint.png")
+
+    @property
+    def psd(self) -> Path:
+        return self._attach("_out.psd")
+
+    @property
+    def psd_bulk(self) -> Path:
+        return self._attach("_out_bulk.psd")

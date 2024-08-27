@@ -38,6 +38,8 @@ SUPPORTED_IMG_TYPES = [
     ".webp",
     ".ppm",
 ]
+
+
 SUPPORTED_MASK_TYPES = [".png", ".bmp", ".tiff", ".tif", ".dib", ".webp", ".ppm"]
 
 # image types:
@@ -85,6 +87,11 @@ class OCREngine(StrEnum):
     TESSERACT = "tesseract"
 
 
+class PSDExport(StrEnum):
+    AUTO = "No psd",
+    SEPARATED = "A PSD per input",
+    BULKPSD = "All inputs in a single PSD"
+
 """
 When adding new config options, follow these steps:
 1. Add the new variable to the dataclass.
@@ -101,6 +108,7 @@ class GeneralConfig:
     preferred_mask_file_type: str = ".png"
     input_height_lower_target: int = 1000
     input_height_upper_target: int = 3000
+    save_psd_output: PSDExport = PSDExport.AUTO
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
         """
@@ -127,6 +135,10 @@ class GeneralConfig:
         preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
         
         
+        # Save the result in PSD File
+        # Two options are proposed : save each output in a separate PSD file or save all of the result in a single PSD file, with the outputs grouped.
+        save_psd_output = {self.save_psd_output}
+
         # The following are the lower and upper targets for the height of the input image.
         # It is only ever scaled down to fit within the range, preferring whole number factors
         # to minimize the impact on image quality. Images smaller than either target will remain unchanged.
@@ -166,6 +178,7 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, int, "input_height_lower_target")
         try_to_load(self, config_updater, section, int, "input_height_upper_target")
+        try_to_load(self, config_updater, section, PSDExport, "save_psd_output")
 
     def fix(self) -> None:
         """

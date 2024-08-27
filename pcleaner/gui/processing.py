@@ -23,6 +23,8 @@ from pcleaner.helpers import tr
 from pcleaner import model_downloader as md
 import pcleaner.ocr.ocr as ocr
 
+from pcleaner.config import PSDExport
+
 
 def generate_output(
     image_objects: list[imf.ImageFile],
@@ -570,6 +572,7 @@ def generate_output(
                 profile.general.preferred_file_type,
                 profile.general.preferred_mask_file_type,
                 profile.denoiser.denoising_enabled,
+                profile.general.save_psd_output,
             )
             for image_obj in image_objects
         ]
@@ -600,6 +603,9 @@ def generate_output(
                         ost.ProgressType.incremental,
                     )
                 )
+
+        if profile.general.save_psd_output == PSDExport.BULKPSD:
+            ie.bundle_psd(output_dir, cache_dir, [image_object.path for image_object in image_objects], [image_object.uuid for image_object in image_objects])
 
     progress_callback.emit(
         ost.ProgressData(
