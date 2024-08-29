@@ -721,22 +721,26 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if lock_file.exists():
             # Check if the lock file is newer than the current uptime.
             if lock_file.stat().st_mtime >= psutil.boot_time():
-                logger.warning("Found active lock file.")
-                response = gu.show_critical(
-                    self,
-                    self.tr("Multiple Instances"),
-                    self.tr(
-                        "Another instance of Panel Cleaner appears to be running already "
-                        "or the previous instance was killed. "
-                        "Opening a new instance will make the old session unstable.\n\n"
-                        "Continue anyway?"
-                    ),
-                    detailedText=self.tr("Found process ID in lock file: ") + lock_file.read_text(),
-                )
-                if response == Qw.QMessageBox.Abort:
-                    logger.critical("User aborted due to lock file.")
-                    raise SystemExit(1)
-                logger.warning("User overrode lock file.")
+                # Make sure other referenced PID is still running.
+                if psutil.pid_exists(int(lock_file.read_text())):
+                    logger.warning("Found active lock file.")
+                    response = gu.show_critical(
+                        self,
+                        self.tr("Multiple Instances"),
+                        self.tr(
+                            "Another instance of Panel Cleaner appears to be running already."
+                            "Opening a new instance will make the old session unstable.\n\n"
+                            "Continue anyway?"
+                        ),
+                        detailedText=self.tr("Found process ID in lock file: ")
+                        + lock_file.read_text(),
+                    )
+                    if response == Qw.QMessageBox.Abort:
+                        logger.critical("User aborted due to lock file.")
+                        raise SystemExit(1)
+                    logger.warning("User overrode lock file.")
+                else:
+                    logger.warning("Found lock file, but referenced PID is not running.")
             else:
                 logger.warning(
                     "Found lock file, but it is older than the current uptime. Overwriting."
