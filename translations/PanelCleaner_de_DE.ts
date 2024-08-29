@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="939"/>
+      <location filename="../pcleaner/config.py" line="953"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>standard</translation>
@@ -35,40 +35,39 @@
       <translation>Der Profilname ist reserviert.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="347"/>
-      <location filename="../pcleaner/gui/image_file.py" line="353"/>
-      <location filename="../pcleaner/gui/image_file.py" line="359"/>
-      <location filename="../pcleaner/gui/image_file.py" line="372"/>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="57"/>
+      <location filename="../pcleaner/gui/image_file.py" line="348"/>
+      <location filename="../pcleaner/gui/image_file.py" line="354"/>
+      <location filename="../pcleaner/gui/image_file.py" line="360"/>
+      <location filename="../pcleaner/gui/image_file.py" line="373"/>
       <source>Unknown</source>
       <translation>Unbekannt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="361"/>
+      <location filename="../pcleaner/gui/image_file.py" line="362"/>
       <source>RGB</source>
       <comment>Color mode</comment>
       <translation>RGB</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="363"/>
+      <location filename="../pcleaner/gui/image_file.py" line="364"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
       <translation>CMYK</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="365"/>
+      <location filename="../pcleaner/gui/image_file.py" line="366"/>
       <source>Grayscale</source>
       <comment>Color mode</comment>
       <translation>Graustufen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="367"/>
+      <location filename="../pcleaner/gui/image_file.py" line="368"/>
       <source>1-bit</source>
       <comment>Color mode</comment>
       <translation>1-Bit</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_file.py" line="369"/>
+      <location filename="../pcleaner/gui/image_file.py" line="370"/>
       <source>Palette</source>
       <comment>Color mode</comment>
       <translation>Palette</translation>
@@ -364,36 +363,41 @@ Seiten mit Fehlern / insgesamt:
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="469"/>
+      <source>The box coordinates may not exceed 2 billion.</source>
+      <translation type="unfinished">The box coordinates may not exceed 2 billion.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/gui_utils.py" line="470"/>
       <source>The file format was not recognized.</source>
       <translation type="unfinished">The file format was not recognized.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="472"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="473"/>
       <source>The CSV file must start with a header row, followed by data rows.</source>
       <translation type="unfinished">The CSV file must start with a header row, followed by data rows.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="473"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="474"/>
       <source>The file path is missing.</source>
       <translation type="unfinished">The file path is missing.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="474"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="475"/>
       <source>The file path is invalid.</source>
       <translation type="unfinished">The file path is invalid.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="492"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="493"/>
       <source>OCR Parse Errors</source>
       <translation type="unfinished">OCR Parse Errors</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="538"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="539"/>
       <source>Multiple analytics match the image: {path}</source>
       <translation type="unfinished">Multiple analytics match the image: {path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="542"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="543"/>
       <source>Multiple images match the file path: {path}</source>
       <translation type="unfinished">Multiple images match the file path: {path}</translation>
     </message>
@@ -403,67 +407,67 @@ Seiten mit Fehlern / insgesamt:
       <translation>Übermalungsmodell nicht gefunden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1565"/>
-      <location filename="../pcleaner/gui/processing.py" line="835"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1601"/>
+      <location filename="../pcleaner/gui/processing.py" line="833"/>
       <source>filename</source>
       <translation>Dateiname</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1565"/>
-      <location filename="../pcleaner/gui/processing.py" line="835"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1601"/>
+      <location filename="../pcleaner/gui/processing.py" line="833"/>
       <source>startx</source>
       <translation>startx</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1565"/>
-      <location filename="../pcleaner/gui/processing.py" line="835"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1601"/>
+      <location filename="../pcleaner/gui/processing.py" line="833"/>
       <source>starty</source>
       <translation>starty</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1565"/>
-      <location filename="../pcleaner/gui/processing.py" line="835"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1601"/>
+      <location filename="../pcleaner/gui/processing.py" line="833"/>
       <source>endx</source>
       <translation>endx</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1565"/>
-      <location filename="../pcleaner/gui/processing.py" line="835"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1601"/>
+      <location filename="../pcleaner/gui/processing.py" line="833"/>
       <source>endy</source>
       <translation>endy</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1565"/>
-      <location filename="../pcleaner/gui/processing.py" line="835"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1601"/>
+      <location filename="../pcleaner/gui/processing.py" line="833"/>
       <source>text</source>
       <translation>Text</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1576"/>
-      <location filename="../pcleaner/gui/processing.py" line="844"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1612"/>
+      <location filename="../pcleaner/gui/processing.py" line="842"/>
       <source>Saved detected text to {output_file}</source>
       <translation>Erkannter Text wurde in {output_file} gespeichert.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1580"/>
-      <location filename="../pcleaner/gui/processing.py" line="848"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1616"/>
+      <location filename="../pcleaner/gui/processing.py" line="846"/>
       <source>Failed to write detected text to {output_file}</source>
       <translation>Der erkannte Text konnte nicht in {output_file} geschrieben werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1584"/>
-      <location filename="../pcleaner/gui/processing.py" line="851"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1620"/>
+      <location filename="../pcleaner/gui/processing.py" line="849"/>
       <source>Save Failed</source>
       <translation>Speichern Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1585"/>
-      <location filename="../pcleaner/gui/processing.py" line="851"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1621"/>
+      <location filename="../pcleaner/gui/processing.py" line="849"/>
       <source>Failed to write detected text to file.</source>
       <translation>Der erkannte Text konnte nicht in die Datei geschrieben werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="375"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="403"/>
       <source>Inpainter (experimental)</source>
       <translation>Übermaler (experimentell)</translation>
     </message>
@@ -481,16 +485,6 @@ Seiten mit Fehlern / insgesamt:
       <location filename="../pcleaner/helpers.py" line="113"/>
       <source>Image path {img_path} does not exist.</source>
       <translation>Bildpfad {img_path} existiert nicht.</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="55"/>
-      <source>Japanese</source>
-      <translation>Japanisch</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="56"/>
-      <source>English</source>
-      <translation>Englisch</translation>
     </message>
   </context>
   <context>
@@ -911,93 +905,93 @@ Standardmäßig wird das eingebaute Profil verwendet. Sie können diese Standard
   <context>
     <name>ImageDetailsWidget</name>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="165"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="167"/>
       <source>Copy Image to Clipboard</source>
       <translation>In die Zwischenablage kopieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="171"/>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="548"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="173"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="550"/>
       <source>Export Image</source>
       <translation>Bild exportieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="177"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="179"/>
       <source>OCR Image</source>
       <translation>OCR anwenden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="409"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="411"/>
       <source>Loading Error</source>
       <translation>Fehler beim Laden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="410"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="412"/>
       <source>Failed to load image &apos;{path}&apos;</source>
       <translation>Bild &apos;{path}&apos; konnte nicht geladen werden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="415"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="417"/>
       <source>Generate Me</source>
       <translation>Erzeuge mich</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="438"/>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="453"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="440"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="455"/>
       <source>Impossible Request</source>
       <translation>Unmöglicher Auftrag</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="442"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="444"/>
       <source>Denoising is disabled in the current profile, this output can&apos;t be generated.
 Please enable denoising in the profile settings and try again.</source>
       <translation>Die Entrauschung ist im aktuellen Profil deaktiviert, diese Ausgabe kann nicht erzeugt werden.
 Bitte aktivieren Sie die Entrauschung in den Profileinstellungen und versuchen Sie es erneut.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="457"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="459"/>
       <source>Inpainting is disabled in the current profile, this output can&apos;t be generated.
 Please enable inpainting in the profile settings and try again.</source>
       <translation>Übermalung ist im aktuellen Profil deaktiviert, diese Ausgabe kann nicht erzeugt werden.
 Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es erneut.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="508"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="510"/>
       <source>Image not found.</source>
       <translation>Bild nicht gefunden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="509"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="511"/>
       <source>Image at {path} does not exist:</source>
       <translation>Das Bild bei {path} existiert nicht:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="557"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="559"/>
       <source>Export failed</source>
       <translation>Export fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="558"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="560"/>
       <source>Failed to export image:</source>
       <translation>Bild kann nicht exportiert werden:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="655"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="657"/>
       <source>Output Failed</source>
       <translation>Ausgabe Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="655"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="657"/>
       <source>Output generation failed:</source>
       <translation>Die Erzeugung der Ausgabe ist fehlgeschlagen:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="805"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="807"/>
       <source>Profile check failed</source>
       <translation>Profilprüfung fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="805"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="807"/>
       <source>Profile change check failed:</source>
       <translation>Profiländerungsprüfung fehlgeschlagen:</translation>
     </message>
@@ -1005,67 +999,67 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
   <context>
     <name>ImageMatchOverview</name>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="165"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
       <source>image</source>
       <translation type="unfinished">image</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="165"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
       <source>images</source>
       <translation type="unfinished">images</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="190"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="193"/>
       <source>result</source>
       <translation type="unfinished">result</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="191"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="194"/>
       <source>results</source>
       <translation type="unfinished">results</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="91"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="94"/>
       <source>Proceed With Selection</source>
       <translation type="unfinished">Proceed With Selection</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="167"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="170"/>
       <source>new image</source>
       <translation type="unfinished">new image</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="171"/>
       <source>new images</source>
       <translation type="unfinished">new images</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="172"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="175"/>
       <source>Matched {num_images} {plural_images} to OCR results. {num_images_unassigned} {plural_img_unassigned}.</source>
       <translation type="unfinished">Matched {num_images} {plural_images} to OCR results. {num_images_unassigned} {plural_img_unassigned}.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="194"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="197"/>
       <source>{num_analytics_unassigned} orphaned OCR {plural_result} will be lost.</source>
       <translation type="unfinished">{num_analytics_unassigned} orphaned OCR {plural_result} will be lost.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="319"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="322"/>
       <source>Failed to load image</source>
       <translation type="unfinished">Failed to load image</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="320"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="323"/>
       <source>Failed to load image {file_path}.</source>
       <translation type="unfinished">Failed to load image {file_path}.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="329"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="332"/>
       <source>Dispatch Failed</source>
       <translation type="unfinished">Dispatch Failed</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_match_driver.py" line="329"/>
+      <location filename="../pcleaner/gui/image_match_driver.py" line="332"/>
       <source>Failed to dispatch image.</source>
       <translation type="unfinished">Failed to dispatch image.</translation>
     </message>
@@ -1073,16 +1067,6 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
       <location filename="../ui_files/ImageMatchOverview.ui" line="14"/>
       <source>Image Selection</source>
       <translation type="unfinished">Image Selection</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/ImageMatchOverview.ui" line="58"/>
-      <source>&lt;warning icon&gt;</source>
-      <translation type="unfinished">&lt;warning icon&gt;</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/ImageMatchOverview.ui" line="65"/>
-      <source>&lt;x pages of OCR data will be lost&gt;</source>
-      <translation type="unfinished">&lt;x pages of OCR data will be lost&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="76"/>
@@ -1205,363 +1189,380 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
   <context>
     <name>MainWindow</name>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="365"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="368"/>
       <source>Open Config</source>
       <comment>Statusbar button</comment>
       <translation>Konfiguration öffnen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="370"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="373"/>
       <source>Open Log</source>
       <comment>Statusbar button</comment>
       <translation>Log öffnen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="386"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="389"/>
       <source>CUDA Enabled</source>
       <translation>CUDA Aktiviert</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="524"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="527"/>
       <source>Select Output Directory</source>
       <translation>Ausgabeverzeichnis Auswählen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="585"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="588"/>
       <source>Aborting...</source>
       <translation>Abbrechen...</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="650"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="653"/>
       <source>Loading OCR model...</source>
       <translation>OCR-Modell lädt...</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="655"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="658"/>
       <source>Loaded OCR model.</source>
       <translation>OCR-Modell geladen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="667"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="670"/>
       <source>Error</source>
       <translation>Fehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="770"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="737"/>
+      <source>Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
+
+Continue anyway?</source>
+      <translation type="unfinished">Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
+
+Continue anyway?</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="777"/>
       <source>Delete Models</source>
       <translation>Modelle Löschen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="774"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="781"/>
       <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
       <translation>Sind Sie sicher, dass Sie die Modelle für maschinelles Lernen löschen wollen? Dadurch werden Reinigung und OCR unmöglich, bis sie erneut heruntergeladen werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="667"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="670"/>
       <source>Encountered error:</source>
       <translation>Ein Fehler ist aufgetreten:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="390"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="393"/>
       <source>MPS Enabled</source>
       <translation>MPS Aktiviert</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="727"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="732"/>
       <source>Multiple Instances</source>
       <translation>Mehrere Instanzen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="733"/>
-      <source>Another instance of Panel Cleaner appears to be running already or the previous instance was killed. Opening a new instance will make the old session unstable.
-
-Continue anyway?</source>
-      <translation>Eine andere Instanz von Panel Cleaner scheint bereits zu laufen oder die vorherige Instanz wurde unsauber beendet. Wenn Sie eine neue Instanz öffnen, wird die alte Sitzung instabil.
-
-Trotzdem fortfahren?</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="734"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="739"/>
       <source>Found process ID in lock file: </source>
       <translation>Prozess-ID in Sperrdatei gefunden: </translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="783"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="790"/>
       <source>Failed to delete models.</source>
       <translation>Modelldaten konnten nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="783"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="790"/>
       <source>Delete Failed</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="789"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="796"/>
       <source>Models Deleted</source>
       <translation>Modelldaten Gelöscht</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="790"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="797"/>
       <source>The models were deleted. Would you like to download them again?</source>
       <translation>Die Modelldaten wurden gelöscht. Möchten Sie sie erneut herunterladen?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="859"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="874"/>
       <source>Not Supported</source>
       <translation>Nicht Unterstützt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="860"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="875"/>
       <source>Unsupported system or package format</source>
       <translation>Dieses System oder diese Installationsmethode sind nicht unterstützt.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="892"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="907"/>
       <source>Restart Required</source>
       <translation>Neustart Erforderlich</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="895"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="910"/>
       <source>The language has been changed. Please restart the application for the changes to take effect.</source>
       <translation>Die Sprache wurde geändert. Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="905"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="906"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="920"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="921"/>
       <source>System Language</source>
       <translation>Systemsprache</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1005"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1020"/>
       <source>Import Profile</source>
       <translation>Profil Importieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1007"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1022"/>
       <source>Profile Files (*.conf)</source>
       <translation>Profildateien (*.conf)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1014"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1029"/>
       <source>Profile Imported</source>
       <translation>Profil Importiert</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1016"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1031"/>
       <source>Import Error</source>
       <translation>Fehler beim Importieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1034"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1049"/>
       <source>Failed to Delete</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1035"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1050"/>
       <source>The default profile cannot be deleted.</source>
       <translation>Das Standardprofil kann nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1039"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1054"/>
       <source>Delete Profile</source>
       <translation>Profil Löschen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1040"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1055"/>
       <source>Are you sure you want to delete the profile {profile_name}?</source>
       <translation>Sind Sie sicher, dass Sie das Profil {profile_name} löschen möchten?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1054"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1069"/>
       <source>Delete Error</source>
       <translation>Löschen Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1055"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1070"/>
       <source>Failed to delete the profile.</source>
       <translation>Das Profil konnte nicht gelöscht werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1119"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1134"/>
       <source>The profile &apos;{profile}&apos; has unsaved changes.
 Switching profiles will discard changes to the current profile.</source>
       <translation>Das Profil &apos;{profile}&apos; hat ungespeicherte Änderungen.
 Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworfen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1122"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1137"/>
       <source>Unsaved changes</source>
       <translation>Ungespeicherte Änderungen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1151"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1279"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1166"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1315"/>
       <source>Load Error</source>
       <translation>Fehler beim Laden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1151"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1279"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1166"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1315"/>
       <source>Failed to load profile:</source>
       <translation>Das Profil konnte nicht geladen werden:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1172"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1181"/>
+      <source>Tesseract OCR is not installed or not found</source>
+      <translation type="unfinished">Tesseract OCR is not installed or not found</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1187"/>
       <source>&lt;html&gt;Can&apos;t use Tesseract to perform OCR. Reverting to manga-ocr.
 Please see the instructions to install Tesseract correctly &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
       <translation>&lt;&apos;html&gt;Tesseract konnte nicht für OCR ausgeführt werden. Manga-ocr wird wieder verwendet.
 Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;hier&lt;/a&gt; oder verwenden Sie weiterhin das Standardmodell.&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1235"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1198"/>
+      <source>Unsupported Language</source>
+      <translation type="unfinished">Unsupported Language</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1204"/>
+      <source>The language &apos;{lang_name}&apos; is not supported by any of your current OCR engines. 
+Check the online documentation for how to add support for more languages.</source>
+      <translation type="unfinished">The language &apos;{lang_name}&apos; is not supported by any of your current OCR engines. 
+Check the online documentation for how to add support for more languages.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1271"/>
       <source>Profile Created</source>
       <translation>Profil Erstellt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1238"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1274"/>
       <source>Create Error</source>
       <translation>Fehler beim Erstellen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1247"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1283"/>
       <source>Failed to save profile to {profile_path}</source>
       <translation>Das Profil konnte nicht in {profile_path} gespeichert werden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1251"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1287"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1302"/>
       <source>Save Error</source>
       <translation>Fehler beim Speichern</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1252"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1288"/>
       <source>Failed to save profile.</source>
       <translation>Das Profil konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1258"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1294"/>
       <source>Profile saved to {profile_path}</source>
       <translation>Profil gespeichert in {profile_path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1263"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1299"/>
       <source>Failed to save config.</source>
       <translation>Konfiguration konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1267"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1303"/>
       <source>Failed to save the new profile to the configuration file.</source>
       <translation>Das neue Profil konnte nicht in der Konfigurationsdatei gespeichert werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1329"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1466"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1365"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1502"/>
       <source>No Files</source>
       <translation>Keine Dateien</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1334"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1370"/>
       <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
       <translation>Keine Dateien zu verarbeiten. Sie können Dateien in der Mitte des Fensters ablegen oder über die Menüleiste hinzufügen: Dateien -&gt; Dateien hinzufügen oder Ordner hinzufügen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1395"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1431"/>
       <source>No Outputs</source>
       <translation>Keine Ausgaben</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1398"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1434"/>
       <source>No outputs were requested. Please select at least one output before cleaning.</source>
       <translation>Es wurden keine Ausgaben angefordert. Bitte wählen Sie vor der Reinigung mindestens eine Ausgabe aus.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1412"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1448"/>
       <location filename="../ui_files/Mainwindow.ui" line="660"/>
       <source>cleaned</source>
       <translation>gereinigt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1471"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1507"/>
       <source>No files to process. To edit an old OCR output file, you must first load (one or more of) the images to which it corresponds.</source>
       <translation type="unfinished">No files to process. To edit an old OCR output file, you must first load (one or more of) the images to which it corresponds.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1479"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1515"/>
       <source>Open OCR Output File</source>
       <translation type="unfinished">Open OCR Output File</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1481"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1517"/>
       <source>OCR Output Files (*.txt *.csv)</source>
       <translation type="unfinished">OCR Output Files (*.txt *.csv)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1496"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1532"/>
       <source>Parse Error</source>
       <translation type="unfinished">Parse Error</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1497"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1533"/>
       <source>Failed to parse the OCR output file.</source>
       <translation type="unfinished">Failed to parse the OCR output file.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1655"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1691"/>
       <source>File Exists</source>
       <translation>Datei Bereits Vorhanden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1656"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1692"/>
       <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
       <translation>Die Datei &apos;{output_path}&apos; existiert bereits. Wollen Sie diese überschreiben?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1747"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1783"/>
       <source>Export Images</source>
       <translation>Bilder exportieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1748"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1784"/>
       <source>Would you like to export the cleaned images?</source>
       <translation>Möchten Sie die bereinigten Bilder exportieren?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1769"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1805"/>
       <source>Export OCR Results</source>
       <translation>OCR-Ergebnisse Exportieren</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1770"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1806"/>
       <source>Would you like to export the OCR results?</source>
       <translation>Möchten Sie die OCR-Ergebnisse exportieren?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1783"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1819"/>
       <source>Processing Finished</source>
       <translation>Verarbeitung Beendet</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1784"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1820"/>
       <source>Finished processing all files.</source>
       <translation>Die Verarbeitung aller Dateien ist abgeschlossen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1787"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1823"/>
       <source>Processing Aborted</source>
       <translation>Abbruch</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1787"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1823"/>
       <source>Processing aborted.</source>
       <translation>Die Verarbeitung wurde abgebrochen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1800"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1836"/>
       <source>Processing Error</source>
       <translation>Verarbeitungsfehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1801"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1837"/>
       <source>Encountered an error while processing files.</source>
       <translation>Bei der Verarbeitung von Dateien ist ein Fehler aufgetreten.</translation>
     </message>
@@ -1588,7 +1589,7 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="83"/>
-      <location filename="../ui_files/Mainwindow.ui" line="1161"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1162"/>
       <source>Save</source>
       <translation>Speichern</translation>
     </message>
@@ -1799,42 +1800,47 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
       <translation>Hilfe</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1093"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1094"/>
       <source>Add Files...</source>
       <translation>Dateien hinzufügen...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1102"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1103"/>
       <source>Remove All Files</source>
       <translation>Alle Dateien entfernen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1248"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1249"/>
       <source>Remove File</source>
       <translation>Datei entfernen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1257"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1258"/>
       <source>Help Translate Panel Cleaner</source>
       <translation>Helfe, Panel Cleaner zu übersetzen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1266"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1267"/>
       <source>Report an Issue...</source>
       <translation>Melde ein Problem...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1271"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1272"/>
       <source>Simulate Exception</source>
       <translation>Error simulieren</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1280"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1281"/>
       <source>Add File Browser Extension...</source>
       <translation>Dateibrowser-Erweiterung hinzufügen...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1111"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1289"/>
+      <source>Show Supported OCR Languages</source>
+      <translation type="unfinished">Show Supported OCR Languages</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/Mainwindow.ui" line="1112"/>
       <source>New</source>
       <translation>Neu</translation>
     </message>
@@ -1844,67 +1850,67 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn diese Option aktiviert ist, werden die Ausgaben auf der Festplatte gespeichert. Andernfalls können Sie sie nur in der Bilddetailansicht oder in der Ausgabeüberprüfung (falls aktiviert) ansehen. &lt;/p&gt;&lt;p&gt;Wenn das Profil nach der Reinigung unverändert bleibt, ohne dass diese Option aktiviert ist, können Sie sie schnell exportieren, indem Sie den Reininger erneut mit aktivierter Option ausführen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1120"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1121"/>
       <source>Delete</source>
       <translation>Löschen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1129"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1130"/>
       <source>Import...</source>
       <translation>Importieren...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1138"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1139"/>
       <source>Online Documentation</source>
       <translation>Online-Dokumentation</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1147"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1148"/>
       <source>About Panel Cleaner</source>
       <translation>Über Panel Cleaner</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1152"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1153"/>
       <source>View License</source>
       <translation>Lizenz anzeigen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1170"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1171"/>
       <source>Save as...</source>
       <translation>Speichern unter...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1178"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1179"/>
       <source>System</source>
       <translation>System</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1186"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1187"/>
       <source>Dark</source>
       <translation>Dunkel</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1194"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1195"/>
       <source>Light</source>
       <translation>Hell</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1208"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1209"/>
       <source>Add Folder...</source>
       <translation>Ordner hinzufügen...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1217"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1218"/>
       <source>Delete Machine Learning Models</source>
       <translation>Modelle für maschinelles Lernen löschen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1226"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1227"/>
       <source>Download Machine Learning Models</source>
       <translation>Modelle für maschinelles Lernen herunterladen</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1231"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1232"/>
       <source>Donate</source>
       <translation>Spenden</translation>
     </message>
@@ -1994,6 +2000,45 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
       <location filename="../ui_files/NewProfile.ui" line="77"/>
       <source>Profile Name:</source>
       <translation>Profilname:</translation>
+    </message>
+  </context>
+  <context>
+    <name>OCRLanguageSupport</name>
+    <message>
+      <location filename="../ui_files/OCRLanguageSupport.ui" line="14"/>
+      <source>OCR Language Support</source>
+      <translation type="unfinished">OCR Language Support</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/OCRLanguageSupport.ui" line="78"/>
+      <source>Code</source>
+      <translation type="unfinished">Code</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/OCRLanguageSupport.ui" line="83"/>
+      <source>Language</source>
+      <comment>Can also call this statistics.</comment>
+      <translation type="unfinished">Language</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/OCRLanguageSupport.ui" line="88"/>
+      <source>MangaOCR</source>
+      <translation type="unfinished">MangaOCR</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/OCRLanguageSupport.ui" line="93"/>
+      <source>Tesseract</source>
+      <translation type="unfinished">Tesseract</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/OCRLanguageSupport.ui" line="109"/>
+      <source>How to install Tesseract</source>
+      <translation type="unfinished">How to install Tesseract</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/OCRLanguageSupport.ui" line="119"/>
+      <source>How to install Tesseract language packs</source>
+      <translation type="unfinished">How to install Tesseract language packs</translation>
     </message>
   </context>
   <context>
@@ -2102,72 +2147,72 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
   <context>
     <name>OcrReviewWindow</name>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="356"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="350"/>
       <source>No OCR</source>
       <translation>Keine OCR</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="415"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="411"/>
       <source>OCR Error</source>
       <translation>OCR-Fehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="415"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="411"/>
       <source>Encountered error:</source>
       <translation>Ein Fehler ist aufgetreten:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="550"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="546"/>
       <source>Reset Bubbles</source>
       <translation>Felder zurücksetzen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="551"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="547"/>
       <source>Are you sure you want to reset all boxes for this image?</source>
       <translation>Sind Sie sicher, dass Sie alle Felder für dieses Bild zurücksetzen wollen?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="628"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="624"/>
       <source>New</source>
       <translation>Neu</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="660"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="656"/>
       <source>OCR Warning</source>
       <translation>OCR-Warnung</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="661"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="657"/>
       <source>The bubble is very large. Are you sure you want to OCR it?</source>
       <translation>Dies Feld ist sehr groß. Sind Sie sicher, dass Sie OCR hierauf ausführen wollen?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="719"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="715"/>
       <source>Finish Review</source>
       <translation>Überprüfung beenden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="720"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="716"/>
       <source>Are you sure you want to finish the review?</source>
       <translation>Sind Sie sicher, dass Sie die Überprüfung beenden wollen?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="773"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="769"/>
       <source>image</source>
       <translation>Bild</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="773"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="769"/>
       <source>images</source>
       <translation>Bilder</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="794"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="790"/>
       <source>Loading Error</source>
       <translation>Fehler beim Laden</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/ocr_review_driver.py" line="795"/>
+      <location filename="../pcleaner/gui/ocr_review_driver.py" line="791"/>
       <source>Failed to load image &apos;{path}&apos;</source>
       <translation>Bild &apos;{path}&apos; konnte nicht geladen werden</translation>
     </message>
@@ -2709,462 +2754,825 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="76"/>
+      <source>The language to use for OCR tasks. The text detector can detect Japanese and English, for anything else, select a language explicitly here. Detecting per box retains what the text detector detected, while per page will assign the most prominent language to the entire page.&lt;br&gt; Note: Only Japanese is supported out of the box, everything else requires Tesseract to be enabled and its associated language packs to be installed.</source>
+      <comment>Profile comment in Preprocessor</comment>
+      <translation type="unfinished">The language to use for OCR tasks. The text detector can detect Japanese and English, for anything else, select a language explicitly here. Detecting per box retains what the text detector detected, while per page will assign the most prominent language to the entire page.&lt;br&gt; Note: Only Japanese is supported out of the box, everything else requires Tesseract to be enabled and its associated language packs to be installed.</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="78"/>
+      <source>OCR Language</source>
+      <comment>Profile entry in Preprocessor</comment>
+      <translation type="unfinished">OCR Language</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="80"/>
       <source>Specifies which engine to use for performing OCR.&lt;br&gt; - auto: Automatically selects the OCR engine based on the detected language of each text block within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.&lt;br&gt; - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition tasks. Best suited for vertical Japanese text.&lt;br&gt; - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a versatile option that supports English and multiple other languages.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Gibt an, welche Engine für die OCR verwendet werden soll.&lt;br&gt; - auto: Wählt automatisch die OCR-Engine auf der Grundlage der erkannten Sprache jedes Textblocks im Bild aus. Verwendet Manga Ocr für japanischen Text, Tesseract für englischen oder unbekannten Text.&lt;br&gt; - mangaocr: Zwingt Panel Cleaner, das eingebaute Manga-Ocr-Modell für alle Texterkennungsaufgaben zu verwenden. Am besten geeignet für vertikalen japanischen Text.&lt;br&gt; - tesseract: Zwingt Panel Cleaner zur Verwendung von Tesseract OCR für alle Texterkennungsaufgaben. Dies ist eine vielseitige Option, die Englisch und mehrere andere Sprachen unterstützt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="78"/>
+      <location filename="profile_strings.py" line="82"/>
       <source>OCR Engine</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>OCR-Engine</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="80"/>
+      <location filename="profile_strings.py" line="84"/>
       <source>Defines the reading order for processing and sorting text boxes on the entire page, not individual text blocks. This global setting influences how text boxes are ordered and presented for further processing.&lt;br&gt; - auto: Detects the reading order based on the detected language of each text block within the page.&lt;br&gt; - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.&lt;br&gt; - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.&lt;br&gt; Choose based on the predominant layout of your content.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Legt die Lesereihenfolge für die Verarbeitung und Sortierung von Textfeldern auf der gesamten Seite fest, nicht für einzelne Textblöcke. Diese globale Einstellung beeinflusst, wie Textfelder geordnet und für die weitere Verarbeitung dargestellt werden.&lt;br&gt; - auto: Erkennt die Lesereihenfolge anhand der erkannten Sprache der einzelnen Textblöcke auf der Seite.&lt;br&gt; - manga: Reihenfolge von rechts nach links, von oben nach unten. Geeignet für japanische Manga.&lt;br&gt; - comic: Von links nach rechts, von oben nach unten. Geeignet für westliche Comics und Texte.&lt;br&gt; Wählen Sie nach dem vorherrschenden Layout Ihres Inhalts.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="82"/>
+      <location filename="profile_strings.py" line="86"/>
       <source>Reading Order</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Reihenfolge</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="84"/>
+      <location filename="profile_strings.py" line="88"/>
       <source>Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Maximale Größe eines Feldes, für das OCR durchgeführt werden soll. Die Unsinnsfelder sind in der Regel klein und die OCR ist langsam, daher sollten Sie dies als Grenzwert verwenden.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="86"/>
+      <location filename="profile_strings.py" line="90"/>
       <source>OCR Max Size</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>OCR Max. Größe</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="88"/>
-      <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</source>
+      <location filename="profile_strings.py" line="92"/>
+      <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</source>
+      <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation>Regex-Muster zum Abgleich mit OCR-Ergebnissen. Alles, was mit diesem Muster übereinstimmt, wird verworfen. Beachten Sie, dass das OCR-Modell Sonderzeichen in voller Breite zurückgibt.</translation>
+      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="90"/>
+      <location filename="profile_strings.py" line="94"/>
       <source>OCR Blacklist Pattern</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>OCR-Blacklist-Muster</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="92"/>
-      <source>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</source>
+      <location filename="profile_strings.py" line="96"/>
+      <source>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
+      <oldsource>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation>Das OCR-Modell kann nur japanischen Text verarbeiten. Wenn also die Option Strenge Spracherkennung aktiviert ist, werden Felder verworfen, von denen nicht sicher ist, dass sie japanisch sind. Manchmal verunsichern Zahlen oder andere Symbole die KI, was dazu führt, dass die erkannte Sprache unbekannt ist. Wenn Streng deaktiviert ist, werden diese nicht verworfen. Alles, was mit Sicherheit als eine andere Sprache erkannt wird, wird unabhängig von dieser Einstellung verworfen.</translation>
+      <translation type="unfinished">The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="94"/>
+      <location filename="profile_strings.py" line="98"/>
       <source>OCR Strict Language</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>OCR Strenge Spracherkennung</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="96"/>
+      <location filename="profile_strings.py" line="100"/>
       <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu den initialen Feldern hinzugefügt, die durch die Texterkennungs-KI erstellt wurden. Diese Rahmen werden in Grün dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="98"/>
+      <location filename="profile_strings.py" line="102"/>
       <source>Box Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="100"/>
-      <location filename="profile_strings.py" line="108"/>
+      <location filename="profile_strings.py" line="104"/>
+      <location filename="profile_strings.py" line="112"/>
       <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung für die rechte Seite eines Feldes. Diese Erweiterung hilft dabei, Rubytext zu verdecken, der rechts von vertikalem Text übersteht.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="102"/>
+      <location filename="profile_strings.py" line="106"/>
       <source>Box Right Padding Initial</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Rechts Initial</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="104"/>
+      <location filename="profile_strings.py" line="108"/>
       <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu einem erweiterten Satz von Feldern hinzugefügt, die verwendet werden, um Falschmeldungen durch die KI-Maske des Texterkenners auszuschließen. Diese Kästchen werden in lila dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="106"/>
+      <location filename="profile_strings.py" line="110"/>
       <source>Box Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Erweitert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="110"/>
+      <location filename="profile_strings.py" line="114"/>
       <source>Box Right Padding Extended</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Rechts Erweitert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="112"/>
+      <location filename="profile_strings.py" line="116"/>
       <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
       <comment>Profile comment in Preprocessor</comment>
       <translation>Füllung, die zu jeder Seite eines Feldes hinzugefügt wird. Dies wird zu den Referenzfeldern hinzugefügt, die bei der Analyse der zu verwendenden Maske zum Abtasten des Originalbildes verwendet werden. Diese Rahmen werden in Blau dargestellt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="114"/>
+      <location filename="profile_strings.py" line="118"/>
       <source>Box Reference Padding</source>
       <comment>Profile entry in Preprocessor</comment>
       <translation>Feldauffüllung Referenz</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="116"/>
+      <location filename="profile_strings.py" line="120"/>
       <source>Masker</source>
       <comment>Profile section title</comment>
       <translation>Maskierer</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="118"/>
+      <location filename="profile_strings.py" line="122"/>
       <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Anzahl der Pixel, um die die Maske bei jedem Schritt vergrößert wird. Dadurch wird der Umriss der Maske vergrößert. Kleinere Werte sind also genauer, aber langsamer.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="120"/>
+      <location filename="profile_strings.py" line="124"/>
       <source>Mask Growth Step Pixels</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenwachstum pro Schritt</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="122"/>
+      <location filename="profile_strings.py" line="126"/>
       <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Anzahl der Schritte, um die die Maske wachsen soll. Bei einer höheren Zahl werden mehr und immer größere Masken erstellt, die letztlich durch die Größe des Referenzfeldes begrenzt sind.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="124"/>
+      <location filename="profile_strings.py" line="128"/>
       <source>Mask Growth Steps</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenwachstumsschritte</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="126"/>
+      <location filename="profile_strings.py" line="130"/>
       <source>Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Mindestdicke einer Maske.  Dies entspricht dem ersten Wachstumsschritt der Maske, die übrigen folgen dem Wachstumsschritt der Maske in Pixeln. Auf diese Weise können Sie eine kleine Schrittgröße für die Genauigkeit haben, aber immer noch verhindern, dass sehr dünne Masken für Text verwendet werden, der nur einen Umriss hat, aber sonst vor einem Hintergrund ist, d.h. dort wäre Inpainting besser gewesen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="128"/>
+      <location filename="profile_strings.py" line="132"/>
       <source>Min Mask Thickness</source>
       <comment>Profile entry in Masker</comment>
       <translation>Min Maskendicke</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="130"/>
+      <location filename="profile_strings.py" line="134"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Maximaler Schwellenwert, ab dem ein Pixel nicht als weiß gilt. Die Medianfarbe entlang des Randes einer Maske ist möglicherweise nicht reinweiß. Um leichte gebrochene Weißtöne auf einem reinweißen Hintergrund zu vermeiden, wird alles, was heller als dieser Schwellenwert ist, auf reinweiß aufgerundet.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="132"/>
+      <location filename="profile_strings.py" line="136"/>
       <source>Off White Max Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation>Max. Schwellenwert für gebrochenes Weiß</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="134"/>
+      <location filename="profile_strings.py" line="138"/>
       <source>The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</oldsource>
       <comment>Profile comment in Masker</comment>
       <translation>Die Standardabweichung einer Maske stellt die Farbabweichung entlang des Randes der Maske dar. Dazu werden nur die einzelnen Pixel entlang des äußeren Randes einer Maske aus dem Originalbild abgetastet. Eine geringe Abweichung bedeutet, dass die Maske auf einem gleichmäßigen Hintergrund liegt, d. h. sie überschneidet keinen Text oder andere Objekte.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="140"/>
+      <location filename="profile_strings.py" line="144"/>
       <source>Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
       <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</oldsource>
       <comment>Profile comment in Masker</comment>
       <translation>Minimale Verbesserung der Standardabweichung der Maske, um sie weiter zu vergrößern. Wird hier ein höherer Wert eingestellt, so ist eine höhere Verbesserung erforderlich, um eine größere Maske zu berücksichtigen, um kleineren Masken den Vorzug zu geben.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="142"/>
+      <location filename="profile_strings.py" line="146"/>
       <source>Mask Improvement Threshold</source>
       <comment>Profile entry in Masker</comment>
       <translation>Maskenverbesserungsschwellwert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="144"/>
+      <location filename="profile_strings.py" line="148"/>
       <source>Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Auswahl, ob der schnelle Maskenauswahlalgorithmus verwendet werden soll. Wenn diese Option aktiviert ist, wählt der Algorithmus für die Maskenauswahl die erste perfekte Maske aus, wenn eine solche früh gefunden wird. Dies ist schneller, aber es kann sein, dass nicht die beste Maske gefunden wird, wenn eine etwas größere besser gewesen wäre.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="146"/>
+      <location filename="profile_strings.py" line="150"/>
       <source>Mask Selection Fast</source>
       <comment>Profile entry in Masker</comment>
       <translation>Schnelle Maskenauswahl</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="196"/>
+      <location filename="profile_strings.py" line="200"/>
       <source>Inpainter</source>
       <comment>Profile section title</comment>
       <translation>Übermaler</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="198"/>
+      <location filename="profile_strings.py" line="202"/>
       <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</source>
       <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</oldsource>
       <comment>Profile comment in Inpainter</comment>
       <translation>EXPERIMENTELL: Wenn Sie bessere Standardeinstellungen finden, öffnen Sie bitte ein Issue auf Github, um die Verbesserungen mit allen zu teilen. Beachten Sie, dass Übermalung nicht standardmäßig aktiviert ist.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="200"/>
+      <location filename="profile_strings.py" line="204"/>
       <source>Inpainting is when machine learning is used to replace the content of an image based on its surroundings. For masks that couldn&apos;t be cleaned well (or at all), inpainting can be used. To differentiate this from denoising, inpainting is meant for significantly worse masks that had a tight fit. Any masks that were denoised won&apos;t be inpainted.</source>
       <comment>Profile comment in Inpainter</comment>
       <translation>Beim Übermalen wird maschinelles Lernen eingesetzt, um den Inhalt eines Bildes auf der Grundlage seiner Umgebung zu ersetzen. Für Masken, die nicht gut (oder gar nicht) bereinigt werden konnten, kann Übermalung verwendet werden. Zur Unterscheidung von der Entrauschung ist das Übermalen für deutlich schlechtere Masken gedacht, die eine enge Passung aufweisen. Masken, die entrauscht wurden, werden nicht übermalt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="202"/>
+      <location filename="profile_strings.py" line="206"/>
       <source>Since this step can provide poor results in some cases, it can be disabled here.  Uncheck to disable inpainting.</source>
       <oldsource>Since this step can provide poor results in some cases, it can be disabled here. Set to False to disable inpainting.</oldsource>
       <comment>Profile comment in Inpainter</comment>
       <translation>Da dieser Schritt in einigen Fällen zu schlechten Ergebnissen führen kann, kann er hier deaktiviert werden.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="204"/>
+      <location filename="profile_strings.py" line="208"/>
       <source>Inpainting Enabled</source>
       <comment>Profile entry in Inpainter</comment>
       <translation>Übermalen Aktiviert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="206"/>
+      <location filename="profile_strings.py" line="210"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask.</source>
       <comment>Profile comment in Inpainter</comment>
       <translation>Die minimale Standardabweichung der Farben um den Rand einer gegebenen Maske, um eine Übermalung in dem Bereich um die Maske durchzuführen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="208"/>
+      <location filename="profile_strings.py" line="212"/>
       <source>Inpainting Min Std Dev</source>
       <comment>Profile entry in Inpainter</comment>
       <translation>Übermalung Min. Abweichung</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="210"/>
+      <location filename="profile_strings.py" line="214"/>
       <source>The maximum radius of a mask to perform inpainting on. Masks larger than this will be left as they are, because if the margin is that big, it is likely that the mask is already good enough.</source>
       <comment>Profile comment in Inpainter</comment>
       <translation>Der maximale Radius einer Maske für das Übermalen. Masken, die dicker sind als dieser Wert, werden unverändert belassen, denn wenn der Rand so groß ist, ist die Maske wahrscheinlich schon gut genug.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="212"/>
+      <location filename="profile_strings.py" line="216"/>
       <source>Inpainting Max Mask Radius</source>
       <comment>Profile entry in Inpainter</comment>
       <translation>Übermalung Max. Maskenradius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="214"/>
+      <location filename="profile_strings.py" line="218"/>
       <source>The minimum radius around a mask to inpaint. This is added to the optimal mask size to ensure that the inpainting covers the entire mask.</source>
       <comment>Profile comment in Inpainter</comment>
       <translation>Der Mindestradius um eine zu übermalende Maske. Dieser Wert wird zur optimalen Maskengröße addiert, um sicherzustellen, dass die Übermalung die gesamte Maske abdeckt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="216"/>
+      <location filename="profile_strings.py" line="220"/>
       <source>Min Inpainting Radius</source>
       <comment>Profile entry in Inpainter</comment>
       <translation>Min. Übermalungsradius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="218"/>
+      <location filename="profile_strings.py" line="222"/>
       <source>For masks that proved far harder to clean, meaning they had a high standard deviation, increase the radius of the inpainting to cover more of the mask. This is additional margin is added to the min inpainting radius and is calculated as: inpainting radius multiplier times mask standard deviation</source>
       <comment>Profile comment in Inpainter</comment>
       <translation>Bei Masken, die sich als wesentlich schwieriger zu bereinigen erweisen, d. h. eine hohe Standardabweichung aufweisen, wird der Radius der Übermalung erhöht, um einen größeren Teil der Maske abzudecken. Dieser zusätzliche Spielraum wird zum minimalen Übermalungsradius addiert und wie folgt berechnet: Übermalungsradius-Faktor mal Standardabweichung der Maske</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="220"/>
+      <location filename="profile_strings.py" line="224"/>
       <source>Inpainting Radius Multiplier</source>
       <comment>Profile entry in Inpainter</comment>
       <translation>Übermalungsradius-Faktor</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="222"/>
+      <location filename="profile_strings.py" line="226"/>
       <source>The maximum radius around a mask to inpaint. This limits the size the inpainting can grow to, to prevent it from covering too much of the image, if a large radius multiplier is used.</source>
       <comment>Profile comment in Inpainter</comment>
       <translation>Der maximale Radius um eine zu übermalende Maske. Dies begrenzt die Größe, bis zu der die Übermalung wachsen kann, um zu verhindern, dass sie zu viel des Bildes bedeckt, wenn ein großer Übermalungsradius-Faktor verwendet wird.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="224"/>
+      <location filename="profile_strings.py" line="228"/>
       <source>Max Inpainting Radius</source>
       <comment>Profile entry in Inpainter</comment>
       <translation>Max. Übermalungsradius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="226"/>
+      <location filename="profile_strings.py" line="230"/>
       <source>After inpainting, cut the result out of the original image to prevent the inpainting from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</source>
       <oldsource>After inpainting, cut the result out of the original image to prevent the inpaitning from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</oldsource>
       <comment>Profile comment in Inpainter</comment>
       <translation>Nach dem Übermalen wird ein begrenzter Bereich aus dem Originalbild ausgeschnitten, um zu verhindern, dass sich das Übermalen auf den Rest des Bildes auswirkt. Dadurch wird sichergestellt, dass das Originalbild so weit wie möglich erhalten bleibt. Dieser Radius wird um den endgültigen Übermalungsradius herum hinzugefügt, da das Übermalungsmodell einige Pixel außerhalb des ihm zugewiesenen Bereichs verändert.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="228"/>
+      <location filename="profile_strings.py" line="232"/>
       <source>Inpainting Isolation Radius</source>
       <comment>Profile entry in Inpainter</comment>
       <translation>Übermalung-Isolationsradius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="136"/>
+      <location filename="profile_strings.py" line="234"/>
+      <source>Detect per box</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Detect per box</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="236"/>
+      <source>Detect per page</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Detect per page</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="238"/>
+      <source>Japanese</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Japanese</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="240"/>
+      <source>English</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">English</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="242"/>
+      <source>Korean</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Korean</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="244"/>
+      <source>Korean (vertical)</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Korean (vertical)</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="246"/>
+      <source>Chinese - Simplified</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Chinese - Simplified</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="248"/>
+      <source>Chinese - Traditional</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Chinese - Traditional</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="250"/>
+      <source>Albanian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Albanian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="252"/>
+      <source>Arabic</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Arabic</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="254"/>
+      <source>Azerbaijani</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Azerbaijani</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="256"/>
+      <source>Azerbaijani - Cyrilic</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Azerbaijani - Cyrilic</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="258"/>
+      <source>Bengali</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Bengali</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="260"/>
+      <source>Bulgarian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Bulgarian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="262"/>
+      <source>Burmese</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Burmese</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="264"/>
+      <source>Catalan; Valencian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Catalan; Valencian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="266"/>
+      <source>Croatian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Croatian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="268"/>
+      <source>Czech</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Czech</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="270"/>
+      <source>Danish</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Danish</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="272"/>
+      <source>Dutch; Flemish</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Dutch; Flemish</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="274"/>
+      <source>Esperanto</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Esperanto</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="276"/>
+      <source>Estonian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Estonian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="278"/>
+      <source>Finnish</source>
+      <oldsource>Filipino</oldsource>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Finnish</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="280"/>
+      <source>French</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">French</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="282"/>
+      <source>Georgian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Georgian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="284"/>
+      <source>German</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">German</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="286"/>
+      <source>Greek</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Greek</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="288"/>
+      <source>Hebrew</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Hebrew</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="290"/>
+      <source>Hindi</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Hindi</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="292"/>
+      <source>Hungarian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Hungarian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="294"/>
+      <source>Indonesian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Indonesian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="296"/>
+      <source>Italian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Italian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="298"/>
+      <source>Kazakh</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Kazakh</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="300"/>
+      <source>Latin</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Latin</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="302"/>
+      <source>Lithuanian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Lithuanian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="304"/>
+      <source>Luxembourgish</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Luxembourgish</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="306"/>
+      <source>Malay</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Malay</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="308"/>
+      <source>Mongolian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Mongolian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="310"/>
+      <source>Nepali</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Nepali</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="312"/>
+      <source>Norwegian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Norwegian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="314"/>
+      <source>Persian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Persian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="316"/>
+      <source>Polish</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Polish</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="318"/>
+      <source>Portuguese</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Portuguese</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="320"/>
+      <source>Romanian; Moldavian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Romanian; Moldavian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="322"/>
+      <source>Russian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Russian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="324"/>
+      <source>Serbian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Serbian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="326"/>
+      <source>Serbian - Latin</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Serbian - Latin</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="328"/>
+      <source>Slovak</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Slovak</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="330"/>
+      <source>Slovenian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Slovenian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="332"/>
+      <source>Spanish; Castilian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Spanish; Castilian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="334"/>
+      <source>Swedish</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Swedish</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="336"/>
+      <source>Tagalog</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Tagalog</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="338"/>
+      <source>Tamil</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Tamil</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="340"/>
+      <source>Telugu</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Telugu</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="342"/>
+      <source>Thai</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Thai</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="344"/>
+      <source>Turkish</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Turkish</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="346"/>
+      <source>Ukrainian</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Ukrainian</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="348"/>
+      <source>Vietnamese</source>
+      <comment>Language option for OCR</comment>
+      <translation type="unfinished">Vietnamese</translation>
+    </message>
+    <message>
+      <location filename="profile_strings.py" line="140"/>
       <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Die maximale Standardabweichung einer Maske, die berücksichtigt werden soll. Ein hoher Wert bedeutet eine höhere Toleranz für eine Maske, die Text oder andere Objekte überschneidet, was keine gute Maske ist, da dieses Feld ohnehin manuelle Korrekturen benötigen wird. Wenn Sie diesen Wert auf 0 setzen, werden nur perfekte Masken zugelassen, was für Bilder mit sehr hoher Auflösung empfohlen wird.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="138"/>
+      <location filename="profile_strings.py" line="142"/>
       <source>Mask Max Standard Deviation</source>
       <comment>Profile entry in Masker</comment>
       <translation>Max. Standardabweichung einer Maske</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="148"/>
+      <location filename="profile_strings.py" line="152"/>
       <source>Color to use for the debug mask.</source>
       <comment>Profile comment in Masker</comment>
       <translation>Farbe, die für die Debug-Maske verwendet werden soll.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="150"/>
+      <location filename="profile_strings.py" line="154"/>
       <source>Debug Mask Color</source>
       <comment>Profile entry in Masker</comment>
       <translation>Farbe der Debug-Maske</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="152"/>
+      <location filename="profile_strings.py" line="156"/>
       <source>Denoiser</source>
       <comment>Profile section title</comment>
       <translation>Entrauscher</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="154"/>
+      <location filename="profile_strings.py" line="158"/>
       <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wenn ein Stück Text schwer zu maskieren ist, musste bei der Bereinigung wahrscheinlich eine kleine Maske gewählt werden, die ggf. eine Menge JPEG-Artefakte um den Text herum zurücklässt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="156"/>
+      <location filename="profile_strings.py" line="160"/>
       <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Das bedeutet, dass die Farbe der Pixel um den Rand einer Maske herum nicht einheitlich ist, was als Standardabweichung quantifiziert wird. Der Entrauscher kann auf Masken ab einer minimalen Standardabweichung abzielen und den Bereich unmittelbar um die Maske herum entrauschen. Dadurch bleiben die Details im restlichen Bild erhalten, aber die Artefakte im Bereich des ehemaligen Textes werden entfernt.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="158"/>
+      <location filename="profile_strings.py" line="162"/>
       <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Da es sich hierbei um einen optionalen Schritt handelt, der bei hochaufgelösten Bildern, die nicht unter JPEG-Artefakten leiden, sogar überflüssig ist, kann er hier deaktiviert werden.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="160"/>
+      <location filename="profile_strings.py" line="164"/>
       <source>Denoising Enabled</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Entrauschen Aktiviert</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="162"/>
+      <location filename="profile_strings.py" line="166"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Die minimale Standardabweichung der Farben um den Rand einer gegebenen Maske, um eine Entrauschung in dem Bereich um die Maske durchzuführen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="164"/>
+      <location filename="profile_strings.py" line="168"/>
       <source>Noise Min Standard Deviation</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschen Min. Standardabweichung</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="166"/>
+      <location filename="profile_strings.py" line="170"/>
       <source>Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this, after which this mask is handed off to the inpainter.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Hinweis: Wenn die Übermalung aktiviert ist, gilt die minimale Standardabweichung für die Übermalung als Höchstwert, nach dem diese Maske an den Übermaler weitergegeben wird.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="168"/>
+      <location filename="profile_strings.py" line="172"/>
       <source>The thickness of an outline to denoise around a mask.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Die Dicke eines Umrisses, der um eine Maske herum entrauscht werden soll.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="170"/>
+      <location filename="profile_strings.py" line="174"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschumrissgröße</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="172"/>
+      <location filename="profile_strings.py" line="176"/>
       <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Blenden Sie die Ränder der entrauschten Abdeckmaske um diesen Wert ab, um die entrauschten Teile sanft in den Rest des Bildes zu integrieren.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="174"/>
+      <location filename="profile_strings.py" line="178"/>
       <source>Noise Fade Radius</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Rauschblendenradius</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="176"/>
+      <location filename="profile_strings.py" line="180"/>
       <source>Set to True to support colored images.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Bilder mit Farbe entrauschen.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="178"/>
+      <location filename="profile_strings.py" line="182"/>
       <source>Colored Images</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Farbige Bilder</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="180"/>
+      <location filename="profile_strings.py" line="184"/>
       <source>How strongly to denoise the image. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wie stark das Bild entrauscht werden soll. Höhere Werte bedeuten eine stärkere Rauschunterdrückung.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="182"/>
+      <location filename="profile_strings.py" line="186"/>
       <source>Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Filterstärke</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="184"/>
+      <location filename="profile_strings.py" line="188"/>
       <source>How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Wie stark die Farbkanäle entrauscht werden sollen, im Gegensatz zur Helligkeit. Höhere Werte bedeuten mehr Rauschunterdrückung.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="186"/>
+      <location filename="profile_strings.py" line="190"/>
       <source>Color Filter Strength</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Farbfilterstärke</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="188"/>
+      <location filename="profile_strings.py" line="192"/>
       <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Größe des Kontextfensters in Pixeln, das für die Berechnung der Gewichte verwendet wird. Sollte ungerade sein.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="190"/>
+      <location filename="profile_strings.py" line="194"/>
       <source>Template Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Kontextfenstergröße</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="192"/>
+      <location filename="profile_strings.py" line="196"/>
       <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
       <comment>Profile comment in Denoiser</comment>
       <translation>Größe des Fensters in Pixeln, das zur Berechnung des gewichteten Durchschnitts für ein bestimmtes Pixel verwendet wird. Sollte ungerade sein.</translation>
     </message>
     <message>
-      <location filename="profile_strings.py" line="194"/>
+      <location filename="profile_strings.py" line="198"/>
       <source>Search Window Size</source>
       <comment>Profile entry in Denoiser</comment>
       <translation>Suchfenstergröße</translation>
@@ -3173,13 +3581,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
   <context>
     <name>ProfileOptionWidget</name>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="91"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="94"/>
       <source>Reset to default</source>
       <comment>Generic reset button tooltip</comment>
       <translation>Auf Standardwerte zurücksetzen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="182"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="185"/>
       <source>Same as image</source>
       <comment>Profile default option for the file type</comment>
       <translation>Wie Originalbild</translation>
@@ -3188,7 +3596,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
   <context>
     <name>ProfileToolBox</name>
     <message>
-      <location filename="../pcleaner/gui/profile_parser.py" line="478"/>
+      <location filename="../pcleaner/gui/profile_parser.py" line="506"/>
       <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
       <translation>&lt;html&gt;Der Pfad für das Text-Detektor-Modell {value} existiert nicht und wird auf die Standardeinstellungen zurückgesetzt.
