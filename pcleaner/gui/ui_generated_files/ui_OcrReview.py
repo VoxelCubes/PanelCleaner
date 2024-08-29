@@ -321,10 +321,10 @@ class Ui_OcrReview(object):
 
         self.horizontalLayout.addWidget(self.label_2)
 
-        self.comboBox_ocr_engine = CComboBox(self.layoutWidget)
-        self.comboBox_ocr_engine.setObjectName(u"comboBox_ocr_engine")
+        self.comboBox_ocr_language = CComboBox(self.layoutWidget)
+        self.comboBox_ocr_language.setObjectName(u"comboBox_ocr_language")
 
-        self.horizontalLayout.addWidget(self.comboBox_ocr_engine)
+        self.horizontalLayout.addWidget(self.comboBox_ocr_language)
 
         self.pushButton_done = QPushButton(self.layoutWidget)
         self.pushButton_done.setObjectName(u"pushButton_done")

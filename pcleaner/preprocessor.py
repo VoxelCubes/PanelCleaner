@@ -1,5 +1,6 @@
 import json
 import re
+from collections import Counter
 from copy import copy
 from pathlib import Path
 
@@ -8,11 +9,10 @@ from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.ctd_interface as ctm
-import pcleaner.structures as st
-import pcleaner.output_structures as ost
-
-from collections import Counter
 import pcleaner.ocr.ocr as ocr
+import pcleaner.ocr.supported_languages as osl
+import pcleaner.output_structures as ost
+import pcleaner.structures as st
 
 
 def generate_mask_data(
@@ -93,7 +93,7 @@ def prep_json_file(
     json_file_path: Path,
     preprocessor_conf: cfg.PreprocessorConfig,
     cache_masks: bool,
-    mocr: ocr.OcrProcsType | None = None,
+    ocr_engine_factory: ocr.OCREngineFactory | None = None,
     cache_masks_ocr: bool = False,
     performing_ocr: bool = False,
 ) -> st.OCRAnalytic | None:
@@ -116,7 +116,7 @@ def prep_json_file(
     :param json_file_path: Path to the json file.
     :param preprocessor_conf: Preprocessor configuration, part of the profile.
     :param cache_masks: Whether to cache the masks.
-    :param mocr: [Optional] OCR processors mapping.
+    :param ocr_engine_factory: [Optional] OCR processors mapping.
     :param cache_masks_ocr: [Optional] Whether to cache the masks early for ocr.
     :param performing_ocr: [Optional] Whether the actual output is for ocr, not cleaning.
     :return: Analytics data if the manga ocr object is given, None otherwise.
@@ -134,21 +134,35 @@ def prep_json_file(
     original_path: str = json_data["original_path"]
     scale: float = json_data["scale"]
     boxes: list[st.Box] = []
-    page_langs: list[st.DetectedLang] = []
+    box_langs: list[osl.LanguageCode | None] = []
 
     path_gen = ost.OutputPathGenerator(Path(original_path), Path(mask_path).parent, Path(mask_path))
 
-    # Define permitted languages based on strictness.
-    # Since the OCR model is only trained to recognize Japanese,
-    # we need to discard anything that isn't, and if strict, also
-    # those that are unknown (likely a mix).
-    language_whitelist = [st.DetectedLang.JA, st.DetectedLang.ENG]
-    if not preprocessor_conf.ocr_strict_language:
-        language_whitelist.append(st.DetectedLang.UNKNOWN)
+    # Map the box language codes to the language codes used in the ocr module.
+    if preprocessor_conf.ocr_language in (
+        osl.LanguageCode.detect_box,
+        osl.LanguageCode.detect_page,
+    ):
+        # Map the raw detected languages to language codes.
+        for data in json_data["blk_list"]:
+            if data["language"] == "ja":
+                data["language"] = osl.LanguageCode.jpn
+            elif data["language"] == "eng":
+                data["language"] = osl.LanguageCode.eng
+            elif data["language"] == "unknown":
+                data["language"] = None
+            else:
+                logger.warning(f"Unknown language code: {data['language']} detected in a box!")
+                data["language"] = None
+    else:
+        # The user wants to overwrite the detected languages with a specific language.
+        for data in json_data["blk_list"]:
+            data["language"] = preprocessor_conf.ocr_language
 
+    # Filter boxes based on the language and size.
     for data in json_data["blk_list"]:
-        # Check box language.
-        if performing_ocr and data["language"] not in language_whitelist:
+        # If we plan to do ocr but can't detect the language, skip it if being strict.
+        if performing_ocr and data["language"] is None and preprocessor_conf.ocr_strict_language:
             continue
 
         box = st.Box(*data["xyxy"])
@@ -156,32 +170,25 @@ def prep_json_file(
         if box.area < preprocessor_conf.box_min_size:
             continue
         # Sussy box. Discard if it's too small.
-        if data["language"] == "unknown" and box.area < preprocessor_conf.suspicious_box_min_size:
+        if data["language"] is None and box.area < preprocessor_conf.suspicious_box_min_size:
             continue
 
-        page_langs.append(data["language"])
+        box_langs.append(data["language"])
         boxes.append(box)
-    page_lang: st.DetectedLang = (
-        Counter(page_langs).most_common(1)[0][0] if boxes else st.DetectedLang.UNKNOWN
+
+    # Prioritize non-None languages when choosing the most prominent one.
+    box_langs_without_none = [lang for lang in box_langs if lang is not None]
+    page_lang: osl.LanguageCode | None = (
+        Counter(box_langs_without_none).most_common(1)[0][0] if box_langs_without_none else None
     )
-    logger.debug(f"Detected lang: {page_lang}")
 
-    # reading_order = preprocessor_conf.reading_order
-    # if page_lang == st.DetectedLang.ENG and reading_order in [cfg.ReadingOrder.COMIC, cfg.ReadingOrder.AUTO]:
-    #     try:
-    #         sorted_boxes = cluster_boxes(boxes)
-    #         boxes = list(flatten(sorted_boxes))
-    #     except RecursionError:  # TODO: clustering recurses sometimes, so we try to sort the boxes manually
-    #         logger.debug(f"Boxes clustering failed, sorting manually")
-    #         boxes.sort(key=lambda b: b.y1 + 0.4 * b.x1)
-    # else:
-    #     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
-    #     boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
+    if preprocessor_conf.ocr_language == osl.LanguageCode.detect_page:
+        logger.debug(f"Detected page language: {page_lang} for page: {original_path}")
+        box_langs = [page_lang] * len(boxes)
 
-    # Sort boxes by their x+y coordinates, using the top right corner as the reference.
-    boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
-
-    page_data = st.PageData(image_path, mask_path, original_path, scale, boxes, [], [], [])
+    page_data = st.PageData(
+        image_path, mask_path, original_path, scale, box_langs, boxes, [], [], []
+    )
 
     # Merge boxes that have mutually overlapping centers.
     page_data.resolve_total_overlaps()
@@ -192,19 +199,24 @@ def prep_json_file(
     page_data.right_pad_boxes(preprocessor_conf.box_right_padding_initial, st.BoxType.BOX)
 
     reading_order = preprocessor_conf.reading_order
-    if page_lang == st.DetectedLang.ENG and reading_order in [
-        cfg.ReadingOrder.COMIC,
-        cfg.ReadingOrder.AUTO,
-    ]:
-        # try:
-        #     sorted_boxes = cluster_boxes(page_data.boxes)
-        #     page_data.boxes = list(flatten(sorted_boxes))
-        # except RecursionError:  # TODO: clustering recurses sometimes, so we try to sort the boxes manually
-        #     logger.debug(f"Boxes clustering failed, sorting manually")
-        page_data.boxes.sort(key=lambda b: b.y1 + 0.4 * b.x1)
-    # else:
-    #     # Sort boxes by their x+y coordinates, using the top right corner as the reference.
-    #     page_data.boxes.sort(key=lambda b: b.y1 - 0.4 * b.x2)
+    x_factor = -0.4
+    y_factor = 1
+    # Check if we're dealing with left-to-right reading order.
+    if (reading_order == cfg.ReadingOrder.COMIC) or (
+        page_lang not in osl.LANGUAGES_RTL_BOX_ORDER and reading_order == cfg.ReadingOrder.AUTO
+    ):
+        x_factor *= -1
+
+    # Keep the boxes and their langs synchronized.
+    page_data.boxes, page_data.box_language = zip(
+        *sorted(
+            zip(page_data.boxes, page_data.box_language),
+            key=lambda x: x_factor * x[0].x1 + y_factor * x[0].y1,
+        )
+    )
+    # Convert the returned tuples back to lists.
+    page_data.boxes = list(page_data.boxes)
+    page_data.box_language = list(page_data.box_language)
 
     # Draw the boxes on the image and save it.
     if cache_masks or cache_masks_ocr:
@@ -212,10 +224,10 @@ def prep_json_file(
 
     # Run OCR to discard small boxes that only contain symbols.
     analytic: st.OCRAnalytic | None = None
-    if mocr is not None:
+    if ocr_engine_factory is not None:
         page_data, analytic = ocr_check(
             page_data,
-            mocr[page_lang],
+            ocr_engine_factory,
             preprocessor_conf.ocr_max_size,
             preprocessor_conf.ocr_blacklist_pattern,
         )
@@ -251,7 +263,10 @@ def prep_json_file(
 
 
 def ocr_check(
-    page_data: st.PageData, mocr: ocr.OCRModel, max_box_size: int, ocr_blacklist_pattern: str
+    page_data: st.PageData,
+    ocr_engine_factory: ocr.OCREngineFactory,
+    max_box_size: int,
+    ocr_blacklist_pattern: str,
 ) -> tuple[st.PageData, st.OCRAnalytic]:
     """
     Run OCR on small boxes to determine whether they contain mere symbols,
@@ -270,29 +285,31 @@ def ocr_check(
     but this makes that fact more explicit.)
 
     :param page_data: PageData object containing the data for the page.
-    :param mocr: Manga ocr object.
+    :param ocr_engine_factory: OCR processors mapping.
     :param max_box_size: Maximum size of a box in pixels, to consider it for ocr.
     :param ocr_blacklist_pattern: Regex pattern to match against the ocr result.
     :return: The modified page data and Analytics data.
     """
     base_image = Image.open(page_data.image_path)
-    img_path = Path(page_data.image_path)
-    outpath = img_path.parent
-    scale = page_data.scale
-    boxes = page_data.boxes
-    candidate_small_bubbles = [box for box in boxes if box.area < max_box_size]
-    if not candidate_small_bubbles:
+    scale: float = page_data.scale
+    langs: list[osl.LanguageCode | None] = page_data.box_language
+    boxes: list[st.Box | None] = page_data.boxes
+
+    # candidate_small_bubbles = list(filter(lambda x: x[0].area < max_box_size, bubbles))
+    candidate_small_bubble_indices = [i for i, box in enumerate(boxes) if box.area < max_box_size]
+    if not candidate_small_bubble_indices:
         return page_data, st.OCRAnalytic(len(boxes), (), (), ())
     # Check if the small bubbles only contain symbols.
-    # If they do, then they are probably not text.
-    # Discard them in that case.
+    # If they do, then they are probably not text. Discard them in that case.
     box_sizes = []
     discarded_box_sizes = []
     discarded_box_texts: list[tuple[Path, str, st.Box]] = []
-    for i, box in enumerate(candidate_small_bubbles):
+    for i in candidate_small_bubble_indices:
+        box = boxes[i]
+        lang = langs[i]
         cutout = base_image.crop(box.as_tuple)
-        # cutout.save(outpath / f"{img_path.stem}_cutout_{i}.png")
-        text = mocr(cutout)
+        ocr_engine = ocr_engine_factory(lang)
+        text = ocr_engine(cutout)
         remove = is_not_worth_cleaning(text, ocr_blacklist_pattern)
         box_sizes.append(box.area)
         if remove:
@@ -301,7 +318,13 @@ def ocr_check(
             # They are used for the csv OCR output.
             discarded_box_texts.append((Path(page_data.original_path), text, box.scale(1 / scale)))
             discarded_box_sizes.append(box.area)
-            boxes.remove(box)
+            # Overwrite the box and lang in the page data, to not break the iterator.
+            boxes[i] = None
+            langs[i] = None
+
+    # Remove the None values from the boxes and langs lists.
+    page_data.boxes = [box for box in boxes if box is not None]
+    page_data.box_language = [lang for lang in langs if lang is not None]
 
     return (
         page_data,

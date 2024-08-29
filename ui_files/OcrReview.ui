@@ -439,7 +439,7 @@
           </widget>
          </item>
          <item>
-          <widget class="CComboBox" name="comboBox_ocr_engine"/>
+          <widget class="CComboBox" name="comboBox_ocr_language"/>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_done">
@@ -520,6 +520,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>CTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>pcleaner.gui.CustomQ.CTableWidget</header>
+  </customwidget>
+  <customwidget>
    <class>CComboBox</class>
    <extends>QComboBox</extends>
    <header>pcleaner.gui.CustomQ.CComboBox</header>
@@ -529,11 +534,6 @@
    <extends>QFrame</extends>
    <header>pcleaner.gui.CustomQ.CElidedLabel</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header>pcleaner.gui.CustomQ.CTableWidget</header>
   </customwidget>
   <customwidget>
    <class>BubbleImageViewer</class>

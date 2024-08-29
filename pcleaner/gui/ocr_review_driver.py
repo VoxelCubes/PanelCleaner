@@ -16,6 +16,7 @@ import pcleaner.output_structures as ost
 import pcleaner.gui.structures as gst
 import pcleaner.structures as st
 import pcleaner.ocr.ocr as ocr
+import pcleaner.ocr.supported_languages as osl
 import pcleaner.gui.worker_thread as wt
 from pcleaner.helpers import tr, f_plural
 from pcleaner.gui.ui_generated_files.ui_OcrReview import Ui_OcrReview
@@ -51,12 +52,6 @@ BUBBLE_STATUS_COLORS = {
     st.OCRStatus.New: Qg.QColor(128, 64, 0, 255),
 }
 
-OCR_LANG_CODE_TO_NAME = {
-    st.DetectedLang.JA: tr("Japanese"),
-    st.DetectedLang.ENG: tr("English"),
-    st.DetectedLang.UNKNOWN: tr("Unknown"),
-}
-
 
 class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
     """
@@ -77,7 +72,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
     first_load: bool
 
-    ocr_model: gst.Shared[ocr.OcrProcsType]
+    ocr_engine_factory: gst.Shared[ocr.OCREngineFactory]
     theme_is_dark: gst.Shared[bool]
 
     # When True, handle changes to cells as user input.
@@ -89,18 +84,17 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         images: list[imf.ImageFile] = None,
         ocr_analytics: list[st.OCRAnalytic] = None,
         editing_old_data: bool = False,
-        ocr_model: gst.Shared[ocr.OcrProcsType] = None,
+        ocr_engine_factory: gst.Shared[ocr.OCREngineFactory] = None,
         theme_is_dark: gst.Shared[bool] = None,
     ):
         """
         Init the widget.
 
-        :param ocr_model:
+        :param ocr_engine_factory:
         :param parent: The parent widget.
         :param images: The images to display.
         :param ocr_analytics: The OCR results to display.
         :param editing_old_data: When true, don't attempt to load generated box outputs.
-        :param ocr_model: The OCR model to use.
         :param theme_is_dark: The shared theme state.
         """
         logger.info(f"Opening OCR Review Window for {len(images)} outputs.")
@@ -114,7 +108,7 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         self.images = images
         self.ocr_analytics = ocr_analytics
         self.editing_old_data = editing_old_data
-        self.ocr_model = ocr_model
+        self.ocr_engine_factory = ocr_engine_factory
         self.theme_is_dark = theme_is_dark
 
         self.sort_images_by_path()
@@ -353,14 +347,16 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         """
         We can either disable auto OCR or choose what language we want it to detect.
         """
-        self.comboBox_ocr_engine.addTextItemLinkedData(self.tr("No OCR"), None)
-        for lang in st.DetectedLang:
-            if lang != st.DetectedLang.UNKNOWN:
-                self.comboBox_ocr_engine.addTextItemLinkedData(
-                    OCR_LANG_CODE_TO_NAME[st.DetectedLang(lang)], lang
-                )
+        self.comboBox_ocr_language.addTextItemLinkedData(self.tr("No OCR"), None)
+        code_and_name = osl.language_code_name_sorted(
+            include_detect=False, pin_important=True, translate=tr
+        )
+        # Filter out the languages we can't use anyway.
+        available_lang_codes = ocr.get_all_available_langs()
+        for code, lang in filter(lambda x: x[0] in available_lang_codes, code_and_name):
+            self.comboBox_ocr_language.addTextItemLinkedData(lang, code)
         # Start at the second item, ie. the first actual language.
-        self.comboBox_ocr_engine.setCurrentIndex(1)
+        self.comboBox_ocr_language.setCurrentIndex(1)
 
     def get_ocr_engine(self) -> ocr.OCRModel | None:
         """
@@ -368,10 +364,10 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
         :return: The OCR model to use, or None if no OCR should be done.
         """
-        selected_index = self.comboBox_ocr_engine.currentIndex()
+        selected_index = self.comboBox_ocr_language.currentIndex()
         if selected_index == 0:
             return None
-        return self.ocr_model.get()[self.comboBox_ocr_engine.currentLinkedData()]
+        return self.ocr_engine_factory.get()(self.comboBox_ocr_language.currentLinkedData())
 
     def start_ocr(self, box: st.Box, row: int) -> None:
         """

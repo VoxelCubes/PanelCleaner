@@ -26,6 +26,7 @@ import pcleaner.gui.issue_reporter_driver as ird
 import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.ocr_review_driver as ocrd
+import pcleaner.gui.ocr_language_overview_driver as olod
 import pcleaner.gui.output_review_driver as red
 import pcleaner.gui.processing as prc
 import pcleaner.gui.profile_parser as pp
@@ -40,6 +41,7 @@ import pcleaner.output_structures as ost
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
 import pcleaner.ocr.parsers as op
+import pcleaner.ocr.supported_languages as osl
 from pcleaner import __display_name__, __version__
 from pcleaner import data
 from pcleaner.gui.file_table import Column
@@ -65,7 +67,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     toolBox_profile: pp.ProfileToolBox
     # Optional shared instance of the OCR model to save time due to its slow loading.
-    shared_ocr_model: gst.Shared[ocr.OcrProcsType]
+    shared_ocr_model: gst.Shared[ocr.OCREngineFactory]
 
     threadpool: Qc.QThreadPool  # Used for loading images and other gui tasks.
     thread_queue: (
@@ -106,7 +108,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.cleaning_review_options = None
         self.ocr_review_options = None
 
-        self.shared_ocr_model = gst.Shared[ocr.OcrProcsType]()
+        self.shared_ocr_model = gst.Shared[ocr.OCREngineFactory]()
 
         self.last_applied_profile = None
 
@@ -295,6 +297,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_delete_models.triggered.connect(self.delete_models)
         self.action_online_documentation.triggered.connect(self.open_online_documentation)
         self.action_about.triggered.connect(self.open_about)
+        self.action_show_ocr_language_support.triggered.connect(self.open_ocr_language_support)
         self.action_donate.triggered.connect(self.open_donation_page)
         self.action_help_translation.triggered.connect(self.open_translation_page)
         self.action_report_issue.triggered.connect(self.open_issue_reporter)
@@ -650,7 +653,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.statusbar.showMessage(self.tr(f"Loading OCR model..."))
         profile = self.config.current_profile
         # pre-load manga-ocr
-        ocr.ocr_engines(profile)[cfg.OCREngine.MANGAOCR].initialize_model()
+        ocr.ocr_engines()[cfg.OCREngine.MANGAOCR].initialize_model()
         logger.info(f"Loaded OCR model ({time.time()-t_start:.2f}s)")
         self.statusbar.showMessage(self.tr(f"Loaded OCR model."))
         self.enable_running_cleaner()
@@ -825,6 +828,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # due to not opening it modally.
         self.about = ad.AboutWidget(self)
         self.about.show()
+
+    def open_ocr_language_support(self) -> None:
+        """
+        Open the supported languages dialog.
+        """
+        logger.debug("Opening OCR language support page.")
+        ocr_lang_support = olod.OCRLanguageSupport(self)
+        ocr_lang_support.exec()
 
     def open_issue_reporter(self) -> None:
         """
@@ -1163,11 +1174,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         Warn the user if Tesseract is not available.
         """
         preprocessor_config = self.config.current_profile.preprocessor
-        want_tess = preprocessor_config.ocr_use_tesseract
-        if want_tess and not ocr.tesseract_ok(self.config.current_profile):
+        tesseract_enabled = preprocessor_config.ocr_use_tesseract
+        if tesseract_enabled and not ocr.tesseract_ok(self.config.current_profile):
             gu.show_warning(
                 self,
-                "Tesseract OCR is not installed or not found",
+                self.tr("Tesseract OCR is not installed or not found"),
                 self.tr(
                     "<html>Can't use Tesseract to perform OCR. Reverting to manga-ocr."
                     "\nPlease see the instructions to install Tesseract correctly <a href="
@@ -1175,7 +1186,27 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                     " or continue using the default model.</html>"
                 ),
             )
-        self.shared_ocr_model.set(ocr.get_ocr_processor(want_tess, preprocessor_config.ocr_engine))
+        # Warn the user if he's trying to force an unsupported language.
+        if preprocessor_config.ocr_language not in (
+            osl.LanguageCode.detect_box,
+            osl.LanguageCode.detect_page,
+        ):
+            if preprocessor_config.ocr_language not in ocr.get_all_available_langs():
+                lang_name = self.tr(osl.LANGUAGE_CODE_TO_NAME[preprocessor_config.ocr_language])
+                gu.show_warning(
+                    self,
+                    self.tr("Unsupported Language"),
+                    self.tr(
+                        f"The language '{lang_name}' "
+                        "is not supported by any of your current OCR engines. "
+                        "\nCheck the online documentation for how to add support for "
+                        "more languages."
+                    ),
+                )
+
+        self.shared_ocr_model.set(
+            ocr.build_ocr_engine_factory(tesseract_enabled, preprocessor_config.ocr_engine)
+        )
 
     @Slot()
     def handle_profile_values_changed(self) -> None:
@@ -1215,6 +1246,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param save_as: Whether to save as a new profile.
         :param make_new: Whether to make a new profile.
         """
+        self.apply_profile()
         # Grab the path from the combobox's linked data. If it is none, this is the
         # default profile, so we need to save it as a new profile.
         profile_path = self.comboBox_current_profile.currentLinkedData()
@@ -1721,7 +1753,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             output_file=output_directory,
             csv_output=csv_output,
             config=self.config,
-            ocr_processor=self.shared_ocr_model.get(),
+            ocr_engine_factory=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
         )

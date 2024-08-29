@@ -4,6 +4,7 @@ import sys
 from io import StringIO
 from PIL import Image
 from importlib import resources
+import locale as pylocale
 
 import PySide6
 import PySide6.QtGui as Qg
@@ -95,6 +96,9 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     # Apply the locale from the config.
     if config.locale:
         locale = Qc.QLocale(config.locale)
+        # Apply it to python as well.
+        pylocale.setlocale(pylocale.LC_ALL, locale.name())
+
     else:
         locale = Qc.QLocale.system()
 

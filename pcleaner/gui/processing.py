@@ -29,7 +29,7 @@ def generate_output(
     target_outputs: list[ost.Output],
     output_dir: Path | None,
     config: cfg.Config,
-    ocr_processor: ocr.OcrProcsType | None,
+    ocr_processor: ocr.OCREngineFactory | None,
     progress_callback: ost.ProgressSignal,
     abort_flag: wt.SharableFlag,
     debug: bool = False,
@@ -241,7 +241,7 @@ def generate_output(
                     preprocessor_conf=profile.preprocessor,
                     cache_masks=target_output in ost.step_to_output[ost.Step.preprocessor]
                     or output_dir is None,
-                    mocr=ocr_processor if profile.preprocessor.ocr_enabled else None,
+                    ocr_engine_factory=ocr_processor if profile.preprocessor.ocr_enabled else None,
                 )
 
                 if ocr_analytic is not None:
@@ -616,7 +616,7 @@ def perform_ocr(
     output_file: Path | None,
     csv_output: bool,
     config: cfg.Config,
-    ocr_processor: ocr.OcrProcsType | None,
+    ocr_engine_factory: ocr.OCREngineFactory | None,
     progress_callback: ost.ProgressSignal,
     abort_flag: wt.SharableFlag,
     debug: bool = False,
@@ -638,7 +638,7 @@ def perform_ocr(
     :param output_file: The directory to save the outputs to. If None, nothing is written.
     :param csv_output: If True, the output is written as a csv file.
     :param config: The config to use.
-    :param ocr_processor: The ocr processors to use.
+    :param ocr_engine_factory: The ocr processors to use.
     :param progress_callback: A callback to report progress to the gui.
     :param abort_flag: A flag that is set to True when the thread should abort.
     :param debug: If True, debug messages are printed.
@@ -681,8 +681,6 @@ def perform_ocr(
     profile.preprocessor.ocr_enabled = True
     # Make sure the max size is infinite, so no boxes are skipped in the OCR process.
     profile.preprocessor.ocr_max_size = 10**10
-    # Make sure the sus box min size is infinite, so all boxes with "unknown" language are skipped.
-    profile.preprocessor.suspicious_box_min_size = 10**10
     # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
     profile.preprocessor.ocr_blacklist_pattern = ".*"
 
@@ -731,8 +729,8 @@ def perform_ocr(
         """
         nonlocal profile, cache_dir
 
-        path_gen = ost.OutputPathGenerator(image_object.path, cache_dir, image_object.uuid)
-        path = path_gen.for_output(current_output)
+        _path_gen = ost.OutputPathGenerator(image_object.path, cache_dir, image_object.uuid)
+        path = _path_gen.for_output(current_output)
 
         if path.is_file():
             image_object.outputs[current_output].update(path, profile)
@@ -801,7 +799,7 @@ def perform_ocr(
             path_gen.raw_json,
             preprocessor_conf=profile.preprocessor,
             cache_masks=False,
-            mocr=ocr_processor if profile.preprocessor.ocr_enabled else None,
+            ocr_engine_factory=ocr_engine_factory,
             cache_masks_ocr=True,
             performing_ocr=True,
         )

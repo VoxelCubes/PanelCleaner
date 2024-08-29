@@ -13,8 +13,10 @@ from loguru import logger
 
 from pcleaner.helpers import tr
 import pcleaner.gui.gui_utils as gu
+import pcleaner.ocr.supported_languages as osl
 from pcleaner import config as cfg
 from pcleaner.config import GreaterZero, LongString, Percentage, OCREngine, ReadingOrder
+from pcleaner.ocr.supported_languages import LanguageCode
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
 
@@ -38,6 +40,7 @@ class EntryTypes(Enum):
     MimeSuffixMASK = auto()
     OCREngine = auto()
     ReadingOrder = auto()
+    LanguageCode = auto()
 
 
 @dataclass(frozen=True)
@@ -201,17 +204,40 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
 
         elif entry_type in (EntryTypes.OCREngine, EntryTypes.ReadingOrder):
             # Use a combobox and populate it with the enum members from the config.
-            # Use auto as the default value.
             self._data_widget: CComboBox = CComboBox()
-            enm = {EntryTypes.OCREngine: OCREngine, EntryTypes.ReadingOrder: ReadingOrder}[
-                entry_type
-            ]
-            for member in enm.__members__.values():
-                self._data_widget.addTextItemLinkedData(member.value, member)
-            self._data_widget.setCurrentIndexByLinkedData(enm.AUTO)
+            name_mapper: dict[Enum, str] | None = None
+            match entry_type:
+                case EntryTypes.OCREngine:
+                    enum_class = OCREngine
+                case EntryTypes.ReadingOrder:
+                    enum_class = ReadingOrder
+                case _:
+                    raise NotImplementedError(f"Unknown entry type {entry_type}")
+
+            for member in enum_class.__members__.values():
+                if name_mapper is not None:
+                    self._data_widget.addTextItemLinkedData(tr(name_mapper[member]), member)
+                else:
+                    self._data_widget.addTextItemLinkedData(member.value, member)
+            self._data_widget.setCurrentIndex(0)
             self._data_widget.currentIndexChanged.connect(self._value_changed)
             self._data_setter = self._data_widget.setCurrentIndexByLinkedData
             self._data_getter = self._data_widget.currentLinkedData
+
+        elif entry_type == EntryTypes.LanguageCode:
+            # Use a combobox and populate it with the enum members from the config.
+            self._data_widget: CComboBox = CComboBox()
+            for code, lang_name in osl.language_code_name_sorted(
+                include_detect=True, pin_important=True, translate=tr
+            ):
+                self._data_widget.addTextItemLinkedData(lang_name, code)
+            self._data_widget.setCurrentIndex(0)
+            self._data_widget.currentIndexChanged.connect(self._value_changed)
+            self._data_setter = self._data_widget.setCurrentIndexByLinkedData
+            self._data_getter = self._data_widget.currentLinkedData
+
+        else:
+            raise NotImplementedError(f"Unknown entry type {entry_type}")
 
     def reset(self) -> None:
         """
@@ -322,6 +348,8 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.OCREngine
                     elif value_type == ReadingOrder:
                         entry_type = EntryTypes.ReadingOrder
+                    elif value_type == LanguageCode:
+                        entry_type = EntryTypes.LanguageCode
                     else:
                         raise NotImplementedError(f"Unknown value type {value_type}")
 

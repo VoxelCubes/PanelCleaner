@@ -10,6 +10,7 @@ Files:
       - arrow-right
       - arrow-up
       - arrow-down
+      - code-block
       - configure
       - dialog-cancel
       - dialog-ok-apply

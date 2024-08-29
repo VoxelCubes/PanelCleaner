@@ -13,6 +13,7 @@ from pcleaner.helpers import tr
 from pcleaner import cli_utils as cli
 from pcleaner import helpers as hp
 from pcleaner import model_downloader as md
+from pcleaner.ocr import supported_languages as osl
 
 # If using Python 3.10 or older, use the 3rd party StrEnum.
 if sys.version_info < (3, 11):
@@ -273,6 +274,7 @@ class PreprocessorConfig:
     box_overlap_threshold: Percentage = 20.0
     ocr_enabled: bool = True
     ocr_use_tesseract: bool = False
+    ocr_language: osl.LanguageCode = osl.LanguageCode.detect_box
     ocr_engine: OCREngine = OCREngine.AUTO
     reading_order: ReadingOrder = ReadingOrder.AUTO
     ocr_max_size: int = 30 * 100
@@ -320,6 +322,16 @@ class PreprocessorConfig:
         # If [CLI: set to False][GUI: unchecked], the built-in OCR model (manga-ocr) is always used, which is
         # best suited for vertical Japanese text.
         ocr_use_tesseract = {self.ocr_use_tesseract}
+        
+        # The language to use for OCR tasks.
+        # The text detector can detect Japanese and English, for anything else, select a language
+        # explicitly here. Detecting per box retains what the text detector detected, while per page
+        # will assign the most prominent language to the entire page.[GUI: <br>]
+        # Note: Only Japanese is supported out of the box, everything else requires Tesseract
+        #       to be enabled and its associated language packs to be installed.
+        # [CLI: The value must either be a language code, e.g. "jpn", "eng" etc. or one of "detect_box", "detect_page".]
+        # [CLI: Use the `languages list` command to see all available languages.]
+        ocr_language = {self.ocr_language}
 
         # Specifies which engine to use for performing OCR.[GUI: <br>]
         # - auto: Automatically selects the OCR engine based on the detected language of each text block
@@ -344,14 +356,15 @@ class PreprocessorConfig:
         ocr_max_size = {self.ocr_max_size}
         
         # Regex pattern to match against OCR results.
-        # Anything matching this pattern is discarded.
-        # Note that the OCR model returns full-width characters, so this pattern should match them.
+        # Anything matching this pattern is discarded.[GUI: <br>]
+        # Note: the OCR model returns full-width characters, so this pattern should match them.
         ocr_blacklist_pattern = {self.ocr_blacklist_pattern}
         
-        # The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn't
-        # confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the
-        # detected language being unknown. If strict is disabled, those will not be discarded. Anything that is
-        # confidently recognized as a different language will be discarded regardless of this setting.
+        # The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that
+        # the it isn't confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting
+        # in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is
+        # confidently recognized as a different language will be discarded regardless of this setting.[GUI: <br>]
+        # Note: this setting is only relevant when ocr_language is set to detect per box or page.
         ocr_strict_language = {self.ocr_strict_language}
         
         # Padding to add to each side of a box.
@@ -398,6 +411,10 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, int, "suspicious_box_min_size")
         try_to_load(self, config_updater, section, Percentage, "box_overlap_threshold")
         try_to_load(self, config_updater, section, bool, "ocr_enabled")
+        try_to_load(self, config_updater, section, bool, "ocr_use_tesseract")
+        try_to_load(self, config_updater, section, osl.LanguageCode, "ocr_language")
+        try_to_load(self, config_updater, section, OCREngine, "ocr_engine")
+        try_to_load(self, config_updater, section, ReadingOrder, "reading_order")
         try_to_load(self, config_updater, section, int, "ocr_max_size")
         try_to_load(self, config_updater, section, str, "ocr_blacklist_pattern")
         try_to_load(self, config_updater, section, bool, "ocr_strict_language")
@@ -406,9 +423,6 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, int, "box_padding_extended")
         try_to_load(self, config_updater, section, int, "box_right_padding_extended")
         try_to_load(self, config_updater, section, int, "box_reference_padding")
-        try_to_load(self, config_updater, section, bool, "ocr_use_tesseract")
-        try_to_load(self, config_updater, section, OCREngine, "ocr_engine")
-        try_to_load(self, config_updater, section, ReadingOrder, "reading_order")
 
     def fix(self) -> None:
         """
@@ -1280,7 +1294,7 @@ def try_to_load(
     The key and the attribute name need to match.
 
     Supports attr_type:
-    bool, int, float, str, Path, str | None, Path | None
+    bool, int, float, str, Path, str | None, Path | None, StrEnum
 
     Union types with None will return none if the bare string is empty.
 

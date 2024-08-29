@@ -14,6 +14,7 @@ Then we can simply intercept the strings on the GUI layer to translate them.
 
 This file needs to be run before the Makefile action that refreshes the source .ts file.
 """
+
 from io import StringIO
 from datetime import datetime
 from pathlib import Path
@@ -22,6 +23,7 @@ from attrs import define
 
 import pcleaner.config as cfg
 import pcleaner.gui.profile_parser as pp
+import pcleaner.ocr.supported_languages as osl
 
 
 @define
@@ -66,12 +68,22 @@ def extract_profile_strings(profile_structure: list[pp.ProfileSection]) -> list[
     return profile_strings
 
 
-def bogus_codegen(profile_strings: list[ProfileString]) -> str:
+def extract_language_names() -> list[str]:
+    """
+    Grab the language names from ocr/supported_languages.py.
+
+    :return: List of language names.
+    """
+    return list(osl.LANGUAGE_CODE_TO_NAME.values())
+
+
+def bogus_codegen(profile_strings: list[ProfileString], language_names: list[str]) -> str:
     """
     Construct a fake Python file that contains translation function calls for all the profile strings.
     This way Qt Linguist can add them to its .ts file with additional context.
 
     :param profile_strings: List of profile strings to generate code for.
+    :param language_names: List of language names to generate code for.
     :return: Generated code.
     """
     buffer = StringIO()
@@ -97,6 +109,11 @@ from PySide6.QtCore import QCoreApplication
             f"QCoreApplication.translate('Profile', '{profile_string.text}', '{profile_string.type}{profile_string.section}')\n\n"
         )
 
+    for language_name in language_names:
+        buffer.write(
+            f"QCoreApplication.translate('Profile', '{language_name}', 'Language option for OCR')\n\n"
+        )
+
     return buffer.getvalue()
 
 
@@ -107,7 +124,8 @@ def main() -> None:
     profile = cfg.Profile()
     profile_structure = pp.parse_profile_structure(profile)
     profile_strings = extract_profile_strings(profile_structure)
-    code = bogus_codegen(profile_strings)
+    language_names = extract_language_names()
+    code = bogus_codegen(profile_strings, language_names)
     # Write the file right next to this one, no matter the current working directory.
     output_file = Path(__file__).parent / "profile_strings.py"
     output_file.write_text(code, encoding="utf-8")

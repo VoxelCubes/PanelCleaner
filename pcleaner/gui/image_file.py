@@ -213,6 +213,7 @@ class ImageFile:
         settings += [
             pp.box_overlap_threshold,
             pp.ocr_enabled,
+            pp.ocr_language,
             pp.ocr_engine,
             pp.reading_order,
             pp.ocr_max_size,

@@ -49,11 +49,13 @@ class Ui_ImageMatchOverview(object):
 
         self.label_warning_icon = QLabel(ImageMatchOverview)
         self.label_warning_icon.setObjectName(u"label_warning_icon")
+        self.label_warning_icon.setText(u"<warning icon>")
 
         self.horizontalLayout.addWidget(self.label_warning_icon)
 
         self.label_warning = QLabel(ImageMatchOverview)
         self.label_warning.setObjectName(u"label_warning")
+        self.label_warning.setText(u"<x pages of OCR data will be lost>")
 
         self.horizontalLayout.addWidget(self.label_warning)
 
@@ -143,8 +145,6 @@ class Ui_ImageMatchOverview(object):
 
     def retranslateUi(self, ImageMatchOverview):
         ImageMatchOverview.setWindowTitle(QCoreApplication.translate("ImageMatchOverview", u"Image Selection", None))
-        self.label_warning_icon.setText(QCoreApplication.translate("ImageMatchOverview", u"<warning icon>", None))
-        self.label_warning.setText(QCoreApplication.translate("ImageMatchOverview", u"<x pages of OCR data will be lost>", None))
         self.pushButton_deselect_all.setText(QCoreApplication.translate("ImageMatchOverview", u"Deselect All", None))
         self.pushButton_select_all.setText(QCoreApplication.translate("ImageMatchOverview", u"Select All", None))
         self.pushButton_deselect_new.setText(QCoreApplication.translate("ImageMatchOverview", u"Unselect images without matching OCR data", None))

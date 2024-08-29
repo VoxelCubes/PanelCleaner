@@ -14,6 +14,7 @@ Usage:
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
     pcleaner load models [--cuda | --cpu | --both] [--force]
+    pcleaner languages list
     pcleaner --help
     pcleaner --version
     pcleaner [--debug]
@@ -46,6 +47,7 @@ Subcommands:
     load models       Download the models used by the program. If neither --cuda nor --cpu is specified, the program will
                      try to use CUDA if available. If it is not, it will fall back to CPU.
                      This is done automatically when needed, but can be done manually.
+    languages list   List the languages and their codes supported for OCR.
 
 
 Options:
@@ -138,6 +140,7 @@ import pcleaner.structures as st
 import pcleaner.output_structures as ost
 import pcleaner.image_export as ie
 import pcleaner.ocr.ocr as ocr
+import pcleaner.ocr.supported_languages as osl
 from pcleaner import __version__
 
 
@@ -215,6 +218,9 @@ def main() -> None:
             config.show()
         elif args.open:
             cli.open_file_with_editor(cli.get_config_path(), config.profile_editor)
+    elif args.languages and args.list:
+        cli.list_all_languages()
+
     elif args.clean:
         img_paths: str = ""
         if args.notify:
@@ -407,11 +413,23 @@ def run_cleaner(
         # (It takes several seconds to load the ocr model, so this is fine.)
         time.sleep(0.1)
         if profile.preprocessor.ocr_enabled:
-            ocr_processor = ocr.get_ocr_processor(
+            ocr_engine_factory = ocr.build_ocr_engine_factory(
                 profile.preprocessor.ocr_use_tesseract, profile.preprocessor.ocr_engine
             )
         else:
-            ocr_processor = None
+            ocr_engine_factory = None
+
+        # Warn the user if he's trying to force an unsupported language.
+        if profile.preprocessor.ocr_language not in (
+            osl.LanguageCode.detect_box,
+            osl.LanguageCode.detect_page,
+        ):
+            if profile.preprocessor.ocr_language not in ocr.get_all_available_langs():
+                lang_name = osl.LANGUAGE_CODE_TO_NAME[profile.preprocessor.ocr_language]
+                print(
+                    f"\nWarning: The language '{lang_name}' "
+                    f"is not supported by any of your current OCR engines.\n"
+                )
 
         ocr_analytics: list[st.OCRAnalytic] = []
         for json_file_path in tqdm(list(cache_dir.glob("*.json"))):
@@ -419,7 +437,7 @@ def run_cleaner(
                 json_file_path,
                 preprocessor_conf=profile.preprocessor,
                 cache_masks=cache_masks,
-                mocr=ocr_processor,
+                ocr_engine_factory=ocr_engine_factory,
             )
             if ocr_analytics_of_a_page is not None:
                 ocr_analytics.append(ocr_analytics_of_a_page)
@@ -624,9 +642,21 @@ def run_ocr(
     cache_dir = config.get_cleaner_cache_dir()
     profile = config.current_profile
 
-    ocr_processor = ocr.get_ocr_processor(
+    ocr_processor = ocr.build_ocr_engine_factory(
         profile.preprocessor.ocr_use_tesseract, profile.preprocessor.ocr_engine
     )
+
+    # Warn the user if he's trying to force an unsupported language.
+    if profile.preprocessor.ocr_language not in (
+        osl.LanguageCode.detect_box,
+        osl.LanguageCode.detect_page,
+    ):
+        if profile.preprocessor.ocr_language not in ocr.get_all_available_langs():
+            lang_name = osl.LANGUAGE_CODE_TO_NAME[profile.preprocessor.ocr_language]
+            print(
+                f"\nWarning: The language '{lang_name}' "
+                f"is not supported by any of your current OCR engines.\n"
+            )
 
     logger.debug(f"Cache directory: {cache_dir}")
 
@@ -667,8 +697,6 @@ def run_ocr(
     profile.preprocessor.ocr_enabled = True
     # Make sure the max size is infinite, so no boxes are skipped in the OCR process.
     profile.preprocessor.ocr_max_size = 10**10
-    # Make sure the sus box min size is infinite, so all boxes with "unknown" language are skipped.
-    profile.preprocessor.suspicious_box_min_size = 10**10
     # Set the OCR blacklist pattern to match everything, so all text gets reported in the analytics.
     profile.preprocessor.ocr_blacklist_pattern = ".*"
 
@@ -678,7 +706,7 @@ def run_ocr(
             json_file_path,
             preprocessor_conf=profile.preprocessor,
             cache_masks=cache_masks,
-            mocr=ocr_processor,
+            ocr_engine_factory=ocr_processor,
             cache_masks_ocr=True,
             performing_ocr=True,
         )

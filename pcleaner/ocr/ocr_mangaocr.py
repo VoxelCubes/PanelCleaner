@@ -4,6 +4,8 @@ from loguru import logger
 from manga_ocr import MangaOcr as MangaOcrModel
 from PIL import Image
 
+import pcleaner.ocr.supported_languages as osl
+
 
 class MangaOcr:
     _instance = None
@@ -21,6 +23,10 @@ class MangaOcr:
     def __init__(self, *args, **kwargs):
         # Initialization logic is deferred to a separate method
         pass
+
+    @staticmethod
+    def langs() -> set[osl.LanguageCode]:
+        return {osl.LanguageCode.jpn}
 
     def initialize_model(self, *args, **kwargs):
         if self._model is None:

@@ -5,6 +5,8 @@ import pytesseract
 from loguru import logger
 from PIL import Image
 
+import pcleaner.ocr.supported_languages as osl
+
 
 @cache
 def verify_tesseract():
@@ -17,9 +19,15 @@ def verify_tesseract():
 
 
 @cache
-def available_langs() -> set[str]:
+def available_langs() -> set[osl.LanguageCode]:
     try:
-        return set(pytesseract.get_languages(config=""))
+        # We don't cover all languages, so abuse StrEnum string equality to compare
+        # against membership before casting to LanguageCode.
+        return set(
+            osl.LanguageCode(code)
+            for code in pytesseract.get_languages(config="")
+            if code in osl.LanguageCode.__members__
+        )
     except pytesseract.TesseractNotFoundError as e:
         logger.error(f"Error checking Tesseract available language data: {e}")
         return set()
@@ -53,7 +61,7 @@ class TesseractOcr:
         return verify_tesseract()
 
     @staticmethod
-    def langs() -> set[str]:
+    def langs() -> set[osl.LanguageCode]:
         return available_langs()
 
     def __call__(

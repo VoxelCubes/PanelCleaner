@@ -55,14 +55,14 @@
        <item>
         <widget class="QLabel" name="label_warning_icon">
          <property name="text">
-          <string>&lt;warning icon&gt;</string>
+          <string notr="true">&lt;warning icon&gt;</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_warning">
          <property name="text">
-          <string>&lt;x pages of OCR data will be lost&gt;</string>
+          <string notr="true">&lt;x pages of OCR data will be lost&gt;</string>
          </property>
         </widget>
        </item>

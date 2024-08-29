@@ -38,7 +38,7 @@ class ImageTab(Qw.QTabWidget):
         self,
         image_obj: imf.ImageFile,
         config: cfg.Config,
-        shared_ocr_model: st.Shared[ocr.OcrProcsType],
+        shared_ocr_model: st.Shared[ocr.OCREngineFactory],
         thread_queue: Qc.QThreadPool,
         progress_callback: Callable[[ost.ProgressData], None],
         profile_changed_signal: Qc.Signal,

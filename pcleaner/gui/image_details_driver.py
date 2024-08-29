@@ -88,7 +88,9 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
     freshness_tracker: FileFreshnessTracker
 
     config: cfg.Config
-    shared_ocr_model: st.Shared[ocr.OcrProcsType] | None  # Must be handed over by the file table.
+    shared_ocr_model: (
+        st.Shared[ocr.OCREngineFactory] | None
+    )  # Must be handed over by the file table.
     thread_queue: Qc.QThreadPool
     progress_callback: Callable[[ost.ProgressData], None]
     abort_signal: Signal
@@ -108,7 +110,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         parent=None,
         image_obj: imf.ImageFile = None,
         config: cfg.Config = None,
-        shared_ocr_model: st.Shared[ocr.OcrProcsType] | None = None,
+        shared_ocr_model: st.Shared[ocr.OCREngineFactory] | None = None,
         thread_queue: Qc.QThreadPool = None,
         progress_callback: Callable[[ost.ProgressData], None] = None,
         profile_changed_signal: Signal = None,
@@ -831,7 +833,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             output_file=None,
             csv_output=False,
             config=self.config,
-            ocr_processor=self.shared_ocr_model.get(),
+            ocr_engine_factory=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
             abort_flag=abort_flag,
         )

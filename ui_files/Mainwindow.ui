@@ -1071,6 +1071,7 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="action_online_documentation"/>
     <addaction name="action_about"/>
+    <addaction name="action_show_ocr_language_support"/>
     <addaction name="action_donate"/>
     <addaction name="action_help_translation"/>
     <addaction name="action_report_issue"/>
@@ -1278,6 +1279,14 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Add File Browser Extension...</string>
+   </property>
+  </action>
+  <action name="action_show_ocr_language_support">
+   <property name="icon">
+    <iconset theme="code-block"/>
+   </property>
+   <property name="text">
+    <string>Show Supported OCR Languages</string>
    </property>
   </action>
  </widget>

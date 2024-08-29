@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Mapping, Protocol, TypeAlias
+from typing import Protocol, TypeAlias, Callable
 from io import StringIO
 import itertools
 import csv
@@ -13,63 +13,80 @@ import pcleaner.structures as st
 import pcleaner.helpers as hp
 from pcleaner.ocr.ocr_mangaocr import MangaOcr
 from pcleaner.ocr.ocr_tesseract import TesseractOcr
+import pcleaner.ocr.supported_languages as osl
 
 
 class OCRModel(Protocol):
     def __call__(self, img_or_path: Image.Image | Path | str, **kwargs) -> str: ...
 
 
-OcrProcsType: TypeAlias = Mapping[st.DetectedLang, OCRModel]
+OCREngineFactory: TypeAlias = Callable[[osl.LanguageCode], OCRModel]
 
 
 def tesseract_ok(profile: cfg.Profile) -> bool:
     want_tess = profile.preprocessor.ocr_use_tesseract
-    tess_langs: set[str] = TesseractOcr.langs()
-    return not want_tess or (want_tess and tess_langs != set())
+    has_language_packs: bool = bool(TesseractOcr.langs())
+    return not want_tess or (want_tess and has_language_packs)
 
 
-def ocr_engines(profile: cfg.Profile):
+def ocr_engines():
     return {
         cfg.OCREngine.MANGAOCR: MangaOcr(),
-        cfg.OCREngine.TESSERACT: TesseractOcr() if tesseract_ok(profile) else None,
+        cfg.OCREngine.TESSERACT: TesseractOcr(),
     }
 
 
-def get_ocr_processor(want_tess: bool, ocr_engine: cfg.OCREngine) -> OcrProcsType:
+def get_all_available_langs() -> set[osl.LanguageCode]:
+    union_langs = set()
+    for ocr in ocr_engines().values():
+        union_langs |= ocr.langs()
+    return union_langs
+
+
+def build_ocr_engine_factory(
+    tesseract_enabled: bool, ocr_engine_preference: cfg.OCREngine
+) -> OCREngineFactory:
+    """
+    Create a factory function that returns the appropriate OCR engine for a given language.
+
+    :param tesseract_enabled: Whether Tesseract should be considered for use.
+    :param ocr_engine_preference: The preferred OCR engine.
+    :return: The factory function.
+    """
     # want_tess = profile.preprocessor.ocr_use_tesseract
-    tess_langs: set[str] = TesseractOcr.langs()
-    if want_tess and not tess_langs:
-        print(
+    tess_langs: set[osl.LanguageCode] = TesseractOcr.langs()
+    mocr_langs: set[osl.LanguageCode] = MangaOcr.langs()
+    if tesseract_enabled and not tess_langs:
+        logger.error(
             f"Tesseract OCR is not installed or not found. "
-            "Please see the instructions to install Tesseract correctly. Falling back to manga-ocr."
+            "Please see the instructions in the README to install Tesseract correctly. Falling back to manga-ocr."
         )
-    mangaocr = MangaOcr()
-    # noinspection PyTypeChecker
-    ocr_processor: OcrProcsType = {
-        st.DetectedLang.JA: mangaocr,
-        st.DetectedLang.ENG: mangaocr,
-        st.DetectedLang.UNKNOWN: mangaocr,
-    }
-    if want_tess and tess_langs:
-        # ocr_engine = profile.preprocessor.ocr_engine
-        if ocr_engine == cfg.OCREngine.AUTO:
-            ocr_processor: OcrProcsType = {
-                st.DetectedLang.JA: mangaocr,
-                st.DetectedLang.ENG: TesseractOcr("eng"),
-                st.DetectedLang.UNKNOWN: TesseractOcr(),
-            }
-        elif ocr_engine == cfg.OCREngine.TESSERACT:
-            if "jpn" not in tess_langs:
-                print(
-                    f"Tesseract language pack for 'jpn' is not installed or not found. "
-                    "Please see the instructions to install Tesseract correctly. Falling back to manga-ocr."
-                )
-            ocr_processor: OcrProcsType = {
-                st.DetectedLang.JA: TesseractOcr("jpn") if "jpn" in tess_langs else mangaocr,
-                st.DetectedLang.ENG: TesseractOcr("eng"),
-                st.DetectedLang.UNKNOWN: TesseractOcr(),
-            }
-    return ocr_processor
+
+    if not tesseract_enabled:
+        ocr_engine_preference = cfg.OCREngine.MANGAOCR
+
+    def closure(lang: osl.LanguageCode) -> OCRModel:
+        if ocr_engine_preference == cfg.OCREngine.AUTO:
+            # Prefer MangaOCR for the languages it can do, which is only one, but it's
+            # much better than Tesseract for it.
+            if lang in mocr_langs:
+                # The linter is being retarded here.
+                # noinspection PyTypeChecker
+                return MangaOcr()
+            if lang in tess_langs:
+                return TesseractOcr(lang)
+        elif ocr_engine_preference == cfg.OCREngine.TESSERACT:
+            if lang in tess_langs:
+                return TesseractOcr(lang)
+            logger.error(
+                f"Tesseract language pack for '{lang}' is not installed or not found. "
+                "Please see the instructions to install Tesseract correctly. Falling back to manga-ocr."
+            )
+        # Fall back to manga-ocr.
+        # noinspection PyTypeChecker
+        return MangaOcr()
+
+    return closure
 
 
 def format_output(

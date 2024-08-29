@@ -13,21 +13,7 @@ from loguru import logger
 
 import pcleaner.config as cfg
 import pcleaner.data
-
-# If using Python 3.10 or older, use the 3rd party StrEnum.
-if sys.version_info < (3, 11):
-    from strenum import StrEnum
-else:
-    from enum import StrEnum
-
-
-class DetectedLang(StrEnum):
-    JA = "ja"
-    ENG = "eng"
-    UNKNOWN = "unknown"
-
-    def __str__(self):
-        return self.value
+import pcleaner.ocr.supported_languages as osl
 
 
 class BoxType(Enum):
@@ -177,6 +163,7 @@ class PageData:
     mask_path: str  # Path to the generated mask.png
     original_path: str  # Path to the original image. (used for relative output)
     scale: float  # The size of the original image relative to the png.
+    box_language: list[osl.LanguageCode]
     boxes: list[Box]
     extended_boxes: list[Box]
     merged_extended_boxes: list[Box]
@@ -198,6 +185,7 @@ class PageData:
             json_data["mask_path"],
             json_data["original_path"],
             json_data["scale"],
+            [osl.LanguageCode(lang) for lang in json_data["box_language"]],
             [Box(*b) for b in json_data["boxes"]],
             [Box(*b) for b in json_data["extended_boxes"]],
             [Box(*b) for b in json_data["merged_extended_boxes"]],
@@ -215,6 +203,7 @@ class PageData:
             "mask_path": self.mask_path,
             "original_path": self.original_path,
             "scale": self.scale,
+            "box_language": [str(lang) for lang in self.box_language],
             "boxes": [b.as_tuple for b in self.boxes],
             "extended_boxes": [b.as_tuple for b in self.extended_boxes],
             "merged_extended_boxes": [b.as_tuple for b in self.merged_extended_boxes],

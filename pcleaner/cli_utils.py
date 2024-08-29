@@ -6,8 +6,10 @@ import subprocess
 from pathlib import Path
 
 from xdg import XDG_CONFIG_HOME, XDG_CACHE_HOME
+import prettytable as pt
 
 from pcleaner import __program__
+import pcleaner.ocr.supported_languages as osl
 
 
 def get_config_path() -> Path:
@@ -26,9 +28,11 @@ def get_config_path() -> Path:
         )
     elif platform.system() == "Darwin":
         path = Path(
-            xdg_path
-            if "XDG_CONFIG_HOME" in os.environ
-            else (Path.home() / "Library" / "Application Support"),
+            (
+                xdg_path
+                if "XDG_CONFIG_HOME" in os.environ
+                else (Path.home() / "Library" / "Application Support")
+            ),
             __program__,
             __program__ + "config.ini",
         )
@@ -212,3 +216,17 @@ def closest_match(word: str, choices: list[str]) -> str | None:
             return str(closest[0])
         else:
             return None
+
+
+def list_all_languages() -> None:
+    """
+    List all supported language codes.
+    """
+    print("Language detection options:")
+    table = pt.PrettyTable()
+    table.set_style(pt.SINGLE_BORDER)
+    table.field_names = ["Language", "Code"]
+    table.align = "l"
+    for code, name in osl.LANGUAGE_CODE_TO_NAME.items():
+        table.add_row([name, code])
+    print(table)
