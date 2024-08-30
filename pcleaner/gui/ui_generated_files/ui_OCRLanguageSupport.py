@@ -25,7 +25,7 @@ class Ui_OCRLanguageSupport(object):
     def setupUi(self, OCRLanguageSupport):
         if not OCRLanguageSupport.objectName():
             OCRLanguageSupport.setObjectName(u"OCRLanguageSupport")
-        OCRLanguageSupport.resize(637, 620)
+        OCRLanguageSupport.resize(500, 720)
         self.verticalLayout = QVBoxLayout(OCRLanguageSupport)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(1, 0, 1, -1)
@@ -53,7 +53,7 @@ class Ui_OCRLanguageSupport(object):
         self.lang_table.setSortingEnabled(False)
         self.lang_table.setCornerButtonEnabled(False)
         self.lang_table.horizontalHeader().setVisible(True)
-        self.lang_table.horizontalHeader().setMinimumSectionSize(111)
+        self.lang_table.horizontalHeader().setMinimumSectionSize(80)
         self.lang_table.horizontalHeader().setHighlightSections(False)
         self.lang_table.verticalHeader().setVisible(False)
         self.lang_table.verticalHeader().setHighlightSections(False)
@@ -65,7 +65,13 @@ class Ui_OCRLanguageSupport(object):
         self.horizontalLayout.setContentsMargins(6, 6, -1, -1)
         self.pushButton_install_tesseract = QPushButton(OCRLanguageSupport)
         self.pushButton_install_tesseract.setObjectName(u"pushButton_install_tesseract")
-        icon = QIcon(QIcon.fromTheme(u"internet-services"))
+        icon = QIcon()
+        iconThemeName = u"internet-services"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_install_tesseract.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_install_tesseract)

@@ -4,6 +4,7 @@ import PySide6.QtWidgets as Qw
 from loguru import logger
 
 import pcleaner.gui.log_parser as lp
+import pcleaner.gui.state_saver as ss
 from pcleaner.gui.ui_generated_files.ui_ErrorDialog import Ui_ErrorDialog
 
 
@@ -13,6 +14,8 @@ class ErrorDialog(Qw.QDialog, Ui_ErrorDialog):
     """
 
     session_log: lp.LogSession
+
+    state_saver: ss.StateSaver  # The state saver for the window.
 
     def __init__(
         self,
@@ -42,6 +45,25 @@ class ErrorDialog(Qw.QDialog, Ui_ErrorDialog):
             self.tr('Note: Name "{name}" was hidden').format(name=lp.get_username())
         )
         self.load_session_log()
+
+        self.state_saver = ss.StateSaver("error_dialog")
+        self.init_state_saver()
+        self.state_saver.restore()
+
+    def closeEvent(self, event: Qg.QCloseEvent) -> None:
+        """
+        Called when the window is closed.
+        """
+        self.state_saver.save()
+        event.accept()
+
+    def init_state_saver(self) -> None:
+        """
+        Load the state from the state saver.
+        """
+        self.state_saver.register(
+            self,
+        )
 
     @staticmethod
     def open_issues() -> None:

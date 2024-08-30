@@ -5,6 +5,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 from loguru import logger
 
+import pcleaner.gui.state_saver as ss
 import pcleaner.ocr.supported_languages as osl
 from pcleaner.gui.ui_generated_files.ui_OCRLanguageSupport import Ui_OCRLanguageSupport
 from pcleaner.helpers import tr
@@ -22,6 +23,8 @@ class OCRLanguageSupport(Qw.QDialog, Ui_OCRLanguageSupport):
     """
     Display the current state of OCR language support.
     """
+
+    state_saver: ss.StateSaver  # The state saver for the window.
 
     def __init__(
         self,
@@ -42,6 +45,26 @@ class OCRLanguageSupport(Qw.QDialog, Ui_OCRLanguageSupport):
         self.pushButton_install_tesseract.clicked.connect(self.open_tesseract_installation)
         self.pushButton_install_tesseract_language_packs.clicked.connect(
             self.open_tesseract_langs_installation
+        )
+
+        self.state_saver = ss.StateSaver("ocr_language_support")
+        self.init_state_saver()
+        self.state_saver.restore()
+
+    def closeEvent(self, event: Qg.QCloseEvent) -> None:
+        """
+        Called when the window is closed.
+        """
+        self.state_saver.save()
+        event.accept()
+
+    def init_state_saver(self) -> None:
+        """
+        Load the state from the state saver.
+        """
+        self.state_saver.register(
+            self,
+            self.lang_table,
         )
 
     def populate_table(self):

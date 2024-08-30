@@ -10,13 +10,15 @@ from loguru import logger
 from natsort import natsorted
 
 import pcleaner.config as cfg
-import pcleaner.gui.structures as gst
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
-import pcleaner.output_structures as ost
 import pcleaner.gui.image_viewer as iv
-from pcleaner.helpers import f_plural
+import pcleaner.gui.state_saver as ss
+import pcleaner.gui.structures as gst
+import pcleaner.output_structures as ost
 from pcleaner.gui.ui_generated_files.ui_OutputReview import Ui_OutputReview
+from pcleaner.helpers import f_plural
+
 
 # The maximum size, will be smaller on one side if the image is not square.
 THUMBNAIL_SIZE = 180
@@ -56,6 +58,8 @@ class OutputReviewWindow(Qw.QWidget, Ui_OutputReview):
 
     min_thumbnail_size: int
     max_thumbnail_size: int
+
+    state_saver: ss.StateSaver  # The state saver for the window.
 
     def __init__(
         self,
@@ -111,6 +115,10 @@ class OutputReviewWindow(Qw.QWidget, Ui_OutputReview):
 
         self.pushButton_done.clicked.connect(self.close)
 
+        self.state_saver = ss.StateSaver("output_review")
+        self.init_state_saver()
+        self.state_saver.restore()
+
     def closeEvent(self, event: Qg.QCloseEvent) -> None:
         if self.confirm_closing:
             if (
@@ -124,6 +132,7 @@ class OutputReviewWindow(Qw.QWidget, Ui_OutputReview):
                 event.ignore()
                 return
         self.closed.emit()
+        self.state_saver.save()
         event.accept()
 
     def cease_and_desist(self):
@@ -134,6 +143,17 @@ class OutputReviewWindow(Qw.QWidget, Ui_OutputReview):
         self.confirm_closing = False
         self.closed.disconnect()
         self.close()
+
+    def init_state_saver(self) -> None:
+        """
+        Load the state from the state saver.
+        """
+        self.state_saver.register(
+            self,
+            self.splitter,
+            self.horizontalSlider_icon_size,
+            self.comboBox_view_mode,
+        )
 
     def sort_images_by_path(self) -> None:
         """

@@ -1,5 +1,4 @@
 import json
-import sys
 import re
 from enum import Enum, auto
 from importlib import resources

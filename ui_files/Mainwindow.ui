@@ -710,7 +710,7 @@
                      <item>
                       <widget class="QRadioButton" name="radioButton_ocr_csv">
                        <property name="text">
-                        <string>CSV File</string>
+                        <string>CSV Spreadsheet</string>
                        </property>
                        <property name="checked">
                         <bool>true</bool>
@@ -1064,6 +1064,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="menu_theme"/>
     <addaction name="menu_language"/>
     <addaction name="action_file_manager_extension"/>
+    <addaction name="action_delete_window_state"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -1283,10 +1284,24 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_show_ocr_language_support">
    <property name="icon">
-    <iconset theme="code-block"/>
+    <iconset theme="code-block">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Show Supported OCR Languages</string>
+   </property>
+  </action>
+  <action name="actionReset_Window_Layout_Preferences">
+   <property name="text">
+    <string>Reset Window Layout Preferences</string>
+   </property>
+  </action>
+  <action name="action_delete_window_state">
+   <property name="icon">
+    <iconset theme="edit-reset"/>
+   </property>
+   <property name="text">
+    <string>Reset Window Layout Preferences</string>
    </property>
   </action>
  </widget>

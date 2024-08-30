@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>637</width>
-    <height>620</height>
+    <width>500</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -62,7 +62,7 @@
       <bool>true</bool>
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>111</number>
+      <number>80</number>
      </attribute>
      <attribute name="horizontalHeaderHighlightSections">
       <bool>false</bool>
@@ -109,7 +109,8 @@
         <string>How to install Tesseract</string>
        </property>
        <property name="icon">
-        <iconset theme="internet-services"/>
+        <iconset theme="internet-services">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
@@ -119,7 +120,8 @@
         <string>How to install Tesseract language packs</string>
        </property>
        <property name="icon">
-        <iconset theme="internet-services"/>
+        <iconset theme="internet-services">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>

@@ -25,36 +25,32 @@ import pcleaner.gui.image_match_driver as imd
 import pcleaner.gui.issue_reporter_driver as ird
 import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.new_profile_driver as npd
-import pcleaner.gui.ocr_review_driver as ocrd
 import pcleaner.gui.ocr_language_overview_driver as olod
+import pcleaner.gui.ocr_review_driver as ocrd
 import pcleaner.gui.output_review_driver as red
 import pcleaner.gui.processing as prc
 import pcleaner.gui.profile_parser as pp
 import pcleaner.gui.setup_greeter_driver as sgd
+import pcleaner.gui.state_saver as ss
 import pcleaner.gui.structures as gst
 import pcleaner.gui.supported_languages as sl
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
 import pcleaner.model_downloader as md
 import pcleaner.ocr.ocr as ocr
+import pcleaner.ocr.parsers as op
+import pcleaner.ocr.supported_languages as osl
 import pcleaner.output_structures as ost
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
-import pcleaner.ocr.parsers as op
-import pcleaner.ocr.supported_languages as osl
 from pcleaner import __display_name__, __version__
 from pcleaner import data
 from pcleaner.gui.file_table import Column
 from pcleaner.gui.ui_generated_files.ui_Mainwindow import Ui_MainWindow
 from pcleaner.helpers import tr
 
+
 ANALYTICS_COLUMNS = 74
-
-# TODO cache window sizes and splitter positions and table column widths
-# more of a 2.9 thing.
-
-# TODO make new ocr options for lang override.
-# OCR language: Detect per bubble|detect per image (average language)|eng|jp|es|br|de etc.
 
 
 # noinspection PyUnresolvedReferences
@@ -99,6 +95,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     terminate = Signal()  # Signal to kill any straggler widgets.
     dead: bool  # Whether the window is closing.
 
+    state_saver: ss.StateSaver  # The state saver for the window.
+
     def __init__(self, config: cfg.Config, files_to_open: list[str], debug: bool) -> None:
         Qw.QMainWindow.__init__(self)
         self.setupUi(self)
@@ -132,6 +130,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # in a previous run, and if so, skip it.
         self.thread_queue = Qc.QThreadPool()
         self.thread_queue.setMaxThreadCount(1)
+
+        self.state_saver = ss.StateSaver("Mainwindow")
+        self.init_state_saver()
 
         # Share core objects with the file table.
         # Since the file table is created by the ui loader, we can't pass them to the constructor.
@@ -276,6 +277,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.file_table.setColumnHidden(Column.PATH, True)
         self.file_table.setColumnWidth(Column.FILENAME, 200)
         self.file_table.setColumnWidth(Column.SIZE, 100)
+        self.file_table.verticalHeader().setSectionResizeMode(Qw.QHeaderView.Fixed)
         self.frame_greeter.drop_signal.connect(self.file_table.dropEvent)
         self.file_table.table_is_empty.connect(lambda: self.stackedWidget_images.setCurrentIndex(0))
         self.file_table.table_not_empty.connect(
@@ -520,6 +522,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # will break any other instance of pcleaner that is using it.
         self.test_and_set_lock_file()
 
+        self.state_saver.restore()
+
         self.start_initialization_worker()
 
         # Load the startup files into the file table, if any.
@@ -685,6 +689,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         self.dead = True
         logger.info("Closing window.")
+        self.state_saver.save()
         self.free_lock_file()
         # Tell the thread queue to abort.
         self.pushButton_abort.clicked.emit()
@@ -696,6 +701,43 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # In the great void of the memory heap, it shall rest, relinquishing its bytes back to the
         # cosmic pool of resources. It walks willingly into the darkness, not as a vanquished foe,
         # but as a fulfilled entity. F
+
+    def init_state_saver(self):
+        """
+        Save window and splitter sizes along with various little settings.
+        These are written to a file on *nix systems, and to the registry on Windows.
+        """
+        self.state_saver.register(
+            self,
+            self.splitter,
+            self.file_table,
+            self.radioButton_cleaning,
+            self.radioButton_ocr,
+        )
+        # Save cleaning output settings.
+        self.state_saver.register(
+            self.lineEdit_out_directory,
+            self.checkBox_save_clean,
+            self.checkBox_save_mask,
+            self.checkBox_save_text,
+            self.checkBox_review_output,
+            self.checkBox_write_output,
+        )
+        # Save OCR output settings.
+        self.state_saver.register(
+            self.lineEdit_out_file,
+            self.radioButton_ocr_csv,
+            self.radioButton_ocr_text,
+            self.checkBox_review_ocr,
+        )
+
+    def clear_window_state(self) -> None:
+        self.state_saver.delete_all()
+        gu.show_info(
+            self,
+            self.tr("Layout Reset"),
+            self.tr("The window layout has been reset. The default layout will be used next time."),
+        )
 
     def clean_cache(self) -> None:
         logger.info("Cleaning image cache.")
@@ -1013,6 +1055,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_import_profile.triggered.connect(self.import_profile)
         self.action_new_profile.triggered.connect(partial(self.save_profile, make_new=True))
         self.action_delete_profile.triggered.connect(self.delete_profile)
+        self.action_delete_window_state.triggered.connect(self.clear_window_state)
 
     def handle_set_default_profile(self, profile_name: str) -> None:
         """
@@ -2020,6 +2063,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_remove_all_files.setEnabled(enabled)
         self.action_save_profile.setEnabled(enabled)
         self.action_import_profile.setEnabled(enabled)
+        self.action_delete_window_state.setEnabled(enabled)
         self.action_new_profile.setEnabled(enabled)
         self.action_delete_profile.setEnabled(enabled)
         self.action_save_profile_as.setEnabled(enabled)

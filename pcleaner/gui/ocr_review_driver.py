@@ -5,21 +5,23 @@ from functools import wraps, partial
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
+from PIL import Image
 from PySide6.QtCore import Slot
 from loguru import logger
-from PIL import Image
 from natsort import natsorted
 
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
-import pcleaner.output_structures as ost
+import pcleaner.gui.state_saver as ss
 import pcleaner.gui.structures as gst
-import pcleaner.structures as st
+import pcleaner.gui.worker_thread as wt
 import pcleaner.ocr.ocr as ocr
 import pcleaner.ocr.supported_languages as osl
-import pcleaner.gui.worker_thread as wt
-from pcleaner.helpers import tr, f_plural
+import pcleaner.output_structures as ost
+import pcleaner.structures as st
 from pcleaner.gui.ui_generated_files.ui_OcrReview import Ui_OcrReview
+from pcleaner.helpers import tr, f_plural
+
 
 # The maximum size, will be smaller on one side if the image is not square.
 THUMBNAIL_SIZE = 180
@@ -77,6 +79,8 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
 
     # When True, handle changes to cells as user input.
     awaiting_user_input: bool
+
+    state_saver: ss.StateSaver  # The state saver for the window.
 
     def __init__(
         self,
@@ -176,6 +180,10 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         self.init_shortcuts()
 
         self.load_ocr_options()
+
+        self.state_saver = ss.StateSaver("ocr_review")
+        self.init_state_saver()
+        self.state_saver.restore()
 
     def init_shortcuts(self) -> None:
         def set_button_shortcut(button: Qw.QPushButton, key_sequence: Qg.QKeySequence) -> None:
@@ -719,6 +727,8 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
             ):
                 event.ignore()
                 return
+
+        self.state_saver.save()
         event.accept()
 
     def calculate_thumbnail_size(self) -> None:
@@ -852,6 +862,16 @@ class OcrReviewWindow(Qw.QDialog, Ui_OcrReview):
         index = self.image_list.currentRow()
         image = self.images[index]
         self.switch_to_image(image)
+
+    def init_state_saver(self) -> None:
+        """
+        Load the state from the state saver.
+        """
+        self.state_saver.register(
+            self,
+            self.splitter,
+            self.horizontalSlider_icon_size,
+        )
 
 
 class WrapTextDelegate(Qw.QStyledItemDelegate):
