@@ -97,6 +97,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     output_review: red.OutputReviewWindow | None  # The output review dialog.
 
     terminate = Signal()  # Signal to kill any straggler widgets.
+    dead: bool  # Whether the window is closing.
 
     def __init__(self, config: cfg.Config, files_to_open: list[str], debug: bool) -> None:
         Qw.QMainWindow.__init__(self)
@@ -110,6 +111,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.progress_step_start: ost.Step | None = None
         self.cleaning_review_options = None
         self.ocr_review_options = None
+        self.dead = False
 
         self.shared_ocr_model = gst.Shared[ocr.OCREngineFactory]()
 
@@ -659,8 +661,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def load_ocr_model(self) -> None:
         t_start = time.time()
         self.statusbar.showMessage(self.tr(f"Loading OCR model..."))
-        profile = self.config.current_profile
-        # pre-load manga-ocr
+        # pre-load manga-ocr since it needs a long time.
         ocr.ocr_engines()[cfg.OCREngine.MANGAOCR].initialize_model()
         logger.info(f"Loaded OCR model ({time.time()-t_start:.2f}s)")
         self.statusbar.showMessage(self.tr(f"Loaded OCR model."))
@@ -682,11 +683,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Notify config on close.
         """
+        self.dead = True
         logger.info("Closing window.")
         self.free_lock_file()
         # Tell the thread queue to abort.
         self.pushButton_abort.clicked.emit()
         self.terminate.emit()
+        if not self.debug:
+            self.clean_cache()
         death.accept()  # Embrace oblivion, for it is here that the code's journey finds solace.
         # As the threads unravel and the loops break, so too does the program find its destined end.
         # In the great void of the memory heap, it shall rest, relinquishing its bytes back to the
@@ -694,6 +698,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # but as a fulfilled entity. F
 
     def clean_cache(self) -> None:
+        logger.info("Cleaning image cache.")
         cache_dir = self.config.get_cleaner_cache_dir()
         if len(list(cache_dir.glob("*"))) > 0:
             cu.empty_cache_dir(cache_dir)
@@ -1857,6 +1862,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.progress_current = 0
         if not self.cleaning_review_options:
             self.enable_running_cleaner()
+        if self.dead and not self.debug:
+            # Nuke the cache.
+            self.clean_cache()
 
     @Slot(wt.WorkerError)
     def output_worker_error(self, error: wt.WorkerError) -> None:
