@@ -92,8 +92,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     theme_is_dark: gst.Shared[bool]
     theme_is_dark_changed = Signal(bool)  # When true, the new theme is dark.
 
-    about: ad.AboutWidget  # The about dialog.
-    file_manager_extension: fmed.FileManagerExtension  # The file manager extension dialog.
+    about: ad.AboutWidget | None  # The about dialog.
+    file_manager_extension: fmed.FileManagerExtension | None  # The file manager extension dialog.
+    output_review: red.OutputReviewWindow | None  # The output review dialog.
+
+    terminate = Signal()  # Signal to kill any straggler widgets.
 
     def __init__(self, config: cfg.Config, files_to_open: list[str], debug: bool) -> None:
         Qw.QMainWindow.__init__(self)
@@ -141,6 +144,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.load_config_theme()
 
         Qc.QTimer.singleShot(0, self.post_init)
+
+        # Window references.
+        self.about = None
+        self.file_manager_extension = None
+        self.output_review = None
 
     def save_default_palette(self) -> None:
         self.default_palette = self.palette()
@@ -593,7 +601,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         :param can_remove: Whether the file can be removed.
         """
-        self.action_remove_file.setEnabled(can_remove)
+        self.action_remove_file.setEnabled(can_remove and self.cleaning_review_options is None)
 
     def handle_ocr_mode_change(self, csv: bool) -> None:
         """
@@ -678,6 +686,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.free_lock_file()
         # Tell the thread queue to abort.
         self.pushButton_abort.clicked.emit()
+        self.terminate.emit()
         death.accept()  # Embrace oblivion, for it is here that the code's journey finds solace.
         # As the threads unravel and the loops break, so too does the program find its destined end.
         # In the great void of the memory heap, it shall rest, relinquishing its bytes back to the
@@ -1213,6 +1222,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         Handle the profile values changing.
         """
+        if self.cleaning_review_options is not None:
+            # We're currently in the cleaning review, so we must not
+            # change anything about the profile.
+            return
         dirty = self.toolBox_profile.is_modified()
         self.pushButton_apply_profile.setEnabled(self.check_profile_difference_sice_last_apply())
         self.pushButton_save_profile.setEnabled(dirty)
@@ -1766,7 +1779,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.info("Output worker finished.")
         if self.cleaning_review_options:
             images_to_review = self.file_table.get_image_files()
-            dialog = red.OutputReviewWindow(
+            self.output_review = red.OutputReviewWindow(
                 self,
                 images_to_review,
                 self.cleaning_review_options.review_output,
@@ -1775,19 +1788,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.config,
                 self.cleaning_review_options.export_afterwards,
             )
-            dialog.exec()
-            # Ask if the user still wants to export the images.
-            if self.cleaning_review_options.export_afterwards and (
-                gu.show_question(
-                    self,
-                    self.tr("Export Images"),
-                    self.tr("Would you like to export the cleaned images?"),
-                    buttons=Qw.QMessageBox.Yes | Qw.QMessageBox.No,
-                )
-                == Qw.QMessageBox.Yes
-            ):
-                self.post_review_export()
-            dialog.deleteLater()
+            self.output_review.closed.connect(self.output_review_closed)
+            self.terminate.connect(self.output_review.cease_and_desist)
+            self.set_output_review_lock(True)
+            self.output_review.show()
         elif self.ocr_review_options:
             dialog = ocrd.OcrReviewWindow(
                 self,
@@ -1812,12 +1816,36 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 self.ocr_review_options.output_path = None
 
             self.post_review_ocr_export(dialog.get_final_ocr_analytics())
+            # Clean it up to prevent the close event from triggering on app termination,
+            # causing it to hang.
             dialog.deleteLater()
 
         else:
             gu.show_info(
                 self, self.tr("Processing Finished"), self.tr("Finished processing all files.")
             )
+
+    def output_review_closed(self) -> None:
+        logger.debug("Output review closed.")
+        # Ask if the user still wants to export the images.
+        if self.cleaning_review_options.export_afterwards and (
+            gu.show_question(
+                self,
+                self.tr("Export Images"),
+                self.tr("Would you like to export the cleaned images?"),
+                buttons=Qw.QMessageBox.Yes | Qw.QMessageBox.No,
+            )
+            == Qw.QMessageBox.Yes
+        ):
+            self.set_output_review_lock(False)
+            self.post_review_export()
+        else:
+            self.set_output_review_lock(False)
+            self.cleaning_review_options = None
+            self.enable_running_cleaner()
+        # Clean it up to prevent the close event from triggering on app termination,
+        # causing it to hang.
+        self.output_review.deleteLater()
 
     def output_worker_aborted(self) -> None:
         gu.show_info(self, self.tr("Processing Aborted"), self.tr("Processing aborted."))
@@ -1827,7 +1855,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.hide_progress_drawer()
         self.progress_step_start = None
         self.progress_current = 0
-        self.enable_running_cleaner()
+        if not self.cleaning_review_options:
+            self.enable_running_cleaner()
 
     @Slot(wt.WorkerError)
     def output_worker_error(self, error: wt.WorkerError) -> None:
@@ -1965,3 +1994,31 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.label_current_step.setText(
             tr(pp.to_display_name(progress_data.current_step.name), context="Process Steps")
         )
+
+    def set_output_review_lock(self, locked: bool) -> None:
+        """
+        (Un)lock various elements of the mainwindow that could mess up the review process.
+        Mainly this means preventing the user from running any cleaning processes.
+
+        :param locked: Whether to lock the window.
+        """
+        self.file_table.locked = locked
+        enabled = not locked
+        self.groupBox_process.setEnabled(enabled)
+        self.groupBox_output_options.setEnabled(enabled)
+        self.action_add_files.setEnabled(enabled)
+        self.action_add_folders.setEnabled(enabled)
+        self.action_remove_file.setEnabled(enabled)
+        self.action_remove_all_files.setEnabled(enabled)
+        self.action_save_profile.setEnabled(enabled)
+        self.action_import_profile.setEnabled(enabled)
+        self.action_new_profile.setEnabled(enabled)
+        self.action_delete_profile.setEnabled(enabled)
+        self.action_save_profile_as.setEnabled(enabled)
+        self.comboBox_current_profile.setEnabled(enabled)
+        self.pushButton_apply_profile.setEnabled(enabled)
+        self.pushButton_save_profile.setEnabled(enabled)
+        self.pushButton_reset_profile.setEnabled(enabled)
+        if not locked:
+            self.handle_profile_values_changed()
+            self.action_remove_file.setEnabled(bool(self.file_table.selectedItems()))

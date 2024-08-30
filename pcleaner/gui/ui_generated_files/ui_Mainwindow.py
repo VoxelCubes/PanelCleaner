@@ -212,7 +212,13 @@ class Ui_MainWindow(object):
         self.action_file_manager_extension.setIcon(icon14)
         self.action_show_ocr_language_support = QAction(MainWindow)
         self.action_show_ocr_language_support.setObjectName(u"action_show_ocr_language_support")
-        icon15 = QIcon(QIcon.fromTheme(u"code-block"))
+        icon15 = QIcon()
+        iconThemeName = u"code-block"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon15 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon15.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.action_show_ocr_language_support.setIcon(icon15)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -396,17 +402,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.groupBox_4 = QGroupBox(self.frame_output)
-        self.groupBox_4.setObjectName(u"groupBox_4")
-        self.verticalLayout_9 = QVBoxLayout(self.groupBox_4)
+        self.groupBox_process = QGroupBox(self.frame_output)
+        self.groupBox_process.setObjectName(u"groupBox_process")
+        self.verticalLayout_9 = QVBoxLayout(self.groupBox_process)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.radioButton_cleaning = QRadioButton(self.groupBox_4)
+        self.radioButton_cleaning = QRadioButton(self.groupBox_process)
         self.radioButton_cleaning.setObjectName(u"radioButton_cleaning")
         self.radioButton_cleaning.setChecked(True)
 
         self.verticalLayout_9.addWidget(self.radioButton_cleaning)
 
-        self.radioButton_ocr = QRadioButton(self.groupBox_4)
+        self.radioButton_ocr = QRadioButton(self.groupBox_process)
         self.radioButton_ocr.setObjectName(u"radioButton_ocr")
 
         self.verticalLayout_9.addWidget(self.radioButton_ocr)
@@ -417,13 +423,13 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7 = QVBoxLayout()
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.pushButton_edit_ocr = QPushButton(self.groupBox_4)
+        self.pushButton_edit_ocr = QPushButton(self.groupBox_process)
         self.pushButton_edit_ocr.setObjectName(u"pushButton_edit_ocr")
         self.pushButton_edit_ocr.setIcon(icon)
 
         self.verticalLayout_7.addWidget(self.pushButton_edit_ocr)
 
-        self.pushButton_abort = QPushButton(self.groupBox_4)
+        self.pushButton_abort = QPushButton(self.groupBox_process)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
         icon18 = QIcon()
         iconThemeName = u"process-stop"
@@ -436,7 +442,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.pushButton_abort)
 
-        self.pushButton_start = QPushButton(self.groupBox_4)
+        self.pushButton_start = QPushButton(self.groupBox_process)
         self.pushButton_start.setObjectName(u"pushButton_start")
         icon19 = QIcon()
         iconThemeName = u"media-playback-start"
@@ -453,7 +459,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.addLayout(self.verticalLayout_7)
 
 
-        self.horizontalLayout_3.addWidget(self.groupBox_4)
+        self.horizontalLayout_3.addWidget(self.groupBox_process)
 
         self.groupBox_output_options = QGroupBox(self.frame_output)
         self.groupBox_output_options.setObjectName(u"groupBox_output_options")
@@ -797,7 +803,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1850, 34))
+        self.menubar.setGeometry(QRect(0, 0, 1850, 30))
         self.menu_File = QMenu(self.menubar)
         self.menu_File.setObjectName(u"menu_File")
         self.menu_Profile = QMenu(self.menubar)
@@ -913,7 +919,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem5 = self.file_table.horizontalHeaderItem(6)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Analytics", u"Can also call this statistics."));
         self.image_tab.setTabText(self.image_tab.indexOf(self.tabWidget_table_page), QCoreApplication.translate("MainWindow", u"Images", None))
-        self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
+        self.groupBox_process.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))
         self.radioButton_ocr.setText(QCoreApplication.translate("MainWindow", u"OCR", None))
         self.pushButton_edit_ocr.setText(QCoreApplication.translate("MainWindow", u"Edit Existing Output", None))
@@ -938,7 +944,7 @@ class Ui_MainWindow(object):
         self.lineEdit_out_directory.setPlaceholderText(QCoreApplication.translate("MainWindow", u"cleaned", None))
         self.pushButton_browse_out_dir.setText("")
         self.radioButton_ocr_text.setText(QCoreApplication.translate("MainWindow", u"Plain Text", None))
-        self.radioButton_ocr_csv.setText(QCoreApplication.translate("MainWindow", u"CSV File", None))
+        self.radioButton_ocr_csv.setText(QCoreApplication.translate("MainWindow", u"CSV Spreadsheet", None))
         self.checkBox_review_ocr.setText(QCoreApplication.translate("MainWindow", u"Review Output", None))
 #if QT_CONFIG(tooltip)
         self.label_review_ocr_help.setToolTip(QCoreApplication.translate("MainWindow", u"When checked, a review window will open upon process completion.", None))

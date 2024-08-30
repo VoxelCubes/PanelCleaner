@@ -47,6 +47,9 @@ class FileTable(CTableWidget):
     shared_ocr_model: gst.Shared[ocr.OCREngineFactory]  # Must be handed over by the mainwindow.
     thread_queue: Qc.QThreadPool  # Must be handed over by the mainwindow.
 
+    # Prevent interactions that delete files. This preserves the integrity of review mode.
+    locked: bool
+
     table_is_empty = Qc.Signal()
     table_not_empty = Qc.Signal()
 
@@ -76,6 +79,8 @@ class FileTable(CTableWidget):
         self.threadpool = Qc.QThreadPool.globalInstance()
 
         self.notify_on_duplicate = True
+
+        self.locked = False
 
         # Make icons larger so the thumbnails are more visible.
         self.setIconSize(Qc.QSize(imf.THUMBNAIL_SIZE, imf.THUMBNAIL_SIZE))
@@ -500,6 +505,7 @@ class FileTable(CTableWidget):
                 Qg.QIcon.fromTheme("edit-delete-remove"), self.tr("Remove from list"), self
             )
             context_menu.addAction(delete_action)
+            delete_action.setEnabled(not self.locked)
             delete_action.triggered.connect(lambda: self.remove_selected_file(row))
 
         # Add "Delete All" action
@@ -507,6 +513,7 @@ class FileTable(CTableWidget):
             Qg.QIcon.fromTheme("edit-clear-history"), self.tr("Remove all files from list"), self
         )
         context_menu.addAction(delete_all_action)
+        delete_all_action.setEnabled(not self.locked)
         delete_all_action.triggered.connect(self.remove_all_files)
 
         # Show the context menu at the cursor position

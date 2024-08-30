@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QDialog,
-    QFrame, QHBoxLayout, QLabel, QListView,
-    QListWidget, QListWidgetItem, QPushButton, QSizePolicy,
-    QSlider, QSpacerItem, QSplitter, QStackedWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
+    QHBoxLayout, QLabel, QListView, QListWidget,
+    QListWidgetItem, QPushButton, QSizePolicy, QSlider,
+    QSpacerItem, QSplitter, QStackedWidget, QVBoxLayout,
+    QWidget)
 
 from pcleaner.gui.CustomQ.CElidedLabel import CElidedLabel
 from pcleaner.gui.image_diff_viewers import (DifferenceViewer, OnionViewer, OverlayViewer, SwipeViewer)
@@ -30,8 +30,6 @@ class Ui_OutputReview(object):
         if not OutputReview.objectName():
             OutputReview.setObjectName(u"OutputReview")
         OutputReview.resize(1400, 800)
-        OutputReview.setWindowTitle(u"Review")
-        OutputReview.setModal(True)
         self.verticalLayout_7 = QVBoxLayout(OutputReview)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.verticalLayout_7.setContentsMargins(1, 1, 1, 1)
@@ -421,6 +419,7 @@ class Ui_OutputReview(object):
     # setupUi
 
     def retranslateUi(self, OutputReview):
+        OutputReview.setWindowTitle(QCoreApplication.translate("OutputReview", u"Review", None))
         self.label.setText(QCoreApplication.translate("OutputReview", u"Icon Size:", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_prev.setToolTip(QCoreApplication.translate("OutputReview", u"Previous image", None))
@@ -452,6 +451,5 @@ class Ui_OutputReview(object):
         self.comboBox_view_mode.setItemText(4, QCoreApplication.translate("OutputReview", u"Overlay", None))
 
         self.pushButton_done.setText(QCoreApplication.translate("OutputReview", u"Done", None))
-        pass
     # retranslateUi
 

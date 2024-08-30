@@ -5,7 +5,7 @@ from pathlib import Path
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-from PySide6.QtCore import Slot
+from PySide6.QtCore import Slot, Signal
 from loguru import logger
 from natsort import natsorted
 
@@ -30,7 +30,7 @@ class ViewMode(IntEnum):
     Overlay = 4
 
 
-class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
+class OutputReviewWindow(Qw.QWidget, Ui_OutputReview):
     """
     A window to display the process results.
     """
@@ -41,6 +41,8 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
     show_isolated_text: bool
     config: cfg.Config
     confirm_closing: bool
+
+    closed: Signal = Signal()
 
     first_slot_connection: bool
     first_sbs_slot_connection: bool
@@ -78,8 +80,9 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
         :param confirm_closing: Whether to ask for confirmation before closing.
         """
         logger.info(f"Opening Review Window for {len(images)} outputs.")
-        Qw.QDialog.__init__(self, parent)
+        Qw.QWidget.__init__(self, parent)
         self.setupUi(self)
+        self.setWindowFlag(Qc.Qt.Window)
 
         self.images = images
         self.target_output = target_output
@@ -120,7 +123,17 @@ class OutputReviewWindow(Qw.QDialog, Ui_OutputReview):
             ):
                 event.ignore()
                 return
+        self.closed.emit()
         event.accept()
+
+    def cease_and_desist(self):
+        """
+        Just stop.
+        """
+        logger.info("Shutting up the review window before killing it.")
+        self.confirm_closing = False
+        self.closed.disconnect()
+        self.close()
 
     def sort_images_by_path(self) -> None:
         """

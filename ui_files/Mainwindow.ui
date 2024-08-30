@@ -345,7 +345,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,3">
           <item>
-           <widget class="QGroupBox" name="groupBox_4">
+           <widget class="QGroupBox" name="groupBox_process">
             <property name="title">
              <string>Process</string>
             </property>
@@ -1005,7 +1005,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1850</width>
-     <height>34</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
