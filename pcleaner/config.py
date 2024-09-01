@@ -976,6 +976,7 @@ class Config:
     default_torch_model_path: Path | None = None  # CUDA
     default_cv2_model_path: Path | None = None  # CPU
     gui_theme: str | None = None
+    show_oom_warnings: bool = True
 
     @staticmethod
     def reserved_profile_names() -> list[str]:
@@ -1035,6 +1036,7 @@ class Config:
             "GUI Theme:",
             self.gui_theme if self.gui_theme is not None else "System default",
         )
+        print("Show OOM Warnings:", self.show_oom_warnings)
 
         print("\n" + "-" * 20 + "\n")
         print(f"Config file located at: {cli.get_config_path()}")
@@ -1125,6 +1127,9 @@ class Config:
         # Built-in themes are Breeze and Breeze Dark
         gui_theme = {none_to_empty(self.gui_theme)}
         
+        # Show out-of-memory warnings.
+        show_oom_warnings = {self.show_oom_warnings}
+        
         
         [Saved Profiles]
         {saved_profiles_str}
@@ -1163,6 +1168,7 @@ class Config:
         try_to_load(config, conf_updater, section, Path | None, "default_torch_model_path")
         try_to_load(config, conf_updater, section, Path | None, "default_cv2_model_path")
         try_to_load(config, conf_updater, section, str | None, "gui_theme")
+        try_to_load(config, conf_updater, section, bool, "show_oom_warnings")
 
         # If the default profile isn't in the saved profiles, clear it.
         if (

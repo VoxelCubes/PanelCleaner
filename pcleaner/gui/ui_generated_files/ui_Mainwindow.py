@@ -224,8 +224,18 @@ class Ui_MainWindow(object):
         self.actionReset_Window_Layout_Preferences.setObjectName(u"actionReset_Window_Layout_Preferences")
         self.action_delete_window_state = QAction(MainWindow)
         self.action_delete_window_state.setObjectName(u"action_delete_window_state")
-        icon16 = QIcon(QIcon.fromTheme(u"edit-reset"))
+        icon16 = QIcon()
+        iconThemeName = u"edit-reset"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon16 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon16.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.action_delete_window_state.setIcon(icon16)
+        self.action_show_oom = QAction(MainWindow)
+        self.action_show_oom.setObjectName(u"action_show_oom")
+        self.action_show_oom.setCheckable(True)
+        self.action_show_oom.setChecked(True)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_6 = QVBoxLayout(self.centralwidget)
@@ -742,6 +752,38 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.splitter)
 
+        self.widget_oom_banner = QWidget(self.centralwidget)
+        self.widget_oom_banner.setObjectName(u"widget_oom_banner")
+        self.horizontalLayout_13 = QHBoxLayout(self.widget_oom_banner)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_13.addItem(self.horizontalSpacer_9)
+
+        self.horizontalLayout_14 = QHBoxLayout()
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.label_oom_icon = QLabel(self.widget_oom_banner)
+        self.label_oom_icon.setObjectName(u"label_oom_icon")
+        self.label_oom_icon.setText(u"<warning icon>")
+
+        self.horizontalLayout_14.addWidget(self.label_oom_icon)
+
+        self.label_oom_message = QLabel(self.widget_oom_banner)
+        self.label_oom_message.setObjectName(u"label_oom_message")
+        self.label_oom_message.setText(u"<warning msg>")
+
+        self.horizontalLayout_14.addWidget(self.label_oom_message)
+
+
+        self.horizontalLayout_13.addLayout(self.horizontalLayout_14)
+
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_13.addItem(self.horizontalSpacer_10)
+
+
+        self.verticalLayout_6.addWidget(self.widget_oom_banner)
+
         self.widget_progress_drawer = QWidget(self.centralwidget)
         self.widget_progress_drawer.setObjectName(u"widget_progress_drawer")
         self.horizontalLayout_2 = QHBoxLayout(self.widget_progress_drawer)
@@ -857,6 +899,7 @@ class Ui_MainWindow(object):
         self.menu_settings.addAction(self.menu_language.menuAction())
         self.menu_settings.addAction(self.action_file_manager_extension)
         self.menu_settings.addAction(self.action_delete_window_state)
+        self.menu_settings.addAction(self.action_show_oom)
         self.menu_theme.addAction(self.action_system_theme)
         self.menu_theme.addSeparator()
         self.menu_theme.addAction(self.action_dark)
@@ -908,6 +951,7 @@ class Ui_MainWindow(object):
         self.action_show_ocr_language_support.setText(QCoreApplication.translate("MainWindow", u"Show Supported OCR Languages", None))
         self.actionReset_Window_Layout_Preferences.setText(QCoreApplication.translate("MainWindow", u"Reset Window Layout Preferences", None))
         self.action_delete_window_state.setText(QCoreApplication.translate("MainWindow", u"Reset Window Layout Preferences", None))
+        self.action_show_oom.setText(QCoreApplication.translate("MainWindow", u"Show Out Of Memory Warnings", None))
         self.groupBox_profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 

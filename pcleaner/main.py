@@ -113,9 +113,9 @@ Examples:
 
 """
 
-import sys
 import multiprocessing
 import platform
+import sys
 import time
 from multiprocessing import Pool
 from pathlib import Path
@@ -130,17 +130,18 @@ import pcleaner.analytics as an
 import pcleaner.cli_utils as cli
 import pcleaner.config as cfg
 import pcleaner.denoiser as dn
-import pcleaner.inpainting as ip
 import pcleaner.helpers as hp
+import pcleaner.image_export as ie
+import pcleaner.inpainting as ip
 import pcleaner.masker as ma
+import pcleaner.memory_watcher as mw
 import pcleaner.model_downloader as md
+import pcleaner.ocr.ocr as ocr
+import pcleaner.ocr.supported_languages as osl
+import pcleaner.output_structures as ost
 import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
-import pcleaner.output_structures as ost
-import pcleaner.image_export as ie
-import pcleaner.ocr.ocr as ocr
-import pcleaner.ocr.supported_languages as osl
 from pcleaner import __version__
 
 
@@ -346,6 +347,9 @@ def run_cleaner(
     :param keep_cache: Whether to keep the cache directory for the text detection step.
     :param debug: Whether to show debug information.
     """
+    if config.show_oom_warnings:
+        mw.start_memory_watcher()
+
     profile = config.current_profile
 
     # Override the skip denoising flag if the config disables denoising.
@@ -679,6 +683,9 @@ def run_ocr(
     :param cache_masks: Whether to cache the masks.
     :param csv_output: Whether to output CSV data
     """
+    if config.show_oom_warnings:
+        mw.start_memory_watcher()
+
     cache_dir = config.get_cleaner_cache_dir()
     profile = config.current_profile
 

@@ -23,6 +23,7 @@ import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.image_match_driver as imd
 import pcleaner.gui.issue_reporter_driver as ird
+import pcleaner.gui.memory_watcher as mw
 import pcleaner.gui.model_downloader_driver as mdd
 import pcleaner.gui.new_profile_driver as npd
 import pcleaner.gui.ocr_language_overview_driver as olod
@@ -96,6 +97,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     dead: bool  # Whether the window is closing.
 
     state_saver: ss.StateSaver  # The state saver for the window.
+    memory_watcher: mw.MemoryWatcher  # The memory watcher for the window.
+    mem_watcher_thread: Qc.QThread  # The thread for the memory watcher.
 
     def __init__(self, config: cfg.Config, files_to_open: list[str], debug: bool) -> None:
         Qw.QMainWindow.__init__(self)
@@ -123,6 +126,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # This isn't used for processing, since that is handled by the multiprocessing module
         # for true parallelism.
         self.threadpool = Qc.QThreadPool.globalInstance()
+
+        self.start_memory_watcher()
 
         # This threadpool acts as a queue for processing runs, therefore only allowing one thread at a time.
         # This is because they must share the same cache directory, which isn't thread safe if operating on the same image.
@@ -262,7 +267,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_donate.setIcon(gu.load_custom_icon("heart"))
 
         self.hide_progress_drawer()
+        self.init_oom_banner()
         self.set_up_statusbar()
+
+        self.action_show_oom.setChecked(self.config.show_oom_warnings)
+        self.action_show_oom.toggled.connect(self.toggle_oom_banner)
+
         # Purge any missing profiles before loading them.
         logger.debug("Purging missing profiles.")
         pc.purge_missing_profiles(self.config, gui=True)
@@ -693,6 +703,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.free_lock_file()
         # Tell the thread queue to abort.
         self.pushButton_abort.clicked.emit()
+        self.memory_watcher.stop()
         self.terminate.emit()
         if not self.debug:
             self.clean_cache()
@@ -2074,3 +2085,38 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if not locked:
             self.handle_profile_values_changed()
             self.action_remove_file.setEnabled(bool(self.file_table.selectedItems()))
+
+    def start_memory_watcher(self) -> None:
+        """
+        Run the memory watcher in a separate thread.
+        Callbacks are sent over signals.
+        """
+        self.memory_watcher = mw.MemoryWatcher()
+        self.memory_watcher.oom_warning.connect(self.show_oom_warning)
+        self.memory_watcher.oom_relaxed.connect(self.hide_oom_warning)
+        self.memory_watcher.start()
+
+    @Slot(str)
+    def show_oom_warning(self, message: str) -> None:
+        logger.warning(message)
+        if self.config.show_oom_warnings:
+            self.widget_oom_banner.show()
+            self.label_oom_message.setText(message)
+
+    def hide_oom_warning(self) -> None:
+        self.widget_oom_banner.hide()
+
+    def init_oom_banner(self) -> None:
+        self.widget_oom_banner.hide()
+        self.label_oom_icon.setPixmap(Qg.QIcon.fromTheme("dialog-warning").pixmap(24, 24))
+        self.widget_oom_banner.setStyleSheet(f"background-color: #550000; color: #ffffff;")
+        font = self.label_oom_message.font()
+        font.setPointSize(round(font.pointSize() * 1.5))
+        self.label_oom_message.setFont(font)
+
+    @Slot(bool)
+    def toggle_oom_banner(self, show: bool) -> None:
+        if not show:
+            self.hide_oom_warning()
+        self.config.show_oom_warnings = show
+        self.config.save()
