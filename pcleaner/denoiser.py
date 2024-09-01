@@ -1,4 +1,5 @@
 from pathlib import Path
+import shutil
 
 from PIL import Image
 from loguru import logger
@@ -25,8 +26,19 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
     def save_mask(img, path: Path) -> None:
         img.save(path)
 
-    # Scale the mask to the original image size, if needed.
     cleaned_image = Image.open(mask_data.original_path)
+    # Check if we're dealing with a 1-bit image.
+    # Denoising these is pointless, as they have no noise.
+    if cleaned_image.mode == "1":
+        logger.info(f"Skipping pointless denoising for 1-bit image: {original_path}")
+        # We can simply copy the cleaned output from the masker step.
+        shutil.copyfile(path_gen.clean, path_gen.clean_denoised)
+        # The noise mask is just a blank image with with the same size as the original.
+        blank_noise_mask = Image.new("LA", cleaned_image.size, (0, 0))
+        save_mask(blank_noise_mask, path_gen.noise_mask)
+        return st.DenoiseAnalytic(tuple(), original_path)
+
+    # Scale the mask to the original image size, if needed.
     mask_image = mask_image.convert("LA")
     cleaned_image = cleaned_image.convert("RGB")
     scale_up_factor = 1.0
