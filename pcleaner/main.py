@@ -463,7 +463,6 @@ def run_cleaner(
         # Read the json files in the image directory.
         json_files = Path(cache_dir).glob("*#clean.json")
 
-        # Zip together the json files and the out path thing.
         data = [
             st.MaskerData(
                 json_file,
@@ -491,7 +490,6 @@ def run_cleaner(
         # Read the json files in the image directory.
         json_files = Path(cache_dir).glob("*#mask_data.json")
 
-        # Zip together the json files and the out path thing.
         data = [
             st.DenoiserData(
                 json_file,
@@ -540,7 +538,6 @@ def run_cleaner(
         md.ensure_inpainting_available(config)
         inpainter_model = ip.InpaintingModel(config)
 
-        # Zip together the json files and the out path thing.
         data = [
             st.InpainterData(
                 page_json_file,
