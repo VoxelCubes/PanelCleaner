@@ -162,7 +162,7 @@ class PageData:
     mask_path: str  # Path to the generated mask.png
     original_path: str  # Path to the original image. (used for relative output)
     scale: float  # The size of the original image relative to the png.
-    box_language: list[osl.LanguageCode]
+    box_language: list[osl.LanguageCode | None]
     boxes: list[Box]
     extended_boxes: list[Box]
     merged_extended_boxes: list[Box]
@@ -184,7 +184,7 @@ class PageData:
             json_data["mask_path"],
             json_data["original_path"],
             json_data["scale"],
-            [osl.LanguageCode(lang) for lang in json_data["box_language"]],
+            [osl.to_language_code(lang) for lang in json_data["box_language"]],
             [Box(*b) for b in json_data["boxes"]],
             [Box(*b) for b in json_data["extended_boxes"]],
             [Box(*b) for b in json_data["merged_extended_boxes"]],
