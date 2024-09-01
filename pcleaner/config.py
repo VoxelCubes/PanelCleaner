@@ -66,6 +66,10 @@ SUFFIX_TO_ICON.update(
 # Create a dummy type to signify numbers need to be greater than 0.
 GreaterZero = NewType("GreaterZero", int)
 
+# Create a special type for the thread limit to add additional gui information.
+# When it is < 1 then that means unlimited threads (well, up to the number of cores).
+ThreadLimit = NewType("ThreadLimit", int)
+
 # Create a new type to signify a long description string.
 LongString = NewType("LongString", str)
 
@@ -101,6 +105,7 @@ class GeneralConfig:
     preferred_mask_file_type: str = ".png"
     input_height_lower_target: int = 1000
     input_height_upper_target: int = 4000
+    max_threads_export: ThreadLimit = 0
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
         """
@@ -147,6 +152,11 @@ class GeneralConfig:
         input_height_lower_target = {self.input_height_lower_target}
         input_height_upper_target = {self.input_height_upper_target}
         
+        # Maximum number of threads to use for exporting images.
+        # You can leave it unspecified to use all available threads.
+        # Lower this value if you run into memory issues, which will appear as random crashes.
+        max_threads_export = {self.max_threads_export if self.max_threads_export > 0 else ""}
+        
         """
         config_updater.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
 
@@ -166,6 +176,7 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, int, "input_height_lower_target")
         try_to_load(self, config_updater, section, int, "input_height_upper_target")
+        try_to_load(self, config_updater, section, ThreadLimit, "max_threads_export")
 
     def fix(self) -> None:
         """
@@ -193,6 +204,9 @@ class GeneralConfig:
                 )
                 closest = SUPPORTED_MASK_TYPES[0]
             self.preferred_mask_file_type = closest
+
+        if self.max_threads_export < 0:
+            self.max_threads_export = 0
 
 
 @define
@@ -452,6 +466,7 @@ class PreprocessorConfig:
 
 @define
 class MaskerConfig:
+    max_threads: ThreadLimit = 0
     mask_growth_step_pixels: int | GreaterZero = 2
     mask_growth_steps: int | GreaterZero = 11
     min_mask_thickness: int = 4
@@ -473,6 +488,11 @@ class MaskerConfig:
         """
         config_str = f"""\
         [Masker]
+        
+        # Maximum number of threads to use for mask generation.
+        # You can leave it unspecified to use all available threads.
+        # Lower this value if you run into memory issues, which will appear as random crashes.
+        max_threads = {self.max_threads if self.max_threads > 0 else ""}
         
         # Number of pixels to grow the mask by each step.
         # This bulks up the outline of the mask, so smaller values will be more accurate but slower.
@@ -538,6 +558,7 @@ class MaskerConfig:
             logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
+        try_to_load(self, config_updater, section, ThreadLimit, "max_threads")
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_step_pixels")
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_steps")
         try_to_load(self, config_updater, section, int, "min_mask_thickness")
@@ -563,6 +584,8 @@ class MaskerConfig:
         Keep the numbers greater or equal to zero.
         For numbers, ensure the range 0-255.
         """
+        if self.max_threads < 0:
+            self.max_threads = ThreadLimit(0)
         self.mask_growth_steps = max(0, self.mask_growth_steps)
         self.off_white_max_threshold = max(0, min(255, self.off_white_max_threshold))
         if self.mask_improvement_threshold < 0:
@@ -577,6 +600,7 @@ class MaskerConfig:
 @define
 class DenoiserConfig:
     denoising_enabled: bool = True
+    max_threads: ThreadLimit = 0
     noise_min_standard_deviation: float = 0.25
     noise_outline_size: int = 5
     noise_fade_radius: int = 1
@@ -612,6 +636,11 @@ class DenoiserConfig:
         # don't suffer from jpeg-artifacts, it can be disabled here.
         # Set to False to disable denoising.
         denoising_enabled = {self.denoising_enabled}
+        
+        # Maximum number of threads to use for mask generation.
+        # You can leave it unspecified to use all available threads.
+        # Lower this value if you run into memory issues, which will appear as random crashes.
+        max_threads = {self.max_threads if self.max_threads > 0 else ""}
         
         # The minimum standard deviation of colors around the edge of a given mask
         # to perform denoising on the region around the mask.
@@ -660,6 +689,7 @@ class DenoiserConfig:
             logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
+        try_to_load(self, config_updater, section, ThreadLimit, "max_threads")
         try_to_load(self, config_updater, section, bool, "denoising_enabled")
         try_to_load(self, config_updater, section, float, "noise_min_standard_deviation")
         try_to_load(self, config_updater, section, int, "noise_outline_size")
@@ -671,6 +701,8 @@ class DenoiserConfig:
         try_to_load(self, config_updater, section, int, "search_window_size")
 
     def fix(self) -> None:
+        if self.max_threads < 0:
+            self.max_threads = ThreadLimit(0)
         if self.noise_min_standard_deviation < 0:
             self.noise_min_standard_deviation = 0
         if self.noise_outline_size < 0:
@@ -1376,6 +1408,24 @@ def try_to_load(
                 f"Option {attr_name} in section {section} should be greater than zero. Limiting to 1."
             )
             attr_value = 1
+
+    elif attr_type == ThreadLimit:
+        if conf_data == "":
+            attr_value = 0
+        else:
+            try:
+                attr_value = int(conf_data)
+            except ValueError as e:
+                print(
+                    f"Option {attr_name} in section {section} should be an integer.\n"
+                    f"Failed to parse '{conf_data}': {e}"
+                )
+                return
+            if attr_value < 0:
+                print(
+                    f"Option {attr_name} in section {section} should be a positive integer. Limiting to 0."
+                )
+                attr_value = 0
 
     elif attr_type == float | GreaterZero:
         # GreaterZero is just a signifier to check for positive numbers.

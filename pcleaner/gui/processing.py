@@ -1,3 +1,4 @@
+import os
 from copy import deepcopy, copy
 from functools import partial
 from multiprocessing import Pool
@@ -326,9 +327,14 @@ def generate_output(
 
             masker_analytics_raw = []
 
-            if len(step_masker_images) > 2:
-                # Only use multiprocessing if there are more than 2 images.
-                with Pool() as pool:
+            # Check the size of the required pool, run sequentially if the size is 1.
+            core_limit = profile.masker.max_threads
+            if core_limit == 0:
+                core_limit = os.cpu_count()
+            pool_size = min(core_limit, len(data))
+
+            if pool_size > 1:
+                with Pool(processes=pool_size) as pool:
                     for analytic in pool.imap(ma.clean_page, data):
                         check_abortion()
                         masker_analytics_raw.extend(analytic)
@@ -412,7 +418,14 @@ def generate_output(
             ]
 
             denoise_analytics_raw = []
-            if len(step_denoiser_images) > 2:
+
+            # Check the size of the required pool, run sequentially if the size is 1.
+            core_limit = profile.denoiser.max_threads
+            if core_limit == 0:
+                core_limit = os.cpu_count()
+            pool_size = min(core_limit, len(data))
+
+            if pool_size > 1:
                 with Pool() as pool:
                     for analytic in pool.imap(dn.denoise_page, data):
                         check_abortion()
@@ -574,8 +587,14 @@ def generate_output(
             for image_obj in image_objects
         ]
 
-        if len(image_objects) > 2:
-            with Pool() as pool:
+        # Check the size of the required pool, run sequentially if the size is 1.
+        core_limit = profile.general.max_threads_export
+        if core_limit == 0:
+            core_limit = os.cpu_count()
+        pool_size = min(core_limit, len(data))
+
+        if pool_size > 1:
+            with Pool(processes=pool_size) as pool:
                 for _ in pool.imap_unordered(ie.copy_to_output_batched, data):
                     check_abortion()
 

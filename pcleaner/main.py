@@ -378,7 +378,7 @@ def run_cleaner(
             f"You can find the masks being generated in real-time in the cache directory:\n\n{cache_dir}\n"
         )
 
-    if not skip_text_detection:
+    if not skip_text_detection:  # Text Detection ==================================================
         # Find all the images in the given image paths.
         # Ignore the rejected tiff list, as those are already visible in CLI mode.
         try:
@@ -415,7 +415,7 @@ def run_cleaner(
         if not hide_analytics:
             print("\n")
 
-    if not skip_pre_processing:
+    if not skip_pre_processing:  # Pre-Processing ==================================================
         # Flush it so it shows up before the progress bar.
         print("Running box data Preprocessor...", flush=True)
         # Make sure it actually flushes at all costs = wait 100 ms.
@@ -458,7 +458,7 @@ def run_cleaner(
                 )
             )
 
-    if not skip_masking:
+    if not skip_masking:  # Masking ================================================================
         print("Running Masker...")
         # Read the json files in the image directory.
         json_files = Path(cache_dir).glob("*#clean.json")
@@ -476,8 +476,20 @@ def run_cleaner(
         ]
 
         masker_analytics_raw: list[st.MaskFittingAnalytic] = []
-        with Pool() as pool:
-            for analytic in tqdm(pool.imap(ma.clean_page, data), total=len(data)):
+
+        # Check the size of the required pool, run sequentially if the size is 1.
+        core_limit = profile.masker.max_threads
+        if core_limit == 0:
+            core_limit = multiprocessing.cpu_count()
+        pool_size = min(core_limit, len(data))
+
+        if pool_size > 1:
+            with Pool(processes=pool_size) as pool:
+                for analytic in tqdm(pool.imap(ma.clean_page, data), total=len(data)):
+                    masker_analytics_raw.extend(analytic)
+        else:
+            for masker_data in tqdm(data):
+                analytic = ma.clean_page(masker_data)
                 masker_analytics_raw.extend(analytic)
 
         if not hide_analytics and masker_analytics_raw:
@@ -485,7 +497,7 @@ def run_cleaner(
                 an.show_masker_analytics(masker_analytics_raw, profile.masker, an.terminal_width())
             )
 
-    if not skip_denoising:
+    if not skip_denoising:  # Denoising ============================================================
         print("Running Denoiser...")
         # Read the json files in the image directory.
         json_files = Path(cache_dir).glob("*#mask_data.json")
@@ -501,8 +513,20 @@ def run_cleaner(
         ]
 
         denoise_analytics_raw = []
-        with Pool() as pool:
-            for analytic in tqdm(pool.imap(dn.denoise_page, data), total=len(data)):
+
+        # Check the size of the required pool, run sequentially if the size is 1.
+        core_limit = profile.denoiser.max_threads
+        if core_limit == 0:
+            core_limit = multiprocessing.cpu_count()
+        pool_size = min(core_limit, len(data))
+
+        if pool_size > 1:
+            with Pool(processes=pool_size) as pool:
+                for analytic in tqdm(pool.imap(dn.denoise_page, data), total=len(data)):
+                    denoise_analytics_raw.append(analytic)
+        else:
+            for denoise_data in tqdm(data):
+                analytic = dn.denoise_page(denoise_data)
                 denoise_analytics_raw.append(analytic)
 
         if not hide_analytics and denoise_analytics_raw:
@@ -515,7 +539,7 @@ def run_cleaner(
                 )
             )
 
-    if not skip_inpainting:
+    if not skip_inpainting:  # Inpainting ==========================================================
         print("Running Inpainter...")
         # Read the json files in the image directory.
         page_json_files = list(Path(cache_dir).glob("*#clean.json"))
@@ -566,7 +590,7 @@ def run_cleaner(
                 )
             )
 
-    print("Exporting results...")
+    print("Exporting results...")  # Exporting =====================================================
 
     # Figure out what outputs should be exported.
     # They must be sorted from lowest to highest priority.
@@ -621,9 +645,19 @@ def run_cleaner(
         for target in export_targets
     ]
 
-    with Pool() as pool:
-        for _ in tqdm(pool.imap_unordered(ie.copy_to_output_batched, data), total=len(data)):
-            pass
+    # Check the size of the required pool, run sequentially if the size is 1.
+    core_limit = profile.general.max_threads_export
+    if core_limit == 0:
+        core_limit = multiprocessing.cpu_count()
+    pool_size = min(core_limit, len(data))
+
+    if pool_size > 1:
+        with Pool(processes=pool_size) as pool:
+            for _ in tqdm(pool.imap_unordered(ie.copy_to_output_batched, data), total=len(data)):
+                pass
+    else:
+        for export_data in tqdm(data):
+            ie.copy_to_output_batched(export_data)
 
     print("\nDone!")
 
