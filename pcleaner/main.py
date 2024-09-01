@@ -199,7 +199,11 @@ def main() -> None:
         config = cfg.load_config()
         config.load_profile(args["--profile"])
         # Ignore the rejected tiff list, as those are already visible in CLI mode.
-        image_paths, _ = hp.discover_all_images(args.image_path, cfg.SUPPORTED_IMG_TYPES)
+        try:
+            image_paths, _ = hp.discover_all_images(args.image_path, cfg.SUPPORTED_IMG_TYPES)
+        except OSError as e:
+            print(f"Error: {e}")
+            sys.exit(1)
         run_ocr(config, image_paths, args.output_path, args.cache_masks, args.csv)
 
     elif args.cache and args.clear:
@@ -377,7 +381,12 @@ def run_cleaner(
     if not skip_text_detection:
         # Find all the images in the given image paths.
         # Ignore the rejected tiff list, as those are already visible in CLI mode.
-        image_paths, _ = hp.discover_all_images(image_paths, cfg.SUPPORTED_IMG_TYPES)
+        try:
+            image_paths, _ = hp.discover_all_images(image_paths, cfg.SUPPORTED_IMG_TYPES)
+        except OSError as e:
+            print(f"Error: {e}")
+            sys.exit(1)
+
         if not image_paths:
             print("No images found.")
             return
