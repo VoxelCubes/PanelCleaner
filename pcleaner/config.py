@@ -100,7 +100,7 @@ class GeneralConfig:
     preferred_file_type: str | None = None
     preferred_mask_file_type: str = ".png"
     input_height_lower_target: int = 1000
-    input_height_upper_target: int = 3000
+    input_height_upper_target: int = 4000
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
         """
