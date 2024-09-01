@@ -1044,6 +1044,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.load_current_profile()
         self.comboBox_current_profile.set_pre_change_hook(self.profile_change_check)
+        self.apply_profile()
 
         # Connect signals.
         self.toolBox_profile.values_changed.connect(self.handle_profile_values_changed)
@@ -1162,7 +1163,6 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.debug("Loading current profile.")
         profile = self.config.current_profile
         self.toolBox_profile.set_profile_values(profile)
-        self.set_last_applied_profile()
         self.profile_values_changed.emit()
 
     def profile_change_check(self) -> bool:
@@ -1176,7 +1176,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if self.comboBox_current_profile.currentText() not in list(
             self.config.saved_profiles.keys()
         ) + [self.config.default_profile_name()]:
-            logger.debug("Profile not in list.")
+            logger.error("Profile not in list.")
             # The profile is not in the list, so it must have been deleted.
             return True
 
