@@ -781,7 +781,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="430"/>
       <source>Number of boxes that failed to generate a mask / total boxes</source>
-      <translation type="unfinished">Number of boxes that failed to generate a mask / total boxes</translation>
+      <translation>Numero di box che non hanno generato una maschera / box in totale</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="432"/>
