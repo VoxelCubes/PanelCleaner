@@ -235,7 +235,7 @@ Utilizzo della maschera per spessore (in pixel):
     <message>
       <location filename="../pcleaner/analytics.py" line="345"/>
       <source>Box mask</source>
-      <translation type="unfinished">Box mask</translation>
+      <translation>Maschera box</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="364"/>
@@ -452,39 +452,39 @@ Pagine con errori / totale:
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1688"/>
       <location filename="../pcleaner/gui/processing.py" line="865"/>
       <source>Failed to write detected text to {output_file}</source>
-      <translation type="unfinished">Failed to write detected text to {output_file}</translation>
+      <translation>Impossibile scrivere il testo rilevato su {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1692"/>
       <location filename="../pcleaner/gui/processing.py" line="868"/>
       <source>Save Failed</source>
-      <translation type="unfinished">Save Failed</translation>
+      <translation>Salvataggio fallito</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1693"/>
       <location filename="../pcleaner/gui/processing.py" line="868"/>
       <source>Failed to write detected text to file.</source>
-      <translation type="unfinished">Failed to write detected text to file.</translation>
+      <translation>Impossibile scrivere il testo rilevato sul file.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="428"/>
       <source>Inpainter (experimental)</source>
-      <translation type="unfinished">Inpainter (experimental)</translation>
+      <translation>Inpainter (sperimentale)</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="98"/>
       <source>Invalid type for img_paths: {paths}</source>
-      <translation type="unfinished">Invalid type for img_paths: {paths}</translation>
+      <translation>Tipo non valido per img_paths: {paths}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="107"/>
       <source>Unsupported image format: {suffix} for {path}</source>
-      <translation type="unfinished">Unsupported image format: {suffix} for {path}</translation>
+      <translation>Formato immagine non supportato: {suffix} per {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="113"/>
       <source>Image path {img_path} does not exist.</source>
-      <translation type="unfinished">Image path {img_path} does not exist.</translation>
+      <translation>Il percorso dell'immagine {img_path} non esiste.</translation>
     </message>
   </context>
   <context>
@@ -492,7 +492,7 @@ Pagine con errori / totale:
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>Informazioni sul Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="81"/>
