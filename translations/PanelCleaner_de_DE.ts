@@ -344,62 +344,62 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="465"/>
       <source>Failed to access the file.</source>
-      <translation type="unfinished">Failed to access the file.</translation>
+      <translation>Der Zugriff auf die Datei ist fehlgeschlagen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="466"/>
       <source>An error occurred.</source>
-      <translation type="unfinished">An error occurred.</translation>
+      <translation>Es ist ein Fehler aufgetreten.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="467"/>
       <source>The CSV file format requires exactly 6 columns.</source>
-      <translation type="unfinished">The CSV file format requires exactly 6 columns.</translation>
+      <translation>Das CSV-Dateiformat erfordert genau 6 Spalten.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="468"/>
       <source>The coordinates must be integers.</source>
-      <translation type="unfinished">The coordinates must be integers.</translation>
+      <translation>Die Koordinaten müssen ganzzahlig sein.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="469"/>
       <source>The box coordinates may not exceed 2 billion.</source>
-      <translation type="unfinished">The box coordinates may not exceed 2 billion.</translation>
+      <translation>Die Koordinaten der Felder dürfen 2 Milliarden nicht überschreiten.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="470"/>
       <source>The file format was not recognized.</source>
-      <translation type="unfinished">The file format was not recognized.</translation>
+      <translation>Das Dateiformat wurde nicht erkannt.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="473"/>
       <source>The CSV file must start with a header row, followed by data rows.</source>
-      <translation type="unfinished">The CSV file must start with a header row, followed by data rows.</translation>
+      <translation>Die CSV-Datei muss mit einer Kopfzeile beginnen, gefolgt von Datenzeilen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="474"/>
       <source>The file path is missing.</source>
-      <translation type="unfinished">The file path is missing.</translation>
+      <translation>Der Dateipfad fehlt.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="475"/>
       <source>The file path is invalid.</source>
-      <translation type="unfinished">The file path is invalid.</translation>
+      <translation>Der Dateipfad ist ungültig.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="493"/>
       <source>OCR Parse Errors</source>
-      <translation type="unfinished">OCR Parse Errors</translation>
+      <translation>OCR-Parsing-Fehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="539"/>
       <source>Multiple analytics match the image: {path}</source>
-      <translation type="unfinished">Multiple analytics match the image: {path}</translation>
+      <translation>Mehrere Datensätze stimmen mit dem Bild überein: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="543"/>
       <source>Multiple images match the file path: {path}</source>
-      <translation type="unfinished">Multiple images match the file path: {path}</translation>
+      <translation>Mehrere Bilder stimmen mit dem Dateipfad überein: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="507"/>
@@ -1001,103 +1001,98 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
       <source>image</source>
-      <translation type="unfinished">image</translation>
+      <translation>Bild</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
       <source>images</source>
-      <translation type="unfinished">images</translation>
+      <translation>Bilder</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="193"/>
       <source>result</source>
-      <translation type="unfinished">result</translation>
+      <translation>Ergebnis</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="194"/>
       <source>results</source>
-      <translation type="unfinished">results</translation>
+      <translation>Ergebnisse</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="94"/>
       <source>Proceed With Selection</source>
-      <translation type="unfinished">Proceed With Selection</translation>
+      <translation>Mit der Auswahl fortfahren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="170"/>
       <source>new image</source>
-      <translation type="unfinished">new image</translation>
+      <translation>neues Bild</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="171"/>
       <source>new images</source>
-      <translation type="unfinished">new images</translation>
+      <translation>neue Bilder</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="175"/>
       <source>Matched {num_images} {plural_images} to OCR results. {num_images_unassigned} {plural_img_unassigned}.</source>
-      <translation type="unfinished">Matched {num_images} {plural_images} to OCR results. {num_images_unassigned} {plural_img_unassigned}.</translation>
+      <translation>Zugewiesen: {num_images} {plural_images} mit OCR-Ergebnissen. {num_images_unassigned} {plural_img_unassigned}.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="197"/>
       <source>{num_analytics_unassigned} orphaned OCR {plural_result} will be lost.</source>
-      <translation type="unfinished">{num_analytics_unassigned} orphaned OCR {plural_result} will be lost.</translation>
+      <translation>{num_analytics_unassigned} verwaiste OCR {plural_result} geht verloren.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="322"/>
       <source>Failed to load image</source>
-      <translation type="unfinished">Failed to load image</translation>
+      <translation>Bild Ladefehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="323"/>
       <source>Failed to load image {file_path}.</source>
-      <translation type="unfinished">Failed to load image {file_path}.</translation>
+      <translation>Das Bild {file_path} konnte nicht geladen werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="332"/>
       <source>Dispatch Failed</source>
-      <translation type="unfinished">Dispatch Failed</translation>
+      <translation>Verarbeitung Fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="332"/>
       <source>Failed to dispatch image.</source>
-      <translation type="unfinished">Failed to dispatch image.</translation>
+      <translation>Das Bild konnte nicht verarbeitet werden.</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="14"/>
       <source>Image Selection</source>
-      <translation type="unfinished">Image Selection</translation>
+      <translation>Bildauswahl</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="76"/>
       <source>Deselect All</source>
-      <translation type="unfinished">Deselect All</translation>
+      <translation>Alle abwählen</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="83"/>
       <source>Select All</source>
-      <translation type="unfinished">Select All</translation>
+      <translation>Alle auswählen</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="96"/>
       <source>Unselect images without matching OCR data</source>
-      <translation type="unfinished">Unselect images without matching OCR data</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/ImageMatchOverview.ui" line="166"/>
-      <source>image_index</source>
-      <translation type="unfinished">image_index</translation>
+      <translation>Bilder ohne OCR-Daten abwählen</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="171"/>
       <source>Image File</source>
-      <translation type="unfinished">Image File</translation>
+      <translation>Bilddatei</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="176"/>
       <source>OCR Data</source>
       <comment>Can also call this statistics.</comment>
-      <translation type="unfinished">OCR Data</translation>
+      <translation>OCR-Daten</translation>
     </message>
   </context>
   <context>
@@ -1235,9 +1230,9 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
       <source>Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
 
 Continue anyway?</source>
-      <translation type="unfinished">Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
+      <translation>Eine andere Instanz von Panel Cleaner scheint bereits zu laufen. Wenn Sie eine neue Instanz öffnen, wird die alte Sitzung instabil.
 
-Continue anyway?</translation>
+Trotzdem fortfahren?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="844"/>
