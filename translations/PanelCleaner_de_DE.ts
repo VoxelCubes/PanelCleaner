@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="986"/>
+      <location filename="../pcleaner/config.py" line="987"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>standard</translation>
@@ -1257,12 +1257,12 @@ Trotzdem fortfahren?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="749"/>
       <source>Layout Reset</source>
-      <translation type="unfinished">Layout Reset</translation>
+      <translation>Layout zurücksetzen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="750"/>
       <source>The window layout has been reset. The default layout will be used next time.</source>
-      <translation type="unfinished">The window layout has been reset. The default layout will be used next time.</translation>
+      <translation>Das Fensterlayout wurde zurückgesetzt. Beim nächsten Mal wird das Standardlayout verwendet.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="799"/>
@@ -1397,7 +1397,7 @@ Wenn Sie das Profil wechseln, werden die Änderungen am aktuellen Profil verworf
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1249"/>
       <source>Tesseract OCR is not installed or not found</source>
-      <translation type="unfinished">Tesseract OCR is not installed or not found</translation>
+      <translation>Tesseract OCR ist nicht installiert oder wird nicht gefunden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1255"/>
@@ -1409,14 +1409,14 @@ Bitte lesen Sie die Anweisungen zur korrekten Installation von Tesseract &lt;a h
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
       <source>Unsupported Language</source>
-      <translation type="unfinished">Unsupported Language</translation>
+      <translation>Nicht unterstützte Sprache</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1272"/>
       <source>The language &apos;{lang_name}&apos; is not supported by any of your current OCR engines. 
 Check the online documentation for how to add support for more languages.</source>
-      <translation type="unfinished">The language &apos;{lang_name}&apos; is not supported by any of your current OCR engines. 
-Check the online documentation for how to add support for more languages.</translation>
+      <translation>Die Sprache &apos;{lang_name}&apos; wird von keiner Ihrer aktuellen OCR-Modelle unterstützt. 
+Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weitere Sprachen hinzufügen können.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1343"/>
@@ -1489,27 +1489,27 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1579"/>
       <source>No files to process. To edit an old OCR output file, you must first load (one or more of) the images to which it corresponds.</source>
-      <translation type="unfinished">No files to process. To edit an old OCR output file, you must first load (one or more of) the images to which it corresponds.</translation>
+      <translation>Keine Dateien zu verarbeiten. Um eine alte OCR-Ausgabedatei zu bearbeiten, müssen Sie zunächst (eines oder mehrere) der Bilder laden, zu denen sie gehört.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1587"/>
       <source>Open OCR Output File</source>
-      <translation type="unfinished">Open OCR Output File</translation>
+      <translation>OCR-Ausgabedatei öffnen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1589"/>
       <source>OCR Output Files (*.txt *.csv)</source>
-      <translation type="unfinished">OCR Output Files (*.txt *.csv)</translation>
+      <translation>OCR-Ausgabedateien (*.txt *.csv)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1604"/>
       <source>Parse Error</source>
-      <translation type="unfinished">Parse Error</translation>
+      <translation>Parse-Fehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1605"/>
       <source>Failed to parse the OCR output file.</source>
-      <translation type="unfinished">Failed to parse the OCR output file.</translation>
+      <translation>Die OCR-Ausgabedatei konnte nicht gelesen werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1763"/>
@@ -1665,7 +1665,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="388"/>
       <source>Edit Existing Output</source>
-      <translation type="unfinished">Edit Existing Output</translation>
+      <translation>Vorhandene Ausgabe bearbeiten</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="399"/>
@@ -1837,18 +1837,18 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1342"/>
       <source>Show Supported OCR Languages</source>
-      <translation type="unfinished">Show Supported OCR Languages</translation>
+      <translation>Unterstützte OCR-Sprachen anzeigen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1347"/>
       <location filename="../ui_files/Mainwindow.ui" line="1356"/>
       <source>Reset Window Layout Preferences</source>
-      <translation type="unfinished">Reset Window Layout Preferences</translation>
+      <translation>Fensterlayout-Einstellungen zurücksetzen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1367"/>
       <source>Show Out Of Memory Warnings</source>
-      <translation type="unfinished">Show Out Of Memory Warnings</translation>
+      <translation>Bei geringem Arbeitsspeicher warnen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1164"/>
@@ -1863,7 +1863,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="713"/>
       <source>CSV Spreadsheet</source>
-      <translation type="unfinished">CSV Spreadsheet</translation>
+      <translation>CSV-Tabelle</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1173"/>
@@ -1937,7 +1937,7 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../pcleaner/gui/memory_watcher.py" line="34"/>
       <location filename="../pcleaner/gui/memory_watcher.py" line="41"/>
       <source>RAM usage has reached {mem}%</source>
-      <translation type="unfinished">RAM usage has reached {mem}%</translation>
+      <translation>Der Arbeitsspeicher ist zu {mem}% ausgelastet</translation>
     </message>
   </context>
   <context>
@@ -2032,38 +2032,38 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="14"/>
       <source>OCR Language Support</source>
-      <translation type="unfinished">OCR Language Support</translation>
+      <translation>OCR-Sprachunterstützung</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="78"/>
       <source>Code</source>
-      <translation type="unfinished">Code</translation>
+      <translation>Sprachkennung</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="83"/>
       <source>Language</source>
       <comment>Can also call this statistics.</comment>
-      <translation type="unfinished">Language</translation>
+      <translation>Sprache</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="88"/>
       <source>MangaOCR</source>
-      <translation type="unfinished">MangaOCR</translation>
+      <translation>MangaOCR</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="93"/>
       <source>Tesseract</source>
-      <translation type="unfinished">Tesseract</translation>
+      <translation>Tesseract</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="109"/>
       <source>How to install Tesseract</source>
-      <translation type="unfinished">How to install Tesseract</translation>
+      <translation>Wie wird Tesseract installiert?</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="120"/>
       <source>How to install Tesseract language packs</source>
-      <translation type="unfinished">How to install Tesseract language packs</translation>
+      <translation>Wie werden Tesseract-Sprachpakete installiert?</translation>
     </message>
   </context>
   <context>
@@ -2247,7 +2247,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OutputReview.ui" line="14"/>
       <source>Review</source>
-      <translation type="unfinished">Review</translation>
+      <translation>Überprüfung</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="73"/>
@@ -2287,7 +2287,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OutputReview.ui" line="292"/>
       <source>View Mode:</source>
-      <translation type="unfinished">View Mode:</translation>
+      <translation>Ansicht:</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="300"/>
@@ -2682,13 +2682,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="42"/>
       <source>Maximum number of threads to use for exporting images. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Maximum number of threads to use for exporting images. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation>Maximale Anzahl von Kernen, die für den Export von Bildern verwendet werden sollen. Sie können diesen Wert unbestimmt lassen, um alle verfügbaren Kerne zu verwenden. Verringern Sie diesen Wert, wenn Sie auf Arbeitsspeicherprobleme stoßen, die zu zufälligen abstürzen führen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="44"/>
       <source>Max Threads Export</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Max Threads Export</translation>
+      <translation>Max Kerne Export</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="46"/>
@@ -2798,13 +2798,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="80"/>
       <source>The language to use for OCR tasks. The text detector can detect Japanese and English, for anything else, select a language explicitly here. Detecting per box retains what the text detector detected, while per page will assign the most prominent language to the entire page.&lt;br&gt; Note: Only Japanese is supported out of the box, everything else requires Tesseract to be enabled and its associated language packs to be installed.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The language to use for OCR tasks. The text detector can detect Japanese and English, for anything else, select a language explicitly here. Detecting per box retains what the text detector detected, while per page will assign the most prominent language to the entire page.&lt;br&gt; Note: Only Japanese is supported out of the box, everything else requires Tesseract to be enabled and its associated language packs to be installed.</translation>
+      <translation>Die Sprache, die für OCR-Aufgaben verwendet werden soll. Die Texterkennung kann Japanisch und Englisch erkennen, für alle anderen Sprachen wählen Sie hier explizit eine Sprache aus. Bei der Erkennung pro Feld wird beibehalten, was der Texterkenner erkannt hat, während bei der Erkennung pro Seite die häufigste Sprache der gesamten Seite zugewiesen wird.&lt;br&gt; Hinweis: Nur Japanisch wird standardmäßig unterstützt, für alle anderen Sprachen müssen Tesseract aktiviert und die zugehörigen Sprachpakete installiert sein.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="82"/>
       <source>OCR Language</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Language</translation>
+      <translation>OCR-Sprache</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="84"/>
@@ -2844,10 +2844,10 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="96"/>
-      <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</source>
-      <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</oldsource>
+      <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</source>
+      <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</translation>
+      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="98"/>
@@ -2857,10 +2857,10 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="100"/>
-      <source>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
-      <oldsource>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</oldsource>
+      <source>The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
+      <oldsource>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
+      <translation type="unfinished">The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="102"/>
@@ -2933,13 +2933,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="126"/>
       <source>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation>Maximale Anzahl von Kernen, die für die Maskenerzeugung verwendet werden sollen. Sie können diesen Wert unbestimmt lassen, um alle verfügbaren Kerne zu verwenden. Verringern Sie diesen Wert, wenn Sie auf Arbeitsspeicherprobleme stoßen, die zu zufälligen abstürzen führen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="128"/>
       <source>Max Threads</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Max Threads</translation>
+      <translation>Max Kerne</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="130"/>
@@ -3023,15 +3023,16 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
     </message>
     <message>
       <location filename="profile_strings.py" line="174"/>
-      <source>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
+      <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
+      <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation type="unfinished">Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="176"/>
       <source>Max Threads</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Max Threads</translation>
+      <translation>Max Kerne</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="212"/>
@@ -3142,350 +3143,350 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="246"/>
       <source>Detect per box</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Detect per box</translation>
+      <translation>Erkennen pro Feld</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="248"/>
       <source>Detect per page</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Detect per page</translation>
+      <translation>Erkennen pro Seite</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="250"/>
       <source>Japanese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Japanese</translation>
+      <translation>Japanisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="252"/>
       <source>English</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">English</translation>
+      <translation>Englisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="254"/>
       <source>Korean</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Korean</translation>
+      <translation>Koreanisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="256"/>
       <source>Korean (vertical)</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Korean (vertical)</translation>
+      <translation>Koreanisch (vertikal)</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="258"/>
       <source>Chinese - Simplified</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Chinese - Simplified</translation>
+      <translation>Chinesisch - Vereinfacht</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="260"/>
       <source>Chinese - Traditional</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Chinese - Traditional</translation>
+      <translation>Chinesisch - Traditionell</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="262"/>
       <source>Albanian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Albanian</translation>
+      <translation>Albanisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="264"/>
       <source>Arabic</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Arabic</translation>
+      <translation>Arabisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="266"/>
       <source>Azerbaijani</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Azerbaijani</translation>
+      <translation>Aserbaidschanisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="268"/>
       <source>Azerbaijani - Cyrilic</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Azerbaijani - Cyrilic</translation>
+      <translation>Aserbaidschanisch - Kyrillisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="270"/>
       <source>Bengali</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Bengali</translation>
+      <translation>Bengalisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="272"/>
       <source>Bulgarian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Bulgarian</translation>
+      <translation>Bulgarisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="274"/>
       <source>Burmese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Burmese</translation>
+      <translation>Birmanisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="276"/>
       <source>Catalan; Valencian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Catalan; Valencian</translation>
+      <translation>Katalanisch; Valencianisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="278"/>
       <source>Croatian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Croatian</translation>
+      <translation>Kroatisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="280"/>
       <source>Czech</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Czech</translation>
+      <translation>Tschechisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="282"/>
       <source>Danish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Danish</translation>
+      <translation>Dänisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="284"/>
       <source>Dutch; Flemish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Dutch; Flemish</translation>
+      <translation>Niederländisch; Flämisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="286"/>
       <source>Esperanto</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Esperanto</translation>
+      <translation>Esperanto</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="288"/>
       <source>Estonian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Estonian</translation>
+      <translation>Estnisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="290"/>
       <source>Finnish</source>
       <oldsource>Filipino</oldsource>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Finnish</translation>
+      <translation>Finnisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="292"/>
       <source>French</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">French</translation>
+      <translation>Französisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="294"/>
       <source>Georgian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Georgian</translation>
+      <translation>Georgisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="296"/>
       <source>German</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">German</translation>
+      <translation>Deutsch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="298"/>
       <source>Greek</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Greek</translation>
+      <translation>Griechisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="300"/>
       <source>Hebrew</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hebrew</translation>
+      <translation>Hebräisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="302"/>
       <source>Hindi</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hindi</translation>
+      <translation>Hindi</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="304"/>
       <source>Hungarian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hungarian</translation>
+      <translation>Ungarisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="306"/>
       <source>Indonesian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Indonesian</translation>
+      <translation>Indonesisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="308"/>
       <source>Italian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Italian</translation>
+      <translation>Italienisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="310"/>
       <source>Kazakh</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Kazakh</translation>
+      <translation>Kasachisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="312"/>
       <source>Latin</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Latin</translation>
+      <translation>Latein</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="314"/>
       <source>Lithuanian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Lithuanian</translation>
+      <translation>Litauisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="316"/>
       <source>Luxembourgish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Luxembourgish</translation>
+      <translation>Luxemburgisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="318"/>
       <source>Malay</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Malay</translation>
+      <translation>Malaiisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="320"/>
       <source>Mongolian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Mongolian</translation>
+      <translation>Mongolisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="322"/>
       <source>Nepali</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Nepali</translation>
+      <translation>Nepalesisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="324"/>
       <source>Norwegian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Norwegian</translation>
+      <translation>Norwegisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="326"/>
       <source>Persian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Persian</translation>
+      <translation>Persisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="328"/>
       <source>Polish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Polish</translation>
+      <translation>Polnisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="330"/>
       <source>Portuguese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Portuguese</translation>
+      <translation>Portugiesisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="332"/>
       <source>Romanian; Moldavian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Romanian; Moldavian</translation>
+      <translation>Rumänisch; Moldawisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="334"/>
       <source>Russian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Russian</translation>
+      <translation>Russisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="336"/>
       <source>Serbian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Serbian</translation>
+      <translation>Serbisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="338"/>
       <source>Serbian - Latin</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Serbian - Latin</translation>
+      <translation>Serbisch - Latein</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="340"/>
       <source>Slovak</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Slovak</translation>
+      <translation>Slowakisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="342"/>
       <source>Slovenian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Slovenian</translation>
+      <translation>Slowenisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="344"/>
       <source>Spanish; Castilian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Spanish; Castilian</translation>
+      <translation>Spanisch; Kastilisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="346"/>
       <source>Swedish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Swedish</translation>
+      <translation>Schwedisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="348"/>
       <source>Tagalog</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Tagalog</translation>
+      <translation>Tagalog</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="350"/>
       <source>Tamil</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Tamil</translation>
+      <translation>Tamilisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="352"/>
       <source>Telugu</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Telugu</translation>
+      <translation>Telugu</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="354"/>
       <source>Thai</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Thai</translation>
+      <translation>Thailändisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="356"/>
       <source>Turkish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Turkish</translation>
+      <translation>Türkisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="358"/>
       <source>Ukrainian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Ukrainian</translation>
+      <translation>Ukrainisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="360"/>
       <source>Vietnamese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Vietnamese</translation>
+      <translation>Vietnamesisch</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="148"/>
@@ -3656,7 +3657,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="../pcleaner/gui/profile_parser.py" line="130"/>
       <source>All Cores</source>
       <comment>The limit on the number of CPU cores to use, or here, no limit.</comment>
-      <translation type="unfinished">All Cores</translation>
+      <translation>Alle Kerne</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="208"/>
