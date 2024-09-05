@@ -1950,7 +1950,7 @@ Per sapere come aggiungere il supporto per altre lingue, consultare la documenta
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="14"/>
       <source>Downloading Machine Learning Models</source>
-      <translation>Scaricare i modelli di apprendimento automatico</translation>
+      <translation>Scaricare i modelli di Machine Learning</translation>
     </message>
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="23"/>
@@ -1984,7 +1984,7 @@ Per sapere come aggiungere il supporto per altre lingue, consultare la documenta
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="254"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="338"/>
       <source>Download Failed</source>
-      <translation>Scaricare Failed</translation>
+      <translation>Scaricarimento non riuscito</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="241"/>
@@ -1995,7 +1995,7 @@ Per sapere come aggiungere il supporto per altre lingue, consultare la documenta
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="281"/>
       <source>ETA</source>
       <comment>estimated time of completion</comment>
-      <translation>ETA</translation>
+      <translation>Tempo stimato di arrivo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="292"/>
