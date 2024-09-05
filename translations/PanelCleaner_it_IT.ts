@@ -1928,7 +1928,7 @@ Per sapere come aggiungere il supporto per altre lingue, consultare la documenta
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1279"/>
       <source>Download Machine Learning Models</source>
-      <translation>Scarica i modelli di apprendimento automatico</translation>
+      <translation>Scarica i modelli di Machine Learning</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1284"/>
