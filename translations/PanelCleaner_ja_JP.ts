@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr_TR" sourcelanguage="en_US">
+<TS version="2.1" language="ja_JP" sourcelanguage="en_US">
   <context>
     <name/>
     <message>
@@ -492,41 +492,41 @@ Pages with failures / total:
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation>Panel Temizleyici Hakkında</translation>
+      <translation type="unfinished">About Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="81"/>
       <source># Panel Cleaner
 
 An AI-powered tool to clean manga panels.</source>
-      <translation># Panel Temizleyici
+      <translation type="unfinished"># Panel Cleaner
 
-Manga panellerini temizlemek için yapay zeka destekli bir araç.</translation>
+An AI-powered tool to clean manga panels.</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="98"/>
       <source>Version:</source>
-      <translation>Versiyon:</translation>
+      <translation type="unfinished">Version:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="112"/>
       <source>Author:</source>
-      <translation>Yazar:</translation>
+      <translation type="unfinished">Author:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="150"/>
       <source>Toolkit:</source>
-      <translation>Araç Seti:</translation>
+      <translation type="unfinished">Toolkit:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="164"/>
       <source>License:</source>
-      <translation>Lisans:</translation>
+      <translation type="unfinished">License:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="181"/>
       <source>Source code:</source>
-      <translation>Kaynak kodu:</translation>
+      <translation type="unfinished">Source code:</translation>
     </message>
   </context>
   <context>
@@ -851,7 +851,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="709"/>
       <source>Images</source>
-      <translation>Görüntüler</translation>
+      <translation type="unfinished">Images</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="730"/>
@@ -864,42 +864,42 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="134"/>
       <source>Zoom in</source>
-      <translation>Yakınlaştır</translation>
+      <translation type="unfinished">Zoom in</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="151"/>
       <source>Zoom out</source>
-      <translation>Uzaklaştır</translation>
+      <translation type="unfinished">Zoom out</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="168"/>
       <source>Reset zoom</source>
-      <translation>Yakınlaştırmayı sıfırla</translation>
+      <translation type="unfinished">Reset zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="185"/>
       <source>Zoom to fit</source>
-      <translation>Sığdırmak için yakınlaştır</translation>
+      <translation type="unfinished">Zoom to fit</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="205"/>
       <source>Refresh</source>
-      <translation>Yenile</translation>
+      <translation type="unfinished">Refresh</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="289"/>
       <source>Generating...</source>
-      <translation>Üretmek...</translation>
+      <translation type="unfinished">Generating...</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="338"/>
       <source>Position:</source>
-      <translation>Pozisyon:</translation>
+      <translation type="unfinished">Position:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="359"/>
       <source>Size:</source>
-      <translation>Boyut:</translation>
+      <translation type="unfinished">Size:</translation>
     </message>
   </context>
   <context>
@@ -1183,7 +1183,7 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../ui_files/License.ui" line="14"/>
       <source>License Agreement</source>
-      <translation>Lisans Sözleşmesi</translation>
+      <translation type="unfinished">License Agreement</translation>
     </message>
   </context>
   <context>
@@ -1489,7 +1489,7 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1520"/>
       <location filename="../ui_files/Mainwindow.ui" line="660"/>
       <source>cleaned</source>
-      <translation>temizlenmiş</translation>
+      <translation type="unfinished">cleaned</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1579"/>
@@ -1579,88 +1579,88 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="14"/>
       <source>Panel Cleaner</source>
-      <translation>Panel Temizleyici</translation>
+      <translation type="unfinished">Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="37"/>
       <location filename="../ui_files/Mainwindow.ui" line="1073"/>
       <source>Profile</source>
-      <translation>Profil</translation>
+      <translation type="unfinished">Profile</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="58"/>
       <source>Default</source>
-      <translation>Varsayılan</translation>
+      <translation type="unfinished">Default</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="69"/>
       <source>Apply</source>
-      <translation>Uygula</translation>
+      <translation type="unfinished">Apply</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="83"/>
       <location filename="../ui_files/Mainwindow.ui" line="1214"/>
       <source>Save</source>
-      <translation>Kaydet</translation>
+      <translation type="unfinished">Save</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="97"/>
       <source>Reset All</source>
-      <translation>Tümünü Sıfırla</translation>
+      <translation type="unfinished">Reset All</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="170"/>
       <source>Drag and Drop Images or Folders Here</source>
-      <translation>Görüntüleri veya Klasörleri Buraya Sürükleyip Bırakın</translation>
+      <translation type="unfinished">Drag and Drop Images or Folders Here</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="228"/>
       <source>Images</source>
-      <translation>Görüntüler</translation>
+      <translation type="unfinished">Images</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="288"/>
       <location filename="../ui_files/Mainwindow.ui" line="1063"/>
       <source>File</source>
-      <translation>Dosya</translation>
+      <translation type="unfinished">File</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="293"/>
       <source>Size</source>
-      <translation>Boyut</translation>
+      <translation type="unfinished">Size</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="298"/>
       <source>Processing Size</source>
       <comment>The size that the picture is shrunk down to for processing.</comment>
-      <translation>İşlenme Boyutu</translation>
+      <translation type="unfinished">Processing Size</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="303"/>
       <source>File Size</source>
-      <translation>Dosya Boyutu</translation>
+      <translation type="unfinished">File Size</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="308"/>
       <source>Color Mode</source>
       <comment>Like RGB, grayscale etc.</comment>
-      <translation>Renk Modu</translation>
+      <translation type="unfinished">Color Mode</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="313"/>
       <source>Analytics</source>
       <comment>Can also call this statistics.</comment>
-      <translation>Analitikler</translation>
+      <translation type="unfinished">Analytics</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="350"/>
       <source>Process</source>
-      <translation>İşlem</translation>
+      <translation type="unfinished">Process</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="356"/>
       <source>Cleaning</source>
-      <translation>Temizleme</translation>
+      <translation type="unfinished">Cleaning</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="366"/>
@@ -1675,32 +1675,32 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="399"/>
       <source>Abort</source>
-      <translation>İptal et</translation>
+      <translation type="unfinished">Abort</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="410"/>
       <source>Start</source>
-      <translation>Başlat</translation>
+      <translation type="unfinished">Start</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="426"/>
       <source>Output</source>
-      <translation>Çıktı</translation>
+      <translation type="unfinished">Output</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="458"/>
       <source>Cleaned Image</source>
-      <translation>Temizlenmiş Görüntü</translation>
+      <translation type="unfinished">Cleaned Image</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="468"/>
       <source>Mask</source>
-      <translation>Maske</translation>
+      <translation type="unfinished">Mask</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="478"/>
       <source>Isolated Text</source>
-      <translation>İzole Metin</translation>
+      <translation type="unfinished">Isolated Text</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="507"/>
@@ -1716,23 +1716,23 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="547"/>
       <source>Save Output</source>
-      <translation>Çıktıyı Kaydet</translation>
+      <translation type="unfinished">Save Output</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="617"/>
       <source>Output Directory:</source>
-      <translation>Çıktı Dizini:</translation>
+      <translation type="unfinished">Output Directory:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="630"/>
       <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
       <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
-      <translation>Görüntüsünün orijinal konumunda bir alt klasör oluşturmak için göreli bir yol kullanabilir veya mutlak bir yol kullanabilirsiniz.</translation>
+      <translation type="unfinished">You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="703"/>
       <source>Plain Text</source>
-      <translation>Düz Metin</translation>
+      <translation type="unfinished">Plain Text</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="752"/>
@@ -1742,12 +1742,12 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="796"/>
       <source>Output File:</source>
-      <translation>Çıktı Dosyası:</translation>
+      <translation type="unfinished">Output File:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="809"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bir dosya adıyla birlikte mutlak veya göreli bir yol girin. Tüm görüntülerin çıktısı aynı dosyaya yazılır.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="839"/>
@@ -1759,12 +1759,12 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../ui_files/Mainwindow.ui" line="951"/>
       <source>Generating:</source>
       <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
-      <translation>Üretiliyor:</translation>
+      <translation type="unfinished">Generating:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="981"/>
       <source>Current Step:</source>
-      <translation>Şu anki adım:</translation>
+      <translation type="unfinished">Current Step:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1010"/>
@@ -1776,38 +1776,38 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../ui_files/Mainwindow.ui" line="1033"/>
       <source>Images Processed:</source>
       <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
-      <translation>İşlenen görüntüler:</translation>
+      <translation type="unfinished">Images Processed:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1077"/>
       <source>Set Default</source>
-      <translation>Varsayılan olarak ayarla</translation>
+      <translation type="unfinished">Set Default</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1093"/>
       <source>Settings</source>
-      <translation>Ayarlar</translation>
+      <translation type="unfinished">Settings</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1097"/>
       <source>Theme</source>
       <comment>As in color theme</comment>
-      <translation>Tema</translation>
+      <translation type="unfinished">Theme</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1106"/>
       <source>Language</source>
-      <translation>Dil</translation>
+      <translation type="unfinished">Language</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1122"/>
       <source>Help</source>
-      <translation>Yardım</translation>
+      <translation type="unfinished">Help</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1146"/>
       <source>Add Files...</source>
-      <translation>Dosya Ekle...</translation>
+      <translation type="unfinished">Add Files...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1155"/>
@@ -1858,7 +1858,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1164"/>
       <source>New</source>
-      <translation>Yeni</translation>
+      <translation type="unfinished">New</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="557"/>
@@ -1873,67 +1873,67 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1173"/>
       <source>Delete</source>
-      <translation>Sil</translation>
+      <translation type="unfinished">Delete</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1182"/>
       <source>Import...</source>
-      <translation>İçe aktar...</translation>
+      <translation type="unfinished">Import...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1191"/>
       <source>Online Documentation</source>
-      <translation>Çevrimiçi Dokümantasyon</translation>
+      <translation type="unfinished">Online Documentation</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1200"/>
       <source>About Panel Cleaner</source>
-      <translation>Panel Temizleyici Hakkında</translation>
+      <translation type="unfinished">About Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1205"/>
       <source>View License</source>
-      <translation>Lisansı Görüntüle</translation>
+      <translation type="unfinished">View License</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1223"/>
       <source>Save as...</source>
-      <translation>Farklı kaydet...</translation>
+      <translation type="unfinished">Save as...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1231"/>
       <source>System</source>
-      <translation>Sistem</translation>
+      <translation type="unfinished">System</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1239"/>
       <source>Dark</source>
-      <translation>Karanlık</translation>
+      <translation type="unfinished">Dark</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1247"/>
       <source>Light</source>
-      <translation>Açık</translation>
+      <translation type="unfinished">Light</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1261"/>
       <source>Add Folder...</source>
-      <translation>Klasör Ekle...</translation>
+      <translation type="unfinished">Add Folder...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1270"/>
       <source>Delete Machine Learning Models</source>
-      <translation>Makine Öğrenimi Modellerini Sil</translation>
+      <translation type="unfinished">Delete Machine Learning Models</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1279"/>
       <source>Download Machine Learning Models</source>
-      <translation>Makine Öğrenimi Modellerini İndir</translation>
+      <translation type="unfinished">Download Machine Learning Models</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1284"/>
       <source>Donate</source>
-      <translation>Bağış Yap</translation>
+      <translation type="unfinished">Donate</translation>
     </message>
   </context>
   <context>
@@ -1950,17 +1950,17 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="14"/>
       <source>Downloading Machine Learning Models</source>
-      <translation>Makine Öğrenimi Modelleri indiriliyor</translation>
+      <translation type="unfinished">Downloading Machine Learning Models</translation>
     </message>
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="23"/>
       <source>Model data required to run Panel Cleaner:</source>
-      <translation>Panel Temizleyiciyi çalıştırmak için gerekli model verileri:</translation>
+      <translation type="unfinished">Model data required to run Panel Cleaner:</translation>
     </message>
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="115"/>
       <source>OCR model:</source>
-      <translation>OCR modeli:</translation>
+      <translation type="unfinished">OCR model:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="108"/>
@@ -2009,27 +2009,27 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/NewProfile.ui" line="14"/>
       <source>New Profile</source>
-      <translation>Yeni Profil</translation>
+      <translation type="unfinished">New Profile</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="23"/>
       <source>The default profile cannot be overwritten. Save a new profile with your changes:</source>
-      <translation>Varsayılan profilin üzerine yazılamaz. Yaptığınız değişiklikler için yeni bir profil oluşturun:</translation>
+      <translation type="unfinished">The default profile cannot be overwritten. Save a new profile with your changes:</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="35"/>
       <source>Use the default location</source>
-      <translation>Varsayılan konumu kullan</translation>
+      <translation type="unfinished">Use the default location</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="45"/>
       <source>Use a different location:</source>
-      <translation>Farklı bir konum kullan:</translation>
+      <translation type="unfinished">Use a different location:</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="77"/>
       <source>Profile Name:</source>
-      <translation>Profil İsmi:</translation>
+      <translation type="unfinished">Profile Name:</translation>
     </message>
   </context>
   <context>
@@ -3685,12 +3685,12 @@ You can download the model manually from &lt;a href=&quot;https://github.com/zyd
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="20"/>
       <source>Downloading Machine Learning Models</source>
-      <translation>Makine Öğrenimi Modelleri indiriliyor</translation>
+      <translation type="unfinished">Downloading Machine Learning Models</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="32"/>
       <source>## Setting up Panel Cleaner</source>
-      <translation>## Panel Temizleyici kuruluyor</translation>
+      <translation type="unfinished">## Setting up Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="58"/>
@@ -3700,19 +3700,19 @@ You can download the model manually from &lt;a href=&quot;https://github.com/zyd
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="107"/>
       <source>Text Detection:</source>
-      <translation>Metin Algılama:</translation>
+      <translation type="unfinished">Text Detection:</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="168"/>
       <location filename="../ui_files/SetupGreeter.ui" line="257"/>
       <location filename="../ui_files/SetupGreeter.ui" line="330"/>
       <source>Saved in:</source>
-      <translation>Kaydedildiği yer:</translation>
+      <translation type="unfinished">Saved in:</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="222"/>
       <source>Optical Character Recognition (OCR):</source>
-      <translation>Optik Karakter Tanıma (OCR):</translation>
+      <translation type="unfinished">Optical Character Recognition (OCR):</translation>
     </message>
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="295"/>
@@ -3732,7 +3732,7 @@ You can download the model manually from &lt;a href=&quot;https://github.com/zyd
     <message>
       <location filename="../ui_files/SetupGreeter.ui" line="147"/>
       <source>(only the comictextdetector file is needed)</source>
-      <translation>(sadece comictextdetector dosyası gereklidir)</translation>
+      <translation type="unfinished">(only the comictextdetector file is needed)</translation>
     </message>
   </context>
 </TS>
