@@ -2847,7 +2847,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</source>
       <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</translation>
+      <translation>Regex-Muster zum Abgleich mit OCR-Ergebnissen. Alles, was mit diesem Muster übereinstimmt, wird verworfen.&lt;br&gt; Beachten Sie, dass das MangaOCR-Modell Sonderzeichen in voller Breite zurückgibt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="98"/>
@@ -2860,7 +2860,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <source>The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
       <oldsource>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
+      <translation>Das MangaOCR-Modell kann nur japanischen Text verarbeiten.  Wenn also die Option Strenge Spracherkennung aktiviert ist, werden Felder verworfen, bei denen die Texterkennung nicht sicher ist, dass sie japanisch enthalten&apos;.  Manchmal verunsichern Zahlen oder andere Symbole die KI, was dazu führt, dass die erkannte Sprache unbekannt ist. Wenn Streng deaktiviert ist, werden diese nicht verworfen. Alles, was mit Sicherheit als eine andere Sprache erkannt wird, wird unabhängig von dieser Einstellung verworfen.&lt;br&gt; Hinweis: Diese Einstellung ist nur relevant, wenn ocr_language auf die Erkennung pro Feld oder Seite eingestellt ist.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="102"/>
@@ -3026,7 +3026,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
       <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation>Maximale Anzahl von Kernen, die für die Entrauschung verwendet werden sollen. Sie können diesen Wert unbestimmt lassen, um alle verfügbaren Kerne zu verwenden. Verringern Sie diesen Wert, wenn Sie auf Arbeitsspeicherprobleme stoßen, die zu zufälligen abstürzen führen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="176"/>
