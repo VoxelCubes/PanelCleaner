@@ -1084,11 +1084,6 @@ Attivare l'inpainting nelle impostazioni del profilo e riprovare.</translation>
       <translation>Deselezionare le immagini senza dati OCR corrispondenti</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageMatchOverview.ui" line="166"/>
-      <source>image_index</source>
-      <translation>indice_immagine</translation>
-    </message>
-    <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="171"/>
       <source>Image File</source>
       <translation>File immagine</translation>
