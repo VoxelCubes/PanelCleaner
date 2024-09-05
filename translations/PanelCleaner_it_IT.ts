@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="986"/>
+      <location filename="../pcleaner/config.py" line="987"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>predefinito</translation>
@@ -2844,10 +2844,10 @@ Verde: caselle iniziali. Rosso: caselle estese. Viola: caselle unite (finali). B
     </message>
     <message>
       <location filename="profile_strings.py" line="96"/>
-      <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</source>
-      <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</oldsource>
+      <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</source>
+      <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation>Modello Regex da confrontare con i risultati dell'OCR. Tutto ciò che corrisponde a questo modello viene scartato.&lt;br&gt; Nota: il modello OCR restituisce caratteri a tutta larghezza, quindi questo modello dovrebbe corrispondere.</translation>
+      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="98"/>
@@ -2857,10 +2857,10 @@ Verde: caselle iniziali. Rosso: caselle estese. Viola: caselle unite (finali). B
     </message>
     <message>
       <location filename="profile_strings.py" line="100"/>
-      <source>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
-      <oldsource>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</oldsource>
+      <source>The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
+      <oldsource>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation>Il modello OCR standard è in grado di gestire solo il testo giapponese, quindi quando è abilitata l'opzione rigorosa, scarterà le caselle che non sono&apos;sicure che siano giapponesi. A volte, numeri o altri simboli riducono la fiducia, facendo sì che la lingua rilevata sia sconosciuta. Se strict è disabilitato, questi non verranno scartati. Tutto ciò che è riconosciuto con sicurezza come lingua diversa sarà scartato indipendentemente da questa impostazione.&lt;br&gt; Nota: questa impostazione è rilevante solo quando ocr_language è impostato su rilevamento per casella o pagina.</translation>
+      <translation type="unfinished">The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="102"/>
@@ -3023,9 +3023,10 @@ Verde: caselle iniziali. Rosso: caselle estese. Viola: caselle unite (finali). B
     </message>
     <message>
       <location filename="profile_strings.py" line="174"/>
-      <source>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
+      <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
+      <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
       <comment>Profile comment in Denoiser</comment>
-      <translation>Numero massimo di threads da utilizzare per l'esportazione delle immagini. Si può lasciare non specificato per utilizzare tutti i threads disponibili. Abbassare questo valore se si riscontrano problemi di memoria, che si manifestano come crash casuali.</translation>
+      <translation type="unfinished">Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="176"/>
