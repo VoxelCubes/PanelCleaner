@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="986"/>
+      <location filename="../pcleaner/config.py" line="987"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>по подразбиране</translation>
@@ -2846,10 +2846,10 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
       <location filename="profile_strings.py" line="96"/>
-      <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</source>
-      <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded. Note that the OCR model returns full-width characters, so this pattern should match them.</oldsource>
+      <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</source>
+      <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</translation>
+      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="98"/>
@@ -2859,10 +2859,10 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
       <location filename="profile_strings.py" line="100"/>
-      <source>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
-      <oldsource>The OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.</oldsource>
+      <source>The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
+      <oldsource>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
+      <translation type="unfinished">The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="102"/>
@@ -3025,9 +3025,10 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
       <location filename="profile_strings.py" line="174"/>
-      <source>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
+      <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
+      <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation type="unfinished">Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="176"/>
