@@ -371,13 +371,14 @@ class PreprocessorConfig:
         
         # Regex pattern to match against OCR results.
         # Anything matching this pattern is discarded.[GUI: <br>]
-        # Note: the OCR model returns full-width characters, so this pattern should match them.
+        # Note: the MangaOCR model returns full-width characters, so this pattern should match them.
         ocr_blacklist_pattern = {self.ocr_blacklist_pattern}
         
-        # The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that
-        # the it isn't confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting
-        # in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is
-        # confidently recognized as a different language will be discarded regardless of this setting.[GUI: <br>]
+        # The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where
+        # the Text Detector isn't confident that they are Japanese. 
+        # Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown.
+        # If strict is disabled, those will not be discarded. Anything that is confidently recognized
+        # as a different language will be discarded regardless of this setting.[GUI: <br>]
         # Note: this setting is only relevant when ocr_language is set to detect per box or page.
         ocr_strict_language = {self.ocr_strict_language}
         
@@ -637,7 +638,7 @@ class DenoiserConfig:
         # Set to False to disable denoising.
         denoising_enabled = {self.denoising_enabled}
         
-        # Maximum number of threads to use for mask generation.
+        # Maximum number of threads to use for denoising.
         # You can leave it unspecified to use all available threads.
         # Lower this value if you run into memory issues, which will appear as random crashes.
         max_threads = {self.max_threads if self.max_threads > 0 else ""}
