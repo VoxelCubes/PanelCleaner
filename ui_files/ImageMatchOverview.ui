@@ -163,7 +163,7 @@
      </attribute>
      <column>
       <property name="text">
-       <string>image_index</string>
+       <string notr="true">image_index</string>
       </property>
      </column>
      <column>

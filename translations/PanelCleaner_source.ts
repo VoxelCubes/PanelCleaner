@@ -1052,11 +1052,6 @@ Please enable inpainting in the profile settings and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui_files/ImageMatchOverview.ui" line="166"/>
-        <source>image_index</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui_files/ImageMatchOverview.ui" line="171"/>
         <source>Image File</source>
         <translation type="unfinished"></translation>
