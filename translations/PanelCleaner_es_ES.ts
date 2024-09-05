@@ -1084,11 +1084,6 @@ Por favor, active la función inpainting en la configuración del perfil e inté
       <translation type="unfinished">Unselect images without matching OCR data</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageMatchOverview.ui" line="166"/>
-      <source>image_index</source>
-      <translation type="unfinished">image_index</translation>
-    </message>
-    <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="171"/>
       <source>Image File</source>
       <translation type="unfinished">Image File</translation>
