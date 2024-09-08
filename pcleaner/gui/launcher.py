@@ -1,26 +1,28 @@
+import locale as pylocale
 import os
 import platform
 import sys
-from io import StringIO
-from PIL import Image
 from importlib import resources
-import locale as pylocale
+from io import StringIO
 
 import PySide6
+import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-import PySide6.QtCore as Qc
-from loguru import logger
+import psutil
 import torch
+from PIL import Image
 from docopt import docopt
+from loguru import logger
 
 import pcleaner.cli_utils as cu
-import pcleaner.gui.gui_utils as gu
 import pcleaner.config as cfg
-from pcleaner import __display_name__, __version__
-import pcleaner.data.translation_generated_files as translation_data
 import pcleaner.data.theme_icons as theme_icons_data
+import pcleaner.data.translation_generated_files as translation_data
+import pcleaner.gui.gui_utils as gu
+from pcleaner import __display_name__, __version__
 from pcleaner.gui.mainwindow_driver import MainWindow
+
 
 # TODO Things to copy from deepqt:
 # - the testing
@@ -66,7 +68,6 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     buffer.write(f"Operating System: {platform.system()} {platform.release()}\n")
     if platform.system() == "Linux":
         buffer.write(f"Desktop Environment: {os.getenv('XDG_CURRENT_DESKTOP', 'unknown')}\n")
-    buffer.write(f"Machine: {platform.machine()}\n")
     buffer.write(f"Python Version: {sys.version}\n")
     buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
     buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
@@ -79,9 +80,19 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     icon_theme_name = icon_theme_name if icon_theme_name else "System Default"
     buffer.write(f"Current Icon Theme: {icon_theme_name}\n")
     buffer.write(f"System locale: {Qc.QLocale.system().name()}\n")
+    buffer.write(f"Architecture: {platform.machine()}\n")
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
+    buffer.write(f"Memory: {psutil.virtual_memory().total / 1024 ** 3:.2f} GiB\n")
+    buffer.write(f"Swap: {psutil.swap_memory().total / 1024 ** 3:.2f} GiB\n")
     if torch.cuda.is_available():
         buffer.write(f"GPU: {torch.cuda.get_device_name(0)} (CUDA enabled)\n")
+        buffer.write(f"    CUDA Version: {torch.version.cuda}\n")
+        buffer.write(
+            f"    CUDA Cores: {torch.cuda.get_device_properties(0).multi_processor_count}\n"
+        )
+        buffer.write(
+            f"    VRAM: {torch.cuda.get_device_properties(0).total_memory / 1024 ** 3:.2f} GiB\n"
+        )
     else:
         buffer.write("GPU: None (CUDA not available)\n")
 

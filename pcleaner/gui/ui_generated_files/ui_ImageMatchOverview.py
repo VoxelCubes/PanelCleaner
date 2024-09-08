@@ -98,6 +98,7 @@ class Ui_ImageMatchOverview(object):
         if (self.file_table.columnCount() < 3):
             self.file_table.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
+        __qtablewidgetitem.setText(u"image_index");
         self.file_table.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(1, __qtablewidgetitem1)
@@ -148,11 +149,9 @@ class Ui_ImageMatchOverview(object):
         self.pushButton_deselect_all.setText(QCoreApplication.translate("ImageMatchOverview", u"Deselect All", None))
         self.pushButton_select_all.setText(QCoreApplication.translate("ImageMatchOverview", u"Select All", None))
         self.pushButton_deselect_new.setText(QCoreApplication.translate("ImageMatchOverview", u"Unselect images without matching OCR data", None))
-        ___qtablewidgetitem = self.file_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("ImageMatchOverview", u"image_index", None));
-        ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("ImageMatchOverview", u"Image File", None));
-        ___qtablewidgetitem2 = self.file_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("ImageMatchOverview", u"OCR Data", u"Can also call this statistics."));
+        ___qtablewidgetitem = self.file_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("ImageMatchOverview", u"Image File", None));
+        ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("ImageMatchOverview", u"OCR Data", u"Can also call this statistics."));
     # retranslateUi
 

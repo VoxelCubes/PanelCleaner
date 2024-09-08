@@ -208,12 +208,13 @@ def prep_json_file(
         x_factor *= -1
 
     # Keep the boxes and their langs synchronized.
-    page_data.boxes, page_data.box_language = zip(
-        *sorted(
-            zip(page_data.boxes, page_data.box_language),
-            key=lambda x: x_factor * x[0].x1 + y_factor * x[0].y1,
+    if len(page_data.boxes) > 1:
+        page_data.boxes, page_data.box_language = zip(
+            *sorted(
+                zip(page_data.boxes, page_data.box_language),
+                key=lambda x: x_factor * x[0].x1 + y_factor * x[0].y1,
+            )
         )
-    )
     # Convert the returned tuples back to lists.
     page_data.boxes = list(page_data.boxes)
     page_data.box_language = list(page_data.box_language)

@@ -68,6 +68,10 @@ SUFFIX_TO_ICON.update(
 # Create a dummy type to signify numbers need to be greater than 0.
 GreaterZero = NewType("GreaterZero", int)
 
+# Create a special type for the thread limit to add additional gui information.
+# When it is < 1 then that means unlimited threads (well, up to the number of cores).
+ThreadLimit = NewType("ThreadLimit", int)
+
 # Create a new type to signify a long description string.
 LongString = NewType("LongString", str)
 
@@ -107,7 +111,8 @@ class GeneralConfig:
     preferred_file_type: str | None = None
     preferred_mask_file_type: str = ".png"
     input_height_lower_target: int = 1000
-    input_height_upper_target: int = 3000
+    input_height_upper_target: int = 4000
+    max_threads_export: ThreadLimit = 0
     save_psd_output: PSDExport = PSDExport.AUTO
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
@@ -159,6 +164,11 @@ class GeneralConfig:
         input_height_lower_target = {self.input_height_lower_target}
         input_height_upper_target = {self.input_height_upper_target}
         
+        # Maximum number of threads to use for exporting images.
+        # You can leave it unspecified to use all available threads.
+        # Lower this value if you run into memory issues, which will appear as random crashes.
+        max_threads_export = {self.max_threads_export if self.max_threads_export > 0 else ""}
+        
         """
         config_updater.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
 
@@ -178,6 +188,7 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, int, "input_height_lower_target")
         try_to_load(self, config_updater, section, int, "input_height_upper_target")
+        try_to_load(self, config_updater, section, ThreadLimit, "max_threads_export")
         try_to_load(self, config_updater, section, PSDExport, "save_psd_output")
 
     def fix(self) -> None:
@@ -206,6 +217,9 @@ class GeneralConfig:
                 )
                 closest = SUPPORTED_MASK_TYPES[0]
             self.preferred_mask_file_type = closest
+
+        if self.max_threads_export < 0:
+            self.max_threads_export = 0
 
 
 @define
@@ -370,13 +384,14 @@ class PreprocessorConfig:
         
         # Regex pattern to match against OCR results.
         # Anything matching this pattern is discarded.[GUI: <br>]
-        # Note: the OCR model returns full-width characters, so this pattern should match them.
+        # Note: the MangaOCR model returns full-width characters, so this pattern should match them.
         ocr_blacklist_pattern = {self.ocr_blacklist_pattern}
         
-        # The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that
-        # the it isn't confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting
-        # in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is
-        # confidently recognized as a different language will be discarded regardless of this setting.[GUI: <br>]
+        # The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where
+        # the Text Detector isn't confident that they are Japanese. 
+        # Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown.
+        # If strict is disabled, those will not be discarded. Anything that is confidently recognized
+        # as a different language will be discarded regardless of this setting.[GUI: <br>]
         # Note: this setting is only relevant when ocr_language is set to detect per box or page.
         ocr_strict_language = {self.ocr_strict_language}
         
@@ -465,6 +480,7 @@ class PreprocessorConfig:
 
 @define
 class MaskerConfig:
+    max_threads: ThreadLimit = 0
     mask_growth_step_pixels: int | GreaterZero = 2
     mask_growth_steps: int | GreaterZero = 11
     min_mask_thickness: int = 4
@@ -486,6 +502,11 @@ class MaskerConfig:
         """
         config_str = f"""\
         [Masker]
+        
+        # Maximum number of threads to use for mask generation.
+        # You can leave it unspecified to use all available threads.
+        # Lower this value if you run into memory issues, which will appear as random crashes.
+        max_threads = {self.max_threads if self.max_threads > 0 else ""}
         
         # Number of pixels to grow the mask by each step.
         # This bulks up the outline of the mask, so smaller values will be more accurate but slower.
@@ -551,6 +572,7 @@ class MaskerConfig:
             logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
+        try_to_load(self, config_updater, section, ThreadLimit, "max_threads")
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_step_pixels")
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_steps")
         try_to_load(self, config_updater, section, int, "min_mask_thickness")
@@ -576,6 +598,8 @@ class MaskerConfig:
         Keep the numbers greater or equal to zero.
         For numbers, ensure the range 0-255.
         """
+        if self.max_threads < 0:
+            self.max_threads = ThreadLimit(0)
         self.mask_growth_steps = max(0, self.mask_growth_steps)
         self.off_white_max_threshold = max(0, min(255, self.off_white_max_threshold))
         if self.mask_improvement_threshold < 0:
@@ -590,6 +614,7 @@ class MaskerConfig:
 @define
 class DenoiserConfig:
     denoising_enabled: bool = True
+    max_threads: ThreadLimit = 0
     noise_min_standard_deviation: float = 0.25
     noise_outline_size: int = 5
     noise_fade_radius: int = 1
@@ -625,6 +650,11 @@ class DenoiserConfig:
         # don't suffer from jpeg-artifacts, it can be disabled here.
         # Set to False to disable denoising.
         denoising_enabled = {self.denoising_enabled}
+        
+        # Maximum number of threads to use for denoising.
+        # You can leave it unspecified to use all available threads.
+        # Lower this value if you run into memory issues, which will appear as random crashes.
+        max_threads = {self.max_threads if self.max_threads > 0 else ""}
         
         # The minimum standard deviation of colors around the edge of a given mask
         # to perform denoising on the region around the mask.
@@ -673,6 +703,7 @@ class DenoiserConfig:
             logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
+        try_to_load(self, config_updater, section, ThreadLimit, "max_threads")
         try_to_load(self, config_updater, section, bool, "denoising_enabled")
         try_to_load(self, config_updater, section, float, "noise_min_standard_deviation")
         try_to_load(self, config_updater, section, int, "noise_outline_size")
@@ -684,6 +715,8 @@ class DenoiserConfig:
         try_to_load(self, config_updater, section, int, "search_window_size")
 
     def fix(self) -> None:
+        if self.max_threads < 0:
+            self.max_threads = ThreadLimit(0)
         if self.noise_min_standard_deviation < 0:
             self.noise_min_standard_deviation = 0
         if self.noise_outline_size < 0:
@@ -957,6 +990,7 @@ class Config:
     default_torch_model_path: Path | None = None  # CUDA
     default_cv2_model_path: Path | None = None  # CPU
     gui_theme: str | None = None
+    show_oom_warnings: bool = True
 
     @staticmethod
     def reserved_profile_names() -> list[str]:
@@ -1016,6 +1050,7 @@ class Config:
             "GUI Theme:",
             self.gui_theme if self.gui_theme is not None else "System default",
         )
+        print("Show OOM Warnings:", self.show_oom_warnings)
 
         print("\n" + "-" * 20 + "\n")
         print(f"Config file located at: {cli.get_config_path()}")
@@ -1106,6 +1141,9 @@ class Config:
         # Built-in themes are Breeze and Breeze Dark
         gui_theme = {none_to_empty(self.gui_theme)}
         
+        # Show out-of-memory warnings.
+        show_oom_warnings = {self.show_oom_warnings}
+        
         
         [Saved Profiles]
         {saved_profiles_str}
@@ -1144,6 +1182,7 @@ class Config:
         try_to_load(config, conf_updater, section, Path | None, "default_torch_model_path")
         try_to_load(config, conf_updater, section, Path | None, "default_cv2_model_path")
         try_to_load(config, conf_updater, section, str | None, "gui_theme")
+        try_to_load(config, conf_updater, section, bool, "show_oom_warnings")
 
         # If the default profile isn't in the saved profiles, clear it.
         if (
@@ -1389,6 +1428,24 @@ def try_to_load(
                 f"Option {attr_name} in section {section} should be greater than zero. Limiting to 1."
             )
             attr_value = 1
+
+    elif attr_type == ThreadLimit:
+        if conf_data == "":
+            attr_value = 0
+        else:
+            try:
+                attr_value = int(conf_data)
+            except ValueError as e:
+                print(
+                    f"Option {attr_name} in section {section} should be an integer.\n"
+                    f"Failed to parse '{conf_data}': {e}"
+                )
+                return
+            if attr_value < 0:
+                print(
+                    f"Option {attr_name} in section {section} should be a positive integer. Limiting to 0."
+                )
+                attr_value = 0
 
     elif attr_type == float | GreaterZero:
         # GreaterZero is just a signifier to check for positive numbers.

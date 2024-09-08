@@ -76,6 +76,19 @@ class LanguageCode(StrEnum):
         return self.value
 
 
+def to_language_code(lang: str) -> LanguageCode | None:
+    """
+    Convert a language string to a LanguageCode enum.
+
+    :param lang: The language string.
+    :return: The LanguageCode enum or None if not found.
+    """
+    if lang in LanguageCode.__members__:
+        return LanguageCode[lang]
+    else:
+        return None
+
+
 LANGUAGE_CODE_TO_NAME: dict[LanguageCode, str] = {
     LanguageCode.detect_box: "Detect per box",
     LanguageCode.detect_page: "Detect per page",

@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 from enum import Enum, auto
 from pathlib import Path
 from typing import get_type_hints, Any, Callable
+import os
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -15,7 +16,17 @@ from pcleaner.helpers import tr
 import pcleaner.gui.gui_utils as gu
 import pcleaner.ocr.supported_languages as osl
 from pcleaner import config as cfg
-from pcleaner.config import GreaterZero, LongString, Percentage, OCREngine, ReadingOrder, PSDExport
+
+from pcleaner.config import (
+    GreaterZero,
+    LongString,
+    Percentage,
+    OCREngine,
+    ReadingOrder,
+    ThreadLimit,
+    PSDExport
+)
+
 from pcleaner.ocr.supported_languages import LanguageCode
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
@@ -30,6 +41,7 @@ class EntryTypes(Enum):
     Int = auto()
     Float = auto()
     IntGreater0 = auto()
+    ThreadLimit = auto()
     FloatGreater0 = auto()
     Percentage = auto()
     Str = auto()
@@ -112,6 +124,20 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             if entry_type == EntryTypes.IntGreater0:
                 self._data_widget.setMinimum(1)
             self._data_widget.valueChanged.connect(self._value_changed)
+
+        elif entry_type == EntryTypes.ThreadLimit:
+            self._data_widget: CComboBox = CComboBox()
+            self._data_widget.addTextItemLinkedData(
+                self.tr(
+                    "All Cores", "The limit on the number of CPU cores to use, or here, no limit."
+                ),
+                0,
+            )
+            for i in range(1, os.cpu_count() + 1):
+                self._data_widget.addTextItemLinkedData(str(i), i)
+            self._data_setter = self._data_widget.setCurrentIndexByLinkedData
+            self._data_getter = self._data_widget.currentLinkedData
+            self._data_widget.currentIndexChanged.connect(self._value_changed)
 
         elif entry_type == EntryTypes.Float or entry_type == EntryTypes.FloatGreater0:
             self._data_widget: Qw.QDoubleSpinBox = Qw.QDoubleSpinBox()
@@ -354,6 +380,8 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.LanguageCode
                     elif value_type == PSDExport:
                         entry_type = EntryTypes.PSDExport
+                    elif value_type == ThreadLimit:
+                        entry_type = EntryTypes.ThreadLimit
                     else:
                         raise NotImplementedError(f"Unknown value type {value_type}")
 
