@@ -334,16 +334,16 @@ def export_to_psd(path, original_image, masks, names):
 
     psd = PSDImage.new("RGBA", (original_image.width, original_image.height))
 
-    base_layer = PixelLayer.frompil(original_image, psd, "Base image", compression=Compression.ZIP)
-    psd.append(base_layer)
+    base_layer = PixelLayer.frompil(original_image, "Base image", compression=Compression.ZIP)
+    psd.add_layer(base_layer)
     
     group_layer = Group.new("Masks")
-    psd.append(group_layer)
+    psd.add_layer(group_layer)
 
     for (mask, name) in zip(masks, names):
         
-        layer = PixelLayer.frompil(mask, psd, name, compression=Compression.ZIP)
-        group_layer.append(layer)
+        layer = PixelLayer.frompil(mask, name, compression=Compression.ZIP)
+        group_layer.add_layer(layer)
         
     psd.save(path)
 
@@ -382,7 +382,7 @@ def bundle_psd(output_directory, cache_dir, image_paths, uuids):
     psd_bulk = PSDImage.new("RGBA", psds[0].size, depth=psds[0].depth)
 
     for page in pages:
-        psd_bulk.append(page)
+        psd_bulk.add_layer(page)
 
     psd_bulk.save(bulk_psd_path)
 
