@@ -571,7 +571,7 @@ def show_inpainting_analytics(
         tr("Inpainting performed")
         + f": {total_inpaint} | "
         + tr("Average thickness")
-        + f": {average_thickness}\n"
+        + f": {average_thickness:.0%}\n"
     )
     buffer.write(
         tr("Minimum thickness")
