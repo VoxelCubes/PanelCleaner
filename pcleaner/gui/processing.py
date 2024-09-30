@@ -335,7 +335,7 @@ def generate_output(
 
             if pool_size > 1:
                 with Pool(processes=pool_size) as pool:
-                    for analytic in pool.imap(ma.clean_page, data):
+                    for analytic in pool.imap(ma.mask_page, data):
                         check_abortion()
                         masker_analytics_raw.extend(analytic)
 
@@ -350,7 +350,7 @@ def generate_output(
             else:
                 for data_obj in data:
                     check_abortion()
-                    analytic = ma.clean_page(data_obj)
+                    analytic = ma.mask_page(data_obj)
                     masker_analytics_raw.extend(analytic)
 
                     progress_callback.emit(
