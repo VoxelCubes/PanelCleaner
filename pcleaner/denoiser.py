@@ -39,7 +39,6 @@ def denoise_page(d_data: st.DenoiserData) -> st.DenoiseAnalytic:
         return st.DenoiseAnalytic(tuple(), original_path)
 
     # Scale the mask to the original image size, if needed.
-    mask_image = mask_image.convert("LA")
     cleaned_image = cleaned_image.convert("RGB")
     scale_up_factor = 1.0
     if cleaned_image.size != mask_image.size:

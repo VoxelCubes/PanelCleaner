@@ -2,6 +2,7 @@ from itertools import cycle
 from pathlib import Path
 from importlib import resources
 from typing import Generator, Iterable, TypeVar, Any, NewType
+from collections import Counter
 
 import cv2
 import numpy as np
@@ -52,7 +53,8 @@ def generate_single_color(
 
 
 def convert_mask_to_rgba(
-    mask: Image.Image, color: int | tuple[int, int, int, int] = 255
+    mask: Image.Image,
+    color: tuple[int, int, int] | tuple[int, int, int, int] = (255, 255, 255, 255),
 ) -> Image.Image:
     """
     Convert "1" mask to "RGBA" mask, where black has an alpha of 0 and white has an alpha of 255.
@@ -62,11 +64,12 @@ def convert_mask_to_rgba(
     :return: The converted mask.
     """
     array_1 = np.array(mask)  # Mode "1" mask.
-    color_tuple = (color, color, color, 255) if isinstance(color, int) else color
+    if len(color) == 3:
+        color = (color[0], color[1], color[2], 255)
     # RGBA mask, filled with 0s.
     array_rgba = np.zeros((*array_1.shape, 4), dtype=np.uint8)  # Mode "RGBA" mask.
     # For anything not black in the original mask, set it to (color, color, color, 255).
-    array_rgba[array_1 != 0] = color_tuple
+    array_rgba[array_1 != 0] = color
     return Image.fromarray(array_rgba)
 
 
@@ -375,9 +378,93 @@ def make_mask_steps_convolution(
         ), min_thickness + (index + 1) * growth_step
 
 
+def heuristic_median_color(colors: np.ndarray) -> np.ndarray | None:
+    """
+    Check if any color occurs in more than 50% of the rows as a
+    simple check for the median.
+
+    :param colors: ndarray of shape (n_samples, 3), where each row is an RGB color.
+    :return: The median color, if found.
+    """
+    # Convert each RGB color to a tuple for hashing in Counter
+    color_tuples = [tuple(color) for color in colors]
+
+    color_counts = Counter(color_tuples)
+    total_colors = len(colors)
+
+    # Check if any color occurs more than 50% of the time
+    for color, count in color_counts.items():
+        if count > total_colors / 2:
+            median_color = np.array(color)
+            return median_color
+
+    return None
+
+
+def geometric_median(points: np.ndarray, epsilon=1e-5, max_iterations=500) -> np.ndarray:
+    """
+    Compute the geometric median of a set of points using Weiszfeld's algorithm.
+
+    :param points: ndarray of shape (n_samples, n_dimensions), the input points.
+    :param epsilon: float, the convergence tolerance.
+    :param max_iterations: int, the maximum number of iterations.
+    :return: ndarray of shape (n_dimensions,), the computed geometric median.
+    """
+    # Initial estimate: mean of the points
+    median = np.mean(points, axis=0)
+
+    for iteration in range(max_iterations):
+        # Compute distances from the current median to all points
+        distances = np.linalg.norm(points - median, axis=1)
+
+        # Identify points not exactly at the median to avoid division by zero
+        non_zero_distances = distances > 0
+
+        if not np.any(non_zero_distances):
+            # All points are at the current median
+            return median
+
+        # Weights are inversely proportional to distances
+        inverse_distances = 1 / distances[non_zero_distances]
+        total_inverse_distance = np.sum(inverse_distances)
+        weights = inverse_distances / total_inverse_distance
+
+        # Update the median estimate
+        new_median = np.sum(weights[:, np.newaxis] * points[non_zero_distances], axis=0)
+
+        # Check for convergence
+        median_shift = np.linalg.norm(new_median - median)
+        if median_shift < epsilon:
+            return new_median
+
+        median = new_median
+
+    # Return the last estimate if convergence was not reached
+    return median
+
+
+def color_std(colors: np.ndarray) -> float:
+    """
+    Compute the standard deviation of colors based on Euclidean distances
+    from each color to the mean color.
+
+    :param colors: ndarray of shape (n_samples, 3), where each row is an RGB color.
+    :returns: the standard deviation of the colors.
+    """
+    # Ensure colors are in floating-point for accurate calculations
+    colors = colors.astype(np.float64)
+    mean_color = np.mean(colors, axis=0)
+    # Compute distances from each color to the mean color
+    distances = np.linalg.norm(colors - mean_color, axis=1)
+
+    # Compute the standard deviation of the distances
+    std_dev = np.std(distances, ddof=1)  # Using sample standard deviation (ddof=1)
+    return std_dev
+
+
 def border_std_deviation(
-    base: Image.Image, mask: Image.Image, off_white_threshold: int
-) -> tuple[float, int]:
+    base: Image.Image, mask: Image.Image, off_white_threshold: int, allow_color: bool
+) -> tuple[float, tuple[int, int, int]]:
     """
     Calculate the border uniformity of a mask.
     For this, find the edge pixels of the mask and then calculate the median color of the pixels around them.
@@ -390,12 +477,15 @@ def border_std_deviation(
     :param base: The base image. Mode: "L"
     :param mask: The mask to calculate the border uniformity of. Mode: "1"
     :param off_white_threshold: The threshold for a pixel to be considered off-white.
+    :param allow_color: Whether to allow colored masks.
     :return: The border uniformity as the standard deviation and the median color of the border.
     """
+    if not allow_color:
+        # Convert the base image to grayscale.
+        base = base.convert("L")
     # Transform the mask into its edge pixels.
     mask = mask.filter(ImageFilter.FIND_EDGES)
     # Collect all pixels from the base image where the mask has a value of 1.
-    # Use numpy for efficiency.
     base_data = np.array(base)
     mask_data = np.array(mask)
 
@@ -405,14 +495,27 @@ def border_std_deviation(
     if num_pixels == 0:
         # We received an empty mask.
         raise BlankMaskError
+
     # Calculate the standard deviation of the border pixels.
-    std = float(np.std(border_pixels))
     # Get the average color of the border pixels, round to highest integer.
-    median_color = int(np.median(border_pixels))
+    # Check if we're dealing with L or RGB columns in the border pixels.
+    if len(border_pixels.shape) == 1:
+        # We're dealing with a grayscale image.
+        std = float(np.std(border_pixels))
+        median_color = int(np.median(border_pixels))
+        median_color = (median_color, median_color, median_color)
+    else:
+        # We're dealing with an RGB image.
+        std = color_std(border_pixels)
+        median_color = heuristic_median_color(border_pixels)
+        if median_color is None:
+            median_color = geometric_median(border_pixels)
+        median_color = tuple(int(color) for color in median_color)
+
     # logger.debug(f"Border uniformity: {std} ({num_pixels} pixels), median color: {median_color}")
     # Round up any color over the threshold to 255. This should prevent slight off-white colors from sneaking in.
-    if median_color > off_white_threshold:
-        median_color = 255
+    if min(median_color) > off_white_threshold:
+        median_color = (255, 255, 255)
 
     return std, median_color
 
@@ -549,7 +652,7 @@ def pick_best_mask(
 
     # Calculate the border uniformity of each mask.
     # Border deviations: (std deviation, median color)
-    border_deviations: list[tuple[float, int]] = []
+    border_deviations: list[tuple[float, tuple[int, int, int]]] = []
     masks = []
     thicknesses = []
     for mask, thickness in mask_stream:
@@ -557,7 +660,7 @@ def pick_best_mask(
             masks.append(mask)
             thicknesses.append(thickness)
             current_deviation = border_std_deviation(
-                base, mask, masker_conf.off_white_max_threshold
+                base, mask, masker_conf.off_white_max_threshold, masker_conf.allow_colored_masks
             )
             border_deviations.append(current_deviation)
             # Break on the first perfect mask if using the fast mask selection.
@@ -568,7 +671,7 @@ def pick_best_mask(
     # Find the best mask.
     best_mask = None
     lowest_border_deviation = None
-    lowest_deviation_color = None
+    lowest_deviation_color: int | tuple[int, int, int] | None = None
     chosen_thickness = None
     for i, border_deviation in enumerate(border_deviations):
         mask_deviation, mask_color = border_deviation

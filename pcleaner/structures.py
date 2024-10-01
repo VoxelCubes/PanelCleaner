@@ -519,7 +519,7 @@ class MaskFittingResults:
     """
 
     best_mask: Image
-    median_color: int
+    median_color: tuple[int, int, int]
     mask_coords: tuple[int, int]
     analytics_page_path: Path
     analytics_std_deviation: float
@@ -543,7 +543,7 @@ class MaskFittingResults:
         return self.best_mask is None
 
     @property
-    def mask_data(self) -> tuple[Image, int, tuple[int, int]]:
+    def mask_data(self) -> tuple[Image, tuple[int, int, int], tuple[int, int]]:
         return self.best_mask, self.median_color, self.mask_coords
 
     @property

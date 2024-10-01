@@ -471,6 +471,7 @@ class MaskerConfig:
     mask_growth_step_pixels: int | GreaterZero = 2
     mask_growth_steps: int | GreaterZero = 11
     min_mask_thickness: int = 4
+    allow_colored_masks: bool = True
     off_white_max_threshold: int = 240
     mask_max_standard_deviation: float = 15
     mask_improvement_threshold: float = 0.1
@@ -511,10 +512,15 @@ class MaskerConfig:
         # better choice.
         min_mask_thickness = {self.min_mask_thickness}
         
+        # Whether to allow colored masks.
+        # When true, the masker will allow masks to use any color, not just white, black, or gray.
+        allow_colored_masks = {self.allow_colored_masks}
+        
         # Maximum threshold for a pixel to be considered off-white.
         # The median color along the edge of a mask may not be pure white,
         # so to prevent slight off-white tones on a pure-white background,
         # anything lighter than this threshold value will be rounded up to pure white.
+        # Value range: black (0) to pure white (255).
         off_white_max_threshold = {self.off_white_max_threshold}
         
         # The standard deviation of a mask represents the variation in color along the edge of the mask.
@@ -563,6 +569,7 @@ class MaskerConfig:
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_step_pixels")
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_steps")
         try_to_load(self, config_updater, section, int, "min_mask_thickness")
+        try_to_load(self, config_updater, section, bool, "allow_colored_masks")
         try_to_load(self, config_updater, section, int, "off_white_max_threshold")
         try_to_load(self, config_updater, section, float, "mask_improvement_threshold")
         try_to_load(self, config_updater, section, bool, "mask_selection_fast")
