@@ -490,11 +490,11 @@ def run_cleaner(
 
         if pool_size > 1:
             with Pool(processes=pool_size) as pool:
-                for analytic in tqdm(pool.imap(ma.clean_page, data), total=len(data)):
+                for analytic in tqdm(pool.imap(ma.mask_page, data), total=len(data)):
                     masker_analytics_raw.extend(analytic)
         else:
             for masker_data in tqdm(data):
-                analytic = ma.clean_page(masker_data)
+                analytic = ma.mask_page(masker_data)
                 masker_analytics_raw.extend(analytic)
 
         if not hide_analytics and masker_analytics_raw:

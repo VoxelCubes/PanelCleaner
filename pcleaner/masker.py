@@ -9,7 +9,7 @@ import pcleaner.structures as st
 import pcleaner.output_structures as ost
 
 
-def clean_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
+def mask_page(m_data: st.MaskerData) -> Sequence[st.MaskFittingAnalytic]:
     """
     Do all the shit and return analytics for mask fitting.
 
