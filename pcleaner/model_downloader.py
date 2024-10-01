@@ -7,7 +7,7 @@ import requests
 import torch
 import tqdm
 from loguru import logger
-from manga_ocr import MangaOcr
+# from manga_ocr import MangaOcr
 from transformers import file_utils
 
 
@@ -156,6 +156,8 @@ def download_models(config, force: bool, cuda: bool, cpu: bool) -> None:
     :param cpu: If True, only download the cpu model.
     :return:
     """
+    from manga_ocr import MangaOcr
+
     if not cuda and not cpu:
         cuda = torch.cuda.is_available()
         cpu = not cuda
