@@ -490,36 +490,36 @@ Seiten mit Fehlern / insgesamt:
       <location filename="../pcleaner/image_export.py" line="130"/>
       <source>Clean mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Clean mask</numerusform>
-        <numerusform>Clean mask</numerusform>
+      <translation>
+        <numerusform>Maskierung</numerusform>
+        <numerusform>Maskierung</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="131"/>
       <source>Denoised mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Denoised mask</numerusform>
-        <numerusform>Denoised mask</numerusform>
+      <translation>
+        <numerusform>Entrauschung</numerusform>
+        <numerusform>Entrauschung</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="133"/>
       <source>Inpainting mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Inpainting mask</numerusform>
-        <numerusform>Inpainting mask</numerusform>
+      <translation>
+        <numerusform>Inpainting</numerusform>
+        <numerusform>Inpainting</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="410"/>
       <source>Page</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Page</numerusform>
-        <numerusform>Page</numerusform>
+      <translation>
+        <numerusform>Seite</numerusform>
+        <numerusform>Seite</numerusform>
       </translation>
     </message>
   </context>
@@ -3017,31 +3017,31 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="30"/>
       <source>Combine outputs into a single project file as layers. Currently supported formats: Photoshop PSD.&lt;br&gt; - none: Each image and mask are saved as basic files.&lt;br&gt; - psd-per-image: Images and masks are saved together in a PSD file per input image.&lt;br&gt;  - psd-bulk: All images and masks are saved together in a single PSD file, grouped by input image.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Combine outputs into a single project file as layers. Currently supported formats: Photoshop PSD.&lt;br&gt; - none: Each image and mask are saved as basic files.&lt;br&gt; - psd-per-image: Images and masks are saved together in a PSD file per input image.&lt;br&gt;  - psd-bulk: All images and masks are saved together in a single PSD file, grouped by input image.</translation>
+      <translation>Kombinieren Sie die Ausgaben in einer einzigen Projektdatei als Ebenen. Derzeit unterstützte Formate: Photoshop PSD.&lt;br&gt; - Keine: Jedes Bild und jede Maske wird als einfache Bilddatei gespeichert.&lt;br&gt; - PSD Pro Bild: Bilder und Masken werden zusammen in einer PSD-Datei pro Eingabebild gespeichert.&lt;br&gt;  - PSD Sammeldatei: Alle Bilder und Masken werden zusammen in einer einzigen PSD-Datei gespeichert, gruppiert nach Eingabebild.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="32"/>
       <source>Layered Export</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Layered Export</translation>
+      <translation>Ebenenexport</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="146"/>
       <source>Whether to allow colored masks. When true, the masker will allow masks to use any color, not just white, black, or gray.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Whether to allow colored masks. When true, the masker will allow masks to use any color, not just white, black, or gray.</translation>
+      <translation>Ob farbige Masken zugelassen werden sollen. Wenn diese Option auf ausgewählt ist, können Masken in jeder beliebigen Farbe erstellt werden, nicht nur in weiß, schwarz oder grau.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="148"/>
       <source>Allow Colored Masks</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Allow Colored Masks</translation>
+      <translation>Farbige Masken zulassen</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="150"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white. Value range: black (0) to pure white (255).</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white. Value range: black (0) to pure white (255).</translation>
+      <translation>Maximaler Schwellenwert, ab dem ein Pixel nicht als weiß gilt. Die Medianfarbe entlang des Randes einer Maske ist möglicherweise nicht reinweiß. Um leichte gebrochene Weißtöne auf einem reinweißen Hintergrund zu vermeiden, wird alles, was heller als dieser Schwellenwert ist, auf reinweiß aufgerundet. Wertebereich: Schwarz (0) bis Reinweiß (255).</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="152"/>
@@ -3729,19 +3729,19 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="../pcleaner/gui/profile_parser.py" line="246"/>
       <source>None</source>
       <comment>Layered export option</comment>
-      <translation type="unfinished">None</translation>
+      <translation>Keine</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="247"/>
       <source>PSD Bulk</source>
       <comment>Layered export option</comment>
-      <translation type="unfinished">PSD Bulk</translation>
+      <translation>PSD Sammeldatei</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="250"/>
       <source>PSD Per Image</source>
       <comment>Layered export option</comment>
-      <translation type="unfinished">PSD Per Image</translation>
+      <translation>PSD Pro Bild</translation>
     </message>
   </context>
   <context>
