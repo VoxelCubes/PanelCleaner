@@ -143,6 +143,7 @@ import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
 from pcleaner import __version__
+from pcleaner.config import LayeredExport
 
 
 # Allow loading of large images.
@@ -645,6 +646,7 @@ def run_cleaner(
             profile.general.preferred_file_type,
             profile.general.preferred_mask_file_type,
             profile.denoiser.denoising_enabled,
+            profile.general.layered_export,
         )
         for target in export_targets
     ]
@@ -662,6 +664,14 @@ def run_cleaner(
     else:
         for export_data in tqdm(data):
             ie.copy_to_output_batched(export_data)
+
+    if profile.general.layered_export == LayeredExport.PSD_BULK:
+        ie.bundle_psd(
+            output_dir,
+            cache_dir,
+            [image_object.original_path for image_object in export_targets],
+            [image_object.uuid for image_object in export_targets],
+        )
 
     print("\nDone!")
 

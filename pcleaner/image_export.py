@@ -3,9 +3,15 @@ from pathlib import Path
 from PIL import Image
 from attrs import frozen
 from loguru import logger
+from psd_tools import PSDImage
+from psd_tools.api.layers import Group, PixelLayer
+from psd_tools.constants import Compression
 
 import pcleaner.output_structures as ost
 import pcleaner.structures as st
+from pcleaner.helpers import tr
+from pcleaner.config import LayeredExport
+
 
 # SUPPORTED_IMG_TYPES = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
 
@@ -88,6 +94,7 @@ def copy_to_output(
     preferred_file_type: str | None,
     preferred_mask_file_type: str,
     denoising_enabled: bool,
+    layered_export: LayeredExport,
 ) -> None:
     """
     Copy or export the outputs from the cache directory to the output directory.
@@ -102,6 +109,8 @@ def copy_to_output(
     - Inpainted image: Output.inpainted_output
     - Inpainted Mask: Output.inpainted_mask
 
+
+
     This may raise OSError in various circumstances.
 
     We need to know if denoising was enabled so that we know to pull in the
@@ -115,7 +124,14 @@ def copy_to_output(
     :param preferred_file_type: Profile setting.
     :param preferred_mask_file_type: Profile setting.
     :param denoising_enabled: Profile setting.
+    :param layered_export: Option to create a layered project file from the outputs.
     """
+
+    masker_mask_name = tr("Clean mask", "layered export", "Label for the masking step mask.")
+    denoiser_mask_name = tr("Denoised mask", "layered export", "Label for the denoising step mask.")
+    inpainter_mask_name = tr(
+        "Inpainting mask", "layered export", "Label for the inpainting step mask."
+    )
 
     if output_directory.is_absolute():
         # When absolute, the output directory is used as is.
@@ -156,9 +172,23 @@ def copy_to_output(
     original_image = Image.open(original_image_path)
     original_size = original_image.size
 
+    to_layered_images: list[tuple[Image, str]] = []
+
+    def export_single_image(
+        image: Path | Image.Image, path: Path, original: Path | Image.Image | None = None
+    ) -> None:
+        # Pass through to save_optimized if not creating layered project files.
+        if layered_export == LayeredExport.NONE:
+            save_optimized(image, path, original)
+
+    def add_image_layer(image: Image, name: str) -> None:
+        if layered_export != LayeredExport.NONE:
+            # Copy the image to prevent mutations.
+            to_layered_images.append((image.copy(), name))
+
     # Output optimized images for all requested outputs.
     if ost.Output.masked_output in outputs:
-        save_optimized(
+        export_single_image(
             cache_path_gen.clean,
             cleaned_out_path,
             original_image,
@@ -168,13 +198,16 @@ def copy_to_output(
         # First scale the output mask to the original image size.
         final_mask = Image.open(cache_path_gen.combined_mask)
         final_mask = final_mask.resize(original_size, Image.NEAREST)
-        save_optimized(final_mask, masked_out_path)
+
+        add_image_layer(final_mask.convert("RGBA"), masker_mask_name)
+
+        export_single_image(final_mask, masked_out_path)
 
     if ost.Output.isolated_text in outputs:
         save_optimized(cache_path_gen.text, text_out_path)
 
     if ost.Output.denoised_output in outputs:
-        save_optimized(
+        export_single_image(
             cache_path_gen.clean_denoised,
             cleaned_out_path,
             original_image,
@@ -188,12 +221,16 @@ def copy_to_output(
         # Ensure both images are RGBA to safely alpha composite them.
         final_mask = final_mask.convert("RGBA")
         denoised_mask = denoised_mask.convert("RGBA")
+
+        add_image_layer(final_mask, masker_mask_name)
+        add_image_layer(denoised_mask, denoiser_mask_name)
+
         final_mask.alpha_composite(denoised_mask)
 
-        save_optimized(final_mask, masked_out_path)
+        export_single_image(final_mask, masked_out_path)
 
     if ost.Output.inpainted_output in outputs:
-        save_optimized(
+        export_single_image(
             cache_path_gen.clean_inpaint,
             cleaned_out_path,
             original_image,
@@ -205,16 +242,34 @@ def copy_to_output(
         final_mask = final_mask.resize(original_size, Image.NEAREST)
         final_mask = final_mask.convert("RGBA")
 
+        add_image_layer(final_mask, masker_mask_name)
+
         if denoising_enabled:
             denoised_mask = Image.open(cache_path_gen.noise_mask)
             denoised_mask = denoised_mask.convert("RGBA")
             final_mask.alpha_composite(denoised_mask)
 
+            add_image_layer(denoised_mask, denoiser_mask_name)
+
         inpainted_mask = Image.open(cache_path_gen.inpainting)
         inpainted_mask = inpainted_mask.convert("RGBA")
+
+        add_image_layer(inpainted_mask, inpainter_mask_name)
+
         final_mask.alpha_composite(inpainted_mask)
 
-        save_optimized(final_mask, masked_out_path)
+        export_single_image(final_mask, masked_out_path)
+
+    # Handle special layering cases.
+    if layered_export == LayeredExport.PSD_PER_IMAGE:
+        export_to_psd(path_gen.psd, original_image.convert("RGBA"), to_layered_images)
+
+    if layered_export == LayeredExport.PSD_BULK:
+        export_to_psd(
+            ost.OutputPathGenerator(original_image_path, cache_dir, uuid_source).psd,
+            original_image.convert("RGBA"),
+            to_layered_images,
+        )
 
 
 @frozen
@@ -285,3 +340,83 @@ def discover_viable_outputs(
         export_targets.append(ExportTarget(path_gen.original_path, path_gen.uuid, target_outputs))
 
     return export_targets
+
+
+def export_to_psd(path: Path, original_image: Image, masks: list[tuple[Image, str]]) -> None:
+    """
+    Export the images and masks to a PSD file.
+
+    :param path: The path to write the PSD file to.
+    :param original_image: The original image to use as the base layer.
+    :param masks: The masks and names to layer on top of the base.
+    """
+
+    psd = PSDImage.new("RGBA", (original_image.width, original_image.height))
+
+    base_layer = PixelLayer.frompil(original_image, psd, "Base image", compression=Compression.ZIP)
+    psd.append(base_layer)
+
+    group_layer = Group.new("Masks")
+    psd.append(group_layer)
+
+    for mask, name in masks:
+        layer = PixelLayer.frompil(mask, psd, name, compression=Compression.ZIP)
+        group_layer.append(layer)
+
+    psd.save(path)
+
+
+def bundle_psd(
+    output_directory: Path, cache_dir: Path, image_paths: list[Path], uuids: list[str]
+) -> None:
+    """
+    Bundle all the PSDs into a single PSD file.
+
+    :param output_directory: The directory to write the PSD file into.
+    :param cache_dir: The directory where the cached PSDs are.
+    :param image_paths: The paths to the original images.
+    :param uuids: The UUIDs of the images used to generate the cache paths.
+    """
+    if not image_paths:
+        logger.error("No images to bundle PSDs for.")
+        return
+
+    if output_directory.is_absolute():
+        # When absolute, the output directory is used as is.
+        path_gen = ost.OutputPathGenerator(image_paths[0], output_directory, export_mode=True)
+    else:
+        # Otherwise, the output directory is relative to the original image's parent directory.
+        path_gen = ost.OutputPathGenerator(
+            image_paths[0], image_paths[0].parent / output_directory, export_mode=True
+        )
+
+    bulk_psd_path = path_gen.psd_bulk
+
+    cached_images = []
+
+    for image_path, uuid in zip(image_paths, uuids):
+        cached_images.append(ost.OutputPathGenerator(image_path, cache_dir, uuid).psd)
+
+    psds = []
+    pages = []
+
+    i = 0
+    for cache_image in cached_images:
+        psds.append(PSDImage.open(cache_image))
+        pages.insert(
+            0,
+            Group.group_layers(
+                psds[i][:],
+                tr("Page", "layered export", "Label for Page X in a layered project file.")
+                + " {:03d}".format(i + 1),
+                open_folder=False,
+            ),
+        )
+        i += 1
+
+    psd_bulk = PSDImage.new("RGBA", psds[0].size, depth=psds[0].depth)
+
+    for page in pages:
+        psd_bulk.append(page)
+
+    psd_bulk.save(bulk_psd_path)

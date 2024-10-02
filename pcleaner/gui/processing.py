@@ -11,18 +11,19 @@ from loguru import logger
 import pcleaner.config as cfg
 import pcleaner.denoiser as dn
 import pcleaner.gui.ctd_interface_gui as ctm
+import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.worker_thread as wt
-import pcleaner.output_structures as ost
 import pcleaner.image_export as ie
-import pcleaner.masker as ma
-import pcleaner.preprocessor as pp
 import pcleaner.inpainting as ip
-import pcleaner.structures as st
-import pcleaner.gui.gui_utils as gu
-from pcleaner.helpers import tr
-from pcleaner import model_downloader as md
+import pcleaner.masker as ma
 import pcleaner.ocr.ocr as ocr
+import pcleaner.output_structures as ost
+import pcleaner.preprocessor as pp
+import pcleaner.structures as st
+from pcleaner import model_downloader as md
+from pcleaner.config import LayeredExport
+from pcleaner.helpers import tr
 
 
 def generate_output(
@@ -583,6 +584,7 @@ def generate_output(
                 profile.general.preferred_file_type,
                 profile.general.preferred_mask_file_type,
                 profile.denoiser.denoising_enabled,
+                profile.general.layered_export,
             )
             for image_obj in image_objects
         ]
@@ -619,6 +621,14 @@ def generate_output(
                         ost.ProgressType.incremental,
                     )
                 )
+
+        if profile.general.layered_export == LayeredExport.PSD_BULK:
+            ie.bundle_psd(
+                output_dir,
+                cache_dir,
+                [image_object.path for image_object in image_objects],
+                [image_object.uuid for image_object in image_objects],
+            )
 
     progress_callback.emit(
         ost.ProgressData(
