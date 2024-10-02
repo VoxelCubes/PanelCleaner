@@ -143,8 +143,8 @@ import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
 import pcleaner.structures as st
 from pcleaner import __version__
+from pcleaner.config import LayeredExport
 
-from pcleaner.config import PSDExport
 
 # Allow loading of large images.
 Image.MAX_IMAGE_PIXELS = 2**32
@@ -352,7 +352,7 @@ def run_cleaner(
         mw.start_memory_watcher()
 
     profile = config.current_profile
-    
+
     # Override the skip denoising flag if the config disables denoising.
     if not profile.denoiser.denoising_enabled:
         logger.debug("Denoising is disabled in the config, skipping denoising step.")
@@ -646,7 +646,7 @@ def run_cleaner(
             profile.general.preferred_file_type,
             profile.general.preferred_mask_file_type,
             profile.denoiser.denoising_enabled,
-            profile.general.save_psd_output,
+            profile.general.layered_export,
         )
         for target in export_targets
     ]
@@ -665,8 +665,13 @@ def run_cleaner(
         for export_data in tqdm(data):
             ie.copy_to_output_batched(export_data)
 
-    if profile.general.save_psd_output == PSDExport.BULKPSD:
-        ie.bundle_psd(output_dir, cache_dir, [image_object.original_path for image_object in export_targets], [image_object.uuid for image_object in export_targets])
+    if profile.general.layered_export == LayeredExport.PSD_BULK:
+        ie.bundle_psd(
+            output_dir,
+            cache_dir,
+            [image_object.original_path for image_object in export_targets],
+            [image_object.uuid for image_object in export_targets],
+        )
 
     print("\nDone!")
 

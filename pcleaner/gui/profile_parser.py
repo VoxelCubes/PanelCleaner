@@ -1,9 +1,9 @@
+import os
 import re
 from dataclasses import dataclass, field
 from enum import Enum, auto
 from pathlib import Path
 from typing import get_type_hints, Any, Callable
-import os
 
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
@@ -12,11 +12,9 @@ import configupdater as cu
 from PySide6.QtCore import Slot
 from loguru import logger
 
-from pcleaner.helpers import tr
 import pcleaner.gui.gui_utils as gu
 import pcleaner.ocr.supported_languages as osl
 from pcleaner import config as cfg
-
 from pcleaner.config import (
     GreaterZero,
     LongString,
@@ -24,12 +22,12 @@ from pcleaner.config import (
     OCREngine,
     ReadingOrder,
     ThreadLimit,
-    PSDExport
+    LayeredExport,
 )
-
-from pcleaner.ocr.supported_languages import LanguageCode
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
+from pcleaner.helpers import tr
+from pcleaner.ocr.supported_languages import LanguageCode
 
 
 class EntryTypes(Enum):
@@ -53,7 +51,8 @@ class EntryTypes(Enum):
     OCREngine = auto()
     ReadingOrder = auto()
     LanguageCode = auto()
-    PSDExport = auto()
+    LayeredExport = auto()
+
 
 @dataclass(frozen=True)
 class ProfileComment:
@@ -228,7 +227,11 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_setter = self._data_widget.setCurrentIndexByLinkedData
             self._data_getter = self._data_widget.currentLinkedData
 
-        elif entry_type in (EntryTypes.OCREngine, EntryTypes.ReadingOrder, EntryTypes.PSDExport):
+        elif entry_type in (
+            EntryTypes.OCREngine,
+            EntryTypes.ReadingOrder,
+            EntryTypes.LayeredExport,
+        ):
             # Use a combobox and populate it with the enum members from the config.
             self._data_widget: CComboBox = CComboBox()
             name_mapper: dict[Enum, str] | None = None
@@ -237,14 +240,21 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
                     enum_class = OCREngine
                 case EntryTypes.ReadingOrder:
                     enum_class = ReadingOrder
-                case EntryTypes.PSDExport:
-                    enum_class = PSDExport
+                case EntryTypes.LayeredExport:
+                    enum_class = LayeredExport
+                    name_mapper = {
+                        LayeredExport.NONE: self.tr("None", "Layered export option"),
+                        LayeredExport.PSD_BULK: self.tr("PSD Bulk", "Layered export option"),
+                        LayeredExport.PSD_PER_IMAGE: self.tr(
+                            "PSD Per Image", "Layered export option"
+                        ),
+                    }
                 case _:
                     raise NotImplementedError(f"Unknown entry type {entry_type}")
 
             for member in enum_class.__members__.values():
                 if name_mapper is not None:
-                    self._data_widget.addTextItemLinkedData(tr(name_mapper[member]), member)
+                    self._data_widget.addTextItemLinkedData(name_mapper[member], member)
                 else:
                     self._data_widget.addTextItemLinkedData(member.value, member)
             self._data_widget.setCurrentIndex(0)
@@ -378,8 +388,8 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.ReadingOrder
                     elif value_type == LanguageCode:
                         entry_type = EntryTypes.LanguageCode
-                    elif value_type == PSDExport:
-                        entry_type = EntryTypes.PSDExport
+                    elif value_type == LayeredExport:
+                        entry_type = EntryTypes.LayeredExport
                     elif value_type == ThreadLimit:
                         entry_type = EntryTypes.ThreadLimit
                     else:

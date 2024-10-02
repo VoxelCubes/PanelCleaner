@@ -91,10 +91,14 @@ class OCREngine(StrEnum):
     TESSERACT = "tesseract"
 
 
-class PSDExport(StrEnum):
-    AUTO = "No psd",
-    SEPARATED = "A PSD per input",
-    BULKPSD = "All inputs in a single PSD"
+class LayeredExport(StrEnum):
+    # NONE = "No psd"
+    # SEPARATED = "A PSD per input"
+    # BULKPSD = "All inputs in a single PSD"
+    NONE = "none"
+    PSD_PER_IMAGE = "psd-per-image"
+    PSD_BULK = "psd-bulk"
+
 
 """
 When adding new config options, follow these steps:
@@ -110,10 +114,10 @@ class GeneralConfig:
     notes: LongString = ""
     preferred_file_type: str | None = None
     preferred_mask_file_type: str = ".png"
+    layered_export: LayeredExport = LayeredExport.NONE
     input_height_lower_target: int = 1000
     input_height_upper_target: int = 4000
     max_threads_export: ThreadLimit = 0
-    save_psd_output: PSDExport = PSDExport.AUTO
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
         """
@@ -140,9 +144,12 @@ class GeneralConfig:
         preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
         
         
-        # Save the result in PSD File
-        # Two options are proposed : save each output in a separate PSD file or save all of the result in a single PSD file, with the outputs grouped.
-        save_psd_output = {self.save_psd_output}
+        # Combine outputs into a single project file as layers.
+        # Currently supported formats: Photoshop PSD.[GUI: <br>]
+        # - none: Each image and mask are saved as basic files.[GUI: <br>]
+        # - psd-per-image: Images and masks are saved together in a PSD file per input image.[GUI: <br>] 
+        # - psd-bulk: All images and masks are saved together in a single PSD file, grouped by input image.
+        layered_export = {self.layered_export}
 
         # The following are the lower and upper targets for the height of the input image.
         # It is only ever scaled down to fit within the range, preferring whole number factors
@@ -186,10 +193,10 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, LongString, "notes")
         try_to_load(self, config_updater, section, str | None, "preferred_file_type")
         try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
+        try_to_load(self, config_updater, section, LayeredExport, "layered_export")
         try_to_load(self, config_updater, section, int, "input_height_lower_target")
         try_to_load(self, config_updater, section, int, "input_height_upper_target")
         try_to_load(self, config_updater, section, ThreadLimit, "max_threads_export")
-        try_to_load(self, config_updater, section, PSDExport, "save_psd_output")
 
     def fix(self) -> None:
         """
@@ -219,7 +226,7 @@ class GeneralConfig:
             self.preferred_mask_file_type = closest
 
         if self.max_threads_export < 0:
-            self.max_threads_export = 0
+            self.max_threads_export = ThreadLimit(0)
 
 
 @define
