@@ -92,9 +92,6 @@ class OCREngine(StrEnum):
 
 
 class LayeredExport(StrEnum):
-    # NONE = "No psd"
-    # SEPARATED = "A PSD per input"
-    # BULKPSD = "All inputs in a single PSD"
     NONE = "none"
     PSD_PER_IMAGE = "psd-per-image"
     PSD_BULK = "psd-bulk"
