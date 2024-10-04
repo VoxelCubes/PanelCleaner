@@ -41,8 +41,6 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     """
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
-    # Log up to 1MB to the log file.
-    # loguru.logfile(str(cu.get_log_path()), maxBytes=2**30, backupCount=1, loglevel=loguru.DEBUG)
 
     # Set up file logging.
     logger.add(str(cu.get_log_path()), rotation="10 MB", retention="1 week", level="DEBUG")

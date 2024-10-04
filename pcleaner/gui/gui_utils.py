@@ -53,6 +53,11 @@ def show_exception(
 ) -> None:
     """
     Show an exception in a dialog along with logs.
+    This automatically gathers the exception information from the current context
+    or a given worker error object.
+
+    You can also skip collecting the exception if you have already logged this separately and
+    merely wish to open the Issue Reporter dialog for the user.
 
     :param parent: The parent widget.
     :param title: The title of the dialog.
