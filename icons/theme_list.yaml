@@ -14,7 +14,6 @@ Files:
       - configure
       - dialog-cancel
       - dialog-ok-apply
-      - dialog-warning
       - document-import
       - document-new
       - document-open-folder
@@ -59,6 +58,7 @@ Files:
     16:
       - data-error
       - data-warning
+      - dialog-warning
     22:
       - dialog-error
     24:

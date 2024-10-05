@@ -14,7 +14,7 @@ I18N_LUPDATE := venv/bin/pyside6-lupdate
 I18N_COMPILER := venv/bin/pyside6-lrelease
 BLACK_LINE_LENGTH := 100
 BLACK_TARGET_DIR := pcleaner/
-BLACK_EXCLUDE_PATTERN := "^$(RC_OUTPUT_DIR).*|^$(UI_OUTPUT_DIR).*|^pcleaner/comic_text_detector/.*"
+BLACK_EXCLUDE_PATTERN := "^$(UI_OUTPUT_DIR).*|^pcleaner/comic_text_detector/.*"
 
 LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.gui.supported_languages import supported_languages; lang_codes = list(supported_languages().keys()); lang_codes.remove('en_US'); print(' '.join(lang_codes))")
 

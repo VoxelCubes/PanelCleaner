@@ -24,10 +24,6 @@ from pcleaner import __display_name__, __version__
 from pcleaner.gui.mainwindow_driver import MainWindow
 
 
-# TODO Things to copy from deepqt:
-# - the testing
-# - the gather themes (potentially)
-
 # Allow loading of large images.
 Image.MAX_IMAGE_PIXELS = 2**32
 

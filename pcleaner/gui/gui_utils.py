@@ -146,6 +146,49 @@ def open_file(path: Path) -> None:
         show_exception(None, tr("File Error"), tr("Failed to open file."))
 
 
+def get_available_themes() -> list[tuple[str, str]]:
+    """
+    Check the data/color_themes directory for available themes.
+    The theme name is the plain file name. The display name is either defined in the
+    theme file under section General, key name.
+    If not defined, the display name is the theme name but capitalized and
+    with spaces instead of underscores.
+
+    Note: The implicit system theme is not included in the list.
+
+    :return: A list of available theme names with their display names.
+    """
+    # Simply discover all files in the themes folder.
+    themes = []
+    with resources.path(color_themes, "") as theme_dir:
+        theme_dir = Path(theme_dir)
+    for theme_file in theme_dir.iterdir():
+        # Skip dirs and empty files.
+        if theme_file.is_dir() or theme_file.stat().st_size == 0:
+            continue
+        theme_name = theme_file.stem
+        content = theme_file.read_text()
+        display_name = theme_name.replace("_", " ").capitalize()
+        in_general_section = False
+        for line in content.split("\n"):
+            line = line.strip()
+            if line.startswith("[General]"):
+                in_general_section = True
+            elif line.startswith("[") and line.endswith("]"):
+                if in_general_section:
+                    # We found general, but came across the next section now.
+                    break
+                in_general_section = False
+            elif "=" in line:
+                key, value = map(str.strip, line.split("=", 1))
+                if key == "Name":
+                    display_name = value
+                    break
+        themes.append((theme_name, display_name))
+
+    return themes
+
+
 def custom_icon_path(icon_name: str, theme: Literal["dark", "light"] | str = "") -> Path:
     """
     Loads the given icon from the dark, light, or color-agnostic set of custom icons.
