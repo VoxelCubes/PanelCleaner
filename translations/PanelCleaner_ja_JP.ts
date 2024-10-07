@@ -7,7 +7,7 @@
       <location filename="../pcleaner/config.py" line="1011"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation type="unfinished">default</translation>
+      <translation/>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
