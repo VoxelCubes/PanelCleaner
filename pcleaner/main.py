@@ -613,6 +613,10 @@ def run_cleaner(
         ost.Output.isolated_text,
     ]
 
+    def remove_output(output: ost.Output, whitelist: list[ost.Output]) -> None:
+        if output in whitelist:
+            whitelist.remove(output)
+
     if save_only_text:
         masked_outputs_whitelist = []
         cleaned_outputs_whitelist = []
@@ -623,13 +627,13 @@ def run_cleaner(
         cleaned_outputs_whitelist = []
         text_outputs_whitelist = []
     if skip_denoising:
-        cleaned_outputs_whitelist.remove(ost.Output.denoised_output)
-        masked_outputs_whitelist.remove(ost.Output.denoise_mask)
+        remove_output(ost.Output.denoised_output, cleaned_outputs_whitelist)
+        remove_output(ost.Output.denoise_mask, masked_outputs_whitelist)
     if skip_inpainting:
-        cleaned_outputs_whitelist.remove(ost.Output.inpainted_output)
-        masked_outputs_whitelist.remove(ost.Output.inpainted_mask)
+        remove_output(ost.Output.inpainted_output, cleaned_outputs_whitelist)
+        remove_output(ost.Output.inpainted_mask, masked_outputs_whitelist)
     if not extract_text:
-        text_outputs_whitelist.remove(ost.Output.isolated_text)
+        remove_output(ost.Output.isolated_text, text_outputs_whitelist)
 
     export_targets = ie.discover_viable_outputs(
         cache_dir, cleaned_outputs_whitelist, masked_outputs_whitelist, text_outputs_whitelist
