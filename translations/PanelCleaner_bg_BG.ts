@@ -1506,16 +1506,6 @@ Check the online documentation for how to add support for more languages.</trans
       <translation>Няма файлове за обработка. Можете да добавяте файлове, като ги плъзгате и пускате в средата на прозореца или чрез менюто: Файлове -&gt; Добавяне на файлове или Добавяне на папка.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1451"/>
-      <source>Unsaved Changes</source>
-      <translation type="unfinished">Unsaved Changes</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1452"/>
-      <source>You have unsaved changes to the profile. Continue anyway?</source>
-      <translation type="unfinished">You have unsaved changes to the profile. Continue anyway?</translation>
-    </message>
-    <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1515"/>
       <source>No Outputs</source>
       <translation>Няма изходящи данни</translation>
@@ -1580,6 +1570,16 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1880"/>
       <source>Export OCR Results</source>
       <translation type="unfinished">Export OCR Results</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1451"/>
+      <source>Un-Applied Changes</source>
+      <translation type="unfinished">Un-Applied Changes</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1452"/>
+      <source>You have un-applied changes to the profile. Continue anyway?</source>
+      <translation type="unfinished">You have un-applied changes to the profile. Continue anyway?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1881"/>
