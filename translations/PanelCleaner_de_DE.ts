@@ -1507,16 +1507,6 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <translation>Keine Dateien zu verarbeiten. Sie können Dateien in der Mitte des Fensters ablegen oder über die Menüleiste hinzufügen: Dateien -&gt; Dateien hinzufügen oder Ordner hinzufügen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1451"/>
-      <source>Unsaved Changes</source>
-      <translation type="unfinished">Unsaved Changes</translation>
-    </message>
-    <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1452"/>
-      <source>You have unsaved changes to the profile. Continue anyway?</source>
-      <translation type="unfinished">You have unsaved changes to the profile. Continue anyway?</translation>
-    </message>
-    <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1515"/>
       <source>No Outputs</source>
       <translation>Keine Ausgaben</translation>
@@ -1581,6 +1571,16 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1880"/>
       <source>Export OCR Results</source>
       <translation>OCR-Ergebnisse Exportieren</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1451"/>
+      <source>Un-Applied Changes</source>
+      <translation type="unfinished">Un-Applied Changes</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1452"/>
+      <source>You have un-applied changes to the profile. Continue anyway?</source>
+      <translation type="unfinished">You have un-applied changes to the profile. Continue anyway?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1881"/>
