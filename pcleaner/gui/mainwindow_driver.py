@@ -1443,6 +1443,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             )
             return
 
+        # Check if there are un-applied changes to the profile.
+        if self.toolBox_profile.is_modified():
+            if (
+                gu.show_question(
+                    self,
+                    self.tr("Unsaved Changes"),
+                    self.tr("You have unsaved changes to the profile. Continue anyway?"),
+                )
+                != Qw.QMessageBox.Yes
+            ):
+                return
+
         if self.radioButton_cleaning.isChecked():
             self.start_cleaning()
         else:
