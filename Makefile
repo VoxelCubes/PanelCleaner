@@ -131,6 +131,14 @@ build-elf:
 		--hidden-import=scipy.signal \
 		--add-data "${PYINSTALLER_VENV}/lib/python3.11/site-packages/manga_ocr/assets/example.jpg:assets/" \
 		--collect-data pcleaner
+	
+	# This stupid thing refuses to collect data, so do it manually:
+	@echo "Copying data files..."
+	mkdir -p dist-elf/PanelCleaner/_internal/pcleaner
+	cp -r pcleaner/data dist-elf/PanelCleaner/_internal/pcleaner/
+	@echo "Purging __pycache__ directories..."
+	@find dist-elf/PanelCleaner/_internal/pcleaner -type d -name "__pycache__"
+	@find dist-elf/PanelCleaner/_internal/pcleaner -type d -name "__pycache__" -exec rm -rf {} \; || true
 
 	@echo "Purging CUDA related files from _internal directory..."
 	@find dist-elf/PanelCleaner/_internal -type f \( \
