@@ -1575,12 +1575,12 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1451"/>
       <source>Un-Applied Changes</source>
-      <translation type="unfinished">Un-Applied Changes</translation>
+      <translation>Nicht angewandte Änderungen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1452"/>
       <source>You have un-applied changes to the profile. Continue anyway?</source>
-      <translation type="unfinished">You have un-applied changes to the profile. Continue anyway?</translation>
+      <translation>Sie haben die Änderungen am Profil noch nicht übernommen. Trotzdem fortfahren?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1881"/>
