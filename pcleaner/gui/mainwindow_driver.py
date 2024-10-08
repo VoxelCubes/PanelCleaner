@@ -1907,6 +1907,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.output_review.deleteLater()
 
     def output_worker_aborted(self) -> None:
+        self.cleaning_review_options = None
+        self.ocr_review_options = None
         gu.show_info(self, self.tr("Processing Aborted"), self.tr("Processing aborted."))
         logger.warning("Output worker aborted.")
 
