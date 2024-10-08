@@ -1448,8 +1448,8 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             if (
                 gu.show_question(
                     self,
-                    self.tr("Unsaved Changes"),
-                    self.tr("You have unsaved changes to the profile. Continue anyway?"),
+                    self.tr("Un-Applied Changes"),
+                    self.tr("You have un-applied changes to the profile. Continue anyway?"),
                 )
                 != Qw.QMessageBox.Yes
             ):
