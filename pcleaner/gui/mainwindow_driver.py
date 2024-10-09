@@ -1156,6 +1156,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if self.last_applied_profile is None:
             return True
 
+        # If it's completely unmodified, then it's the same.
+        if not self.toolBox_profile.is_modified():
+            return False
+
         # Read the current profile and then compare.
         profile_in_gui = cfg.Profile()
         self.toolBox_profile.get_profile_values(profile_in_gui, no_validation=True)
@@ -1444,7 +1448,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             return
 
         # Check if there are un-applied changes to the profile.
-        if self.toolBox_profile.is_modified():
+        if self.check_profile_difference_sice_last_apply():
             if (
                 gu.show_question(
                     self,
