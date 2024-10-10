@@ -35,8 +35,33 @@
       <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_2.png</image>
       <caption>Process many images at a time</caption>
     </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_review.png</image>
+      <caption>Process many images at a time</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_ocr.png</image>
+      <caption>Process many images at a time</caption>
+    </screenshot>
   </screenshots>
   <releases>
+    <release version="2.9.2" date="2024-10-10">
+      <description>
+        <p>Changelog</p>
+        <ul>
+          <li>Output layers can now be exported together as a Photoshop PSD file (they also work in other programs that support psd, like GIMP!). Thank you @al3ks1s!</li>
+          <li>Italian language support! Thank you @fujicrow!</li>
+          <li>Allow overriding what language was detected, to force the use of Tesseract with any language you have installed.</li>
+          <li>Masks may now be any solid color, not just grayscale (without needing to resort to inpainting).</li>
+          <li>Image export parallelized in GUI mode, making it several times faster.</li>
+          <li>You can now load previous .txt or .csv OCR outputs and re-edit them in the GUI.</li>
+          <li>Window layout and sizes are now saved between sessions.</li>
+          <li>The main window stays interactive while reviewing cleaning output.</li>
+          <li>When system or graphics memory is low, a warning banner shows up. If left unchecked, the program will likely be terminated by the operating system.</li>
+          <li>The image cache is now cleaned upon closing the program, not just opening.</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.6.1" date="2024-03-16">
       <description>
         <p>Changelog</p>
@@ -113,6 +138,9 @@
   <languages>
     <lang percentage="100">en</lang>
     <lang percentage="100">de</lang>
+    <lang percentage="93">it</lang>
+    <lang percentage="76">es</lang>
+    <lang percentage="76">bg</lang>
   </languages>
   <keywords>
 <!--    <keyword translate="no"></keyword>-->
