@@ -251,6 +251,8 @@ Note: The default profile is optimized for images roughly 1100x1600 pixels in si
 Adjust size parameters accordingly in a profile if you are using images with a significantly
 lower or higher resolution.
 
+Review your settings with a selection of view modes before exporting the cleaned images.
+![Review](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_review.png) 
 
 ## OCR
 
@@ -301,6 +303,9 @@ For detailed installation instructions and additional information, please refer 
 
 > Note: While Tesseract supports additional languages, Panel Cleaner will only utilize Tesseract for English and Japanese text recognition. English is installed by default. Follow the instructions here [Installing additional language packs](https://ocrmypdf.readthedocs.io/en/latest/languages.html) to install the Japanese language pack.  
 
+Review and edit the OCR output interactively.
+![Review](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_ocr.png) 
+
 ## Examples of Tricky Bubbles
 
 | Original | Cleaned |
@@ -333,4 +338,4 @@ the [LICENSE](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/L
 
 ## Roadmap
 
-- [x] Maybe make a GUI for it.
+- Currently no new features are planned.
