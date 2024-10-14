@@ -490,36 +490,36 @@ Pagine con errori / totale:
       <location filename="../pcleaner/image_export.py" line="130"/>
       <source>Clean mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
+      <translation>
         <numerusform>Maschera pulita</numerusform>
-        <numerusform>Clean mask</numerusform>
+        <numerusform>Maschera pulita</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="131"/>
       <source>Denoised mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
+      <translation>
         <numerusform>Maschera con Denoising applicato</numerusform>
-        <numerusform>Denoised mask</numerusform>
+        <numerusform>Maschera con Denoising applicato</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="133"/>
       <source>Inpainting mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
+      <translation>
         <numerusform>Maschera dipinta</numerusform>
-        <numerusform>Inpainting mask</numerusform>
+        <numerusform>Maschera dipinta</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="410"/>
       <source>Page</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
+      <translation>
         <numerusform>Pagina</numerusform>
-        <numerusform>Page</numerusform>
+        <numerusform>Pagina</numerusform>
       </translation>
     </message>
   </context>
