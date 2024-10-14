@@ -491,7 +491,7 @@ Pagine con errori / totale:
       <source>Clean mask</source>
       <comment>layered export</comment>
       <translation type="unfinished">
-        <numerusform>Clean mask</numerusform>
+        <numerusform>Maschera pulita</numerusform>
         <numerusform>Clean mask</numerusform>
       </translation>
     </message>
@@ -500,7 +500,7 @@ Pagine con errori / totale:
       <source>Denoised mask</source>
       <comment>layered export</comment>
       <translation type="unfinished">
-        <numerusform>Denoised mask</numerusform>
+        <numerusform>Maschera con Denoising applicato</numerusform>
         <numerusform>Denoised mask</numerusform>
       </translation>
     </message>
@@ -509,7 +509,7 @@ Pagine con errori / totale:
       <source>Inpainting mask</source>
       <comment>layered export</comment>
       <translation type="unfinished">
-        <numerusform>Inpainting mask</numerusform>
+        <numerusform>Maschera dipinta</numerusform>
         <numerusform>Inpainting mask</numerusform>
       </translation>
     </message>
@@ -518,7 +518,7 @@ Pagine con errori / totale:
       <source>Page</source>
       <comment>layered export</comment>
       <translation type="unfinished">
-        <numerusform>Page</numerusform>
+        <numerusform>Pagina</numerusform>
         <numerusform>Page</numerusform>
       </translation>
     </message>
@@ -1575,12 +1575,12 @@ Per sapere come aggiungere il supporto per altre lingue, consultare la documenta
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1451"/>
       <source>Un-Applied Changes</source>
-      <translation type="unfinished">Un-Applied Changes</translation>
+      <translation>Modifiche non applicate</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1452"/>
       <source>You have un-applied changes to the profile. Continue anyway?</source>
-      <translation type="unfinished">You have un-applied changes to the profile. Continue anyway?</translation>
+      <translation>Le modifiche al profilo non sono state applicate. Continuare comunque?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1881"/>
@@ -2893,7 +2893,7 @@ Verde: caselle iniziali. Rosso: caselle estese. Viola: caselle unite (finali). B
       <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</source>
       <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</translation>
+      <translation>Modello Regex da confrontare con i risultati dell'OCR. Tutto ciò che corrisponde a questo modello viene scartato.&lt;br&gt; Nota: il modello OCR restituisce caratteri a tutta larghezza, quindi questo modello dovrebbe corrispondere.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="102"/>
@@ -2906,7 +2906,7 @@ Verde: caselle iniziali. Rosso: caselle estese. Viola: caselle unite (finali). B
       <source>The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
       <oldsource>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
+      <translation>Il modello MangaOCR  è in grado di gestire solo il testo giapponese, quindi quando è abilitata l'opzione forzata del modello, scarterà le caselle che non sono&apos;sicure che siano giapponesi. A volte, numeri o altri simboli riducono l'efficacia, facendo sì che la lingua rilevata sia sconosciuta. Se l'opzione forzata è disabilitata, questi non verranno scartati. Tutto ciò che è riconosciuto con sicurezza come lingua diversa sarà scartato indipendentemente da questa impostazione.&lt;br&gt; Nota: questa impostazione è rilevante solo quando ocr_language è impostato su rilevamento per casella o pagina.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="106"/>
@@ -3027,31 +3027,31 @@ Verde: caselle iniziali. Rosso: caselle estese. Viola: caselle unite (finali). B
       <location filename="profile_strings.py" line="30"/>
       <source>Combine outputs into a single project file as layers. Currently supported formats: Photoshop PSD.&lt;br&gt; - none: Each image and mask are saved as basic files.&lt;br&gt; - psd-per-image: Images and masks are saved together in a PSD file per input image.&lt;br&gt;  - psd-bulk: All images and masks are saved together in a single PSD file, grouped by input image.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Combine outputs into a single project file as layers. Currently supported formats: Photoshop PSD.&lt;br&gt; - none: Each image and mask are saved as basic files.&lt;br&gt; - psd-per-image: Images and masks are saved together in a PSD file per input image.&lt;br&gt;  - psd-bulk: All images and masks are saved together in a single PSD file, grouped by input image.</translation>
+      <translation>Combinare gli output in un unico file di progetto come layer diversi. Formati attualmente supportati: Photoshop PSD.&lt;br&gt; - nessuno: Ogni immagine e maschera vengono salvate come file di base.&lt;br&gt; - psd-per-image: Le immagini e le maschere vengono salvate insieme in un file PSD per ogni immagine di input.&lt;br&gt;  - psd-bulk: Tutte le immagini e le maschere vengono salvate insieme in un unico file PSD, raggruppato per immagine di input.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="32"/>
       <source>Layered Export</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Layered Export</translation>
+      <translation>Esportazione in Layers</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="146"/>
       <source>Whether to allow colored masks. When true, the masker will allow masks to use any color, not just white, black, or gray.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Whether to allow colored masks. When true, the masker will allow masks to use any color, not just white, black, or gray.</translation>
+      <translation>Se consentire o meno le maschere colorate. Quando è -true-, il mascheratore permetterà alle maschere di usare qualsiasi colore, non solo il bianco, il nero o il grigio.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="148"/>
       <source>Allow Colored Masks</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Allow Colored Masks</translation>
+      <translation>Consentire le maschere colorate</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="150"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white. Value range: black (0) to pure white (255).</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white. Value range: black (0) to pure white (255).</translation>
+      <translation>Soglia massima per un pixel da considerare off-white. Il colore mediano lungo il bordo di una maschera potrebbe non essere bianco puro, quindi per evitare lievi tonalità di off-white su uno sfondo bianco puro, tutto ciò che è più chiaro di questo valore di soglia verrà arrotondato al bianco puro. Value range: black (0) to pure white (255).']".".</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="152"/>
@@ -3096,7 +3096,7 @@ Verde: caselle iniziali. Rosso: caselle estese. Viola: caselle unite (finali). B
       <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
       <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation>Numero massimo di threads da utilizzare per l'esportazione delle immagini. Si può lasciare non specificato per utilizzare tutti i threads disponibili. Abbassare questo valore se si riscontrano problemi di memoria, che si manifestano come crash casuali.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="184"/>
@@ -3739,19 +3739,19 @@ Verde: caselle iniziali. Rosso: caselle estese. Viola: caselle unite (finali). B
       <location filename="../pcleaner/gui/profile_parser.py" line="246"/>
       <source>None</source>
       <comment>Layered export option</comment>
-      <translation type="unfinished">None</translation>
+      <translation>Nessuno</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="247"/>
       <source>PSD Bulk</source>
       <comment>Layered export option</comment>
-      <translation type="unfinished">PSD Bulk</translation>
+      <translation>PSD in massa</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="250"/>
       <source>PSD Per Image</source>
       <comment>Layered export option</comment>
-      <translation type="unfinished">PSD Per Image</translation>
+      <translation>PSD per immagine</translation>
     </message>
   </context>
   <context>
