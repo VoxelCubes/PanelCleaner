@@ -9,7 +9,6 @@ import PySide6
 import PySide6.QtCore as Qc
 import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
-import psutil
 import torch
 from PIL import Image
 from docopt import docopt
@@ -20,6 +19,7 @@ import pcleaner.config as cfg
 import pcleaner.data.theme_icons as theme_icons_data
 import pcleaner.data.translation_generated_files as translation_data
 import pcleaner.gui.gui_utils as gu
+import pcleaner.helpers as hp
 from pcleaner import __display_name__, __version__
 from pcleaner.gui.mainwindow_driver import MainWindow
 
@@ -76,8 +76,8 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     buffer.write(f"System locale: {Qc.QLocale.system().name()}\n")
     buffer.write(f"Architecture: {platform.machine()}\n")
     buffer.write(f"CPU Cores: {os.cpu_count()}\n")
-    buffer.write(f"Memory: {psutil.virtual_memory().total / 1024 ** 3:.2f} GiB\n")
-    buffer.write(f"Swap: {psutil.swap_memory().total / 1024 ** 3:.2f} GiB\n")
+    buffer.write(f"Memory: {hp.sys_virtual_memory_total() / 1024 ** 3:.2f} GiB\n")
+    buffer.write(f"Swap: {hp.sys_swap_memory_total() / 1024 ** 3:.2f} GiB\n")
     if torch.cuda.is_available():
         buffer.write(f"GPU: {torch.cuda.get_device_name(0)} (CUDA enabled)\n")
         buffer.write(f"    CUDA Version: {torch.version.cuda}\n")

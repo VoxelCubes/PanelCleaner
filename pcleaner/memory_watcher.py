@@ -1,24 +1,22 @@
 import threading
 import time
 
-import psutil
 import torch
+
+import pcleaner.helpers as hp
 
 
 def memory_watcher():
     # Monitor system memory usage to warn of impending OOM errors.
 
     while True:
-        mem = psutil.virtual_memory()
-        swap = psutil.swap_memory()
-
         # Print warnings based on RAM and swap status.
-        if swap.total == 0:  # No swap available.
-            if mem.percent >= 80:
-                print_warning_banner(f"Warning: RAM usage has reached {round(mem.percent)}%")
+        if hp.sys_swap_memory_total() == 0:  # No swap available.
+            if (mem := hp.sys_virtual_memory_used_percent()) >= 80:
+                print_warning_banner(f"Warning: RAM usage has reached {round(mem)}%")
         else:
-            if mem.percent >= 90:
-                print_warning_banner(f"Warning: RAM usage has reached {round(mem.percent)}%.")
+            if (mem := hp.sys_virtual_memory_used_percent()) >= 90:
+                print_warning_banner(f"Warning: RAM usage has reached {round(mem)}%.")
 
         # Monitor VRAM if torch is available and GPU is detected.
         if torch.cuda.is_available() and torch.cuda.device_count() > 0:

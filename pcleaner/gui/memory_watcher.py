@@ -1,6 +1,7 @@
-import psutil
 import torch
 from PySide6.QtCore import Signal, QObject, QTimer
+
+import pcleaner.helpers as hp
 
 
 class MemoryWatcher(QObject):
@@ -23,22 +24,20 @@ class MemoryWatcher(QObject):
 
     def check_memory(self):
         # Monitor system memory (RAM)
-        mem = psutil.virtual_memory()
-        swap = psutil.swap_memory()
         oom: bool = False
 
         # Check conditions for RAM and swap.
-        if swap.total == 0:  # No swap available.
-            if mem.percent >= 80:
+        if hp.sys_swap_memory_total() == 0:  # No swap available.
+            if (mem := hp.sys_virtual_memory_used_percent()) >= 80:
                 self.oom_warning.emit(
-                    self.tr("RAM usage has reached {mem}%").format(mem=round(mem.percent))
+                    self.tr("RAM usage has reached {mem}%").format(mem=round(mem))
                 )
                 oom = True
         else:  # Swap is available
-            if mem.percent >= 90:
+            if (mem := hp.sys_virtual_memory_used_percent()) >= 90:
                 # self.oom_warning.emit("RAM usage has reached 100%.")
                 self.oom_warning.emit(
-                    self.tr("RAM usage has reached {mem}%").format(mem=round(mem.percent))
+                    self.tr("RAM usage has reached {mem}%").format(mem=round(mem))
                 )
                 oom = True
 

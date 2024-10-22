@@ -1,10 +1,11 @@
 import difflib
 import platform
-from enum import Enum
 import subprocess
+from enum import Enum
 from itertools import takewhile, groupby
 from pathlib import Path
 
+import psutil
 import tifffile
 from loguru import logger
 
@@ -281,3 +282,47 @@ def send_desktop_notification(
 
     else:
         logger.debug(f"Desktop notifications are not supported on {platform.system()}")
+
+
+def sys_virtual_memory_total() -> int:
+    """
+    Get the total amount of RAM in the system in bytes.
+    """
+    try:
+        return psutil.virtual_memory().total
+    except Exception as e:
+        logger.exception(e)
+        return 0
+
+
+def sys_virtual_memory_used_percent() -> float:
+    """
+    Get the percentage of RAM used in the system.
+    """
+    try:
+        return psutil.virtual_memory().percent
+    except Exception as e:
+        logger.exception(e)
+        return 0
+
+
+def sys_swap_memory_total() -> int:
+    """
+    Get the total amount of swap memory in the system in bytes.
+    """
+    try:
+        return psutil.swap_memory().total
+    except Exception as e:
+        logger.exception(e)
+        return 0
+
+
+def sys_swap_memory_used() -> int:
+    """
+    Get the used amount of swap memory in the system in bytes.
+    """
+    try:
+        return psutil.swap_memory().used
+    except Exception as e:
+        logger.exception(e)
+        return 0
