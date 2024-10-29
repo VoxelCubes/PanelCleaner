@@ -265,7 +265,7 @@ pcleaner ocr myfolder --output-path=output.txt
 ```
 This is also available in the GUI, as the OCR output option.
 
-Panel Cleaner handles Japanese OCR with [MangaOCR](https://github.com/manga-ocr/manga-ocr) out of the box, and that is the preferred way to OCR Japanese text.
+Panel Cleaner handles Japanese OCR with [MangaOCR](https://github.com/kha-white/manga-ocr) out of the box, and that is the preferred way to OCR Japanese text.
 If available, Panel Cleaner can also use Tesseract for OCR capabilities, specifically for processing English and 
 Japanese text, the only two languages currently supported.
 Follow the instructions below to install Tesseract on your system.
