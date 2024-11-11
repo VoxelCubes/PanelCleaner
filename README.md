@@ -328,6 +328,7 @@ Review and edit the OCR output interactively.
   and performing the dedicated OCR command.
 
 - [Simple Lama Inpainting](https://github.com/enesmsahin/simple-lama-inpainting) for inpainting bubbles that can't be masked out.
+  Using the fine-tuned [Model by dreMaz](https://huggingface.co/dreMaz/AnimeMangaInpainting).
 
 
 ## License

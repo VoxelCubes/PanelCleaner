@@ -167,7 +167,7 @@ class Ui_SetupGreeter(object):
         self.label_13.setObjectName(u"label_13")
         sizePolicy1.setHeightForWidth(self.label_13.sizePolicy().hasHeightForWidth())
         self.label_13.setSizePolicy(sizePolicy1)
-        self.label_13.setText(u"[https://github.com/enesmsahin/simple-lama-inpainting/releases](https://github.com/enesmsahin/simple-lama-inpainting/releases)")
+        self.label_13.setText(u"[https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt](https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt)")
         self.label_13.setTextFormat(Qt.MarkdownText)
         self.label_13.setWordWrap(True)
         self.label_13.setOpenExternalLinks(True)
@@ -214,15 +214,27 @@ class Ui_SetupGreeter(object):
 
         self.pushButton_ok = QPushButton(SetupGreeter)
         self.pushButton_ok.setObjectName(u"pushButton_ok")
-        icon = QIcon(QIcon.fromTheme(u"download"))
+        icon = QIcon()
+        iconThemeName = u"download"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_ok.setIcon(icon)
-        self.pushButton_ok.setAutoDefault(True)
+        self.pushButton_ok.setAutoDefault(False)
 
         self.horizontalLayout.addWidget(self.pushButton_ok)
 
         self.pushButton_abort = QPushButton(SetupGreeter)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon1 = QIcon(QIcon.fromTheme(u"dialog-cancel"))
+        icon1 = QIcon()
+        iconThemeName = u"dialog-cancel"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon1 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
         self.pushButton_abort.setIcon(icon1)
 
         self.horizontalLayout.addWidget(self.pushButton_abort)

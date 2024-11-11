@@ -9,6 +9,7 @@ import tqdm
 from loguru import logger
 from manga_ocr import MangaOcr
 from transformers import file_utils
+import pcleaner.cli_utils as cu
 
 
 MODEL_URL = "https://github.com/zyddnys/manga-image-translator/releases/download/beta-0.3/"
@@ -17,10 +18,8 @@ TORCH_SHA256 = "1f90fa60aeeb1eb82e2ac1167a66bf139a8a61b8780acd351ead55268540cccb
 CV2_MODEL_NAME = "comictextdetector.pt.onnx"
 CV2_SHA256 = "1a86ace74961413cbd650002e7bb4dcec4980ffa21b2f19b86933372071d718f"
 OCR_DIR_NAME = "models--kha-white--manga-ocr-base"
-INPAINTING_URL = (
-    "https://github.com/enesmsahin/simple-lama-inpainting/releases/download/v0.1.0/big-lama.pt"
-)
-INPAINTING_SHA256 = "7ba7aa7ac37a4d41fdbbeba3a2af7ead18058552997e3a3cd1a3b2210c9e6b4c"
+INPAINTING_URL = "https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt"
+INPAINTING_SHA256 = "479d3afdcb7ed2fd944ed4ebcc39ca45b33491f0f2e43eb1000bd623cfb41823"
 
 
 def check_hash(file_path: Path, sha_hash: str) -> bool:
@@ -105,13 +104,22 @@ def download_cv2_model(cache_dir: Path) -> Path | None:
     return download_file(MODEL_URL + CV2_MODEL_NAME, cache_dir, sha_hash=CV2_SHA256)
 
 
-def get_inpainting_model_path(config) -> Path:
+def get_old_inpainting_model_path(config) -> Path:
     """
     Get the path to the inpainting model.
 
     :return: The path to the inpainting model.
     """
     return config.get_model_cache_dir() / "big-lama.pt"
+
+
+def get_inpainting_model_path(config) -> Path:
+    """
+    Get the path to the inpainting model.
+
+    :return: The path to the inpainting model.
+    """
+    return config.get_model_cache_dir() / "anime-manga-big-lama.pt"
 
 
 def download_inpainting_model(cache_dir: Path) -> Path | None:
@@ -134,15 +142,42 @@ def is_inpainting_downloaded(config) -> bool:
     return get_inpainting_model_path(config).is_file()
 
 
+def has_old_inpainting_model(config) -> bool:
+    """
+    Check if the old inpainting model is downloaded.
+
+    :return: True if the old inpainting model is downloaded.
+    """
+    return get_old_inpainting_model_path(config).is_file()
+
+
+def check_upgrade_inpainting_model(config) -> None:
+    # Check if we have the old version sitting around and offer to
+    # delete or keep it.
+    if has_old_inpainting_model(config):
+        if cu.get_confirmation(
+            "A new version of the inpainting model is available.\n"
+            "You can delete the model later if you don't want to upgrade yet.\n"
+            "Switch to the new model?",
+            default=True,
+        ):
+            get_old_inpainting_model_path(config).unlink()
+            download_inpainting_model(config.get_model_cache_dir())
+        else:
+            print("Old model kept.")
+            shutil.move(get_old_inpainting_model_path(config), get_inpainting_model_path(config))
+    else:
+        download_inpainting_model(config.get_model_cache_dir())
+
+
 def ensure_inpainting_available(config) -> None:
     """
     Check if it is downloaded, and download it if it isn't.
 
     :param config: The config to get the cache path from.
     """
-    cache_dir = config.get_model_cache_dir()
     if not is_inpainting_downloaded(config):
-        download_inpainting_model(cache_dir)
+        check_upgrade_inpainting_model(config)
 
 
 def download_models(config, force: bool, cuda: bool, cpu: bool) -> None:
@@ -180,7 +215,7 @@ def download_models(config, force: bool, cuda: bool, cpu: bool) -> None:
     config.save()
 
     # Download the inpainting model.
-    download_inpainting_model(cache_dir)
+    ensure_inpainting_available(config)
 
     # Also load the OCR model, but there is only one option and can't be forced.
     MangaOcr()

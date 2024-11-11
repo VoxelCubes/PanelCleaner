@@ -308,7 +308,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string notr="true">[https://github.com/enesmsahin/simple-lama-inpainting/releases](https://github.com/enesmsahin/simple-lama-inpainting/releases)</string>
+        <string notr="true">[https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt](https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt)</string>
        </property>
        <property name="textFormat">
         <enum>Qt::MarkdownText</enum>
@@ -417,10 +417,11 @@
         <string>Automatically Download</string>
        </property>
        <property name="icon">
-        <iconset theme="download"/>
+        <iconset theme="download">
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="autoDefault">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <property name="default">
         <bool>false</bool>
@@ -433,7 +434,8 @@
         <string>Abort</string>
        </property>
        <property name="icon">
-        <iconset theme="dialog-cancel"/>
+        <iconset theme="dialog-cancel">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>

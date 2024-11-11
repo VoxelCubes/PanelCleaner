@@ -1,6 +1,7 @@
 import platform
 import sys
 import time
+import shutil
 from copy import deepcopy
 from functools import partial
 from importlib import resources
@@ -419,6 +420,33 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         has_text_detector = (not cuda and self.config.default_cv2_model_path) or (
             cuda and self.config.default_torch_model_path
         )
+
+        if not has_inpainting and md.has_old_inpainting_model(self.config):
+            response = gu.show_question(
+                self,
+                self.tr("Inpainting Model Update"),
+                self.tr(
+                    "A new version of the inpainting model is available.\n"
+                    "You can delete the model later if you don't want to upgrade yet.\n"
+                    "Switch to the new model?"
+                ),
+            )
+            if response == Qw.QMessageBox.Yes:
+                md.get_old_inpainting_model_path(self.config).unlink()
+            else:
+                gu.show_info(
+                    self,
+                    self.tr("Inpainting Model Update"),
+                    self.tr(
+                        'Old model kept. To upgrade, select "Help" then '
+                        '"Delete Machine Learning Models" from the menubar.'
+                    ),
+                )
+                shutil.move(
+                    md.get_old_inpainting_model_path(self.config),
+                    md.get_inpainting_model_path(self.config),
+                )
+                has_inpainting = True
 
         if all((has_ocr, has_inpainting, has_text_detector)):
             # Already downloaded.
