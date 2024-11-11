@@ -1294,21 +1294,21 @@ Continuare comunque?</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="427"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="439"/>
       <source>Inpainting Model Update</source>
-      <translation type="unfinished">Inpainting Model Update</translation>
+      <translation>Aggiornamento del Modello di Inpainting</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="432"/>
       <source>A new version of the inpainting model is available.
 You can delete the model later if you don&apos;t want to upgrade yet.
 Switch to the new model?</source>
-      <translation type="unfinished">A new version of the inpainting model is available.
-You can delete the model later if you don&apos;t want to upgrade yet.
-Switch to the new model?</translation>
+      <translation>È disponibile una nuova versione del modello di inpainting.
+Puoi eliminare il modello in seguito se non desideri ancora eseguire l'aggiornamento.
+Passare al nuovo modello?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="443"/>
       <source>Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</source>
-      <translation type="unfinished">Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</translation>
+      <translation>Il vecchio modello è stato mantenuto. Per eseguire l'aggiornamento, seleziona &quot;Aiuto&quot; e poi &quot;Eliminare i Modelli di Apprendimento Automatico&quot; dalla barra dei menu.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="777"/>
