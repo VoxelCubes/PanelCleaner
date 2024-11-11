@@ -1294,21 +1294,21 @@ Trotzdem fortfahren?</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="427"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="439"/>
       <source>Inpainting Model Update</source>
-      <translation type="unfinished">Inpainting Model Update</translation>
+      <translation>Übermal-Modell Update</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="432"/>
       <source>A new version of the inpainting model is available.
 You can delete the model later if you don&apos;t want to upgrade yet.
 Switch to the new model?</source>
-      <translation type="unfinished">A new version of the inpainting model is available.
-You can delete the model later if you don&apos;t want to upgrade yet.
-Switch to the new model?</translation>
+      <translation>Eine neue Version des Übermal-Modells ist verfügbar.
+Sie können das Modell auch später löschen, wenn Sie noch nicht aktualisieren möchten.
+Auf das neue Modell umsteigen?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="443"/>
       <source>Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</source>
-      <translation type="unfinished">Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</translation>
+      <translation>Das alte Modell bleibt erhalten. Wählen Sie zum Aktualisieren &quot;Hilfe&quot; und dann &quot;Modelle für maschinelles Lernen löschen&quot; in der Menüleiste.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="777"/>
