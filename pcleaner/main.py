@@ -408,13 +408,34 @@ def run_cleaner(
         model_path = config.get_model_path(gpu)
 
         print("Running text detection AI model...")
-        pp.generate_mask_data(
-            image_paths,
-            config_general=profile.general,
-            config_detector=profile.text_detector,
-            model_path=model_path,
-            output_dir=cache_dir,
-        )
+        try:
+            pp.generate_mask_data(
+                image_paths,
+                config_general=profile.general,
+                config_detector=profile.text_detector,
+                model_path=model_path,
+                output_dir=cache_dir,
+            )
+        except NotImplementedError as e:
+            if "CUDA" in str(e):
+                # Get the current CUDA version.
+                cuda_version = "Error, no version found."
+                try:
+                    version = torch.version.cuda
+                    if version is not None:
+                        cuda_version = version
+                except Exception:
+                    pass
+
+                logger.error(
+                    "Your GPU does not support the required CUDA operations.\n\n"
+                    "Try uninstalling the current versions of torch and torchvision\n"
+                    "and installing the CPU version (or a different CUDA version) instead.\n"
+                    "You can find further instructions here: https://pytorch.org/get-started/locally/\n"
+                    'Check the "Compute Platform" section to see the available versions.\n\n'
+                    f"Your current CUDA version is: {cuda_version}\n"
+                )
+                raise e
 
         # Leave some extra space here if drawing analytics, so it looks better.
         if not hide_analytics:
@@ -736,13 +757,34 @@ def run_ocr(
 
     print("Running text detection AI model...")
     # start = time.perf_counter()
-    pp.generate_mask_data(
-        image_paths,
-        config_general=profile.general,
-        config_detector=profile.text_detector,
-        model_path=model_path,
-        output_dir=cache_dir,
-    )
+    try:
+        pp.generate_mask_data(
+            image_paths,
+            config_general=profile.general,
+            config_detector=profile.text_detector,
+            model_path=model_path,
+            output_dir=cache_dir,
+        )
+    except NotImplementedError as e:
+        if "CUDA" in str(e):
+            # Get the current CUDA version.
+            cuda_version = "Error, no version found."
+            try:
+                version = torch.version.cuda
+                if version is not None:
+                    cuda_version = version
+            except Exception:
+                pass
+
+            logger.error(
+                "Your GPU does not support the required CUDA operations.\n\n"
+                "Try uninstalling the current versions of torch and torchvision\n"
+                "and installing the CPU version (or a different CUDA version) instead.\n"
+                "You can find further instructions here: https://pytorch.org/get-started/locally/\n"
+                'Check the "Compute Platform" section to see the available versions.\n\n'
+                f"Your current CUDA version is: {cuda_version}\n"
+            )
+            raise e
     # end = time.perf_counter()
     # print(f"\nTime elapsed: {end - start:.4f} seconds")
     print("\n")

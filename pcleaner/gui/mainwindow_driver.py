@@ -1968,6 +1968,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     @Slot(wt.WorkerError)
     def output_worker_error(self, error: wt.WorkerError) -> None:
+        # Nuke any review options.
+        self.cleaning_review_options = None
+        self.ocr_review_options = None
+
+        if gu.check_unsupported_cuda_error(self, error):
+            return
+
         gu.show_exception(
             self,
             self.tr("Processing Error"),

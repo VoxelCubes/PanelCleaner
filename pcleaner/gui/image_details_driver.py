@@ -653,6 +653,10 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
     @Slot(wt.WorkerError)
     def output_worker_error(self, error: wt.WorkerError) -> None:
+
+        if gu.check_unsupported_cuda_error(self, error):
+            return
+
         gu.show_exception(
             self, self.tr("Output Failed"), self.tr("Output generation failed:"), error
         )

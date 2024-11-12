@@ -99,11 +99,14 @@ def show_exception(
 
 def show_critical(parent, title: str, msg: str, **kwargs) -> int:
     msg = msg.ljust(MIN_MSG_LENGTH)
+    buttons = Qw.QMessageBox.Yes | Qw.QMessageBox.Abort
+    if "buttons" in kwargs:
+        buttons = kwargs.pop("buttons")
     box = SelectableMessageBox(
         Qw.QMessageBox.Critical,
         title,
         msg,
-        Qw.QMessageBox.Yes | Qw.QMessageBox.Abort,
+        buttons,
         parent,
         **kwargs,
     )
@@ -597,3 +600,46 @@ def match_image_files_to_ocr_analytics(
                 unmatched_analytics.remove(analytic)
 
     return matched, unmatched_images, unmatched_analytics
+
+
+def check_unsupported_cuda_error(caller, error: wt.WorkerError) -> bool:
+    """
+    Check if the error is related to an unsupported CUDA operation and show a message to the user.
+
+    :param caller: The calling object.
+    :param error: The WorkerError object.
+    :return: True if the error was handled, False otherwise.
+    """
+    if error.exception_type == NotImplementedError and "CUDA" in str(error.value):
+        # Get the current CUDA version.
+        cuda_version = "Error, no version found."
+        try:
+            import torch
+
+            version = torch.version.cuda
+            if version is not None:
+                cuda_version = version
+        except Exception:
+            pass
+        logger.opt(
+            depth=1, exception=(error.exception_type, error.value, error.traceback)
+        ).critical(error.value)
+        show_critical(
+            caller,
+            tr("CUDA Error"),
+            tr(
+                "<html>"
+                "Your GPU does not support the required CUDA operations.<br><br>"
+                "Try uninstalling the current versions of torch and torchvision"
+                " and installing the CPU version (or a different CUDA version) instead.<br>"
+                "You can find further instructions here: <br><a href='https://pytorch.org/get-started/locally/'>"
+                "https://pytorch.org/get-started/locally/</a><br>"
+                'Check the "Compute Platform" section to see the available versions.<br><br>'
+                f"Your current CUDA version is: {cuda_version}<br>"
+                "</html>"
+            ),
+            buttons=Qw.QMessageBox.Ok,
+            detailedText=str(error.value),
+        )
+        return True
+    return False
