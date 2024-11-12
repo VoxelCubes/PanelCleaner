@@ -332,74 +332,84 @@ Seiten mit Fehlern / insgesamt:
       <translation>Übermalt</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="146"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="149"/>
       <source>File Error</source>
       <translation>Datei-Fehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="146"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="149"/>
       <source>Failed to open file.</source>
       <translation>Die Datei konnte nicht geöffnet werden.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="513"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="516"/>
       <source>Failed to access the file.</source>
       <translation>Der Zugriff auf die Datei ist fehlgeschlagen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="514"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
       <source>An error occurred.</source>
       <translation>Es ist ein Fehler aufgetreten.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="515"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
       <source>The CSV file format requires exactly 6 columns.</source>
       <translation>Das CSV-Dateiformat erfordert genau 6 Spalten.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="516"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
       <source>The coordinates must be integers.</source>
       <translation>Die Koordinaten müssen ganzzahlig sein.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
       <source>The box coordinates may not exceed 2 billion.</source>
       <translation>Die Koordinaten der Felder dürfen 2 Milliarden nicht überschreiten.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
       <source>The file format was not recognized.</source>
       <translation>Das Dateiformat wurde nicht erkannt.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="524"/>
       <source>The CSV file must start with a header row, followed by data rows.</source>
       <translation>Die CSV-Datei muss mit einer Kopfzeile beginnen, gefolgt von Datenzeilen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="525"/>
       <source>The file path is missing.</source>
       <translation>Der Dateipfad fehlt.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="523"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
       <source>The file path is invalid.</source>
       <translation>Der Dateipfad ist ungültig.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="541"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="544"/>
       <source>OCR Parse Errors</source>
       <translation>OCR-Parsing-Fehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="587"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="590"/>
       <source>Multiple analytics match the image: {path}</source>
       <translation>Mehrere Datensätze stimmen mit dem Bild überein: {path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="591"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="594"/>
       <source>Multiple images match the file path: {path}</source>
       <translation>Mehrere Bilder stimmen mit dem Dateipfad überein: {path}</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/gui_utils.py" line="629"/>
+      <source>CUDA Error</source>
+      <translation type="unfinished">CUDA Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/gui_utils.py" line="640"/>
+      <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="508"/>
@@ -1012,22 +1022,22 @@ Bitte aktivieren Sie Übermalung in den Profileinstellungen und versuchen Sie es
       <translation>Bild kann nicht exportiert werden:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="657"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="661"/>
       <source>Output Failed</source>
       <translation>Ausgabe Fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="657"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="661"/>
       <source>Output generation failed:</source>
       <translation>Die Erzeugung der Ausgabe ist fehlgeschlagen:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="807"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="811"/>
       <source>Profile check failed</source>
       <translation>Profilprüfung fehlgeschlagen</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="807"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="811"/>
       <source>Profile change check failed:</source>
       <translation>Profiländerungsprüfung fehlgeschlagen:</translation>
     </message>
@@ -1628,12 +1638,12 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <translation>Die Verarbeitung wurde abgebrochen.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1973"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1980"/>
       <source>Processing Error</source>
       <translation>Verarbeitungsfehler</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1974"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1981"/>
       <source>Encountered an error while processing files.</source>
       <translation>Bei der Verarbeitung von Dateien ist ein Fehler aufgetreten.</translation>
     </message>
