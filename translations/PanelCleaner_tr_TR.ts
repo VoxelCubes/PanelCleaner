@@ -332,74 +332,89 @@ Pages with failures / total:
       <translation type="unfinished">Inpainted</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="146"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="149"/>
       <source>File Error</source>
       <translation type="unfinished">File Error</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="146"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="149"/>
       <source>Failed to open file.</source>
       <translation type="unfinished">Failed to open file.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="513"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="516"/>
       <source>Failed to access the file.</source>
       <translation type="unfinished">Failed to access the file.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="514"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
       <source>An error occurred.</source>
       <translation type="unfinished">An error occurred.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="515"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
       <source>The CSV file format requires exactly 6 columns.</source>
       <translation type="unfinished">The CSV file format requires exactly 6 columns.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="516"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
       <source>The coordinates must be integers.</source>
       <translation type="unfinished">The coordinates must be integers.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
       <source>The box coordinates may not exceed 2 billion.</source>
       <translation type="unfinished">The box coordinates may not exceed 2 billion.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
       <source>The file format was not recognized.</source>
       <translation type="unfinished">The file format was not recognized.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="524"/>
       <source>The CSV file must start with a header row, followed by data rows.</source>
       <translation type="unfinished">The CSV file must start with a header row, followed by data rows.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="525"/>
       <source>The file path is missing.</source>
       <translation type="unfinished">The file path is missing.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="523"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
       <source>The file path is invalid.</source>
       <translation type="unfinished">The file path is invalid.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="541"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="544"/>
       <source>OCR Parse Errors</source>
       <translation type="unfinished">OCR Parse Errors</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="587"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="590"/>
       <source>Multiple analytics match the image: {path}</source>
       <translation type="unfinished">Multiple analytics match the image: {path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/gui_utils.py" line="591"/>
+      <location filename="../pcleaner/gui/gui_utils.py" line="594"/>
       <source>Multiple images match the file path: {path}</source>
       <translation type="unfinished">Multiple images match the file path: {path}</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
+      <source>Error, no version found.</source>
+      <translation type="unfinished">Error, no version found.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/gui_utils.py" line="629"/>
+      <source>CUDA Error</source>
+      <translation type="unfinished">CUDA Error</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/gui_utils.py" line="640"/>
+      <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="508"/>
@@ -1012,22 +1027,22 @@ Please enable inpainting in the profile settings and try again.</translation>
       <translation type="unfinished">Failed to export image:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="657"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="661"/>
       <source>Output Failed</source>
       <translation type="unfinished">Output Failed</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="657"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="661"/>
       <source>Output generation failed:</source>
       <translation type="unfinished">Output generation failed:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="807"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="811"/>
       <source>Profile check failed</source>
       <translation type="unfinished">Profile check failed</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/image_details_driver.py" line="807"/>
+      <location filename="../pcleaner/gui/image_details_driver.py" line="811"/>
       <source>Profile change check failed:</source>
       <translation type="unfinished">Profile change check failed:</translation>
     </message>
@@ -1628,12 +1643,12 @@ Check the online documentation for how to add support for more languages.</trans
       <translation type="unfinished">Processing aborted.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1973"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1980"/>
       <source>Processing Error</source>
       <translation type="unfinished">Processing Error</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1974"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1981"/>
       <source>Encountered an error while processing files.</source>
       <translation type="unfinished">Encountered an error while processing files.</translation>
     </message>
