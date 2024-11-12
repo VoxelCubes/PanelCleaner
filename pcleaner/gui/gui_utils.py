@@ -612,7 +612,7 @@ def check_unsupported_cuda_error(caller, error: wt.WorkerError) -> bool:
     """
     if error.exception_type == NotImplementedError and "CUDA" in str(error.value):
         # Get the current CUDA version.
-        cuda_version = "Error, no version found."
+        cuda_version = tr("Error, no version found.")
         try:
             import torch
 

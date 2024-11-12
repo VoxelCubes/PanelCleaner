@@ -382,6 +382,11 @@ Pages with failures / total:
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
+        <source>Error, no version found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../pcleaner/gui/gui_utils.py" line="629"/>
         <source>CUDA Error</source>
         <translation type="unfinished"></translation>
