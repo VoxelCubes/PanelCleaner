@@ -402,9 +402,14 @@ Seiten mit Fehlern / insgesamt:
       <translation>Mehrere Bilder stimmen mit dem Dateipfad überein: {path}</translation>
     </message>
     <message>
+      <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
+      <source>Error, no version found.</source>
+      <translation type="unfinished">Error, no version found.</translation>
+    </message>
+    <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="629"/>
       <source>CUDA Error</source>
-      <translation type="unfinished">CUDA Error</translation>
+      <translation>CUDA-Fehler</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="640"/>
