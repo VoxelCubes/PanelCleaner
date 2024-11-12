@@ -3,6 +3,7 @@ from pathlib import Path, PosixPath
 from importlib import resources
 
 import pcleaner.gui.gui_utils as gu
+import pcleaner.gui.ui_generated_files
 import pcleaner.data.theme_icons as theme_icons_module
 
 
@@ -56,3 +57,34 @@ def test_theme_icon_presence():
                         assert (
                             False
                         ), f"Icon {expected_relative_path} not found among the theme_icons data files."
+
+
+def test_theme_icon_app_presence():
+    # Load the source code and inspect it for xdg icon names.
+    with resources.files(pcleaner.gui.ui_generated_files) as source_dir:
+        source_dir = Path(source_dir)
+
+    # This only works for the generated code from ui files.
+    # General python code would be undecidable.
+    expected_icons: set[str] = set()
+    for source_file in source_dir.rglob("*.py"):
+        with source_file.open() as file:
+            for line in file:
+                if 'iconThemeName = u"' in line:
+                    theme_name = line.split('iconThemeName = u"')[1].split('"')[0]
+                    expected_icons.add(theme_name)
+
+    # Ensure they are listed in the yaml icon list file.
+    yaml_path = Path(__file__).parent.parent / "icons" / "theme_list.yaml"
+    with yaml_path.open() as file:
+        data = yaml.safe_load(file)
+
+    theme_icons = data["Files"]
+    icon_set = set()
+    for category, sizes in theme_icons.items():
+        for size, icons in sizes.items():
+            for icon in icons:
+                icon_set.add(icon)
+
+    missing = expected_icons - icon_set
+    assert not missing
