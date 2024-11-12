@@ -922,7 +922,8 @@ def visualize_raw_boxes(
     :param raw_boxes: The raw boxes to visualize.
     :param output_path: The path to save the visualization to.
     """
-    image = Image.fromarray(image)
+    # Fix flipped R and B channels.
+    image = Image.fromarray(image[:, :, ::-1])
 
     with resources.files(pcleaner.data) as data_path:
         font_path = str(data_path / "LiberationSans-Regular.ttf")
