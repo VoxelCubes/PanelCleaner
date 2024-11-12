@@ -404,7 +404,7 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
       <source>Error, no version found.</source>
-      <translation type="unfinished">Error, no version found.</translation>
+      <translation>Fehler, keine Version gefunden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="629"/>
@@ -414,7 +414,7 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="640"/>
       <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;Ihr Grafikprozessor unterstützt die erforderlichen CUDA-Operationen nicht.&lt;br&gt;&lt;br&gt;Deinstallieren Sie die aktuellen Versionen von torch und torchvision und installieren Sie stattdessen die CPU-Version (oder eine andere CUDA-Version).&lt;br&gt;Weitere Anweisungen finden Sie hier: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Überprüfen Sie den Abschnitt &quot;Compute Platform&quot;, um die verfügbaren Versionen zu sehen.&lt;br&gt;&lt;br&gt;Ihre aktuelle CUDA-Version ist: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="508"/>
