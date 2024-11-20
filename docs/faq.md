@@ -58,14 +58,6 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 (`torchaudio` may be omitted)
 This should download around 2 Gigabytes of data, so be patient, then try running `pcleaner` again.
 
-## It won't start on Windows, something about "Magic"?
-
-You can try swapping out the python magic package (image manipulation library) with the following command:
-
-```bash
-pip uninstall python-magic
-pip install python-magic-bin
-```
 
 ## Will profiles I set up with the CLI work with the GUI?
 

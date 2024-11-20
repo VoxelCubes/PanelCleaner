@@ -1,11 +1,9 @@
 import json
-import re
 from enum import Enum, auto
 from importlib import resources
 from pathlib import Path
 from typing import Sequence
 
-import magic
 from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 from attrs import frozen, define
 from loguru import logger
@@ -213,20 +211,7 @@ class PageData:
     @property
     def image_size(self) -> tuple[int, int]:
         if self._image_size is None:
-            try:
-                metadata = magic.from_file(self.image_path)
-                size_str = re.search(r"(\d+) x (\d+)", metadata).groups()
-                self._image_size = (int(size_str[0]), int(size_str[1]))
-            except (UnicodeDecodeError, AttributeError):
-                # Unicode error: Windows is up to some bullshit again.
-                # Attribute error: magic can't deal with windows' bullshit either, returning "cannot open".
-                # Something got fucked, time for plan B.
-                logger.error(
-                    f"Encountered a Unicode Error for file '{self.image_path}', using fallback method."
-                )
-                temp_image = Image.open(self.image_path)
-                self._image_size = temp_image.size
-
+            self._image_size = Image.open(self.image_path).size
         return self._image_size
 
     def boxes_from_type(self, box_type: BoxType) -> list[Box]:

@@ -27,8 +27,6 @@ simple_lama_inpainting
 pytesseract
 psd-tools
 strenum; python_version < "3.11"
-python-magic; platform_system != "Windows"
-python-magic-bin; platform_system == "Windows"
 dbus-python; platform_system == "Linux"
 pywin32; platform_system == "Windows"
 win10toast; platform_system == "Windows"
