@@ -290,14 +290,15 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
         """
         return self._data_getter() == self._default_value
 
-    def set_value(self, value: Any) -> None:
+    def set_value(self, value: Any, no_new_default: bool) -> None:
         """
         Set the value of the data widget, which is the new default value.
         Does not emit the valueChanged signal.
         """
-        self._default_value = value
+        if not no_new_default:
+            self._default_value = value
+            self.set_reset_button_enabled(False)
         self._data_setter(value)
-        self.set_reset_button_enabled(False)
 
     def get_value(self) -> Any:
         """
@@ -493,11 +494,14 @@ class ProfileToolBox(Qw.QToolBox):
             # Tell the vbox layout to stretch the last item to fill the space.
             layout.addStretch(1)
 
-    def set_profile_values(self, profile: cfg.Profile) -> None:
+    def set_profile_values(self, profile: cfg.Profile, no_new_defaults: bool = False) -> None:
         """
         Load the values from the given profile into the widgets.
+        Sometimes we just want to change the value currently being displayed, as
+        as result of automatic fixes, not as the ground truth of the current profile.
 
         :param profile: The profile to load.
+        :param no_new_defaults: If True, don't update the default values.
         """
         logger.debug("Setting profile values")
         # Assign the value and connect the reset functionality for each widget.
@@ -505,7 +509,7 @@ class ProfileToolBox(Qw.QToolBox):
             for key, option_widget in section.items():
                 # Get the value from the profile.
                 value = profile.get(section_name, key)
-                option_widget.set_value(value)
+                option_widget.set_value(value, no_new_defaults)
 
         self.values_initialized = True
 

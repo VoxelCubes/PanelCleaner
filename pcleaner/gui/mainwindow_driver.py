@@ -1335,6 +1335,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         """
         logger.debug("Applying profile.")
         self.toolBox_profile.get_profile_values(self.config.current_profile)
+        self.config.current_profile.fix()
+        self.toolBox_profile.set_profile_values(
+            self.config.current_profile,
+            no_new_defaults=True,
+        )
         self.handle_profile_values_changed()
         self.set_last_applied_profile()
         self.profile_values_changed.emit()
