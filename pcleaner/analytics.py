@@ -565,13 +565,13 @@ def show_inpainting_analytics(
     ]
 
     total_inpaint = len(thicknesses)
-    average_thickness = sum(thicknesses) / total_inpaint if total_inpaint else tr("N/A")
+    average_thickness = f"{sum(thicknesses) / total_inpaint:.0%}" if total_inpaint else tr("N/A")
 
     buffer.write(
         tr("Inpainting performed")
         + f": {total_inpaint} | "
         + tr("Average thickness")
-        + f": {average_thickness:.0%}\n"
+        + f": {average_thickness}\n"
     )
     buffer.write(
         tr("Minimum thickness")
