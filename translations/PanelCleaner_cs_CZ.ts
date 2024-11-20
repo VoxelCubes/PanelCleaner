@@ -7,32 +7,32 @@
       <location filename="../pcleaner/config.py" line="1011"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation type="unfinished">default</translation>
+      <translation>výchozí</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
       <source>Profile file {profile_path} already exists.</source>
-      <translation type="unfinished">Profile file {profile_path} already exists.</translation>
+      <translation>Soubor profilu {profile_path} již existuje.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="106"/>
       <source>Profile {profile_name} created.</source>
-      <translation type="unfinished">Profile {profile_name} created.</translation>
+      <translation>Profil {profile_name} vytvořen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="238"/>
       <source>Profile name cannot be empty.</source>
-      <translation type="unfinished">Profile name cannot be empty.</translation>
+      <translation>Název profilu nemůže být prázdný.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="240"/>
       <source>Profile name already in use.</source>
-      <translation type="unfinished">Profile name already in use.</translation>
+      <translation>Název profilu je již použit.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="242"/>
       <source>Profile name is reserved.</source>
-      <translation type="unfinished">Profile name is reserved.</translation>
+      <translation>Název profilu je vyhrazen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="348"/>
@@ -40,56 +40,56 @@
       <location filename="../pcleaner/gui/image_file.py" line="360"/>
       <location filename="../pcleaner/gui/image_file.py" line="373"/>
       <source>Unknown</source>
-      <translation type="unfinished">Unknown</translation>
+      <translation>Neznámý</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="362"/>
       <source>RGB</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">RGB</translation>
+      <translation>RGB</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="364"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">CMYK</translation>
+      <translation>CMYK</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="366"/>
       <source>Grayscale</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Grayscale</translation>
+      <translation>Stupnice šedi</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="368"/>
       <source>1-bit</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">1-bit</translation>
+      <translation>1 bit</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="370"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Palette</translation>
+      <translation>Paleta</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="373"/>
       <source>Error downloading file from url: {url}</source>
-      <translation type="unfinished">Error downloading file from url: {url}</translation>
+      <translation>Chyba při stahování souboru z url: {url}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="427"/>
       <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-Failed to save the file to {save_path}</translation>
+      <translation>Chyba při stahování souboru z url: {url}
+Nepodařilo se uložit soubor do {save_path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="436"/>
       <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-The file content is different from expected.</translation>
+      <translation>Chyba při stahování souboru z url: {url}
+Obsah souboru je jiný, než se očekávalo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="65"/>
@@ -101,25 +101,25 @@ The file content is different from expected.</translation>
       <location filename="../pcleaner/analytics.py" line="427"/>
       <location filename="../pcleaner/analytics.py" line="570"/>
       <source>N/A</source>
-      <translation type="unfinished">N/A</translation>
+      <translation>N/A</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="78"/>
       <source>OCR Analytics</source>
-      <translation type="unfinished">OCR Analytics</translation>
+      <translation>Analýza OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="84"/>
       <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
-      <translation type="unfinished">Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
+      <translation>Počet rámečků: {num_boxes} | Počet malých rámečků: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="93"/>
       <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
-      <translation type="unfinished">Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
+      <translation>Počet odstraněných rámečků: {num_removed} ({removed_box_ratio} celkem, {removed_among_small_ratio} malých rámečků)
 </translation>
     </message>
     <message>
@@ -127,15 +127,15 @@ The file content is different from expected.</translation>
       <source>
 Small box sizes:
 </source>
-      <translation type="unfinished">
-Small box sizes:
+      <translation>
+Malé rámečky:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="108"/>
       <source>No not-removed small boxes found.
 </source>
-      <translation type="unfinished">No not-removed small boxes found.
+      <translation>Nebyly nalezeny žádné neodstraněné malé rámečky.
 </translation>
     </message>
     <message>
@@ -143,105 +143,105 @@ Small box sizes:
       <source>
 Removed bubbles:
 </source>
-      <translation type="unfinished">
-Removed bubbles:
+      <translation>
+Odstraněné bubliny:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="126"/>
       <source>Page {path}: {text}
 </source>
-      <translation type="unfinished">Page {path}: {text}
+      <translation>Stránka {path}: {text}
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="170"/>
       <source>Small boxes</source>
-      <translation type="unfinished">Small boxes</translation>
+      <translation>Malé rámečky</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="172"/>
       <source>Removed boxes</source>
-      <translation type="unfinished">Removed boxes</translation>
+      <translation>Odstraněné rámečky</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="211"/>
       <location filename="../pcleaner/analytics.py" line="230"/>
       <location filename="../pcleaner/analytics.py" line="351"/>
       <source>Failed</source>
-      <translation type="unfinished">Failed</translation>
+      <translation>Neúspěšné</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="226"/>
       <source>Perfect</source>
-      <translation type="unfinished">Perfect</translation>
+      <translation>Perfektní</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="537"/>
       <source>Total
 </source>
-      <translation type="unfinished">Total
+      <translation>Celkem
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="309"/>
       <source>Mask Fitment Analytics</source>
-      <translation type="unfinished">Mask Fitment Analytics</translation>
+      <translation>Analýza uložení masky</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="228"/>
       <source>Total</source>
-      <translation type="unfinished">Total</translation>
+      <translation>Celkem</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="313"/>
       <source>Total boxes</source>
-      <translation type="unfinished">Total boxes</translation>
+      <translation>Celkem rámečků</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="315"/>
       <source>Masks succeeded</source>
-      <translation type="unfinished">Masks succeeded</translation>
+      <translation>Úspěšné masky</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="317"/>
       <source>Masks failed</source>
-      <translation type="unfinished">Masks failed</translation>
+      <translation>Neúspěšné masky</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="321"/>
       <source>Perfect masks</source>
-      <translation type="unfinished">Perfect masks</translation>
+      <translation>Perfektní masky</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="323"/>
       <source>Average border deviation</source>
-      <translation type="unfinished">Average border deviation</translation>
+      <translation>Průměrná odchylka okraje</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="325"/>
       <source>
 Mask usage by thickness (in pixels):
 </source>
-      <translation type="unfinished">
-Mask usage by thickness (in pixels):
+      <translation>
+Použití masky podle tloušťky (v pixelech):
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="341"/>
       <source>Mask ({thickness}px)</source>
-      <translation type="unfinished">Mask ({thickness}px)</translation>
+      <translation>Maska ({thickness}px)</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="345"/>
       <source>Box mask</source>
-      <translation type="unfinished">Box mask</translation>
+      <translation>Maska rámečku</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="364"/>
       <source>All bubbles were successfully masked.
 </source>
-      <translation type="unfinished">All bubbles were successfully masked.
+      <translation>Všechny bubliny byly úspěšně zamaskovány.
 </translation>
     </message>
     <message>
@@ -249,58 +249,58 @@ Mask usage by thickness (in pixels):
       <source>
 Pages with failures / total:
 </source>
-      <translation type="unfinished">
-Pages with failures / total:
+      <translation>
+Stránky s chybami / celkem:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="406"/>
       <source>Denoising Analytics</source>
-      <translation type="unfinished">Denoising Analytics</translation>
+      <translation>Analýza odstranění šumu</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="429"/>
       <source>Total masks</source>
-      <translation type="unfinished">Total masks</translation>
+      <translation>Celkem masek</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="431"/>
       <source>Masks denoised</source>
-      <translation type="unfinished">Masks denoised</translation>
+      <translation>Masky s odstraněním šumu</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="435"/>
       <source>Minimum deviation to denoise</source>
-      <translation type="unfinished">Minimum deviation to denoise</translation>
+      <translation>Minimální odchylka pro odstranění šumu</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="437"/>
       <source>Maximum allowed deviation</source>
-      <translation type="unfinished">Maximum allowed deviation</translation>
+      <translation>Maximální povolená odchylka</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="439"/>
       <source>Standard deviation around masks:
 
 </source>
-      <translation type="unfinished">Standard deviation around masks:
+      <translation>Směrodatná odchylka kolem masek:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="536"/>
       <source>Denoised</source>
-      <translation type="unfinished">Denoised</translation>
+      <translation>Šum odstraněn</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="559"/>
       <source>Inpainting Analytics</source>
-      <translation type="unfinished">Inpainting Analytics</translation>
+      <translation>Analýza retušování</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="572"/>
       <source>Inpainting performed</source>
-      <translation type="unfinished">Inpainting performed</translation>
+      <translation>Provedené retušování</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="574"/>
@@ -310,239 +310,239 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/analytics.py" line="578"/>
       <source>Minimum thickness</source>
-      <translation type="unfinished">Minimum thickness</translation>
+      <translation>Minimální tloušťka</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="580"/>
       <source>Maximum thickness</source>
-      <translation type="unfinished">Maximum thickness</translation>
+      <translation>Maximální tloušťka</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="582"/>
       <source>Outline thickness around text inpainted:
 
 </source>
-      <translation type="unfinished">Outline thickness around text inpainted:
+      <translation>Tloušťka obrysu kolem retušovaného textu:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="649"/>
       <source>Inpainted</source>
-      <translation type="unfinished">Inpainted</translation>
+      <translation>Retušováno</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="149"/>
       <source>File Error</source>
-      <translation type="unfinished">File Error</translation>
+      <translation>Chyba souboru</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="149"/>
       <source>Failed to open file.</source>
-      <translation type="unfinished">Failed to open file.</translation>
+      <translation>Nepodařilo se otevřít soubor.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="516"/>
       <source>Failed to access the file.</source>
-      <translation type="unfinished">Failed to access the file.</translation>
+      <translation>Nepodařilo se získat přístup k souboru.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
       <source>An error occurred.</source>
-      <translation type="unfinished">An error occurred.</translation>
+      <translation>Došlo k chybě.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
       <source>The CSV file format requires exactly 6 columns.</source>
-      <translation type="unfinished">The CSV file format requires exactly 6 columns.</translation>
+      <translation>Formát souboru CSV vyžaduje přesně 6 sloupců.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
       <source>The coordinates must be integers.</source>
-      <translation type="unfinished">The coordinates must be integers.</translation>
+      <translation>Souřadnice musí být celočíselné.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
       <source>The box coordinates may not exceed 2 billion.</source>
-      <translation type="unfinished">The box coordinates may not exceed 2 billion.</translation>
+      <translation>Souřadnice rámečku nesmí překročit 2 miliardy.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
       <source>The file format was not recognized.</source>
-      <translation type="unfinished">The file format was not recognized.</translation>
+      <translation>Formát souboru nebyl rozpoznán.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="524"/>
       <source>The CSV file must start with a header row, followed by data rows.</source>
-      <translation type="unfinished">The CSV file must start with a header row, followed by data rows.</translation>
+      <translation>Soubor CSV musí začínat řádkem záhlaví, po kterém následují řádky s daty.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="525"/>
       <source>The file path is missing.</source>
-      <translation type="unfinished">The file path is missing.</translation>
+      <translation>Chybí cesta k souboru.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
       <source>The file path is invalid.</source>
-      <translation type="unfinished">The file path is invalid.</translation>
+      <translation>Cesta k souboru je neplatná.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="544"/>
       <source>OCR Parse Errors</source>
-      <translation type="unfinished">OCR Parse Errors</translation>
+      <translation>Chyba analýzy OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="590"/>
       <source>Multiple analytics match the image: {path}</source>
-      <translation type="unfinished">Multiple analytics match the image: {path}</translation>
+      <translation>Obrázku odpovídá více analytik: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="594"/>
       <source>Multiple images match the file path: {path}</source>
-      <translation type="unfinished">Multiple images match the file path: {path}</translation>
+      <translation>Cestě k souboru odpovídá více obrázkům: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
       <source>Error, no version found.</source>
-      <translation type="unfinished">Error, no version found.</translation>
+      <translation>Chyba, nebyla nalezena žádná verze.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="629"/>
       <source>CUDA Error</source>
-      <translation type="unfinished">CUDA Error</translation>
+      <translation>Chyba CUDA</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="640"/>
       <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;Váše GPU nepodporuje požadované operace CUDA.&lt;br&gt;&lt;br&gt;Zkuste odinstalovat aktuální verzi torch a torchvision a místo nich nainstalovat verzi pro CPU (nebo jinou verzi CUDA).&lt;br&gt;Další pokyny najdete zde: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Podívejte se do sekce &quot;Compute Platform&quot;, kde najdete dostupné verze.&lt;br&gt;&lt;br&gt;Vaše aktuální verze CUDA je: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="508"/>
       <source>Inpainting model not found.</source>
-      <translation type="unfinished">Inpainting model not found.</translation>
+      <translation>Nebyl nalezen model pro retušování.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
       <location filename="../pcleaner/gui/processing.py" line="862"/>
       <source>filename</source>
-      <translation type="unfinished">filename</translation>
+      <translation>název souboru</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
       <location filename="../pcleaner/gui/processing.py" line="862"/>
       <source>startx</source>
-      <translation type="unfinished">startx</translation>
+      <translation>startx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
       <location filename="../pcleaner/gui/processing.py" line="862"/>
       <source>starty</source>
-      <translation type="unfinished">starty</translation>
+      <translation>starty</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
       <location filename="../pcleaner/gui/processing.py" line="862"/>
       <source>endx</source>
-      <translation type="unfinished">endx</translation>
+      <translation>endx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
       <location filename="../pcleaner/gui/processing.py" line="862"/>
       <source>endy</source>
-      <translation type="unfinished">endy</translation>
+      <translation>endy</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
       <location filename="../pcleaner/gui/processing.py" line="862"/>
       <source>text</source>
-      <translation type="unfinished">text</translation>
+      <translation>text</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1728"/>
       <location filename="../pcleaner/gui/processing.py" line="871"/>
       <source>Saved detected text to {output_file}</source>
-      <translation type="unfinished">Saved detected text to {output_file}</translation>
+      <translation>Detekovaný text byl uložen do {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1732"/>
       <location filename="../pcleaner/gui/processing.py" line="875"/>
       <source>Failed to write detected text to {output_file}</source>
-      <translation type="unfinished">Failed to write detected text to {output_file}</translation>
+      <translation>Nepodařilo se zapsat detekovaný text do {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1736"/>
       <location filename="../pcleaner/gui/processing.py" line="878"/>
       <source>Save Failed</source>
-      <translation type="unfinished">Save Failed</translation>
+      <translation>Ukládání selhalo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1737"/>
       <location filename="../pcleaner/gui/processing.py" line="878"/>
       <source>Failed to write detected text to file.</source>
-      <translation type="unfinished">Failed to write detected text to file.</translation>
+      <translation>Nepodařilo se zapsat detekovaný text do souboru.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="445"/>
       <source>Inpainter (experimental)</source>
-      <translation type="unfinished">Inpainter (experimental)</translation>
+      <translation>Retušování (experimentální)</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="99"/>
       <source>Invalid type for img_paths: {paths}</source>
-      <translation type="unfinished">Invalid type for img_paths: {paths}</translation>
+      <translation>Nesprávný typ pro img_paths: {paths}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="108"/>
       <source>Unsupported image format: {suffix} for {path}</source>
-      <translation type="unfinished">Unsupported image format: {suffix} for {path}</translation>
+      <translation>Nepodporovaný formát obrázku: {suffix} pro {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="114"/>
       <source>Image path {img_path} does not exist.</source>
-      <translation type="unfinished">Image path {img_path} does not exist.</translation>
+      <translation>Cesta k obrázku {img_path} neexistuje.</translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="130"/>
       <source>Clean mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Clean mask</numerusform>
-        <numerusform>Clean mask</numerusform>
-        <numerusform>Clean mask</numerusform>
-        <numerusform>Clean mask</numerusform>
+      <translation>
+        <numerusform>Vyčištěná maska</numerusform>
+        <numerusform>Vyčištěných masek</numerusform>
+        <numerusform>Vyčištěných masek</numerusform>
+        <numerusform>Vyčištěných masek</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="131"/>
       <source>Denoised mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Denoised mask</numerusform>
-        <numerusform>Denoised mask</numerusform>
-        <numerusform>Denoised mask</numerusform>
-        <numerusform>Denoised mask</numerusform>
+      <translation>
+        <numerusform>Maska zbavena šumu</numerusform>
+        <numerusform>Masek zbavených šumu</numerusform>
+        <numerusform>Masek zbavených šumu</numerusform>
+        <numerusform>Masek zbavených šumu</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="133"/>
       <source>Inpainting mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Inpainting mask</numerusform>
-        <numerusform>Inpainting mask</numerusform>
-        <numerusform>Inpainting mask</numerusform>
-        <numerusform>Inpainting mask</numerusform>
+      <translation>
+        <numerusform>Retušovaná maska</numerusform>
+        <numerusform>Retušovaných masek</numerusform>
+        <numerusform>Retušovaných masek</numerusform>
+        <numerusform>Retušovaných masek</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="410"/>
       <source>Page</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Page</numerusform>
-        <numerusform>Page</numerusform>
-        <numerusform>Page</numerusform>
-        <numerusform>Page</numerusform>
+      <translation>
+        <numerusform>Stránka</numerusform>
+        <numerusform>Stránek</numerusform>
+        <numerusform>Stránek</numerusform>
+        <numerusform>Stránek</numerusform>
       </translation>
     </message>
   </context>
@@ -551,41 +551,41 @@ Pages with failures / total:
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>O Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="81"/>
       <source># Panel Cleaner
 
 An AI-powered tool to clean manga panels.</source>
-      <translation type="unfinished"># Panel Cleaner
+      <translation># Panel Cleaner
 
-An AI-powered tool to clean manga panels.</translation>
+Nástroj s umělou inteligencí na čištění panelů mangy.</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="98"/>
       <source>Version:</source>
-      <translation type="unfinished">Version:</translation>
+      <translation>Verze:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="112"/>
       <source>Author:</source>
-      <translation type="unfinished">Author:</translation>
+      <translation>Autor:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="150"/>
       <source>Toolkit:</source>
-      <translation type="unfinished">Toolkit:</translation>
+      <translation>Toolkit:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="164"/>
       <source>License:</source>
-      <translation type="unfinished">License:</translation>
+      <translation>Licence:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="181"/>
       <source>Source code:</source>
-      <translation type="unfinished">Source code:</translation>
+      <translation>Zdrojový kód:</translation>
     </message>
   </context>
   <context>
@@ -593,7 +593,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CTextEdit.py" line="17"/>
       <source>Clear</source>
-      <translation type="unfinished">Clear</translation>
+      <translation>Vyčistit</translation>
     </message>
   </context>
   <context>
@@ -601,7 +601,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="38"/>
       <source>Select Color</source>
-      <translation type="unfinished">Select Color</translation>
+      <translation>Vybrat barvu</translation>
     </message>
   </context>
   <context>
@@ -609,7 +609,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="102"/>
       <source>Copy to Clipboard</source>
-      <translation type="unfinished">Copy to Clipboard</translation>
+      <translation>Zkopírovat do schránky</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="113"/>
