@@ -288,7 +288,8 @@ def visualize_standard_deviations(
                 width=3,
             )
             draw.rectangle(fitment.mask_box.as_tuple, outline=(255, 0, 0, 255), width=3)
-            text = f"\u03C3>{max_standard_deviation:.2f}"
+            std_deviation = fitment.analytics_std_deviation
+            text = f"\u03C3={std_deviation:.2f}"
             draw.text(
                 (text_x + text_offset_x, text_y + text_offset_y),
                 text,
