@@ -800,6 +800,8 @@ def grow_mask(mask: Image.Image, size: int) -> Image.Image:
     :param size: The amount of pixels to grow the mask by.
     :return: The grown mask. Mode: "1"
     """
+    if size == 0:
+        return mask
     grow_size = size * 2
     mask = mask.convert("L")
     mask_array = np.array(mask, dtype=np.uint8)
