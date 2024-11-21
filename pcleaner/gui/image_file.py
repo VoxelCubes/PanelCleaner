@@ -327,6 +327,7 @@ class ImageFile:
             ip.max_inpainting_radius,
             ip.inpainting_radius_multiplier,
             ip.inpainting_isolation_radius,
+            ip.inpainting_fade_radius,
         ]
         self.outputs[ost.Output.inpainted_mask] = ProcessOutput(
             "The inpainted sections around the text that was poorly cleaned, if at all.",

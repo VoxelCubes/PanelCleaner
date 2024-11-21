@@ -749,10 +749,11 @@ class InpainterConfig:
     inpainting_enabled: bool = False
     inpainting_min_std_dev: float = 15
     inpainting_max_mask_radius: int = 6
-    min_inpainting_radius: int = 5
+    min_inpainting_radius: int = 7
     max_inpainting_radius: int = 20
-    inpainting_radius_multiplier: float = 0.1
+    inpainting_radius_multiplier: float = 0.2
     inpainting_isolation_radius: int = 5
+    inpainting_fade_radius: int = 4
 
     def export_to_conf(
         self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
@@ -782,6 +783,8 @@ class InpainterConfig:
 
         # The minimum standard deviation of colors around the edge of a given mask
         # to perform inpainting on the region around the mask.
+        # If this value matches the maximum deviation for masks, only failed bubbles will be inpainted,
+        # making the following two settings irrelevant.
         inpainting_min_std_dev = {self.inpainting_min_std_dev}
 
         # The maximum radius of a mask to perform inpainting on.
@@ -810,6 +813,12 @@ class InpainterConfig:
         # This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels
         # outside of its dedicated region.
         inpainting_isolation_radius = {self.inpainting_isolation_radius}
+        
+        # Fade the edges of the inpainted cover mask by this many pixels to smoothly blend
+        # the inpainted parts into the rest of the image.[GUI: <br>]
+        # If you see faint outlines after inpainting, increase the min inpainting value and
+        # set this one to half that amount.
+        inpainting_fade_radius = {self.inpainting_fade_radius}
 
         """
         inpainter_conf = cu.ConfigUpdater()
@@ -835,6 +844,7 @@ class InpainterConfig:
         try_to_load(self, config_updater, section, int, "max_inpainting_radius")
         try_to_load(self, config_updater, section, float, "inpainting_radius_multiplier")
         try_to_load(self, config_updater, section, int, "inpainting_isolation_radius")
+        try_to_load(self, config_updater, section, int, "inpainting_fade_radius")
 
     def fix(self) -> None:
         if self.inpainting_min_std_dev < 0:
@@ -849,6 +859,9 @@ class InpainterConfig:
             self.inpainting_radius_multiplier = 0
         if self.inpainting_isolation_radius < 0:
             self.inpainting_isolation_radius = 0
+        if self.inpainting_fade_radius < 0:
+            self.inpainting_fade_radius = 0
+        self.max_inpainting_radius = max(self.min_inpainting_radius, self.max_inpainting_radius)
 
 
 @define

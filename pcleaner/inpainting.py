@@ -145,15 +145,10 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
             original_image.size, resample=Image.NEAREST
         )
 
-    # Apply the mask to the inpainted image.
-    inpainted_areas = Image.new("RGBA", original_image.size, 0)
-    inpainted_areas.paste(inpainted_image, (0, 0), isolated_combined_mask)
-
     # Create a new output with these inpainted areas overlayed.
     # But first, apply the cleaning masks.
-    cleaned_image = (
-        original_image  # Don't bother copying as we won't need this anymore, so overwrite.
-    )
+    # Don't bother copying as we won't need this anymore, so overwrite.
+    cleaned_image = original_image.convert("RGBA")
     # We need to scale up the mask image to the original image size.
     if original_image.size != mask_image.size:
         mask_image = mask_image.resize(original_image.size, resample=Image.NEAREST)
@@ -163,10 +158,22 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
         noise_mask = Image.open(path_gen.noise_mask)
         cleaned_image.paste(noise_mask, (0, 0), noise_mask)
 
-    cleaned_image.paste(inpainted_areas, (0, 0), isolated_combined_mask)
+    if i_conf.inpainting_fade_radius:
+        # Fade the mask edges for a smoother transition.
+        mask_faded = ops.fade_mask_edges(combined_mask, i_conf.inpainting_fade_radius)
+    else:
+        mask_faded = combined_mask.convert("L")
+
+    # Cut away the rest according to the isolated combined mask.
+    final_mask = Image.new("L", original_image.size, 0)
+    final_mask.paste(mask_faded, (0, 0), isolated_combined_mask)
+    inpainted_image.putalpha(final_mask)
+
+    cleaned_image.alpha_composite(inpainted_image)
+    cleaned_image.putalpha(255)
 
     # Save output.
-    inpainted_areas.save(path_gen.inpainting)
+    inpainted_image.save(path_gen.inpainting)
     cleaned_image.save(path_gen.clean_inpaint)
 
     # Package the analytics. We're only interested in the thicknesses.
