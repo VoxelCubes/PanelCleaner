@@ -803,18 +803,18 @@ Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastaven
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="229"/>
       <source>Failed to load images: {path}</source>
-      <translation type="unfinished">Failed to load images: {path}</translation>
+      <translation>Nepodařilo se načíst obrázky: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="237"/>
       <source>Unsupported TIFF files</source>
-      <translation type="unfinished">Unsupported TIFF files</translation>
+      <translation>Nepodporované TIFF soubory</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="239"/>
       <source>The following 5-channel TIFF files are not supported: 
 </source>
-      <translation type="unfinished">The following 5-channel TIFF files are not supported: 
+      <translation>Následující pětikanálové soubory TIFF nejsou podporovány: 
 </translation>
     </message>
     <message>
