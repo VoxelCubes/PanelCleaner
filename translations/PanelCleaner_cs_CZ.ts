@@ -652,7 +652,7 @@ Nástroj s umělou inteligencí na čištění panelů mangy.</translation>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="87"/>
       <source>Install for Dolphin</source>
-      <translation>Instalovat do Dolphin</translation>
+      <translation>Nainstalovat pro Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="88"/>
@@ -672,92 +672,92 @@ Nástroj s umělou inteligencí na čištění panelů mangy.</translation>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="103"/>
       <source>Install for Windows Explorer</source>
-      <translation type="unfinished">Install for Windows Explorer</translation>
+      <translation>Nainstalovat pro Průzkumníka souborů</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="104"/>
       <source>Uninstall for Windows Explorer</source>
-      <translation type="unfinished">Uninstall for Windows Explorer</translation>
+      <translation>Odinstalovat z Průzkumníka souborů</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="110"/>
       <source>The extension will be installed in the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be installed in the Windows registry.This requires admin permissions.</translation>
+      <translation>Rozšíření se nainstaluje do registru Windows. Vyžaduje oprávnění správce.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="116"/>
       <source>The extension will be uninstalled from the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be uninstalled from the Windows registry.This requires admin permissions.</translation>
+      <translation>Rozšíření bude odinstalováno z registru Windows. Vyžaduje oprávnění správce.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="157"/>
       <source>Dolphin extension installed successfully.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.</translation>
+      <translation>Rozšíření Dolphin bylo úspěšně nainstalováno.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="171"/>
       <source>Installation successful</source>
-      <translation type="unfinished">Installation successful</translation>
+      <translation>Instalace proběhla úspěšně</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="162"/>
       <source>Dolphin extension installed successfully.
 You may need to log out and log back in (or restart) for the changes to take effect.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.
-You may need to log out and log back in (or restart) for the changes to take effect.</translation>
+      <translation>Rozšíření Dolphin bylo úspěšně nainstalováno.
+Aby se změny projevily, je prořeba se odhlásit a přihlásit, nebo restartovat zařízení.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="177"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="201"/>
       <source>Installation failed</source>
-      <translation type="unfinished">Installation failed</translation>
+      <translation>Instalace se nezdařila</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="178"/>
       <source>Failed to install Dolphin extension.</source>
-      <translation type="unfinished">Failed to install Dolphin extension.</translation>
+      <translation>Nepodařilo se nainstalovat rozšíření pro Dolphin.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="202"/>
       <source>Failed to install Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to install Windows Explorer extension.</translation>
+      <translation>Nepodařilo se nainstalovat rozšíření pro Průzkumníka souborů.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="217"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="223"/>
       <source>Uninstallation successful</source>
-      <translation type="unfinished">Uninstallation successful</translation>
+      <translation>Odinstalace proběhla úspěšně</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
       <source>Dolphin extension uninstalled successfully.</source>
-      <translation type="unfinished">Dolphin extension uninstalled successfully.</translation>
+      <translation>Rozšíření Dolphin bylo úspěšně odinstalováno.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="224"/>
       <source>Dolphin extension was not installed.</source>
-      <translation type="unfinished">Dolphin extension was not installed.</translation>
+      <translation>Rozšíření Dolphin nebylo nainstalováno.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="229"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="248"/>
       <source>Uninstallation failed</source>
-      <translation type="unfinished">Uninstallation failed</translation>
+      <translation>Odinstalace se nezdařila</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="230"/>
       <source>Failed to uninstall Dolphin extension.</source>
-      <translation type="unfinished">Failed to uninstall Dolphin extension.</translation>
+      <translation>Nepodařilo se odinstalovat rozšíření pro Dolphin.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="249"/>
       <source>Failed to uninstall Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to uninstall Windows Explorer extension.</translation>
+      <translation>Nepodařilo se odinstalovat rozšíření pro Průzkumníka souborů.</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="14"/>
       <source>File Manager Extension</source>
-      <translation type="unfinished">File Manager Extension</translation>
+      <translation>Rozšíření správce souborů</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="32"/>
@@ -768,13 +768,13 @@ This feature adds a menu option to your file browser&apos;s context menu (which 
 It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
 
 By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</source>
-      <translation type="unfinished">### Add or Remove Integration with your File Browser
+      <translation>### Přidat nebo odebrat integraci se správcem souborů
 
-This feature adds a menu option to your file browser&apos;s context menu (which appears when you right-click) for folders or image files.
+Tato funkce přidá do kontextové nabídky správce souborů (která se zobrazí po kliknutí pravým tlačítkem myši) možnost pro složky nebo obrázky.
 
-It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
+Umožňuje používat aplikaci Panel Cleaner přímo ze správce souborů, čímž odpadá nutnost otevírat aplikaci samostatně.
 
-By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</translation>
+Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastavení však můžete změnit výběrem možnosti **Profil** a poté **Nastavit výchozí** z panelu nabídek.</translation>
     </message>
   </context>
   <context>
@@ -782,23 +782,23 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="132"/>
       <source>Original size in pixels (width × height)</source>
-      <translation type="unfinished">Original size in pixels (width × height)</translation>
+      <translation>Původní velikost v pixelech (šířka × výška)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="135"/>
       <source>Processing size in pixels (width × height), scale factor</source>
-      <translation type="unfinished">Processing size in pixels (width × height), scale factor</translation>
+      <translation>Velikost zpracování v pixelech (šířka × výška), faktor měřítka</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="220"/>
       <location filename="../pcleaner/gui/file_table.py" line="228"/>
       <source>Loading Failed</source>
-      <translation type="unfinished">Loading Failed</translation>
+      <translation>Načtení se nezdařilo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="221"/>
       <source>Failed to discover images: {path}</source>
-      <translation type="unfinished">Failed to discover images: {path}</translation>
+      <translation>Nepodařilo se najít obrázky: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="229"/>
