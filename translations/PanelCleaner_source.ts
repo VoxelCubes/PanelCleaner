@@ -4,7 +4,7 @@
 <context>
     <name></name>
     <message>
-        <location filename="../pcleaner/config.py" line="1011"/>
+        <location filename="../pcleaner/config.py" line="1079"/>
         <source>default</source>
         <comment>reserved profile name</comment>
         <translation type="unfinished"></translation>
@@ -35,39 +35,39 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_file.py" line="348"/>
-        <location filename="../pcleaner/gui/image_file.py" line="354"/>
         <location filename="../pcleaner/gui/image_file.py" line="360"/>
-        <location filename="../pcleaner/gui/image_file.py" line="373"/>
+        <location filename="../pcleaner/gui/image_file.py" line="366"/>
+        <location filename="../pcleaner/gui/image_file.py" line="372"/>
+        <location filename="../pcleaner/gui/image_file.py" line="385"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_file.py" line="362"/>
+        <location filename="../pcleaner/gui/image_file.py" line="374"/>
         <source>RGB</source>
         <comment>Color mode</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_file.py" line="364"/>
+        <location filename="../pcleaner/gui/image_file.py" line="376"/>
         <source>CMYK</source>
         <comment>Color mode</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_file.py" line="366"/>
+        <location filename="../pcleaner/gui/image_file.py" line="378"/>
         <source>Grayscale</source>
         <comment>Color mode</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_file.py" line="368"/>
+        <location filename="../pcleaner/gui/image_file.py" line="380"/>
         <source>1-bit</source>
         <comment>Color mode</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_file.py" line="370"/>
+        <location filename="../pcleaner/gui/image_file.py" line="382"/>
         <source>Palette</source>
         <comment>Color mode</comment>
         <translation type="unfinished"></translation>
@@ -312,157 +312,157 @@ Pages with failures / total:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="149"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="151"/>
         <source>File Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="149"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="151"/>
         <source>Failed to open file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="516"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
         <source>Failed to access the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
         <source>An error occurred.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
         <source>The CSV file format requires exactly 6 columns.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
         <source>The coordinates must be integers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
         <source>The box coordinates may not exceed 2 billion.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="523"/>
         <source>The file format was not recognized.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="524"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
         <source>The CSV file must start with a header row, followed by data rows.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="525"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="527"/>
         <source>The file path is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="528"/>
         <source>The file path is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="544"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="546"/>
         <source>OCR Parse Errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="590"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="592"/>
         <source>Multiple analytics match the image: {path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="594"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="596"/>
         <source>Multiple images match the file path: {path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="618"/>
         <source>Error, no version found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="629"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="631"/>
         <source>CUDA Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="640"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="642"/>
         <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/processing.py" line="508"/>
+        <location filename="../pcleaner/gui/processing.py" line="511"/>
         <source>Inpainting model not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
-        <location filename="../pcleaner/gui/processing.py" line="862"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1724"/>
+        <location filename="../pcleaner/gui/processing.py" line="889"/>
         <source>filename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
-        <location filename="../pcleaner/gui/processing.py" line="862"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1724"/>
+        <location filename="../pcleaner/gui/processing.py" line="889"/>
         <source>startx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
-        <location filename="../pcleaner/gui/processing.py" line="862"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1724"/>
+        <location filename="../pcleaner/gui/processing.py" line="889"/>
         <source>starty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
-        <location filename="../pcleaner/gui/processing.py" line="862"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1724"/>
+        <location filename="../pcleaner/gui/processing.py" line="889"/>
         <source>endx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
-        <location filename="../pcleaner/gui/processing.py" line="862"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1724"/>
+        <location filename="../pcleaner/gui/processing.py" line="889"/>
         <source>endy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1717"/>
-        <location filename="../pcleaner/gui/processing.py" line="862"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1724"/>
+        <location filename="../pcleaner/gui/processing.py" line="889"/>
         <source>text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1728"/>
-        <location filename="../pcleaner/gui/processing.py" line="871"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1735"/>
+        <location filename="../pcleaner/gui/processing.py" line="898"/>
         <source>Saved detected text to {output_file}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1732"/>
-        <location filename="../pcleaner/gui/processing.py" line="875"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1739"/>
+        <location filename="../pcleaner/gui/processing.py" line="902"/>
         <source>Failed to write detected text to {output_file}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1736"/>
-        <location filename="../pcleaner/gui/processing.py" line="878"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1743"/>
+        <location filename="../pcleaner/gui/processing.py" line="905"/>
         <source>Save Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1737"/>
-        <location filename="../pcleaner/gui/processing.py" line="878"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1744"/>
+        <location filename="../pcleaner/gui/processing.py" line="905"/>
         <source>Failed to write detected text to file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="445"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="486"/>
         <source>Inpainter (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -482,7 +482,7 @@ Pages with failures / total:
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../pcleaner/image_export.py" line="130"/>
+        <location filename="../pcleaner/image_export.py" line="133"/>
         <source>Clean mask</source>
         <comment>layered export</comment>
         <translation type="unfinished">
@@ -491,7 +491,7 @@ Pages with failures / total:
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../pcleaner/image_export.py" line="131"/>
+        <location filename="../pcleaner/image_export.py" line="134"/>
         <source>Denoised mask</source>
         <comment>layered export</comment>
         <translation type="unfinished">
@@ -500,7 +500,7 @@ Pages with failures / total:
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../pcleaner/image_export.py" line="133"/>
+        <location filename="../pcleaner/image_export.py" line="136"/>
         <source>Inpainting mask</source>
         <comment>layered export</comment>
         <translation type="unfinished">
@@ -509,7 +509,7 @@ Pages with failures / total:
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../pcleaner/image_export.py" line="410"/>
+        <location filename="../pcleaner/image_export.py" line="420"/>
         <source>Page</source>
         <comment>layered export</comment>
         <translation type="unfinished">
@@ -743,139 +743,144 @@ By default, this uses the built-in profile. However, you can change this default
 <context>
     <name>FileTable</name>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="132"/>
+        <location filename="../pcleaner/gui/file_table.py" line="136"/>
         <source>Original size in pixels (width × height)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="135"/>
+        <location filename="../pcleaner/gui/file_table.py" line="139"/>
         <source>Processing size in pixels (width × height), scale factor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="220"/>
-        <location filename="../pcleaner/gui/file_table.py" line="228"/>
+        <location filename="../pcleaner/gui/file_table.py" line="227"/>
+        <location filename="../pcleaner/gui/file_table.py" line="235"/>
         <source>Loading Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="221"/>
+        <location filename="../pcleaner/gui/file_table.py" line="228"/>
         <source>Failed to discover images: {path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="229"/>
+        <location filename="../pcleaner/gui/file_table.py" line="236"/>
         <source>Failed to load images: {path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="237"/>
+        <location filename="../pcleaner/gui/file_table.py" line="244"/>
         <source>Unsupported TIFF files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="239"/>
+        <location filename="../pcleaner/gui/file_table.py" line="246"/>
         <source>The following 5-channel TIFF files are not supported: 
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="272"/>
+        <location filename="../pcleaner/gui/file_table.py" line="279"/>
         <source>Duplicate file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="273"/>
+        <location filename="../pcleaner/gui/file_table.py" line="280"/>
         <source>File &quot;{path}&quot; is already in the table.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="276"/>
+        <location filename="../pcleaner/gui/file_table.py" line="283"/>
         <source>Ignore All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="426"/>
+        <location filename="../pcleaner/gui/file_table.py" line="309"/>
+        <source>split</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/file_table.py" line="470"/>
         <source>Number of boxes removed by the OCR model / total boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="430"/>
+        <location filename="../pcleaner/gui/file_table.py" line="474"/>
         <source>Number of boxes that failed to generate a mask / total boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="432"/>
+        <location filename="../pcleaner/gui/file_table.py" line="476"/>
         <source>Number of boxes that were perfectly masked / total boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="434"/>
+        <location filename="../pcleaner/gui/file_table.py" line="478"/>
         <source>Number of boxes that were denoised / total boxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="436"/>
+        <location filename="../pcleaner/gui/file_table.py" line="480"/>
         <source>Number of boxes that were inpainted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="475"/>
+        <location filename="../pcleaner/gui/file_table.py" line="519"/>
         <source>Image not loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="476"/>
+        <location filename="../pcleaner/gui/file_table.py" line="520"/>
         <source>Please wait until the image has loaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="494"/>
+        <location filename="../pcleaner/gui/file_table.py" line="538"/>
         <source>Open individual cleaning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="505"/>
+        <location filename="../pcleaner/gui/file_table.py" line="549"/>
         <source>Remove from list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="513"/>
+        <location filename="../pcleaner/gui/file_table.py" line="557"/>
         <source>Remove all files from list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="689"/>
+        <location filename="../pcleaner/gui/file_table.py" line="733"/>
         <source>Failed to load image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="690"/>
+        <location filename="../pcleaner/gui/file_table.py" line="734"/>
         <source>Failed to load image {file_path}.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="699"/>
+        <location filename="../pcleaner/gui/file_table.py" line="743"/>
         <source>Failed to dispatch image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="699"/>
+        <location filename="../pcleaner/gui/file_table.py" line="743"/>
         <source>Dispatch Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="708"/>
+        <location filename="../pcleaner/gui/file_table.py" line="752"/>
         <source>Select files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="709"/>
+        <location filename="../pcleaner/gui/file_table.py" line="753"/>
         <source>Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="730"/>
+        <location filename="../pcleaner/gui/file_table.py" line="774"/>
         <source>Select directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -995,22 +1000,22 @@ Please enable inpainting in the profile settings and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="661"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="662"/>
         <source>Output Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="661"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="662"/>
         <source>Output generation failed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="811"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="812"/>
         <source>Profile check failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_details_driver.py" line="811"/>
+        <location filename="../pcleaner/gui/image_details_driver.py" line="812"/>
         <source>Profile change check failed:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1406,210 +1411,210 @@ Switch to the new model?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1234"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1230"/>
         <source>The profile &apos;{profile}&apos; has unsaved changes.
 Switching profiles will discard changes to the current profile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1237"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1233"/>
         <source>Unsaved changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1419"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1262"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1422"/>
         <source>Load Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1266"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1419"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1262"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1422"/>
         <source>Failed to load profile:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1281"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1279"/>
         <source>Tesseract OCR is not installed or not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1287"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1285"/>
         <source>&lt;html&gt;Can&apos;t use Tesseract to perform OCR. Reverting to manga-ocr.
 Please see the instructions to install Tesseract correctly &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1298"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1296"/>
         <source>Unsupported Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1304"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1302"/>
         <source>The language &apos;{lang_name}&apos; is not supported by any of your current OCR engines. 
 Check the online documentation for how to add support for more languages.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1375"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1378"/>
         <source>Profile Created</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1378"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1381"/>
         <source>Create Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1387"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1390"/>
         <source>Failed to save profile to {profile_path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1391"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1406"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1394"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1409"/>
         <source>Save Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1392"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1395"/>
         <source>Failed to save profile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1398"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1401"/>
         <source>Profile saved to {profile_path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1403"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1406"/>
         <source>Failed to save config.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1407"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1410"/>
         <source>Failed to save the new profile to the configuration file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1469"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1618"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1472"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1624"/>
         <source>No Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1474"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1477"/>
         <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1547"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1550"/>
         <source>No Outputs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1550"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1553"/>
         <source>No outputs were requested. Please select at least one output before cleaning.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1564"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1567"/>
         <location filename="../ui_files/Mainwindow.ui" line="660"/>
         <source>cleaned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1623"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1629"/>
         <source>No files to process. To edit an old OCR output file, you must first load (one or more of) the images to which it corresponds.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1631"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1637"/>
         <source>Open OCR Output File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1633"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1639"/>
         <source>OCR Output Files (*.txt *.csv)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1648"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1654"/>
         <source>Parse Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1649"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1655"/>
         <source>Failed to parse the OCR output file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1807"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1817"/>
         <source>File Exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1808"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1818"/>
         <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1937"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1952"/>
         <source>Export Images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1938"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1953"/>
         <source>Would you like to export the cleaned images?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1912"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1927"/>
         <source>Export OCR Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1483"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1486"/>
         <source>Un-Applied Changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1484"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1487"/>
         <source>You have un-applied changes to the profile. Continue anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1913"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1928"/>
         <source>Would you like to export the OCR results?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1928"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
         <source>Processing Finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1929"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1944"/>
         <source>Finished processing all files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1956"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1971"/>
         <source>Processing Aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1956"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1971"/>
         <source>Processing aborted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1980"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1995"/>
         <source>Processing Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1981"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1996"/>
         <source>Encountered an error while processing files.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2721,301 +2726,367 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     </message>
     <message>
         <location filename="profile_strings.py" line="46"/>
-        <source>Maximum number of threads to use for exporting images. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
+        <source>Split long strips into individual pages. If enabled, instead of squeezing the entire strip to fit into the preferred height, the strip will be split into individual pages, each fitting the preferred height plus/minus double the split tolerance margin (if the segment was in the middle of the strip).</source>
         <comment>Profile comment in General</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="48"/>
-        <source>Max Threads Export</source>
+        <source>Split Long Strips</source>
         <comment>Profile entry in General</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="50"/>
+        <source>Preferred height to split long strips at.</source>
+        <comment>Profile comment in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="52"/>
+        <source>Preferred Split Height</source>
+        <comment>Profile entry in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="54"/>
+        <source>Tolerance margin for splitting long strips. This is the maximum difference between the preferred split height and the actual height of the strip. An algorithm determines the best split point within this margin, in an effort to avoid splitting in the middle of a panel.</source>
+        <comment>Profile comment in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="56"/>
+        <source>Split Tolerance Margin</source>
+        <comment>Profile entry in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="58"/>
+        <source>Aspect ratio to use for splitting long strips. This is the ratio of the width to the height of the image. If the image&apos;s aspect ratio is smaller than this value, it will be considered a long strip.&lt;br&gt; Example: 0.3 means that the width of the image is 0.3 times the height.</source>
+        <comment>Profile comment in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="60"/>
+        <source>Long Strip Aspect Ratio</source>
+        <comment>Profile entry in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="62"/>
+        <source>Merge long strips back into a single image. If enabled, the individual pages created from a long strip will be merged back into a single image upon export.</source>
+        <comment>Profile comment in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="64"/>
+        <source>Merge After Split</source>
+        <comment>Profile entry in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="66"/>
+        <source>Maximum number of threads to use for exporting images. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
+        <comment>Profile comment in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="68"/>
+        <source>Max Threads Export</source>
+        <comment>Profile entry in General</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="70"/>
         <source>Text Detector</source>
         <comment>Profile section title</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="52"/>
+        <location filename="profile_strings.py" line="72"/>
         <source>Path to the text detection model, leave empty to use the built-in model. It is only recommended to override this if the version downloaded automatically is older than the latest release. The path must point directly to the comictextdetector.pt (CUDA) or comictextdetector.pt.onnx (CPU) file. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</source>
         <oldsource>Path to the text detection model, leave empty to use the built-in model. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</oldsource>
         <comment>Profile comment in Text Detector</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="54"/>
+        <location filename="profile_strings.py" line="74"/>
         <source>Model Path</source>
         <comment>Profile entry in Text Detector</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="56"/>
+        <location filename="profile_strings.py" line="76"/>
         <source>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. &lt;br&gt;DO NOT report issues about this setting, as it&apos;s entirely hardware-dependent!</source>
         <oldsource>Number of models to run in parallel. This is useful if you have enough RAM (or VRAM with CUDA) to run multiple models at the same time. This, of course, will increase the speed of the process, but can also crash your computer if you overestimate your hardware. I recommend using 1 model per 2 GB of memory available, or 1 model per 50 images. Note: This is ignored if processing less than 50 files due to the overhead of starting multiple models not being worth it below that. Warning: This may cause program instability, use at your own risk. DO NOT report issues about this problem, as it&apos;s very hardware-dependent!</oldsource>
         <comment>Profile comment in Text Detector</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="58"/>
+        <location filename="profile_strings.py" line="78"/>
         <source>Concurrent Models</source>
         <comment>Profile entry in Text Detector</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="60"/>
+        <location filename="profile_strings.py" line="80"/>
         <source>Preprocessor</source>
         <comment>Profile section title</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="62"/>
+        <location filename="profile_strings.py" line="82"/>
         <source>Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="64"/>
+        <location filename="profile_strings.py" line="84"/>
         <source>Minimum size of any box to keep it.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="66"/>
+        <location filename="profile_strings.py" line="86"/>
         <source>Box Min Size</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="68"/>
+        <location filename="profile_strings.py" line="88"/>
         <source>Minimum size of a box with &quot;unknown&quot; language to keep it. This language is typically assigned to logos and other badly behaved text elements.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="70"/>
+        <location filename="profile_strings.py" line="90"/>
         <source>Suspicious Box Min Size</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="72"/>
+        <location filename="profile_strings.py" line="92"/>
         <source>The minimum overlap between two boxes to merge them. This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged. A higher value will require a larger overlap to merge the boxes.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="74"/>
+        <location filename="profile_strings.py" line="94"/>
         <source>Box Overlap Threshold</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="76"/>
+        <location filename="profile_strings.py" line="96"/>
         <source>Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="78"/>
+        <location filename="profile_strings.py" line="98"/>
         <source>OCR Enabled</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="80"/>
+        <location filename="profile_strings.py" line="100"/>
         <source>Whether to use Tesseract to perform OCR tasks.&lt;br&gt; If checked, Tesseract OCR can be used for text extraction, if available.&lt;br&gt; If unchecked, the built-in OCR model (manga-ocr) is always used, which is best suited for vertical Japanese text.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="82"/>
+        <location filename="profile_strings.py" line="102"/>
         <source>OCR Use Tesseract</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="84"/>
+        <location filename="profile_strings.py" line="104"/>
         <source>The language to use for OCR tasks. The text detector can detect Japanese and English, for anything else, select a language explicitly here. Detecting per box retains what the text detector detected, while per page will assign the most prominent language to the entire page.&lt;br&gt; Note: Only Japanese is supported out of the box, everything else requires Tesseract to be enabled and its associated language packs to be installed.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="86"/>
+        <location filename="profile_strings.py" line="106"/>
         <source>OCR Language</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="88"/>
+        <location filename="profile_strings.py" line="108"/>
         <source>Specifies which engine to use for performing OCR.&lt;br&gt; - auto: Automatically selects the OCR engine based on the detected language of each text block within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.&lt;br&gt; - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition tasks. Best suited for vertical Japanese text.&lt;br&gt; - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a versatile option that supports English and multiple other languages.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="90"/>
+        <location filename="profile_strings.py" line="110"/>
         <source>OCR Engine</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="92"/>
+        <location filename="profile_strings.py" line="112"/>
         <source>Defines the reading order for processing and sorting text boxes on the entire page, not individual text blocks. This global setting influences how text boxes are ordered and presented for further processing.&lt;br&gt; - auto: Detects the reading order based on the detected language of each text block within the page.&lt;br&gt; - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.&lt;br&gt; - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.&lt;br&gt; Choose based on the predominant layout of your content.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="94"/>
+        <location filename="profile_strings.py" line="114"/>
         <source>Reading Order</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="96"/>
+        <location filename="profile_strings.py" line="116"/>
         <source>Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="98"/>
+        <location filename="profile_strings.py" line="118"/>
         <source>OCR Max Size</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="100"/>
+        <location filename="profile_strings.py" line="120"/>
         <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</source>
         <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</oldsource>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="102"/>
+        <location filename="profile_strings.py" line="122"/>
         <source>OCR Blacklist Pattern</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="104"/>
+        <location filename="profile_strings.py" line="124"/>
         <source>The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
         <oldsource>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</oldsource>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="106"/>
+        <location filename="profile_strings.py" line="126"/>
         <source>OCR Strict Language</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="108"/>
+        <location filename="profile_strings.py" line="128"/>
         <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="110"/>
+        <location filename="profile_strings.py" line="130"/>
         <source>Box Padding Initial</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="112"/>
-        <location filename="profile_strings.py" line="120"/>
+        <location filename="profile_strings.py" line="132"/>
+        <location filename="profile_strings.py" line="140"/>
         <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="114"/>
+        <location filename="profile_strings.py" line="134"/>
         <source>Box Right Padding Initial</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="116"/>
+        <location filename="profile_strings.py" line="136"/>
         <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="118"/>
+        <location filename="profile_strings.py" line="138"/>
         <source>Box Padding Extended</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="122"/>
+        <location filename="profile_strings.py" line="142"/>
         <source>Box Right Padding Extended</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="124"/>
+        <location filename="profile_strings.py" line="144"/>
         <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
         <comment>Profile comment in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="126"/>
+        <location filename="profile_strings.py" line="146"/>
         <source>Box Reference Padding</source>
         <comment>Profile entry in Preprocessor</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="128"/>
+        <location filename="profile_strings.py" line="148"/>
         <source>Masker</source>
         <comment>Profile section title</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="130"/>
+        <location filename="profile_strings.py" line="150"/>
         <source>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="132"/>
+        <location filename="profile_strings.py" line="152"/>
         <source>Max Threads</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="134"/>
+        <location filename="profile_strings.py" line="154"/>
         <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="136"/>
+        <location filename="profile_strings.py" line="156"/>
         <source>Mask Growth Step Pixels</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="138"/>
+        <location filename="profile_strings.py" line="158"/>
         <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="140"/>
+        <location filename="profile_strings.py" line="160"/>
         <source>Mask Growth Steps</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="142"/>
+        <location filename="profile_strings.py" line="162"/>
         <source>Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="144"/>
+        <location filename="profile_strings.py" line="164"/>
         <source>Min Mask Thickness</source>
         <comment>Profile entry in Masker</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="250"/>
+        <source>The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask. If this value matches the maximum deviation for masks, only failed bubbles will be inpainted, making the following two settings irrelevant.</source>
+        <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3031,680 +3102,686 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="146"/>
+        <location filename="profile_strings.py" line="166"/>
         <source>Whether to allow colored masks. When true, the masker will allow masks to use any color, not just white, black, or gray.</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="148"/>
+        <location filename="profile_strings.py" line="168"/>
         <source>Allow Colored Masks</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="150"/>
+        <location filename="profile_strings.py" line="170"/>
         <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white. Value range: black (0) to pure white (255).</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="152"/>
+        <location filename="profile_strings.py" line="172"/>
         <source>Off White Max Threshold</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="154"/>
+        <location filename="profile_strings.py" line="174"/>
         <source>The standard deviation of a mask represents the variation in color along the edge of the mask. For this, only the single line of pixels along the outer edge of a mask is sampled from the original image. A low deviation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects.</source>
         <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. The standard deviation refers to the variation is color along the edge of a mask. A low variation means that the mask sits in a solid color, which means it doesn&apos;t intersect any text or other objects. Setting a higher value here requires a higher improvement to consider a smaller mask, to give a preference to larger masks.</oldsource>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="160"/>
+        <location filename="profile_strings.py" line="180"/>
         <source>Minimum improvement in standard deviation of the mask to continue growing it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</source>
         <oldsource>Minimum improvement in standard deviation of the mask to continue shrinking it. Setting a higher value here requires a higher improvement to consider a larger mask, to give a preference to smaller masks.</oldsource>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="162"/>
+        <location filename="profile_strings.py" line="182"/>
         <source>Mask Improvement Threshold</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="164"/>
+        <location filename="profile_strings.py" line="184"/>
         <source>Whether to use the fast mask selection algorithm. When true, the mask selection algorithm will pick the first perfect mask, if one is found early. This is faster, but may not find the best mask, if a slightly bigger one would have been better.</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="166"/>
+        <location filename="profile_strings.py" line="186"/>
         <source>Mask Selection Fast</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="182"/>
+        <location filename="profile_strings.py" line="202"/>
         <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
         <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="184"/>
+        <location filename="profile_strings.py" line="204"/>
         <source>Max Threads</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="220"/>
+        <location filename="profile_strings.py" line="240"/>
         <source>Inpainter</source>
         <comment>Profile section title</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="222"/>
+        <location filename="profile_strings.py" line="242"/>
         <source>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note that inpainting isn&apos;t enabled by default.</source>
         <oldsource>EXPERIMENTAL FEATURE: If you find better default settings, please open an issue on github to share the improvements with everyone. Note tha inpainting isn&apos;t enabled by default.</oldsource>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="224"/>
+        <location filename="profile_strings.py" line="244"/>
         <source>Inpainting is when machine learning is used to replace the content of an image based on its surroundings. For masks that couldn&apos;t be cleaned well (or at all), inpainting can be used. To differentiate this from denoising, inpainting is meant for significantly worse masks that had a tight fit. Any masks that were denoised won&apos;t be inpainted.</source>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="226"/>
+        <location filename="profile_strings.py" line="246"/>
         <source>Since this step can provide poor results in some cases, it can be disabled here.  Uncheck to disable inpainting.</source>
         <oldsource>Since this step can provide poor results in some cases, it can be disabled here. Set to False to disable inpainting.</oldsource>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="228"/>
+        <location filename="profile_strings.py" line="248"/>
         <source>Inpainting Enabled</source>
         <comment>Profile entry in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="230"/>
-        <source>The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask.</source>
-        <comment>Profile comment in Inpainter</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="profile_strings.py" line="232"/>
+        <location filename="profile_strings.py" line="252"/>
         <source>Inpainting Min Std Dev</source>
         <comment>Profile entry in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="234"/>
+        <location filename="profile_strings.py" line="254"/>
         <source>The maximum radius of a mask to perform inpainting on. Masks larger than this will be left as they are, because if the margin is that big, it is likely that the mask is already good enough.</source>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="236"/>
+        <location filename="profile_strings.py" line="256"/>
         <source>Inpainting Max Mask Radius</source>
         <comment>Profile entry in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="238"/>
+        <location filename="profile_strings.py" line="258"/>
         <source>The minimum radius around a mask to inpaint. This is added to the optimal mask size to ensure that the inpainting covers the entire mask.</source>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="240"/>
+        <location filename="profile_strings.py" line="260"/>
         <source>Min Inpainting Radius</source>
         <comment>Profile entry in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="242"/>
+        <location filename="profile_strings.py" line="262"/>
         <source>For masks that proved far harder to clean, meaning they had a high standard deviation, increase the radius of the inpainting to cover more of the mask. This is additional margin is added to the min inpainting radius and is calculated as: inpainting radius multiplier times mask standard deviation</source>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="244"/>
+        <location filename="profile_strings.py" line="264"/>
         <source>Inpainting Radius Multiplier</source>
         <comment>Profile entry in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="246"/>
+        <location filename="profile_strings.py" line="266"/>
         <source>The maximum radius around a mask to inpaint. This limits the size the inpainting can grow to, to prevent it from covering too much of the image, if a large radius multiplier is used.</source>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="248"/>
+        <location filename="profile_strings.py" line="268"/>
         <source>Max Inpainting Radius</source>
         <comment>Profile entry in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="250"/>
+        <location filename="profile_strings.py" line="270"/>
         <source>After inpainting, cut the result out of the original image to prevent the inpainting from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</source>
         <oldsource>After inpainting, cut the result out of the original image to prevent the inpaitning from affecting the rest of the image. This ensures that the original image is preserved as much as possible. This radius is added around the final inpainting radius, due to the inpainting model modifying a few pixels outside of its dedicated region.</oldsource>
         <comment>Profile comment in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="252"/>
+        <location filename="profile_strings.py" line="272"/>
         <source>Inpainting Isolation Radius</source>
         <comment>Profile entry in Inpainter</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="254"/>
+        <location filename="profile_strings.py" line="274"/>
+        <source>Fade the edges of the inpainted cover mask by this many pixels to smoothly blend the inpainted parts into the rest of the image.&lt;br&gt; If you see faint outlines after inpainting, increase the min inpainting value and set this one to half that amount.</source>
+        <comment>Profile comment in Inpainter</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="276"/>
+        <source>Inpainting Fade Radius</source>
+        <comment>Profile entry in Inpainter</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="profile_strings.py" line="278"/>
         <source>Detect per box</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="256"/>
+        <location filename="profile_strings.py" line="280"/>
         <source>Detect per page</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="258"/>
+        <location filename="profile_strings.py" line="282"/>
         <source>Japanese</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="260"/>
+        <location filename="profile_strings.py" line="284"/>
         <source>English</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="262"/>
+        <location filename="profile_strings.py" line="286"/>
         <source>Korean</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="264"/>
+        <location filename="profile_strings.py" line="288"/>
         <source>Korean (vertical)</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="266"/>
+        <location filename="profile_strings.py" line="290"/>
         <source>Chinese - Simplified</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="268"/>
+        <location filename="profile_strings.py" line="292"/>
         <source>Chinese - Traditional</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="270"/>
+        <location filename="profile_strings.py" line="294"/>
         <source>Albanian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="272"/>
+        <location filename="profile_strings.py" line="296"/>
         <source>Arabic</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="274"/>
+        <location filename="profile_strings.py" line="298"/>
         <source>Azerbaijani</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="276"/>
+        <location filename="profile_strings.py" line="300"/>
         <source>Azerbaijani - Cyrilic</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="278"/>
+        <location filename="profile_strings.py" line="302"/>
         <source>Bengali</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="280"/>
+        <location filename="profile_strings.py" line="304"/>
         <source>Bulgarian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="282"/>
+        <location filename="profile_strings.py" line="306"/>
         <source>Burmese</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="284"/>
+        <location filename="profile_strings.py" line="308"/>
         <source>Catalan; Valencian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="286"/>
+        <location filename="profile_strings.py" line="310"/>
         <source>Croatian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="288"/>
+        <location filename="profile_strings.py" line="312"/>
         <source>Czech</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="290"/>
+        <location filename="profile_strings.py" line="314"/>
         <source>Danish</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="292"/>
+        <location filename="profile_strings.py" line="316"/>
         <source>Dutch; Flemish</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="294"/>
+        <location filename="profile_strings.py" line="318"/>
         <source>Esperanto</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="296"/>
+        <location filename="profile_strings.py" line="320"/>
         <source>Estonian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="298"/>
+        <location filename="profile_strings.py" line="322"/>
         <source>Finnish</source>
         <oldsource>Filipino</oldsource>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="300"/>
+        <location filename="profile_strings.py" line="324"/>
         <source>French</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="302"/>
+        <location filename="profile_strings.py" line="326"/>
         <source>Georgian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="304"/>
+        <location filename="profile_strings.py" line="328"/>
         <source>German</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="306"/>
+        <location filename="profile_strings.py" line="330"/>
         <source>Greek</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="308"/>
+        <location filename="profile_strings.py" line="332"/>
         <source>Hebrew</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="310"/>
+        <location filename="profile_strings.py" line="334"/>
         <source>Hindi</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="312"/>
+        <location filename="profile_strings.py" line="336"/>
         <source>Hungarian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="314"/>
+        <location filename="profile_strings.py" line="338"/>
         <source>Indonesian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="316"/>
+        <location filename="profile_strings.py" line="340"/>
         <source>Italian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="318"/>
+        <location filename="profile_strings.py" line="342"/>
         <source>Kazakh</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="320"/>
+        <location filename="profile_strings.py" line="344"/>
         <source>Latin</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="322"/>
+        <location filename="profile_strings.py" line="346"/>
         <source>Lithuanian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="324"/>
+        <location filename="profile_strings.py" line="348"/>
         <source>Luxembourgish</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="326"/>
+        <location filename="profile_strings.py" line="350"/>
         <source>Malay</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="328"/>
+        <location filename="profile_strings.py" line="352"/>
         <source>Mongolian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="330"/>
+        <location filename="profile_strings.py" line="354"/>
         <source>Nepali</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="332"/>
+        <location filename="profile_strings.py" line="356"/>
         <source>Norwegian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="334"/>
+        <location filename="profile_strings.py" line="358"/>
         <source>Persian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="336"/>
+        <location filename="profile_strings.py" line="360"/>
         <source>Polish</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="338"/>
+        <location filename="profile_strings.py" line="362"/>
         <source>Portuguese</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="340"/>
+        <location filename="profile_strings.py" line="364"/>
         <source>Romanian; Moldavian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="342"/>
+        <location filename="profile_strings.py" line="366"/>
         <source>Russian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="344"/>
+        <location filename="profile_strings.py" line="368"/>
         <source>Serbian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="346"/>
+        <location filename="profile_strings.py" line="370"/>
         <source>Serbian - Latin</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="348"/>
+        <location filename="profile_strings.py" line="372"/>
         <source>Slovak</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="350"/>
+        <location filename="profile_strings.py" line="374"/>
         <source>Slovenian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="352"/>
+        <location filename="profile_strings.py" line="376"/>
         <source>Spanish; Castilian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="354"/>
+        <location filename="profile_strings.py" line="378"/>
         <source>Swedish</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="356"/>
+        <location filename="profile_strings.py" line="380"/>
         <source>Tagalog</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="358"/>
+        <location filename="profile_strings.py" line="382"/>
         <source>Tamil</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="360"/>
+        <location filename="profile_strings.py" line="384"/>
         <source>Telugu</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="362"/>
+        <location filename="profile_strings.py" line="386"/>
         <source>Thai</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="364"/>
+        <location filename="profile_strings.py" line="388"/>
         <source>Turkish</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="366"/>
+        <location filename="profile_strings.py" line="390"/>
         <source>Ukrainian</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="368"/>
+        <location filename="profile_strings.py" line="392"/>
         <source>Vietnamese</source>
         <comment>Language option for OCR</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="156"/>
+        <location filename="profile_strings.py" line="176"/>
         <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="158"/>
+        <location filename="profile_strings.py" line="178"/>
         <source>Mask Max Standard Deviation</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="168"/>
+        <location filename="profile_strings.py" line="188"/>
         <source>Color to use for the debug mask.</source>
         <comment>Profile comment in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="170"/>
+        <location filename="profile_strings.py" line="190"/>
         <source>Debug Mask Color</source>
         <comment>Profile entry in Masker</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="172"/>
+        <location filename="profile_strings.py" line="192"/>
         <source>Denoiser</source>
         <comment>Profile section title</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="174"/>
+        <location filename="profile_strings.py" line="194"/>
         <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="176"/>
+        <location filename="profile_strings.py" line="196"/>
         <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="178"/>
+        <location filename="profile_strings.py" line="198"/>
         <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="180"/>
+        <location filename="profile_strings.py" line="200"/>
         <source>Denoising Enabled</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="186"/>
+        <location filename="profile_strings.py" line="206"/>
         <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="188"/>
+        <location filename="profile_strings.py" line="208"/>
         <source>Noise Min Standard Deviation</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="190"/>
+        <location filename="profile_strings.py" line="210"/>
         <source>Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this, after which this mask is handed off to the inpainter.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="192"/>
+        <location filename="profile_strings.py" line="212"/>
         <source>The thickness of an outline to denoise around a mask.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="194"/>
+        <location filename="profile_strings.py" line="214"/>
         <source>Noise Outline Size</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="196"/>
+        <location filename="profile_strings.py" line="216"/>
         <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="198"/>
+        <location filename="profile_strings.py" line="218"/>
         <source>Noise Fade Radius</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="200"/>
+        <location filename="profile_strings.py" line="220"/>
         <source>Set to True to support colored images.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="202"/>
+        <location filename="profile_strings.py" line="222"/>
         <source>Colored Images</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="204"/>
+        <location filename="profile_strings.py" line="224"/>
         <source>How strongly to denoise the image. Higher values mean more denoising.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="206"/>
+        <location filename="profile_strings.py" line="226"/>
         <source>Filter Strength</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="208"/>
+        <location filename="profile_strings.py" line="228"/>
         <source>How strongly to denoise the color channels, as opposed to lightness. Higher values mean more denoising.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="210"/>
+        <location filename="profile_strings.py" line="230"/>
         <source>Color Filter Strength</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="212"/>
+        <location filename="profile_strings.py" line="232"/>
         <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="214"/>
+        <location filename="profile_strings.py" line="234"/>
         <source>Template Window Size</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="216"/>
+        <location filename="profile_strings.py" line="236"/>
         <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
         <comment>Profile comment in Denoiser</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="profile_strings.py" line="218"/>
+        <location filename="profile_strings.py" line="238"/>
         <source>Search Window Size</source>
         <comment>Profile entry in Denoiser</comment>
         <translation type="unfinished"></translation>
@@ -3713,37 +3790,49 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
 <context>
     <name>ProfileOptionWidget</name>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="105"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="113"/>
         <source>Reset to default</source>
         <comment>Generic reset button tooltip</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="132"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="138"/>
+        <source> px</source>
+        <comment>Pixel unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="148"/>
+        <source> px²</source>
+        <comment>Pixel squared unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="158"/>
         <source>All Cores</source>
         <comment>The limit on the number of CPU cores to use, or here, no limit.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="210"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="242"/>
         <source>Same as image</source>
         <comment>Profile default option for the file type</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="246"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="278"/>
         <source>None</source>
         <comment>Layered export option</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="247"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="279"/>
         <source>PSD Bulk</source>
         <comment>Layered export option</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="250"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="282"/>
         <source>PSD Per Image</source>
         <comment>Layered export option</comment>
         <translation type="unfinished"></translation>
@@ -3752,9 +3841,22 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
 <context>
     <name>ProfileToolBox</name>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="548"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="594"/>
         <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="610"/>
+        <source>The regex pattern &quot;{value}&quot; for {key} is invalid, reverting to default.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RegexLineEdit</name>
+    <message>
+        <location filename="../pcleaner/gui/CustomQ/CRegexLineEdit.py" line="43"/>
+        <source>Regex is valid</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
