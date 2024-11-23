@@ -1476,7 +1476,8 @@ def try_to_load(
             attr_value = conf_data
     elif attr_type == RegexPattern:
         try:
-            attr_value = re.compile(conf_data)
+            attr_value = conf_data
+            re.compile(attr_value)
         except re.error as e:
             print(
                 f"Option {attr_name} in section {section} should be a valid regular expression.\n"
