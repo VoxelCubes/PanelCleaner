@@ -14,7 +14,7 @@ def test_get_available_themes():
     themes = gu.get_available_themes()
 
     assert themes
-    assert themes == [("breeze", "Breeze Light"), ("breeze-dark", "Breeze Dark")]
+    assert themes == [("breeze-dark", "Breeze Dark"), ("breeze", "Breeze Light")]
 
 
 def test_theme_icon_presence():
