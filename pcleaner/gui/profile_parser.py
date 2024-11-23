@@ -29,6 +29,7 @@ from pcleaner.config import (
 )
 from pcleaner.gui.CustomQ.CColorButton import ColorButton
 from pcleaner.gui.CustomQ.CComboBox import CComboBox
+from pcleaner.gui.CustomQ.CRegexLineEdit import RegexLineEdit
 from pcleaner.helpers import tr
 from pcleaner.ocr.supported_languages import LanguageCode
 
@@ -182,11 +183,17 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_getter = self._data_widget.value
             self._data_widget.valueChanged.connect(self._value_changed)
 
-        elif entry_type == EntryTypes.Str or entry_type == EntryTypes.RegexPattern:
+        elif entry_type == EntryTypes.Str:
             self._data_widget: Qw.QLineEdit = Qw.QLineEdit()
             self._data_widget.textChanged.connect(self._value_changed)
             self._data_setter = self._data_widget.setText
             self._data_getter = self._data_widget.text
+
+        elif entry_type == EntryTypes.RegexPattern:
+            self._data_widget: RegexLineEdit = RegexLineEdit()
+            self._data_widget.get_text_changed_signal().connect(self._value_changed)
+            self._data_setter = self._data_widget.setRegex
+            self._data_getter = self._data_widget.regex
 
         elif entry_type == EntryTypes.LongString:
             self._data_widget: Qw.QPlainTextEdit = Qw.QPlainTextEdit()

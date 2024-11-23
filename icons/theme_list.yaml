@@ -61,5 +61,6 @@ Files:
       - dialog-warning
     22:
       - dialog-error
+      - data-success
     24:
       - data-warning
