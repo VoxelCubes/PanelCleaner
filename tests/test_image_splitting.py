@@ -19,7 +19,7 @@ def test_split_image():
     )
     assert True
 
-    if False:
+    if True:
         return
 
     print(f"Time taken: {(time.time() - start) * 1000:.2f} ms")
