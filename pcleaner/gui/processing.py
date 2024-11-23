@@ -629,6 +629,13 @@ def generate_output(
                     )
                 )
 
+        # For bulk exports, we need a common parent directory.
+        if not output_dir.is_absolute():
+            common_parent = hp.common_path_parent(
+                [image_object.export_path for image_object in image_objects],
+            )
+            output_dir = common_parent / output_dir
+
         if profile.general.layered_export == LayeredExport.PSD_BULK:
             ie.bundle_psd(
                 output_dir,

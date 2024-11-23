@@ -701,12 +701,20 @@ def run_cleaner(
         for export_data in tqdm(data):
             ie.copy_to_output_batched(export_data)
 
+    # For bulk exports, we need a common parent directory.
+    if not output_dir.is_absolute():
+        common_parent = hp.common_path_parent(
+            [image_object.original_path for image_object in export_targets]
+        )
+        output_dir = common_parent / output_dir
+
     if profile.general.layered_export == LayeredExport.PSD_BULK:
+        print(f"Bulk exporting to {output_dir}...")
         ie.bundle_psd(
             output_dir,
             cache_dir,
-            [image_object.original_path for image_object in export_targets],
-            [image_object.uuid for image_object in export_targets],
+            [export_target.original_path for export_target in export_targets],
+            [export_target.uuid for export_target in export_targets],
         )
 
     print("\nDone!")

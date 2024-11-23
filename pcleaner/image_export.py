@@ -379,6 +379,7 @@ def bundle_psd(
 ) -> None:
     """
     Bundle all the PSDs into a single PSD file.
+    The PSDs are loaded, and the pages are grouped into a single PSD file.
 
     :param output_directory: The directory to write the PSD file into.
     :param cache_dir: The directory where the cached PSDs are.
@@ -429,6 +430,7 @@ def bundle_psd(
     for psd in psds:
         max_size = (max(max_size[0], psd.width), max(max_size[1], psd.height))
         max_depth = max(max_depth, psd.depth)
+    psd_bulk = PSDImage.new("RGBA", max_size, depth=max_depth)
 
     for page in pages:
         psd_bulk.append(page)
@@ -436,6 +438,14 @@ def bundle_psd(
     psd_bulk.save(bulk_psd_path)
 
 
+def merge_cached_images(
+    merged_image_path: Path,
+    image_files: list[ExportTarget],
+    cache_dir: Path,
+    for_ocr: bool,
+    uuid: str,
+) -> ost.OutputPathGenerator:
+    """
     Merge the cached images into a single image.
 
     :param merged_image_path: The path to write the merged image to.
