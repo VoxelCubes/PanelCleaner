@@ -835,6 +835,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         """
         prc.perform_ocr(
             image_objects=[self.image_obj],
+            split_files={},
             output_file=None,
             csv_output=False,
             config=self.config,
