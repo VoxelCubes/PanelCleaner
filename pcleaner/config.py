@@ -73,6 +73,9 @@ ThreadLimit = NewType("ThreadLimit", int)
 # Create a new type to signify a long description string.
 LongString = NewType("LongString", str)
 
+# Create a new type for regular expressions, so they can be validated at load time.
+RegexPattern = NewType("RegexPattern", str)
+
 # Create a new type for percentages as floats. These are between 0 and 100.
 Percentage = NewType("Percentage", float)
 
@@ -361,7 +364,7 @@ class PreprocessorConfig:
     ocr_engine: OCREngine = OCREngine.AUTO
     reading_order: ReadingOrder = ReadingOrder.AUTO
     ocr_max_size: PixelsSquared = 30 * 100
-    ocr_blacklist_pattern: str = "[～．ー！？０-９~.!?0-9-]*"
+    ocr_blacklist_pattern: RegexPattern = "[～．ー！？０-９~.!?0-9-]*"
     ocr_strict_language: bool = False
     box_padding_initial: Pixels = 2
     box_right_padding_initial: Pixels = 3
@@ -500,7 +503,7 @@ class PreprocessorConfig:
         try_to_load(self, config_updater, section, OCREngine, "ocr_engine")
         try_to_load(self, config_updater, section, ReadingOrder, "reading_order")
         try_to_load(self, config_updater, section, PixelsSquared, "ocr_max_size")
-        try_to_load(self, config_updater, section, str, "ocr_blacklist_pattern")
+        try_to_load(self, config_updater, section, RegexPattern, "ocr_blacklist_pattern")
         try_to_load(self, config_updater, section, bool, "ocr_strict_language")
         try_to_load(self, config_updater, section, Pixels, "box_padding_initial")
         try_to_load(self, config_updater, section, Pixels, "box_right_padding_initial")
@@ -1471,6 +1474,15 @@ def try_to_load(
             attr_value = None
         else:
             attr_value = conf_data
+    elif attr_type == RegexPattern:
+        try:
+            attr_value = re.compile(conf_data)
+        except re.error as e:
+            print(
+                f"Option {attr_name} in section {section} should be a valid regular expression.\n"
+                f"Failed to parse '{conf_data}': {e}"
+            )
+            return
     elif attr_type in (int, Pixels, PixelsSquared):
         try:
             attr_value = int(conf_data)

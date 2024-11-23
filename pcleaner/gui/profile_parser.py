@@ -20,6 +20,7 @@ from pcleaner.config import (
     Pixels,
     PixelsSquared,
     LongString,
+    RegexPattern,
     Percentage,
     OCREngine,
     ReadingOrder,
@@ -50,6 +51,7 @@ class EntryTypes(Enum):
     Str = auto()
     LongString = auto()
     StrNone = auto()
+    RegexPattern = auto()
     Color = auto()
     MimeSuffixIMG = auto()
     MimeSuffixMASK = auto()
@@ -180,7 +182,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_getter = self._data_widget.value
             self._data_widget.valueChanged.connect(self._value_changed)
 
-        elif entry_type == EntryTypes.Str:
+        elif entry_type == EntryTypes.Str or entry_type == EntryTypes.RegexPattern:
             self._data_widget: Qw.QLineEdit = Qw.QLineEdit()
             self._data_widget.textChanged.connect(self._value_changed)
             self._data_setter = self._data_widget.setText
@@ -410,6 +412,8 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.LongString
                     elif value_type == str | None:
                         entry_type = EntryTypes.StrNone
+                    elif value_type == RegexPattern:
+                        entry_type = EntryTypes.RegexPattern
                     elif value_type == tuple[int, int, int, int]:
                         entry_type = EntryTypes.Color
                     elif value_type == OCREngine:
@@ -550,6 +554,8 @@ class ProfileToolBox(Qw.QToolBox):
         The only value validated here is the model path. We don't want to interrupt the user while
         typing.
 
+        We also need to validate that the regex compiles.
+
         :param profile: The profile to save to.
         :param no_validation: If True, skip validation of the values.
         """
@@ -579,6 +585,23 @@ class ProfileToolBox(Qw.QToolBox):
                                 '"https://github.com/zyddnys/manga-image-translator/releases/latest">here</a>'
                                 " or continue using the default model.</html>"
                             ).format(value=value),
+                        )
+                if key == "ocr_blacklist_pattern":
+                    try:
+                        re.compile(value)
+                    except re.error as e:
+                        if no_validation:
+                            continue
+                        logger.error(
+                            f"Invalid regex pattern {value} for {key}. Please check your profile."
+                        )
+                        gu.show_warning(
+                            self,
+                            "Invalid regex pattern",
+                            self.tr(
+                                'The regex pattern "{value}" for {key} is invalid, reverting to default.'
+                            ).format(value=value, key=key),
+                            detailedText=str(e),
                         )
         # Sanity check to guard against future breakage.
         if not found_model_path:
