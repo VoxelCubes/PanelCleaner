@@ -76,6 +76,10 @@ LongString = NewType("LongString", str)
 # Create a new type for percentages as floats. These are between 0 and 100.
 Percentage = NewType("Percentage", float)
 
+# Create a new type for pixel values.
+Pixels = NewType("Pixels", int)
+PixelsSquared = NewType("PixelsSquared", int)
+
 
 class ReadingOrder(StrEnum):
     AUTO = "auto"
@@ -110,11 +114,11 @@ class GeneralConfig:
     preferred_file_type: str | None = None
     preferred_mask_file_type: str = ".png"
     layered_export: LayeredExport = LayeredExport.NONE
-    input_height_lower_target: int = 1000
-    input_height_upper_target: int = 4000
+    input_height_lower_target: Pixels = 1000
+    input_height_upper_target: Pixels = 4000
     split_long_strips: bool = True
-    preferred_split_height: int = 2000
-    split_tolerance_margin: int = 500
+    preferred_split_height: Pixels = 2000
+    split_tolerance_margin: Pixels = 500
     long_strip_aspect_ratio: float = 0.33
     merge_after_split: bool = True
     max_threads_export: ThreadLimit = 0
@@ -220,11 +224,11 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, str | None, "preferred_file_type")
         try_to_load(self, config_updater, section, str, "preferred_mask_file_type")
         try_to_load(self, config_updater, section, LayeredExport, "layered_export")
-        try_to_load(self, config_updater, section, int, "input_height_lower_target")
-        try_to_load(self, config_updater, section, int, "input_height_upper_target")
+        try_to_load(self, config_updater, section, Pixels, "input_height_lower_target")
+        try_to_load(self, config_updater, section, Pixels, "input_height_upper_target")
         try_to_load(self, config_updater, section, bool, "split_long_strips")
-        try_to_load(self, config_updater, section, int, "preferred_split_height")
-        try_to_load(self, config_updater, section, int, "split_tolerance_margin")
+        try_to_load(self, config_updater, section, Pixels, "preferred_split_height")
+        try_to_load(self, config_updater, section, Pixels, "split_tolerance_margin")
         try_to_load(self, config_updater, section, float, "long_strip_aspect_ratio")
         try_to_load(self, config_updater, section, bool, "merge_after_split")
         try_to_load(self, config_updater, section, ThreadLimit, "max_threads_export")
@@ -260,14 +264,16 @@ class GeneralConfig:
             self.max_threads_export = ThreadLimit(0)
 
         if self.input_height_lower_target < 0:
-            self.input_height_lower_target = 0
+            self.input_height_lower_target = Pixels(0)
         if self.input_height_upper_target < 0:
-            self.input_height_upper_target = 0
+            self.input_height_upper_target = Pixels(0)
+        if self.input_height_upper_target < self.input_height_lower_target:
+            self.input_height_upper_target = self.input_height_lower_target
 
         if self.preferred_split_height < 0:
-            self.preferred_split_height = 0
+            self.preferred_split_height = Pixels(0)
         if self.split_tolerance_margin < 0:
-            self.split_tolerance_margin = 0
+            self.split_tolerance_margin = Pixels(0)
         if self.long_strip_aspect_ratio < 0:
             self.long_strip_aspect_ratio = 0
 
@@ -346,22 +352,22 @@ class TextDetectorConfig:
 
 @define
 class PreprocessorConfig:
-    box_min_size: int = 20 * 20
-    suspicious_box_min_size: int = 200 * 200
+    box_min_size: PixelsSquared = 20 * 20
+    suspicious_box_min_size: PixelsSquared = 200 * 200
     box_overlap_threshold: Percentage = 20.0
     ocr_enabled: bool = True
     ocr_use_tesseract: bool = False
     ocr_language: osl.LanguageCode = osl.LanguageCode.detect_box
     ocr_engine: OCREngine = OCREngine.AUTO
     reading_order: ReadingOrder = ReadingOrder.AUTO
-    ocr_max_size: int = 30 * 100
+    ocr_max_size: PixelsSquared = 30 * 100
     ocr_blacklist_pattern: str = "[～．ー！？０-９~.!?0-9-]*"
     ocr_strict_language: bool = False
-    box_padding_initial: int = 2
-    box_right_padding_initial: int = 3
-    box_padding_extended: int = 5
-    box_right_padding_extended: int = 5
-    box_reference_padding: int = 20
+    box_padding_initial: Pixels = 2
+    box_right_padding_initial: Pixels = 3
+    box_padding_extended: Pixels = 5
+    box_right_padding_extended: Pixels = 5
+    box_reference_padding: Pixels = 20
 
     def export_to_conf(
         self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
@@ -485,55 +491,55 @@ class PreprocessorConfig:
             logger.warning(f"No {section} section found in the profile, using defaults.")
             return
 
-        try_to_load(self, config_updater, section, int, "box_min_size")
-        try_to_load(self, config_updater, section, int, "suspicious_box_min_size")
+        try_to_load(self, config_updater, section, PixelsSquared, "box_min_size")
+        try_to_load(self, config_updater, section, PixelsSquared, "suspicious_box_min_size")
         try_to_load(self, config_updater, section, Percentage, "box_overlap_threshold")
         try_to_load(self, config_updater, section, bool, "ocr_enabled")
         try_to_load(self, config_updater, section, bool, "ocr_use_tesseract")
         try_to_load(self, config_updater, section, osl.LanguageCode, "ocr_language")
         try_to_load(self, config_updater, section, OCREngine, "ocr_engine")
         try_to_load(self, config_updater, section, ReadingOrder, "reading_order")
-        try_to_load(self, config_updater, section, int, "ocr_max_size")
+        try_to_load(self, config_updater, section, PixelsSquared, "ocr_max_size")
         try_to_load(self, config_updater, section, str, "ocr_blacklist_pattern")
         try_to_load(self, config_updater, section, bool, "ocr_strict_language")
-        try_to_load(self, config_updater, section, int, "box_padding_initial")
-        try_to_load(self, config_updater, section, int, "box_right_padding_initial")
-        try_to_load(self, config_updater, section, int, "box_padding_extended")
-        try_to_load(self, config_updater, section, int, "box_right_padding_extended")
-        try_to_load(self, config_updater, section, int, "box_reference_padding")
+        try_to_load(self, config_updater, section, Pixels, "box_padding_initial")
+        try_to_load(self, config_updater, section, Pixels, "box_right_padding_initial")
+        try_to_load(self, config_updater, section, Pixels, "box_padding_extended")
+        try_to_load(self, config_updater, section, Pixels, "box_right_padding_extended")
+        try_to_load(self, config_updater, section, Pixels, "box_reference_padding")
 
     def fix(self) -> None:
         """
         Ensure all numbers are greater equal 0.
         """
         if self.box_min_size < 0:
-            self.box_min_size = 0
+            self.box_min_size = PixelsSquared(0)
         if self.suspicious_box_min_size < 0:
-            self.suspicious_box_min_size = 0
+            self.suspicious_box_min_size = PixelsSquared(0)
         if self.box_overlap_threshold < 0:
             self.box_overlap_threshold = Percentage(0.0)
         if self.box_overlap_threshold > 100:
             self.box_overlap_threshold = Percentage(100.0)
         if self.ocr_max_size < 0:
-            self.ocr_max_size = 0
+            self.ocr_max_size = PixelsSquared(0)
         if self.box_padding_initial < 0:
-            self.box_padding_initial = 0
+            self.box_padding_initial = Pixels(0)
         if self.box_right_padding_initial < 0:
-            self.box_right_padding_initial = 0
+            self.box_right_padding_initial = Pixels(0)
         if self.box_padding_extended < 0:
-            self.box_padding_extended = 0
+            self.box_padding_extended = Pixels(0)
         if self.box_right_padding_extended < 0:
-            self.box_right_padding_extended = 0
+            self.box_right_padding_extended = Pixels(0)
         if self.box_reference_padding < 0:
-            self.box_reference_padding = 0
+            self.box_reference_padding = Pixels(0)
 
 
 @define
 class MaskerConfig:
     max_threads: ThreadLimit = 0
-    mask_growth_step_pixels: int | GreaterZero = 2
+    mask_growth_step_pixels: Pixels | GreaterZero = 2
     mask_growth_steps: int | GreaterZero = 11
-    min_mask_thickness: int = 4
+    min_mask_thickness: Pixels = 4
     allow_colored_masks: bool = True
     off_white_max_threshold: int = 240
     mask_max_standard_deviation: float = 15
@@ -629,9 +635,9 @@ class MaskerConfig:
             return
 
         try_to_load(self, config_updater, section, ThreadLimit, "max_threads")
-        try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_step_pixels")
+        try_to_load(self, config_updater, section, Pixels | GreaterZero, "mask_growth_step_pixels")
         try_to_load(self, config_updater, section, int | GreaterZero, "mask_growth_steps")
-        try_to_load(self, config_updater, section, int, "min_mask_thickness")
+        try_to_load(self, config_updater, section, Pixels, "min_mask_thickness")
         try_to_load(self, config_updater, section, bool, "allow_colored_masks")
         try_to_load(self, config_updater, section, int, "off_white_max_threshold")
         try_to_load(self, config_updater, section, float, "mask_improvement_threshold")
@@ -673,13 +679,13 @@ class DenoiserConfig:
     denoising_enabled: bool = True
     max_threads: ThreadLimit = 0
     noise_min_standard_deviation: float = 0.25
-    noise_outline_size: int = 5
-    noise_fade_radius: int = 1
+    noise_outline_size: Pixels = 5
+    noise_fade_radius: Pixels = 1
     colored_images: bool = False
     filter_strength: int = 10
     color_filter_strength: int = 10
-    template_window_size: int = 7
-    search_window_size: int = 21
+    template_window_size: Pixels = 7
+    search_window_size: Pixels = 21
 
     def export_to_conf(
         self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
@@ -763,13 +769,13 @@ class DenoiserConfig:
         try_to_load(self, config_updater, section, ThreadLimit, "max_threads")
         try_to_load(self, config_updater, section, bool, "denoising_enabled")
         try_to_load(self, config_updater, section, float, "noise_min_standard_deviation")
-        try_to_load(self, config_updater, section, int, "noise_outline_size")
-        try_to_load(self, config_updater, section, int, "noise_fade_radius")
+        try_to_load(self, config_updater, section, Pixels, "noise_outline_size")
+        try_to_load(self, config_updater, section, Pixels, "noise_fade_radius")
         try_to_load(self, config_updater, section, bool, "colored_images")
         try_to_load(self, config_updater, section, int, "filter_strength")
         try_to_load(self, config_updater, section, int, "color_filter_strength")
-        try_to_load(self, config_updater, section, int, "template_window_size")
-        try_to_load(self, config_updater, section, int, "search_window_size")
+        try_to_load(self, config_updater, section, Pixels, "template_window_size")
+        try_to_load(self, config_updater, section, Pixels, "search_window_size")
 
     def fix(self) -> None:
         if self.max_threads < 0:
@@ -777,29 +783,29 @@ class DenoiserConfig:
         if self.noise_min_standard_deviation < 0:
             self.noise_min_standard_deviation = 0
         if self.noise_outline_size < 0:
-            self.noise_outline_size = 0
+            self.noise_outline_size = Pixels(0)
         if self.noise_fade_radius < 0:
-            self.noise_fade_radius = 0
+            self.noise_fade_radius = Pixels(0)
         if self.filter_strength < 0:
             self.filter_strength = 0
         if self.color_filter_strength < 0:
             self.color_filter_strength = 0
         if self.template_window_size < 0:
-            self.template_window_size = 0
+            self.template_window_size = Pixels(0)
         if self.search_window_size < 0:
-            self.search_window_size = 0
+            self.search_window_size = Pixels(0)
 
 
 @define
 class InpainterConfig:
     inpainting_enabled: bool = False
     inpainting_min_std_dev: float = 15
-    inpainting_max_mask_radius: int = 6
-    min_inpainting_radius: int = 7
-    max_inpainting_radius: int = 20
+    inpainting_max_mask_radius: Pixels = 6
+    min_inpainting_radius: Pixels = 7
+    max_inpainting_radius: Pixels = 20
     inpainting_radius_multiplier: float = 0.2
-    inpainting_isolation_radius: int = 5
-    inpainting_fade_radius: int = 4
+    inpainting_isolation_radius: Pixels = 5
+    inpainting_fade_radius: Pixels = 4
 
     def export_to_conf(
         self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
@@ -885,28 +891,28 @@ class InpainterConfig:
 
         try_to_load(self, config_updater, section, bool, "inpainting_enabled")
         try_to_load(self, config_updater, section, float, "inpainting_min_std_dev")
-        try_to_load(self, config_updater, section, int, "inpainting_max_mask_radius")
-        try_to_load(self, config_updater, section, int, "min_inpainting_radius")
-        try_to_load(self, config_updater, section, int, "max_inpainting_radius")
+        try_to_load(self, config_updater, section, Pixels, "inpainting_max_mask_radius")
+        try_to_load(self, config_updater, section, Pixels, "min_inpainting_radius")
+        try_to_load(self, config_updater, section, Pixels, "max_inpainting_radius")
         try_to_load(self, config_updater, section, float, "inpainting_radius_multiplier")
-        try_to_load(self, config_updater, section, int, "inpainting_isolation_radius")
-        try_to_load(self, config_updater, section, int, "inpainting_fade_radius")
+        try_to_load(self, config_updater, section, Pixels, "inpainting_isolation_radius")
+        try_to_load(self, config_updater, section, Pixels, "inpainting_fade_radius")
 
     def fix(self) -> None:
         if self.inpainting_min_std_dev < 0:
             self.inpainting_min_std_dev = 0
         if self.inpainting_max_mask_radius < 0:
-            self.inpainting_max_mask_radius = 0
+            self.inpainting_max_mask_radius = Pixels(0)
         if self.min_inpainting_radius < 0:
-            self.min_inpainting_radius = 0
+            self.min_inpainting_radius = Pixels(0)
         if self.max_inpainting_radius < 0:
-            self.max_inpainting_radius = 0
+            self.max_inpainting_radius = Pixels(0)
         if self.inpainting_radius_multiplier < 0:
             self.inpainting_radius_multiplier = 0
         if self.inpainting_isolation_radius < 0:
-            self.inpainting_isolation_radius = 0
+            self.inpainting_isolation_radius = Pixels(0)
         if self.inpainting_fade_radius < 0:
-            self.inpainting_fade_radius = 0
+            self.inpainting_fade_radius = Pixels(0)
         self.max_inpainting_radius = max(self.min_inpainting_radius, self.max_inpainting_radius)
 
 
@@ -1465,7 +1471,7 @@ def try_to_load(
             attr_value = None
         else:
             attr_value = conf_data
-    elif attr_type == int:
+    elif attr_type in (int, Pixels, PixelsSquared):
         try:
             attr_value = int(conf_data)
         except ValueError as e:
@@ -1483,7 +1489,7 @@ def try_to_load(
                 f"Failed to parse '{conf_data}': {e}"
             )
             return
-    elif attr_type == int | GreaterZero:
+    elif attr_type in (int | GreaterZero, Pixels | GreaterZero):
         # GreaterZero is just a signifier to check for positive numbers.
         try:
             attr_value = int(conf_data)

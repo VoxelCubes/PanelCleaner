@@ -17,6 +17,8 @@ import pcleaner.ocr.supported_languages as osl
 from pcleaner import config as cfg
 from pcleaner.config import (
     GreaterZero,
+    Pixels,
+    PixelsSquared,
     LongString,
     Percentage,
     OCREngine,
@@ -39,6 +41,9 @@ class EntryTypes(Enum):
     Int = auto()
     Float = auto()
     IntGreater0 = auto()
+    Pixels = auto()
+    PixelsSquared = auto()
+    PixelsGreater0 = auto()
     ThreadLimit = auto()
     FloatGreater0 = auto()
     Percentage = auto()
@@ -122,6 +127,24 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             self._data_getter = self._data_widget.value
             if entry_type == EntryTypes.IntGreater0:
                 self._data_widget.setMinimum(1)
+            self._data_widget.valueChanged.connect(self._value_changed)
+
+        elif entry_type == EntryTypes.Pixels or entry_type == EntryTypes.PixelsGreater0:
+            self._data_widget: Qw.QSpinBox = Qw.QSpinBox()
+            self._data_widget.setMaximum(999999999)  # Can't go much higher due to int32 limits.
+            self._data_widget.setSuffix(self.tr(" px", "Pixel unit"))
+            self._data_setter = self._data_widget.setValue
+            self._data_getter = self._data_widget.value
+            if entry_type == EntryTypes.PixelsGreater0:
+                self._data_widget.setMinimum(1)
+            self._data_widget.valueChanged.connect(self._value_changed)
+
+        elif entry_type == EntryTypes.PixelsSquared:
+            self._data_widget: Qw.QSpinBox = Qw.QSpinBox()
+            self._data_widget.setMaximum(999999999)  # Can't go much higher due to int32 limits.
+            self._data_widget.setSuffix(self.tr(" px²", "Pixel squared unit"))
+            self._data_setter = self._data_widget.setValue
+            self._data_getter = self._data_widget.value
             self._data_widget.valueChanged.connect(self._value_changed)
 
         elif entry_type == EntryTypes.ThreadLimit:
@@ -367,6 +390,12 @@ def parse_profile_structure(profile: cfg.Profile) -> list[ProfileSection]:
                         entry_type = EntryTypes.Bool
                     elif value_type == int:
                         entry_type = EntryTypes.Int
+                    elif value_type == Pixels:
+                        entry_type = EntryTypes.Pixels
+                    elif value_type == Pixels | GreaterZero:
+                        entry_type = EntryTypes.PixelsGreater0
+                    elif value_type == PixelsSquared:
+                        entry_type = EntryTypes.PixelsSquared
                     elif value_type == float:
                         entry_type = EntryTypes.Float
                     elif value_type == int | GreaterZero:
