@@ -133,6 +133,16 @@ class Box:
 
         return Box(x1_new, y1_new, x2_new, y2_new)
 
+    def translate(self, x: int, y: int) -> "Box":
+        """
+        Translate the box by x and y.
+
+        :param x: The x translation.
+        :param y: The y translation.
+        :return: The translated box.
+        """
+        return Box(self.x1 + x, self.y1 + y, self.x2 + x, self.y2 + y)
+
 
 @define
 class PageData:
@@ -476,6 +486,71 @@ def convert_ocr_results_to_analytics(ocr_results: list[list[OCRResult]]) -> list
             )
         )
     return ocr_analytics
+
+
+def merge_ocr_analytics(
+    split_from: Path, segment_paths: list[Path], ocr_analytics: list[OCRAnalytic]
+) -> None:
+    """
+    We need to merge and correct coordinates for the OCR analytics.
+    OCRAnalytics are modified in place.
+
+    :param split_from: The path to the original image.
+    :param segment_paths: The paths to the split images.
+    :param ocr_analytics: The full list of OCR analytics.
+    """
+
+    # Analytic:
+    # num_boxes: int
+    # box_sizes_ocr: Sequence[int]
+    # box_sizes_removed: Sequence[int]
+    # removed_box_data: Sequence[tuple[Path, str, Box]]
+
+    # First we need to find which analytics to merge by identifying the
+    # file name in one of the removed_box_data entries.
+    # It can happen that no analytics are found, in which case we create a dummy one.
+    split_file_to_analytic = {}
+    for segment_path in segment_paths:
+        for analytic in ocr_analytics:
+            if not analytic.removed_box_data:
+                continue
+            analytic_path, _, _ = analytic.removed_box_data[0]
+            if analytic_path == segment_path:
+                split_file_to_analytic[segment_path] = analytic
+                break
+        else:
+            # Create a dummy analytic.
+            split_file_to_analytic[segment_path] = OCRAnalytic(0, [], [], [])
+
+    # Purge the assigned analytics from the main list.
+    for analytic_found in split_file_to_analytic.values():
+        ocr_analytics.remove(analytic_found)
+
+    merge_num_boxes = sum(analytic.num_boxes for analytic in split_file_to_analytic.values())
+    merge_box_sizes_ocr = [
+        size for analytic in split_file_to_analytic.values() for size in analytic.box_sizes_ocr
+    ]
+    merge_box_sizes_removed = [
+        size for analytic in split_file_to_analytic.values() for size in analytic.box_sizes_removed
+    ]
+    # For the boxes we need to adjust the coordinates and fix the file path.
+    new_path = split_from
+    new_box_tuples = []
+    offset = 0
+    for segment_path in segment_paths:
+        for _, text, box in split_file_to_analytic[segment_path].removed_box_data:
+            new_box = box.translate(0, offset)
+            new_box_tuples.append((new_path, text, new_box))
+        offset += Image.open(segment_path).size[1]
+
+    # Create the new analytic and add it to the list.
+    new_analytic = OCRAnalytic(
+        merge_num_boxes,
+        merge_box_sizes_ocr,
+        merge_box_sizes_removed,
+        new_box_tuples,
+    )
+    ocr_analytics.append(new_analytic)
 
 
 @frozen

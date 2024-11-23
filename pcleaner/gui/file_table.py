@@ -1,4 +1,5 @@
 from collections import defaultdict
+import uuid
 from enum import IntEnum, auto
 from pathlib import Path
 from typing import Sequence
@@ -15,6 +16,7 @@ import pcleaner.ctd_interface as ctd
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.output_structures as ost
+import pcleaner.image_ops as ops
 import pcleaner.gui.structures as gst
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
@@ -60,6 +62,7 @@ class FileTable(CTableWidget):
     remove_all_files = Qc.Signal()
 
     files: dict[Path, imf.ImageFile]
+    split_files: dict[Path, list[imf.ImageFile]]
 
     notify_on_duplicate: bool
 
@@ -76,6 +79,7 @@ class FileTable(CTableWidget):
 
         # Store a map of resolved file paths to file objects.
         self.files: dict[Path, imf.ImageFile] = {}
+        self.split_files: dict[Path, list[imf.ImageFile]] = {}
         self.threadpool = Qc.QThreadPool.globalInstance()
 
         self.notify_on_duplicate = True
@@ -194,6 +198,9 @@ class FileTable(CTableWidget):
         """
         return list(self.files.values())
 
+    def get_split_files(self) -> dict[Path, list[imf.ImageFile]]:
+        return self.split_files
+
     def has_no_files(self) -> bool:
         """
         Check if the table is empty.
@@ -263,7 +270,7 @@ class FileTable(CTableWidget):
         """
         logger.debug(f'Requesting to add "{path}"')
         # Make sure the file is not already in the table.
-        if path in self.files:
+        if path in self.files or path in self.split_files:
             logger.warning(f'File "{path}" already in table.')
             if not notify_on_duplicate:
                 return False
@@ -280,7 +287,33 @@ class FileTable(CTableWidget):
 
             return dialog.clickedButton() is not ok_to_all_button
 
-        self.files[path] = imf.ImageFile(path=path)
+        # Check if the image needs splitting due to excessive length.
+        general_profile = self.config.current_profile.general
+        splits = ops.calculate_best_splits(
+            path,
+            general_profile.preferred_split_height,
+            general_profile.split_tolerance_margin,
+            general_profile.split_long_strips,
+            general_profile.long_strip_aspect_ratio,
+        )
+        if not splits:
+            # Nothing to do.
+            self.files[path] = imf.ImageFile(path=path)
+        else:
+            segments = ops.split_image(path, splits)
+            # Save these dummy files in the cache.
+            cache_dir = self.config.get_cleaner_cache_dir() / f"splits_{uuid.uuid4().hex}"
+            cache_dir.mkdir(parents=True, exist_ok=True)
+            self.split_files[path] = []
+            for index, segment in enumerate(segments, 1):
+                segment_name = path.stem + "_" + self.tr("split") + f"_{index}" + path.suffix
+                segment_path = cache_dir / segment_name
+                segment.save(segment_path)
+                fake_path = path.with_name(segment_name)
+                self.files[segment_path] = imf.ImageFile(
+                    path=segment_path, split_from=path, export_path=fake_path
+                )
+                self.split_files[path].append(self.files[segment_path])
         return notify_on_duplicate
 
     def clear_files(self) -> None:
@@ -289,6 +322,7 @@ class FileTable(CTableWidget):
         """
         logger.debug(f"Clearing table")
         self.files.clear()
+        self.split_files.clear()
         self.clearAll()
         self.check_empty()
 
@@ -318,6 +352,15 @@ class FileTable(CTableWidget):
 
         path = Path(self.item(selected_row, Column.PATH).text())
         self.remove_file.emit(path)
+        # Check if the file was split.
+        removed_image_file = self.files[path]
+        split_from = removed_image_file.split_from
+        if split_from is not None:
+            # Remove this part of the split.
+            self.split_files[split_from].remove(removed_image_file)
+            if not self.split_files[split_from]:
+                # Remove the split from the table.
+                del self.split_files[split_from]
         del self.files[path]
         self.removeRow(selected_row)
         self.check_empty()
@@ -336,7 +379,8 @@ class FileTable(CTableWidget):
 
         # Collect the file paths and map them to their shortened version.
         # Then update the table accordingly.
-        shortened_paths = hp.trim_prefix_from_paths(list(self.files.keys()))
+        file_paths = [img_file.export_path for img_file in self.files.values()]
+        shortened_paths = hp.trim_prefix_from_paths(file_paths)
         long_and_short_paths: list[tuple[Path, Path]] = list(
             natsorted(zip(self.files.keys(), shortened_paths), key=lambda x: x[1])
         )

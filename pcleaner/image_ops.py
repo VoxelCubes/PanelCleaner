@@ -1,4 +1,5 @@
 from itertools import cycle
+from math import ceil
 from pathlib import Path
 from importlib import resources
 from typing import Generator, Iterable, TypeVar, Any, NewType
@@ -993,3 +994,150 @@ def visualize_raw_boxes(
         )
 
     image.save(output_path)
+
+
+def calculate_best_splits(
+    image_path: Path | str,
+    preferred_height: int,
+    tolerance: int,
+    split_strips: bool,
+    max_aspect_ratio: float,
+) -> list[int]:
+    """
+    Check if we should split the image into smaller vertical segments.
+    We check for good splits by comparing the change in pixels horizontally.
+    We then pick the best one in the preferred height range.
+
+    :param image_path: The path to the image to calculate the best splits for.
+    :param preferred_height: The preferred height of the strips.
+    :param tolerance: The pixel range to consider for the preferred height.
+    :param split_strips: Whether to even split the strips or not.
+    :param max_aspect_ratio: The maximum aspect ratio of the strips to consider splitting.
+    :return: A list of y values to split the image at.
+    """
+    if not split_strips:
+        return []
+
+    image = Image.open(image_path)
+    width, height = image.size
+
+    if height <= preferred_height:
+        return []
+
+    if width / height > max_aspect_ratio:
+        return []
+
+    # Calculate the number of strips to split the image into.
+    # We want to avoid leaving a tiny strip at the end.
+    num_strips = ceil(height / preferred_height) - 1
+    preferred_height = height // (num_strips + 1)
+    splits = [preferred_height * i for i in range(1, num_strips + 1)]
+    # Adjust the tolerance to prevent overlapping search ranges
+    # and invalid search ranges near the image edges.
+    tolerance = min(tolerance, preferred_height // 2)
+
+    if tolerance == 0:
+        return splits
+
+    # Perform the calculation on the luminance alone,
+    # as human vision is more sensitive to changes in luminance than color,
+    # an important feature in the image will be unlikely to lack contrast
+    # in this channel.
+    image_luminance = image.convert("L")
+    luminance = np.array(image_luminance)
+
+    # Search for the minimum changes for each split's range.
+    for index, split in enumerate(splits):
+        search_start = split - tolerance
+        search_end = split + tolerance
+
+        search_range = luminance[search_start:search_end, :]
+        # We want to penalize large changes more than small changes,
+        # so we square the differences.
+        # Even if the pixel changed by 255 each time, we would need a width of 2^14 to overflow.
+        horizontal_changes = np.sum(np.square(np.diff(search_range, axis=1)), axis=1)
+
+        # Create a bitmap by thresholding the horizontal changes using the 10th percentile.
+        # This way we can still optimize the exact split location when the image is noisy.
+        threshold = np.percentile(horizontal_changes, 10)
+        horizontal_changes_bitmap = (horizontal_changes > threshold).astype(np.uint8)
+
+        # Find the optimal region by identifying the center of the region with the lowest values
+        small_value_indices = np.where(horizontal_changes_bitmap == 0)[0]
+
+        if len(small_value_indices) > 0:
+            diff_indices = np.diff(small_value_indices)
+            split_points = np.where(diff_indices > 1)[0]
+            split_points = np.concatenate(([0], split_points + 1, [len(small_value_indices)]))
+
+            best_region_length = 0
+            best_region_start = 0
+            for i in range(len(split_points) - 1):
+                start = split_points[i]
+                end = split_points[i + 1]
+                current_length = end - start
+                if current_length > best_region_length:
+                    best_region_length = current_length
+                    best_region_start = start
+
+            # Set the best split to the center of the largest contiguous region of small values
+            best_split = small_value_indices[best_region_start + (best_region_length // 2)]
+        else:
+            # Fallback to the row with the minimum value if no region found
+            best_split = np.argmin(horizontal_changes)
+
+        splits[index] = search_start + best_split
+
+    return splits
+
+
+def split_image(image_path: Path | str, splits: list[int]) -> list[Image.Image]:
+    """
+    Split the image into multiple strips at the given y coordinates.
+
+    :param image_path: The path to the image to split.
+    :param splits: The y coordinates to split the image at.
+    :return: A list of the split images.
+    """
+    image = Image.open(image_path)
+    split_images = []
+    y1 = 0
+    for y2 in splits:
+        split_images.append(image.crop((0, y1, image.width, y2)))
+        y1 = y2
+    split_images.append(image.crop((0, y1, image.width, image.height)))
+    return split_images
+
+
+def stitch_images(image_paths: list[Path], output_path: Path) -> None:
+    """
+    Stitch the images together vertically.
+
+    :param image_paths: The paths to the images to stitch.
+    :param output_path: The path to save the stitched image to.
+    """
+    images = [Image.open(image_path) for image_path in image_paths]
+    widths, heights = zip(*(i.size for i in images))
+
+    total_width = max(widths)
+    total_height = sum(heights)
+
+    def get_greatest_common_mode(modes: list[str]) -> str:
+        # Define a hierarchy for image modes
+        mode_hierarchy = ["1", "L", "P", "LA", "RGB", "RGBA", "CMYK", "YCbCr"]
+
+        # Get the highest-ranked mode from the list
+        greatest_mode = max(modes, key=lambda mode: mode_hierarchy.index(mode))
+
+        return greatest_mode
+
+    # Get greatest common mode for the images.
+    image_modes = [image.mode for image in images]
+    stitched_image = Image.new(get_greatest_common_mode(image_modes), (total_width, total_height))
+
+    y_offset = 0
+    for image in images:
+        stitched_image.paste(image, (0, y_offset))
+        y_offset += image.size[1]
+
+    stitched_image.save(output_path)

@@ -1566,6 +1566,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         output_str = self.lineEdit_out_directory.text()
         output_directory = Path(output_str if output_str else self.tr("cleaned"))
         image_files = self.file_table.get_image_files()
+        split_files = self.file_table.get_split_files()
 
         # Save the review options for later, should the process succeed.
         # Setting to none implies that no review is requested.
@@ -1589,6 +1590,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
                 output_directory,
                 requested_outputs,
                 image_files,
+                split_files,
             )
         else:
             self.cleaning_review_options = None
@@ -1599,6 +1601,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             requested_outputs,
             output_directory,
             image_files,
+            split_files,
             self.config,
             abort_signal=self.get_abort_signal(),
         )
@@ -1692,6 +1695,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.cleaning_review_options.requested_outputs + [ost.Output.write_output],
             self.cleaning_review_options.output_directory,
             self.cleaning_review_options.image_files,
+            self.cleaning_review_options.split_files,
             self.cleaning_review_options.config,
             abort_signal=self.get_abort_signal(),
         )
@@ -1748,6 +1752,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         outputs: list[ost.Output],
         output_directory: Path,
         image_files: list[imf.ImageFile],
+        split_files: dict[Path, list[imf.ImageFile]],
         config: cfg.Config,
         progress_callback: ost.ProgressSignal,
         abort_flag: wt.SharableFlag,
@@ -1759,6 +1764,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param outputs: The outputs to generate.
         :param output_directory: The directory to output to.
         :param image_files: The image files to process.
+        :param split_files: The split files information.
         :param config: The current or older configuration.
         :param progress_callback: The callback given by the worker thread wrapper.
         :param abort_flag: The flag to check for aborting.
@@ -1767,6 +1773,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Start the processor.
         prc.generate_output(
             image_objects=image_files,
+            split_files=split_files,
             target_outputs=outputs,
             output_dir=output_directory,
             config=config,
@@ -1796,7 +1803,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         if not output_path.is_absolute():
             # Find the common directory of all the files.
             common_parent = hp.common_path_parent(
-                [f.path for f in self.file_table.get_image_files()]
+                [f.export_path for f in self.file_table.get_image_files()]
             )
             output_path = common_parent / output_path
 
@@ -1822,6 +1829,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.disable_processing_options()
 
         image_files = self.file_table.get_image_files()
+        split_files = self.file_table.get_split_files()
 
         if review_ocr:
             # The empty list gets populated with analytic results in the progress callback.
@@ -1837,6 +1845,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             self.perform_ocr,
             output_path,
             image_files,
+            split_files,
             csv_output,
             abort_signal=self.get_abort_signal(),
         )
@@ -1851,6 +1860,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self,
         output_directory: Path,
         image_files: list[imf.ImageFile],
+        split_files: dict[Path, list[imf.ImageFile]],
         csv_output: bool,
         progress_callback: ost.ProgressSignal,
         abort_flag: wt.SharableFlag,
@@ -1862,6 +1872,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         :param csv_output: Whether to output as a csv file.
         :param output_directory: The directory to output to.
         :param image_files: The image files to process.
+        :param split_files: The split files information.
         :param progress_callback: The callback given by the worker thread wrapper.
         :param abort_flag: The flag to check for aborting.
         """
@@ -1869,6 +1880,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Start the processor.
         prc.perform_ocr(
             image_objects=image_files,
+            split_files=split_files,
             output_file=output_directory,
             csv_output=csv_output,
             config=self.config,

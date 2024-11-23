@@ -200,6 +200,9 @@ def empty_cache_dir(cache_dir: Path) -> None:
     for item in cache_dir.iterdir():
         if item.suffix in [".png", ".json", ".pt", ".onnx"]:
             item.unlink()
+    # Remove all folders starting with "splits".
+    for folder in cache_dir.glob("splits*"):
+        shutil.rmtree(folder)
 
 
 def closest_match(word: str, choices: list[str]) -> str | None:

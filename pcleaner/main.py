@@ -113,10 +113,12 @@ Examples:
 
 """
 
+import json
 import multiprocessing
 import platform
 import sys
 import time
+from uuid import uuid4
 from multiprocessing import Pool
 from pathlib import Path
 
@@ -133,6 +135,7 @@ import pcleaner.denoiser as dn
 import pcleaner.helpers as hp
 import pcleaner.image_export as ie
 import pcleaner.inpainting as ip
+import pcleaner.image_ops as ops
 import pcleaner.masker as ma
 import pcleaner.memory_watcher as mw
 import pcleaner.model_downloader as md
@@ -407,6 +410,8 @@ def run_cleaner(
         gpu = torch.cuda.is_available() or torch.backends.mps.is_available()
         model_path = config.get_model_path(gpu)
 
+        split_images(image_paths, profile, cache_dir)
+
         print("Running text detection AI model...")
         try:
             pp.generate_mask_data(
@@ -660,10 +665,16 @@ def run_cleaner(
         cache_dir, cleaned_outputs_whitelist, masked_outputs_whitelist, text_outputs_whitelist
     )
 
+    # Merge the splits through the export targets.
+    export_targets = merge_export_splits(
+        export_targets, cache_dir, profile.general.merge_after_split
+    )
+
     # Pack all the arguments in batches.
     data = [
         (
             target.original_path,
+            target.export_path,
             cache_dir,
             target.uuid,
             target.outputs,
@@ -755,6 +766,8 @@ def run_ocr(
     gpu = torch.cuda.is_available() or torch.backends.mps.is_available()
     model_path = config.get_model_path(gpu)
 
+    split_images(image_paths, profile, cache_dir)
+
     print("Running text detection AI model...")
     # start = time.perf_counter()
     try:
@@ -816,6 +829,8 @@ def run_ocr(
         if ocr_analytic:
             ocr_analytics.append(ocr_analytic)
 
+    handle_merging_ocr_splits(cache_dir, profile.general.merge_after_split, ocr_analytics)
+
     print("\nDetected Text:")
     # Output the OCRed text from the analytics.
     text_out = ocr.format_output(
@@ -870,6 +885,163 @@ def clear_cache(config: cfg.Config, all_cache: bool, models: bool, images: bool)
         image_cache_dir = config.get_cleaner_cache_dir()
         cli.empty_cache_dir(image_cache_dir)
         print(f"Cleared image cache at {image_cache_dir}")
+
+
+def split_images(image_paths: list[Path], profile: cfg.Profile, cache_dir: Path) -> None:
+    # Perform image splitting, if the profile requires it.
+    split_files: dict[str, list[str]] = {}
+    files_to_remove = []
+    files_to_add = []
+    for image_path in image_paths:
+        splits = ops.calculate_best_splits(
+            image_path,
+            profile.general.preferred_split_height,
+            profile.general.split_tolerance_margin,
+            profile.general.split_long_strips,
+            profile.general.long_strip_aspect_ratio,
+        )
+        if not splits:
+            # Nothing to do.
+            continue
+        else:
+            segments = ops.split_image(image_path, splits)
+            # Save these dummy files in the cache.
+            splits_cache_dir = cache_dir / f"splits_{uuid4().hex}"
+            splits_cache_dir.mkdir(parents=True, exist_ok=True)
+            split_files[str(image_path.absolute())] = []
+            for index, segment in enumerate(segments, 1):
+                segment_name = f"{image_path.stem}_split_{index}{image_path.suffix}"
+                segment_path = splits_cache_dir / segment_name
+                segment.save(segment_path)
+                split_files[str(image_path.absolute())].append(str(segment_path.absolute()))
+                files_to_add.append(segment_path)
+            files_to_remove.append(image_path)
+    # Update the image paths.
+    for file in files_to_remove:
+        image_paths.remove(file)
+    image_paths.extend(files_to_add)
+    # We need to save the split info for the export later.
+    if split_files:
+        split_data_path = cache_dir / "splits.json"
+        with open(split_data_path, "w") as f:
+            json.dump(split_files, f)
+
+
+def merge_export_splits(
+    export_targets: list[ie.ExportTarget], cache_dir: Path, merge_splits: bool
+) -> list[ie.ExportTarget]:
+    """
+    Merge the split images into temporary files for export.
+
+    :param export_targets: The export targets to merge the splits into.
+    :param cache_dir: The cache directory.
+    :param merge_splits: Whether to merge the splits.
+    :return: The export targets with the splits merged.
+    """
+
+    split_data_path = cache_dir / "splits.json"
+    if not split_data_path.exists():
+        return export_targets
+
+    with open(split_data_path, "r") as f:
+        split_files = json.load(f)
+
+    if not merge_splits:
+        # Calculate a reverse lookup for the split files.
+        reverse_lookup = {}
+        for original_path, split_paths in split_files.items():
+            for split_path in split_paths:
+                reverse_lookup[split_path] = original_path
+
+        # We need to still repair the export paths.
+        for i in range(len(export_targets)):
+            export_target = export_targets[i]
+            if export_target.original_path in reverse_lookup:
+                new_export_target = ie.ExportTarget(
+                    export_target.original_path,
+                    reverse_lookup[export_target.original_path],
+                    export_target.uuid,
+                    export_target.outputs,
+                )
+                export_targets[i] = new_export_target
+    else:
+        # Gather the export targets that need to be merged.
+        for split_file, split_path_list in split_files.items():
+            split_export_targets: dict[str, ie.ExportTarget] = {}
+            for export_target in export_targets:
+                if str(export_target.original_path) in split_path_list:
+                    split_export_targets[str(export_target.original_path)] = export_target
+            # Verify we found all of them.
+            if len(split_export_targets) != len(split_path_list):
+                logger.error(f"Could not find all split images for {split_file}." f"Skipping.")
+                continue
+
+            # Sort the export targets by the split path list.
+            export_targets_in_order = [split_export_targets[path] for path in split_path_list]
+
+            # We need to merge the images together under a fresh UUID.
+            # Add an identifying prefix so we can clean this up later.
+            uuid = f"merger_{uuid4()}"
+
+            split_file = Path(split_file)
+            path_gen_master = ie.merge_cached_images(
+                split_file, export_targets_in_order, cache_dir, False, uuid
+            )
+            merged_outputs = []
+            for output in export_targets_in_order[0].outputs:
+                if all(output in target.outputs for target in export_targets_in_order):
+                    merged_outputs.append(output)
+
+            # Craft a replacement export target for the merged image.
+            merged_export_target = ie.ExportTarget(
+                path_gen_master.original_path,
+                split_file,
+                uuid,
+                merged_outputs,
+            )
+
+            # Remove the split images from the export targets.
+            for target in export_targets_in_order:
+                export_targets.remove(target)
+            export_targets.append(merged_export_target)
+
+    return export_targets
+
+
+def handle_merging_ocr_splits(
+    cache_dir: Path,
+    merge_after_split: bool,
+    ocr_analytics: list[st.OCRAnalytic],
+):
+    """
+    If merging the splits, merge them into a new image object and remove the split objects.
+
+    :param cache_dir: The cache directory.
+    :param merge_after_split: Whether to merge the OCR after splitting.
+    :param ocr_analytics: The OCR analytics to merge.
+    """
+
+    split_data_path = cache_dir / "splits.json"
+    if not split_data_path.exists():
+        return
+
+    with open(split_data_path, "r") as f:
+        split_files = json.load(f)
+    if not split_files:
+        return
+
+    if merge_after_split:
+        logger.info("Merging split ocr...")
+
+        for split_from in split_files:
+            segment_paths = split_files[split_from]
+
+            if not segment_paths:
+                logger.error(f"Split file {split_from} has no split objects.")
+                continue
+
+            segment_paths = [Path(path) for path in segment_paths]
+            st.merge_ocr_analytics(Path(split_from), segment_paths, ocr_analytics)
 
 
 if __name__ == "__main__":

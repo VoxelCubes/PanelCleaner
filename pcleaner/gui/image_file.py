@@ -2,6 +2,7 @@ import io
 from pathlib import Path
 from typing import Any
 from typing import Iterable
+from collections import namedtuple
 from uuid import uuid4
 
 import PySide6.QtGui as Qg
@@ -12,6 +13,7 @@ from PIL import Image
 from attrs import fields
 
 import pcleaner.config as cfg
+import pcleaner.image_export as ie
 import pcleaner.output_structures as ost
 from pcleaner.helpers import tr
 
@@ -136,7 +138,7 @@ class ImageFile:
     This class represents an image file.
     """
 
-    path: Path  # Path to the image file.
+    path: Path  # Path to the image file. For split images, this isn't the export path.
     icon: Qg.QIcon  # Placeholder icon for the image type.
     uuid: str  # Unique identifier for the temp files to prevent name collisions.
     # The following attributes are lazy-loaded.
@@ -147,16 +149,25 @@ class ImageFile:
     outputs: dict[ost.Output, ProcessOutput]  # Map of steps to ProcessStep objects.
     loading_queued: bool = False  # Whether the image is queued to be loaded.
     analytics_data: ost.ImageAnalytics = None
+    split_from: Path | None = None  # Path to the original image that this image was split from.
+    export_path: Path | None = (
+        None  # Path to display in the UI and used for exporting if not merging splits.
+    )
 
     error: Exception | None = None  # Error that occurred during any process.
 
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path, split_from: Path = None, export_path: Path = None) -> None:
         """
         Init the image file.
 
         :param path: Path to the image file.
         """
         self.path = path
+        self.split_from = split_from
+        if export_path is None:
+            self.export_path = path
+        else:
+            self.export_path = export_path
         self.icon = Qg.QIcon.fromTheme(cfg.SUFFIX_TO_ICON[path.suffix.lower()])
         self.uuid = str(uuid4())
         self.outputs = {}
@@ -393,6 +404,62 @@ class ImageFile:
         self.thumbnail = convert_PIL_to_QPixmap(thumbnail)
 
         return self.path
+
+
+# We need to be able to deliver the .path attribute as a dummy output.
+DummyOutput = namedtuple("DummyOutput", ["path"])
+
+
+class MergedImageFile:
+    """
+    This class represents an image file.
+    """
+
+    # This is all we need for exporting.
+    path: Path
+    export_path: Path
+    uuid: str
+    outputs: dict[ost.Output, DummyOutput]
+
+    def __init__(
+        self, image_files: list[ImageFile], cache_dir: Path, for_ocr: bool = False
+    ) -> None:
+        """
+        Create an amalgam from the given image files.
+        Stitches the images together vertically as well.
+        The image list must be sorted top to bottom.
+
+        :param image_files: The image files to merge.
+        :param cache_dir: The cache directory to store the merged image.
+        :param for_ocr: When merging for ocr we need to forge some outputs data.
+        """
+        # Check that all images came from the same original image.
+        split_from = {image.split_from for image in image_files}
+        if len(split_from) != 1:
+            raise ValueError("Bad splits. Images must be from the same original image.")
+
+        self.path = split_from.pop()
+        self.export_path = self.path
+
+        # We need to merge the images together under a fresh UUID.
+        # Add an identifying prefix so we can clean this up later.
+        self.uuid = f"merger_{uuid4()}"
+
+        merge_files = [
+            ie.ExportTarget(image.export_path, image.export_path, image.uuid, [])
+            for image in image_files
+        ]
+        path_gen_master = ie.merge_cached_images(
+            self.path, merge_files, cache_dir, for_ocr, self.uuid
+        )
+
+        if for_ocr:
+            # The OCR review driver will request the initial boxes output to grab it's path.
+            self.outputs = {
+                ost.Output.initial_boxes: DummyOutput(
+                    path_gen_master.for_output(ost.Output.initial_boxes)
+                ),
+            }
 
 
 def convert_PIL_to_QPixmap(image: Image.Image) -> Qg.QPixmap:

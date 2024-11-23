@@ -21,13 +21,15 @@ import pcleaner.ocr.ocr as ocr
 import pcleaner.output_structures as ost
 import pcleaner.preprocessor as pp
 import pcleaner.structures as st
+import pcleaner.helpers as hp
 from pcleaner import model_downloader as md
 from pcleaner.config import LayeredExport
 from pcleaner.helpers import tr
 
 
 def generate_output(
-    image_objects: list[imf.ImageFile],
+    image_objects: list[imf.ImageFile | imf.MergedImageFile],
+    split_files: dict[Path, list[imf.ImageFile]],
     target_outputs: list[ost.Output],
     output_dir: Path | None,
     config: cfg.Config,
@@ -56,6 +58,7 @@ def generate_output(
     additional visualizations that aren't necessary when you aren't viewing image details.
 
     :param image_objects: The image objects to process. These contain the image paths.
+    :param split_files: The split files information.
     :param target_outputs: The target outputs to reach, eg. the clean mask and image.
         Multiple outputs are only supported for those within the same step, as it's meant to accommodate
         the full run parameters.
@@ -564,6 +567,9 @@ def generate_output(
     check_abortion()
 
     if target_output == ost.Output.write_output:
+
+        handle_merging_splits(image_objects, split_files, profile, cache_dir)
+
         progress_callback.emit(
             ost.ProgressData(
                 len(image_objects),
@@ -577,6 +583,7 @@ def generate_output(
         data = [
             (
                 image_obj.path,
+                image_obj.export_path,
                 cache_dir,
                 image_obj.uuid,
                 target_outputs,
@@ -630,6 +637,12 @@ def generate_output(
                 [image_object.uuid for image_object in image_objects],
             )
 
+        # Clean up merged files to prevent a storage leak
+        if split_files:
+            # These files start with merged_
+            for file in cache_dir.glob("merger_*"):
+                file.unlink()
+
     progress_callback.emit(
         ost.ProgressData(
             0,
@@ -642,6 +655,7 @@ def generate_output(
 
 def perform_ocr(
     image_objects: list[imf.ImageFile],
+    split_files: dict[Path, list[imf.ImageFile]],
     output_file: Path | None,
     csv_output: bool,
     config: cfg.Config,
@@ -664,6 +678,7 @@ def perform_ocr(
     additional visualizations that aren't necessary when you aren't viewing image details.
 
     :param image_objects: The image objects to process. These contain the image paths.
+    :param split_files: The split files information.
     :param output_file: The directory to save the outputs to. If None, nothing is written.
     :param csv_output: If True, the output is written as a csv file.
     :param config: The config to use.
@@ -855,6 +870,11 @@ def perform_ocr(
 
     check_abortion()
 
+    handle_merging_splits(image_objects, split_files, profile, cache_dir, for_ocr=True)
+    handle_merging_ocr_splits(split_files, profile, ocr_analytics)
+
+    check_abortion()
+
     # Output the OCRed text from the analytics.
     text_out = ocr.format_output(
         ocr_analytics,
@@ -895,3 +915,73 @@ def perform_ocr(
             ost.ProgressType.end,
         )
     )
+
+
+def handle_merging_splits(
+    image_objects: list[imf.ImageFile | imf.MergedImageFile],
+    split_files: dict[Path, list[imf.ImageFile]],
+    profile: cfg.Profile,
+    cache_dir: Path,
+    for_ocr: bool = False,
+):
+    """
+    If merging the splits, merge them into a new image object and remove the split objects.
+
+    :param image_objects: The image objects to process.
+    :param split_files: The split files information.
+    :param profile: The profile to use.
+    :param cache_dir: The cache directory to use.
+    :param for_ocr: If True, the merge is for OCR, and we forge some output data as well.
+    """
+    if not split_files:
+        return
+
+    if profile.general.merge_after_split:
+        logger.info("Merging split files...")
+
+        for split_file in split_files:
+            split_objects = split_files[split_file]
+
+            if not split_objects:
+                logger.error(f"Split file {split_file} has no split objects.")
+                continue
+
+            # Create a new image object with the split objects.
+            merged_object = imf.MergedImageFile(split_objects, cache_dir, for_ocr)
+
+            # Add the new object to the list of image objects.
+            image_objects.append(merged_object)
+
+            # Remove the split objects from the list of image objects.
+            for split_object in split_objects:
+                image_objects.remove(split_object)
+
+
+def handle_merging_ocr_splits(
+    split_files: dict[Path, list[imf.ImageFile]],
+    profile: cfg.Profile,
+    ocr_analytics: list[st.OCRAnalytic],
+):
+    """
+    If merging the splits, merge them into a new image object and remove the split objects.
+
+    :param split_files: The split files information.
+    :param profile: The profile to use.
+    :param ocr_analytics: The OCR analytics to merge.
+    """
+    if not split_files:
+        return
+
+    if profile.general.merge_after_split:
+        logger.info("Merging split ocr...")
+
+        for split_file in split_files:
+            split_objects = split_files[split_file]
+
+            if not split_objects:
+                logger.error(f"Split file {split_file} has no split objects.")
+                continue
+
+            segment_paths = [split_object.path for split_object in split_objects]
+            split_from = split_objects[0].split_from
+            st.merge_ocr_analytics(split_from, segment_paths, ocr_analytics)

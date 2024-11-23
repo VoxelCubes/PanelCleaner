@@ -39,7 +39,6 @@ SUPPORTED_IMG_TYPES = [
     ".ppm",
 ]
 
-
 SUPPORTED_MASK_TYPES = [".png", ".bmp", ".tiff", ".tif", ".dib", ".webp", ".ppm"]
 
 # image types:
@@ -63,7 +62,6 @@ SUFFIX_TO_ICON.update(
         ".ppm": "image-x-generic",
     }
 )
-
 
 # Create a dummy type to signify numbers need to be greater than 0.
 GreaterZero = NewType("GreaterZero", int)
@@ -114,6 +112,11 @@ class GeneralConfig:
     layered_export: LayeredExport = LayeredExport.NONE
     input_height_lower_target: int = 1000
     input_height_upper_target: int = 4000
+    split_long_strips: bool = True
+    preferred_split_height: int = 2000
+    split_tolerance_margin: int = 500
+    long_strip_aspect_ratio: float = 0.33
+    merge_after_split: bool = True
     max_threads_export: ThreadLimit = 0
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
@@ -128,10 +131,10 @@ class GeneralConfig:
 
         config_str = f"""\
         [General]
-        
+
         # About this profile:
         notes = {escape_all(self.notes)}
-        
+
         # Preferred file type to save the cleaned image as.
         # [CLI: If no file type is specified, the original file type will be used.]
         preferred_file_type = {self.preferred_file_type if self.preferred_file_type else ""}
@@ -139,8 +142,8 @@ class GeneralConfig:
         # Preferred file type to save the mask as.
         # Only image formats that allow for transparency are supported.
         preferred_mask_file_type = {self.preferred_mask_file_type if self.preferred_mask_file_type else ""}
-        
-        
+
+
         # Combine outputs into a single project file as layers.
         # Currently supported formats: Photoshop PSD.[GUI: <br>]
         # - none: Each image and mask are saved as basic files.[GUI: <br>]
@@ -152,27 +155,53 @@ class GeneralConfig:
         # It is only ever scaled down to fit within the range, preferring whole number factors
         # to minimize the impact on image quality. Images smaller than either target will remain unchanged.
         # You can disable this feature by setting one or both values less than or equal to 0.
-        
+
         # This is useful for significantly speeding up processing on large images.
         # Also, since other options relying on pixel dimensions depend on size, this will help
         # normalize the results across different image sizes.
-        
+
         # The image will be scaled down, processed, and then only the mask is scaled back up.
         # Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality.
         # Only the height of the image is used to determine the scale factor, preserving the aspect ratio,
         # and ignoring the individual width of an image so that the factor remains consistent if one of
         # the pages is a double page spread.
-        
+
         # E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels
         # will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.
         input_height_lower_target = {self.input_height_lower_target}
         input_height_upper_target = {self.input_height_upper_target}
+
+        # Split long strips into individual pages.
+        # If enabled, instead of squeezing the entire strip to fit into the preferred height,
+        # the strip will be split into individual pages, each fitting the preferred height
+        # plus/minus double the split tolerance margin (if the segment was in the middle of the strip).
+        split_long_strips = {self.split_long_strips}
         
+        # Preferred height to split long strips at.
+        preferred_split_height = {self.preferred_split_height}
+        
+        # Tolerance margin for splitting long strips.
+        # This is the maximum difference between the preferred split height and the actual height of the strip.
+        # An algorithm determines the best split point within this margin, in an effort
+        # to avoid splitting in the middle of a panel.
+        split_tolerance_margin = {self.split_tolerance_margin}
+
+        # Aspect ratio to use for splitting long strips.
+        # This is the ratio of the width to the height of the image.
+        # If the image's aspect ratio is smaller than this value, it will be considered a long strip.[GUI: <br>]
+        # Example: 0.3 means that the width of the image is 0.3 times the height.
+        long_strip_aspect_ratio = {self.long_strip_aspect_ratio}
+
+        # Merge long strips back into a single image.
+        # If enabled, the individual pages created from a long strip will be
+        # merged back into a single image upon export.
+        merge_after_split = {self.merge_after_split}
+
         # Maximum number of threads to use for exporting images.
         # You can leave it unspecified to use all available threads.
         # Lower this value if you run into memory issues, which will appear as random crashes.
         max_threads_export = {self.max_threads_export if self.max_threads_export > 0 else ""}
-        
+
         """
         config_updater.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
 
@@ -193,6 +222,11 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, LayeredExport, "layered_export")
         try_to_load(self, config_updater, section, int, "input_height_lower_target")
         try_to_load(self, config_updater, section, int, "input_height_upper_target")
+        try_to_load(self, config_updater, section, bool, "split_long_strips")
+        try_to_load(self, config_updater, section, int, "preferred_split_height")
+        try_to_load(self, config_updater, section, int, "split_tolerance_margin")
+        try_to_load(self, config_updater, section, float, "long_strip_aspect_ratio")
+        try_to_load(self, config_updater, section, bool, "merge_after_split")
         try_to_load(self, config_updater, section, ThreadLimit, "max_threads_export")
 
     def fix(self) -> None:
@@ -224,6 +258,18 @@ class GeneralConfig:
 
         if self.max_threads_export < 0:
             self.max_threads_export = ThreadLimit(0)
+
+        if self.input_height_lower_target < 0:
+            self.input_height_lower_target = 0
+        if self.input_height_upper_target < 0:
+            self.input_height_upper_target = 0
+
+        if self.preferred_split_height < 0:
+            self.preferred_split_height = 0
+        if self.split_tolerance_margin < 0:
+            self.split_tolerance_margin = 0
+        if self.long_strip_aspect_ratio < 0:
+            self.long_strip_aspect_ratio = 0
 
 
 @define

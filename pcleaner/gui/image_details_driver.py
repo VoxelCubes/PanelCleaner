@@ -639,6 +639,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         # Start the processor.
         prc.generate_output(
             image_objects=[self.image_obj],
+            split_files={},
             target_outputs=[output],
             output_dir=None,
             config=self.config,

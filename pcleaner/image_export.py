@@ -9,6 +9,7 @@ from psd_tools.constants import Compression
 
 import pcleaner.output_structures as ost
 import pcleaner.structures as st
+import pcleaner.image_ops as ops
 from pcleaner.helpers import tr
 from pcleaner.config import LayeredExport
 
@@ -87,6 +88,7 @@ def copy_to_output_batched(arg_tuple: tuple) -> None:
 
 def copy_to_output(
     original_image_path: Path,
+    export_path: Path,
     cache_dir: Path,
     uuid_source: str | Path,
     outputs: list[ost.Output],
@@ -117,6 +119,7 @@ def copy_to_output(
     denoised mask when compositing the inpainting mask from the previous mask layers.
 
     :param original_image_path: The path to the original file to read it's metadata.
+    :param export_path: The path to write the outputs to.
     :param cache_dir: Where the cached outputs are.
     :param uuid_source: One of the cached images with the uuid or the uuid itself.
     :param outputs: The outputs to copy.
@@ -135,13 +138,13 @@ def copy_to_output(
 
     if output_directory.is_absolute():
         # When absolute, the output directory is used as is.
-        final_out_path = output_directory / original_image_path.name
-        path_gen = ost.OutputPathGenerator(original_image_path, output_directory, export_mode=True)
+        final_out_path = output_directory / export_path.name
+        path_gen = ost.OutputPathGenerator(export_path, output_directory, export_mode=True)
     else:
         # Otherwise, the output directory is relative to the original image's parent directory.
-        final_out_path = original_image_path.parent / output_directory / original_image_path.name
+        final_out_path = export_path.parent / output_directory / export_path.name
         path_gen = ost.OutputPathGenerator(
-            original_image_path, original_image_path.parent / output_directory, export_mode=True
+            export_path, export_path.parent / output_directory, export_mode=True
         )
 
     final_out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -275,6 +278,7 @@ def copy_to_output(
 @frozen
 class ExportTarget:
     original_path: Path
+    export_path: Path
     uuid: str
     outputs: list[ost.Output]
 
@@ -337,7 +341,11 @@ def discover_viable_outputs(
             )
             continue
 
-        export_targets.append(ExportTarget(path_gen.original_path, path_gen.uuid, target_outputs))
+        export_targets.append(
+            ExportTarget(
+                path_gen.original_path, path_gen.original_path, path_gen.uuid, target_outputs
+            )
+        )
 
     return export_targets
 
@@ -391,6 +399,7 @@ def bundle_psd(
         )
 
     bulk_psd_path = path_gen.psd_bulk
+    bulk_psd_path.parent.mkdir(parents=True, exist_ok=True)
 
     cached_images = []
 
@@ -414,9 +423,53 @@ def bundle_psd(
         )
         i += 1
 
-    psd_bulk = PSDImage.new("RGBA", psds[0].size, depth=psds[0].depth)
+    # Find maximum size and depth.
+    max_size = (0, 0)
+    max_depth = 0
+    for psd in psds:
+        max_size = (max(max_size[0], psd.width), max(max_size[1], psd.height))
+        max_depth = max(max_depth, psd.depth)
 
     for page in pages:
         psd_bulk.append(page)
 
     psd_bulk.save(bulk_psd_path)
+
+
+    Merge the cached images into a single image.
+
+    :param merged_image_path: The path to write the merged image to.
+    :param image_files: The image files to merge.
+    :param cache_dir: The cache directory.
+    :param for_ocr: Whether to generate OCR outputs.
+    :param uuid: The UUID of the image.
+    :return: The path generator for the merged image.
+    """
+
+    path_gen_master = ost.OutputPathGenerator(merged_image_path, cache_dir, uuid)
+    file_generators = [
+        ost.OutputPathGenerator(image.original_path, cache_dir, image.uuid) for image in image_files
+    ]
+
+    generator_targets = [
+        "clean",
+        "combined_mask",
+        "text",
+        "noise_mask",
+        "clean_denoised",
+        "clean_inpaint",
+        "inpainting",
+    ]
+    if for_ocr:
+        generator_targets.append("base_png")
+        generator_targets.append("boxes")
+
+    for target in generator_targets:
+        paths_from = [gen.__getattribute__(target) for gen in file_generators]
+        path_to = path_gen_master.__getattribute__(target)
+        # Check that ALL images have this output.
+        if not all(path.exists() for path in paths_from):
+            continue
+        ops.stitch_images(paths_from, path_to)
+
+    return path_gen_master

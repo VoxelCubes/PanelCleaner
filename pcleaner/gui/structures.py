@@ -47,6 +47,7 @@ class CleaningReviewOptions:
     output_directory: Path
     requested_outputs: list[ost.Output]
     image_files: list[imf.ImageFile]
+    split_files: dict[Path, list[imf.ImageFile]]
 
 
 @define
