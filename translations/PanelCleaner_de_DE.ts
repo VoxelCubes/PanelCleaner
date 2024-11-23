@@ -827,7 +827,7 @@ Standardmäßig wird das eingebaute Profil verwendet. Sie können diese Standard
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="309"/>
       <source>split</source>
-      <translation type="unfinished">split</translation>
+      <translation>abschnitt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="470"/>
@@ -2768,61 +2768,61 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="46"/>
       <source>Split long strips into individual pages. If enabled, instead of squeezing the entire strip to fit into the preferred height, the strip will be split into individual pages, each fitting the preferred height plus/minus double the split tolerance margin (if the segment was in the middle of the strip).</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Split long strips into individual pages. If enabled, instead of squeezing the entire strip to fit into the preferred height, the strip will be split into individual pages, each fitting the preferred height plus/minus double the split tolerance margin (if the segment was in the middle of the strip).</translation>
+      <translation>Lange Streifen in einzelne Abschnitte aufteilen. Wenn diese Option aktiviert ist, wird der gesamte Streifen nicht auf die gewünschte Höhe gequetscht, sondern in einzelne Abschnitte aufgeteilt, die jeweils in die gewünschte Höhe plus/minus das Doppelte der Teilungstoleranz passen (wenn das Segment in der Mitte des Streifens liegt).</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="48"/>
       <source>Split Long Strips</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Split Long Strips</translation>
+      <translation>Lange Streifen Teilen</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="50"/>
       <source>Preferred height to split long strips at.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Preferred height to split long strips at.</translation>
+      <translation>Bevorzugte Länge zum Spalten langer Streifen.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="52"/>
       <source>Preferred Split Height</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Preferred Split Height</translation>
+      <translation>Bevorzugte Spalt-Länge</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="54"/>
       <source>Tolerance margin for splitting long strips. This is the maximum difference between the preferred split height and the actual height of the strip. An algorithm determines the best split point within this margin, in an effort to avoid splitting in the middle of a panel.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Tolerance margin for splitting long strips. This is the maximum difference between the preferred split height and the actual height of the strip. An algorithm determines the best split point within this margin, in an effort to avoid splitting in the middle of a panel.</translation>
+      <translation>Toleranzspanne für die Teilung langer Streifen. Dies ist die maximale Differenz zwischen der gewünschten Teilungslänge und der tatsächlichen Länge des Streifens. Ein Algorithmus bestimmt den besten Teilungspunkt innerhalb dieser Spanne, um eine Teilung in der Mitte von etwas Wichtigem zu vermeiden.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="56"/>
       <source>Split Tolerance Margin</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Split Tolerance Margin</translation>
+      <translation>Spalt-Toleranzspanne</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="58"/>
       <source>Aspect ratio to use for splitting long strips. This is the ratio of the width to the height of the image. If the image&apos;s aspect ratio is smaller than this value, it will be considered a long strip.&lt;br&gt; Example: 0.3 means that the width of the image is 0.3 times the height.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Aspect ratio to use for splitting long strips. This is the ratio of the width to the height of the image. If the image&apos;s aspect ratio is smaller than this value, it will be considered a long strip.&lt;br&gt; Example: 0.3 means that the width of the image is 0.3 times the height.</translation>
+      <translation>Seitenverhältnis, das für die Aufteilung langer Streifen verwendet wird. Dies ist das Verhältnis der Breite zur Höhe des Bildes. Wenn das Seitenverhältnis des Bildes kleiner als dieser Wert ist, wird es als langer Streifen betrachtet.&lt;br&gt; Beispiel: 0,3 bedeutet, dass die Breite des Bildes das 0,3-fache der Höhe beträgt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="60"/>
       <source>Long Strip Aspect Ratio</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Long Strip Aspect Ratio</translation>
+      <translation>Kritisches Seitenverhältnis</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="62"/>
       <source>Merge long strips back into a single image. If enabled, the individual pages created from a long strip will be merged back into a single image upon export.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Merge long strips back into a single image. If enabled, the individual pages created from a long strip will be merged back into a single image upon export.</translation>
+      <translation>Lange Streifen wieder zu einem einzigen Bild zusammenfügen. Wenn diese Option aktiviert ist, werden die einzelnen Seiten, die aus einem langen Streifen erstellt wurden, beim Export wieder zu einem einzigen Bild zusammengefügt.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="64"/>
       <source>Merge After Split</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Merge After Split</translation>
+      <translation>Streifen Zusammenfügen</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="66"/>
@@ -3127,7 +3127,7 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="250"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask. If this value matches the maximum deviation for masks, only failed bubbles will be inpainted, making the following two settings irrelevant.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask. If this value matches the maximum deviation for masks, only failed bubbles will be inpainted, making the following two settings irrelevant.</translation>
+      <translation>Die minimale Standardabweichung der Farben um den Rand einer bestimmten Maske, um den Bereich um die Maske herum zu übermalen. Wenn dieser Wert mit der maximalen Abweichung für Masken übereinstimmt, werden nur fehlgeschlagene Felder übermalt, sodass die folgenden beiden Einstellungen irrelevant sind.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="30"/>
@@ -3313,13 +3313,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="profile_strings.py" line="274"/>
       <source>Fade the edges of the inpainted cover mask by this many pixels to smoothly blend the inpainted parts into the rest of the image.&lt;br&gt; If you see faint outlines after inpainting, increase the min inpainting value and set this one to half that amount.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">Fade the edges of the inpainted cover mask by this many pixels to smoothly blend the inpainted parts into the rest of the image.&lt;br&gt; If you see faint outlines after inpainting, increase the min inpainting value and set this one to half that amount.</translation>
+      <translation>Verblasst die Ränder der übermalten Abdeckmaske um diese Anzahl von Pixeln aus, um die übermalten Teile sanft in den Rest des Bildes zu integrieren.&lt;br&gt; Wenn Sie nach dem Übermalen schwache Umrisse sehen, erhöhen Sie den Mindestwert für das Übermalen und setzen Sie diesen Wert auf die Hälfte dieses Wertes.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="276"/>
       <source>Inpainting Fade Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Fade Radius</translation>
+      <translation>Übermalung Verblassungsradius</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="278"/>
@@ -3839,13 +3839,13 @@ Grün: initiale Felder. Rot: erweiterte Felder. Lila: Zusammengefügte (finale) 
       <location filename="../pcleaner/gui/profile_parser.py" line="138"/>
       <source> px</source>
       <comment>Pixel unit</comment>
-      <translation type="unfinished"> px</translation>
+      <translation> px</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="148"/>
       <source> px²</source>
       <comment>Pixel squared unit</comment>
-      <translation type="unfinished"> px²</translation>
+      <translation> px²</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="158"/>
@@ -3890,7 +3890,7 @@ Sie können das Modell manuell &lt;a href=&quot;https://github.com/zyddnys/manga
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="610"/>
       <source>The regex pattern &quot;{value}&quot; for {key} is invalid, reverting to default.</source>
-      <translation type="unfinished">The regex pattern &quot;{value}&quot; for {key} is invalid, reverting to default.</translation>
+      <translation>Das Regex-Muster &quot;{value}&quot; für {key} ist ungültig und wird auf den Standardwert zurückgesetzt.</translation>
     </message>
   </context>
   <context>
@@ -3898,7 +3898,7 @@ Sie können das Modell manuell &lt;a href=&quot;https://github.com/zyddnys/manga
     <message>
       <location filename="../pcleaner/gui/CustomQ/CRegexLineEdit.py" line="43"/>
       <source>Regex is valid</source>
-      <translation type="unfinished">Regex is valid</translation>
+      <translation>Dieser Regex ist gültig</translation>
     </message>
   </context>
   <context>
