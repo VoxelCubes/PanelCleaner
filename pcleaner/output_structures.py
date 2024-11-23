@@ -401,10 +401,6 @@ class OutputPathGenerator:
         return self._attach("_clean_denoised.png")
 
     @property
-    def inpainting_mask(self) -> Path:
-        return self._attach("_inpainting_mask.png")
-
-    @property
     def inpainting(self) -> Path:
         return self._attach("_inpainting.png")
 

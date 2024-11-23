@@ -123,8 +123,6 @@ def inpaint_page(i_data: st.InpainterData, model: InpaintingModel) -> Image:
     for box, mask, _ in padded_boxes_to_inpaint:
         combined_mask.paste(mask, (box.x1, box.y1), mask)
 
-    combined_mask.save(path_gen.inpainting_mask)
-
     # Scale up the masks before inpainting.
     if original_image.size != mask_image.size:
         combined_mask = combined_mask.resize(original_image.size, resample=Image.NEAREST)
