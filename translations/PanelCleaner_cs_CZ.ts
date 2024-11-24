@@ -875,52 +875,52 @@ Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastaven
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="538"/>
       <source>Open individual cleaning</source>
-      <translation type="unfinished">Open individual cleaning</translation>
+      <translation>Otevřít čištění samostatně</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="549"/>
       <source>Remove from list</source>
-      <translation type="unfinished">Remove from list</translation>
+      <translation>Odebrat z fronty</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="557"/>
       <source>Remove all files from list</source>
-      <translation type="unfinished">Remove all files from list</translation>
+      <translation>Odstranění všech souborů z fronty</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="733"/>
       <source>Failed to load image</source>
-      <translation type="unfinished">Failed to load image</translation>
+      <translation>Obrázek se nepodařil načíst</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="734"/>
       <source>Failed to load image {file_path}.</source>
-      <translation type="unfinished">Failed to load image {file_path}.</translation>
+      <translation>Obrázky: {file_path} se nepodařil načíst.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="743"/>
       <source>Failed to dispatch image.</source>
-      <translation type="unfinished">Failed to dispatch image.</translation>
+      <translation>Obrázek se nepodařilo odeslat.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="743"/>
       <source>Dispatch Failed</source>
-      <translation type="unfinished">Dispatch Failed</translation>
+      <translation>Odeslání se nezdařilo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="752"/>
       <source>Select files</source>
-      <translation type="unfinished">Select files</translation>
+      <translation>Vybrat soubory</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="753"/>
       <source>Images</source>
-      <translation type="unfinished">Images</translation>
+      <translation>Obrázky</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="774"/>
       <source>Select directory</source>
-      <translation type="unfinished">Select directory</translation>
+      <translation>Vybrat adresář</translation>
     </message>
   </context>
   <context>
@@ -928,42 +928,42 @@ Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastaven
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="134"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Přiblížení</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="151"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Oddálení</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="168"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Resetovat pohled</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="185"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Přiblížení na míru</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="205"/>
       <source>Refresh</source>
-      <translation type="unfinished">Refresh</translation>
+      <translation>Obnovit</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="289"/>
       <source>Generating...</source>
-      <translation type="unfinished">Generating...</translation>
+      <translation>Generování...</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="338"/>
       <source>Position:</source>
-      <translation type="unfinished">Position:</translation>
+      <translation>Pozice:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="359"/>
       <source>Size:</source>
-      <translation type="unfinished">Size:</translation>
+      <translation>Velikost:</translation>
     </message>
   </context>
   <context>
@@ -971,93 +971,93 @@ Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastaven
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="167"/>
       <source>Copy Image to Clipboard</source>
-      <translation type="unfinished">Copy Image to Clipboard</translation>
+      <translation>Zkopírovat obrázek do schránky</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="173"/>
       <location filename="../pcleaner/gui/image_details_driver.py" line="550"/>
       <source>Export Image</source>
-      <translation type="unfinished">Export Image</translation>
+      <translation>Exportovat obrázek</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="179"/>
       <source>OCR Image</source>
-      <translation type="unfinished">OCR Image</translation>
+      <translation>OCR obrázku</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="411"/>
       <source>Loading Error</source>
-      <translation type="unfinished">Loading Error</translation>
+      <translation>Chyba načtení</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="412"/>
       <source>Failed to load image &apos;{path}&apos;</source>
-      <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
+      <translation>Nepodařilo se načíst obrázek &apos;{path}&apos;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="417"/>
       <source>Generate Me</source>
-      <translation type="unfinished">Generate Me</translation>
+      <translation>Generovat</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="440"/>
       <location filename="../pcleaner/gui/image_details_driver.py" line="455"/>
       <source>Impossible Request</source>
-      <translation type="unfinished">Impossible Request</translation>
+      <translation>Nemožná žádost</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="444"/>
       <source>Denoising is disabled in the current profile, this output can&apos;t be generated.
 Please enable denoising in the profile settings and try again.</source>
-      <translation type="unfinished">Denoising is disabled in the current profile, this output can&apos;t be generated.
-Please enable denoising in the profile settings and try again.</translation>
+      <translation>Odstranění šumu je zakázáno v profilu, výstup nelze vygenerovat.
+Povolte prosím odstranění šumu v profilu a zkuste to znovu.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="459"/>
       <source>Inpainting is disabled in the current profile, this output can&apos;t be generated.
 Please enable inpainting in the profile settings and try again.</source>
-      <translation type="unfinished">Inpainting is disabled in the current profile, this output can&apos;t be generated.
-Please enable inpainting in the profile settings and try again.</translation>
+      <translation>Retušování je zakázáno v profilu, výstup nelze vygenerovat.
+Povolte prosím retušování v profilu a zkuste to znovu.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="510"/>
       <source>Image not found.</source>
-      <translation type="unfinished">Image not found.</translation>
+      <translation>Obrázek nebyl nalezen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="511"/>
       <source>Image at {path} does not exist:</source>
-      <translation type="unfinished">Image at {path} does not exist:</translation>
+      <translation>Obrázek v {path} neexistuje:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="559"/>
       <source>Export failed</source>
-      <translation type="unfinished">Export failed</translation>
+      <translation>Export se nezdařil</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="560"/>
       <source>Failed to export image:</source>
-      <translation type="unfinished">Failed to export image:</translation>
+      <translation>Nepodařilo se exportovat obrázek:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="662"/>
       <source>Output Failed</source>
-      <translation type="unfinished">Output Failed</translation>
+      <translation>Výstup se nezdařil</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="662"/>
       <source>Output generation failed:</source>
-      <translation type="unfinished">Output generation failed:</translation>
+      <translation>Generování výstupu se nezdařilo:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="812"/>
       <source>Profile check failed</source>
-      <translation type="unfinished">Profile check failed</translation>
+      <translation>Kontrola profilu se nezdařila</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="812"/>
       <source>Profile change check failed:</source>
-      <translation type="unfinished">Profile change check failed:</translation>
+      <translation>Kontrola změny profilu se nezdařila:</translation>
     </message>
   </context>
   <context>
@@ -1065,92 +1065,92 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
       <source>image</source>
-      <translation type="unfinished">image</translation>
+      <translation>obrázek</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
       <source>images</source>
-      <translation type="unfinished">images</translation>
+      <translation>obrázky</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="193"/>
       <source>result</source>
-      <translation type="unfinished">result</translation>
+      <translation>výsledek</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="194"/>
       <source>results</source>
-      <translation type="unfinished">results</translation>
+      <translation>výsledky</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="94"/>
       <source>Proceed With Selection</source>
-      <translation type="unfinished">Proceed With Selection</translation>
+      <translation>Pokračujte ve výběru</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="170"/>
       <source>new image</source>
-      <translation type="unfinished">new image</translation>
+      <translation>nový obrázek</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="171"/>
       <source>new images</source>
-      <translation type="unfinished">new images</translation>
+      <translation>nové obrázky</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="175"/>
       <source>Matched {num_images} {plural_images} to OCR results. {num_images_unassigned} {plural_img_unassigned}.</source>
-      <translation type="unfinished">Matched {num_images} {plural_images} to OCR results. {num_images_unassigned} {plural_img_unassigned}.</translation>
+      <translation>Odpovídá {num_images} {plural_images} výsledkům OCR. {num_images_unassigned} {plural_img_unassigned}.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="197"/>
       <source>{num_analytics_unassigned} orphaned OCR {plural_result} will be lost.</source>
-      <translation type="unfinished">{num_analytics_unassigned} orphaned OCR {plural_result} will be lost.</translation>
+      <translation>{num_analytics_unassigned} osiřelé OCR {plural_result} budou ztraceny.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="322"/>
       <source>Failed to load image</source>
-      <translation type="unfinished">Failed to load image</translation>
+      <translation>Obrázek se nepodařil načíst</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="323"/>
       <source>Failed to load image {file_path}.</source>
-      <translation type="unfinished">Failed to load image {file_path}.</translation>
+      <translation>Nepodařilo se načíst obrázek {file_path}.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="332"/>
       <source>Dispatch Failed</source>
-      <translation type="unfinished">Dispatch Failed</translation>
+      <translation>Odeslání se nezdařilo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="332"/>
       <source>Failed to dispatch image.</source>
-      <translation type="unfinished">Failed to dispatch image.</translation>
+      <translation>Obrázek se nepodařilo odeslat.</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="14"/>
       <source>Image Selection</source>
-      <translation type="unfinished">Image Selection</translation>
+      <translation>Výběr obrázku</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="76"/>
       <source>Deselect All</source>
-      <translation type="unfinished">Deselect All</translation>
+      <translation>Zrušit výběr všech</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="83"/>
       <source>Select All</source>
-      <translation type="unfinished">Select All</translation>
+      <translation>Vybrat vše</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="96"/>
       <source>Unselect images without matching OCR data</source>
-      <translation type="unfinished">Unselect images without matching OCR data</translation>
+      <translation>Zrušení výběru obrázků bez shodných dat OCR</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="171"/>
       <source>Image File</source>
-      <translation type="unfinished">Image File</translation>
+      <translation>Soubor obrázku</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="176"/>
