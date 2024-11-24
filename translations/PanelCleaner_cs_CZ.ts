@@ -112,14 +112,14 @@ Obsah souboru je jiný, než se očekávalo.</translation>
       <location filename="../pcleaner/analytics.py" line="84"/>
       <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
-      <translation>Počet rámečků: {num_boxes} | Počet malých rámečků: {num_small_boxes} ({small_box_ratio})
+      <translation>Počet políček: {num_boxes} | Počet malých políček: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="93"/>
       <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
-      <translation>Počet odstraněných rámečků: {num_removed} ({removed_box_ratio} celkem, {removed_among_small_ratio} malých rámečků)
+      <translation>Počet odstraněných políček: {num_removed} ({removed_box_ratio} celkem, {removed_among_small_ratio} malých políček)
 </translation>
     </message>
     <message>
@@ -128,14 +128,14 @@ Obsah souboru je jiný, než se očekávalo.</translation>
 Small box sizes:
 </source>
       <translation>
-Malé rámečky:
+Malé políčka:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="108"/>
       <source>No not-removed small boxes found.
 </source>
-      <translation>Nebyly nalezeny žádné neodstraněné malé rámečky.
+      <translation>Nebyly nalezeny žádné neodstraněné malé políčka.
 </translation>
     </message>
     <message>
@@ -157,12 +157,12 @@ Odstraněné bubliny:
     <message>
       <location filename="../pcleaner/analytics.py" line="170"/>
       <source>Small boxes</source>
-      <translation>Malé rámečky</translation>
+      <translation>Malé políčka</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="172"/>
       <source>Removed boxes</source>
-      <translation>Odstraněné rámečky</translation>
+      <translation>Odstraněné políčka</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="211"/>
@@ -196,7 +196,7 @@ Odstraněné bubliny:
     <message>
       <location filename="../pcleaner/analytics.py" line="313"/>
       <source>Total boxes</source>
-      <translation>Celkem rámečků</translation>
+      <translation>Celkem políček</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="315"/>
@@ -235,7 +235,7 @@ Použití masky podle tloušťky (v pixelech):
     <message>
       <location filename="../pcleaner/analytics.py" line="345"/>
       <source>Box mask</source>
-      <translation>Maska rámečku</translation>
+      <translation>Maska políček</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="364"/>
@@ -364,7 +364,7 @@ Stránky s chybami / celkem:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
       <source>The box coordinates may not exceed 2 billion.</source>
-      <translation>Souřadnice rámečku nesmí překročit 2 miliardy.</translation>
+      <translation>Souřadnice políček nesmí překročit 2 miliardy.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="523"/>
@@ -820,57 +820,57 @@ Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastaven
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="279"/>
       <source>Duplicate file</source>
-      <translation type="unfinished">Duplicate file</translation>
+      <translation>Duplicitní soubor</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="280"/>
       <source>File &quot;{path}&quot; is already in the table.</source>
-      <translation type="unfinished">File &quot;{path}&quot; is already in the table.</translation>
+      <translation>Soubor &quot;{path}&quot; je již v tabulce.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="283"/>
       <source>Ignore All</source>
-      <translation type="unfinished">Ignore All</translation>
+      <translation>Ignorovat vše</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="309"/>
       <source>split</source>
-      <translation type="unfinished">split</translation>
+      <translation>rozdělit</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="470"/>
       <source>Number of boxes removed by the OCR model / total boxes</source>
-      <translation type="unfinished">Number of boxes removed by the OCR model / total boxes</translation>
+      <translation>Počet políček odstraněných modelem OCR / celkový počet políček</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="474"/>
       <source>Number of boxes that failed to generate a mask / total boxes</source>
-      <translation type="unfinished">Number of boxes that failed to generate a mask / total boxes</translation>
+      <translation>Počet políček, u kterých se nepodařilo vygenerovat masku / celkový počet políček</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="476"/>
       <source>Number of boxes that were perfectly masked / total boxes</source>
-      <translation type="unfinished">Number of boxes that were perfectly masked / total boxes</translation>
+      <translation>Počet políček, které byly dokonale zamaskovány / celkový počet políček</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="478"/>
       <source>Number of boxes that were denoised / total boxes</source>
-      <translation type="unfinished">Number of boxes that were denoised / total boxes</translation>
+      <translation>Počet políček, které byly zbaveny šumu / celkový počet políček</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="480"/>
       <source>Number of boxes that were inpainted</source>
-      <translation type="unfinished">Number of boxes that were inpainted</translation>
+      <translation>Počet políček, který byly retušovány</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="519"/>
       <source>Image not loaded</source>
-      <translation type="unfinished">Image not loaded</translation>
+      <translation>Obrázek nebyl načten</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="520"/>
       <source>Please wait until the image has loaded.</source>
-      <translation type="unfinished">Please wait until the image has loaded.</translation>
+      <translation>Vyčkejte, dokud se obrázek nenačte.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="538"/>
