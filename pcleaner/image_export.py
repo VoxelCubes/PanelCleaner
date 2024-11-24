@@ -371,7 +371,7 @@ def export_to_psd(path: Path, original_image: Image, masks: list[tuple[Image, st
         layer = PixelLayer.frompil(mask, psd, name, compression=Compression.ZIP)
         group_layer.append(layer)
 
-    psd.save(path)
+    psd.save(str(path))
 
 
 def bundle_psd(
@@ -412,7 +412,7 @@ def bundle_psd(
 
     i = 0
     for cache_image in cached_images:
-        psds.append(PSDImage.open(cache_image))
+        psds.append(PSDImage.open(str(cache_image)))
         pages.insert(
             0,
             Group.group_layers(
@@ -435,7 +435,7 @@ def bundle_psd(
     for page in pages:
         psd_bulk.append(page)
 
-    psd_bulk.save(bulk_psd_path)
+    psd_bulk.save(str(bulk_psd_path))
 
 
 def merge_cached_images(
