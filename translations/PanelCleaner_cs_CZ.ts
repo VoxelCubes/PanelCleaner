@@ -1199,17 +1199,17 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="49"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Poznámka: Jméno &quot;{name}&quot; bylo skryto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="86"/>
       <source>Corrupted log session</source>
-      <translation type="unfinished">Corrupted log session</translation>
+      <translation>Poškozený protokol</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="88"/>
       <source>Current session</source>
-      <translation type="unfinished">Current session</translation>
+      <translation>Tato relace</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="91"/>
