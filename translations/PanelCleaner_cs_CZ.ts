@@ -1156,7 +1156,7 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
       <location filename="../ui_files/ImageMatchOverview.ui" line="176"/>
       <source>OCR Data</source>
       <comment>Can also call this statistics.</comment>
-      <translation type="unfinished">OCR Data</translation>
+      <translation>Data OCR</translation>
     </message>
   </context>
   <context>
@@ -1164,37 +1164,37 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="14"/>
       <source>Report an Issue</source>
-      <translation type="unfinished">Report an Issue</translation>
+      <translation>Nahlásit problém</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="23"/>
       <source>Consider including the log for the session that had an issue, if applicable.</source>
-      <translation type="unfinished">Consider including the log for the session that had an issue, if applicable.</translation>
+      <translation>V případě potřeby zvažte zahrnutí protokolu relace, u které došlo k problému.</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="32"/>
       <source>View Logs:</source>
-      <translation type="unfinished">View Logs:</translation>
+      <translation>Prohlédnout si protokoly:</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="62"/>
       <source>Log file is at:</source>
-      <translation type="unfinished">Log file is at:</translation>
+      <translation>Soubor protokolu se nachází v:</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="103"/>
       <source>Copy to Clipboard</source>
-      <translation type="unfinished">Copy to Clipboard</translation>
+      <translation>Zkopírovat do schránky</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="114"/>
       <source>Open Issue Tracker</source>
-      <translation type="unfinished">Open Issue Tracker</translation>
+      <translation>Otevřít Issue Tracker</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="125"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Zavřít</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="49"/>
