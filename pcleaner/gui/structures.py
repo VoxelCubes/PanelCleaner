@@ -1,7 +1,8 @@
 from typing import Generic, TypeVar, Optional
 from pathlib import Path
+import shlex
 
-from attrs import frozen, define
+from attrs import frozen, define, field
 
 import pcleaner.gui.image_file as imf
 import pcleaner.output_structures as ost
@@ -64,3 +65,48 @@ class OcrReviewOptions:
     output_path: Path
     csv_output: bool
     editing_old_data: bool
+
+
+@define
+class BatchMetadata:
+    """
+    A structure tracking what files were processed and output in a batch,
+    to be used in the post-run actions.
+    """
+
+    input_files: list[Path] = field(factory=list)
+    input_dirs: list[Path] = field(factory=list)
+    output_files: list[Path] = field(factory=list)
+    output_dirs: list[Path] = field(factory=list)
+    profile_used: str = ""
+
+    def set_input_paths_from_files(self, files: list[imf.ImageFile]) -> None:
+        self.input_files = [f.export_path for f in files]
+        self.input_dirs = list(set(f.export_path.parent for f in files))
+
+    def calculate_output_parents(self) -> None:
+        self.output_dirs = list(set(f.parent for f in self.output_files))
+
+    @staticmethod
+    def _shell_safe(paths: list[Path]) -> str:
+        return " ".join(shlex.quote(str(f.resolve())) for f in paths)
+
+    def substitute_placeholders(self, command: str) -> str:
+        """
+        In post action commands, we offer the following placeholders:
+        %i - input files
+        %id - input directories
+        %o - output files
+        %od - output directories
+        %p - profile used
+
+        :param command: the command to substitute
+        :return: the command with placeholders substituted
+        """
+        return (
+            command.replace("%id", self._shell_safe(self.input_dirs))
+            .replace("%i", self._shell_safe(self.input_files))
+            .replace("%od", self._shell_safe(self.output_dirs))
+            .replace("%o", self._shell_safe(self.output_files))
+            .replace("%p", shlex.quote(self.profile_used))
+        )

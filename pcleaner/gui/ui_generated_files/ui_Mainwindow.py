@@ -236,6 +236,20 @@ class Ui_MainWindow(object):
         self.action_show_oom.setObjectName(u"action_show_oom")
         self.action_show_oom.setCheckable(True)
         self.action_show_oom.setChecked(True)
+        self.action_post_action_settings = QAction(MainWindow)
+        self.action_post_action_settings.setObjectName(u"action_post_action_settings")
+        icon17 = QIcon()
+        iconThemeName = u"configure"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon17 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon17.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
+        self.action_post_action_settings.setIcon(icon17)
+        self.action_TEMP = QAction(MainWindow)
+        self.action_TEMP.setObjectName(u"action_TEMP")
+        self.action_TEMP.setEnabled(False)
+        self.action_TEMP.setText(u"<TEMP>")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_6 = QVBoxLayout(self.centralwidget)
@@ -265,14 +279,14 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon17 = QIcon()
+        icon18 = QIcon()
         iconThemeName = u"dialog-ok-apply"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon17 = QIcon.fromTheme(iconThemeName)
+            icon18 = QIcon.fromTheme(iconThemeName)
         else:
-            icon17.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon18.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_apply_profile.setIcon(icon17)
+        self.pushButton_apply_profile.setIcon(icon18)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
 
@@ -286,14 +300,14 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
-        icon18 = QIcon()
+        icon19 = QIcon()
         iconThemeName = u"document-revert"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon18 = QIcon.fromTheme(iconThemeName)
+            icon19 = QIcon.fromTheme(iconThemeName)
         else:
-            icon18.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon19.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_reset_profile.setIcon(icon18)
+        self.pushButton_reset_profile.setIcon(icon19)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
 
@@ -447,27 +461,27 @@ class Ui_MainWindow(object):
 
         self.pushButton_abort = QPushButton(self.groupBox_process)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon19 = QIcon()
-        iconThemeName = u"process-stop"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon19 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon19.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
-        self.pushButton_abort.setIcon(icon19)
-
-        self.verticalLayout_7.addWidget(self.pushButton_abort)
-
-        self.pushButton_start = QPushButton(self.groupBox_process)
-        self.pushButton_start.setObjectName(u"pushButton_start")
         icon20 = QIcon()
-        iconThemeName = u"media-playback-start"
+        iconThemeName = u"process-stop"
         if QIcon.hasThemeIcon(iconThemeName):
             icon20 = QIcon.fromTheme(iconThemeName)
         else:
             icon20.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
-        self.pushButton_start.setIcon(icon20)
+        self.pushButton_abort.setIcon(icon20)
+
+        self.verticalLayout_7.addWidget(self.pushButton_abort)
+
+        self.pushButton_start = QPushButton(self.groupBox_process)
+        self.pushButton_start.setObjectName(u"pushButton_start")
+        icon21 = QIcon()
+        iconThemeName = u"media-playback-start"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon21 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon21.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
+        self.pushButton_start.setIcon(icon21)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
 
@@ -784,6 +798,78 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.widget_oom_banner)
 
+        self.widget_post_process_banner = QWidget(self.centralwidget)
+        self.widget_post_process_banner.setObjectName(u"widget_post_process_banner")
+        self.horizontalLayout_17 = QHBoxLayout(self.widget_post_process_banner)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_17.addItem(self.horizontalSpacer_13)
+
+        self.horizontalLayout_18 = QHBoxLayout()
+        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
+        self.label_post_process_icon = QLabel(self.widget_post_process_banner)
+        self.label_post_process_icon.setObjectName(u"label_post_process_icon")
+        self.label_post_process_icon.setText(u"<post-process icon>")
+
+        self.horizontalLayout_18.addWidget(self.label_post_process_icon)
+
+        self.label_post_process = QLabel(self.widget_post_process_banner)
+        self.label_post_process.setObjectName(u"label_post_process")
+        self.label_post_process.setText(u"<what will happen after processing>")
+
+        self.horizontalLayout_18.addWidget(self.label_post_process)
+
+
+        self.horizontalLayout_17.addLayout(self.horizontalLayout_18)
+
+        self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_17.addItem(self.horizontalSpacer_14)
+
+        self.label_post_action_conflict_icon = QLabel(self.widget_post_process_banner)
+        self.label_post_action_conflict_icon.setObjectName(u"label_post_action_conflict_icon")
+        self.label_post_action_conflict_icon.setText(u"<warning icon>")
+
+        self.horizontalLayout_17.addWidget(self.label_post_action_conflict_icon)
+
+        self.label_post_action_conflict = QLabel(self.widget_post_process_banner)
+        self.label_post_action_conflict.setObjectName(u"label_post_action_conflict")
+        font = QFont()
+        font.setItalic(True)
+        self.label_post_action_conflict.setFont(font)
+        self.label_post_action_conflict.setText(u"<warning note>")
+
+        self.horizontalLayout_17.addWidget(self.label_post_action_conflict)
+
+        self.horizontalSpacer_11 = QSpacerItem(24, 0, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_17.addItem(self.horizontalSpacer_11)
+
+        self.pushButton_post_action_cancel = QPushButton(self.widget_post_process_banner)
+        self.pushButton_post_action_cancel.setObjectName(u"pushButton_post_action_cancel")
+        icon22 = QIcon()
+        iconThemeName = u"dialog-cancel"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon22 = QIcon.fromTheme(iconThemeName)
+        else:
+            icon22.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+
+        self.pushButton_post_action_cancel.setIcon(icon22)
+        self.pushButton_post_action_cancel.setFlat(False)
+
+        self.horizontalLayout_17.addWidget(self.pushButton_post_action_cancel)
+
+        self.pushButton_post_action_close = QPushButton(self.widget_post_process_banner)
+        self.pushButton_post_action_close.setObjectName(u"pushButton_post_action_close")
+        self.pushButton_post_action_close.setIcon(icon18)
+        self.pushButton_post_action_close.setFlat(False)
+
+        self.horizontalLayout_17.addWidget(self.pushButton_post_action_close)
+
+
+        self.verticalLayout_6.addWidget(self.widget_post_process_banner)
+
         self.widget_progress_drawer = QWidget(self.centralwidget)
         self.widget_progress_drawer.setObjectName(u"widget_progress_drawer")
         self.horizontalLayout_2 = QHBoxLayout(self.widget_progress_drawer)
@@ -851,7 +937,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1850, 30))
+        self.menubar.setGeometry(QRect(0, 0, 1850, 34))
         self.menu_File = QMenu(self.menubar)
         self.menu_File.setObjectName(u"menu_File")
         self.menu_Profile = QMenu(self.menubar)
@@ -865,6 +951,8 @@ class Ui_MainWindow(object):
         self.menu_language = QMenu(self.menu_settings)
         self.menu_language.setObjectName(u"menu_language")
         self.menu_language.setIcon(icon12)
+        self.menu_post_actions = QMenu(self.menu_settings)
+        self.menu_post_actions.setObjectName(u"menu_post_actions")
         self.menu_Help = QMenu(self.menubar)
         self.menu_Help.setObjectName(u"menu_Help")
         MainWindow.setMenuBar(self.menubar)
@@ -900,11 +988,15 @@ class Ui_MainWindow(object):
         self.menu_settings.addAction(self.action_file_manager_extension)
         self.menu_settings.addAction(self.action_delete_window_state)
         self.menu_settings.addAction(self.action_show_oom)
+        self.menu_settings.addSeparator()
+        self.menu_settings.addAction(self.action_post_action_settings)
+        self.menu_settings.addAction(self.menu_post_actions.menuAction())
         self.menu_theme.addAction(self.action_system_theme)
         self.menu_theme.addSeparator()
         self.menu_theme.addAction(self.action_dark)
         self.menu_theme.addAction(self.action_light)
         self.menu_language.addAction(self.action_temp_3)
+        self.menu_post_actions.addAction(self.action_TEMP)
         self.menu_Help.addAction(self.action_online_documentation)
         self.menu_Help.addAction(self.action_about)
         self.menu_Help.addAction(self.action_show_ocr_language_support)
@@ -952,6 +1044,7 @@ class Ui_MainWindow(object):
         self.actionReset_Window_Layout_Preferences.setText(QCoreApplication.translate("MainWindow", u"Reset Window Layout Preferences", None))
         self.action_delete_window_state.setText(QCoreApplication.translate("MainWindow", u"Reset Window Layout Preferences", None))
         self.action_show_oom.setText(QCoreApplication.translate("MainWindow", u"Show Out Of Memory Warnings", None))
+        self.action_post_action_settings.setText(QCoreApplication.translate("MainWindow", u"Configure Post-Run Actions...", None))
         self.groupBox_profile.setTitle(QCoreApplication.translate("MainWindow", u"Profile", None))
         self.comboBox_current_profile.setItemText(0, QCoreApplication.translate("MainWindow", u"Default", None))
 
@@ -1008,6 +1101,8 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.lineEdit_out_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"detected_text.txt", None))
         self.pushButton_browse_out_file.setText("")
+        self.pushButton_post_action_cancel.setText(QCoreApplication.translate("MainWindow", u"Cancel Action", None))
+        self.pushButton_post_action_close.setText(QCoreApplication.translate("MainWindow", u"Close", None))
         self.label_generating_what.setText(QCoreApplication.translate("MainWindow", u"Generating:", u"This is present progressive, as in \"[currently] Generating:\""))
         self.label_current_step_label.setText(QCoreApplication.translate("MainWindow", u"Current Step:", None))
         self.progressBar_total.setFormat(QCoreApplication.translate("MainWindow", u"%v / %m", None))
@@ -1019,6 +1114,7 @@ class Ui_MainWindow(object):
         self.menu_settings.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.menu_theme.setTitle(QCoreApplication.translate("MainWindow", u"Theme", u"As in color theme"))
         self.menu_language.setTitle(QCoreApplication.translate("MainWindow", u"Language", None))
+        self.menu_post_actions.setTitle(QCoreApplication.translate("MainWindow", u"Post-Run Actions", None))
         self.menu_Help.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
     # retranslateUi
 

@@ -16,7 +16,7 @@ import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.output_structures as ost
 import pcleaner.gui.processing as prc
-import pcleaner.gui.structures as st
+import pcleaner.gui.structures as gst
 import pcleaner.gui.worker_thread as wt
 from pcleaner.gui.CustomQ.CBadgeButton import BadgeButton
 from pcleaner.gui.ui_generated_files.ui_ImageDetails import Ui_ImageDetails
@@ -89,7 +89,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
 
     config: cfg.Config
     shared_ocr_model: (
-        st.Shared[ocr.OCREngineFactory] | None
+        gst.Shared[ocr.OCREngineFactory] | None
     )  # Must be handed over by the file table.
     thread_queue: Qc.QThreadPool
     progress_callback: Callable[[ost.ProgressData], None]
@@ -110,7 +110,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
         parent=None,
         image_obj: imf.ImageFile = None,
         config: cfg.Config = None,
-        shared_ocr_model: st.Shared[ocr.OCREngineFactory] | None = None,
+        shared_ocr_model: gst.Shared[ocr.OCREngineFactory] | None = None,
         thread_queue: Qc.QThreadPool = None,
         progress_callback: Callable[[ost.ProgressData], None] = None,
         profile_changed_signal: Signal = None,
@@ -645,6 +645,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             config=self.config,
             ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
+            batch_metadata=gst.BatchMetadata(),
             abort_flag=abort_flag,
         )
 

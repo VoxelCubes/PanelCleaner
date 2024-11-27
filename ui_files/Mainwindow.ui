@@ -14,7 +14,7 @@
    <string>Panel Cleaner</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,0,0">
+   <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,0,0,0">
     <property name="leftMargin">
      <number>1</number>
     </property>
@@ -943,6 +943,119 @@ p, li { white-space: pre-wrap; }
      </widget>
     </item>
     <item>
+     <widget class="QWidget" name="widget_post_process_banner" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_17">
+       <item>
+        <spacer name="horizontalSpacer_13">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_18">
+         <item>
+          <widget class="QLabel" name="label_post_process_icon">
+           <property name="text">
+            <string notr="true">&lt;post-process icon&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_post_process">
+           <property name="text">
+            <string notr="true">&lt;what will happen after processing&gt;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_14">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_post_action_conflict_icon">
+         <property name="text">
+          <string notr="true">&lt;warning icon&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_post_action_conflict">
+         <property name="font">
+          <font>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="text">
+          <string notr="true">&lt;warning note&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_11">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>24</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_post_action_cancel">
+         <property name="text">
+          <string>Cancel Action</string>
+         </property>
+         <property name="icon">
+          <iconset theme="dialog-cancel">
+           <normaloff>.</normaloff>.</iconset>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_post_action_close">
+         <property name="text">
+          <string>Close</string>
+         </property>
+         <property name="icon">
+          <iconset theme="dialog-ok-apply">
+           <normaloff>.</normaloff>.</iconset>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
      <widget class="QWidget" name="widget_progress_drawer" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0,1,0,0,5">
        <item>
@@ -1055,7 +1168,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1850</width>
-     <height>30</height>
+     <height>34</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -1111,11 +1224,20 @@ p, li { white-space: pre-wrap; }
      </property>
      <addaction name="action_temp_3"/>
     </widget>
+    <widget class="QMenu" name="menu_post_actions">
+     <property name="title">
+      <string>Post-Run Actions</string>
+     </property>
+     <addaction name="action_TEMP"/>
+    </widget>
     <addaction name="menu_theme"/>
     <addaction name="menu_language"/>
     <addaction name="action_file_manager_extension"/>
     <addaction name="action_delete_window_state"/>
     <addaction name="action_show_oom"/>
+    <addaction name="separator"/>
+    <addaction name="action_post_action_settings"/>
+    <addaction name="menu_post_actions"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -1367,8 +1489,30 @@ p, li { white-space: pre-wrap; }
     <string>Show Out Of Memory Warnings</string>
    </property>
   </action>
+  <action name="action_post_action_settings">
+   <property name="icon">
+    <iconset theme="configure">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Configure Post-Run Actions...</string>
+   </property>
+  </action>
+  <action name="action_TEMP">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string notr="true">&lt;TEMP&gt;</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>CTooltipLabel</class>
+   <extends>QLabel</extends>
+   <header>pcleaner.gui.CustomQ.CTooltipLabel</header>
+  </customwidget>
   <customwidget>
    <class>CComboBox</class>
    <extends>QComboBox</extends>
@@ -1395,11 +1539,6 @@ p, li { white-space: pre-wrap; }
    <extends>QTabWidget</extends>
    <header>pcleaner.gui.image_tab</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CTooltipLabel</class>
-   <extends>QLabel</extends>
-   <header>pcleaner.gui.CustomQ.CTooltipLabel</header>
   </customwidget>
  </customwidgets>
  <resources/>

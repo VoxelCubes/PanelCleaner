@@ -82,8 +82,8 @@ def save_optimized(
     image.save(path, **kwargs)
 
 
-def copy_to_output_batched(arg_tuple: tuple) -> None:
-    copy_to_output(*arg_tuple)
+def copy_to_output_batched(arg_tuple: tuple) -> list[Path]:
+    return copy_to_output(*arg_tuple)
 
 
 def copy_to_output(
@@ -97,7 +97,7 @@ def copy_to_output(
     preferred_mask_file_type: str,
     denoising_enabled: bool,
     layered_export: LayeredExport,
-) -> None:
+) -> list[Path]:
     """
     Copy or export the outputs from the cache directory to the output directory.
     Output paths and preferred file types are taken into account.
@@ -111,12 +111,12 @@ def copy_to_output(
     - Inpainted image: Output.inpainted_output
     - Inpainted Mask: Output.inpainted_mask
 
-
-
     This may raise OSError in various circumstances.
 
     We need to know if denoising was enabled so that we know to pull in the
     denoised mask when compositing the inpainting mask from the previous mask layers.
+
+    For the post-process actions, we want to know all the files saved to, so we return them.
 
     :param original_image_path: The path to the original file to read it's metadata.
     :param export_path: The path to write the outputs to.
@@ -128,7 +128,9 @@ def copy_to_output(
     :param preferred_mask_file_type: Profile setting.
     :param denoising_enabled: Profile setting.
     :param layered_export: Option to create a layered project file from the outputs.
+    :return: The paths to the exported files.
     """
+    files_written = []
 
     masker_mask_name = tr("Clean mask", "layered export", "Label for the masking step mask.")
     denoiser_mask_name = tr("Denoised mask", "layered export", "Label for the denoising step mask.")
@@ -183,6 +185,7 @@ def copy_to_output(
         # Pass through to save_optimized if not creating layered project files.
         if layered_export == LayeredExport.NONE:
             save_optimized(image, path, original)
+            files_written.append(path)
 
     def add_image_layer(image: Image, name: str) -> None:
         if layered_export != LayeredExport.NONE:
@@ -207,7 +210,7 @@ def copy_to_output(
         export_single_image(final_mask, masked_out_path)
 
     if ost.Output.isolated_text in outputs:
-        save_optimized(cache_path_gen.text, text_out_path)
+        export_single_image(cache_path_gen.text, text_out_path)
 
     if ost.Output.denoised_output in outputs:
         export_single_image(
@@ -273,6 +276,9 @@ def copy_to_output(
             original_image.convert("RGBA"),
             to_layered_images,
         )
+        # Since we're gonna bundle everything, we aren't actually saving the images here.
+        files_written = []
+    return files_written
 
 
 @frozen
@@ -376,7 +382,7 @@ def export_to_psd(path: Path, original_image: Image, masks: list[tuple[Image, st
 
 def bundle_psd(
     output_directory: Path, cache_dir: Path, image_paths: list[Path], uuids: list[str]
-) -> None:
+) -> Path | None:
     """
     Bundle all the PSDs into a single PSD file.
     The PSDs are loaded, and the pages are grouped into a single PSD file.
@@ -385,10 +391,11 @@ def bundle_psd(
     :param cache_dir: The directory where the cached PSDs are.
     :param image_paths: The paths to the original images.
     :param uuids: The UUIDs of the images used to generate the cache paths.
+    :return: The path to the bundled PSD file.
     """
     if not image_paths:
         logger.error("No images to bundle PSDs for.")
-        return
+        return None
 
     if output_directory.is_absolute():
         # When absolute, the output directory is used as is.
@@ -436,6 +443,7 @@ def bundle_psd(
         psd_bulk.append(page)
 
     psd_bulk.save(str(bulk_psd_path))
+    return bulk_psd_path
 
 
 def merge_cached_images(

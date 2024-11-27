@@ -14,6 +14,7 @@ import pcleaner.gui.ctd_interface_gui as ctm
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.image_file as imf
 import pcleaner.gui.worker_thread as wt
+import pcleaner.gui.structures as gst
 import pcleaner.image_export as ie
 import pcleaner.inpainting as ip
 import pcleaner.masker as ma
@@ -35,6 +36,7 @@ def generate_output(
     config: cfg.Config,
     ocr_processor: ocr.OCREngineFactory | None,
     progress_callback: ost.ProgressSignal,
+    batch_metadata: gst.BatchMetadata,
     abort_flag: wt.SharableFlag,
     debug: bool = False,
 ):
@@ -66,6 +68,7 @@ def generate_output(
     :param config: The config to use.
     :param ocr_processor: The ocr models to use.
     :param progress_callback: A callback to report progress to the gui.
+    :param batch_metadata: The metadata for the batch, used for the post action arguments.
     :param abort_flag: A flag that is set to True when the thread should abort.
     :param debug: If True, debug messages are printed.
     """
@@ -569,6 +572,7 @@ def generate_output(
     if target_output == ost.Output.write_output:
 
         handle_merging_splits(image_objects, split_files, profile, cache_dir)
+        batch_metadata.set_input_paths_from_files(image_objects)
 
         progress_callback.emit(
             ost.ProgressData(
@@ -604,8 +608,9 @@ def generate_output(
 
         if pool_size > 1:
             with Pool(processes=pool_size) as pool:
-                for _ in pool.imap_unordered(ie.copy_to_output_batched, data):
+                for output_files in pool.imap_unordered(ie.copy_to_output_batched, data):
                     check_abortion()
+                    batch_metadata.output_files.extend(output_files)
 
                     progress_callback.emit(
                         ost.ProgressData(
@@ -618,7 +623,8 @@ def generate_output(
         else:
             for args in data:
                 check_abortion()
-                ie.copy_to_output(*args)
+                output_files = ie.copy_to_output(*args)
+                batch_metadata.output_files.extend(output_files)
 
                 progress_callback.emit(
                     ost.ProgressData(
@@ -637,18 +643,28 @@ def generate_output(
             output_dir = common_parent / output_dir
 
         if profile.general.layered_export == LayeredExport.PSD_BULK:
-            ie.bundle_psd(
+            file_path = ie.bundle_psd(
                 output_dir,
                 cache_dir,
                 [image_object.path for image_object in image_objects],
                 [image_object.uuid for image_object in image_objects],
             )
+            if file_path is not None:
+                batch_metadata.output_files = [file_path]
 
         # Clean up merged files to prevent a storage leak
         if split_files:
             # These files start with merged_
             for file in cache_dir.glob("merger_*"):
                 file.unlink()
+
+    else:
+        # We aren't writing output, but we may still need to update the metadata at least.
+        # For that, we will need the input files, so we'd prefer to use the re-merged files.
+        handle_merging_splits(image_objects, split_files, profile, cache_dir)
+        batch_metadata.set_input_paths_from_files(image_objects)
+
+    batch_metadata.calculate_output_parents()
 
     progress_callback.emit(
         ost.ProgressData(
@@ -668,6 +684,7 @@ def perform_ocr(
     config: cfg.Config,
     ocr_engine_factory: ocr.OCREngineFactory | None,
     progress_callback: ost.ProgressSignal,
+    batch_metadata: gst.BatchMetadata,
     abort_flag: wt.SharableFlag,
     debug: bool = False,
 ):
@@ -691,6 +708,7 @@ def perform_ocr(
     :param config: The config to use.
     :param ocr_engine_factory: The ocr processors to use.
     :param progress_callback: A callback to report progress to the gui.
+    :param batch_metadata: The metadata for the batch, used for the post action arguments.
     :param abort_flag: A flag that is set to True when the thread should abort.
     :param debug: If True, debug messages are printed.
     """

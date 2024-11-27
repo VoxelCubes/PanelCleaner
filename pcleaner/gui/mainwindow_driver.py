@@ -1,4 +1,6 @@
+import os
 import platform
+import subprocess
 import sys
 import time
 import shutil
@@ -36,6 +38,8 @@ import pcleaner.gui.setup_greeter_driver as sgd
 import pcleaner.gui.state_saver as ss
 import pcleaner.gui.structures as gst
 import pcleaner.gui.supported_languages as sl
+import pcleaner.gui.post_action_config as pac
+import pcleaner.gui.post_action_runner as par
 import pcleaner.gui.worker_thread as wt
 import pcleaner.helpers as hp
 import pcleaner.model_downloader as md
@@ -53,6 +57,8 @@ from pcleaner.helpers import tr
 
 
 ANALYTICS_COLUMNS = 74
+
+# TODO escape wildcards in commands with shlex.quote
 
 
 # noinspection PyUnresolvedReferences
@@ -74,9 +80,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
     progress_current: int
     progress_step_start: ost.Step | None  # When None, no processing is running.
+    current_post_action: str | None
+    closed_post_action_banner: bool
 
     cleaning_review_options: None | gst.CleaningReviewOptions
     ocr_review_options: None | gst.OcrReviewOptions
+    batch_metadata: None | gst.BatchMetadata
 
     profile_values_changed = Signal()
 
@@ -111,8 +120,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
 
         self.progress_current: int = 0
         self.progress_step_start: ost.Step | None = None
+        self.current_post_action = None
+        self.closed_post_action_banner = False
         self.cleaning_review_options = None
         self.ocr_review_options = None
+        self.batch_metadata = None
         self.dead = False
 
         self.shared_ocr_model = gst.Shared[ocr.OCREngineFactory]()
@@ -281,6 +293,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.initialize_profiles()
         self.initialize_analytics_view()
         self.initialize_language_menu()
+        self.initialize_post_action_menu()
         self.disable_running_cleaner()
 
         # Allow the table to accept file drops and hide the PATH column.
@@ -308,6 +321,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         label_font.setPointSize(round(label_font.pointSize() * 1.5))
         self.label_drop.setFont(label_font)
 
+        # Set up post-action banner.
+        self.update_post_action_drawer()
+        self.pushButton_post_action_close.clicked.connect(self.close_post_action_banner)
+        self.pushButton_post_action_cancel.clicked.connect(self.cancel_post_action)
+        self.label_post_action_conflict_icon.setPixmap(
+            Qg.QIcon.fromTheme("data-warning").pixmap(16, 16)
+        )
+
         # Connect signals.
         self.comboBox_current_profile.hookedCurrentIndexChanged.connect(self.change_current_profile)
         self.action_add_files.triggered.connect(self.file_table.browse_add_files)
@@ -324,6 +345,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_donate.triggered.connect(self.open_donation_page)
         self.action_help_translation.triggered.connect(self.open_translation_page)
         self.action_report_issue.triggered.connect(self.open_issue_reporter)
+        self.action_post_action_settings.triggered.connect(self.open_post_action_settings)
         self.action_simulate_exception.triggered.connect(self.simulate_exception)
 
         if not self.debug:
@@ -348,6 +370,11 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.theme_is_dark_changed.connect(self.label_review_output_help.load_icon)
         self.theme_is_dark_changed.connect(self.label_review_ocr_help.load_icon)
         self.theme_is_dark_changed.connect(self.label_ocr_outdir_help.load_icon)
+        self.theme_is_dark_changed.connect(self.update_post_action_drawer)
+        # The post-action banner warning message is sensitive to a couple checkboxes.
+        self.checkBox_review_ocr.toggled.connect(self.update_post_action_drawer)
+        self.checkBox_review_output.toggled.connect(self.update_post_action_drawer)
+        self.checkBox_write_output.toggled.connect(self.update_post_action_drawer)
         # Set up output panel.
         self.pushButton_start.clicked.connect(self.start_processing)
         self.pushButton_abort.clicked.connect(self.abort_button_on_click)
@@ -486,6 +513,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
     def adjust_stylesheet_overrides(self) -> None:
         # Make the progress drawer use the alternate background color.
         self.widget_progress_drawer.setStyleSheet("background-color: palette(alternate-base);")
+        self.widget_post_process_banner.setStyleSheet("background-color: palette(alternate-base);")
         self.widget_progress_drawer.update()
         # Fix the strange dark default color of the corner button in light themes.
         if not self.theme_is_dark.get():
@@ -940,6 +968,15 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         issue_reporter = ird.IssueReporter(self)
         issue_reporter.exec()
 
+    def open_post_action_settings(self) -> None:
+        """
+        Open the post-action settings dialog.
+        """
+        logger.debug("Opening post-action config.")
+        post_action_settings = pac.PostActionConfiguration(self, self.config)
+        post_action_settings.exec()
+        self.initialize_post_action_menu()
+
     @staticmethod
     def open_donation_page() -> None:
         """
@@ -972,6 +1009,167 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         logger.debug("Opening file manager extension page.")
         self.file_manager_extension = fmed.FileManagerExtension(self)
         self.file_manager_extension.show()
+
+    def initialize_post_action_menu(self) -> None:
+        """
+        Populate the post-action menu with the available actions as an exclusive group.
+        """
+        self.menu_post_actions.clear()
+        self.menu_post_actions.setIcon(Qg.QIcon.fromTheme("view-form-action-symbolic"))
+        action_group = Qg.QActionGroup(self)
+        action_group.setExclusive(True)
+        # Add the shutdown action first.
+        action = Qg.QAction(
+            Qg.QIcon.fromTheme("system-shutdown-symbolic"), self.tr("Shutdown"), self
+        )
+        action.setCheckable(True)
+        action_group.addAction(action)
+        action.triggered.connect(
+            partial(self.handle_post_action_selection, pac.SHUTDOWN_COMMAND_NAME)
+        )
+        self.menu_post_actions.addAction(action)
+        action.setChecked(pac.SHUTDOWN_COMMAND_NAME == self.current_post_action)
+
+        for action_name, action in self.config.pa_custom_commands.items():
+            action = Qg.QAction(Qg.QIcon.fromTheme("dialog-scripts-symbolic"), action_name, self)
+            action.setCheckable(True)
+            action_group.addAction(action)
+            action.triggered.connect(partial(self.handle_post_action_selection, action_name))
+            self.menu_post_actions.addAction(action)
+            action.setChecked(action_name == self.current_post_action)
+
+    def handle_post_action_selection(self, action_name: str) -> None:
+        self.closed_post_action_banner = False
+        if self.current_post_action == action_name:
+            self.current_post_action = None
+            self.config.pa_last_action = None
+        else:
+            self.current_post_action = action_name
+            self.config.pa_last_action = action_name
+        self.update_post_action_drawer()
+        self.config.save()
+
+    def update_post_action_drawer(self) -> None:
+        logger.debug(f"Updating post action drawer: {self.current_post_action}")
+        self.label_post_action_conflict.clear()
+
+        if self.current_post_action is None or self.closed_post_action_banner:
+            self.widget_post_process_banner.hide()
+            return
+
+        if self.current_post_action == pac.SHUTDOWN_COMMAND_NAME:
+            self.label_post_process.setText(self.tr("After processing, the system will shut down."))
+            self.label_post_process_icon.setPixmap(
+                Qg.QIcon.fromTheme("system-shutdown").pixmap(24, 24)
+            )
+
+        else:
+            if self.current_post_action not in self.config.pa_custom_commands:
+                logger.warning(f"Custom command {self.current_post_action} not found.")
+                self.cancel_post_action()
+                return
+
+            self.label_post_process.setText(
+                self.tr('After processing, the "{action}" action will be executed.').format(
+                    action=self.current_post_action
+                )
+            )
+            self.label_post_process_icon.setPixmap(
+                Qg.QIcon.fromTheme("dialog-scripts").pixmap(24, 24)
+            )
+
+        # Check for silly oopsies the user made.
+        # Yes, we're checking the UI itself, but this way the user gets instant feedback before
+        # he starts the processing and once that does start, the UI is locked.
+        if (
+            self.stackedWidget_output.currentIndex() == 0
+            and self.checkBox_review_output.isChecked()
+        ) or (
+            self.stackedWidget_output.currentIndex() == 1 and self.checkBox_review_ocr.isChecked()
+        ):
+            self.label_post_action_conflict.setText(
+                self.tr(
+                    "You have review options enabled, "
+                    "these will need to be manually closed before the action can start."
+                )
+            )
+            self.label_post_action_conflict_icon.show()
+        elif (
+            self.stackedWidget_output.currentIndex() == 0
+            and not self.checkBox_write_output.isChecked()
+        ):
+            self.label_post_action_conflict.setText(self.tr("You have disabled writing output."))
+            self.label_post_action_conflict_icon.show()
+        else:
+            self.label_post_action_conflict_icon.hide()
+
+        self.widget_post_process_banner.show()
+
+    def close_post_action_banner(self) -> None:
+        self.closed_post_action_banner = True
+        self.widget_post_process_banner.hide()
+
+    def cancel_post_action(self) -> None:
+        self.current_post_action = None
+        self.update_post_action_drawer()
+        self.initialize_post_action_menu()
+
+    def wait_to_run_post_action(self, error: bool = False) -> None:
+        """
+        Opens a dialog to wait for the post action to run.
+        Or just runs it if the wait time is 0.
+
+        :param error: Whether the post action is proceeding despite an error.
+        """
+        if self.current_post_action is None:
+            # The user changed his mind last second.
+            self.statusbar.showMessage(self.tr("Post action canceled."))
+            self.update_post_action_drawer()
+            self.initialize_post_action_menu()
+            return
+
+        wait_time = self.config.pa_wait_time
+        if self.current_post_action == pac.SHUTDOWN_COMMAND_NAME:
+            command = self.config.pa_shutdown_command or pac.shut_down_command()
+        else:
+            command = self.config.pa_custom_commands[self.current_post_action]
+            command = self.batch_metadata.substitute_placeholders(command)
+
+        if wait_time == 0:
+            self.run_post_action()
+        else:
+            post_action_runner = par.PostActionRunner(
+                self, wait_time, self.current_post_action, command, self.debug, error
+            )
+            post_action_runner.exec()
+
+    def run_post_action(self) -> None:
+        logger.info(f"Running post action: {self.current_post_action}")
+        if self.current_post_action is None:
+            # The user changed his mind last second.
+            self.statusbar.showMessage(self.tr("Post action canceled."), timeout=2000)
+            self.update_post_action_drawer()
+            self.initialize_post_action_menu()
+        elif self.current_post_action == pac.SHUTDOWN_COMMAND_NAME:
+            logger.info("Shutting down system.")
+            self.statusbar.showMessage(self.tr("Shutting down system..."), timeout=5000)
+            self.cancel_post_action()
+            if self.debug:
+                logger.warning("Psyche! Not really shutting down, we're in debug mode.")
+            else:
+                shutdown_command = self.config.pa_shutdown_command or pac.shut_down_command()
+                subprocess.Popen(shutdown_command, shell=True, start_new_session=True)
+        else:
+            self.statusbar.showMessage(
+                self.tr(
+                    'Running post action "{action}"...'.format(action=self.current_post_action),
+                ),
+                timeout=5000,
+            )
+            command = self.config.pa_custom_commands[self.current_post_action]
+            command = self.batch_metadata.substitute_placeholders(command)
+            self.cancel_post_action()
+            subprocess.Popen(command, shell=True, start_new_session=True, env=os.environ)
 
     # ========================================== Languages ==========================================
 
@@ -1490,6 +1688,16 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             ):
                 return
 
+        # Check if the post action should be repeated.
+        if self.current_post_action is None:
+            if self.config.pa_remember_action and self.config.pa_last_action:
+                self.current_post_action = self.config.pa_last_action
+        self.update_post_action_drawer()
+
+        # Clear the batch data.
+        current_profile_name = self.comboBox_current_profile.currentText()
+        self.batch_metadata = gst.BatchMetadata(profile_used=current_profile_name)
+
         if self.radioButton_cleaning.isChecked():
             self.start_cleaning()
         else:
@@ -1779,6 +1987,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             config=config,
             ocr_processor=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
+            batch_metadata=self.batch_metadata,
             abort_flag=abort_flag,
         )
 
@@ -1886,6 +2095,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             config=self.config,
             ocr_engine_factory=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
+            batch_metadata=self.batch_metadata,
             abort_flag=abort_flag,
         )
 
@@ -1939,9 +2149,13 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             dialog.deleteLater()
 
         else:
-            gu.show_info(
-                self, self.tr("Processing Finished"), self.tr("Finished processing all files.")
-            )
+            if self.current_post_action is not None:
+                self.wait_to_run_post_action()
+                self.cancel_post_action()
+            else:
+                gu.show_info(
+                    self, self.tr("Processing Finished"), self.tr("Finished processing all files.")
+                )
 
     def output_review_closed(self) -> None:
         logger.debug("Output review closed.")
@@ -1986,6 +2200,14 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # Nuke any review options.
         self.cleaning_review_options = None
         self.ocr_review_options = None
+
+        if (
+            not self.config.pa_cancel_on_error and self.current_post_action is not None
+        ) or self.current_post_action == pac.SHUTDOWN_COMMAND_NAME:
+            logger.warning(f"Proceeding with post action despite error: {error}")
+            self.wait_to_run_post_action(error=True)
+
+        self.cancel_post_action()
 
         if gu.check_unsupported_cuda_error(self, error):
             return

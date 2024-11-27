@@ -23,6 +23,7 @@ Files:
       - document-save-as
       - document-save
       - document-scan
+      - debug-run
       - download
       - edit-clear-history
       - edit-copy
@@ -36,17 +37,26 @@ Files:
       - list-add
       - languages
       - media-playback-start
+      - media-playback-pause
+      - media-skip-forward
       - overflow-menu
       - process-stop
+      - system-shutdown-symbolic
+      - dialog-scripts-symbolic
+      - dialog-cancel
       - tools-report-bug
       - view-form
       - view-refresh
       - view-list-details
+      - view-form-action-symbolic
       - window-close
       - zoom-fit-best
       - zoom-in
       - zoom-out
       - zoom-original
+    24:
+      - system-shutdown
+      - dialog-scripts
   mimetypes:
     16:
       - image-bmp

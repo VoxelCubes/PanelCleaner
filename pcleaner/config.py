@@ -1,6 +1,7 @@
 import re
 import sys
 import shutil
+import base64
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, NewType
@@ -1070,6 +1071,12 @@ class Config:
     default_cv2_model_path: Path | None = None  # CPU
     gui_theme: str | None = None
     show_oom_warnings: bool = True
+    pa_remember_action: bool = False
+    pa_wait_time: int = 5
+    pa_shutdown_command: str | None = None
+    pa_cancel_on_error: bool = True
+    pa_last_action: str | None = None
+    pa_custom_commands: dict[str, str] = field(factory=dict)
 
     @staticmethod
     def reserved_profile_names() -> list[str]:
@@ -1130,6 +1137,14 @@ class Config:
             self.gui_theme if self.gui_theme is not None else "System default",
         )
         print("Show OOM Warnings:", self.show_oom_warnings)
+        print("PA Remember Action:", self.pa_remember_action)
+        print("PA Wait Time:", self.pa_wait_time)
+        print("PA Shutdown Command:", self.pa_shutdown_command)
+        print("PA Cancel on Error:", self.pa_cancel_on_error)
+        print("PA Last Action:", self.pa_last_action)
+        print("PA Custom Commands:")
+        for name, command in self.pa_custom_commands.items():
+            print(f"- {name}: {command}")
 
         print("\n" + "-" * 20 + "\n")
         print(f"Config file located at: {cli.get_config_path()}")
@@ -1189,6 +1204,10 @@ class Config:
         saved_profiles_str = "\n".join(
             f"{name}={str(path.resolve())}" for name, path in self.saved_profiles.items()
         )
+        custom_commands_str = "\n".join(
+            f"{to_base32_modified(name)} = {to_base32_modified(command)}"
+            for name, command in self.pa_custom_commands.items()
+        )
 
         conf_str = f"""\
         [General]
@@ -1222,6 +1241,31 @@ class Config:
         
         # Show out-of-memory warnings.
         show_oom_warnings = {self.show_oom_warnings}
+        
+        
+        
+        [Post-Action]
+        # Post-Action settings from the GUI
+        
+        # Remember the last action taken.
+        pa_remember_action = {self.pa_remember_action}
+        
+        # Last action taken.
+        pa_last_action = {none_to_empty(self.pa_last_action)}
+        
+        # Wait time before executing the action.
+        pa_wait_time = {self.pa_wait_time}
+        
+        # Shutdown command to use.
+        pa_shutdown_command = {none_to_empty(self.pa_shutdown_command)}
+        
+        # Cancel the custom action if an error occurs.
+        pa_cancel_on_error = {self.pa_cancel_on_error}
+        
+        # Commands are stored in Base32, to prevent issues with special characters.
+        # This is a GUI-only feature, so readability isn't a concern.
+        [Custom Commands]
+        {custom_commands_str}
         
         
         [Saved Profiles]
@@ -1262,6 +1306,17 @@ class Config:
         try_to_load(config, conf_updater, section, Path | None, "default_cv2_model_path")
         try_to_load(config, conf_updater, section, str | None, "gui_theme")
         try_to_load(config, conf_updater, section, bool, "show_oom_warnings")
+
+        section = "Post-Action"
+        try_to_load(config, conf_updater, section, bool, "pa_remember_action")
+        try_to_load(config, conf_updater, section, int, "pa_wait_time")
+        try_to_load(config, conf_updater, section, str | None, "pa_shutdown_command")
+        try_to_load(config, conf_updater, section, bool, "pa_cancel_on_error")
+        if "Custom Commands" in conf_updater:
+            config.pa_custom_commands = {
+                from_base32_modified(k): from_base32_modified(v.value)
+                for k, v in conf_updater["Custom Commands"].items()
+            }
 
         # If the default profile isn't in the saved profiles, clear it.
         if (
@@ -1439,6 +1494,10 @@ def try_to_load(
         conf_data = conf_updater.get(section, attr_name).value
     except cu.NoOptionError as e:
         print(f"Option {attr_name} not found in {section}. Using default.")
+        logger.debug(e)
+        return
+    except cu.NoSectionError as e:
+        print(f"Section {section} not found in the config file. Using defaults.")
         logger.debug(e)
         return
 
@@ -1644,3 +1703,18 @@ def format_for_version(conf_string: str, gui_mode: bool) -> str:
         conf_string = re.sub(r"\[CLI: (.*?)]", r"\1", conf_string)
 
     return conf_string
+
+
+def from_base32_modified(data: str) -> str:
+    """
+    Decode a Base64 string, replacing the characters that are not valid in a command.
+    """
+    data = data.replace("_", "=").upper()
+    return base64.b32decode(data).decode("utf-8", errors="replace")
+
+
+def to_base32_modified(data: str) -> str:
+    """
+    Encode a string to Base64, replacing the characters that are not valid in a command.
+    """
+    return base64.b32encode(data.encode("utf-8")).decode("utf-8").replace("=", "_")
