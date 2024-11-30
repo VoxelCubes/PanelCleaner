@@ -842,6 +842,7 @@ class ImageDetailsWidget(Qw.QWidget, Ui_ImageDetails):
             config=self.config,
             ocr_engine_factory=self.shared_ocr_model.get(),
             progress_callback=progress_callback,
+            batch_metadata=gst.BatchMetadata(),
             abort_flag=abort_flag,
         )
 
