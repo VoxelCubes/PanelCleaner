@@ -54,5 +54,25 @@ class RegexLineEdit(Qw.QWidget):
     def regex(self):
         return self.line_edit.text()
 
-    def get_text_changed_signal(self) -> Signal:
+    @property
+    def textChanged(self) -> Signal:
         return self.line_edit.textChanged
+
+    def setClearButtonEnabled(self, enabled: bool):
+        self.line_edit.setClearButtonEnabled(enabled)
+
+    def setPlaceholderText(self, text: str):
+        self.line_edit.setPlaceholderText(text)
+
+    @property
+    def textEdited(self):
+        return self.line_edit.textEdited
+
+    def text(self):
+        return self.line_edit.text()
+
+    def setText(self, text: str):
+        self.line_edit.setText(text)
+
+    def setRegexEnabled(self, enabled: bool):
+        self.error_icon.setVisible(enabled)

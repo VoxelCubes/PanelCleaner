@@ -191,7 +191,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
 
         elif entry_type == EntryTypes.RegexPattern:
             self._data_widget: RegexLineEdit = RegexLineEdit()
-            self._data_widget.get_text_changed_signal().connect(self._value_changed)
+            self._data_widget.textChanged.connect(self._value_changed)
             self._data_setter = self._data_widget.setRegex
             self._data_getter = self._data_widget.regex
 
