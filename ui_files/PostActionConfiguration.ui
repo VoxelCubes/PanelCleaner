@@ -136,7 +136,7 @@
      <item>
       <widget class="QPushButton" name="pushButton_row_up">
        <property name="toolTip">
-        <string>Move box order up</string>
+        <string>Move command up</string>
        </property>
        <property name="text">
         <string notr="true"/>
@@ -153,7 +153,7 @@
      <item>
       <widget class="QPushButton" name="pushButton_row_down">
        <property name="toolTip">
-        <string>Move box order down</string>
+        <string>Move command down</string>
        </property>
        <property name="text">
         <string notr="true"/>

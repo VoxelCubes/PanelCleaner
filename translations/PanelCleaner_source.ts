@@ -2506,12 +2506,12 @@ Check the online documentation for how to add support for more languages.</sourc
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="139"/>
-        <source>Move box order up</source>
+        <source>Move command up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="156"/>
-        <source>Move box order down</source>
+        <source>Move command down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
