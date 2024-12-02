@@ -8,6 +8,7 @@ import pcleaner.gui.image_file as imf
 import pcleaner.output_structures as ost
 import pcleaner.structures as st
 import pcleaner.config as cfg
+from pcleaner.helpers import tr
 
 
 T = TypeVar("T")
@@ -104,9 +105,9 @@ class BatchMetadata:
         :return: the command with placeholders substituted
         """
         return (
-            command.replace("%id", self._shell_safe(self.input_dirs))
-            .replace("%i", self._shell_safe(self.input_files))
-            .replace("%od", self._shell_safe(self.output_dirs))
-            .replace("%o", self._shell_safe(self.output_files))
-            .replace("%p", shlex.quote(self.profile_used))
+            command.replace(tr("%id"), self._shell_safe(self.input_dirs))
+            .replace(tr("%i"), self._shell_safe(self.input_files))
+            .replace(tr("%od"), self._shell_safe(self.output_dirs))
+            .replace(tr("%o"), self._shell_safe(self.output_files))
+            .replace(tr("%p"), shlex.quote(self.profile_used))
         )

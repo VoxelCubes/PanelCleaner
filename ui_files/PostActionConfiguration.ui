@@ -335,7 +335,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>%i</string>
+            <string extracomment="Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.">%i</string>
            </property>
           </widget>
          </item>
@@ -385,7 +385,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>%id</string>
+            <string extracomment="Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.">%id</string>
            </property>
           </widget>
          </item>
@@ -439,7 +439,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>%o</string>
+            <string extracomment="Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.">%o</string>
            </property>
           </widget>
          </item>
@@ -489,7 +489,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>%od</string>
+            <string extracomment="Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.">%od</string>
            </property>
           </widget>
          </item>
@@ -543,7 +543,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>%p</string>
+            <string extracomment="Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.">%p</string>
            </property>
           </widget>
          </item>

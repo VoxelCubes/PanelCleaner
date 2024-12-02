@@ -517,6 +517,31 @@ Pages with failures / total:
             <numerusform></numerusform>
         </translation>
     </message>
+    <message>
+        <location filename="../pcleaner/gui/structures.py" line="108"/>
+        <source>%id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/structures.py" line="109"/>
+        <source>%i</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/structures.py" line="110"/>
+        <source>%od</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/structures.py" line="111"/>
+        <source>%o</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/structures.py" line="112"/>
+        <source>%p</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>About</name>
@@ -2557,6 +2582,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="338"/>
         <source>%i</source>
+        <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2572,6 +2598,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="388"/>
         <source>%id</source>
+        <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2587,6 +2614,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="442"/>
         <source>%o</source>
+        <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2602,6 +2630,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="492"/>
         <source>%od</source>
+        <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2617,6 +2646,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="546"/>
         <source>%p</source>
+        <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2626,17 +2656,17 @@ Check the online documentation for how to add support for more languages.</sourc
     </message>
     <message>
         <location filename="../pcleaner/gui/post_action_config.py" line="142"/>
-        <source>Command names cannot be empty.</source>
+        <source>Action names cannot be empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/post_action_config.py" line="147"/>
-        <source>Command names must be unique.</source>
+        <source>Action names must be unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/post_action_config.py" line="154"/>
-        <source>The name &quot;{SHUTDOWN_COMMAND_NAME}&quot; is reserved.</source>
+        <location filename="../pcleaner/gui/post_action_config.py" line="153"/>
+        <source>The name &quot;{shutdown_command}&quot; is reserved.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

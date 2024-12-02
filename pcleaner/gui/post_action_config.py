@@ -139,18 +139,20 @@ class PostActionConfiguration(Qw.QDialog, Ui_PostActionConfiguration):
         for row in range(self.tableWidget_commands.rowCount()):
             name = self.tableWidget_commands.item(row, 0).text()
             if not name:
-                self.label_warning.setText(self.tr("Command names cannot be empty."))
+                self.label_warning.setText(self.tr("Action names cannot be empty."))
                 self.label_warning.show()
                 self.label_warning_icon.show()
                 return False
             if name in names:
-                self.label_warning.setText(self.tr("Command names must be unique."))
+                self.label_warning.setText(self.tr("Action names must be unique."))
                 self.label_warning.show()
                 self.label_warning_icon.show()
                 return False
             if name == SHUTDOWN_COMMAND_NAME:
                 self.label_warning.setText(
-                    self.tr(f'The name "{SHUTDOWN_COMMAND_NAME}" is reserved.')
+                    self.tr('The name "{shutdown_command}" is reserved.').format(
+                        shutdown_command=SHUTDOWN_COMMAND_NAME
+                    )
                 )
                 self.label_warning.show()
                 self.label_warning_icon.show()
