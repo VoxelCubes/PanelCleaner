@@ -44,6 +44,27 @@
       <caption>Review and edit the OCR output interactively</caption>
     </screenshot>
   </screenshots>
+  <release version="2.11.0" date="2024-12-02">
+    <description>
+        <p>Changelog</p>
+        <ul>
+            <li>Switched to a fine-tuned inpainting model by dreMaz, handling dithering patterns significantly better. The old model can still be used if desired.</li>
+            <li>Post-run actions added for the GUI, enabling automation like automatic shutdown or custom commands.</li>
+            <li>Automatic splitting of long image strips and merging them after cleaning (#123).</li>
+            <li>Added inpainting fade radius (#121).</li>
+            <li>Auto-correct invalid ranges in profiles.</li>
+            <li>Show actual standard deviation of failed masks instead of the maximum value.</li>
+            <li>Bulk PSD export now uses the largest image dimensions rather than the first image's dimensions.</li>
+            <li>Clarified when sizes are pixel counts in the GUI.</li>
+            <li>Indicate and validate when the OCR blacklist regex pattern is invalid.</li>
+            <li>Workaround added for a crash in psd-tools version 1.10.3.</li>
+            <li>Fixed an inpainting analytics crash when nothing was inpainted.</li>
+            <li>Resolved an issue where the "Apply Profile" button was sometimes disabled.</li>
+            <li>Removed dependence on python-magic.</li>
+            <li>Various fixes and optimizations.</li>
+        </ul>
+    </description>
+  </release>
   <releases>
     <release version="2.9.2" date="2024-10-10">
       <description>
