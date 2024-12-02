@@ -537,6 +537,31 @@ Pages with failures / total:
         <numerusform>Page</numerusform>
       </translation>
     </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="108"/>
+      <source>%id</source>
+      <translation type="unfinished">%id</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="109"/>
+      <source>%i</source>
+      <translation type="unfinished">%i</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="110"/>
+      <source>%od</source>
+      <translation type="unfinished">%od</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="111"/>
+      <source>%o</source>
+      <translation type="unfinished">%o</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="112"/>
+      <source>%p</source>
+      <translation type="unfinished">%p</translation>
+    </message>
   </context>
   <context>
     <name>About</name>
@@ -2547,13 +2572,13 @@ Check the online documentation for how to add support for more languages.</trans
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="139"/>
-      <source>Move box order up</source>
-      <translation type="unfinished">Move box order up</translation>
+      <source>Move command up</source>
+      <translation type="unfinished">Move command up</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="156"/>
-      <source>Move box order down</source>
-      <translation type="unfinished">Move box order down</translation>
+      <source>Move command down</source>
+      <translation type="unfinished">Move command down</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="173"/>
@@ -2598,6 +2623,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="338"/>
       <source>%i</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%i</translation>
     </message>
     <message>
@@ -2613,6 +2639,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="388"/>
       <source>%id</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%id</translation>
     </message>
     <message>
@@ -2628,6 +2655,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="442"/>
       <source>%o</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%o</translation>
     </message>
     <message>
@@ -2643,6 +2671,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="492"/>
       <source>%od</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%od</translation>
     </message>
     <message>
@@ -2658,6 +2687,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="546"/>
       <source>%p</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%p</translation>
     </message>
     <message>
@@ -2667,18 +2697,18 @@ Check the online documentation for how to add support for more languages.</trans
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="142"/>
-      <source>Command names cannot be empty.</source>
-      <translation type="unfinished">Command names cannot be empty.</translation>
+      <source>Action names cannot be empty.</source>
+      <translation type="unfinished">Action names cannot be empty.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="147"/>
-      <source>Command names must be unique.</source>
-      <translation type="unfinished">Command names must be unique.</translation>
+      <source>Action names must be unique.</source>
+      <translation type="unfinished">Action names must be unique.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/post_action_config.py" line="154"/>
-      <source>The name &quot;{SHUTDOWN_COMMAND_NAME}&quot; is reserved.</source>
-      <translation type="unfinished">The name &quot;{SHUTDOWN_COMMAND_NAME}&quot; is reserved.</translation>
+      <location filename="../pcleaner/gui/post_action_config.py" line="153"/>
+      <source>The name &quot;{shutdown_command}&quot; is reserved.</source>
+      <translation type="unfinished">The name &quot;{shutdown_command}&quot; is reserved.</translation>
     </message>
   </context>
   <context>
