@@ -540,27 +540,27 @@ Seiten mit Fehlern / insgesamt:
     <message>
       <location filename="../pcleaner/gui/structures.py" line="108"/>
       <source>%id</source>
-      <translation type="unfinished">%id</translation>
+      <translation>%ev</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="109"/>
       <source>%i</source>
-      <translation type="unfinished">%i</translation>
+      <translation>%e</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="110"/>
       <source>%od</source>
-      <translation type="unfinished">%od</translation>
+      <translation>%av</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="111"/>
       <source>%o</source>
-      <translation type="unfinished">%o</translation>
+      <translation>%a</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="112"/>
       <source>%p</source>
-      <translation type="unfinished">%p</translation>
+      <translation>%p</translation>
     </message>
   </context>
   <context>
@@ -2571,12 +2571,12 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="139"/>
       <source>Move command up</source>
-      <translation type="unfinished">Move command up</translation>
+      <translation>Befehl nach oben bewegen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="156"/>
       <source>Move command down</source>
-      <translation type="unfinished">Move command down</translation>
+      <translation>Befehl nach unten bewegen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="173"/>
@@ -2622,7 +2622,7 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <location filename="../ui_files/PostActionConfiguration.ui" line="338"/>
       <source>%i</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%i</translation>
+      <translation>%e</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="345"/>
@@ -2638,7 +2638,7 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <location filename="../ui_files/PostActionConfiguration.ui" line="388"/>
       <source>%id</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%id</translation>
+      <translation>%ev</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="395"/>
@@ -2654,7 +2654,7 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <location filename="../ui_files/PostActionConfiguration.ui" line="442"/>
       <source>%o</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%o</translation>
+      <translation>%a</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="449"/>
@@ -2670,7 +2670,7 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <location filename="../ui_files/PostActionConfiguration.ui" line="492"/>
       <source>%od</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%od</translation>
+      <translation>%av</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="499"/>
@@ -2686,7 +2686,7 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <location filename="../ui_files/PostActionConfiguration.ui" line="546"/>
       <source>%p</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%p</translation>
+      <translation>%p</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="553"/>
@@ -2696,17 +2696,17 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="142"/>
       <source>Action names cannot be empty.</source>
-      <translation type="unfinished">Action names cannot be empty.</translation>
+      <translation>Aktionsnamen dürfen nicht leer sein.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="147"/>
       <source>Action names must be unique.</source>
-      <translation type="unfinished">Action names must be unique.</translation>
+      <translation>Aktionsnamen müssen eindeutig sein.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="153"/>
       <source>The name &quot;{shutdown_command}&quot; is reserved.</source>
-      <translation type="unfinished">The name &quot;{shutdown_command}&quot; is reserved.</translation>
+      <translation>Der Name &quot;{shutdown_command}&quot; ist reserviert.</translation>
     </message>
   </context>
   <context>
@@ -2739,47 +2739,47 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="261"/>
       <source>Resume Countdown</source>
-      <translation type="unfinished">Resume Countdown</translation>
+      <translation>Countdown Fortsetzen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="271"/>
       <source>Pause Countdown</source>
-      <translation type="unfinished">Pause Countdown</translation>
+      <translation>Countdown Pausieren</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="283"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Schließen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="295"/>
       <source>Cancel Action</source>
-      <translation type="unfinished">Cancel Action</translation>
+      <translation>Aktion Abbrechen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="305"/>
       <source>Cancel Shutdown</source>
-      <translation type="unfinished">Cancel Shutdown</translation>
+      <translation>Herunterfahren Abbrechen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="76"/>
       <source>Shutting down the system</source>
-      <translation type="unfinished">Shutting down the system</translation>
+      <translation>Wird heruntergefahren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="85"/>
       <source>Running the action &quot;{action_name}&quot;</source>
-      <translation type="unfinished">Running the action &quot;{action_name}&quot;</translation>
+      <translation>Nachlaufaktion &quot;{action_name}&quot; wird ausgeführt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="154"/>
       <source>Remaining time: {time} seconds</source>
-      <translation type="unfinished">Remaining time: {time} seconds</translation>
+      <translation>Verbleibende Zeit: {time} Sekunden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="157"/>
       <source>Remaining time: 1 second</source>
-      <translation type="unfinished">Remaining time: 1 second</translation>
+      <translation>Verbleibende Zeit: 1 Sekunde</translation>
     </message>
   </context>
   <context>
