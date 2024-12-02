@@ -537,6 +537,31 @@ Seiten mit Fehlern / insgesamt:
         <numerusform>Seite</numerusform>
       </translation>
     </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="108"/>
+      <source>%id</source>
+      <translation type="unfinished">%id</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="109"/>
+      <source>%i</source>
+      <translation type="unfinished">%i</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="110"/>
+      <source>%od</source>
+      <translation type="unfinished">%od</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="111"/>
+      <source>%o</source>
+      <translation type="unfinished">%o</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="112"/>
+      <source>%p</source>
+      <translation type="unfinished">%p</translation>
+    </message>
   </context>
   <context>
     <name>About</name>
@@ -1383,32 +1408,32 @@ Auf das neue Modell umsteigen?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1023"/>
       <source>Shutdown</source>
-      <translation type="unfinished">Shutdown</translation>
+      <translation>Herunterfahren</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1061"/>
       <source>After processing, the system will shut down.</source>
-      <translation type="unfinished">After processing, the system will shut down.</translation>
+      <translation>Nach der Bearbeitung wird das System heruntergefahren.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1095"/>
       <source>You have review options enabled, these will need to be manually closed before the action can start.</source>
-      <translation type="unfinished">You have review options enabled, these will need to be manually closed before the action can start.</translation>
+      <translation>Sie haben Überprüfungsoptionen aktiviert. Diese müssen manuell geschlossen werden, bevor die Aktion gestartet werden kann.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1101"/>
       <source>You have disabled writing output.</source>
-      <translation type="unfinished">You have disabled writing output.</translation>
+      <translation>Sie haben die Schreibausgabe deaktiviert.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1155"/>
       <source>Shutting down system...</source>
-      <translation type="unfinished">Shutting down system...</translation>
+      <translation>Wird heruntergefahren...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1165"/>
       <source>Running post action &quot;{action}&quot;...</source>
-      <translation type="unfinished">Running post action &quot;{action}&quot;...</translation>
+      <translation>Nachlaufaktion &quot;{action}&quot; wird ausgeführt...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1200"/>
@@ -1645,13 +1670,13 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1073"/>
       <source>After processing, the &quot;{action}&quot; action will be executed.</source>
-      <translation type="unfinished">After processing, the &quot;{action}&quot; action will be executed.</translation>
+      <translation>Nach der Bearbeitung wird die Aktion &quot;{action}&quot; ausgeführt.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1126"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1150"/>
       <source>Post action canceled.</source>
-      <translation type="unfinished">Post action canceled.</translation>
+      <translation>Nachlaufaktion abgebrochen.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1684"/>
@@ -1880,12 +1905,12 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1030"/>
       <source>Cancel Action</source>
-      <translation type="unfinished">Cancel Action</translation>
+      <translation>Aktion Abbrechen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1044"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Schließen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1064"/>
@@ -1990,12 +2015,12 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1229"/>
       <source>Post-Run Actions</source>
-      <translation type="unfinished">Post-Run Actions</translation>
+      <translation>Nachlaufaktionen</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1498"/>
       <source>Configure Post-Run Actions...</source>
-      <translation type="unfinished">Configure Post-Run Actions...</translation>
+      <translation>Nachlaufaktionen konfigurieren...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1286"/>
@@ -2505,178 +2530,183 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="14"/>
       <source>Configure Post-Run Actions</source>
-      <translation type="unfinished">Configure Post-Run Actions</translation>
+      <translation>Nachlaufaktionen Konfigurieren</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="20"/>
       <source>Always perform the action after processing</source>
-      <translation type="unfinished">Always perform the action after processing</translation>
+      <translation>Aktion immer nach einem Lauf ausführen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="29"/>
       <source>Wait before performing an action:</source>
-      <translation type="unfinished">Wait before performing an action:</translation>
+      <translation>Warten, bevor die Aktion ausgeführt wird:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="36"/>
       <source> s</source>
       <extracomment>unit of time: seconds</extracomment>
-      <translation type="unfinished"> s</translation>
+      <translation> s</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="49"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you set a wait time greater than 0, a window will open upon process completion. This window will show a countdown and allow you to preview as well as edit the command.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you set a wait time greater than 0, a window will open upon process completion. This window will show a countdown and allow you to preview as well as edit the command.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wenn Sie eine Wartezeit von mehr als 0 festlegen, wird nach Abschluss des Vorgangs ein Fenster geöffnet. In diesem Fenster wird ein Countdown angezeigt, und Sie können den Befehl überprüfen sowie bearbeiten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="101"/>
       <source>Power Off Command:</source>
-      <translation type="unfinished">Power Off Command:</translation>
+      <translation>Befehl zum Herunterfahren:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="108"/>
       <source>shutdown</source>
-      <translation type="unfinished">shutdown</translation>
+      <translation>herunterfahren</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="119"/>
       <source>Custom Commands:</source>
-      <translation type="unfinished">Custom Commands:</translation>
+      <translation>Benutzerdefinierte Befehle:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="139"/>
-      <source>Move box order up</source>
-      <translation type="unfinished">Move box order up</translation>
+      <source>Move command up</source>
+      <translation type="unfinished">Move command up</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="156"/>
-      <source>Move box order down</source>
-      <translation type="unfinished">Move box order down</translation>
+      <source>Move command down</source>
+      <translation type="unfinished">Move command down</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="173"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Neu</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="187"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Löschen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="228"/>
       <source>Action Name</source>
-      <translation type="unfinished">Action Name</translation>
+      <translation>Aktionsname</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="233"/>
       <source>Command or Script File Path</source>
-      <translation type="unfinished">Command or Script File Path</translation>
+      <translation>Befehl oder Skriptdateipfad</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="243"/>
       <source>Cancel the custom action if processing failed</source>
-      <translation type="unfinished">Cancel the custom action if processing failed</translation>
+      <translation>Aktion abbrechen, falls die Verarbeitung nicht erfolgreich war</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="253"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Power Off action will run regardless of this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Power Off action will run regardless of this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die Aktion Herunterfahren wird unabhängig von dieser Einstellung ausgeführt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="303"/>
       <source>Placeholder Tokens:</source>
-      <translation type="unfinished">Placeholder Tokens:</translation>
+      <translation>Befehls-Platzhalter:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="323"/>
       <source>Input Files</source>
-      <translation type="unfinished">Input Files</translation>
+      <translation>Eingabedateien</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="338"/>
       <source>%i</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%i</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="345"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file processed, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file processed, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die einzelnen Dateipfade jeder verarbeiteten Datei, als durch Leerzeichen getrennte Liste, mit Anführungszeichen, wo nötig.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="373"/>
       <source>Input Directory</source>
-      <translation type="unfinished">Input Directory</translation>
+      <translation>Eingabe-Verzeichnis</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="388"/>
       <source>%id</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%id</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="395"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gruppiert die Dateien nach übergeordnetem Verzeichnis und listen Sie diese in einer durch Leerzeichen getrennten Liste auf, gegebenenfalls mit Anführungszeichen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="427"/>
       <source>Output Files</source>
-      <translation type="unfinished">Output Files</translation>
+      <translation>Ausgabedateien</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="442"/>
       <source>%o</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%o</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="449"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file created as an output, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file created as an output, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Die einzelnen Dateipfade jeder Datei, die als Ausgabe erstellt wird, als durch Leerzeichen getrennte Liste, mit Anführungszeichen, wo nötig.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="477"/>
       <source>Output Directory</source>
-      <translation type="unfinished">Output Directory</translation>
+      <translation>Ausgabeverzeichnis</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="492"/>
       <source>%od</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%od</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="499"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group output files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group output files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gruppiert die Ausgabedateien nach übergeordnetem Verzeichnis und listen Sie diese in einer durch Leerzeichen getrennten Liste auf, gegebenenfalls mit Anführungszeichen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="531"/>
       <source>Profile Used</source>
-      <translation type="unfinished">Profile Used</translation>
+      <translation>Verwendetes Profil</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="546"/>
       <source>%p</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%p</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="553"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of the profile used, with quotation marks if necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of the profile used, with quotation marks if necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Der Name des verwendeten Profils, ggf. mit Anführungszeichen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="142"/>
-      <source>Command names cannot be empty.</source>
-      <translation type="unfinished">Command names cannot be empty.</translation>
+      <source>Action names cannot be empty.</source>
+      <translation type="unfinished">Action names cannot be empty.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="147"/>
-      <source>Command names must be unique.</source>
-      <translation type="unfinished">Command names must be unique.</translation>
+      <source>Action names must be unique.</source>
+      <translation type="unfinished">Action names must be unique.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/post_action_config.py" line="154"/>
-      <source>The name &quot;{SHUTDOWN_COMMAND_NAME}&quot; is reserved.</source>
-      <translation type="unfinished">The name &quot;{SHUTDOWN_COMMAND_NAME}&quot; is reserved.</translation>
+      <location filename="../pcleaner/gui/post_action_config.py" line="153"/>
+      <source>The name &quot;{shutdown_command}&quot; is reserved.</source>
+      <translation type="unfinished">The name &quot;{shutdown_command}&quot; is reserved.</translation>
     </message>
   </context>
   <context>
@@ -2684,27 +2714,27 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="14"/>
       <source>Post-Action Runner</source>
-      <translation type="unfinished">Post-Action Runner</translation>
+      <translation>Nachlaufaktion</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="163"/>
       <source>An error occurred during the process.</source>
-      <translation type="unfinished">An error occurred during the process.</translation>
+      <translation>Während des Prozesses ist ein Fehler aufgetreten.</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="194"/>
       <source>Full Command:</source>
-      <translation type="unfinished">Full Command:</translation>
+      <translation>Vollständiger Befehl:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="231"/>
       <source>Run Again</source>
-      <translation type="unfinished">Run Again</translation>
+      <translation>Nochmal Ausführen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="241"/>
       <source>Skip Countdown</source>
-      <translation type="unfinished">Skip Countdown</translation>
+      <translation>Countdown Überspringen</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="261"/>
