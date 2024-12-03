@@ -1,4 +1,5 @@
 import platform
+from pathlib import Path
 from functools import wraps
 
 import PySide6.QtGui as Qg
@@ -156,6 +157,15 @@ class PostActionConfiguration(Qw.QDialog, Ui_PostActionConfiguration):
                 self.label_warning.show()
                 self.label_warning_icon.show()
                 return False
+            # Make sure this isn't the flatpak version:
+            if Path("/.flatpak-info").exists():
+                self.label_warning.setText(
+                    self.tr("The Flatpak sandbox will likely prevent actions from working.")
+                )
+                self.label_warning.show()
+                self.label_warning_icon.show()
+                return False
+
             names.add(name)
         self.label_warning.setText("")
         self.label_warning.hide()
