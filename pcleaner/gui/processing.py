@@ -661,8 +661,16 @@ def generate_output(
     else:
         # We aren't writing output, but we may still need to update the metadata at least.
         # For that, we will need the input files, so we'd prefer to use the re-merged files.
-        handle_merging_splits(image_objects, split_files, profile, cache_dir)
-        batch_metadata.set_input_paths_from_files(image_objects)
+
+        # If we need to merge files, we do it by replacing the split objects with the merged objects.
+        # But we don't actually want to delete the image objects, so we create a shallow copy of the list.
+        # Otherwise the review options, which share the image objects list, would have messed up
+        # image objects as a side effect, then pass those on to the next run of the cleaner, resulting
+        # in the poor thing being unable to handle the merged files.
+        # We don't want the merged image objects to leak beyond the scope of this function.
+        image_objects_export = image_objects.copy()
+        handle_merging_splits(image_objects_export, split_files, profile, cache_dir)
+        batch_metadata.set_input_paths_from_files(image_objects_export)
 
     batch_metadata.calculate_output_parents()
 
@@ -895,6 +903,12 @@ def perform_ocr(
 
     check_abortion()
 
+    # In the cleaning process we want to avoid messing with the image_objects list if we aren't exporting,
+    # since we share it with the review options object, which will then reuse it later in turn for export.
+    # With OCR however, we don't use the image objects list for export (just the analytics),
+    # but we do use it when showing the image in the OCR editor/reviewer, in which case this
+    # cross-contamination is explicitly necessary to have the reviewer show the merged image for
+    # OCR editing, as is expected with the merged analytics containing the text.
     handle_merging_splits(image_objects, split_files, profile, cache_dir, for_ocr=True)
     handle_merging_ocr_splits(split_files, profile, ocr_analytics)
 

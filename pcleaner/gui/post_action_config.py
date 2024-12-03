@@ -1,5 +1,4 @@
 import platform
-import subprocess
 from functools import wraps
 
 import PySide6.QtGui as Qg
