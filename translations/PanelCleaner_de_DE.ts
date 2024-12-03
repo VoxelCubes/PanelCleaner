@@ -423,61 +423,61 @@ Seiten mit Fehlern / insgesamt:
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>filename</source>
       <translation>Dateiname</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>startx</source>
       <translation>startx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>starty</source>
       <translation>starty</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>endx</source>
       <translation>endx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>endy</source>
       <translation>endy</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>text</source>
       <translation>Text</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
-      <location filename="../pcleaner/gui/processing.py" line="916"/>
+      <location filename="../pcleaner/gui/processing.py" line="930"/>
       <source>Saved detected text to {output_file}</source>
       <translation>Erkannter Text wurde in {output_file} gespeichert.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
-      <location filename="../pcleaner/gui/processing.py" line="920"/>
+      <location filename="../pcleaner/gui/processing.py" line="934"/>
       <source>Failed to write detected text to {output_file}</source>
       <translation>Der erkannte Text konnte nicht in {output_file} geschrieben werden.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1951"/>
-      <location filename="../pcleaner/gui/processing.py" line="923"/>
+      <location filename="../pcleaner/gui/processing.py" line="937"/>
       <source>Save Failed</source>
       <translation>Speichern Fehlgeschlagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1952"/>
-      <location filename="../pcleaner/gui/processing.py" line="923"/>
+      <location filename="../pcleaner/gui/processing.py" line="937"/>
       <source>Failed to write detected text to file.</source>
       <translation>Der erkannte Text konnte nicht in die Datei geschrieben werden.</translation>
     </message>
@@ -2707,6 +2707,11 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
       <location filename="../pcleaner/gui/post_action_config.py" line="153"/>
       <source>The name &quot;{shutdown_command}&quot; is reserved.</source>
       <translation>Der Name &quot;{shutdown_command}&quot; ist reserviert.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/post_action_config.py" line="164"/>
+      <source>The Flatpak sandbox will likely prevent actions from working.</source>
+      <translation>Die Flatpak-Sandbox wird wahrscheinlich verhindern, dass die Aktionen funktionieren.</translation>
     </message>
   </context>
   <context>

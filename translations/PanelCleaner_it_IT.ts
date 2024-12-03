@@ -423,61 +423,61 @@ Pagine con errori / totale:
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>filename</source>
       <translation>nome del file</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>startx</source>
       <translation>startx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>starty</source>
       <translation>starty</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>endx</source>
       <translation>endx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>endy</source>
       <translation>endy</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
-      <location filename="../pcleaner/gui/processing.py" line="907"/>
+      <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>text</source>
       <translation>testo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
-      <location filename="../pcleaner/gui/processing.py" line="916"/>
+      <location filename="../pcleaner/gui/processing.py" line="930"/>
       <source>Saved detected text to {output_file}</source>
       <translation>Salvataggio del testo rilevato in {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
-      <location filename="../pcleaner/gui/processing.py" line="920"/>
+      <location filename="../pcleaner/gui/processing.py" line="934"/>
       <source>Failed to write detected text to {output_file}</source>
       <translation>Impossibile scrivere il testo rilevato su {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1951"/>
-      <location filename="../pcleaner/gui/processing.py" line="923"/>
+      <location filename="../pcleaner/gui/processing.py" line="937"/>
       <source>Save Failed</source>
       <translation>Salvataggio fallito</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1952"/>
-      <location filename="../pcleaner/gui/processing.py" line="923"/>
+      <location filename="../pcleaner/gui/processing.py" line="937"/>
       <source>Failed to write detected text to file.</source>
       <translation>Impossibile scrivere il testo rilevato sul file.</translation>
     </message>
@@ -2707,6 +2707,11 @@ Per sapere come aggiungere il supporto per altre lingue, consultare la documenta
       <location filename="../pcleaner/gui/post_action_config.py" line="153"/>
       <source>The name &quot;{shutdown_command}&quot; is reserved.</source>
       <translation type="unfinished">The name &quot;{shutdown_command}&quot; is reserved.</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/post_action_config.py" line="164"/>
+      <source>The Flatpak sandbox will likely prevent actions from working.</source>
+      <translation type="unfinished">The Flatpak sandbox will likely prevent actions from working.</translation>
     </message>
   </context>
   <context>
