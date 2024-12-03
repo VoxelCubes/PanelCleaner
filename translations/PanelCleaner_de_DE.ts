@@ -2711,7 +2711,7 @@ Lesen Sie in der Online-Dokumentation nach, wie Sie die Unterstützung für weit
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="164"/>
       <source>The Flatpak sandbox will likely prevent actions from working.</source>
-      <translation type="unfinished">The Flatpak sandbox will likely prevent actions from working.</translation>
+      <translation>Die Flatpak-Sandbox wird wahrscheinlich verhindern, dass die Aktionen funktionieren.</translation>
     </message>
   </context>
   <context>
