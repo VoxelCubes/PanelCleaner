@@ -1239,27 +1239,27 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="91"/>
       <source>Today</source>
-      <translation type="unfinished">Today</translation>
+      <translation>Dnes</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="99"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Chyba</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="100"/>
       <source>Errors</source>
-      <translation type="unfinished">Errors</translation>
+      <translation>Chyby</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="105"/>
       <source>Critical</source>
-      <translation type="unfinished">Critical</translation>
+      <translation>Kritická</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="106"/>
       <source>Criticals</source>
-      <translation type="unfinished">Criticals</translation>
+      <translation>Kritické</translation>
     </message>
   </context>
   <context>
@@ -1267,7 +1267,7 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
     <message>
       <location filename="../ui_files/License.ui" line="14"/>
       <source>License Agreement</source>
-      <translation type="unfinished">License Agreement</translation>
+      <translation>Licenční smlouva</translation>
     </message>
   </context>
   <context>
@@ -1276,152 +1276,152 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="418"/>
       <source>Open Config</source>
       <comment>Statusbar button</comment>
-      <translation type="unfinished">Open Config</translation>
+      <translation>Otevřít konfiguraci</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="423"/>
       <source>Open Log</source>
       <comment>Statusbar button</comment>
-      <translation type="unfinished">Open Log</translation>
+      <translation>Otevřít protokol</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="439"/>
       <source>CUDA Enabled</source>
-      <translation type="unfinished">CUDA Enabled</translation>
+      <translation>CUDA k dispozici</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="607"/>
       <source>Select Output Directory</source>
-      <translation type="unfinished">Select Output Directory</translation>
+      <translation>Vybrat výstupní adresář</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="668"/>
       <source>Aborting...</source>
-      <translation type="unfinished">Aborting...</translation>
+      <translation>Rušení...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="733"/>
       <source>Loading OCR model...</source>
-      <translation type="unfinished">Loading OCR model...</translation>
+      <translation>Načítání modelu OCR...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="737"/>
       <source>Loaded OCR model.</source>
-      <translation type="unfinished">Loaded OCR model.</translation>
+      <translation>OCR model načten.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="749"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Chyba</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="860"/>
       <source>Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
 
 Continue anyway?</source>
-      <translation type="unfinished">Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
+      <translation>Zdá se, že je již spuštěna další instance programu Panel Cleaner.Otevření nové instance způsobí, že stará relace nebude stabilní.
 
-Continue anyway?</translation>
+Přesto pokračovat?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="900"/>
       <source>Delete Models</source>
-      <translation type="unfinished">Delete Models</translation>
+      <translation>Smazat modely</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="904"/>
       <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
-      <translation type="unfinished">Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</translation>
+      <translation>Jste si jisti, že chcete odstranit modely strojového učení? Znemožníte tím čištění a OCR, dokud nebudou znovu staženy.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="749"/>
       <source>Encountered error:</source>
-      <translation type="unfinished">Encountered error:</translation>
+      <translation>Vyskytla se chyba:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="443"/>
       <source>MPS Enabled</source>
-      <translation type="unfinished">MPS Enabled</translation>
+      <translation>MPS povoleno</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="454"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="466"/>
       <source>Inpainting Model Update</source>
-      <translation type="unfinished">Inpainting Model Update</translation>
+      <translation>Aktualizace modelu pro retušování</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="459"/>
       <source>A new version of the inpainting model is available.
 You can delete the model later if you don&apos;t want to upgrade yet.
 Switch to the new model?</source>
-      <translation type="unfinished">A new version of the inpainting model is available.
-You can delete the model later if you don&apos;t want to upgrade yet.
-Switch to the new model?</translation>
+      <translation>Nová verze modelu pro retušováni je k dispozici.
+Model můžete smazat později, pokud nechcete aktualizovat.
+Přejít na nový model?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="470"/>
       <source>Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</source>
-      <translation type="unfinished">Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</translation>
+      <translation>Starý model byl zachován. Chcete-li provést aktualizaci, vyberte v nabídce &quot;Nápověda&quot; a poté &quot;Odstranit modely strojového učení&quot;.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="805"/>
       <source>Layout Reset</source>
-      <translation type="unfinished">Layout Reset</translation>
+      <translation>Obnovit rozložení</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="806"/>
       <source>The window layout has been reset. The default layout will be used next time.</source>
-      <translation type="unfinished">The window layout has been reset. The default layout will be used next time.</translation>
+      <translation>Rozložení okna bylo resetováno. Příště bude použito výchozí rozložení.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="855"/>
       <source>Multiple Instances</source>
-      <translation type="unfinished">Multiple Instances</translation>
+      <translation>Více instancí</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="862"/>
       <source>Found process ID in lock file: </source>
-      <translation type="unfinished">Found process ID in lock file: </translation>
+      <translation>Nalezeno ID procesu v zamčeném souboru: </translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="913"/>
       <source>Failed to delete models.</source>
-      <translation type="unfinished">Failed to delete models.</translation>
+      <translation>Nepodařilo se odstranit modely.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="913"/>
       <source>Delete Failed</source>
-      <translation type="unfinished">Delete Failed</translation>
+      <translation>Odstranění se nezdařilo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="919"/>
       <source>Models Deleted</source>
-      <translation type="unfinished">Models Deleted</translation>
+      <translation>Modely odstraněny</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="920"/>
       <source>The models were deleted. Would you like to download them again?</source>
-      <translation type="unfinished">The models were deleted. Would you like to download them again?</translation>
+      <translation>Modely byly odstraněny. Chcete si je znovu stáhnout?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1006"/>
       <source>Not Supported</source>
-      <translation type="unfinished">Not Supported</translation>
+      <translation>Není podporováno</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1007"/>
       <source>Unsupported system or package format</source>
-      <translation type="unfinished">Unsupported system or package format</translation>
+      <translation>Nepodporovaný formát systému nebo balíčku</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1023"/>
       <source>Shutdown</source>
-      <translation type="unfinished">Shutdown</translation>
+      <translation>Vypnout</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1061"/>
       <source>After processing, the system will shut down.</source>
-      <translation type="unfinished">After processing, the system will shut down.</translation>
+      <translation>Po dokončení se systém vypne.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1095"/>
