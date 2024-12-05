@@ -167,6 +167,8 @@ def main() -> None:
 
     logger.debug(args)
 
+    cli.dump_system_info(__file__)
+
     # If save-only-text is set, set extract-text to true, as it is required.
     # Also, automatically skip the Denoising step, as it is not needed.
     # This also means that the save-only-text option will not be regarded in the

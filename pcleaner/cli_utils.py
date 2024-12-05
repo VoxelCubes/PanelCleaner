@@ -3,13 +3,20 @@ import os
 import platform
 import shutil
 import subprocess
+import sys
+from io import StringIO
 from pathlib import Path
 
-from xdg import XDG_CONFIG_HOME, XDG_CACHE_HOME
 import prettytable as pt
+import torch
+from loguru import logger
+from xdg import XDG_CONFIG_HOME, XDG_CACHE_HOME
 
-from pcleaner import __program__
+import pcleaner.config as cfg
+import pcleaner.helpers as hp
 import pcleaner.ocr.supported_languages as osl
+from pcleaner import __display_name__, __version__
+from pcleaner import __program__
 
 
 def get_config_path() -> Path:
@@ -233,3 +240,53 @@ def list_all_languages() -> None:
     for code, name in osl.LANGUAGE_CODE_TO_NAME.items():
         table.add_row([name, code])
     print(table)
+
+
+def dump_system_info(executing_from: str, gui: bool = False) -> None:
+    logger.info("\n" + cfg.STARTUP_MESSAGE)
+    buffer = StringIO()
+    buffer.write("\n- Program Information -\n")
+    buffer.write(f"Program: {__display_name__} {__version__}\n")
+    buffer.write(f"Executing from: {executing_from}\n")
+    buffer.write(f"Log file: {get_log_path()}\n")
+    buffer.write(f"Config file: {get_config_path()}\n")
+    buffer.write(f"Cache directory: {get_cache_path()}\n")
+    buffer.write("- System Information -\n")
+    buffer.write(f"Operating System: {platform.system()} {platform.release()}\n")
+    if platform.system() == "Linux":
+        buffer.write(f"Desktop Environment: {os.getenv('XDG_CURRENT_DESKTOP', 'unknown')}\n")
+    buffer.write(f"Python Version: {sys.version}\n")
+    if gui:
+        import PySide6
+        import PySide6.QtCore as Qc
+        import PySide6.QtGui as Qg
+        import PySide6.QtWidgets as Qw
+
+        buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
+        buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
+        current_app_theme = Qw.QApplication.style()
+        current_app_theme_name = (
+            current_app_theme.objectName() if current_app_theme else "System Default"
+        )
+        buffer.write(f"Current Qt Theme: {current_app_theme_name}\n")
+        icon_theme_name = Qg.QIcon.themeName()
+        icon_theme_name = icon_theme_name if icon_theme_name else "System Default"
+        buffer.write(f"Current Icon Theme: {icon_theme_name}\n")
+        buffer.write(f"System locale: {Qc.QLocale.system().name()}\n")
+    buffer.write(f"Architecture: {platform.machine()}\n")
+    buffer.write(f"CPU Cores: {os.cpu_count()}\n")
+    buffer.write(f"Memory: {hp.sys_virtual_memory_total() / 1024 ** 3:.2f} GiB\n")
+    buffer.write(f"Swap: {hp.sys_swap_memory_total() / 1024 ** 3:.2f} GiB\n")
+    if torch.cuda.is_available():
+        buffer.write(f"GPU: {torch.cuda.get_device_name(0)} (CUDA enabled)\n")
+        buffer.write(f"    CUDA Version: {torch.version.cuda}\n")
+        buffer.write(
+            f"    CUDA Cores: {torch.cuda.get_device_properties(0).multi_processor_count}\n"
+        )
+        buffer.write(
+            f"    VRAM: {torch.cuda.get_device_properties(0).total_memory / 1024 ** 3:.2f} GiB\n"
+        )
+    else:
+        buffer.write("GPU: None (CUDA not available)\n")
+
+    logger.info(buffer.getvalue())

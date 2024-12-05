@@ -50,47 +50,7 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
 
     sys.excepthook = exception_handler
 
-    logger.info("\n" + cfg.STARTUP_MESSAGE)
-    buffer = StringIO()
-    buffer.write("\n- Program Information -\n")
-    buffer.write(f"Program: {__display_name__} {__version__}\n")
-    buffer.write(f"Executing from: {__file__}\n")
-    buffer.write(f"Log file: {cu.get_log_path()}\n")
-    buffer.write(f"Config file: {cu.get_config_path()}\n")
-    buffer.write(f"Cache directory: {cu.get_cache_path()}\n")
-    buffer.write("- System Information -\n")
-    buffer.write(f"Operating System: {platform.system()} {platform.release()}\n")
-    if platform.system() == "Linux":
-        buffer.write(f"Desktop Environment: {os.getenv('XDG_CURRENT_DESKTOP', 'unknown')}\n")
-    buffer.write(f"Python Version: {sys.version}\n")
-    buffer.write(f"PySide (Qt) Version: {PySide6.__version__}\n")
-    buffer.write(f"Available Qt Themes: {', '.join(Qw.QStyleFactory.keys())}\n")
-    current_app_theme = Qw.QApplication.style()
-    current_app_theme_name = (
-        current_app_theme.objectName() if current_app_theme else "System Default"
-    )
-    buffer.write(f"Current Qt Theme: {current_app_theme_name}\n")
-    icon_theme_name = Qg.QIcon.themeName()
-    icon_theme_name = icon_theme_name if icon_theme_name else "System Default"
-    buffer.write(f"Current Icon Theme: {icon_theme_name}\n")
-    buffer.write(f"System locale: {Qc.QLocale.system().name()}\n")
-    buffer.write(f"Architecture: {platform.machine()}\n")
-    buffer.write(f"CPU Cores: {os.cpu_count()}\n")
-    buffer.write(f"Memory: {hp.sys_virtual_memory_total() / 1024 ** 3:.2f} GiB\n")
-    buffer.write(f"Swap: {hp.sys_swap_memory_total() / 1024 ** 3:.2f} GiB\n")
-    if torch.cuda.is_available():
-        buffer.write(f"GPU: {torch.cuda.get_device_name(0)} (CUDA enabled)\n")
-        buffer.write(f"    CUDA Version: {torch.version.cuda}\n")
-        buffer.write(
-            f"    CUDA Cores: {torch.cuda.get_device_properties(0).multi_processor_count}\n"
-        )
-        buffer.write(
-            f"    VRAM: {torch.cuda.get_device_properties(0).total_memory / 1024 ** 3:.2f} GiB\n"
-        )
-    else:
-        buffer.write("GPU: None (CUDA not available)\n")
-
-    logger.info(buffer.getvalue())
+    cu.dump_system_info(__file__, gui=True)
 
     # Start the main window.
     app = Qw.QApplication(sys.argv)
