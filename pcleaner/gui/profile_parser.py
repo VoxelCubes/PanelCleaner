@@ -476,10 +476,19 @@ class ProfileToolBox(Qw.QToolBox):
         :param structure: The structure to use.
         """
 
+        # Because we need to re-create the form layout after the
+        # notes field, we extract this into a function to ensure the
+        # same layout settings are applied.
+        def make_form_layout() -> Qw.QFormLayout:
+            w = Qw.QFormLayout()
+            w.setContentsMargins(0, 0, 0, 0)
+            w.setSpacing(6)
+            return w
+
         for section in structure:
             section_widget = Qw.QWidget()
             layout = Qw.QVBoxLayout()
-            current_layout_form = Qw.QFormLayout()
+            current_layout_form = make_form_layout()
             section_widget.setLayout(layout)
             # Mark the inpainting section as experimental.
             if section.name == "inpainter":
@@ -489,18 +498,29 @@ class ProfileToolBox(Qw.QToolBox):
 
             self._widgets[section.name] = {}
 
+            last_was_entry = False
             for item in section.items:
                 if isinstance(item, ProfileComment):
+                    # Ensure we get large spaces after the settings and before the comments explaining
+                    # the next setting.
+                    if last_was_entry:
+                        spacer = Qw.QSpacerItem(0, 18, Qw.QSizePolicy.Fixed, Qw.QSizePolicy.Fixed)
+                        current_layout_form.addItem(spacer)
+
                     item: ProfileComment
                     label = Qw.QLabel(parent=self, text=tr(item.comment, context="Profile"))
                     label.setOpenExternalLinks(True)
                     label.setWordWrap(True)
                     current_layout_form.addRow(label)
 
+                    last_was_entry = False
+
                 elif isinstance(item, ProfileSpace):
-                    current_layout_form.addRow(Qw.QLabel(parent=self, text=""))
+                    # We don't actually care about these anymore.
+                    continue
 
                 elif isinstance(item, ProfileEntry):
+                    last_was_entry = True
                     item: ProfileEntry
                     # Make a special exception for the notes field, which needs to take up
                     # the entire width of the form, otherwise it is really narrow and looks
@@ -515,14 +535,13 @@ class ProfileToolBox(Qw.QToolBox):
                         self._widgets[section.name][item.key] = notes_widget
                         notes_widget.valueChanged.connect(self._on_value_changed)
 
-                        current_layout_form = Qw.QFormLayout()
+                        current_layout_form = make_form_layout()
                         continue
 
                     label = Qw.QLabel(
                         parent=self, text=tr(to_display_name(item.key), context="Profile")
                     )
                     label.setToolTip(to_display_name(item.key))
-                    current_layout_form.addRow(label)
                     option_widget = ProfileOptionWidget(item.entry_type)
                     current_layout_form.addRow(label, option_widget)
                     option_widget.valueChanged.connect(self._on_value_changed)

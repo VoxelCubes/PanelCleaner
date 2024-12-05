@@ -58,8 +58,6 @@ from pcleaner.helpers import tr
 
 ANALYTICS_COLUMNS = 74
 
-# TODO escape wildcards in commands with shlex.quote
-
 
 # noinspection PyUnresolvedReferences
 class MainWindow(Qw.QMainWindow, Ui_MainWindow):
