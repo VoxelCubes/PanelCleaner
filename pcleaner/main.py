@@ -966,7 +966,9 @@ def merge_export_splits(
         reverse_lookup = {}
         for original_path, split_paths in split_files.items():
             for split_path in split_paths:
-                reverse_lookup[split_path] = original_path
+                path_split_path = Path(split_path)
+                # We want to graft the split name onto the original path.
+                reverse_lookup[path_split_path] = Path(original_path).parent / path_split_path.name
 
         # We need to still repair the export paths.
         for i in range(len(export_targets)):
