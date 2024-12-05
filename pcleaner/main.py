@@ -167,6 +167,11 @@ def main() -> None:
 
     logger.debug(args)
 
+    cli.get_log_path().parent.mkdir(parents=True, exist_ok=True)
+
+    # Set up file logging.
+    logger.add(str(cli.get_log_path()), rotation="10 MB", retention="1 week", level="DEBUG")
+
     cli.dump_system_info(__file__)
 
     # If save-only-text is set, set extract-text to true, as it is required.
