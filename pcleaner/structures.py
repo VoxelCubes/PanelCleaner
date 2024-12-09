@@ -509,7 +509,7 @@ def merge_ocr_analytics(
     # First we need to find which analytics to merge by identifying the
     # file name in one of the removed_box_data entries.
     # It can happen that no analytics are found, in which case we create a dummy one.
-    split_file_to_analytic = {}
+    split_file_to_analytic: dict[Path, OCRAnalytic] = {}
     for segment_path in segment_paths:
         for analytic in ocr_analytics:
             if not analytic.removed_box_data:
@@ -524,7 +524,9 @@ def merge_ocr_analytics(
 
     # Purge the assigned analytics from the main list.
     for analytic_found in split_file_to_analytic.values():
-        ocr_analytics.remove(analytic_found)
+        # We may have added dummies, so we need to not remove those.
+        if analytic_found in ocr_analytics:
+            ocr_analytics.remove(analytic_found)
 
     merge_num_boxes = sum(analytic.num_boxes for analytic in split_file_to_analytic.values())
     merge_box_sizes_ocr = [
