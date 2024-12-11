@@ -573,14 +573,11 @@ class FileTable(CTableWidget):
         analytics_dict: dict[Path, Sequence[int, int]] = defaultdict(lambda: [0, 0])
 
         for analytic in ocr_analytics:
-            for removed_data in analytic.removed_box_data:
-                path, _, _ = removed_data
+            # Update the number of boxes removed for this path.
+            analytics_dict[analytic.path][0] = len(analytic.removed_box_data)
 
-                # Update the number of boxes removed for this path.
-                analytics_dict[path][0] += 1
-
-                # Update the total number of boxes for this path.
-                analytics_dict[path][1] = analytic.num_boxes
+            # Update the total number of boxes for this path.
+            analytics_dict[analytic.path][1] = analytic.num_boxes
 
         # Update the image files with the analytics data.
         for path, (num_removed, total) in analytics_dict.items():

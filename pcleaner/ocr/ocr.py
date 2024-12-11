@@ -106,9 +106,17 @@ def format_output(
     # Format of the analytics:
     # number of boxes | sizes of all boxes | sizes of boxes that were OCRed | path to image, text, box coordinates
     # We do not need to show the first three columns, so we simplify the data structure.
-    path_texts_coords: list[tuple[Path, str, st.Box]] = list(
-        itertools.chain.from_iterable(a.removed_box_data for a in ocr_analytics)
-    )
+    # path_texts_coords: list[tuple[Path, str, st.Box]] = list(
+    #     itertools.chain.from_iterable(a.removed_box_data for a in ocr_analytics)
+    # )
+
+    # Build tuples of the form (path, text) for the removed texts.
+    # This requires adding the path from the analytic to all the texts.
+    path_texts_coords: list[tuple[Path, str, st.Box]] = []
+    for analytic in ocr_analytics:
+        for text, box in analytic.removed_box_data:
+            path_texts_coords.append((analytic.path, text, box))
+
     if path_texts_coords:
         paths, texts, boxes = zip(*path_texts_coords)
         paths = hp.trim_prefix_from_paths(paths)

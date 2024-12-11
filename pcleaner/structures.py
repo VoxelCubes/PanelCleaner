@@ -397,23 +397,11 @@ class OCRAnalytic:
     - the cached file name and the text and the box that was removed.
     """
 
+    path: Path
     num_boxes: int
     box_sizes_ocr: Sequence[int]
     box_sizes_removed: Sequence[int]
-    removed_box_data: Sequence[tuple[Path, str, Box]]
-
-    @property
-    def path(self) -> Path | None:
-        """
-        Grab the first path from the removed box data.
-        This assumes that all boxes are from the same image,
-        which they must be.
-
-        :return: The path to the image, if any.
-        """
-        if self.removed_box_data:
-            return self.removed_box_data[0][0]
-        return None
+    removed_box_data: Sequence[tuple[str, Box]]
 
 
 class OCRStatus(Enum):
@@ -454,8 +442,8 @@ def convert_ocr_analytics_to_results(ocr_analytics: list[OCRAnalytic]) -> list[l
     ocr_results = []
     for analytic in ocr_analytics:
         bubbles = [
-            OCRResult(path, text, box, str(index), OCRStatus.Normal)
-            for index, (path, text, box) in enumerate(analytic.removed_box_data, start=1)
+            OCRResult(analytic.path, text, box, str(index), OCRStatus.Normal)
+            for index, (text, box) in enumerate(analytic.removed_box_data, start=1)
         ]
         ocr_results.append(bubbles)
     return ocr_results
@@ -472,17 +460,19 @@ def convert_ocr_results_to_analytics(ocr_results: list[list[OCRResult]]) -> list
     """
     ocr_analytics = []
     for results in ocr_results:
-        removed_box_data = [
-            (result.path, result.text, result.box)
-            for result in results
-            if result.status != OCRStatus.Removed
+        keeping_box_data = [
+            (result.text, result.box) for result in results if result.status != OCRStatus.Removed
         ]
+        if not keeping_box_data:
+            continue
+
         ocr_analytics.append(
             OCRAnalytic(
-                len(removed_box_data),
+                results[0].path,
+                len(keeping_box_data),
                 [],
                 [],
-                removed_box_data,
+                keeping_box_data,
             )
         )
     return ocr_analytics
@@ -512,15 +502,13 @@ def merge_ocr_analytics(
     split_file_to_analytic: dict[Path, OCRAnalytic] = {}
     for segment_path in segment_paths:
         for analytic in ocr_analytics:
-            if not analytic.removed_box_data:
-                continue
-            analytic_path, _, _ = analytic.removed_box_data[0]
-            if analytic_path == segment_path:
+            if segment_path == analytic.path:
                 split_file_to_analytic[segment_path] = analytic
                 break
         else:
-            # Create a dummy analytic.
-            split_file_to_analytic[segment_path] = OCRAnalytic(0, [], [], [])
+            # Create a dummy analytic. This shouldn't happen, but this guards against future oopsies.
+            logger.warning(f"Creating dummy analytic for {segment_path}")
+            split_file_to_analytic[segment_path] = OCRAnalytic(segment_path, 0, (), (), ())
 
     # Purge the assigned analytics from the main list.
     for analytic_found in split_file_to_analytic.values():
@@ -536,17 +524,17 @@ def merge_ocr_analytics(
         size for analytic in split_file_to_analytic.values() for size in analytic.box_sizes_removed
     ]
     # For the boxes we need to adjust the coordinates and fix the file path.
-    new_path = split_from
     new_box_tuples = []
     offset = 0
     for segment_path in segment_paths:
-        for _, text, box in split_file_to_analytic[segment_path].removed_box_data:
+        for text, box in split_file_to_analytic[segment_path].removed_box_data:
             new_box = box.translate(0, offset)
-            new_box_tuples.append((new_path, text, new_box))
+            new_box_tuples.append((text, new_box))
         offset += Image.open(segment_path).size[1]
 
     # Create the new analytic and add it to the list.
     new_analytic = OCRAnalytic(
+        split_from,
         merge_num_boxes,
         merge_box_sizes_ocr,
         merge_box_sizes_removed,
