@@ -97,11 +97,7 @@ def parse_plain_text(path: Path) -> tuple[list[st.OCRAnalytic], list[ParseError]
     for file_path, box_data in analytics_data.items():
         if not box_data:
             continue
-        analytics_list.append(
-            st.OCRAnalytic(
-                len(box_data), [], [], tuple((file_path, text, box) for text, box in box_data)
-            )
-        )
+        analytics_list.append(st.OCRAnalytic(file_path, len(box_data), [], [], box_data))
 
     return analytics_list, []
 
@@ -125,7 +121,7 @@ def parse_csv(path: Path) -> tuple[list[st.OCRAnalytic], list[ParseError]]:
     analytics_data: dict[Path, list[tuple[str, st.Box]]] = defaultdict(list)
     parse_errors: list[ParseError] = []
 
-    with path.open("r") as file:
+    with path.open("r", encoding="utf-8") as file:
         csv_reader = reader(file)
         header = next(csv_reader)
 
@@ -220,11 +216,7 @@ def parse_csv(path: Path) -> tuple[list[st.OCRAnalytic], list[ParseError]]:
     # Pack the analytics data by file path.
     analytics_list = []
     for file_path, box_data in analytics_data.items():
-        analytics_list.append(
-            st.OCRAnalytic(
-                len(box_data), [], [], tuple((file_path, text, box) for text, box in box_data)
-            )
-        )
+        analytics_list.append(st.OCRAnalytic(file_path, len(box_data), [], [], box_data))
 
     return analytics_list, []
 

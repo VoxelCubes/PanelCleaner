@@ -161,8 +161,8 @@ def generate_output(
         """
         nonlocal profile, cache_dir
 
-        path_gen = ost.OutputPathGenerator(image_object.path, cache_dir, image_object.uuid)
-        path = path_gen.for_output(current_output)
+        _path_gen = ost.OutputPathGenerator(image_object.path, cache_dir, image_object.uuid)
+        path = _path_gen.for_output(current_output)
 
         if path.is_file():
             image_object.outputs[current_output].update(path, profile)

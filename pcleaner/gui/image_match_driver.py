@@ -208,10 +208,11 @@ class ImageMatchOverview(Qw.QDialog, Ui_ImageMatchOverview):
         """
         for image, analytic in list(self.mapping.items()):
             analytic_with_expanded_path = st.OCRAnalytic(
+                image.path,
                 analytic.num_boxes,
                 analytic.box_sizes_ocr,
                 analytic.box_sizes_removed,
-                [(image.path, text, box) for old_path, text, box in analytic.removed_box_data],
+                analytic.removed_box_data,
             )
             self.mapping[image] = analytic_with_expanded_path
 
@@ -227,7 +228,7 @@ class ImageMatchOverview(Qw.QDialog, Ui_ImageMatchOverview):
                 if image in self.mapping:
                     continue
                 else:
-                    self.mapping[image] = st.OCRAnalytic(0, [], [], [])
+                    self.mapping[image] = st.OCRAnalytic(image.path, 0, [], [], [])
             else:
                 # Remove the mapping.
                 self.mapping.pop(image, None)
