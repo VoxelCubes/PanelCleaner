@@ -548,27 +548,27 @@ Stránky s chybami / celkem:
     <message>
       <location filename="../pcleaner/gui/structures.py" line="108"/>
       <source>%id</source>
-      <translation type="unfinished">%id</translation>
+      <translation>%id</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="109"/>
       <source>%i</source>
-      <translation type="unfinished">%i</translation>
+      <translation>%i</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="110"/>
       <source>%od</source>
-      <translation type="unfinished">%od</translation>
+      <translation>%od</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="111"/>
       <source>%o</source>
-      <translation type="unfinished">%o</translation>
+      <translation>%o</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="112"/>
       <source>%p</source>
-      <translation type="unfinished">%p</translation>
+      <translation>%p</translation>
     </message>
   </context>
   <context>
@@ -1426,22 +1426,22 @@ Přejít na nový model?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1095"/>
       <source>You have review options enabled, these will need to be manually closed before the action can start.</source>
-      <translation type="unfinished">You have review options enabled, these will need to be manually closed before the action can start.</translation>
+      <translation>Máte povolenou možnost přezkoumání, které je třeba před spuštěním akce ručně zavřít.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1101"/>
       <source>You have disabled writing output.</source>
-      <translation type="unfinished">You have disabled writing output.</translation>
+      <translation>Zakázali jste zápis výstupu.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1155"/>
       <source>Shutting down system...</source>
-      <translation type="unfinished">Shutting down system...</translation>
+      <translation>Vypnání systému...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1165"/>
       <source>Running post action &quot;{action}&quot;...</source>
-      <translation type="unfinished">Running post action &quot;{action}&quot;...</translation>
+      <translation>Spuštění post-akce &quot;{action}&quot;...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1200"/>
