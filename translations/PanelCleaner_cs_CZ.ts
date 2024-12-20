@@ -1446,7 +1446,7 @@ Přejít na nový model?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1200"/>
       <source>Restart Required</source>
-      <translation type="unfinished">Restart Required</translation>
+      <translation>Požaduje se restart</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1203"/>
