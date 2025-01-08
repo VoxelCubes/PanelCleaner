@@ -206,8 +206,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             palette = gu.load_color_palette(theme)
 
             Qg.QIcon.setThemeName(theme)
-            if platform.system() == "Windows":
-                Qw.QApplication.setStyle("Fusion")
+            Qw.QApplication.setStyle("Fusion")
 
         self.setPalette(palette)
         Qw.QApplication.setPalette(self.palette())
@@ -250,6 +249,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_system_theme.setChecked(theme is None)
         self.action_dark.setChecked(theme == "breeze-dark")
         self.action_light.setChecked(theme == "breeze")
+
+        logger.debug(f"Icon theme: {Qg.QIcon.themeName()}")
+        logger.debug(f"Fallback icon theme: {Qg.QIcon.fallbackThemeName()}")
 
         self.update()
 

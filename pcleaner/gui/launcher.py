@@ -99,12 +99,14 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     with resources.files(theme_icons_data) as data_path:
         theme_icons = str(data_path)
 
+    default_theme_search_paths = Qg.QIcon.themeSearchPaths()
+    Qg.QIcon.setThemeSearchPaths([default_theme_search_paths, theme_icons, ":/icons"])
+
     Qg.QIcon.setFallbackSearchPaths([":/icons", theme_icons])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load
     # later on, even when switching the theme again.
     if platform.system() == "Windows":
         Qg.QIcon.setThemeName("breeze")
-        Qg.QIcon.setThemeSearchPaths([":/icons", theme_icons])
 
     if files_to_open:
         input_paths = ", ".join(map(str, files_to_open))

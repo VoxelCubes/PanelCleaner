@@ -44,10 +44,12 @@
       <caption>Review and edit the OCR output interactively</caption>
     </screenshot>
   </screenshots>
-  <release version="2.11.0" date="2024-12-02">
+  <release version="2.11.5" date="2025-01-08">
     <description>
         <p>Changelog</p>
         <ul>
+            <li>Flatpak: Fixed dark icons not loading.</li>
+            <li>Flatpak: Using Qt BaseApp to support breeze application theme.</li>
             <li>Switched to a fine-tuned inpainting model by dreMaz, handling dithering patterns significantly better. The old model can still be used if desired.</li>
             <li>Post-run actions added for the GUI, enabling automation like automatic shutdown or custom commands.</li>
             <li>Automatic splitting of long image strips and merging them after cleaning (#123).</li>
