@@ -443,7 +443,7 @@ class BubbleImageViewer(ImageViewer):
             painter.setPen(text_pen)
             painter.fillPath(path, text_pen.color())
 
-        if self._new_bubble_start is not None:
+        if self._new_bubble_start is not None and self._new_bubble_end is not None:
             # Use double the opacity for the new bubble to make it more visible.
             painter.setPen(Qg.QPen(self.new_bubble_color, 1, Qt.DashLine))
             painter.setBrush(
