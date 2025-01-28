@@ -107,9 +107,9 @@ Comment[x-test]=xxBreeze by the KDE VDGxx
 Comment[zh_CN]=Breeze 微风主题，由 KDE VDG (视觉设计团队) 设计制作
 Comment[zh_TW]=由 KDE VDG 團隊製作的 Breeze
 
-DisplayDepth=32
-
 Inherits=hicolor
+
+DisplayDepth=32
 
 Example=folder
 

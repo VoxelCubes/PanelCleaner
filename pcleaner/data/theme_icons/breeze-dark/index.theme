@@ -8,7 +8,7 @@ Name[ca@valencia]=Brisa fosca
 Name[cs]=Breeze Tmavé
 Name[da]=Breeze Dark
 Name[de]=Breeze Dunkel
-Name[el]=Σκοτεινό Breeze
+Name[el]=Breeze σκούρο
 Name[en_GB]=Breeze Dark
 Name[eo]=Breeze Dark
 Name[es]=Brisa oscuro
@@ -107,9 +107,9 @@ Comment[x-test]=xxBreeze Dark by the KDE VDGxx
 Comment[zh_CN]=Breeze 微风深色主题，由 KDE VDG (视觉设计团队) 设计制作
 Comment[zh_TW]=由 KDE VDG 團隊製作的 Breeze Dark
 
-DisplayDepth=32
-
 Inherits=breeze,hicolor
+
+DisplayDepth=32
 
 Example=folder
 
@@ -133,8 +133,8 @@ KDE-Extensions=.svg
 ########## Directories
 ########## ordered by category and alphabetically
 
-Directories=actions/12,actions/16,actions/22,actions/24,actions/32,actions/48,actions/64,animations/16,animations/22,apps/16,apps/22,apps/32,apps/48,preferences/22,preferences/32,applets/16,applets/22,applets/48,applets/64,applets/128,applets/256,categories/32,devices/16,devices/22,devices/64,emblems/8,emblems/16,emblems/22,emotes/22,mimetypes/16,mimetypes/22,mimetypes/32,mimetypes/64,places/16,places/22,places/32,places/48,places/96,places/64,status/16,status/22,status/24,status/32,status/48,status/64
-ScaledDirectories=actions/16@2x,actions/16@3x,actions/22@2x,actions/22@3x,actions/24@2x,actions/24@3x,actions/32@2x,actions/32@3x,animations/16@2x,animations/16@3x,apps/16@2x,apps/16@3x,apps/22@2x,apps/22@3x,devices/16@2x,devices/16@3x,devices/22@2x,devices/22@3x,emblems/16@2x,emblems/16@3x,emblems/22@2x,emblems/22@3x,emotes/22@2x,emotes/22@3x,mimetypes/16@2x,mimetypes/16@3x,mimetypes/22@2x,mimetypes/22@3x,places/16@2x,places/16@3x,places/22@2x,places/22@3x,status/16@2x,status/16@3x,status/22@2x,status/22@3x
+Directories=actions/12,actions/16,actions/22,actions/24,actions/32,actions/48,actions/64,animations/16,animations/22,apps/16,apps/22,apps/32,apps/48,preferences/22,preferences/32,applets/16,applets/22,applets/48,applets/64,applets/128,applets/256,categories/22,categories/32,devices/16,devices/22,devices/32,devices/64,emblems/8,emblems/16,emblems/22,emotes/22,mimetypes/16,mimetypes/22,mimetypes/32,mimetypes/64,places/16,places/22,places/32,places/48,places/96,places/64,status/16,status/22,status/24,status/32,status/48,status/64
+ScaledDirectories=actions/16@2x,actions/16@3x,actions/22@2x,actions/22@3x,actions/24@2x,actions/24@3x,actions/32@2x,actions/32@3x,animations/16@2x,animations/16@3x,apps/16@2x,apps/16@3x,apps/22@2x,apps/22@3x,devices/16@2x,devices/16@3x,devices/22@2x,devices/22@3x,devices/32@2x,devices/32@3x,emblems/16@2x,emblems/16@3x,emblems/22@2x,emblems/22@3x,emotes/22@2x,emotes/22@3x,mimetypes/16@2x,mimetypes/16@3x,mimetypes/22@2x,mimetypes/22@3x,places/16@2x,places/16@3x,places/22@2x,places/22@3x,status/16@2x,status/16@3x,status/22@2x,status/22@3x
 
 ########## Actions
 ########## ordered by size
@@ -398,7 +398,14 @@ MaxSize=256
 ########## Categories
 ########## ordered by size
 
-#32x32 - Fixed size - For categories icons >!!!ONLY!!!< - Used in Kickoff (KDE 4.x.x) and Lancelot. Also used in MATE and Cinnamon (just FYI) - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
+# 22x22 - Both color (icon-name) and monochrome (icon-name-symbolic)
+[categories/22]
+Size=22
+Context=Categories
+Type=Fixed
+
+# 32x32 - Fixed size - For categories icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Color
+# Used in Plasma, MATE and Cinnamon
 [categories/32]
 Size=32
 Context=Categories
@@ -446,6 +453,26 @@ Type=Fixed
 #22x22@3x - Fixed size - For small device icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
 [devices/22@3x]
 Size=22
+Scale=3
+Context=Devices
+Type=Fixed
+
+#32x32 - Fixed size - For medium device icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
+[devices/32]
+Size=32
+Context=Devices
+Type=Fixed
+
+#32x32@2x - Fixed size - For medium device icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
+[devices/32@2x]
+Size=32
+Scale=2
+Context=Devices
+Type=Fixed
+
+#32x32@3x - Fixed size - For medium device icons >!!!ONLY!!!< - DO_NOT_USE_ANYWHERE_ELSE - Monochrome
+[devices/32@3x]
+Size=32
 Scale=3
 Context=Devices
 Type=Fixed
