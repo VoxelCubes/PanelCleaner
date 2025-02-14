@@ -93,7 +93,7 @@ test.png|380|1700|480|1750|．．．！！
 
 Note: If the text it claims to have found makes no sense, for example, it just reads "．．．", for something
 entirely different, check what OCR language is set. The default MangaOCR model might return something like that
-for English text, resulting in it getting cleaned up, if the bubble was small enough.
+for English text, resulting in it getting ignored, if the bubble was small enough.
 
 ### Checking bubble size
 
