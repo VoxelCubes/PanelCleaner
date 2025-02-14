@@ -107,10 +107,13 @@ This is influenced by the profile settings in General: Input Height Lower Target
 The scaled image size is what is used to calculate the box size, so you need to multiply the box size by the scale to get the actual size.
 
 To calculate the size of the box, use this formula:
+
 $$
 \text{box size} = (\text{endx} - \text{startx}) \times (\text{endy} - \text{starty})
 $$
+
 Then to correct for the scale factor, if it isn't 100%:
+
 $$
 \text{actual box size} = \text{box size} \times \left(\frac{\text{processing size percentage}}{100}\right)^2
 $$
