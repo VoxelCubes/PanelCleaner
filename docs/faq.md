@@ -101,7 +101,7 @@ If the text was removed during cleaning, when you think it shouldn't, check if t
 To calculate the box size, you first need to check the scale being used to process the image.
 This is visible in the main table of the GUI, seen here:
 
-![Processing size](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/processing_size.png) 
+![Processing size](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/screenshots/processing_size.png) 
 
 This is influenced by the profile settings in General: Input Height Lower Target and Input Height Upper Target.
 The scaled image size is what is used to calculate the box size, so you need to multiply the box size by the scale to get the actual size.
