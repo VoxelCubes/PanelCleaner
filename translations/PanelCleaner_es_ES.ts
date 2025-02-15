@@ -1346,9 +1346,9 @@ Continue anyway?</translation>
       <source>A new version of the inpainting model is available.
 You can delete the model later if you don&apos;t want to upgrade yet.
 Switch to the new model?</source>
-      <translation type="unfinished">A new version of the inpainting model is available.
-You can delete the model later if you don&apos;t want to upgrade yet.
-Switch to the new model?</translation>
+      <translation>Ya está disponible una nueva versión del modelo de pintado.
+Puede eliminar el modelo más adelante si no desea actualizarlo todavía&apos;.
+¿Cambiar al nuevo modelo?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="470"/>
