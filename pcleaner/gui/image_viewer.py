@@ -10,6 +10,7 @@ from loguru import logger
 
 import pcleaner.data
 import pcleaner.gui.structures as gst
+import pcleaner.helpers as hp
 
 ZOOM_TICK_FACTOR = 1.25
 
@@ -303,8 +304,7 @@ class BubbleImageViewer(ImageViewer):
         self._new_bubble_end = None
 
         # Load included font.
-        with resources.files(pcleaner.data) as data_path:
-            font_path = data_path / "LiberationSans-Regular.ttf"
+        font_path = hp.resource_path(pcleaner.data, "LiberationSans-Regular.ttf")
         font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
         if font_id == -1:
             logger.error("Failed to load font.")

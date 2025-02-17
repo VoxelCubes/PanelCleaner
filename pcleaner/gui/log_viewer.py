@@ -6,6 +6,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 
 from pcleaner import data
+from pcleaner import helpers as hp
 
 colors_dark_theme = {
     "debug": Qg.QColor(41, 128, 185),
@@ -116,8 +117,7 @@ class LogViewer(Qw.QPlainTextEdit):
         """
         Qw.QPlainTextEdit.__init__(self, parent)
 
-        with resources.files(data) as data_path:
-            font_path = data_path / "NotoMono-Regular.ttf"
+        font_path = hp.resource_path(data, "NotoMono-Regular.ttf")
         font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
         self.setFont(Qg.QFont(Qg.QFontDatabase.applicationFontFamilies(font_id)[0]))
         self.syntax_highlighter = LogSyntaxManager(self, self, self.palette())

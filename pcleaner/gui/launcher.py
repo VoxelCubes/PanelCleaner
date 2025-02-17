@@ -92,15 +92,15 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
 
     translator = Qc.QTranslator(app)
 
-    with resources.files(translation_data) as data_path:
-        path = str(data_path)
+    path = str(hp.resource_path(translation_data))
 
     if translator.load(locale, "PanelCleaner", "_", path):
         app.installTranslator(translator)
         logger.debug(f"Loaded App translations for {locale.name()}.")
 
-    with resources.files(theme_icons_data) as data_path:
-        theme_icons = str(data_path)
+    # with hp.resource_path(theme_icons_data) as data_path:
+    #     theme_icons = str(data_path)
+    theme_icons = str(hp.resource_path(theme_icons_data))
 
     default_theme_search_paths = Qg.QIcon.themeSearchPaths()
     Qg.QIcon.setThemeSearchPaths([default_theme_search_paths, theme_icons, ":/icons"])

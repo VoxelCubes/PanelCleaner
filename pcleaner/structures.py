@@ -11,6 +11,7 @@ from loguru import logger
 import pcleaner.config as cfg
 import pcleaner.data
 import pcleaner.ocr.supported_languages as osl
+import pcleaner.helpers as hp
 
 
 class BoxType(Enum):
@@ -271,8 +272,7 @@ class PageData:
         :param output_path: A full file path to write the image to.
         """
         image = Image.open(image_path)
-        with resources.files(pcleaner.data) as data_path:
-            font_path = str(data_path / "LiberationSans-Regular.ttf")
+        font_path = hp.resource_path(pcleaner.data, "LiberationSans-Regular.ttf")
         logger.debug(f"Loading included font from {font_path}")
         # Figure out the optimal font size based on the image size. E.g. 30 for a 1600px image.
         font_size = int(image.size[0] / 50) + 5
