@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'OutputReview.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.8.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -107,14 +107,14 @@ class Ui_OutputReview(object):
         self.image_list.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.image_list.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.image_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.image_list.setProperty("showDropIndicator", False)
+        self.image_list.setProperty(u"showDropIndicator", False)
         self.image_list.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.image_list.setTextElideMode(Qt.ElideLeft)
         self.image_list.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.image_list.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.image_list.setMovement(QListView.Static)
         self.image_list.setFlow(QListView.LeftToRight)
-        self.image_list.setProperty("isWrapping", True)
+        self.image_list.setProperty(u"isWrapping", True)
         self.image_list.setResizeMode(QListView.Adjust)
         self.image_list.setLayoutMode(QListView.Batched)
         self.image_list.setViewMode(QListView.IconMode)

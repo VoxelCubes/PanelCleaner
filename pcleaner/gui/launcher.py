@@ -4,6 +4,7 @@ import platform
 import sys
 from importlib import resources
 from io import StringIO
+import logging
 
 import PySide6
 import PySide6.QtCore as Qc
@@ -37,6 +38,8 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     """
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
+
+    logging.getLogger("transformers").setLevel(logging.ERROR)
 
     # Set up file logging.
     logger.add(str(cu.get_log_path()), rotation="10 MB", retention="1 week", level="DEBUG")
@@ -89,22 +92,24 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
 
     translator = Qc.QTranslator(app)
 
-    with resources.files(translation_data) as data_path:
-        path = str(data_path)
+    path = str(hp.resource_path(translation_data))
 
     if translator.load(locale, "PanelCleaner", "_", path):
         app.installTranslator(translator)
         logger.debug(f"Loaded App translations for {locale.name()}.")
 
-    with resources.files(theme_icons_data) as data_path:
-        theme_icons = str(data_path)
+    # with hp.resource_path(theme_icons_data) as data_path:
+    #     theme_icons = str(data_path)
+    theme_icons = str(hp.resource_path(theme_icons_data))
+
+    default_theme_search_paths = Qg.QIcon.themeSearchPaths()
+    Qg.QIcon.setThemeSearchPaths([default_theme_search_paths, theme_icons, ":/icons"])
 
     Qg.QIcon.setFallbackSearchPaths([":/icons", theme_icons])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load
     # later on, even when switching the theme again.
     if platform.system() == "Windows":
         Qg.QIcon.setThemeName("breeze")
-        Qg.QIcon.setThemeSearchPaths([":/icons", theme_icons])
 
     if files_to_open:
         input_paths = ", ".join(map(str, files_to_open))

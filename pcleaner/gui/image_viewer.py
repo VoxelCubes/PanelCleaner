@@ -10,6 +10,7 @@ from loguru import logger
 
 import pcleaner.data
 import pcleaner.gui.structures as gst
+import pcleaner.helpers as hp
 
 ZOOM_TICK_FACTOR = 1.25
 
@@ -303,8 +304,7 @@ class BubbleImageViewer(ImageViewer):
         self._new_bubble_end = None
 
         # Load included font.
-        with resources.files(pcleaner.data) as data_path:
-            font_path = data_path / "LiberationSans-Regular.ttf"
+        font_path = hp.resource_path(pcleaner.data, "LiberationSans-Regular.ttf")
         font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
         if font_id == -1:
             logger.error("Failed to load font.")
@@ -443,7 +443,7 @@ class BubbleImageViewer(ImageViewer):
             painter.setPen(text_pen)
             painter.fillPath(path, text_pen.color())
 
-        if self._new_bubble_start is not None:
+        if self._new_bubble_start is not None and self._new_bubble_end is not None:
             # Use double the opacity for the new bubble to make it more visible.
             painter.setPen(Qg.QPen(self.new_bubble_color, 1, Qt.DashLine))
             painter.setBrush(

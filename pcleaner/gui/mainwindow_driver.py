@@ -206,8 +206,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             palette = gu.load_color_palette(theme)
 
             Qg.QIcon.setThemeName(theme)
-            if platform.system() == "Windows":
-                Qw.QApplication.setStyle("Fusion")
+            Qw.QApplication.setStyle("Fusion")
 
         self.setPalette(palette)
         Qw.QApplication.setPalette(self.palette())
@@ -250,6 +249,9 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         self.action_system_theme.setChecked(theme is None)
         self.action_dark.setChecked(theme == "breeze-dark")
         self.action_light.setChecked(theme == "breeze")
+
+        logger.debug(f"Icon theme: {Qg.QIcon.themeName()}")
+        logger.debug(f"Fallback icon theme: {Qg.QIcon.fallbackThemeName()}")
 
         self.update()
 
@@ -818,8 +820,7 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         # The font is stored in the data module. Noto Mono is a free font.
         # Load it from file to be cross platform.
         self.textEdit_analytics.clear()
-        with resources.files(data) as data_path:
-            font_path = data_path / "NotoMono-Regular.ttf"
+        font_path = hp.resource_path(data, "NotoMono-Regular.ttf")
         logger.debug(f"Loading included font from {str(font_path)}")
         font_id = Qg.QFontDatabase.addApplicationFont(str(font_path))
         if font_id != -1:

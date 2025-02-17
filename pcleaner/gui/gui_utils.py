@@ -18,6 +18,7 @@ import pcleaner.ocr.parsers as op
 import pcleaner.gui.image_file as imf
 import pcleaner.structures as st
 from pcleaner.helpers import tr
+import pcleaner.helpers as hp
 from pcleaner.data import custom_icons
 from pcleaner.data import color_themes
 
@@ -204,8 +205,7 @@ def custom_icon_path(icon_name: str, theme: Literal["dark", "light"] | str = "")
         if applicable, otherwise leave blank.
     :return: A full path to the file.
     """
-    with resources.files(custom_icons) as data_path:
-        custom_icon_dir: Path = data_path
+    custom_icon_dir = hp.resource_path(custom_icons)
 
     if theme:
         custom_icon_dir = custom_icon_dir / theme
@@ -344,8 +344,7 @@ def load_color_palette(theme: str) -> Qg.QPalette:
     """
     palette = Qg.QPalette()
 
-    with resources.files(color_themes) as data_path:
-        file_path = data_path / theme
+    file_path = hp.resource_path(color_themes, theme)
 
     file = Qc.QFile(file_path)
     if file.open(Qc.QFile.ReadOnly | Qc.QFile.Text):

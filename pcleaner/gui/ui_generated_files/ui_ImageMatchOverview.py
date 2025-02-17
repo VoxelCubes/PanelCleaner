@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'ImageMatchOverview.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.8.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -108,7 +108,7 @@ class Ui_ImageMatchOverview(object):
         self.file_table.setFocusPolicy(Qt.NoFocus)
         self.file_table.setFrameShape(QFrame.NoFrame)
         self.file_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.file_table.setProperty("showDropIndicator", False)
+        self.file_table.setProperty(u"showDropIndicator", False)
         self.file_table.setDragDropOverwriteMode(False)
         self.file_table.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.file_table.setAlternatingRowColors(True)

@@ -83,6 +83,7 @@ The two bottom pages are what the program can output: either just the transparen
 - It only supports Japanese and English text for cleaning (success may vary with other languages), Japanese only for OCR.
 
 - Supported file types: .jpeg, .jpg, .png, .bmp, .tiff, .tif, .jp2, .dib, .webp, .ppm
+- Supported file types (export only): .psd
 
 - The program relies on AI for the initial text detection, which by nature is imperfect. Sometimes it will miss little bits of text or think part of the bubble belongs to the text, which will prevent that bubble from being cleaned. From testing, this typically affects between 2–8% of bubbles, depending on your settings.
 

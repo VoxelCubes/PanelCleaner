@@ -299,12 +299,12 @@ def ocr_check(
     # candidate_small_bubbles = list(filter(lambda x: x[0].area < max_box_size, bubbles))
     candidate_small_bubble_indices = [i for i, box in enumerate(boxes) if box.area < max_box_size]
     if not candidate_small_bubble_indices:
-        return page_data, st.OCRAnalytic(len(boxes), (), (), ())
+        return page_data, st.OCRAnalytic(Path(page_data.original_path), len(boxes), (), (), ())
     # Check if the small bubbles only contain symbols.
     # If they do, then they are probably not text. Discard them in that case.
     box_sizes = []
     discarded_box_sizes = []
-    discarded_box_texts: list[tuple[Path, str, st.Box]] = []
+    discarded_box_texts: list[tuple[str, st.Box]] = []
     for i in candidate_small_bubble_indices:
         box = boxes[i]
         lang = langs[i]
@@ -317,7 +317,7 @@ def ocr_check(
             # When returning the box in the analytics, the coordinates must be scaled
             # back to the original size so they can be used in relation to the original image.
             # They are used for the csv OCR output.
-            discarded_box_texts.append((Path(page_data.original_path), text, box.scale(1 / scale)))
+            discarded_box_texts.append((text, box.scale(1 / scale)))
             discarded_box_sizes.append(box.area)
             # Overwrite the box and lang in the page data, to not break the iterator.
             boxes[i] = None
@@ -329,7 +329,13 @@ def ocr_check(
 
     return (
         page_data,
-        st.OCRAnalytic(len(boxes), box_sizes, discarded_box_sizes, discarded_box_texts),
+        st.OCRAnalytic(
+            Path(page_data.original_path),
+            len(boxes),
+            box_sizes,
+            discarded_box_sizes,
+            discarded_box_texts,
+        ),
     )
 
 

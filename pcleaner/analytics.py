@@ -107,20 +107,22 @@ def show_ocr_analytics(
     else:
         buffer.write(tr("No not-removed small boxes found.\n"))
 
-    # Show removed texts.
-    removed_path_texts: list[tuple[Path, str, st.Box]] = list(
-        itertools.chain.from_iterable(a.removed_box_data for a in analytics)
-    )
+    # Build tuples of the form (path, text) for the removed texts.
+    # This requires adding the path from the analytic to all the texts.
+    removed_paths: list[Path] = []
+    removed_texts: list[str] = []
+    for analytic in analytics:
+        for text, box in analytic.removed_box_data:
+            removed_paths.append(analytic.path)
+            removed_texts.append(text)
 
-    if removed_path_texts:
+    if removed_paths:
         # Find and then remove the longest common prefix from the file paths.
-        paths, texts, _ = zip(*removed_path_texts)
-        removed_paths = hp.trim_prefix_from_paths(paths)
-        removed_path_texts = list(zip(removed_paths, texts))
+        removed_paths = hp.trim_prefix_from_paths(removed_paths)
+        removed_path_texts = list(zip(removed_paths, removed_texts))
         # Sort by file path.
         removed_path_texts = natsorted(removed_path_texts, key=lambda p: p[0])
 
-    if removed_path_texts:
         buffer.write(tr("\nRemoved bubbles:\n"))
         for path, text in removed_path_texts:
             buffer.write(tr("Page {path}: {text}\n").format(path=path, text=text))

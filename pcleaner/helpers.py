@@ -1,6 +1,7 @@
 import difflib
 import platform
 import subprocess
+from importlib import resources
 from enum import Enum
 from itertools import takewhile, groupby
 from pathlib import Path
@@ -34,6 +35,12 @@ def f_plural(value, singular: str, plural: str) -> str:
     Selects which form to use based on the value.
     """
     return singular if value == 1 else plural
+
+
+def resource_path(module, resource="") -> Path:
+    with resources.as_file(resources.files(module).joinpath(resource)) as f:
+        path = f
+    return path
 
 
 def open_file(path: Path) -> None:

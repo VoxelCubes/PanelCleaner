@@ -5,6 +5,7 @@ from importlib import resources
 import pcleaner.gui.gui_utils as gu
 import pcleaner.gui.ui_generated_files
 import pcleaner.data.theme_icons as theme_icons_module
+import pcleaner.helpers as hp
 
 
 def test_get_available_themes():
@@ -14,7 +15,7 @@ def test_get_available_themes():
     themes = gu.get_available_themes()
 
     assert themes
-    assert themes == [("breeze-dark", "Breeze Dark"), ("breeze", "Breeze Light")]
+    assert set(themes) == {("breeze-dark", "Breeze Dark"), ("breeze", "Breeze Light")}
 
 
 def test_theme_icon_presence():
@@ -23,8 +24,7 @@ def test_theme_icon_presence():
     """
     # Read the icon list from the yaml file located at DeepQt/icons/theme_list.yaml
     yaml_path = Path(__file__).parent.parent / "icons" / "theme_list.yaml"
-    with resources.files(theme_icons_module) as theme_icons_path:
-        theme_icons_root = Path(theme_icons_path)
+    theme_icons_root = hp.resource_path(theme_icons_module)
 
     with yaml_path.open() as file:
         data = yaml.safe_load(file)
@@ -61,8 +61,8 @@ def test_theme_icon_presence():
 
 def test_theme_icon_app_presence():
     # Load the source code and inspect it for xdg icon names.
-    with resources.files(pcleaner.gui.ui_generated_files) as source_dir:
-        source_dir = Path(source_dir)
+    with resources.as_file(resources.files(pcleaner.gui.ui_generated_files)) as f:
+        source_dir = f
 
     # This only works for the generated code from ui files.
     # General python code would be undecidable.

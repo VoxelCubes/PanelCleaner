@@ -15,7 +15,7 @@ def test_parse_good_csv():
     first_result = results[0]
     assert len(first_result.removed_box_data) == 2
     assert first_result.path == Path("img1.jpg")
-    assert first_result.removed_box_data[0][2].area == 20_000
+    assert first_result.removed_box_data[0][1].area == 20_000
 
 
 def test_parse_good_txt():

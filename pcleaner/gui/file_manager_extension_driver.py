@@ -11,6 +11,7 @@ from loguru import logger
 
 import pcleaner.gui.gui_utils as gu
 import pcleaner.data
+import pcleaner.helpers as hp
 from pcleaner.gui.ui_generated_files.ui_FileManagerIntegration import Ui_FileManagerExtension
 
 
@@ -295,15 +296,14 @@ def get_executable_target() -> list[Path]:
     """
     if getattr(sys, "frozen", False):
         # We need to fall back to the bundle.
-        with resources.files(pcleaner.data) as data_path:
-            exe = data_path / "WindowsExplorerIntegrationRegedit.exe"
-        return [exe]
+        return [hp.resource_path(pcleaner.data, "WindowsExplorerIntegrationRegedit.exe")]
 
     else:
         python_interpreter = Path(sys.executable)
-        with resources.files(pcleaner.data) as data_path:
-            script_path = data_path / "windows_explorer_integration_regedit.py"
-        return [python_interpreter, script_path]
+        return [
+            python_interpreter,
+            hp.resource_path(pcleaner.data, "windows_explorer_integration_regedit.py"),
+        ]
 
 
 def get_pcleaner_path() -> Path | None:
