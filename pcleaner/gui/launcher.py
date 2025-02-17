@@ -4,6 +4,7 @@ import platform
 import sys
 from importlib import resources
 from io import StringIO
+import logging
 
 import PySide6
 import PySide6.QtCore as Qc
@@ -37,6 +38,8 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     """
 
     cu.get_log_path().parent.mkdir(parents=True, exist_ok=True)
+
+    logging.getLogger("transformers").setLevel(logging.ERROR)
 
     # Set up file logging.
     logger.add(str(cu.get_log_path()), rotation="10 MB", retention="1 week", level="DEBUG")

@@ -121,6 +121,7 @@ import time
 from uuid import uuid4
 from multiprocessing import Pool
 from pathlib import Path
+import logging
 
 import torch
 from PIL import Image
@@ -164,6 +165,8 @@ def main() -> None:
             logger.add(sys.stdout, level="DEBUG")
         else:
             logger.add(sys.stdout, level="WARNING")
+
+    logging.getLogger("transformers").setLevel(logging.ERROR)
 
     logger.debug(args)
 
