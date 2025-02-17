@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'PostActionConfiguration.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.8.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -165,7 +165,7 @@ class Ui_PostActionConfiguration(object):
         self.tableWidget_commands.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         self.tableWidget_commands.setObjectName(u"tableWidget_commands")
         self.tableWidget_commands.setEditTriggers(QAbstractItemView.AllEditTriggers)
-        self.tableWidget_commands.setProperty("showDropIndicator", False)
+        self.tableWidget_commands.setProperty(u"showDropIndicator", False)
         self.tableWidget_commands.setDragDropOverwriteMode(False)
         self.tableWidget_commands.setAlternatingRowColors(True)
         self.tableWidget_commands.setSelectionMode(QAbstractItemView.SingleSelection)

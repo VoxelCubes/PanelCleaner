@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'OCRLanguageSupport.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.7.2
+## Created by: Qt User Interface Compiler version 6.8.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -44,7 +44,7 @@ class Ui_OCRLanguageSupport(object):
         self.lang_table.setFocusPolicy(Qt.NoFocus)
         self.lang_table.setFrameShape(QFrame.NoFrame)
         self.lang_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.lang_table.setProperty("showDropIndicator", False)
+        self.lang_table.setProperty(u"showDropIndicator", False)
         self.lang_table.setDragDropOverwriteMode(False)
         self.lang_table.setDragDropMode(QAbstractItemView.NoDragDrop)
         self.lang_table.setAlternatingRowColors(True)
