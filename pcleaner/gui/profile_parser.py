@@ -511,6 +511,8 @@ class ProfileToolBox(Qw.QToolBox):
                     label = Qw.QLabel(parent=self, text=tr(item.comment, context="Profile"))
                     label.setOpenExternalLinks(True)
                     label.setWordWrap(True)
+                    # Allow copying the text for people to use machine translation.
+                    label.setTextInteractionFlags(Qc.Qt.TextSelectableByMouse)
                     current_layout_form.addRow(label)
 
                     last_was_entry = False
