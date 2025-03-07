@@ -59,52 +59,89 @@ def model2annotations(
     :return:
     """
 
-    device = (
-        ("mps" if torch.backends.mps.is_available() else "cuda")
-        if model_path.suffix == ".pt"
-        else "cpu"
-    )
-    print(f"Using device for text detection model: {device}")
-    # Determine the number of processes to use
-    num_processes = min(config_detector.concurrent_models, len(img_list))
-    print(f"Using {num_processes} processes for text detection.")
+    if torch.backends.mps.is_available():
+        # When MPS is available, use a thread-based approach similar to the GUI
+        # This should address the MPS resource sharing issues
+        device = "mps"
+        print(f"Using MPS device for text detection with threading approach")
 
-    if num_processes > 1:
-        mp.freeze_support()
-        mp.set_start_method("spawn")
+        # Use single-process with threading model
+        print("Creating TextDetector model with MPS...")
+        model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
+        print(f"Created TextDetector with device={device}, backend={model.backend}")
 
-        with mp.Pool(num_processes) as pool:
-            # Distribute the images evenly among the processes.
-            batches = [list() for _ in range(num_processes)]
-            for i, img_path in enumerate(img_list):
-                batches[i % num_processes].append(img_path)
-
-            args = [
-                (
-                    batch,
-                    model_path,
-                    device,
+        # Process images serially (same as GUI approach)
+        for img_path in tqdm(img_list):
+            try:
+                process_image(
+                    img_path,
+                    model,
                     save_dir,
                     config_general.input_height_lower_target,
                     config_general.input_height_upper_target,
                 )
-                for batch in batches
-            ]
+            except Exception as e:
+                print(f"ERROR processing {img_path}: {e}")
+                import traceback
+                traceback.print_exc()
 
-            for _ in tqdm(pool.imap_unordered(process_image_batch, args), total=len(args)):
-                pass  # do nothing, just iterate through the results
-
+        return
     else:
-        model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
+        # For non-MPS systems, use the original multiprocessing approach
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        num_processes = min(config_detector.concurrent_models, len(img_list))
+        print(f"Using device for text detection model: {device}")
+        print(f"Using {num_processes} processes for text detection.")
 
-        for index, img_path in enumerate(tqdm(img_list)):
-            process_image(
-                img_path,
-                model,
-                save_dir,
-                config_general.input_height_lower_target,
-                config_general.input_height_upper_target,
+        if num_processes > 1:
+            mp.freeze_support()
+            mp.set_start_method("spawn")
+
+            with mp.Pool(num_processes) as pool:
+                # Distribute the images evenly among the processes.
+                batches = [list() for _ in range(num_processes)]
+                for i, img_path in enumerate(img_list):
+                    batches[i % num_processes].append(img_path)
+
+                args = [
+                    (
+                        batch,
+                        model_path,
+                        device,
+                        save_dir,
+                        config_general.input_height_lower_target,
+                        config_general.input_height_upper_target,
+                    )
+                    for batch in batches
+                ]
+
+                for _ in tqdm(pool.imap_unordered(process_image_batch, args), total=len(args)):
+                    pass  # do nothing, just iterate through the results
+
+        else:
+            # Single-process mode: create a processor and handle things sequentially
+            # For single-process mode:
+            print("DEBUG: Creating TextDetector model")
+            model = TextDetector(
+                model_path=str(model_path), input_size=1024, device=device
             )
+            print(f"DEBUG: Created TextDetector with device={device}, backend={model.backend}")
+
+            for img_path in tqdm(img_list):
+                try:
+                    print(f"DEBUG: Processing image {img_path}")
+                    process_image(
+                        img_path,
+                        model,
+                        save_dir,
+                        config_general.input_height_lower_target,
+                        config_general.input_height_upper_target,
+                    )
+                    print(f"DEBUG: Completed processing {img_path}")
+                except Exception as e:
+                    print(f"ERROR processing {img_path}: {e}")
+                    import traceback
+                    traceback.print_exc()
 
 
 def process_image_batch(args) -> None:

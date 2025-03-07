@@ -418,6 +418,8 @@ def run_cleaner(
             cli.empty_cache_dir(cache_dir)
         # Get the model file, downloading it if necessary.
         gpu = torch.cuda.is_available() or torch.backends.mps.is_available()
+        if torch.backends.mps.is_available():
+            initialize_ocr_model()
         model_path = config.get_model_path(gpu)
 
         split_images(image_paths, profile, cache_dir)
@@ -782,6 +784,8 @@ def run_ocr(
         cli.empty_cache_dir(cache_dir)
     # Get the model file, downloading it if necessary.
     gpu = torch.cuda.is_available() or torch.backends.mps.is_available()
+    if torch.backends.mps.is_available():
+        initialize_ocr_model()
     model_path = config.get_model_path(gpu)
 
     split_images(image_paths, profile, cache_dir)
@@ -1026,6 +1030,13 @@ def merge_export_splits(
             export_targets.append(merged_export_target)
 
     return export_targets
+
+
+def initialize_ocr_model():
+    # Pre-initialize OCR model to properly set up MPS environment
+    print("Pre-initializing OCR model to set up MPS environment...")
+    ocr.ocr_engines()[cfg.OCREngine.MANGAOCR].initialize_model()
+    print("OCR model initialized for MPS")
 
 
 def handle_merging_ocr_splits(
