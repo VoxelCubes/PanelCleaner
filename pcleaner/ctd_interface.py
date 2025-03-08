@@ -59,14 +59,14 @@ def model2annotations(
     :return:
     """
 
-    device = (
-        ("mps" if torch.backends.mps.is_available() else "cuda")
-        if model_path.suffix == ".pt"
-        else "cpu"
-    )
-    print(f"Using device for text detection model: {device}")
-    # Determine the number of processes to use
+
+    # For non-MPS systems, use the original multiprocessing approach
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     num_processes = min(config_detector.concurrent_models, len(img_list))
+    if torch.backends.mps.is_available():
+        device = "mps"
+        num_processes = 1  # Multiprocessing breaks the mps backend.
+    print(f"Using device for text detection model: {device}")
     print(f"Using {num_processes} processes for text detection.")
 
     if num_processes > 1:
