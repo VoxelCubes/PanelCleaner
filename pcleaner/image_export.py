@@ -137,6 +137,7 @@ def copy_to_output(
     inpainter_mask_name = tr(
         "Inpainting mask", "layered export", "Label for the inpainting step mask."
     )
+    text_mask_name = tr("Isolated text", "layered export", "Label for the isolated text mask.")
 
     if output_directory.is_absolute():
         # When absolute, the output directory is used as is.
@@ -209,9 +210,6 @@ def copy_to_output(
 
         export_single_image(final_mask, masked_out_path)
 
-    if ost.Output.isolated_text in outputs:
-        export_single_image(cache_path_gen.text, text_out_path)
-
     if ost.Output.denoised_output in outputs:
         export_single_image(
             cache_path_gen.clean_denoised,
@@ -265,6 +263,13 @@ def copy_to_output(
         final_mask.alpha_composite(inpainted_mask)
 
         export_single_image(final_mask, masked_out_path)
+
+    if ost.Output.isolated_text in outputs:
+        export_single_image(cache_path_gen.text, text_out_path)
+
+        if layered_export != LayeredExport.NONE:
+            text_image = Image.open(cache_path_gen.text).convert("RGBA")
+            add_image_layer(text_image, text_mask_name)
 
     # Handle special layering cases.
     if layered_export == LayeredExport.PSD_PER_IMAGE:
