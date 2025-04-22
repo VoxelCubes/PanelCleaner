@@ -1715,6 +1715,18 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
         request_output = self.checkBox_write_output.isChecked()
         request_review = self.checkBox_review_output.isChecked()
 
+        # Edge case: The user selected the cleaned output but not masks
+        # while having layered outputs enabled. The mask output must be
+        # enabled for the layered outputs to be cleaned, otherwise the
+        # layering was pointless.
+        if request_cleaned and not request_mask:
+            if self.config.current_profile.general.layered_export != cfg.LayeredExport.NONE:
+                request_mask = True
+                logger.warning(
+                    "User requested Cleaned Image without Mask for layered export. "
+                    "Forcing use of Mask output anyway, to not break layered export."
+                )
+
         requested_outputs = []
         review_output: ost.Output
         review_mask_output: ost.Output

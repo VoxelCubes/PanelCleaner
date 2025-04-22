@@ -655,6 +655,14 @@ def run_cleaner(
         if output in whitelist:
             whitelist.remove(output)
 
+    # Edge case: The user selected the cleaned output but not masks
+    # while having layered outputs enabled. The mask output must be
+    # enabled for the layered outputs to be cleaned, otherwise the
+    # layering was pointless.
+    if profile.general.layered_export != LayeredExport.NONE:
+        if save_only_cleaned:
+            save_only_cleaned = False
+
     if save_only_text:
         masked_outputs_whitelist = []
         cleaned_outputs_whitelist = []
