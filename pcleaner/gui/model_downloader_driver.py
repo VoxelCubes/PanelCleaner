@@ -191,6 +191,9 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.label_model_size.setText("")
         self.encountered_error = True
         gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value), worker_error)
+        gu.show_critical(
+            self, self.tr("Download Failed"), str(worker_error.value), buttons=Qw.QMessageBox.Abort
+        )
 
     @Slot(Path)
     def text_detection_result(self, model_path: Path | None) -> None:
@@ -336,6 +339,9 @@ class ModelDownloader(Qw.QDialog, Ui_ModelDownloader):
         self.label_inpaint_size.setText("")
         self.encountered_error = True
         gu.show_exception(self, self.tr("Download Failed"), str(worker_error.value), worker_error)
+        gu.show_critical(
+            self, self.tr("Download Failed"), str(worker_error.value), buttons=Qw.QMessageBox.Abort
+        )
 
     def inpainting_finished(self) -> None:
         """
