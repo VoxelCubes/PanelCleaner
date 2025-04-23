@@ -264,11 +264,15 @@ You can run OCR with:
 ```bash
 pcleaner ocr myfolder --output-path=output.txt
 ```
-This is also available in the GUI, as the OCR output option.
 
 Panel Cleaner handles Japanese OCR with [MangaOCR](https://github.com/kha-white/manga-ocr) out of the box, and that is the preferred way to OCR Japanese text.
 If available, Panel Cleaner can also use Tesseract for OCR capabilities, specifically for processing English and 
 Japanese text, the only two languages currently supported.
+
+This is also available in the GUI, as the OCR output option.
+You can review and edit the OCR output interactively there too.
+![Review](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_ocr.png) 
+
 Follow the instructions below to install Tesseract on your system.
 
 ### Installing Tesseract
@@ -303,9 +307,6 @@ For other distributions, refer to your package manager and the [official Tessera
 For detailed installation instructions and additional information, please refer to the [official Tesseract documentation](https://tesseract-ocr.github.io/tessdoc/).
 
 > Note: While Tesseract supports additional languages, Panel Cleaner will only utilize Tesseract for English and Japanese text recognition. English is installed by default. Follow the instructions here [Installing additional language packs](https://ocrmypdf.readthedocs.io/en/latest/languages.html) to install the Japanese language pack.  
-
-Review and edit the OCR output interactively.
-![Review](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_ocr.png) 
 
 ## Examples of Tricky Bubbles
 
