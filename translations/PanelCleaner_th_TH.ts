@@ -75,7 +75,7 @@
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="373"/>
       <source>Error downloading file from url: {url}</source>
-      <translation type="unfinished">Error downloading file from url: {url}</translation>
+      <translation/>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="427"/>
