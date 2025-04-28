@@ -534,7 +534,7 @@ Seiten mit Fehlern / insgesamt:
       <comment>layered export</comment>
       <translation type="unfinished">
         <numerusform>Isolated text</numerusform>
-        <numerusform>Isolated text</numerusform>
+        <numerusform>Isolierter Text</numerusform>
       </translation>
     </message>
     <message numerus="yes">
