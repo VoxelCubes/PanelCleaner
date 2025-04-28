@@ -632,12 +632,12 @@ An AI-powered tool to clean manga panels.</source>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="45"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Note: ชื่อ &quot;{name}&quot; ถูกซ่อนอยู่</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="86"/>
       <source>Failed to load log.</source>
-      <translation type="unfinished">Failed to load log.</translation>
+      <translation>ไม่สามารถโหลด log ได้</translation>
     </message>
   </context>
   <context>
@@ -645,122 +645,122 @@ An AI-powered tool to clean manga panels.</source>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
       <source>Unsupported system</source>
-      <translation type="unfinished">Unsupported system</translation>
+      <translation>ระบบไม่รองรับ</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="85"/>
       <source>This system is not supported.</source>
-      <translation type="unfinished">This system is not supported.</translation>
+      <translation>ระบบไม่รองรับ</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="88"/>
       <source>Install for Dolphin</source>
-      <translation type="unfinished">Install for Dolphin</translation>
+      <translation>การติดตั้งสำหรับ Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="89"/>
       <source>Uninstall for Dolphin</source>
-      <translation type="unfinished">Uninstall for Dolphin</translation>
+      <translation>ถอนการติดตั้ง Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="93"/>
       <source>The extension will be installed at {path}. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension will be installed at {path}. This doesn&apos;t require root permissions.</translation>
+      <translation>ส่วนขยายจะถูกติดตั้งที่ {path} การติดตั้งนี้ไม่ต้องการการอนุญาติจากผู้ดูแลระบบ</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="102"/>
       <source>The extension file will be deleted. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension file will be deleted. This doesn&apos;t require root permissions.</translation>
+      <translation>ส่วนขยายจะถูกลบออก การดำเนินการนี้ไม่ต้องการการอนุญาติจากผู้ดูแลระบบ</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="104"/>
       <source>Install for Windows Explorer</source>
-      <translation type="unfinished">Install for Windows Explorer</translation>
+      <translation>การติดตั้งสำหรับ Windows Explorer</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="105"/>
       <source>Uninstall for Windows Explorer</source>
-      <translation type="unfinished">Uninstall for Windows Explorer</translation>
+      <translation>ถอนการติดตั้งสำหรับ Windows Explorer</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="111"/>
       <source>The extension will be installed in the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be installed in the Windows registry.This requires admin permissions.</translation>
+      <translation>ส่วนขยายจะถูกติดตั้งที่ Windows registry การดำเนินการนี้ต้องการการอนุญาติจากผู้ดูแลระบบ</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="117"/>
       <source>The extension will be uninstalled from the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be uninstalled from the Windows registry.This requires admin permissions.</translation>
+      <translation>ส่วนขยายจะถูกลบออกจาก Windows registry การดำเนินการนี้ต้องการการอนุญาติจากผู้ดูแลระบบ</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="158"/>
       <source>Dolphin extension installed successfully.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.</translation>
+      <translation>ส่วนขยาย Dolphin ติดตั้งเสร็จสมบูรณ์</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="172"/>
       <source>Installation successful</source>
-      <translation type="unfinished">Installation successful</translation>
+      <translation>การติดตั้งเสร็จสมบูรณ์</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="163"/>
       <source>Dolphin extension installed successfully.
 You may need to log out and log back in (or restart) for the changes to take effect.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.
-You may need to log out and log back in (or restart) for the changes to take effect.</translation>
+      <translation>ส่วนขยาย Dolphin ติดตั้งเสร็จสมบูรณ์
+คุณอาจจำเป็นต้องเปิดโปรแกรมและเปิดใหม่ หรือ restart เครื่อง</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="178"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="202"/>
       <source>Installation failed</source>
-      <translation type="unfinished">Installation failed</translation>
+      <translation>การติดตั้งล้มเหลว</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="179"/>
       <source>Failed to install Dolphin extension.</source>
-      <translation type="unfinished">Failed to install Dolphin extension.</translation>
+      <translation>ไม่สามารถติดตั้งส่วนขยาย Dolphin ได้</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="203"/>
       <source>Failed to install Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to install Windows Explorer extension.</translation>
+      <translation>ไม่สามารถติดตั้งส่วนขยาย Windows Explorer ได้</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="224"/>
       <source>Uninstallation successful</source>
-      <translation type="unfinished">Uninstallation successful</translation>
+      <translation>ถอนการติดตั้งเสร็จสมบูรณ์</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="219"/>
       <source>Dolphin extension uninstalled successfully.</source>
-      <translation type="unfinished">Dolphin extension uninstalled successfully.</translation>
+      <translation>ถอนการติดตั้งส่วนขยาย Dolphin เสร็จสมบูรณ์</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="225"/>
       <source>Dolphin extension was not installed.</source>
-      <translation type="unfinished">Dolphin extension was not installed.</translation>
+      <translation>ส่วนขยาย Dolphin ไม่ได้ถูกติดตั้งอยู่</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="230"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="249"/>
       <source>Uninstallation failed</source>
-      <translation type="unfinished">Uninstallation failed</translation>
+      <translation>การถอนการติดตั้งล้มเหลว</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="231"/>
       <source>Failed to uninstall Dolphin extension.</source>
-      <translation type="unfinished">Failed to uninstall Dolphin extension.</translation>
+      <translation>ไม่สามารถเปิดการถอนการติดตั้ง Dolphin ได้</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="250"/>
       <source>Failed to uninstall Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to uninstall Windows Explorer extension.</translation>
+      <translation>ไม่สามารถถอนการติดตั้งส่วนขยาย Windows Explorer ได้</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="14"/>
       <source>File Manager Extension</source>
-      <translation type="unfinished">File Manager Extension</translation>
+      <translation>ส่วนขยายตัวจัดการไฟล์</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="32"/>
@@ -771,13 +771,13 @@ This feature adds a menu option to your file browser&apos;s context menu (which 
 It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
 
 By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</source>
-      <translation type="unfinished">### Add or Remove Integration with your File Browser
+      <translation>### เพิ่มหรือลบการเชื่อมต่อกับตัวจัดการไฟล์ของคุณ
 
-This feature adds a menu option to your file browser&apos;s context menu (which appears when you right-click) for folders or image files.
+ฟีเจอร์นี้จะเพิ่มตัวเลือกในเมนูคลิกขวาของตัวจัดการไฟล์ (เมนูที่แสดงเมื่อคุณคลิกขวาที่โฟลเดอร์หรือไฟล์รูปภาพ)
 
-It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
+ช่วยให้คุณสามารถใช้ Panel Cleaner ได้โดยตรงจากตัวจัดการไฟล์ โดยไม่จำเป็นต้องเปิดแอปพลิเคชันแยกต่างหาก
 
-By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</translation>
+โดยค่าเริ่มต้น ระบบจะใช้โปรไฟล์ที่มีมาให้ในตัว อย่างไรก็ตาม คุณสามารถเปลี่ยนการตั้งค่านี้ได้โดยเลือก โปรไฟล์ และจากนั้นเลือก ตั้งค่าเริ่มต้น จากแถบเมนูของแอปพลิเคชัน</translation>
     </message>
   </context>
   <context>
@@ -785,55 +785,54 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="136"/>
       <source>Original size in pixels (width × height)</source>
-      <translation type="unfinished">Original size in pixels (width × height)</translation>
+      <translation>ค่าดั้งเดิมในหน่วย pixel (กว้าง x ยาว)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="139"/>
       <source>Processing size in pixels (width × height), scale factor</source>
-      <translation type="unfinished">Processing size in pixels (width × height), scale factor</translation>
+      <translation>ขนาดของการประมวลผลในหน่วย pixel (กว้าง x ยาว)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="227"/>
       <location filename="../pcleaner/gui/file_table.py" line="235"/>
       <source>Loading Failed</source>
-      <translation type="unfinished">Loading Failed</translation>
+      <translation>ไม่สามารถโหลดได้</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="228"/>
       <source>Failed to discover images: {path}</source>
-      <translation type="unfinished">Failed to discover images: {path}</translation>
+      <translation>ไม่สามารถเข้าถึงรูป {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="236"/>
       <source>Failed to load images: {path}</source>
-      <translation type="unfinished">Failed to load images: {path}</translation>
+      <translation>ไม่สามารถโหลดรูป {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="244"/>
       <source>Unsupported TIFF files</source>
-      <translation type="unfinished">Unsupported TIFF files</translation>
+      <translation>ไม่รองรับรูปแบบ TIFF</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="246"/>
       <source>The following 5-channel TIFF files are not supported: 
 </source>
-      <translation type="unfinished">The following 5-channel TIFF files are not supported: 
-</translation>
+      <translation>ไม่รองรับรูปแบบ TIFF</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="279"/>
       <source>Duplicate file</source>
-      <translation type="unfinished">Duplicate file</translation>
+      <translation>ไฟล์ซ้ำ</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="280"/>
       <source>File &quot;{path}&quot; is already in the table.</source>
-      <translation type="unfinished">File &quot;{path}&quot; is already in the table.</translation>
+      <translation>ไฟล์ &quot;{path}&quot; อยู่ใน table อยู่แล้ว</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="283"/>
       <source>Ignore All</source>
-      <translation type="unfinished">Ignore All</translation>
+      <translation/>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="309"/>
