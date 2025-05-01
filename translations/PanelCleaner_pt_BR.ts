@@ -7,32 +7,32 @@
       <location filename="../pcleaner/config.py" line="1086"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation type="unfinished">default</translation>
+      <translation>padrão</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
       <source>Profile file {profile_path} already exists.</source>
-      <translation type="unfinished">Profile file {profile_path} already exists.</translation>
+      <translation>O Perfil {profile_path} já existe.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="106"/>
       <source>Profile {profile_name} created.</source>
-      <translation type="unfinished">Profile {profile_name} created.</translation>
+      <translation>Perfil {profile_name} criado.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="238"/>
       <source>Profile name cannot be empty.</source>
-      <translation type="unfinished">Profile name cannot be empty.</translation>
+      <translation>O nome do perfil não pode estar branco.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="240"/>
       <source>Profile name already in use.</source>
-      <translation type="unfinished">Profile name already in use.</translation>
+      <translation>Nome do perfil já em uso.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="242"/>
       <source>Profile name is reserved.</source>
-      <translation type="unfinished">Profile name is reserved.</translation>
+      <translation>O nome do perfil é reservado.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="360"/>
@@ -40,56 +40,56 @@
       <location filename="../pcleaner/gui/image_file.py" line="372"/>
       <location filename="../pcleaner/gui/image_file.py" line="385"/>
       <source>Unknown</source>
-      <translation type="unfinished">Unknown</translation>
+      <translation>Desconhecido</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="374"/>
       <source>RGB</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">RGB</translation>
+      <translation>RGB</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="376"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">CMYK</translation>
+      <translation>CMYK</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="378"/>
       <source>Grayscale</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Grayscale</translation>
+      <translation>Tons de cinza</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="380"/>
       <source>1-bit</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">1-bit</translation>
+      <translation>1 bit</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="382"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Palette</translation>
+      <translation>Paleta</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="373"/>
       <source>Error downloading file from url: {url}</source>
-      <translation type="unfinished">Error downloading file from url: {url}</translation>
+      <translation>Erro ao baixar o arquivo de URL:  {url}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="427"/>
       <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-Failed to save the file to {save_path}</translation>
+      <translation>Erro ao baixar o arquivo de (URL): {url}
+Falha ao salvar o arquivo em {save_path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="436"/>
       <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-The file content is different from expected.</translation>
+      <translation>Erro ao baixar o arquivo da (URL):  {url}
+O conteúdo do arquivo difere do esperado.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="65"/>
@@ -101,25 +101,25 @@ The file content is different from expected.</translation>
       <location filename="../pcleaner/analytics.py" line="429"/>
       <location filename="../pcleaner/analytics.py" line="572"/>
       <source>N/A</source>
-      <translation type="unfinished">N/A</translation>
+      <translation>N/A</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="78"/>
       <source>OCR Analytics</source>
-      <translation type="unfinished">OCR Analytics</translation>
+      <translation>Análise de OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="84"/>
       <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
-      <translation type="unfinished">Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
+      <translation>Número de quadrados: {num_boxes} | Número de balões pequenos: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="93"/>
       <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
-      <translation type="unfinished">Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
+      <translation>Número de quadrados removidos: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} de quadrados pequenos)
 </translation>
     </message>
     <message>
@@ -127,121 +127,117 @@ The file content is different from expected.</translation>
       <source>
 Small box sizes:
 </source>
-      <translation type="unfinished">
-Small box sizes:
+      <translation>
+Tamanhos de balões pequenos:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="108"/>
       <source>No not-removed small boxes found.
 </source>
-      <translation type="unfinished">No not-removed small boxes found.
-</translation>
+      <translation>Não foram encontrados quadrados pequenos não removidos.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="126"/>
       <source>
 Removed bubbles:
 </source>
-      <translation type="unfinished">
-Removed bubbles:
-</translation>
+      <translation>Balões limpos</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="128"/>
       <source>Page {path}: {text}
 </source>
-      <translation type="unfinished">Page {path}: {text}
+      <translation>Página {path}: {text}
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="172"/>
       <source>Small boxes</source>
-      <translation type="unfinished">Small boxes</translation>
+      <translation>Quadrados pequenos</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="174"/>
       <source>Removed boxes</source>
-      <translation type="unfinished">Removed boxes</translation>
+      <translation>Quadrados removidos</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="213"/>
       <location filename="../pcleaner/analytics.py" line="232"/>
       <location filename="../pcleaner/analytics.py" line="353"/>
       <source>Failed</source>
-      <translation type="unfinished">Failed</translation>
+      <translation>Falha</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="228"/>
       <source>Perfect</source>
-      <translation type="unfinished">Perfect</translation>
+      <translation>Perfeito</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="539"/>
       <source>Total
 </source>
-      <translation type="unfinished">Total
-</translation>
+      <translation>Total</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="311"/>
       <source>Mask Fitment Analytics</source>
-      <translation type="unfinished">Mask Fitment Analytics</translation>
+      <translation>Análise de ajuste da máscara</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="230"/>
       <source>Total</source>
-      <translation type="unfinished">Total</translation>
+      <translation>Total</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="315"/>
       <source>Total boxes</source>
-      <translation type="unfinished">Total boxes</translation>
+      <translation>Total de quadrados</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="317"/>
       <source>Masks succeeded</source>
-      <translation type="unfinished">Masks succeeded</translation>
+      <translation>Máscaras bem-sucedidas</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="319"/>
       <source>Masks failed</source>
-      <translation type="unfinished">Masks failed</translation>
+      <translation>Máscaras fracassadas</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="323"/>
       <source>Perfect masks</source>
-      <translation type="unfinished">Perfect masks</translation>
+      <translation>Máscaras perfeitas</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="325"/>
       <source>Average border deviation</source>
-      <translation type="unfinished">Average border deviation</translation>
+      <translation>Desvio médio da borda</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="327"/>
       <source>
 Mask usage by thickness (in pixels):
 </source>
-      <translation type="unfinished">
-Mask usage by thickness (in pixels):
+      <translation>
+Uso da máscara por espessura (em pixels):
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="343"/>
       <source>Mask ({thickness}px)</source>
-      <translation type="unfinished">Mask ({thickness}px)</translation>
+      <translation>Máscara ({thickness}px)</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="347"/>
       <source>Box mask</source>
-      <translation type="unfinished">Box mask</translation>
+      <translation>Máscara de quadrado</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="366"/>
       <source>All bubbles were successfully masked.
 </source>
-      <translation type="unfinished">All bubbles were successfully masked.
+      <translation>Todos os balões foram mascarados com sucesso.
 </translation>
     </message>
     <message>
@@ -249,58 +245,58 @@ Mask usage by thickness (in pixels):
       <source>
 Pages with failures / total:
 </source>
-      <translation type="unfinished">
-Pages with failures / total:
+      <translation>
+Páginas com falhas / total:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="408"/>
       <source>Denoising Analytics</source>
-      <translation type="unfinished">Denoising Analytics</translation>
+      <translation>Análise de tratamento (Denoise)</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="431"/>
       <source>Total masks</source>
-      <translation type="unfinished">Total masks</translation>
+      <translation>Total de máscaras</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="433"/>
       <source>Masks denoised</source>
-      <translation type="unfinished">Masks denoised</translation>
+      <translation>Máscaras sem ruído</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="437"/>
       <source>Minimum deviation to denoise</source>
-      <translation type="unfinished">Minimum deviation to denoise</translation>
+      <translation>Desvio mínimo para tratar (Denoise)</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="439"/>
       <source>Maximum allowed deviation</source>
-      <translation type="unfinished">Maximum allowed deviation</translation>
+      <translation>Desvio máximo permitido</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="441"/>
       <source>Standard deviation around masks:
 
 </source>
-      <translation type="unfinished">Standard deviation around masks:
+      <translation>Desvio padrão em torno das máscaras:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="538"/>
       <source>Denoised</source>
-      <translation type="unfinished">Denoised</translation>
+      <translation>Tratado (Denoised)</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="561"/>
       <source>Inpainting Analytics</source>
-      <translation type="unfinished">Inpainting Analytics</translation>
+      <translation>Análise de Inpainting</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="574"/>
       <source>Inpainting performed</source>
-      <translation type="unfinished">Inpainting performed</translation>
+      <translation>Inpaint feita</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="576"/>
@@ -322,192 +318,192 @@ Pages with failures / total:
       <source>Outline thickness around text inpainted:
 
 </source>
-      <translation type="unfinished">Outline thickness around text inpainted:
+      <translation>Espessura do traçado ao redor do texto inpainted:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="651"/>
       <source>Inpainted</source>
-      <translation type="unfinished">Inpainted</translation>
+      <translation>Inpainted</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
       <source>File Error</source>
-      <translation type="unfinished">File Error</translation>
+      <translation>Erro de arquivo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
       <source>Failed to open file.</source>
-      <translation type="unfinished">Failed to open file.</translation>
+      <translation>Falha ao abrir o arquivo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
       <source>Failed to access the file.</source>
-      <translation type="unfinished">Failed to access the file.</translation>
+      <translation>Falha ao acessar o arquivo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
       <source>An error occurred.</source>
-      <translation type="unfinished">An error occurred.</translation>
+      <translation>Ocorreu um erro.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
       <source>The CSV file format requires exactly 6 columns.</source>
-      <translation type="unfinished">The CSV file format requires exactly 6 columns.</translation>
+      <translation>O formato de arquivo CSV requer exatamente 6 colunas.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
       <source>The coordinates must be integers.</source>
-      <translation type="unfinished">The coordinates must be integers.</translation>
+      <translation>As coordenadas devem ser inteiras.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
       <source>The box coordinates may not exceed 2 billion.</source>
-      <translation type="unfinished">The box coordinates may not exceed 2 billion.</translation>
+      <translation>As coordenadas de quadrado não podem exceder 2 bilhões.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
       <source>The file format was not recognized.</source>
-      <translation type="unfinished">The file format was not recognized.</translation>
+      <translation>O formato do arquivo não foi reconhecido.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="525"/>
       <source>The CSV file must start with a header row, followed by data rows.</source>
-      <translation type="unfinished">The CSV file must start with a header row, followed by data rows.</translation>
+      <translation>O arquivo CSV deve começar com uma linha de cabeçalho, seguida pelas linhas de dados.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
       <source>The file path is missing.</source>
-      <translation type="unfinished">The file path is missing.</translation>
+      <translation>O caminho do arquivo está ausente.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="527"/>
       <source>The file path is invalid.</source>
-      <translation type="unfinished">The file path is invalid.</translation>
+      <translation>O caminho do arquivo é inválido.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="545"/>
       <source>OCR Parse Errors</source>
-      <translation type="unfinished">OCR Parse Errors</translation>
+      <translation>Erros de análise de OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="591"/>
       <source>Multiple analytics match the image: {path}</source>
-      <translation type="unfinished">Multiple analytics match the image: {path}</translation>
+      <translation>Várias análises correspondem à imagem: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="595"/>
       <source>Multiple images match the file path: {path}</source>
-      <translation type="unfinished">Multiple images match the file path: {path}</translation>
+      <translation>Várias imagens correspondem ao caminho do arquivo: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="617"/>
       <source>Error, no version found.</source>
-      <translation type="unfinished">Error, no version found.</translation>
+      <translation>Erro, nenhuma versão encontrada.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="630"/>
       <source>CUDA Error</source>
-      <translation type="unfinished">CUDA Error</translation>
+      <translation>Erro CUDA</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="641"/>
       <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;Sua GPU não é compatível com as operações CUDA necessárias.&lt;br&gt;&lt;br&gt;Tente desinstalar as versões atuais do torch e do torchvision e instalar a versão da CPU (ou uma versão CUDA diferente).&lt;br&gt;Você pode encontrar mais instruções aqui: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Verifique a seção &quot;Compute Platform&quot; para ver as versões disponíveis.&lt;br&gt;&lt;br&gt;Sua versão atual do CUDA é: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="514"/>
       <source>Inpainting model not found.</source>
-      <translation type="unfinished">Inpainting model not found.</translation>
+      <translation>Modelo de pintura não encontrado.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>filename</source>
-      <translation type="unfinished">filename</translation>
+      <translation>nome do arquivo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>startx</source>
-      <translation type="unfinished">startx</translation>
+      <translation>startx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>starty</source>
-      <translation type="unfinished">starty</translation>
+      <translation>starty</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>endx</source>
-      <translation type="unfinished">endx</translation>
+      <translation>endx</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>endy</source>
-      <translation type="unfinished">endy</translation>
+      <translation>endy</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>text</source>
-      <translation type="unfinished">text</translation>
+      <translation>texto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1954"/>
       <location filename="../pcleaner/gui/processing.py" line="930"/>
       <source>Saved detected text to {output_file}</source>
-      <translation type="unfinished">Saved detected text to {output_file}</translation>
+      <translation>Texto detectado salvo em {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1958"/>
       <location filename="../pcleaner/gui/processing.py" line="934"/>
       <source>Failed to write detected text to {output_file}</source>
-      <translation type="unfinished">Failed to write detected text to {output_file}</translation>
+      <translation>Falha ao gravar o texto detectado em {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1962"/>
       <location filename="../pcleaner/gui/processing.py" line="937"/>
       <source>Save Failed</source>
-      <translation type="unfinished">Save Failed</translation>
+      <translation>Falha ao salvar</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1963"/>
       <location filename="../pcleaner/gui/processing.py" line="937"/>
       <source>Failed to write detected text to file.</source>
-      <translation type="unfinished">Failed to write detected text to file.</translation>
+      <translation>Falha ao gravar o texto detectado no arquivo.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="495"/>
       <source>Inpainter (experimental)</source>
-      <translation type="unfinished">Inpainter (experimental)</translation>
+      <translation>Inpainter (experimental)</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="106"/>
       <source>Invalid type for img_paths: {paths}</source>
-      <translation type="unfinished">Invalid type for img_paths: {paths}</translation>
+      <translation>Tipo inválido para img_paths: {paths}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="115"/>
       <source>Unsupported image format: {suffix} for {path}</source>
-      <translation type="unfinished">Unsupported image format: {suffix} for {path}</translation>
+      <translation>Formato de imagem não suportado: {suffix} para {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="121"/>
       <source>Image path {img_path} does not exist.</source>
-      <translation type="unfinished">Image path {img_path} does not exist.</translation>
+      <translation>O caminho da imagem {img_path} não existe.</translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="135"/>
       <source>Clean mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Clean mask</numerusform>
-        <numerusform>Clean mask</numerusform>
+      <translation>
+        <numerusform>Máscara limpa</numerusform>
+        <numerusform>Máscara limpa</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -515,7 +511,7 @@ Pages with failures / total:
       <source>Denoised mask</source>
       <comment>layered export</comment>
       <translation type="unfinished">
-        <numerusform>Denoised mask</numerusform>
+        <numerusform>Máscara Tratada (Denoised)</numerusform>
         <numerusform>Denoised mask</numerusform>
       </translation>
     </message>
@@ -524,7 +520,7 @@ Pages with failures / total:
       <source>Inpainting mask</source>
       <comment>layered export</comment>
       <translation type="unfinished">
-        <numerusform>Inpainting mask</numerusform>
+        <numerusform>Máscara de Inpaiting</numerusform>
         <numerusform>Inpainting mask</numerusform>
       </translation>
     </message>
@@ -533,7 +529,7 @@ Pages with failures / total:
       <source>Isolated text</source>
       <comment>layered export</comment>
       <translation type="unfinished">
-        <numerusform>Isolated text</numerusform>
+        <numerusform>Texto isolado</numerusform>
         <numerusform>Isolated text</numerusform>
       </translation>
     </message>
@@ -542,34 +538,34 @@ Pages with failures / total:
       <source>Page</source>
       <comment>layered export</comment>
       <translation type="unfinished">
-        <numerusform>Page</numerusform>
+        <numerusform>Página</numerusform>
         <numerusform>Page</numerusform>
       </translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="108"/>
       <source>%id</source>
-      <translation type="unfinished">%id</translation>
+      <translation>%id</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="109"/>
       <source>%i</source>
-      <translation type="unfinished">%i</translation>
+      <translation>%i</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="110"/>
       <source>%od</source>
-      <translation type="unfinished">%od</translation>
+      <translation>%od</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="111"/>
       <source>%o</source>
-      <translation type="unfinished">%o</translation>
+      <translation>%o</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="112"/>
       <source>%p</source>
-      <translation type="unfinished">%p</translation>
+      <translation>%p</translation>
     </message>
   </context>
   <context>
@@ -577,31 +573,31 @@ Pages with failures / total:
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>Sobre o Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="81"/>
       <source># Panel Cleaner
 
 An AI-powered tool to clean manga panels.</source>
-      <translation type="unfinished"># Panel Cleaner
+      <translation># Panel Cleaner
 
-An AI-powered tool to clean manga panels.</translation>
+Uma ferramenta com tecnologia de IA para limpar painéis de mangá.</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="98"/>
       <source>Version:</source>
-      <translation type="unfinished">Version:</translation>
+      <translation>Versão:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="112"/>
       <source>Author:</source>
-      <translation type="unfinished">Author:</translation>
+      <translation>Autor:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="150"/>
       <source>Toolkit:</source>
-      <translation type="unfinished">Toolkit:</translation>
+      <translation>Kit de ferramentas:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="164"/>
@@ -619,7 +615,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CTextEdit.py" line="17"/>
       <source>Clear</source>
-      <translation type="unfinished">Clear</translation>
+      <translation>Limpo</translation>
     </message>
   </context>
   <context>
@@ -627,7 +623,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="38"/>
       <source>Select Color</source>
-      <translation type="unfinished">Select Color</translation>
+      <translation>Selecionar cor</translation>
     </message>
   </context>
   <context>
@@ -635,32 +631,32 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="102"/>
       <source>Copy to Clipboard</source>
-      <translation type="unfinished">Copy to Clipboard</translation>
+      <translation>Copiar para a área de transferência</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="113"/>
       <source>Open Issue Tracker</source>
-      <translation type="unfinished">Open Issue Tracker</translation>
+      <translation>Abrir o rastreador de problemas</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="124"/>
       <source>Terminate Panel Cleaner</source>
-      <translation type="unfinished">Terminate Panel Cleaner</translation>
+      <translation>Encerrando Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="134"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Fechar</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="45"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>Observação: O nome &quot;{name}&quot; estava oculto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="86"/>
       <source>Failed to load log.</source>
-      <translation type="unfinished">Failed to load log.</translation>
+      <translation>Falha ao carregar o registro.</translation>
     </message>
   </context>
   <context>
@@ -668,122 +664,122 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
       <source>Unsupported system</source>
-      <translation type="unfinished">Unsupported system</translation>
+      <translation>Sistema não suportado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="85"/>
       <source>This system is not supported.</source>
-      <translation type="unfinished">This system is not supported.</translation>
+      <translation>Esse sistema não é compatível.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="88"/>
       <source>Install for Dolphin</source>
-      <translation type="unfinished">Install for Dolphin</translation>
+      <translation>Instalar para o Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="89"/>
       <source>Uninstall for Dolphin</source>
-      <translation type="unfinished">Uninstall for Dolphin</translation>
+      <translation>Desinstalação do Dolphin</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="93"/>
       <source>The extension will be installed at {path}. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension will be installed at {path}. This doesn&apos;t require root permissions.</translation>
+      <translation>A extensão será instalada em {path}. Isso não requer&apos;permissões de administrador.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="102"/>
       <source>The extension file will be deleted. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension file will be deleted. This doesn&apos;t require root permissions.</translation>
+      <translation>O arquivo de extensão será excluído. Isso não requer&apos;permissões de administrador.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="104"/>
       <source>Install for Windows Explorer</source>
-      <translation type="unfinished">Install for Windows Explorer</translation>
+      <translation>Instalar para o Windows Explorer</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="105"/>
       <source>Uninstall for Windows Explorer</source>
-      <translation type="unfinished">Uninstall for Windows Explorer</translation>
+      <translation>Desinstalar para Windows Explorer</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="111"/>
       <source>The extension will be installed in the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be installed in the Windows registry.This requires admin permissions.</translation>
+      <translation>A extensão será instalada no registro do Windows, o que requer permissões de administrador.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="117"/>
       <source>The extension will be uninstalled from the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be uninstalled from the Windows registry.This requires admin permissions.</translation>
+      <translation>A extensão será desinstalada do registro do Windows, o que requer permissões de administrador.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="158"/>
       <source>Dolphin extension installed successfully.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.</translation>
+      <translation>Extensão do Dolphin instalada com sucesso.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="172"/>
       <source>Installation successful</source>
-      <translation type="unfinished">Installation successful</translation>
+      <translation>Instalação bem-sucedida</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="163"/>
       <source>Dolphin extension installed successfully.
 You may need to log out and log back in (or restart) for the changes to take effect.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.
-You may need to log out and log back in (or restart) for the changes to take effect.</translation>
+      <translation>A extensão do Dolphin foi instalada com sucesso.
+Talvez seja necessário fazer logout e login novamente (ou reiniciar) para que as alterações tenham efeito.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="178"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="202"/>
       <source>Installation failed</source>
-      <translation type="unfinished">Installation failed</translation>
+      <translation>Falha na instalação</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="179"/>
       <source>Failed to install Dolphin extension.</source>
-      <translation type="unfinished">Failed to install Dolphin extension.</translation>
+      <translation>Falha ao instalar a extensão do Dolphin.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="203"/>
       <source>Failed to install Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to install Windows Explorer extension.</translation>
+      <translation>Falha ao instalar a extensão do Windows Explorer.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="224"/>
       <source>Uninstallation successful</source>
-      <translation type="unfinished">Uninstallation successful</translation>
+      <translation>Desinstalação bem-sucedida</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="219"/>
       <source>Dolphin extension uninstalled successfully.</source>
-      <translation type="unfinished">Dolphin extension uninstalled successfully.</translation>
+      <translation>Extensão do Dolphin desinstalada com sucesso.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="225"/>
       <source>Dolphin extension was not installed.</source>
-      <translation type="unfinished">Dolphin extension was not installed.</translation>
+      <translation>A extensão do Dolphin não foi instalada.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="230"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="249"/>
       <source>Uninstallation failed</source>
-      <translation type="unfinished">Uninstallation failed</translation>
+      <translation>Falha na desinstalação</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="231"/>
       <source>Failed to uninstall Dolphin extension.</source>
-      <translation type="unfinished">Failed to uninstall Dolphin extension.</translation>
+      <translation>Falha ao desinstalar a extensão do Dolphin.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="250"/>
       <source>Failed to uninstall Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to uninstall Windows Explorer extension.</translation>
+      <translation>Falha ao desinstalar a extensão do Windows Explorer.</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="14"/>
       <source>File Manager Extension</source>
-      <translation type="unfinished">File Manager Extension</translation>
+      <translation>Extensão do gerenciador de arquivos</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="32"/>
@@ -794,13 +790,13 @@ This feature adds a menu option to your file browser&apos;s context menu (which 
 It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
 
 By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</source>
-      <translation type="unfinished">### Add or Remove Integration with your File Browser
+      <translation>&apos;### Adicionar ou remover a integração com o Windows Explorer
 
-This feature adds a menu option to your file browser&apos;s context menu (which appears when you right-click) for folders or image files.
+Esse recurso adiciona uma opção no menu de contexto do navegador de arquivos (que aparece quando você clica com o botão direito do mouse) para pastas ou arquivos de imagem.
 
-It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
+Ele permite que você use o Panel Cleaner diretamente do navegador de arquivos, eliminando a necessidade de abrir o aplicativo separadamente.
 
-By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</translation>
+Por padrão, ele usa o perfil incorporado. Entretanto, você pode alterar essa configuração padrão escolhendo **Perfil** e, em seguida, **Definir Padrão** na barra de menus do aplicativo&apos;s.</translation>
     </message>
   </context>
   <context>
@@ -808,95 +804,95 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="136"/>
       <source>Original size in pixels (width × height)</source>
-      <translation type="unfinished">Original size in pixels (width × height)</translation>
+      <translation>Tamanho original em pixels (largura × altura)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="139"/>
       <source>Processing size in pixels (width × height), scale factor</source>
-      <translation type="unfinished">Processing size in pixels (width × height), scale factor</translation>
+      <translation>Tamanho do processamento em pixels (largura × altura), fator de escala</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="227"/>
       <location filename="../pcleaner/gui/file_table.py" line="235"/>
       <source>Loading Failed</source>
-      <translation type="unfinished">Loading Failed</translation>
+      <translation>Falha no carregamento</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="228"/>
       <source>Failed to discover images: {path}</source>
-      <translation type="unfinished">Failed to discover images: {path}</translation>
+      <translation>Falha ao descobrir imagens: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="236"/>
       <source>Failed to load images: {path}</source>
-      <translation type="unfinished">Failed to load images: {path}</translation>
+      <translation>Falha ao carregar imagens: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="244"/>
       <source>Unsupported TIFF files</source>
-      <translation type="unfinished">Unsupported TIFF files</translation>
+      <translation>Arquivos TIFF não suportados</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="246"/>
       <source>The following 5-channel TIFF files are not supported: 
 </source>
-      <translation type="unfinished">The following 5-channel TIFF files are not supported: 
+      <translation>Os seguintes arquivos TIFF de 5 canais não são compatíveis: 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="279"/>
       <source>Duplicate file</source>
-      <translation type="unfinished">Duplicate file</translation>
+      <translation>Arquivo duplicado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="280"/>
       <source>File &quot;{path}&quot; is already in the table.</source>
-      <translation type="unfinished">File &quot;{path}&quot; is already in the table.</translation>
+      <translation>O arquivo &quot;{path}&quot; já está na tabela.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="283"/>
       <source>Ignore All</source>
-      <translation type="unfinished">Ignore All</translation>
+      <translation>Ignorar tudo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="309"/>
       <source>split</source>
-      <translation type="unfinished">split</translation>
+      <translation>dividir</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="470"/>
       <source>Number of boxes removed by the OCR model / total boxes</source>
-      <translation type="unfinished">Number of boxes removed by the OCR model / total boxes</translation>
+      <translation>Número de balões removidos pelo modelo OCR / total de balões</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="474"/>
       <source>Number of boxes that failed to generate a mask / total boxes</source>
-      <translation type="unfinished">Number of boxes that failed to generate a mask / total boxes</translation>
+      <translation>Número de balões que não conseguiram gerar uma máscara / total de balões</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="476"/>
       <source>Number of boxes that were perfectly masked / total boxes</source>
-      <translation type="unfinished">Number of boxes that were perfectly masked / total boxes</translation>
+      <translation>Número de balões que foram perfeitamente mascarados / total de balões</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="478"/>
       <source>Number of boxes that were denoised / total boxes</source>
-      <translation type="unfinished">Number of boxes that were denoised / total boxes</translation>
+      <translation>Número de balões que foram tratados (denoise)/ total de balões</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="480"/>
       <source>Number of boxes that were inpainted</source>
-      <translation type="unfinished">Number of boxes that were inpainted</translation>
+      <translation>Número de balões que passaram por Inpaint</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="519"/>
       <source>Image not loaded</source>
-      <translation type="unfinished">Image not loaded</translation>
+      <translation>Imagem não carregada</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="520"/>
       <source>Please wait until the image has loaded.</source>
-      <translation type="unfinished">Please wait until the image has loaded.</translation>
+      <translation>Aguarde até que a imagem seja carregada.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="538"/>
@@ -906,47 +902,47 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="549"/>
       <source>Remove from list</source>
-      <translation type="unfinished">Remove from list</translation>
+      <translation>Remover da lista</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="557"/>
       <source>Remove all files from list</source>
-      <translation type="unfinished">Remove all files from list</translation>
+      <translation>Remover todos os arquivos da lista</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="730"/>
       <source>Failed to load image</source>
-      <translation type="unfinished">Failed to load image</translation>
+      <translation>Falha ao carregar a imagem</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="731"/>
       <source>Failed to load image {file_path}.</source>
-      <translation type="unfinished">Failed to load image {file_path}.</translation>
+      <translation>Falha ao carregar a imagem {file_path}.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="740"/>
       <source>Failed to dispatch image.</source>
-      <translation type="unfinished">Failed to dispatch image.</translation>
+      <translation>Falha ao enviar a imagem.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="740"/>
       <source>Dispatch Failed</source>
-      <translation type="unfinished">Dispatch Failed</translation>
+      <translation>Envio Falhou</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="749"/>
       <source>Select files</source>
-      <translation type="unfinished">Select files</translation>
+      <translation>Selecionar arquivos</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="750"/>
       <source>Images</source>
-      <translation type="unfinished">Images</translation>
+      <translation>Imagens</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="771"/>
       <source>Select directory</source>
-      <translation type="unfinished">Select directory</translation>
+      <translation>Selecione o diretório</translation>
     </message>
   </context>
   <context>
@@ -954,42 +950,42 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="134"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Ampliar</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="151"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Reduzir o zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="168"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Redefinir o zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="185"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Ajustar à tela</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="205"/>
       <source>Refresh</source>
-      <translation type="unfinished">Refresh</translation>
+      <translation>Atualizar</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="289"/>
       <source>Generating...</source>
-      <translation type="unfinished">Generating...</translation>
+      <translation>Gerando...</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="338"/>
       <source>Position:</source>
-      <translation type="unfinished">Position:</translation>
+      <translation>Posição:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="359"/>
       <source>Size:</source>
-      <translation type="unfinished">Size:</translation>
+      <translation>Tamanho:</translation>
     </message>
   </context>
   <context>
@@ -997,28 +993,28 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="167"/>
       <source>Copy Image to Clipboard</source>
-      <translation type="unfinished">Copy Image to Clipboard</translation>
+      <translation>Copiar imagem para a área de transferência</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="173"/>
       <location filename="../pcleaner/gui/image_details_driver.py" line="550"/>
       <source>Export Image</source>
-      <translation type="unfinished">Export Image</translation>
+      <translation>Exportar imagem</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="179"/>
       <source>OCR Image</source>
-      <translation type="unfinished">OCR Image</translation>
+      <translation>Imagem OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="411"/>
       <source>Loading Error</source>
-      <translation type="unfinished">Loading Error</translation>
+      <translation>Erro de carregamento</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="412"/>
       <source>Failed to load image &apos;{path}&apos;</source>
-      <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
+      <translation>Falha ao carregar a imagem &apos;{path}&apos;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="417"/>
@@ -2039,7 +2035,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="557"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view or the Output Review, if enabled. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view or the Output Review, if enabled. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quando marcada, as saídas são salvas no disco. Caso contrário, você só poderá visualizá-las na exibição de detalhes da imagem ou na Revisão de saída, se ativada. &lt;/p&gt;&lt;p&gt;Se o perfil permanecer inalterado após a limpeza sem essa opção ativada, você poderá exportá-lo rapidamente executando o limpador novamente com essa opção ativada.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="713"/>
@@ -2292,32 +2288,32 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OcrReview.ui" line="304"/>
       <source>Original</source>
-      <translation type="unfinished">Original</translation>
+      <translation>Original</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="319"/>
       <source>Move box order up</source>
-      <translation type="unfinished">Move box order up</translation>
+      <translation>Mover a ordem dos balões para cima</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="336"/>
       <source>Move box order down</source>
-      <translation type="unfinished">Move box order down</translation>
+      <translation>Mover a ordem dos balões para baixo</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="353"/>
       <source>Add a new box</source>
-      <translation type="unfinished">Add a new box</translation>
+      <translation>Adicionar um novo balão</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="369"/>
       <source>Delete current box</source>
-      <translation type="unfinished">Delete current box</translation>
+      <translation>Excluir balão atual</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="386"/>
       <source>Recover this deleted box</source>
-      <translation type="unfinished">Recover this deleted box</translation>
+      <translation>Recuperar balão excluído</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="399"/>
