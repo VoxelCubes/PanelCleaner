@@ -305,7 +305,7 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/analytics.py" line="576"/>
       <source>Average thickness</source>
-      <translation type="unfinished">Average thickness</translation>
+      <translation>Espessura média</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="580"/>
