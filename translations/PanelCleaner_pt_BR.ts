@@ -310,7 +310,7 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/analytics.py" line="580"/>
       <source>Minimum thickness</source>
-      <translation type="unfinished">Minimum thickness</translation>
+      <translation>Espessura mínima</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="582"/>
@@ -606,7 +606,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../ui_files/About.ui" line="164"/>
       <source>License:</source>
-      <translation type="unfinished">License:</translation>
+      <translation>Licença:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="181"/>
