@@ -3732,296 +3732,296 @@ Verde: balões iniciais. Vermelho: balões estendidos. Roxo: balões mesclados (
       <location filename="profile_strings.py" line="296"/>
       <source>Arabic</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Arabic</translation>
+      <translation>Árabe</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="298"/>
       <source>Azerbaijani</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Azerbaijani</translation>
+      <translation>Azerbaijão</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="300"/>
       <source>Azerbaijani - Cyrilic</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Azerbaijani - Cyrilic</translation>
+      <translation>Azerbaijão - cirílico</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="302"/>
       <source>Bengali</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Bengali</translation>
+      <translation>Bengalês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="304"/>
       <source>Bulgarian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Bulgarian</translation>
+      <translation>Búlgaro</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="306"/>
       <source>Burmese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Burmese</translation>
+      <translation>Birmanês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="308"/>
       <source>Catalan; Valencian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Catalan; Valencian</translation>
+      <translation>Catalão; Valenciano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="310"/>
       <source>Croatian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Croatian</translation>
+      <translation>Croata</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="312"/>
       <source>Czech</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Czech</translation>
+      <translation>Tcheco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="314"/>
       <source>Danish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Danish</translation>
+      <translation>Dinamarquês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="316"/>
       <source>Dutch; Flemish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Dutch; Flemish</translation>
+      <translation>Holandês; flamengo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="318"/>
       <source>Esperanto</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Esperanto</translation>
+      <translation>Esperanto</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="320"/>
       <source>Estonian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Estonian</translation>
+      <translation>Estoniano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="322"/>
       <source>Finnish</source>
       <oldsource>Filipino</oldsource>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Finnish</translation>
+      <translation>Finlandês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="324"/>
       <source>French</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">French</translation>
+      <translation>Francês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="326"/>
       <source>Georgian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Georgian</translation>
+      <translation>Georgiano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="328"/>
       <source>German</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">German</translation>
+      <translation>Alemão</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="330"/>
       <source>Greek</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Greek</translation>
+      <translation>Grego</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="332"/>
       <source>Hebrew</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hebrew</translation>
+      <translation>Hebraico</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="334"/>
       <source>Hindi</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hindi</translation>
+      <translation>Hindi (हिन्दी)</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="336"/>
       <source>Hungarian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hungarian</translation>
+      <translation>Húngaro</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="338"/>
       <source>Indonesian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Indonesian</translation>
+      <translation>Indonésio</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="340"/>
       <source>Italian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Italian</translation>
+      <translation>Italiano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="342"/>
       <source>Kazakh</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Kazakh</translation>
+      <translation>Cazaquistão</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="344"/>
       <source>Latin</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Latin</translation>
+      <translation>Latim</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="346"/>
       <source>Lithuanian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Lithuanian</translation>
+      <translation>Lituanês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="348"/>
       <source>Luxembourgish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Luxembourgish</translation>
+      <translation>Luxemburguês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="350"/>
       <source>Malay</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Malay</translation>
+      <translation>Malaio</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="352"/>
       <source>Mongolian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Mongolian</translation>
+      <translation>Mongol</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="354"/>
       <source>Nepali</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Nepali</translation>
+      <translation>Nepalês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="356"/>
       <source>Norwegian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Norwegian</translation>
+      <translation>Norueguês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="358"/>
       <source>Persian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Persian</translation>
+      <translation>Persa (فارسی)</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="360"/>
       <source>Polish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Polish</translation>
+      <translation>Polonês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="362"/>
       <source>Portuguese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Portuguese</translation>
+      <translation>Português</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="364"/>
       <source>Romanian; Moldavian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Romanian; Moldavian</translation>
+      <translation>Romeno; moldavo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="366"/>
       <source>Russian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Russian</translation>
+      <translation>Russo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="368"/>
       <source>Serbian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Serbian</translation>
+      <translation>Sérvio</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="370"/>
       <source>Serbian - Latin</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Serbian - Latin</translation>
+      <translation>Sérvio - Latim</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="372"/>
       <source>Slovak</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Slovak</translation>
+      <translation>Eslovaco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="374"/>
       <source>Slovenian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Slovenian</translation>
+      <translation>Esloveno</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="376"/>
       <source>Spanish; Castilian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Spanish; Castilian</translation>
+      <translation>Espanhol; Castelhano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="378"/>
       <source>Swedish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Swedish</translation>
+      <translation>Sueco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="380"/>
       <source>Tagalog</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Tagalog</translation>
+      <translation>Tagalog</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="382"/>
       <source>Tamil</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Tamil</translation>
+      <translation>Tâmil</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="384"/>
       <source>Telugu</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Telugu</translation>
+      <translation>Telugu</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="386"/>
       <source>Thai</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Thai</translation>
+      <translation>Tailandês</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="388"/>
       <source>Turkish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Turkish</translation>
+      <translation>Turco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="390"/>
       <source>Ukrainian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Ukrainian</translation>
+      <translation>Ucraniano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="392"/>
       <source>Vietnamese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Vietnamese</translation>
+      <translation>Vietnamita</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="176"/>
@@ -4039,79 +4039,79 @@ Verde: balões iniciais. Vermelho: balões estendidos. Roxo: balões mesclados (
       <location filename="profile_strings.py" line="188"/>
       <source>Color to use for the debug mask.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Color to use for the debug mask.</translation>
+      <translation>Cor a ser usada para a máscara de depuração.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="190"/>
       <source>Debug Mask Color</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Debug Mask Color</translation>
+      <translation>Cor da máscara de depuração</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="192"/>
       <source>Denoiser</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">Denoiser</translation>
+      <translation>Denoiser</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="194"/>
       <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</translation>
+      <translation>Quando um  texto é difícil de mascarar, a etapa de limpeza provavelmente teve que escolher uma máscara pequena, o que deixa muitos artefatos de jpeg para trás, se eles estavam ao redor do texto.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="196"/>
       <source>This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">This means that the color of pixels around the edge of a mask isn&apos;t uniform, which is quantified as a standard deviation. The denoiser can target masks with a minimum standard deviation and denoise the area right around the mask. This preserves details in the rest of the image, but removes artifacts right around where the text used to be.</translation>
+      <translation>&apos;Isso significa que a cor dos pixels ao redor da borda de uma máscara não é uniforme, o que é quantificado como um desvio padrão. O denoiser pode direcionar as máscaras com um desvio padrão mínimo e fazer o denoise da área ao redor da máscara. Isso preserva os detalhes no restante da imagem, mas remove os artefatos ao redor do local onde o texto costumava estar.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="198"/>
       <source>Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Since this is an optional step and may even be superfluous for high-resolution images that  don&apos;t suffer from jpeg-artifacts, it can be disabled here. Set to False to disable denoising.</translation>
+      <translation>Como essa etapa é opcional e pode até ser supérflua para imagens de alta resolução que não&apos;sofrem com artefatos jpeg, ela pode ser desativada aqui. Defina como Falso para desativar a redução de ruído.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="200"/>
       <source>Denoising Enabled</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Denoising Enabled</translation>
+      <translation>Denoising ativado</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="206"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform denoising on the region around the mask.</translation>
+      <translation>O desvio padrão mínimo de cores ao redor da borda de uma determinada máscara para realizar a redução de ruído na região ao redor da máscara.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="208"/>
       <source>Noise Min Standard Deviation</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Noise Min Standard Deviation</translation>
+      <translation>Ruído Desvio padrão mínimo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="210"/>
       <source>Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this, after which this mask is handed off to the inpainter.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Note: If inpainting is enabled, the inpainting min std deviation will act as a maximum for this, after which this mask is handed off to the inpainter.</translation>
+      <translation>Observação: Se Inpainting estiver ativado, o desvio padrão mínimo da pintura funcionará como um máximo para isso, após o qual essa máscara será entregue ao Inpainter.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="212"/>
       <source>The thickness of an outline to denoise around a mask.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">The thickness of an outline to denoise around a mask.</translation>
+      <translation>A espessura de um contorno a ser eliminado em torno de uma máscara.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="214"/>
       <source>Noise Outline Size</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Noise Outline Size</translation>
+      <translation>Tamanho do contorno do ruído</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="216"/>
       <source>Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</source>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Fade the edges of the denoised cover mask by this amount to smoothly blend the denoised parts into the rest of the image.</translation>
+      <translation>Suavize as bordas da máscara  com redução de ruído nessa quantidade para mesclar suavemente as partes com redução de ruído com o restante da imagem.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="218"/>
