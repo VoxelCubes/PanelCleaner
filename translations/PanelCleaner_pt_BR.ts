@@ -311,7 +311,7 @@ Páginas com falhas / total:
     <message>
       <location filename="../pcleaner/analytics.py" line="582"/>
       <source>Maximum thickness</source>
-      <translation type="unfinished">Maximum thickness</translation>
+      <translation>Espessura máxima</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="584"/>
@@ -1246,7 +1246,7 @@ Ative a pintura nas configurações do perfil e tente novamente.</translation>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="100"/>
       <source>Errors</source>
-      <translation type="unfinished">Errors</translation>
+      <translation>Erros</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="105"/>
@@ -1522,7 +1522,7 @@ A troca de perfis descartará as alterações feitas no perfil atual.</translati
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1459"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1619"/>
       <source>Load Error</source>
-      <translation type="unfinished">Load Error</translation>
+      <translation>Erro ao carregar</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1459"/>
@@ -2323,27 +2323,27 @@ Consulte a documentação on-line para saber como adicionar suporte a mais idiom
     <message>
       <location filename="../ui_files/OcrReview.ui" line="416"/>
       <source>Reset All</source>
-      <translation type="unfinished">Reset All</translation>
+      <translation>Redefinir tudo</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="437"/>
       <source>OCR new boxes:</source>
-      <translation type="unfinished">OCR new boxes:</translation>
+      <translation>Novas áreas OCR:</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="447"/>
       <source>Done</source>
-      <translation type="unfinished">Done</translation>
+      <translation>Concluído</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="504"/>
       <source>Box</source>
-      <translation type="unfinished">Box</translation>
+      <translation>Caixa</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="509"/>
       <source>Text</source>
-      <translation type="unfinished">Text</translation>
+      <translation>Texto</translation>
     </message>
   </context>
   <context>
@@ -2611,7 +2611,7 @@ Consulte a documentação on-line para saber como adicionar suporte a mais idiom
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="253"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Power Off action will run regardless of this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Power Off action will run regardless of this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A ação Desligar será executada independentemente dessa configuração.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="303"/>
@@ -2896,145 +2896,145 @@ Verde: balões iniciais. Vermelho: balões estendidos. Roxo: balões mesclados (
       <location filename="process_strings.py" line="37"/>
       <source>The rough text detection mask with everything outside the box mask cut out.</source>
       <comment>Step description in the image details view, step: Masker, output: Cut Mask</comment>
-      <translation type="unfinished">The rough text detection mask with everything outside the box mask cut out.</translation>
+      <translation>Máscara de detecção preliminar de texto, com as áreas fora da máscara da caixa excluídas.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="39"/>
       <source>Cut Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Cut Mask</translation>
+      <translation>Máscara de corte</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="40"/>
       <source>The different steps of growth around the cut mask displayed in different colors.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Layers</comment>
-      <translation type="unfinished">The different steps of growth around the cut mask displayed in different colors.</translation>
+      <translation>As diferentes etapas de expansão em torno da máscara de corte são exibidas em cores diferentes.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="42"/>
       <source>Mask Layers</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Layers</translation>
+      <translation>Camadas de máscara</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="43"/>
       <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</source>
       <comment>Step description in the image details view, step: Masker, output: Fitment Quality</comment>
-      <translation type="unfinished">The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</translation>
+      <translation>O desvio padrão (σ) e a espessura do contorno (em pixels) de cada melhor máscara selecionada, se houver. Valores menores de σ indicam melhor qualidade, variando de perfeito (roxo) a falho (vermelho).</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="45"/>
       <source>Fitment Quality</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Fitment Quality</translation>
+      <translation>Qualidade do ajuste</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="46"/>
       <source>The input image with the final mask overlaid in color.</source>
       <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
-      <translation type="unfinished">The input image with the final mask overlaid in color.</translation>
+      <translation>A imagem original com a máscara final aplicada por cima, em cores.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="48"/>
       <source>Mask Overlay</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Mask Overlay</translation>
+      <translation>Sobreposição de máscara</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="49"/>
       <source>The collection of masks for each bubble that fit best.</source>
       <comment>Step description in the image details view, step: Masker, output: Final Mask</comment>
-      <translation type="unfinished">The collection of masks for each bubble that fit best.</translation>
+      <translation>A coleção de máscaras para cada balão que melhor se adapta.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="51"/>
       <source>Final Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Final Mask</translation>
+      <translation>Máscara final</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="52"/>
       <source>The text layer isolated from the input image.</source>
       <comment>Step description in the image details view, step: Masker, output: Isolated Text</comment>
-      <translation type="unfinished">The text layer isolated from the input image.</translation>
+      <translation>A camada de texto isolada da imagem de entrada.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="54"/>
       <source>Isolated Text</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Isolated Text</translation>
+      <translation>Texto isolado</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="55"/>
       <source>The input image with the final mask applied.</source>
       <comment>Step description in the image details view, step: Masker, output: Masked Output</comment>
-      <translation type="unfinished">The input image with the final mask applied.</translation>
+      <translation>A imagem original com a máscara final aplicada.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="57"/>
       <source>Masked Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Masked Output</translation>
+      <translation>Saída com a máscara</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="58"/>
       <source>The masks that required denoising, to be overlaid on the final mask when exporting.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoise Mask</comment>
-      <translation type="unfinished">The masks that required denoising, to be overlaid on the final mask when exporting.</translation>
+      <translation>Máscaras que passaram por remoção de ruído, destinadas a serem sobrepostas na máscara final durante a exportação.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="59"/>
       <source>Denoiser</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Denoiser</translation>
+      <translation>Denoiser</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="61"/>
       <source>Denoise Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Denoise Mask</translation>
+      <translation>Máscara de Tratamento (Denoise)</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="62"/>
       <source>The input image with the denoised mask applied.</source>
       <comment>Step description in the image details view, step: Denoiser, output: Denoised Output</comment>
-      <translation type="unfinished">The input image with the denoised mask applied.</translation>
+      <translation>A imagem original com redução de ruído aplicado na máscara. </translation>
     </message>
     <message>
       <location filename="process_strings.py" line="64"/>
       <source>Denoised Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Denoised Output</translation>
+      <translation>Imagem Tratada (Denoised)</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="65"/>
       <source>The inpainted sections around the text that was poorly cleaned, if at all.</source>
       <comment>Step description in the image details view, step: Inpainter, output: Inpainted Mask</comment>
-      <translation type="unfinished">The inpainted sections around the text that was poorly cleaned, if at all.</translation>
+      <translation>As áreas preenchidas (inpaint) ao redor do texto que não foi bem limpo, se existirem.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="66"/>
       <source>Inpainter</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Inpainter</translation>
+      <translation>Inpainter</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="68"/>
       <source>Inpainted Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Inpainted Mask</translation>
+      <translation>Máscara de Inpaiting</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="69"/>
       <source>The input image: cleaned, denoised (if enabled), and inpainted.</source>
       <comment>Step description in the image details view, step: Inpainter, output: Inpainted Output</comment>
-      <translation type="unfinished">The input image: cleaned, denoised (if enabled), and inpainted.</translation>
+      <translation>A imagem original: limpa, tratada (se ativado) e inpainted.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="71"/>
       <source>Inpainted Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Inpainted Output</translation>
+      <translation>Resultado do Inpaint</translation>
     </message>
   </context>
   <context>
@@ -3043,79 +3043,79 @@ Verde: balões iniciais. Vermelho: balões estendidos. Roxo: balões mesclados (
       <location filename="profile_strings.py" line="16"/>
       <source>General</source>
       <comment>Profile section title</comment>
-      <translation type="unfinished">General</translation>
+      <translation>Geral</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="18"/>
       <source>About this profile:</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">About this profile:</translation>
+      <translation>Sobre este perfil:</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="20"/>
       <source>Notes</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Notes</translation>
+      <translation>Anotações</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="22"/>
       <source>Preferred file type to save the cleaned image as.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Preferred file type to save the cleaned image as.</translation>
+      <translation>Tipo de arquivo preferido para salvar a imagem limpa.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="24"/>
       <source>Preferred File Type</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Preferred File Type</translation>
+      <translation>Tipo de arquivo preferido</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="26"/>
       <source>Preferred file type to save the mask as. Only image formats that allow for transparency are supported.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Preferred file type to save the mask as. Only image formats that allow for transparency are supported.</translation>
+      <translation>Tipo de arquivo preferido para salvar a máscara. Somente formatos de imagem que permitem transparência são suportados.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="28"/>
       <source>Preferred Mask File Type</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Preferred Mask File Type</translation>
+      <translation>Tipo de arquivo de máscara preferido</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="34"/>
       <source>The following are the lower and upper targets for the height of the input image. It is only ever scaled down to fit within the range, preferring whole number factors to minimize the impact on image quality. Images smaller than either target will remain unchanged. You can disable this feature by setting one or both values less than or equal to 0.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">The following are the lower and upper targets for the height of the input image. It is only ever scaled down to fit within the range, preferring whole number factors to minimize the impact on image quality. Images smaller than either target will remain unchanged. You can disable this feature by setting one or both values less than or equal to 0.</translation>
+      <translation>A seguir estão os limites inferior e superior para a altura da imagem original. A imagem é reduzida apenas para se ajustar a esse intervalo, dando preferência a fatores de número inteiro para minimizar o impacto na qualidade da imagem. Imagens menores que qualquer um dos limites permanecerão inalteradas. Você pode desativar esse recurso definindo um ou ambos os valores como menores ou iguais a 0.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="36"/>
       <source>This is useful for significantly speeding up processing on large images. Also, since other options relying on pixel dimensions depend on size, this will help normalize the results across different image sizes.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">This is useful for significantly speeding up processing on large images. Also, since other options relying on pixel dimensions depend on size, this will help normalize the results across different image sizes.</translation>
+      <translation>Isso é útil para acelerar significativamente o processamento de imagens grandes. Além disso, como outras opções que dependem de dimensões de pixel dependem do tamanho, isso ajudará a normalizar os resultados em diferentes tamanhos de imagem.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="38"/>
       <source>The image will be scaled down, processed, and then only the mask is scaled back up. Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality. Only the height of the image is used to determine the scale factor, preserving the aspect ratio, and ignoring the individual width of an image so that the factor remains consistent if one of the pages is a double page spread.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">The image will be scaled down, processed, and then only the mask is scaled back up. Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality. Only the height of the image is used to determine the scale factor, preserving the aspect ratio, and ignoring the individual width of an image so that the factor remains consistent if one of the pages is a double page spread.</translation>
+      <translation>A imagem será diminuida, processada e, em seguida, apenas a máscara será redimensionada de volta. Isso significa que a saída limpa ainda usará a imagem original, sem redimensionamento, para evitar qualquer perda de qualidade. Apenas a altura da imagem é usada para determinar o fator de escala, preservando a proporção e ignorando a largura individual da imagem, de forma que o fator permaneça consistente caso uma das páginas seja uma página dupla.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="40"/>
       <source>E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">E.g. for a lower target of 1000 and an upper target of 2000, an image with the size 5000x7000 (w, h) pixels will be scaled down by a factor of 4, so that it has the size 1250x1750 pixels during processing.</translation>
+      <translation>Por exemplo, para um limite inferior de 1000 e um limite superior de 2000, uma imagem com tamanho de 5000x7000 pixels (largura, altura) será redimensionada por um fator de 4, passando a ter o tamanho de 1250x1750 pixels durante o processamento.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="42"/>
       <source>Input Height Lower Target</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Input Height Lower Target</translation>
+      <translation>Limite Inferior de Altura</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="44"/>
       <source>Input Height Upper Target</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Input Height Upper Target</translation>
+      <translation>Limite Superior de Altura</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="46"/>
