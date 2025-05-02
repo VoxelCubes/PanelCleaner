@@ -2606,7 +2606,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="243"/>
       <source>Cancel the custom action if processing failed</source>
-      <translation type="unfinished">Cancel the custom action if processing failed</translation>
+      <translation>Cancelar a ação personalizada se o processamento falhar</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="253"/>
