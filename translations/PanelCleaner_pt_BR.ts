@@ -1779,258 +1779,258 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="293"/>
       <source>Size</source>
-      <translation type="unfinished">Size</translation>
+      <translation>Tamanho</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="298"/>
       <source>Processing Size</source>
       <comment>The size that the picture is shrunk down to for processing.</comment>
-      <translation type="unfinished">Processing Size</translation>
+      <translation>Tamanho do processamento</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="303"/>
       <source>File Size</source>
-      <translation type="unfinished">File Size</translation>
+      <translation>Tamanho do arquivo</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="308"/>
       <source>Color Mode</source>
       <comment>Like RGB, grayscale etc.</comment>
-      <translation type="unfinished">Color Mode</translation>
+      <translation>Modo de cor</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="313"/>
       <source>Analytics</source>
       <comment>Can also call this statistics.</comment>
-      <translation type="unfinished">Analytics</translation>
+      <translation>Análises</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="350"/>
       <source>Process</source>
-      <translation type="unfinished">Process</translation>
+      <translation>Processo</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="356"/>
       <source>Cleaning</source>
-      <translation type="unfinished">Cleaning</translation>
+      <translation>Limpando</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="366"/>
       <source>OCR</source>
-      <translation type="unfinished">OCR</translation>
+      <translation>OCR</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="388"/>
       <source>Edit Existing Output</source>
-      <translation type="unfinished">Edit Existing Output</translation>
+      <translation>Editar saída existente</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="399"/>
       <source>Abort</source>
-      <translation type="unfinished">Abort</translation>
+      <translation>Interromper</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="410"/>
       <source>Start</source>
-      <translation type="unfinished">Start</translation>
+      <translation>Iniciar</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="426"/>
       <source>Output</source>
-      <translation type="unfinished">Output</translation>
+      <translation>Saída</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="458"/>
       <source>Cleaned Image</source>
-      <translation type="unfinished">Cleaned Image</translation>
+      <translation>Imagem limpa</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="468"/>
       <source>Mask</source>
-      <translation type="unfinished">Mask</translation>
+      <translation>Máscara</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="478"/>
       <source>Isolated Text</source>
-      <translation type="unfinished">Isolated Text</translation>
+      <translation>Texto isolado</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="507"/>
       <location filename="../ui_files/Mainwindow.ui" line="742"/>
       <source>Review Output</source>
-      <translation type="unfinished">Review Output</translation>
+      <translation>Revisar Saída</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="517"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, a review window will open upon process completion. The results are also pre-viewable in each image&apos;s details view, before proceeding with saving them to disk.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, a review window will open upon process completion. The results are also pre-viewable in each image&apos;s details view, before proceeding with saving them to disk.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quando marcada, uma janela de revisão será aberta após a conclusão do processo. Os resultados também podem ser visualizados previamente em cada imagem&apos;s visão detalhada, antes de continuar a salvá-las.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="547"/>
       <source>Save Output</source>
-      <translation type="unfinished">Save Output</translation>
+      <translation>Salvar saída</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="617"/>
       <source>Output Directory:</source>
-      <translation type="unfinished">Output Directory:</translation>
+      <translation>Diretório de saída:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="630"/>
       <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
       <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
-      <translation type="unfinished">You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</translation>
+      <translation>Você pode usar um caminho relativo para criar uma subpasta no local original da imagem&apos;s ou usar um caminho absoluto.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="703"/>
       <source>Plain Text</source>
-      <translation type="unfinished">Plain Text</translation>
+      <translation>Texto sem Formatação</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="752"/>
       <source>When checked, a review window will open upon process completion.</source>
-      <translation type="unfinished">When checked, a review window will open upon process completion.</translation>
+      <translation>Quando marcada, uma janela de revisão será aberta após a conclusão do processo.</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="796"/>
       <source>Output File:</source>
-      <translation type="unfinished">Output File:</translation>
+      <translation>Arquivo de saída:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="809"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Either enter an absolute or relative path with a file name. The output of all images is written to the same file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Insira um caminho absoluto ou relativo com um nome de arquivo. A saída de todas as imagens é gravada no mesmo arquivo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="839"/>
       <source>detected_text.txt</source>
       <extracomment>The file suffix .txt is important, don&apos;t change that. The .csv extension is swapped in automatically for that alternative when selected.</extracomment>
-      <translation type="unfinished">detected_text.txt</translation>
+      <translation>texto_detectado.txt</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1030"/>
       <source>Cancel Action</source>
-      <translation type="unfinished">Cancel Action</translation>
+      <translation>Cancelar ação</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1044"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Fechar</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1064"/>
       <source>Generating:</source>
       <comment>This is present progressive, as in &quot;[currently] Generating:&quot;</comment>
-      <translation type="unfinished">Generating:</translation>
+      <translation>Gerando</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1094"/>
       <source>Current Step:</source>
-      <translation type="unfinished">Current Step:</translation>
+      <translation>Etapa atual:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1123"/>
       <location filename="../ui_files/Mainwindow.ui" line="1156"/>
       <source>%v / %m</source>
-      <translation type="unfinished">%v / %m</translation>
+      <translation>%v / %m</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1146"/>
       <source>Images Processed:</source>
       <comment>As in &quot;images processed: 42&quot; with progress bar.</comment>
-      <translation type="unfinished">Images Processed:</translation>
+      <translation>Imagens processadas:</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1190"/>
       <source>Set Default</source>
-      <translation type="unfinished">Set Default</translation>
+      <translation>Definir padrão</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1206"/>
       <source>Settings</source>
-      <translation type="unfinished">Settings</translation>
+      <translation>Configurações</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1210"/>
       <source>Theme</source>
       <comment>As in color theme</comment>
-      <translation type="unfinished">Theme</translation>
+      <translation>Tema</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1219"/>
       <source>Language</source>
-      <translation type="unfinished">Language</translation>
+      <translation>Idioma</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1244"/>
       <source>Help</source>
-      <translation type="unfinished">Help</translation>
+      <translation>Ajuda</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1268"/>
       <source>Add Files...</source>
-      <translation type="unfinished">Add Files...</translation>
+      <translation>Adicionar arquivos...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1277"/>
       <source>Remove All Files</source>
-      <translation type="unfinished">Remove All Files</translation>
+      <translation>Remover todos os arquivos</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1423"/>
       <source>Remove File</source>
-      <translation type="unfinished">Remove File</translation>
+      <translation>Remover arquivo</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1432"/>
       <source>Help Translate Panel Cleaner</source>
-      <translation type="unfinished">Help Translate Panel Cleaner</translation>
+      <translation>Ajude a traduzir o Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1441"/>
       <source>Report an Issue...</source>
-      <translation type="unfinished">Report an Issue...</translation>
+      <translation>Relatar um problema...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1446"/>
       <source>Simulate Exception</source>
-      <translation type="unfinished">Simulate Exception</translation>
+      <translation>Simular exceção</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1455"/>
       <source>Add File Browser Extension...</source>
-      <translation type="unfinished">Add File Browser Extension...</translation>
+      <translation>Adicionar extensão do navegador de arquivos...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1464"/>
       <source>Show Supported OCR Languages</source>
-      <translation type="unfinished">Show Supported OCR Languages</translation>
+      <translation>Mostrar idiomas de OCR suportados</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1469"/>
       <location filename="../ui_files/Mainwindow.ui" line="1478"/>
       <source>Reset Window Layout Preferences</source>
-      <translation type="unfinished">Reset Window Layout Preferences</translation>
+      <translation>Redefinir preferências de layout de janela</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1489"/>
       <source>Show Out Of Memory Warnings</source>
-      <translation type="unfinished">Show Out Of Memory Warnings</translation>
+      <translation>Mostrar avisos de falta de memória</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1229"/>
       <source>Post-Run Actions</source>
-      <translation type="unfinished">Post-Run Actions</translation>
+      <translation>Ações pós-execução</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1498"/>
       <source>Configure Post-Run Actions...</source>
-      <translation type="unfinished">Configure Post-Run Actions...</translation>
+      <translation>Configurar Ações pós-execução...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1286"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Novo</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="557"/>
@@ -2045,67 +2045,67 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1295"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Excluir</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1304"/>
       <source>Import...</source>
-      <translation type="unfinished">Import...</translation>
+      <translation>Importar...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1313"/>
       <source>Online Documentation</source>
-      <translation type="unfinished">Online Documentation</translation>
+      <translation>Documentação on-line</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1322"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>Sobre o Panel Cleaner</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1327"/>
       <source>View License</source>
-      <translation type="unfinished">View License</translation>
+      <translation>Exibir licença</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1345"/>
       <source>Save as...</source>
-      <translation type="unfinished">Save as...</translation>
+      <translation>Salvar como...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1353"/>
       <source>System</source>
-      <translation type="unfinished">System</translation>
+      <translation>Sistema</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1361"/>
       <source>Dark</source>
-      <translation type="unfinished">Dark</translation>
+      <translation>Escuro</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1369"/>
       <source>Light</source>
-      <translation type="unfinished">Light</translation>
+      <translation>Luz</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1383"/>
       <source>Add Folder...</source>
-      <translation type="unfinished">Add Folder...</translation>
+      <translation>Adicionar pasta...</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1392"/>
       <source>Delete Machine Learning Models</source>
-      <translation type="unfinished">Delete Machine Learning Models</translation>
+      <translation>Excluir Modelos de Aprendizagem de Máquina (LLM)</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1401"/>
       <source>Download Machine Learning Models</source>
-      <translation type="unfinished">Download Machine Learning Models</translation>
+      <translation>Baixar Modelos de Aprendizagem de Máquina (LLM)</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1406"/>
       <source>Donate</source>
-      <translation type="unfinished">Donate</translation>
+      <translation>Faça uma Doação</translation>
     </message>
   </context>
   <context>
@@ -2114,7 +2114,7 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../pcleaner/gui/memory_watcher.py" line="33"/>
       <location filename="../pcleaner/gui/memory_watcher.py" line="40"/>
       <source>RAM usage has reached {mem}%</source>
-      <translation type="unfinished">RAM usage has reached {mem}%</translation>
+      <translation>O uso da RAM atingiu {mem}%</translation>
     </message>
   </context>
   <context>
@@ -2122,58 +2122,58 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="14"/>
       <source>Downloading Machine Learning Models</source>
-      <translation type="unfinished">Downloading Machine Learning Models</translation>
+      <translation>Baixando modelos de aprendizado de máquina (LLM)</translation>
     </message>
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="23"/>
       <source>Model data required to run Panel Cleaner:</source>
-      <translation type="unfinished">Model data required to run Panel Cleaner:</translation>
+      <translation>Dados do modelo necessários para executar o Panel Cleaner:</translation>
     </message>
     <message>
       <location filename="../ui_files/ModelDownloader.ui" line="115"/>
       <source>OCR model:</source>
-      <translation type="unfinished">OCR model:</translation>
+      <translation>Modelo OCR:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="108"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="113"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="119"/>
       <source>Already downloaded</source>
-      <translation type="unfinished">Already downloaded</translation>
+      <translation>Já baixado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="139"/>
       <source>Text Detector model (CUDA)</source>
-      <translation type="unfinished">Text Detector model (CUDA)</translation>
+      <translation>Modelo de detector de texto (CUDA)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="145"/>
       <source>Text Detector model (CPU)</source>
-      <translation type="unfinished">Text Detector model (CPU)</translation>
+      <translation>Modelo de detector de texto (CPU)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="193"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="254"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="338"/>
       <source>Download Failed</source>
-      <translation type="unfinished">Download Failed</translation>
+      <translation>Falha no download</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="241"/>
       <source>OCR download errors</source>
-      <translation type="unfinished">OCR download errors</translation>
+      <translation>Erros de download de OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="281"/>
       <source>ETA</source>
       <comment>estimated time of completion</comment>
-      <translation type="unfinished">ETA</translation>
+      <translation>Tempo Estimado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="292"/>
       <location filename="../ui_files/ModelDownloader.ui" line="186"/>
       <source>Inpainting model</source>
-      <translation type="unfinished">Inpainting model</translation>
+      <translation>Modelo de Inpaiting</translation>
     </message>
   </context>
   <context>
@@ -2181,27 +2181,27 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/NewProfile.ui" line="14"/>
       <source>New Profile</source>
-      <translation type="unfinished">New Profile</translation>
+      <translation>Novo perfil</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="23"/>
       <source>The default profile cannot be overwritten. Save a new profile with your changes:</source>
-      <translation type="unfinished">The default profile cannot be overwritten. Save a new profile with your changes:</translation>
+      <translation>O perfil padrão não pode ser substituído. Salve um novo perfil com suas alterações:</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="35"/>
       <source>Use the default location</source>
-      <translation type="unfinished">Use the default location</translation>
+      <translation>Usar o local padrão</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="45"/>
       <source>Use a different location:</source>
-      <translation type="unfinished">Use a different location:</translation>
+      <translation>Use um local diferente:</translation>
     </message>
     <message>
       <location filename="../ui_files/NewProfile.ui" line="77"/>
       <source>Profile Name:</source>
-      <translation type="unfinished">Profile Name:</translation>
+      <translation>Nome do perfil:</translation>
     </message>
   </context>
   <context>
@@ -2209,38 +2209,38 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="14"/>
       <source>OCR Language Support</source>
-      <translation type="unfinished">OCR Language Support</translation>
+      <translation>Suporte ao idioma do OCR</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="78"/>
       <source>Code</source>
-      <translation type="unfinished">Code</translation>
+      <translation>Código</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="83"/>
       <source>Language</source>
       <comment>Can also call this statistics.</comment>
-      <translation type="unfinished">Language</translation>
+      <translation>Idioma</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="88"/>
       <source>MangaOCR</source>
-      <translation type="unfinished">MangaOCR</translation>
+      <translation>MangaOCR</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="93"/>
       <source>Tesseract</source>
-      <translation type="unfinished">Tesseract</translation>
+      <translation>Tesseract</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="109"/>
       <source>How to install Tesseract</source>
-      <translation type="unfinished">How to install Tesseract</translation>
+      <translation>Como instalar o Tesseract</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="120"/>
       <source>How to install Tesseract language packs</source>
-      <translation type="unfinished">How to install Tesseract language packs</translation>
+      <translation>Como instalar pacotes de idioma Tesseract</translation>
     </message>
   </context>
   <context>
@@ -2248,42 +2248,42 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OcrReview.ui" line="79"/>
       <source>Icon Size:</source>
-      <translation type="unfinished">Icon Size:</translation>
+      <translation>Tamanho do ícone:</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="99"/>
       <source>Previous image</source>
-      <translation type="unfinished">Previous image</translation>
+      <translation>Imagem anterior</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="116"/>
       <source>Next image</source>
-      <translation type="unfinished">Next image</translation>
+      <translation>Próxima imagem</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="230"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Ampliar</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="247"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Diminuir zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="264"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Redefinir Zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="281"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Ajustar à tela</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="299"/>
       <source>With Boxes</source>
-      <translation type="unfinished">With Boxes</translation>
+      <translation>Com balões</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="304"/>
@@ -2351,72 +2351,72 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="358"/>
       <source>No OCR</source>
-      <translation type="unfinished">No OCR</translation>
+      <translation>Sem OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="419"/>
       <source>OCR Error</source>
-      <translation type="unfinished">OCR Error</translation>
+      <translation>Erro de OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="419"/>
       <source>Encountered error:</source>
-      <translation type="unfinished">Encountered error:</translation>
+      <translation>Erro encontrado:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="554"/>
       <source>Reset Bubbles</source>
-      <translation type="unfinished">Reset Bubbles</translation>
+      <translation>Redefinir balões</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="555"/>
       <source>Are you sure you want to reset all boxes for this image?</source>
-      <translation type="unfinished">Are you sure you want to reset all boxes for this image?</translation>
+      <translation>Tem certeza de que deseja redefinir todas os balões para essa imagem?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="632"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Novo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="664"/>
       <source>OCR Warning</source>
-      <translation type="unfinished">OCR Warning</translation>
+      <translation>Aviso de OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="665"/>
       <source>The bubble is very large. Are you sure you want to OCR it?</source>
-      <translation type="unfinished">The bubble is very large. Are you sure you want to OCR it?</translation>
+      <translation>O balão é muito grande. Tem certeza de que deseja fazer o OCR?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="723"/>
       <source>Finish Review</source>
-      <translation type="unfinished">Finish Review</translation>
+      <translation>Concluir a revisão</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="724"/>
       <source>Are you sure you want to finish the review?</source>
-      <translation type="unfinished">Are you sure you want to finish the review?</translation>
+      <translation>Tem certeza de que deseja concluir a revisão?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="779"/>
       <source>image</source>
-      <translation type="unfinished">image</translation>
+      <translation>imagem</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="779"/>
       <source>images</source>
-      <translation type="unfinished">images</translation>
+      <translation>imagens</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="800"/>
       <source>Loading Error</source>
-      <translation type="unfinished">Loading Error</translation>
+      <translation>Erro de carregamento</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="801"/>
       <source>Failed to load image &apos;{path}&apos;</source>
-      <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
+      <translation>Falha ao carregar a imagem &apos;{path}&apos;</translation>
     </message>
   </context>
   <context>
@@ -2424,77 +2424,77 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OutputReview.ui" line="14"/>
       <source>Review</source>
-      <translation type="unfinished">Review</translation>
+      <translation>Revisão</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="73"/>
       <source>Icon Size:</source>
-      <translation type="unfinished">Icon Size:</translation>
+      <translation>Tamanho do ícone:</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="93"/>
       <source>Previous image</source>
-      <translation type="unfinished">Previous image</translation>
+      <translation>Imagem anterior</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="110"/>
       <source>Next image</source>
-      <translation type="unfinished">Next image</translation>
+      <translation>Próxima imagem</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="224"/>
       <source>Zoom in</source>
-      <translation type="unfinished">Zoom in</translation>
+      <translation>Ampliar</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="241"/>
       <source>Zoom out</source>
-      <translation type="unfinished">Zoom out</translation>
+      <translation>Reduzir o zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="258"/>
       <source>Reset zoom</source>
-      <translation type="unfinished">Reset zoom</translation>
+      <translation>Redefinir o zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="275"/>
       <source>Zoom to fit</source>
-      <translation type="unfinished">Zoom to fit</translation>
+      <translation>Ajustar à tela</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="292"/>
       <source>View Mode:</source>
-      <translation type="unfinished">View Mode:</translation>
+      <translation>&amp;Modo de exibição:</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="300"/>
       <source>Side-by-Side</source>
-      <translation type="unfinished">Side-by-Side</translation>
+      <translation>Lado a lado</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="305"/>
       <source>Swipe</source>
-      <translation type="unfinished">Swipe</translation>
+      <translation>Deslizar</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="310"/>
       <source>Onion</source>
-      <translation type="unfinished">Onion</translation>
+      <translation>Arco</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="315"/>
       <source>Difference</source>
-      <translation type="unfinished">Difference</translation>
+      <translation>Diferença</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="320"/>
       <source>Overlay</source>
-      <translation type="unfinished">Overlay</translation>
+      <translation>Sobreposição</translation>
     </message>
     <message>
       <location filename="../ui_files/OutputReview.ui" line="328"/>
       <source>Done</source>
-      <translation type="unfinished">Done</translation>
+      <translation>Concluído</translation>
     </message>
   </context>
   <context>
@@ -2502,32 +2502,32 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="127"/>
       <source>Finish Review</source>
-      <translation type="unfinished">Finish Review</translation>
+      <translation>Concluir a revisão</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="128"/>
       <source>Are you sure you want to finish the review?</source>
-      <translation type="unfinished">Are you sure you want to finish the review?</translation>
+      <translation>Tem certeza de que deseja concluir a revisão?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="211"/>
       <source>image</source>
-      <translation type="unfinished">image</translation>
+      <translation>Imagem</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="211"/>
       <source>images</source>
-      <translation type="unfinished">images</translation>
+      <translation>imagens</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="229"/>
       <source>Loading Error</source>
-      <translation type="unfinished">Loading Error</translation>
+      <translation>Erro de carregamento</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/output_review_driver.py" line="230"/>
       <source>Failed to load image &apos;{path}&apos;</source>
-      <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
+      <translation>Falha ao carregar a imagem &apos;{path}&apos;</translation>
     </message>
   </context>
   <context>
@@ -2535,73 +2535,73 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="14"/>
       <source>Configure Post-Run Actions</source>
-      <translation type="unfinished">Configure Post-Run Actions</translation>
+      <translation>Configurar ações pós-execução</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="20"/>
       <source>Always perform the action after processing</source>
-      <translation type="unfinished">Always perform the action after processing</translation>
+      <translation>Sempre execute a ação após o processamento</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="29"/>
       <source>Wait before performing an action:</source>
-      <translation type="unfinished">Wait before performing an action:</translation>
+      <translation>Aguarde antes de executar uma ação:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="36"/>
       <source> s</source>
       <extracomment>unit of time: seconds</extracomment>
-      <translation type="unfinished"> s</translation>
+      <translation> s</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="49"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you set a wait time greater than 0, a window will open upon process completion. This window will show a countdown and allow you to preview as well as edit the command.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you set a wait time greater than 0, a window will open upon process completion. This window will show a countdown and allow you to preview as well as edit the command.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se você definir um tempo de espera maior que 0, uma janela será aberta após a conclusão do processo. Essa janela mostrará uma contagem regressiva e permitirá que você visualize e edite o comando.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="101"/>
       <source>Power Off Command:</source>
-      <translation type="unfinished">Power Off Command:</translation>
+      <translation>Comando de Desligar:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="108"/>
       <source>shutdown</source>
-      <translation type="unfinished">shutdown</translation>
+      <translation>desligar</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="119"/>
       <source>Custom Commands:</source>
-      <translation type="unfinished">Custom Commands:</translation>
+      <translation>Comandos Customizáveis</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="139"/>
       <source>Move command up</source>
-      <translation type="unfinished">Move command up</translation>
+      <translation>Mover o comando para cima</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="156"/>
       <source>Move command down</source>
-      <translation type="unfinished">Move command down</translation>
+      <translation>Mover o comando para baixo</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="173"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Novo</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="187"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Apagar</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="228"/>
       <source>Action Name</source>
-      <translation type="unfinished">Action Name</translation>
+      <translation>Nome da ação</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="233"/>
       <source>Command or Script File Path</source>
-      <translation type="unfinished">Command or Script File Path</translation>
+      <translation>Caminho do arquivo de comando ou script</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="243"/>
@@ -2616,107 +2616,107 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="303"/>
       <source>Placeholder Tokens:</source>
-      <translation type="unfinished">Placeholder Tokens:</translation>
+      <translation>Símbolos reservados:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="323"/>
       <source>Input Files</source>
-      <translation type="unfinished">Input Files</translation>
+      <translation>Arquivos de entrada</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="338"/>
       <source>%i</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%i</translation>
+      <translation>%i</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="345"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file processed, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file processed, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Os caminhos de arquivo individuais de cada arquivo processado, como uma lista separada por espaço, com aspas quando necessário.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="373"/>
       <source>Input Directory</source>
-      <translation type="unfinished">Input Directory</translation>
+      <translation>Diretório de entrada</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="388"/>
       <source>%id</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%id</translation>
+      <translation>%id</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="395"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Agrupe os arquivos por diretórios e liste-os, como uma lista separada por espaço, com aspas quando necessário.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="427"/>
       <source>Output Files</source>
-      <translation type="unfinished">Output Files</translation>
+      <translation>Arquivos de saída</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="442"/>
       <source>%o</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%o</translation>
+      <translation>%o</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="449"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file created as an output, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file created as an output, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Caminhos de arquivo individuais de cada arquivo criado como saída, como uma lista separada por espaço, com aspas quando necessário.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="477"/>
       <source>Output Directory</source>
-      <translation type="unfinished">Output Directory</translation>
+      <translation>Diretório de saída</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="492"/>
       <source>%od</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%od</translation>
+      <translation>%od</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="499"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group output files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group output files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Agrupe os arquivos de saída por diretório e liste-os, como uma lista separada por espaço, com aspas quando necessário.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="531"/>
       <source>Profile Used</source>
-      <translation type="unfinished">Profile Used</translation>
+      <translation>Perfil utilizado</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="546"/>
       <source>%p</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%p</translation>
+      <translation>%p</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="553"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of the profile used, with quotation marks if necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of the profile used, with quotation marks if necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;O nome do perfil usado, com aspas, se necessário.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="142"/>
       <source>Action names cannot be empty.</source>
-      <translation type="unfinished">Action names cannot be empty.</translation>
+      <translation>O nome da ação não pode estar vazio</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="147"/>
       <source>Action names must be unique.</source>
-      <translation type="unfinished">Action names must be unique.</translation>
+      <translation>Nomes de ações devem ser únicos.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="153"/>
       <source>The name &quot;{shutdown_command}&quot; is reserved.</source>
-      <translation type="unfinished">The name &quot;{shutdown_command}&quot; is reserved.</translation>
+      <translation>O nome &quot;{shutdown_command}&quot; é reservado.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="164"/>
       <source>The Flatpak sandbox will likely prevent actions from working.</source>
-      <translation type="unfinished">The Flatpak sandbox will likely prevent actions from working.</translation>
+      <translation>O sandbox do Flatpak provavelmente impedirá que as ações funcionem.</translation>
     </message>
   </context>
   <context>
@@ -2724,72 +2724,72 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="14"/>
       <source>Post-Action Runner</source>
-      <translation type="unfinished">Post-Action Runner</translation>
+      <translation>Executor pós-ação</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="163"/>
       <source>An error occurred during the process.</source>
-      <translation type="unfinished">An error occurred during the process.</translation>
+      <translation>Ocorreu um erro durante o processo.</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="194"/>
       <source>Full Command:</source>
-      <translation type="unfinished">Full Command:</translation>
+      <translation>Comando completo:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="231"/>
       <source>Run Again</source>
-      <translation type="unfinished">Run Again</translation>
+      <translation>Executar novamente</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="241"/>
       <source>Skip Countdown</source>
-      <translation type="unfinished">Skip Countdown</translation>
+      <translation>Pular a contagem regressiva</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="261"/>
       <source>Resume Countdown</source>
-      <translation type="unfinished">Resume Countdown</translation>
+      <translation>Retomar Contagem regressiva</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="271"/>
       <source>Pause Countdown</source>
-      <translation type="unfinished">Pause Countdown</translation>
+      <translation>Pausar Contagem Regressiva</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="283"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Fechar</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="295"/>
       <source>Cancel Action</source>
-      <translation type="unfinished">Cancel Action</translation>
+      <translation>Cancelar ação</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="305"/>
       <source>Cancel Shutdown</source>
-      <translation type="unfinished">Cancel Shutdown</translation>
+      <translation>Cancelar desligamento</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="76"/>
       <source>Shutting down the system</source>
-      <translation type="unfinished">Shutting down the system</translation>
+      <translation>Desligando o sistema</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="85"/>
       <source>Running the action &quot;{action_name}&quot;</source>
-      <translation type="unfinished">Running the action &quot;{action_name}&quot;</translation>
+      <translation>Executando a ação &quot;{action_name}&quot;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="154"/>
       <source>Remaining time: {time} seconds</source>
-      <translation type="unfinished">Remaining time: {time} seconds</translation>
+      <translation>Tempo restante: {time} segundos</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="157"/>
       <source>Remaining time: 1 second</source>
-      <translation type="unfinished">Remaining time: 1 second</translation>
+      <translation>Tempo restante: 1 segundo</translation>
     </message>
   </context>
   <context>
@@ -2798,99 +2798,99 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="process_strings.py" line="15"/>
       <source>The original image with scaling applied (if needed).</source>
       <comment>Step description in the image details view, step: Input, output: Input</comment>
-      <translation type="unfinished">The original image with scaling applied (if needed).</translation>
+      <translation>A imagem original com dimensionamento aplicado (se necessário).</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="16"/>
       <source>Input</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Input</translation>
+      <translation>Entrada</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="18"/>
       <source>Input</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Input</translation>
+      <translation>Entrada</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="19"/>
       <source>The rough mask generated by the AI.</source>
       <comment>Step description in the image details view, step: Text Detection, output: AI Mask</comment>
-      <translation type="unfinished">The rough mask generated by the AI.</translation>
+      <translation>A máscara bruta gerada pela IA.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="20"/>
       <source>Text Detection</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Text Detection</translation>
+      <translation>Detecção de texto</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="22"/>
       <source>AI Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">AI Mask</translation>
+      <translation>Máscara de IA</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="23"/>
       <source>The unfiltered box data generated by the AI.</source>
       <comment>Step description in the image details view, step: Text Detection, output: Raw Boxes</comment>
-      <translation type="unfinished">The unfiltered box data generated by the AI.</translation>
+      <translation>Os dados de balões não filtrados gerados pela IA.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="25"/>
       <source>Raw Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Raw Boxes</translation>
+      <translation>Balões na Raw</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="26"/>
       <source>The outlines of the text boxes the AI found.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Initial Boxes</comment>
-      <translation type="unfinished">The outlines of the text boxes the AI found.</translation>
+      <translation>Contornos dos balões que a IA encontrou.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="27"/>
       <source>Preprocessor</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Preprocessor</translation>
+      <translation>Pré-processador</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="29"/>
       <source>Initial Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Initial Boxes</translation>
+      <translation>Balões iniciais</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="30"/>
       <source>The final boxes after expanding, merging and filtering unneeded boxes with OCR.
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</source>
       <comment>Step description in the image details view, step: Preprocessor, output: Final Boxes</comment>
-      <translation type="unfinished">The final boxes after expanding, merging and filtering unneeded boxes with OCR.
-Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</translation>
+      <translation>Balões finais após a expansão, fusão e filtragem de balões desnecessários com OCR.
+Verde: balões iniciais. Vermelho: balões estendidos. Roxo: balões mesclados (finais). Azul: balões de referência para redução de ruído.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="32"/>
       <source>Final Boxes</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Final Boxes</translation>
+      <translation>Balões finais</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="33"/>
       <source>The mask of the merged boxes.</source>
       <comment>Step description in the image details view, step: Masker, output: Box Mask</comment>
-      <translation type="unfinished">The mask of the merged boxes.</translation>
+      <translation>A máscara dos balões mesclados.</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="34"/>
       <source>Masker</source>
       <comment>Step name in the image details view</comment>
-      <translation type="unfinished">Masker</translation>
+      <translation>Mascarador</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="36"/>
       <source>Box Mask</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Box Mask</translation>
+      <translation>Máscara de quadrado</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="37"/>
