@@ -1,5 +1,5 @@
+import getpass
 import re
-import os
 from datetime import datetime
 from typing import Sequence
 
@@ -16,7 +16,7 @@ def get_username() -> str:
 
     :return: The username of the current user.
     """
-    return os.getlogin()
+    return getpass.getuser()
 
 
 def censor(text: str) -> str:
