@@ -20,4 +20,5 @@ def supported_languages() -> dict[str, tuple[str, bool]]:
         "it_IT": ("Italiano (IT)", True),
         "tr_TR": ("Türkçe (TR)", False),
         "bg_BG": ("български (BG)", True),
+        "ko_KR": ("한국어 (KR)", True),
     }
