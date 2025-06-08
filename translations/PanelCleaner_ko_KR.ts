@@ -17,7 +17,7 @@
     <message>
         <location filename="../pcleaner/profile_cli.py" line="106"/>
         <source>Profile {profile_name} created.</source>
-        <translation>프로파일 {profile_name}이 생성됨.</translation>
+        <translation>프로파일 {profile_name}이(가) 생성됨.</translation>
     </message>
     <message>
         <location filename="../pcleaner/profile_cli.py" line="238"/>
@@ -112,14 +112,14 @@ The file content is different from expected.</source>
         <location filename="../pcleaner/analytics.py" line="84"/>
         <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
-        <translation>박스 개수: {num_boxes} | 작은 박스 개수: {num_small_boxes} ({small_box_ratio})
+        <translation>글자 영역 개수: {num_boxes} | 작은 영역 개수: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="93"/>
         <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
-        <translation>제거된 박스 수: {num_removed} (전체 대비 {removed_box_ratio}, 작은 박스 중 {removed_among_small_ratio})
+        <translation>제거된 영역 수: {num_removed} (전체 대비 {removed_box_ratio}, 작은 영역 개수 중 {removed_among_small_ratio})
 </translation>
     </message>
     <message>
@@ -128,14 +128,14 @@ The file content is different from expected.</source>
 Small box sizes:
 </source>
         <translation>
-작은 박스 크기:
+작은 영역 크기:
 </translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="108"/>
         <source>No not-removed small boxes found.
 </source>
-        <translation>제거되지 않은 작은 박스 찾지못함.
+        <translation>제거되지 않은 작은 영역 찾지못함.
 </translation>
     </message>
     <message>
@@ -157,12 +157,12 @@ Removed bubbles:
     <message>
         <location filename="../pcleaner/analytics.py" line="170"/>
         <source>Small boxes</source>
-        <translation>작은 박스</translation>
+        <translation>작은 영역</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="172"/>
         <source>Removed boxes</source>
-        <translation>제거된 박스</translation>
+        <translation>제거된 글자 영역</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="211"/>
@@ -196,17 +196,17 @@ Removed bubbles:
     <message>
         <location filename="../pcleaner/analytics.py" line="313"/>
         <source>Total boxes</source>
-        <translation>전체 박스</translation>
+        <translation>전체 글자 영역 개수</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="315"/>
         <source>Masks succeeded</source>
-        <translation>성공한 마스크</translation>
+        <translation>마스크 생성 성공</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="317"/>
         <source>Masks failed</source>
-        <translation>실패한 마스크</translation>
+        <translation>마스크 생성 실패</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="321"/>
@@ -224,7 +224,7 @@ Removed bubbles:
 Mask usage by thickness (in pixels):
 </source>
         <translation>
-두께(픽셀 단위)별 마스크 현황:
+두께별 마스크 처리 현황:
 </translation>
     </message>
     <message>
@@ -235,13 +235,13 @@ Mask usage by thickness (in pixels):
     <message>
         <location filename="../pcleaner/analytics.py" line="345"/>
         <source>Box mask</source>
-        <translation>박스 마스크</translation>
+        <translation>영역 마스크</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="364"/>
         <source>All bubbles were successfully masked.
 </source>
-        <translation>모든 말풍선들이 성공적으로 마스킹 처리 되었습니다.
+        <translation>모든 말풍선들의 마스크가 생성 되었습니다.
 </translation>
     </message>
     <message>
@@ -250,7 +250,7 @@ Mask usage by thickness (in pixels):
 Pages with failures / total:
 </source>
         <translation>
-페이지 실패/전체:
+페이지별 실패한 개수 / 전체 개수:
 </translation>
     </message>
     <message>
@@ -261,12 +261,12 @@ Pages with failures / total:
     <message>
         <location filename="../pcleaner/analytics.py" line="429"/>
         <source>Total masks</source>
-        <translation>전체 마스크</translation>
+        <translation>전체 마스크 개수</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="431"/>
         <source>Masks denoised</source>
-        <translation>디노이즈 된 마스크</translation>
+        <translation>노이즈 감소 처리된 마스크</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="435"/>
@@ -290,7 +290,7 @@ Pages with failures / total:
     <message>
         <location filename="../pcleaner/analytics.py" line="536"/>
         <source>Denoised</source>
-        <translation>디노이즈됨</translation>
+        <translation>노이즈 감소됨</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="559"/>
@@ -300,7 +300,7 @@ Pages with failures / total:
     <message>
         <location filename="../pcleaner/analytics.py" line="572"/>
         <source>Inpainting performed</source>
-        <translation>인페인팅 처리</translation>
+        <translation>인페인팅 처리한 개수</translation>
     </message>
     <message>
         <location filename="../pcleaner/analytics.py" line="574"/>
@@ -322,7 +322,7 @@ Pages with failures / total:
         <source>Outline thickness around text inpainted:
 
 </source>
-        <translation>인페인팅 된 텍스트 주변 외곽선 두께:
+        <translation>인페인팅 된 글자 영역 주변 외곽선 두께:
 
 </translation>
     </message>
@@ -648,7 +648,7 @@ An AI-powered tool to clean manga panels.</source>
     <message>
         <location filename="../pcleaner/gui/error_dialog_driver.py" line="45"/>
         <source>Note: Name &quot;{name}&quot; was hidden</source>
-        <translation>참고: 이름 &quot;{name}&quot;은 숨겨졌습니다</translation>
+        <translation>참고: 로그에서 사용자 이름 &quot;{name}&quot;은(는) 가려졌습니다</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/error_dialog_driver.py" line="86"/>
@@ -859,27 +859,27 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="470"/>
         <source>Number of boxes removed by the OCR model / total boxes</source>
-        <translation>OCR 모델에 의해 지워진 박스 수 / 전체 박스 수</translation>
+        <translation>OCR 모델에 의해 지워진 글자 영역 수 / 전체 글자 영역 수</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="474"/>
         <source>Number of boxes that failed to generate a mask / total boxes</source>
-        <translation>마스크 생성에 실패한 박스 수 / 전체 박스 수</translation>
+        <translation>마스크 생성에 실패한 영역 수 / 전체 글자 영역 수</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="476"/>
         <source>Number of boxes that were perfectly masked / total boxes</source>
-        <translation>완전히 마스크가 만들어진 박스 수 / 전체 박스 수</translation>
+        <translation>성공적으로 생성된 마스크 개수 / 전체 글자 영역 수</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="478"/>
         <source>Number of boxes that were denoised / total boxes</source>
-        <translation>노이즈가 제거된 박스 수 / 전체 박스 수</translation>
+        <translation>노이즈 감소된 영역 수 / 전체 글자 영역 수</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="480"/>
         <source>Number of boxes that were inpainted</source>
-        <translation>인페인팅 된 박스 수</translation>
+        <translation>인페인팅 된 영역 수</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="519"/>
@@ -894,7 +894,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="538"/>
         <source>Open individual cleaning</source>
-        <translation>개별 클리닝 열기</translation>
+        <translation>개별 편집 화면 열기</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/file_table.py" line="549"/>
@@ -1190,7 +1190,7 @@ Please enable inpainting in the profile settings and try again.</source>
     <message>
         <location filename="../ui_files/IssueReporter.ui" line="23"/>
         <source>Consider including the log for the session that had an issue, if applicable.</source>
-        <translation>해당되는 경우, 문제가 발생한 세션의 로그를 포함하는 것이 좋습니다.</translation>
+        <translation>가능하면 문제가 발생한 세션의 로그를 포함하는 것이 좋습니다.</translation>
     </message>
     <message>
         <location filename="../ui_files/IssueReporter.ui" line="32"/>
@@ -1220,7 +1220,7 @@ Please enable inpainting in the profile settings and try again.</source>
     <message>
         <location filename="../pcleaner/gui/issue_reporter_driver.py" line="49"/>
         <source>Note: Name &quot;{name}&quot; was hidden</source>
-        <translation>참고: 이름 &quot;{name}&quot;은 숨겨졌습니다</translation>
+        <translation>참고: 로그에서 사용자 이름 &quot;{name}&quot;은(는) 가려졌습니다</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/issue_reporter_driver.py" line="86"/>
@@ -1240,22 +1240,22 @@ Please enable inpainting in the profile settings and try again.</source>
     <message>
         <location filename="../pcleaner/gui/issue_reporter_driver.py" line="99"/>
         <source>Error</source>
-        <translation>오류</translation>
+        <translation>개 오류</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/issue_reporter_driver.py" line="100"/>
         <source>Errors</source>
-        <translation>오류</translation>
+        <translation>개 오류</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/issue_reporter_driver.py" line="105"/>
         <source>Critical</source>
-        <translation>심각</translation>
+        <translation>개 심각한 오류</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/issue_reporter_driver.py" line="106"/>
         <source>Criticals</source>
-        <translation>심각</translation>
+        <translation>개 심각한 오류</translation>
     </message>
 </context>
 <context>
@@ -1327,7 +1327,7 @@ Continue anyway?</source>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="904"/>
         <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
-        <translation>머신 러닝 모델을 삭제하시겠습니까? 다시 다운로드할 때까지 클리닝 및 OCR이 불가능해집니다.</translation>
+        <translation>머신 러닝 모델을 삭제하시겠습니까? 다시 다운로드할 때까지 글자 지우기 및 OCR이 불가능해집니다.</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="749"/>
@@ -1367,7 +1367,7 @@ Switch to the new model?</source>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="806"/>
         <source>The window layout has been reset. The default layout will be used next time.</source>
-        <translation>창의 레이아웃을 초기화합니다. 다음부터 기본값이 적용됩니다.</translation>
+        <translation>화면의 레이아웃을 초기화합니다. 다음부터 기본값이 적용됩니다.</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="855"/>
@@ -1493,7 +1493,7 @@ Switch to the new model?</source>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="1350"/>
         <source>Are you sure you want to delete the profile {profile_name}?</source>
-        <translation>정말로 프로파일 {profile_name}을 삭제하시겠습니까?</translation>
+        <translation>정말로 프로파일 {profile_name}을(를) 삭제하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="1364"/>
@@ -1619,7 +1619,8 @@ Check the online documentation for how to add support for more languages.</sourc
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="1775"/>
         <location filename="../ui_files/Mainwindow.ui" line="660"/>
         <source>cleaned</source>
-        <translation>정리된이미지</translation>
+        <translatorcomment>내보내기 저장 폴더의 기본 폴더명?</translatorcomment>
+        <translation>cleaned</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="1837"/>
@@ -1674,7 +1675,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="1073"/>
         <source>After processing, the &quot;{action}&quot; action will be executed.</source>
-        <translation>처리가 완료된 후 작업 &quot;{action}&quot;이 실행됩니다.</translation>
+        <translation>처리가 완료된 후 작업 &quot;{action}&quot;이(가) 실행됩니다.</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="1126"/>
@@ -1762,7 +1763,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="170"/>
         <source>Drag and Drop Images or Folders Here</source>
-        <translation>폴더나 이미지를 여기에 끌고오세요</translation>
+        <translation>폴더나 이미지를 여기로 끌고오세요</translation>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="228"/>
@@ -1778,7 +1779,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="293"/>
         <source>Size</source>
-        <translation>크기</translation>
+        <translation>해상도</translation>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="298"/>
@@ -1811,7 +1812,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="356"/>
         <source>Cleaning</source>
-        <translation>지우기</translation>
+        <translation>글자 지우기</translation>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="366"/>
@@ -1821,7 +1822,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="388"/>
         <source>Edit Existing Output</source>
-        <translation>존재하는 출력 수정</translation>
+        <translation>이전 인식 결과 수정</translation>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="399"/>
@@ -1878,7 +1879,7 @@ Check the online documentation for how to add support for more languages.</sourc
         <location filename="../ui_files/Mainwindow.ui" line="630"/>
         <source>You can use a relative path to create a subfolder at the image&apos;s original location, or use an absolute path.</source>
         <extracomment>The &amp;apos; is the possessive &apos;s apostrophe and should be ignored if the language doesn&apos;t call for it.</extracomment>
-        <translation>이미지의 원래 위치를 기준으로 하위 폴더를 만들기 위해 상대 경로 를 쓰거나 절대 경로를 사용할 수 있습니다.</translation>
+        <translation>상대 경로 또는 절대 경로를 사용할 수 있으며, 상대 경로의 경우 기준은 이미지의 위치입니다.</translation>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="703"/>
@@ -1942,8 +1943,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="1190"/>
         <source>Set Default</source>
-        <translatorcomment>기본으로 설정</translatorcomment>
-        <translation>Set Default</translation>
+        <translation>사용할 프로파일</translation>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="1206"/>
@@ -2025,7 +2025,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="1498"/>
         <source>Configure Post-Run Actions...</source>
-        <translation>후속 작업 설정하기...</translation>
+        <translation>후속 작업 구성하기...</translation>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="1286"/>
@@ -2035,7 +2035,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="557"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the outputs are saved on disk. Otherwise, you can only preview them in the image details view or the Output Review, if enabled. &lt;/p&gt;&lt;p&gt;If the profile remains unchanged after cleaning without this option enabled, you can quickly export them by running the cleaner again with this option enabled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 옵션을 선택하면 결과물이 저장됩니다. 그렇지 않으면 이미지 세부 정보 보기 또는 검토(활성화한 경우) 작업만 할 수 있습니다. &lt;/p&gt;&lt;p&gt;이 옵션을 활성화하지 않은 상태에서 작업 후 프로파일이 변경되지 않았다면 이 옵션을 활성화한 상태에서 지우기 작업을 다시 실행하여 빠르게 내보낼 수 있습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;체크하면 결과물이 저장됩니다. 그렇지 않으면 이미지 세부 정보 보기 또는 검토 작업(설정한 경우)만 할 수 있습니다. &lt;/p&gt;&lt;p&gt;이 옵션을 체크하지 않은 상태에서 작업 후 프로파일이 변경되지 않았다면 이 옵션을 체크하고 지우기 작업을 다시 실행하면 빠르게 내보낼 수 있습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ui_files/Mainwindow.ui" line="713"/>
@@ -2225,7 +2225,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/OCRLanguageSupport.ui" line="88"/>
         <source>MangaOCR</source>
-        <translation>MangaOCR</translation>
+        <translation>Manga OCR</translation>
     </message>
     <message>
         <location filename="../ui_files/OCRLanguageSupport.ui" line="93"/>
@@ -2248,7 +2248,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/OcrReview.ui" line="79"/>
         <source>Icon Size:</source>
-        <translation>아이콘 크기:</translation>
+        <translation>썸네일 크기:</translation>
     </message>
     <message>
         <location filename="../ui_files/OcrReview.ui" line="99"/>
@@ -2283,12 +2283,12 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/OcrReview.ui" line="299"/>
         <source>With Boxes</source>
-        <translation>박스와 함께</translation>
+        <translation>인식 구역 표시</translation>
     </message>
     <message>
         <location filename="../ui_files/OcrReview.ui" line="304"/>
         <source>Original</source>
-        <translation>원본</translation>
+        <translation>원본 이미지만</translation>
     </message>
     <message>
         <location filename="../ui_files/OcrReview.ui" line="319"/>
@@ -2303,7 +2303,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/OcrReview.ui" line="353"/>
         <source>Add a new box</source>
-        <translation>새 박스 추가</translation>
+        <translation>새 영역 추가</translation>
     </message>
     <message>
         <location filename="../ui_files/OcrReview.ui" line="369"/>
@@ -2328,7 +2328,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/OcrReview.ui" line="437"/>
         <source>OCR new boxes:</source>
-        <translation>새 박스 OCR:</translation>
+        <translation>새 영역 추가 OCR:</translation>
     </message>
     <message>
         <location filename="../ui_files/OcrReview.ui" line="447"/>
@@ -2371,7 +2371,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../pcleaner/gui/ocr_review_driver.py" line="555"/>
         <source>Are you sure you want to reset all boxes for this image?</source>
-        <translation>이 이미지의 모든 박스를 초기화하시겠습니까?</translation>
+        <translation>이 이미지의 모든 영역을 초기화하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/ocr_review_driver.py" line="632"/>
@@ -2429,7 +2429,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/OutputReview.ui" line="73"/>
         <source>Icon Size:</source>
-        <translation>아이콘 크기:</translation>
+        <translation>썸네일 크기:</translation>
     </message>
     <message>
         <location filename="../ui_files/OutputReview.ui" line="93"/>
@@ -2474,12 +2474,12 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/OutputReview.ui" line="305"/>
         <source>Swipe</source>
-        <translation>넘기기</translation>
+        <translation>스와이프</translation>
     </message>
     <message>
         <location filename="../ui_files/OutputReview.ui" line="310"/>
         <source>Onion</source>
-        <translation>양파껍질</translation>
+        <translation>글자 오버레이</translation>
     </message>
     <message>
         <location filename="../ui_files/OutputReview.ui" line="315"/>
@@ -2489,7 +2489,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/OutputReview.ui" line="320"/>
         <source>Overlay</source>
-        <translation>오버레이</translation>
+        <translation>마스크 오버레이</translation>
     </message>
     <message>
         <location filename="../ui_files/OutputReview.ui" line="328"/>
@@ -2545,7 +2545,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="29"/>
         <source>Wait before performing an action:</source>
-        <translation>작업 시작하기 전 대기 시간:</translation>
+        <translation>작업을 시작하기 전 대기 시간:</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="36"/>
@@ -2556,7 +2556,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="49"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you set a wait time greater than 0, a window will open upon process completion. This window will show a countdown and allow you to preview as well as edit the command.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;대기 시간을 0 이상으로 설정하면 이미지 처리 완료 후 창이 열립니다. 해당 창에서는 카운트다운이 표시되며 명령어를 미리 보고 편집할 수 있습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;대기 시간을 0보다 크게 설정하면 이미지 처리 완료 후 창이 열립니다. 해당 창에서는 카운트다운이 표시되며 명령어를 미리 보고 편집할 수 있습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="101"/>
@@ -2621,7 +2621,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="323"/>
         <source>Input Files</source>
-        <translation>입력 파일</translation>
+        <translation>원본 파일 경로</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="338"/>
@@ -2632,12 +2632,12 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="345"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file processed, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;처리된 파일들 각각의 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;원본 이미지들의 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="373"/>
         <source>Input Directory</source>
-        <translation>입력 폴더</translation>
+        <translation>원본 폴더 경로</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="388"/>
@@ -2648,12 +2648,12 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="395"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;파일들을 부모 디렉토리로 그룹화하여 그 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;원본 이미지들이 들어있던 폴더의 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="427"/>
         <source>Output Files</source>
-        <translation>출력 파일</translation>
+        <translation>결과물 저장 경로</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="442"/>
@@ -2664,12 +2664,12 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="449"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file created as an output, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;출력으로 생성된 파일들 각각의 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;완성된 결과물 이미지들이 저장된 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="477"/>
         <source>Output Directory</source>
-        <translation>출력 폴더</translation>
+        <translation>결과물 저장 폴더 경로</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="492"/>
@@ -2680,12 +2680,12 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="499"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group output files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;출력으로 생성된 파일들을 부모 디렉토리로 그룹화하여 그 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;완성된 결과물 이미지들이 저장된 폴더의 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="531"/>
         <source>Profile Used</source>
-        <translation>사용할 프로파일</translation>
+        <translation>프로파일 이름</translation>
     </message>
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="546"/>
@@ -2696,7 +2696,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/PostActionConfiguration.ui" line="553"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of the profile used, with quotation marks if necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;사용된 프로파일의 이름이며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;작업에 사용된 프로파일의 이름이며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/post_action_config.py" line="142"/>
@@ -2779,7 +2779,7 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../pcleaner/gui/post_action_runner.py" line="85"/>
         <source>Running the action &quot;{action_name}&quot;</source>
-        <translation>실행중인 작업: {action_name}</translation>
+        <translation>작업: {action_name}</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/post_action_runner.py" line="154"/>
@@ -2798,7 +2798,7 @@ Check the online documentation for how to add support for more languages.</sourc
         <location filename="process_strings.py" line="15"/>
         <source>The original image with scaling applied (if needed).</source>
         <comment>Step description in the image details view, step: Input, output: Input</comment>
-        <translation>스케일링이 적용된 원본 이미지 (필요한 경우).</translation>
+        <translation>원본 이미지입니다. 필요한 경우 사이즈가 변경될 수 있습니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="16"/>
@@ -2816,7 +2816,7 @@ Check the online documentation for how to add support for more languages.</sourc
         <location filename="process_strings.py" line="19"/>
         <source>The rough mask generated by the AI.</source>
         <comment>Step description in the image details view, step: Text Detection, output: AI Mask</comment>
-        <translation>AI가 생성한 마스크 초안.</translation>
+        <translation>AI가 생성한 마스크 초안입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="20"/>
@@ -2834,19 +2834,19 @@ Check the online documentation for how to add support for more languages.</sourc
         <location filename="process_strings.py" line="23"/>
         <source>The unfiltered box data generated by the AI.</source>
         <comment>Step description in the image details view, step: Text Detection, output: Raw Boxes</comment>
-        <translation>AI가 생성한 필터링되지 않은 박스 데이터.</translation>
+        <translation>AI가 생성한 필터링되지 않은 글자 영역입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="25"/>
         <source>Raw Boxes</source>
         <comment>Output name in the image details view</comment>
-        <translation>로우 박스</translation>
+        <translation>원시 영역</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="26"/>
         <source>The outlines of the text boxes the AI found.</source>
         <comment>Step description in the image details view, step: Preprocessor, output: Initial Boxes</comment>
-        <translation>AI가 찾은 글자 박스의 윤곽선.</translation>
+        <translation>AI가 찾은 글자 영역입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="27"/>
@@ -2858,81 +2858,81 @@ Check the online documentation for how to add support for more languages.</sourc
         <location filename="process_strings.py" line="29"/>
         <source>Initial Boxes</source>
         <comment>Output name in the image details view</comment>
-        <translation>초기 박스</translation>
+        <translation>초기 글자 영역</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="30"/>
         <source>The final boxes after expanding, merging and filtering unneeded boxes with OCR.
 Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: reference boxes for denoising.</source>
         <comment>Step description in the image details view, step: Preprocessor, output: Final Boxes</comment>
-        <translation>OCR로 불필요한 박스를 확장, 병합 및 필터링한 후의 최종 박스입니다.
-녹색: 초기 박스. 빨간색: 확장된 박스. 보라색: 병합된(최종) 박스. 파란색: 노이즈 감소를 위한 참조 박스.</translation>
+        <translation>OCR로 글자 영역들을 확장, 병합, 필터링 처리한 후의 최종적인 글자 영역입니다.
+녹색: 초기 글자 영역. 빨간색: 확장 글자 영역. 보라색: 병합된(최종) 글자 영역. 파란색: 노이즈 감소를 위한 참조 영역.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="32"/>
         <source>Final Boxes</source>
         <comment>Output name in the image details view</comment>
-        <translation>최종 박스</translation>
+        <translation>최종 글자 영역</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="33"/>
         <source>The mask of the merged boxes.</source>
         <comment>Step description in the image details view, step: Masker, output: Box Mask</comment>
-        <translation>병합된 박스들의 마스크.</translation>
+        <translation>병합된 글자 영역들의 마스크입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="34"/>
         <source>Masker</source>
         <comment>Step name in the image details view</comment>
-        <translation>마스커</translation>
+        <translation>마스크</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="36"/>
         <source>Box Mask</source>
         <comment>Output name in the image details view</comment>
-        <translation>박스 마스크</translation>
+        <translation>글자 영역 마스크</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="37"/>
         <source>The rough text detection mask with everything outside the box mask cut out.</source>
         <comment>Step description in the image details view, step: Masker, output: Cut Mask</comment>
-        <translation>박스 마스크 외부의 모든 것을 잘라낸 텍스트 인식 마스크 초안.</translation>
+        <translation>글자 마스크의 초안입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="39"/>
         <source>Cut Mask</source>
         <comment>Output name in the image details view</comment>
-        <translation>마스크 자르기</translation>
+        <translation>글자 마스크</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="40"/>
         <source>The different steps of growth around the cut mask displayed in different colors.</source>
         <comment>Step description in the image details view, step: Masker, output: Mask Layers</comment>
-        <translation>컷 마스크 주변의 각 확장 단계는 다양한 색으로 표시됩니다.</translation>
+        <translation>마스크 주변의 각 확장 단계를 여러가지 색으로 표시합니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="42"/>
         <source>Mask Layers</source>
         <comment>Output name in the image details view</comment>
-        <translation>마스크 레ㅣ어</translation>
+        <translation>마스크 확장 단계</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="43"/>
         <source>The standard deviation (σ) and outline thickness (in pixels) of each best mask chosen, if any. Lower σ is better, from perfect (purple) to failed (red).</source>
         <comment>Step description in the image details view, step: Masker, output: Fitment Quality</comment>
-        <translation>선택된 최적 마스크 각각의 표준 편차(σ)와 윤곽선 두께(픽셀 단위)를 표시합니다. 표준 편차 값이 낮을수록 더 좋으며, 완벽한 경우는 보라색, 실패한 경우는 빨간색으로 표시됩니다.</translation>
+        <translation>선택된 최적 마스크 각각의 표준 편차(σ)와 두께(픽셀 단위)를 표시합니다. 표준 편차 값이 낮을수록 더 좋은 마스크이며, 완벽한 경우는 보라색, 마스크 생성에 실패한 경우는 빨간색으로 표시됩니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="45"/>
         <source>Fitment Quality</source>
         <comment>Output name in the image details view</comment>
-        <translation>적합 품질</translation>
+        <translation>최적 마스크</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="46"/>
         <source>The input image with the final mask overlaid in color.</source>
         <comment>Step description in the image details view, step: Masker, output: Mask Overlay</comment>
-        <translation>최종 마스크가 색상으로 오버레이된 입력 이미지입니다.</translation>
+        <translation>최종 마스크를 색상으로 오버레이한 이미지입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="48"/>
@@ -2944,7 +2944,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="process_strings.py" line="49"/>
         <source>The collection of masks for each bubble that fit best.</source>
         <comment>Step description in the image details view, step: Masker, output: Final Mask</comment>
-        <translation>각 말풍선에 가장 잘 맞는 마스크들의 모음입니다.</translation>
+        <translation>각 말풍선의 최적 마스크들입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="51"/>
@@ -2956,31 +2956,31 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="process_strings.py" line="52"/>
         <source>The text layer isolated from the input image.</source>
         <comment>Step description in the image details view, step: Masker, output: Isolated Text</comment>
-        <translation>입력 이미지에서 분리된 글자 레이어입니다.</translation>
+        <translation>이미지에서 분리된 글자 레이어입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="54"/>
         <source>Isolated Text</source>
         <comment>Output name in the image details view</comment>
-        <translation>분리된 글자</translation>
+        <translation>글자 추출</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="55"/>
         <source>The input image with the final mask applied.</source>
         <comment>Step description in the image details view, step: Masker, output: Masked Output</comment>
-        <translation>최종 마스크가 적용된 원본 이미지.</translation>
+        <translation>최종 마스크가 적용된 이미지입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="57"/>
         <source>Masked Output</source>
         <comment>Output name in the image details view</comment>
-        <translation>마스크 처리된 출력</translation>
+        <translation>마스크 처리된 결과</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="58"/>
         <source>The masks that required denoising, to be overlaid on the final mask when exporting.</source>
         <comment>Step description in the image details view, step: Denoiser, output: Denoise Mask</comment>
-        <translation>노이즈 감소가 필요했던 마스크로, 내보낼 때 최종 마스크 위에 오버레이됩니다.</translation>
+        <translation>노이즈 감소 작업이 필요했던 마스크로, 내보낼 때 최종 마스크 위에 오버레이됩니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="59"/>
@@ -2998,7 +2998,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="process_strings.py" line="62"/>
         <source>The input image with the denoised mask applied.</source>
         <comment>Step description in the image details view, step: Denoiser, output: Denoised Output</comment>
-        <translation>노이즈 감소된 마스크가 적용된 원본 이미지.</translation>
+        <translation>노이즈 감소된 마스크가 적용된 원본 이미지입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="64"/>
@@ -3010,7 +3010,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="process_strings.py" line="65"/>
         <source>The inpainted sections around the text that was poorly cleaned, if at all.</source>
         <comment>Step description in the image details view, step: Inpainter, output: Inpainted Mask</comment>
-        <translation>만약 존재한 경우, 제대로 정리되지 않은 글자 주변 영역에 적용된 인페인팅 영역입니다.</translation>
+        <translation>제대로 지워지지 않은 글자 영역 주변에 적용된 인페인팅 결과입니다. 경우에 따라 아무것도 없을 수 있습니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="66"/>
@@ -3028,7 +3028,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="process_strings.py" line="69"/>
         <source>The input image: cleaned, denoised (if enabled), and inpainted.</source>
         <comment>Step description in the image details view, step: Inpainter, output: Inpainted Output</comment>
-        <translation>정리, 노이즈 감소(활성화 된 경우), 인페인팅 된 이미지.</translation>
+        <translation>지우기, 노이즈 감소, 인페인팅이 모두 적용된 최종 이미지입니다.</translation>
     </message>
     <message>
         <location filename="process_strings.py" line="71"/>
@@ -3097,7 +3097,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="38"/>
         <source>The image will be scaled down, processed, and then only the mask is scaled back up. Meaning that the cleaned output will still use the original, unscaled image to prevent any loss in quality. Only the height of the image is used to determine the scale factor, preserving the aspect ratio, and ignoring the individual width of an image so that the factor remains consistent if one of the pages is a double page spread.</source>
         <comment>Profile comment in General</comment>
-        <translation>이미지가 축소되고 처리된 다음, 마스크만 다시 확대됩니다. 즉, 처리된 결과물에는 품질 손실 방지를 위해 크기 조정이 되지 않은 원본 이미지가 그대로 사용됩니다. 이미지의 높이만 배율을 결정하는 데 사용되므로 이미지 전체의 비율은 유지되고 각 너비는 무시되므로 이미지 중 하나가 두 페이지를 담고 있는 경우 배율이 일관되게 유지됩니다.</translation>
+        <translation>이미지가 축소되어 처리된 다음, 마스크만 다시 확대됩니다. 즉, 처리된 결과물에는 품질 손실 방지를 위해 크기 조정이 되지 않은 원본 이미지가 그대로 사용됩니다. 이미지의 높이만 배율을 결정하는 데 사용되므로 이미지 전체의 비율은 유지되고 각 너비는 무시되므로 이미지 중 하나가 두 페이지를 담고 있는 경우 배율이 일관되게 유지됩니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="40"/>
@@ -3121,7 +3121,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="46"/>
         <source>Split long strips into individual pages. If enabled, instead of squeezing the entire strip to fit into the preferred height, the strip will be split into individual pages, each fitting the preferred height plus/minus double the split tolerance margin (if the segment was in the middle of the strip).</source>
         <comment>Profile comment in General</comment>
-        <translation>긴 콘텐츠를 개별 페이지로 분할합니다. 활성화하면 전체 콘텐츠를 원하는 높이로 맞추기 위해 찌그러뜨리지 않고 개별 이미지로 분할되는데, 이 때 높이는 &quot;분할 목표 높이&quot; ± (&quot;분할 여백 허용범위&quot; * 2)의 값 내에서 정해집니다.</translation>
+        <translation>긴 콘텐츠를 개별 페이지로 분할합니다. 활성화하면 전체 콘텐츠를 원하는 높이로 맞추기 위해 찌그러뜨리지 않고 개별 이미지로 분할하는데, 이 때 높이는 &quot;분할 목표 높이&quot; ± (&quot;분할 여백 허용범위&quot; * 2)의 값 내에서 정해집니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="48"/>
@@ -3157,7 +3157,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="58"/>
         <source>Aspect ratio to use for splitting long strips. This is the ratio of the width to the height of the image. If the image&apos;s aspect ratio is smaller than this value, it will be considered a long strip.&lt;br&gt; Example: 0.3 means that the width of the image is 0.3 times the height.</source>
         <comment>Profile comment in General</comment>
-        <translation>긴 이미지를 분할할 때 사용할 종횡비로, 이미지의 너비와 높이의 비율입니다. 이미지의 종횡비가 이 값보다 작으면 긴 이미지로 간주합니다.&lt;br&gt;예시: 0.3은 이미지의 너비가 높이의 0.3배임을 의미합니다.</translation>
+        <translation>긴 이미지를 분할할 때 사용할 기준 종횡비로, 이미지의 너비와 높이의 비율입니다. 이미지의 종횡비가 이 값보다 작으면 긴 이미지로 간주합니다.&lt;br&gt;예시: 0.3은 이미지의 너비가 높이의 0.3배임을 의미합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="60"/>
@@ -3181,13 +3181,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="66"/>
         <source>Maximum number of threads to use for exporting images. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
         <comment>Profile comment in General</comment>
-        <translation>이미지 내보내기에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용 가능한 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 무작위 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
+        <translation>이미지 내보내기에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용 가능한 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="68"/>
         <source>Max Threads Export</source>
         <comment>Profile entry in General</comment>
-        <translation>내보내기 최대 코어 수</translation>
+        <translation>내보내기 시 사용할 최대 코어 수</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="70"/>
@@ -3200,7 +3200,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <source>Path to the text detection model, leave empty to use the built-in model. It is only recommended to override this if the version downloaded automatically is older than the latest release. The path must point directly to the comictextdetector.pt (CUDA) or comictextdetector.pt.onnx (CPU) file. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</source>
         <oldsource>Path to the text detection model, leave empty to use the built-in model. You can download older versions of the model  &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here.&lt;/a&gt;</oldsource>
         <comment>Profile comment in Text Detector</comment>
-        <translation>글자 감지 모델의 경로이며, 비워둘 경우 내장 모델이 사용됩니다. 자동으로 다운로드 된 모델의 버전이 최신 버전이 아닐 경우에만 이 경로를 재정의 하는 것이 좋습니다. 이 경로는  comictextdetector.pt (CUDA)또는 comictextdetector.pt.onnx (CPU)파일을 가리켜야합니다. 이전 버전의 모델 &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;다운로드&lt;/a&gt;</translation>
+        <translation>글자 감지 모델의 경로이며, 비워둘 경우 내장 모델이 사용됩니다. 자동으로 다운로드 된 모델의 버전이 최신 버전이 아닐 경우에만 이 경로를 재정의 하는 것이 좋습니다. 이 경로는  comictextdetector.pt (CUDA 사용)또는 comictextdetector.pt.onnx (CPU 사용)파일을 가리켜야합니다.&lt;br&gt;이전 버전의 모델 &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;다운로드&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="74"/>
@@ -3225,55 +3225,55 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="80"/>
         <source>Preprocessor</source>
         <comment>Profile section title</comment>
-        <translation>처리기</translation>
+        <translation>전처리기</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="82"/>
         <source>Box sizes are given in the total number of pixels, so a box of 200x200 pixels has a size of 200 * 200 = 40000.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>박스 크기는 총 픽셀 수로 지정됩니다. 따라서 200x200픽셀의 경우 200px * 200px = 40000px²입니다.</translation>
+        <translation>글자 영역 크기는 총 픽셀 수로 지정됩니다. 따라서 200x200픽셀의 경우 200px * 200px = 40000px²입니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="84"/>
         <source>Minimum size of any box to keep it.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>유지할 박스의 최소 크기.</translation>
+        <translation>지우지 않고 유지할 글자 영역의 최소 크기 값입니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="86"/>
         <source>Box Min Size</source>
         <comment>Profile entry in Preprocessor</comment>
-        <translation>박스 최소 크기</translation>
+        <translation>글자 영역 최소 크기</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="88"/>
         <source>Minimum size of a box with &quot;unknown&quot; language to keep it. This language is typically assigned to logos and other badly behaved text elements.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>&quot;unknown(알 수 없는)&quot; 언어에 대한 유지할 박스의 크기. 알 수 없는 언어는 보통 로고나 잘못 인식된 텍스트 요소에서 발생합니다.</translation>
+        <translation>&quot;unknown(알 수 없는)&quot; 언어로 인식되는 글자 영역을 유지할 최소 크기. 알 수 없는 언어는 보통 로고나 잘못 인식된 텍스트 요소에서 발생합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="90"/>
         <source>Suspicious Box Min Size</source>
         <comment>Profile entry in Preprocessor</comment>
-        <translation>알 수 없는 박스 최소 크기</translation>
+        <translation>알 수 없는 글자 영역 최소 크기</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="92"/>
         <source>The minimum overlap between two boxes to merge them. This percentage (0-100) means how much of the smaller box must be inside the larger box to be merged. A higher value will require a larger overlap to merge the boxes.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>두 박스를 하나로 합칠 최소한의 겹침 비율입니다. 이 비율(0-100)은 작은 박스가 큰 박스에 얼마나 겹쳐져 포함되어 있는지에 대한 비율입니다. 값이 클수록 더 많이 겹쳐져야 병합됩니다.</translation>
+        <translation>두 글자 영역을 하나로 합칠 최소한의 겹침 비율입니다. 이 비율(0-100)은 작은 영역이 큰 영역에 얼마나 겹쳐져 포함되어 있는지에 대한 비율입니다. 값이 클수록 더 많이 겹쳐져야 병합됩니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="94"/>
         <source>Box Overlap Threshold</source>
         <comment>Profile entry in Preprocessor</comment>
-        <translation>박스 겹침 기준값</translation>
+        <translation>영역 겹침 기준값</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="96"/>
         <source>Whether to use OCR to detect boxes that aren&apos;t worth cleaning, like ones that only contain numbers or symbols.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>OCR을 사용하여 지울 필요가 없는 박스(숫자 혹은 특수문자만 있는 경우)를 감지할지 여부.</translation>
+        <translation>지울 필요가 없는 글자 영역(숫자 혹은 특수문자만 있는 경우)을 OCR을 사용하여 감지할지 여부.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="98"/>
@@ -3285,7 +3285,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="100"/>
         <source>Whether to use Tesseract to perform OCR tasks.&lt;br&gt; If checked, Tesseract OCR can be used for text extraction, if available.&lt;br&gt; If unchecked, the built-in OCR model (manga-ocr) is always used, which is best suited for vertical Japanese text.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>테서렉트를 사용하여 OCR을 할지 여부.&lt;br&gt;만약 활성화하면 사용 가능할 경우 테서렉트 OCR을 글자 감지에 사용합니다.&lt;br&gt;활성화하지 않으면 기본 내장 모델(manga-ocr)이 사용되며, 이는 세로쓰기로 된 일본어 텍스트에 가장 적합합니다.</translation>
+        <translation>테서렉트를 사용하여 OCR을 수행 할지 여부.&lt;br&gt;만약 활성화하면 사용 가능할 경우 테서렉트 OCR을 글자 감지에 사용합니다.&lt;br&gt;활성화하지 않으면 기본 내장 모델(manga-ocr)이 사용되며, 이는 세로쓰기로 된 일본어 텍스트에 가장 적합합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="102"/>
@@ -3297,7 +3297,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="104"/>
         <source>The language to use for OCR tasks. The text detector can detect Japanese and English, for anything else, select a language explicitly here. Detecting per box retains what the text detector detected, while per page will assign the most prominent language to the entire page.&lt;br&gt; Note: Only Japanese is supported out of the box, everything else requires Tesseract to be enabled and its associated language packs to be installed.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>OCR 작업시 사용할 언어. 글자 감지기는 일본어와 영어만 감지할 수 있으며, 다른 모든 언어는 여기서 명시적으로 선택할 수 있습니다. 박스 단위 감지의 경우 감지기가 감지한 언어를 유지하며, 페이지 단위 감지의 경우 페이지 전역에서 가장 눈에 띄는 언어를 사용합니다.&lt;br&gt;참고: 기본적으로 일본어만 지원되며, 다른 모든 언어는 테서렉트를 활성화하고 관련 언어 팩을 설치해야합니다.</translation>
+        <translation>OCR 작업시 사용할 언어. 글자 감지기는 일본어와 영어만 감지할 수 있으며, 다른 모든 언어는 여기서 명시적으로 선택할 수 있습니다. 영역 단위 감지의 경우 감지기가 감지한 언어를 유지하며, 페이지 단위 감지의 경우 페이지 전역에서 가장 눈에 띄는 언어를 사용합니다.&lt;br&gt;참고: 기본적으로 일본어만 지원되며, 다른 모든 언어는 테서렉트를 활성화하고 관련 언어 팩을 설치해야합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="106"/>
@@ -3309,7 +3309,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="108"/>
         <source>Specifies which engine to use for performing OCR.&lt;br&gt; - auto: Automatically selects the OCR engine based on the detected language of each text block within the image. Uses Manga Ocr for Japanese text, Tesseract for English or Unknown Text.&lt;br&gt; - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition tasks. Best suited for vertical Japanese text.&lt;br&gt; - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a versatile option that supports English and multiple other languages.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>OCR 작업시 사용할 엔진을 설정합니다.&lt;br&gt; -자동: 각 영역의 감지된 언어에 따라 자동으로 선택됩니다. 일본어는 Manga OCR을, 영어 또는 알 수 없는 텍스트에는 테서렉트를 사용합니다.&lt;br&gt; - manga ocr: 모든 텍스트 인식 작업에 대해 내장된 manga-ocr 모델을 사용하도록 강제합니다. 세로쓰기로 적힌 일본어 텍스트에 가장 적합합니다.&lt;br&gt; - 테서렉트: 모든 텍스트 인식 작업에 대해 테서렉트를 사용하도록 강제합니다. 영어 및 다른 언어들을 지원하는 범용 옵션입니다.</translation>
+        <translation>OCR 작업시 사용할 엔진을 설정합니다.&lt;br&gt; -자동: 각 영역의 감지된 언어에 따라 자동으로 선택됩니다. 일본어는 manga-ocr을, 영어 또는 알 수 없는 텍스트에는 테서렉트를 사용합니다.&lt;br&gt; - manga ocr: 모든 텍스트 인식 작업에 대해 내장된 manga-ocr 모델을 사용하도록 강제합니다. 세로쓰기로 적힌 일본어 텍스트에 가장 적합합니다.&lt;br&gt; - 테서렉트: 모든 텍스트 인식 작업에 대해 테서렉트를 사용하도록 강제합니다. 영어 및 다른 언어들을 지원하는 범용 옵션입니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="110"/>
@@ -3321,7 +3321,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="112"/>
         <source>Defines the reading order for processing and sorting text boxes on the entire page, not individual text blocks. This global setting influences how text boxes are ordered and presented for further processing.&lt;br&gt; - auto: Detects the reading order based on the detected language of each text block within the page.&lt;br&gt; - manga: Right-to-left, top-to-bottom order. Suitable for Japanese manga.&lt;br&gt; - comic: Left-to-right, top-to-bottom order. Suitable for Western comics and texts.&lt;br&gt; Choose based on the predominant layout of your content.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>페이지 전역에서 텍스트 박스를 처리하고 정렬하기위한 읽는 순서를 지정합니다. 이는 개별 텍스트 박스가 아닌 전체 페이지의 텍스트 박스 순서에 영향을 미칩니다. 이 전역 설정은 텍스트 박스가 어떤 순서로 정렬되고 후처리에 제공될지 결정합니다.&lt;br&gt; - 자동: 각 텍스트 박스에서 감지된 언어에 따라 자동으로 순서를 감지합니다.&lt;br&gt; - 망가: 오른쪽에서 왼쪽, 위에서 아래쪽 순서로, 일본 만화에 적합합니다.&lt;br&gt; - 코믹: 왼쪽에서 오른쪽, 위에서 아래쪽 순서로, 서양 만화에 적합합니다.&lt;br&gt;내용의 주요 배치 형식에 맞게 선택하세요.</translation>
+        <translation>페이지 전역에서 글자 영역을 처리하고 정렬하기위한 읽는 순서를 지정합니다. 이는 개별 영역이 아닌 전체 페이지의 글자 영역 순서에 영향을 미칩니다. 이 전역 설정은 글자 영역이 어떤 순서로 정렬되고 후처리에 사용될지 결정합니다.&lt;br&gt; - 자동: 각 글자 영역에서 감지된 언어에 따라 자동으로 순서를 감지합니다.&lt;br&gt; - 망가: 오른쪽에서 왼쪽, 위에서 아래쪽 순서로, 일본 만화에 적합합니다.&lt;br&gt; - 코믹: 왼쪽에서 오른쪽, 위에서 아래쪽 순서로, 서양 만화에 적합합니다.&lt;br&gt;내용의 주요 배치 형식에 맞게 선택하세요.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="114"/>
@@ -3333,7 +3333,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="116"/>
         <source>Maximum size of a box to perform OCR on. These useless boxes are usually small, and OCR is slow, so use this as a cutoff.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>OCR을 수행할 박스의 최대 크기입니다. 이런 불필요한 박스는 보통 크고, OCR을 느리게 만드므로 이 설정으로 제한할 수 있습니다.</translation>
+        <translation>OCR을 수행할 글자 영역의 최대 크기입니다. OCR이 불필요한 영역은 보통 크고, OCR을 느리게 만드므로 이 설정으로 제한할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="118"/>
@@ -3346,7 +3346,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</source>
         <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</oldsource>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>OCR 결과에 비교할 정규식 패턴. 이 패턴과 일치하는 모든것은 사용하지않습니다.&lt;br&gt;참고: MangaOCR 모델은 결과로 전각 문자를 반환하므로 패턴도 이에 맞춰야합니다.</translation>
+        <translation>OCR 결과에 비교할 정규식 패턴. 이 패턴에 일치하는 모든 인식 결과는 사용되지않습니다.&lt;br&gt;참고: manga-ocr 모델은 결과로 전각 문자를 반환하므로 패턴도 이에 맞춰야합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="122"/>
@@ -3359,7 +3359,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <source>The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
         <oldsource>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</oldsource>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>MangaOCR 모델은 일본어 텍스트만 처리할 수 있으므로 엄격 모드가 활성화되면 일본어임을 확신하지 못하는 글자 박스는 무시합니다. 간혹 숫자나 다른 특수 문자가 신뢰도를 떨어뜨려 언어를 감지할 수 없는 경우가 있는데, 엄격 모드를 비활성화하면 이러한 경우에는 무시되지 않습니다. 다른 언어라고 확신할 수 있는 박스들에 대해서는 이 설정과 관계없이 무시됩니다.&lt;br&gt;참고: 이 설정은 OCR 언어 옵션이 박스 단위 감지 혹은 페이지 단위 감지로 설정된 경우에만 유효합니다.</translation>
+        <translation>manga-ocr 모델은 일본어 텍스트만 처리할 수 있으므로 엄격 모드가 활성화되면 일본어임을 확신하지 못하는 글자 영역은 무시합니다. 간혹 숫자나 다른 특수 문자가 신뢰도를 떨어뜨려 언어를 감지할 수 없는 경우가 있는데, 엄격 모드를 비활성화하면 이러한 경우에는 무시되지 않습니다. 다른 언어라고 확신할 수 있는 영역들에 대해서는 이 설정과 관계없이 무시됩니다.&lt;br&gt;참고: 이 설정은 OCR 언어 옵션이 영역 단위 감지 혹은 페이지 단위 감지로 설정된 경우에만 유효합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="126"/>
@@ -3371,56 +3371,56 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="128"/>
         <source>Padding to add to each side of a box. This is added to the initial boxes created by the text detector AI. These boxes are visualized in green.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>박스 각 테두리에 추가할 외부 여백(패딩).이 여백은 글자 감지기 AI가 처음 만든 박스에 추가되며, 녹색으로 시각화됩니다.</translation>
+        <translation>글자 영역 주위에 추가할 여백입니다.이 여백은 글자 감지기 AI가 처음 만든 초기 글자 영역에 추가되며, 녹색으로 시각화됩니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="130"/>
         <source>Box Padding Initial</source>
         <comment>Profile entry in Preprocessor</comment>
-        <translation>초기 박스 패딩</translation>
+        <translation>초기 글자 영역 여백</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="132"/>
         <location filename="profile_strings.py" line="140"/>
         <source>Padding to add to the right side of a box. This extension helps to cover rubytext that floats off to the right of vertical text.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>박스의 오른쪽에 추가할 패딩. 이 여백은 세로 쓰기로 된 글자의 오른쪽에 위치한 루비 텍스트를 덮는 데 도움이 됩니다.</translation>
+        <translation>영역의 오른쪽에 추가할 여백. 이 여백은 세로 쓰기로 된 글자의 오른쪽에 위치한 루비 텍스트를 덮는 데 도움이 됩니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="134"/>
         <source>Box Right Padding Initial</source>
         <comment>Profile entry in Preprocessor</comment>
-        <translation>초기 박스 오른쪽 패딩</translation>
+        <translation>초기 글자 영역 오른쪽 여백</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="136"/>
         <source>Padding to add to each side of a box. This is added to an extended set of boxes, used to cut out false positives by the text detector AI&apos;s mask. These boxes are visualized in purple.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>박스 각 테두리에 추가할 패딩. 이 여백은 글자 감지기 AI의 오탐을 제거하는데 사용되는 확장된 박스들에 추가되며, 보라색으로 시각화됩니다.</translation>
+        <translation>글자 영역 주위에 추가할 여백입니다. 이 여백은 글자 감지기 AI의 오탐을 제거하는데 사용되는 확장 글자 영역들에 추가되며, 보라색으로 시각화됩니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="138"/>
         <source>Box Padding Extended</source>
         <comment>Profile entry in Preprocessor</comment>
-        <translation>확장 박스 패딩</translation>
+        <translation>확장 글자 영역 여백</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="142"/>
         <source>Box Right Padding Extended</source>
         <comment>Profile entry in Preprocessor</comment>
-        <translation>확장 박스 오른쪽 패딩</translation>
+        <translation>확장 글자 영역 오른쪽 여백</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="144"/>
         <source>Padding to add to each side of a box. This is added to the reference boxes used to sample the original image while analyzing what mask to use. These boxes are visualized in blue.</source>
         <comment>Profile comment in Preprocessor</comment>
-        <translation>박스 각 테두리에 추가할 패딩. 이 여백은 어떤 마스크를 사용할지 분석할 때 원본 이미지를 샘플링하는 데 사용되는 참조 박스에 추가되며, 파란색으로 시각화됩니다.</translation>
+        <translation>글자 영역 주위에 추가할 여백입니다. 이 여백은 어떤 마스크를 사용할지 분석할 때 원본 이미지를 샘플링하는 데 사용되는 참조 영역에 추가되며, 파란색으로 시각화됩니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="146"/>
         <source>Box Reference Padding</source>
         <comment>Profile entry in Preprocessor</comment>
-        <translation>참조 박스 패딩</translation>
+        <translation>참조 영역 여백</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="148"/>
@@ -3432,7 +3432,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="150"/>
         <source>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
         <comment>Profile comment in Masker</comment>
-        <translation>마스크 생성에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용 가능한 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 무작위 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
+        <translation>마스크 생성에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용 가능한 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="152"/>
@@ -3444,7 +3444,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="154"/>
         <source>Number of pixels to grow the mask by each step. This bulks up the outline of the mask, so smaller values will be more accurate but slower.</source>
         <comment>Profile comment in Masker</comment>
-        <translation>단계별로 증가시킬 마스크의 필셀 수입니다. 이 값은 마스크의 테두리를 늘리므로 작은 값은 더 정확하지만 느립니다.</translation>
+        <translation>단계마다 마스크를 몇 필셀씩 늘릴지 정합니다. 이 값은 마스크의 주위를 늘리며 작은 값은 더 정확하지만 느립니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="156"/>
@@ -3456,7 +3456,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="158"/>
         <source>Number of steps to grow the mask by. A higher number will make more and larger masks, ultimately limited by the reference box size.</source>
         <comment>Profile comment in Masker</comment>
-        <translation>마스크를 확장해나갈 단계의 수입니다. 값이 클수록 점점 더 큰 마스크를 만들 수 있지만 최종적으로 참조 박스 크기보다 커질 수 없습니다.</translation>
+        <translation>마스크를 몇 단계까지 확장할지 정합니다. 값이 클수록 점점 더 큰 마스크를 만들 수 있지만 최종적으로 참조 영역 크기보다 커질 수 없습니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="160"/>
@@ -3468,7 +3468,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="162"/>
         <source>Minimum thickness of a mask.  This is like the first mask&apos;s growth step, the remaining will follow Mask Growth Step Pixels. This way, you can have a small step size for accuracy, but still prevent very thin masks that might be used to clean text only surrounded by an outline, when inpainting would&apos;ve been the better choice.</source>
         <comment>Profile comment in Masker</comment>
-        <translation>마스크의 최소 두께입니다. 이것은 마스크의 첫번째 단계 확장시의 두께와 같으며 이후로는 단계별 확장 필셀값을 따릅니다. 이렇게 하면 정확도를 위해 단계당 작은 확장 크기를 가질 수 있지만, 텍스트만 테두리가 둘러싸여 있는 매우 얇은 마스크를 방지할 수 있습니다. 이러한 경우에는 인페인팅이 더 적합한 선택일 수 있습니다.</translation>
+        <translation>마스크의 최소 두께입니다. 이 값은 마스크의 첫번째 단계 확장시의 두께와 같으며 이후로는 단계별 확장 필셀값을 따릅니다. 이렇게 하면 정확도를 위해 단계당 작은 확장 크기를 가질 수 있지만, 텍스트만 둘러싸는 매우 얇은 마스크를 방지할 수 있습니다. 이러한 경우에는 인페인팅이 더 적합한 선택일 수 있습니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="164"/>
@@ -3486,7 +3486,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="30"/>
         <source>Combine outputs into a single project file as layers. Currently supported formats: Photoshop PSD.&lt;br&gt; - none: Each image and mask are saved as basic files.&lt;br&gt; - psd-per-image: Images and masks are saved together in a PSD file per input image.&lt;br&gt;  - psd-bulk: All images and masks are saved together in a single PSD file, grouped by input image.</source>
         <comment>Profile comment in General</comment>
-        <translation>결과물을 레이어를 이용해 하나의 프로젝트 파일로 합칩니다. 현재 지원되는 형식은 Photoshop PSD입니다.&lt;br&gt; - 없음: 각 이미지와 마스크는 기본 파일 형식으로 저장됩니다.&lt;br&gt; - 개별 PSD: 하나의 원본 이미지에 대한 이미지 및 마스크를 하나의 PSD파일로 저장합니다.&lt;br&gt; - 단일 PSD: 각 원본 이미지에 대한 이미지 및 마스크를 그룹화하여 최종적으로 하나의 PSD에 모든 이미지의 결과물을 저장합니다.</translation>
+        <translation>결과물을 레이어를 이용해 하나의 프로젝트 파일로 합칩니다. 현재 지원되는 파일 형식은 Photoshop PSD입니다.&lt;br&gt; - 없음: 각 이미지와 마스크는 기본 파일 형식으로 저장됩니다.&lt;br&gt; - 개별 PSD: 하나의 원본 이미지에 대한 이미지 및 마스크를 하나의 PSD파일로 저장합니다.&lt;br&gt; - 단일 PSD: 각 원본 이미지에 대한 이미지 및 마스크를 그룹화하여 최종적으로 하나의 PSD에 모든 이미지의 결과물을 저장합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="32"/>
@@ -3498,7 +3498,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="166"/>
         <source>Whether to allow colored masks. When true, the masker will allow masks to use any color, not just white, black, or gray.</source>
         <comment>Profile comment in Masker</comment>
-        <translation>컬러 마스크를 허용할지 여부입니다. 허용하면 마스크는 흰색, 회색, 검정색뿐만 아니라 모든 색상이 사용될 수 있습니다.</translation>
+        <translation>컬러 마스크를 허용할지 여부입니다. 허용하면 마스크에는 흰색, 회색, 검정색뿐만 아니라 모든 색상이 사용될 수 있습니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="168"/>
@@ -3555,14 +3555,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
         <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
         <comment>Profile comment in Denoiser</comment>
-        <translation>노이즈 감소에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용 가능한 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 무작위 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
+        <translation>노이즈 감소에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용 가능한 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="204"/>
         <source>Max Threads</source>
         <comment>Profile entry in Denoiser</comment>
-        <translatorcomment>최대 코어수</translatorcomment>
-        <translation>Max Threads</translation>
+        <translation>최대 코어수</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="240"/>
@@ -3581,7 +3580,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="244"/>
         <source>Inpainting is when machine learning is used to replace the content of an image based on its surroundings. For masks that couldn&apos;t be cleaned well (or at all), inpainting can be used. To differentiate this from denoising, inpainting is meant for significantly worse masks that had a tight fit. Any masks that were denoised won&apos;t be inpainted.</source>
         <comment>Profile comment in Inpainter</comment>
-        <translation>인페인팅은 머신 러닝을 사용하요 주변 영역을 기반으로 이미지의 콘텐츠를 대체하는 기술입니다. 제대로 지워지지 않았거나 아예 지워지지 않은 마스크의 경우 인페인팅을 사용할 수 있습니다. 노이즈 감소와 구분하기 위해 마스크가 여유없이 덮고있는 경우에 사용됩니다. 노이즈가 제거된 마스크는 인페인팅이 되지 않습니다.</translation>
+        <translation>인페인팅은 머신 러닝을 사용하여 주변 영역을 기반으로 이미지의 영역을 대체하는 기술입니다. 제대로 지워지지 않았거나 아예 지워지지 않은 마스크의 경우 인페인팅을 사용할 수 있습니다. 노이즈 감소와 구분하기 위해 마스크가 여유없이 덮고있는 경우에 사용됩니다. 노이즈 감소가 된 마스크는 인페인팅이 되지 않습니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="246"/>
@@ -3679,7 +3678,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="278"/>
         <source>Detect per box</source>
         <comment>Language option for OCR</comment>
-        <translation>박스 단위 감지</translation>
+        <translation>영역 단위 감지</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="280"/>
@@ -4028,7 +4027,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="176"/>
         <source>The maximum standard deviation of a mask to consider. A high value here means a higher tolerance for the mask intersecting text or other objects, which isn&apos;t a good mask, as it will require inpainting anyway. Setting this to 0 will only allow perfect masks, which is recommended for very high resolution images.</source>
         <comment>Profile comment in Masker</comment>
-        <translation>고려할 마스크의 최대 표준 편차입니다. 여기서 값이 높을수록 텍스트나 다른 물체와 교차하는 마스크의 허용 오차가 커지며, 이는 어차피 다시 칠해야 하므로 좋은 마스크가 아닙니다. 이 값을 0으로 설정하면 완벽한 마스크만 허용되며, 이는 매우 높은 해상도의 이미지에 권장됩니다.</translation>
+        <translation>고려할 마스크의 최대 표준 편차입니다. 여기서 값이 높을수록 텍스트나 다른 물체와 교차하는 마스크의 허용 오차가 커지며, 이는 어차피 다시 칠해야 하므로 좋은 마스크가 아닙니다. 이 값을 0으로 설정하면 완벽한 마스크만 허용되며, 이는 매우 높은 해상도의 이미지에서 권장됩니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="178"/>
@@ -4058,7 +4057,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="194"/>
         <source>When a bit of text is hard to mask off, the cleaning step likely had to choose a small mask, which leaves a lot of jpeg-artifacts behind, if they were around the text.</source>
         <comment>Profile comment in Denoiser</comment>
-        <translation>텍스트를 마스킹하기 어려운 경우 작은 마스크가 필요할 수 있으며, 이로 인해 텍스트 주위에 많은 JPEG 아티팩트(노이즈)가 남을 수 있습니다.</translation>
+        <translation>글자를 마스킹하기 어려운 경우 작은 마스크가 필요할 수 있으며, 이로 인해 글자 주변에 많은 JPEG 아티팩트(노이즈)가 남을 수 있습니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="196"/>
@@ -4100,7 +4099,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="212"/>
         <source>The thickness of an outline to denoise around a mask.</source>
         <comment>Profile comment in Denoiser</comment>
-        <translation>마스크 주변의 노이즈를 제거할 범위의 두께입니다.</translation>
+        <translation>마스크 주변의 노이즈 감소를 수행할 범위의 두께입니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="214"/>
@@ -4118,7 +4117,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="218"/>
         <source>Noise Fade Radius</source>
         <comment>Profile entry in Denoiser</comment>
-        <translation>노이즈 혼합 반경</translation>
+        <translation>혼합 반경</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="220"/>
@@ -4160,25 +4159,25 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="232"/>
         <source>Size in pixels of the template patch that is used to compute weights. Should be odd.</source>
         <comment>Profile comment in Denoiser</comment>
-        <translation>가중치를 계산하는 데 사용되는 컨텍스트 창의 픽셀 단위 크기입니다. 홀수여야 합니다.</translation>
+        <translation>가중치를 계산하는 데 사용되는 컨텍스트 영역의 픽셀 단위 크기입니다. 홀수여야 합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="234"/>
         <source>Template Window Size</source>
         <comment>Profile entry in Denoiser</comment>
-        <translation>컨텍스트 창 크기</translation>
+        <translation>컨텍스트 영역 크기</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="236"/>
         <source>Size in pixels of the window that is used to compute weighted average for given pixel. Should be odd.</source>
         <comment>Profile comment in Denoiser</comment>
-        <translation>특정 픽셀에 대한 가중 평균을 계산하는 데 사용되는 픽셀 단위의 창 크기입니다. 홀수여야 합니다.</translation>
+        <translation>특정 픽셀에 대한 가중 평균을 계산하는 데 사용되는 픽셀 단위의 영역 크기입니다. 홀수여야 합니다.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="238"/>
         <source>Search Window Size</source>
         <comment>Profile entry in Denoiser</comment>
-        <translation>검색 창 크기</translation>
+        <translation>검색 영역 크기</translation>
     </message>
 </context>
 <context>
@@ -4211,7 +4210,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="../pcleaner/gui/profile_parser.py" line="242"/>
         <source>Same as image</source>
         <comment>Profile default option for the file type</comment>
-        <translation>이미지와 동일하게</translation>
+        <translation>원본 이미지와 동일하게</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/profile_parser.py" line="278"/>
@@ -4265,7 +4264,7 @@ You can download the model manually from &lt;a href=&quot;https://github.com/zyd
     <message>
         <location filename="../ui_files/SetupGreeter.ui" line="32"/>
         <source>## Setting up Panel Cleaner</source>
-        <translation>## 패널 설정</translation>
+        <translation>## 패널 클리너 설정</translation>
     </message>
     <message>
         <location filename="../ui_files/SetupGreeter.ui" line="58"/>
