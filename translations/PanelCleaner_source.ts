@@ -73,18 +73,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="373"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="379"/>
         <source>Error downloading file from url: {url}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="427"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="433"/>
         <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="436"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="442"/>
         <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
         <translation type="unfinished"></translation>
@@ -2118,24 +2118,26 @@ Check the online documentation for how to add support for more languages.</sourc
     </message>
     <message>
         <location filename="../pcleaner/gui/model_downloader_driver.py" line="193"/>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="254"/>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="338"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="195"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="257"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="341"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="343"/>
         <source>Download Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="241"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="244"/>
         <source>OCR download errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="281"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="284"/>
         <source>ETA</source>
         <comment>estimated time of completion</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="292"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="295"/>
         <location filename="../ui_files/ModelDownloader.ui" line="186"/>
         <source>Inpainting model</source>
         <translation type="unfinished"></translation>
@@ -3029,7 +3031,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2258"/>
+        <location filename="process_strings.py" line="72"/>
+        <source>&lt;This is just a placeholder, translating this string is not necessary&gt;</source>
+        <comment>Step description in the image details view, step: None, output: Write Output</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="process_strings.py" line="74"/>
         <source>Write Output</source>
         <comment>Output name in the image details view</comment>
         <translation type="unfinished"></translation>
