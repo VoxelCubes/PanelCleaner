@@ -73,19 +73,19 @@
         <translation>팔레트</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="373"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="379"/>
         <source>Error downloading file from url: {url}</source>
         <translation>다음 url에서 파일을 다운로드하는데 오류가 발생했습니다: {url}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="427"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="433"/>
         <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
         <translation>다음 url에서 파일을 다운로드하는데 오류가 발생했습니다: {url}
 파일을 {save_path}에 저장하는데 실패했습니다</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="436"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="442"/>
         <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
         <translation>다음 url에서 파일을 다운로드하는데 오류가 발생했습니다: {url}
@@ -95,11 +95,11 @@ The file content is different from expected.</source>
         <location filename="../pcleaner/analytics.py" line="65"/>
         <location filename="../pcleaner/analytics.py" line="66"/>
         <location filename="../pcleaner/analytics.py" line="68"/>
-        <location filename="../pcleaner/analytics.py" line="293"/>
         <location filename="../pcleaner/analytics.py" line="295"/>
-        <location filename="../pcleaner/analytics.py" line="296"/>
-        <location filename="../pcleaner/analytics.py" line="427"/>
-        <location filename="../pcleaner/analytics.py" line="570"/>
+        <location filename="../pcleaner/analytics.py" line="297"/>
+        <location filename="../pcleaner/analytics.py" line="298"/>
+        <location filename="../pcleaner/analytics.py" line="429"/>
+        <location filename="../pcleaner/analytics.py" line="572"/>
         <source>N/A</source>
         <translation>N/A</translation>
     </message>
@@ -139,7 +139,7 @@ Small box sizes:
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="124"/>
+        <location filename="../pcleaner/analytics.py" line="126"/>
         <source>
 Removed bubbles:
 </source>
@@ -148,78 +148,78 @@ Removed bubbles:
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="126"/>
+        <location filename="../pcleaner/analytics.py" line="128"/>
         <source>Page {path}: {text}
 </source>
         <translation>페이지 {path}: {text}
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="170"/>
+        <location filename="../pcleaner/analytics.py" line="172"/>
         <source>Small boxes</source>
         <translation>작은 영역</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="172"/>
+        <location filename="../pcleaner/analytics.py" line="174"/>
         <source>Removed boxes</source>
         <translation>제거된 글자 영역</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="211"/>
-        <location filename="../pcleaner/analytics.py" line="230"/>
-        <location filename="../pcleaner/analytics.py" line="351"/>
+        <location filename="../pcleaner/analytics.py" line="213"/>
+        <location filename="../pcleaner/analytics.py" line="232"/>
+        <location filename="../pcleaner/analytics.py" line="353"/>
         <source>Failed</source>
         <translation>실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="226"/>
+        <location filename="../pcleaner/analytics.py" line="228"/>
         <source>Perfect</source>
         <translation>완벽</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="537"/>
+        <location filename="../pcleaner/analytics.py" line="539"/>
         <source>Total
 </source>
         <translation>전체
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="309"/>
+        <location filename="../pcleaner/analytics.py" line="311"/>
         <source>Mask Fitment Analytics</source>
         <translation>마스크 적합성 분석</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="228"/>
+        <location filename="../pcleaner/analytics.py" line="230"/>
         <source>Total</source>
         <translation>전체</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="313"/>
+        <location filename="../pcleaner/analytics.py" line="315"/>
         <source>Total boxes</source>
         <translation>전체 글자 영역 개수</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="315"/>
+        <location filename="../pcleaner/analytics.py" line="317"/>
         <source>Masks succeeded</source>
         <translation>마스크 생성 성공</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="317"/>
+        <location filename="../pcleaner/analytics.py" line="319"/>
         <source>Masks failed</source>
         <translation>마스크 생성 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="321"/>
+        <location filename="../pcleaner/analytics.py" line="323"/>
         <source>Perfect masks</source>
         <translation>완벽한 마스크</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="323"/>
+        <location filename="../pcleaner/analytics.py" line="325"/>
         <source>Average border deviation</source>
         <translation>평균 경계 편차</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="325"/>
+        <location filename="../pcleaner/analytics.py" line="327"/>
         <source>
 Mask usage by thickness (in pixels):
 </source>
@@ -228,24 +228,24 @@ Mask usage by thickness (in pixels):
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="341"/>
+        <location filename="../pcleaner/analytics.py" line="343"/>
         <source>Mask ({thickness}px)</source>
         <translation>마스크 ({thickness}px)</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="345"/>
+        <location filename="../pcleaner/analytics.py" line="347"/>
         <source>Box mask</source>
         <translation>영역 마스크</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="364"/>
+        <location filename="../pcleaner/analytics.py" line="366"/>
         <source>All bubbles were successfully masked.
 </source>
         <translation>모든 말풍선들의 마스크가 생성 되었습니다.
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="379"/>
+        <location filename="../pcleaner/analytics.py" line="381"/>
         <source>
 Pages with failures / total:
 </source>
@@ -254,32 +254,32 @@ Pages with failures / total:
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="406"/>
+        <location filename="../pcleaner/analytics.py" line="408"/>
         <source>Denoising Analytics</source>
         <translation>노이즈 감소 분석</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="429"/>
+        <location filename="../pcleaner/analytics.py" line="431"/>
         <source>Total masks</source>
         <translation>전체 마스크 개수</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="431"/>
+        <location filename="../pcleaner/analytics.py" line="433"/>
         <source>Masks denoised</source>
         <translation>노이즈 감소 처리된 마스크</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="435"/>
+        <location filename="../pcleaner/analytics.py" line="437"/>
         <source>Minimum deviation to denoise</source>
         <translation>노이즈 감소 최소 편차</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="437"/>
+        <location filename="../pcleaner/analytics.py" line="439"/>
         <source>Maximum allowed deviation</source>
         <translation>최대 허용 편차</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="439"/>
+        <location filename="../pcleaner/analytics.py" line="441"/>
         <source>Standard deviation around masks:
 
 </source>
@@ -288,37 +288,37 @@ Pages with failures / total:
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="536"/>
+        <location filename="../pcleaner/analytics.py" line="538"/>
         <source>Denoised</source>
         <translation>노이즈 감소됨</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="559"/>
+        <location filename="../pcleaner/analytics.py" line="561"/>
         <source>Inpainting Analytics</source>
         <translation>인페인팅 분석</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="572"/>
+        <location filename="../pcleaner/analytics.py" line="574"/>
         <source>Inpainting performed</source>
         <translation>인페인팅 처리한 개수</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="574"/>
+        <location filename="../pcleaner/analytics.py" line="576"/>
         <source>Average thickness</source>
         <translation>평균 두께</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="578"/>
+        <location filename="../pcleaner/analytics.py" line="580"/>
         <source>Minimum thickness</source>
         <translation>최소 두께</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="580"/>
+        <location filename="../pcleaner/analytics.py" line="582"/>
         <source>Maximum thickness</source>
         <translation>최대 두께</translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="582"/>
+        <location filename="../pcleaner/analytics.py" line="584"/>
         <source>Outline thickness around text inpainted:
 
 </source>
@@ -327,92 +327,92 @@ Pages with failures / total:
 </translation>
     </message>
     <message>
-        <location filename="../pcleaner/analytics.py" line="649"/>
+        <location filename="../pcleaner/analytics.py" line="651"/>
         <source>Inpainted</source>
         <translation>인페인팅됨</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="151"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
         <source>File Error</source>
         <translation>파일 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="151"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
         <source>Failed to open file.</source>
         <translation>파일 열기 실패.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
         <source>Failed to access the file.</source>
         <translation>파일 접근 실패.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
         <source>An error occurred.</source>
         <translation>오류 발생.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
         <source>The CSV file format requires exactly 6 columns.</source>
         <translation>CSV 파일은 정확히 6개의 열을 가져야합니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
         <source>The coordinates must be integers.</source>
         <translation>좌표는 반드시 정수여야합니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
         <source>The box coordinates may not exceed 2 billion.</source>
         <translation>박스의 좌표는 20억을 초과할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="523"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
         <source>The file format was not recognized.</source>
         <translation>인식할 수 없는 파일 형식입니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="525"/>
         <source>The CSV file must start with a header row, followed by data rows.</source>
         <translation>CSV 파일은 반드시 헤더 행으로 시작하고 이어서 데이터 행이 나와야합니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="527"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
         <source>The file path is missing.</source>
         <translation>경로가 존재하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="528"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="527"/>
         <source>The file path is invalid.</source>
         <translation>경로가 잘못되었습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="546"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="545"/>
         <source>OCR Parse Errors</source>
         <translation>OCR 파싱 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="592"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="591"/>
         <source>Multiple analytics match the image: {path}</source>
         <translation>여러 데이터 항목이 이 이미지와 일치함: {path}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="596"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="595"/>
         <source>Multiple images match the file path: {path}</source>
         <translation>여러 이미지가 해당 파일 경로와 일치합니다: {path}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="618"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="617"/>
         <source>Error, no version found.</source>
         <translation>오류. 버전을 찾을 수 없음.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="631"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="630"/>
         <source>CUDA Error</source>
         <translation>CUDA 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/gui_utils.py" line="642"/>
+        <location filename="../pcleaner/gui/gui_utils.py" line="641"/>
         <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;현재 사용 중인 GPU는 필요한 CUDA 연산을 지원하지 않습니다.&lt;br&gt;&lt;br&gt;현재 설치된 torch 및 torchvision을 제거하고, 대신 CPU 버전(또는 다른 CUDA 버전)을 설치해 보세요.&lt;br&gt;자세한 설치 방법은 다음 페이지에서 확인할 수 있습니다:&lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;&quot;Compute Platform&quot; 섹션에서 사용 가능한 CUDA 버전을 확인하세요.&lt;br&gt;&lt;br&gt;현재 사용 중인 CUDA 버전: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
@@ -422,88 +422,88 @@ Pages with failures / total:
         <translation>인페인팅 모델을 찾을 수 없음.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
         <location filename="../pcleaner/gui/processing.py" line="921"/>
         <source>filename</source>
         <translatorcomment>OCR결과 CSV파일의 헤더명. 만일을 위해 번역하지 않을것임.</translatorcomment>
         <translation>filename</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
         <location filename="../pcleaner/gui/processing.py" line="921"/>
         <source>startx</source>
         <translatorcomment>OCR결과 CSV파일의 헤더명. 만일을 위해 번역하지 않을것임.</translatorcomment>
         <translation>startx</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
         <location filename="../pcleaner/gui/processing.py" line="921"/>
         <source>starty</source>
         <translatorcomment>OCR결과 CSV파일의 헤더명. 만일을 위해 번역하지 않을것임.</translatorcomment>
         <translation>starty</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
         <location filename="../pcleaner/gui/processing.py" line="921"/>
         <source>endx</source>
         <translatorcomment>OCR결과 CSV파일의 헤더명. 만일을 위해 번역하지 않을것임.</translatorcomment>
         <translation>endx</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
         <location filename="../pcleaner/gui/processing.py" line="921"/>
         <source>endy</source>
         <translatorcomment>OCR결과 CSV파일의 헤더명. 만일을 위해 번역하지 않을것임.</translatorcomment>
         <translation>endy</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1932"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
         <location filename="../pcleaner/gui/processing.py" line="921"/>
         <source>text</source>
         <translatorcomment>OCR결과 CSV파일의 헤더명. 만일을 위해 번역하지 않을것임.</translatorcomment>
         <translation>text</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1943"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1954"/>
         <location filename="../pcleaner/gui/processing.py" line="930"/>
         <source>Saved detected text to {output_file}</source>
         <translation>감지된 글자들을 다음 경로에 저장했습니다: {output_file}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1958"/>
         <location filename="../pcleaner/gui/processing.py" line="934"/>
         <source>Failed to write detected text to {output_file}</source>
         <translation>감지된 글자들을 다음 경로에 저장하는데 실패 했습니다: {output_file}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1951"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1962"/>
         <location filename="../pcleaner/gui/processing.py" line="937"/>
         <source>Save Failed</source>
         <translation>저장 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1952"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1963"/>
         <location filename="../pcleaner/gui/processing.py" line="937"/>
         <source>Failed to write detected text to file.</source>
         <translation>감지된 글자들을 파일에 쓰는데 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="486"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="495"/>
         <source>Inpainter (experimental)</source>
         <translation>인페인팅 (실험적인 기능)</translation>
     </message>
     <message>
-        <location filename="../pcleaner/helpers.py" line="99"/>
+        <location filename="../pcleaner/helpers.py" line="106"/>
         <source>Invalid type for img_paths: {paths}</source>
         <translation>알 수 없는 타입의 img_paths: {paths}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/helpers.py" line="108"/>
+        <location filename="../pcleaner/helpers.py" line="115"/>
         <source>Unsupported image format: {suffix} for {path}</source>
         <translation>지원하지 않는 이미지 형식: {suffix}, 경로: {path}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/helpers.py" line="114"/>
+        <location filename="../pcleaner/helpers.py" line="121"/>
         <source>Image path {img_path} does not exist.</source>
         <translation>경로 {img_path}는 존재하지 않습니다.</translation>
     </message>
@@ -532,7 +532,15 @@ Pages with failures / total:
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../pcleaner/image_export.py" line="427"/>
+        <location filename="../pcleaner/image_export.py" line="140"/>
+        <source>Isolated text</source>
+        <comment>layered export</comment>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../pcleaner/image_export.py" line="432"/>
         <source>Page</source>
         <comment>layered export</comment>
         <translation>
@@ -659,117 +667,117 @@ An AI-powered tool to clean manga panels.</source>
 <context>
     <name>FileManagerExtension</name>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="83"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
         <source>Unsupported system</source>
         <translation>미지원 시스템</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="85"/>
         <source>This system is not supported.</source>
         <translation>이 시스템은 지원하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="87"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="88"/>
         <source>Install for Dolphin</source>
         <translation>돌핀 설치</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="88"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="89"/>
         <source>Uninstall for Dolphin</source>
         <translation>돌핀 삭제</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="92"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="93"/>
         <source>The extension will be installed at {path}. This doesn&apos;t require root permissions.</source>
         <translation>확장 기능이 {path}에 설치될 예정입니다. 이 작업은 루트 권한이 필요하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="101"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="102"/>
         <source>The extension file will be deleted. This doesn&apos;t require root permissions.</source>
         <translation>확장 기능이 삭제될 예정입니다. 이 작업은 루트 권한이 필요하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="103"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="104"/>
         <source>Install for Windows Explorer</source>
         <translation>윈도우 파일 탐색기를 위해 설치</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="104"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="105"/>
         <source>Uninstall for Windows Explorer</source>
         <translation>윈도우 파일 탐색기를 위해 삭제</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="110"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="111"/>
         <source>The extension will be installed in the Windows registry.This requires admin permissions.</source>
         <translation>확장 기능이 윈도우 레지스트리에 설치될 예정입니다. 이 작업은 관리자 권한이 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="116"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="117"/>
         <source>The extension will be uninstalled from the Windows registry.This requires admin permissions.</source>
         <translation>확장 기능이 윈도우 레지스트리에서 삭제될 예정입니다. 이 작업은 관리자 권한이 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="157"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="158"/>
         <source>Dolphin extension installed successfully.</source>
         <translation>돌핀 확장 기능이 설치되었습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="171"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="172"/>
         <source>Installation successful</source>
         <translation>설치 성공</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="162"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="163"/>
         <source>Dolphin extension installed successfully.
 You may need to log out and log back in (or restart) for the changes to take effect.</source>
         <translation>돌핀 확장 기능이 성공적으로 설치되었습니다.
 변경 사항을 적용하려면 로그아웃했다가 다시 로그인(또는 다시 시작)해야 할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="177"/>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="201"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="178"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="202"/>
         <source>Installation failed</source>
         <translation>설치 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="178"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="179"/>
         <source>Failed to install Dolphin extension.</source>
         <translation>돌핀 확장 기능을 설치하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="202"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="203"/>
         <source>Failed to install Windows Explorer extension.</source>
         <translation>윈도우 파일 탐색기 확장으로 설치하는데 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="217"/>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="223"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="224"/>
         <source>Uninstallation successful</source>
         <translation>삭제 성공</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="219"/>
         <source>Dolphin extension uninstalled successfully.</source>
         <translation>돌핀 확장 기능이 삭제되었습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="224"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="225"/>
         <source>Dolphin extension was not installed.</source>
         <translation>돌핀 확장기능이 설치되어있지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="229"/>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="248"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="230"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="249"/>
         <source>Uninstallation failed</source>
         <translation>삭제 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="230"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="231"/>
         <source>Failed to uninstall Dolphin extension.</source>
         <translation>돌핀 확장 기능을 삭제하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="249"/>
+        <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="250"/>
         <source>Failed to uninstall Windows Explorer extension.</source>
         <translation>윈도우 파일 탐색기 확장을 삭제하는데 실패했습니다.</translation>
     </message>
@@ -907,37 +915,37 @@ By default, this uses the built-in profile. However, you can change this default
         <translation>목록에서 모든 파일 제거</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="733"/>
+        <location filename="../pcleaner/gui/file_table.py" line="730"/>
         <source>Failed to load image</source>
         <translation>이미지 불러오기 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="734"/>
+        <location filename="../pcleaner/gui/file_table.py" line="731"/>
         <source>Failed to load image {file_path}.</source>
         <translation>다음 이미지를 불러오는데 실패했습니다: &apos;{file_path}&apos;.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="743"/>
+        <location filename="../pcleaner/gui/file_table.py" line="740"/>
         <source>Failed to dispatch image.</source>
         <translation>이미지를 처리하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="743"/>
+        <location filename="../pcleaner/gui/file_table.py" line="740"/>
         <source>Dispatch Failed</source>
         <translation>처리 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="752"/>
+        <location filename="../pcleaner/gui/file_table.py" line="749"/>
         <source>Select files</source>
         <translation>파일 선택</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="753"/>
+        <location filename="../pcleaner/gui/file_table.py" line="750"/>
         <source>Images</source>
         <translation>이미지</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/file_table.py" line="774"/>
+        <location filename="../pcleaner/gui/file_table.py" line="771"/>
         <source>Select directory</source>
         <translation>폴더 선택</translation>
     </message>
@@ -1129,22 +1137,22 @@ Please enable inpainting in the profile settings and try again.</source>
         <translation>{num_analytics_unassigned} 개의 분리된OCR 결과가 손실됩니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_match_driver.py" line="322"/>
+        <location filename="../pcleaner/gui/image_match_driver.py" line="323"/>
         <source>Failed to load image</source>
         <translation>이미지 불러오기 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_match_driver.py" line="323"/>
+        <location filename="../pcleaner/gui/image_match_driver.py" line="324"/>
         <source>Failed to load image {file_path}.</source>
         <translation>이미지 &apos;{file_path}&apos;를 불러오는데 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_match_driver.py" line="332"/>
+        <location filename="../pcleaner/gui/image_match_driver.py" line="333"/>
         <source>Dispatch Failed</source>
         <translation>처리 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/image_match_driver.py" line="332"/>
+        <location filename="../pcleaner/gui/image_match_driver.py" line="333"/>
         <source>Failed to dispatch image.</source>
         <translation>이미지를 처리하지 못했습니다.</translation>
     </message>
@@ -1311,7 +1319,7 @@ Please enable inpainting in the profile settings and try again.</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="860"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="859"/>
         <source>Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
 
 Continue anyway?</source>
@@ -1320,12 +1328,12 @@ Continue anyway?</source>
 계속 하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="900"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
         <source>Delete Models</source>
         <translation>모델 삭제</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="904"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="903"/>
         <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
         <translation>머신 러닝 모델을 삭제하시겠습니까? 다시 다운로드할 때까지 글자 지우기 및 OCR이 불가능해집니다.</translation>
     </message>
@@ -1370,361 +1378,361 @@ Switch to the new model?</source>
         <translation>화면의 레이아웃을 초기화합니다. 다음부터 기본값이 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="855"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="854"/>
         <source>Multiple Instances</source>
         <translation>다중 인스턴스</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="862"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="861"/>
         <source>Found process ID in lock file: </source>
         <translation>lock 파일에서 찾은 프로세스 ID: </translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="913"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="912"/>
         <source>Failed to delete models.</source>
         <translation>모델 삭제 실패.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="913"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="912"/>
         <source>Delete Failed</source>
         <translation>삭제 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="919"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="918"/>
         <source>Models Deleted</source>
         <translation>모델 삭제됨</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="920"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="919"/>
         <source>The models were deleted. Would you like to download them again?</source>
         <translation>모델을 삭제했습니다. 다시 다운로드하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1006"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1005"/>
         <source>Not Supported</source>
         <translation>지원되지 않음</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1007"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1006"/>
         <source>Unsupported system or package format</source>
         <translation>지원되지 않는 시스템 또는 패키지 형식</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1023"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1022"/>
         <source>Shutdown</source>
         <translation>컴퓨터 종료</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1061"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1060"/>
         <source>After processing, the system will shut down.</source>
         <translation>처리가 끝난 후 컴퓨터를 종료합니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1095"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1094"/>
         <source>You have review options enabled, these will need to be manually closed before the action can start.</source>
         <translation>검토가 활성화되어 있으므로 작업을 시작하기 전에 수동으로 닫아야 합니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1101"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1100"/>
         <source>You have disabled writing output.</source>
         <translation>쓰기 출력을 비활성화했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1155"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1154"/>
         <source>Shutting down system...</source>
         <translation>시스템 종료...</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1165"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1164"/>
         <source>Running post action &quot;{action}&quot;...</source>
         <translation>후속 작업 &quot;{action}&quot; 실행...</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1200"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1199"/>
         <source>Restart Required</source>
         <translation>재시작 필요</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1203"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1202"/>
         <source>The language has been changed. Please restart the application for the changes to take effect.</source>
         <translation>언어가 변경되었습니다. 변경 사항을 적용하려면 프로그램을 종료 후 다시 실행해 주세요.</translation>
     </message>
     <message>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1212"/>
         <location filename="../pcleaner/gui/mainwindow_driver.py" line="1213"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1214"/>
         <source>System Language</source>
         <translation>시스템 언어</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1315"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1314"/>
         <source>Import Profile</source>
         <translation>프로파일 가져오기</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1317"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1316"/>
         <source>Profile Files (*.conf)</source>
         <translation>프로파일 파일 (*.conf)</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1324"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1323"/>
         <source>Profile Imported</source>
         <translation>프로파일 가져옴</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1326"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1325"/>
         <source>Import Error</source>
         <translation>가져오기 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1344"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1343"/>
         <source>Failed to Delete</source>
         <translation>삭제 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1345"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1344"/>
         <source>The default profile cannot be deleted.</source>
         <translation>기본 프로파일은 삭제할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1349"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1348"/>
         <source>Delete Profile</source>
         <translation>프로파일 삭제</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1350"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1349"/>
         <source>Are you sure you want to delete the profile {profile_name}?</source>
         <translation>정말로 프로파일 {profile_name}을(를) 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1364"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1363"/>
         <source>Delete Error</source>
         <translation>삭제 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1365"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1364"/>
         <source>Failed to delete the profile.</source>
         <translation>프로파일 삭제 실패.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1428"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1427"/>
         <source>The profile &apos;{profile}&apos; has unsaved changes.
 Switching profiles will discard changes to the current profile.</source>
         <translation>프로파일 &apos;{profile}&apos;에 저장되지 않은 변경 사항이 있습니다.
 프로파일을 전환하면 현재 변경 사항이 없어집니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1431"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1430"/>
         <source>Unsaved changes</source>
         <translation>저장되지 않은 변경 사항</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1460"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1620"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1459"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1619"/>
         <source>Load Error</source>
         <translation>불러오기 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1460"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1620"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1459"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1619"/>
         <source>Failed to load profile:</source>
         <translation>프로파일 불러오기 실패:</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1477"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1476"/>
         <source>Tesseract OCR is not installed or not found</source>
         <translation>테서렉트 OCR이 설치되어 있지 않거나 찾을 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1483"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1482"/>
         <source>&lt;html&gt;Can&apos;t use Tesseract to perform OCR. Reverting to manga-ocr.
 Please see the instructions to install Tesseract correctly &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
         <translation>&lt;html&gt;테서렉트를 사용할 수 없어 OCR을 할 수 없습니다. manga-ocr로 되돌립니다.
 테서렉트를 올바르게 설치하기 위해 &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;이 문서&lt;/a&gt;를 읽거나 기본 모델을 씁니다.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1494"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1493"/>
         <source>Unsupported Language</source>
         <translation>지원되지 않는 언어</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1500"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1499"/>
         <source>The language &apos;{lang_name}&apos; is not supported by any of your current OCR engines. 
 Check the online documentation for how to add support for more languages.</source>
         <translation>언어 &apos;{lang_name}&apos;는 모든 현재 OCR 모델에서 지원되지 않습니다. 
 더 많은 언어를 지원하는 방법은 온라인 문서를 확인하세요.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1576"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1575"/>
         <source>Profile Created</source>
         <translation>프로파일 생성됨</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1579"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1578"/>
         <source>Create Error</source>
         <translation>생성 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1588"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1587"/>
         <source>Failed to save profile to {profile_path}</source>
         <translation>프로파일을 다음 경로에 저장하는데 실패했습니다: {profile_path}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1592"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1607"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1591"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1606"/>
         <source>Save Error</source>
         <translation>저장 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1593"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1592"/>
         <source>Failed to save profile.</source>
         <translation>프로파일 저장 실패.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1599"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1598"/>
         <source>Profile saved to {profile_path}</source>
         <translation>프로파일이 다음 경로에 저장됐습니다: {profile_path}</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1604"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1603"/>
         <source>Failed to save config.</source>
         <translation>설정 저장 실패.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1608"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1607"/>
         <source>Failed to save the new profile to the configuration file.</source>
         <translation>새 프로파일을 설정 파일로 저장하는데 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1670"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1832"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1669"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1843"/>
         <source>No Files</source>
         <translation>파일 없음</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1675"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1674"/>
         <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
         <translation>처리할 파일이 없습니다. 화면에 드래그 앤 드롭하거나 메뉴를 통해 파일을 추가할 수 있습니다: 파일 -&gt; 파일 추가 또는 폴더 추가.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1758"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1769"/>
         <source>No Outputs</source>
         <translation>출력 없음</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1761"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1772"/>
         <source>No outputs were requested. Please select at least one output before cleaning.</source>
         <translation>저장할 결과물이 없습니다. 저장할 것을 한 개 이상 선택해 주세요.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1775"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1786"/>
         <location filename="../ui_files/Mainwindow.ui" line="660"/>
         <source>cleaned</source>
         <translatorcomment>내보내기 저장 폴더의 기본 폴더명?</translatorcomment>
         <translation>cleaned</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1837"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1848"/>
         <source>No files to process. To edit an old OCR output file, you must first load (one or more of) the images to which it corresponds.</source>
         <translation>처리할 파일이 없습니다. 이전 OCR 결과 파일을 편집하려면 먼저 해당 파일에 해당하는 이미지를 로드해야 합니다(하나 이상).</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1845"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1856"/>
         <source>Open OCR Output File</source>
         <translation>OCR 결과 파일 열기</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1847"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1858"/>
         <source>OCR Output Files (*.txt *.csv)</source>
         <translation>OCR 결과 파일 (*.txt *.csv)</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1862"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1873"/>
         <source>Parse Error</source>
         <translation>파싱 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1863"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1874"/>
         <source>Failed to parse the OCR output file.</source>
         <translation>OCR 결과 파일을 파싱하는데 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2026"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2037"/>
         <source>File Exists</source>
         <translation>파일 존재함</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2027"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2038"/>
         <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
         <translation>피일 &apos;{output_path}&apos;은 이미 존재합니다. 덮어쓰시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2166"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2177"/>
         <source>Export Images</source>
         <translation>이미지 내보내기</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2167"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2178"/>
         <source>Would you like to export the cleaned images?</source>
         <translation>정리된 이미지들을 내보내겠습니까?</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2137"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2148"/>
         <source>Export OCR Results</source>
         <translation>OCR 결과 내보내기</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1073"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1072"/>
         <source>After processing, the &quot;{action}&quot; action will be executed.</source>
         <translation>처리가 완료된 후 작업 &quot;{action}&quot;이(가) 실행됩니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1126"/>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1150"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1125"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1149"/>
         <source>Post action canceled.</source>
         <translation>후속 작업 취소됨.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1684"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1683"/>
         <source>Un-Applied Changes</source>
         <translation>적용되지 않은 변경사항</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1685"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="1684"/>
         <source>You have un-applied changes to the profile. Continue anyway?</source>
         <translation>프로파일에 적용되지 않은 변경 사항이 있습니다. 그래도 계속하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2138"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2149"/>
         <source>Would you like to export the OCR results?</source>
         <translation>OCR 결과를 내보내겠습니까?</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2157"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2168"/>
         <source>Processing Finished</source>
         <translation>처리 완료</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2158"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2169"/>
         <source>Finished processing all files.</source>
         <translation>모든 파일 처리 완료.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2185"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2196"/>
         <source>Processing Aborted</source>
         <translation>처리 중단됨</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2185"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2196"/>
         <source>Processing aborted.</source>
         <translation>처리가 중단되었습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2217"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2228"/>
         <source>Processing Error</source>
         <translation>처리 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2218"/>
+        <location filename="../pcleaner/gui/mainwindow_driver.py" line="2229"/>
         <source>Encountered an error while processing files.</source>
         <translation>처리 중 오류가 발생했습니다.</translation>
     </message>
@@ -2153,24 +2161,26 @@ Check the online documentation for how to add support for more languages.</sourc
     </message>
     <message>
         <location filename="../pcleaner/gui/model_downloader_driver.py" line="193"/>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="254"/>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="338"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="195"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="257"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="341"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="343"/>
         <source>Download Failed</source>
         <translation>다운로드 실패</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="241"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="244"/>
         <source>OCR download errors</source>
         <translation>OCR 다운로드 오류</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="281"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="284"/>
         <source>ETA</source>
         <comment>estimated time of completion</comment>
         <translation>남은 예상 시간</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="292"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="295"/>
         <location filename="../ui_files/ModelDownloader.ui" line="186"/>
         <source>Inpainting model</source>
         <translation>인페인팅 모델</translation>
@@ -4234,14 +4244,14 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
 <context>
     <name>ProfileToolBox</name>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="594"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="615"/>
         <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
         <translation>&lt;html&gt;글자 감지 모델의 경로 {value}가 존재하지 않아 기본값으로 변경됩니다.
 모델은 &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;이곳&lt;/a&gt;에서 직접 다운로드하거나, 기본 모델을 이용하여 진행할 수 있습니다.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="610"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="631"/>
         <source>The regex pattern &quot;{value}&quot; for {key} is invalid, reverting to default.</source>
         <translation>{key}를 위한 정규식 패턴 &quot;{value}&quot;은 유효하지 않아 기본값으로 변경됩니다.</translation>
     </message>
