@@ -14,7 +14,7 @@ import PySide6.QtGui as Qg
 import PySide6.QtWidgets as Qw
 import psutil
 import torch
-from PySide6.QtCore import Slot, Signal
+from PySide6.QtCore import Slot, Signal, QCoreApplication
 from loguru import logger
 
 import pcleaner.analytics as an
@@ -2252,6 +2252,12 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             # This marks the beginning of a new processing step.
             self.show_progress_drawer()
             self.progress_current = 0
+
+            # This step name is used only in the progress bar and are not included in "pcleaner/gui/image_file.py",
+            # so they are not detected by process_step_extractor.py and therefore not included in the .ts translation file.
+            # This is likely not the best solution, but explicitly referencing the strings here ensures they are added
+            # to the .ts file and translations can be applied properly.
+            QCoreApplication.translate("Process Steps", "Write Output")
 
             if self.progress_step_start is None:
                 # This is the first step.
