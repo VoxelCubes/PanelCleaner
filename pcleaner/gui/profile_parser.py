@@ -263,6 +263,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             EntryTypes.OCREngine,
             EntryTypes.ReadingOrder,
             EntryTypes.LayeredExport,
+            EntryTypes.LanguageCode,
         ):
             # Use a combobox and populate it with the enum members from the config.
             self._data_widget: CComboBox = CComboBox()
@@ -270,16 +271,86 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
             match entry_type:
                 case EntryTypes.OCREngine:
                     enum_class = OCREngine
+                    name_mapper = {
+                        OCREngine.AUTO: self.tr("auto", "OCR Engine option"),
+                        OCREngine.MANGAOCR: self.tr("manga-ocr", "OCR Engine option"),
+                        OCREngine.TESSERACT: self.tr("tesseract", "OCR Engine option"),
+                    }
                 case EntryTypes.ReadingOrder:
                     enum_class = ReadingOrder
+                    name_mapper = {
+                        ReadingOrder.AUTO: self.tr("auto", "Reading order option"),
+                        ReadingOrder.MANGA: self.tr("manga", "Reading order option"),
+                        ReadingOrder.COMIC: self.tr("comic", "Reading order option"),
+                    }
                 case EntryTypes.LayeredExport:
                     enum_class = LayeredExport
                     name_mapper = {
                         LayeredExport.NONE: self.tr("None", "Layered export option"),
                         LayeredExport.PSD_BULK: self.tr("PSD Bulk", "Layered export option"),
-                        LayeredExport.PSD_PER_IMAGE: self.tr(
-                            "PSD Per Image", "Layered export option"
-                        ),
+                        LayeredExport.PSD_PER_IMAGE: self.tr("PSD Per Image", "Layered export option"),
+                    }
+                case EntryTypes.LanguageCode:
+                    enum_class = LanguageCode
+                    name_mapper = {
+                        LanguageCode.detect_box: self.tr("Detect per box", "Language code option"),
+                        LanguageCode.detect_page: self.tr("Detect per page", "Language code option"),
+                        LanguageCode.jpn: self.tr("Japanese", "Language code option"),
+                        LanguageCode.eng: self.tr("English", "Language code option"),
+                        LanguageCode.kor: self.tr("Korean", "Language code option"),
+                        LanguageCode.kor_vert: self.tr("Korean (vertical)", "Language code option"),
+                        LanguageCode.chi_sim: self.tr("Chinese - Simplified", "Language code option"),
+                        LanguageCode.chi_tra: self.tr("Chinese - Traditional", "Language code option"),
+                        LanguageCode.sqi: self.tr("Albanian", "Language code option"),
+                        LanguageCode.ara: self.tr("Arabic", "Language code option"),
+                        LanguageCode.aze: self.tr("Azerbaijani", "Language code option"),
+                        LanguageCode.aze_cyrl: self.tr("Azerbaijani - Cyrilic", "Language code option"),
+                        LanguageCode.ben: self.tr("Bengali", "Language code option"),
+                        LanguageCode.bul: self.tr("Bulgarian", "Language code option"),
+                        LanguageCode.mya: self.tr("Burmese", "Language code option"),
+                        LanguageCode.cat: self.tr("Catalan; Valencian", "Language code option"),
+                        LanguageCode.hrv: self.tr("Croatian", "Language code option"),
+                        LanguageCode.ces: self.tr("Czech", "Language code option"),
+                        LanguageCode.dan: self.tr("Danish", "Language code option"),
+                        LanguageCode.nld: self.tr("Dutch; Flemish", "Language code option"),
+                        LanguageCode.epo: self.tr("Esperanto", "Language code option"),
+                        LanguageCode.est: self.tr("Estonian", "Language code option"),
+                        LanguageCode.fin: self.tr("Finnish", "Language code option"),
+                        LanguageCode.fra: self.tr("French", "Language code option"),
+                        LanguageCode.kat: self.tr("Georgian", "Language code option"),
+                        LanguageCode.deu: self.tr("German", "Language code option"),
+                        LanguageCode.ell: self.tr("Greek", "Language code option"),
+                        LanguageCode.heb: self.tr("Hebrew", "Language code option"),
+                        LanguageCode.hin: self.tr("Hindi", "Language code option"),
+                        LanguageCode.hun: self.tr("Hungarian", "Language code option"),
+                        LanguageCode.ind: self.tr("Indonesian", "Language code option"),
+                        LanguageCode.ita: self.tr("Italian", "Language code option"),
+                        LanguageCode.kaz: self.tr("Kazakh", "Language code option"),
+                        LanguageCode.lat: self.tr("Latin", "Language code option"),
+                        LanguageCode.lit: self.tr("Lithuanian", "Language code option"),
+                        LanguageCode.ltz: self.tr("Luxembourgish", "Language code option"),
+                        LanguageCode.msa: self.tr("Malay", "Language code option"),
+                        LanguageCode.mon: self.tr("Mongolian", "Language code option"),
+                        LanguageCode.nep: self.tr("Nepali", "Language code option"),
+                        LanguageCode.nor: self.tr("Norwegian", "Language code option"),
+                        LanguageCode.fas: self.tr("Persian", "Language code option"),
+                        LanguageCode.pol: self.tr("Polish", "Language code option"),
+                        LanguageCode.por: self.tr("Portuguese", "Language code option"),
+                        LanguageCode.ron: self.tr("Romanian; Moldavian", "Language code option"),
+                        LanguageCode.rus: self.tr("Russian", "Language code option"),
+                        LanguageCode.srp: self.tr("Serbian", "Language code option"),
+                        LanguageCode.srp_latn: self.tr("Serbian - Latin", "Language code option"),
+                        LanguageCode.slk: self.tr("Slovak", "Language code option"),
+                        LanguageCode.slv: self.tr("Slovenian", "Language code option"),
+                        LanguageCode.spa: self.tr("Spanish; Castilian", "Language code option"),
+                        LanguageCode.swe: self.tr("Swedish", "Language code option"),
+                        LanguageCode.tgl: self.tr("Tagalog", "Language code option"),
+                        LanguageCode.tam: self.tr("Tamil", "Language code option"),
+                        LanguageCode.tel: self.tr("Telugu", "Language code option"),
+                        LanguageCode.tha: self.tr("Thai", "Language code option"),
+                        LanguageCode.tur: self.tr("Turkish", "Language code option"),
+                        LanguageCode.ukr: self.tr("Ukrainian", "Language code option"),
+                        LanguageCode.vie: self.tr("Vietnamese", "Language code option"),
                     }
                 case _:
                     raise NotImplementedError(f"Unknown entry type {entry_type}")
