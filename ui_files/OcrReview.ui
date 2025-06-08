@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string notr="true">Review</string>
+   <string>Review</string>
   </property>
   <property name="modal">
    <bool>true</bool>

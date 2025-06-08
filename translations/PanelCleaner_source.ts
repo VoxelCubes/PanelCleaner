@@ -73,18 +73,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="373"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="379"/>
         <source>Error downloading file from url: {url}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="427"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="433"/>
         <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="436"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="442"/>
         <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
         <translation type="unfinished"></translation>
@@ -462,7 +462,7 @@ Pages with failures / total:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="495"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="566"/>
         <source>Inpainter (experimental)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2118,24 +2118,26 @@ Check the online documentation for how to add support for more languages.</sourc
     </message>
     <message>
         <location filename="../pcleaner/gui/model_downloader_driver.py" line="193"/>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="254"/>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="338"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="195"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="257"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="341"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="343"/>
         <source>Download Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="241"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="244"/>
         <source>OCR download errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="281"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="284"/>
         <source>ETA</source>
         <comment>estimated time of completion</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/model_downloader_driver.py" line="292"/>
+        <location filename="../pcleaner/gui/model_downloader_driver.py" line="295"/>
         <location filename="../ui_files/ModelDownloader.ui" line="186"/>
         <source>Inpainting model</source>
         <translation type="unfinished"></translation>
@@ -2166,6 +2168,29 @@ Check the online documentation for how to add support for more languages.</sourc
     <message>
         <location filename="../ui_files/NewProfile.ui" line="77"/>
         <source>Profile Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewProfileDialog</name>
+    <message>
+        <location filename="../pcleaner/gui/new_profile_driver.py" line="106"/>
+        <source>Please enter a name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/new_profile_driver.py" line="111"/>
+        <source>This name is used by a builtin profile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/new_profile_driver.py" line="116"/>
+        <source>A profile with this name already exists.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/new_profile_driver.py" line="126"/>
+        <source>The selected directory does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2210,6 +2235,11 @@ Check the online documentation for how to add support for more languages.</sourc
 </context>
 <context>
     <name>OcrReview</name>
+    <message>
+        <location filename="../ui_files/OcrReview.ui" line="14"/>
+        <source>Review</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <location filename="../ui_files/OcrReview.ui" line="79"/>
         <source>Icon Size:</source>
@@ -2997,6 +3027,18 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
     <message>
         <location filename="process_strings.py" line="71"/>
         <source>Inpainted Output</source>
+        <comment>Output name in the image details view</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="process_strings.py" line="72"/>
+        <source>&lt;This is just a placeholder, translating this string is not necessary&gt;</source>
+        <comment>Step description in the image details view, step: None, output: Write Output</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="process_strings.py" line="74"/>
+        <source>Write Output</source>
         <comment>Output name in the image details view</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -4177,34 +4219,418 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="278"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="275"/>
+        <source>auto</source>
+        <comment>OCR Engine option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="276"/>
+        <source>manga-ocr</source>
+        <comment>OCR Engine option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="277"/>
+        <source>tesseract</source>
+        <comment>OCR Engine option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="282"/>
+        <source>auto</source>
+        <comment>Reading order option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="283"/>
+        <source>manga</source>
+        <comment>Reading order option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="284"/>
+        <source>comic</source>
+        <comment>Reading order option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="289"/>
         <source>None</source>
         <comment>Layered export option</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="279"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="290"/>
         <source>PSD Bulk</source>
         <comment>Layered export option</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="282"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="291"/>
         <source>PSD Per Image</source>
         <comment>Layered export option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="296"/>
+        <source>Detect per box</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="297"/>
+        <source>Detect per page</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="298"/>
+        <source>Japanese</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="299"/>
+        <source>English</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="300"/>
+        <source>Korean</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="301"/>
+        <source>Korean (vertical)</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="302"/>
+        <source>Chinese - Simplified</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="303"/>
+        <source>Chinese - Traditional</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="304"/>
+        <source>Albanian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="305"/>
+        <source>Arabic</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="306"/>
+        <source>Azerbaijani</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="307"/>
+        <source>Azerbaijani - Cyrilic</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="308"/>
+        <source>Bengali</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="309"/>
+        <source>Bulgarian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="310"/>
+        <source>Burmese</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="311"/>
+        <source>Catalan; Valencian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="312"/>
+        <source>Croatian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="313"/>
+        <source>Czech</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="314"/>
+        <source>Danish</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="315"/>
+        <source>Dutch; Flemish</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="316"/>
+        <source>Esperanto</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="317"/>
+        <source>Estonian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="318"/>
+        <source>Finnish</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="319"/>
+        <source>French</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="320"/>
+        <source>Georgian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="321"/>
+        <source>German</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="322"/>
+        <source>Greek</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="323"/>
+        <source>Hebrew</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="324"/>
+        <source>Hindi</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="325"/>
+        <source>Hungarian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="326"/>
+        <source>Indonesian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="327"/>
+        <source>Italian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="328"/>
+        <source>Kazakh</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="329"/>
+        <source>Latin</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="330"/>
+        <source>Lithuanian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="331"/>
+        <source>Luxembourgish</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="332"/>
+        <source>Malay</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="333"/>
+        <source>Mongolian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="334"/>
+        <source>Nepali</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="335"/>
+        <source>Norwegian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="336"/>
+        <source>Persian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="337"/>
+        <source>Polish</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="338"/>
+        <source>Portuguese</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="339"/>
+        <source>Romanian; Moldavian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="340"/>
+        <source>Russian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="341"/>
+        <source>Serbian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="342"/>
+        <source>Serbian - Latin</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="343"/>
+        <source>Slovak</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="344"/>
+        <source>Slovenian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="345"/>
+        <source>Spanish; Castilian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="346"/>
+        <source>Swedish</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="347"/>
+        <source>Tagalog</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="348"/>
+        <source>Tamil</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="349"/>
+        <source>Telugu</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="350"/>
+        <source>Thai</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="351"/>
+        <source>Turkish</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="352"/>
+        <source>Ukrainian</source>
+        <comment>Language code option</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="353"/>
+        <source>Vietnamese</source>
+        <comment>Language code option</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ProfileToolBox</name>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="615"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="686"/>
         <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="631"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="702"/>
         <source>The regex pattern &quot;{value}&quot; for {key} is invalid, reverting to default.</source>
         <translation type="unfinished"></translation>
     </message>

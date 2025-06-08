@@ -31,7 +31,6 @@ class Ui_OcrReview(object):
         if not OcrReview.objectName():
             OcrReview.setObjectName(u"OcrReview")
         OcrReview.resize(1400, 800)
-        OcrReview.setWindowTitle(u"Review")
         OcrReview.setModal(True)
         self.verticalLayout_2 = QVBoxLayout(OcrReview)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -379,6 +378,7 @@ class Ui_OcrReview(object):
     # setupUi
 
     def retranslateUi(self, OcrReview):
+        OcrReview.setWindowTitle(QCoreApplication.translate("OcrReview", u"Review", None))
         self.label.setText(QCoreApplication.translate("OcrReview", u"Icon Size:", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_prev.setToolTip(QCoreApplication.translate("OcrReview", u"Previous image", None))
@@ -431,6 +431,5 @@ class Ui_OcrReview(object):
         ___qtablewidgetitem.setText(QCoreApplication.translate("OcrReview", u"Box", None));
         ___qtablewidgetitem1 = self.tableWidget_ocr.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("OcrReview", u"Text", None));
-        pass
     # retranslateUi
 
