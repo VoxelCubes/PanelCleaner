@@ -103,17 +103,17 @@ class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
         prospective_dir = self.get_directory()
 
         if not name:
-            self.label_warning_message.setText("Please enter a name.")
+            self.label_warning_message.setText(self.tr("Please enter a name."))
             self.label_warning_message.show()
             self.label_warning_icon.hide()
             self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(False)
         elif name.lower() in self.protected_names:
-            self.label_warning_message.setText("This name is used by a builtin profile.")
+            self.label_warning_message.setText(self.tr("This name is used by a builtin profile."))
             self.label_warning_message.show()
             self.label_warning_icon.show()
             self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(False)
         elif (prospective_dir / name).with_suffix(".conf").exists():
-            self.label_warning_message.setText("A profile with this name already exists.")
+            self.label_warning_message.setText(self.tr("A profile with this name already exists."))
             self.label_warning_message.show()
             self.label_warning_icon.show()
             self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(False)
@@ -123,7 +123,7 @@ class NewProfileDialog(Qw.QDialog, Ui_NewProfile):
             self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(True)
 
         if not prospective_dir.is_dir():
-            self.label_warning_message.setText("The selected directory does not exist.")
+            self.label_warning_message.setText(self.tr("The selected directory does not exist."))
             self.label_warning_message.show()
             self.label_warning_icon.show()
             self.buttonBox.button(Qw.QDialogButtonBox.Save).setEnabled(False)

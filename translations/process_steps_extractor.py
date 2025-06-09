@@ -118,6 +118,14 @@ def main() -> None:
     """
     image_file = imf.ImageFile(Path("nothing.png"))
     process_outputs = image_file.outputs
+    # This step name is used only in the progress bar and is not included in "pcleaner/gui/image_file.py",
+    # but since it still needs to be translated, we need to manually squeeze it in here.
+    process_outputs[ost.Output.write_output] = imf.ProcessOutput(
+        "<This is just a placeholder, translating this string is not necessary>",
+        None,
+        "Write Output",
+    )
+
     process_strings = extract_step_strings(process_outputs)
     code = bogus_codegen(process_strings)
     # Write the file right next to this one, no matter the current working directory.
