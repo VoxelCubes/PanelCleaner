@@ -2,7 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ko_KR" sourcelanguage="en_US">
 <context>
-    <name/>
+    <name></name>
     <message>
         <location filename="../pcleaner/config.py" line="1086"/>
         <source>default</source>
@@ -488,7 +488,7 @@ Pages with failures / total:
         <translation>감지된 글자들을 파일에 쓰는 데 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="495"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="566"/>
         <source>Inpainter (experimental)</source>
         <translation>인페인팅 (실험적인 기능)</translation>
     </message>
@@ -2215,6 +2215,29 @@ Check the online documentation for how to add support for more languages.</sourc
     </message>
 </context>
 <context>
+    <name>NewProfileDialog</name>
+    <message>
+        <location filename="../pcleaner/gui/new_profile_driver.py" line="106"/>
+        <source>Please enter a name.</source>
+        <translation>이름을 입력해 주세요.</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/new_profile_driver.py" line="111"/>
+        <source>This name is used by a builtin profile.</source>
+        <translation>이 이름은 내장 프로파일이 이미 사용 중입니다.</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/new_profile_driver.py" line="116"/>
+        <source>A profile with this name already exists.</source>
+        <translation>이미 존재하는 이름입니다.</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/new_profile_driver.py" line="126"/>
+        <source>The selected directory does not exist.</source>
+        <translation>선택한 디렉토리가 존재하지 않습니다.</translation>
+    </message>
+</context>
+<context>
     <name>OCRLanguageSupport</name>
     <message>
         <location filename="../ui_files/OCRLanguageSupport.ui" line="14"/>
@@ -2255,6 +2278,11 @@ Check the online documentation for how to add support for more languages.</sourc
 </context>
 <context>
     <name>OcrReview</name>
+    <message>
+        <location filename="../ui_files/OcrReview.ui" line="14"/>
+        <source>Review</source>
+        <translation>검토</translation>
+    </message>
     <message>
         <location filename="../ui_files/OcrReview.ui" line="79"/>
         <source>Icon Size:</source>
@@ -3191,13 +3219,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="66"/>
         <source>Maximum number of threads to use for exporting images. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
         <comment>Profile comment in General</comment>
-        <translation>이미지 내보내기에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용할 수 있는 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
+        <translation>이미지 내보내기에 사용할 최대 스레드 수입니다. 이 값을 지정하지 않으면 사용할 수 있는 모든 스레드를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="68"/>
         <source>Max Threads Export</source>
         <comment>Profile entry in General</comment>
-        <translation>내보내기 시 사용할 최대 코어 수</translation>
+        <translation>내보내기 시 사용할 최대 스레드 수</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="70"/>
@@ -3442,13 +3470,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="profile_strings.py" line="150"/>
         <source>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
         <comment>Profile comment in Masker</comment>
-        <translation>마스크 생성에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용할 수 있는 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
+        <translation>마스크 생성에 사용할 최대 스레드 수입니다. 이 값을 지정하지 않으면 사용할 수 있는 모든 스레드를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="152"/>
         <source>Max Threads</source>
         <comment>Profile entry in Masker</comment>
-        <translation>최대 코어 수</translation>
+        <translation>최대 스레드 수</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="154"/>
@@ -3565,13 +3593,13 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
         <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
         <comment>Profile comment in Denoiser</comment>
-        <translation>노이즈 감소에 사용할 최대 코어 수입니다. 이 값을 지정하지 않으면 사용할 수 있는 모든 코어를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
+        <translation>노이즈 감소에 사용할 최대 스레드 수입니다. 이 값을 지정하지 않으면 사용할 수 있는 모든 스레드를 사용할 수 있습니다. 메모리 문제로 인해 간헐적인 충돌이 발생하는 경우 이 값을 줄이세요.</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="204"/>
         <source>Max Threads</source>
         <comment>Profile entry in Denoiser</comment>
-        <translation>최대 코어 수</translation>
+        <translation>최대 스레드 수</translation>
     </message>
     <message>
         <location filename="profile_strings.py" line="240"/>
@@ -4214,7 +4242,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <location filename="../pcleaner/gui/profile_parser.py" line="158"/>
         <source>All Cores</source>
         <comment>The limit on the number of CPU cores to use, or here, no limit.</comment>
-        <translation>모든 코어</translation>
+        <translation>모든 스레드</translation>
     </message>
     <message>
         <location filename="../pcleaner/gui/profile_parser.py" line="242"/>
@@ -4223,35 +4251,419 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
         <translation>원본 이미지와 동일하게</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="278"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="275"/>
+        <source>auto</source>
+        <comment>OCR Engine option</comment>
+        <translation>자동</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="276"/>
+        <source>manga-ocr</source>
+        <comment>OCR Engine option</comment>
+        <translation>manga-ocr</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="277"/>
+        <source>tesseract</source>
+        <comment>OCR Engine option</comment>
+        <translation>테서렉트</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="282"/>
+        <source>auto</source>
+        <comment>Reading order option</comment>
+        <translation>자동</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="283"/>
+        <source>manga</source>
+        <comment>Reading order option</comment>
+        <translation>망가</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="284"/>
+        <source>comic</source>
+        <comment>Reading order option</comment>
+        <translation>코믹</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="289"/>
         <source>None</source>
         <comment>Layered export option</comment>
         <translation>없음</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="279"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="290"/>
         <source>PSD Bulk</source>
         <comment>Layered export option</comment>
         <translation>단일 PSD</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="282"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="291"/>
         <source>PSD Per Image</source>
         <comment>Layered export option</comment>
         <translation>개별 PSD</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="296"/>
+        <source>Detect per box</source>
+        <comment>Language code option</comment>
+        <translation>영역 단위 감지</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="297"/>
+        <source>Detect per page</source>
+        <comment>Language code option</comment>
+        <translation>페이지 단위 감지</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="298"/>
+        <source>Japanese</source>
+        <comment>Language code option</comment>
+        <translation>일본어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="299"/>
+        <source>English</source>
+        <comment>Language code option</comment>
+        <translation>영어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="300"/>
+        <source>Korean</source>
+        <comment>Language code option</comment>
+        <translation>한국어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="301"/>
+        <source>Korean (vertical)</source>
+        <comment>Language code option</comment>
+        <translation>한국어(세로쓰기)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="302"/>
+        <source>Chinese - Simplified</source>
+        <comment>Language code option</comment>
+        <translation>중국어(간체)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="303"/>
+        <source>Chinese - Traditional</source>
+        <comment>Language code option</comment>
+        <translation>중국어(번체)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="304"/>
+        <source>Albanian</source>
+        <comment>Language code option</comment>
+        <translation>알바니아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="305"/>
+        <source>Arabic</source>
+        <comment>Language code option</comment>
+        <translation>아랍어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="306"/>
+        <source>Azerbaijani</source>
+        <comment>Language code option</comment>
+        <translation>아제르바이잔어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="307"/>
+        <source>Azerbaijani - Cyrilic</source>
+        <comment>Language code option</comment>
+        <translation>아제르바이잔어(키릴문자)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="308"/>
+        <source>Bengali</source>
+        <comment>Language code option</comment>
+        <translation>벵골어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="309"/>
+        <source>Bulgarian</source>
+        <comment>Language code option</comment>
+        <translation>불가리아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="310"/>
+        <source>Burmese</source>
+        <comment>Language code option</comment>
+        <translation>버마어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="311"/>
+        <source>Catalan; Valencian</source>
+        <comment>Language code option</comment>
+        <translation>카탈루냐어(발렌시아어)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="312"/>
+        <source>Croatian</source>
+        <comment>Language code option</comment>
+        <translation>크로아티아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="313"/>
+        <source>Czech</source>
+        <comment>Language code option</comment>
+        <translation>체코어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="314"/>
+        <source>Danish</source>
+        <comment>Language code option</comment>
+        <translation>덴마크어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="315"/>
+        <source>Dutch; Flemish</source>
+        <comment>Language code option</comment>
+        <translation>네덜란드어(플라망어)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="316"/>
+        <source>Esperanto</source>
+        <comment>Language code option</comment>
+        <translation>에스페란토어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="317"/>
+        <source>Estonian</source>
+        <comment>Language code option</comment>
+        <translation>에스토니아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="318"/>
+        <source>Finnish</source>
+        <comment>Language code option</comment>
+        <translation>핀란드어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="319"/>
+        <source>French</source>
+        <comment>Language code option</comment>
+        <translation>프랑스어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="320"/>
+        <source>Georgian</source>
+        <comment>Language code option</comment>
+        <translation>조지아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="321"/>
+        <source>German</source>
+        <comment>Language code option</comment>
+        <translation>독일어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="322"/>
+        <source>Greek</source>
+        <comment>Language code option</comment>
+        <translation>그리스어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="323"/>
+        <source>Hebrew</source>
+        <comment>Language code option</comment>
+        <translation>히브리어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="324"/>
+        <source>Hindi</source>
+        <comment>Language code option</comment>
+        <translation>힌디어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="325"/>
+        <source>Hungarian</source>
+        <comment>Language code option</comment>
+        <translation>헝가리어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="326"/>
+        <source>Indonesian</source>
+        <comment>Language code option</comment>
+        <translation>인도네시아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="327"/>
+        <source>Italian</source>
+        <comment>Language code option</comment>
+        <translation>이탈리아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="328"/>
+        <source>Kazakh</source>
+        <comment>Language code option</comment>
+        <translation>카자흐어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="329"/>
+        <source>Latin</source>
+        <comment>Language code option</comment>
+        <translation>라틴어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="330"/>
+        <source>Lithuanian</source>
+        <comment>Language code option</comment>
+        <translation>리투아니아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="331"/>
+        <source>Luxembourgish</source>
+        <comment>Language code option</comment>
+        <translation>룩셈부르크어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="332"/>
+        <source>Malay</source>
+        <comment>Language code option</comment>
+        <translation>말레이어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="333"/>
+        <source>Mongolian</source>
+        <comment>Language code option</comment>
+        <translation>몽골어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="334"/>
+        <source>Nepali</source>
+        <comment>Language code option</comment>
+        <translation>네팔어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="335"/>
+        <source>Norwegian</source>
+        <comment>Language code option</comment>
+        <translation>노르웨이어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="336"/>
+        <source>Persian</source>
+        <comment>Language code option</comment>
+        <translation>페르시아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="337"/>
+        <source>Polish</source>
+        <comment>Language code option</comment>
+        <translation>폴란드어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="338"/>
+        <source>Portuguese</source>
+        <comment>Language code option</comment>
+        <translation>포르투갈어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="339"/>
+        <source>Romanian; Moldavian</source>
+        <comment>Language code option</comment>
+        <translation>루마니아어(몰도바어)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="340"/>
+        <source>Russian</source>
+        <comment>Language code option</comment>
+        <translation>러시아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="341"/>
+        <source>Serbian</source>
+        <comment>Language code option</comment>
+        <translation>세르비아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="342"/>
+        <source>Serbian - Latin</source>
+        <comment>Language code option</comment>
+        <translation>세르비아어(라틴문자)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="343"/>
+        <source>Slovak</source>
+        <comment>Language code option</comment>
+        <translation>슬로바키아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="344"/>
+        <source>Slovenian</source>
+        <comment>Language code option</comment>
+        <translation>슬로베니아어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="345"/>
+        <source>Spanish; Castilian</source>
+        <comment>Language code option</comment>
+        <translation>스페인어(카스티야어)</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="346"/>
+        <source>Swedish</source>
+        <comment>Language code option</comment>
+        <translation>스웨덴어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="347"/>
+        <source>Tagalog</source>
+        <comment>Language code option</comment>
+        <translation>타갈로그어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="348"/>
+        <source>Tamil</source>
+        <comment>Language code option</comment>
+        <translation>타밀어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="349"/>
+        <source>Telugu</source>
+        <comment>Language code option</comment>
+        <translation>텔루구어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="350"/>
+        <source>Thai</source>
+        <comment>Language code option</comment>
+        <translation>태국어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="351"/>
+        <source>Turkish</source>
+        <comment>Language code option</comment>
+        <translation>터키어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="352"/>
+        <source>Ukrainian</source>
+        <comment>Language code option</comment>
+        <translation>우크라이나어</translation>
+    </message>
+    <message>
+        <location filename="../pcleaner/gui/profile_parser.py" line="353"/>
+        <source>Vietnamese</source>
+        <comment>Language code option</comment>
+        <translation>베트남어</translation>
     </message>
 </context>
 <context>
     <name>ProfileToolBox</name>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="615"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="686"/>
         <source>&lt;html&gt;The Text Detector model path {value} does not exist, reverting to default.
 You can download the model manually from &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
         <translation>&lt;html&gt;글자 감지 모델의 경로 {value}가 존재하지 않아 기본값으로 변경됩니다.
 모델은 &lt;a href=&quot;https://github.com/zyddnys/manga-image-translator/releases/latest&quot;&gt;이곳&lt;/a&gt;에서 직접 다운로드하거나, 기본 모델을 이용하여 진행할 수 있습니다.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../pcleaner/gui/profile_parser.py" line="631"/>
+        <location filename="../pcleaner/gui/profile_parser.py" line="702"/>
         <source>The regex pattern &quot;{value}&quot; for {key} is invalid, reverting to default.</source>
         <translation>{key}를 위한 정규식 패턴 &quot;{value}&quot;은 유효하지 않아 기본값으로 변경됩니다.</translation>
     </message>
