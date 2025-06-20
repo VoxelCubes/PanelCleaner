@@ -2269,7 +2269,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="120"/>
       <source>How to install Tesseract language packs</source>
-      <translation type="unfinished">How to install Tesseract language packs</translation>
+      <translation>Cómo instalar los paquetes de idiomas de Tesseract</translation>
     </message>
   </context>
   <context>
