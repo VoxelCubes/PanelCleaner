@@ -382,6 +382,7 @@ def export_to_psd(path: Path, original_image: Image, masks: list[tuple[Image, st
         layer = PixelLayer.frompil(mask, psd, name, compression=Compression.ZIP)
         group_layer.append(layer)
 
+    logger.debug(f"Saving PSD file to {path} with {len(masks)} layers.")
     psd.save(str(path))
 
 
@@ -447,6 +448,7 @@ def bundle_psd(
     for page in pages:
         psd_bulk.append(page)
 
+    logger.debug(f"Saving bulk PSD file to {bulk_psd_path} with {len(pages)} pages.")
     psd_bulk.save(str(bulk_psd_path))
     return bulk_psd_path
 
