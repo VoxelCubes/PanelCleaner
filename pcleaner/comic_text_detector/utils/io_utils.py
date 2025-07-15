@@ -5,11 +5,23 @@ from pathlib import Path
 import cv2
 import numpy as np
 import json
+from loguru import logger
 
 IMG_EXT = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
 
-NP_BOOL_TYPES = (np.bool_, np.bool8)
-NP_FLOAT_TYPES = (np.float_, np.float16, np.float32, np.float64)
+# Guard for numpy version compatibility
+from packaging import version
+
+np_version = version.parse(np.__version__)
+
+if np_version >= version.parse("2.0.0"):
+    NP_BOOL_TYPES = (np.bool_,)
+    NP_FLOAT_TYPES = (np.float16, np.float32, np.float64)
+else:
+    NP_BOOL_TYPES = (np.bool_, np.bool8)
+    NP_FLOAT_TYPES = (np.float_, np.float16, np.float32, np.float64)
+    logger.info("Using numpy <2.0.0 compatible types for boolean and float.")
+
 NP_INT_TYPES = (
     np.int_,
     np.int8,
@@ -22,6 +34,7 @@ NP_INT_TYPES = (
     np.uint32,
     np.uint64,
 )
+
 
 # https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable
 class NumpyEncoder(json.JSONEncoder):
