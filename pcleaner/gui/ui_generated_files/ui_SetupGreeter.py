@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'SetupGreeter.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.2
+## Created by: Qt User Interface Compiler version 6.9.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -61,7 +61,7 @@ class Ui_SetupGreeter(object):
         self.label_9 = QLabel(SetupGreeter)
         self.label_9.setObjectName(u"label_9")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_9)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_9)
 
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -92,7 +92,7 @@ class Ui_SetupGreeter(object):
         self.verticalLayout_2.addWidget(self.label_11)
 
 
-        self.formLayout.setLayout(0, QFormLayout.FieldRole, self.verticalLayout_2)
+        self.formLayout.setLayout(0, QFormLayout.ItemRole.FieldRole, self.verticalLayout_2)
 
         self.label_4 = QLabel(SetupGreeter)
         self.label_4.setObjectName(u"label_4")
@@ -101,7 +101,7 @@ class Ui_SetupGreeter(object):
         self.label_4.setOpenExternalLinks(True)
         self.label_4.setTextInteractionFlags(Qt.NoTextInteraction)
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_4)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_4)
 
         self.label_text_detector_path = QLabel(SetupGreeter)
         self.label_text_detector_path.setObjectName(u"label_text_detector_path")
@@ -114,17 +114,17 @@ class Ui_SetupGreeter(object):
         self.label_text_detector_path.setWordWrap(True)
         self.label_text_detector_path.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_text_detector_path)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_text_detector_path)
 
         self.verticalSpacer_2 = QSpacerItem(20, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
 
-        self.formLayout.setItem(2, QFormLayout.LabelRole, self.verticalSpacer_2)
+        self.formLayout.setItem(2, QFormLayout.ItemRole.LabelRole, self.verticalSpacer_2)
 
         self.label_10 = QLabel(SetupGreeter)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setWordWrap(True)
 
-        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_10)
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_10)
 
         self.label_5 = QLabel(SetupGreeter)
         self.label_5.setObjectName(u"label_5")
@@ -136,7 +136,7 @@ class Ui_SetupGreeter(object):
         self.label_5.setOpenExternalLinks(True)
         self.label_5.setTextInteractionFlags(Qt.TextBrowserInteraction)
 
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.label_5)
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_5)
 
         self.label_7 = QLabel(SetupGreeter)
         self.label_7.setObjectName(u"label_7")
@@ -145,7 +145,7 @@ class Ui_SetupGreeter(object):
         self.label_7.setOpenExternalLinks(True)
         self.label_7.setTextInteractionFlags(Qt.NoTextInteraction)
 
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_7)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_7)
 
         self.label_ocr_path = QLabel(SetupGreeter)
         self.label_ocr_path.setObjectName(u"label_ocr_path")
@@ -155,13 +155,13 @@ class Ui_SetupGreeter(object):
         self.label_ocr_path.setWordWrap(True)
         self.label_ocr_path.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_ocr_path)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_ocr_path)
 
         self.label_12 = QLabel(SetupGreeter)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setWordWrap(True)
 
-        self.formLayout.setWidget(6, QFormLayout.LabelRole, self.label_12)
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.LabelRole, self.label_12)
 
         self.label_13 = QLabel(SetupGreeter)
         self.label_13.setObjectName(u"label_13")
@@ -173,7 +173,7 @@ class Ui_SetupGreeter(object):
         self.label_13.setOpenExternalLinks(True)
         self.label_13.setTextInteractionFlags(Qt.TextBrowserInteraction)
 
-        self.formLayout.setWidget(6, QFormLayout.FieldRole, self.label_13)
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.label_13)
 
         self.label_8 = QLabel(SetupGreeter)
         self.label_8.setObjectName(u"label_8")
@@ -182,7 +182,7 @@ class Ui_SetupGreeter(object):
         self.label_8.setOpenExternalLinks(True)
         self.label_8.setTextInteractionFlags(Qt.NoTextInteraction)
 
-        self.formLayout.setWidget(7, QFormLayout.LabelRole, self.label_8)
+        self.formLayout.setWidget(7, QFormLayout.ItemRole.LabelRole, self.label_8)
 
         self.label_inpainting_path = QLabel(SetupGreeter)
         self.label_inpainting_path.setObjectName(u"label_inpainting_path")
@@ -192,11 +192,11 @@ class Ui_SetupGreeter(object):
         self.label_inpainting_path.setWordWrap(True)
         self.label_inpainting_path.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.formLayout.setWidget(7, QFormLayout.FieldRole, self.label_inpainting_path)
+        self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.label_inpainting_path)
 
         self.verticalSpacer_3 = QSpacerItem(20, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
 
-        self.formLayout.setItem(5, QFormLayout.LabelRole, self.verticalSpacer_3)
+        self.formLayout.setItem(5, QFormLayout.ItemRole.LabelRole, self.verticalSpacer_3)
 
 
         self.verticalLayout.addLayout(self.formLayout)

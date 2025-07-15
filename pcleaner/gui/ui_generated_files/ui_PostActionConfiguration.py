@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'PostActionConfiguration.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.2
+## Created by: Qt User Interface Compiler version 6.9.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -74,12 +74,12 @@ class Ui_PostActionConfiguration(object):
         self.label = QLabel(PostActionConfiguration)
         self.label.setObjectName(u"label")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label)
 
         self.lineEdit_shutdown = QLineEdit(PostActionConfiguration)
         self.lineEdit_shutdown.setObjectName(u"lineEdit_shutdown")
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.lineEdit_shutdown)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.lineEdit_shutdown)
 
 
         self.verticalLayout.addLayout(self.formLayout)
@@ -218,7 +218,7 @@ class Ui_PostActionConfiguration(object):
         self.label_4 = QLabel(PostActionConfiguration)
         self.label_4.setObjectName(u"label_4")
 
-        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label_4)
+        self.formLayout_2.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_4)
 
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
@@ -244,12 +244,12 @@ class Ui_PostActionConfiguration(object):
         self.horizontalLayout_2.addItem(self.horizontalSpacer_3)
 
 
-        self.formLayout_2.setLayout(0, QFormLayout.FieldRole, self.horizontalLayout_2)
+        self.formLayout_2.setLayout(0, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_2)
 
         self.inputDirectoryIesLabel = QLabel(PostActionConfiguration)
         self.inputDirectoryIesLabel.setObjectName(u"inputDirectoryIesLabel")
 
-        self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.inputDirectoryIesLabel)
+        self.formLayout_2.setWidget(1, QFormLayout.ItemRole.LabelRole, self.inputDirectoryIesLabel)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -272,7 +272,7 @@ class Ui_PostActionConfiguration(object):
         self.horizontalLayout_3.addItem(self.horizontalSpacer_4)
 
 
-        self.formLayout_2.setLayout(1, QFormLayout.FieldRole, self.horizontalLayout_3)
+        self.formLayout_2.setLayout(1, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_3)
 
 
         self.horizontalLayout_7.addLayout(self.formLayout_2)
@@ -282,7 +282,7 @@ class Ui_PostActionConfiguration(object):
         self.label_6 = QLabel(PostActionConfiguration)
         self.label_6.setObjectName(u"label_6")
 
-        self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.label_6)
+        self.formLayout_3.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_6)
 
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
@@ -305,12 +305,12 @@ class Ui_PostActionConfiguration(object):
         self.horizontalLayout_4.addItem(self.horizontalSpacer_5)
 
 
-        self.formLayout_3.setLayout(0, QFormLayout.FieldRole, self.horizontalLayout_4)
+        self.formLayout_3.setLayout(0, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_4)
 
         self.label_10 = QLabel(PostActionConfiguration)
         self.label_10.setObjectName(u"label_10")
 
-        self.formLayout_3.setWidget(1, QFormLayout.LabelRole, self.label_10)
+        self.formLayout_3.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_10)
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
@@ -333,7 +333,7 @@ class Ui_PostActionConfiguration(object):
         self.horizontalLayout_5.addItem(self.horizontalSpacer_6)
 
 
-        self.formLayout_3.setLayout(1, QFormLayout.FieldRole, self.horizontalLayout_5)
+        self.formLayout_3.setLayout(1, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_5)
 
 
         self.horizontalLayout_7.addLayout(self.formLayout_3)
@@ -343,7 +343,7 @@ class Ui_PostActionConfiguration(object):
         self.label_8 = QLabel(PostActionConfiguration)
         self.label_8.setObjectName(u"label_8")
 
-        self.formLayout_4.setWidget(0, QFormLayout.LabelRole, self.label_8)
+        self.formLayout_4.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_8)
 
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
@@ -366,7 +366,7 @@ class Ui_PostActionConfiguration(object):
         self.horizontalLayout_6.addItem(self.horizontalSpacer_7)
 
 
-        self.formLayout_4.setLayout(0, QFormLayout.FieldRole, self.horizontalLayout_6)
+        self.formLayout_4.setLayout(0, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_6)
 
 
         self.horizontalLayout_7.addLayout(self.formLayout_4)

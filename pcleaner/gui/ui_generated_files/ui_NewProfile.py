@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'NewProfile.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.2
+## Created by: Qt User Interface Compiler version 6.9.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -40,12 +40,12 @@ class Ui_NewProfile(object):
         self.radioButton_default_location.setObjectName(u"radioButton_default_location")
         self.radioButton_default_location.setChecked(True)
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.radioButton_default_location)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.radioButton_default_location)
 
         self.radioButton_custom_location = QRadioButton(NewProfile)
         self.radioButton_custom_location.setObjectName(u"radioButton_custom_location")
 
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.radioButton_custom_location)
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.radioButton_custom_location)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -70,24 +70,24 @@ class Ui_NewProfile(object):
         self.horizontalLayout.addWidget(self.pushButton_browse_location)
 
 
-        self.formLayout.setLayout(2, QFormLayout.FieldRole, self.horizontalLayout)
+        self.formLayout.setLayout(2, QFormLayout.ItemRole.FieldRole, self.horizontalLayout)
 
         self.label = QLabel(NewProfile)
         self.label.setObjectName(u"label")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label)
 
         self.lineEdit_name = QLineEdit(NewProfile)
         self.lineEdit_name.setObjectName(u"lineEdit_name")
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.lineEdit_name)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.lineEdit_name)
 
         self.label_default_path = QLabel(NewProfile)
         self.label_default_path.setObjectName(u"label_default_path")
         self.label_default_path.setText(u"<default path>")
         self.label_default_path.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.label_default_path)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_default_path)
 
 
         self.verticalLayout.addLayout(self.formLayout)

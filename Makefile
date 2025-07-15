@@ -129,7 +129,7 @@ build-elf:
 		--collect-data=torch \
 		--collect-data=unidic_lite \
 		--hidden-import=scipy.signal \
-		--add-data "${PYINSTALLER_VENV}/lib/python3.11/site-packages/manga_ocr/assets/example.jpg:assets/" \
+		--add-data "${PYINSTALLER_VENV}/lib/python3.13/site-packages/manga_ocr/assets/example.jpg:assets/" \
 		--collect-data pcleaner
 	
 	# This stupid thing refuses to collect data, so do it manually:

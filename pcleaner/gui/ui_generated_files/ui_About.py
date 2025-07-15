@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'About.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.8.2
+## Created by: Qt User Interface Compiler version 6.9.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -58,18 +58,18 @@ class Ui_About(object):
         self.label_3 = QLabel(About)
         self.label_3.setObjectName(u"label_3")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_3)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.label_3)
 
         self.label_version = QLabel(About)
         self.label_version.setObjectName(u"label_version")
         self.label_version.setText(u"<version>")
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_version)
+        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.label_version)
 
         self.label_11 = QLabel(About)
         self.label_11.setObjectName(u"label_11")
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_11)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_11)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -90,35 +90,35 @@ class Ui_About(object):
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
 
-        self.formLayout.setLayout(1, QFormLayout.FieldRole, self.horizontalLayout)
+        self.formLayout.setLayout(1, QFormLayout.ItemRole.FieldRole, self.horizontalLayout)
 
         self.label_5 = QLabel(About)
         self.label_5.setObjectName(u"label_5")
 
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_5)
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.label_5)
 
         self.label_toolkit = QLabel(About)
         self.label_toolkit.setObjectName(u"label_toolkit")
         self.label_toolkit.setText(u"<toolkit>")
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.label_toolkit)
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.label_toolkit)
 
         self.label_7 = QLabel(About)
         self.label_7.setObjectName(u"label_7")
 
-        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_7)
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.label_7)
 
         self.label_license = QLabel(About)
         self.label_license.setObjectName(u"label_license")
         self.label_license.setText(u"<html><head/><body><p><a href=\"open_license\"><span style=\" text-decoration: underline; color:#8419ff;\">GNU General Public License v3.0</span></a></p></body></html>")
         self.label_license.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse)
 
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.label_license)
+        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_license)
 
         self.label_9 = QLabel(About)
         self.label_9.setObjectName(u"label_9")
 
-        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_9)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_9)
 
         self.label_10 = QLabel(About)
         self.label_10.setObjectName(u"label_10")
@@ -126,7 +126,7 @@ class Ui_About(object):
         self.label_10.setOpenExternalLinks(True)
         self.label_10.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse)
 
-        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.label_10)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_10)
 
 
         self.verticalLayout.addLayout(self.formLayout)
