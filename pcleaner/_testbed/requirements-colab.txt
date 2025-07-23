@@ -1,0 +1,12 @@
+pyclipper  
+docopt-ng  
+ConfigUpdater  
+loguru  
+colorama  
+xdg  
+dictdiffer  
+humanfriendly  
+pytesseract  
+python-magic
+pyngrok
+portpicker
