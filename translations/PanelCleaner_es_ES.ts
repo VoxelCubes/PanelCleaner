@@ -2788,7 +2788,7 @@ Consulte la documentación en línea para saber cómo añadir compatibilidad con
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="271"/>
       <source>Pause Countdown</source>
-      <translation type="unfinished">Pause Countdown</translation>
+      <translation>Pausar cuenta regresiva</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="283"/>
@@ -4574,7 +4574,7 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="339"/>
       <source>Romanian; Moldavian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Romanian; Moldavian</translation>
+      <translation>Rumano; Moldavo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="340"/>
@@ -4681,7 +4681,7 @@ Puede descargar el modelo manualmente desde &lt;a href=&quot;https://github.com/
     <message>
       <location filename="../pcleaner/gui/CustomQ/CRegexLineEdit.py" line="43"/>
       <source>Regex is valid</source>
-      <translation type="unfinished">Regex is valid</translation>
+      <translation>Regex es válido</translation>
     </message>
   </context>
   <context>
