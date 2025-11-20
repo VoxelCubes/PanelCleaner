@@ -196,7 +196,7 @@ Burbujas eliminadas:
     <message>
       <location filename="../pcleaner/analytics.py" line="315"/>
       <source>Total boxes</source>
-      <translation>Total cajas</translation>
+      <translation>Total de cajas</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="317"/>
@@ -549,27 +549,27 @@ Páginas con fallos / total:
     <message>
       <location filename="../pcleaner/gui/structures.py" line="108"/>
       <source>%id</source>
-      <translation type="unfinished">%id</translation>
+      <translation>%id</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="109"/>
       <source>%i</source>
-      <translation type="unfinished">%i</translation>
+      <translation>%i</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="110"/>
       <source>%od</source>
-      <translation type="unfinished">%od</translation>
+      <translation>%od</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="111"/>
       <source>%o</source>
-      <translation type="unfinished">%o</translation>
+      <translation>%o</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="112"/>
       <source>%p</source>
-      <translation type="unfinished">%p</translation>
+      <translation>%p</translation>
     </message>
   </context>
   <context>
@@ -2277,7 +2277,7 @@ Consulte la documentación en línea para saber cómo añadir compatibilidad con
     <message>
       <location filename="../ui_files/OcrReview.ui" line="14"/>
       <source>Review</source>
-      <translation type="unfinished">Review</translation>
+      <translation>Revisar</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="79"/>
@@ -2590,167 +2590,167 @@ Consulte la documentación en línea para saber cómo añadir compatibilidad con
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="49"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you set a wait time greater than 0, a window will open upon process completion. This window will show a countdown and allow you to preview as well as edit the command.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you set a wait time greater than 0, a window will open upon process completion. This window will show a countdown and allow you to preview as well as edit the command.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Si establece un tiempo de espera superior a 0, se abrirá una ventana al finalizar el proceso. Esta ventana mostrará una cuenta atrás y le permitirá previsualizar y editar el comando.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="101"/>
       <source>Power Off Command:</source>
-      <translation type="unfinished">Power Off Command:</translation>
+      <translation>Comando de apagado:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="108"/>
       <source>shutdown</source>
-      <translation type="unfinished">shutdown</translation>
+      <translation>apagar</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="119"/>
       <source>Custom Commands:</source>
-      <translation type="unfinished">Custom Commands:</translation>
+      <translation>Comandos personalizados</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="139"/>
       <source>Move command up</source>
-      <translation type="unfinished">Move command up</translation>
+      <translation>Mover comando hacia arriba</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="156"/>
       <source>Move command down</source>
-      <translation type="unfinished">Move command down</translation>
+      <translation>Mover comando hacia abajo</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="173"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Nuevo</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="187"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Eliminar</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="228"/>
       <source>Action Name</source>
-      <translation type="unfinished">Action Name</translation>
+      <translation>Nombre de la acción</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="233"/>
       <source>Command or Script File Path</source>
-      <translation type="unfinished">Command or Script File Path</translation>
+      <translation>Ruta del archivo de comandos o scripts</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="243"/>
       <source>Cancel the custom action if processing failed</source>
-      <translation type="unfinished">Cancel the custom action if processing failed</translation>
+      <translation>Cancelar la acción personalizada si falla el procesamiento</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="253"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Power Off action will run regardless of this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Power Off action will run regardless of this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La acción de apagado se ejecutará independientemente de esta configuración.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="303"/>
       <source>Placeholder Tokens:</source>
-      <translation type="unfinished">Placeholder Tokens:</translation>
+      <translation>Tokens de marcador de posición</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="323"/>
       <source>Input Files</source>
-      <translation type="unfinished">Input Files</translation>
+      <translation>Archivos de entrada</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="338"/>
       <source>%i</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%i</translation>
+      <translation>%i</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="345"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file processed, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file processed, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Las rutas individuales de cada archivo procesado, como una lista separada por espacios, con comillas donde sea necesario.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="373"/>
       <source>Input Directory</source>
-      <translation type="unfinished">Input Directory</translation>
+      <translation>Directorio de entradas</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="388"/>
       <source>%id</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%id</translation>
+      <translation>%id</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="395"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Agrupe los archivos por directorio principal y enumérelos, como una lista separada por espacios, con comillas donde sea necesario.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="427"/>
       <source>Output Files</source>
-      <translation type="unfinished">Output Files</translation>
+      <translation>Archivos de Salida</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="442"/>
       <source>%o</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%o</translation>
+      <translation>%o</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="449"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file created as an output, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file created as an output, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Las rutas individuales de cada archivo creado como salida, como una lista separada por espacios, con comillas donde sea necesario.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="477"/>
       <source>Output Directory</source>
-      <translation type="unfinished">Output Directory</translation>
+      <translation>Directorio de salida</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="492"/>
       <source>%od</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%od</translation>
+      <translation>%od</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="499"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group output files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group output files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Agrupe los archivos de salida por directorio principal y enumérelos, como una lista separada por espacios, con comillas donde sea necesario.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="531"/>
       <source>Profile Used</source>
-      <translation type="unfinished">Profile Used</translation>
+      <translation>Perfil utilizado</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="546"/>
       <source>%p</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
-      <translation type="unfinished">%p</translation>
+      <translation>%p</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="553"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of the profile used, with quotation marks if necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of the profile used, with quotation marks if necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;El nombre del perfil utilizado, entre comillas si es necesario.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="142"/>
       <source>Action names cannot be empty.</source>
-      <translation type="unfinished">Action names cannot be empty.</translation>
+      <translation>Los nombres de las acciones no pueden estar vacíos.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="147"/>
       <source>Action names must be unique.</source>
-      <translation type="unfinished">Action names must be unique.</translation>
+      <translation>Los nombres de las acciones deben ser únicos.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="153"/>
       <source>The name &quot;{shutdown_command}&quot; is reserved.</source>
-      <translation type="unfinished">The name &quot;{shutdown_command}&quot; is reserved.</translation>
+      <translation>El nombre &quot;{shutdown_command}&quot; está reservado.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="164"/>
       <source>The Flatpak sandbox will likely prevent actions from working.</source>
-      <translation type="unfinished">The Flatpak sandbox will likely prevent actions from working.</translation>
+      <translation>Es probable que el sandbox de Flatpak impida que las acciones funcionen.</translation>
     </message>
   </context>
   <context>
@@ -2758,32 +2758,32 @@ Consulte la documentación en línea para saber cómo añadir compatibilidad con
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="14"/>
       <source>Post-Action Runner</source>
-      <translation type="unfinished">Post-Action Runner</translation>
+      <translation>Ejecutador de Post-Action</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="163"/>
       <source>An error occurred during the process.</source>
-      <translation type="unfinished">An error occurred during the process.</translation>
+      <translation>Ocurrió un error durante el proceso.</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="194"/>
       <source>Full Command:</source>
-      <translation type="unfinished">Full Command:</translation>
+      <translation>Comando completo:</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="231"/>
       <source>Run Again</source>
-      <translation type="unfinished">Run Again</translation>
+      <translation>Ejecutar de nuevo</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="241"/>
       <source>Skip Countdown</source>
-      <translation type="unfinished">Skip Countdown</translation>
+      <translation>Saltar cuenta regresiva</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="261"/>
       <source>Resume Countdown</source>
-      <translation type="unfinished">Resume Countdown</translation>
+      <translation>Reanudar cuenta regresiva</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="271"/>
@@ -2798,32 +2798,32 @@ Consulte la documentación en línea para saber cómo añadir compatibilidad con
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="295"/>
       <source>Cancel Action</source>
-      <translation type="unfinished">Cancel Action</translation>
+      <translation>Cancelar acción</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="305"/>
       <source>Cancel Shutdown</source>
-      <translation type="unfinished">Cancel Shutdown</translation>
+      <translation>Cancelar Apagado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="76"/>
       <source>Shutting down the system</source>
-      <translation type="unfinished">Shutting down the system</translation>
+      <translation>Cerrando el sistema.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="85"/>
       <source>Running the action &quot;{action_name}&quot;</source>
-      <translation type="unfinished">Running the action &quot;{action_name}&quot;</translation>
+      <translation>Ejecutar la acción &quot;{action_name}&quot;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="154"/>
       <source>Remaining time: {time} seconds</source>
-      <translation type="unfinished">Remaining time: {time} seconds</translation>
+      <translation>Tiempo restante: {time} segundos</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="157"/>
       <source>Remaining time: 1 second</source>
-      <translation type="unfinished">Remaining time: 1 second</translation>
+      <translation>Tiempo restante: 1 segundo</translation>
     </message>
   </context>
   <context>
@@ -3074,13 +3074,13 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="process_strings.py" line="72"/>
       <source>&lt;This is just a placeholder, translating this string is not necessary&gt;</source>
       <comment>Step description in the image details view, step: None, output: Write Output</comment>
-      <translation type="unfinished">&lt;This is just a placeholder, translating this string is not necessary&gt;</translation>
+      <translation>&lt;Esto es solo un marcador de posición, la traducción de esta cadena no es necesario&gt;</translation>
     </message>
     <message>
       <location filename="process_strings.py" line="74"/>
       <source>Write Output</source>
       <comment>Output name in the image details view</comment>
-      <translation type="unfinished">Write Output</translation>
+      <translation>Salida de escritura</translation>
     </message>
   </context>
   <context>
@@ -3167,73 +3167,73 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="46"/>
       <source>Split long strips into individual pages. If enabled, instead of squeezing the entire strip to fit into the preferred height, the strip will be split into individual pages, each fitting the preferred height plus/minus double the split tolerance margin (if the segment was in the middle of the strip).</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Split long strips into individual pages. If enabled, instead of squeezing the entire strip to fit into the preferred height, the strip will be split into individual pages, each fitting the preferred height plus/minus double the split tolerance margin (if the segment was in the middle of the strip).</translation>
+      <translation>Divida tiras largas en páginas individuales. Si se activa, en lugar de apretar la tira entera para caber en la altura preferida, el clip se dividirá en páginas individuales, cada ajuste de la altura preferida más/menos doble el margen de tolerancia dividida (si el segmento estaba en medio de la raya).</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="48"/>
       <source>Split Long Strips</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Split Long Strips</translation>
+      <translation>Dividir Tiras Largas</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="50"/>
       <source>Preferred height to split long strips at.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Preferred height to split long strips at.</translation>
+      <translation>Altura preferida para dividir tiras largas.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="52"/>
       <source>Preferred Split Height</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Preferred Split Height</translation>
+      <translation>Altura de división preferida</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="54"/>
       <source>Tolerance margin for splitting long strips. This is the maximum difference between the preferred split height and the actual height of the strip. An algorithm determines the best split point within this margin, in an effort to avoid splitting in the middle of a panel.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Tolerance margin for splitting long strips. This is the maximum difference between the preferred split height and the actual height of the strip. An algorithm determines the best split point within this margin, in an effort to avoid splitting in the middle of a panel.</translation>
+      <translation>Margen de tolerancia para dividir tiras largas, es la diferencia máxima entre la altura de división preferida y la altura real de la raya. Un algoritmo determina el mejor punto de división dentro de este margen, en un esfuerzo por evitar dividirse en medio de un panel.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="56"/>
       <source>Split Tolerance Margin</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Split Tolerance Margin</translation>
+      <translation>Margen de tolerancia de división</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="58"/>
       <source>Aspect ratio to use for splitting long strips. This is the ratio of the width to the height of the image. If the image&apos;s aspect ratio is smaller than this value, it will be considered a long strip.&lt;br&gt; Example: 0.3 means that the width of the image is 0.3 times the height.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Aspect ratio to use for splitting long strips. This is the ratio of the width to the height of the image. If the image&apos;s aspect ratio is smaller than this value, it will be considered a long strip.&lt;br&gt; Example: 0.3 means that the width of the image is 0.3 times the height.</translation>
+      <translation>Relación de aspecto a utilizar para dividir tiras largas. Es la relación entre la anchura y la altura de la imagen. Si la relación de aspecto de la imagen&apos;es menor que este valor, se considerará una tira larga.&lt;br&gt; Ejemplo: 0,3 significa que la anchura de la imagen es 0,3 veces la altura.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="60"/>
       <source>Long Strip Aspect Ratio</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Long Strip Aspect Ratio</translation>
+      <translation>Relación de aspecto de Tira larga</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="62"/>
       <source>Merge long strips back into a single image. If enabled, the individual pages created from a long strip will be merged back into a single image upon export.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Merge long strips back into a single image. If enabled, the individual pages created from a long strip will be merged back into a single image upon export.</translation>
+      <translation>Combinar tiras largas en una sola imagen. Si se activa, las páginas individuales creadas a partir de un clip largo se fusionarán de nuevo en una sola imagen al exportar.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="64"/>
       <source>Merge After Split</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Merge After Split</translation>
+      <translation>Fusionar después de dividir</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="66"/>
       <source>Maximum number of threads to use for exporting images. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Maximum number of threads to use for exporting images. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation>Número máximo de hilos a usar para exportar imágenes. Puede dejarlo sin especificar para utilizar todos los hilos disponibles. Reduzca este valor si tiene problemas de memoria, que aparecerán como bloqueos aleatorios.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="68"/>
       <source>Max Threads Export</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Max Threads Export</translation>
+      <translation>Exportación máxima de hilos</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="70"/>
@@ -3343,13 +3343,13 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="104"/>
       <source>The language to use for OCR tasks. The text detector can detect Japanese and English, for anything else, select a language explicitly here. Detecting per box retains what the text detector detected, while per page will assign the most prominent language to the entire page.&lt;br&gt; Note: Only Japanese is supported out of the box, everything else requires Tesseract to be enabled and its associated language packs to be installed.</source>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The language to use for OCR tasks. The text detector can detect Japanese and English, for anything else, select a language explicitly here. Detecting per box retains what the text detector detected, while per page will assign the most prominent language to the entire page.&lt;br&gt; Note: Only Japanese is supported out of the box, everything else requires Tesseract to be enabled and its associated language packs to be installed.</translation>
+      <translation>El idioma a utilizar para las tareas de OCR. El detector de texto puede detectar japonés e inglés, para cualquier otra cosa, seleccione un idioma explícitamente aquí. La detección por cuadro retiene lo que el detector de texto detectó, mientras que por página asignará el idioma más prominente a toda la página.&lt;br&gt; Nota: Sólo el japonés es compatible de fábrica, todo lo demás requiere que Tesseract esté habilitado y que se instalen sus paquetes de idiomas asociados.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="106"/>
       <source>OCR Language</source>
       <comment>Profile entry in Preprocessor</comment>
-      <translation type="unfinished">OCR Language</translation>
+      <translation>Idioma OCR</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="108"/>
@@ -3392,7 +3392,7 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <source>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</source>
       <oldsource>Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the OCR model returns full-width characters, so this pattern should match them.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">Regex pattern to match against OCR results. Anything matching this pattern is discarded.&lt;br&gt; Note: the MangaOCR model returns full-width characters, so this pattern should match them.</translation>
+      <translation>Patrón Regex para comparar con los resultados del OCR. Todo lo que coincida con este patrón se descarta. Tenga en cuenta que el modelo OCR devuelve caracteres de ancho completo, por lo que este patrón debería coincidir con ellos.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="122"/>
@@ -3405,7 +3405,7 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <source>The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</source>
       <oldsource>The standard OCR model can only handle Japanese text, so when strict is enabled, it will discard boxes that the it isn&apos;t confident are Japanese. Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</oldsource>
       <comment>Profile comment in Preprocessor</comment>
-      <translation type="unfinished">The MangaOCR model can only handle Japanese text, so when strict is enabled, it will discard boxes where the Text Detector isn&apos;t confident that they are Japanese.  Sometimes, numbers or other symbols will lower its confidence, resulting in the detected language being unknown. If strict is disabled, those will not be discarded. Anything that is confidently recognized as a different language will be discarded regardless of this setting.&lt;br&gt; Note: this setting is only relevant when ocr_language is set to detect per box or page.</translation>
+      <translation>El modelo OCR sólo puede manejar texto en japonés, por lo que cuando se activa la opción estricta, descartará las casillas que no&apos;confíe que son japonesas. A veces, los números u otros símbolos disminuyen su confianza, lo que hace que el idioma detectado sea desconocido. Si se desactiva la opción estricta, no se descartarán. Todo lo que se reconozca con seguridad como un idioma diferente se descartará independientemente de esta configuración.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="126"/>
@@ -3478,13 +3478,13 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="150"/>
       <source>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation>Número máximo de hilos a usar para la generación de máscaras. Puede dejarlo sin especificar para utilizar todos los hilos disponibles. Bajar este valor si se encuentran problemas de memoria, que aparecerán como bloqueos aleatorios.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="152"/>
       <source>Max Threads</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Max Threads</translation>
+      <translation>Hilos máximos</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="154"/>
@@ -3526,37 +3526,37 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="250"/>
       <source>The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask. If this value matches the maximum deviation for masks, only failed bubbles will be inpainted, making the following two settings irrelevant.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">The minimum standard deviation of colors around the edge of a given mask to perform inpainting on the region around the mask. If this value matches the maximum deviation for masks, only failed bubbles will be inpainted, making the following two settings irrelevant.</translation>
+      <translation>La desviación estándar mínima de colores alrededor del borde de una máscara determinada para realizar pintura en la región alrededor de la máscara. Si este valor coincide con la desviación máxima para las máscaras, sólo se pintarán burbujas fallidas, haciendo que los siguientes dos ajustes sean irrelevantes.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="30"/>
       <source>Combine outputs into a single project file as layers. Currently supported formats: Photoshop PSD.&lt;br&gt; - none: Each image and mask are saved as basic files.&lt;br&gt; - psd-per-image: Images and masks are saved together in a PSD file per input image.&lt;br&gt;  - psd-bulk: All images and masks are saved together in a single PSD file, grouped by input image.</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">Combine outputs into a single project file as layers. Currently supported formats: Photoshop PSD.&lt;br&gt; - none: Each image and mask are saved as basic files.&lt;br&gt; - psd-per-image: Images and masks are saved together in a PSD file per input image.&lt;br&gt;  - psd-bulk: All images and masks are saved together in a single PSD file, grouped by input image.</translation>
+      <translation>Combine las salidas en un solo archivo de proyecto como capas. Formatos soportados actualmente: Photoshop PSD.&lt;br&gt; - ninguno: Cada imagen y máscara se guardan como archivos básicos.&lt;br&gt; - psd-per-imagen: Las imágenes y máscaras se guardan juntas en un archivo PSD por imagen de entrada.&lt;br&gt;  - psd-bulk: Todas las imágenes y máscaras se guardan juntas en un único archivo PSD, agrupado por imagen de entrada.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="32"/>
       <source>Layered Export</source>
       <comment>Profile entry in General</comment>
-      <translation type="unfinished">Layered Export</translation>
+      <translation>Exportación por capas</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="166"/>
       <source>Whether to allow colored masks. When true, the masker will allow masks to use any color, not just white, black, or gray.</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Whether to allow colored masks. When true, the masker will allow masks to use any color, not just white, black, or gray.</translation>
+      <translation>Si se permiten máscaras de color. Cuando sea verdadero, el enmascarador permitirá que las máscaras usen cualquier color, no solo blanco, negro o gris.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="168"/>
       <source>Allow Colored Masks</source>
       <comment>Profile entry in Masker</comment>
-      <translation type="unfinished">Allow Colored Masks</translation>
+      <translation>Permitir máscaras de colores</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="170"/>
       <source>Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white. Value range: black (0) to pure white (255).</source>
       <comment>Profile comment in Masker</comment>
-      <translation type="unfinished">Maximum threshold for a pixel to be considered off-white. The median color along the edge of a mask may not be pure white, so to prevent slight off-white tones on a pure-white background, anything lighter than this threshold value will be rounded up to pure white. Value range: black (0) to pure white (255).</translation>
+      <translation>Umbral máximo para que un píxel se considere blanquecino. El color medio a lo largo del borde de una máscara puede no ser blanco puro, por lo que para evitar ligeros tonos blanquecinos sobre un fondo blanco puro, cualquier valor más claro que este umbral se redondeará a blanco puro. Rango de valores: negro (0) a blanco puro (255).</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="172"/>
@@ -3601,13 +3601,13 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <source>Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</source>
       <oldsource>Maximum number of threads to use for mask generation. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</oldsource>
       <comment>Profile comment in Denoiser</comment>
-      <translation type="unfinished">Maximum number of threads to use for denoising. You can leave it unspecified to use all available threads. Lower this value if you run into memory issues, which will appear as random crashes.</translation>
+      <translation>Número máximo de hilos a utilizar para la eliminación de ruido. Puede dejarlo sin especificar para utilizar todos los subprocesos disponibles. Reduzca este valor si tiene problemas de memoria, que aparecerán como bloqueos aleatorios.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="204"/>
       <source>Max Threads</source>
       <comment>Profile entry in Denoiser</comment>
-      <translation type="unfinished">Max Threads</translation>
+      <translation>Máximo de hilos</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="240"/>
@@ -3712,73 +3712,73 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="274"/>
       <source>Fade the edges of the inpainted cover mask by this many pixels to smoothly blend the inpainted parts into the rest of the image.&lt;br&gt; If you see faint outlines after inpainting, increase the min inpainting value and set this one to half that amount.</source>
       <comment>Profile comment in Inpainter</comment>
-      <translation type="unfinished">Fade the edges of the inpainted cover mask by this many pixels to smoothly blend the inpainted parts into the rest of the image.&lt;br&gt; If you see faint outlines after inpainting, increase the min inpainting value and set this one to half that amount.</translation>
+      <translation>Desvanezca los bordes de la máscara de cobertura pintada en esta cantidad de píxeles para mezclar suavemente las partes pintadas con el resto de la imagen.&lt;br&gt; Si ve contornos tenues después de pintar, aumente el valor de pintado mínimo y establezca éste a la mitad de esa cantidad.</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="276"/>
       <source>Inpainting Fade Radius</source>
       <comment>Profile entry in Inpainter</comment>
-      <translation type="unfinished">Inpainting Fade Radius</translation>
+      <translation>Radio de desvanecimiento</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="278"/>
       <source>Detect per box</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Detect per box</translation>
+      <translation>Detectar por caja</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="280"/>
       <source>Detect per page</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Detect per page</translation>
+      <translation>Detectar por página</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="282"/>
       <source>Japanese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Japanese</translation>
+      <translation>Japonés</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="284"/>
       <source>English</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">English</translation>
+      <translation>Inglés</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="286"/>
       <source>Korean</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Korean</translation>
+      <translation>Coreano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="288"/>
       <source>Korean (vertical)</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Korean (vertical)</translation>
+      <translation>Coreano (vertical)</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="290"/>
       <source>Chinese - Simplified</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Chinese - Simplified</translation>
+      <translation>Chino simplificado</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="292"/>
       <source>Chinese - Traditional</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Chinese - Traditional</translation>
+      <translation>Chino tradicional</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="294"/>
       <source>Albanian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Albanian</translation>
+      <translation>Albano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="296"/>
       <source>Arabic</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Arabic</translation>
+      <translation>Arabic</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="298"/>
@@ -3796,13 +3796,13 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="302"/>
       <source>Bengali</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Bengali</translation>
+      <translation>Bengalí</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="304"/>
       <source>Bulgarian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Bulgarian</translation>
+      <translation>Búlgaro</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="306"/>
@@ -3814,37 +3814,37 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="308"/>
       <source>Catalan; Valencian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Catalan; Valencian</translation>
+      <translation>Catalán; Valenciano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="310"/>
       <source>Croatian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Croatian</translation>
+      <translation>Croata</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="312"/>
       <source>Czech</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Czech</translation>
+      <translation>Checo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="314"/>
       <source>Danish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Danish</translation>
+      <translation>Danés</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="316"/>
       <source>Dutch; Flemish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Dutch; Flemish</translation>
+      <translation>Neerlandés; Flamenco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="318"/>
       <source>Esperanto</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Esperanto</translation>
+      <translation>Esperanto</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="320"/>
@@ -3857,61 +3857,61 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <source>Finnish</source>
       <oldsource>Filipino</oldsource>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Finnish</translation>
+      <translation>Finlandés</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="324"/>
       <source>French</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">French</translation>
+      <translation>Francés</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="326"/>
       <source>Georgian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Georgian</translation>
+      <translation>Georgiano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="328"/>
       <source>German</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">German</translation>
+      <translation>Alemán</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="330"/>
       <source>Greek</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Greek</translation>
+      <translation>Griego</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="332"/>
       <source>Hebrew</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hebrew</translation>
+      <translation>Hebreo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="334"/>
       <source>Hindi</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hindi</translation>
+      <translation>Hindú</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="336"/>
       <source>Hungarian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Hungarian</translation>
+      <translation>Húngaro</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="338"/>
       <source>Indonesian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Indonesian</translation>
+      <translation>Indonesio</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="340"/>
       <source>Italian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Italian</translation>
+      <translation>Italiano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="342"/>
@@ -3923,109 +3923,109 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="344"/>
       <source>Latin</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Latin</translation>
+      <translation>Latín</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="346"/>
       <source>Lithuanian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Lithuanian</translation>
+      <translation>Lituano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="348"/>
       <source>Luxembourgish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Luxembourgish</translation>
+      <translation>Luxemburgués</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="350"/>
       <source>Malay</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Malay</translation>
+      <translation>Malayo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="352"/>
       <source>Mongolian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Mongolian</translation>
+      <translation>Mongol</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="354"/>
       <source>Nepali</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Nepali</translation>
+      <translation>Nepalí</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="356"/>
       <source>Norwegian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Norwegian</translation>
+      <translation>Noruego</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="358"/>
       <source>Persian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Persian</translation>
+      <translation>Persa</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="360"/>
       <source>Polish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Polish</translation>
+      <translation>Polaco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="362"/>
       <source>Portuguese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Portuguese</translation>
+      <translation>Portugués</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="364"/>
       <source>Romanian; Moldavian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Romanian; Moldavian</translation>
+      <translation>Rumano; Moldavo</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="366"/>
       <source>Russian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Russian</translation>
+      <translation>Ruso</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="368"/>
       <source>Serbian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Serbian</translation>
+      <translation>Serbio</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="370"/>
       <source>Serbian - Latin</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Serbian - Latin</translation>
+      <translation>Serbio - Latín</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="372"/>
       <source>Slovak</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Slovak</translation>
+      <translation>Eslovaco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="374"/>
       <source>Slovenian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Slovenian</translation>
+      <translation>Eslovaco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="376"/>
       <source>Spanish; Castilian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Spanish; Castilian</translation>
+      <translation>Español, Castellano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="378"/>
       <source>Swedish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Swedish</translation>
+      <translation>Sueco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="380"/>
@@ -4049,25 +4049,25 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="profile_strings.py" line="386"/>
       <source>Thai</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Thai</translation>
+      <translation>Tailandés</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="388"/>
       <source>Turkish</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Turkish</translation>
+      <translation>Turco</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="390"/>
       <source>Ukrainian</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Ukrainian</translation>
+      <translation>Ucraniano</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="392"/>
       <source>Vietnamese</source>
       <comment>Language option for OCR</comment>
-      <translation type="unfinished">Vietnamese</translation>
+      <translation>Vietnamita</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="176"/>
@@ -4238,7 +4238,7 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="138"/>
       <source> px</source>
       <comment>Pixel unit</comment>
-      <translation type="unfinished"> px</translation>
+      <translation> px</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="148"/>
@@ -4250,7 +4250,7 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="158"/>
       <source>All Cores</source>
       <comment>The limit on the number of CPU cores to use, or here, no limit.</comment>
-      <translation type="unfinished">All Cores</translation>
+      <translation>Todos los Núcleos</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="242"/>
@@ -4262,37 +4262,37 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="275"/>
       <source>auto</source>
       <comment>OCR Engine option</comment>
-      <translation type="unfinished">auto</translation>
+      <translation>automático</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="276"/>
       <source>manga-ocr</source>
       <comment>OCR Engine option</comment>
-      <translation type="unfinished">manga-ocr</translation>
+      <translation>manga-ocr</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="277"/>
       <source>tesseract</source>
       <comment>OCR Engine option</comment>
-      <translation type="unfinished">tesseract</translation>
+      <translation>tesseract</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="282"/>
       <source>auto</source>
       <comment>Reading order option</comment>
-      <translation type="unfinished">auto</translation>
+      <translation>automático</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="283"/>
       <source>manga</source>
       <comment>Reading order option</comment>
-      <translation type="unfinished">manga</translation>
+      <translation>manga</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="284"/>
       <source>comic</source>
       <comment>Reading order option</comment>
-      <translation type="unfinished">comic</translation>
+      <translation>comic</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="289"/>
@@ -4304,73 +4304,73 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="290"/>
       <source>PSD Bulk</source>
       <comment>Layered export option</comment>
-      <translation type="unfinished">PSD Bulk</translation>
+      <translation>PSD por lotes</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="291"/>
       <source>PSD Per Image</source>
       <comment>Layered export option</comment>
-      <translation type="unfinished">PSD Per Image</translation>
+      <translation>PSD por imagen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="296"/>
       <source>Detect per box</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Detect per box</translation>
+      <translation>Detectar por caja</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="297"/>
       <source>Detect per page</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Detect per page</translation>
+      <translation>Detectar por página</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="298"/>
       <source>Japanese</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Japanese</translation>
+      <translation>Japonés</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="299"/>
       <source>English</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">English</translation>
+      <translation>Inglés</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="300"/>
       <source>Korean</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Korean</translation>
+      <translation>Coreano</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="301"/>
       <source>Korean (vertical)</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Korean (vertical)</translation>
+      <translation>Coreano (vertical)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="302"/>
       <source>Chinese - Simplified</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Chinese - Simplified</translation>
+      <translation>Chino simplificado</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="303"/>
       <source>Chinese - Traditional</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Chinese - Traditional</translation>
+      <translation>Chino tradicional</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="304"/>
       <source>Albanian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Albanian</translation>
+      <translation>Albanés</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="305"/>
       <source>Arabic</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Arabic</translation>
+      <translation>Árabe</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="306"/>
@@ -4388,121 +4388,121 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="308"/>
       <source>Bengali</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Bengali</translation>
+      <translation>Bengalí</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="309"/>
       <source>Bulgarian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Bulgarian</translation>
+      <translation>Búlgaro</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="310"/>
       <source>Burmese</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Burmese</translation>
+      <translation>Birmano</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="311"/>
       <source>Catalan; Valencian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Catalan; Valencian</translation>
+      <translation>Catalán; Valenciano</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="312"/>
       <source>Croatian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Croatian</translation>
+      <translation>Croata</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="313"/>
       <source>Czech</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Czech</translation>
+      <translation>Checo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="314"/>
       <source>Danish</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Danish</translation>
+      <translation>Danés</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="315"/>
       <source>Dutch; Flemish</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Dutch; Flemish</translation>
+      <translation>Neerlandés; Flamenco</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="316"/>
       <source>Esperanto</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Esperanto</translation>
+      <translation>Esperanto</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="317"/>
       <source>Estonian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Estonian</translation>
+      <translation>Estonio</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="318"/>
       <source>Finnish</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Finnish</translation>
+      <translation>Finlandés</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="319"/>
       <source>French</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">French</translation>
+      <translation>Francés</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="320"/>
       <source>Georgian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Georgian</translation>
+      <translation>Gregoriano</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="321"/>
       <source>German</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">German</translation>
+      <translation>Alemán</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="322"/>
       <source>Greek</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Greek</translation>
+      <translation>Griego</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="323"/>
       <source>Hebrew</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Hebrew</translation>
+      <translation>Hebreo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="324"/>
       <source>Hindi</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Hindi</translation>
+      <translation>Hindú</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="325"/>
       <source>Hungarian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Hungarian</translation>
+      <translation>Húngaro</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="326"/>
       <source>Indonesian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Indonesian</translation>
+      <translation>Indonesio</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="327"/>
       <source>Italian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Italian</translation>
+      <translation>Italiano</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="328"/>
@@ -4514,61 +4514,61 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="329"/>
       <source>Latin</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Latin</translation>
+      <translation>Latín</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="330"/>
       <source>Lithuanian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Lithuanian</translation>
+      <translation>Lituano</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="331"/>
       <source>Luxembourgish</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Luxembourgish</translation>
+      <translation>Luxemburgués</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="332"/>
       <source>Malay</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Malay</translation>
+      <translation>Malayo</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="333"/>
       <source>Mongolian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Mongolian</translation>
+      <translation>Mongol</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="334"/>
       <source>Nepali</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Nepali</translation>
+      <translation>Nepalí</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="335"/>
       <source>Norwegian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Norwegian</translation>
+      <translation>Noruego</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="336"/>
       <source>Persian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Persian</translation>
+      <translation>Persa</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="337"/>
       <source>Polish</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Polish</translation>
+      <translation>Polaco</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="338"/>
       <source>Portuguese</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Portuguese</translation>
+      <translation>Portugués</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="339"/>
@@ -4580,43 +4580,43 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="340"/>
       <source>Russian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Russian</translation>
+      <translation>Ruso</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="341"/>
       <source>Serbian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Serbian</translation>
+      <translation>Serbio</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="342"/>
       <source>Serbian - Latin</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Serbian - Latin</translation>
+      <translation>Serbio - Latín</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="343"/>
       <source>Slovak</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Slovak</translation>
+      <translation>Eslovaco</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="344"/>
       <source>Slovenian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Slovenian</translation>
+      <translation>Eslovenio</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="345"/>
       <source>Spanish; Castilian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Spanish; Castilian</translation>
+      <translation>Español; Castellano</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="346"/>
       <source>Swedish</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Swedish</translation>
+      <translation>Sueco</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="347"/>
@@ -4640,25 +4640,25 @@ Verde: cajas iniciales. Rojo: cajas ampliadas. Morado: recuadros fusionados (fin
       <location filename="../pcleaner/gui/profile_parser.py" line="350"/>
       <source>Thai</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Thai</translation>
+      <translation>Tailandés</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="351"/>
       <source>Turkish</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Turkish</translation>
+      <translation>Turco</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="352"/>
       <source>Ukrainian</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Ukrainian</translation>
+      <translation>Ucraniano</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="353"/>
       <source>Vietnamese</source>
       <comment>Language code option</comment>
-      <translation type="unfinished">Vietnamese</translation>
+      <translation>Vietnamita</translation>
     </message>
   </context>
   <context>
@@ -4673,7 +4673,7 @@ Puede descargar el modelo manualmente desde &lt;a href=&quot;https://github.com/
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="702"/>
       <source>The regex pattern &quot;{value}&quot; for {key} is invalid, reverting to default.</source>
-      <translation type="unfinished">The regex pattern &quot;{value}&quot; for {key} is invalid, reverting to default.</translation>
+      <translation>El patrón regex &quot;{value}&quot; para {key} no es válido, volviendo al predeterminado.</translation>
     </message>
   </context>
   <context>
