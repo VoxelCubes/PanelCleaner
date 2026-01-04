@@ -254,6 +254,7 @@ def dump_system_info(executing_from: str, gui: bool = False) -> None:
     buffer.write(f"Log file: {get_log_path()}\n")
     buffer.write(f"Config file: {get_config_path()}\n")
     buffer.write(f"Cache directory: {get_cache_path()}\n")
+    buffer.write(f"Cleaner cache directory override: {os.getenv("GUARDED_CLEANER_CACHE")}\n")
     buffer.write("- System Information -\n")
     buffer.write(f"Operating System: {platform.system()} {platform.release()}\n")
     if platform.system() == "Linux":
