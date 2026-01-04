@@ -200,13 +200,16 @@ def get_confirmation(prompt: str, default: bool | None = None) -> bool:
 def empty_cache_dir(cache_dir: Path) -> None:
     """
     Empty the cache directory.
-    Only attempt to delete .png images and .json files.
-    Or .pt and .onnx files for PyTorch and ONNX models.
-    This limits the damage if this points to the wrong directory.
+    Due to a copy of the original being migrated to the cache directory,
+    there is no telling what the extension may be, so nuke all files,
+    non-recursively to minimize risk.
+    The only recursive deletion is for folders starting with "splits",
+    which are created when splitting long images.
+
+    :param cache_dir: The cache directory to empty.
     """
     for item in cache_dir.iterdir():
-        if item.suffix in [".png", ".json", ".pt", ".onnx"]:
-            item.unlink()
+        item.unlink()
     # Remove all folders starting with "splits".
     for folder in cache_dir.glob("splits*"):
         shutil.rmtree(folder)
