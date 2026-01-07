@@ -4,7 +4,6 @@ from PIL import Image
 from attrs import frozen
 from loguru import logger
 from psd_tools import PSDImage
-from psd_tools.api.layers import Group, PixelLayer
 from psd_tools.constants import Compression
 
 import pcleaner.output_structures as ost
@@ -401,6 +400,7 @@ def bundle_psd(
         logger.error("No images to bundle PSDs for.")
         return None
 
+    # Set up path generators and look for cached PSDs to merge.
     if output_directory.is_absolute():
         # When absolute, the output directory is used as is.
         path_gen = ost.OutputPathGenerator(image_paths[0], output_directory, export_mode=True)
@@ -419,34 +419,79 @@ def bundle_psd(
         cached_images.append(ost.OutputPathGenerator(image_path, cache_dir, uuid).psd)
 
     psds = []
-    pages = []
+    page_groups = []
 
-    i = 0
-    for cache_image in cached_images:
-        psds.append(PSDImage.open(str(cache_image)))
-        pages.insert(
-            0,
-            Group.group_layers(
-                psds[i][:],
-                tr("Page", "layered export", "Label for Page X in a layered project file.")
-                + " {:03d}".format(i + 1),
-                open_folder=False,
-            ),
-        )
-        i += 1
-
-    # Find maximum size and depth.
+    # Find maximum size and depth first, so we can create the bulk PSD with proper dimensions.
+    # Changes in psd_tools 1.11 require us to do this beforehand, so we have to iterate twice...
     max_size = (0, 0)
     max_depth = 0
-    for psd in psds:
+
+    for cache_image in cached_images:
+        psd = PSDImage.open(str(cache_image))
+        psds.append(psd)
         max_size = (max(max_size[0], psd.width), max(max_size[1], psd.height))
         max_depth = max(max_depth, psd.depth)
+
     psd_bulk = PSDImage.new("RGBA", max_size, depth=max_depth)
 
-    for page in pages:
-        psd_bulk.append(page)
+    # Insert each PSD as a group in the bulk PSD.
+    # Due to changes in psd_tools 1.11, we need to re-create all layers/groups, copying
+    # them implicitly doesn't work anymore :(
+    # Maybe I shoulda asked Alexis to fix up his own old code instead...
+    for i, psd in enumerate(psds):
+        page_number = "{:03d}".format(i + 1)
+        page_name = (
+            tr("Page", "layered export", "Label for Page X in a layered project file.")
+            + " "
+            + page_number
+        )
 
-    logger.debug(f"Saving bulk PSD file to {bulk_psd_path} with {len(pages)} pages.")
+        page_group = psd_bulk.create_group(name=page_name)
+
+        # We need to call this recursively for nested groups, that's why it's a helper function.
+        def copy_layer_to_group(source_layer, target_group, page_num):
+            if source_layer.kind == "pixel":
+                layer_image = source_layer.topil()
+                if layer_image:
+                    # Tack on the page number to avoid ugly auto-renaming in Photoshop.
+                    layer_name = f"{source_layer.name} {page_num}"
+                    new_layer = psd_bulk.create_pixel_layer(
+                        image=layer_image,
+                        name=layer_name,
+                        opacity=getattr(source_layer, "opacity", 255),
+                        compression=Compression.ZIP,
+                    )
+                    target_group.append(new_layer)
+                else:
+                    logger.error(
+                        f"Failed to get image for pixel layer '{source_layer.name}'. Skipping."
+                    )
+
+            elif source_layer.kind == "group":
+                group_name = f"{source_layer.name} {page_num}"
+                new_subgroup = psd_bulk.create_group(name=group_name)
+                target_group.append(new_subgroup)
+
+                for child_layer in source_layer:
+                    copy_layer_to_group(child_layer, new_subgroup, page_num)
+
+            else:
+                # We only created pixel layers and groups in the export_to_psd function,
+                # so nothing else should be here.
+                logger.error(
+                    f"Unsupported layer type '{source_layer.kind}' in layer '{source_layer.name}'. Skipping."
+                )
+
+        for layer in psd[:]:
+            copy_layer_to_group(layer, page_group, page_number)
+
+        page_groups.append(page_group)
+
+    # We gotta reverse the order because pages are viewed LIFO in Photoshop.
+    for page_group in reversed(page_groups):
+        psd_bulk.append(page_group)
+
+    logger.debug(f"Saving bulk PSD file to {bulk_psd_path} with {len(page_groups)} pages.")
     psd_bulk.save(str(bulk_psd_path))
     return bulk_psd_path
 
