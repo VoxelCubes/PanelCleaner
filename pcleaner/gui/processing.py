@@ -674,6 +674,11 @@ def generate_output(
 
     batch_metadata.calculate_output_parents()
 
+    # TODO add output analytics using batch_metadata, but converted to typical analysics structures.:
+    # 13 Files written to /path/to/output
+    # 2 files written to /path/to/another_output
+    # Wait, maybe we can also abuse the shared batch metadata directly?
+
     progress_callback.emit(
         ost.ProgressData(
             0,
