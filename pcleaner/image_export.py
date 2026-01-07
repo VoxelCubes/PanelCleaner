@@ -372,14 +372,12 @@ def export_to_psd(path: Path, original_image: Image, masks: list[tuple[Image, st
 
     psd = PSDImage.new("RGBA", (original_image.width, original_image.height))
 
-    base_layer = PixelLayer.frompil(original_image, psd, "Base image", compression=Compression.ZIP)
-    psd.append(base_layer)
+    psd.create_pixel_layer(image=original_image, name="Base image", compression=Compression.ZIP)
 
-    group_layer = Group.new("Masks")
-    psd.append(group_layer)
+    group_layer = psd.create_group(name="Masks")
 
     for mask, name in masks:
-        layer = PixelLayer.frompil(mask, psd, name, compression=Compression.ZIP)
+        layer = psd.create_pixel_layer(image=mask, name=name, compression=Compression.ZIP)
         group_layer.append(layer)
 
     logger.debug(f"Saving PSD file to {path} with {len(masks)} layers.")
