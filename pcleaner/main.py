@@ -738,13 +738,14 @@ def run_cleaner(
         output_dir = common_parent / output_dir
 
     if profile.general.layered_export == LayeredExport.PSD_BULK:
-        print(f"Bulk exporting to {output_dir}...")
-        ie.bundle_psd(
+        print(f"Merging PSDs for bulk export...")
+        bulk_path = ie.bundle_psd(
             output_dir,
             cache_dir,
             [export_target.original_path for export_target in export_targets],
             [export_target.uuid for export_target in export_targets],
         )
+        print(f"Saved bulk PSD to {bulk_path}")
 
     print("\nDone!")
 
