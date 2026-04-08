@@ -329,7 +329,7 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/analytics.py" line="651"/>
       <source>Inpainted</source>
-      <translation type="unfinished">Inpainted</translation>
+      <translation/>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
