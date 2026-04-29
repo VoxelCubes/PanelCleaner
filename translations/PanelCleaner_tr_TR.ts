@@ -7,7 +7,7 @@
       <location filename="../pcleaner/config.py" line="1088"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation type="unfinished">default</translation>
+      <translation>varsayılan</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
@@ -22,12 +22,12 @@
     <message>
       <location filename="../pcleaner/profile_cli.py" line="237"/>
       <source>Profile name cannot be empty.</source>
-      <translation type="unfinished">Profile name cannot be empty.</translation>
+      <translation>Profil ismi boş bırakılamaz.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="239"/>
       <source>Profile name already in use.</source>
-      <translation type="unfinished">Profile name already in use.</translation>
+      <translation>Profil ismi zaten kullanılıyor.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="241"/>
@@ -40,7 +40,7 @@
       <location filename="../pcleaner/gui/image_file.py" line="371"/>
       <location filename="../pcleaner/gui/image_file.py" line="383"/>
       <source>Unknown</source>
-      <translation type="unfinished">Unknown</translation>
+      <translation>Bilinmeyen</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="373"/>
@@ -70,7 +70,7 @@
       <location filename="../pcleaner/gui/image_file.py" line="381"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Palette</translation>
+      <translation>Palet</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="379"/>
@@ -339,17 +339,17 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
       <source>Failed to open file.</source>
-      <translation type="unfinished">Failed to open file.</translation>
+      <translation>Dosyayı açarken sorun oluştu.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
       <source>Failed to access the file.</source>
-      <translation type="unfinished">Failed to access the file.</translation>
+      <translation>Dosyaya erişmeye çalışırken sorun çıktı.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
       <source>An error occurred.</source>
-      <translation type="unfinished">An error occurred.</translation>
+      <translation>Hata meydana geldi.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
@@ -404,7 +404,7 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
       <source>Error, no version found.</source>
-      <translation type="unfinished">Error, no version found.</translation>
+      <translation>Hata, versiyon bulunamadı.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="630"/>
@@ -627,7 +627,7 @@ Manga panellerini temizlemek için yapay zeka destekli bir araç.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="37"/>
       <source>Select Color</source>
-      <translation type="unfinished">Select Color</translation>
+      <translation>Rengi seç</translation>
     </message>
   </context>
   <context>
@@ -846,7 +846,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="279"/>
       <source>Duplicate file</source>
-      <translation type="unfinished">Duplicate file</translation>
+      <translation>Dosyayı çoğalt</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="280"/>
@@ -861,7 +861,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="309"/>
       <source>split</source>
-      <translation type="unfinished">split</translation>
+      <translation>böl</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="469"/>
@@ -891,7 +891,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="519"/>
       <source>Image not loaded</source>
-      <translation type="unfinished">Image not loaded</translation>
+      <translation>Fotoğraf yüklenmedi</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="520"/>
@@ -906,17 +906,17 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="549"/>
       <source>Remove from list</source>
-      <translation type="unfinished">Remove from list</translation>
+      <translation>Listeden kaldır</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="557"/>
       <source>Remove all files from list</source>
-      <translation type="unfinished">Remove all files from list</translation>
+      <translation>Listedeki tüm dosyaları sil</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="730"/>
       <source>Failed to load image</source>
-      <translation type="unfinished">Failed to load image</translation>
+      <translation>Dosyayı yüklerken hata oluştu</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="731"/>
@@ -936,7 +936,7 @@ By default, this uses the built-in profile. However, you can change this default
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="749"/>
       <source>Select files</source>
-      <translation type="unfinished">Select files</translation>
+      <translation>Seçilen dosyalar</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="750"/>
@@ -1003,7 +1003,7 @@ By default, this uses the built-in profile. However, you can change this default
       <location filename="../pcleaner/gui/image_details_driver.py" line="173"/>
       <location filename="../pcleaner/gui/image_details_driver.py" line="550"/>
       <source>Export Image</source>
-      <translation type="unfinished">Export Image</translation>
+      <translation>Fotoğrafı dışa aktar</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="179"/>
@@ -1048,7 +1048,7 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="510"/>
       <source>Image not found.</source>
-      <translation type="unfinished">Image not found.</translation>
+      <translation>Fotoğraf bulunamadı.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="511"/>
@@ -1058,12 +1058,12 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="559"/>
       <source>Export failed</source>
-      <translation type="unfinished">Export failed</translation>
+      <translation>Dışa aktarma başarısız oldu</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="559"/>
       <source>Failed to export image:</source>
-      <translation type="unfinished">Failed to export image:</translation>
+      <translation>Fotoğrafı dışa aktarmak başarısız oldu:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="663"/>
@@ -1166,7 +1166,7 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="83"/>
       <source>Select All</source>
-      <translation type="unfinished">Select All</translation>
+      <translation>Hepsini seç</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="96"/>
@@ -1190,7 +1190,7 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="14"/>
       <source>Report an Issue</source>
-      <translation type="unfinished">Report an Issue</translation>
+      <translation>Sorun bildir</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="23"/>
@@ -1220,7 +1220,7 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="125"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Kapat</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="49"/>
@@ -1240,12 +1240,12 @@ Please enable inpainting in the profile settings and try again.</translation>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="91"/>
       <source>Today</source>
-      <translation type="unfinished">Today</translation>
+      <translation>Bugün</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="99"/>
       <source>Error</source>
-      <translation type="unfinished">Error</translation>
+      <translation>Hata</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="99"/>
@@ -1397,12 +1397,12 @@ Switch to the new model?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="920"/>
       <source>Models Deleted</source>
-      <translation type="unfinished">Models Deleted</translation>
+      <translation>Modeller silindi</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="921"/>
       <source>The models were deleted. Would you like to download them again?</source>
-      <translation type="unfinished">The models were deleted. Would you like to download them again?</translation>
+      <translation>Modeller silindi. Tekrardan indirmek ister misiniz?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1007"/>
@@ -1422,7 +1422,7 @@ Switch to the new model?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1062"/>
       <source>After processing, the system will shut down.</source>
-      <translation type="unfinished">After processing, the system will shut down.</translation>
+      <translation>İşlemden sonra sistem kapatılacak.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1093"/>
@@ -1437,7 +1437,7 @@ Switch to the new model?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1156"/>
       <source>Shutting down system...</source>
-      <translation type="unfinished">Shutting down system...</translation>
+      <translation>Sistem kapatılıyor...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1166"/>
@@ -1447,7 +1447,7 @@ Switch to the new model?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1201"/>
       <source>Restart Required</source>
-      <translation type="unfinished">Restart Required</translation>
+      <translation>Yeniden başlatma gerekli</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1203"/>
@@ -1458,12 +1458,12 @@ Switch to the new model?</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1214"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1215"/>
       <source>System Language</source>
-      <translation type="unfinished">System Language</translation>
+      <translation>Sistem dili</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1316"/>
       <source>Import Profile</source>
-      <translation type="unfinished">Import Profile</translation>
+      <translation>Profili içe aktar</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1318"/>
@@ -1473,7 +1473,7 @@ Switch to the new model?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1325"/>
       <source>Profile Imported</source>
-      <translation type="unfinished">Profile Imported</translation>
+      <translation>Profil içe aktarıldı</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1327"/>
@@ -1493,7 +1493,7 @@ Switch to the new model?</translation>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1350"/>
       <source>Delete Profile</source>
-      <translation type="unfinished">Delete Profile</translation>
+      <translation>Profili sil</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1351"/>
@@ -1549,7 +1549,7 @@ Please see the instructions to install Tesseract correctly &lt;a href=&quot;http
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1495"/>
       <source>Unsupported Language</source>
-      <translation type="unfinished">Unsupported Language</translation>
+      <translation>Desteklemeyen dil</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1497"/>
@@ -1978,12 +1978,12 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1268"/>
       <source>Remove All Files</source>
-      <translation type="unfinished">Remove All Files</translation>
+      <translation>Tüm dosyaları kaldır</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1403"/>
       <source>Remove File</source>
-      <translation type="unfinished">Remove File</translation>
+      <translation>Dosyayı kaldır</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1411"/>
@@ -2148,7 +2148,7 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="113"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="119"/>
       <source>Already downloaded</source>
-      <translation type="unfinished">Already downloaded</translation>
+      <translation>Zaten indirildi</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="138"/>
@@ -2167,7 +2167,7 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="341"/>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="343"/>
       <source>Download Failed</source>
-      <translation type="unfinished">Download Failed</translation>
+      <translation>İndirme başarısız</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="244"/>
@@ -2254,7 +2254,7 @@ Check the online documentation for how to add support for more languages.</trans
       <location filename="../ui_files/OCRLanguageSupport.ui" line="83"/>
       <source>Language</source>
       <comment>Can also call this statistics.</comment>
-      <translation type="unfinished">Language</translation>
+      <translation>Dil</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="88"/>
@@ -2269,12 +2269,12 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="109"/>
       <source>How to install Tesseract</source>
-      <translation type="unfinished">How to install Tesseract</translation>
+      <translation>Tesseract nasıl indirilir</translation>
     </message>
     <message>
       <location filename="../ui_files/OCRLanguageSupport.ui" line="120"/>
       <source>How to install Tesseract language packs</source>
-      <translation type="unfinished">How to install Tesseract language packs</translation>
+      <translation>Tesseract dil paketleri nasıl indirilir</translation>
     </message>
   </context>
   <context>
@@ -2292,12 +2292,12 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/OcrReview.ui" line="99"/>
       <source>Previous image</source>
-      <translation type="unfinished">Previous image</translation>
+      <translation>Önceki Fotoğraf</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="116"/>
       <source>Next image</source>
-      <translation type="unfinished">Next image</translation>
+      <translation>Sonraki Fotoğraf</translation>
     </message>
     <message>
       <location filename="../ui_files/OcrReview.ui" line="230"/>
@@ -2415,7 +2415,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="632"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Yeni</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/ocr_review_driver.py" line="664"/>
@@ -2625,12 +2625,12 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="173"/>
       <source>New</source>
-      <translation type="unfinished">New</translation>
+      <translation>Yeni</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="187"/>
       <source>Delete</source>
-      <translation type="unfinished">Delete</translation>
+      <translation>Sil</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionConfiguration.ui" line="228"/>
@@ -2778,7 +2778,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="231"/>
       <source>Run Again</source>
-      <translation type="unfinished">Run Again</translation>
+      <translation>Tekrar çalıştır</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="241"/>
@@ -2798,7 +2798,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="283"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>Kapat</translation>
     </message>
     <message>
       <location filename="../ui_files/PostActionRunner.ui" line="295"/>
@@ -2828,7 +2828,7 @@ Check the online documentation for how to add support for more languages.</trans
     <message>
       <location filename="../pcleaner/gui/post_action_runner.py" line="157"/>
       <source>Remaining time: 1 second</source>
-      <translation type="unfinished">Remaining time: 1 second</translation>
+      <translation>Kalan zaman: 1 saniye</translation>
     </message>
   </context>
   <context>
@@ -3100,7 +3100,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="profile_strings.py" line="16"/>
       <source>About this profile:</source>
       <comment>Profile comment in General</comment>
-      <translation type="unfinished">About this profile:</translation>
+      <translation>Bu profil hakkında:</translation>
     </message>
     <message>
       <location filename="profile_strings.py" line="18"/>
@@ -4291,7 +4291,7 @@ Green: initial boxes. Red: extended boxes. Purple: merged (final) boxes. Blue: r
       <location filename="../pcleaner/gui/profile_parser.py" line="283"/>
       <source>manga</source>
       <comment>Reading order option</comment>
-      <translation type="unfinished">manga</translation>
+      <translation>manga</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="284"/>
