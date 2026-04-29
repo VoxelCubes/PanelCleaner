@@ -169,7 +169,7 @@ Removed bubbles:
       <location filename="../pcleaner/analytics.py" line="231"/>
       <location filename="../pcleaner/analytics.py" line="353"/>
       <source>Failed</source>
-      <translation type="unfinished">Failed</translation>
+      <translation>Başarısız</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="227"/>
@@ -180,7 +180,7 @@ Removed bubbles:
       <location filename="../pcleaner/analytics.py" line="538"/>
       <source>Total
 </source>
-      <translation type="unfinished">Total
+      <translation>Toplam
 </translation>
     </message>
     <message>
