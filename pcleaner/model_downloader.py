@@ -8,7 +8,7 @@ import torch
 import tqdm
 from loguru import logger
 from manga_ocr import MangaOcr
-from transformers import file_utils
+from huggingface_hub import constants
 import pcleaner.cli_utils as cu
 
 
@@ -227,7 +227,7 @@ def get_ocr_model_directory() -> Path:
 
     :return: The path to the OCR model directory.
     """
-    cache_dir = Path(file_utils.default_cache_path)
+    cache_dir = Path(constants.HF_HUB_CACHE)
     ocr_dir = cache_dir / OCR_DIR_NAME
     return ocr_dir
 
