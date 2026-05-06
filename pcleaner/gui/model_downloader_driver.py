@@ -481,6 +481,7 @@ def parse_ocr_progress(line: str) -> ProgressData | str | None:
 
     # Using regex to capture relevant data.
     regex_pattern = r".*?(Downloading )?(?P<path>.*?): *(?P<percentage>\d+)%\|.*?\| (?P<downloaded>[\d.]+[kMGT]?B?)/(?P<total>[\d.]+[kMGT]?B?)(?: \[.*?<(?P<eta>.*), (?P<speed>[\d.]+[kMGT]?B/s)\])?"
+    regex_pattern_no_percentage = r".*?(Downloading )?(?P<path>.*?): *(?P<downloaded>[\d.]+[kMGT]?B?) \[[\d:]+, (?P<speed>[\d.]+[kMGT]?B/s|\?B/s)\]"
 
     if match := re.search(regex_pattern, line, flags=re.IGNORECASE):
         # Figure out the file name. If it was not elided, use the file name from the line.
@@ -509,6 +510,17 @@ def parse_ocr_progress(line: str) -> ProgressData | str | None:
         speed = parse_size(match.group("speed")) if match.group("speed") else 0
 
         eta = parse_simple_time(match.group("eta")) if match.group("eta") else -1
+
+    elif match := re.search(regex_pattern_no_percentage, line, flags=re.IGNORECASE):
+        # Small file: treat as 100% complete since the full size was downloaded instantly.
+        # Speed may be "?B/s" for zero-duration downloads, so guard parse_size.
+        filename = match.group("path").split("/")[-1]
+        downloaded = parse_size(match.group("downloaded"))
+        total = downloaded  # No separate total in this format; file is fully fetched
+        percentage = 100
+        raw_speed = match.group("speed")
+        speed = parse_size(raw_speed) if raw_speed and raw_speed != "?B/s" else 0
+        eta = 0  # Already done
 
     else:
         # If all that failed, attempt to salvage some information at the very least.
