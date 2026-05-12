@@ -8,8 +8,30 @@ import torch
 import tqdm
 from loguru import logger
 from manga_ocr import MangaOcr
-from transformers import file_utils
 import pcleaner.cli_utils as cu
+
+
+def _huggingface_hub_cache_path() -> Path:
+    """
+    Locate the Hugging Face hub cache directory, where snapshot directories such
+    as ``models--kha-white--manga-ocr-base`` are stored.
+
+    The legacy ``transformers.file_utils.default_cache_path`` attribute was removed
+    in newer ``transformers`` releases, so resolve the cache via ``huggingface_hub``
+    (a dependency of both ``transformers`` and ``manga_ocr``), falling back to the
+    documented default location.
+
+    :return: The path to the Hugging Face hub cache directory.
+    """
+    try:
+        from huggingface_hub.constants import HF_HUB_CACHE
+
+        return Path(HF_HUB_CACHE)
+    except ImportError:
+        hf_home = os.environ.get("HF_HOME") or os.path.join(
+            os.path.expanduser("~"), ".cache", "huggingface"
+        )
+        return Path(hf_home) / "hub"
 
 
 MODEL_URL = "https://github.com/zyddnys/manga-image-translator/releases/download/beta-0.3/"
@@ -227,7 +249,7 @@ def get_ocr_model_directory() -> Path:
 
     :return: The path to the OCR model directory.
     """
-    cache_dir = Path(file_utils.default_cache_path)
+    cache_dir = _huggingface_hub_cache_path()
     ocr_dir = cache_dir / OCR_DIR_NAME
     return ocr_dir
 
