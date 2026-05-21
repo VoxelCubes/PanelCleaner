@@ -1,7 +1,11 @@
 # define configurable variables. May need to be adapted for your environment.
 CurrentDir := $(shell pwd)
-PYINSTALLER_VENV := venv_clean
-PYTHON := venv/bin/python
+UV := uv
+VENV_GUI_CPU := .venv-gui-cpu
+VENV_GUI_CUDA := .venv-gui-cuda
+VENV_CLI_CUDA := .venv-cli-cuda
+PYINSTALLER_VENV := $(VENV_GUI_CPU)
+PYTHON := $(VENV_GUI_CPU)/bin/python
 PYINSTALLER := $(PYINSTALLER_VENV)/bin/pyinstaller
 BUILD_DIR := dist/
 DIR_ICONS := icons
@@ -9,15 +13,19 @@ UI_DIR := ui_files/
 PACKED_TRANSLATION_DATA := pcleaner/data/translation_generated_files
 RC_OUTPUT_DIR := pcleaner/gui/rc_generated_files/
 UI_OUTPUT_DIR := pcleaner/gui/ui_generated_files/
-UIC_COMPILER := venv/bin/pyside6-uic
-I18N_LUPDATE := venv/bin/pyside6-lupdate
-I18N_COMPILER := venv/bin/pyside6-lrelease
+UIC_COMPILER := $(VENV_GUI_CPU)/bin/pyside6-uic
+I18N_LUPDATE := $(VENV_GUI_CPU)/bin/pyside6-lupdate
+I18N_COMPILER := $(VENV_GUI_CPU)/bin/pyside6-lrelease
 BLACK_LINE_LENGTH := 100
 BLACK_TARGET_DIR := pcleaner/
 BLACK_EXCLUDE_PATTERN := "^$(UI_OUTPUT_DIR).*|^pcleaner/comic_text_detector/.*"
 
 LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.gui.supported_languages import supported_languages; lang_codes = list(supported_languages().keys()); lang_codes.remove('en_US'); print(' '.join(lang_codes))")
+PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print('{}.{}'.format(sys.version_info[0], sys.version_info[1]))")
+PYINSTALLER_SITE = $(PYINSTALLER_VENV)/lib/python$(PYTHON_VERSION)/site-packages
 
+EXCLUDE_NEWER_DATE := $(shell date -u -d '7 days ago' +%Y-%m-%d)
+export UV_EXCLUDE_NEWER := $(EXCLUDE_NEWER_DATE)
 
 run-gui:
 	$(PYTHON) -m pcleaner.gui.launcher
@@ -32,16 +40,32 @@ refresh-assets: build-icon-cache compile-ui refresh-i18n compile-i18n
 
 build-both: build build-cli
 
+uv-sync-gui-cpu:
+	$(UV) venv $(VENV_GUI_CPU)
+	. $(VENV_GUI_CPU)/bin/activate && $(UV) pip install --reinstall torch torchvision --index-url https://download.pytorch.org/whl/cpu
+	. $(VENV_GUI_CPU)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-gui --group runtime-dbus --group dev-tools --no-install-package torch --no-install-package torchvision
+
+uv-sync-gui-cuda:
+	$(UV) venv $(VENV_GUI_CUDA)
+	. $(VENV_GUI_CUDA)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-gui --group runtime-dbus --group dev-tools
+
+uv-sync-cli-cuda:
+	$(UV) venv $(VENV_CLI_CUDA)
+	. $(VENV_CLI_CUDA)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-gui --group runtime-dbus --group dev-tools
+
+sync-setup-cfg:
+	$(PYTHON) tools/sync_setup_cfg.py
+
 # Normal build target. Use the setup-cli-gui.cfg configuration.
-build: compile-ui
+build: compile-ui sync-setup-cfg
 	cp setup-cli-gui.cfg setup.cfg
-	$(PYTHON) -m build --outdir $(BUILD_DIR)
+	$(UV) build --outdir $(BUILD_DIR)
 	rm setup.cfg
 
 # CLI-only build target. Use the setup-cli.cfg configuration.
-build-cli:
+build-cli: sync-setup-cfg
 	cp setup-cli.cfg setup.cfg
-	$(PYTHON) -m build --outdir $(BUILD_DIR)
+	$(UV) build --outdir $(BUILD_DIR)
 	rm setup.cfg
 
 # clean-build target
@@ -87,7 +111,7 @@ build-icon-cache:
 
 # install target
 install:
-	$(PYTHON) -m pip install $(BUILD_DIR)*.whl 
+	$(UV) pip install --python $(PYTHON) $(BUILD_DIR)*.whl
 
 # clean target
 clean:
@@ -107,11 +131,11 @@ black-format:
 	find $(BLACK_TARGET_DIR) -type f -name '*.py' | grep -Ev $(BLACK_EXCLUDE_PATTERN) | xargs black --line-length $(BLACK_LINE_LENGTH)
 
 release: confirm
-	$(PYTHON) -m twine upload $(BUILD_DIR)*
+	$(UV) publish $(BUILD_DIR)*
 
 build-elf:
 	$(PYINSTALLER) pcleaner/main.py \
-		--paths "${PYINSTALLER_VENV}/lib/python3.11/site-packages" \
+		--paths "${PYINSTALLER_SITE}" \
 		--onedir --noconfirm --clean --workpath=build --distpath=dist-elf --windowed \
 		--name="PanelCleaner" \
 		--copy-metadata=filelock \
@@ -129,7 +153,7 @@ build-elf:
 		--collect-data=torch \
 		--collect-data=unidic_lite \
 		--hidden-import=scipy.signal \
-		--add-data "${PYINSTALLER_VENV}/lib/python3.13/site-packages/manga_ocr/assets/example.jpg:assets/" \
+		--add-data "${PYINSTALLER_SITE}/manga_ocr/assets/example.jpg:assets/" \
 		--collect-data pcleaner
 	
 	# This stupid thing refuses to collect data, so do it manually:
@@ -158,8 +182,12 @@ build-elf:
 
 
 pip-install-torch-no-cuda:
-	$(PYTHON) -m pip uninstall torch torchvision -y
-	$(PYTHON) -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+	$(UV) pip uninstall --python $(PYTHON) torch torchvision -y
+	$(UV) pip install --python $(PYTHON) torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+requirements-tested:
+	$(UV) lock
+	$(UV) export --format requirements-txt --group runtime-base --group runtime-gui --group runtime-dbus > requirements_tested.txt
 
 # build AppImage from ELF
 build-app-image: 
@@ -204,4 +232,4 @@ confirm:
 	fi
 
 
-.PHONY: confirm clean build build-cli build-both install fresh-install release refresh-i18n compile-i18n compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda build-elf build-app-image
+.PHONY: confirm clean build build-cli build-both install fresh-install release refresh-i18n compile-i18n compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda build-elf build-app-image uv-sync-gui-cpu uv-sync-gui-cuda uv-sync-cli-cuda sync-setup-cfg requirements-tested

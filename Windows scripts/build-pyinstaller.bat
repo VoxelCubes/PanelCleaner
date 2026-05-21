@@ -1,9 +1,13 @@
-:: Perform a Windows build.
-:: Be sure to switch venv first!
+:: Perform a Windows build (CPU-only).
 call build-integration-helper-pyinstaller.bat
 
-.\venv\Scripts\pip install pyinstaller
-.\venv\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv/Lib/site-packages' ^
+uv venv .venv-gui-cpu
+call .venv-gui-cpu\Scripts\activate
+for /f %%i in ('powershell -NoProfile -Command "(Get-Date).AddDays(-7).ToString('yyyy-MM-dd')"') do set UV_EXCLUDE_NEWER=%%i
+uv sync --active --group runtime-base --group runtime-gui --group dev-tools --no-install-package torch --no-install-package torchvision
+uv pip install --reinstall torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+.\.venv-gui-cpu\Scripts\pyinstaller.exe pcleaner/main.py --paths '.venv-gui-cpu/Lib/site-packages' ^
     --onedir --noconfirm --clean --workpath=build --distpath=dist_exe --windowed ^
     --name="PanelCleaner" --icon=pcleaner/data/custom_icons/logo.ico ^
     --copy-metadata filelock ^
@@ -21,7 +25,7 @@ call build-integration-helper-pyinstaller.bat
     --collect-data unidic_lite ^
     --hidden-import=scipy.signal ^
     --add-data "dist_exe/WindowsExplorerIntegrationRegedit.exe;pcleaner/data/" ^
-    --add-data "venv/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" ^
+    --add-data ".venv-gui-cpu/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" ^
     --collect-datas pcleaner
 
 Copy "docs\What is _internal.txt" "dist_exe/PanelCleaner\What is _internal.txt"

@@ -1,7 +1,10 @@
 :: Perform a Windows build with CUDA.
-:: Be sure to switch venv first!
-.\venv-cuda\Scripts\pip install pyinstaller
-.\venv-cuda\Scripts\pyinstaller.exe pcleaner/main.py --paths 'venv-cuda/Lib/site-packages' ^
+uv venv .venv-gui-cuda
+call .venv-gui-cuda\Scripts\activate
+for /f %%i in ('powershell -NoProfile -Command "(Get-Date).AddDays(-7).ToString('yyyy-MM-dd')"') do set UV_EXCLUDE_NEWER=%%i
+uv sync --active --group runtime-base --group runtime-gui --group dev-tools
+
+.\.venv-gui-cuda\Scripts\pyinstaller.exe pcleaner/main.py --paths '.venv-gui-cuda/Lib/site-packages' ^
     --onefile --noconfirm --clean --workpath=build --distpath=dist_exe_cuda --windowed ^
     --name="PanelCleaner.exe" --icon=icons\logo.ico ^
     --copy-metadata filelock ^
@@ -18,5 +21,5 @@
     --collect-data torch ^
     --collect-data unidic_lite ^
     --hidden-import=scipy.signal ^
-    --add-data "venv/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" ^
+    --add-data ".venv-gui-cuda/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" ^
     --collect-data pcleaner
