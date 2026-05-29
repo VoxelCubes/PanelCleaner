@@ -6,29 +6,36 @@ import PySide6.QtCore as Qc
 class CElidedLabel(Qw.QFrame):
     elisionChanged = Qc.Signal(bool)
 
-    def __init__(self, text, parent=None) -> None:
+    def __init__(self, parent=None, text="") -> None:
+        """
+        A QLabel that emits a signal when its text is elided due to insufficient space.
+        It's meant for single lines of text that must dynamically elide themselves.
+
+        :param parent: Optional parent widget.
+        :param text: Initial text for the label.
+        """
         super(CElidedLabel, self).__init__(parent)
 
         self._elided = False
         self._content = text
-        self._elideMode = Qc.Qt.ElideRight
+        self._elideMode: Qc.Qt.TextElideMode = Qc.Qt.ElideRight
         self.setSizePolicy(Qw.QSizePolicy.Expanding, Qw.QSizePolicy.Preferred)
         self.setFrameStyle(Qw.QFrame.NoFrame)
 
-    def text(self) -> None:
+    def text(self) -> str:
         return self._content
 
-    def setText(self, newText) -> None:
+    def setText(self, newText: str) -> None:
         self._content = newText
         self.update()
 
     def isElided(self) -> bool:
         return self._elided
 
-    def elideMode(self) -> None:
+    def elideMode(self) -> Qc.Qt.TextElideMode:
         return self._elideMode
 
-    def setElideMode(self, mode) -> None:
+    def setElideMode(self, mode: Qc.Qt.TextElideMode) -> None:
         if mode in [Qc.Qt.ElideLeft, Qc.Qt.ElideMiddle, Qc.Qt.ElideRight, Qc.Qt.ElideNone]:
             self._elideMode = mode
             self.update()
