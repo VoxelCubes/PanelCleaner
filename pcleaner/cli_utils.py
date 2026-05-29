@@ -209,10 +209,12 @@ def empty_cache_dir(cache_dir: Path) -> None:
     :param cache_dir: The cache directory to empty.
     """
     for item in cache_dir.iterdir():
-        item.unlink()
+        if item.is_file() or item.is_symlink():
+            item.unlink()
     # Remove all folders starting with "splits".
     for folder in cache_dir.glob("splits*"):
-        shutil.rmtree(folder)
+        if folder.is_dir():
+            shutil.rmtree(folder)
 
 
 def closest_match(word: str, choices: list[str]) -> str | None:
