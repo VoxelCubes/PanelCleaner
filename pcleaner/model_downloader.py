@@ -52,34 +52,61 @@ def download_file(url: str, save_dir: Path, sha_hash: str = None) -> Path | None
 
     file_name = os.path.basename(url)
     save_path = save_dir / file_name
+    temp_path = save_path.with_suffix(save_path.suffix + ".partial")
 
-    # Ensure the file is not already downloaded, and the folder exists.
+    # Ensure the folder exists and any partial download is cleared.
     save_dir.mkdir(parents=True, exist_ok=True)
-    if save_path.is_file():
-        save_path.unlink()
-    elif save_path.is_dir():
-        save_path.rmdir()
+    if temp_path.exists():
+        logger.warning(f"Removing leftover partial download: {temp_path}")
+        if temp_path.is_dir():
+            shutil.rmtree(temp_path)
+        else:
+            temp_path.unlink()
 
     file_size = int(response.headers.get("Content-Length", 0))
     chunk_size = 8192  # 8KB
 
-    with open(save_path, "wb") as f, tqdm.tqdm(total=file_size, unit="B", unit_scale=True) as pbar:
+    with open(temp_path, "wb") as f, tqdm.tqdm(total=file_size, unit="B", unit_scale=True) as pbar:
         for chunk in response.iter_content(chunk_size=chunk_size):
             if chunk:
                 f.write(chunk)
                 pbar.update(len(chunk))
 
-    if not save_path.exists():
+    if not temp_path.exists():
         print(f"Error downloading file from url: {url}\nFailed to save the file to {save_path}")
     if sha_hash is not None:
-        if not check_hash(save_path, sha_hash):
+        if not check_hash(temp_path, sha_hash):
             print(
                 f"Error downloading file from url: {url}\nThe file content is different from expected."
             )
-            save_path.unlink()
+            temp_path.unlink()
             return None
 
+    if save_path.is_dir():
+        save_path.rmdir()
+    temp_path.replace(save_path)
+
     return save_path
+
+
+def cleanup_partial_downloads(cache_dir: Path) -> None:
+    """
+    Remove any partial download files left behind from previous runs.
+
+    :param cache_dir: The model cache directory to clean.
+    """
+    if not cache_dir.exists():
+        return
+
+    for partial in cache_dir.glob("*.partial"):
+        try:
+            if partial.is_dir():
+                shutil.rmtree(partial)
+            else:
+                partial.unlink()
+            logger.info(f"Removed partial download: {partial}")
+        except Exception as exc:
+            logger.warning(f"Failed to remove partial download {partial}: {exc}")
 
 
 def download_torch_model(cache_dir: Path) -> Path | None:

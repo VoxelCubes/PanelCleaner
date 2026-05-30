@@ -1,6 +1,7 @@
 import os
 import re
 import time
+import shutil
 from pathlib import Path
 
 import PySide6.QtCore as Qc
@@ -381,12 +382,13 @@ def download_file(url: str, save_dir: Path, signals: DownloadSignals, sha_hash: 
 
     file_name = os.path.basename(url)
     save_path = save_dir / file_name
+    temp_path = save_path.with_suffix(save_path.suffix + ".partial")
 
     save_dir.mkdir(parents=True, exist_ok=True)
-    if save_path.is_file():
-        save_path.unlink()
-    elif save_path.is_dir():
-        save_path.rmdir()
+    if temp_path.is_file() or temp_path.is_symlink():
+        temp_path.unlink()
+    elif temp_path.is_dir():
+        shutil.rmtree(temp_path)
 
     file_size = int(response.headers.get("Content-Length", 0))
     chunk_size = 8192  # 8KB
@@ -399,7 +401,7 @@ def download_file(url: str, save_dir: Path, signals: DownloadSignals, sha_hash: 
     last_speed = 0
     last_eta = -1
 
-    with open(save_path, "wb") as f:
+    with open(temp_path, "wb") as f:
         for chunk in response.iter_content(chunk_size=chunk_size):
             if chunk:
                 f.write(chunk)
@@ -426,7 +428,7 @@ def download_file(url: str, save_dir: Path, signals: DownloadSignals, sha_hash: 
                 )
                 signals.progress_signal.emit(progress_data)
 
-    if not save_path.exists():
+    if not temp_path.exists():
         raise OSError(
             tr(
                 "Error downloading file from url: {url}\nFailed to save the file to {save_path}"
@@ -434,13 +436,18 @@ def download_file(url: str, save_dir: Path, signals: DownloadSignals, sha_hash: 
         )
 
     if sha_hash is not None:
-        if not md.check_hash(save_path, sha_hash):
-            save_path.unlink()
+        if not md.check_hash(temp_path, sha_hash):
+            temp_path.unlink()
             raise OSError(
                 tr(
                     "Error downloading file from url: {url}\nThe file content is different from expected."
                 ).format(url=url)
             )
+
+    if save_path.is_dir():
+        save_path.rmdir()
+    temp_path.replace(save_path)
+    logger.info(f"Finished downloading file from url: {url} to {save_path}")
 
     return save_path
 

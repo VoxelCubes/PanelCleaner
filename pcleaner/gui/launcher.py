@@ -21,9 +21,9 @@ import pcleaner.data.theme_icons as theme_icons_data
 import pcleaner.data.translation_generated_files as translation_data
 import pcleaner.gui.gui_utils as gu
 import pcleaner.helpers as hp
+import pcleaner.model_downloader as md
 from pcleaner import __display_name__, __version__
 from pcleaner.gui.mainwindow_driver import MainWindow
-
 
 # Allow loading of large images.
 Image.MAX_IMAGE_PIXELS = 2**32
@@ -60,6 +60,12 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
 
     # Load the config.
     config = cfg.load_config()
+
+    try:
+        logger.info("Checking for partial model downloads and cleaning them up...")
+        md.cleanup_partial_downloads(config.get_model_cache_dir())
+    except Exception as exc:
+        logger.warning(f"Failed to clean partial model downloads: {exc}")
 
     # Apply the locale from the config.
     if config.locale:

@@ -186,6 +186,13 @@ def main() -> None:
 
     cli.dump_system_info(__file__)
 
+    try:
+        logger.info("Checking for partial model downloads and cleaning them up...")
+        startup_config = cfg.load_config()
+        md.cleanup_partial_downloads(startup_config.get_model_cache_dir())
+    except Exception as exc:
+        logger.warning(f"Failed to clean partial model downloads: {exc}")
+
     # If save-only-text is set, set extract-text to true, as it is required.
     # Also, automatically skip the Denoising step, as it is not needed.
     # This also means that the save-only-text option will not be regarded in the

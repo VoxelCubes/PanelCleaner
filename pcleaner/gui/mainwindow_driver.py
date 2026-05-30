@@ -912,6 +912,10 @@ class MainWindow(Qw.QMainWindow, Ui_MainWindow):
             gu.show_exception(self, self.tr("Delete Failed"), self.tr("Failed to delete models."))
             return
 
+        self.config.default_torch_model_path = None
+        self.config.default_cv2_model_path = None
+        self.config.save()
+
         # Offer to download them again or just quit.
         response = gu.show_question(
             self,
