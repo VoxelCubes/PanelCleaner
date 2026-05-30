@@ -1,5 +1,4 @@
 from pathlib import Path
-from importlib import resources
 
 import PySide6.QtCore as Qc
 from PySide6.QtCore import Qt
@@ -89,7 +88,7 @@ class ImageViewer(Qw.QGraphicsView):
             pixmap = self.shared_pixmap.get()
         return pixmap
 
-    def set_image(self, image_path: Path = None) -> None:
+    def set_image(self, image_path: Path | None = None) -> None:
         self.loaded_image_path = image_path
 
         if image_path:
@@ -396,6 +395,38 @@ class BubbleImageViewer(ImageViewer):
             self.viewport().update()
             self.setCursor(Qt.ArrowCursor)
         super().mouseReleaseEvent(event)
+
+    def leaveEvent(self, event) -> None:
+        """
+        Clear any in-progress new-bubble drawing when the cursor leaves the widget.
+        This prevents a half-started bubble (start set, end None) from causing later
+        repaints to construct invalid QRect objects.
+        """
+        logger.debug("Cursor left the image viewer, clearing any in-progress bubble drawing.")
+        if self._new_bubble_start is not None:
+            self._new_bubble_start = None
+            self._new_bubble_end = None
+            self.setCursor(Qt.ArrowCursor)
+            self.viewport().update()
+        try:
+            super().leaveEvent(event)
+        except Exception:
+            pass
+
+    def focusOutEvent(self, event) -> None:
+        """
+        Clear any in-progress new-bubble drawing when the widget loses focus.
+        """
+        logger.debug("Widget lost focus, clearing any in-progress bubble drawing.")
+        if self._new_bubble_start is not None:
+            self._new_bubble_start = None
+            self._new_bubble_end = None
+            self.setCursor(Qt.ArrowCursor)
+            self.viewport().update()
+        try:
+            super().focusOutEvent(event)
+        except Exception:
+            pass
 
     def drawForeground(self, painter, rect) -> None:
         if self.image_item is None:
