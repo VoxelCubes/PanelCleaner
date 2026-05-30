@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'OcrReview.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.1
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -428,8 +428,8 @@ class Ui_OcrReview(object):
         self.label_2.setText(QCoreApplication.translate("OcrReview", u"OCR new boxes:", None))
         self.pushButton_done.setText(QCoreApplication.translate("OcrReview", u"Done", None))
         ___qtablewidgetitem = self.tableWidget_ocr.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("OcrReview", u"Box", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("OcrReview", u"Box", None))
         ___qtablewidgetitem1 = self.tableWidget_ocr.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("OcrReview", u"Text", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("OcrReview", u"Text", None))
     # retranslateUi
 

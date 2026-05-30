@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'OCRLanguageSupport.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.1
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -98,13 +98,13 @@ class Ui_OCRLanguageSupport(object):
     def retranslateUi(self, OCRLanguageSupport):
         OCRLanguageSupport.setWindowTitle(QCoreApplication.translate("OCRLanguageSupport", u"OCR Language Support", None))
         ___qtablewidgetitem = self.lang_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("OCRLanguageSupport", u"Code", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("OCRLanguageSupport", u"Code", None))
         ___qtablewidgetitem1 = self.lang_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("OCRLanguageSupport", u"Language", u"Can also call this statistics."));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("OCRLanguageSupport", u"Language", u"Can also call this statistics."))
         ___qtablewidgetitem2 = self.lang_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("OCRLanguageSupport", u"MangaOCR", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("OCRLanguageSupport", u"MangaOCR", None))
         ___qtablewidgetitem3 = self.lang_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("OCRLanguageSupport", u"Tesseract", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("OCRLanguageSupport", u"Tesseract", None))
         self.pushButton_install_tesseract.setText(QCoreApplication.translate("OCRLanguageSupport", u"How to install Tesseract", None))
         self.pushButton_install_tesseract_language_packs.setText(QCoreApplication.translate("OCRLanguageSupport", u"How to install Tesseract language packs", None))
     # retranslateUi

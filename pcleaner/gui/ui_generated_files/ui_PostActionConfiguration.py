@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'PostActionConfiguration.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.1
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -434,9 +434,9 @@ class Ui_PostActionConfiguration(object):
         self.pushButton_new.setText(QCoreApplication.translate("PostActionConfiguration", u"New", None))
         self.pushButton_delete.setText(QCoreApplication.translate("PostActionConfiguration", u"Delete", None))
         ___qtablewidgetitem = self.tableWidget_commands.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("PostActionConfiguration", u"Action Name", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("PostActionConfiguration", u"Action Name", None))
         ___qtablewidgetitem1 = self.tableWidget_commands.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("PostActionConfiguration", u"Command or Script File Path", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("PostActionConfiguration", u"Command or Script File Path", None))
         self.checkBox_cancel_on_error.setText(QCoreApplication.translate("PostActionConfiguration", u"Cancel the custom action if processing failed", None))
 #if QT_CONFIG(tooltip)
         self.label_review_output_help_6.setToolTip(QCoreApplication.translate("PostActionConfiguration", u"<html><head/><body><p>The Power Off action will run regardless of this setting.</p></body></html>", None))

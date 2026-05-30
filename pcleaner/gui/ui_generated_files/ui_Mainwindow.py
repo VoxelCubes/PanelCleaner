@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'Mainwindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.1
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -388,7 +388,7 @@ class Ui_MainWindow(object):
         if (self.file_table.columnCount() < 7):
             self.file_table.setColumnCount(7)
         __qtablewidgetitem = QTableWidgetItem()
-        __qtablewidgetitem.setText(u"id");
+        __qtablewidgetitem.setText(u"id")
         self.file_table.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(1, __qtablewidgetitem1)
@@ -1053,17 +1053,17 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile.setText(QCoreApplication.translate("MainWindow", u"Reset All", None))
         self.label_drop.setText(QCoreApplication.translate("MainWindow", u"Drag and Drop Images or Folders Here", None))
         ___qtablewidgetitem = self.file_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"File", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"File", None))
         ___qtablewidgetitem1 = self.file_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Size", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Size", None))
         ___qtablewidgetitem2 = self.file_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Processing Size", u"The size that the picture is shrunk down to for processing."));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Processing Size", u"The size that the picture is shrunk down to for processing."))
         ___qtablewidgetitem3 = self.file_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"File Size", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"File Size", None))
         ___qtablewidgetitem4 = self.file_table.horizontalHeaderItem(5)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Color Mode", u"Like RGB, grayscale etc."));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"Color Mode", u"Like RGB, grayscale etc."))
         ___qtablewidgetitem5 = self.file_table.horizontalHeaderItem(6)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Analytics", u"Can also call this statistics."));
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Analytics", u"Can also call this statistics."))
         self.image_tab.setTabText(self.image_tab.indexOf(self.tabWidget_table_page), QCoreApplication.translate("MainWindow", u"Images", None))
         self.groupBox_process.setTitle(QCoreApplication.translate("MainWindow", u"Process", None))
         self.radioButton_cleaning.setText(QCoreApplication.translate("MainWindow", u"Cleaning", None))
