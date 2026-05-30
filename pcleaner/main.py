@@ -158,7 +158,6 @@ import pcleaner.structures as st
 from pcleaner import __version__
 from pcleaner.config import LayeredExport
 
-
 # Allow loading of large images.
 Image.MAX_IMAGE_PIXELS = 2**32
 
@@ -325,9 +324,9 @@ def main() -> None:
         except ImportError:
             if not args.gui:
                 print(
-                    "This is the CLI version of Panel Cleaner. "
+                    "This is the CLI-only version of Panel Cleaner. "
                     "Calling pcleaner-cli without any arguments will attempt to launch the GUI. "
-                    "Please install the GUI version 'pcleaner' to use the GUI."
+                    "Please install the CLI+GUI version 'pcleaner' to use the GUI."
                 )
             else:
                 print(
