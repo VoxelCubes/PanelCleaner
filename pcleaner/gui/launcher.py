@@ -103,7 +103,7 @@ def launch(files_to_open: list[str], debug: bool = False) -> None:
     theme_icons = str(hp.resource_path(theme_icons_data))
 
     default_theme_search_paths = Qg.QIcon.themeSearchPaths()
-    Qg.QIcon.setThemeSearchPaths([default_theme_search_paths, theme_icons, ":/icons"])
+    Qg.QIcon.setThemeSearchPaths(default_theme_search_paths + [theme_icons, ":/icons"])
 
     Qg.QIcon.setFallbackSearchPaths([":/icons", theme_icons])
     # We need to set an initial theme on Windows, otherwise the icons will fail to load
