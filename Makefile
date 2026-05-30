@@ -4,6 +4,9 @@ UV := uv
 VENV_GUI_CPU := .venv-gui-cpu
 VENV_GUI_CUDA := .venv-gui-cuda
 VENV_CLI_CUDA := .venv-cli-cuda
+VENV_TEST_WHL := .venv-test-whl
+TORCH_CPU_SPEC ?= torch
+TORCHVISION_CPU_SPEC ?= torchvision
 PYINSTALLER_VENV := $(VENV_GUI_CPU)
 PYTHON := $(VENV_GUI_CPU)/bin/python
 PYINSTALLER := $(PYINSTALLER_VENV)/bin/pyinstaller
@@ -24,11 +27,7 @@ LANGUAGES := $(shell python -c "import sys; sys.path.append('.'); from pcleaner.
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print('{}.{}'.format(sys.version_info[0], sys.version_info[1]))")
 PYINSTALLER_SITE = $(PYINSTALLER_VENV)/lib/python$(PYTHON_VERSION)/site-packages
 
-EXCLUDE_NEWER_DATE := $(shell date -u -d '7 days ago' +%Y-%m-%d)
-export UV_EXCLUDE_NEWER := $(EXCLUDE_NEWER_DATE)
-
-run-gui:
-	$(PYTHON) -m pcleaner.gui.launcher
+export UV_EXCLUDE_NEWER := 10 days
 
 # print supported languages
 print-translated-languages:
@@ -41,17 +40,17 @@ refresh-assets: build-icon-cache compile-ui refresh-i18n compile-i18n
 build-both: build build-cli
 
 uv-sync-gui-cpu:
-	$(UV) venv $(VENV_GUI_CPU)
-	. $(VENV_GUI_CPU)/bin/activate && $(UV) pip install --reinstall torch torchvision --index-url https://download.pytorch.org/whl/cpu
-	. $(VENV_GUI_CPU)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-gui --group runtime-dbus --group dev-tools --no-install-package torch --no-install-package torchvision
+	@if [ ! -d $(VENV_GUI_CPU) ]; then $(UV) venv $(VENV_GUI_CPU); fi
+	. $(VENV_GUI_CPU)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-gui --group runtime-dbus --group dev-tools
+	. $(VENV_GUI_CPU)/bin/activate && $(UV) pip install --reinstall $(TORCH_CPU_SPEC) $(TORCHVISION_CPU_SPEC) --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple --index-strategy unsafe-best-match
 
 uv-sync-gui-cuda:
-	$(UV) venv $(VENV_GUI_CUDA)
-	. $(VENV_GUI_CUDA)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-gui --group runtime-dbus --group dev-tools
+	@if [ ! -d $(VENV_GUI_CUDA) ]; then $(UV) venv $(VENV_GUI_CUDA); fi
+	. $(VENV_GUI_CUDA)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-torch --group runtime-gui --group runtime-dbus --group dev-tools
 
 uv-sync-cli-cuda:
-	$(UV) venv $(VENV_CLI_CUDA)
-	. $(VENV_CLI_CUDA)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-gui --group runtime-dbus --group dev-tools
+	@if [ ! -d $(VENV_CLI_CUDA) ]; then $(UV) venv $(VENV_CLI_CUDA); fi
+	. $(VENV_CLI_CUDA)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-torch --group runtime-gui --group runtime-dbus --group dev-tools
 
 sync-setup-cfg:
 	$(PYTHON) tools/sync_setup_cfg.py
@@ -59,13 +58,13 @@ sync-setup-cfg:
 # Normal build target. Use the setup-cli-gui.cfg configuration.
 build: compile-ui sync-setup-cfg
 	cp setup-cli-gui.cfg setup.cfg
-	$(UV) build --outdir $(BUILD_DIR)
+	$(UV) build --out-dir $(BUILD_DIR)
 	rm setup.cfg
 
 # CLI-only build target. Use the setup-cli.cfg configuration.
 build-cli: sync-setup-cfg
 	cp setup-cli.cfg setup.cfg
-	$(UV) build --outdir $(BUILD_DIR)
+	$(UV) build --out-dir $(BUILD_DIR)
 	rm setup.cfg
 
 # clean-build target
@@ -112,6 +111,18 @@ build-icon-cache:
 # install target
 install:
 	$(UV) pip install --python $(PYTHON) $(BUILD_DIR)*.whl
+
+# create a temporary venv and install the newest wheel from dist/
+test-whl-install:
+	rm -rf $(VENV_TEST_WHL)
+	$(UV) venv $(VENV_TEST_WHL)
+	NEWEST_WHL="$$(find $(BUILD_DIR) -maxdepth 1 -type f -name '*.whl' -printf '%T@ %p\n' | sort -nr | head -n 1 | cut -d' ' -f2-)"; \
+	if [ -z "$$NEWEST_WHL" ]; then \
+		echo "No wheel found in $(BUILD_DIR)"; \
+		exit 1; \
+	fi; \
+	echo "Installing $$NEWEST_WHL into $(VENV_TEST_WHL)"; \
+	$(UV) pip install --python $(VENV_TEST_WHL)/bin/python "$$NEWEST_WHL"
 
 # clean target
 clean:
@@ -181,10 +192,6 @@ build-elf:
 		\) -exec rm -rf {} \;
 
 
-pip-install-torch-no-cuda:
-	$(UV) pip uninstall --python $(PYTHON) torch torchvision -y
-	$(UV) pip install --python $(PYTHON) torch torchvision --index-url https://download.pytorch.org/whl/cpu
-
 requirements-tested:
 	$(UV) lock
 	$(UV) export --format requirements-txt --group runtime-base --group runtime-gui --group runtime-dbus > requirements_tested.txt
@@ -232,4 +239,4 @@ confirm:
 	fi
 
 
-.PHONY: confirm clean build build-cli build-both install fresh-install release refresh-i18n compile-i18n compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda build-elf build-app-image uv-sync-gui-cpu uv-sync-gui-cuda uv-sync-cli-cuda sync-setup-cfg requirements-tested
+.PHONY: confirm clean build build-cli build-both install test-whl-install fresh-install release refresh-i18n compile-i18n compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda build-elf build-app-image uv-sync-gui-cpu uv-sync-gui-cuda uv-sync-cli-cuda sync-setup-cfg requirements-tested
