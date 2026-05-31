@@ -64,8 +64,11 @@ def replace_install_requires(path: Path, requirements: list[str]) -> None:
 
 def main() -> int:
     groups = load_groups()
-    replace_install_requires(SETUP_CLI, merge_groups(groups, ["runtime-base"]))
-    replace_install_requires(SETUP_GUI, merge_groups(groups, ["runtime-base", "runtime-gui"]))
+    replace_install_requires(SETUP_CLI, merge_groups(groups, ["runtime-base", "runtime-torch"]))
+    replace_install_requires(
+        SETUP_GUI,
+        merge_groups(groups, ["runtime-base", "runtime-torch", "runtime-gui"]),
+    )
     return 0
 
 

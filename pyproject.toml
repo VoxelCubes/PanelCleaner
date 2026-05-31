@@ -16,8 +16,6 @@ runtime-base = [
 	"natsort",
 	"docopt-ng",
 	"ConfigUpdater",
-	"torch",
-	"torchvision",
 	"loguru",
 	"prettytable",
 	"colorama",
@@ -35,6 +33,10 @@ runtime-base = [
 	"pywin32; platform_system == \"Windows\"",
 	"win10toast; platform_system == \"Windows\"",
 	"pyuac; platform_system == \"Windows\"",
+]
+runtime-torch = [
+	"torch",
+	"torchvision",
 ]
 runtime-gui = [
 	"PySide6",
