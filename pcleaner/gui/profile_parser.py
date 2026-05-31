@@ -275,6 +275,7 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
                         OCREngine.AUTO: self.tr("auto", "OCR Engine option"),
                         OCREngine.MANGAOCR: self.tr("manga-ocr", "OCR Engine option"),
                         OCREngine.TESSERACT: self.tr("tesseract", "OCR Engine option"),
+                        OCREngine.PADDLEOCR_VL: self.tr("PaddleOCR-VL", "OCR Engine option"),
                     }
                 case EntryTypes.ReadingOrder:
                     enum_class = ReadingOrder

@@ -87,6 +87,8 @@ def model2annotations(
                     save_dir,
                     config_general.input_height_lower_target,
                     config_general.input_height_upper_target,
+                    config_detector.bubble_detection_enabled,
+                    config_detector.bubble_detector_model_path,
                 )
                 for batch in batches
             ]
@@ -104,14 +106,33 @@ def model2annotations(
                 save_dir,
                 config_general.input_height_lower_target,
                 config_general.input_height_upper_target,
+                bubble_detection_enabled=config_detector.bubble_detection_enabled,
+                bubble_detector_model_path=config_detector.bubble_detector_model_path,
             )
 
 
 def process_image_batch(args) -> None:
-    img_batch, model_path, device, save_dir, height_target_lower, height_target_upper = args
+    (
+        img_batch,
+        model_path,
+        device,
+        save_dir,
+        height_target_lower,
+        height_target_upper,
+        bubble_detection_enabled,
+        bubble_detector_model_path,
+    ) = args
     model = TextDetector(model_path=str(model_path), input_size=1024, device=device)
     for img_path in img_batch:
-        process_image(img_path, model, save_dir, height_target_lower, height_target_upper)
+        process_image(
+            img_path,
+            model,
+            save_dir,
+            height_target_lower,
+            height_target_upper,
+            bubble_detection_enabled=bubble_detection_enabled,
+            bubble_detector_model_path=bubble_detector_model_path,
+        )
 
     del model
 
@@ -130,6 +151,8 @@ def process_image(
     skip_text_detection: bool = False,
     uuid: str = None,
     visualize_raw_data: bool = False,
+    bubble_detection_enabled: bool = False,
+    bubble_detector_model_path: str | None = None,
 ):
     """
     Process a single image using the TextDetector model.
@@ -161,6 +184,11 @@ def process_image(
     mask, mask_refined, blk_list = model(
         img, refine_mode=REFINEMASK_ANNOTATION, keep_undetected_mask=True
     )
+
+    # Optionally augment the detected boxes using the comic text and bubble detector.
+    if bubble_detection_enabled:
+        augment_blk_list_with_bubble_detector(img, blk_list, bubble_detector_model_path)
+
     blk_xyxy = []
     blk_dict_list = []
     for blk in blk_list:
@@ -183,6 +211,75 @@ def process_image(
 
     if visualize_raw_data:
         ops.visualize_raw_boxes(img, blk_dict_list, path_gen.raw_boxes)
+
+
+def _boxes_overlap(box_a, box_b, threshold: float = 0.3) -> bool:
+    """
+    Check whether two xyxy boxes overlap by more than ``threshold`` of the
+    smaller box's area.
+    """
+    ax1, ay1, ax2, ay2 = box_a
+    bx1, by1, bx2, by2 = box_b
+    x_overlap = max(0, min(ax2, bx2) - max(ax1, bx1))
+    y_overlap = max(0, min(ay2, by2) - max(ay1, by1))
+    intersection = x_overlap * y_overlap
+    if intersection == 0:
+        return False
+    area_a = max(1, (ax2 - ax1) * (ay2 - ay1))
+    area_b = max(1, (bx2 - bx1) * (by2 - by1))
+    return intersection / min(area_a, area_b) > threshold
+
+
+def augment_blk_list_with_bubble_detector(
+    img: np.ndarray,
+    blk_list: list,
+    bubble_detector_model_path: str | None = None,
+) -> None:
+    """
+    Augment the detected text blocks in place using the comic text and bubble
+    detector (RT-DETR). New text regions (classes text_bubble / text_free) that
+    aren't already covered by an existing block are appended, and every block is
+    tagged with an ``in_bubble`` flag based on the detected bubble regions.
+
+    The segmentation mask from the built-in detector is left untouched; this only
+    improves the box data. Failures are logged and ignored so that an unavailable
+    or failing optional model never breaks the main pipeline.
+
+    :param img: The (already resized) image as a cv2 BGR ndarray.
+    :param blk_list: The list of TextBlock objects to augment in place.
+    :param bubble_detector_model_path: Optional model path/repo override.
+    """
+    try:
+        from pcleaner.comic_text_detector.bubble_detector import (
+            BubbleDetector,
+            CLASS_BUBBLE,
+            CLASS_TEXT_BUBBLE,
+            CLASS_TEXT_FREE,
+        )
+        from pcleaner.comic_text_detector.utils.textblock import TextBlock
+    except ImportError as e:
+        logger.warning(f"Could not import the bubble detector, skipping augmentation: {e}")
+        return
+
+    try:
+        detections = BubbleDetector().detect(img, model_path=bubble_detector_model_path)
+    except Exception as e:
+        logger.error(f"Comic text and bubble detection failed, skipping augmentation: {e}")
+        return
+
+    bubble_boxes = [box for box, cls, _ in detections if cls == CLASS_BUBBLE]
+    text_boxes = [box for box, cls, _ in detections if cls in (CLASS_TEXT_BUBBLE, CLASS_TEXT_FREE)]
+
+    # Append detected text regions that aren't already represented by a block.
+    existing_boxes = [blk.xyxy for blk in blk_list]
+    for box in text_boxes:
+        if not any(_boxes_overlap(box, existing) for existing in existing_boxes):
+            blk_list.append(TextBlock(xyxy=list(box), language="unknown"))
+            existing_boxes.append(box)
+
+    # Tag every block with whether it sits inside a detected speech bubble.
+    for blk in blk_list:
+        blk.in_bubble = any(_boxes_overlap(blk.xyxy, bubble) for bubble in bubble_boxes)
 
 
 def read_image(path: Path | str) -> np.ndarray:

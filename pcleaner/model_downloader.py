@@ -20,6 +20,11 @@ CV2_SHA256 = "1a86ace74961413cbd650002e7bb4dcec4980ffa21b2f19b86933372071d718f"
 OCR_DIR_NAME = "models--kha-white--manga-ocr-base"
 INPAINTING_URL = "https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt"
 INPAINTING_SHA256 = "479d3afdcb7ed2fd944ed4ebcc39ca45b33491f0f2e43eb1000bd623cfb41823"
+# Optional Hugging Face models, downloaded on demand into the HF hub cache.
+PADDLEOCR_VL_MODEL_ID = "PaddlePaddle/PaddleOCR-VL-1.5"
+PADDLEOCR_VL_DIR_NAME = "models--PaddlePaddle--PaddleOCR-VL-1.5"
+BUBBLE_DETECTOR_MODEL_ID = "ogkalu/comic-text-and-bubble-detector"
+BUBBLE_DETECTOR_DIR_NAME = "models--ogkalu--comic-text-and-bubble-detector"
 
 
 def check_hash(file_path: Path, sha_hash: str) -> bool:
@@ -241,6 +246,60 @@ def is_ocr_downloaded() -> bool:
     return get_ocr_model_directory().is_dir()
 
 
+def get_paddleocr_vl_directory() -> Path:
+    """
+    Get the path to the PaddleOCR-VL model directory in the Hugging Face cache.
+    """
+    return Path(constants.HF_HUB_CACHE) / PADDLEOCR_VL_DIR_NAME
+
+
+def is_paddleocr_vl_downloaded() -> bool:
+    """
+    Check if the PaddleOCR-VL model is downloaded.
+    """
+    return get_paddleocr_vl_directory().is_dir()
+
+
+def download_paddleocr_vl() -> Path | None:
+    """
+    Download the PaddleOCR-VL model into the Hugging Face cache.
+
+    Requires the optional 'paddleocr-vl' extra (transformers/huggingface_hub).
+
+    :return: The path to the snapshot directory, or None if unavailable.
+    """
+    from huggingface_hub import snapshot_download
+
+    print("Downloading PaddleOCR-VL model...")
+    return Path(snapshot_download(PADDLEOCR_VL_MODEL_ID))
+
+
+def get_bubble_detector_directory() -> Path:
+    """
+    Get the path to the comic text and bubble detector directory in the HF cache.
+    """
+    return Path(constants.HF_HUB_CACHE) / BUBBLE_DETECTOR_DIR_NAME
+
+
+def is_bubble_detector_downloaded() -> bool:
+    """
+    Check if the comic text and bubble detector model is downloaded.
+    """
+    return get_bubble_detector_directory().is_dir()
+
+
+def download_bubble_detector() -> Path | None:
+    """
+    Download the comic text and bubble detector model into the HF cache.
+
+    :return: The path to the snapshot directory, or None if unavailable.
+    """
+    from huggingface_hub import snapshot_download
+
+    print("Downloading comic text and bubble detector model...")
+    return Path(snapshot_download(BUBBLE_DETECTOR_MODEL_ID))
+
+
 def delete_models(text_detector_cache_dir: Path) -> None:
     """
     Delete the downloaded models.
@@ -253,6 +312,12 @@ def delete_models(text_detector_cache_dir: Path) -> None:
         shutil.rmtree(ocr_dir)
     else:
         logger.warning(f"OCR model directory does not exist and cannot be deleted: {ocr_dir}")
+
+    # Delete the optional Hugging Face models if they were downloaded.
+    for optional_dir in (get_paddleocr_vl_directory(), get_bubble_detector_directory()):
+        if optional_dir.is_dir():
+            logger.info(f"Deleting model directory: {optional_dir}")
+            shutil.rmtree(optional_dir)
 
     if text_detector_cache_dir.is_dir():
         logger.info(f"Deleting text detector cache directory: {text_detector_cache_dir}")

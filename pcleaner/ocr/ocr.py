@@ -13,6 +13,8 @@ import pcleaner.structures as st
 import pcleaner.helpers as hp
 from pcleaner.ocr.ocr_mangaocr import MangaOcr
 from pcleaner.ocr.ocr_tesseract import TesseractOcr
+from pcleaner.ocr.ocr_paddleocr_vl import PaddleOcrVL
+import pcleaner.ocr.ocr_paddleocr_vl as paddleocr_vl
 import pcleaner.ocr.supported_languages as osl
 
 
@@ -30,10 +32,15 @@ def tesseract_ok(profile: cfg.Profile) -> bool:
 
 
 def ocr_engines():
-    return {
+    engines = {
         cfg.OCREngine.MANGAOCR: MangaOcr(),
         cfg.OCREngine.TESSERACT: TesseractOcr(),
     }
+    # Only advertise PaddleOCR-VL when its optional dependencies are installed,
+    # so that get_all_available_langs() doesn't claim languages we can't serve.
+    if paddleocr_vl.is_available():
+        engines[cfg.OCREngine.PADDLEOCR_VL] = PaddleOcrVL()
+    return engines
 
 
 def get_all_available_langs() -> set[osl.LanguageCode]:
@@ -82,6 +89,19 @@ def build_ocr_engine_factory(
                 f"Tesseract language pack for '{lang}' is not installed or not found. "
                 "Please see the instructions to install Tesseract correctly. Falling back to manga-ocr."
             )
+        elif ocr_engine_preference == cfg.OCREngine.PADDLEOCR_VL:
+            if not paddleocr_vl.is_available():
+                logger.error(
+                    "PaddleOCR-VL is not available. Install the optional dependency with "
+                    "'pip install pcleaner[paddleocr-vl]'. Falling back to manga-ocr."
+                )
+            elif lang in PaddleOcrVL.langs():
+                # noinspection PyTypeChecker
+                return PaddleOcrVL()
+            else:
+                logger.error(
+                    f"PaddleOCR-VL does not support the language '{lang}'. Falling back to manga-ocr."
+                )
         # Fall back to manga-ocr.
         # noinspection PyTypeChecker
         return MangaOcr()

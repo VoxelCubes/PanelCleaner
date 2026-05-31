@@ -96,6 +96,7 @@ class OCREngine(StrEnum):
     AUTO = "auto"
     MANGAOCR = "manga-ocr"
     TESSERACT = "tesseract"
+    PADDLEOCR_VL = "paddle-ocr-vl"
 
 
 class LayeredExport(StrEnum):
@@ -287,6 +288,8 @@ class GeneralConfig:
 class TextDetectorConfig:
     model_path: str | None = None
     concurrent_models: int | GreaterZero = 1
+    bubble_detection_enabled: bool = False
+    bubble_detector_model_path: str | None = None
 
     def export_to_conf(
         self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
@@ -323,7 +326,19 @@ class TextDetectorConfig:
         # Warning: This may cause program instability, use at your own risk.
         # [GUI: <br>]DO NOT report issues about this setting, as it's entirely hardware-dependent!
         concurrent_models = {self.concurrent_models}
-        
+
+        # Whether to additionally run the comic text and bubble detector
+        # (ogkalu/comic-text-and-bubble-detector) to augment box detection.[GUI: <br>]
+        # When enabled, the RT-DETR model detects extra text regions and classifies
+        # them as being inside a speech bubble or free-floating, supplementing the
+        # built-in detector. The segmentation mask still comes from the built-in model.
+        # Note: This requires the optional 'paddleocr-vl' extra to be installed.
+        bubble_detection_enabled = {self.bubble_detection_enabled}
+
+        # Path to a local copy of the comic text and bubble detector model, leave
+        # empty to download it automatically from Hugging Face.
+        bubble_detector_model_path = {none_to_empty(self.bubble_detector_model_path)}
+
         """
         detector_conf = cu.ConfigUpdater()
         detector_conf.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
@@ -343,6 +358,8 @@ class TextDetectorConfig:
 
         try_to_load(self, config_updater, section, str | None, "model_path")
         try_to_load(self, config_updater, section, int | GreaterZero, "concurrent_models")
+        try_to_load(self, config_updater, section, bool, "bubble_detection_enabled")
+        try_to_load(self, config_updater, section, str | None, "bubble_detector_model_path")
 
     def fix(self) -> None:
         """
@@ -353,6 +370,13 @@ class TextDetectorConfig:
             if not Path(self.model_path).exists():
                 logger.error(f"Could not find model file: {self.model_path}, using default.")
                 self.model_path = None
+        if self.bubble_detector_model_path is not None:
+            if not Path(self.bubble_detector_model_path).exists():
+                logger.error(
+                    f"Could not find bubble detector model: {self.bubble_detector_model_path}, "
+                    "using default."
+                )
+                self.bubble_detector_model_path = None
 
 
 @define
@@ -427,7 +451,9 @@ class PreprocessorConfig:
         # - mangaocr: Forces Panel Cleaner to use the built-in manga-ocr model for all text recognition
         #             tasks. Best suited for vertical Japanese text.[GUI: <br>]
         # - tesseract: Forces Panel Cleaner to use Tesseract OCR for all text recognition tasks. This is a
-        #              versatile option that supports English and multiple other languages.
+        #              versatile option that supports English and multiple other languages.[GUI: <br>]
+        # - paddle-ocr-vl: Forces Panel Cleaner to use the PaddleOCR-VL vision-language model. A heavy,
+        #              multilingual model that requires the optional 'paddleocr-vl' extra to be installed.
         ocr_engine = {self.ocr_engine}
 
         # Defines the reading order for processing and sorting text boxes on the entire page, not
