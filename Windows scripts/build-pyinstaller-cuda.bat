@@ -15,6 +15,7 @@
     --copy-metadata tokenizers ^
     --copy-metadata tqdm ^
     --copy-metadata torch ^
+    --copy-metadata transformers ^
     --collect-data torch ^
     --collect-data unidic_lite ^
     --hidden-import=scipy.signal ^

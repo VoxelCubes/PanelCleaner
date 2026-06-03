@@ -1,0 +1,99 @@
+name: Build Windows EXE and Release
+
+# Builds a Windows .exe of Panel Cleaner (with the optional PaddleOCR-VL and
+# comic text/bubble detector engines available) and publishes it as a GitHub
+# Release. Triggered by pushing a tag like "v2.11.10-models", or manually.
+#
+# Note: the model weights are NOT bundled into the exe. They are downloaded from
+# Hugging Face into the user's cache the first time the corresponding engine is
+# used, so an internet connection is required on first run.
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Create virtual environment and install dependencies
+        shell: pwsh
+        run: |
+          python -m venv venv
+          .\venv\Scripts\python -m pip install --upgrade pip wheel
+          # The project keeps its packaging metadata in setup-cli-gui.cfg.
+          Copy-Item setup-cli-gui.cfg setup.cfg -Force
+          # Install the app together with the optional model engines.
+          .\venv\Scripts\pip install -e ".[paddleocr-vl]"
+          # Extra metadata needed by the PyInstaller build.
+          .\venv\Scripts\pip install pyyaml pyinstaller
+          Remove-Item setup.cfg -Force
+
+      - name: Build the executable
+        shell: pwsh
+        run: |
+          .\venv\Scripts\pyinstaller pcleaner/main.py --paths "venv/Lib/site-packages" `
+            --onedir --noconfirm --clean --workpath=build --distpath=dist_exe --windowed `
+            --name="PanelCleaner" --icon=pcleaner/data/custom_icons/logo.ico `
+            --copy-metadata filelock `
+            --copy-metadata huggingface-hub `
+            --copy-metadata numpy `
+            --copy-metadata packaging `
+            --copy-metadata pyyaml `
+            --copy-metadata regex `
+            --copy-metadata requests `
+            --copy-metadata safetensors `
+            --copy-metadata tokenizers `
+            --copy-metadata tqdm `
+            --copy-metadata torch `
+            --copy-metadata transformers `
+            --copy-metadata accelerate `
+            --collect-data torch `
+            --collect-data unidic_lite `
+            --collect-submodules transformers `
+            --hidden-import=scipy.signal `
+            --add-data "venv/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" `
+            --collect-datas pcleaner
+
+      - name: Package the build into a zip
+        shell: pwsh
+        run: |
+          Compress-Archive -Path dist_exe/PanelCleaner/* -DestinationPath PanelCleaner-windows-x64.zip -Force
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PanelCleaner-windows-x64
+          path: PanelCleaner-windows-x64.zip
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: PanelCleaner-windows-x64.zip
+          draft: false
+          prerelease: true
+          generate_release_notes: true
+          body: |
+            Windows build of Panel Cleaner with the optional **PaddleOCR-VL** OCR
+            engine and **comic text & bubble detector** available.
+
+            - Unzip and run `PanelCleaner.exe`.
+            - To use the new engines, select `paddle-ocr-vl` as the OCR engine
+              and/or enable `bubble_detection_enabled` in a profile.
+            - The model weights download from Hugging Face on first use, so an
+              internet connection is required the first time.
