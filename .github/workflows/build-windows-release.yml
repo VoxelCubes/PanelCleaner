@@ -12,6 +12,8 @@ on:
   push:
     tags:
       - "v*"
+    branches:
+      - "release-build"
   workflow_dispatch:
 
 permissions:
@@ -81,9 +83,13 @@ jobs:
           path: PanelCleaner-windows-x64.zip
 
       - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/release-build'
         uses: softprops/action-gh-release@v2
         with:
+          # On a tag push, use that tag. On the release-build branch, create the
+          # tag ourselves (the git proxy used by the agent can't push tags).
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || 'v2.11.10-models' }}
+          target_commitish: ${{ github.sha }}
           files: PanelCleaner-windows-x64.zip
           draft: false
           prerelease: true
