@@ -1,0 +1,84 @@
+name: Build Windows EXE (PaddleOCR-VL)
+
+# Experimental Windows build that bundles transformers 5 via PanelCleaner.spec
+# so the PaddleOCR-VL OCR engine works inside the exe. Published as a separate
+# prerelease (v2.11.10-paddle) so it doesn't replace the stable build.
+#
+# Triggered by pushing to the "release-paddle" branch, a "v*-paddle" tag, or
+# manually. Model weights are downloaded from Hugging Face on first use.
+
+on:
+  push:
+    tags:
+      - "v*-paddle"
+    branches:
+      - "release-paddle"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows-paddle:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Create virtual environment and install dependencies
+        shell: pwsh
+        run: |
+          python -m venv venv
+          .\venv\Scripts\python -m pip install --upgrade pip wheel
+          # The project keeps its packaging metadata in setup-cli-gui.cfg.
+          Copy-Item setup-cli-gui.cfg setup.cfg -Force
+          # Install WITH the paddleocr-vl extra -> transformers >= 5.
+          .\venv\Scripts\pip install -e ".[paddleocr-vl]"
+          .\venv\Scripts\pip install accelerate sentencepiece pyyaml pyinstaller
+          Remove-Item setup.cfg -Force
+
+      - name: Build the executable (spec bundles transformers source)
+        shell: pwsh
+        run: |
+          .\venv\Scripts\pyinstaller PanelCleaner.spec --noconfirm --clean --distpath dist_exe --workpath build
+
+      - name: Package the build into a zip
+        shell: pwsh
+        run: |
+          Compress-Archive -Path dist_exe/PanelCleaner/* -DestinationPath PanelCleaner-windows-x64-paddle.zip -Force
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PanelCleaner-windows-x64-paddle
+          path: PanelCleaner-windows-x64-paddle.zip
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/release-paddle'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || 'v2.11.10-paddle' }}
+          target_commitish: ${{ github.sha }}
+          name: PanelCleaner with PaddleOCR-VL (experimental)
+          files: PanelCleaner-windows-x64-paddle.zip
+          draft: false
+          prerelease: true
+          generate_release_notes: true
+          body: |
+            **Experimental** Windows build with the multilingual **PaddleOCR-VL**
+            OCR engine bundled (transformers 5, source-bundled via PyInstaller
+            spec). Also includes the comic text/bubble detector.
+
+            - Unzip and run `PanelCleaner.exe`.
+            - In a profile, set `ocr_engine = paddle-ocr-vl` for multilingual OCR,
+              and/or enable `bubble_detection_enabled`.
+            - Model weights download from Hugging Face on first use (internet
+              required the first time, several GB).
+            - PaddleOCR-VL is a 0.9B model: a CUDA GPU is strongly recommended.
+              On CPU with little RAM it may be very slow or run out of memory.

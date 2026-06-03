@@ -273,6 +273,28 @@ This is also available in the GUI, as the OCR output option.
 You can review and edit the OCR output interactively there too.
 ![Review](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/flatpak/Screenshot_ocr.png) 
 
+### Optional: PaddleOCR-VL and the comic text & bubble detector
+
+Panel Cleaner can optionally use the multilingual [PaddleOCR-VL](https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5)
+vision-language model as an OCR engine, and the [comic text and bubble detector](https://huggingface.co/ogkalu/comic-text-and-bubble-detector)
+(RT-DETRv2) to augment box detection by also classifying text as inside a speech bubble or free-floating.
+The built-in detector still produces the segmentation mask used for cleaning.
+
+These models are heavy and require a newer `transformers` than the base install, so they ship as an optional
+extra to avoid disrupting the manga-ocr engine. Install it with:
+
+```
+pip install "pcleaner[paddleocr-vl]"
+```
+
+Once installed, select `paddle-ocr-vl` as the OCR engine, and/or enable `bubble_detection_enabled` in the
+`[TextDetector]` section of a profile. A CUDA GPU is strongly recommended for PaddleOCR-VL.
+
+> Note: PaddleOCR-VL is only available from a source install, not from the packaged Windows `.exe`.
+> It requires `transformers>=5`, which reads model source files at load time and is therefore
+> incompatible with PyInstaller bundles. The prebuilt exe ships `transformers<5` (so manga-ocr works)
+> and includes the comic text/bubble detector, but not PaddleOCR-VL.
+
 Follow the instructions below to install Tesseract on your system.
 
 ### Installing Tesseract

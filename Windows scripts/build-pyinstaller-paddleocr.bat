@@ -1,5 +1,13 @@
-:: Perform a Windows build.
-:: Be sure to switch venv first!
+:: Perform a Windows build WITH the optional PaddleOCR-VL and comic text/bubble
+:: detector models bundled (the "paddleocr-vl" extra).
+::
+:: Be sure to switch to a venv that has the extra installed first, e.g.:
+::   copy setup-cli-gui.cfg setup.cfg
+::   .\venv\Scripts\pip install -e ".[paddleocr-vl]"
+::   del setup.cfg
+::
+:: Note: the model weights themselves are NOT bundled. They are downloaded from
+:: Hugging Face into the user's cache on first use of the respective engine.
 call build-integration-helper-pyinstaller.bat
 
 .\venv\Scripts\pip install pyinstaller
@@ -18,8 +26,10 @@ call build-integration-helper-pyinstaller.bat
     --copy-metadata tqdm ^
     --copy-metadata torch ^
     --copy-metadata transformers ^
+    --copy-metadata accelerate ^
     --collect-data torch ^
     --collect-data unidic_lite ^
+    --collect-submodules transformers ^
     --hidden-import=scipy.signal ^
     --add-data "dist_exe/WindowsExplorerIntegrationRegedit.exe;pcleaner/data/" ^
     --add-data "venv/Lib/site-packages/manga_ocr/assets/example.jpg;assets/" ^
