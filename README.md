@@ -290,6 +290,11 @@ pip install "pcleaner[paddleocr-vl]"
 Once installed, select `paddle-ocr-vl` as the OCR engine, and/or enable `bubble_detection_enabled` in the
 `[TextDetector]` section of a profile. A CUDA GPU is strongly recommended for PaddleOCR-VL.
 
+> Note: PaddleOCR-VL is only available from a source install, not from the packaged Windows `.exe`.
+> It requires `transformers>=5`, which reads model source files at load time and is therefore
+> incompatible with PyInstaller bundles. The prebuilt exe ships `transformers<5` (so manga-ocr works)
+> and includes the comic text/bubble detector, but not PaddleOCR-VL.
+
 Follow the instructions below to install Tesseract on your system.
 
 ### Installing Tesseract

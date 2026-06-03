@@ -39,10 +39,14 @@ jobs:
           .\venv\Scripts\python -m pip install --upgrade pip wheel
           # The project keeps its packaging metadata in setup-cli-gui.cfg.
           Copy-Item setup-cli-gui.cfg setup.cfg -Force
-          # Install the app together with the optional model engines.
-          .\venv\Scripts\pip install -e ".[paddleocr-vl]"
-          # Extra metadata needed by the PyInstaller build.
-          .\venv\Scripts\pip install pyyaml pyinstaller
+          .\venv\Scripts\pip install -e .
+          # transformers 5.x reads each model's .py source file at load time
+          # (_can_set_experts_implementation), which does not exist inside a
+          # PyInstaller bundle and crashes every model (manga-ocr included).
+          # Pin to <5 -- still new enough for the RT-DETRv2 bubble detector --
+          # so the packaged exe works. PaddleOCR-VL needs transformers 5 and is
+          # therefore not available in the prebuilt exe (it degrades gracefully).
+          .\venv\Scripts\pip install "transformers>=4.47,<5.0" accelerate pyyaml pyinstaller
           Remove-Item setup.cfg -Force
 
       - name: Build the executable
@@ -95,11 +99,15 @@ jobs:
           prerelease: true
           generate_release_notes: true
           body: |
-            Windows build of Panel Cleaner with the optional **PaddleOCR-VL** OCR
-            engine and **comic text & bubble detector** available.
+            Windows build of Panel Cleaner with the **comic text & bubble
+            detector** augmentation available.
 
             - Unzip and run `PanelCleaner.exe`.
-            - To use the new engines, select `paddle-ocr-vl` as the OCR engine
-              and/or enable `bubble_detection_enabled` in a profile.
-            - The model weights download from Hugging Face on first use, so an
-              internet connection is required the first time.
+            - Enable `bubble_detection_enabled` in a profile to use the
+              RT-DETRv2 comic text/bubble detector. The model weights download
+              from Hugging Face on first use (internet required the first time).
+            - **PaddleOCR-VL is not bundled in this exe.** It requires
+              transformers 5, which is incompatible with PyInstaller (transformers
+              5 reads model source files at runtime, absent from the bundle). The
+              exe ships transformers <5 so manga-ocr works. To use PaddleOCR-VL,
+              run from a source install: `pip install "pcleaner[paddleocr-vl]"`.
