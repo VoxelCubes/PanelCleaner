@@ -13,6 +13,8 @@ Usage:
         add <name> <path> | list | info <name> | status <name> | open <name>) [--debug]
     pcleaner glossary (list | validate | add <source> <target> [--type=<type>] [--notes=<notes>] |
         remove <source> | import <file> | export <file>) [--workspace=<ws>] [--debug]
+    pcleaner translate <ocr_file> [--workspace=<ws>] [--out=<dir>] [--model=<model>]
+        [--force] [--dry-run] [--debug]
     pcleaner gui [<image_path> ...] [--debug]
     pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--profile=<profile>] [--cache-masks] [--debug]
     pcleaner config (show | open)
@@ -54,6 +56,10 @@ Subcommands:
         remove       Remove a term by its source.
         import       Import terms from a CSV file.
         export       Export terms to a CSV file.
+    translate        Translate the bubbles in an OCR output file (from `pcleaner ocr`) using a
+                     workspace's languages, glossary and model via OpenRouter. Writes a
+                     <image>#translated.json sidecar per page. Use --dry-run to estimate work
+                     and cost without calling the API.
     gui              Open the GUI. This is also automatically invoked if no command is given.
     ocr              Run only the OCR on the given image(s). Any number of images and directories can be given.
                      The output will be saved in a single text file for the whole batch.
@@ -111,6 +117,10 @@ Options:
     --type=<type>                   The glossary term type: name, term, honorific, do_not_translate.
     --notes=<notes>                 Optional notes for a glossary term.
     --workspace=<ws>                The workspace (name or path) to operate on.
+    <ocr_file>                      An OCR output file (CSV or TXT) produced by `pcleaner ocr`.
+    --out=<dir>                     Output directory for translation sidecars (default: workspace cache).
+    --model=<model>                 Override the translation model for this run.
+    --dry-run                       Estimate the translation work and cost without calling the API.
     --cuda                          Load the torch models that support CUDA. They will only be used if supported.
     --cpu                           Load the open cv2 models that are optimized for CPU.
                                     They will only be used as a fallback, unless specified in the config.
@@ -186,6 +196,7 @@ import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
 import pcleaner.workspace_cli as wc
 import pcleaner.glossary_cli as gc
+import pcleaner.translate_cli as trc
 import pcleaner.structures as st
 from pcleaner import __version__
 from pcleaner.config import LayeredExport
@@ -278,6 +289,19 @@ def main() -> None:
             gc.export_glossary(config, workspace, args["<file>"])
         else:
             raise ValueError("Invalid glossary subcommand.")
+
+    elif args["translate"]:
+        # Handle the translate subcommand.
+        config = cfg.load_config()
+        trc.run_translate(
+            config,
+            args["<ocr_file>"],
+            args["--workspace"],
+            args["--out"],
+            args["--model"],
+            args["--force"],
+            args["--dry-run"],
+        )
 
     elif args.profile:
         # Handle profile subcommands.

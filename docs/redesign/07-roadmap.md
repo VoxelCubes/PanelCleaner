@@ -28,7 +28,10 @@
 
 ---
 
-## Phase 2 — OpenRouter + Glossary injection
+## Phase 2 — OpenRouter + Glossary injection ✅ implemented
+
+> สถานะ: **ทำแล้ว** — ดูสรุปการ implement ใน [09-phase2-implementation.md](09-phase2-implementation.md)
+
 
 **สร้าง:** `translator/openrouter.py`, `prompt.py`, `batching.py`, `cache.py`,
 `translate.py`
