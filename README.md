@@ -8,6 +8,11 @@
 
 This tool uses machine learning to find text and then generates masks to cover it up with the highest accuracy possible. It is designed to clean easy bubbles, no in-painting or out-of-bubble text removal is done. This is intended to save a lot of monotonous work for people who have to clean a lot of panels, while making sure it doesn't paint over anything that it wasn't supposed to.
 
+> 🚧 **Redesign in progress — Webtoon Translate & Cleaner.** Design documents for an
+> upcoming major expansion (Glossary, OpenRouter LLM translation, per-series Workspaces,
+> and translated-text rendering) live under [`docs/redesign/`](docs/redesign/00-overview.md).
+> These are design specs only; the existing clean-only workflow is unchanged.
+
 ![Example](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/spread.png)
 
 ![Example](https://raw.githubusercontent.com/VoxelCubes/PanelCleaner/master/media/screenshots/cleaning_done.png)
