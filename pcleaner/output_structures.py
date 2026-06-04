@@ -39,6 +39,11 @@ class Output(IntEnum):
     inpainted_mask = auto()
     inpainted_output = auto()
 
+    # Webtoon Translate & Cleaner: translation + rendering outputs.
+    # Inserted before write_output so that write_output remains the logical last output.
+    translated_json = auto()
+    rendered_output = auto()
+
     write_output = auto()  # This is only used for the progress bar.
 
 
@@ -52,6 +57,10 @@ class Step(IntEnum):
     masker = auto()
     denoiser = auto()
     inpainter = auto()
+    # Webtoon Translate & Cleaner: optional steps, disabled by default.
+    # Inserted before output so that output remains the logical last step.
+    translator = auto()
+    renderer = auto()
     output = auto()
 
 
@@ -125,6 +134,8 @@ output_to_step: dict[Output, Step] = {
     Output.denoised_output: Step.denoiser,
     Output.inpainted_mask: Step.inpainter,
     Output.inpainted_output: Step.inpainter,
+    Output.translated_json: Step.translator,
+    Output.rendered_output: Step.renderer,
     Output.write_output: Step.output,
 }
 
@@ -146,6 +157,8 @@ step_to_output: dict[Step, tuple[Output, ...]] = {
     ),
     Step.denoiser: (Output.denoise_mask, Output.denoised_output),
     Step.inpainter: (Output.inpainted_mask, Output.inpainted_output),
+    Step.translator: (Output.translated_json,),
+    Step.renderer: (Output.rendered_output,),
     Step.output: (Output.write_output,),
 }
 
@@ -314,6 +327,10 @@ class OutputPathGenerator:
                 return self.inpainting
             case Output.inpainted_output:
                 return self.clean_inpaint
+            case Output.translated_json:
+                return self.translated_json
+            case Output.rendered_output:
+                return self.rendered
             case _:
                 raise ValueError(f"No path assigned for output {output}")
 
@@ -407,6 +424,14 @@ class OutputPathGenerator:
     @property
     def clean_inpaint(self) -> Path:
         return self._attach("_clean_inpaint.png")
+
+    @property
+    def translated_json(self) -> Path:
+        return self._attach("#translated.json")
+
+    @property
+    def rendered(self) -> Path:
+        return self._attach("_rendered.png")
 
     @property
     def psd(self) -> Path:

@@ -56,6 +56,19 @@ def get_default_profile_path(profile_name: str | None = None) -> Path:
     return get_config_path().parent / "profiles" / f"{profile_name}.conf"
 
 
+def get_workspaces_path(workspace_name: str | None = None) -> Path:
+    """
+    Get the default location for Webtoon Translate & Cleaner workspaces.
+
+    :param workspace_name: If given, return the path to that named workspace's directory.
+        Otherwise, return the directory that holds all default workspaces.
+    """
+    base = get_config_path().parent / "workspaces"
+    if workspace_name is None:
+        return base
+    return base / workspace_name
+
+
 def get_cache_path() -> Path:
     """
     Get the default suggested path to the cache directory for both Linux and Windows.

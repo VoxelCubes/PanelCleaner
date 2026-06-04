@@ -26,6 +26,8 @@ humanfriendly
 simple_lama_inpainting
 pytesseract
 psd-tools
+tomli_w  # Writing TOML for workspace/glossary files (Webtoon Translate & Cleaner).
+tomli; python_version < "3.11"  # Reading TOML on Python 3.10 (stdlib tomllib is 3.11+).
 strenum; python_version < "3.11"
 dbus-python; platform_system == "Linux"
 pywin32; platform_system == "Windows"

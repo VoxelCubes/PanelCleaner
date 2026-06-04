@@ -7,7 +7,10 @@
 
 ---
 
-## Phase 1 — Foundation & data models (ไม่มี network, ไม่มี GUI)
+## Phase 1 — Foundation & data models (ไม่มี network, ไม่มี GUI) ✅ implemented
+
+> สถานะ: **ทำแล้ว** — ดูสรุปการ implement ใน [08-phase1-implementation.md](08-phase1-implementation.md)
+
 
 **สร้าง:** `glossary.py`, `workspace.py`, `translator/structures.py`,
 `translator/config.py`, `rendering/config.py`

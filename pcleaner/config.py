@@ -1104,6 +1104,30 @@ class Config:
     pa_cancel_on_error: bool = True
     pa_last_action: str | None = None
     pa_custom_commands: dict[str, str] = field(factory=dict)
+    # Webtoon Translate & Cleaner global settings.
+    # The API key may also be supplied via the OPENROUTER_API_KEY environment variable,
+    # which takes precedence. It is never stored in a workspace manifest.
+    openrouter_api_key: str | None = None
+    openrouter_default_model: str | None = None
+    default_workspace: str | None = None
+    saved_workspaces: dict[str, Path] = field(factory=dict)
+
+    def add_workspace(self, name: str, path: Path) -> None:
+        """Register a workspace directory under a name."""
+        self.saved_workspaces[name] = path
+
+    def remove_workspace(self, name: str) -> None:
+        """Unregister a workspace, clearing the default if it pointed here."""
+        if self.default_workspace == name:
+            self.default_workspace = None
+        self.saved_workspaces.pop(name, None)
+
+    def get_openrouter_api_key(self) -> str | None:
+        """
+        Resolve the OpenRouter API key, preferring the environment variable over the
+        stored config value. Returns None if neither is set.
+        """
+        return os.getenv("OPENROUTER_API_KEY") or self.openrouter_api_key
 
     @staticmethod
     def reserved_profile_names() -> list[str]:
@@ -1248,6 +1272,9 @@ class Config:
             f"{to_base32_modified(name)} = {to_base32_modified(command)}"
             for name, command in self.pa_custom_commands.items()
         )
+        saved_workspaces_str = "\n".join(
+            f"{name}={str(path.resolve())}" for name, path in self.saved_workspaces.items()
+        )
 
         conf_str = f"""\
         [General]
@@ -1310,6 +1337,24 @@ class Config:
         
         [Saved Profiles]
         {saved_profiles_str}
+
+
+        # Webtoon Translate & Cleaner settings.
+        [OpenRouter]
+
+        # API key for OpenRouter. Leave blank to use the OPENROUTER_API_KEY environment
+        # variable instead (which takes precedence when both are set).
+        openrouter_api_key = {none_to_empty(self.openrouter_api_key)}
+
+        # Default model to use for translation when a workspace does not specify one.
+        openrouter_default_model = {none_to_empty(self.openrouter_default_model)}
+
+        # The default workspace to use. Leave blank for none.
+        default_workspace = {none_to_empty(self.default_workspace)}
+
+
+        [Saved Workspaces]
+        {saved_workspaces_str}
         """
         config.read_string(multi_left_strip(conf_str))
         # Save the config.
@@ -1357,6 +1402,28 @@ class Config:
                 from_base32_modified(k): from_base32_modified(v.value)
                 for k, v in conf_updater["Custom Commands"].items()
             }
+
+        # Webtoon Translate & Cleaner settings. All optional; tolerate missing sections.
+        section = "OpenRouter"
+        if conf_updater.has_section(section):
+            try_to_load(config, conf_updater, section, str | None, "openrouter_api_key")
+            try_to_load(config, conf_updater, section, str | None, "openrouter_default_model")
+            try_to_load(config, conf_updater, section, str | None, "default_workspace")
+        if "Saved Workspaces" in conf_updater:
+            config.saved_workspaces = {
+                k: Path(v.value) for k, v in conf_updater["Saved Workspaces"].items()
+            }
+
+        # If the default workspace isn't in the saved workspaces, clear it.
+        if (
+            config.default_workspace is not None
+            and config.default_workspace not in config.saved_workspaces
+        ):
+            logger.error(
+                f"Default workspace {config.default_workspace} not found in saved workspaces. "
+                f"Clearing entry."
+            )
+            config.default_workspace = None
 
         # If the default profile isn't in the saved profiles, clear it.
         if (

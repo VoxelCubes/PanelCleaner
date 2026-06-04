@@ -9,6 +9,10 @@ Usage:
     pcleaner profile (list | new <profile_name> [<profile_path>] | add <profile_name> <profile_path> |
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
+    pcleaner workspace (new <name> [<path>] --source=<lang> --target=<lang> [--profile=<profile>] |
+        add <name> <path> | list | info <name> | status <name> | open <name>) [--debug]
+    pcleaner glossary (list | validate | add <source> <target> [--type=<type>] [--notes=<notes>] |
+        remove <source> | import <file> | export <file>) [--workspace=<ws>] [--debug]
     pcleaner gui [<image_path> ...] [--debug]
     pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--profile=<profile>] [--cache-masks] [--debug]
     pcleaner config (show | open)
@@ -34,6 +38,22 @@ Subcommands:
         repair       Repair a profile. This will remove any invalid entries and save the profile.
                      Warning: Changes to the comments won't be preserved, only settings.
         purge-missing  Remove all profiles that link to a file that doesn't exist.
+    workspace        Manage per-series translation workspaces. A workspace wraps a cleaning
+                     profile, a glossary, the source/target languages and translation/render
+                     settings for one series.
+        new          Create a new workspace. Requires --source and --target language codes.
+        add          Register an existing workspace directory under a name.
+        list         List all registered workspaces.
+        info         Show the manifest details of a workspace.
+        status       Show per-page processing progress for a workspace.
+        open         Open the workspace manifest in the default editor.
+    glossary         Manage the glossary of a workspace (selected with --workspace).
+        list         List all glossary terms.
+        validate     Check the glossary for issues (duplicates, empty fields).
+        add          Add or update a term: source target [--type] [--notes].
+        remove       Remove a term by its source.
+        import       Import terms from a CSV file.
+        export       Export terms to a CSV file.
     gui              Open the GUI. This is also automatically invoked if no command is given.
     ocr              Run only the OCR on the given image(s). Any number of images and directories can be given.
                      The output will be saved in a single text file for the whole batch.
@@ -81,6 +101,16 @@ Options:
     <profile_name>                  The saved name of the profile to open, delete, or set as default.
     --output-path=<output_path>     The path to save the OCR output file to.
     --csv                           Save the output of the OCR as a CSV file
+    <name>                          The name of a workspace.
+    <path>                          A filesystem path to a workspace directory.
+    <source>                        A glossary source term.
+    <target>                        A glossary target translation.
+    <file>                          A CSV file to import from or export to.
+    --source=<lang>                 The source language code for a new workspace.
+    --target=<lang>                 The target language code for a new workspace.
+    --type=<type>                   The glossary term type: name, term, honorific, do_not_translate.
+    --notes=<notes>                 Optional notes for a glossary term.
+    --workspace=<ws>                The workspace (name or path) to operate on.
     --cuda                          Load the torch models that support CUDA. They will only be used if supported.
     --cpu                           Load the open cv2 models that are optimized for CPU.
                                     They will only be used as a fallback, unless specified in the config.
@@ -154,6 +184,8 @@ import pcleaner.ocr.supported_languages as osl
 import pcleaner.output_structures as ost
 import pcleaner.preprocessor as pp
 import pcleaner.profile_cli as pc
+import pcleaner.workspace_cli as wc
+import pcleaner.glossary_cli as gc
 import pcleaner.structures as st
 from pcleaner import __version__
 from pcleaner.config import LayeredExport
@@ -194,7 +226,60 @@ def main() -> None:
         args.extract_text = True
         args.skip_denoising = True
 
-    if args.profile:
+    # Use explicit dict-key access for command words that collide with options
+    # (e.g. the "workspace" command vs the "--workspace" option), since docopt-ng's
+    # attribute access coalesces those variants by truthiness.
+    if args["workspace"]:
+        # Handle workspace subcommands.
+        config = cfg.load_config()
+
+        if args.new:
+            _, msg = wc.new_workspace(
+                config,
+                args["<name>"],
+                args["<path>"],
+                args["--source"],
+                args["--target"],
+                args["--profile"],
+            )
+            print(msg)
+        elif args.add:
+            _, msg = wc.add_workspace(config, args["<name>"], args["<path>"])
+            print(msg)
+        elif args.list:
+            wc.list_workspaces(config)
+        elif args.info:
+            wc.info_workspace(config, args["<name>"])
+        elif args.status:
+            wc.status_workspace(config, args["<name>"])
+        elif args.open:
+            wc.open_workspace(config, args["<name>"])
+        else:
+            raise ValueError("Invalid workspace subcommand.")
+
+    elif args["glossary"]:
+        # Handle glossary subcommands.
+        config = cfg.load_config()
+        workspace = args["--workspace"]
+
+        if args.list:
+            gc.list_terms(config, workspace)
+        elif args.validate:
+            gc.validate_glossary(config, workspace)
+        elif args.add:
+            gc.add_term(
+                config, workspace, args["<source>"], args["<target>"], args["--type"], args["--notes"]
+            )
+        elif args.remove:
+            gc.remove_term(config, workspace, args["<source>"])
+        elif args["import"]:
+            gc.import_glossary(config, workspace, args["<file>"])
+        elif args["export"]:
+            gc.export_glossary(config, workspace, args["<file>"])
+        else:
+            raise ValueError("Invalid glossary subcommand.")
+
+    elif args.profile:
         # Handle profile subcommands.
         config = cfg.load_config()
 
