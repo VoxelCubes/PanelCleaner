@@ -76,6 +76,7 @@ detection → masking → inpainting) แต่ผู้แปลยังต้
 
 | ไฟล์ | เนื้อหา |
 |------|---------|
+| [USAGE.md](USAGE.md) | **คู่มือใช้งาน** — ติดตั้ง (pip + Windows .bat), end-to-end, GUI, แก้ปัญหา |
 | [00-overview.md](00-overview.md) | (ไฟล์นี้) ภาพรวมโปรเจกต์ |
 | [01-architecture.md](01-architecture.md) | สถาปัตยกรรมรวม, data flow, ความเป็นเจ้าของ config, โครงโมดูล |
 | [02-workspace.md](02-workspace.md) | Spec ระบบ Workspace |
