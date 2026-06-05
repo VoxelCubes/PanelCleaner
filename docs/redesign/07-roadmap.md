@@ -62,7 +62,10 @@
 
 ---
 
-## Phase 4 — Workspace orchestration
+## Phase 4 — Workspace orchestration ✅ implemented
+
+> สถานะ: **ทำแล้ว** — ดูสรุปการ implement ใน [11-phase4-implementation.md](11-phase4-implementation.md)
+
 
 **งาน:**
 - ต่อ translator + renderer เข้า tail ของ `run_cleaner` ภายใต้

@@ -14,6 +14,7 @@ from pathlib import Path
 import pcleaner.cli_utils as cli
 import pcleaner.config as cfg
 from pcleaner.workspace import Workspace
+from pcleaner.workspace_runner import build_font_registry
 from pcleaner.translator import cache as tcache
 from pcleaner.rendering.config import RenderConfig
 from pcleaner.rendering.fonts import FontRegistry
@@ -32,19 +33,6 @@ def _resolve_workspace_root(config: cfg.Config, workspace: str | None) -> Path |
     if match is None:
         return None
     return config.saved_workspaces[match]
-
-
-def _build_font_registry(ws: Workspace) -> FontRegistry:
-    """Build a font registry from a workspace's render config, fonts map and fonts dir."""
-    user_dirs = []
-    fonts_dir = ws.root / "fonts"
-    if fonts_dir.is_dir():
-        user_dirs.append(fonts_dir)
-    return FontRegistry(
-        default_font=ws.render.default_font,
-        per_language=ws.fonts,
-        user_font_dirs=user_dirs,
-    )
 
 
 def _discover_images(image_paths: list[str]) -> list[Path]:
@@ -83,7 +71,7 @@ def run_render(
         try:
             ws = Workspace.load(root)
             render_config = ws.render
-            fonts = _build_font_registry(ws)
+            fonts = build_font_registry(ws)
             if translations_dir is None:
                 translations_dir = ws.cache_dir()
         except FileNotFoundError:

@@ -11,6 +11,8 @@ Usage:
         purge-missing) [--debug]
     pcleaner workspace (new <name> [<path>] --source=<lang> --target=<lang> [--profile=<profile>] |
         add <name> <path> | list | info <name> | status <name> | open <name>) [--debug]
+    pcleaner workspace run <name> [--ocr=<ocr_file>] [--chapter=<chapter>] [--stage=<stage>]
+        [--clean] [--scale=<scale>] [--force] [--dry-run] [--debug]
     pcleaner glossary (list | validate | add <source> <target> [--type=<type>] [--notes=<notes>] |
         remove <source> | import <file> | export <file>) [--workspace=<ws>] [--debug]
     pcleaner translate <ocr_file> [--workspace=<ws>] [--out=<dir>] [--model=<model>]
@@ -51,6 +53,10 @@ Subcommands:
         info         Show the manifest details of a workspace.
         status       Show per-page processing progress for a workspace.
         open         Open the workspace manifest in the default editor.
+        run          Run the end-to-end pipeline for a workspace: (optional --clean) then
+                     translate (from an --ocr file) and render, tracking page state and
+                     resuming pages that are already done. Pass --stage to stop early or
+                     pass --dry-run to preview the plan.
     glossary         Manage the glossary of a workspace (selected with --workspace).
         list         List all glossary terms.
         validate     Check the glossary for issues (duplicates, empty fields).
@@ -128,6 +134,10 @@ Options:
     --dry-run                       Estimate the translation work and cost without calling the API.
     --translations=<dir>            Directory holding the #translated.json sidecars (default: workspace cache).
     --scale=<scale>                 Scale factor for translation box coordinates when rendering (default: 1.0).
+    --ocr=<ocr_file>                OCR output file (from `pcleaner ocr`) for `workspace run` translation.
+    --chapter=<chapter>             Limit a workspace run to a single chapter id.
+    --stage=<stage>                 Final stage for `workspace run`: clean, translate or render (default: render).
+    --clean                         Run the (delegated) clean stage first in `workspace run`.
     --cuda                          Load the torch models that support CUDA. They will only be used if supported.
     --cpu                           Load the open cv2 models that are optimized for CPU.
                                     They will only be used as a fallback, unless specified in the config.
@@ -252,7 +262,19 @@ def main() -> None:
         # Handle workspace subcommands.
         config = cfg.load_config()
 
-        if args.new:
+        if args.run:
+            wc.run_workspace(
+                config,
+                args["<name>"],
+                args["--ocr"],
+                args["--chapter"],
+                args["--stage"],
+                args["--clean"],
+                args["--force"],
+                args["--dry-run"],
+                args["--scale"],
+            )
+        elif args.new:
             _, msg = wc.new_workspace(
                 config,
                 args["<name>"],
