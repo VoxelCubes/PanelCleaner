@@ -340,3 +340,18 @@ def run_workspace(
 def _status_line(ws: "Workspace") -> str:
     counts = ws.progress_summary()
     return " | ".join(f"{state.value}: {counts[state]}" for state in PageState)
+
+
+def gui_workspace(config: cfg.Config, name: str | None) -> None:
+    """
+    Launch the Webtoon Translate & Cleaner GUI (workspace browser + glossary editor).
+
+    :param config: The global config.
+    :param name: Optional workspace name to open the glossary editor for directly.
+    """
+    try:
+        from pcleaner.gui import webtoon_launcher
+    except Exception as e:  # PySide6 missing or import error.
+        print(f"The GUI is unavailable (is PySide6 installed?): {e}")
+        return
+    webtoon_launcher.launch(config, name)

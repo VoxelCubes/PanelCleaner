@@ -78,7 +78,11 @@
 
 ---
 
-## Phase 5 — GUI
+## Phase 5 — GUI ✅ implemented (initial)
+
+> สถานะ: **ทำแล้ว (ชุดแรก)** — workspace browser + glossary editor + launcher + CLI `workspace gui`
+> ดูสรุปใน [12-phase5-implementation.md](12-phase5-implementation.md) (translation review/render preview เป็นงานต่อยอด)
+
 
 **งาน (out of scope ของรอบออกแบบนี้):**
 - workspace browser (PySide6)

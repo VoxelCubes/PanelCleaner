@@ -13,6 +13,7 @@ Usage:
         add <name> <path> | list | info <name> | status <name> | open <name>) [--debug]
     pcleaner workspace run <name> [--ocr=<ocr_file>] [--chapter=<chapter>] [--stage=<stage>]
         [--clean] [--scale=<scale>] [--force] [--dry-run] [--debug]
+    pcleaner workspace gui [<name>] [--debug]
     pcleaner glossary (list | validate | add <source> <target> [--type=<type>] [--notes=<notes>] |
         remove <source> | import <file> | export <file>) [--workspace=<ws>] [--debug]
     pcleaner translate <ocr_file> [--workspace=<ws>] [--out=<dir>] [--model=<model>]
@@ -57,6 +58,7 @@ Subcommands:
                      translate (from an --ocr file) and render, tracking page state and
                      resuming pages that are already done. Pass --stage to stop early or
                      pass --dry-run to preview the plan.
+        gui          Open the workspace browser and glossary editor (requires PySide6).
     glossary         Manage the glossary of a workspace (selected with --workspace).
         list         List all glossary terms.
         validate     Check the glossary for issues (duplicates, empty fields).
@@ -274,6 +276,8 @@ def main() -> None:
                 args["--dry-run"],
                 args["--scale"],
             )
+        elif args.gui:
+            wc.gui_workspace(config, args["<name>"])
         elif args.new:
             _, msg = wc.new_workspace(
                 config,
