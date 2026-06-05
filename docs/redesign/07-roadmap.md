@@ -46,7 +46,10 @@
 
 ---
 
-## Phase 3 — Rendering
+## Phase 3 — Rendering ✅ implemented
+
+> สถานะ: **ทำแล้ว** — ดูสรุปการ implement ใน [10-phase3-implementation.md](10-phase3-implementation.md)
+
 
 **สร้าง:** `rendering/fonts.py`, `layout.py`, `render.py`; bundle fonts ใน `data/fonts/`
 

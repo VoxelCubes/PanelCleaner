@@ -15,6 +15,8 @@ Usage:
         remove <source> | import <file> | export <file>) [--workspace=<ws>] [--debug]
     pcleaner translate <ocr_file> [--workspace=<ws>] [--out=<dir>] [--model=<model>]
         [--force] [--dry-run] [--debug]
+    pcleaner render [<image_path> ...] [--workspace=<ws>] [--translations=<dir>] [--out=<dir>]
+        [--scale=<scale>] [--debug]
     pcleaner gui [<image_path> ...] [--debug]
     pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--profile=<profile>] [--cache-masks] [--debug]
     pcleaner config (show | open)
@@ -60,6 +62,9 @@ Subcommands:
                      workspace's languages, glossary and model via OpenRouter. Writes a
                      <image>#translated.json sidecar per page. Use --dry-run to estimate work
                      and cost without calling the API.
+    render           Draw the translated text from <image>#translated.json sidecars onto cleaned
+                     page images, writing <image>_rendered.png per page. Uses the workspace's
+                     render settings and fonts.
     gui              Open the GUI. This is also automatically invoked if no command is given.
     ocr              Run only the OCR on the given image(s). Any number of images and directories can be given.
                      The output will be saved in a single text file for the whole batch.
@@ -121,6 +126,8 @@ Options:
     --out=<dir>                     Output directory for translation sidecars (default: workspace cache).
     --model=<model>                 Override the translation model for this run.
     --dry-run                       Estimate the translation work and cost without calling the API.
+    --translations=<dir>            Directory holding the #translated.json sidecars (default: workspace cache).
+    --scale=<scale>                 Scale factor for translation box coordinates when rendering (default: 1.0).
     --cuda                          Load the torch models that support CUDA. They will only be used if supported.
     --cpu                           Load the open cv2 models that are optimized for CPU.
                                     They will only be used as a fallback, unless specified in the config.
@@ -197,6 +204,7 @@ import pcleaner.profile_cli as pc
 import pcleaner.workspace_cli as wc
 import pcleaner.glossary_cli as gc
 import pcleaner.translate_cli as trc
+import pcleaner.render_cli as rdc
 import pcleaner.structures as st
 from pcleaner import __version__
 from pcleaner.config import LayeredExport
@@ -301,6 +309,18 @@ def main() -> None:
             args["--model"],
             args["--force"],
             args["--dry-run"],
+        )
+
+    elif args["render"]:
+        # Handle the render subcommand.
+        config = cfg.load_config()
+        rdc.run_render(
+            config,
+            args["<image_path>"],
+            args["--workspace"],
+            args["--translations"],
+            args["--out"],
+            args["--scale"],
         )
 
     elif args.profile:

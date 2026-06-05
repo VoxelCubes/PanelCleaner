@@ -40,3 +40,11 @@ def test_defaults_on_empty_dict():
     config = RenderConfig.from_dict({})
     assert config.alignment == Alignment.CENTER
     assert config.auto_fit is True
+    assert config.text_color == "#000000"
+
+
+def test_text_color_roundtrip():
+    config = RenderConfig.from_dict({"text_color": "#112233", "stroke_color": "#abcdef"})
+    assert config.text_color == "#112233"
+    assert config.stroke_color == "#abcdef"
+    assert RenderConfig.from_dict(config.to_dict()).text_color == "#112233"

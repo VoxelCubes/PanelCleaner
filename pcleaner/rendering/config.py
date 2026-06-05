@@ -48,8 +48,9 @@ class RenderConfig:
     min_font_size: int = 10
     max_font_size: int = 48
     alignment: Alignment = Alignment.CENTER
+    text_color: str = "#000000"
     stroke_width: int = 0
-    stroke_color: str = "#000000"
+    stroke_color: str = "#FFFFFF"
     vertical: bool = False
 
     def fix(self) -> None:
@@ -70,6 +71,7 @@ class RenderConfig:
             "min_font_size": self.min_font_size,
             "max_font_size": self.max_font_size,
             "alignment": str(self.alignment),
+            "text_color": self.text_color,
             "stroke_width": self.stroke_width,
             "stroke_color": self.stroke_color,
             "vertical": self.vertical,
@@ -89,6 +91,8 @@ class RenderConfig:
             config.max_font_size = int(data["max_font_size"])
         if "alignment" in data:
             config.alignment = to_alignment(data["alignment"])
+        if "text_color" in data:
+            config.text_color = str(data["text_color"])
         if "stroke_width" in data:
             config.stroke_width = int(data["stroke_width"])
         if "stroke_color" in data:
