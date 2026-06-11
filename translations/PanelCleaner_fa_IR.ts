@@ -7,32 +7,32 @@
       <location filename="../pcleaner/config.py" line="1088"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation type="unfinished">default</translation>
+      <translation>پیش‌فرض</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
       <source>Profile file {profile_path} already exists.</source>
-      <translation type="unfinished">Profile file {profile_path} already exists.</translation>
+      <translation>پروفایل {profile_path} در حال حاضر وجود دارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="106"/>
       <source>Profile {profile_name} created.</source>
-      <translation type="unfinished">Profile {profile_name} created.</translation>
+      <translation>پروفایل {profile_name} ایجاد شد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="237"/>
       <source>Profile name cannot be empty.</source>
-      <translation type="unfinished">Profile name cannot be empty.</translation>
+      <translation>نام پروفایل نمی‌تواند خالی باشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="239"/>
       <source>Profile name already in use.</source>
-      <translation type="unfinished">Profile name already in use.</translation>
+      <translation>نام پروفایل قبلاً در استفاده است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="241"/>
       <source>Profile name is reserved.</source>
-      <translation type="unfinished">Profile name is reserved.</translation>
+      <translation>نام پروفایل رزرو شده است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="359"/>
@@ -40,56 +40,56 @@
       <location filename="../pcleaner/gui/image_file.py" line="371"/>
       <location filename="../pcleaner/gui/image_file.py" line="383"/>
       <source>Unknown</source>
-      <translation type="unfinished">Unknown</translation>
+      <translation>ناشناخته</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="373"/>
       <source>RGB</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">RGB</translation>
+      <translation>RGB</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="375"/>
       <source>CMYK</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">CMYK</translation>
+      <translation>CMYK</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="377"/>
       <source>Grayscale</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Grayscale</translation>
+      <translation>مقیاس خاکستری</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="379"/>
       <source>1-bit</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">1-bit</translation>
+      <translation>1 بیت</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="381"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation type="unfinished">Palette</translation>
+      <translation>پالت</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="379"/>
       <source>Error downloading file from url: {url}</source>
-      <translation type="unfinished">Error downloading file from url: {url}</translation>
+      <translation>خطا در دانلود فایل از لینک: {url}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="432"/>
       <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-Failed to save the file to {save_path}</translation>
+      <translation>خطا در دانلود فایل از آدرس: {url}
+ذخیرهٔ فایل با موفقیت انجام نشد {save_path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="441"/>
       <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
-      <translation type="unfinished">Error downloading file from url: {url}
-The file content is different from expected.</translation>
+      <translation>خطا در دانلود فایل از آدرس: {url}
+محتوای فایل با آنچه انتظار می‌رفت متفاوت است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="64"/>
@@ -101,25 +101,25 @@ The file content is different from expected.</translation>
       <location filename="../pcleaner/analytics.py" line="427"/>
       <location filename="../pcleaner/analytics.py" line="570"/>
       <source>N/A</source>
-      <translation type="unfinished">N/A</translation>
+      <translation>در دسترس نیست</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="77"/>
       <source>OCR Analytics</source>
-      <translation type="unfinished">OCR Analytics</translation>
+      <translation>تحلیل OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="82"/>
       <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
-      <translation type="unfinished">Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
+      <translation>تعداد جعبه‌ها: {num_boxes} | تعداد جعبه‌های کوچک: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="92"/>
       <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
-      <translation type="unfinished">Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
+      <translation>تعداد جعبه‌های حذف‌شده: {num_removed} ({removed_box_ratio} در مجموع، {removed_among_small_ratio} جعبهٔ کوچک)
 </translation>
     </message>
     <message>
@@ -127,8 +127,8 @@ The file content is different from expected.</translation>
       <source>
 Small box sizes:
 </source>
-      <translation type="unfinished">
-Small box sizes:
+      <translation>
+اندازه‌های کوچک جعبه:
 </translation>
     </message>
     <message>
