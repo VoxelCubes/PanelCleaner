@@ -135,7 +135,7 @@ Small box sizes:
       <location filename="../pcleaner/analytics.py" line="108"/>
       <source>No not-removed small boxes found.
 </source>
-      <translation type="unfinished">No not-removed small boxes found.
+      <translation>هیچ جعبه‌های کوچک حذف‌نشده یافت نشد.
 </translation>
     </message>
     <message>
@@ -143,94 +143,94 @@ Small box sizes:
       <source>
 Removed bubbles:
 </source>
-      <translation type="unfinished">
-Removed bubbles:
+      <translation>
+حباب‌های حذف‌شده:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="128"/>
       <source>Page {path}: {text}
 </source>
-      <translation type="unfinished">Page {path}: {text}
+      <translation>صفحه {path}: {text}
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="171"/>
       <source>Small boxes</source>
-      <translation type="unfinished">Small boxes</translation>
+      <translation>جعبه‌های کوچک</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="173"/>
       <source>Removed boxes</source>
-      <translation type="unfinished">Removed boxes</translation>
+      <translation>جعبه‌ها حذف شدند</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="212"/>
       <location filename="../pcleaner/analytics.py" line="231"/>
       <location filename="../pcleaner/analytics.py" line="353"/>
       <source>Failed</source>
-      <translation type="unfinished">Failed</translation>
+      <translation>ناموفق</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="227"/>
       <source>Perfect</source>
-      <translation type="unfinished">Perfect</translation>
+      <translation>عالی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="538"/>
       <source>Total
 </source>
-      <translation type="unfinished">Total
+      <translation>مجموع
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="310"/>
       <source>Mask Fitment Analytics</source>
-      <translation type="unfinished">Mask Fitment Analytics</translation>
+      <translation>تحلیل تناسب ماسک</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="229"/>
       <source>Total</source>
-      <translation type="unfinished">Total</translation>
+      <translation>مجموع</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="314"/>
       <source>Total boxes</source>
-      <translation type="unfinished">Total boxes</translation>
+      <translation>مجموع جعبه‌ها</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="316"/>
       <source>Masks succeeded</source>
-      <translation type="unfinished">Masks succeeded</translation>
+      <translation>ماسک‌ها با موفقید اعمال شدند</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="318"/>
       <source>Masks failed</source>
-      <translation type="unfinished">Masks failed</translation>
+      <translation>ماسک‌ها شکست خوردند</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="322"/>
       <source>Perfect masks</source>
-      <translation type="unfinished">Perfect masks</translation>
+      <translation>ماسک‌های عالی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="324"/>
       <source>Average border deviation</source>
-      <translation type="unfinished">Average border deviation</translation>
+      <translation>انحراف متوسط مرزی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="327"/>
       <source>
 Mask usage by thickness (in pixels):
 </source>
-      <translation type="unfinished">
-Mask usage by thickness (in pixels):
+      <translation>
+استفاده از ماسک بر اساس ضخامت (به پیکسل):
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="343"/>
       <source>Mask ({thickness}px)</source>
-      <translation type="unfinished">Mask ({thickness}px)</translation>
+      <translation>ماسک ({thickness}پیکسل)</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="345"/>
@@ -241,7 +241,7 @@ Mask usage by thickness (in pixels):
       <location filename="../pcleaner/analytics.py" line="366"/>
       <source>All bubbles were successfully masked.
 </source>
-      <translation type="unfinished">All bubbles were successfully masked.
+      <translation>تمام حباب‌ها با موفقیت پنهان شدند.
 </translation>
     </message>
     <message>
@@ -249,63 +249,63 @@ Mask usage by thickness (in pixels):
       <source>
 Pages with failures / total:
 </source>
-      <translation type="unfinished">
-Pages with failures / total:
+      <translation>
+صفحات با خطاها / کل:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="407"/>
       <source>Denoising Analytics</source>
-      <translation type="unfinished">Denoising Analytics</translation>
+      <translation>تحلیل نویززدایی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="430"/>
       <source>Total masks</source>
-      <translation type="unfinished">Total masks</translation>
+      <translation>ماسک‌های کامل</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="432"/>
       <source>Masks denoised</source>
-      <translation type="unfinished">Masks denoised</translation>
+      <translation>ماسک‌های نویززدایی‌شده</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="436"/>
       <source>Minimum deviation to denoise</source>
-      <translation type="unfinished">Minimum deviation to denoise</translation>
+      <translation>حداقل انحراف برای حذف نویز</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="438"/>
       <source>Maximum allowed deviation</source>
-      <translation type="unfinished">Maximum allowed deviation</translation>
+      <translation>حداکثر انحراف مجاز</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="441"/>
       <source>Standard deviation around masks:
 
 </source>
-      <translation type="unfinished">Standard deviation around masks:
+      <translation>انحراف معیار اطراف ماسک‌ها:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="538"/>
       <source>Denoised</source>
-      <translation type="unfinished">Denoised</translation>
+      <translation>نویز‌زدایی‌شده</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="560"/>
       <source>Inpainting Analytics</source>
-      <translation type="unfinished">Inpainting Analytics</translation>
+      <translation>تحلیل بازسازی نقاشی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="573"/>
       <source>Inpainting performed</source>
-      <translation type="unfinished">Inpainting performed</translation>
+      <translation>بازسازی انجام شد</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="575"/>
       <source>Average thickness</source>
-      <translation type="unfinished">Average thickness</translation>
+      <translation>ضخامت متوسط</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="579"/>
