@@ -1,3 +1,6 @@
+# We don't specify a [project] section here because all of the metadata is in the setup.cfg files,
+# which differ for gui and cli versions.
+
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = ["setuptools", "wheel"]

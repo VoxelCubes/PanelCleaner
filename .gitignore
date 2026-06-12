@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+uv.lock
+
 output/**
 dist_exe/**
 *.zip

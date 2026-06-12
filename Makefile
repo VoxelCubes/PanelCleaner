@@ -5,11 +5,10 @@ VENV_GUI_CPU := .venv-gui-cpu
 VENV_GUI_CUDA := .venv-gui-cuda
 VENV_CLI_CUDA := .venv-cli-cuda
 VENV_TEST_WHL := .venv-test-whl
-TORCH_CPU_SPEC ?= torch
-TORCHVISION_CPU_SPEC ?= torchvision
 PYINSTALLER_VENV := $(VENV_GUI_CPU)
 PYTHON := $(VENV_GUI_CPU)/bin/python
 PYINSTALLER := $(PYINSTALLER_VENV)/bin/pyinstaller
+GPU_BACKEND := auto # set to cu128, cu130 etc. to force a specific cuda version. Maybe rocm also works, that hasn't been tested.
 BUILD_DIR := dist/
 DIR_ICONS := icons
 UI_DIR := ui_files/
@@ -29,6 +28,11 @@ PYINSTALLER_SITE = $(PYINSTALLER_VENV)/lib/python$(PYTHON_VERSION)/site-packages
 
 export UV_EXCLUDE_NEWER := 10 days
 
+run-gui-cpu:
+    # Check that the venv exists, then launch.
+	@if [ ! -d $(VENV_GUI_CPU) ]; then echo "Virtual environment not found. Please run 'make uv-sync-gui-cpu' first."; exit 1; fi
+	$(VENV_GUI_CPU)/bin/python -m pcleaner.gui.launcher
+
 # print supported languages
 print-translated-languages:
 	@echo $(LANGUAGES)
@@ -41,16 +45,32 @@ build-both: build build-cli
 
 uv-sync-gui-cpu:
 	@if [ ! -d $(VENV_GUI_CPU) ]; then $(UV) venv $(VENV_GUI_CPU); fi
-	. $(VENV_GUI_CPU)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-gui --group runtime-dbus --group dev-tools
-	. $(VENV_GUI_CPU)/bin/activate && $(UV) pip install --reinstall $(TORCH_CPU_SPEC) $(TORCHVISION_CPU_SPEC) --index-url https://download.pytorch.org/whl/cpu --extra-index-url https://pypi.org/simple --index-strategy unsafe-best-match
+	$(UV) pip install --python $(VENV_GUI_CPU)/bin/python \
+		--torch-backend cpu \
+		--group runtime-base \
+		--group runtime-gui \
+		--group runtime-dbus \
+		--group dev-tools \
+		--group runtime-torch
 
 uv-sync-gui-cuda:
 	@if [ ! -d $(VENV_GUI_CUDA) ]; then $(UV) venv $(VENV_GUI_CUDA); fi
-	. $(VENV_GUI_CUDA)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-torch --group runtime-gui --group runtime-dbus --group dev-tools
+	$(UV) pip install --python $(VENV_GUI_CUDA)/bin/python \
+		--torch-backend $(GPU_BACKEND) \
+		--group runtime-base \
+		--group runtime-gui \
+		--group runtime-dbus \
+		--group dev-tools \
+		--group runtime-torch
 
 uv-sync-cli-cuda:
 	@if [ ! -d $(VENV_CLI_CUDA) ]; then $(UV) venv $(VENV_CLI_CUDA); fi
-	. $(VENV_CLI_CUDA)/bin/activate && $(UV) sync --active --group runtime-base --group runtime-torch --group runtime-gui --group runtime-dbus --group dev-tools
+	$(UV) pip install --python $(VENV_CLI_CUDA)/bin/python \
+		--torch-backend $(GPU_BACKEND) \
+		--group runtime-base \
+		--group runtime-dbus \
+		--group dev-tools \
+		--group runtime-torch
 
 sync-setup-cfg:
 	$(PYTHON) tools/sync_setup_cfg.py
@@ -129,7 +149,6 @@ clean:
 	rm -rf build
 	rm -rf dist
 	rm -rf dist-elf/PanelCleaner
-	rm -rf AppImage
 	rm -rf .pytest_cache
 	rm -rf pcleaner.egg-info
 	rm -rf AUR/panelcleaner/pkg
@@ -192,51 +211,13 @@ build-elf:
 		\) -exec rm -rf {} \;
 
 
-requirements-tested:
-	$(UV) lock
-	$(UV) export --format requirements-txt --group runtime-base --group runtime-gui --group runtime-dbus > requirements_tested.txt
-
-# build AppImage from ELF
-build-app-image: 
-	# appimagetool Error: Desktop file not found, aborting
-	# No idea how to fix, oh well...
-	@echo "Building AppImage..."
-	# Create AppDir structure
-	mkdir -p AppImage/PanelCleaner.AppDir/usr/bin
-	mkdir -p AppImage/PanelCleaner.AppDir/usr/lib
-	mkdir -p AppImage/PanelCleaner.AppDir/usr/share/applications
-	mkdir -p AppImage/PanelCleaner.AppDir/usr/share/icons/hicolor/256x256/apps
-	mkdir -p AppImage/PanelCleaner.AppDir/usr/share/metainfo
-
-	# Copy the ELF file and its dependencies
-	cp -r dist-elf/PanelCleaner/PanelCleaner AppImage/PanelCleaner.AppDir/usr/bin/
-	cp -r dist-elf/PanelCleaner/_internal/* AppImage/PanelCleaner.AppDir/usr/lib/
-	
-	# Copy desktop file and icon
-	cp PanelCleaner.desktop AppImage/PanelCleaner.AppDir/usr/share/applications/
-	cp icons/logo-big.png AppImage/PanelCleaner.AppDir/usr/share/icons/hicolor/256x256/apps/PanelCleaner.png
-
-	# Copy AppStream metadata
-	cp flatpak/io.github.voxelcubes.panelcleaner.appdata.xml AppImage/PanelCleaner.AppDir/usr/share/metainfo/
-
-
-	# Create AppRun script
-	echo -e "#!/bin/bash\nexec \$${APPDIR}/usr/bin/PanelCleaner" > AppImage/PanelCleaner.AppDir/AppRun
-	chmod +x AppImage/PanelCleaner.AppDir/AppRun
-
-	# Use appimagetool to create the AppImage
-	appimagetool -v AppImage/PanelCleaner.AppDir -n -u "gh-releases-zsync|VoxelCubes|PanelCleaner|latest" PanelCleaner-x86_64.AppImage
-
-	@echo "AppImage built successfully."
-
-confirm:
-	@read -p "Are you sure you want to proceed? (yes/no): " CONFIRM; \
-	if [ "$$CONFIRM" = "yes" ]; then \
-		echo "Proceeding..."; \
-	else \
-		echo "Aborted by user."; \
-		exit 1; \
-	fi
-
+requirements-tested-gui-cpu:
+	$(UV) pip compile pyproject.toml \
+		--torch-backend cpu \
+		--group runtime-base \
+		--group runtime-gui \
+		--group runtime-dbus \
+		--group runtime-torch \
+		-o requirements_tested.txt
 
 .PHONY: confirm clean build build-cli build-both install test-whl-install fresh-install release refresh-i18n compile-i18n compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda build-elf build-app-image uv-sync-gui-cpu uv-sync-gui-cuda uv-sync-cli-cuda sync-setup-cfg requirements-tested
