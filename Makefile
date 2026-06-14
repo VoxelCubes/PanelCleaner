@@ -1,6 +1,7 @@
 # define configurable variables. May need to be adapted for your environment.
 CurrentDir := $(shell pwd)
 UV := uv
+PY_UV ?= python3.14
 VENV_GUI_CPU := .venv-gui-cpu
 VENV_GUI_CUDA := .venv-gui-cuda
 VENV_CLI_CUDA := .venv-cli-cuda
@@ -44,7 +45,8 @@ refresh-assets: build-icon-cache compile-ui refresh-i18n compile-i18n
 build-both: build build-cli
 
 uv-sync-gui-cpu:
-	@if [ ! -d $(VENV_GUI_CPU) ]; then $(UV) venv $(VENV_GUI_CPU); fi
+	rm -rf $(VENV_GUI_CPU)
+	$(UV) venv --python $(PY_UV) $(VENV_GUI_CPU)
 	$(UV) pip install --python $(VENV_GUI_CPU)/bin/python \
 		--torch-backend cpu \
 		--group runtime-base \
@@ -54,7 +56,8 @@ uv-sync-gui-cpu:
 		--group runtime-torch
 
 uv-sync-gui-cuda:
-	@if [ ! -d $(VENV_GUI_CUDA) ]; then $(UV) venv $(VENV_GUI_CUDA); fi
+	rm -rf $(VENV_GUI_CUDA)
+	$(UV) venv --python $(PY_UV) $(VENV_GUI_CUDA)
 	$(UV) pip install --python $(VENV_GUI_CUDA)/bin/python \
 		--torch-backend $(GPU_BACKEND) \
 		--group runtime-base \
@@ -64,7 +67,8 @@ uv-sync-gui-cuda:
 		--group runtime-torch
 
 uv-sync-cli-cuda:
-	@if [ ! -d $(VENV_CLI_CUDA) ]; then $(UV) venv $(VENV_CLI_CUDA); fi
+	rm -rf $(VENV_CLI_CUDA)
+	$(UV) venv --python $(PY_UV) $(VENV_CLI_CUDA)
 	$(UV) pip install --python $(VENV_CLI_CUDA)/bin/python \
 		--torch-backend $(GPU_BACKEND) \
 		--group runtime-base \
@@ -103,7 +107,8 @@ refresh-i18n:
 	$(I18N_LUPDATE) -extensions .py,.ui -no-recursive pcleaner pcleaner/gui pcleaner/gui/CustomQ ui_files \
 		translations/profile_strings.py translations/process_strings.py -source-language en_US -target-language en_US -ts translations/PanelCleaner_source.ts
 
-# Generate .ts files for each language if they don't already exist
+# Generate .ts files for each language if they don't already exist. 
+#Typically handled by Crowdin now, do not overwrite existing files in Crowdin (unless they're fubar).
 generate-ts:
 	$(foreach lang, $(LANGUAGES), \
 		if [ ! -f translations/PanelCleaner_$(lang).ts ]; then \
@@ -180,11 +185,15 @@ build-elf:
 		--copy-metadata=tokenizers \
 		--copy-metadata=tqdm \
 		--copy-metadata=torch \
+		--copy-metadata=manga_ocr \
 		--collect-data=torch \
 		--collect-data=unidic_lite \
 		--hidden-import=scipy.signal \
-		--add-data "${PYINSTALLER_SITE}/manga_ocr/assets/example.jpg:assets/" \
+		--add-data "${PYINSTALLER_SITE}/manga_ocr:manga_ocr/" \
 		--collect-data pcleaner
+	
+	# Note on adding data for manga_ocr. For some reason PyInstaller stopped including the source files for manga_ocr,
+	# which transformers needs to run, so we manually tell it to include it as data. Hacky but necessary, for now.
 	
 	# This stupid thing refuses to collect data, so do it manually:
 	@echo "Copying data files..."
@@ -192,8 +201,11 @@ build-elf:
 	cp -r pcleaner/data dist-elf/PanelCleaner/_internal/pcleaner/
 	@echo "Purging __pycache__ directories..."
 	@find dist-elf/PanelCleaner/_internal/pcleaner -type d -name "__pycache__"
+	@echo "Confiming deletion of __pycache__ directories..."
 	@find dist-elf/PanelCleaner/_internal/pcleaner -type d -name "__pycache__" -exec rm -rf {} \; || true
 
+    # The cpu-limited install of torch now cuts out most of them, but one or two might still be lurking here,
+	# so clean them up just in case.
 	@echo "Purging CUDA related files from _internal directory..."
 	@find dist-elf/PanelCleaner/_internal -type f \( \
 		-name 'libtorch_cuda.so' -o \

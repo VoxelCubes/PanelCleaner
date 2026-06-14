@@ -10,7 +10,7 @@ shapely
 natsort
 docopt-ng
 ConfigUpdater
-transformers
+huggingface_hub
 manga_ocr
 loguru
 prettytable
