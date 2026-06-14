@@ -224,12 +224,8 @@ build-elf:
 
 
 requirements-tested-gui-cpu:
-	$(UV) pip compile pyproject.toml \
-		--torch-backend cpu \
-		--group runtime-base \
-		--group runtime-gui \
-		--group runtime-dbus \
-		--group runtime-torch \
-		-o requirements_tested.txt
+    # These are the packages that are tested on Linux and used for the Flatpak build.
+	@if [ ! -x $(VENV_GUI_CPU)/bin/python ]; then echo "Virtual environment not found. Please run 'make uv-sync-gui-cpu' first."; exit 1; fi
+	$(UV) pip freeze --no-cache --python $(VENV_GUI_CPU)/bin/python > requirements_tested.txt
 
-.PHONY: confirm clean build build-cli build-both install test-whl-install fresh-install release refresh-i18n compile-i18n compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda build-elf build-app-image uv-sync-gui-cpu uv-sync-gui-cuda uv-sync-cli-cuda sync-setup-cfg requirements-tested
+.PHONY: confirm clean build build-cli build-both install test-whl-install fresh-install release refresh-i18n compile-i18n compile-ui build-icon-cache refresh-assets black-format pip-install-torch-no-cuda build-elf build-app-image uv-sync-gui-cpu uv-sync-gui-cuda uv-sync-cli-cuda sync-setup-cfg requirements-tested-gui-cpu
