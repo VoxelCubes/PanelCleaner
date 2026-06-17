@@ -1,6 +1,19 @@
-:: On Windows, pip is too retarded to install the CUDA variants of pytorch correctly, so here is
-:: the manual way, using CUDA 11 for compatibility.
-:: See https://pytorch.org/get-started/locally/#windows-pip for more info.
-:: First ensure the regular torch is uninstalled.
-.\venv-cuda\Scripts\pip uninstall torch torchvision -y
-.\venv-cuda\Scripts\pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+@echo off
+setlocal
+
+:: Create a CUDA-capable Windows uv environment, matching the Makefile uv-sync-gui-cuda target.
+:: Set GPU_BACKEND=cu128, cu130, etc. to force a CUDA version.
+if not defined PY_UV set "PY_UV=python3.14"
+if not defined GPU_BACKEND set "GPU_BACKEND=auto"
+set "VENV_GUI_CUDA=.venv-gui-cuda"
+set "UV_EXCLUDE_NEWER=10 days"
+
+if exist "%VENV_GUI_CUDA%" rmdir /s /q "%VENV_GUI_CUDA%"
+uv venv --python "%PY_UV%" "%VENV_GUI_CUDA%" || exit /b 1
+uv pip install --python "%VENV_GUI_CUDA%\Scripts\python.exe" ^
+    --torch-backend "%GPU_BACKEND%" ^
+    --group runtime-base ^
+    --group runtime-gui ^
+    --group runtime-dbus ^
+    --group dev-tools ^
+    --group runtime-torch || exit /b 1

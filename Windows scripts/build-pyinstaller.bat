@@ -1,11 +1,22 @@
-:: Perform a Windows build (CPU-only).
-call build-integration-helper-pyinstaller.bat
+@echo off
+setlocal
 
-uv venv .venv-gui-cpu
-call .venv-gui-cpu\Scripts\activate
-for /f %%i in ('powershell -NoProfile -Command "(Get-Date).AddDays(-7).ToString('yyyy-MM-dd')"') do set UV_EXCLUDE_NEWER=%%i
-uv sync --active --group runtime-base --group runtime-gui --group dev-tools --no-install-package torch --no-install-package torchvision
-uv pip install --reinstall torch torchvision --index-url https://download.pytorch.org/whl/cpu
+:: Perform a Windows build (CPU-only).
+if not defined PY_UV set "PY_UV=python3.14"
+set "VENV_GUI_CPU=.venv-gui-cpu"
+set "UV_EXCLUDE_NEWER=10 days"
+
+if exist "%VENV_GUI_CPU%" rmdir /s /q "%VENV_GUI_CPU%"
+uv venv --python "%PY_UV%" "%VENV_GUI_CPU%" || exit /b 1
+uv pip install --python "%VENV_GUI_CPU%\Scripts\python.exe" ^
+    --torch-backend cpu ^
+    --group runtime-base ^
+    --group runtime-gui ^
+    --group runtime-dbus ^
+    --group dev-tools ^
+    --group runtime-torch || exit /b 1
+
+call "Windows scripts\build-integration-helper-pyinstaller.bat" || exit /b 1
 
 .\.venv-gui-cpu\Scripts\pyinstaller.exe pcleaner/main.py --paths '.venv-gui-cpu/Lib/site-packages' ^
     --onedir --noconfirm --clean --workpath=build --distpath=dist_exe --windowed ^

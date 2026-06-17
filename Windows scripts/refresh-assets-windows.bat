@@ -3,8 +3,8 @@ REM This simply generates the packed .qm translation files
 setlocal enabledelayedexpansion
 REM Define variables
 set CurrentDir=%cd%
-set PYTHON=venv\Scripts\python.exe
-set I18N_COMPILER=venv\Scripts\pyside6-lrelease.exe
+set PYTHON=.venv-gui-cpu\Scripts\python.exe
+set I18N_COMPILER=.venv-gui-cpu\Scripts\pyside6-lrelease.exe
 
 REM Get supported languages
 set TEMP_FILE=temp.txt
