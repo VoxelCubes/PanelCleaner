@@ -329,12 +329,12 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/analytics.py" line="651"/>
       <source>Inpainted</source>
-      <translation type="unfinished">Inpainted</translation>
+      <translation>مرمت‌شده</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
       <source>File Error</source>
-      <translation type="unfinished">File Error</translation>
+      <translation>خطای فایل</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
@@ -409,92 +409,92 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="630"/>
       <source>CUDA Error</source>
-      <translation type="unfinished">CUDA Error</translation>
+      <translation>خطای CUDA</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="632"/>
       <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
-      <translation type="unfinished">&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;کارت گرافیک شما از عملیات‌های CUDA مورد نیاز پشتیبانی نمی‌کند.&lt;br&gt;سعی کنید نسخه‌های فعلی torch و torchvision را لغو نصب کرده و به جای آن‌ها، نسخه CPU (یا نسخه دیگری از CUDA) را نصب کنید.&lt;br&gt;دستورالعمل‌های بیشتر را می‌توانید در اینجا پیدا کنید:https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt; برای مشاهده نسخه‌های موجود، بخش &quot;Compute Platform&quot; را بررسی کنید.&lt;br&gt;&lt;br&gt;نسخه فعلی CUDA شما: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="514"/>
       <source>Inpainting model not found.</source>
-      <translation type="unfinished">Inpainting model not found.</translation>
+      <translation>مدل پر کردن نواقص یافت نشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>filename</source>
-      <translation type="unfinished">filename</translation>
+      <translation>نام فایل</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>startx</source>
-      <translation type="unfinished">startx</translation>
+      <translation>استارت‌ا</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>starty</source>
-      <translation type="unfinished">starty</translation>
+      <translation>لرزان</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>endx</source>
-      <translation type="unfinished">endx</translation>
+      <translation>پایان</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>endy</source>
-      <translation type="unfinished">endy</translation>
+      <translation>پایان</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
       <location filename="../pcleaner/gui/processing.py" line="921"/>
       <source>text</source>
-      <translation type="unfinished">text</translation>
+      <translation>متن</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1956"/>
       <location filename="../pcleaner/gui/processing.py" line="930"/>
       <source>Saved detected text to {output_file}</source>
-      <translation type="unfinished">Saved detected text to {output_file}</translation>
+      <translation>متن شناسایی‌شده را ذخیره کرد در {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1960"/>
       <location filename="../pcleaner/gui/processing.py" line="934"/>
       <source>Failed to write detected text to {output_file}</source>
-      <translation type="unfinished">Failed to write detected text to {output_file}</translation>
+      <translation>نوشتن متن شناسایی‌شده به {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1964"/>
       <location filename="../pcleaner/gui/processing.py" line="937"/>
       <source>Save Failed</source>
-      <translation type="unfinished">Save Failed</translation>
+      <translation>ذخیره نشد</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1964"/>
       <location filename="../pcleaner/gui/processing.py" line="937"/>
       <source>Failed to write detected text to file.</source>
-      <translation type="unfinished">Failed to write detected text to file.</translation>
+      <translation>نوشتن متن شناسایی‌شده به فایل ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="566"/>
       <source>Inpainter (experimental)</source>
-      <translation type="unfinished">Inpainter (experimental)</translation>
+      <translation>این‌پینتر (تجربی)</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="106"/>
       <source>Invalid type for img_paths: {paths}</source>
-      <translation type="unfinished">Invalid type for img_paths: {paths}</translation>
+      <translation>نوع نامعتبر برای img_paths: {paths}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="115"/>
       <source>Unsupported image format: {suffix} for {path}</source>
-      <translation type="unfinished">Unsupported image format: {suffix} for {path}</translation>
+      <translation>فرمت تصویر پشتیبانی‌نشده: {suffix} برای {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="121"/>
