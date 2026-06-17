@@ -53,6 +53,7 @@ dev-tools = [
 	"PyYAML",
 	"tomli",
 	"pyinstaller",
+	"twine",
 ]
 
 [tool.black]

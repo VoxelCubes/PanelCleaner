@@ -166,7 +166,7 @@ black-format:
 	find $(BLACK_TARGET_DIR) -type f -name '*.py' | grep -Ev $(BLACK_EXCLUDE_PATTERN) | xargs black --line-length $(BLACK_LINE_LENGTH)
 
 release: confirm
-	$(UV) publish $(BUILD_DIR)*
+	$(VENV_GUI_CPU)/bin/python -m twine upload $(BUILD_DIR)*
 
 build-elf:
 	$(PYINSTALLER) pcleaner/main.py \
