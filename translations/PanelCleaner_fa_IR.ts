@@ -549,27 +549,27 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/gui/structures.py" line="108"/>
       <source>%id</source>
-      <translation type="unfinished">%id</translation>
+      <translation>%id</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="109"/>
       <source>%i</source>
-      <translation type="unfinished">%i</translation>
+      <translation>%i</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="110"/>
       <source>%od</source>
-      <translation type="unfinished">%od</translation>
+      <translation>%od</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="111"/>
       <source>%o</source>
-      <translation type="unfinished">%o</translation>
+      <translation>%o</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/structures.py" line="112"/>
       <source>%p</source>
-      <translation type="unfinished">%p</translation>
+      <translation>%p</translation>
     </message>
   </context>
   <context>
@@ -577,41 +577,41 @@ Pages with failures / total:
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation type="unfinished">About Panel Cleaner</translation>
+      <translation>درباره پنل کلینر</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="81"/>
       <source># Panel Cleaner
 
 An AI-powered tool to clean manga panels.</source>
-      <translation type="unfinished"># Panel Cleaner
+      <translation># پنل کلینر
 
-An AI-powered tool to clean manga panels.</translation>
+ابزاری مبتنی بر هوش مصنوعی برای کلین کردن پنل‌های مانگا.</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="98"/>
       <source>Version:</source>
-      <translation type="unfinished">Version:</translation>
+      <translation>نسخه:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="112"/>
       <source>Author:</source>
-      <translation type="unfinished">Author:</translation>
+      <translation>نویسنده:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="150"/>
       <source>Toolkit:</source>
-      <translation type="unfinished">Toolkit:</translation>
+      <translation>مجموعه ابزار:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="164"/>
       <source>License:</source>
-      <translation type="unfinished">License:</translation>
+      <translation>مجوز:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="181"/>
       <source>Source code:</source>
-      <translation type="unfinished">Source code:</translation>
+      <translation>کد منبع:</translation>
     </message>
   </context>
   <context>
@@ -619,7 +619,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CTextEdit.py" line="17"/>
       <source>Clear</source>
-      <translation type="unfinished">Clear</translation>
+      <translation>پاک کردن</translation>
     </message>
   </context>
   <context>
@@ -627,7 +627,7 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="37"/>
       <source>Select Color</source>
-      <translation type="unfinished">Select Color</translation>
+      <translation>انتخاب رنگ</translation>
     </message>
   </context>
   <context>
@@ -635,32 +635,32 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="102"/>
       <source>Copy to Clipboard</source>
-      <translation type="unfinished">Copy to Clipboard</translation>
+      <translation>کپی در کلیپ‌بورد</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="113"/>
       <source>Open Issue Tracker</source>
-      <translation type="unfinished">Open Issue Tracker</translation>
+      <translation>دنبال کننده ایشو فعال</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="124"/>
       <source>Terminate Panel Cleaner</source>
-      <translation type="unfinished">Terminate Panel Cleaner</translation>
+      <translation>پنل کلینر را خاتمه دهید</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="134"/>
       <source>Close</source>
-      <translation type="unfinished">Close</translation>
+      <translation>بستن</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="45"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
+      <translation>توجه: نام &quot;{name}&quot; پنهان شده بود</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="86"/>
       <source>Failed to load log.</source>
-      <translation type="unfinished">Failed to load log.</translation>
+      <translation>بارگذاری لاگ ناموفق بود.</translation>
     </message>
   </context>
   <context>
@@ -668,107 +668,107 @@ An AI-powered tool to clean manga panels.</translation>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
       <source>Unsupported system</source>
-      <translation type="unfinished">Unsupported system</translation>
+      <translation>سیستم پشتیبانی‌نشده</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
       <source>This system is not supported.</source>
-      <translation type="unfinished">This system is not supported.</translation>
+      <translation>این سیستم پشتیبانی نمی‌شود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="88"/>
       <source>Install for Dolphin</source>
-      <translation type="unfinished">Install for Dolphin</translation>
+      <translation>نصب برای دلفین</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="89"/>
       <source>Uninstall for Dolphin</source>
-      <translation type="unfinished">Uninstall for Dolphin</translation>
+      <translation>حذف برای دلفین</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="92"/>
       <source>The extension will be installed at {path}. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension will be installed at {path}. This doesn&apos;t require root permissions.</translation>
+      <translation>&apos;افزونه در {path}نصب خواهد شد. این افزونه به مجوزهای روت نیاز ندارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="100"/>
       <source>The extension file will be deleted. This doesn&apos;t require root permissions.</source>
-      <translation type="unfinished">The extension file will be deleted. This doesn&apos;t require root permissions.</translation>
+      <translation>فایل افزونه حذف خواهد شد. این کار نیاز ب&apos;ه مجوزهای روت ندارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="104"/>
       <source>Install for Windows Explorer</source>
-      <translation type="unfinished">Install for Windows Explorer</translation>
+      <translation>نصب برای ویندوز اکسپلورر</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="105"/>
       <source>Uninstall for Windows Explorer</source>
-      <translation type="unfinished">Uninstall for Windows Explorer</translation>
+      <translation>حذف از ویندوز اکسپلورر</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="108"/>
       <source>The extension will be installed in the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be installed in the Windows registry.This requires admin permissions.</translation>
+      <translation>افزونه در رجیستری ویندوز نصب خواهد شد. این کار نیازمند مجوزهای ادمین است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="114"/>
       <source>The extension will be uninstalled from the Windows registry.This requires admin permissions.</source>
-      <translation type="unfinished">The extension will be uninstalled from the Windows registry.This requires admin permissions.</translation>
+      <translation>افزونه از رجیستری ویندوز حذف خواهد شد. این کار نیازمند مجوزهای ادمین است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="157"/>
       <source>Dolphin extension installed successfully.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.</translation>
+      <translation>افزونه دلفین با موفقیت نصب شد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="172"/>
       <source>Installation successful</source>
-      <translation type="unfinished">Installation successful</translation>
+      <translation>نصب با موفقیت انجام شد</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="160"/>
       <source>Dolphin extension installed successfully.
 You may need to log out and log back in (or restart) for the changes to take effect.</source>
-      <translation type="unfinished">Dolphin extension installed successfully.
-You may need to log out and log back in (or restart) for the changes to take effect.</translation>
+      <translation>افزونه دلفین با موفقیت نصب شد.
+ممکن است لازم باشد از حساب کاربری خارج شده و دوباره وارد شوید (یا دستگاه را راه‌اندازی مجدد کنید) تا تغییرات اعمال شوند.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="178"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="202"/>
       <source>Installation failed</source>
-      <translation type="unfinished">Installation failed</translation>
+      <translation>نصب ناموفق بود</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="179"/>
       <source>Failed to install Dolphin extension.</source>
-      <translation type="unfinished">Failed to install Dolphin extension.</translation>
+      <translation>نصب افزونه دلفین ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="203"/>
       <source>Failed to install Windows Explorer extension.</source>
-      <translation type="unfinished">Failed to install Windows Explorer extension.</translation>
+      <translation>نصب افزونهٔ ویندوز اکسپلورر ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="224"/>
       <source>Uninstallation successful</source>
-      <translation type="unfinished">Uninstallation successful</translation>
+      <translation>حذف با موفقیت انجام شد</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="219"/>
       <source>Dolphin extension uninstalled successfully.</source>
-      <translation type="unfinished">Dolphin extension uninstalled successfully.</translation>
+      <translation>افزونه دلفین با موفقیت حذف شد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="225"/>
       <source>Dolphin extension was not installed.</source>
-      <translation type="unfinished">Dolphin extension was not installed.</translation>
+      <translation>افزونه دلفین نصب نشده است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="230"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="249"/>
       <source>Uninstallation failed</source>
-      <translation type="unfinished">Uninstallation failed</translation>
+      <translation>لغو نصب ناموفق بود</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="231"/>
