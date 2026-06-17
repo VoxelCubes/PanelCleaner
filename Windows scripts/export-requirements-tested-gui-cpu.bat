@@ -5,7 +5,7 @@ setlocal
 set "VENV_GUI_CPU=.venv-gui-cpu"
 
 if not exist "%VENV_GUI_CPU%\Scripts\python.exe" (
-    echo Virtual environment not found. Please run "Windows scripts\build-pyinstaller.bat" first.
+    echo Virtual environment not found. Please run "Windows scripts\install_cpu_windows.bat" first.
     exit /b 1
 )
 

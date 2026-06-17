@@ -1,6 +1,7 @@
 To ensure the paths are correct, make sure your shell is in the PanelCleaner directory, not the
 Windows scripts directory.
 
-So run the build-pyinstaller.bat script like this:
+So set up the CPU build environment and then run the build-pyinstaller.bat script like this:
 
+& ".\Windows scripts\install_cpu_windows.bat"
 & ".\Windows scripts\build-pyinstaller.bat"

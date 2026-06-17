@@ -2,20 +2,12 @@
 setlocal
 
 :: Perform a Windows build with CUDA.
-if not defined PY_UV set "PY_UV=python3.14"
-if not defined GPU_BACKEND set "GPU_BACKEND=auto"
 set "VENV_GUI_CUDA=.venv-gui-cuda"
-set "UV_EXCLUDE_NEWER=10 days"
 
-if exist "%VENV_GUI_CUDA%" rmdir /s /q "%VENV_GUI_CUDA%"
-uv venv --python "%PY_UV%" "%VENV_GUI_CUDA%" || exit /b 1
-uv pip install --python "%VENV_GUI_CUDA%\Scripts\python.exe" ^
-    --torch-backend "%GPU_BACKEND%" ^
-    --group runtime-base ^
-    --group runtime-gui ^
-    --group runtime-dbus ^
-    --group dev-tools ^
-    --group runtime-torch || exit /b 1
+if not exist "%VENV_GUI_CUDA%\Scripts\pyinstaller.exe" (
+    echo Virtual environment not found or missing PyInstaller. Please run "Windows scripts\install_cuda_windows.bat" first.
+    exit /b 1
+)
 
 .\.venv-gui-cuda\Scripts\pyinstaller.exe pcleaner/main.py --paths '.venv-gui-cuda/Lib/site-packages' ^
     --onefile --noconfirm --clean --workpath=build --distpath=dist_exe_cuda --windowed ^

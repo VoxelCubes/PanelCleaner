@@ -16,16 +16,17 @@ to upload under their 2 Gigabyte limit.
 
 Feel free to download the source code and build your own CUDA version, I have left the necessary build files for it. 
 
-You will need to have a python virtual environment set up (e.g. using Pycharm or done manually), install the requirements and then run the following command:
+You will need to have a Python virtual environment set up with the project requirements installed, then run the following command:
 
 On Linux (pytorch installs with cuda support by default):
 ```bash
 make build-elf
 ```
 
-On Windows (after ensuring you have the CUDA enabled version of pytorch installed, and your virtual environment is a folder named venv-cuda):
+On Windows:
 ```bash
-.\build-pyinstaller-cuda.bat
+& ".\Windows scripts\install_cuda_windows.bat"
+& ".\Windows scripts\build-pyinstaller-cuda.bat"
 ```
 
 You will find the output in the dist_elf or dist_exe_cuda folders respectively.
