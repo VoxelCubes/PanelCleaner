@@ -414,7 +414,7 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="632"/>
       <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;کارت گرافیک شما از عملیات‌های CUDA مورد نیاز پشتیبانی نمی‌کند.&lt;br&gt;سعی کنید نسخه‌های فعلی torch و torchvision را لغو نصب کرده و به جای آن‌ها، نسخه CPU (یا نسخه دیگری از CUDA) را نصب کنید.&lt;br&gt;دستورالعمل‌های بیشتر را می‌توانید در اینجا پیدا کنید:https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt; برای مشاهده نسخه‌های موجود، بخش &quot;Compute Platform&quot; را بررسی کنید.&lt;br&gt;&lt;br&gt;نسخه فعلی CUDA شما: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;کارت گرافیک شما از عملیات‌های CUDA مورد نیاز پشتیبانی نمی‌کند.&lt;br&gt;سعی کنید نسخه‌های فعلی torch و torchvision را لغو نصب کرده و به جای آن‌ها، نسخه CPU (یا نسخه دیگری از CUDA) را نصب کنید.&lt;br&gt;دستورالعمل‌های بیشتر را می‌توانید در اینجا پیدا کنید:&lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt; برای مشاهده نسخه‌های موجود، بخش &quot;Compute Platform&quot; را بررسی کنید.&lt;br&gt;&lt;br&gt;نسخه فعلی CUDA شما: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="514"/>
@@ -499,51 +499,51 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/helpers.py" line="121"/>
       <source>Image path {img_path} does not exist.</source>
-      <translation type="unfinished">Image path {img_path} does not exist.</translation>
+      <translation>مسیر تصویر {img_path} وجود ندارد.</translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="135"/>
       <source>Clean mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Clean mask</numerusform>
-        <numerusform>Clean mask</numerusform>
+      <translation>
+        <numerusform>ماسک تمیز</numerusform>
+        <numerusform>ماسک تمیز</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="136"/>
       <source>Denoised mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Denoised mask</numerusform>
-        <numerusform>Denoised mask</numerusform>
+      <translation>
+        <numerusform>ماسک نویززدایی‌شده</numerusform>
+        <numerusform>ماسک نویززدایی‌شده</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="138"/>
       <source>Inpainting mask</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Inpainting mask</numerusform>
-        <numerusform>Inpainting mask</numerusform>
+      <translation>
+        <numerusform>ماسک پر کردن</numerusform>
+        <numerusform>ماسک پر کردن</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="140"/>
       <source>Isolated text</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Isolated text</numerusform>
-        <numerusform>Isolated text</numerusform>
+      <translation>
+        <numerusform>متن جداشده</numerusform>
+        <numerusform>متن جداشده</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="433"/>
       <source>Page</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Page</numerusform>
-        <numerusform>Page</numerusform>
+      <translation>
+        <numerusform>صفحه</numerusform>
+        <numerusform>صفحه</numerusform>
       </translation>
     </message>
     <message>
