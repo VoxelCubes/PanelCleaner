@@ -339,72 +339,72 @@ Pages with failures / total:
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
       <source>Failed to open file.</source>
-      <translation type="unfinished">Failed to open file.</translation>
+      <translation>باز کردن فایل ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
       <source>Failed to access the file.</source>
-      <translation type="unfinished">Failed to access the file.</translation>
+      <translation>دسترسی به فایل ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
       <source>An error occurred.</source>
-      <translation type="unfinished">An error occurred.</translation>
+      <translation>خطایی رخ داد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
       <source>The CSV file format requires exactly 6 columns.</source>
-      <translation type="unfinished">The CSV file format requires exactly 6 columns.</translation>
+      <translation>فرمت فایل CSV دقیقاً به ۶ ستون نیاز دارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
       <source>The coordinates must be integers.</source>
-      <translation type="unfinished">The coordinates must be integers.</translation>
+      <translation>مختصات باید عددهای صحیح باشند.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
       <source>The box coordinates may not exceed 2 billion.</source>
-      <translation type="unfinished">The box coordinates may not exceed 2 billion.</translation>
+      <translation>مختصات جعبه نباید بیشتر از ۲ میلیارد عدد باشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
       <source>The file format was not recognized.</source>
-      <translation type="unfinished">The file format was not recognized.</translation>
+      <translation>فرمت فایل شناسایی نشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="524"/>
       <source>The CSV file must start with a header row, followed by data rows.</source>
-      <translation type="unfinished">The CSV file must start with a header row, followed by data rows.</translation>
+      <translation>فایل CSV باید با یک سطر سربرگ شروع شود و پس از آن سطرهای داده قرار گیرند.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
       <source>The file path is missing.</source>
-      <translation type="unfinished">The file path is missing.</translation>
+      <translation>مسیر فایل وجود ندارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="527"/>
       <source>The file path is invalid.</source>
-      <translation type="unfinished">The file path is invalid.</translation>
+      <translation>مسیر فایل نامعتبر است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="545"/>
       <source>OCR Parse Errors</source>
-      <translation type="unfinished">OCR Parse Errors</translation>
+      <translation>خطاهای تجزیه OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="591"/>
       <source>Multiple analytics match the image: {path}</source>
-      <translation type="unfinished">Multiple analytics match the image: {path}</translation>
+      <translation>تحلیل‌های چندگانه با تصویر مطابقت دارند: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="595"/>
       <source>Multiple images match the file path: {path}</source>
-      <translation type="unfinished">Multiple images match the file path: {path}</translation>
+      <translation>چندین تصویر با مسیر فایل مطابقت دارند: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
       <source>Error, no version found.</source>
-      <translation type="unfinished">Error, no version found.</translation>
+      <translation>خطا، هیچ نسخه‌ای یافت نشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="630"/>
