@@ -38,7 +38,7 @@
       </sizepolicy>
      </property>
      <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
+      <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
      </property>
      <widget class="QWidget" name="scrollAreaWidgetContents">
       <property name="geometry">
@@ -51,7 +51,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <property name="sizeConstraint">
-        <enum>QLayout::SetMinimumSize</enum>
+        <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
        </property>
        <property name="leftMargin">
         <number>0</number>
@@ -121,10 +121,10 @@
           </sizepolicy>
          </property>
          <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
+          <enum>QFrame::Shape::NoFrame</enum>
          </property>
          <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+          <enum>QFrame::Shadow::Raised</enum>
          </property>
         </widget>
        </item>
@@ -137,8 +137,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-in">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="zoom-in"/>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -154,8 +153,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-out">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="zoom-out"/>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -171,8 +169,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-original">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="zoom-original"/>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -188,8 +185,7 @@
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="zoom-fit-best">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="zoom-fit-best"/>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -205,8 +201,7 @@
           <string>Refresh</string>
          </property>
          <property name="icon">
-          <iconset theme="view-refresh">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="view-refresh"/>
          </property>
         </widget>
        </item>
@@ -225,14 +220,13 @@
           </size>
          </property>
          <property name="contextMenuPolicy">
-          <enum>Qt::ActionsContextMenu</enum>
+          <enum>Qt::ContextMenuPolicy::ActionsContextMenu</enum>
          </property>
          <property name="text">
           <string/>
          </property>
          <property name="icon">
-          <iconset theme="overflow-menu">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="overflow-menu"/>
          </property>
         </widget>
        </item>
@@ -269,13 +263,13 @@
             </sizepolicy>
            </property>
            <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
+            <enum>QFrame::Shadow::Plain</enum>
            </property>
            <property name="transformationAnchor">
-            <enum>QGraphicsView::AnchorUnderMouse</enum>
+            <enum>QGraphicsView::ViewportAnchor::AnchorUnderMouse</enum>
            </property>
           </widget>
          </item>
@@ -283,7 +277,7 @@
        </widget>
        <widget class="QWidget" name="page_no_image">
         <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item alignment="Qt::AlignHCenter">
+         <item alignment="Qt::AlignmentFlag::AlignHCenter">
           <widget class="QLabel" name="label_17">
            <property name="text">
             <string>Generating...</string>

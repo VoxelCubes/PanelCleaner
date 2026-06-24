@@ -48,7 +48,7 @@ class Ui_About(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.label_2 = QLabel(About)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setTextFormat(Qt.MarkdownText)
+        self.label_2.setTextFormat(Qt.TextFormat.MarkdownText)
 
         self.verticalLayout.addWidget(self.label_2)
 
@@ -111,7 +111,7 @@ class Ui_About(object):
         self.label_license = QLabel(About)
         self.label_license.setObjectName(u"label_license")
         self.label_license.setText(u"<html><head/><body><p><a href=\"open_license\"><span style=\" text-decoration: underline; color:#8419ff;\">GNU General Public License v3.0</span></a></p></body></html>")
-        self.label_license.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse)
+        self.label_license.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByKeyboard|Qt.TextInteractionFlag.LinksAccessibleByMouse)
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_license)
 
@@ -124,7 +124,7 @@ class Ui_About(object):
         self.label_10.setObjectName(u"label_10")
         self.label_10.setText(u"<html><head/><body><p><a href=\"https://github.com/VoxelCubes/PanelCleaner\"><span style=\" text-decoration: underline; color:#8419ff;\">GitHub</span></a></p></body></html>")
         self.label_10.setOpenExternalLinks(True)
-        self.label_10.setTextInteractionFlags(Qt.LinksAccessibleByKeyboard|Qt.LinksAccessibleByMouse)
+        self.label_10.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByKeyboard|Qt.TextInteractionFlag.LinksAccessibleByMouse)
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_10)
 

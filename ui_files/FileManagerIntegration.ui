@@ -38,7 +38,7 @@ It allows you to use Panel Cleaner directly from the file browser, eliminating t
 By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application's menu bar.</string>
      </property>
      <property name="textFormat">
-      <enum>Qt::MarkdownText</enum>
+      <enum>Qt::TextFormat::MarkdownText</enum>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -48,7 +48,7 @@ By default, this uses the built-in profile. However, you can change this default
    <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -71,10 +71,10 @@ By default, this uses the built-in profile. However, you can change this default
    <item>
     <spacer name="verticalSpacer_3">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
+      <enum>QSizePolicy::Policy::Fixed</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -90,8 +90,7 @@ By default, this uses the built-in profile. However, you can change this default
       <string notr="true">&lt;remove shell extension&gt;</string>
      </property>
      <property name="icon">
-      <iconset theme="edit-delete">
-       <normaloff>.</normaloff>.</iconset>
+      <iconset theme="edit-delete"/>
      </property>
      <property name="description">
       <string notr="true">&lt;removing from what program&gt;</string>
@@ -101,7 +100,7 @@ By default, this uses the built-in profile. However, you can change this default
    <item>
     <spacer name="verticalSpacer_2">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Orientation::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -114,7 +113,7 @@ By default, this uses the built-in profile. However, you can change this default
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Close</set>
+      <set>QDialogButtonBox::StandardButton::Close</set>
      </property>
     </widget>
    </item>

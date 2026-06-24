@@ -35,7 +35,7 @@ class Ui_OutputReview(object):
         self.verticalLayout_7.setContentsMargins(1, 1, 1, 1)
         self.splitter = QSplitter(OutputReview)
         self.splitter.setObjectName(u"splitter")
-        self.splitter.setOrientation(Qt.Horizontal)
+        self.splitter.setOrientation(Qt.Orientation.Horizontal)
         self.layoutWidget = QWidget(self.splitter)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.verticalLayout_3 = QVBoxLayout(self.layoutWidget)
@@ -63,20 +63,14 @@ class Ui_OutputReview(object):
         self.horizontalSlider_icon_size.setObjectName(u"horizontalSlider_icon_size")
         self.horizontalSlider_icon_size.setMinimum(1)
         self.horizontalSlider_icon_size.setMaximum(1000)
-        self.horizontalSlider_icon_size.setOrientation(Qt.Horizontal)
+        self.horizontalSlider_icon_size.setOrientation(Qt.Orientation.Horizontal)
 
         self.horizontalLayout_2.addWidget(self.horizontalSlider_icon_size)
 
         self.pushButton_prev = QPushButton(self.layoutWidget)
         self.pushButton_prev.setObjectName(u"pushButton_prev")
         self.pushButton_prev.setText(u"")
-        icon = QIcon()
-        iconThemeName = u"arrow-left"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"arrow-left"))
         self.pushButton_prev.setIcon(icon)
         self.pushButton_prev.setFlat(True)
 
@@ -85,13 +79,7 @@ class Ui_OutputReview(object):
         self.pushButton_next = QPushButton(self.layoutWidget)
         self.pushButton_next.setObjectName(u"pushButton_next")
         self.pushButton_next.setText(u"")
-        icon1 = QIcon()
-        iconThemeName = u"arrow-right"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"arrow-right"))
         self.pushButton_next.setIcon(icon1)
         self.pushButton_next.setFlat(True)
 
@@ -104,20 +92,20 @@ class Ui_OutputReview(object):
 
         self.image_list = QListWidget(self.layoutWidget)
         self.image_list.setObjectName(u"image_list")
-        self.image_list.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.image_list.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.image_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.image_list.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.image_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.image_list.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.image_list.setProperty(u"showDropIndicator", False)
-        self.image_list.setDragDropMode(QAbstractItemView.NoDragDrop)
-        self.image_list.setTextElideMode(Qt.ElideLeft)
-        self.image_list.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
-        self.image_list.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
-        self.image_list.setMovement(QListView.Static)
-        self.image_list.setFlow(QListView.LeftToRight)
+        self.image_list.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.image_list.setTextElideMode(Qt.TextElideMode.ElideLeft)
+        self.image_list.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.image_list.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.image_list.setMovement(QListView.Movement.Static)
+        self.image_list.setFlow(QListView.Flow.LeftToRight)
         self.image_list.setProperty(u"isWrapping", True)
-        self.image_list.setResizeMode(QListView.Adjust)
-        self.image_list.setLayoutMode(QListView.Batched)
-        self.image_list.setViewMode(QListView.IconMode)
+        self.image_list.setResizeMode(QListView.ResizeMode.Adjust)
+        self.image_list.setLayoutMode(QListView.LayoutMode.Batched)
+        self.image_list.setViewMode(QListView.ViewMode.IconMode)
         self.image_list.setUniformItemSizes(False)
         self.image_list.setBatchSize(50)
         self.image_list.setWordWrap(False)
@@ -142,20 +130,14 @@ class Ui_OutputReview(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_file_name.sizePolicy().hasHeightForWidth())
         self.label_file_name.setSizePolicy(sizePolicy)
-        self.label_file_name.setFrameShape(QFrame.NoFrame)
-        self.label_file_name.setFrameShadow(QFrame.Raised)
+        self.label_file_name.setFrameShape(QFrame.Shape.NoFrame)
+        self.label_file_name.setFrameShadow(QFrame.Shadow.Raised)
 
         self.horizontalLayout.addWidget(self.label_file_name)
 
         self.pushButton_zoom_in = QPushButton(self.layoutWidget1)
         self.pushButton_zoom_in.setObjectName(u"pushButton_zoom_in")
-        icon2 = QIcon()
-        iconThemeName = u"zoom-in"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon2 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon2.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon2 = QIcon(QIcon.fromTheme(u"zoom-in"))
         self.pushButton_zoom_in.setIcon(icon2)
         self.pushButton_zoom_in.setFlat(True)
 
@@ -163,13 +145,7 @@ class Ui_OutputReview(object):
 
         self.pushButton_zoom_out = QPushButton(self.layoutWidget1)
         self.pushButton_zoom_out.setObjectName(u"pushButton_zoom_out")
-        icon3 = QIcon()
-        iconThemeName = u"zoom-out"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon3 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon3 = QIcon(QIcon.fromTheme(u"zoom-out"))
         self.pushButton_zoom_out.setIcon(icon3)
         self.pushButton_zoom_out.setFlat(True)
 
@@ -177,13 +153,7 @@ class Ui_OutputReview(object):
 
         self.pushButton_zoom_reset = QPushButton(self.layoutWidget1)
         self.pushButton_zoom_reset.setObjectName(u"pushButton_zoom_reset")
-        icon4 = QIcon()
-        iconThemeName = u"zoom-original"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon4 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon4.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon4 = QIcon(QIcon.fromTheme(u"zoom-original"))
         self.pushButton_zoom_reset.setIcon(icon4)
         self.pushButton_zoom_reset.setFlat(True)
 
@@ -191,13 +161,7 @@ class Ui_OutputReview(object):
 
         self.pushButton_zoom_fit = QPushButton(self.layoutWidget1)
         self.pushButton_zoom_fit.setObjectName(u"pushButton_zoom_fit")
-        icon5 = QIcon()
-        iconThemeName = u"zoom-fit-best"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon5 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon5 = QIcon(QIcon.fromTheme(u"zoom-fit-best"))
         self.pushButton_zoom_fit.setIcon(icon5)
         self.pushButton_zoom_fit.setFlat(True)
 
@@ -274,7 +238,7 @@ class Ui_OutputReview(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.horizontalSlider_swipe.sizePolicy().hasHeightForWidth())
         self.horizontalSlider_swipe.setSizePolicy(sizePolicy1)
-        self.horizontalSlider_swipe.setOrientation(Qt.Horizontal)
+        self.horizontalSlider_swipe.setOrientation(Qt.Orientation.Horizontal)
 
         self.horizontalLayout_5.addWidget(self.horizontalSlider_swipe)
 
@@ -311,7 +275,7 @@ class Ui_OutputReview(object):
         self.horizontalSlider_onion.setObjectName(u"horizontalSlider_onion")
         sizePolicy1.setHeightForWidth(self.horizontalSlider_onion.sizePolicy().hasHeightForWidth())
         self.horizontalSlider_onion.setSizePolicy(sizePolicy1)
-        self.horizontalSlider_onion.setOrientation(Qt.Horizontal)
+        self.horizontalSlider_onion.setOrientation(Qt.Orientation.Horizontal)
 
         self.horizontalLayout_6.addWidget(self.horizontalSlider_onion)
 
@@ -349,7 +313,7 @@ class Ui_OutputReview(object):
         self.horizontalSlider_difference.setObjectName(u"horizontalSlider_difference")
         sizePolicy1.setHeightForWidth(self.horizontalSlider_difference.sizePolicy().hasHeightForWidth())
         self.horizontalSlider_difference.setSizePolicy(sizePolicy1)
-        self.horizontalSlider_difference.setOrientation(Qt.Horizontal)
+        self.horizontalSlider_difference.setOrientation(Qt.Orientation.Horizontal)
 
         self.horizontalLayout_7.addWidget(self.horizontalSlider_difference)
 
@@ -387,7 +351,7 @@ class Ui_OutputReview(object):
         self.horizontalSlider_overlay.setObjectName(u"horizontalSlider_overlay")
         sizePolicy1.setHeightForWidth(self.horizontalSlider_overlay.sizePolicy().hasHeightForWidth())
         self.horizontalSlider_overlay.setSizePolicy(sizePolicy1)
-        self.horizontalSlider_overlay.setOrientation(Qt.Horizontal)
+        self.horizontalSlider_overlay.setOrientation(Qt.Orientation.Horizontal)
 
         self.horizontalLayout_8.addWidget(self.horizontalSlider_overlay)
 

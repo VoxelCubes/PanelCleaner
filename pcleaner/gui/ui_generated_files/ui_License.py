@@ -747,8 +747,8 @@ class Ui_License(object):
 
         self.buttonBox = QDialogButtonBox(License)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Close)
+        self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Close)
 
         self.verticalLayout.addWidget(self.buttonBox)
 

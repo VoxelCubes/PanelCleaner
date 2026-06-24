@@ -72,7 +72,7 @@ class Ui_IssueReporter(object):
         self.label_log_path = QLabel(IssueReporter)
         self.label_log_path.setObjectName(u"label_log_path")
         self.label_log_path.setText(u"<log file path>")
-        self.label_log_path.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_log_path.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.horizontalLayout_3.addWidget(self.label_log_path)
 
@@ -93,39 +93,21 @@ class Ui_IssueReporter(object):
 
         self.pushButton_clipboard = QPushButton(IssueReporter)
         self.pushButton_clipboard.setObjectName(u"pushButton_clipboard")
-        icon = QIcon()
-        iconThemeName = u"edit-copy"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"edit-copy"))
         self.pushButton_clipboard.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_clipboard)
 
         self.pushButton_open_issues = QPushButton(IssueReporter)
         self.pushButton_open_issues.setObjectName(u"pushButton_open_issues")
-        icon1 = QIcon()
-        iconThemeName = u"internet-services"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"internet-services"))
         self.pushButton_open_issues.setIcon(icon1)
 
         self.horizontalLayout.addWidget(self.pushButton_open_issues)
 
         self.pushButton_close = QPushButton(IssueReporter)
         self.pushButton_close.setObjectName(u"pushButton_close")
-        icon2 = QIcon()
-        iconThemeName = u"window-close"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon2 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon2.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon2 = QIcon(QIcon.fromTheme(u"window-close"))
         self.pushButton_close.setIcon(icon2)
 
         self.horizontalLayout.addWidget(self.pushButton_close)

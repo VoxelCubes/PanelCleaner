@@ -76,9 +76,9 @@ class Ui_PostActionRunner(object):
         sizePolicy1.setHeightForWidth(self.lcdNumber_shutdown.sizePolicy().hasHeightForWidth())
         self.lcdNumber_shutdown.setSizePolicy(sizePolicy1)
         self.lcdNumber_shutdown.setMinimumSize(QSize(0, 48))
-        self.lcdNumber_shutdown.setFrameShape(QFrame.NoFrame)
+        self.lcdNumber_shutdown.setFrameShape(QFrame.Shape.NoFrame)
         self.lcdNumber_shutdown.setDigitCount(5)
-        self.lcdNumber_shutdown.setSegmentStyle(QLCDNumber.Flat)
+        self.lcdNumber_shutdown.setSegmentStyle(QLCDNumber.SegmentStyle.Flat)
 
         self.horizontalLayout_2.addWidget(self.lcdNumber_shutdown)
 
@@ -128,7 +128,7 @@ class Ui_PostActionRunner(object):
         self.plainTextEdit_command = QPlainTextEdit(PostActionRunner)
         self.plainTextEdit_command.setObjectName(u"plainTextEdit_command")
         self.plainTextEdit_command.setPlainText(u"")
-        self.plainTextEdit_command.setTextInteractionFlags(Qt.TextEditorInteraction)
+        self.plainTextEdit_command.setTextInteractionFlags(Qt.TextInteractionFlag.TextEditorInteraction)
 
         self.verticalLayout_3.addWidget(self.plainTextEdit_command)
 
@@ -200,14 +200,7 @@ class Ui_PostActionRunner(object):
 
         self.pushButton_cancel_shutdown = QPushButton(PostActionRunner)
         self.pushButton_cancel_shutdown.setObjectName(u"pushButton_cancel_shutdown")
-        icon6 = QIcon()
-        iconThemeName = u"dialog-cancel"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon6 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon6.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
-        self.pushButton_cancel_shutdown.setIcon(icon6)
+        self.pushButton_cancel_shutdown.setIcon(icon5)
 
         self.verticalLayout_2.addWidget(self.pushButton_cancel_shutdown)
 

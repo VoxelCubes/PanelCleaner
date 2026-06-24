@@ -30,7 +30,7 @@ class Ui_FileManagerExtension(object):
         self.verticalLayout.setContentsMargins(12, 12, 12, -1)
         self.label = QLabel(FileManagerExtension)
         self.label.setObjectName(u"label")
-        self.label.setTextFormat(Qt.MarkdownText)
+        self.label.setTextFormat(Qt.TextFormat.MarkdownText)
         self.label.setWordWrap(True)
 
         self.verticalLayout.addWidget(self.label)
@@ -53,13 +53,7 @@ class Ui_FileManagerExtension(object):
         self.commandLinkButton_uninstall = QCommandLinkButton(FileManagerExtension)
         self.commandLinkButton_uninstall.setObjectName(u"commandLinkButton_uninstall")
         self.commandLinkButton_uninstall.setText(u"<remove shell extension>")
-        icon = QIcon()
-        iconThemeName = u"edit-delete"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"edit-delete"))
         self.commandLinkButton_uninstall.setIcon(icon)
         self.commandLinkButton_uninstall.setDescription(u"<removing from what program>")
 
@@ -71,7 +65,7 @@ class Ui_FileManagerExtension(object):
 
         self.buttonBox = QDialogButtonBox(FileManagerExtension)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Close)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Close)
 
         self.verticalLayout.addWidget(self.buttonBox)
 

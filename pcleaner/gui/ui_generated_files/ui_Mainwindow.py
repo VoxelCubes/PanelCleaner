@@ -37,95 +37,41 @@ class Ui_MainWindow(object):
         MainWindow.resize(1850, 800)
         self.action_add_files = QAction(MainWindow)
         self.action_add_files.setObjectName(u"action_add_files")
-        icon = QIcon()
-        iconThemeName = u"document-open"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"document-open"))
         self.action_add_files.setIcon(icon)
         self.action_remove_all_files = QAction(MainWindow)
         self.action_remove_all_files.setObjectName(u"action_remove_all_files")
-        icon1 = QIcon()
-        iconThemeName = u"edit-clear-history"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"edit-clear-history"))
         self.action_remove_all_files.setIcon(icon1)
         self.action_new_profile = QAction(MainWindow)
         self.action_new_profile.setObjectName(u"action_new_profile")
-        icon2 = QIcon()
-        iconThemeName = u"document-new"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon2 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon2.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon2 = QIcon(QIcon.fromTheme(u"document-new"))
         self.action_new_profile.setIcon(icon2)
         self.action_delete_profile = QAction(MainWindow)
         self.action_delete_profile.setObjectName(u"action_delete_profile")
-        icon3 = QIcon()
-        iconThemeName = u"edit-delete"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon3 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon3 = QIcon(QIcon.fromTheme(u"edit-delete"))
         self.action_delete_profile.setIcon(icon3)
         self.action_import_profile = QAction(MainWindow)
         self.action_import_profile.setObjectName(u"action_import_profile")
-        icon4 = QIcon()
-        iconThemeName = u"document-import"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon4 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon4.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon4 = QIcon(QIcon.fromTheme(u"document-import"))
         self.action_import_profile.setIcon(icon4)
         self.action_online_documentation = QAction(MainWindow)
         self.action_online_documentation.setObjectName(u"action_online_documentation")
-        icon5 = QIcon()
-        iconThemeName = u"internet-services"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon5 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon5 = QIcon(QIcon.fromTheme(u"internet-services"))
         self.action_online_documentation.setIcon(icon5)
         self.action_about = QAction(MainWindow)
         self.action_about.setObjectName(u"action_about")
-        icon6 = QIcon()
-        iconThemeName = u"help-about"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon6 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon6.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon6 = QIcon(QIcon.fromTheme(u"help-about"))
         self.action_about.setIcon(icon6)
         self.actionView_License = QAction(MainWindow)
         self.actionView_License.setObjectName(u"actionView_License")
         self.action_save_profile = QAction(MainWindow)
         self.action_save_profile.setObjectName(u"action_save_profile")
-        icon7 = QIcon()
-        iconThemeName = u"document-save"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon7 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon7.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon7 = QIcon(QIcon.fromTheme(u"document-save"))
         self.action_save_profile.setIcon(icon7)
         self.action_save_profile_as = QAction(MainWindow)
         self.action_save_profile_as.setObjectName(u"action_save_profile_as")
-        icon8 = QIcon()
-        iconThemeName = u"document-save-as"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon8 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon8.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon8 = QIcon(QIcon.fromTheme(u"document-save-as"))
         self.action_save_profile_as.setIcon(icon8)
         self.action_system_theme = QAction(MainWindow)
         self.action_system_theme.setObjectName(u"action_system_theme")
@@ -141,26 +87,14 @@ class Ui_MainWindow(object):
         self.action_temp_2.setText(u"<temp>")
         self.action_add_folders = QAction(MainWindow)
         self.action_add_folders.setObjectName(u"action_add_folders")
-        icon9 = QIcon()
-        iconThemeName = u"document-open-folder"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon9 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon9.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon9 = QIcon(QIcon.fromTheme(u"document-open-folder"))
         self.action_add_folders.setIcon(icon9)
         self.action_delete_models = QAction(MainWindow)
         self.action_delete_models.setObjectName(u"action_delete_models")
         self.action_delete_models.setIcon(icon3)
         self.action_download_models = QAction(MainWindow)
         self.action_download_models.setObjectName(u"action_download_models")
-        icon10 = QIcon()
-        iconThemeName = u"download"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon10 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon10.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon10 = QIcon(QIcon.fromTheme(u"download"))
         self.action_download_models.setIcon(icon10)
         self.action_donate = QAction(MainWindow)
         self.action_donate.setObjectName(u"action_donate")
@@ -170,67 +104,31 @@ class Ui_MainWindow(object):
         self.action_remove_file = QAction(MainWindow)
         self.action_remove_file.setObjectName(u"action_remove_file")
         self.action_remove_file.setEnabled(False)
-        icon11 = QIcon()
-        iconThemeName = u"edit-delete-remove"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon11 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon11.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon11 = QIcon(QIcon.fromTheme(u"edit-delete-remove"))
         self.action_remove_file.setIcon(icon11)
         self.action_help_translation = QAction(MainWindow)
         self.action_help_translation.setObjectName(u"action_help_translation")
-        icon12 = QIcon()
-        iconThemeName = u"languages"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon12 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon12.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon12 = QIcon(QIcon.fromTheme(u"languages"))
         self.action_help_translation.setIcon(icon12)
         self.action_report_issue = QAction(MainWindow)
         self.action_report_issue.setObjectName(u"action_report_issue")
-        icon13 = QIcon()
-        iconThemeName = u"tools-report-bug"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon13 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon13.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon13 = QIcon(QIcon.fromTheme(u"tools-report-bug"))
         self.action_report_issue.setIcon(icon13)
         self.action_simulate_exception = QAction(MainWindow)
         self.action_simulate_exception.setObjectName(u"action_simulate_exception")
         self.action_file_manager_extension = QAction(MainWindow)
         self.action_file_manager_extension.setObjectName(u"action_file_manager_extension")
-        icon14 = QIcon()
-        iconThemeName = u"application-menu"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon14 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon14.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon14 = QIcon(QIcon.fromTheme(u"application-menu"))
         self.action_file_manager_extension.setIcon(icon14)
         self.action_show_ocr_language_support = QAction(MainWindow)
         self.action_show_ocr_language_support.setObjectName(u"action_show_ocr_language_support")
-        icon15 = QIcon()
-        iconThemeName = u"code-block"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon15 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon15.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon15 = QIcon(QIcon.fromTheme(u"code-block"))
         self.action_show_ocr_language_support.setIcon(icon15)
         self.actionReset_Window_Layout_Preferences = QAction(MainWindow)
         self.actionReset_Window_Layout_Preferences.setObjectName(u"actionReset_Window_Layout_Preferences")
         self.action_delete_window_state = QAction(MainWindow)
         self.action_delete_window_state.setObjectName(u"action_delete_window_state")
-        icon16 = QIcon()
-        iconThemeName = u"edit-reset"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon16 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon16.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon16 = QIcon(QIcon.fromTheme(u"edit-reset"))
         self.action_delete_window_state.setIcon(icon16)
         self.action_show_oom = QAction(MainWindow)
         self.action_show_oom.setObjectName(u"action_show_oom")
@@ -238,13 +136,7 @@ class Ui_MainWindow(object):
         self.action_show_oom.setChecked(True)
         self.action_post_action_settings = QAction(MainWindow)
         self.action_post_action_settings.setObjectName(u"action_post_action_settings")
-        icon17 = QIcon()
-        iconThemeName = u"configure"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon17 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon17.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon17 = QIcon(QIcon.fromTheme(u"configure"))
         self.action_post_action_settings.setIcon(icon17)
         self.action_TEMP = QAction(MainWindow)
         self.action_TEMP.setObjectName(u"action_TEMP")
@@ -257,7 +149,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setContentsMargins(1, 4, 1, 1)
         self.splitter = QSplitter(self.centralwidget)
         self.splitter.setObjectName(u"splitter")
-        self.splitter.setOrientation(Qt.Horizontal)
+        self.splitter.setOrientation(Qt.Orientation.Horizontal)
         self.groupBox_profile = QGroupBox(self.splitter)
         self.groupBox_profile.setObjectName(u"groupBox_profile")
         self.verticalLayout_2 = QVBoxLayout(self.groupBox_profile)
@@ -279,13 +171,7 @@ class Ui_MainWindow(object):
         self.pushButton_apply_profile = QPushButton(self.groupBox_profile)
         self.pushButton_apply_profile.setObjectName(u"pushButton_apply_profile")
         self.pushButton_apply_profile.setEnabled(False)
-        icon18 = QIcon()
-        iconThemeName = u"dialog-ok-apply"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon18 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon18.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon18 = QIcon(QIcon.fromTheme(u"dialog-ok-apply"))
         self.pushButton_apply_profile.setIcon(icon18)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_apply_profile)
@@ -300,13 +186,7 @@ class Ui_MainWindow(object):
         self.pushButton_reset_profile = QPushButton(self.groupBox_profile)
         self.pushButton_reset_profile.setObjectName(u"pushButton_reset_profile")
         self.pushButton_reset_profile.setEnabled(False)
-        icon19 = QIcon()
-        iconThemeName = u"document-revert"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon19 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon19.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon19 = QIcon(QIcon.fromTheme(u"document-revert"))
         self.pushButton_reset_profile.setIcon(icon19)
 
         self.horizontalLayout_profile_header.addWidget(self.pushButton_reset_profile)
@@ -334,8 +214,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.frame_greeter = CDropFrame(self.page_greeter)
         self.frame_greeter.setObjectName(u"frame_greeter")
-        self.frame_greeter.setFrameShape(QFrame.StyledPanel)
-        self.frame_greeter.setFrameShadow(QFrame.Raised)
+        self.frame_greeter.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_greeter.setFrameShadow(QFrame.Shadow.Raised)
         self.frame_greeter.setLineWidth(4)
         self.horizontalLayout_4 = QHBoxLayout(self.frame_greeter)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
@@ -348,14 +228,14 @@ class Ui_MainWindow(object):
 
         self.label_drop = QLabel(self.frame_greeter)
         self.label_drop.setObjectName(u"label_drop")
-        self.label_drop.setAlignment(Qt.AlignCenter)
+        self.label_drop.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_10.addWidget(self.label_drop)
 
         self.label_drop_icon = QLabel(self.frame_greeter)
         self.label_drop_icon.setObjectName(u"label_drop_icon")
         self.label_drop_icon.setText(u"<drop icon>")
-        self.label_drop_icon.setAlignment(Qt.AlignCenter)
+        self.label_drop_icon.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.verticalLayout_10.addWidget(self.label_drop_icon)
 
@@ -403,13 +283,13 @@ class Ui_MainWindow(object):
         __qtablewidgetitem6 = QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(6, __qtablewidgetitem6)
         self.file_table.setObjectName(u"file_table")
-        self.file_table.setFrameShape(QFrame.NoFrame)
-        self.file_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.file_table.setFrameShape(QFrame.Shape.NoFrame)
+        self.file_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.file_table.setDragDropOverwriteMode(False)
-        self.file_table.setDragDropMode(QAbstractItemView.NoDragDrop)
+        self.file_table.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
         self.file_table.setAlternatingRowColors(True)
-        self.file_table.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.file_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.file_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.file_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.file_table.setSortingEnabled(False)
         self.file_table.setCornerButtonEnabled(False)
         self.file_table.horizontalHeader().setHighlightSections(False)
@@ -425,8 +305,8 @@ class Ui_MainWindow(object):
         self.splitter.addWidget(self.stackedWidget_images)
         self.frame_output = QFrame(self.splitter)
         self.frame_output.setObjectName(u"frame_output")
-        self.frame_output.setFrameShape(QFrame.NoFrame)
-        self.frame_output.setFrameShadow(QFrame.Raised)
+        self.frame_output.setFrameShape(QFrame.Shape.NoFrame)
+        self.frame_output.setFrameShadow(QFrame.Shadow.Raised)
         self.verticalLayout_4 = QVBoxLayout(self.frame_output)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -461,26 +341,14 @@ class Ui_MainWindow(object):
 
         self.pushButton_abort = QPushButton(self.groupBox_process)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon20 = QIcon()
-        iconThemeName = u"process-stop"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon20 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon20.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon20 = QIcon(QIcon.fromTheme(u"process-stop"))
         self.pushButton_abort.setIcon(icon20)
 
         self.verticalLayout_7.addWidget(self.pushButton_abort)
 
         self.pushButton_start = QPushButton(self.groupBox_process)
         self.pushButton_start.setObjectName(u"pushButton_start")
-        icon21 = QIcon()
-        iconThemeName = u"media-playback-start"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon21 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon21.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon21 = QIcon(QIcon.fromTheme(u"media-playback-start"))
         self.pushButton_start.setIcon(icon21)
 
         self.verticalLayout_7.addWidget(self.pushButton_start)
@@ -596,7 +464,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.label_4 = QLabel(self.page_cleaning)
         self.label_4.setObjectName(u"label_4")
-        self.label_4.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
+        self.label_4.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse)
 
         self.horizontalLayout_5.addWidget(self.label_4)
 
@@ -697,7 +565,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.label_6 = QLabel(self.page_ocr)
         self.label_6.setObjectName(u"label_6")
-        self.label_6.setTextInteractionFlags(Qt.LinksAccessibleByMouse)
+        self.label_6.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse)
 
         self.horizontalLayout_9.addWidget(self.label_6)
 
@@ -748,16 +616,19 @@ class Ui_MainWindow(object):
         self.textEdit_analytics.setObjectName(u"textEdit_analytics")
         self.textEdit_analytics.setDocumentTitle(u"")
         self.textEdit_analytics.setUndoRedoEnabled(False)
-        self.textEdit_analytics.setLineWrapMode(QTextEdit.NoWrap)
+        self.textEdit_analytics.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
         self.textEdit_analytics.setReadOnly(False)
         self.textEdit_analytics.setHtml(u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Noto Mono','Monospace';\">Mask Fitment Analytics <br />---------------------- <br />Total boxes: 5 | Masks succeeded: 5 (100%) | Masks failed: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#b21818;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> <br />Perfect masks: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">5</span><span style=\" font-family:'Noto Mono','Monospace';\"> (100%) | Average border deviation: 0.00 <br /><br />Mask usage by mask size (smallest to largest)"
-                        ": <br />Mask 0  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 1  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 2  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 3  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 4  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 5  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 6  : </span><span style=\" font-family:'Noto Mono','"
-                        "Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">1</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 1 <br />Mask 7  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 8  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 9  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 10 :  </span><span style=\" font-family:'Noto Mono','Monospa"
-                        "ce'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Box mask: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">4</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 4 <br /><br /></span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588 Perfect</span><span style=\" font-family:'Noto Mono','Monospace';\"> | \u2588 Total<br /><br /></span></p></body></html>")
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Noto Mono','Monospace';\">Mask Fitment Analytics <br />---------------------- <br />Total boxes: 5 | Masks succeeded: 5 (100%) | Masks failed: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#b21818;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> <br />Perfect masks: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b"
+                        "2;\">5</span><span style=\" font-family:'Noto Mono','Monospace';\"> (100%) | Average border deviation: 0.00 <br /><br />Mask usage by mask size (smallest to largest): <br />Mask 0  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 1  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 2  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 3  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 4  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 5  :  </span><span style=\" font-family:'Noto M"
+                        "ono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 6  : </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">1</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 1 <br />Mask 7  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 8  :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 9  :  </span><span style=\" font-family:'Noto Mono','Mo"
+                        "nospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Mask 10 :  </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">0</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 0 <br />Box mask: </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588</span><span style=\" font-family:'Noto Mono','Monospace';\"> </span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">4</span><span style=\" font-family:'Noto Mono','Monospace';\"> / 4 <br /><br /></span><span style=\" font-family:'Noto Mono','Monospace'; color:#18b2b2;\">\u2588 Perfect</span><span style=\" font-family:'Noto Mono','Monospace';\"> | \u2588 Total<br /><br /></span></p></body></html>")
 
         self.verticalLayout_4.addWidget(self.textEdit_analytics)
 
@@ -848,13 +719,7 @@ class Ui_MainWindow(object):
 
         self.pushButton_post_action_cancel = QPushButton(self.widget_post_process_banner)
         self.pushButton_post_action_cancel.setObjectName(u"pushButton_post_action_cancel")
-        icon22 = QIcon()
-        iconThemeName = u"dialog-cancel"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon22 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon22.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon22 = QIcon(QIcon.fromTheme(u"dialog-cancel"))
         self.pushButton_post_action_cancel.setIcon(icon22)
         self.pushButton_post_action_cancel.setFlat(False)
 
@@ -937,7 +802,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1850, 34))
+        self.menubar.setGeometry(QRect(0, 0, 1850, 30))
         self.menu_File = QMenu(self.menubar)
         self.menu_File.setObjectName(u"menu_File")
         self.menu_Profile = QMenu(self.menubar)

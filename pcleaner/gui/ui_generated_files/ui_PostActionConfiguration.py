@@ -46,7 +46,7 @@ class Ui_PostActionConfiguration(object):
         self.spinBox_wait_time = QSpinBox(PostActionConfiguration)
         self.spinBox_wait_time.setObjectName(u"spinBox_wait_time")
         self.spinBox_wait_time.setMaximum(86400)
-        self.spinBox_wait_time.setStepType(QAbstractSpinBox.AdaptiveDecimalStepType)
+        self.spinBox_wait_time.setStepType(QAbstractSpinBox.StepType.AdaptiveDecimalStepType)
 
         self.horizontalLayout_8.addWidget(self.spinBox_wait_time)
 
@@ -98,13 +98,7 @@ class Ui_PostActionConfiguration(object):
         self.pushButton_row_up = QPushButton(PostActionConfiguration)
         self.pushButton_row_up.setObjectName(u"pushButton_row_up")
         self.pushButton_row_up.setText(u"")
-        icon = QIcon()
-        iconThemeName = u"arrow-up"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"arrow-up"))
         self.pushButton_row_up.setIcon(icon)
         self.pushButton_row_up.setFlat(True)
 
@@ -113,13 +107,7 @@ class Ui_PostActionConfiguration(object):
         self.pushButton_row_down = QPushButton(PostActionConfiguration)
         self.pushButton_row_down.setObjectName(u"pushButton_row_down")
         self.pushButton_row_down.setText(u"")
-        icon1 = QIcon()
-        iconThemeName = u"arrow-down"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"arrow-down"))
         self.pushButton_row_down.setIcon(icon1)
         self.pushButton_row_down.setFlat(True)
 
@@ -127,13 +115,7 @@ class Ui_PostActionConfiguration(object):
 
         self.pushButton_new = QPushButton(PostActionConfiguration)
         self.pushButton_new.setObjectName(u"pushButton_new")
-        icon2 = QIcon()
-        iconThemeName = u"list-add"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon2 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon2.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon2 = QIcon(QIcon.fromTheme(u"list-add"))
         self.pushButton_new.setIcon(icon2)
         self.pushButton_new.setFlat(True)
 
@@ -141,13 +123,7 @@ class Ui_PostActionConfiguration(object):
 
         self.pushButton_delete = QPushButton(PostActionConfiguration)
         self.pushButton_delete.setObjectName(u"pushButton_delete")
-        icon3 = QIcon()
-        iconThemeName = u"edit-delete"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon3 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon3 = QIcon(QIcon.fromTheme(u"edit-delete"))
         self.pushButton_delete.setIcon(icon3)
         self.pushButton_delete.setFlat(True)
 
@@ -164,12 +140,12 @@ class Ui_PostActionConfiguration(object):
         __qtablewidgetitem1 = QTableWidgetItem()
         self.tableWidget_commands.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         self.tableWidget_commands.setObjectName(u"tableWidget_commands")
-        self.tableWidget_commands.setEditTriggers(QAbstractItemView.AllEditTriggers)
+        self.tableWidget_commands.setEditTriggers(QAbstractItemView.EditTrigger.AllEditTriggers)
         self.tableWidget_commands.setProperty(u"showDropIndicator", False)
         self.tableWidget_commands.setDragDropOverwriteMode(False)
         self.tableWidget_commands.setAlternatingRowColors(True)
-        self.tableWidget_commands.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.tableWidget_commands.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableWidget_commands.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tableWidget_commands.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.tableWidget_commands.horizontalHeader().setDefaultSectionSize(200)
         self.tableWidget_commands.horizontalHeader().setStretchLastSection(True)
 
@@ -368,6 +344,34 @@ class Ui_PostActionConfiguration(object):
 
         self.formLayout_4.setLayout(0, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_6)
 
+        self.label_15 = QLabel(PostActionConfiguration)
+        self.label_15.setObjectName(u"label_15")
+
+        self.formLayout_4.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_15)
+
+        self.horizontalLayout_12 = QHBoxLayout()
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.label_16 = QLabel(PostActionConfiguration)
+        self.label_16.setObjectName(u"label_16")
+        sizePolicy.setHeightForWidth(self.label_16.sizePolicy().hasHeightForWidth())
+        self.label_16.setSizePolicy(sizePolicy)
+
+        self.horizontalLayout_12.addWidget(self.label_16)
+
+        self.label_review_output_help_9 = CTooltipLabel(PostActionConfiguration)
+        self.label_review_output_help_9.setObjectName(u"label_review_output_help_9")
+        self.label_review_output_help_9.setToolTipDuration(-1)
+        self.label_review_output_help_9.setText(u"<helper>")
+
+        self.horizontalLayout_12.addWidget(self.label_review_output_help_9)
+
+        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_12.addItem(self.horizontalSpacer_11)
+
+
+        self.formLayout_4.setLayout(1, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_12)
+
 
         self.horizontalLayout_7.addLayout(self.formLayout_4)
 
@@ -397,8 +401,8 @@ class Ui_PostActionConfiguration(object):
 
         self.buttonBox = QDialogButtonBox(PostActionConfiguration)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
 
         self.horizontalLayout_9.addWidget(self.buttonBox)
 
@@ -466,6 +470,11 @@ class Ui_PostActionConfiguration(object):
         self.label_7.setText(QCoreApplication.translate("PostActionConfiguration", u"%p", None))
 #if QT_CONFIG(tooltip)
         self.label_review_output_help_3.setToolTip(QCoreApplication.translate("PostActionConfiguration", u"<html><head/><body><p>The name of the profile used, with quotation marks if necessary.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_15.setText(QCoreApplication.translate("PostActionConfiguration", u"Cache ID", None))
+        self.label_16.setText(QCoreApplication.translate("PostActionConfiguration", u"%c", None))
+#if QT_CONFIG(tooltip)
+        self.label_review_output_help_9.setToolTip(QCoreApplication.translate("PostActionConfiguration", u"<html><head/><body><p>The internal prefix ID the files had while in the cache, to distinguish files with the same name, as a space separated list. Example: if the image \"page1\" in cache is called 6a33b5e7-6761-445a-ad9a-f6291232edfb_page1_base.png then the cache ID is 6a33b5e7-6761-445a-ad9a-f6291232edfb.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
     # retranslateUi
 

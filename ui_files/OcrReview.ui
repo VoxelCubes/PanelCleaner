@@ -32,7 +32,7 @@
    <item>
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <widget class="QWidget" name="layoutWidget1">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -63,7 +63,7 @@
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -89,7 +89,7 @@
             <number>1000</number>
            </property>
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
           </widget>
          </item>
@@ -102,8 +102,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="arrow-left">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="arrow-left"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -119,8 +118,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="arrow-right">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="arrow-right"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -132,46 +130,46 @@
        <item>
         <widget class="QListWidget" name="image_list">
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOn</enum>
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
          </property>
          <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
          </property>
          <property name="showDropIndicator" stdset="0">
           <bool>false</bool>
          </property>
          <property name="dragDropMode">
-          <enum>QAbstractItemView::NoDragDrop</enum>
+          <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
          </property>
          <property name="textElideMode">
-          <enum>Qt::ElideLeft</enum>
+          <enum>Qt::TextElideMode::ElideLeft</enum>
          </property>
          <property name="verticalScrollMode">
-          <enum>QAbstractItemView::ScrollPerPixel</enum>
+          <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
          </property>
          <property name="horizontalScrollMode">
-          <enum>QAbstractItemView::ScrollPerPixel</enum>
+          <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
          </property>
          <property name="movement">
-          <enum>QListView::Static</enum>
+          <enum>QListView::Movement::Static</enum>
          </property>
          <property name="flow">
-          <enum>QListView::LeftToRight</enum>
+          <enum>QListView::Flow::LeftToRight</enum>
          </property>
          <property name="isWrapping" stdset="0">
           <bool>true</bool>
          </property>
          <property name="resizeMode">
-          <enum>QListView::Adjust</enum>
+          <enum>QListView::ResizeMode::Adjust</enum>
          </property>
          <property name="layoutMode">
-          <enum>QListView::Batched</enum>
+          <enum>QListView::LayoutMode::Batched</enum>
          </property>
          <property name="viewMode">
-          <enum>QListView::IconMode</enum>
+          <enum>QListView::ViewMode::IconMode</enum>
          </property>
          <property name="uniformItemSizes">
           <bool>false</bool>
@@ -217,10 +215,10 @@
             </sizepolicy>
            </property>
            <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
+            <enum>QFrame::Shadow::Raised</enum>
            </property>
           </widget>
          </item>
@@ -233,8 +231,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="zoom-in">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="zoom-in"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -250,8 +247,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="zoom-out">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="zoom-out"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -267,8 +263,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="zoom-original">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="zoom-original"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -284,8 +279,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="zoom-fit-best">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="zoom-fit-best"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -309,7 +303,7 @@
          <item>
           <widget class="Line" name="line">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -322,8 +316,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="arrow-up">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="arrow-up"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -339,8 +332,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="arrow-down">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="arrow-down"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -372,8 +364,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="edit-delete">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="edit-delete"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -402,8 +393,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="edit-reset">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="edit-reset"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -416,8 +406,7 @@
             <string>Reset All</string>
            </property>
            <property name="icon">
-            <iconset theme="document-revert">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="document-revert"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -427,7 +416,7 @@
          <item>
           <widget class="Line" name="line_2">
            <property name="orientation">
-            <enum>Qt::Vertical</enum>
+            <enum>Qt::Orientation::Vertical</enum>
            </property>
           </widget>
          </item>
@@ -453,7 +442,7 @@
        <item>
         <widget class="QSplitter" name="splitter_side">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <widget class="BubbleImageViewer" name="image_viewer"/>
          <widget class="CTableWidget" name="tableWidget_ocr">
@@ -461,7 +450,7 @@
            <bool>true</bool>
           </property>
           <property name="editTriggers">
-           <set>QAbstractItemView::AllEditTriggers</set>
+           <set>QAbstractItemView::EditTrigger::AllEditTriggers</set>
           </property>
           <property name="tabKeyNavigation">
            <bool>false</bool>
@@ -476,19 +465,19 @@
            <bool>false</bool>
           </property>
           <property name="dragDropMode">
-           <enum>QAbstractItemView::NoDragDrop</enum>
+           <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
           </property>
           <property name="defaultDropAction">
-           <enum>Qt::MoveAction</enum>
+           <enum>Qt::DropAction::MoveAction</enum>
           </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
           <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
+           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
           </property>
           <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectRows</enum>
+           <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
           </property>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>80</number>
@@ -520,6 +509,12 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>CElidedLabel</class>
+   <extends>QFrame</extends>
+   <header>pcleaner.gui.CustomQ.CElidedLabel</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>CTableWidget</class>
    <extends>QTableWidget</extends>
    <header>pcleaner.gui.CustomQ.CTableWidget</header>
@@ -528,12 +523,6 @@
    <class>CComboBox</class>
    <extends>QComboBox</extends>
    <header>pcleaner.gui.CustomQ.CComboBox</header>
-  </customwidget>
-  <customwidget>
-   <class>CElidedLabel</class>
-   <extends>QFrame</extends>
-   <header>pcleaner.gui.CustomQ.CElidedLabel</header>
-   <container>1</container>
   </customwidget>
   <customwidget>
    <class>BubbleImageViewer</class>

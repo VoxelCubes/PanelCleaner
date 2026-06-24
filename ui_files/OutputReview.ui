@@ -29,7 +29,7 @@
    <item>
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -57,7 +57,7 @@
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -83,7 +83,7 @@
             <number>1000</number>
            </property>
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
           </widget>
          </item>
@@ -96,8 +96,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="arrow-left">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="arrow-left"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -113,8 +112,7 @@
             <string notr="true"/>
            </property>
            <property name="icon">
-            <iconset theme="arrow-right">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="arrow-right"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -126,46 +124,46 @@
        <item>
         <widget class="QListWidget" name="image_list">
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOn</enum>
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
          </property>
          <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
          </property>
          <property name="showDropIndicator" stdset="0">
           <bool>false</bool>
          </property>
          <property name="dragDropMode">
-          <enum>QAbstractItemView::NoDragDrop</enum>
+          <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
          </property>
          <property name="textElideMode">
-          <enum>Qt::ElideLeft</enum>
+          <enum>Qt::TextElideMode::ElideLeft</enum>
          </property>
          <property name="verticalScrollMode">
-          <enum>QAbstractItemView::ScrollPerPixel</enum>
+          <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
          </property>
          <property name="horizontalScrollMode">
-          <enum>QAbstractItemView::ScrollPerPixel</enum>
+          <enum>QAbstractItemView::ScrollMode::ScrollPerPixel</enum>
          </property>
          <property name="movement">
-          <enum>QListView::Static</enum>
+          <enum>QListView::Movement::Static</enum>
          </property>
          <property name="flow">
-          <enum>QListView::LeftToRight</enum>
+          <enum>QListView::Flow::LeftToRight</enum>
          </property>
          <property name="isWrapping" stdset="0">
           <bool>true</bool>
          </property>
          <property name="resizeMode">
-          <enum>QListView::Adjust</enum>
+          <enum>QListView::ResizeMode::Adjust</enum>
          </property>
          <property name="layoutMode">
-          <enum>QListView::Batched</enum>
+          <enum>QListView::LayoutMode::Batched</enum>
          </property>
          <property name="viewMode">
-          <enum>QListView::IconMode</enum>
+          <enum>QListView::ViewMode::IconMode</enum>
          </property>
          <property name="uniformItemSizes">
           <bool>false</bool>
@@ -211,10 +209,10 @@
             </sizepolicy>
            </property>
            <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
+            <enum>QFrame::Shadow::Raised</enum>
            </property>
           </widget>
          </item>
@@ -227,8 +225,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="zoom-in">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="zoom-in"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -244,8 +241,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="zoom-out">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="zoom-out"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -261,8 +257,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="zoom-original">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="zoom-original"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -278,8 +273,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset theme="zoom-fit-best">
-             <normaloff>.</normaloff>.</iconset>
+            <iconset theme="zoom-fit-best"/>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -405,7 +399,7 @@
              <item>
               <spacer name="horizontalSpacer_2">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -424,14 +418,14 @@
                 </sizepolicy>
                </property>
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_3">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -482,7 +476,7 @@
              <item>
               <spacer name="horizontalSpacer_6">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -501,14 +495,14 @@
                 </sizepolicy>
                </property>
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_7">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -562,7 +556,7 @@
              <item>
               <spacer name="horizontalSpacer_8">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -581,14 +575,14 @@
                 </sizepolicy>
                </property>
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_9">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -642,7 +636,7 @@
              <item>
               <spacer name="horizontalSpacer_10">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -661,14 +655,14 @@
                 </sizepolicy>
                </property>
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
               </widget>
              </item>
              <item>
               <spacer name="horizontalSpacer_11">
                <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+                <enum>Qt::Orientation::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -692,15 +686,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CElidedLabel</class>
-   <extends>QFrame</extends>
-   <header>pcleaner.gui.CustomQ.CElidedLabel</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ImageViewer</class>
    <extends>QGraphicsView</extends>
    <header>pcleaner.gui.image_viewer</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CElidedLabel</class>
+   <extends>QFrame</extends>
+   <header>pcleaner.gui.CustomQ.CElidedLabel</header>
    <container>1</container>
   </customwidget>
   <customwidget>

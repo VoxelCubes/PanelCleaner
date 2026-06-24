@@ -31,9 +31,9 @@ class Ui_SetupGreeter(object):
         self.verticalLayout.setContentsMargins(-1, 20, -1, -1)
         self.label_2 = QLabel(SetupGreeter)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setTextFormat(Qt.MarkdownText)
+        self.label_2.setTextFormat(Qt.TextFormat.MarkdownText)
 
-        self.verticalLayout.addWidget(self.label_2, 0, Qt.AlignHCenter)
+        self.verticalLayout.addWidget(self.label_2, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.verticalSpacer_4 = QSpacerItem(20, 14, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
@@ -41,10 +41,10 @@ class Ui_SetupGreeter(object):
 
         self.label = QLabel(SetupGreeter)
         self.label.setObjectName(u"label")
-        self.label.setTextFormat(Qt.MarkdownText)
+        self.label.setTextFormat(Qt.TextFormat.MarkdownText)
         self.label.setWordWrap(True)
         self.label.setOpenExternalLinks(True)
-        self.label.setTextInteractionFlags(Qt.NoTextInteraction)
+        self.label.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
 
         self.verticalLayout.addWidget(self.label)
 
@@ -54,8 +54,8 @@ class Ui_SetupGreeter(object):
 
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setFieldGrowthPolicy(QFormLayout.ExpandingFieldsGrow)
-        self.formLayout.setRowWrapPolicy(QFormLayout.WrapLongRows)
+        self.formLayout.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.ExpandingFieldsGrow)
+        self.formLayout.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapLongRows)
         self.formLayout.setHorizontalSpacing(6)
         self.formLayout.setVerticalSpacing(6)
         self.label_9 = QLabel(SetupGreeter)
@@ -73,10 +73,10 @@ class Ui_SetupGreeter(object):
         sizePolicy.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
         self.label_6.setSizePolicy(sizePolicy)
         self.label_6.setText(u"[https://github.com/zyddnys/manga-image-translator/releases](https://github.com/zyddnys/manga-image-translator/releases)")
-        self.label_6.setTextFormat(Qt.MarkdownText)
+        self.label_6.setTextFormat(Qt.TextFormat.MarkdownText)
         self.label_6.setWordWrap(True)
         self.label_6.setOpenExternalLinks(True)
-        self.label_6.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        self.label_6.setTextInteractionFlags(Qt.TextInteractionFlag.TextBrowserInteraction)
 
         self.verticalLayout_2.addWidget(self.label_6)
 
@@ -84,10 +84,10 @@ class Ui_SetupGreeter(object):
         self.label_11.setObjectName(u"label_11")
         sizePolicy.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
         self.label_11.setSizePolicy(sizePolicy)
-        self.label_11.setTextFormat(Qt.MarkdownText)
+        self.label_11.setTextFormat(Qt.TextFormat.MarkdownText)
         self.label_11.setWordWrap(True)
         self.label_11.setOpenExternalLinks(True)
-        self.label_11.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        self.label_11.setTextInteractionFlags(Qt.TextInteractionFlag.TextBrowserInteraction)
 
         self.verticalLayout_2.addWidget(self.label_11)
 
@@ -96,10 +96,10 @@ class Ui_SetupGreeter(object):
 
         self.label_4 = QLabel(SetupGreeter)
         self.label_4.setObjectName(u"label_4")
-        self.label_4.setTextFormat(Qt.PlainText)
+        self.label_4.setTextFormat(Qt.TextFormat.PlainText)
         self.label_4.setWordWrap(True)
         self.label_4.setOpenExternalLinks(True)
-        self.label_4.setTextInteractionFlags(Qt.NoTextInteraction)
+        self.label_4.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.label_4)
 
@@ -112,7 +112,7 @@ class Ui_SetupGreeter(object):
         self.label_text_detector_path.setSizePolicy(sizePolicy1)
         self.label_text_detector_path.setText(u"<text detection path>")
         self.label_text_detector_path.setWordWrap(True)
-        self.label_text_detector_path.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_text_detector_path.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_text_detector_path)
 
@@ -131,19 +131,19 @@ class Ui_SetupGreeter(object):
         sizePolicy1.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
         self.label_5.setSizePolicy(sizePolicy1)
         self.label_5.setText(u"[https://huggingface.co/kha-white/manga-ocr-base/tree/main](https://huggingface.co/kha-white/manga-ocr-base/tree/main)")
-        self.label_5.setTextFormat(Qt.MarkdownText)
+        self.label_5.setTextFormat(Qt.TextFormat.MarkdownText)
         self.label_5.setWordWrap(True)
         self.label_5.setOpenExternalLinks(True)
-        self.label_5.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        self.label_5.setTextInteractionFlags(Qt.TextInteractionFlag.TextBrowserInteraction)
 
         self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.label_5)
 
         self.label_7 = QLabel(SetupGreeter)
         self.label_7.setObjectName(u"label_7")
-        self.label_7.setTextFormat(Qt.PlainText)
+        self.label_7.setTextFormat(Qt.TextFormat.PlainText)
         self.label_7.setWordWrap(True)
         self.label_7.setOpenExternalLinks(True)
-        self.label_7.setTextInteractionFlags(Qt.NoTextInteraction)
+        self.label_7.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.LabelRole, self.label_7)
 
@@ -153,7 +153,7 @@ class Ui_SetupGreeter(object):
         self.label_ocr_path.setSizePolicy(sizePolicy1)
         self.label_ocr_path.setText(u"<ocr path>")
         self.label_ocr_path.setWordWrap(True)
-        self.label_ocr_path.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_ocr_path.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.label_ocr_path)
 
@@ -168,19 +168,19 @@ class Ui_SetupGreeter(object):
         sizePolicy1.setHeightForWidth(self.label_13.sizePolicy().hasHeightForWidth())
         self.label_13.setSizePolicy(sizePolicy1)
         self.label_13.setText(u"[https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt](https://github.com/Sanster/models/releases/download/AnimeMangaInpainting/anime-manga-big-lama.pt)")
-        self.label_13.setTextFormat(Qt.MarkdownText)
+        self.label_13.setTextFormat(Qt.TextFormat.MarkdownText)
         self.label_13.setWordWrap(True)
         self.label_13.setOpenExternalLinks(True)
-        self.label_13.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        self.label_13.setTextInteractionFlags(Qt.TextInteractionFlag.TextBrowserInteraction)
 
         self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.label_13)
 
         self.label_8 = QLabel(SetupGreeter)
         self.label_8.setObjectName(u"label_8")
-        self.label_8.setTextFormat(Qt.PlainText)
+        self.label_8.setTextFormat(Qt.TextFormat.PlainText)
         self.label_8.setWordWrap(True)
         self.label_8.setOpenExternalLinks(True)
-        self.label_8.setTextInteractionFlags(Qt.NoTextInteraction)
+        self.label_8.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
 
         self.formLayout.setWidget(7, QFormLayout.ItemRole.LabelRole, self.label_8)
 
@@ -190,7 +190,7 @@ class Ui_SetupGreeter(object):
         self.label_inpainting_path.setSizePolicy(sizePolicy1)
         self.label_inpainting_path.setText(u"<inpainting path>")
         self.label_inpainting_path.setWordWrap(True)
-        self.label_inpainting_path.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_inpainting_path.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.label_inpainting_path)
 
@@ -214,13 +214,7 @@ class Ui_SetupGreeter(object):
 
         self.pushButton_ok = QPushButton(SetupGreeter)
         self.pushButton_ok.setObjectName(u"pushButton_ok")
-        icon = QIcon()
-        iconThemeName = u"download"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"download"))
         self.pushButton_ok.setIcon(icon)
         self.pushButton_ok.setAutoDefault(False)
 
@@ -228,13 +222,7 @@ class Ui_SetupGreeter(object):
 
         self.pushButton_abort = QPushButton(SetupGreeter)
         self.pushButton_abort.setObjectName(u"pushButton_abort")
-        icon1 = QIcon()
-        iconThemeName = u"dialog-cancel"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"dialog-cancel"))
         self.pushButton_abort.setIcon(icon1)
 
         self.horizontalLayout.addWidget(self.pushButton_abort)

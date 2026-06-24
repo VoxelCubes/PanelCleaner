@@ -30,7 +30,7 @@
     <item>
      <widget class="QSplitter" name="splitter">
       <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+       <enum>Qt::Orientation::Horizontal</enum>
       </property>
       <widget class="QGroupBox" name="groupBox_profile">
        <property name="title">
@@ -69,8 +69,7 @@
              <string>Apply</string>
             </property>
             <property name="icon">
-             <iconset theme="dialog-ok-apply">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="dialog-ok-apply"/>
             </property>
            </widget>
           </item>
@@ -83,8 +82,7 @@
              <string>Save</string>
             </property>
             <property name="icon">
-             <iconset theme="document-save">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="document-save"/>
             </property>
            </widget>
           </item>
@@ -97,8 +95,7 @@
              <string>Reset All</string>
             </property>
             <property name="icon">
-             <iconset theme="document-revert">
-              <normaloff>.</normaloff>.</iconset>
+             <iconset theme="document-revert"/>
             </property>
            </widget>
           </item>
@@ -137,10 +134,10 @@
          <item>
           <widget class="CDropFrame" name="frame_greeter">
            <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
+            <enum>QFrame::Shape::StyledPanel</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
+            <enum>QFrame::Shadow::Raised</enum>
            </property>
            <property name="lineWidth">
             <number>4</number>
@@ -154,7 +151,7 @@
               <item>
                <spacer name="verticalSpacer_3">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -170,7 +167,7 @@
                  <string>Drag and Drop Images or Folders Here</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -180,14 +177,14 @@
                  <string notr="true">&lt;drop icon&gt;</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
                 </property>
                </widget>
               </item>
               <item>
                <spacer name="verticalSpacer_4">
                 <property name="orientation">
-                 <enum>Qt::Vertical</enum>
+                 <enum>Qt::Orientation::Vertical</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -246,25 +243,25 @@
              <item>
               <widget class="FileTable" name="file_table">
                <property name="frameShape">
-                <enum>QFrame::NoFrame</enum>
+                <enum>QFrame::Shape::NoFrame</enum>
                </property>
                <property name="editTriggers">
-                <set>QAbstractItemView::NoEditTriggers</set>
+                <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                </property>
                <property name="dragDropOverwriteMode">
                 <bool>false</bool>
                </property>
                <property name="dragDropMode">
-                <enum>QAbstractItemView::NoDragDrop</enum>
+                <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
                </property>
                <property name="alternatingRowColors">
                 <bool>true</bool>
                </property>
                <property name="selectionMode">
-                <enum>QAbstractItemView::SingleSelection</enum>
+                <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
                </property>
                <property name="selectionBehavior">
-                <enum>QAbstractItemView::SelectRows</enum>
+                <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
                </property>
                <property name="sortingEnabled">
                 <bool>false</bool>
@@ -324,10 +321,10 @@
       </widget>
       <widget class="QFrame" name="frame_output">
        <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
+        <enum>QFrame::Shape::NoFrame</enum>
        </property>
        <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
+        <enum>QFrame::Shadow::Raised</enum>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,1">
         <property name="leftMargin">
@@ -370,7 +367,7 @@
              <item>
               <spacer name="verticalSpacer">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Orientation::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -388,8 +385,7 @@
                   <string>Edit Existing Output</string>
                  </property>
                  <property name="icon">
-                  <iconset theme="document-open">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="document-open"/>
                  </property>
                 </widget>
                </item>
@@ -399,8 +395,7 @@
                   <string>Abort</string>
                  </property>
                  <property name="icon">
-                  <iconset theme="process-stop">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="process-stop"/>
                  </property>
                 </widget>
                </item>
@@ -410,8 +405,7 @@
                   <string>Start</string>
                  </property>
                  <property name="icon">
-                  <iconset theme="media-playback-start">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="media-playback-start"/>
                  </property>
                 </widget>
                </item>
@@ -484,7 +478,7 @@
                    <item>
                     <spacer name="horizontalSpacer_6">
                      <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
+                      <enum>Qt::Orientation::Horizontal</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
@@ -527,7 +521,7 @@
                        <item>
                         <spacer name="horizontalSpacer_7">
                          <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                          <enum>Qt::Orientation::Horizontal</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
@@ -567,7 +561,7 @@
                        <item>
                         <spacer name="horizontalSpacer_4">
                          <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
+                          <enum>Qt::Orientation::Horizontal</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
@@ -582,7 +576,7 @@
                      <item>
                       <spacer name="verticalSpacer_6">
                        <property name="orientation">
-                        <enum>Qt::Vertical</enum>
+                        <enum>Qt::Orientation::Vertical</enum>
                        </property>
                        <property name="sizeHint" stdset="0">
                         <size>
@@ -599,7 +593,7 @@
                  <item>
                   <spacer name="verticalSpacer_2">
                    <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                    <enum>Qt::Orientation::Vertical</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -617,7 +611,7 @@
                       <string>Output Directory:</string>
                      </property>
                      <property name="textInteractionFlags">
-                      <set>Qt::LinksAccessibleByMouse</set>
+                      <set>Qt::TextInteractionFlag::LinksAccessibleByMouse</set>
                      </property>
                      <property name="buddy">
                       <cstring>lineEdit_out_directory</cstring>
@@ -640,7 +634,7 @@
                    <item>
                     <spacer name="horizontalSpacer_3">
                      <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
+                      <enum>Qt::Orientation::Horizontal</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
@@ -670,8 +664,7 @@
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset theme="document-open-folder">
-                       <normaloff>.</normaloff>.</iconset>
+                      <iconset theme="document-open-folder"/>
                      </property>
                     </widget>
                    </item>
@@ -722,7 +715,7 @@
                    <item>
                     <spacer name="horizontalSpacer_8">
                      <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
+                      <enum>Qt::Orientation::Horizontal</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
@@ -761,7 +754,7 @@
                      <item>
                       <spacer name="verticalSpacer_7">
                        <property name="orientation">
-                        <enum>Qt::Vertical</enum>
+                        <enum>Qt::Orientation::Vertical</enum>
                        </property>
                        <property name="sizeHint" stdset="0">
                         <size>
@@ -778,7 +771,7 @@
                  <item>
                   <spacer name="verticalSpacer_5">
                    <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                    <enum>Qt::Orientation::Vertical</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
@@ -796,7 +789,7 @@
                       <string>Output File:</string>
                      </property>
                      <property name="textInteractionFlags">
-                      <set>Qt::LinksAccessibleByMouse</set>
+                      <set>Qt::TextInteractionFlag::LinksAccessibleByMouse</set>
                      </property>
                      <property name="buddy">
                       <cstring>lineEdit_out_directory</cstring>
@@ -819,7 +812,7 @@
                    <item>
                     <spacer name="horizontalSpacer_5">
                      <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
+                      <enum>Qt::Orientation::Horizontal</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
@@ -849,8 +842,7 @@
                       <string/>
                      </property>
                      <property name="icon">
-                      <iconset theme="document-open">
-                       <normaloff>.</normaloff>.</iconset>
+                      <iconset theme="document-open"/>
                      </property>
                     </widget>
                    </item>
@@ -874,15 +866,18 @@
            <bool>false</bool>
           </property>
           <property name="lineWrapMode">
-           <enum>QTextEdit::NoWrap</enum>
+           <enum>QTextEdit::LineWrapMode::NoWrap</enum>
           </property>
           <property name="readOnly">
            <bool>false</bool>
           </property>
           <property name="html">
            <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt;Mask Fitment Analytics &lt;br /&gt;---------------------- &lt;br /&gt;Total boxes: 5 | Masks succeeded: 5 (100%) | Masks failed: &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#b21818;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; &lt;br /&gt;Perfect masks: &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;5&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; (100%) | Average border deviation: 0.00 &lt;br /&gt;&lt;br /&gt;Mask usage by mask size (smallest to largest): &lt;br /&gt;Mask 0  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 1  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 2  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 3  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 4  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 5  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 6  : &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;████████████████████████████████████████&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;1&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 1 &lt;br /&gt;Mask 7  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 8  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 9  :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Mask 10 :  &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;0&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 0 &lt;br /&gt;Box mask: &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;████████████████████████████████████████&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;4&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; / 4 &lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace'; color:#18b2b2;&quot;&gt;█ Perfect&lt;/span&gt;&lt;span style=&quot; font-family:'Noto Mono','Monospace';&quot;&gt; | █ Total&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
@@ -898,7 +893,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <spacer name="horizontalSpacer_9">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -929,7 +924,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <spacer name="horizontalSpacer_10">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -948,7 +943,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <spacer name="horizontalSpacer_13">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -979,7 +974,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <spacer name="horizontalSpacer_14">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -1011,10 +1006,10 @@ p, li { white-space: pre-wrap; }
        <item>
         <spacer name="horizontalSpacer_11">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+          <enum>QSizePolicy::Policy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -1030,8 +1025,7 @@ p, li { white-space: pre-wrap; }
           <string>Cancel Action</string>
          </property>
          <property name="icon">
-          <iconset theme="dialog-cancel">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="dialog-cancel"/>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -1044,8 +1038,7 @@ p, li { white-space: pre-wrap; }
           <string>Close</string>
          </property>
          <property name="icon">
-          <iconset theme="dialog-ok-apply">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="dialog-ok-apply"/>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -1075,10 +1068,10 @@ p, li { white-space: pre-wrap; }
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Maximum</enum>
+          <enum>QSizePolicy::Policy::Maximum</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -1127,10 +1120,10 @@ p, li { white-space: pre-wrap; }
        <item>
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Maximum</enum>
+          <enum>QSizePolicy::Policy::Maximum</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -1168,7 +1161,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1850</width>
-     <height>34</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -1219,8 +1212,7 @@ p, li { white-space: pre-wrap; }
       <string>Language</string>
      </property>
      <property name="icon">
-      <iconset theme="languages">
-       <normaloff>.</normaloff>.</iconset>
+      <iconset theme="languages"/>
      </property>
      <addaction name="action_temp_3"/>
     </widget>
@@ -1261,8 +1253,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_add_files">
    <property name="icon">
-    <iconset theme="document-open">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-open"/>
    </property>
    <property name="text">
     <string>Add Files...</string>
@@ -1270,8 +1261,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_remove_all_files">
    <property name="icon">
-    <iconset theme="edit-clear-history">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-clear-history"/>
    </property>
    <property name="text">
     <string>Remove All Files</string>
@@ -1279,8 +1269,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_new_profile">
    <property name="icon">
-    <iconset theme="document-new">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-new"/>
    </property>
    <property name="text">
     <string>New</string>
@@ -1288,8 +1277,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_delete_profile">
    <property name="icon">
-    <iconset theme="edit-delete">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-delete"/>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -1297,8 +1285,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_import_profile">
    <property name="icon">
-    <iconset theme="document-import">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-import"/>
    </property>
    <property name="text">
     <string>Import...</string>
@@ -1306,8 +1293,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_online_documentation">
    <property name="icon">
-    <iconset theme="internet-services">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="internet-services"/>
    </property>
    <property name="text">
     <string>Online Documentation</string>
@@ -1315,8 +1301,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_about">
    <property name="icon">
-    <iconset theme="help-about">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="help-about"/>
    </property>
    <property name="text">
     <string>About Panel Cleaner</string>
@@ -1329,8 +1314,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_save_profile">
    <property name="icon">
-    <iconset theme="document-save">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-save"/>
    </property>
    <property name="text">
     <string>Save</string>
@@ -1338,8 +1322,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_save_profile_as">
    <property name="icon">
-    <iconset theme="document-save-as">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-save-as"/>
    </property>
    <property name="text">
     <string>Save as...</string>
@@ -1376,8 +1359,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_add_folders">
    <property name="icon">
-    <iconset theme="document-open-folder">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="document-open-folder"/>
    </property>
    <property name="text">
     <string>Add Folder...</string>
@@ -1385,8 +1367,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_delete_models">
    <property name="icon">
-    <iconset theme="edit-delete">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-delete"/>
    </property>
    <property name="text">
     <string>Delete Machine Learning Models</string>
@@ -1394,8 +1375,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_download_models">
    <property name="icon">
-    <iconset theme="download">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="download"/>
    </property>
    <property name="text">
     <string>Download Machine Learning Models</string>
@@ -1416,8 +1396,7 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="edit-delete-remove">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-delete-remove"/>
    </property>
    <property name="text">
     <string>Remove File</string>
@@ -1425,8 +1404,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_help_translation">
    <property name="icon">
-    <iconset theme="languages">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="languages"/>
    </property>
    <property name="text">
     <string>Help Translate Panel Cleaner</string>
@@ -1434,8 +1412,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_report_issue">
    <property name="icon">
-    <iconset theme="tools-report-bug">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="tools-report-bug"/>
    </property>
    <property name="text">
     <string>Report an Issue...</string>
@@ -1448,8 +1425,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_file_manager_extension">
    <property name="icon">
-    <iconset theme="application-menu">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="application-menu"/>
    </property>
    <property name="text">
     <string>Add File Browser Extension...</string>
@@ -1457,8 +1433,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_show_ocr_language_support">
    <property name="icon">
-    <iconset theme="code-block">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="code-block"/>
    </property>
    <property name="text">
     <string>Show Supported OCR Languages</string>
@@ -1471,8 +1446,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_delete_window_state">
    <property name="icon">
-    <iconset theme="edit-reset">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="edit-reset"/>
    </property>
    <property name="text">
     <string>Reset Window Layout Preferences</string>
@@ -1491,8 +1465,7 @@ p, li { white-space: pre-wrap; }
   </action>
   <action name="action_post_action_settings">
    <property name="icon">
-    <iconset theme="configure">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="configure"/>
    </property>
    <property name="text">
     <string>Configure Post-Run Actions...</string>
@@ -1509,14 +1482,14 @@ p, li { white-space: pre-wrap; }
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CTooltipLabel</class>
-   <extends>QLabel</extends>
-   <header>pcleaner.gui.CustomQ.CTooltipLabel</header>
-  </customwidget>
-  <customwidget>
    <class>CComboBox</class>
    <extends>QComboBox</extends>
    <header>pcleaner.gui.CustomQ.CComboBox</header>
+  </customwidget>
+  <customwidget>
+   <class>CTooltipLabel</class>
+   <extends>QLabel</extends>
+   <header>pcleaner.gui.CustomQ.CTooltipLabel</header>
   </customwidget>
   <customwidget>
    <class>CTextEdit</class>

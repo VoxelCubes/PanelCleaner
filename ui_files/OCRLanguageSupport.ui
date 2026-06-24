@@ -26,13 +26,13 @@
    <item>
     <widget class="CTableWidget" name="lang_table">
      <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
+      <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
      </property>
      <property name="showDropIndicator" stdset="0">
       <bool>false</bool>
@@ -41,16 +41,16 @@
       <bool>false</bool>
      </property>
      <property name="dragDropMode">
-      <enum>QAbstractItemView::NoDragDrop</enum>
+      <enum>QAbstractItemView::DragDropMode::NoDragDrop</enum>
      </property>
      <property name="alternatingRowColors">
       <bool>true</bool>
      </property>
      <property name="selectionMode">
-      <enum>QAbstractItemView::MultiSelection</enum>
+      <enum>QAbstractItemView::SelectionMode::MultiSelection</enum>
      </property>
      <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
+      <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
      </property>
      <property name="sortingEnabled">
       <bool>false</bool>
@@ -109,8 +109,7 @@
         <string>How to install Tesseract</string>
        </property>
        <property name="icon">
-        <iconset theme="internet-services">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="internet-services"/>
        </property>
       </widget>
      </item>
@@ -120,15 +119,14 @@
         <string>How to install Tesseract language packs</string>
        </property>
        <property name="icon">
-        <iconset theme="internet-services">
-         <normaloff>.</normaloff>.</iconset>
+        <iconset theme="internet-services"/>
        </property>
       </widget>
      </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

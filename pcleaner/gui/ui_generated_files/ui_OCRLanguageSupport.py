@@ -41,15 +41,15 @@ class Ui_OCRLanguageSupport(object):
         __qtablewidgetitem3 = QTableWidgetItem()
         self.lang_table.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         self.lang_table.setObjectName(u"lang_table")
-        self.lang_table.setFocusPolicy(Qt.NoFocus)
-        self.lang_table.setFrameShape(QFrame.NoFrame)
-        self.lang_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.lang_table.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.lang_table.setFrameShape(QFrame.Shape.NoFrame)
+        self.lang_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.lang_table.setProperty(u"showDropIndicator", False)
         self.lang_table.setDragDropOverwriteMode(False)
-        self.lang_table.setDragDropMode(QAbstractItemView.NoDragDrop)
+        self.lang_table.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
         self.lang_table.setAlternatingRowColors(True)
-        self.lang_table.setSelectionMode(QAbstractItemView.MultiSelection)
-        self.lang_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.lang_table.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.lang_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.lang_table.setSortingEnabled(False)
         self.lang_table.setCornerButtonEnabled(False)
         self.lang_table.horizontalHeader().setVisible(True)
@@ -65,13 +65,7 @@ class Ui_OCRLanguageSupport(object):
         self.horizontalLayout.setContentsMargins(6, 6, -1, -1)
         self.pushButton_install_tesseract = QPushButton(OCRLanguageSupport)
         self.pushButton_install_tesseract.setObjectName(u"pushButton_install_tesseract")
-        icon = QIcon()
-        iconThemeName = u"internet-services"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"internet-services"))
         self.pushButton_install_tesseract.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_install_tesseract)

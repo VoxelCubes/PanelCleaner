@@ -39,13 +39,13 @@ class Ui_ImageDetails(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
         self.scrollArea.setSizePolicy(sizePolicy)
-        self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
         self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 138, 943))
         self.horizontalLayout_2 = QHBoxLayout(self.scrollAreaWidgetContents)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setSizeConstraint(QLayout.SetMinimumSize)
+        self.horizontalLayout_2.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.widget = QWidget(self.scrollAreaWidgetContents)
         self.widget.setObjectName(u"widget")
@@ -77,20 +77,14 @@ class Ui_ImageDetails(object):
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.label_file_name.sizePolicy().hasHeightForWidth())
         self.label_file_name.setSizePolicy(sizePolicy2)
-        self.label_file_name.setFrameShape(QFrame.NoFrame)
-        self.label_file_name.setFrameShadow(QFrame.Raised)
+        self.label_file_name.setFrameShape(QFrame.Shape.NoFrame)
+        self.label_file_name.setFrameShadow(QFrame.Shadow.Raised)
 
         self.horizontalLayout.addWidget(self.label_file_name)
 
         self.pushButton_zoom_in = QPushButton(ImageDetails)
         self.pushButton_zoom_in.setObjectName(u"pushButton_zoom_in")
-        icon = QIcon()
-        iconThemeName = u"zoom-in"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"zoom-in"))
         self.pushButton_zoom_in.setIcon(icon)
         self.pushButton_zoom_in.setFlat(True)
 
@@ -98,13 +92,7 @@ class Ui_ImageDetails(object):
 
         self.pushButton_zoom_out = QPushButton(ImageDetails)
         self.pushButton_zoom_out.setObjectName(u"pushButton_zoom_out")
-        icon1 = QIcon()
-        iconThemeName = u"zoom-out"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"zoom-out"))
         self.pushButton_zoom_out.setIcon(icon1)
         self.pushButton_zoom_out.setFlat(True)
 
@@ -112,13 +100,7 @@ class Ui_ImageDetails(object):
 
         self.pushButton_zoom_reset = QPushButton(ImageDetails)
         self.pushButton_zoom_reset.setObjectName(u"pushButton_zoom_reset")
-        icon2 = QIcon()
-        iconThemeName = u"zoom-original"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon2 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon2.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon2 = QIcon(QIcon.fromTheme(u"zoom-original"))
         self.pushButton_zoom_reset.setIcon(icon2)
         self.pushButton_zoom_reset.setFlat(True)
 
@@ -126,13 +108,7 @@ class Ui_ImageDetails(object):
 
         self.pushButton_zoom_fit = QPushButton(ImageDetails)
         self.pushButton_zoom_fit.setObjectName(u"pushButton_zoom_fit")
-        icon3 = QIcon()
-        iconThemeName = u"zoom-fit-best"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon3 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon3 = QIcon(QIcon.fromTheme(u"zoom-fit-best"))
         self.pushButton_zoom_fit.setIcon(icon3)
         self.pushButton_zoom_fit.setFlat(True)
 
@@ -141,13 +117,7 @@ class Ui_ImageDetails(object):
         self.pushButton_refresh = QPushButton(ImageDetails)
         self.pushButton_refresh.setObjectName(u"pushButton_refresh")
         self.pushButton_refresh.setEnabled(False)
-        icon4 = QIcon()
-        iconThemeName = u"view-refresh"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon4 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon4.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon4 = QIcon(QIcon.fromTheme(u"view-refresh"))
         self.pushButton_refresh.setIcon(icon4)
 
         self.horizontalLayout.addWidget(self.pushButton_refresh)
@@ -160,14 +130,8 @@ class Ui_ImageDetails(object):
         sizePolicy3.setHeightForWidth(self.pushButton_menu.sizePolicy().hasHeightForWidth())
         self.pushButton_menu.setSizePolicy(sizePolicy3)
         self.pushButton_menu.setMinimumSize(QSize(16, 16))
-        self.pushButton_menu.setContextMenuPolicy(Qt.ActionsContextMenu)
-        icon5 = QIcon()
-        iconThemeName = u"overflow-menu"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon5 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        self.pushButton_menu.setContextMenuPolicy(Qt.ContextMenuPolicy.ActionsContextMenu)
+        icon5 = QIcon(QIcon.fromTheme(u"overflow-menu"))
         self.pushButton_menu.setIcon(icon5)
 
         self.horizontalLayout.addWidget(self.pushButton_menu)
@@ -190,9 +154,9 @@ class Ui_ImageDetails(object):
         sizePolicy4.setVerticalStretch(0)
         sizePolicy4.setHeightForWidth(self.image_viewer.sizePolicy().hasHeightForWidth())
         self.image_viewer.setSizePolicy(sizePolicy4)
-        self.image_viewer.setFrameShape(QFrame.NoFrame)
-        self.image_viewer.setFrameShadow(QFrame.Plain)
-        self.image_viewer.setTransformationAnchor(QGraphicsView.AnchorUnderMouse)
+        self.image_viewer.setFrameShape(QFrame.Shape.NoFrame)
+        self.image_viewer.setFrameShadow(QFrame.Shadow.Plain)
+        self.image_viewer.setTransformationAnchor(QGraphicsView.ViewportAnchor.AnchorUnderMouse)
 
         self.verticalLayout_3.addWidget(self.image_viewer)
 
@@ -204,7 +168,7 @@ class Ui_ImageDetails(object):
         self.label_17 = QLabel(self.page_no_image)
         self.label_17.setObjectName(u"label_17")
 
-        self.verticalLayout_4.addWidget(self.label_17, 0, Qt.AlignHCenter)
+        self.verticalLayout_4.addWidget(self.label_17, 0, Qt.AlignmentFlag.AlignHCenter)
 
         self.stackedWidget.addWidget(self.page_no_image)
 

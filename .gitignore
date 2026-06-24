@@ -175,3 +175,4 @@ _testbed/cleaner/
 */_testbed/experiment/source/**
 
 !.gitkeep
+uv.lock

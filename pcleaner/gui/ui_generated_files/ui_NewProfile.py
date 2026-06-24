@@ -58,13 +58,7 @@ class Ui_NewProfile(object):
         self.pushButton_browse_location = QPushButton(NewProfile)
         self.pushButton_browse_location.setObjectName(u"pushButton_browse_location")
         self.pushButton_browse_location.setEnabled(False)
-        icon = QIcon()
-        iconThemeName = u"document-open-folder"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"document-open-folder"))
         self.pushButton_browse_location.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_browse_location)
@@ -85,7 +79,7 @@ class Ui_NewProfile(object):
         self.label_default_path = QLabel(NewProfile)
         self.label_default_path.setObjectName(u"label_default_path")
         self.label_default_path.setText(u"<default path>")
-        self.label_default_path.setTextInteractionFlags(Qt.LinksAccessibleByMouse|Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
+        self.label_default_path.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse|Qt.TextInteractionFlag.TextSelectableByKeyboard|Qt.TextInteractionFlag.TextSelectableByMouse)
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.label_default_path)
 
@@ -128,8 +122,8 @@ class Ui_NewProfile(object):
 
         self.buttonBox = QDialogButtonBox(NewProfile)
         self.buttonBox.setObjectName(u"buttonBox")
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Save)
+        self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Save)
 
         self.verticalLayout.addWidget(self.buttonBox)
 

@@ -80,26 +80,14 @@ class Ui_ErrorDialog(object):
 
         self.pushButton_clipboard = QPushButton(ErrorDialog)
         self.pushButton_clipboard.setObjectName(u"pushButton_clipboard")
-        icon = QIcon()
-        iconThemeName = u"edit-copy"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"edit-copy"))
         self.pushButton_clipboard.setIcon(icon)
 
         self.horizontalLayout.addWidget(self.pushButton_clipboard)
 
         self.pushButton_open_issues = QPushButton(ErrorDialog)
         self.pushButton_open_issues.setObjectName(u"pushButton_open_issues")
-        icon1 = QIcon()
-        iconThemeName = u"internet-services"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"internet-services"))
         self.pushButton_open_issues.setIcon(icon1)
 
         self.horizontalLayout.addWidget(self.pushButton_open_issues)
@@ -113,13 +101,7 @@ class Ui_ErrorDialog(object):
 
         self.pushButton_close = QPushButton(ErrorDialog)
         self.pushButton_close.setObjectName(u"pushButton_close")
-        icon3 = QIcon()
-        iconThemeName = u"window-close"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon3 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon3 = QIcon(QIcon.fromTheme(u"window-close"))
         self.pushButton_close.setIcon(icon3)
 
         self.horizontalLayout.addWidget(self.pushButton_close)

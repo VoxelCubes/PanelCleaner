@@ -50,7 +50,7 @@
      <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>
@@ -86,7 +86,7 @@
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -102,8 +102,7 @@
           <string>Copy to Clipboard</string>
          </property>
          <property name="icon">
-          <iconset theme="edit-copy">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="edit-copy"/>
          </property>
         </widget>
        </item>
@@ -113,8 +112,7 @@
           <string>Open Issue Tracker</string>
          </property>
          <property name="icon">
-          <iconset theme="internet-services">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="internet-services"/>
          </property>
         </widget>
        </item>
@@ -134,8 +132,7 @@
           <string>Close</string>
          </property>
          <property name="icon">
-          <iconset theme="window-close">
-           <normaloff>.</normaloff>.</iconset>
+          <iconset theme="window-close"/>
          </property>
         </widget>
        </item>

@@ -37,7 +37,7 @@ class Ui_OcrReview(object):
         self.verticalLayout_2.setContentsMargins(1, 1, 1, 1)
         self.splitter = QSplitter(OcrReview)
         self.splitter.setObjectName(u"splitter")
-        self.splitter.setOrientation(Qt.Horizontal)
+        self.splitter.setOrientation(Qt.Orientation.Horizontal)
         self.layoutWidget1 = QWidget(self.splitter)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
         self.verticalLayout_3 = QVBoxLayout(self.layoutWidget1)
@@ -66,20 +66,14 @@ class Ui_OcrReview(object):
         self.horizontalSlider_icon_size.setObjectName(u"horizontalSlider_icon_size")
         self.horizontalSlider_icon_size.setMinimum(1)
         self.horizontalSlider_icon_size.setMaximum(1000)
-        self.horizontalSlider_icon_size.setOrientation(Qt.Horizontal)
+        self.horizontalSlider_icon_size.setOrientation(Qt.Orientation.Horizontal)
 
         self.horizontalLayout_2.addWidget(self.horizontalSlider_icon_size)
 
         self.pushButton_prev = QPushButton(self.layoutWidget1)
         self.pushButton_prev.setObjectName(u"pushButton_prev")
         self.pushButton_prev.setText(u"")
-        icon = QIcon()
-        iconThemeName = u"arrow-left"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"arrow-left"))
         self.pushButton_prev.setIcon(icon)
         self.pushButton_prev.setFlat(True)
 
@@ -88,13 +82,7 @@ class Ui_OcrReview(object):
         self.pushButton_next = QPushButton(self.layoutWidget1)
         self.pushButton_next.setObjectName(u"pushButton_next")
         self.pushButton_next.setText(u"")
-        icon1 = QIcon()
-        iconThemeName = u"arrow-right"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"arrow-right"))
         self.pushButton_next.setIcon(icon1)
         self.pushButton_next.setFlat(True)
 
@@ -107,20 +95,20 @@ class Ui_OcrReview(object):
 
         self.image_list = QListWidget(self.layoutWidget1)
         self.image_list.setObjectName(u"image_list")
-        self.image_list.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.image_list.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.image_list.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.image_list.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
+        self.image_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.image_list.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.image_list.setProperty(u"showDropIndicator", False)
-        self.image_list.setDragDropMode(QAbstractItemView.NoDragDrop)
-        self.image_list.setTextElideMode(Qt.ElideLeft)
-        self.image_list.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
-        self.image_list.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
-        self.image_list.setMovement(QListView.Static)
-        self.image_list.setFlow(QListView.LeftToRight)
+        self.image_list.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.image_list.setTextElideMode(Qt.TextElideMode.ElideLeft)
+        self.image_list.setVerticalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.image_list.setHorizontalScrollMode(QAbstractItemView.ScrollMode.ScrollPerPixel)
+        self.image_list.setMovement(QListView.Movement.Static)
+        self.image_list.setFlow(QListView.Flow.LeftToRight)
         self.image_list.setProperty(u"isWrapping", True)
-        self.image_list.setResizeMode(QListView.Adjust)
-        self.image_list.setLayoutMode(QListView.Batched)
-        self.image_list.setViewMode(QListView.IconMode)
+        self.image_list.setResizeMode(QListView.ResizeMode.Adjust)
+        self.image_list.setLayoutMode(QListView.LayoutMode.Batched)
+        self.image_list.setViewMode(QListView.ViewMode.IconMode)
         self.image_list.setUniformItemSizes(False)
         self.image_list.setBatchSize(50)
         self.image_list.setWordWrap(False)
@@ -145,20 +133,14 @@ class Ui_OcrReview(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_file_name.sizePolicy().hasHeightForWidth())
         self.label_file_name.setSizePolicy(sizePolicy)
-        self.label_file_name.setFrameShape(QFrame.NoFrame)
-        self.label_file_name.setFrameShadow(QFrame.Raised)
+        self.label_file_name.setFrameShape(QFrame.Shape.NoFrame)
+        self.label_file_name.setFrameShadow(QFrame.Shadow.Raised)
 
         self.horizontalLayout.addWidget(self.label_file_name)
 
         self.pushButton_zoom_in = QPushButton(self.layoutWidget)
         self.pushButton_zoom_in.setObjectName(u"pushButton_zoom_in")
-        icon2 = QIcon()
-        iconThemeName = u"zoom-in"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon2 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon2.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon2 = QIcon(QIcon.fromTheme(u"zoom-in"))
         self.pushButton_zoom_in.setIcon(icon2)
         self.pushButton_zoom_in.setFlat(True)
 
@@ -166,13 +148,7 @@ class Ui_OcrReview(object):
 
         self.pushButton_zoom_out = QPushButton(self.layoutWidget)
         self.pushButton_zoom_out.setObjectName(u"pushButton_zoom_out")
-        icon3 = QIcon()
-        iconThemeName = u"zoom-out"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon3 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon3.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon3 = QIcon(QIcon.fromTheme(u"zoom-out"))
         self.pushButton_zoom_out.setIcon(icon3)
         self.pushButton_zoom_out.setFlat(True)
 
@@ -180,13 +156,7 @@ class Ui_OcrReview(object):
 
         self.pushButton_zoom_reset = QPushButton(self.layoutWidget)
         self.pushButton_zoom_reset.setObjectName(u"pushButton_zoom_reset")
-        icon4 = QIcon()
-        iconThemeName = u"zoom-original"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon4 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon4.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon4 = QIcon(QIcon.fromTheme(u"zoom-original"))
         self.pushButton_zoom_reset.setIcon(icon4)
         self.pushButton_zoom_reset.setFlat(True)
 
@@ -194,13 +164,7 @@ class Ui_OcrReview(object):
 
         self.pushButton_zoom_fit = QPushButton(self.layoutWidget)
         self.pushButton_zoom_fit.setObjectName(u"pushButton_zoom_fit")
-        icon5 = QIcon()
-        iconThemeName = u"zoom-fit-best"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon5 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon5.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon5 = QIcon(QIcon.fromTheme(u"zoom-fit-best"))
         self.pushButton_zoom_fit.setIcon(icon5)
         self.pushButton_zoom_fit.setFlat(True)
 
@@ -223,13 +187,7 @@ class Ui_OcrReview(object):
         self.pushButton_row_up = QPushButton(self.layoutWidget)
         self.pushButton_row_up.setObjectName(u"pushButton_row_up")
         self.pushButton_row_up.setText(u"")
-        icon6 = QIcon()
-        iconThemeName = u"arrow-up"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon6 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon6.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon6 = QIcon(QIcon.fromTheme(u"arrow-up"))
         self.pushButton_row_up.setIcon(icon6)
         self.pushButton_row_up.setFlat(True)
 
@@ -238,13 +196,7 @@ class Ui_OcrReview(object):
         self.pushButton_row_down = QPushButton(self.layoutWidget)
         self.pushButton_row_down.setObjectName(u"pushButton_row_down")
         self.pushButton_row_down.setText(u"")
-        icon7 = QIcon()
-        iconThemeName = u"arrow-down"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon7 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon7.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon7 = QIcon(QIcon.fromTheme(u"arrow-down"))
         self.pushButton_row_down.setIcon(icon7)
         self.pushButton_row_down.setFlat(True)
 
@@ -261,13 +213,7 @@ class Ui_OcrReview(object):
         self.pushButton_delete = QPushButton(self.layoutWidget)
         self.pushButton_delete.setObjectName(u"pushButton_delete")
         self.pushButton_delete.setText(u"")
-        icon8 = QIcon()
-        iconThemeName = u"edit-delete"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon8 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon8.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon8 = QIcon(QIcon.fromTheme(u"edit-delete"))
         self.pushButton_delete.setIcon(icon8)
         self.pushButton_delete.setFlat(True)
 
@@ -282,13 +228,7 @@ class Ui_OcrReview(object):
 
         self.pushButton_reset = QPushButton(self.layoutWidget)
         self.pushButton_reset.setObjectName(u"pushButton_reset")
-        icon9 = QIcon()
-        iconThemeName = u"edit-reset"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon9 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon9.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon9 = QIcon(QIcon.fromTheme(u"edit-reset"))
         self.pushButton_reset.setIcon(icon9)
         self.pushButton_reset.setFlat(True)
 
@@ -296,13 +236,7 @@ class Ui_OcrReview(object):
 
         self.pushButton_reset_all = QPushButton(self.layoutWidget)
         self.pushButton_reset_all.setObjectName(u"pushButton_reset_all")
-        icon10 = QIcon()
-        iconThemeName = u"document-revert"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon10 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon10.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon10 = QIcon(QIcon.fromTheme(u"document-revert"))
         self.pushButton_reset_all.setIcon(icon10)
         self.pushButton_reset_all.setFlat(True)
 
@@ -336,7 +270,7 @@ class Ui_OcrReview(object):
 
         self.splitter_side = QSplitter(self.layoutWidget)
         self.splitter_side.setObjectName(u"splitter_side")
-        self.splitter_side.setOrientation(Qt.Horizontal)
+        self.splitter_side.setOrientation(Qt.Orientation.Horizontal)
         self.image_viewer = BubbleImageViewer(self.splitter_side)
         self.image_viewer.setObjectName(u"image_viewer")
         self.splitter_side.addWidget(self.image_viewer)
@@ -349,16 +283,16 @@ class Ui_OcrReview(object):
         self.tableWidget_ocr.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         self.tableWidget_ocr.setObjectName(u"tableWidget_ocr")
         self.tableWidget_ocr.setAcceptDrops(True)
-        self.tableWidget_ocr.setEditTriggers(QAbstractItemView.AllEditTriggers)
+        self.tableWidget_ocr.setEditTriggers(QAbstractItemView.EditTrigger.AllEditTriggers)
         self.tableWidget_ocr.setTabKeyNavigation(False)
         self.tableWidget_ocr.setProperty(u"showDropIndicator", True)
         self.tableWidget_ocr.setDragEnabled(True)
         self.tableWidget_ocr.setDragDropOverwriteMode(False)
-        self.tableWidget_ocr.setDragDropMode(QAbstractItemView.NoDragDrop)
-        self.tableWidget_ocr.setDefaultDropAction(Qt.MoveAction)
+        self.tableWidget_ocr.setDragDropMode(QAbstractItemView.DragDropMode.NoDragDrop)
+        self.tableWidget_ocr.setDefaultDropAction(Qt.DropAction.MoveAction)
         self.tableWidget_ocr.setAlternatingRowColors(True)
-        self.tableWidget_ocr.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.tableWidget_ocr.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tableWidget_ocr.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.tableWidget_ocr.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.splitter_side.addWidget(self.tableWidget_ocr)
         self.tableWidget_ocr.horizontalHeader().setDefaultSectionSize(80)
         self.tableWidget_ocr.horizontalHeader().setStretchLastSection(True)
