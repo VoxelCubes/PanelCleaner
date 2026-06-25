@@ -42,8 +42,6 @@ fresh-install: clean-build build install
 
 refresh-assets: build-icon-cache compile-ui refresh-i18n compile-i18n
 
-build-both: build build-cli
-
 uv-sync-gui-cpu:
 	rm -rf $(VENV_GUI_CPU)
 	$(UV) venv --python $(PY_UV) $(VENV_GUI_CPU)
@@ -90,6 +88,8 @@ build-cli: sync-setup-cfg
 	cp setup-cli.cfg setup.cfg
 	$(UV) build --out-dir $(BUILD_DIR)
 	rm setup.cfg
+
+build-both: build build-cli
 
 # clean-build target
 clean-build: 
