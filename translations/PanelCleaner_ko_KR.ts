@@ -4,7 +4,7 @@
   <context>
     <name/>
     <message>
-      <location filename="../pcleaner/config.py" line="1088"/>
+      <location filename="../pcleaner/config.py" line="1087"/>
       <source>default</source>
       <comment>reserved profile name</comment>
       <translation>기본</translation>
@@ -73,19 +73,19 @@
       <translation>팔레트</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="379"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="380"/>
       <source>Error downloading file from url: {url}</source>
       <translation>다음 URL에서 파일을 다운로드하는데 오류가 발생했습니다: {url}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="432"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="434"/>
       <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
       <translation>다음 URL에서 파일을 다운로드하는데 오류가 발생했습니다: {url}
 파일을 {save_path}에 저장하는데 실패했습니다</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="441"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="443"/>
       <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
       <translation>다음 URL에서 파일을 다운로드하는데 오류가 발생했습니다: {url}
@@ -422,62 +422,62 @@ Pages with failures / total:
       <translation>인페인팅 모델을 찾을 수 없음.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
-      <location filename="../pcleaner/gui/processing.py" line="921"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
+      <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>filename</source>
       <translation type="unfinished">filename</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
-      <location filename="../pcleaner/gui/processing.py" line="921"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
+      <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>startx</source>
       <translation type="unfinished">startx</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
-      <location filename="../pcleaner/gui/processing.py" line="921"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
+      <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>starty</source>
       <translation type="unfinished">starty</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
-      <location filename="../pcleaner/gui/processing.py" line="921"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
+      <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>endx</source>
       <translation type="unfinished">endx</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
-      <location filename="../pcleaner/gui/processing.py" line="921"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
+      <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>endy</source>
       <translation type="unfinished">endy</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1945"/>
-      <location filename="../pcleaner/gui/processing.py" line="921"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
+      <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>text</source>
       <translation type="unfinished">text</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1956"/>
-      <location filename="../pcleaner/gui/processing.py" line="930"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1958"/>
+      <location filename="../pcleaner/gui/processing.py" line="935"/>
       <source>Saved detected text to {output_file}</source>
       <translation>감지된 글자들을 다음 경로에 저장했습니다: {output_file}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1960"/>
-      <location filename="../pcleaner/gui/processing.py" line="934"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1962"/>
+      <location filename="../pcleaner/gui/processing.py" line="939"/>
       <source>Failed to write detected text to {output_file}</source>
       <translation>감지된 글자들을 다음 경로에 저장하는 데 실패했습니다: {output_file}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1964"/>
-      <location filename="../pcleaner/gui/processing.py" line="937"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1966"/>
+      <location filename="../pcleaner/gui/processing.py" line="942"/>
       <source>Save Failed</source>
       <translation>저장 실패</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1964"/>
-      <location filename="../pcleaner/gui/processing.py" line="937"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1966"/>
+      <location filename="../pcleaner/gui/processing.py" line="942"/>
       <source>Failed to write detected text to file.</source>
       <translation>감지된 글자들을 파일에 쓰는 데 실패했습니다.</translation>
     </message>
@@ -502,7 +502,7 @@ Pages with failures / total:
       <translation>경로 {img_path}는 존재하지 않습니다.</translation>
     </message>
     <message numerus="yes">
-      <location filename="../pcleaner/image_export.py" line="135"/>
+      <location filename="../pcleaner/image_export.py" line="134"/>
       <source>Clean mask</source>
       <comment>layered export</comment>
       <translation>
@@ -510,7 +510,7 @@ Pages with failures / total:
       </translation>
     </message>
     <message numerus="yes">
-      <location filename="../pcleaner/image_export.py" line="136"/>
+      <location filename="../pcleaner/image_export.py" line="135"/>
       <source>Denoised mask</source>
       <comment>layered export</comment>
       <translation>
@@ -518,7 +518,7 @@ Pages with failures / total:
       </translation>
     </message>
     <message numerus="yes">
-      <location filename="../pcleaner/image_export.py" line="138"/>
+      <location filename="../pcleaner/image_export.py" line="137"/>
       <source>Inpainting mask</source>
       <comment>layered export</comment>
       <translation>
@@ -526,7 +526,7 @@ Pages with failures / total:
       </translation>
     </message>
     <message numerus="yes">
-      <location filename="../pcleaner/image_export.py" line="140"/>
+      <location filename="../pcleaner/image_export.py" line="139"/>
       <source>Isolated text</source>
       <comment>layered export</comment>
       <translation>
@@ -534,7 +534,7 @@ Pages with failures / total:
       </translation>
     </message>
     <message numerus="yes">
-      <location filename="../pcleaner/image_export.py" line="433"/>
+      <location filename="../pcleaner/image_export.py" line="444"/>
       <source>Page</source>
       <comment>layered export</comment>
       <translation>
@@ -542,27 +542,32 @@ Pages with failures / total:
       </translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/structures.py" line="108"/>
+      <location filename="../pcleaner/gui/structures.py" line="111"/>
       <source>%id</source>
       <translation type="unfinished">%id</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/structures.py" line="109"/>
+      <location filename="../pcleaner/gui/structures.py" line="112"/>
       <source>%i</source>
       <translation type="unfinished">%i</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/structures.py" line="110"/>
+      <location filename="../pcleaner/gui/structures.py" line="113"/>
       <source>%od</source>
       <translation type="unfinished">%od</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/structures.py" line="111"/>
+      <location filename="../pcleaner/gui/structures.py" line="114"/>
       <source>%o</source>
       <translation type="unfinished">%o</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/structures.py" line="112"/>
+      <location filename="../pcleaner/gui/structures.py" line="115"/>
+      <source>%c</source>
+      <translation type="unfinished">%c</translation>
+    </message>
+    <message>
+      <location filename="../pcleaner/gui/structures.py" line="116"/>
       <source>%p</source>
       <translation type="unfinished">%p</translation>
     </message>
@@ -633,17 +638,17 @@ An AI-powered tool to clean manga panels.</source>
       <translation>클립보드에 복사</translation>
     </message>
     <message>
-      <location filename="../ui_files/ErrorDialog.ui" line="113"/>
+      <location filename="../ui_files/ErrorDialog.ui" line="112"/>
       <source>Open Issue Tracker</source>
       <translation>이슈 트래커 열기</translation>
     </message>
     <message>
-      <location filename="../ui_files/ErrorDialog.ui" line="124"/>
+      <location filename="../ui_files/ErrorDialog.ui" line="122"/>
       <source>Terminate Panel Cleaner</source>
       <translation>프로그램 강제 종료</translation>
     </message>
     <message>
-      <location filename="../ui_files/ErrorDialog.ui" line="134"/>
+      <location filename="../ui_files/ErrorDialog.ui" line="132"/>
       <source>Close</source>
       <translation>닫기</translation>
     </message>
@@ -952,37 +957,37 @@ By default, this uses the built-in profile. However, you can change this default
       <translation>확대</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageDetails.ui" line="151"/>
+      <location filename="../ui_files/ImageDetails.ui" line="150"/>
       <source>Zoom out</source>
       <translation>축소</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageDetails.ui" line="168"/>
+      <location filename="../ui_files/ImageDetails.ui" line="166"/>
       <source>Reset zoom</source>
       <translation>확대 초기화</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageDetails.ui" line="185"/>
+      <location filename="../ui_files/ImageDetails.ui" line="182"/>
       <source>Zoom to fit</source>
       <translation>화면에 맞추기</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageDetails.ui" line="205"/>
+      <location filename="../ui_files/ImageDetails.ui" line="201"/>
       <source>Refresh</source>
       <translation>새로고침</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageDetails.ui" line="289"/>
+      <location filename="../ui_files/ImageDetails.ui" line="283"/>
       <source>Generating...</source>
       <translation>생성중...</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageDetails.ui" line="338"/>
+      <location filename="../ui_files/ImageDetails.ui" line="332"/>
       <source>Position:</source>
       <translation>위치:</translation>
     </message>
     <message>
-      <location filename="../ui_files/ImageDetails.ui" line="359"/>
+      <location filename="../ui_files/ImageDetails.ui" line="353"/>
       <source>Size:</source>
       <translation>크기:</translation>
     </message>
@@ -1208,12 +1213,12 @@ Please enable inpainting in the profile settings and try again.</source>
       <translation>클립보드에 복사</translation>
     </message>
     <message>
-      <location filename="../ui_files/IssueReporter.ui" line="114"/>
+      <location filename="../ui_files/IssueReporter.ui" line="113"/>
       <source>Open Issue Tracker</source>
       <translation>이슈 트래커 열기</translation>
     </message>
     <message>
-      <location filename="../ui_files/IssueReporter.ui" line="125"/>
+      <location filename="../ui_files/IssueReporter.ui" line="123"/>
       <source>Close</source>
       <translation>닫기</translation>
     </message>
@@ -1269,49 +1274,49 @@ Please enable inpainting in the profile settings and try again.</source>
   <context>
     <name>MainWindow</name>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="420"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="418"/>
       <source>Open Config</source>
       <comment>Statusbar button</comment>
       <translation>설정 열기</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="425"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="423"/>
       <source>Open Log</source>
       <comment>Statusbar button</comment>
       <translation>로그 열기</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="441"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="439"/>
       <source>CUDA Enabled</source>
       <translation>CUDA 활성화됨</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="609"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="607"/>
       <source>Select Output Directory</source>
       <translation>저장 디렉토리 설정</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="670"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="668"/>
       <source>Aborting...</source>
       <translation>중지중...</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="735"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="733"/>
       <source>Loading OCR model...</source>
       <translation>OCR 모델 불러오는 중...</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="739"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="737"/>
       <source>Loaded OCR model.</source>
       <translation>OCR 모델 불러옴.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="751"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="749"/>
       <source>Error</source>
       <translation>오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="858"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="856"/>
       <source>Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
 
 Continue anyway?</source>
@@ -1320,33 +1325,33 @@ Continue anyway?</source>
 계속하시겠습니까?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="901"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
       <source>Delete Models</source>
       <translation>모델 삭제</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="903"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="901"/>
       <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
       <translation>머신 러닝 모델을 삭제하시겠습니까? 다시 다운로드할 때까지 글자 지우기 및 OCR이 불가능해집니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="751"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="749"/>
       <source>Encountered error:</source>
       <translation>오류 발생:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="445"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="443"/>
       <source>MPS Enabled</source>
       <translation>MPS 활성화됨</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="456"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="468"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="454"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="466"/>
       <source>Inpainting Model Update</source>
       <translation>인페인팅 모델 업데이트</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="458"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="456"/>
       <source>A new version of the inpainting model is available.
 You can delete the model later if you don&apos;t want to upgrade yet.
 Switch to the new model?</source>
@@ -1355,375 +1360,375 @@ Switch to the new model?</source>
 새 모델로 바꾸시겠습니까?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="470"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="468"/>
       <source>Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</source>
       <translation>오래된 모델을 유지합니다. 업데이트하려면 메뉴에서 &quot;도움말&quot;을 선택한 다음 &quot;머신 러닝 모델 삭제&quot;를 선택하세요.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="807"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="805"/>
       <source>Layout Reset</source>
       <translation>레이아웃 초기화</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="808"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="806"/>
       <source>The window layout has been reset. The default layout will be used next time.</source>
       <translation>화면의 레이아웃을 초기화합니다. 다음부터 기본값이 적용됩니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="856"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="854"/>
       <source>Multiple Instances</source>
       <translation>다중 인스턴스</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="862"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="860"/>
       <source>Found process ID in lock file: </source>
       <translation>lock 파일에서 찾은 프로세스 ID: </translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="914"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="912"/>
       <source>Failed to delete models.</source>
       <translation>모델 삭제 실패.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="914"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="912"/>
       <source>Delete Failed</source>
       <translation>삭제 실패</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="920"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="922"/>
       <source>Models Deleted</source>
       <translation>모델 삭제됨</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="921"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="923"/>
       <source>The models were deleted. Would you like to download them again?</source>
       <translation>모델을 삭제했습니다. 다시 다운로드하시겠습니까?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1007"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1009"/>
       <source>Not Supported</source>
       <translation>지원되지 않음</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1007"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1009"/>
       <source>Unsupported system or package format</source>
       <translation>지원되지 않는 시스템 또는 패키지 형식</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1024"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1026"/>
       <source>Shutdown</source>
       <translation>컴퓨터 종료</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1062"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1064"/>
       <source>After processing, the system will shut down.</source>
       <translation>처리가 끝난 후 컴퓨터를 종료합니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1093"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1095"/>
       <source>You have review options enabled, these will need to be manually closed before the action can start.</source>
       <translation>검토가 활성화되어 있으므로 작업을 시작하기 전에 수동으로 닫아야 합니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1102"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1104"/>
       <source>You have disabled writing output.</source>
       <translation>쓰기 출력을 비활성화했습니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1156"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1158"/>
       <source>Shutting down system...</source>
       <translation>시스템 종료...</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1166"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1168"/>
       <source>Running post action &quot;{action}&quot;...</source>
       <translation>후속 작업 &quot;{action}&quot; 실행...</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1201"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1203"/>
       <source>Restart Required</source>
       <translation>재시작 필요</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1203"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1205"/>
       <source>The language has been changed. Please restart the application for the changes to take effect.</source>
       <translation>언어가 변경되었습니다. 변경 사항을 적용하려면 프로그램을 종료 후 다시 실행해 주세요.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1214"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1215"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1216"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1217"/>
       <source>System Language</source>
       <translation>시스템 언어</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1316"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1318"/>
       <source>Import Profile</source>
       <translation>프로파일 가져오기</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1318"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1320"/>
       <source>Profile Files (*.conf)</source>
       <translation>프로파일 파일 (*.conf)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1325"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1327"/>
       <source>Profile Imported</source>
       <translation>프로파일 가져옴</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1327"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1329"/>
       <source>Import Error</source>
       <translation>가져오기 오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1345"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1347"/>
       <source>Failed to Delete</source>
       <translation>삭제 실패</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1345"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1347"/>
       <source>The default profile cannot be deleted.</source>
       <translation>기본 프로파일은 삭제할 수 없습니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1350"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1352"/>
       <source>Delete Profile</source>
       <translation>프로파일 삭제</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1351"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1353"/>
       <source>Are you sure you want to delete the profile {profile_name}?</source>
       <translation>정말로 프로파일 {profile_name}을(를) 삭제하시겠습니까?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1365"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1367"/>
       <source>Delete Error</source>
       <translation>삭제 오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1366"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1368"/>
       <source>Failed to delete the profile.</source>
       <translation>프로파일 삭제 실패.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1427"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1429"/>
       <source>The profile &apos;{profile}&apos; has unsaved changes.
 Switching profiles will discard changes to the current profile.</source>
       <translation>프로파일 &apos;{profile}&apos;에 저장되지 않은 변경 사항이 있습니다.
 프로파일을 전환하면 현재 변경 사항이 없어집니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1432"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1434"/>
       <source>Unsaved changes</source>
       <translation>저장되지 않은 변경 사항</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1461"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1621"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1463"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1623"/>
       <source>Load Error</source>
       <translation>불러오기 오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1461"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1621"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1463"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1623"/>
       <source>Failed to load profile:</source>
       <translation>프로파일 불러오기 실패:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1478"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1480"/>
       <source>Tesseract OCR is not installed or not found</source>
       <translation>테서렉트 OCR이 설치되어 있지 않거나 찾을 수 없습니다</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1480"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1482"/>
       <source>&lt;html&gt;Can&apos;t use Tesseract to perform OCR. Reverting to manga-ocr.
 Please see the instructions to install Tesseract correctly &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;here&lt;/a&gt; or continue using the default model.&lt;/html&gt;</source>
       <translation>&lt;html&gt;테서렉트를 사용할 수 없어 OCR을 할 수 없습니다. manga-ocr로 되돌립니다.
 테서렉트를 올바르게 설치하기 위해 &lt;a href=&quot;https://github.com/VoxelCubes/PanelCleaner?tab=readme-ov-file#ocr&quot;&gt;이 문서&lt;/a&gt;를 읽거나 기본 모델을 씁니다.&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1495"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1497"/>
       <source>Unsupported Language</source>
       <translation>지원되지 않는 언어</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1497"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1499"/>
       <source>The language &apos;{lang_name}&apos; is not supported by any of your current OCR engines. 
 Check the online documentation for how to add support for more languages.</source>
       <translation>언어 &apos;{lang_name}&apos;는 모든 현재 OCR 모델에서 지원되지 않습니다. 
 더 많은 언어를 지원하는 방법은 온라인 문서를 확인하세요.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1577"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1579"/>
       <source>Profile Created</source>
       <translation>프로파일 생성됨</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1580"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1582"/>
       <source>Create Error</source>
       <translation>생성 오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1589"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1591"/>
       <source>Failed to save profile to {profile_path}</source>
       <translation>프로파일을 다음 경로에 저장하는 데 실패했습니다: {profile_path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1593"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1608"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1595"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1610"/>
       <source>Save Error</source>
       <translation>저장 오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1594"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1596"/>
       <source>Failed to save profile.</source>
       <translation>프로파일 저장 실패.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1600"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1602"/>
       <source>Profile saved to {profile_path}</source>
       <translation>프로파일이 다음 경로에 저장됐습니다: {profile_path}</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1605"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1607"/>
       <source>Failed to save config.</source>
       <translation>설정 저장 실패.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1609"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1611"/>
       <source>Failed to save the new profile to the configuration file.</source>
       <translation>새 프로파일을 설정 파일로 저장하는 데 실패했습니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1671"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1845"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1673"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1847"/>
       <source>No Files</source>
       <translation>파일 없음</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1673"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1675"/>
       <source>No files to process. You can add files by dragging and dropping them in the middle of the window, or through the menubar: Files -&gt; Add Files or Add Folder.</source>
       <translation>처리할 파일이 없습니다. 화면에 드래그 앤 드롭하거나 메뉴를 통해 파일을 추가할 수 있습니다: 파일 -&gt; 파일 추가 또는 폴더 추가.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1771"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1773"/>
       <source>No Outputs</source>
       <translation>출력 없음</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1773"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1775"/>
       <source>No outputs were requested. Please select at least one output before cleaning.</source>
       <translation>저장할 결과물이 없습니다. 저장할 것을 한 개 이상 선택해 주세요.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1788"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1790"/>
       <location filename="../ui_files/Mainwindow.ui" line="654"/>
       <source>cleaned</source>
       <translation>정리된이미지</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1847"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1849"/>
       <source>No files to process. To edit an old OCR output file, you must first load (one or more of) the images to which it corresponds.</source>
       <translation>처리할 파일이 없습니다. 이전 OCR 결과 파일을 편집하려면 먼저 해당 파일에 해당하는 이미지를 로드해야 합니다(하나 이상).</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1858"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1860"/>
       <source>Open OCR Output File</source>
       <translation>OCR 결과 파일 열기</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1860"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1862"/>
       <source>OCR Output Files (*.txt *.csv)</source>
       <translation>OCR 결과 파일 (*.txt *.csv)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1875"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1877"/>
       <source>Parse Error</source>
       <translation>파싱 오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1876"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1878"/>
       <source>Failed to parse the OCR output file.</source>
       <translation>OCR 결과 파일을 파싱하는 데 실패했습니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2039"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2041"/>
       <source>File Exists</source>
       <translation>파일 존재함</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2040"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2042"/>
       <source>The file &apos;{output_path}&apos; already exists. Overwrite?</source>
       <translation>피일 &apos;{output_path}&apos;은 이미 존재합니다. 덮어쓰시겠습니까?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2179"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2181"/>
       <source>Export Images</source>
       <translation>이미지 내보내기</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2180"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2182"/>
       <source>Would you like to export the cleaned images?</source>
       <translation>정리된 이미지들을 내보내겠습니까?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2150"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2152"/>
       <source>Export OCR Results</source>
       <translation>OCR 결과 내보내기</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1074"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1076"/>
       <source>After processing, the &quot;{action}&quot; action will be executed.</source>
       <translation>처리가 완료된 후 작업 &quot;{action}&quot;이(가) 실행됩니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1127"/>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1151"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1129"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1153"/>
       <source>Post action canceled.</source>
       <translation>후속 작업 취소됨.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1685"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1687"/>
       <source>Un-Applied Changes</source>
       <translation>적용되지 않은 변경 사항</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1686"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="1688"/>
       <source>You have un-applied changes to the profile. Continue anyway?</source>
       <translation>프로파일에 적용되지 않은 변경 사항이 있습니다. 그래도 계속하시겠습니까?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2151"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2153"/>
       <source>Would you like to export the OCR results?</source>
       <translation>OCR 결과를 내보내겠습니까?</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2170"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2172"/>
       <source>Processing Finished</source>
       <translation>처리 완료</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2170"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2172"/>
       <source>Finished processing all files.</source>
       <translation>모든 파일 처리 완료.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2198"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2200"/>
       <source>Processing Aborted</source>
       <translation>처리 중단됨</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2198"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2200"/>
       <source>Processing aborted.</source>
       <translation>처리가 중단되었습니다.</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2230"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2232"/>
       <source>Processing Error</source>
       <translation>처리 오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2231"/>
+      <location filename="../pcleaner/gui/mainwindow_driver.py" line="2233"/>
       <source>Encountered an error while processing files.</source>
       <translation>처리 중 오류가 발생했습니다.</translation>
     </message>
@@ -1750,7 +1755,7 @@ Check the online documentation for how to add support for more languages.</sourc
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="82"/>
-      <location filename="../ui_files/Mainwindow.ui" line="1321"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1320"/>
       <source>Save</source>
       <translation>저장</translation>
     </message>
@@ -1961,65 +1966,60 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>언어</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1237"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1236"/>
       <source>Help</source>
       <translation>도움말</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1260"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1259"/>
       <source>Add Files...</source>
       <translation>파일 추가...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1268"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1267"/>
       <source>Remove All Files</source>
       <translation>모든 파일 제거</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1403"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1402"/>
       <source>Remove File</source>
       <translation>파일 제거</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1411"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1410"/>
       <source>Help Translate Panel Cleaner</source>
       <translation>패널 클리너 번역 도와주기</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1419"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1418"/>
       <source>Report an Issue...</source>
       <translation>이슈 제보...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1424"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1423"/>
       <source>Simulate Exception</source>
       <translation>예외 시뮬레이션</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1432"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1431"/>
       <source>Add File Browser Extension...</source>
       <translation>파일 관리자 확장 기능 추가...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1440"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1439"/>
       <source>Show Supported OCR Languages</source>
       <translation>지원하는 OCR 언어 표시</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1445"/>
-      <location filename="../ui_files/Mainwindow.ui" line="1453"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1444"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1452"/>
       <source>Reset Window Layout Preferences</source>
       <translation>화면 레이아웃 설정 초기화</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1464"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1463"/>
       <source>Show Out Of Memory Warnings</source>
       <translation>메모리 부족 경고 표시</translation>
-    </message>
-    <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1491"/>
-      <source>Clear Image Cache When Closing</source>
-      <translation type="unfinished">Clear Image Cache When Closing</translation>
     </message>
     <message>
       <location filename="../ui_files/Mainwindow.ui" line="1221"/>
@@ -2027,12 +2027,12 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>후속 작업</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1472"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1471"/>
       <source>Configure Post-Run Actions...</source>
       <translation>후속 작업 구성하기...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1276"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1275"/>
       <source>New</source>
       <translation>새로 만들기</translation>
     </message>
@@ -2047,67 +2047,67 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>CSV</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1284"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1283"/>
       <source>Delete</source>
       <translation>삭제</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1292"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1291"/>
       <source>Import...</source>
       <translation>가져오기...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1300"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1299"/>
       <source>Online Documentation</source>
       <translation>온라인 문서</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1308"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1307"/>
       <source>About Panel Cleaner</source>
       <translation>패널 클리너에 대해</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1313"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1312"/>
       <source>View License</source>
       <translation>라이선스 보기</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1329"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1328"/>
       <source>Save as...</source>
       <translation>다른 이름으로 저장...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1337"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1336"/>
       <source>System</source>
       <translation>시스템 설정에 따름</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1345"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1344"/>
       <source>Dark</source>
       <translation>다크</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1353"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1352"/>
       <source>Light</source>
       <translation>라이트</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1366"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1365"/>
       <source>Add Folder...</source>
       <translation>폴더 추가...</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1374"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1373"/>
       <source>Delete Machine Learning Models</source>
       <translation>머신 러닝 모델 삭제</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1382"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1381"/>
       <source>Download Machine Learning Models</source>
       <translation>머신 러닝 모델 다운로드</translation>
     </message>
     <message>
-      <location filename="../ui_files/Mainwindow.ui" line="1387"/>
+      <location filename="../ui_files/Mainwindow.ui" line="1386"/>
       <source>Donate</source>
       <translation>후원</translation>
     </message>
@@ -2139,44 +2139,44 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>OCR 모델:</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="107"/>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="113"/>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="119"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="108"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="114"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="120"/>
       <source>Already downloaded</source>
       <translation>이미 다운로드됨</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="138"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="139"/>
       <source>Text Detector model (CUDA)</source>
       <translation>글자 감지 모델 (CUDA)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="142"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="143"/>
       <source>Text Detector model (CPU)</source>
       <translation>글자 감지 모델 (CPU)</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="193"/>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="195"/>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="257"/>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="341"/>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="343"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="194"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="196"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="258"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="342"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="344"/>
       <source>Download Failed</source>
       <translation>다운로드 실패</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="244"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="245"/>
       <source>OCR download errors</source>
       <translation>OCR 다운로드 오류</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="283"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="284"/>
       <source>ETA</source>
       <comment>estimated time of completion</comment>
       <translation>남은 예상 시간</translation>
     </message>
     <message>
-      <location filename="../pcleaner/gui/model_downloader_driver.py" line="295"/>
+      <location filename="../pcleaner/gui/model_downloader_driver.py" line="296"/>
       <location filename="../ui_files/ModelDownloader.ui" line="186"/>
       <source>Inpainting model</source>
       <translation>인페인팅 모델</translation>
@@ -2205,7 +2205,7 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>다른 경로 사용:</translation>
     </message>
     <message>
-      <location filename="../ui_files/NewProfile.ui" line="77"/>
+      <location filename="../ui_files/NewProfile.ui" line="76"/>
       <source>Profile Name:</source>
       <translation>프로파일 이름:</translation>
     </message>
@@ -2267,7 +2267,7 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>테서렉트 설치 방법</translation>
     </message>
     <message>
-      <location filename="../ui_files/OCRLanguageSupport.ui" line="120"/>
+      <location filename="../ui_files/OCRLanguageSupport.ui" line="119"/>
       <source>How to install Tesseract language packs</source>
       <translation>테서렉트 언어 팩 설치 방법</translation>
     </message>
@@ -2290,92 +2290,92 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>이전 이미지</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="116"/>
+      <location filename="../ui_files/OcrReview.ui" line="115"/>
       <source>Next image</source>
       <translation>다음 이미지</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="230"/>
+      <location filename="../ui_files/OcrReview.ui" line="228"/>
       <source>Zoom in</source>
       <translation>확대</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="247"/>
+      <location filename="../ui_files/OcrReview.ui" line="244"/>
       <source>Zoom out</source>
       <translation>축소</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="264"/>
+      <location filename="../ui_files/OcrReview.ui" line="260"/>
       <source>Reset zoom</source>
       <translation>확대 초기화</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="281"/>
+      <location filename="../ui_files/OcrReview.ui" line="276"/>
       <source>Zoom to fit</source>
       <translation>화면에 맞추기</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="299"/>
+      <location filename="../ui_files/OcrReview.ui" line="293"/>
       <source>With Boxes</source>
       <translation>인식 구역 표시</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="304"/>
+      <location filename="../ui_files/OcrReview.ui" line="298"/>
       <source>Original</source>
       <translation>원본 이미지만</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="319"/>
+      <location filename="../ui_files/OcrReview.ui" line="313"/>
       <source>Move box order up</source>
       <translation>박스 순서를 위로</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="336"/>
+      <location filename="../ui_files/OcrReview.ui" line="329"/>
       <source>Move box order down</source>
       <translation>박스 순서를 아래로</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="353"/>
+      <location filename="../ui_files/OcrReview.ui" line="345"/>
       <source>Add a new box</source>
       <translation>새 영역 추가</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="369"/>
+      <location filename="../ui_files/OcrReview.ui" line="361"/>
       <source>Delete current box</source>
       <translation>현재 박스 삭제</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="386"/>
+      <location filename="../ui_files/OcrReview.ui" line="377"/>
       <source>Recover this deleted box</source>
       <translation>삭제한 박스 복원</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="399"/>
+      <location filename="../ui_files/OcrReview.ui" line="390"/>
       <source>Reset changes to this image</source>
       <translation>이 이미지의 변경 사항 초기화</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="416"/>
+      <location filename="../ui_files/OcrReview.ui" line="406"/>
       <source>Reset All</source>
       <translation>전부 초기화</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="437"/>
+      <location filename="../ui_files/OcrReview.ui" line="426"/>
       <source>OCR new boxes:</source>
       <translation>새 영역 추가 OCR:</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="447"/>
+      <location filename="../ui_files/OcrReview.ui" line="436"/>
       <source>Done</source>
       <translation>완료</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="504"/>
+      <location filename="../ui_files/OcrReview.ui" line="493"/>
       <source>Box</source>
       <translation>박스</translation>
     </message>
     <message>
-      <location filename="../ui_files/OcrReview.ui" line="509"/>
+      <location filename="../ui_files/OcrReview.ui" line="498"/>
       <source>Text</source>
       <translation>글자</translation>
     </message>
@@ -2471,62 +2471,62 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>이전 이미지</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="110"/>
+      <location filename="../ui_files/OutputReview.ui" line="109"/>
       <source>Next image</source>
       <translation>다음 이미지</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="224"/>
+      <location filename="../ui_files/OutputReview.ui" line="222"/>
       <source>Zoom in</source>
       <translation>확대</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="241"/>
+      <location filename="../ui_files/OutputReview.ui" line="238"/>
       <source>Zoom out</source>
       <translation>축소</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="258"/>
+      <location filename="../ui_files/OutputReview.ui" line="254"/>
       <source>Reset zoom</source>
       <translation>확대 초기화</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="275"/>
+      <location filename="../ui_files/OutputReview.ui" line="270"/>
       <source>Zoom to fit</source>
       <translation>화면에 맞추기</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="292"/>
+      <location filename="../ui_files/OutputReview.ui" line="286"/>
       <source>View Mode:</source>
       <translation>보기 모드:</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="300"/>
+      <location filename="../ui_files/OutputReview.ui" line="294"/>
       <source>Side-by-Side</source>
       <translation>나란히</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="305"/>
+      <location filename="../ui_files/OutputReview.ui" line="299"/>
       <source>Swipe</source>
       <translation>스와이프</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="310"/>
+      <location filename="../ui_files/OutputReview.ui" line="304"/>
       <source>Onion</source>
       <translation>글자 오버레이</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="315"/>
+      <location filename="../ui_files/OutputReview.ui" line="309"/>
       <source>Difference</source>
       <translation>차이</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="320"/>
+      <location filename="../ui_files/OutputReview.ui" line="314"/>
       <source>Overlay</source>
       <translation>마스크 오버레이</translation>
     </message>
     <message>
-      <location filename="../ui_files/OutputReview.ui" line="328"/>
+      <location filename="../ui_files/OutputReview.ui" line="322"/>
       <source>Done</source>
       <translation>완료</translation>
     </message>
@@ -2613,124 +2613,140 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>순서 위로 이동</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="156"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="155"/>
       <source>Move command down</source>
       <translation>순서 아래로 이동</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="173"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="171"/>
       <source>New</source>
       <translation>추가</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="187"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="184"/>
       <source>Delete</source>
       <translation>삭제</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="228"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="224"/>
       <source>Action Name</source>
       <translation>작업 이름</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="233"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="229"/>
       <source>Command or Script File Path</source>
       <translation>명령어 또는 스크립트 파일의 경로</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="243"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="239"/>
       <source>Cancel the custom action if processing failed</source>
       <translation>처리 실패 시 맞춤 작업 취소</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="253"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="249"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Power Off action will run regardless of this setting.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;시스템 종료 커맨드는 이 설정과 관계없이 실행됩니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="303"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="298"/>
       <source>Placeholder Tokens:</source>
       <translation>변환 문자:</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="323"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="318"/>
       <source>Input Files</source>
       <translation>원본 파일 경로</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="338"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="333"/>
       <source>%i</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%i</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="345"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="340"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file processed, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;원본 이미지들의 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="373"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="368"/>
       <source>Input Directory</source>
       <translation>원본 폴더 경로</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="388"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="383"/>
       <source>%id</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%id</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="395"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="390"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;원본 이미지들이 들어있던 폴더의 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="427"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="422"/>
       <source>Output Files</source>
       <translation>결과물 저장 경로</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="442"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="437"/>
       <source>%o</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%o</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="449"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="444"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The individual file paths of each file created as an output, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;완성된 결과물 이미지들이 저장된 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="477"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="472"/>
       <source>Output Directory</source>
       <translation>결과물 저장 폴더 경로</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="492"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="487"/>
       <source>%od</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%od</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="499"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="494"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group output files by parent directory and list these, as a space separated list, with quotation marks where necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;완성된 결과물 이미지들이 저장된 폴더의 경로를 공백으로 구분된 리스트로 제공하며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="531"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="526"/>
       <source>Profile Used</source>
       <translation>프로파일 이름</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="546"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="541"/>
       <source>%p</source>
       <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
       <translation type="unfinished">%p</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionConfiguration.ui" line="553"/>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="548"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The name of the profile used, with quotation marks if necessary.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;작업에 사용된 프로파일의 이름이며, 필요한 경우 따옴표로 감쌉니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="576"/>
+      <source>Cache ID</source>
+      <translation type="unfinished">Cache ID</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="591"/>
+      <source>%c</source>
+      <extracomment>Yes, you may change this, so long as all tokens are different and the directory version is longer than the file version. So, a and ab are allowed for file and directory, but not the other way around.</extracomment>
+      <translation type="unfinished">%c</translation>
+    </message>
+    <message>
+      <location filename="../ui_files/PostActionConfiguration.ui" line="598"/>
+      <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The internal prefix ID the files had while in the cache, to distinguish files with the same name, as a space separated list. Example: if the image &quot;page1&quot; in cache is called 6a33b5e7-6761-445a-ad9a-f6291232edfb_page1_base.png then the cache ID is 6a33b5e7-6761-445a-ad9a-f6291232edfb.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+      <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The internal prefix ID the files had while in the cache, to distinguish files with the same name, as a space separated list. Example: if the image &quot;page1&quot; in cache is called 6a33b5e7-6761-445a-ad9a-f6291232edfb_page1_base.png then the cache ID is 6a33b5e7-6761-445a-ad9a-f6291232edfb.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/post_action_config.py" line="142"/>
@@ -2766,42 +2782,42 @@ Check the online documentation for how to add support for more languages.</sourc
       <translation>작업 처리 중 오류가 발생했습니다.</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionRunner.ui" line="194"/>
+      <location filename="../ui_files/PostActionRunner.ui" line="193"/>
       <source>Full Command:</source>
       <translation>전체 커맨드:</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionRunner.ui" line="231"/>
+      <location filename="../ui_files/PostActionRunner.ui" line="230"/>
       <source>Run Again</source>
       <translation>재실행</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionRunner.ui" line="241"/>
+      <location filename="../ui_files/PostActionRunner.ui" line="240"/>
       <source>Skip Countdown</source>
       <translation>카운트다운 건너뛰기</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionRunner.ui" line="261"/>
+      <location filename="../ui_files/PostActionRunner.ui" line="260"/>
       <source>Resume Countdown</source>
       <translation>카운트다운 재개</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionRunner.ui" line="271"/>
+      <location filename="../ui_files/PostActionRunner.ui" line="270"/>
       <source>Pause Countdown</source>
       <translation>카운트다운 일시정지</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionRunner.ui" line="283"/>
+      <location filename="../ui_files/PostActionRunner.ui" line="282"/>
       <source>Close</source>
       <translation>닫기</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionRunner.ui" line="295"/>
+      <location filename="../ui_files/PostActionRunner.ui" line="294"/>
       <source>Cancel Action</source>
       <translation>작업 취소</translation>
     </message>
     <message>
-      <location filename="../ui_files/PostActionRunner.ui" line="305"/>
+      <location filename="../ui_files/PostActionRunner.ui" line="304"/>
       <source>Cancel Shutdown</source>
       <translation>중지 취소</translation>
     </message>
@@ -4729,7 +4745,7 @@ You can download the model manually from &lt;a href=&quot;https://github.com/zyd
       <translation>자동 다운로드</translation>
     </message>
     <message>
-      <location filename="../ui_files/SetupGreeter.ui" line="434"/>
+      <location filename="../ui_files/SetupGreeter.ui" line="433"/>
       <source>Abort</source>
       <translation>취소</translation>
     </message>
