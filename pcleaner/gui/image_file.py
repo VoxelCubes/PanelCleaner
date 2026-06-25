@@ -34,6 +34,7 @@ class ProcessOutput:
     _path: Path | None = None
     _sensitivity_filter: attrs.filters
     _current_profile_dict: dict[str, Any] | None = None
+
     # This used to use a current_dict_checksum, using the json representation of the filtered profile
     # for the digest, but that proved unreliable despite the json exporter having sort keys enabled.
     # The result were phantom differences that didn't exist, so using dictdiffer and comparing the filtered
@@ -156,20 +157,28 @@ class ImageFile:
 
     error: Exception | None = None  # Error that occurred during any process.
 
-    def __init__(self, path: Path, split_from: Path = None, export_path: Path = None) -> None:
+    def __init__(
+        self,
+        path: Path,
+        split_from: Path | None = None,
+        export_path: Path | None = None,
+        split_from_uuid: str | None = None,
+    ) -> None:
         """
         Init the image file.
+        When splitting images, the path will be a temporary file in the cache directory, thus the
+        split_from is then needed to know the original image location for exporting.
 
-        :param path: Path to the image file.
+        :param path: Path to the input image file.
+        :param split_from: Path to the original image that this image was split from, if any.
+        :param export_path: The path to export the image to. If None, the path will be used.
+        :param split_from_uuid: The UUID of the original image that this image was split from, if any.
         """
         self.path = path
         self.split_from = split_from
-        if export_path is None:
-            self.export_path = path
-        else:
-            self.export_path = export_path
+        self.export_path = export_path or path
         self.icon = Qg.QIcon.fromTheme(cfg.SUFFIX_TO_ICON[path.suffix.lower()])
-        self.uuid = str(uuid4())
+        self.uuid = split_from_uuid or str(uuid4())
         self.outputs = {}
         self.analytics_data = ost.ImageAnalytics()
 
@@ -412,7 +421,7 @@ DummyOutput = namedtuple("DummyOutput", ["path"])
 
 class MergedImageFile:
     """
-    This class represents an image file.
+    This class represents an image file that is stitched together vertically from multiple segments.
     """
 
     # This is all we need for exporting.
@@ -422,7 +431,11 @@ class MergedImageFile:
     outputs: dict[ost.Output, DummyOutput]
 
     def __init__(
-        self, image_files: list[ImageFile], cache_dir: Path, for_ocr: bool = False
+        self,
+        image_files: list[ImageFile],
+        cache_dir: Path,
+        for_ocr: bool = False,
+        stitch_all: bool = False,
     ) -> None:
         """
         Create an amalgam from the given image files.
@@ -432,6 +445,7 @@ class MergedImageFile:
         :param image_files: The image files to merge.
         :param cache_dir: The cache directory to store the merged image.
         :param for_ocr: When merging for ocr we need to forge some outputs data.
+        :param stitch_all: When True, stitch all image available outputs together, not just those used for final export.
         """
         # Check that all images came from the same original image.
         split_from = {image.split_from for image in image_files}
@@ -441,16 +455,16 @@ class MergedImageFile:
         self.path = split_from.pop()
         self.export_path = self.path
 
-        # We need to merge the images together under a fresh UUID.
+        # We need to merge the images together under the shared UUID.
         # Add an identifying prefix so we can clean this up later.
-        self.uuid = f"merger_{uuid4()}"
+        self.uuid = f"merger_{image_files[0].uuid}"
 
         merge_files = [
             ie.ExportTarget(image.export_path, image.export_path, image.uuid, [])
             for image in image_files
         ]
         path_gen_master = ie.merge_cached_images(
-            self.path, merge_files, cache_dir, for_ocr, self.uuid
+            self.path, merge_files, cache_dir, for_ocr, self.uuid, stitch_all
         )
 
         if for_ocr:

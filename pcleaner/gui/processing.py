@@ -180,7 +180,9 @@ def generate_output(
             f"Running text detection AI model for {len(step_text_detector_images)} images..."
         )
 
-        visualize_raw_boxes = ost.Output.raw_boxes in target_outputs
+        visualize_raw_boxes = (
+            ost.Output.raw_boxes in target_outputs or profile.general.always_cache_masks
+        )
 
         try:
             ctm.model2annotations_gui(
@@ -248,7 +250,8 @@ def generate_output(
                     path_gen.raw_json,
                     preprocessor_conf=profile.preprocessor,
                     cache_masks=target_output in ost.step_to_output[ost.Step.preprocessor]
-                    or output_dir is None,
+                    or output_dir is None
+                    or profile.general.always_cache_masks,
                     ocr_engine_factory=ocr_processor if profile.preprocessor.ocr_enabled else None,
                 )
 
@@ -326,7 +329,7 @@ def generate_output(
                     cache_dir,
                     profile.masker,
                     extract_text=ost.Output.isolated_text in target_outputs,
-                    show_masks=need_to_show_masks,
+                    show_masks=need_to_show_masks or profile.general.always_cache_masks,
                     debug=debug,
                 )
                 for json_file in json_files
@@ -651,12 +654,6 @@ def generate_output(
             )
             if file_path is not None:
                 batch_metadata.output_files = [file_path]
-
-        # Clean up merged files to prevent a storage leak
-        if split_files:
-            # These files start with merged_
-            for file in cache_dir.glob("merger_*"):
-                file.unlink()
 
     else:
         # We aren't writing output, but we may still need to update the metadata at least.
@@ -991,7 +988,9 @@ def handle_merging_splits(
                 continue
 
             # Create a new image object with the split objects.
-            merged_object = imf.MergedImageFile(split_objects, cache_dir, for_ocr)
+            merged_object = imf.MergedImageFile(
+                split_objects, cache_dir, for_ocr, profile.general.always_cache_masks
+            )
 
             # Add the new object to the list of image objects.
             image_objects.append(merged_object)

@@ -79,11 +79,13 @@ class BatchMetadata:
     input_dirs: list[Path] = field(factory=list)
     output_files: list[Path] = field(factory=list)
     output_dirs: list[Path] = field(factory=list)
+    cache_uuids: list[str] = field(factory=list)
     profile_used: str = ""
 
     def set_input_paths_from_files(self, files: list[imf.ImageFile]) -> None:
         self.input_files = [f.export_path for f in files]
         self.input_dirs = list(set(f.export_path.parent for f in files))
+        self.cache_uuids = [f.uuid for f in files]
 
     def calculate_output_parents(self) -> None:
         self.output_dirs = list(set(f.parent for f in self.output_files))
@@ -100,6 +102,7 @@ class BatchMetadata:
         %o - output files
         %od - output directories
         %p - profile used
+        %c - cache uuid
 
         :param command: the command to substitute
         :return: the command with placeholders substituted
@@ -109,5 +112,6 @@ class BatchMetadata:
             .replace(tr("%i"), self._shell_safe(self.input_files))
             .replace(tr("%od"), self._shell_safe(self.output_dirs))
             .replace(tr("%o"), self._shell_safe(self.output_files))
+            .replace(tr("%c"), " ".join(c for c in self.cache_uuids))
             .replace(tr("%p"), shlex.quote(self.profile_used))
         )

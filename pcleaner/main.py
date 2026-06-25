@@ -391,6 +391,11 @@ def run_cleaner(
         logger.debug("Inpainting is disabled in the config, skipping inpainting step.")
         skip_inpainting = True
 
+    # Override the cache masks flag if the config forces caching masks.
+    if profile.general.always_cache_masks:
+        logger.debug("Always cache masks is enabled in the config, caching masks.")
+        cache_masks = True
+
     # Catch jokesters who want to skip all 5 steps.
     if (
         skip_text_detection

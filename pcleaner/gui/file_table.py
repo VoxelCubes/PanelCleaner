@@ -24,7 +24,6 @@ import pcleaner.structures as st
 from .CustomQ.CTableWidget import CTableWidget
 import pcleaner.ocr.ocr as ocr
 
-
 # Add some space between the icon of each row.
 GUI_PADDING = 4
 
@@ -302,7 +301,8 @@ class FileTable(CTableWidget):
         else:
             segments = ops.split_image(path, splits)
             # Save these dummy files in the cache.
-            cache_dir = self.config.get_cleaner_cache_dir() / f"splits_{uuid.uuid4().hex}"
+            new_uuid = uuid.uuid4().hex
+            cache_dir = self.config.get_cleaner_cache_dir() / f"splits_{new_uuid}"
             cache_dir.mkdir(parents=True, exist_ok=True)
             self.split_files[path] = []
             for index, segment in enumerate(segments, 1):
@@ -311,7 +311,10 @@ class FileTable(CTableWidget):
                 segment.save(segment_path)
                 fake_path = path.with_name(segment_name)
                 self.files[segment_path] = imf.ImageFile(
-                    path=segment_path, split_from=path, export_path=fake_path
+                    path=segment_path,
+                    split_from=path,
+                    export_path=fake_path,
+                    split_from_uuid=new_uuid,
                 )
                 self.split_files[path].append(self.files[segment_path])
         return notify_on_duplicate

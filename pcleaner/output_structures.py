@@ -320,6 +320,10 @@ class OutputPathGenerator:
     def _attach(self, suffix: str) -> Path:
         return Path(self._output_base_path + suffix)
 
+    # Some of these map to the same file suffix due to backwards compatibility and such stuff
+    # with how things are named in the image viewer details. That's because of the
+    # slightly cursed way reflection is used to get the appropriate output name.
+
     @property
     def base_png(self) -> Path:
         return self._attach("_base.png")

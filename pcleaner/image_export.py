@@ -12,7 +12,6 @@ import pcleaner.image_ops as ops
 from pcleaner.helpers import tr
 from pcleaner.config import LayeredExport
 
-
 # SUPPORTED_IMG_TYPES = [".jpeg", ".jpg", ".png", ".bmp", ".tiff", ".tif", ".jp2", ".dib", ".webp", ".ppm"]
 
 # Map the file extension to the type constant used in Pillow.
@@ -502,6 +501,7 @@ def merge_cached_images(
     cache_dir: Path,
     for_ocr: bool,
     uuid: str,
+    stitch_all: bool = False,
 ) -> ost.OutputPathGenerator:
     """
     Merge the cached images into a single image.
@@ -511,6 +511,8 @@ def merge_cached_images(
     :param cache_dir: The cache directory.
     :param for_ocr: Whether to generate OCR outputs.
     :param uuid: The UUID of the image.
+    :param stitch_all: When true, stitch all available outputs, which normally isn't needed but may
+    be desired for scripting.
     :return: The path generator for the merged image.
     """
 
@@ -531,6 +533,18 @@ def merge_cached_images(
     if for_ocr:
         generator_targets.append("base_png")
         generator_targets.append("boxes")
+
+    if stitch_all:
+        generator_targets.append("raw_mask")
+        generator_targets.append("raw_boxes")
+        if not for_ocr:
+            generator_targets.append("boxes")
+        generator_targets.append("final_boxes")
+        generator_targets.append("box_mask")
+        generator_targets.append("with_masks")
+        generator_targets.append("cut_mask")
+        generator_targets.append("mask_fitments")
+        generator_targets.append("std_devs")
 
     for target in generator_targets:
         paths_from = [gen.__getattribute__(target) for gen in file_generators]

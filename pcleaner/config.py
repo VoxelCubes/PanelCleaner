@@ -127,6 +127,7 @@ class GeneralConfig:
     long_strip_aspect_ratio: float = 0.33
     merge_after_split: bool = True
     max_threads_export: ThreadLimit = 0
+    always_cache_masks: bool = False
 
     def export_to_conf(self, config_updater: cu.ConfigUpdater, gui_mode: bool = False) -> None:
         """
@@ -211,6 +212,15 @@ class GeneralConfig:
         # Lower this value if you run into memory issues, which will appear as random crashes.
         max_threads_export = {self.max_threads_export if self.max_threads_export > 0 else ""}
 
+        # Force the cleaning process to always cache the masks it generates, even if it wouldn't be necessary.
+        # [GUI: This is useful for checking what all of the intermediate steps look like, without having]
+        # [GUI: to view each image individually and click "Generate Me" on them. This also allows for post-run]
+        # [GUI: actions to have access to the intermediate masks, should you want them.]
+        # [CLI: This is effectively the same as using the --cache-masks flag and is useful if you need the intermediate]
+        # [CLI: masks for any scripts running after the cleaning process.]
+        # Note: This will increase the amount of disk space used during cleaning, as the masks are stored in the cache folder.
+        always_cache_masks = {self.always_cache_masks}  
+        
         """
         config_updater.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
 
@@ -237,6 +247,7 @@ class GeneralConfig:
         try_to_load(self, config_updater, section, float, "long_strip_aspect_ratio")
         try_to_load(self, config_updater, section, bool, "merge_after_split")
         try_to_load(self, config_updater, section, ThreadLimit, "max_threads_export")
+        try_to_load(self, config_updater, section, bool, "always_cache_masks")
 
     def fix(self) -> None:
         """
@@ -307,10 +318,10 @@ class TextDetectorConfig:
         # is older than the latest release.
         # The path must point directly to the comictextdetector.pt (CUDA) or
         # comictextdetector.pt.onnx (CPU) file.
-        [CLI: # You can download older versions of the model here:]
-        [CLI: # https://github.com/zyddnys/manga-image-translator/releases/latest]
-        [GUI: # You can download older versions of the model ]
-        [GUI: # <a href="https://github.com/zyddnys/manga-image-translator/releases/latest">here.</a>]
+        # [CLI: You can download older versions of the model here:]
+        # [CLI: https://github.com/zyddnys/manga-image-translator/releases/latest]
+        # [GUI: You can download older versions of the model ]
+        # [GUI: <a href="https://github.com/zyddnys/manga-image-translator/releases/latest">here.</a>]
         model_path = {none_to_empty(self.model_path)}
         
         # Number of models to run in parallel. This is useful if you have enough RAM
