@@ -1337,6 +1337,7 @@ class Config:
         try_to_load(config, conf_updater, section, int, "pa_wait_time")
         try_to_load(config, conf_updater, section, str | None, "pa_shutdown_command")
         try_to_load(config, conf_updater, section, bool, "pa_cancel_on_error")
+        try_to_load(config, conf_updater, section, str | None, "pa_last_action")
         if "Custom Commands" in conf_updater:
             config.pa_custom_commands = {
                 from_base32_modified(k): from_base32_modified(v.value)
