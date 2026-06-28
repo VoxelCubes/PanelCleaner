@@ -10,7 +10,7 @@ Usage:
         open <profile_name> | delete <profile_name> | set-default <profile_name> | repair <profile_name> |
         purge-missing) [--debug]
     pcleaner gui [<image_path> ...] [--debug]
-    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--profile=<profile>] [--cache-masks] [--debug]
+    pcleaner ocr [<image_path> ...] [--output-path=<output_path>] [--csv] [--profile=<profile>] [--cache-masks] [--use-llm] [--debug]
     pcleaner config (show | open)
     pcleaner cache clear (all | models | cleaner)
     pcleaner load models [--cuda | --cpu | --both] [--force]
@@ -81,6 +81,10 @@ Options:
     <profile_name>                  The saved name of the profile to open, delete, or set as default.
     --output-path=<output_path>     The path to save the OCR output file to.
     --csv                           Save the output of the OCR as a CSV file
+    --use-llm                       Run the OCR output through a large language model (via airllm) to
+                                    fix garbled text before saving. Off by default. Requires the
+                                    optional [llm] extra: pip install pcleaner[llm]
+                                    Configure the model in the [LLM] section of the profile.
     --cuda                          Load the torch models that support CUDA. They will only be used if supported.
     --cpu                           Load the open cv2 models that are optimized for CPU.
                                     They will only be used as a fallback, unless specified in the config.
@@ -146,6 +150,7 @@ import pcleaner.helpers as hp
 import pcleaner.image_export as ie
 import pcleaner.inpainting as ip
 import pcleaner.image_ops as ops
+import pcleaner.llm_correction as llm_corr
 import pcleaner.masker as ma
 import pcleaner.memory_watcher as mw
 import pcleaner.model_downloader as md
@@ -234,7 +239,7 @@ def main() -> None:
         except OSError as e:
             print(f"Error: {e}")
             sys.exit(1)
-        run_ocr(config, image_paths, args.output_path, args.cache_masks, args.csv)
+        run_ocr(config, image_paths, args.output_path, args.cache_masks, args.csv, args.use_llm)
 
     elif args.cache and args.clear:
         config = cfg.load_config()
@@ -767,6 +772,7 @@ def run_ocr(
     output_path: str | None,
     cache_masks: bool,
     csv_output: bool,
+    use_llm: bool = False,
 ):
     """
     Run OCR on the given images. This is a byproduct of the pre-processing step,
@@ -777,6 +783,7 @@ def run_ocr(
     :param output_path: The path to output the results to.
     :param cache_masks: Whether to cache the masks.
     :param csv_output: Whether to output CSV data
+    :param use_llm: Whether to run the OCR output through an LLM for correction.
     """
     if config.show_oom_warnings:
         mw.start_memory_watcher()
@@ -882,6 +889,11 @@ def run_ocr(
 
     handle_merging_ocr_splits(cache_dir, profile.general.merge_after_split, ocr_analytics)
 
+    # Optionally run the OCR output through a large language model (via airllm) to
+    # fix garbled manga_ocr / tesseract output. This is slow but "smarter".
+    if use_llm or profile.llm.llm_enabled:
+        ocr_analytics = run_llm_correction(profile, ocr_analytics)
+
     print("\nDetected Text:")
     # Output the OCRed text from the analytics.
     text_out = ocr.format_output(
@@ -908,6 +920,46 @@ def run_ocr(
     except OSError as e:
         print(f"Failed to write detected text to {path}")
         logger.exception(e)
+
+
+def run_llm_correction(
+    profile: cfg.Profile, ocr_analytics: list[st.OCRAnalytic]
+) -> list[st.OCRAnalytic]:
+    """
+    Run the OCR analytics through a large language model (via airllm) to correct garbled
+    OCR output. If airllm isn't installed or the model fails to load, the original analytics
+    are returned unchanged so the rest of the OCR run still completes.
+
+    :param profile: The profile, carrying the [LLM] configuration.
+    :param ocr_analytics: The OCR analytics produced by the preprocessor.
+    :return: New analytics with corrected text, or the originals on failure.
+    """
+    llm_conf = profile.llm
+    try:
+        corrector = llm_corr.LLMCorrector(
+            llm_conf.llm_model,
+            max_new_tokens=llm_conf.llm_max_new_tokens,
+            max_bubbles_per_prompt=llm_conf.llm_max_bubbles_per_prompt,
+            compression=llm_conf.llm_compression or None,
+            hf_token=llm_conf.llm_hf_token or None,
+        )
+    except ImportError as e:
+        print(f"\n{e}")
+        print("Skipping LLM correction; saving raw OCR output.")
+        logger.warning(f"LLM correction skipped: {e}")
+        return ocr_analytics
+    except Exception:
+        logger.exception("Failed to load airllm model; skipping LLM correction.")
+        print("\nFailed to load the airllm model. Skipping LLM correction; saving raw OCR output.")
+        return ocr_analytics
+
+    print("\nRunning LLM OCR post-correction (this is slow)...")
+    try:
+        return llm_corr.correct_ocr_analytics(ocr_analytics, corrector)
+    except Exception:
+        logger.exception("LLM correction failed; saving raw OCR output.")
+        print("\nLLM correction failed. Saving raw OCR output.")
+        return ocr_analytics
 
 
 def clear_cache(config: cfg.Config, all_cache: bool, models: bool, images: bool) -> None:

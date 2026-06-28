@@ -933,6 +933,109 @@ class InpainterConfig:
 
 
 @define
+class LLMConfig:
+    # EXPERIMENTAL: Optional "smart" OCR post-correction via a large language model.
+    # Requires the optional [llm] extra:  pip install pcleaner[llm]
+    # airllm performs layer-wise disk offloading so very large models run on minimal RAM.
+    llm_enabled: bool = False
+    # Hugging Face repo id or local path of the model to load with airllm.
+    llm_model: str = "meta-llama/Meta-Llama-3-8B-Instruct"
+    # How many OCR bubbles to pack into a single LLM prompt. Higher saves on the very
+    # slow generation passes; too high may exceed the model's context window.
+    llm_max_bubbles_per_prompt: int = 40
+    # Maximum new tokens to generate per prompt. Must be large enough for the JSON array
+    # of corrections for one batch.
+    llm_max_new_tokens: int = 1024
+    # Optional block-wise quantization for ~3x speedup at a small accuracy cost.
+    # One of: "", "4bit", "8bit". Empty/none disables it.
+    llm_compression: str = ""
+    # Optional Hugging Face token, needed for gated models such as meta-llama/Llama-*.
+    llm_hf_token: str = ""
+
+    def export_to_conf(
+        self, config_updater: cu.ConfigUpdater, add_after_section: str, gui_mode: bool = False
+    ) -> None:
+        """
+        Write the config to the config updater object.
+
+        :param config_updater: An existing config updater object.
+        :param add_after_section: The section to add the new section after.
+        :param gui_mode: Whether to format the config for the GUI.
+        """
+        config_str = f"""\
+        [LLM]
+
+        # EXPERIMENTAL FEATURE: Optional "smart" OCR post-correction using a large language model.
+        # When enabled, the OCR text from the `pcleaner ocr` command is passed through an LLM that
+        # fixes garbled manga_ocr / tesseract output (misread characters, broken words, stray
+        # punctuation) while preserving the original language and meaning. It does not translate.
+        # [CLI: Use the --use-llm flag on the `pcleaner ocr` command to enable this for a single run.]
+        # This requires the optional [llm] extra to be installed: pip install pcleaner[llm]
+        # airllm performs layer-wise disk offloading, so large models (e.g. Llama-3-70B) can run on
+        # a few GB of RAM, at the cost of slow token generation.
+        llm_enabled = {self.llm_enabled}
+
+        # The Hugging Face repository id (e.g. "meta-llama/Meta-Llama-3-8B-Instruct") or a local path
+        # of the model to load with airllm. Instruct-tuned models are strongly recommended.
+        # Note: gated models (like the meta-llama ones) require a Hugging Face token, see below.
+        llm_model = {self.llm_model}
+
+        # How many OCR bubbles to pack into a single LLM prompt. Since airllm generation is slow,
+        # batching many bubbles into one prompt is much faster than one prompt per bubble.
+        # Lower this if you exceed the model's context window or run out of memory.
+        llm_max_bubbles_per_prompt = {self.llm_max_bubbles_per_prompt}
+
+        # The maximum number of new tokens to generate per prompt. This needs to be large enough to
+        # hold the JSON array of corrections for one batch.
+        llm_max_new_tokens = {self.llm_max_new_tokens}
+
+        # Optional block-wise quantization for up to ~3x faster inference at a small accuracy cost.
+        # Leave empty for no compression, or set to "4bit" or "8bit". Requires the bitsandbytes package.
+        llm_compression = {self.llm_compression}
+
+        # Optional Hugging Face token, required to download gated models such as the meta-llama ones.
+        # Leave empty if your model is not gated. You can also set the HF_TOKEN environment variable.
+        llm_hf_token = {self.llm_hf_token}
+
+        """
+        llm_conf = cu.ConfigUpdater()
+        llm_conf.read_string(multi_left_strip(format_for_version(config_str, gui_mode)))
+        llm_section = llm_conf["LLM"]
+        config_updater[add_after_section].add_after.space(2).section(llm_section.detach())
+
+    def import_from_conf(self, config_updater: cu.ConfigUpdater) -> None:
+        """
+        Read the config from the config updater object.
+
+        :param config_updater: An existing config updater object.
+        """
+        section = "LLM"
+        if not config_updater.has_section(section):
+            logger.debug(f"No {section} section found in the profile, using defaults.")
+            return
+
+        try_to_load(self, config_updater, section, bool, "llm_enabled")
+        try_to_load(self, config_updater, section, str, "llm_model")
+        try_to_load(self, config_updater, section, int, "llm_max_bubbles_per_prompt")
+        try_to_load(self, config_updater, section, int, "llm_max_new_tokens")
+        try_to_load(self, config_updater, section, str, "llm_compression")
+        try_to_load(self, config_updater, section, str, "llm_hf_token")
+
+    def fix(self) -> None:
+        if self.llm_max_bubbles_per_prompt < 1:
+            self.llm_max_bubbles_per_prompt = 1
+        if self.llm_max_new_tokens < 1:
+            self.llm_max_new_tokens = 1
+        if self.llm_compression not in ("", "4bit", "8bit"):
+            logger.warning(
+                f"Invalid llm_compression '{self.llm_compression}', disabling compression."
+            )
+            self.llm_compression = ""
+        if not self.llm_model.strip():
+            self.llm_model = "meta-llama/Meta-Llama-3-8B-Instruct"
+
+
+@define
 class Profile:
     """
     A profile is a collection of settings that can be saved and loaded from disk.
@@ -944,6 +1047,7 @@ class Profile:
     masker: MaskerConfig = field(factory=MaskerConfig)
     denoiser: DenoiserConfig = field(factory=DenoiserConfig)
     inpainter: InpainterConfig = field(factory=InpainterConfig)
+    llm: LLMConfig = field(factory=LLMConfig)
 
     def bundle_config(self, gui_mode: bool = False) -> cu.ConfigUpdater:
         """
@@ -959,6 +1063,7 @@ class Profile:
         self.masker.export_to_conf(config_updater, "Preprocessor", gui_mode=gui_mode)
         self.denoiser.export_to_conf(config_updater, "Masker", gui_mode=gui_mode)
         self.inpainter.export_to_conf(config_updater, "Denoiser", gui_mode=gui_mode)
+        self.llm.export_to_conf(config_updater, "Inpainter", gui_mode=gui_mode)
         return config_updater
 
     def hash_current_values(self) -> int:
@@ -1027,6 +1132,7 @@ class Profile:
             profile.masker.import_from_conf(config)
             profile.denoiser.import_from_conf(config)
             profile.inpainter.import_from_conf(config)
+            profile.llm.import_from_conf(config)
             profile.fix()
         except Exception:
             logger.exception(f"Failed to load profile from {path}")
@@ -1061,6 +1167,7 @@ class Profile:
         self.masker.fix()
         self.denoiser.fix()
         self.inpainter.fix()
+        self.llm.fix()
 
 
 @define

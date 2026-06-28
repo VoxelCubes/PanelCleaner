@@ -35,6 +35,7 @@ The two bottom pages are what the program can output: either just the transparen
 > [Usage](#usage) \
 > [Profiles](#profiles) \
 > [OCR](#ocr) \
+> [Smart OCR (LLM Post-Correction)](#smart-ocr-llm-post-correction) \
 > [Examples](#examples-of-tricky-bubbles) \
 > [Acknowledgements](#acknowledgements) \
 > [License](#license) \
@@ -71,6 +72,8 @@ The two bottom pages are what the program can output: either just the transparen
 - Can also cut out the text from the rest of the image, e.g. to paste it over a colored rendition.
 
 - Can also run OCR on the pages and output the text to a file.
+
+- Optionally runs the OCR output through a large language model (via [airllm](https://github.com/lyogavin/Anima/tree/main/air_llm)) to fix garbled text — "smart" OCR post-correction.
 
 - Review cleaning and OCR output, including editing the OCR output interactively before saving it.
 
@@ -308,6 +311,53 @@ For detailed installation instructions and additional information, please refer 
 
 > Note: While Tesseract supports additional languages, Panel Cleaner will only utilize Tesseract for English and Japanese text recognition. English is installed by default. Follow the instructions here [Installing additional language packs](https://ocrmypdf.readthedocs.io/en/latest/languages.html) to install the Japanese language pack.  
 
+## Smart OCR (LLM Post-Correction)
+
+Panel Cleaner can optionally run the OCR output through a large language model (LLM) to fix garbled text — correcting misread characters, broken words, and stray punctuation — while preserving the original language and meaning. It does **not** translate. This is useful when the raw manga-ocr or Tesseract output is noisy and you want cleaner text for translation or archival.
+
+This feature is powered by [airllm](https://github.com/lyogavin/Anima/tree/main/air_llm), which performs layer-wise disk offloading so that very large models (e.g. Llama-3-70B) can run on just a few gigabytes of RAM, at the cost of slow token generation.
+
+### Enabling LLM Correction
+
+The feature is **off by default**. First, install the optional `[llm]` extra:
+
+```bash
+pip install pcleaner[llm]
+```
+
+Then enable it for a single OCR run with the `--use-llm` flag:
+
+```bash
+pcleaner ocr myfolder --output-path=output.txt --use-llm
+```
+
+Or enable it permanently by setting `llm_enabled = True` in the `[LLM]` section of your [profile](#profiles):
+
+```ini
+[LLM]
+llm_enabled = True
+llm_model = meta-llama/Meta-Llama-3-8B-Instruct
+llm_max_bubbles_per_prompt = 40
+llm_max_new_tokens = 1024
+llm_compression =        # leave empty, or use "4bit" / "8bit"
+llm_hf_token =           # required for gated models like meta-llama/*
+```
+
+### How It Works
+
+1. Panel Cleaner runs OCR as usual, collecting the text from every detected bubble.
+2. The OCR text from many bubbles is batched into a single LLM prompt (since airllm generation is slow, batching is much faster than one prompt per bubble).
+3. The LLM returns a JSON array of corrected strings, which replace the raw OCR output.
+4. If a batch fails or the model returns the wrong number of items, the original OCR text is kept for that batch — so a single bad batch never aborts the whole run.
+
+### Notes
+
+- **Slow by design:** airllm offloads model layers to disk, so generation is far slower than a normal GPU inference. This is the trade-off for running large models on minimal RAM.
+- **Instruct-tuned models** (e.g. `Meta-Llama-3-8B-Instruct`) are strongly recommended.
+- **Gated models** (such as the `meta-llama/*` repos) require a [Hugging Face token](https://huggingface.co/settings/tokens). Set it via `llm_hf_token` in the profile or the `HF_TOKEN` environment variable.
+- **Compression:** setting `llm_compression` to `4bit` or `8bit` enables block-wise quantization for up to ~3x faster inference at a small accuracy cost (requires the `bitsandbytes` package).
+- **GPU recommended:** airllm targets CUDA. On CPU-only machines the model may fail to load — in that case the run falls back to raw OCR output automatically.
+
 ## Examples of Tricky Bubbles
 
 | Original | Cleaned |
@@ -331,6 +381,8 @@ For detailed installation instructions and additional information, please refer 
 
 - [Simple Lama Inpainting](https://github.com/enesmsahin/simple-lama-inpainting) for inpainting bubbles that can't be masked out.
   Using the fine-tuned [Model by dreMaz](https://huggingface.co/dreMaz/AnimeMangaInpainting).
+
+- [airllm](https://github.com/lyogavin/Anima/tree/main/air_llm) for running large language models on minimal RAM via layer-wise disk offloading, used by the optional smart OCR post-correction feature.
 
 
 ## License

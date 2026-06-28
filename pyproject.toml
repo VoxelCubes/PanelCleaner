@@ -44,6 +44,13 @@ runtime-torch = [
 runtime-gui = [
 	"PySide6",
 ]
+runtime-llm = [
+	# Optional "smart" OCR post-correction via a large LLM run on minimal RAM.
+	# Enable with: pip install pcleaner[llm]  (or the runtime-llm dependency group).
+	# airllm performs layer-wise disk offloading so very large models (e.g. Llama-3-70B)
+	# can run on a few GB of RAM, at the cost of slow token generation.
+	"airllm",
+]
 runtime-dbus = [
 	"dbus-python; platform_system == \"Linux\"",
 ]

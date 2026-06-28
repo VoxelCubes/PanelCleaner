@@ -288,23 +288,33 @@ class ProfileOptionWidget(Qw.QHBoxLayout):
                     name_mapper = {
                         LayeredExport.NONE: self.tr("None", "Layered export option"),
                         LayeredExport.PSD_BULK: self.tr("PSD Bulk", "Layered export option"),
-                        LayeredExport.PSD_PER_IMAGE: self.tr("PSD Per Image", "Layered export option"),
+                        LayeredExport.PSD_PER_IMAGE: self.tr(
+                            "PSD Per Image", "Layered export option"
+                        ),
                     }
                 case EntryTypes.LanguageCode:
                     enum_class = LanguageCode
                     name_mapper = {
                         LanguageCode.detect_box: self.tr("Detect per box", "Language code option"),
-                        LanguageCode.detect_page: self.tr("Detect per page", "Language code option"),
+                        LanguageCode.detect_page: self.tr(
+                            "Detect per page", "Language code option"
+                        ),
                         LanguageCode.jpn: self.tr("Japanese", "Language code option"),
                         LanguageCode.eng: self.tr("English", "Language code option"),
                         LanguageCode.kor: self.tr("Korean", "Language code option"),
                         LanguageCode.kor_vert: self.tr("Korean (vertical)", "Language code option"),
-                        LanguageCode.chi_sim: self.tr("Chinese - Simplified", "Language code option"),
-                        LanguageCode.chi_tra: self.tr("Chinese - Traditional", "Language code option"),
+                        LanguageCode.chi_sim: self.tr(
+                            "Chinese - Simplified", "Language code option"
+                        ),
+                        LanguageCode.chi_tra: self.tr(
+                            "Chinese - Traditional", "Language code option"
+                        ),
                         LanguageCode.sqi: self.tr("Albanian", "Language code option"),
                         LanguageCode.ara: self.tr("Arabic", "Language code option"),
                         LanguageCode.aze: self.tr("Azerbaijani", "Language code option"),
-                        LanguageCode.aze_cyrl: self.tr("Azerbaijani - Cyrilic", "Language code option"),
+                        LanguageCode.aze_cyrl: self.tr(
+                            "Azerbaijani - Cyrilic", "Language code option"
+                        ),
                         LanguageCode.ben: self.tr("Bengali", "Language code option"),
                         LanguageCode.bul: self.tr("Bulgarian", "Language code option"),
                         LanguageCode.mya: self.tr("Burmese", "Language code option"),
@@ -769,4 +779,5 @@ def to_display_name(name: str) -> str:
         " ".join(word.capitalize() for word in s2.split(" "))
         .replace("Ai ", "AI ")
         .replace("Ocr", "OCR")
+        .replace("Llm", "LLM")
     )
