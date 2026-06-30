@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ" sourcelanguage="en_US">
+<TS version="2.1" language="fa_IR" sourcelanguage="en_US">
   <context>
     <name/>
     <message>
       <location filename="../pcleaner/config.py" line="1087"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation>výchozí</translation>
+      <translation>پیش‌فرض</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
       <source>Profile file {profile_path} already exists.</source>
-      <translation>Soubor profilu {profile_path} již existuje.</translation>
+      <translation>پروفایل {profile_path} در حال حاضر وجود دارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="106"/>
       <source>Profile {profile_name} created.</source>
-      <translation>Profil {profile_name} vytvořen.</translation>
+      <translation>پروفایل {profile_name} ایجاد شد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="237"/>
       <source>Profile name cannot be empty.</source>
-      <translation>Název profilu nemůže být prázdný.</translation>
+      <translation>نام پروفایل نمی‌تواند خالی باشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="239"/>
       <source>Profile name already in use.</source>
-      <translation>Název profilu je již použit.</translation>
+      <translation>نام پروفایل قبلاً در استفاده است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="241"/>
       <source>Profile name is reserved.</source>
-      <translation>Název profilu je vyhrazen.</translation>
+      <translation>نام پروفایل رزرو شده است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="359"/>
@@ -40,7 +40,7 @@
       <location filename="../pcleaner/gui/image_file.py" line="371"/>
       <location filename="../pcleaner/gui/image_file.py" line="383"/>
       <source>Unknown</source>
-      <translation>Neznámý</translation>
+      <translation>ناشناخته</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="373"/>
@@ -58,38 +58,38 @@
       <location filename="../pcleaner/gui/image_file.py" line="377"/>
       <source>Grayscale</source>
       <comment>Color mode</comment>
-      <translation>Stupnice šedi</translation>
+      <translation>مقیاس خاکستری</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="379"/>
       <source>1-bit</source>
       <comment>Color mode</comment>
-      <translation>1 bit</translation>
+      <translation>1 بیت</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_file.py" line="381"/>
       <source>Palette</source>
       <comment>Color mode</comment>
-      <translation>Paleta</translation>
+      <translation>پالت</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="380"/>
       <source>Error downloading file from url: {url}</source>
-      <translation>Chyba při stahování souboru z url: {url}</translation>
+      <translation>خطا در دانلود فایل از لینک: {url}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="434"/>
       <source>Error downloading file from url: {url}
 Failed to save the file to {save_path}</source>
-      <translation>Chyba při stahování souboru z url: {url}
-Nepodařilo se uložit soubor do {save_path}</translation>
+      <translation>خطا در دانلود فایل از آدرس: {url}
+ذخیرهٔ فایل با موفقیت انجام نشد {save_path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/model_downloader_driver.py" line="443"/>
       <source>Error downloading file from url: {url}
 The file content is different from expected.</source>
-      <translation>Chyba při stahování souboru z url: {url}
-Obsah souboru je jiný, než se očekávalo.</translation>
+      <translation>خطا در دانلود فایل از آدرس: {url}
+محتوای فایل با آنچه انتظار می‌رفت متفاوت است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="64"/>
@@ -101,25 +101,25 @@ Obsah souboru je jiný, než se očekávalo.</translation>
       <location filename="../pcleaner/analytics.py" line="427"/>
       <location filename="../pcleaner/analytics.py" line="570"/>
       <source>N/A</source>
-      <translation>N/A</translation>
+      <translation>در دسترس نیست</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="77"/>
       <source>OCR Analytics</source>
-      <translation>Analýza OCR</translation>
+      <translation>تحلیل OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="82"/>
       <source>Number of boxes: {num_boxes} | Number of small boxes: {num_small_boxes} ({small_box_ratio})
 </source>
-      <translation>Počet políček: {num_boxes} | Počet malých políček: {num_small_boxes} ({small_box_ratio})
+      <translation>تعداد جعبه‌ها: {num_boxes} | تعداد جعبه‌های کوچک: {num_small_boxes} ({small_box_ratio})
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="92"/>
       <source>Number of removed boxes: {num_removed} ({removed_box_ratio} total, {removed_among_small_ratio} of small boxes)
 </source>
-      <translation>Počet odstraněných políček: {num_removed} ({removed_box_ratio} celkem, {removed_among_small_ratio} malých políček)
+      <translation>تعداد جعبه‌های حذف‌شده: {num_removed} ({removed_box_ratio} در مجموع، {removed_among_small_ratio} جعبهٔ کوچک)
 </translation>
     </message>
     <message>
@@ -128,14 +128,14 @@ Obsah souboru je jiný, než se očekávalo.</translation>
 Small box sizes:
 </source>
       <translation>
-Malé políčka:
+اندازه‌های کوچک جعبه:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="108"/>
       <source>No not-removed small boxes found.
 </source>
-      <translation>Nebyly nalezeny žádné neodstraněné malé políčka.
+      <translation>هیچ جعبه‌های کوچک حذف‌نشده یافت نشد.
 </translation>
     </message>
     <message>
@@ -144,79 +144,79 @@ Malé políčka:
 Removed bubbles:
 </source>
       <translation>
-Odstraněné bubliny:
+حباب‌های حذف‌شده:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="128"/>
       <source>Page {path}: {text}
 </source>
-      <translation>Stránka {path}: {text}
+      <translation>صفحه {path}: {text}
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="171"/>
       <source>Small boxes</source>
-      <translation>Malé políčka</translation>
+      <translation>جعبه‌های کوچک</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="173"/>
       <source>Removed boxes</source>
-      <translation>Odstraněné políčka</translation>
+      <translation>جعبه‌ها حذف شدند</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="212"/>
       <location filename="../pcleaner/analytics.py" line="231"/>
       <location filename="../pcleaner/analytics.py" line="353"/>
       <source>Failed</source>
-      <translation>Neúspěšné</translation>
+      <translation>ناموفق</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="227"/>
       <source>Perfect</source>
-      <translation>Perfektní</translation>
+      <translation>عالی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="538"/>
       <source>Total
 </source>
-      <translation>Celkem
+      <translation>مجموع
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="310"/>
       <source>Mask Fitment Analytics</source>
-      <translation>Analýza uložení masky</translation>
+      <translation>تحلیل تناسب ماسک</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="229"/>
       <source>Total</source>
-      <translation>Celkem</translation>
+      <translation>مجموع</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="314"/>
       <source>Total boxes</source>
-      <translation>Celkem políček</translation>
+      <translation>مجموع جعبه‌ها</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="316"/>
       <source>Masks succeeded</source>
-      <translation>Úspěšné masky</translation>
+      <translation>ماسک‌ها با موفقید اعمال شدند</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="318"/>
       <source>Masks failed</source>
-      <translation>Neúspěšné masky</translation>
+      <translation>ماسک‌ها شکست خوردند</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="322"/>
       <source>Perfect masks</source>
-      <translation>Perfektní masky</translation>
+      <translation>ماسک‌های عالی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="324"/>
       <source>Average border deviation</source>
-      <translation>Průměrná odchylka okraje</translation>
+      <translation>انحراف متوسط مرزی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="327"/>
@@ -224,24 +224,24 @@ Odstraněné bubliny:
 Mask usage by thickness (in pixels):
 </source>
       <translation>
-Použití masky podle tloušťky (v pixelech):
+استفاده از ماسک بر اساس ضخامت (به پیکسل):
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="343"/>
       <source>Mask ({thickness}px)</source>
-      <translation>Maska ({thickness}px)</translation>
+      <translation>ماسک ({thickness}پیکسل)</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="345"/>
       <source>Box mask</source>
-      <translation>Maska políček</translation>
+      <translation type="unfinished">Box mask</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="366"/>
       <source>All bubbles were successfully masked.
 </source>
-      <translation>Všechny bubliny byly úspěšně zamaskovány.
+      <translation>تمام حباب‌ها با موفقیت پنهان شدند.
 </translation>
     </message>
     <message>
@@ -250,266 +250,264 @@ Použití masky podle tloušťky (v pixelech):
 Pages with failures / total:
 </source>
       <translation>
-Stránky s chybami / celkem:
+صفحات با خطاها / کل:
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="407"/>
       <source>Denoising Analytics</source>
-      <translation>Analýza odstranění šumu</translation>
+      <translation>تحلیل نویززدایی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="430"/>
       <source>Total masks</source>
-      <translation>Celkem masek</translation>
+      <translation>ماسک‌های کامل</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="432"/>
       <source>Masks denoised</source>
-      <translation>Masky s odstraněním šumu</translation>
+      <translation>ماسک‌های نویززدایی‌شده</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="436"/>
       <source>Minimum deviation to denoise</source>
-      <translation>Minimální odchylka pro odstranění šumu</translation>
+      <translation>حداقل انحراف برای حذف نویز</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="438"/>
       <source>Maximum allowed deviation</source>
-      <translation>Maximální povolená odchylka</translation>
+      <translation>حداکثر انحراف مجاز</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="441"/>
       <source>Standard deviation around masks:
 
 </source>
-      <translation>Směrodatná odchylka kolem masek:
+      <translation>انحراف معیار اطراف ماسک‌ها:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="538"/>
       <source>Denoised</source>
-      <translation>Šum odstraněn</translation>
+      <translation>نویز‌زدایی‌شده</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="560"/>
       <source>Inpainting Analytics</source>
-      <translation>Analýza retušování</translation>
+      <translation>تحلیل بازسازی نقاشی</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="573"/>
       <source>Inpainting performed</source>
-      <translation>Provedené retušování</translation>
+      <translation>بازسازی انجام شد</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="575"/>
       <source>Average thickness</source>
-      <translation>Průměrná tloušťka</translation>
+      <translation>ضخامت متوسط</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="579"/>
       <source>Minimum thickness</source>
-      <translation>Minimální tloušťka</translation>
+      <translation type="unfinished">Minimum thickness</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="581"/>
       <source>Maximum thickness</source>
-      <translation>Maximální tloušťka</translation>
+      <translation type="unfinished">Maximum thickness</translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="584"/>
       <source>Outline thickness around text inpainted:
 
 </source>
-      <translation>Tloušťka obrysu kolem retušovaného textu:
+      <translation type="unfinished">Outline thickness around text inpainted:
 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/analytics.py" line="651"/>
       <source>Inpainted</source>
-      <translation>Retušováno</translation>
+      <translation>مرمت‌شده</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
       <source>File Error</source>
-      <translation>Chyba souboru</translation>
+      <translation>خطای فایل</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="152"/>
       <source>Failed to open file.</source>
-      <translation>Nepodařilo se otevřít soubor.</translation>
+      <translation>باز کردن فایل ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="517"/>
       <source>Failed to access the file.</source>
-      <translation>Nepodařilo se získat přístup k souboru.</translation>
+      <translation>دسترسی به فایل ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="518"/>
       <source>An error occurred.</source>
-      <translation>Došlo k chybě.</translation>
+      <translation>خطایی رخ داد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="519"/>
       <source>The CSV file format requires exactly 6 columns.</source>
-      <translation>Formát souboru CSV vyžaduje přesně 6 sloupců.</translation>
+      <translation>فرمت فایل CSV دقیقاً به ۶ ستون نیاز دارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="520"/>
       <source>The coordinates must be integers.</source>
-      <translation>Souřadnice musí být celočíselné.</translation>
+      <translation>مختصات باید عددهای صحیح باشند.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="521"/>
       <source>The box coordinates may not exceed 2 billion.</source>
-      <translation>Souřadnice políček nesmí překročit 2 miliardy.</translation>
+      <translation>مختصات جعبه نباید بیشتر از ۲ میلیارد عدد باشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="522"/>
       <source>The file format was not recognized.</source>
-      <translation>Formát souboru nebyl rozpoznán.</translation>
+      <translation>فرمت فایل شناسایی نشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="524"/>
       <source>The CSV file must start with a header row, followed by data rows.</source>
-      <translation>Soubor CSV musí začínat řádkem záhlaví, po kterém následují řádky s daty.</translation>
+      <translation>فایل CSV باید با یک سطر سربرگ شروع شود و پس از آن سطرهای داده قرار گیرند.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="526"/>
       <source>The file path is missing.</source>
-      <translation>Chybí cesta k souboru.</translation>
+      <translation>مسیر فایل وجود ندارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="527"/>
       <source>The file path is invalid.</source>
-      <translation>Cesta k souboru je neplatná.</translation>
+      <translation>مسیر فایل نامعتبر است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="545"/>
       <source>OCR Parse Errors</source>
-      <translation>Chyba analýzy OCR</translation>
+      <translation>خطاهای تجزیه OCR</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="591"/>
       <source>Multiple analytics match the image: {path}</source>
-      <translation>Obrázku odpovídá více analytik: {path}</translation>
+      <translation>تحلیل‌های چندگانه با تصویر مطابقت دارند: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="595"/>
       <source>Multiple images match the file path: {path}</source>
-      <translation>Cestě k souboru odpovídá více obrázkům: {path}</translation>
+      <translation>چندین تصویر با مسیر فایل مطابقت دارند: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="616"/>
       <source>Error, no version found.</source>
-      <translation>Chyba, nebyla nalezena žádná verze.</translation>
+      <translation>خطا، هیچ نسخه‌ای یافت نشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="630"/>
       <source>CUDA Error</source>
-      <translation>Chyba CUDA</translation>
+      <translation>خطای CUDA</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/gui_utils.py" line="632"/>
       <source>&lt;html&gt;Your GPU does not support the required CUDA operations.&lt;br&gt;&lt;br&gt;Try uninstalling the current versions of torch and torchvision and installing the CPU version (or a different CUDA version) instead.&lt;br&gt;You can find further instructions here: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Check the &quot;Compute Platform&quot; section to see the available versions.&lt;br&gt;&lt;br&gt;Your current CUDA version is: {cuda_version}&lt;br&gt;&lt;/html&gt;</source>
-      <translation>&lt;html&gt;Váše GPU nepodporuje požadované operace CUDA.&lt;br&gt;&lt;br&gt;Zkuste odinstalovat aktuální verzi torch a torchvision a místo nich nainstalovat verzi pro CPU (nebo jinou verzi CUDA).&lt;br&gt;Další pokyny najdete zde: &lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt;Podívejte se do sekce &quot;Compute Platform&quot;, kde najdete dostupné verze.&lt;br&gt;&lt;br&gt;Vaše aktuální verze CUDA je: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;کارت گرافیک شما از عملیات‌های CUDA مورد نیاز پشتیبانی نمی‌کند.&lt;br&gt;سعی کنید نسخه‌های فعلی torch و torchvision را لغو نصب کرده و به جای آن‌ها، نسخه CPU (یا نسخه دیگری از CUDA) را نصب کنید.&lt;br&gt;دستورالعمل‌های بیشتر را می‌توانید در اینجا پیدا کنید:&lt;br&gt;&lt;a href=&apos;https://pytorch.org/get-started/locally/&apos;&gt;https://pytorch.org/get-started/locally/&lt;/a&gt;&lt;br&gt; برای مشاهده نسخه‌های موجود، بخش &quot;Compute Platform&quot; را بررسی کنید.&lt;br&gt;&lt;br&gt;نسخه فعلی CUDA شما: {cuda_version}&lt;br&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/processing.py" line="514"/>
       <source>Inpainting model not found.</source>
-      <translation>Nebyl nalezen model pro retušování.</translation>
+      <translation>مدل پر کردن نواقص یافت نشد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
       <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>filename</source>
-      <translation>název souboru</translation>
+      <translation>نام فایل</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
       <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>startx</source>
-      <translation>startx</translation>
+      <translation>استارت‌ا</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
       <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>starty</source>
-      <translation>starty</translation>
+      <translation>لرزان</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
       <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>endx</source>
-      <translation>endx</translation>
+      <translation>پایان</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
       <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>endy</source>
-      <translation>endy</translation>
+      <translation>پایان</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1947"/>
       <location filename="../pcleaner/gui/processing.py" line="926"/>
       <source>text</source>
-      <translation>text</translation>
+      <translation>متن</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1958"/>
       <location filename="../pcleaner/gui/processing.py" line="935"/>
       <source>Saved detected text to {output_file}</source>
-      <translation>Detekovaný text byl uložen do {output_file}</translation>
+      <translation>متن شناسایی‌شده را ذخیره کرد در {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1962"/>
       <location filename="../pcleaner/gui/processing.py" line="939"/>
       <source>Failed to write detected text to {output_file}</source>
-      <translation>Nepodařilo se zapsat detekovaný text do {output_file}</translation>
+      <translation>نوشتن متن شناسایی‌شده به {output_file}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1966"/>
       <location filename="../pcleaner/gui/processing.py" line="942"/>
       <source>Save Failed</source>
-      <translation>Ukládání selhalo</translation>
+      <translation>ذخیره نشد</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1966"/>
       <location filename="../pcleaner/gui/processing.py" line="942"/>
       <source>Failed to write detected text to file.</source>
-      <translation>Nepodařilo se zapsat detekovaný text do souboru.</translation>
+      <translation>نوشتن متن شناسایی‌شده به فایل ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/profile_parser.py" line="566"/>
       <source>Inpainter (experimental)</source>
-      <translation>Retušování (experimentální)</translation>
+      <translation>این‌پینتر (تجربی)</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="106"/>
       <source>Invalid type for img_paths: {paths}</source>
-      <translation>Nesprávný typ pro img_paths: {paths}</translation>
+      <translation>نوع نامعتبر برای img_paths: {paths}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="115"/>
       <source>Unsupported image format: {suffix} for {path}</source>
-      <translation>Nepodporovaný formát obrázku: {suffix} pro {path}</translation>
+      <translation>فرمت تصویر پشتیبانی‌نشده: {suffix} برای {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/helpers.py" line="121"/>
       <source>Image path {img_path} does not exist.</source>
-      <translation>Cesta k obrázku {img_path} neexistuje.</translation>
+      <translation>مسیر تصویر {img_path} وجود ندارد.</translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="134"/>
       <source>Clean mask</source>
       <comment>layered export</comment>
       <translation>
-        <numerusform>Vyčištěná maska</numerusform>
-        <numerusform>Vyčištěných masek</numerusform>
-        <numerusform>Vyčištěných masek</numerusform>
-        <numerusform>Vyčištěných masek</numerusform>
+        <numerusform>ماسک تمیز</numerusform>
+        <numerusform>ماسک تمیز</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -517,10 +515,8 @@ Stránky s chybami / celkem:
       <source>Denoised mask</source>
       <comment>layered export</comment>
       <translation>
-        <numerusform>Maska zbavena šumu</numerusform>
-        <numerusform>Masek zbavených šumu</numerusform>
-        <numerusform>Masek zbavených šumu</numerusform>
-        <numerusform>Masek zbavených šumu</numerusform>
+        <numerusform>ماسک نویززدایی‌شده</numerusform>
+        <numerusform>ماسک نویززدایی‌شده</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -528,21 +524,17 @@ Stránky s chybami / celkem:
       <source>Inpainting mask</source>
       <comment>layered export</comment>
       <translation>
-        <numerusform>Retušovaná maska</numerusform>
-        <numerusform>Retušovaných masek</numerusform>
-        <numerusform>Retušovaných masek</numerusform>
-        <numerusform>Retušovaných masek</numerusform>
+        <numerusform>ماسک پر کردن</numerusform>
+        <numerusform>ماسک پر کردن</numerusform>
       </translation>
     </message>
     <message numerus="yes">
       <location filename="../pcleaner/image_export.py" line="139"/>
       <source>Isolated text</source>
       <comment>layered export</comment>
-      <translation type="unfinished">
-        <numerusform>Isolated text</numerusform>
-        <numerusform>Isolated text</numerusform>
-        <numerusform>Isolated text</numerusform>
-        <numerusform>Isolated text</numerusform>
+      <translation>
+        <numerusform>متن جداشده</numerusform>
+        <numerusform>متن جداشده</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -550,10 +542,8 @@ Stránky s chybami / celkem:
       <source>Page</source>
       <comment>layered export</comment>
       <translation>
-        <numerusform>Stránka</numerusform>
-        <numerusform>Stránek</numerusform>
-        <numerusform>Stránek</numerusform>
-        <numerusform>Stránek</numerusform>
+        <numerusform>صفحه</numerusform>
+        <numerusform>صفحه</numerusform>
       </translation>
     </message>
     <message>
@@ -592,41 +582,41 @@ Stránky s chybami / celkem:
     <message>
       <location filename="../ui_files/About.ui" line="14"/>
       <source>About Panel Cleaner</source>
-      <translation>O Panel Cleaner</translation>
+      <translation>درباره پنل کلینر</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="81"/>
       <source># Panel Cleaner
 
 An AI-powered tool to clean manga panels.</source>
-      <translation># Panel Cleaner
+      <translation># پنل کلینر
 
-Nástroj s umělou inteligencí na čištění panelů mangy.</translation>
+ابزاری مبتنی بر هوش مصنوعی برای کلین کردن پنل‌های مانگا.</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="98"/>
       <source>Version:</source>
-      <translation>Verze:</translation>
+      <translation>نسخه:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="112"/>
       <source>Author:</source>
-      <translation>Autor:</translation>
+      <translation>نویسنده:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="150"/>
       <source>Toolkit:</source>
-      <translation>Toolkit:</translation>
+      <translation>مجموعه ابزار:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="164"/>
       <source>License:</source>
-      <translation>Licence:</translation>
+      <translation>مجوز:</translation>
     </message>
     <message>
       <location filename="../ui_files/About.ui" line="181"/>
       <source>Source code:</source>
-      <translation>Zdrojový kód:</translation>
+      <translation>کد منبع:</translation>
     </message>
   </context>
   <context>
@@ -634,7 +624,7 @@ Nástroj s umělou inteligencí na čištění panelů mangy.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CTextEdit.py" line="17"/>
       <source>Clear</source>
-      <translation>Vyčistit</translation>
+      <translation>پاک کردن</translation>
     </message>
   </context>
   <context>
@@ -642,7 +632,7 @@ Nástroj s umělou inteligencí na čištění panelů mangy.</translation>
     <message>
       <location filename="../pcleaner/gui/CustomQ/CColorButton.py" line="37"/>
       <source>Select Color</source>
-      <translation>Vybrat barvu</translation>
+      <translation>انتخاب رنگ</translation>
     </message>
   </context>
   <context>
@@ -650,32 +640,32 @@ Nástroj s umělou inteligencí na čištění panelů mangy.</translation>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="102"/>
       <source>Copy to Clipboard</source>
-      <translation>Zkopírovat do schránky</translation>
+      <translation>کپی در کلیپ‌بورد</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="112"/>
       <source>Open Issue Tracker</source>
-      <translation>Otevřít Issue Tracker</translation>
+      <translation>دنبال کننده ایشو فعال</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="122"/>
       <source>Terminate Panel Cleaner</source>
-      <translation>Ukončit Panel Cleaner</translation>
+      <translation>پنل کلینر را خاتمه دهید</translation>
     </message>
     <message>
       <location filename="../ui_files/ErrorDialog.ui" line="132"/>
       <source>Close</source>
-      <translation>Zavřít</translation>
+      <translation>بستن</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="45"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation>Poznámka: Jméno &quot;{name}&quot; bylo skryto</translation>
+      <translation>توجه: نام &quot;{name}&quot; پنهان شده بود</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/error_dialog_driver.py" line="86"/>
       <source>Failed to load log.</source>
-      <translation>Nepodařilo se načíst protokol.</translation>
+      <translation>بارگذاری لاگ ناموفق بود.</translation>
     </message>
   </context>
   <context>
@@ -683,122 +673,122 @@ Nástroj s umělou inteligencí na čištění panelů mangy.</translation>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
       <source>Unsupported system</source>
-      <translation>Nepodporovaný systém</translation>
+      <translation>سیستم پشتیبانی‌نشده</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="84"/>
       <source>This system is not supported.</source>
-      <translation>Tento systém není podporován.</translation>
+      <translation>این سیستم پشتیبانی نمی‌شود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="88"/>
       <source>Install for Dolphin</source>
-      <translation>Nainstalovat pro Dolphin</translation>
+      <translation>نصب برای دلفین</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="89"/>
       <source>Uninstall for Dolphin</source>
-      <translation>Odinstalovat z Dolphin</translation>
+      <translation>حذف برای دلفین</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="92"/>
       <source>The extension will be installed at {path}. This doesn&apos;t require root permissions.</source>
-      <translation>Rozšíření bude nainstalováno do {path}. Nevyžaduje oprávnění root.</translation>
+      <translation>&apos;افزونه در {path}نصب خواهد شد. این افزونه به مجوزهای روت نیاز ندارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="100"/>
       <source>The extension file will be deleted. This doesn&apos;t require root permissions.</source>
-      <translation>Rozšíření bude odstraněno. Nevyžaduje oprávnění root.</translation>
+      <translation>فایل افزونه حذف خواهد شد. این کار نیاز ب&apos;ه مجوزهای روت ندارد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="104"/>
       <source>Install for Windows Explorer</source>
-      <translation>Nainstalovat pro Průzkumníka souborů</translation>
+      <translation>نصب برای ویندوز اکسپلورر</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="105"/>
       <source>Uninstall for Windows Explorer</source>
-      <translation>Odinstalovat z Průzkumníka souborů</translation>
+      <translation>حذف از ویندوز اکسپلورر</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="108"/>
       <source>The extension will be installed in the Windows registry.This requires admin permissions.</source>
-      <translation>Rozšíření se nainstaluje do registru Windows. Vyžaduje oprávnění správce.</translation>
+      <translation>افزونه در رجیستری ویندوز نصب خواهد شد. این کار نیازمند مجوزهای ادمین است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="114"/>
       <source>The extension will be uninstalled from the Windows registry.This requires admin permissions.</source>
-      <translation>Rozšíření bude odinstalováno z registru Windows. Vyžaduje oprávnění správce.</translation>
+      <translation>افزونه از رجیستری ویندوز حذف خواهد شد. این کار نیازمند مجوزهای ادمین است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="157"/>
       <source>Dolphin extension installed successfully.</source>
-      <translation>Rozšíření Dolphin bylo úspěšně nainstalováno.</translation>
+      <translation>افزونه دلفین با موفقیت نصب شد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="172"/>
       <source>Installation successful</source>
-      <translation>Instalace proběhla úspěšně</translation>
+      <translation>نصب با موفقیت انجام شد</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="160"/>
       <source>Dolphin extension installed successfully.
 You may need to log out and log back in (or restart) for the changes to take effect.</source>
-      <translation>Rozšíření Dolphin bylo úspěšně nainstalováno.
-Aby se změny projevily, je prořeba se odhlásit a přihlásit, nebo restartovat zařízení.</translation>
+      <translation>افزونه دلفین با موفقیت نصب شد.
+ممکن است لازم باشد از حساب کاربری خارج شده و دوباره وارد شوید (یا دستگاه را راه‌اندازی مجدد کنید) تا تغییرات اعمال شوند.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="178"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="202"/>
       <source>Installation failed</source>
-      <translation>Instalace se nezdařila</translation>
+      <translation>نصب ناموفق بود</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="179"/>
       <source>Failed to install Dolphin extension.</source>
-      <translation>Nepodařilo se nainstalovat rozšíření pro Dolphin.</translation>
+      <translation>نصب افزونه دلفین ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="203"/>
       <source>Failed to install Windows Explorer extension.</source>
-      <translation>Nepodařilo se nainstalovat rozšíření pro Průzkumníka souborů.</translation>
+      <translation>نصب افزونهٔ ویندوز اکسپلورر ناموفق بود.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="218"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="224"/>
       <source>Uninstallation successful</source>
-      <translation>Odinstalace proběhla úspěšně</translation>
+      <translation>حذف با موفقیت انجام شد</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="219"/>
       <source>Dolphin extension uninstalled successfully.</source>
-      <translation>Rozšíření Dolphin bylo úspěšně odinstalováno.</translation>
+      <translation>افزونه دلفین با موفقیت حذف شد.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="225"/>
       <source>Dolphin extension was not installed.</source>
-      <translation>Rozšíření Dolphin nebylo nainstalováno.</translation>
+      <translation>افزونه دلفین نصب نشده است.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="230"/>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="249"/>
       <source>Uninstallation failed</source>
-      <translation>Odinstalace se nezdařila</translation>
+      <translation>لغو نصب ناموفق بود</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="231"/>
       <source>Failed to uninstall Dolphin extension.</source>
-      <translation>Nepodařilo se odinstalovat rozšíření pro Dolphin.</translation>
+      <translation type="unfinished">Failed to uninstall Dolphin extension.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_manager_extension_driver.py" line="250"/>
       <source>Failed to uninstall Windows Explorer extension.</source>
-      <translation>Nepodařilo se odinstalovat rozšíření pro Průzkumníka souborů.</translation>
+      <translation type="unfinished">Failed to uninstall Windows Explorer extension.</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="14"/>
       <source>File Manager Extension</source>
-      <translation>Rozšíření správce souborů</translation>
+      <translation type="unfinished">File Manager Extension</translation>
     </message>
     <message>
       <location filename="../ui_files/FileManagerIntegration.ui" line="32"/>
@@ -809,13 +799,13 @@ This feature adds a menu option to your file browser&apos;s context menu (which 
 It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
 
 By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</source>
-      <translation>### Přidat nebo odebrat integraci se správcem souborů
+      <translation type="unfinished">### Add or Remove Integration with your File Browser
 
-Tato funkce přidá do kontextové nabídky správce souborů (která se zobrazí po kliknutí pravým tlačítkem myši) možnost pro složky nebo obrázky.
+This feature adds a menu option to your file browser&apos;s context menu (which appears when you right-click) for folders or image files.
 
-Umožňuje používat aplikaci Panel Cleaner přímo ze správce souborů, čímž odpadá nutnost otevírat aplikaci samostatně.
+It allows you to use Panel Cleaner directly from the file browser, eliminating the need to open the application separately.
 
-Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastavení však můžete změnit výběrem možnosti **Profil** a poté **Nastavit výchozí** z panelu nabídek.</translation>
+By default, this uses the built-in profile. However, you can change this default setting by choosing **Profile** and then **Set Default** from the application&apos;s menu bar.</translation>
     </message>
   </context>
   <context>
@@ -823,145 +813,145 @@ Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastaven
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="135"/>
       <source>Original size in pixels (width × height)</source>
-      <translation>Původní velikost v pixelech (šířka × výška)</translation>
+      <translation type="unfinished">Original size in pixels (width × height)</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="138"/>
       <source>Processing size in pixels (width × height), scale factor</source>
-      <translation>Velikost zpracování v pixelech (šířka × výška), faktor měřítka</translation>
+      <translation type="unfinished">Processing size in pixels (width × height), scale factor</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="227"/>
       <location filename="../pcleaner/gui/file_table.py" line="235"/>
       <source>Loading Failed</source>
-      <translation>Načtení se nezdařilo</translation>
+      <translation type="unfinished">Loading Failed</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="228"/>
       <source>Failed to discover images: {path}</source>
-      <translation>Nepodařilo se najít obrázky: {path}</translation>
+      <translation type="unfinished">Failed to discover images: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="236"/>
       <source>Failed to load images: {path}</source>
-      <translation>Nepodařilo se načíst obrázky: {path}</translation>
+      <translation type="unfinished">Failed to load images: {path}</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="244"/>
       <source>Unsupported TIFF files</source>
-      <translation>Nepodporované TIFF soubory</translation>
+      <translation type="unfinished">Unsupported TIFF files</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="245"/>
       <source>The following 5-channel TIFF files are not supported: 
 </source>
-      <translation>Následující pětikanálové soubory TIFF nejsou podporovány: 
+      <translation type="unfinished">The following 5-channel TIFF files are not supported: 
 </translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="279"/>
       <source>Duplicate file</source>
-      <translation>Duplicitní soubor</translation>
+      <translation type="unfinished">Duplicate file</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="280"/>
       <source>File &quot;{path}&quot; is already in the table.</source>
-      <translation>Soubor &quot;{path}&quot; je již v tabulce.</translation>
+      <translation type="unfinished">File &quot;{path}&quot; is already in the table.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="283"/>
       <source>Ignore All</source>
-      <translation>Ignorovat vše</translation>
+      <translation type="unfinished">Ignore All</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="309"/>
       <source>split</source>
-      <translation>rozdělit</translation>
+      <translation type="unfinished">split</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="469"/>
       <source>Number of boxes removed by the OCR model / total boxes</source>
-      <translation>Počet políček odstraněných modelem OCR / celkový počet políček</translation>
+      <translation type="unfinished">Number of boxes removed by the OCR model / total boxes</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="472"/>
       <source>Number of boxes that failed to generate a mask / total boxes</source>
-      <translation>Počet políček, u kterých se nepodařilo vygenerovat masku / celkový počet políček</translation>
+      <translation type="unfinished">Number of boxes that failed to generate a mask / total boxes</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="475"/>
       <source>Number of boxes that were perfectly masked / total boxes</source>
-      <translation>Počet políček, které byly dokonale zamaskovány / celkový počet políček</translation>
+      <translation type="unfinished">Number of boxes that were perfectly masked / total boxes</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="477"/>
       <source>Number of boxes that were denoised / total boxes</source>
-      <translation>Počet políček, které byly zbaveny šumu / celkový počet políček</translation>
+      <translation type="unfinished">Number of boxes that were denoised / total boxes</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="479"/>
       <source>Number of boxes that were inpainted</source>
-      <translation>Počet políček, který byly retušovány</translation>
+      <translation type="unfinished">Number of boxes that were inpainted</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="519"/>
       <source>Image not loaded</source>
-      <translation>Obrázek nebyl načten</translation>
+      <translation type="unfinished">Image not loaded</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="520"/>
       <source>Please wait until the image has loaded.</source>
-      <translation>Vyčkejte, dokud se obrázek nenačte.</translation>
+      <translation type="unfinished">Please wait until the image has loaded.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="538"/>
       <source>Open individual cleaning</source>
-      <translation>Otevřít čištění samostatně</translation>
+      <translation type="unfinished">Open individual cleaning</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="549"/>
       <source>Remove from list</source>
-      <translation>Odebrat z fronty</translation>
+      <translation type="unfinished">Remove from list</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="557"/>
       <source>Remove all files from list</source>
-      <translation>Odstranění všech souborů z fronty</translation>
+      <translation type="unfinished">Remove all files from list</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="730"/>
       <source>Failed to load image</source>
-      <translation>Obrázek se nepodařil načíst</translation>
+      <translation type="unfinished">Failed to load image</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="731"/>
       <source>Failed to load image {file_path}.</source>
-      <translation>Obrázky: {file_path} se nepodařil načíst.</translation>
+      <translation type="unfinished">Failed to load image {file_path}.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="740"/>
       <source>Failed to dispatch image.</source>
-      <translation>Obrázek se nepodařilo odeslat.</translation>
+      <translation type="unfinished">Failed to dispatch image.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="740"/>
       <source>Dispatch Failed</source>
-      <translation>Odeslání se nezdařilo</translation>
+      <translation type="unfinished">Dispatch Failed</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="749"/>
       <source>Select files</source>
-      <translation>Vybrat soubory</translation>
+      <translation type="unfinished">Select files</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="750"/>
       <source>Images</source>
-      <translation>Obrázky</translation>
+      <translation type="unfinished">Images</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/file_table.py" line="771"/>
       <source>Select directory</source>
-      <translation>Vybrat adresář</translation>
+      <translation type="unfinished">Select directory</translation>
     </message>
   </context>
   <context>
@@ -969,42 +959,42 @@ Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastaven
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="134"/>
       <source>Zoom in</source>
-      <translation>Přiblížení</translation>
+      <translation type="unfinished">Zoom in</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="150"/>
       <source>Zoom out</source>
-      <translation>Oddálení</translation>
+      <translation type="unfinished">Zoom out</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="166"/>
       <source>Reset zoom</source>
-      <translation>Resetovat pohled</translation>
+      <translation type="unfinished">Reset zoom</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="182"/>
       <source>Zoom to fit</source>
-      <translation>Přiblížení na míru</translation>
+      <translation type="unfinished">Zoom to fit</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="201"/>
       <source>Refresh</source>
-      <translation>Obnovit</translation>
+      <translation type="unfinished">Refresh</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="283"/>
       <source>Generating...</source>
-      <translation>Generování...</translation>
+      <translation type="unfinished">Generating...</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="332"/>
       <source>Position:</source>
-      <translation>Pozice:</translation>
+      <translation type="unfinished">Position:</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageDetails.ui" line="353"/>
       <source>Size:</source>
-      <translation>Velikost:</translation>
+      <translation type="unfinished">Size:</translation>
     </message>
   </context>
   <context>
@@ -1012,93 +1002,93 @@ Ve výchozím nastavení se používá výchozí profil. Toto výchozí nastaven
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="167"/>
       <source>Copy Image to Clipboard</source>
-      <translation>Zkopírovat obrázek do schránky</translation>
+      <translation type="unfinished">Copy Image to Clipboard</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="173"/>
       <location filename="../pcleaner/gui/image_details_driver.py" line="550"/>
       <source>Export Image</source>
-      <translation>Exportovat obrázek</translation>
+      <translation type="unfinished">Export Image</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="179"/>
       <source>OCR Image</source>
-      <translation>OCR obrázku</translation>
+      <translation type="unfinished">OCR Image</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="411"/>
       <source>Loading Error</source>
-      <translation>Chyba načtení</translation>
+      <translation type="unfinished">Loading Error</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="412"/>
       <source>Failed to load image &apos;{path}&apos;</source>
-      <translation>Nepodařilo se načíst obrázek &apos;{path}&apos;</translation>
+      <translation type="unfinished">Failed to load image &apos;{path}&apos;</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="417"/>
       <source>Generate Me</source>
-      <translation>Generovat</translation>
+      <translation type="unfinished">Generate Me</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="440"/>
       <location filename="../pcleaner/gui/image_details_driver.py" line="455"/>
       <source>Impossible Request</source>
-      <translation>Nemožná žádost</translation>
+      <translation type="unfinished">Impossible Request</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="442"/>
       <source>Denoising is disabled in the current profile, this output can&apos;t be generated.
 Please enable denoising in the profile settings and try again.</source>
-      <translation>Odstranění šumu je zakázáno v profilu, výstup nelze vygenerovat.
-Povolte prosím odstranění šumu v profilu a zkuste to znovu.</translation>
+      <translation type="unfinished">Denoising is disabled in the current profile, this output can&apos;t be generated.
+Please enable denoising in the profile settings and try again.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="457"/>
       <source>Inpainting is disabled in the current profile, this output can&apos;t be generated.
 Please enable inpainting in the profile settings and try again.</source>
-      <translation>Retušování je zakázáno v profilu, výstup nelze vygenerovat.
-Povolte prosím retušování v profilu a zkuste to znovu.</translation>
+      <translation type="unfinished">Inpainting is disabled in the current profile, this output can&apos;t be generated.
+Please enable inpainting in the profile settings and try again.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="510"/>
       <source>Image not found.</source>
-      <translation>Obrázek nebyl nalezen.</translation>
+      <translation type="unfinished">Image not found.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="511"/>
       <source>Image at {path} does not exist:</source>
-      <translation>Obrázek v {path} neexistuje:</translation>
+      <translation type="unfinished">Image at {path} does not exist:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="559"/>
       <source>Export failed</source>
-      <translation>Export se nezdařil</translation>
+      <translation type="unfinished">Export failed</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="559"/>
       <source>Failed to export image:</source>
-      <translation>Nepodařilo se exportovat obrázek:</translation>
+      <translation type="unfinished">Failed to export image:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="663"/>
       <source>Output Failed</source>
-      <translation>Výstup se nezdařil</translation>
+      <translation type="unfinished">Output Failed</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="663"/>
       <source>Output generation failed:</source>
-      <translation>Generování výstupu se nezdařilo:</translation>
+      <translation type="unfinished">Output generation failed:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="813"/>
       <source>Profile check failed</source>
-      <translation>Kontrola profilu se nezdařila</translation>
+      <translation type="unfinished">Profile check failed</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_details_driver.py" line="813"/>
       <source>Profile change check failed:</source>
-      <translation>Kontrola změny profilu se nezdařila:</translation>
+      <translation type="unfinished">Profile change check failed:</translation>
     </message>
   </context>
   <context>
@@ -1106,98 +1096,98 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
       <source>image</source>
-      <translation>obrázek</translation>
+      <translation type="unfinished">image</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="168"/>
       <source>images</source>
-      <translation>obrázky</translation>
+      <translation type="unfinished">images</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="193"/>
       <source>result</source>
-      <translation>výsledek</translation>
+      <translation type="unfinished">result</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="193"/>
       <source>results</source>
-      <translation>výsledky</translation>
+      <translation type="unfinished">results</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="94"/>
       <source>Proceed With Selection</source>
-      <translation>Pokračujte ve výběru</translation>
+      <translation type="unfinished">Proceed With Selection</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="170"/>
       <source>new image</source>
-      <translation>nový obrázek</translation>
+      <translation type="unfinished">new image</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="170"/>
       <source>new images</source>
-      <translation>nové obrázky</translation>
+      <translation type="unfinished">new images</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="173"/>
       <source>Matched {num_images} {plural_images} to OCR results. {num_images_unassigned} {plural_img_unassigned}.</source>
-      <translation>Odpovídá {num_images} {plural_images} výsledkům OCR. {num_images_unassigned} {plural_img_unassigned}.</translation>
+      <translation type="unfinished">Matched {num_images} {plural_images} to OCR results. {num_images_unassigned} {plural_img_unassigned}.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="196"/>
       <source>{num_analytics_unassigned} orphaned OCR {plural_result} will be lost.</source>
-      <translation>{num_analytics_unassigned} osiřelé OCR {plural_result} budou ztraceny.</translation>
+      <translation type="unfinished">{num_analytics_unassigned} orphaned OCR {plural_result} will be lost.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="323"/>
       <source>Failed to load image</source>
-      <translation>Obrázek se nepodařil načíst</translation>
+      <translation type="unfinished">Failed to load image</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="324"/>
       <source>Failed to load image {file_path}.</source>
-      <translation>Nepodařilo se načíst obrázek {file_path}.</translation>
+      <translation type="unfinished">Failed to load image {file_path}.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="333"/>
       <source>Dispatch Failed</source>
-      <translation>Odeslání se nezdařilo</translation>
+      <translation type="unfinished">Dispatch Failed</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/image_match_driver.py" line="333"/>
       <source>Failed to dispatch image.</source>
-      <translation>Obrázek se nepodařilo odeslat.</translation>
+      <translation type="unfinished">Failed to dispatch image.</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="14"/>
       <source>Image Selection</source>
-      <translation>Výběr obrázku</translation>
+      <translation type="unfinished">Image Selection</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="76"/>
       <source>Deselect All</source>
-      <translation>Zrušit výběr všech</translation>
+      <translation type="unfinished">Deselect All</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="83"/>
       <source>Select All</source>
-      <translation>Vybrat vše</translation>
+      <translation type="unfinished">Select All</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="96"/>
       <source>Unselect images without matching OCR data</source>
-      <translation>Zrušení výběru obrázků bez shodných dat OCR</translation>
+      <translation type="unfinished">Unselect images without matching OCR data</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="171"/>
       <source>Image File</source>
-      <translation>Soubor obrázku</translation>
+      <translation type="unfinished">Image File</translation>
     </message>
     <message>
       <location filename="../ui_files/ImageMatchOverview.ui" line="176"/>
       <source>OCR Data</source>
       <comment>Can also call this statistics.</comment>
-      <translation>Data OCR</translation>
+      <translation type="unfinished">OCR Data</translation>
     </message>
   </context>
   <context>
@@ -1205,77 +1195,77 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="14"/>
       <source>Report an Issue</source>
-      <translation>Nahlásit problém</translation>
+      <translation type="unfinished">Report an Issue</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="23"/>
       <source>Consider including the log for the session that had an issue, if applicable.</source>
-      <translation>V případě potřeby zvažte zahrnutí protokolu relace, u které došlo k problému.</translation>
+      <translation type="unfinished">Consider including the log for the session that had an issue, if applicable.</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="32"/>
       <source>View Logs:</source>
-      <translation>Prohlédnout si protokoly:</translation>
+      <translation type="unfinished">View Logs:</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="62"/>
       <source>Log file is at:</source>
-      <translation>Soubor protokolu se nachází v:</translation>
+      <translation type="unfinished">Log file is at:</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="103"/>
       <source>Copy to Clipboard</source>
-      <translation>Zkopírovat do schránky</translation>
+      <translation type="unfinished">Copy to Clipboard</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="113"/>
       <source>Open Issue Tracker</source>
-      <translation>Otevřít Issue Tracker</translation>
+      <translation type="unfinished">Open Issue Tracker</translation>
     </message>
     <message>
       <location filename="../ui_files/IssueReporter.ui" line="123"/>
       <source>Close</source>
-      <translation>Zavřít</translation>
+      <translation type="unfinished">Close</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="49"/>
       <source>Note: Name &quot;{name}&quot; was hidden</source>
-      <translation>Poznámka: Jméno &quot;{name}&quot; bylo skryto</translation>
+      <translation type="unfinished">Note: Name &quot;{name}&quot; was hidden</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="85"/>
       <source>Corrupted log session</source>
-      <translation>Poškozený protokol</translation>
+      <translation type="unfinished">Corrupted log session</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="87"/>
       <source>Current session</source>
-      <translation>Tato relace</translation>
+      <translation type="unfinished">Current session</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="91"/>
       <source>Today</source>
-      <translation>Dnes</translation>
+      <translation type="unfinished">Today</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="99"/>
       <source>Error</source>
-      <translation>Chyba</translation>
+      <translation type="unfinished">Error</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="99"/>
       <source>Errors</source>
-      <translation>Chyby</translation>
+      <translation type="unfinished">Errors</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="105"/>
       <source>Critical</source>
-      <translation>Kritická</translation>
+      <translation type="unfinished">Critical</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/issue_reporter_driver.py" line="105"/>
       <source>Criticals</source>
-      <translation>Kritické</translation>
+      <translation type="unfinished">Criticals</translation>
     </message>
   </context>
   <context>
@@ -1283,7 +1273,7 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
     <message>
       <location filename="../ui_files/License.ui" line="14"/>
       <source>License Agreement</source>
-      <translation>Licenční smlouva</translation>
+      <translation type="unfinished">License Agreement</translation>
     </message>
   </context>
   <context>
@@ -1292,177 +1282,177 @@ Povolte prosím retušování v profilu a zkuste to znovu.</translation>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="418"/>
       <source>Open Config</source>
       <comment>Statusbar button</comment>
-      <translation>Otevřít konfiguraci</translation>
+      <translation type="unfinished">Open Config</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="423"/>
       <source>Open Log</source>
       <comment>Statusbar button</comment>
-      <translation>Otevřít protokol</translation>
+      <translation type="unfinished">Open Log</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="439"/>
       <source>CUDA Enabled</source>
-      <translation>CUDA k dispozici</translation>
+      <translation type="unfinished">CUDA Enabled</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="607"/>
       <source>Select Output Directory</source>
-      <translation>Vybrat výstupní adresář</translation>
+      <translation type="unfinished">Select Output Directory</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="668"/>
       <source>Aborting...</source>
-      <translation>Rušení...</translation>
+      <translation type="unfinished">Aborting...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="733"/>
       <source>Loading OCR model...</source>
-      <translation>Načítání modelu OCR...</translation>
+      <translation type="unfinished">Loading OCR model...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="737"/>
       <source>Loaded OCR model.</source>
-      <translation>OCR model načten.</translation>
+      <translation type="unfinished">Loaded OCR model.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="749"/>
       <source>Error</source>
-      <translation>Chyba</translation>
+      <translation type="unfinished">Error</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="856"/>
       <source>Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
 
 Continue anyway?</source>
-      <translation>Zdá se, že je již spuštěna další instance programu Panel Cleaner.Otevření nové instance způsobí, že stará relace nebude stabilní.
+      <translation type="unfinished">Another instance of Panel Cleaner appears to be running already.Opening a new instance will make the old session unstable.
 
-Přesto pokračovat?</translation>
+Continue anyway?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="899"/>
       <source>Delete Models</source>
-      <translation>Smazat modely</translation>
+      <translation type="unfinished">Delete Models</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="901"/>
       <source>Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</source>
-      <translation>Jste si jisti, že chcete odstranit modely strojového učení? Znemožníte tím čištění a OCR, dokud nebudou znovu staženy.</translation>
+      <translation type="unfinished">Are you sure you want to delete the machine learning models? This will make cleaning and OCR impossible until they are downloaded again.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="749"/>
       <source>Encountered error:</source>
-      <translation>Vyskytla se chyba:</translation>
+      <translation type="unfinished">Encountered error:</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="443"/>
       <source>MPS Enabled</source>
-      <translation>MPS povoleno</translation>
+      <translation type="unfinished">MPS Enabled</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="454"/>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="466"/>
       <source>Inpainting Model Update</source>
-      <translation>Aktualizace modelu pro retušování</translation>
+      <translation type="unfinished">Inpainting Model Update</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="456"/>
       <source>A new version of the inpainting model is available.
 You can delete the model later if you don&apos;t want to upgrade yet.
 Switch to the new model?</source>
-      <translation>Nová verze modelu pro retušováni je k dispozici.
-Model můžete smazat později, pokud nechcete aktualizovat.
-Přejít na nový model?</translation>
+      <translation type="unfinished">A new version of the inpainting model is available.
+You can delete the model later if you don&apos;t want to upgrade yet.
+Switch to the new model?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="468"/>
       <source>Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</source>
-      <translation>Starý model byl zachován. Chcete-li provést aktualizaci, vyberte v nabídce &quot;Nápověda&quot; a poté &quot;Odstranit modely strojového učení&quot;.</translation>
+      <translation type="unfinished">Old model kept. To upgrade, select &quot;Help&quot; then &quot;Delete Machine Learning Models&quot; from the menubar.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="805"/>
       <source>Layout Reset</source>
-      <translation>Obnovit rozložení</translation>
+      <translation type="unfinished">Layout Reset</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="806"/>
       <source>The window layout has been reset. The default layout will be used next time.</source>
-      <translation>Rozložení okna bylo resetováno. Příště bude použito výchozí rozložení.</translation>
+      <translation type="unfinished">The window layout has been reset. The default layout will be used next time.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="854"/>
       <source>Multiple Instances</source>
-      <translation>Více instancí</translation>
+      <translation type="unfinished">Multiple Instances</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="860"/>
       <source>Found process ID in lock file: </source>
-      <translation>Nalezeno ID procesu v zamčeném souboru: </translation>
+      <translation type="unfinished">Found process ID in lock file: </translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="912"/>
       <source>Failed to delete models.</source>
-      <translation>Nepodařilo se odstranit modely.</translation>
+      <translation type="unfinished">Failed to delete models.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="912"/>
       <source>Delete Failed</source>
-      <translation>Odstranění se nezdařilo</translation>
+      <translation type="unfinished">Delete Failed</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="922"/>
       <source>Models Deleted</source>
-      <translation>Modely odstraněny</translation>
+      <translation type="unfinished">Models Deleted</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="923"/>
       <source>The models were deleted. Would you like to download them again?</source>
-      <translation>Modely byly odstraněny. Chcete si je znovu stáhnout?</translation>
+      <translation type="unfinished">The models were deleted. Would you like to download them again?</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1009"/>
       <source>Not Supported</source>
-      <translation>Není podporováno</translation>
+      <translation type="unfinished">Not Supported</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1009"/>
       <source>Unsupported system or package format</source>
-      <translation>Nepodporovaný formát systému nebo balíčku</translation>
+      <translation type="unfinished">Unsupported system or package format</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1026"/>
       <source>Shutdown</source>
-      <translation>Vypnout</translation>
+      <translation type="unfinished">Shutdown</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1064"/>
       <source>After processing, the system will shut down.</source>
-      <translation>Po dokončení se systém vypne.</translation>
+      <translation type="unfinished">After processing, the system will shut down.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1095"/>
       <source>You have review options enabled, these will need to be manually closed before the action can start.</source>
-      <translation>Máte povolenou možnost přezkoumání, které je třeba před spuštěním akce ručně zavřít.</translation>
+      <translation type="unfinished">You have review options enabled, these will need to be manually closed before the action can start.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1104"/>
       <source>You have disabled writing output.</source>
-      <translation>Zakázali jste zápis výstupu.</translation>
+      <translation type="unfinished">You have disabled writing output.</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1158"/>
       <source>Shutting down system...</source>
-      <translation>Vypnání systému...</translation>
+      <translation type="unfinished">Shutting down system...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1168"/>
       <source>Running post action &quot;{action}&quot;...</source>
-      <translation>Spuštění post-akce &quot;{action}&quot;...</translation>
+      <translation type="unfinished">Running post action &quot;{action}&quot;...</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1203"/>
       <source>Restart Required</source>
-      <translation>Požaduje se restart</translation>
+      <translation type="unfinished">Restart Required</translation>
     </message>
     <message>
       <location filename="../pcleaner/gui/mainwindow_driver.py" line="1205"/>
