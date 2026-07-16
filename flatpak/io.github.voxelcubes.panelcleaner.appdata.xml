@@ -45,6 +45,22 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="2.11.11" date="2026-07-16">
+      <description>
+        <p>Changelog</p>
+        <ul>
+          <li>Updated dependencies and runtime.</li>
+          <li>Added Korean translations.</li>
+          <li>Added support for Python 3.13 and NumPy 2.0+.</li>
+          <li>Improved model downloads and handling of split directories.</li>
+          <li>Fixed missing checkmark icons.</li>
+          <li>Fixed Hugging Face deprecation issues.</li>
+          <li>Fix partial model file downloads resulting in corrupted models.</li>
+          <li>Exposed file cache IDs for post-actions.</li>
+          <li>Fixed the last post-action not being remembered by the configuration.</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.11.5" date="2025-01-08">
       <description>
           <p>Changelog</p>
@@ -161,8 +177,10 @@
   <languages>
     <lang percentage="100">en</lang>
     <lang percentage="100">de</lang>
-    <lang percentage="93">it</lang>
-    <lang percentage="76">es</lang>
+    <lang percentage="98">kr</lang>
+    <lang percentage="82">it</lang>
+    <lang percentage="98">es</lang>
+    <lang percentage="96">br</lang>
     <lang percentage="76">bg</lang>
   </languages>
   <keywords>
