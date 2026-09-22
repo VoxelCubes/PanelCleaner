@@ -7,12 +7,12 @@
       <location filename="../pcleaner/config.py" line="1087"/>
       <source>default</source>
       <comment>reserved profile name</comment>
-      <translation type="unfinished">default</translation>
+      <translation>默认</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="86"/>
       <source>Profile file {profile_path} already exists.</source>
-      <translation type="unfinished">Profile file {profile_path} already exists.</translation>
+      <translation>配置文件 {profile_path} 已存在。</translation>
     </message>
     <message>
       <location filename="../pcleaner/profile_cli.py" line="106"/>
